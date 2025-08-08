@@ -3407,22 +3407,26 @@ Mind however that the *Bachet* ranking rule, even of comparable complexity :math
    >>> n.value()
     358948993845926294385124
 
-In Python, the range of integers is luckily only limited by the available CPU memory and the *orderLimit* parameter may be adjusted to tackle, if required, outranking digraphs of orders > 50. The randomized *Bachet* ranking rule might however need in these cases a smart permutohedron sampling strategy in order to achieve convincingly correlated ranking results. This challenging trail is being explored in the next Section.
+In Python, the range of integers is luckily only limited by the available CPU memory and the *orderLimit* parameter may be adjusted to tackle, if required, outranking digraphs of orders > 50. The randomized *Bachet* ranking rule might however need in these cases a smart permutohedron sampling strategy in order to achieve convincingly correlated ranking results. 
 
 Smart sampling of the permutations of the actions list
 ......................................................
 
-The Condorcet consistency of the polarised Bachet ranking rule guarantees that all transitive outranking triples are correctly scored independently of the given actions ordering. Only the intransitive outranking triples may give diverging ranking results. It is hence opportune to keep transitive triples unchanged in their given initial positions and only permute the two first and the to last pairs in a sample of intransitive triples and keep always the best correlated ranking result. To explore the usefulness of this sampling approach we provide below the :py:class:`~linearOrders.SmartBachetRanking` class.
+The Condorcet consistency of the polarised Bachet ranking rule guarantees that all transitive outranking triples are correctly scored independently of any given actions ordering. Only the intransitive outranking triples may give diverging ranking results. It is hence opportune to keep transitive triples unchanged in their given initial positions and only permute the first and the last pair in a sample of intransitive triples and keep always the best qualified PolarisedBachetRanking result. To explore the usefulness of this sampling approach we provide below the :py:class:`~linearOrders.SmartBachetRanking` class.
 
-When reconsidering the random outranking digraph seen in :numref:`optimisingBachet`, we obtain in :numref:`smartBachet` with a random sample of only 3 intransitive outranking triples the following very convincing ranking result. 
+When reconsidering the random outranking digraph seen in :numref:`optimisingBachet` we obtain in :numref:`smartBachet`, with a random sample of only 3 triples from the 161 intransitive outranking triples, the following very convincing ranking result (see Lines 5, 8, 22, 24). 
 
 .. code-block:: pycon
    :caption: Smart *Bachet* ranking result
    :name: smartBachet
-   :emphasize-lines: 4,20,22,27
+   :emphasize-lines: 5,8,24,26
 
    >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
    >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
+   >>> g.computeTransitivityDegree(Comments=True)
+    Transitivity degree of digraph <rel_randomperftab>:
+      #triples x>y>z: 504, #closed: 343, #open: 161
+      (#closed/#triples) =  0.681
    >>> from linearOrders import SmartBachetRanking
    >>> sba = SmartBachetRanking(g,Polarised=True,sampleSize=3,seed=1)
    >>> sba
@@ -3439,8 +3443,6 @@ When reconsidering the random outranking digraph seen in :numref:`optimisingBach
 			    'name', 'actions', 'order', 'valuationdomain',
 			    'relation', 'correlation',
 			    'gamma', 'notGamma', 'runTimes']
-   >>> len(sba.intransitiveTriples)
-    161
    >>> sba.bachetRanking
     ['a2', 'a5', 'a9', 'a6', 'a4', 'a8', 'a3', 'a7', 'a1']
    >>> g.computeRankingCorrelation(sba.bachetRanking)
@@ -3451,9 +3453,9 @@ When reconsidering the random outranking digraph seen in :numref:`optimisingBach
    >>> g.computeRankingCorrelation(sba.bachetRanking)
     {'correlation': 0.7585058291696407, 'determination': 0.408625}
 
-In :numref:`smartBachet` Line 22 we discover a ranking result that differs only in the positions of actions *a4* and *a8* from the optimal Kemeny ranking (see :numref:`optimalKemeny1`). When permuting now all the 161 intransitive outranking triples we get in fact this optimal Kemeny ranking (see Lines 20, 24).
+In :numref:`smartBachet` Line 24 we discover a ranking result that differs only in the positions of actions *a4* and *a8* from the optimal Kemeny ranking (see :numref:`optimalKemeny1`). When permuting now all the 161 intransitive outranking triples by setting *sampleSize=None* (Line 25), we get in fact this optimal Kemeny ranking result (see Lines 26, 28).
 
-When running a MonteCarlo simulation with a sample of 500 random 3 objectives --economic, sociatal and environmental-- performance tableaux of 9 decision actions marked on 13 performance criteria, we obtain the following statistical summary. 
+When running a MonteCarlo simulation with a sample of 500 random 3 objectives --economic, environmental and societal-- performance tableaux of 9 decision actions marked on 13 performance criteria, we obtain the following correlations statistics. 
 
     ============== ========= ========= ========= =========
      Ranking rule   Mean      Median    Minimum   Maximum
@@ -3471,7 +3473,7 @@ When running a MonteCarlo simulation with a sample of 500 random 3 objectives --
      Kemeny         0.79058    0.96945     0.065475
     ============== ========== =========== ==========
 
-The statistical figures above show that the smart Bachet ranking rule comes very close to the Kemeny figures. In 163/500 (32.6%) cases we even reach in fact the optimal Kemeny ranking.
+The correlation figures above show that the smart Bachet ranking rule comes very close to the optimal Kemeny figures. In 163/500 (32.6%) cases we even reach in fact the optimal Kemeny ranking.
 
 The Bachet rule: a new method for partially ranking 
 ...................................................

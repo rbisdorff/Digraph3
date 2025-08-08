@@ -67,7 +67,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{July 15, 2025}
+\date{August 08, 2025}
 \release{3.13.5}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -2505,7 +2505,7 @@ We are ready now for building a first choice recommendation.
 \subsubsection{Computing the first choice recommendation}
 \label{\detokenize{tutorial:computing-the-first-choice-recommendation}}
 \sphinxAtStartPar
-Following the previously stated pragmatic principles, potential first choice recommendations are determined by the inbitial prekernels \textendash{}\sphinxstyleemphasis{weakly independent} and \sphinxstyleemphasis{strictly outranking} choices\textendash{} of the strict outranking digraph (see the tutorial on \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{computing digraph kernels}}}). Any detected chordless odd outranking circuits are by default broken up (see \sphinxcite{tutorial:bis-2008}).
+Following the previously stated pragmatic principles, potential first choice recommendations are determined by the initial prekernels \textendash{}\sphinxstyleemphasis{weakly independent} and \sphinxstyleemphasis{strictly outranking} choices\textendash{} of the strict outranking digraph (see the tutorial on \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{computing digraph kernels}}}). Any detected chordless odd outranking circuits are by default broken up (see \sphinxcite{tutorial:bis-2008}).
 \sphinxSetupCaptionForVerbatim{Computing the first choice recommendation}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:strictbestchoice}}}
 \fvset{hllines={, 1, 6, 12, 13, 14, 16,}}%
@@ -2661,20 +2661,20 @@ In \hyperref[\detokenize{tutorial:bachetranking0}]{Listing \ref{\detokenize{tuto
 \fvset{hllines={, 2, 4, 5, 6, 7, 8, 11, 14,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{transitiveDigraphs} \PYG{k+kn}{import} \PYG{n}{PartialBachetRanking}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbr} \PYG{o}{=} \PYG{n}{PartialBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{randomized}\PYG{o}{=}\PYG{l+m+mi}{200}\PYG{p}{,}\PYG{n}{maxNbrOfRankings}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbr}\PYG{o}{.}\PYG{n}{bachetRankings}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pbr} \PYG{o}{=} \PYG{n}{PartialBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{randomized}\PYG{o}{=}\PYG{l+m+mi}{200}\PYG{p}{,}\PYG{n}{maxNbrOfRankings}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pbr}\PYG{o}{.}\PYG{n}{bachetRankings}
 \PYG{g+go}{ [(0.816, [\PYGZsq{}G\PYGZsq{}, \PYGZsq{}D\PYGZsq{}, \PYGZsq{}A\PYGZsq{}, \PYGZsq{}C\PYGZsq{}, \PYGZsq{}B\PYGZsq{}, \PYGZsq{}E\PYGZsq{}, \PYGZsq{}F\PYGZsq{}]),}
 \PYG{g+go}{  (0.788, [\PYGZsq{}G\PYGZsq{}, \PYGZsq{}D\PYGZsq{}, \PYGZsq{}E\PYGZsq{}, \PYGZsq{}B\PYGZsq{}, \PYGZsq{}A\PYGZsq{}, \PYGZsq{}C\PYGZsq{}, \PYGZsq{}F\PYGZsq{}]),}
 \PYG{g+go}{  (0.778, [\PYGZsq{}A\PYGZsq{}, \PYGZsq{}D\PYGZsq{}, \PYGZsq{}C\PYGZsq{}, \PYGZsq{}G\PYGZsq{}, \PYGZsq{}E\PYGZsq{}, \PYGZsq{}B\PYGZsq{}, \PYGZsq{}F\PYGZsq{}]),}
 \PYG{g+go}{  (0.758, [\PYGZsq{}D\PYGZsq{}, \PYGZsq{}A\PYGZsq{}, \PYGZsq{}C\PYGZsq{}, \PYGZsq{}G\PYGZsq{}, \PYGZsq{}E\PYGZsq{}, \PYGZsq{}B\PYGZsq{}, \PYGZsq{}F\PYGZsq{}]),}
 \PYG{g+go}{  (0.756, [\PYGZsq{}G\PYGZsq{}, \PYGZsq{}C\PYGZsq{}, \PYGZsq{}D\PYGZsq{}, \PYGZsq{}A\PYGZsq{}, \PYGZsq{}E\PYGZsq{}, \PYGZsq{}B\PYGZsq{}, \PYGZsq{}F\PYGZsq{}])]}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbr}\PYG{o}{.}\PYG{n}{showTransitiveDigraph}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pbr}\PYG{o}{.}\PYG{n}{showTransitiveDigraph}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ Ranking by Choosing and Rejecting}
 \PYG{g+go}{ 1st ranked [\PYGZsq{}A\PYGZsq{}, \PYGZsq{}C\PYGZsq{}, \PYGZsq{}D\PYGZsq{}, \PYGZsq{}G\PYGZsq{}]}
 \PYG{g+go}{    2nd ranked [\PYGZsq{}B\PYGZsq{}, \PYGZsq{}E\PYGZsq{}]}
 \PYG{g+go}{    2nd last ranked [\PYGZsq{}B\PYGZsq{}, \PYGZsq{}E\PYGZsq{}]}
 \PYG{g+go}{ 1st last ranked [\PYGZsq{}F\PYGZsq{}]}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbr}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{officeChoiceRanking}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{n}{ArrowHeads}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pbr}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{officeChoiceRanking}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{n}{ArrowHeads}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Exporting to officeChoiceRanking.dot}
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng officeChoiceRanking.dot \PYGZhy{}o officeChoiceRanking.png}
@@ -2694,7 +2694,7 @@ In \hyperref[\detokenize{tutorial:bachetranking0}]{Listing \ref{\detokenize{tuto
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:partialbachetranking1}}}
 \fvset{hllines={, 1, 5, 7, 8, 10, 11, 13,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbr}\PYG{o}{.}\PYG{n}{computePartialOutrankingConsensusQuality}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pbr}\PYG{o}{.}\PYG{n}{computePartialOutrankingConsensusQuality}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+go}{ Consensus quality of partial ranking:}
 \PYG{g+go}{ Criterion (weight)    : ordinal correlation}
 \PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -2719,7 +2719,7 @@ The partial Bachet ranking is a 100\% consistent with the \sphinxstyleemphasis{P
 We may finally use the best, with the outranking digraph \sphinxstyleemphasis{g} correlated (+0.816), \sphinxstyleemphasis{Bachet} ranking {[}‘G’, ‘D’, ‘A’, ‘C’, ‘B’, ‘E’, ‘F’{]}  for showing in \hyperref[\detokenize{tutorial:rankedofficechoiceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:rankedofficechoiceheatmap}}} a from best to worst ranked performance heatmap of all the potential office locations.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{actionsList}\PYG{o}{=}\PYG{n}{wbr}\PYG{o}{.}\PYG{n}{bachetRankings}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{actionsList}\PYG{o}{=}\PYG{n}{pbr}\PYG{o}{.}\PYG{n}{bachetRankings}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
 \PYG{g+go}{   ...                              Correlations=True)}
 \end{sphinxVerbatim}
 
@@ -5122,8 +5122,8 @@ As we have noticed before, the randomized \sphinxstyleemphasis{polarised Bachet}
 \PYG{g+gp}{... }                      \PYG{n}{numberOfCriteria}\PYG{o}{=}\PYG{l+m+mi}{13}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{200}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{Normalized}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{transitiveDigraphs} \PYG{k+kn}{import} \PYG{n}{PartialBachetRanking}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wb} \PYG{o}{=} \PYG{n}{PartialBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{randomized}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{maxNbrOfRankings}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wb}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pbr} \PYG{o}{=} \PYG{n}{PartialBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{randomized}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{maxNbrOfRankings}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pbr}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Digraph instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{  Instance class      : PartialBachetRanking}
 \PYG{g+go}{  Instance name       : rel\PYGZus{}randomCBperftab\PYGZus{}wk}
@@ -5136,7 +5136,7 @@ As we have noticed before, the randomized \sphinxstyleemphasis{polarised Bachet}
 \PYG{g+go}{                         \PYGZsq{}randomized\PYGZsq{}, \PYGZsq{}seed\PYGZsq{}, \PYGZsq{}bachetRankings\PYGZsq{},}
 \PYG{g+go}{                         \PYGZsq{}maxNbrOfRankings\PYGZsq{},\PYGZsq{}Polarised\PYGZsq{},}
 \PYG{g+go}{                         \PYGZsq{}partialBachetCorrelation\PYGZsq{}]}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wb}\PYG{o}{.}\PYG{n}{bachetRankings}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pbr}\PYG{o}{.}\PYG{n}{bachetRankings}
 \PYG{g+go}{ [(0.6824, [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]),}
 \PYG{g+go}{  (0.6523, [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}]),}
 \PYG{g+go}{  (0.6482, [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}]),}
@@ -5151,18 +5151,18 @@ In \hyperref[\detokenize{tutorial:weakbachet3}]{Listing \ref{\detokenize{tutoria
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:weakbachet4}}}
 \fvset{hllines={, 2, 3, 4, 5, 6, 9, 10, 11,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wb}\PYG{o}{.}\PYG{n}{showTransitiveDigraph}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pbr}\PYG{o}{.}\PYG{n}{showTransitiveDigraph}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ Ranking by Choosing and Rejecting}
 \PYG{g+go}{  1st ranked [\PYGZsq{}a5\PYGZsq{}]}
 \PYG{g+go}{    2nd ranked [\PYGZsq{}a6\PYGZsq{}]}
 \PYG{g+go}{    2nd last ranked [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}])}
 \PYG{g+go}{  1st last ranked [\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}])}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wb}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{wb}\PYG{o}{.}\PYG{n}{partialBachetCorrelation}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pbr}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{pbr}\PYG{o}{.}\PYG{n}{partialBachetCorrelation}\PYG{p}{)}
 \PYG{g+go}{ Correlation indexes:}
 \PYG{g+go}{  Crisp ordinal correlation  : +0.806}
 \PYG{g+go}{  Epistemic determination    :  0.179}
 \PYG{g+go}{  Bipolar\PYGZhy{}valued equivalence : +0.144}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wb}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{weakBachetpol}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pbr}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{weakBachetpol}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{  Exporting to weakBachetpol.dot}
 \PYG{g+go}{  dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng weakBachetpol.dot \PYGZhy{}o weakBachetpol.png}
@@ -5180,7 +5180,7 @@ In \hyperref[\detokenize{tutorial:weakbachet3}]{Listing \ref{\detokenize{tutoria
 The resulting \sphinxstyleemphasis{partial ranking} is highly correlated with the common determinated part of the given outranking digraph \sphinxstyleemphasis{g} (+0.806) leading to a \sphinxstyleemphasis{relational equivalence} with the given outranking digraph \sphinxstyleemphasis{g} supported by a criteria significance majority of 57.2\% (see Lines 9\sphinxhyphen{}11 above).
 
 \sphinxAtStartPar
-We recover with the \sphinxstyleemphasis{Bachet} ranking rule a ranking consensus actually very similar to the previous consensus obtained from of all four \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}scoring} results (see \hyperref[\detokenize{tutorial:rankingconsensusfigure}]{Fig.\@ \ref{\detokenize{tutorial:rankingconsensusfigure}}}).
+We recover with the \sphinxstyleemphasis{Bachet} ranking rule a ranking consensus actually very similar to the previous consensus obtained from all four \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}scoring} results (see \hyperref[\detokenize{tutorial:rankingconsensusfigure}]{Fig.\@ \ref{\detokenize{tutorial:rankingconsensusfigure}}}).
 
 \sphinxAtStartPar
 The \sphinxcode{\sphinxupquote{PartialBachetRanking}} constructor uses by default the \sphinxstyleemphasis{polarised} version of the \sphinxstyleemphasis{Bachet} ranking rule. Due to its \sphinxstyleemphasis{Condorcet consistency} property, the partial ranking result obtained in \hyperref[\detokenize{tutorial:weakbachetpol}]{Fig.\@ \ref{\detokenize{tutorial:weakbachetpol}}} represents in fact a ranking consensus respecting the actual \sphinxstylestrong{transitive parts} of the given outranking digraph (see the advanced topic dedicated to the \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{Bachet ranking rules}}}).
@@ -5191,9 +5191,9 @@ The \sphinxcode{\sphinxupquote{PartialBachetRanking}} now provides a “\sphinxs
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:weakbachet5}}}
 \fvset{hllines={, 1, 4, 5, 6, 7, 8,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbv} \PYG{o}{=} \PYG{n}{PartialBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{Polarised}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pvbr} \PYG{o}{=} \PYG{n}{PartialBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{Polarised}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,}
 \PYG{g+gp}{... }           \PYG{n}{randomized}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{maxNbrOfRankings}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbv}\PYG{o}{.}\PYG{n}{bachetRankings}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pvbr}\PYG{o}{.}\PYG{n}{bachetRankings}
 \PYG{g+go}{ [(0.6764, [\PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}]),}
 \PYG{g+go}{  (0.6583, [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}]),}
 \PYG{g+go}{  (0.6543, [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}]),}
@@ -5211,18 +5211,18 @@ In \hyperref[\detokenize{tutorial:weakbachet6}]{Listing \ref{\detokenize{tutoria
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:weakbachet6}}}
 \fvset{hllines={, 3, 4, 5, 6, 9, 10, 11,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbv}\PYG{o}{.}\PYG{n}{showTransitiveDigraph}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pvbr}\PYG{o}{.}\PYG{n}{showTransitiveDigraph}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ Ranking by Choosing and Rejecting}
 \PYG{g+go}{  1st ranked [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}]}
 \PYG{g+go}{    2nd ranked [\PYGZsq{}a7\PYGZsq{}],}
 \PYG{g+go}{    2nd last ranked [\PYGZsq{}\PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}])}
 \PYG{g+go}{  1st last ranked [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}])}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbv}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{wbv}\PYG{o}{.}\PYG{n}{weakBachetCorrelation}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pvbr}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{pvbr}\PYG{o}{.}\PYG{n}{weakBachetCorrelation}\PYG{p}{)}
 \PYG{g+go}{ Correlation indexes:}
 \PYG{g+go}{  Crisp ordinal correlation  : +0.888}
 \PYG{g+go}{  Epistemic determination    :  0.157}
 \PYG{g+go}{  Bipolar\PYGZhy{}valued equivalence : +0.139}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbv}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{weakBachetval}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pvbr}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{weakBachetval}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{  Exporting to weakBachetval.dot}
 \PYG{g+go}{  dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng weakBachetval.dot \PYGZhy{}o weakBachetval.png}
@@ -5243,12 +5243,12 @@ It is worthwhile noticing in \hyperref[\detokenize{tutorial:weakbachetval}]{Fig.
 \subsubsection{Consensus quality of the partial Bachet rankings}
 \label{\detokenize{tutorial:consensus-quality-of-the-partial-bachet-rankings}}
 \sphinxAtStartPar
-Let us now verify in \hyperref[\detokenize{tutorial:weakbachet7}]{Listing \ref{\detokenize{tutorial:weakbachet7}}} below the consensus quality of the partial \sphinxstyleemphasis{polarised} Bachet ranking \sphinxstyleemphasis{wb}.
+Let us now verify in \hyperref[\detokenize{tutorial:weakbachet7}]{Listing \ref{\detokenize{tutorial:weakbachet7}}} below the consensus quality of the partial \sphinxstyleemphasis{polarised} Bachet ranking \sphinxstyleemphasis{pbr}.
 \sphinxSetupCaptionForVerbatim{Consensus quality of the partial polarised Bachet ranking}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:weakbachet7}}}
 \fvset{hllines={, 1, 5, 6, 21,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wb}\PYG{o}{.}\PYG{n}{computePartialOutrankingConsensusQuality}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pbr}\PYG{o}{.}\PYG{n}{computePartialOutrankingConsensusQuality}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+go}{ Consensus quality of partial polarised Bachet ranking}
 \PYG{g+go}{ criterion (weight): bipolar\PYGZhy{}valued relational equivalence}
 \PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -5281,7 +5281,7 @@ We may redo in \hyperref[\detokenize{tutorial:weakbachet8}]{Listing \ref{\detoke
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:weakbachet8}}}
 \fvset{hllines={, 1, 5, 6, 16, 19, 20, 21,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbv}\PYG{o}{.}\PYG{n}{computePartialOutrankingConsensusQuality}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pvbr}\PYG{o}{.}\PYG{n}{computePartialOutrankingConsensusQuality}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+go}{ Consensus quality of the partial valued Bachet ranking}
 \PYG{g+go}{ criterion (weight): bipolar\PYGZhy{}valued relational equivalence}
 \PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}

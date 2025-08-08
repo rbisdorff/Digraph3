@@ -3338,48 +3338,50 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span class="linenos">4</span><span class="go"> 358948993845926294385124</span>
 </pre></div>
 </div>
-<p>In Python, the range of integers is luckily only limited by the available CPU memory and the <em>orderLimit</em> parameter may be adjusted to tackle, if required, outranking digraphs of orders &gt; 50. The randomized <em>Bachet</em> ranking rule might however need in these cases a smart permutohedron sampling strategy in order to achieve convincingly correlated ranking results. This challenging trail is being explored in the next Section.</p>
+<p>In Python, the range of integers is luckily only limited by the available CPU memory and the <em>orderLimit</em> parameter may be adjusted to tackle, if required, outranking digraphs of orders &gt; 50. The randomized <em>Bachet</em> ranking rule might however need in these cases a smart permutohedron sampling strategy in order to achieve convincingly correlated ranking results.</p>
 </section>
 <section id="smart-sampling-of-the-permutations-of-the-actions-list">
 <h4><a class="toc-backref" href="#id153" role="doc-backlink"><span class="section-number">3.3.3.5. </span>Smart sampling of the permutations of the actions list</a><a class="headerlink" href="#smart-sampling-of-the-permutations-of-the-actions-list" title="Link to this heading"></a></h4>
-<p>The Condorcet consistency of the polarised Bachet ranking rule guarantees that all transitive outranking triples are correctly scored independently of the given actions ordering. Only the intransitive outranking triples may give diverging ranking results. It is hence opportune to keep transitive triples unchanged in their given initial positions and only permute the two first and the to last pairs in a sample of intransitive triples and keep always the best correlated ranking result. To explore the usefulness of this sampling approach we provide below the <a class="reference internal" href="techDoc.html#linearOrders.SmartBachetRanking" title="linearOrders.SmartBachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">SmartBachetRanking</span></code></a> class.</p>
-<p>When reconsidering the random outranking digraph seen in <a class="reference internal" href="#optimisingbachet"><span class="std std-numref">Listing 3.47</span></a>, we obtain in <a class="reference internal" href="#smartbachet"><span class="std std-numref">Listing 3.50</span></a> with a random sample of only 3 intransitive outranking triples the following very convincing ranking result.</p>
+<p>The Condorcet consistency of the polarised Bachet ranking rule guarantees that all transitive outranking triples are correctly scored independently of any given actions ordering. Only the intransitive outranking triples may give diverging ranking results. It is hence opportune to keep transitive triples unchanged in their given initial positions and only permute the first and the last pair in a sample of intransitive triples and keep always the best qualified PolarisedBachetRanking result. To explore the usefulness of this sampling approach we provide below the <a class="reference internal" href="techDoc.html#linearOrders.SmartBachetRanking" title="linearOrders.SmartBachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">SmartBachetRanking</span></code></a> class.</p>
+<p>When reconsidering the random outranking digraph seen in <a class="reference internal" href="#optimisingbachet"><span class="std std-numref">Listing 3.47</span></a> we obtain in <a class="reference internal" href="#smartbachet"><span class="std std-numref">Listing 3.50</span></a>, with a random sample of only 3 triples from the 161 intransitive outranking triples, the following very convincing ranking result (see Lines 5, 8, 22, 24).</p>
 <div class="literal-block-wrapper docutils container" id="smartbachet">
 <div class="code-block-caption"><span class="caption-number">Listing 3.50 </span><span class="caption-text">Smart <em>Bachet</em> ranking result</span><a class="headerlink" href="#smartbachet" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RandomBipolarOutrankingDigraph</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">SmartBachetRanking</span>
-<span class="hll"><span class="linenos"> 4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span> <span class="o">=</span> <span class="n">SmartBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</span><span class="linenos"> 5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span>
-<span class="linenos"> 6</span><span class="go"> *------- Digraph instance description ------*</span>
-<span class="linenos"> 7</span><span class="go">  Instance class      : SmartBachetRanking</span>
-<span class="linenos"> 8</span><span class="go">  Instance name       : rel_randomperftab_best_ranked</span>
-<span class="linenos"> 9</span><span class="go">  Digraph Order       : 9</span>
-<span class="linenos">10</span><span class="go">  Digraph Size        : 36</span>
-<span class="linenos">11</span><span class="go">  Valuation domain    : [-1.00;1.00]</span>
-<span class="linenos">12</span><span class="go">  Determinateness (%) : 100.00</span>
-<span class="linenos">13</span><span class="go">  Attributes          : [&#39;intransitiveTriples&#39;, &#39;sampleSize&#39;,</span>
-<span class="linenos">14</span><span class="go">                         &#39;bachetRanking&#39;, &#39;bachetOrder&#39;,</span>
-<span class="linenos">15</span><span class="go">                         &#39;decBachetScores&#39;, &#39;incBachetScores&#39;,</span>
-<span class="linenos">16</span><span class="go">                         &#39;name&#39;, &#39;actions&#39;, &#39;order&#39;, &#39;valuationdomain&#39;,</span>
-<span class="linenos">17</span><span class="go">                         &#39;relation&#39;, &#39;correlation&#39;,</span>
-<span class="linenos">18</span><span class="go">                         &#39;gamma&#39;, &#39;notGamma&#39;, &#39;runTimes&#39;]</span>
-<span class="linenos">19</span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">sba</span><span class="o">.</span><span class="n">intransitiveTriples</span><span class="p">)</span>
-<span class="hll"><span class="linenos">20</span><span class="go"> 161</span>
-</span><span class="linenos">21</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span><span class="o">.</span><span class="n">bachetRanking</span>
-<span class="hll"><span class="linenos">22</span><span class="go"> [&#39;a2&#39;, &#39;a5&#39;, &#39;a9&#39;, &#39;a6&#39;, &#39;a4&#39;, &#39;a8&#39;, &#39;a3&#39;, &#39;a7&#39;, &#39;a1&#39;]</span>
-</span><span class="linenos">23</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">sba</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
-<span class="linenos">24</span><span class="go"> {&#39;correlation&#39;: 0.7441963223547806, &#39;determination&#39;: 0.408625}</span>
-<span class="linenos">25</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span> <span class="o">=</span> <span class="n">SmartBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="linenos">26</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span><span class="o">.</span><span class="n">bachetRanking</span>
-<span class="hll"><span class="linenos">27</span><span class="go"> [&#39;a2&#39;, &#39;a5&#39;, &#39;a9&#39;, &#39;a6&#39;, &#39;a8&#39;, &#39;a4&#39;, &#39;a3&#39;, &#39;a7&#39;, &#39;a1&#39;]</span>
-</span><span class="linenos">28</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">sba</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
-<span class="linenos">29</span><span class="go"> {&#39;correlation&#39;: 0.7585058291696407, &#39;determination&#39;: 0.408625}</span>
+<span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos"> 4</span><span class="go"> Transitivity degree of digraph &lt;rel_randomperftab&gt;:</span>
+<span class="hll"><span class="linenos"> 5</span><span class="go">   #triples x&gt;y&gt;z: 504, #closed: 343, #open: 161</span>
+</span><span class="linenos"> 6</span><span class="go">   (#closed/#triples) =  0.681</span>
+<span class="linenos"> 7</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">SmartBachetRanking</span>
+<span class="hll"><span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span> <span class="o">=</span> <span class="n">SmartBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span><span class="linenos"> 9</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span>
+<span class="linenos">10</span><span class="go"> *------- Digraph instance description ------*</span>
+<span class="linenos">11</span><span class="go">  Instance class      : SmartBachetRanking</span>
+<span class="linenos">12</span><span class="go">  Instance name       : rel_randomperftab_best_ranked</span>
+<span class="linenos">13</span><span class="go">  Digraph Order       : 9</span>
+<span class="linenos">14</span><span class="go">  Digraph Size        : 36</span>
+<span class="linenos">15</span><span class="go">  Valuation domain    : [-1.00;1.00]</span>
+<span class="linenos">16</span><span class="go">  Determinateness (%) : 100.00</span>
+<span class="linenos">17</span><span class="go">  Attributes          : [&#39;intransitiveTriples&#39;, &#39;sampleSize&#39;,</span>
+<span class="linenos">18</span><span class="go">                         &#39;bachetRanking&#39;, &#39;bachetOrder&#39;,</span>
+<span class="linenos">19</span><span class="go">                         &#39;decBachetScores&#39;, &#39;incBachetScores&#39;,</span>
+<span class="linenos">20</span><span class="go">                         &#39;name&#39;, &#39;actions&#39;, &#39;order&#39;, &#39;valuationdomain&#39;,</span>
+<span class="linenos">21</span><span class="go">                         &#39;relation&#39;, &#39;correlation&#39;,</span>
+<span class="linenos">22</span><span class="go">                         &#39;gamma&#39;, &#39;notGamma&#39;, &#39;runTimes&#39;]</span>
+<span class="linenos">23</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span><span class="o">.</span><span class="n">bachetRanking</span>
+<span class="hll"><span class="linenos">24</span><span class="go"> [&#39;a2&#39;, &#39;a5&#39;, &#39;a9&#39;, &#39;a6&#39;, &#39;a4&#39;, &#39;a8&#39;, &#39;a3&#39;, &#39;a7&#39;, &#39;a1&#39;]</span>
+</span><span class="linenos">25</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">sba</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
+<span class="hll"><span class="linenos">26</span><span class="go"> {&#39;correlation&#39;: 0.7441963223547806, &#39;determination&#39;: 0.408625}</span>
+</span><span class="linenos">27</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span> <span class="o">=</span> <span class="n">SmartBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">28</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span><span class="o">.</span><span class="n">bachetRanking</span>
+<span class="linenos">29</span><span class="go"> [&#39;a2&#39;, &#39;a5&#39;, &#39;a9&#39;, &#39;a6&#39;, &#39;a8&#39;, &#39;a4&#39;, &#39;a3&#39;, &#39;a7&#39;, &#39;a1&#39;]</span>
+<span class="linenos">30</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">sba</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
+<span class="linenos">31</span><span class="go"> {&#39;correlation&#39;: 0.7585058291696407, &#39;determination&#39;: 0.408625}</span>
 </pre></div>
 </div>
 </div>
-<p>In <a class="reference internal" href="#smartbachet"><span class="std std-numref">Listing 3.50</span></a> Line 22 we discover a ranking result that differs only in the positions of actions <em>a4</em> and <em>a8</em> from the optimal Kemeny ranking (see <a class="reference internal" href="#optimalkemeny1"><span class="std std-numref">Listing 3.49</span></a>). When permuting now all the 161 intransitive outranking triples we get in fact this optimal Kemeny ranking (see Lines 20, 24).</p>
-<p>When running a MonteCarlo simulation with a sample of 500 random 3 objectives –economic, sociatal and environmental– performance tableaux of 9 decision actions marked on 13 performance criteria, we obtain the following statistical summary.</p>
+<p>In <a class="reference internal" href="#smartbachet"><span class="std std-numref">Listing 3.50</span></a> Line 24 we discover a ranking result that differs only in the positions of actions <em>a4</em> and <em>a8</em> from the optimal Kemeny ranking (see <a class="reference internal" href="#optimalkemeny1"><span class="std std-numref">Listing 3.49</span></a>). When permuting now all the 161 intransitive outranking triples by setting <em>sampleSize=None</em> (Line 25), we get in fact this optimal Kemeny ranking result (see Lines 26, 28).</p>
+<p>When running a MonteCarlo simulation with a sample of 500 random 3 objectives –economic, environmental and societal– performance tableaux of 9 decision actions marked on 13 performance criteria, we obtain the following correlations statistics.</p>
 <blockquote>
 <div><table class="docutils align-default">
 <thead>
@@ -3438,7 +3440,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 </tbody>
 </table>
 </div></blockquote>
-<p>The statistical figures above show that the smart Bachet ranking rule comes very close to the Kemeny figures. In 163/500 (32.6%) cases we even reach in fact the optimal Kemeny ranking.</p>
+<p>The correlation figures above show that the smart Bachet ranking rule comes very close to the optimal Kemeny figures. In 163/500 (32.6%) cases we even reach in fact the optimal Kemeny ranking.</p>
 </section>
 <section id="the-bachet-rule-a-new-method-for-partially-ranking">
 <h4><a class="toc-backref" href="#id154" role="doc-backlink"><span class="section-number">3.3.3.6. </span>The Bachet rule: a new method for partially ranking</a><a class="headerlink" href="#the-bachet-rule-a-new-method-for-partially-ranking" title="Link to this heading"></a></h4>
