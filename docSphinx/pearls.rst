@@ -3455,7 +3455,7 @@ When reconsidering the random outranking digraph seen in :numref:`optimisingBach
 
 In :numref:`smartBachet` Line 24 we discover a ranking result that differs only in the positions of actions *a4* and *a8* from the optimal Kemeny ranking (see :numref:`optimalKemeny1`). When permuting now all the 161 intransitive outranking triples by setting *sampleSize=None* (Line 25), we get in fact this optimal Kemeny ranking result (see Lines 26, 28).
 
-When running a MonteCarlo simulation with a sample of 500 random 3 objectives --economic, environmental and societal-- performance tableaux of 9 decision actions marked on 13 performance criteria, we obtain the following correlations statistics. 
+When running a MonteCarlo simulation with a sample of 500 random 3 objectives --economic, environmental and societal-- performance tableaux of 9 decision actions marked on 13 performance criteria, we obtain the following ordinal correlations statistics between the corresponding ranking result and the given bipolar-valued outranking digraph *g*. 
 
     ============== ========= ========= ========= =========
      Ranking rule   Mean      Median    Minimum   Maximum
@@ -3473,7 +3473,7 @@ When running a MonteCarlo simulation with a sample of 500 random 3 objectives --
      Kemeny         0.79058    0.96945     0.065475
     ============== ========== =========== ==========
 
-The correlation figures above show that the smart Bachet ranking rule comes very close to the optimal Kemeny figures. In 163/500 (32.6%) cases we even reach in fact the optimal Kemeny ranking.
+The correlation figures show that the smart Bachet ranking rule comes very close to the Kemeny rule. In 163/500 (32.6%) cases we even reach in fact the optimal Kemeny ranking.
 
 The Bachet rule: a new method for partially ranking 
 ...................................................
