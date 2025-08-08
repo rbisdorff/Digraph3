@@ -3407,7 +3407,71 @@ Mind however that the *Bachet* ranking rule, even of comparable complexity :math
    >>> n.value()
     358948993845926294385124
 
-In Python, the range of integers is luckily only limited by the available CPU memory and the *orderLimit* parameter may be adjusted to tackle, if required, outranking digraphs of orders > 50. The randomized *Bachet* ranking rule might however need in these cases a smart permutohedron sampling strategy in order to achieve convincingly correlated ranking results. But this challenging trail has still to be explored.
+In Python, the range of integers is luckily only limited by the available CPU memory and the *orderLimit* parameter may be adjusted to tackle, if required, outranking digraphs of orders > 50. The randomized *Bachet* ranking rule might however need in these cases a smart permutohedron sampling strategy in order to achieve convincingly correlated ranking results. This challenging trail is being explored in the next Section.
+
+Smart sampling of the permutations of the actions list
+......................................................
+
+The Condorcet consistency of the polarised Bachet ranking rule guarantees that all transitive outranking triples are correctly scored independently of the given actions ordering. Only the intransitive outranking triples may give diverging ranking results. It is hence opportune to keep transitive triples unchanged in their given initial positions and only permute the two first and the to last pairs in a sample of intransitive triples and keep always the best correlated ranking result. To explore the usefulness of this sampling approach we provide below the :py:class:`~linearOrders.SmartBachetRanking` class.
+
+When reconsidering the random outranking digraph seen in :numref:`optimisingBachet`, we obtain in :numref:`smartBachet` with a random sample of only 3 intransitive outranking triples the following very convincing ranking result. 
+
+.. code-block:: pycon
+   :caption: Smart *Bachet* ranking result
+   :name: smartBachet
+   :emphasize-lines: 4,20,22,27
+
+   >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
+   >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
+   >>> from linearOrders import SmartBachetRanking
+   >>> sba = SmartBachetRanking(g,Polarised=True,sampleSize=3,seed=1)
+   >>> sba
+    *------- Digraph instance description ------*
+     Instance class      : SmartBachetRanking
+     Instance name       : rel_randomperftab_best_ranked
+     Digraph Order       : 9
+     Digraph Size        : 36
+     Valuation domain    : [-1.00;1.00]
+     Determinateness (%) : 100.00
+     Attributes          : ['intransitiveTriples', 'sampleSize',
+                            'bachetRanking', 'bachetOrder',
+			    'decBachetScores', 'incBachetScores',
+			    'name', 'actions', 'order', 'valuationdomain',
+			    'relation', 'correlation',
+			    'gamma', 'notGamma', 'runTimes']
+   >>> len(sba.intransitiveTriples)
+    161
+   >>> sba.bachetRanking
+    ['a2', 'a5', 'a9', 'a6', 'a4', 'a8', 'a3', 'a7', 'a1']
+   >>> g.computeRankingCorrelation(sba.bachetRanking)
+    {'correlation': 0.7441963223547806, 'determination': 0.408625}
+   >>> sba = SmartBachetRanking(g,sampleSize=None,seed=1,Polarised=True)
+   >>> sba.bachetRanking
+    ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1']
+   >>> g.computeRankingCorrelation(sba.bachetRanking)
+    {'correlation': 0.7585058291696407, 'determination': 0.408625}
+
+In :numref:`smartBachet` Line 22 we discover a ranking result that differs only in the positions of actions *a4* and *a8* from the optimal Kemeny ranking (see :numref:`optimalKemeny1`). When permuting now all the 161 intransitive outranking triples we get in fact this optimal Kemeny ranking (see Lines 20, 24).
+
+When running a MonteCarlo simulation with a sample of 500 random 3 objectives --economic, sociatal and environmental-- performance tableaux of 9 decision actions marked on 13 performance criteria, we obtain the following statistical summary. 
+
+    ============== ========= ========= ========= =========
+     Ranking rule   Mean      Median    Minimum   Maximum
+    ============== ========= ========= ========= =========
+     Smart Bachet   0.88197   0.90095   0.52690   0.98390
+     Copeland       0.83808   0.85935   0.40320   0.98520
+     Kemeny         0.89946   0.91350   0.57230   0.99010
+    ============== ========= ========= ========= =========
+
+    ============== ========== =========== ==========
+     Ranking rule   5% perc.   95% perc.   IQ range  
+    ============== ========== =========== ==========
+     Smart Bachet   0.73898    0.96338     0.083375
+     Copeland       0.66041    0.95302     0.12175 
+     Kemeny         0.79058    0.96945     0.065475
+    ============== ========== =========== ==========
+
+The statistical figures above show that the smart Bachet ranking rule comes very close to the Kemeny figures. In 163/500 (32.6%) cases we even reach in fact the optimal Kemeny ranking.
 
 The Bachet rule: a new method for partially ranking 
 ...................................................
