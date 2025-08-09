@@ -3379,12 +3379,11 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 </div>
 </div>
 <p>In <a class="reference internal" href="#smartbachet"><span class="std std-numref">Listing 3.50</span></a> Line 22 we discover a ranking result that differs only in the positions of actions <em>a4</em> and <em>a8</em> from the optimal Kemeny ranking seen in <a class="reference internal" href="#optimalkemeny1"><span class="std std-numref">Listing 3.49</span></a>. When permuting now all the 161 intransitive outranking triples by setting <em>sampleSize=None</em> (Line 25), we get in fact this optimal Kemeny ranking result (see Lines 27, 29).</p>
-<p>Running a MonteCarlo simulation with a sample of 500 random 3 objectives –economic, environmental and societal– performance tableaux of 9 decision actions marked on 13 performance criteria, we obtain the following ordinal correlations statistics between the corresponding ranking result and the given bipolar-valued outranking digraph <em>g</em>.</p>
+<p>Running a MonteCarlo simulation with a sample of 500 random 3 objectives –economic, environmental and societal– performance tableaux of 9 decision actions marked on 13 performance criteria, we obtain the following ordinal correlations statistics between the corresponding ranking results and the given bipolar-valued outranking digraph <em>g</em>.</p>
 <blockquote>
 <div><table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Ranking rule</p></th>
-<th class="head"><p>Mean</p></th>
 <th class="head"><p>Median</p></th>
 <th class="head"><p>Minimum</p></th>
 <th class="head"><p>Maximum</p></th>
@@ -3393,8 +3392,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Smart Bachet</p></td>
-<td><p>0.88197</p></td>
+<tr class="row-even"><td><p>Polarised Bachet</p></td>
 <td><p>0.90095</p></td>
 <td><p>0.52690</p></td>
 <td><p>0.98390</p></td>
@@ -3402,15 +3400,27 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <td><p>0.96338</p></td>
 </tr>
 <tr class="row-odd"><td><p>Copeland</p></td>
-<td><p>0.83808</p></td>
 <td><p>0.85935</p></td>
 <td><p>0.40320</p></td>
 <td><p>0.98520</p></td>
 <td><p>0.66041</p></td>
 <td><p>0.95302</p></td>
 </tr>
+<tr class="row-even"><td><p>Valued Bachet</p></td>
+<td><p>0.90175</p></td>
+<td><p>0.56450</p></td>
+<td><p>0.98390</p></td>
+<td><p>0.76050</p></td>
+<td><p>0.96286</p></td>
+</tr>
+<tr class="row-odd"><td><p>NetFlows</p></td>
+<td><p>0.86325</p></td>
+<td><p>0.34140</p></td>
+<td><p>0.98130</p></td>
+<td><p>0.67623</p></td>
+<td><p>0.94908</p></td>
+</tr>
 <tr class="row-even"><td><p>Kemeny</p></td>
-<td><p>0.89946</p></td>
 <td><p>0.91350</p></td>
 <td><p>0.57230</p></td>
 <td><p>0.99010</p></td>
@@ -3420,7 +3430,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 </tbody>
 </table>
 </div></blockquote>
-<p>The correlation figures show that the smart Bachet ranking rule comes very close to the Kemeny rule (median +0.901 vs +0.914). In 163/500 (32.6%) cases we even reach in fact the optimal Kemeny ranking.</p>
+<p>The correlation figures show that the smart polarised and valued Bachet ranking rules permuting all potential intransitive outranking triples come very close to the optimal Kemeny ranking rule (median +0.901 vs +0.914). And, in 163/500 (32.6%) polarised cases and in 196/500 (39.2%) valued cases, we even get an optimal Kemeny ranking result.</p>
 </section>
 <section id="the-bachet-rule-a-new-method-for-partially-ranking">
 <h4><a class="toc-backref" href="#id154" role="doc-backlink"><span class="section-number">3.3.3.6. </span>The Bachet rule: a new method for partially ranking</a><a class="headerlink" href="#the-bachet-rule-a-new-method-for-partially-ranking" title="Link to this heading"></a></h4>

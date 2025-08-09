@@ -3453,17 +3453,19 @@ When reconsidering the random outranking digraph *g* seen in :numref:`optimising
 
 In :numref:`smartBachet` Line 22 we discover a ranking result that differs only in the positions of actions *a4* and *a8* from the optimal Kemeny ranking seen in :numref:`optimalKemeny1`. When permuting now all the 161 intransitive outranking triples by setting *sampleSize=None* (Line 25), we get in fact this optimal Kemeny ranking result (see Lines 27, 29).
 
-Running a MonteCarlo simulation with a sample of 500 random 3 objectives --economic, environmental and societal-- performance tableaux of 9 decision actions marked on 13 performance criteria, we obtain the following ordinal correlations statistics between the corresponding ranking result and the given bipolar-valued outranking digraph *g*. 
+Running a MonteCarlo simulation with a sample of 500 random 3 objectives --economic, environmental and societal-- performance tableaux of 9 decision actions marked on 13 performance criteria, we obtain the following ordinal correlations statistics between the corresponding ranking results and the given bipolar-valued outranking digraph *g*. 
 
-    ============== ========= ========= ========= ========= ========== ===========
-     Ranking rule   Mean      Median    Minimum   Maximum   5% perc.   95% perc.
-    ============== ========= ========= ========= ========= ========== ===========
-     Smart Bachet   0.88197   0.90095   0.52690   0.98390   0.73898    0.96338
-     Copeland       0.83808   0.85935   0.40320   0.98520   0.66041    0.95302
-     Kemeny         0.89946   0.91350   0.57230   0.99010   0.79058    0.96945
-    ============== ========= ========= ========= ========= ========== ===========
+    ================== ========= ========= ========= ========== ===========
+     Ranking rule       Median    Minimum   Maximum   5% perc.   95% perc.
+    ================== ========= ========= ========= ========== ===========
+     Polarised Bachet   0.90095   0.52690   0.98390   0.73898    0.96338
+     Copeland           0.85935   0.40320   0.98520   0.66041    0.95302
+     Valued Bachet      0.90175   0.56450   0.98390   0.76050    0.96286
+     NetFlows           0.86325   0.34140   0.98130   0.67623    0.94908
+     Kemeny             0.91350   0.57230   0.99010   0.79058    0.96945
+    ================== ========= ========= ========= ========== ===========
 
-The correlation figures show that the smart Bachet ranking rule comes very close to the Kemeny rule (median +0.901 vs +0.914). In 163/500 (32.6%) cases we even reach in fact the optimal Kemeny ranking.
+The correlation figures show that the smart polarised and valued Bachet ranking rules permuting all potential intransitive outranking triples come very close to the optimal Kemeny ranking rule (median +0.901 vs +0.914). And, in 163/500 (32.6%) polarised cases and in 196/500 (39.2%) valued cases, we even get an optimal Kemeny ranking result.
 
 The Bachet rule: a new method for partially ranking 
 ...................................................

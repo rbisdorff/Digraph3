@@ -67,7 +67,7 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{August 08, 2025}
+\date{August 09, 2025}
 \release{3.13.5}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -4816,10 +4816,10 @@ In Python, the range of integers is luckily only limited by the available CPU me
 The Condorcet consistency of the polarised Bachet ranking rule guarantees that all transitive outranking triples are correctly scored independently of any given actions ordering. Only the intransitive outranking triples may give diverging ranking results. It is hence opportune to keep transitive triples unchanged in their given initial positions and only permute the first and the last pair in a sample of intransitive triples and keep always the best qualified PolarisedBachetRanking result. To explore the usefulness of this sampling approach we provide below the \sphinxcode{\sphinxupquote{SmartBachetRanking}} class.
 
 \sphinxAtStartPar
-When reconsidering the random outranking digraph seen in \hyperref[\detokenize{pearls:optimisingbachet}]{Listing \ref{\detokenize{pearls:optimisingbachet}}} we obtain in \hyperref[\detokenize{pearls:smartbachet}]{Listing \ref{\detokenize{pearls:smartbachet}}}, with a random sample of only 3 triples from the 161 intransitive outranking triples, the following very convincing ranking result (see Lines 5, 8, 22, 24).
+When reconsidering the random outranking digraph \sphinxstyleemphasis{g} seen in \hyperref[\detokenize{pearls:optimisingbachet}]{Listing \ref{\detokenize{pearls:optimisingbachet}}} we obtain, with a random sample of only 3 triples from the 161 intransitive outranking triples, the following very convincing ranking result.
 \sphinxSetupCaptionForVerbatim{Smart \sphinxstyleemphasis{Bachet} ranking result}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:smartbachet}}}
-\fvset{hllines={, 5, 8, 24, 26,}}%
+\fvset{hllines={, 5, 8, 22, 24, 25, 27, 29,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{RandomBipolarOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{RandomBipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
@@ -4829,20 +4829,18 @@ When reconsidering the random outranking digraph seen in \hyperref[\detokenize{p
 \PYG{g+go}{   (\PYGZsh{}closed/\PYGZsh{}triples) =  0.681}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{SmartBachetRanking}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sba} \PYG{o}{=} \PYG{n}{SmartBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{Polarised}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}\PYG{n}{sampleSize}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sba}
-\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Digraph instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+go}{  Instance class      : SmartBachetRanking}
-\PYG{g+go}{  Instance name       : rel\PYGZus{}randomperftab\PYGZus{}best\PYGZus{}ranked}
-\PYG{g+go}{  Digraph Order       : 9}
-\PYG{g+go}{  Digraph Size        : 36}
-\PYG{g+go}{  Valuation domain    : [\PYGZhy{}1.00;1.00]}
-\PYG{g+go}{  Determinateness (\PYGZpc{}) : 100.00}
-\PYG{g+go}{  Attributes          : [\PYGZsq{}intransitiveTriples\PYGZsq{}, \PYGZsq{}sampleSize\PYGZsq{},}
-\PYG{g+go}{                         \PYGZsq{}bachetRanking\PYGZsq{}, \PYGZsq{}bachetOrder\PYGZsq{},}
-\PYG{g+go}{                         \PYGZsq{}decBachetScores\PYGZsq{}, \PYGZsq{}incBachetScores\PYGZsq{},}
-\PYG{g+go}{                         \PYGZsq{}name\PYGZsq{}, \PYGZsq{}actions\PYGZsq{}, \PYGZsq{}order\PYGZsq{}, \PYGZsq{}valuationdomain\PYGZsq{},}
-\PYG{g+go}{                         \PYGZsq{}relation\PYGZsq{}, \PYGZsq{}correlation\PYGZsq{},}
-\PYG{g+go}{                         \PYGZsq{}gamma\PYGZsq{}, \PYGZsq{}notGamma\PYGZsq{}, \PYGZsq{}runTimes\PYGZsq{}]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sba}\PYG{o}{.}\PYG{n}{showScores}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{ Bachet scores in descending order}
+\PYG{g+go}{  action      score}
+\PYG{g+go}{   a2         6056.00}
+\PYG{g+go}{   a5         4746.00}
+\PYG{g+go}{   a9         2966.00}
+\PYG{g+go}{   a6         \PYGZhy{}306.00}
+\PYG{g+go}{   a4         \PYGZhy{}1494.00}
+\PYG{g+go}{   a8         \PYGZhy{}1849.00}
+\PYG{g+go}{   a3         \PYGZhy{}4801.00}
+\PYG{g+go}{   a7         \PYGZhy{}4955.00}
+\PYG{g+go}{   a1         \PYGZhy{}5921.00}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sba}\PYG{o}{.}\PYG{n}{bachetRanking}
 \PYG{g+go}{ [\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeRankingCorrelation}\PYG{p}{(}\PYG{n}{sba}\PYG{o}{.}\PYG{n}{bachetRanking}\PYG{p}{)}
@@ -4856,24 +4854,21 @@ When reconsidering the random outranking digraph seen in \hyperref[\detokenize{p
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-In \hyperref[\detokenize{pearls:smartbachet}]{Listing \ref{\detokenize{pearls:smartbachet}}} Line 24 we discover a ranking result that differs only in the positions of actions \sphinxstyleemphasis{a4} and \sphinxstyleemphasis{a8} from the optimal Kemeny ranking (see \hyperref[\detokenize{pearls:optimalkemeny1}]{Listing \ref{\detokenize{pearls:optimalkemeny1}}}). When permuting now all the 161 intransitive outranking triples by setting \sphinxstyleemphasis{sampleSize=None} (Line 25), we get in fact this optimal Kemeny ranking result (see Lines 26, 28).
+In \hyperref[\detokenize{pearls:smartbachet}]{Listing \ref{\detokenize{pearls:smartbachet}}} Line 22 we discover a ranking result that differs only in the positions of actions \sphinxstyleemphasis{a4} and \sphinxstyleemphasis{a8} from the optimal Kemeny ranking seen in \hyperref[\detokenize{pearls:optimalkemeny1}]{Listing \ref{\detokenize{pearls:optimalkemeny1}}}. When permuting now all the 161 intransitive outranking triples by setting \sphinxstyleemphasis{sampleSize=None} (Line 25), we get in fact this optimal Kemeny ranking result (see Lines 27, 29).
 
 \sphinxAtStartPar
-When running a MonteCarlo simulation with a sample of 500 random 3 objectives \textendash{}economic, environmental and societal\textendash{} performance tableaux of 9 decision actions marked on 13 performance criteria, we obtain the following correlations statistics.
+Running a MonteCarlo simulation with a sample of 500 random 3 objectives \textendash{}economic, environmental and societal\textendash{} performance tableaux of 9 decision actions marked on 13 performance criteria, we obtain the following ordinal correlations statistics between the corresponding ranking results and the given bipolar\sphinxhyphen{}valued outranking digraph \sphinxstyleemphasis{g}.
 \begin{quote}
 
 
 \begin{savenotes}\sphinxattablestart
 \sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{TTTTT}
+\begin{tabulary}{\linewidth}[t]{TTTTTT}
 \sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 Ranking rule
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
-Mean
 &\sphinxstyletheadfamily 
 \sphinxAtStartPar
 Median
@@ -4883,14 +4878,17 @@ Minimum
 &\sphinxstyletheadfamily 
 \sphinxAtStartPar
 Maximum
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+5\% perc.
+&\sphinxstyletheadfamily 
+\sphinxAtStartPar
+95\% perc.
 \\
 \sphinxmidrule
 \sphinxtableatstartofbodyhook
 \sphinxAtStartPar
-Smart Bachet
-&
-\sphinxAtStartPar
-0.88197
+Polarised Bachet
 &
 \sphinxAtStartPar
 0.90095
@@ -4900,13 +4898,16 @@ Smart Bachet
 &
 \sphinxAtStartPar
 0.98390
+&
+\sphinxAtStartPar
+0.73898
+&
+\sphinxAtStartPar
+0.96338
 \\
 \sphinxhline
 \sphinxAtStartPar
 Copeland
-&
-\sphinxAtStartPar
-0.83808
 &
 \sphinxAtStartPar
 0.85935
@@ -4916,13 +4917,54 @@ Copeland
 &
 \sphinxAtStartPar
 0.98520
+&
+\sphinxAtStartPar
+0.66041
+&
+\sphinxAtStartPar
+0.95302
+\\
+\sphinxhline
+\sphinxAtStartPar
+Valued Bachet
+&
+\sphinxAtStartPar
+0.90175
+&
+\sphinxAtStartPar
+0.56450
+&
+\sphinxAtStartPar
+0.98390
+&
+\sphinxAtStartPar
+0.76050
+&
+\sphinxAtStartPar
+0.96286
+\\
+\sphinxhline
+\sphinxAtStartPar
+NetFlows
+&
+\sphinxAtStartPar
+0.86325
+&
+\sphinxAtStartPar
+0.34140
+&
+\sphinxAtStartPar
+0.98130
+&
+\sphinxAtStartPar
+0.67623
+&
+\sphinxAtStartPar
+0.94908
 \\
 \sphinxhline
 \sphinxAtStartPar
 Kemeny
-&
-\sphinxAtStartPar
-0.89946
 &
 \sphinxAtStartPar
 0.91350
@@ -4932,70 +4974,12 @@ Kemeny
 &
 \sphinxAtStartPar
 0.99010
-\\
-\sphinxbottomrule
-\end{tabulary}
-\sphinxtableafterendhook\par
-\sphinxattableend\end{savenotes}
-
-
-\begin{savenotes}\sphinxattablestart
-\sphinxthistablewithglobalstyle
-\centering
-\begin{tabulary}{\linewidth}[t]{TTTT}
-\sphinxtoprule
-\sphinxstyletheadfamily 
-\sphinxAtStartPar
-Ranking rule
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
-5\% perc.
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
-95\% perc.
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
-IQ range
-\\
-\sphinxmidrule
-\sphinxtableatstartofbodyhook
-\sphinxAtStartPar
-Smart Bachet
-&
-\sphinxAtStartPar
-0.73898
-&
-\sphinxAtStartPar
-0.96338
-&
-\sphinxAtStartPar
-0.083375
-\\
-\sphinxhline
-\sphinxAtStartPar
-Copeland
-&
-\sphinxAtStartPar
-0.66041
-&
-\sphinxAtStartPar
-0.95302
-&
-\sphinxAtStartPar
-0.12175
-\\
-\sphinxhline
-\sphinxAtStartPar
-Kemeny
 &
 \sphinxAtStartPar
 0.79058
 &
 \sphinxAtStartPar
 0.96945
-&
-\sphinxAtStartPar
-0.065475
 \\
 \sphinxbottomrule
 \end{tabulary}
@@ -5004,7 +4988,7 @@ Kemeny
 \end{quote}
 
 \sphinxAtStartPar
-The correlation figures above show that the smart Bachet ranking rule comes very close to the optimal Kemeny figures. In 163/500 (32.6\%) cases we even reach in fact the optimal Kemeny ranking.
+The correlation figures show that the smart polarised and valued Bachet ranking rules permuting all potential intransitive outranking triples come very close to the optimal Kemeny ranking rule (median +0.901 vs +0.914). And, in 163/500 (32.6\%) polarised cases and in 196/500 (39.2\%) valued cases, we even get an optimal Kemeny ranking result.
 
 
 \subsubsection{The Bachet rule: a new method for partially ranking}
