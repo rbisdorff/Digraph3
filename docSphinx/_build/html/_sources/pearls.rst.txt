@@ -3412,9 +3412,9 @@ In Python, the range of integers is luckily only limited by the available CPU me
 Smart sampling of the permutations of the actions list
 ......................................................
 
-The Condorcet consistency of the polarised Bachet ranking rule guarantees that all transitive outranking triples are correctly scored independently of any given actions ordering. Only the intransitive outranking triples may give diverging ranking results. It is hence opportune to keep transitive triples unchanged in their given initial positions and only permute the first and the last pair in a sample of intransitive triples and keep always the best qualified PolarisedBachetRanking result. To explore the usefulness of this sampling approach we provide below the :py:class:`~linearOrders.SmartBachetRanking` class.
+The Condorcet consistency of the polarised Bachet ranking rule guarantees that all transitive outranking triples are correctly scored independently of any given actions ordering. Only the intransitive outranking triples may give diverging ranking results. It is hence opportune to keep transitive triples unchanged in their given initial positions and only permute the first and the last pair in a sample of intransitive triples and keep always the best qualified PolarisedBachetRanking or ValuedBachetRanking result. To explore the usefulness of this sampling approach the :py:mod:`linearOrders` module provides the :py:class:`~linearOrders.SmartBachetRanking` class.
 
-When reconsidering the random outranking digraph *g* seen in :numref:`optimisingBachet` we obtain, with a random sample of only 3 triples from the 161 intransitive outranking triples, the following very convincing ranking result. 
+When reconsidering the random outranking digraph *g*, seen in :numref:`optimisingBachet`,  we get the following very convincing ranking result. 
 
 .. code-block:: pycon
    :caption: Smart *Bachet* ranking result
@@ -3451,9 +3451,9 @@ When reconsidering the random outranking digraph *g* seen in :numref:`optimising
    >>> g.computeRankingCorrelation(sba.bachetRanking)
     {'correlation': 0.7585058291696407, 'determination': 0.408625}
 
-In :numref:`smartBachet` Line 22 we discover a ranking result that differs only in the positions of actions *a4* and *a8* from the optimal Kemeny ranking seen in :numref:`optimalKemeny1`. When permuting now all the 161 intransitive outranking triples by setting *sampleSize=None* (Line 25), we get in fact this optimal Kemeny ranking result (see Lines 27, 29).
+In :numref:`smartBachet` Line 5 we notice that the given random outranking digraph presents 161 intransitive outranking triples. When sampling in Line 8 the permutations of 10 of these intransitive triples, we discover a ranking result that differs only in the positions of actions *a4* and *a8* from the optimal Kemeny ranking seen in :numref:`optimalKemeny1`. When permuting now all the 161 intransitive outranking triples by setting *sampleSize=None* (Line 25), we actually obtain this optimal Kemeny ranking result (see Lines 27, 29).
 
-Running a MonteCarlo simulation with a sample of 500 random 3 objectives --economic, environmental and societal-- performance tableaux of 9 decision actions marked on 13 performance criteria, we obtain the following ordinal correlations statistics between the corresponding ranking results and the given bipolar-valued outranking digraph *g*. 
+Running a MonteCarlo simulation with a sample of 500 random 3 objectives --economic, environmental and societal-- performance tableaux of 9 decision actions marked on 13 performance criteria, gives the following ordinal correlations statistics between the corresponding ranking results and the given bipolar-valued outranking digraph *g*. 
 
     ================== ========= ========= ========= ========== ===========
      Ranking rule       Median    Minimum   Maximum   5% perc.   95% perc.
@@ -3465,7 +3465,7 @@ Running a MonteCarlo simulation with a sample of 500 random 3 objectives --econo
      Kemeny             0.91350   0.57230   0.99010   0.79058    0.96945
     ================== ========= ========= ========= ========== ===========
 
-The correlation figures show that the smart polarised and valued Bachet ranking rules permuting all potential intransitive outranking triples come very close to the optimal Kemeny ranking rule (median +0.901 vs +0.914). And, in 163/500 (32.6%) polarised cases and in 196/500 (39.2%) valued cases, we even get an optimal Kemeny ranking result.
+The correlation figures show that both the smart polarised and the valued Bachet ranking rules, by permuting all potential intransitive outranking triples, come very close to the optimal Kemeny ranking rule (median correlation +0.901 vs +0.914). And in 163/500 (32.6%) polarised cases and in 196/500 (39.2%) valued cases, we even get an optimal Kemeny ranking result.
 
 The Bachet rule: a new method for partially ranking 
 ...................................................
