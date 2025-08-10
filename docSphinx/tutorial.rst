@@ -3736,7 +3736,7 @@ As we have noticed before, the randomized *polarised Bachet* ranking rule produc
      (0.6442, ['a5', 'a6', 'a4', 'a3', 'a1', 'a7', 'a9', 'a8', 'a2']),
      (0.6382, ['a5', 'a6', 'a1', 'a7', 'a3', 'a4', 'a8', 'a2', 'a9'])]
 
-In :numref:`weakBachet3` Line 6, we notice that we sample 100 *Bachet* rankings and keep the five best correlated rankings for constructing the ranking consensus (see Lines 20-25). We may notice that alternative *a5* is always first-ranked and alternative *a6* second-ranked. Whereas alternatives *a2*, *a8* and *a9* make up the the tail group. The :py:meth:`~transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph` method confirms this partial ranking (see :numref:`weakBachet4` Lines 2-6 below and :numref:`weakBachetpol`).
+In :numref:`weakBachet3` Line 6, we notice that we sample 100 *Bachet* rankings and keep the five best correlated rankings for constructing the ranking consensus (see Lines 20-25). We may notice that alternative *a5* is always first-ranked and alternative *a6* second-ranked. Whereas alternatives *a2*, *a8* and *a9* make up the tail group. The :py:meth:`~transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph` method confirms this partial ranking (see :numref:`weakBachet4` Lines 2-6 below and :numref:`weakBachetpol`).
 
 .. code-block:: pycon
    :caption: Partial polarised Bachet ranking result

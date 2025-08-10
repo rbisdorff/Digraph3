@@ -3547,7 +3547,7 @@ To explore this opportunity, a :py:meth:`~digraphs.Digraph.showBachetChoiceRecom
 
 Alternative *a2* appears clearly as the first-choice candidate, whereas alternatives *a1*, *a3* and *a7* appear as potential last-choice candidates (see Lines 7 and 14 above).
 
-In order to provide information about the the underlying :py:class:`~transitiveDigraphs.PartialBachetRanking` digraph, the corresponding instance is stored in the *g.pbr* attribute. We may thus consult the five Bachet rankings used by the :py:class:`~transitiveDigraphs.RankingsFusionDigraph` constructor and provide the best correlated one for ranking the performance heatmap of the given performance tableau (see Lines 2 and 12-13 below).
+In order to provide information about the underlying :py:class:`~transitiveDigraphs.PartialBachetRanking` digraph, the corresponding instance is stored in the *g.pbr* attribute. We may thus consult the five Bachet rankings used by the :py:class:`~transitiveDigraphs.RankingsFusionDigraph` constructor and provide the best correlated one for ranking the performance heatmap of the given performance tableau (see Lines 2 and 12-13 below).
 
 .. code-block:: pycon
    :emphasize-lines: 2,9,12-13
