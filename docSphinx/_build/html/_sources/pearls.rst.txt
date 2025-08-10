@@ -3513,7 +3513,7 @@ The nine performance records are grouped into three performance equivalence clas
 
 A Monte Carlo experiment with the same 500 random Cost-Benefit performance tableaux, reporting the grades obtained by 20 decision actions on 13 criteria already used before, shows with *randomized=100* and *maxNbrOfRankings=5* settings a median partial ranking correlation of +0.936 (min. +0.760) on a common median determination part of 63%% (min. 55%) of the given outranking digraphs. The valued median equivalence of the partial rankings with the given outranking digraphs is hence supported by a median criteria significance majority of 62% (min. 54%).
 
-The :py:class:`~transitiveDigraphs.PartialBachetRanking` class provides this way a valuable and effective method for computing *partial rankings* from given bipolar-valued outranking digraphs. The partial *Bachet* ranking digraph represents in fact the directed version of a **comparability** graph, i.e. :ref:`a Berge or perfect graph <Permutation-Tutorial-label>` . We have this way found an algorithm for computing a *transitively orientable* graph, close in the :ref:`bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>` sense to the transitive part of a given bipolar-valued outranking digraph.
+The :py:class:`~transitiveDigraphs.PartialBachetRanking` class provides this way a valuable and effective method for computing *partial rankings* from given bipolar-valued outranking digraphs. The partial *Bachet* ranking digraph represents in fact the directed version of a **comparability** graph, i.e. :ref:`a Berge or perfect graph <Permutation-Tutorial-label>` .
 
 .. code-block:: pycon
 
@@ -3521,9 +3521,14 @@ The :py:class:`~transitiveDigraphs.PartialBachetRanking` class provides this way
    >>> cg.isComparabilityGraph()
     True
 
-*Partial Bachet* rankings make hence apparent the actual **transitive part** of outranking relations. This interesting finding opens the way to a new design of first- or last-choice recommender algorithms avoiding the necessity to arbitrarily break up potential chordless outranking circuits. The first and last levels of a topological sort of partial rankings --their **initial and terminal kernels**-- give indeed convincing candidates for a *first-choice*, respectively a *last-choice* recommendation (see :numref:`partialBachet0` Lines 7-10).
+We have this way found an algorithm for computing a *transitively orientable* graph, close in the :ref:`bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>` sense to the transitive part of a given bipolar-valued outranking digraph. *Partial Bachet* rankings make hence apparent the actual **transitive part** of outranking relations. This interesting finding opens the way to a new design of first- or last-choice recommender algorithms avoiding the necessity to arbitrarily break up potential chordless outranking circuits.
 
-To explore this opportunity, a :py:meth:`~digraphs.Digraph.showBachetChoiceRecommendation` method has been added (see :numref:`BachetBCR0` lines 3-4). 
+The Bachet first and last choice recommender algorithm 
+......................................................
+
+The first and last levels of a topological sort of partial rankings --their **initial and terminal kernels**-- give indeed convincing candidates for a *first-choice*, respectively a *last-choice* recommendation (see :numref:`partialBachet0` Lines 7-10).
+
+To explore this opportunity, a :py:meth:`~digraphs.Digraph.showBachetChoiceRecommendation` method has been added to the :py:class:`~digraphs.Digraph` class (see :numref:`BachetBCR0` lines 3-4). 
 
 .. code-block:: pycon
    :caption: *Bachet* first and last choice recommendations
@@ -3569,15 +3574,15 @@ In order to provide information about the underlying :py:class:`~transitiveDigra
 
 .. Figure:: bachetBCR.png
    :name: bachetBCR1
-   :alt: Bachet first choice recommendation
+   :alt: Bachet choice recommendations
    :width: 450 px
    :align: center
 
-   Bachet first choice recommendation
+   Bachet choice recommendations
 
 In :numref:`bachetBCR1` we see confirmed that alternative *a2* shows indeed the very best performance profile and alternatives *a1*, *a3* and *a7* the weakest performance profiles. 
 
-As the *Bachet* first choice recommendation is based on a partial transitive asymmetric digraph, actually highly correlated with the given outranking digraph *g* (+0.717, see Line 9 above), a unique initial and a unique terminal prekernel always exist (see :numref:`BachetBCR0` Lines 8 and 14). Both these properties confer the *Bachet choice recommendation* a computational advantage over the Rubis first choice recommendation based on initial and terminal prekernels directly extracted from the given outranking digraph where we, first, must arbitrarily break, the case given, all chordless outranking circuits.
+As the *Bachet* choice recommendation is based on a partial transitive asymmetric digraph, actually highly correlated with the given outranking digraph *g* (+0.717, see Line 9 above), a unique initial and a unique terminal prekernel always exist (see :numref:`BachetBCR0` Lines 7 and 14). Both these properties confer the *Bachet choice recommendation algorithm* a computational advantage over the *Rubis* first choice recommendation algorithm based on initial and terminal prekernels directly extracted from the given strict outranking digraph where we, first, must arbitrarily break, the case given, all chordless outranking circuits (see [BIS-2008p]_).
 
 Computing initial and terminal *prekernels* in digraphs is the subject of the next Section.
 
