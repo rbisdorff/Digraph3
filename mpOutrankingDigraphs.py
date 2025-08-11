@@ -22,7 +22,7 @@ Copyright (C) 2023-2025  Raymond Bisdorff
 """
 
 
-__version__ = "Revision: Py3.13.2"
+__version__ = "Revision: Py3.13.13"
 
 import multiprocessing
 import os
@@ -536,5 +536,5 @@ if __name__ == '__main__':
         
     print('*************************************')
     print('* R.B.                              *')
-    print('* $Revision: Python3.12 $           *')                   
+    print('* $Revision: Python3.13 $           *')                   
     print('*************************************')

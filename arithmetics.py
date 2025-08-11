@@ -1133,8 +1133,8 @@ if __name__ == '__main__':
     print("""
     ****************************************************
     * Digraph3 arithmetics module                      *
-    * Revision: Python3.9                              *
-    * Copyright (C) 2010-2021 Raymond Bisdorff         *
+    * Revision: Python3.13                             *
+    * Copyright (C) 2010-2025 Raymond Bisdorff         *
     * The module comes with ABSOLUTELY NO WARRANTY     *
     * to the extent permitted by the applicable law.   *
     * This is free software, and you are welcome to    *

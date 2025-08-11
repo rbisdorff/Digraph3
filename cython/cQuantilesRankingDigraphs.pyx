@@ -3,7 +3,7 @@
 c-Extension for the Digraph3 collection.
 Module cQuantilesRankingDigraphs.py is a c-compiled partial version of the corresponding :py:mod:`sparseOutrankingDigraphs` module for handling quantiles ranking digraphs of very large order.
 
-Copyright (C) 2024  Raymond Bisdorff 
+Copyright (C) 2025  Raymond Bisdorff 
 """
 ######################
 

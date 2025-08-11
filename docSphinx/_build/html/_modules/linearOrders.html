@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>linearOrders &mdash; Digraph3 3.13.5 documentation</title>
+  <title>linearOrders &mdash; Digraph3 3.13.6 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
@@ -14,7 +14,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=32a6def9"></script>
+      <script src="../_static/documentation_options.js?v=055e5493"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -1769,7 +1769,7 @@
 
 <span class="sd">        - *actionsList* : a given ordering of the other.actions dictionary. If *None* the list of other.actions is used.</span>
 
-<span class="sd">        - *sampleSize*: number &gt; 0 of intransitive tripes to permute, the potential list of intransitive triples is ranked by decreasng epistemic determination. If *None* all intransitive tripes are permuted.</span>
+<span class="sd">        - *sampleSize*: number &gt; 0 of intransitive tripes to permute, the potential list of intransitive triples is ranked by decreasing epistemic determination. If *None* all intransitive tripes are permuted.</span>
 
 
 <span class="sd">    *Useage example*</span>
@@ -1782,6 +1782,18 @@
 <span class="sd">      (#closed/#triples) =  0.681</span>
 <span class="sd">    &gt;&gt;&gt; from linearOrders import SmartBachetRanking</span>
 <span class="sd">    &gt;&gt;&gt; sba = SmartBachetRanking(g,Polarised=True,sampleSize=3)</span>
+<span class="sd">    &gt;&gt;&gt; sba</span>
+<span class="sd">    *------- Digraph instance description ------*</span>
+<span class="sd">    Instance class      : SmartBachetRanking</span>
+<span class="sd">    Instance name       : rel_randomperftab_best_ranked</span>
+<span class="sd">    Digraph Order       : 9</span>
+<span class="sd">    Digraph Size        : 36</span>
+<span class="sd">    Valuation domain    : [-1.00;1.00]</span>
+<span class="sd">    Determinateness (%) : 100.00</span>
+<span class="sd">    Attributes          : [&#39;intransitiveTriples&#39;, &#39;sampleSize&#39;, &#39;bachetRanking&#39;,</span>
+<span class="sd">                           &#39;bachetOrder&#39;, &#39;decBachetScores&#39;, &#39;incBachetScores&#39;,</span>
+<span class="sd">                           &#39;name&#39;, &#39;actions&#39;, &#39;order&#39;, &#39;valuationdomain&#39;, &#39;relation&#39;,</span>
+<span class="sd">                           &#39;correlation&#39;, &#39;gamma&#39;, &#39;notGamma&#39;, &#39;runTimes&#39;]</span>
 <span class="sd">    &gt;&gt;&gt; sba.showScores()</span>
 <span class="sd">    Bachet scores in descending order</span>
 <span class="sd">     action 	 score</span>
@@ -1796,6 +1808,8 @@
 <span class="sd">      a1 	 -5921.00</span>
 <span class="sd">    &gt;&gt;&gt; sba.bachetRanking</span>
 <span class="sd">    [&#39;a2&#39;, &#39;a5&#39;, &#39;a9&#39;, &#39;a6&#39;, &#39;a4&#39;, &#39;a8&#39;, &#39;a3&#39;, &#39;a7&#39;, &#39;a1&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; sba.correlation</span>
+<span class="sd">    0.7441963223547806</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>

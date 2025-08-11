@@ -2295,7 +2295,7 @@ if __name__ == "__main__":
     print("""
     ****************************************************
     * Digraph3 ratingDigraphs module                   *
-    * Copyright (C) 2022 Raymond Bisdorff              *
+    * Copyright (C) 2022-2025 Raymond Bisdorff         *
     * The module comes with ABSOLUTELY NO WARRANTY     *
     * to the extent permitted by the applicable law.   *
     * This is free software, and you are welcome to    *

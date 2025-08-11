@@ -8,7 +8,7 @@
 <meta content="Algorithmic Decision Theory, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Aid, Bipolar-valued Epistemic Logic" name="keywords" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2. Technical Reference of the Digraph3 modules &mdash; Digraph3 3.13.5 documentation</title>
+  <title>2. Technical Reference of the Digraph3 modules &mdash; Digraph3 3.13.6 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
@@ -17,7 +17,7 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=32a6def9"></script>
+      <script src="_static/documentation_options.js?v=055e5493"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="_static/clipboard.min.js?v=a7894cd8"></script>
@@ -1245,7 +1245,7 @@
 <dd class="field-even"><p><a class="reference external" href="https://rbisdorff.github.io/">https://rbisdorff.github.io/</a></p>
 </dd>
 <dt class="field-odd">Version<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Python 3.13 (release: 3.13.5)</p>
+<dd class="field-odd"><p>Python 3.13 (release: 3.13.6)</p>
 </dd>
 <dt class="field-even">Copyright<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="_static/digraph3_copyright.html">R. Bisdorff</a> 2013-2025</p>
@@ -8276,7 +8276,7 @@ Algorithmic Decision Theory applications</p>
 <p>You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p>
 </div></blockquote>
 <hr class="docutils" />
-<p>__version__ = “$Revision: Python 3.13.2”</p>
+<p>__version__ = “$Revision: Python 3.13.13”</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="performanceQuantiles.PerformanceQuantiles">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">performanceQuantiles.</span></span><span class="sig-name descname"><span class="pre">PerformanceQuantiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">perfTab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numberOfBins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LowerClosed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/performanceQuantiles.html#PerformanceQuantiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#performanceQuantiles.PerformanceQuantiles" title="Link to this definition"></a></dt>
@@ -9217,7 +9217,7 @@ a given bipolar-valued Digraph instance</p>
 <li><p><em>Polarised</em> : if <em>True</em> (default), the <em>PolarisedBachetRanking</em> contructor is used, if <em>False</em> the ValuedBachetRanking constructor is used.</p></li>
 <li><p><em>orderLimit</em> : maximal length of the <em>other.actions</em> dictionary.</p></li>
 <li><p><em>actionsList</em> : a given ordering of the other.actions dictionary. If <em>None</em> the list of other.actions is used.</p></li>
-<li><p><em>sampleSize</em>: number &gt; 0 of intransitive tripes to permute, the potential list of intransitive triples is ranked by decreasng epistemic determination. If <em>None</em> all intransitive tripes are permuted.</p></li>
+<li><p><em>sampleSize</em>: number &gt; 0 of intransitive tripes to permute, the potential list of intransitive triples is ranked by decreasing epistemic determination. If <em>None</em> all intransitive tripes are permuted.</p></li>
 </ul>
 </div></blockquote>
 <p><em>Useage example</em></p>
@@ -9229,6 +9229,18 @@ a given bipolar-valued Digraph instance</p>
 <span class="go">  (#closed/#triples) =  0.681</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">SmartBachetRanking</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span> <span class="o">=</span> <span class="n">SmartBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span>
+<span class="go">*------- Digraph instance description ------*</span>
+<span class="go">Instance class      : SmartBachetRanking</span>
+<span class="go">Instance name       : rel_randomperftab_best_ranked</span>
+<span class="go">Digraph Order       : 9</span>
+<span class="go">Digraph Size        : 36</span>
+<span class="go">Valuation domain    : [-1.00;1.00]</span>
+<span class="go">Determinateness (%) : 100.00</span>
+<span class="go">Attributes          : [&#39;intransitiveTriples&#39;, &#39;sampleSize&#39;, &#39;bachetRanking&#39;,</span>
+<span class="go">                       &#39;bachetOrder&#39;, &#39;decBachetScores&#39;, &#39;incBachetScores&#39;,</span>
+<span class="go">                       &#39;name&#39;, &#39;actions&#39;, &#39;order&#39;, &#39;valuationdomain&#39;, &#39;relation&#39;,</span>
+<span class="go">                       &#39;correlation&#39;, &#39;gamma&#39;, &#39;notGamma&#39;, &#39;runTimes&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
 <span class="go">Bachet scores in descending order</span>
 <span class="go"> action      score</span>
@@ -9243,6 +9255,8 @@ a given bipolar-valued Digraph instance</p>
 <span class="go">  a1         -5921.00</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span><span class="o">.</span><span class="n">bachetRanking</span>
 <span class="go">[&#39;a2&#39;, &#39;a5&#39;, &#39;a9&#39;, &#39;a6&#39;, &#39;a4&#39;, &#39;a8&#39;, &#39;a3&#39;, &#39;a7&#39;, &#39;a1&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span><span class="o">.</span><span class="n">correlation</span>
+<span class="go">0.7441963223547806</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -12526,7 +12540,7 @@ Euler’s number of coprime elements a in Zn.</p>
 <p class="admonition-title">Warning</p>
 <p>These resources are now deprecated and should no more be considered for ongoing usage!! They were developped in the context of now obsolete xml encoded web services deployments. A replacement alternative is given with the standard save() methods of performance tableaux, digraphs and graphs.</p>
 </div>
-<p>Copyright (C) 2016-2022  Raymond Bisdorff</p>
+<p>Copyright (C) 2016-2025  Raymond Bisdorff</p>
 <blockquote>
 <div><p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.</p>
 <p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</p>
@@ -12657,7 +12671,7 @@ Rubis Solver computed from a stored XMCDA2 encoded performance tableau.</p>
 <p class="warning">Inheritance diagram of cnpBipolarDigraphs</p></object></div>
 <p id="module-cnpBipolarDigraphs">c-Extension for the Digraph3 collection requiring the python <em>numpy</em> package.</p>
 <p>Module <em>cnpBipolarDigraphs</em> is a new c-compiled and openmp optimized reimplementation of the <em>BipolarOutrankingDigraph</em> class where the <em>relation</em> attribute is replaced by a <em>numpy</em> integer double array of type int.</p>
-<p>Copyright (C) 2024  Raymond Bisdorff</p>
+<p>Copyright (C) 2025  Raymond Bisdorff</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cnpBipolarDigraphs.CoDualnpDigraph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cnpBipolarDigraphs.</span></span><span class="sig-name descname"><span class="pre">CoDualnpDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.CoDualnpDigraph" title="Link to this definition"></a></dt>
@@ -12913,7 +12927,7 @@ Module cRandPerfTabs is a c-compiled version of the
 ie with integer action keys and float performance evaluations.</p>
 <p>Conversions methods are provided
 to switch from the standard to the BigData format and back.</p>
-<p>Copyright (C) 2018-2024  Raymond Bisdorff</p>
+<p>Copyright (C) 2018-2025  Raymond Bisdorff</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cRandPerfTabs.cNormalizedPerformanceTableau">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cRandPerfTabs.</span></span><span class="sig-name descname"><span class="pre">cNormalizedPerformanceTableau</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argPerfTab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lowValue</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">highValue</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coalition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cNormalizedPerformanceTableau" title="Link to this definition"></a></dt>
@@ -13315,7 +13329,7 @@ matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p
 Module cIntegerOutrankingDigraphs.py is a c-compiled part of the
 <a class="reference internal" href="#module-outrankingDigraphs" title="outrankingDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">outrankingDigraphs</span></code></a> module for handling random performance tableaux of Big Data type,
 ie with integer action keys and float performance evaluations.</p>
-<p>Copyright (C) 2018-2024  Raymond Bisdorff</p>
+<p>Copyright (C) 2018-2025  Raymond Bisdorff</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cIntegerOutrankingDigraphs.</span></span><span class="sig-name descname"><span class="pre">IntegerBipolarOutrankingDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argPerfTab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coalition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actionsSubset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hasNoVeto</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hasBipolarVeto</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CopyPerfTab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BigData</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startMethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tempDir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">WithConcordanceRelation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">WithVetoCounts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrCores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph" title="Link to this definition"></a></dt>
@@ -13540,7 +13554,7 @@ is by convention 0.0 at determination level 0.0 .</p>
 <p id="module-cIntegerSortingDigraphs">c-Extension for the Digraph3 collection.
 Module cIntegerSortingDigraphs.py is a c-compiled part of the
 <a class="reference internal" href="#module-sortingDigraphs" title="sortingDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sortingDigraphs</span></code></a> module for sorting with cIntegerOutrankingDigraphs ressources.</p>
-<p>Copyright (C) 2018-2024  Raymond Bisdorff</p>
+<p>Copyright (C) 2018-2025  Raymond Bisdorff</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cIntegerSortingDigraphs.</span></span><span class="sig-name descname"><span class="pre">IntegerQuantilesSortingDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argPerfTab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limitingQuantiles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LowerClosed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PrefThresholds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hasNoVeto</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outrankingType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bipolar'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CompleteOutranking</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">StoreSorting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CopyPerfTab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">AddProfiles2Actions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startMethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tempDir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrCores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph" title="Link to this definition"></a></dt>
@@ -13891,7 +13905,7 @@ the high category limit.</p>
 <p class="warning">Inheritance diagram of cSparseIntegerOutrankingDigraphs</p></object></div>
 <p id="module-cSparseIntegerOutrankingDigraphs">c-Extension for the Digraph3 collection.
 Module cSparseIntegerOutrankingDigraphs.py is a c-compiled partial version of the corresponding <a class="reference internal" href="#module-sparseOutrankingDigraphs" title="sparseOutrankingDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sparseOutrankingDigraphs</span></code></a> module for handling integer outranking digraphs of very large order.</p>
-<p>Copyright (C) 2018-2024  Raymond Bisdorff</p>
+<p>Copyright (C) 2018-2025  Raymond Bisdorff</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cSparseIntegerOutrankingDigraphs.</span></span><span class="sig-name descname"><span class="pre">SparseIntegerDigraph</span></span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph" title="Link to this definition"></a></dt>
@@ -14706,7 +14720,7 @@ Components are stored in an ordered dictionary.</p>
 <span id="cquantilesrankingdigraphs-label"></span><h3><span class="section-number">2.23.6. </span>cQuantilesRankingDigraphs module<a class="headerlink" href="#cquantilesrankingdigraphs-module" title="Link to this heading"></a></h3>
 <p id="module-cQuantilesRankingDigraphs">c-Extension for the Digraph3 collection.
 Module cQuantilesRankingDigraphs.py is a c-compiled partial version of the corresponding <a class="reference internal" href="#module-sparseOutrankingDigraphs" title="sparseOutrankingDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sparseOutrankingDigraphs</span></code></a> module for handling quantiles ranking digraphs of very large order.</p>
-<p>Copyright (C) 2024  Raymond Bisdorff</p>
+<p>Copyright (C) 2025  Raymond Bisdorff</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cQuantilesRankingDigraphs.cQuantilesRankingDigraph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cQuantilesRankingDigraphs.</span></span><span class="sig-name descname"><span class="pre">cQuantilesRankingDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argPerfTab</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantiles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantilesOrderingStrategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'optimal'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LowerClosed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">componentRankingRule</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Copeland'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimalComponentSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startMethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tempDir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrOfCPUs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrOfSorters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrOfRankers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save2File</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CopyPerfTab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Configuring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cQuantilesRankingDigraphs.cQuantilesRankingDigraph" title="Link to this definition"></a></dt>

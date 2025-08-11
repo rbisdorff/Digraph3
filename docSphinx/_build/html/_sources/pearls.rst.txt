@@ -3428,7 +3428,7 @@ When reconsidering the random outranking digraph *g*, seen in :numref:`optimisin
       #triples x>y>z: 504, #closed: 343, #open: 161
       (#closed/#triples) =  0.681
    >>> from linearOrders import SmartBachetRanking
-   >>> sba = SmartBachetRanking(g,Polarised=True,sampleSize=3,seed=1)
+   >>> sba = SmartBachetRanking(g,Polarised=True,sampleSize=3)
    >>> sba.showScores()
     Bachet scores in descending order
      action 	 score
@@ -3451,7 +3451,7 @@ When reconsidering the random outranking digraph *g*, seen in :numref:`optimisin
    >>> g.computeRankingCorrelation(sba.bachetRanking)
     {'correlation': 0.7585058291696407, 'determination': 0.408625}
 
-In :numref:`smartBachet` Line 5 we notice that the given random outranking digraph presents 161 intransitive outranking triples. When sampling in Line 8 the permutations of 10 of these intransitive triples, we discover a ranking result that differs only in the positions of actions *a4* and *a8* from the optimal Kemeny ranking seen in :numref:`optimalKemeny1`. When permuting now all the 161 intransitive outranking triples by setting *sampleSize=None* (Line 25), we actually obtain this optimal Kemeny ranking result (see Lines 27, 29).
+In :numref:`smartBachet` Line 5 we notice that the given random outranking digraph presents 161 intransitive outranking triples. When sampling in Line 8 the permutations of 3 of these intransitive triples, we discover a ranking result that differs only in the positions of actions *a4* and *a8* from the optimal Kemeny ranking seen in :numref:`optimalKemeny1`. When permuting now all the 161 intransitive outranking triples by setting *sampleSize=None* (Line 25), we actually obtain this optimal Kemeny ranking result (see Lines 27, 29).
 
 Running a MonteCarlo simulation with a sample of 500 random 3 objectives --economic, environmental and societal-- performance tableaux of 9 decision actions marked on 13 performance criteria, gives the following ordinal correlations statistics between the corresponding ranking results and the given bipolar-valued outranking digraph *g*. 
 

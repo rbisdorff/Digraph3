@@ -10,10 +10,10 @@ Conversions methods are provided
 to switch from the standard to the BigData format and back.  
 
 
-Copyright (C) 2018-2024  Raymond Bisdorff
+Copyright (C) 2018-2025  Raymond Bisdorff
 
 """
-__version__ = "cython 0.27.3"
+__version__ = "cython 3.0.10"
 
 from perfTabs import *
 #from decimal import Decimal

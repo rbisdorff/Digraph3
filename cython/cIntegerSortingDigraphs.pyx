@@ -4,7 +4,7 @@ c-Extension for the Digraph3 collection.
 Module cIntegerSortingDigraphs.py is a c-compiled part of the
 :py:mod:`sortingDigraphs` module for sorting with cIntegerOutrankingDigraphs ressources.  
 
-Copyright (C) 2018-2024  Raymond Bisdorff
+Copyright (C) 2018-2025  Raymond Bisdorff
 
 """
 #######################

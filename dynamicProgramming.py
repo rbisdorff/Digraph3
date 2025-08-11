@@ -21,7 +21,7 @@ Copyright (C) 2024-2025 Raymond Bisdorff
 
 """
 
-__version__ = "$Revision: Python 3.13.2 $"
+__version__ = "$Revision: Python 3.13.13 $"
 
 from transitiveDigraphs import TransitiveDigraph        
 class DynamicProgrammingDigraph(TransitiveDigraph):

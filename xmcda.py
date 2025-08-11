@@ -6,7 +6,7 @@ Python3+ implementation of xmcda tools
 
    These resources are now deprecated and should no more be considered for ongoing usage!! They were developped in the context of now obsolete xml encoded web services deployments. A replacement alternative is given with the standard save() methods of performance tableaux, digraphs and graphs. 
   
-Copyright (C) 2016-2022  Raymond Bisdorff
+Copyright (C) 2016-2025  Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
 
@@ -17,7 +17,7 @@ Copyright (C) 2016-2022  Raymond Bisdorff
 """
 #######################
 
-__version__ = "$Revision: Python 3.10"
+__version__ = "$Revision: Python 3.13"
 
 """
 XMCDA 2.0 xsl style sheets and XMCDA save and show method
@@ -3270,7 +3270,7 @@ if __name__ == '__main__':
     print("""
     ****************************************************
     * Python xmcda module                              *
-    * Copyright (C) 2011-2021 Raymond Bisdorff         *
+    * Copyright (C) 2011-2025 Raymond Bisdorff         *
     * The module comes with ABSOLUTELY NO WARRANTY     *
     * to the extent permitted by the applicable law.   *
     * This is free software, and you are welcome to    *

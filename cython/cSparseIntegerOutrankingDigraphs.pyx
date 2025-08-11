@@ -3,7 +3,7 @@
 c-Extension for the Digraph3 collection.
 Module cSparseIntegerOutrankingDigraphs.py is a c-compiled partial version of the corresponding :py:mod:`sparseOutrankingDigraphs` module for handling integer outranking digraphs of very large order.
 
-Copyright (C) 2018-2024  Raymond Bisdorff 
+Copyright (C) 2018-2025  Raymond Bisdorff 
 """
 ######################
 

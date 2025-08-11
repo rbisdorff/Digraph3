@@ -8,7 +8,7 @@
 <meta content="Algorithmic Decision Theory, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Aid, Bipolar-valued Epistemic Logic" name="keywords" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>3. Pearls of bipolar-valued epistemic logic &mdash; Digraph3 3.13.5 documentation</title>
+  <title>3. Pearls of bipolar-valued epistemic logic &mdash; Digraph3 3.13.6 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
@@ -17,7 +17,7 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=32a6def9"></script>
+      <script src="_static/documentation_options.js?v=055e5493"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="_static/clipboard.min.js?v=a7894cd8"></script>
@@ -205,7 +205,7 @@
 <dd class="field-even"><p><a class="reference external" href="https://rbisdorff.github.io/">https://rbisdorff.github.io/</a></p>
 </dd>
 <dt class="field-odd">Version<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Python 3.13 (release: 3.13.5)</p>
+<dd class="field-odd"><p>Python 3.13 (release: 3.13.6)</p>
 </dd>
 <dt class="field-even">PDF version<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="_static/digraph3Pearls.pdf">3.3 MB</a></p>
@@ -3355,7 +3355,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span class="hll"><span class="linenos"> 5</span><span class="go">   #triples x&gt;y&gt;z: 504, #closed: 343, #open: 161</span>
 </span><span class="linenos"> 6</span><span class="go">   (#closed/#triples) =  0.681</span>
 <span class="linenos"> 7</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">SmartBachetRanking</span>
-<span class="hll"><span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span> <span class="o">=</span> <span class="n">SmartBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="hll"><span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span> <span class="o">=</span> <span class="n">SmartBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </span><span class="linenos"> 9</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
 <span class="linenos">10</span><span class="go"> Bachet scores in descending order</span>
 <span class="linenos">11</span><span class="go">  action      score</span>
@@ -3380,7 +3380,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 </span></pre></div>
 </div>
 </div>
-<p>In <a class="reference internal" href="#smartbachet"><span class="std std-numref">Listing 3.50</span></a> Line 5 we notice that the given random outranking digraph presents 161 intransitive outranking triples. When sampling in Line 8 the permutations of 10 of these intransitive triples, we discover a ranking result that differs only in the positions of actions <em>a4</em> and <em>a8</em> from the optimal Kemeny ranking seen in <a class="reference internal" href="#optimalkemeny1"><span class="std std-numref">Listing 3.49</span></a>. When permuting now all the 161 intransitive outranking triples by setting <em>sampleSize=None</em> (Line 25), we actually obtain this optimal Kemeny ranking result (see Lines 27, 29).</p>
+<p>In <a class="reference internal" href="#smartbachet"><span class="std std-numref">Listing 3.50</span></a> Line 5 we notice that the given random outranking digraph presents 161 intransitive outranking triples. When sampling in Line 8 the permutations of 3 of these intransitive triples, we discover a ranking result that differs only in the positions of actions <em>a4</em> and <em>a8</em> from the optimal Kemeny ranking seen in <a class="reference internal" href="#optimalkemeny1"><span class="std std-numref">Listing 3.49</span></a>. When permuting now all the 161 intransitive outranking triples by setting <em>sampleSize=None</em> (Line 25), we actually obtain this optimal Kemeny ranking result (see Lines 27, 29).</p>
 <p>Running a MonteCarlo simulation with a sample of 500 random 3 objectives –economic, environmental and societal– performance tableaux of 9 decision actions marked on 13 performance criteria, gives the following ordinal correlations statistics between the corresponding ranking results and the given bipolar-valued outranking digraph <em>g</em>.</p>
 <blockquote>
 <div><table class="docutils align-default">
@@ -5212,7 +5212,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Aug 10, 2025.
+      <span class="lastupdated">Last updated on Aug 11, 2025.
       </span></p>
   </div>
 

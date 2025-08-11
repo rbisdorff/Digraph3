@@ -23,7 +23,7 @@ Copyright (C) 2016-2025 Raymond Bisdorff
 """
 #####################################
 
-__version__ = "$Revision: Python 3.13.2"
+__version__ = "$Revision: Python 3.13.13"
 
 from outrankingDigraphs import *
 from sortingDigraphs import *
@@ -3103,7 +3103,7 @@ if __name__ == "__main__":
     print("""
     ****************************************************
     * Digraph3 sparseOutrankingDigraphs module         *
-    * Copyright (C) 2010-2021 Raymond Bisdorff         *
+    * Copyright (C) 2010-2025 Raymond Bisdorff         *
     * The module comes with ABSOLUTELY NO WARRANTY     *
     * to the extent permitted by the applicable law.   *
     * This is free software, and you are welcome to    *

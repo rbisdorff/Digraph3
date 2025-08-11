@@ -15383,8 +15383,8 @@ if __name__ == "__main__":
 
     print('*****************************************************')
     print('* Python digraphs module                            *')
-    print('* $Revision: Python3.9 $                            *')
-    print('* Copyright (C) 2006-2021  Raymond Bisdorff         *')
+    print('* $Revision: Python3.13$                            *')
+    print('* Copyright (C) 2006-2025 Raymond Bisdorff          *')
     print('* The module comes with ABSOLUTELY NO WARRANTY      *')
     print('* to the extent permitted by the applicable law.    *')
     print('* This is free software, and you are welcome to     *')

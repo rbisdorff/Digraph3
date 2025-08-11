@@ -13,7 +13,7 @@ Copyright (C) 2015-2025  Raymond Bisdorff
 """
 #######################
 
-__version__ = "$Revision: 3.13.2 $"
+__version__ = "$Revision: 3.13.13 $"
 
 
 #from digraphsTools import *
@@ -948,7 +948,7 @@ if __name__ == "__main__":
 
     print('****************************************************')
     print('* Python randomDigraphs module                     *')
-    print('* Copyright (C) 2015-2021 R. Bisdorff              *')
+    print('* Copyright (C) 2015-2025 R. Bisdorff              *')
     print('* The module comes with ABSOLUTELY NO WARRANTY     *')
     print('* to the extent permitted by the applicable law.   *')
     print('* This is free software, and you are welcome to    *')

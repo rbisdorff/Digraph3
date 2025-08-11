@@ -6,7 +6,7 @@ c-Extension for the Digraph3 collection requiring the python *numpy* package.
 
 Module *cnpBipolarDigraphs* is a new c-compiled and openmp optimized reimplementation of the *BipolarOutrankingDigraph* class where the *relation* attribute is replaced by a *numpy* integer double array of type int.  
 
-Copyright (C) 2024  Raymond Bisdorff
+Copyright (C) 2025  Raymond Bisdorff
 
 """
 import numpy as np

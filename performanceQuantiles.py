@@ -15,7 +15,7 @@ Copyright (C) 2016-2025 Raymond Bisdorff
 
 ######################################
 
-__version__ = "$Revision: Python 3.13.2"
+__version__ = "$Revision: Python 3.13.13"
 
 
 """
@@ -1050,8 +1050,8 @@ if __name__ == "__main__":
     ****************************************************
     * Digraph3 performanceQunatiles module             *
     * depends on BipolarOutrankingDigraph and          *
-    * $Revision Python 3.9 $                           *
-    * Copyright (C) 2010-2021 Raymond Bisdorff         *
+    * $Revision Python 3.13$                           *
+    * Copyright (C) 2010-2025 Raymond Bisdorff         *
     * The module comes with ABSOLUTELY NO WARRANTY     *
     * to the extent permitted by the applicable law.   *
     * This is free software, and you are welcome to    *

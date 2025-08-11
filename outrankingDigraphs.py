@@ -19,7 +19,7 @@ Copyright (C) 2006-2025  Raymond Bisdorff
 
 """
 
-__version__ = "Revision: Py3.13.2"
+__version__ = "Revision: Py3.13.6"
 
 from digraphsTools import *
 from digraphs import *
@@ -10279,7 +10279,7 @@ if __name__ == "__main__":
     print("""
     ****************************************************
     * Digraph3 outrankingDigraphs module               *
-    * Copyright (C) 2011-2021 Raymond Bisdorff         *
+    * Copyright (C) 2011-2025 Raymond Bisdorff         *
     * The module comes with ABSOLUTELY NO WARRANTY     *
     * to the extent permitted by the applicable law.   *
     * This is free software, and you are welcome to    *

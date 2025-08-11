@@ -1621,7 +1621,7 @@ class SmartBachetRanking(BachetRanking):
 
         - *actionsList* : a given ordering of the other.actions dictionary. If *None* the list of other.actions is used.
 
-        - *sampleSize*: number > 0 of intransitive tripes to permute, the potential list of intransitive triples is ranked by decreasng epistemic determination. If *None* all intransitive tripes are permuted.
+        - *sampleSize*: number > 0 of intransitive tripes to permute, the potential list of intransitive triples is ranked by decreasing epistemic determination. If *None* all intransitive tripes are permuted.
 
 
     *Useage example*
