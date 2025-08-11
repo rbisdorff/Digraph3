@@ -1760,18 +1760,51 @@
 <span class="k">class</span> <span class="nc">SmartBachetRanking</span><span class="p">(</span><span class="n">BachetRanking</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Smart sampling of the permutohedron of the actions list</span>
+
+<span class="sd">    *Parameters*</span>
+
+<span class="sd">        - *Polarised* : if *True* (default), the *PolarisedBachetRanking* contructor is used, if *False* the ValuedBachetRanking constructor is used.</span>
+
+<span class="sd">        - *orderLimit* : maximal length of the *other.actions* dictionary.</span>
+
+<span class="sd">        - *actionsList* : a given ordering of the other.actions dictionary. If *None* the list of other.actions is used.</span>
+
+<span class="sd">        - *sampleSize*: number &gt; 0 of intransitive tripes to permute, the potential list of intransitive triples is ranked by decreasng epistemic determination. If *None* all intransitive tripes are permuted.</span>
+
+
+<span class="sd">    *Useage example*</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; from outrankingDigraphs import RandomBipolarOutrankingDigraph</span>
+<span class="sd">    &gt;&gt;&gt; g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)</span>
+<span class="sd">    &gt;&gt;&gt; g.computeTransitivityDegree(Comments=True)</span>
+<span class="sd">    Transitivity degree of digraph &lt;rel_randomperftab&gt;:</span>
+<span class="sd">      #triples x&gt;y&gt;z: 504, #closed: 343, #open: 161</span>
+<span class="sd">      (#closed/#triples) =  0.681</span>
+<span class="sd">    &gt;&gt;&gt; from linearOrders import SmartBachetRanking</span>
+<span class="sd">    &gt;&gt;&gt; sba = SmartBachetRanking(g,Polarised=True,sampleSize=3)</span>
+<span class="sd">    &gt;&gt;&gt; sba.showScores()</span>
+<span class="sd">    Bachet scores in descending order</span>
+<span class="sd">     action 	 score</span>
+<span class="sd">      a2 	 6056.00</span>
+<span class="sd">      a5 	 4746.00</span>
+<span class="sd">      a9 	 2966.00</span>
+<span class="sd">      a6 	 -306.00</span>
+<span class="sd">      a4 	 -1494.00</span>
+<span class="sd">      a8 	 -1849.00</span>
+<span class="sd">      a3 	 -4801.00</span>
+<span class="sd">      a7 	 -4955.00</span>
+<span class="sd">      a1 	 -5921.00</span>
+<span class="sd">    &gt;&gt;&gt; sba.bachetRanking</span>
+<span class="sd">    [&#39;a2&#39;, &#39;a5&#39;, &#39;a9&#39;, &#39;a6&#39;, &#39;a4&#39;, &#39;a8&#39;, &#39;a3&#39;, &#39;a7&#39;, &#39;a1&#39;]</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">orderLimit</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                 <span class="n">sampleSize</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                 <span class="n">sampleSize</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                 <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 
         <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="kn">import</span> <span class="nn">random</span> <span class="k">as</span> <span class="nn">rd</span>
-        
-        <span class="n">rd</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-        <span class="c1">#gcd = ~(-g)</span>
-        <span class="n">triples</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">(</span><span class="n">ReturnIntransitiveTriples</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">triples</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">(</span><span class="n">ReturnIntransitiveTriples</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">intransitiveTriples</span> <span class="o">=</span> <span class="n">triples</span>
         <span class="n">nt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">triples</span><span class="p">)</span>
         <span class="n">rankedTriples</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1779,7 +1812,7 @@
             <span class="n">x</span> <span class="o">=</span> <span class="n">tr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">y</span> <span class="o">=</span> <span class="n">tr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">z</span> <span class="o">=</span> <span class="n">tr</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-            <span class="n">score</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">+</span> <span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">z</span><span class="p">]</span> <span class="o">+</span> <span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">z</span><span class="p">]</span>
+            <span class="n">score</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">z</span><span class="p">]</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">z</span><span class="p">]</span>
             <span class="n">rankedTriples</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">score</span><span class="p">,</span><span class="n">tr</span><span class="p">))</span>
         <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">scoredTuplesSort</span>
         <span class="n">scoredTuplesSort</span><span class="p">(</span><span class="n">rankedTriples</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1787,26 +1820,18 @@
             <span class="nb">print</span><span class="p">(</span><span class="n">nt</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">rankedTriples</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">sampleSize</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">sampleLength</span> <span class="o">=</span> <span class="n">nt</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">sampleLength</span> <span class="o">=</span> <span class="n">sampleSize</span>
-        <span class="k">if</span> <span class="n">sampleSize</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">sampleSize</span> <span class="o">=</span> <span class="n">nt</span>
+        <span class="k">elif</span> <span class="n">sampleSize</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: sampleSize must be positive integer!&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
         <span class="k">if</span> <span class="n">nt</span> <span class="o">&gt;</span> <span class="n">sampleSize</span><span class="p">:</span>
             <span class="n">rdIndex</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">sampleSize</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">rdIndex</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">nt</span><span class="p">)</span>
-<span class="c1">##        if nt &gt; sampleLength:</span>
-<span class="c1">##            rdIndex = rd.sample(range(nt),sampleLength)</span>
-<span class="c1">##        else:</span>
-<span class="c1">##            rdIndex = range(nt)</span>
-<span class="c1">##        if Debug:</span>
-<span class="c1">##            print(len(rdIndex))</span>
-<span class="c1">##            #print(len(triples))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sampleSize</span> <span class="o">=</span> <span class="n">sampleLength</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sampleSize</span> <span class="o">=</span> <span class="n">sampleSize</span>
         <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">actionsList</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">al</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
+            <span class="n">al</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">al</span> <span class="o">=</span> <span class="n">actionsList</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -1817,7 +1842,7 @@
             <span class="n">_BachetRanking</span> <span class="o">=</span> <span class="n">PolarisedBachetRanking</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">_BachetRanking</span> <span class="o">=</span> <span class="n">ValuedBachetRanking</span>
-        <span class="n">bestBa</span> <span class="o">=</span> <span class="n">_BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">al</span><span class="p">,</span>
+        <span class="n">bestBa</span> <span class="o">=</span> <span class="n">_BachetRanking</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">al</span><span class="p">,</span>
                                 <span class="n">orderLimit</span><span class="o">=</span><span class="n">orderLimit</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">rdIndex</span><span class="p">:</span>
             <span class="n">tr</span> <span class="o">=</span> <span class="n">rankedTriples</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
@@ -1829,13 +1854,12 @@
             <span class="n">al</span><span class="p">[</span><span class="n">yi</span><span class="p">]</span> <span class="o">=</span> <span class="n">tr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">al</span><span class="p">)</span>
-            <span class="n">ba</span> <span class="o">=</span> <span class="n">_BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">al</span><span class="p">,</span>
+            <span class="n">ba</span> <span class="o">=</span> <span class="n">_BachetRanking</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">al</span><span class="p">,</span>
                                <span class="n">orderLimit</span><span class="o">=</span><span class="n">orderLimit</span><span class="p">)</span>
-            <span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">bestCorr</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ba</span><span class="o">.</span><span class="n">correlation</span> <span class="o">&gt;</span> <span class="n">bestCorr</span><span class="p">:</span>
                 <span class="n">bestList</span> <span class="o">=</span> <span class="n">al</span>
-                <span class="n">bestCorr</span> <span class="o">=</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span>
-                <span class="n">bestBa</span> <span class="o">=</span> <span class="n">_BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">bestList</span><span class="p">,</span>
+                <span class="n">bestCorr</span> <span class="o">=</span> <span class="n">ba</span><span class="o">.</span><span class="n">correlation</span>
+                <span class="n">bestBa</span> <span class="o">=</span> <span class="n">_BachetRanking</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">bestList</span><span class="p">,</span>
                                        <span class="n">orderLimit</span><span class="o">=</span><span class="n">orderLimit</span><span class="p">)</span>
             <span class="n">yi</span> <span class="o">=</span> <span class="n">al</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
             <span class="n">zi</span> <span class="o">=</span> <span class="n">al</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
@@ -1843,13 +1867,12 @@
             <span class="n">al</span><span class="p">[</span><span class="n">zi</span><span class="p">]</span> <span class="o">=</span> <span class="n">tr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">al</span><span class="p">)</span>
-            <span class="n">ba</span> <span class="o">=</span> <span class="n">_BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">al</span><span class="p">,</span>
+            <span class="n">ba</span> <span class="o">=</span> <span class="n">_BachetRanking</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">al</span><span class="p">,</span>
                                <span class="n">orderLimit</span><span class="o">=</span><span class="n">orderLimit</span><span class="p">)</span>
-            <span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">bestCorr</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ba</span><span class="o">.</span><span class="n">correlation</span> <span class="o">&gt;</span> <span class="n">bestCorr</span><span class="p">:</span>
                 <span class="n">bestList</span> <span class="o">=</span> <span class="n">al</span>
-                <span class="n">bestCorr</span> <span class="o">=</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span>
-                <span class="n">bestBa</span> <span class="o">=</span> <span class="n">_BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">bestList</span><span class="p">,</span>
+                <span class="n">bestCorr</span> <span class="o">=</span> <span class="n">ba</span><span class="o">.</span><span class="n">correlation</span>
+                <span class="n">bestBa</span> <span class="o">=</span> <span class="n">_BachetRanking</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">bestList</span><span class="p">,</span>
                                        <span class="n">orderLimit</span><span class="o">=</span><span class="n">orderLimit</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">att</span> <span class="ow">in</span> <span class="n">bestBa</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">att</span><span class="p">]</span> <span class="o">=</span> <span class="n">bestBa</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">att</span><span class="p">]</span></div>
@@ -2883,8 +2906,8 @@
         <span class="c1">#g = RandomDigraph(order=7)</span>
         <span class="n">revba1</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">)]</span>
         <span class="n">ba1</span> <span class="o">=</span> <span class="n">SmartBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span>
-                            <span class="n">orderLimit</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span>
-                            <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                            <span class="n">orderLimit</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                            <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                             <span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                             <span class="p">)</span>
         <span class="c1">#print(ba1)</span>
@@ -2925,7 +2948,7 @@
 <span class="c1">##                            )</span>
         <span class="c1">#print(ba2)</span>
         <span class="n">ba2</span> <span class="o">=</span> <span class="n">SmartBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                 <span class="n">sampleSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+                                 <span class="n">sampleSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">corrba2</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba2</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Smart valued Bachet Ranking&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ba2&#39;</span><span class="p">,</span><span class="n">ba2</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">,</span><span class="n">corrba2</span><span class="p">)</span>
@@ -2968,7 +2991,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Aug 07, 2025.
+      <span class="lastupdated">Last updated on Aug 11, 2025.
       </span></p>
   </div>
 

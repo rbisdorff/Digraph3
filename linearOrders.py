@@ -1612,18 +1612,65 @@ class PolarisedBachetOrder(PolarisedBachetRanking):
 class SmartBachetRanking(BachetRanking):
     """
     Smart sampling of the permutohedron of the actions list
+
+    *Parameters*
+
+        - *Polarised* : if *True* (default), the *PolarisedBachetRanking* contructor is used, if *False* the ValuedBachetRanking constructor is used.
+
+        - *orderLimit* : maximal length of the *other.actions* dictionary.
+
+        - *actionsList* : a given ordering of the other.actions dictionary. If *None* the list of other.actions is used.
+
+        - *sampleSize*: number > 0 of intransitive tripes to permute, the potential list of intransitive triples is ranked by decreasng epistemic determination. If *None* all intransitive tripes are permuted.
+
+
+    *Useage example*
+    
+    >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
+    >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
+    >>> g.computeTransitivityDegree(Comments=True)
+    Transitivity degree of digraph <rel_randomperftab>:
+      #triples x>y>z: 504, #closed: 343, #open: 161
+      (#closed/#triples) =  0.681
+    >>> from linearOrders import SmartBachetRanking
+    >>> sba = SmartBachetRanking(g,Polarised=True,sampleSize=3)
+    >>> sba
+    *------- Digraph instance description ------*
+    Instance class      : SmartBachetRanking
+    Instance name       : rel_randomperftab_best_ranked
+    Digraph Order       : 9
+    Digraph Size        : 36
+    Valuation domain    : [-1.00;1.00]
+    Determinateness (%) : 100.00
+    Attributes          : ['intransitiveTriples', 'sampleSize', 'bachetRanking',
+                           'bachetOrder', 'decBachetScores', 'incBachetScores',
+                           'name', 'actions', 'order', 'valuationdomain', 'relation',
+                           'correlation', 'gamma', 'notGamma', 'runTimes']
+    >>> sba.showScores()
+    Bachet scores in descending order
+     action 	 score
+      a2 	 6056.00
+      a5 	 4746.00
+      a9 	 2966.00
+      a6 	 -306.00
+      a4 	 -1494.00
+      a8 	 -1849.00
+      a3 	 -4801.00
+      a7 	 -4955.00
+      a1 	 -5921.00
+    >>> sba.bachetRanking
+    ['a2', 'a5', 'a9', 'a6', 'a4', 'a8', 'a3', 'a7', 'a1']
+    >>> sba.correlation
+    0.7441963223547806
+
     """
-    def __init__(self,g,actionsList=None,
+    def __init__(self,other,actionsList=None,
                  orderLimit=50,Polarised=True,
-                 sampleSize=100,seed=None,
-                 Comments=False,Debug=False):
+                 sampleSize=100,
+                 Debug=False):
 
         from copy import deepcopy
-        import random as rd
-        
-        rd.seed(seed)
-        #gcd = ~(-g)
-        triples = g.computeTransitivityDegree(ReturnIntransitiveTriples=True)
+        triples = other.computeTransitivityDegree(ReturnIntransitiveTriples=True)
         self.intransitiveTriples = triples
         nt = len(triples)
         rankedTriples = []
@@ -1631,7 +1678,7 @@ class SmartBachetRanking(BachetRanking):
             x = tr[0]
             y = tr[1]
             z = tr[2]
-            score = g.relation[x][y] + g.relation[y][z] + g.relation[x][z]
+            score = other.relation[x][y] + other.relation[y][z] + other.relation[x][z]
             rankedTriples.append((score,tr))
         from digraphsTools import scoredTuplesSort
         scoredTuplesSort(rankedTriples,reverse=True)
@@ -1639,26 +1686,18 @@ class SmartBachetRanking(BachetRanking):
             print(nt)
             print(rankedTriples)
         if sampleSize is None:
-            sampleLength = nt
-        else:
-            sampleLength = sampleSize
-        if sampleSize is None:
             sampleSize = nt
+        elif sampleSize < 1:
+            print('Error: sampleSize must be positive integer!')
+            return
         if nt > sampleSize:
             rdIndex = range(sampleSize)
         else:
             rdIndex = range(nt)
-##        if nt > sampleLength:
-##            rdIndex = rd.sample(range(nt),sampleLength)
-##        else:
-##            rdIndex = range(nt)
-##        if Debug:
-##            print(len(rdIndex))
-##            #print(len(triples))
-        self.sampleSize = sampleLength
+        self.sampleSize = sampleSize
         t0 = time()
         if actionsList is None:
-            al = [x for x in g.actions]
+            al = [x for x in other.actions]
         else:
             al = actionsList
         if Debug:
@@ -1669,7 +1708,7 @@ class SmartBachetRanking(BachetRanking):
             _BachetRanking = PolarisedBachetRanking
         else:
             _BachetRanking = ValuedBachetRanking
-        bestBa = _BachetRanking(g,actionsList=al,
+        bestBa = _BachetRanking(other,actionsList=al,
                                 orderLimit=orderLimit)
         for i in rdIndex:
             tr = rankedTriples[i][1]
@@ -1681,13 +1720,12 @@ class SmartBachetRanking(BachetRanking):
             al[yi] = tr[0]
             if Debug:
                 print(al)
-            ba = _BachetRanking(g,actionsList=al,
+            ba = _BachetRanking(other,actionsList=al,
                                orderLimit=orderLimit)
-            corr = g.computeRankingCorrelation(ba.bachetRanking)
-            if corr['correlation'] > bestCorr:
+            if ba.correlation > bestCorr:
                 bestList = al
-                bestCorr = corr['correlation']
-                bestBa = _BachetRanking(g,actionsList=bestList,
+                bestCorr = ba.correlation
+                bestBa = _BachetRanking(other,actionsList=bestList,
                                        orderLimit=orderLimit)
             yi = al.index(tr[1])
             zi = al.index(tr[2])
@@ -1695,13 +1733,12 @@ class SmartBachetRanking(BachetRanking):
             al[zi] = tr[1]
             if Debug:
                 print(al)
-            ba = _BachetRanking(g,actionsList=al,
+            ba = _BachetRanking(other,actionsList=al,
                                orderLimit=orderLimit)
-            corr = g.computeRankingCorrelation(ba.bachetRanking)
-            if corr['correlation'] > bestCorr:
+            if ba.correlation > bestCorr:
                 bestList = al
-                bestCorr = corr['correlation']
-                bestBa = _BachetRanking(g,actionsList=bestList,
+                bestCorr = ba.correlation
+                bestBa = _BachetRanking(other,actionsList=bestList,
                                        orderLimit=orderLimit)
         for att in bestBa.__dict__:
             self.__dict__[att] = bestBa.__dict__[att]
@@ -2704,8 +2741,8 @@ if __name__ == "__main__":
         #g = RandomDigraph(order=7)
         revba1 = [x for x in reversed(g.actions)]
         ba1 = SmartBachetRanking(g,
-                            orderLimit=20,sampleSize=None,seed=seed,
-                            Comments=False,Debug=False,
+                            orderLimit=20,sampleSize=None,
+                            Debug=False,
                             actionsList=None,
                             )
         #print(ba1)
@@ -2746,7 +2783,7 @@ if __name__ == "__main__":
 ##                            )
         #print(ba2)
         ba2 = SmartBachetRanking(g,Debug=False,
-                                 sampleSize=None,Polarised=False,seed=seed)
+                                 sampleSize=None,Polarised=False)
         corrba2 = g.computeRankingCorrelation(ba2.bachetRanking)
         print('Smart valued Bachet Ranking')
         print('ba2',ba2.bachetRanking,corrba2)
