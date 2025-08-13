@@ -1951,7 +1951,8 @@ class PartialBachetRanking(TransitiveDigraph):
             print(statistics)
         resStat = [(float(x),statistics[x]) for x in statistics]
         resStat = list(sorted(resStat,reverse=True))
-        print(len(resStat))
+        if Debug:
+            print(len(resStat))
         bachetRankings = []
         if len(resStat) < maxNbrOfRankings:
             maxNbrOfRankings = len(resStat)
@@ -2232,7 +2233,7 @@ if __name__ == "__main__":
 
     pt = RandomCBPerformanceTableau(numberOfActions=9,numberOfCriteria=13,seed=100)
     g = BipolarOutrankingDigraph(pt)
-    pbr = PartialBachetRanking(g,randomized=200,seed=1,Polarised=True,Comments=False,Debug=True)
+    pbr = PartialBachetRanking(g,randomized=200,seed=1,Polarised=True,Comments=False,Debug=False)
     print(pbr)
     pbr.showTransitiveDigraph()
     pbr.exportGraphViz('wbg')
