@@ -3467,7 +3467,7 @@ Running a MonteCarlo simulation with a sample of 500 random 3 objectives --econo
 
 The correlation figures show that both the smart polarised and the valued Bachet ranking rules, by permuting all potential intransitive outranking triples, come very close to the optimal Kemeny ranking rule (median correlation +0.901 vs +0.914). And in 163/500 (32.6%) polarised cases and in 196/500 (39.2%) valued cases, we even get an optimal Kemeny ranking result.
 
-The Bachet rule: a new method for partially ranking 
+The Bachet rule: a new method for partially ranking
 ...................................................
 
 As we have noticed before, the randomized versions of the :py:class:`~linearOrders.PolarisedBachetRanking` and the :py:class:`~linearOrders.ValuedBachetRanking` constructors potentially produce multiple ranking results of unequal correlation quality, yet respecting all more or less the transitive part of the given outranking digraph. If we collect now a small subset of the best correlated rankings, we can use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class for constructing, by epistemic disjunctive fusion of these selected rankings, a partial *Bachet* ranking result --a transitive asymmetric digraph with indeterminate reflexive relations-- showing actually the potential transitive part of the given polarised outranking digraph. 
@@ -3522,6 +3522,8 @@ The :py:class:`~transitiveDigraphs.PartialBachetRanking` class provides this way
     True
 
 We have this way found an algorithm for computing a *transitively orientable* graph, close in the :ref:`bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>` sense to the transitive part of a given bipolar-valued outranking digraph. *Partial Bachet* rankings make hence apparent the actual **transitive part** of outranking relations. This interesting finding opens the way to a new design of first- or last-choice recommender algorithms avoiding the necessity to arbitrarily break up potential chordless outranking circuits.
+
+.. _Bachet-Choice-Recommender-Tutorial-label:
 
 The Bachet first and last choice recommender algorithm 
 ......................................................
