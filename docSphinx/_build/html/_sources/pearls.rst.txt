@@ -3525,7 +3525,7 @@ We have this way found an algorithm for computing a *transitively orientable* gr
 
 .. _Bachet-Choice-Recommender-Tutorial-label:
 
-The Bachet first and last choice recommender algorithm 
+The Bachet choice recommender algorithm 
 ......................................................
 
 The first and last levels of a topological sort of partial rankings --their **initial and terminal kernels**-- give indeed convincing candidates for a *first-choice*, respectively a *last-choice* recommendation (see :numref:`partialBachet0` Lines 7-10).
@@ -3533,7 +3533,7 @@ The first and last levels of a topological sort of partial rankings --their **in
 To explore this opportunity, a :py:meth:`~digraphs.Digraph.showBachetChoiceRecommendation` method has been added to the :py:class:`~digraphs.Digraph` class (see :numref:`BachetBCR0` lines 3-4). 
 
 .. code-block:: pycon
-   :caption: *Bachet* first and last choice recommendations
+   :caption: *Bachet* choice recommendations
    :name: BachetBCR0
    :emphasize-lines: 3-4,7,14
 
