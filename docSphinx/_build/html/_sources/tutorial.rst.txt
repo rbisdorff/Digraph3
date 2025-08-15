@@ -3707,7 +3707,7 @@ As we have noticed before, the randomized *polarised Bachet* ranking rule produc
 
 .. code-block:: pycon
    :caption: Partial polarised Bachet ranking digraph
-   :name: weakBachet3
+   :name: partialBachet3
    :emphasize-lines: 6,20-25
 
    >>> from outrankingDigraphs import *
@@ -3736,11 +3736,11 @@ As we have noticed before, the randomized *polarised Bachet* ranking rule produc
      (0.6442, ['a5', 'a6', 'a4', 'a3', 'a1', 'a7', 'a9', 'a8', 'a2']),
      (0.6382, ['a5', 'a6', 'a1', 'a7', 'a3', 'a4', 'a8', 'a2', 'a9'])]
 
-In :numref:`weakBachet3` Line 6, we notice that we sample 100 *Bachet* rankings and keep the five best correlated rankings for constructing the ranking consensus (see Lines 20-25). We may notice that alternative *a5* is always first-ranked and alternative *a6* second-ranked. Whereas alternatives *a2*, *a8* and *a9* make up the tail group. The :py:meth:`~transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph` method confirms this partial ranking (see :numref:`weakBachet4` Lines 2-6 below and :numref:`weakBachetpol`).
+In :numref:`partialBachet3` Line 6, we notice that we sample 100 *Bachet* rankings and keep the five best correlated rankings for constructing the ranking consensus (see Lines 20-25). We may notice that alternative *a5* is always first-ranked and alternative *a6* second-ranked. Whereas alternatives *a2*, *a8* and *a9* make up the tail group. The :py:meth:`~transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph` method confirms this partial ranking (see :numref:`partialBachet4` Lines 2-6 below and :numref:`partialBachetpol`).
 
 .. code-block:: pycon
    :caption: Partial polarised Bachet ranking result
-   :name: weakBachet4
+   :name: partialBachet4
    :emphasize-lines: 2-6,9-11
 
    >>> pbr.showTransitiveDigraph()
@@ -3754,13 +3754,13 @@ In :numref:`weakBachet3` Line 6, we notice that we sample 100 *Bachet* rankings 
      Crisp ordinal correlation  : +0.806
      Epistemic determination    :  0.179
      Bipolar-valued equivalence : +0.144
-   >>> pbr.exportGraphViz('weakBachetpol')
+   >>> pbr.exportGraphViz('partialBachetpol')
     *---- exporting a dot file for GraphViz tools ---------*
-     Exporting to weakBachetpol.dot
-     dot -Grankdir=TB -Tpng weakBachetpol.dot -o weakBachetpol.png
+     Exporting to partialBachetpol.dot
+     dot -Grankdir=TB -Tpng partialBachetpol.dot -o partialBachetpol.png
 
-.. Figure:: weakBachetpol.png
-   :name: weakBachetpol
+.. Figure:: partialBachetpol.png
+   :name: partialBachetpol
    :width: 200 px
    :align: center
 
@@ -3770,7 +3770,7 @@ The resulting *partial ranking* is highly correlated with the common determinate
 
 We recover with the *Bachet* ranking rule a ranking consensus actually very similar to the previous consensus obtained from all four *ranking-by-scoring* results (see :numref:`rankingConsensusFigure`).
 
-The :py:class:`~transitiveDigraphs.PartialBachetRanking` constructor uses by default the *polarised* version of the *Bachet* ranking rule. Due to its *Condorcet consistency* property, the partial ranking result obtained in :numref:`weakBachetpol` represents in fact a ranking consensus respecting the actual **transitive parts** of the given outranking digraph (see the advanced topic dedicated to the :ref:`Bachet ranking rules <Bachet-Tutorial-label>`).
+The :py:class:`~transitiveDigraphs.PartialBachetRanking` constructor uses by default the *polarised* version of the *Bachet* ranking rule. Due to its *Condorcet consistency* property, the partial ranking result obtained in :numref:`partialBachetpol` represents in fact a ranking consensus respecting the actual **transitive parts** of the given outranking digraph (see the advanced topic dedicated to the :ref:`Bachet ranking rules <Bachet-Tutorial-label>`).
 
 The :py:class:`~transitiveDigraphs.PartialBachetRanking` now provides a "**Polarised == False**" flag allowing to use instead the **valued** version of the *Bachet* ranking rule (see below :numref:`weakBachet5` Line 1). The five best qualified *Bachet* rankings are shown in Lines 4-8. 
 
@@ -3803,20 +3803,20 @@ In :numref:`weakBachet6` Lines 3-6 we observe now a partial ranking taking into 
        2nd ranked ['a7'], 
        2nd last ranked [''a3', 'a8'])
      1st last ranked ['a1', 'a2', 'a4', 'a9'])
-   >>> pvbr.showCorrelation(pvbr.weakBachetCorrelation)
+   >>> pvbr.showCorrelation(pvbr.partialBachetCorrelation)
     Correlation indexes:
      Crisp ordinal correlation  : +0.888
      Epistemic determination    :  0.157
      Bipolar-valued equivalence : +0.139
-   >>> pvbr.exportGraphViz('weakBachetval')
+   >>> pvbr.exportGraphViz('partialBachetval')
     *---- exporting a dot file for GraphViz tools ---------*
-     Exporting to weakBachetval.dot
-     dot -Grankdir=TB -Tpng weakBachetval.dot -o weakBachetval.png
+     Exporting to partialBachetval.dot
+     dot -Grankdir=TB -Tpng partialBachetval.dot -o partialBachetval.png
 
-It is worthwhile noticing in :numref:`weakBachetval` that alternative *a1* appears indeed incomparable to the other alternatives except alternatives *a5* and *a6*, a fact already made previously apparent with the partial *polarised Bachet* ranking shown in :numref:`rankingConsensusFigure`.
+It is worthwhile noticing in :numref:`partialBachetval` that alternative *a1* appears indeed incomparable to the other alternatives except alternatives *a5* and *a6*, a fact already made previously apparent with the partial *polarised Bachet* ranking shown in :numref:`rankingConsensusFigure`.
 
-.. Figure:: weakBachetval.png
-   :name: weakBachetval
+.. Figure:: partialBachetval.png
+   :name: partialBachetval
    :width: 200 px
    :align: center
 
@@ -3824,11 +3824,11 @@ It is worthwhile noticing in :numref:`weakBachetval` that alternative *a1* appea
 
 Consensus quality of the partial Bachet rankings
 ````````````````````````````````````````````````
-Let us now verify in :numref:`weakBachet7` below the consensus quality of the partial *polarised* Bachet ranking *pbr*.
+Let us now verify in :numref:`partialBachet7` below the consensus quality of the partial *polarised* Bachet ranking *pbr*.
 
 .. code-block:: pycon
    :caption: Consensus quality of the partial polarised Bachet ranking
-   :name: weakBachet7
+   :name: partialBachet7
    :emphasize-lines: 1,5-6,21
 
    >>> pbr.computePartialOutrankingConsensusQuality(Comments=True)
@@ -3855,11 +3855,11 @@ Let us now verify in :numref:`weakBachet7` below the consensus quality of the pa
 
 Best correlated (+0.444) with the partial ranking appear *Cost* criterion *c01* and Benefit criterion *b09*. The relational equivalences are supported by a nearly 75% significance majority (Lines 5-6). Eight out of thirteen criteria show a non negative equivalence and the weighted mean marginal equivalence is slightly positive (+0.108, Line 19). With a standard deviation of +0.240, we obtain however an overall negative fairness score of -0.132 for the partial polarised Bachet ranking.
 
-We may redo in :numref:`weakBachet8` below the same computation for the partial *valued* Bachet ranking. 
+We may redo in :numref:`partialBachet8` below the same computation for the partial *valued* Bachet ranking. 
 
 .. code-block:: pycon
    :caption: Consensus quality of the partial valued Bachet ranking
-   :name: weakBachet8
+   :name: partialBachet8
    :emphasize-lines: 1,5-6,16,19-21
 		     
    >>> pvbr.computePartialOutrankingConsensusQuality(Comments=True)
