@@ -3091,13 +3091,15 @@ We recover in :numref:`weakCopelandRanking` Lines 6 and 8 above, the ranking wit
 
    A weak Copeland ranking 	   
 
-A valued version of the *Copeland* ranking-by-scoring rule is given by the new *Bachet* ranking rule.	
+A similar ranking-by-scoring rule is provided by the :py:class:`linearOrders.PolarisedBachetRanking` class.	
 
-The *Bachet* ranking
+The polarised *Bachet* ranking
 ````````````````````
 *Bachet* numbers --bipolar-valued {-1,0,+1} base 3 encoded integers, provided by the :py:class:`arithmetics.BachetNumber` class and instantiated by the row vectors and the column vectors --both without reflexive terms-- of the strict outranking digraph's polarised relation table, model in fact per decision action respectively an **outrankingness** and a **negated outrankedness** ranking fitness score similar to the previous *Copeland* ranking scores (see the advanced topic on :ref:`a new ranking rule based on bipolar-valued base 3 Bachet numbers <Bachet-Tutorial-label>` ).
 
-Now, *Bachet* numbers are formulated in a base 3 positional numeral system and the integer values of the *Bachet* ranking scores may depend therefore on the actual ordering of the outranking digraph's *actions* dictionary. The *Bachet* rule is however, like the *Copeland* rule, **invariant** under the **codual** transform and **Condorcet consistent**, ie. when the outranking digraph models a transitive relation, this relation will be preserved by the *Bachet* ranking scores. Here, as we have seen above, the given digraph's transitivity degree is only 0.487. To reduce therefore the dependency on the given initial ordering of the *actions* dictionary, we compute below *Bachet* ranking results for 10 random permutations and their reversed orderings of the actions keys (see :numref:`BachetRanking` Line 2) and keep the one ranking that is best correlated with the given outranking digraph. 
+Now, *Bachet* numbers are formulated in a base 3 positional numeral system and the integer values of the *Bachet* ranking scores may depend therefore on the actual ordering of the outranking digraph's *actions* dictionary. The *Bachet* rule is however, like the *Copeland* rule, **invariant** under the **codual** transform and **Condorcet consistent**, ie. when the outranking digraph models a transitive relation, this relation will be preserved by the polarised *Bachet* ranking scores.
+
+Here, as we have seen above, the given digraph's transitivity degree is only 0.487. To reduce therefore the dependency on the given initial ordering of the *actions* dictionary, we compute below *Bachet* ranking results for 10 random permutations and their reversed orderings of the actions keys (see :numref:`BachetRanking` Line 2) and keep the one ranking that is best correlated with the given outranking digraph. 
 
 .. code-block:: pycon
    :name: BachetRanking
@@ -3128,7 +3130,7 @@ Now, *Bachet* numbers are formulated in a base 3 positional numeral system and t
      Epistemic determination    :  0.230
      Bipolar-valued equivalence : +0.165
 
-In :numref:`BachetRanking` Line 20 above, we may observe that the *Bachet* scores lead eventually to a ranking result that is better correlated  with the given outranking relation than the previous *Copeland* ranking (+0.715 versus +0.463).
+In :numref:`BachetRanking` Line 20 above, we may observe that the *Bachet* scores lead eventually to a ranking result that is much better correlated  with the given outranking relation than the previous *Copeland* ranking (+0.715 versus +0.463).
 
 A heatmap view on the performance tableau illustrates the actual quality of this *Bachet* ranking result.
 
@@ -3206,7 +3208,7 @@ Indeed, the extended *Kendall* tau index of +0.638 leads to a bipolar-valued *re
 The valued *Bachet* ranking
 ```````````````````````````
 
-The polarised *Bachet* ranking rule only considers the crisp relational structure of the outranking digraph, ignoring the actual credibility of the individual arcs. The :py:mod:`linearOrders` module provides now also a :py:class:`~linearOrders.ValuedBachetRanking` rule taking into account, like the *NetFlows* rule, the actual bipolar-valued characteristic determination of the outranking situations. The *Bachet* numbers making up the ranking scores are therefore instantiated from the rows and columns of the normalized relation instead of the polarised relation of the outranking digraph. 
+The polarised *Bachet* ranking rule only considers the crisp relational structure of the outranking digraph, ignoring the actual credibility of the individual arcs. The :py:mod:`linearOrders` module provides now also a :py:class:`~linearOrders.ValuedBachetRanking` rule, taking into account, like the *NetFlows* rule, the actual bipolar-valued characteristic determination of the outranking situations. The *Bachet* numbers making up the ranking scores are therefore instantiated from the rows and columns of the normalized relation instead of the polarised relation of the outranking digraph. 
 
 .. code-block:: pycon
    :name: ValuedBachetRanking
