@@ -159,8 +159,8 @@ def testRankingCorrelations():
     print(por.principalRanking)
     print(g.computeRankingCorrelation(por.principalRanking))
 
-def testBachetRanking():
-    print("*==>> testing BachetRanking Class ----*")
+def testPolarisedBachetRanking():
+    print("*==>> testing PolarisedBachetRanking Class ----*")
     from outrankingDigraphs import RandomBipolarOutrankingDigraph
     g = RandomBipolarOutrankingDigraph(numberOfActions=7,seed=1)
     print(g)
@@ -169,16 +169,82 @@ def testBachetRanking():
     ba1 = PolarisedBachetRanking(g,BestQualified=True)
     print(ba1)
     ba1.showScores() 
-    print(g.computeRankingCorrelation(ba1.bachetRanking))
+    print(ba1.correlation)
     ba2 = PolarisedBachetRanking(g,BestQualified=False)
     print(ba2)
     ba2.showScores()
-    print(g.computeRankingCorrelation(ba2.bachetRanking))
+    print(ba2.correlation)
     ba3 = PolarisedBachetRanking(g,randomized=10,seed=1)
     print(ba3)
     ba3.showScores()
-    print(g.computeRankingCorrelation(ba3.bachetRanking))
+    print(ba3.correlation)
     ba4 = PolarisedBachetRanking(g,Optimal=True,Comments=True)
     print(ba4)
     ba4.showScores()
-    print(g.computeRankingCorrelation(ba4.bachetRanking))
+    print(ba4.correlation)
+
+def testValuedBachetRanking():
+    print("*==>> testing ValuedBachetRanking Class ----*")
+    from outrankingDigraphs import RandomBipolarOutrankingDigraph
+    g = RandomBipolarOutrankingDigraph(numberOfActions=7,seed=1)
+    print(g)
+    from linearOrders import ValuedBachetRanking
+    actions = [x for x in g.actions]
+    ba1 = ValuedBachetRanking(g,BestQualified=True)
+    print(ba1)
+    ba1.showScores() 
+    print(ba1.correlation)
+    ba2 = ValuedBachetRanking(g,BestQualified=False)
+    print(ba2)
+    ba2.showScores()
+    print(ba2.correlation)
+    ba3 = ValuedBachetRanking(g,randomized=10,seed=1)
+    print(ba3)
+    ba3.showScores()
+    print(ba3.correlation)
+    ba4 = ValuedBachetRanking(g,Optimal=True,Comments=True)
+    print(ba4)
+    ba4.showScores()
+    print(ba4.correlation)
+
+def testSmartBachetRanking():
+    print("*==>> testing SmartBachetRanking Class ----*")
+    from outrankingDigraphs import RandomBipolarOutrankingDigraph
+    g = RandomBipolarOutrankingDigraph(numberOfActions=7,seed=1)
+    print(g)
+    from linearOrders import SmartBachetRanking
+    ba1 = SmartBachetRanking(g,sampleSize=3,Polarised=True)
+    print(ba1)
+    ba1.showScores() 
+    print(ba1.correlation)
+    ba2 = SmartBachetRanking(g,Polarised=True,sampleSize=None)
+    print(ba2)
+    ba2.showScores()
+    print(ba2.correlation)
+    ba3 = SmartBachetRanking(g,sampleSize=3,Polarised=False)
+    print(ba3)
+    ba3.showScores() 
+    print(ba3.correlation)
+    ba4 = SmartBachetRanking(g,Polarised=False,sampleSize=None)
+    print(ba4)
+    ba4.showScores()
+    print(ba4.correlation)
+
+def testPartialBachetRanking():
+    print("*==>> testing SmartBachetRanking Class ----*")
+    from outrankingDigraphs import RandomBipolarOutrankingDigraph
+    g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
+    print(g)
+    from transitiveDigraphs import PartialBachetRanking
+    pbr = PartialBachetRanking(g,randomized=10,maxNbrOfRankings=4,seed=3,
+                               Polarised=True,Comments=True)
+    print(pbr.bachetRankings)
+    pbr.showTransitiveDigraph()
+    g.computeOrdinalCorrelation(pbr)
+    pbr = PartialBachetRanking(g,randomized=100,maxNbrOfRankings=5,seed=3,
+                               Polarised=False,Comments=True)
+    print(pbr.bachetRankings)
+    pbr.showTransitiveDigraph()
+    print(g.computeOrdinalCorrelation(pbr))
+    g.showBachetChoiceRecommendation()
+
