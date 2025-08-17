@@ -1,11 +1,11 @@
 # Fdb version 4
-["makeindex digraph3Tutorial.idx"] 1742131595.73566 "digraph3Tutorial.idx" "digraph3Tutorial.ind" "digraph3Tutorial" 1754735323.78091 0
-  "digraph3Tutorial.idx" 1754735313.90126 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+["makeindex digraph3Tutorial.idx"] 1742131595.73566 "digraph3Tutorial.idx" "digraph3Tutorial.ind" "digraph3Tutorial" 1755434424.64165 0
+  "digraph3Tutorial.idx" 1755434414.77572 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
   "digraph3Tutorial.ilg"
   "digraph3Tutorial.ind"
   (rewritten before read)
-["pdflatex"] 1754735313.27514 "digraph3Tutorial.tex" "digraph3Tutorial.pdf" "digraph3Tutorial" 1754735323.78109 0
+["pdflatex"] 1755434414.13282 "digraph3Tutorial.tex" "digraph3Tutorial.pdf" "digraph3Tutorial" 1755434424.64183 0
   "/etc/texmf/web2c/texmf.cnf" 1736347673.95939 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/bisdorff/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1200.600pk" 1752565449.70144 42704 f3e23334c6effd863faa74e722eaf93e ""
   "/home/bisdorff/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk" 1752565430.64462 31928 986a937634d7481132fcd84029badd7e ""
@@ -233,11 +233,11 @@
   "compareRules10A.png" 1742802552.8506 25465 74307cc9b41a4fd2e473fa5466206db1 ""
   "converse-dual_rel_best10.png" 1703333620.63671 65760 5d5d409f110f9914d7fe19fce26ff459 ""
   "cycles.png" 1703333620.64071 38389 9515e841f4881dd2df51947edd07b3e9 ""
-  "digraph3Tutorial.aux" 1754735323.34616 148143 ec73aee770c2dcfbb8f03835df90d04e "pdflatex"
+  "digraph3Tutorial.aux" 1755434424.21966 148484 4f1112919ff07b74a3e05d4c37372f72 "pdflatex"
   "digraph3Tutorial.ind" 1721632393.95292 0 d41d8cd98f00b204e9800998ecf8427e "makeindex digraph3Tutorial.idx"
-  "digraph3Tutorial.out" 1754735323.35915 40198 678626388bc3caf1f8d67faa8afbaf8a "pdflatex"
-  "digraph3Tutorial.tex" 1754735284.65457 1196963 cb85a1c7adf9e49a631d7fa884783821 ""
-  "digraph3Tutorial.toc" 1754735323.36015 16151 a092e1f95aa9b4bf036c429d3084f5fd "pdflatex"
+  "digraph3Tutorial.out" 1755434424.23366 40251 39bbde247f4362616f26a31a429c30a6 "pdflatex"
+  "digraph3Tutorial.tex" 1755434369.72903 1200756 b60bc5c3ffd4af4c43497ff9da5dbbbc ""
+  "digraph3Tutorial.toc" 1755434424.23466 16162 73deba848081e60b5772f0719bd5f09e "pdflatex"
   "distGSFairness.png" 1703333620.87671 24704 78fbd418381a5fa82d67302573693a91 ""
   "distStableFairness.png" 1703333620.87671 23842 9e06dcd9f166aeaf01b3f640b6ed7b89 ""
   "enhancedFreq.png" 1703333620.87671 24449 910cf8db479bb329d7f220a127d42ac5 ""
@@ -270,6 +270,8 @@
   "officeChoiceRanking.png" 1750235415.92288 21878 767b8e353668d4b8e666dd32e1452d45 ""
   "oriented_permutationGraph.png" 1703333620.71671 20831 9aa4215f96b7c918d38c8532010bbd8a ""
   "pairwiseComparison.png" 1703333620.71671 115291 e5cbb01c0dc10d2bc12ba00daa93cbc2 ""
+  "partialBachetpol.png" 1747665055.95169 32060 c81a99f4dedb10295fb28a15352b799c ""
+  "partialBachetval.png" 1747665055.95169 32132 d3f453feb057a449b68afaf7917f1759 ""
   "perm_permutationGraph.png" 1703333620.71671 19706 b063270359fa02a6fa5853cbe4d7faa9 ""
   "permutationGraph.png" 1703333620.71671 25021 a67f71ad880fdfdba06b0a37a9beeae0 ""
   "randomCBHeatmap.png" 1703333620.71671 47664 a431c58407213f1fcc62a73781f15116 ""
@@ -292,7 +294,7 @@
   "sparse75RelationMap.png" 1703333620.72471 75230 8417e72bd2306a26da729fd398a4e039 ""
   "sparseRelationMap.png" 1703333620.72471 13187 df51199ccfddd95f44d62a9338454774 ""
   "sphinx.sty" 1736501255.25246 54119 967a674353157928503df7cae9b6165e ""
-  "sphinxhighlight.sty" 1754735207.76539 7553 83fb52292c17957d9f4aadcb28c57a87 ""
+  "sphinxhighlight.sty" 1755434292.27657 7553 83fb52292c17957d9f4aadcb28c57a87 ""
   "sphinxhowto.cls" 1703333620.72471 3256 55d5772de2f18cad818d98a3e6e8e37b ""
   "sphinxlatexadmonitions.sty" 1736501255.25346 19110 2855832b1a32f04033523b9919260ac9 ""
   "sphinxlatexcontainers.sty" 1748352455.63404 900 d61f923db071a7b54d3cee8a1e6935d3 ""
@@ -307,7 +309,7 @@
   "sphinxlatexstylepage.sty" 1748352455.63504 2671 e63daf3b9f0f8a387a8b4ba09c515982 ""
   "sphinxlatexstyletext.sty" 1748352455.63504 6759 9e932c65374cfb62686485d331bc975c ""
   "sphinxlatextables.sty" 1748352455.63604 57643 7f1013c2fa11942370d867527bdda568 ""
-  "sphinxmessages.sty" 1754735306.30934 745 3f5fcd6cdd7964ed608767954a8ced6f ""
+  "sphinxmessages.sty" 1755434390.86488 745 3f5fcd6cdd7964ed608767954a8ced6f ""
   "sphinxoptionsgeometry.sty" 1748352455.63604 2060 6c27b3eba37bde592ae8908ab2c1ac0f ""
   "sphinxoptionshyperref.sty" 1748352455.63604 1093 e468489bae7631a7f387b4b0f7bc15d4 ""
   "sphinxpackageboxes.sty" 1736501255.25646 36106 1be2053eb1cb9b083b3a75e3657bcb24 ""
@@ -338,8 +340,6 @@
   "tutorialLinearBallots.png" 1703333620.73671 15859 a80248b1f195bee5c98fc0dfb2c63b45 ""
   "tutorialSlater.png" 1703333620.73671 31863 4ee28fc2f76db5d38cc21ab25fae8198 ""
   "votingHeatmap.png" 1703333620.73671 78263 0cb11bc819865b43d16f066cc3f62ef9 ""
-  "weakBachetpol.png" 1747665055.95169 32060 c81a99f4dedb10295fb28a15352b799c ""
-  "weakBachetval.png" 1747665055.95169 32132 d3f453feb057a449b68afaf7917f1759 ""
   "weakCopelandRanking.png" 1703333620.74071 26872 7f7bedb326411ae7ecc65d34ddabc4cb ""
   (generated)
   "digraph3Tutorial.aux"

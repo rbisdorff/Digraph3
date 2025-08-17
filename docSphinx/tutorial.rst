@@ -1723,7 +1723,7 @@ In :numref:`BachetRanking0` Line 2, we operate the :ref:`epistemic disjunctive f
    :emphasize-lines: 2,4-8,11,14
 
    >>> from transitiveDigraphs import PartialBachetRanking
-   >>> pbr = PartialBachetRanking(g,randomized=200,maxNbrOfRankings=5,seed=3)
+   >>> pbr = PartialBachetRanking(g,randomized=200,maxNbrOfRankings=5,seed=4)
    >>> pbr.bachetRankings
     [(0.816, ['G', 'D', 'A', 'C', 'B', 'E', 'F']),
      (0.788, ['G', 'D', 'E', 'B', 'A', 'C', 'F']),
@@ -1796,7 +1796,7 @@ The :py:class:`digraphs.Digraph` class now readily provides the :py:meth:`~digra
    :linenos:
    :emphasize-lines: 1,9,13
 
-   >>> g.showBachetChoiceRecommendation(randomized=200)
+   >>> g.showBachetChoiceRecommendation(randomized=200,seed=4)
     *---- Bachet Choice Recommendations ----*
     Ranking by recursively first and last choosing
      1st ranked ['A', 'C', 'D', 'G']

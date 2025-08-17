@@ -67,8 +67,8 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{August 09, 2025}
-\release{3.13.5}
+\date{August 17, 2025}
+\release{3.13.7}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
 \renewcommand{\releasename}{Release}
@@ -314,7 +314,7 @@ In \hyperref[\detokenize{tutorial:digraphs}]{Listing \ref{\detokenize{tutorial:d
 
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
-For convenience of redoing the computations, all python code\sphinxhyphen{}blocks show in the upper right corner a specific \sphinxstylestrong{copy button} which allows to both copy \sphinxstyleemphasis{only} code lines, i.e. lines starting with ‘\textgreater{}\textgreater{}\textgreater{}’ or ‘…’, and stripping the console prompts. The copied code lines may hence be right away \sphinxstyleemphasis{pasted} into a Python console session. As of Python 3.13.0 is necessary to switch in the python terminal console with the F3 function key into a console “\sphinxstyleemphasis{paste mode}” which allows pasting blocks of code. Press F3 key again to return to the regular prompt (see Python 3.13.0 Interactive Mode documentation).
+For convenience of redoing the computations, all python code\sphinxhyphen{}blocks show in the upper right corner a specific \sphinxstylestrong{copy button} which allows to both copy \sphinxstyleemphasis{only} code lines, i.e. lines starting with ‘\textgreater{}\textgreater{}\textgreater{}’ or ‘…’, and stripping the console prompts. The copied code lines may hence be right away \sphinxstyleemphasis{pasted} into a Python console session. As of Python 3.13.+ it is necessary to switch in the python terminal console with the F3 function key into a console “\sphinxstyleemphasis{paste mode}” which allows pasting blocks of code. Press F3 key again to return to the regular prompt (see Python 3.13.+ Interactive Mode documentation).
 \end{sphinxadmonition}
 \end{quote}
 
@@ -2661,7 +2661,7 @@ In \hyperref[\detokenize{tutorial:bachetranking0}]{Listing \ref{\detokenize{tuto
 \fvset{hllines={, 2, 4, 5, 6, 7, 8, 11, 14,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{transitiveDigraphs} \PYG{k+kn}{import} \PYG{n}{PartialBachetRanking}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pbr} \PYG{o}{=} \PYG{n}{PartialBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{randomized}\PYG{o}{=}\PYG{l+m+mi}{200}\PYG{p}{,}\PYG{n}{maxNbrOfRankings}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pbr} \PYG{o}{=} \PYG{n}{PartialBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{randomized}\PYG{o}{=}\PYG{l+m+mi}{200}\PYG{p}{,}\PYG{n}{maxNbrOfRankings}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{4}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pbr}\PYG{o}{.}\PYG{n}{bachetRankings}
 \PYG{g+go}{ [(0.816, [\PYGZsq{}G\PYGZsq{}, \PYGZsq{}D\PYGZsq{}, \PYGZsq{}A\PYGZsq{}, \PYGZsq{}C\PYGZsq{}, \PYGZsq{}B\PYGZsq{}, \PYGZsq{}E\PYGZsq{}, \PYGZsq{}F\PYGZsq{}]),}
 \PYG{g+go}{  (0.788, [\PYGZsq{}G\PYGZsq{}, \PYGZsq{}D\PYGZsq{}, \PYGZsq{}E\PYGZsq{}, \PYGZsq{}B\PYGZsq{}, \PYGZsq{}A\PYGZsq{}, \PYGZsq{}C\PYGZsq{}, \PYGZsq{}F\PYGZsq{}]),}
@@ -2734,7 +2734,46 @@ We may finally use the best, with the outranking digraph \sphinxstyleemphasis{g}
 In view of \hyperref[\detokenize{tutorial:rankedofficechoiceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:rankedofficechoiceheatmap}}}, office locations \sphinxstyleemphasis{G} or \sphinxstyleemphasis{D} make up convincing best choice recommendations with an apparent slight advantage for location \sphinxstyleemphasis{G}. Notice that both alternatives \sphinxstyleemphasis{A} and \sphinxstyleemphasis{C}, with their highly contrasted performance profiles, appear ranked in the midfield. Indeed, as they don’t compare well, they may neither be first nor last ranked. This is why, when such largely incomparable or extreme alternatives are observed, linear rankings may fail to deliver adequate first\sphinxhyphen{}choice recommendations. Notice finally in the \sphinxstyleemphasis{tau} row above similar marginal ordinal correlation indexes as observed before in \hyperref[\detokenize{tutorial:partialbachetranking1}]{Listing \ref{\detokenize{tutorial:partialbachetranking1}}} Lines 5\sphinxhyphen{}11.
 
 \sphinxAtStartPar
-Our first choice recommendation appears essentially depending on the very importance the CEO is eventually attaching to each one of the three decision objectives he is considering. In the setting here, where he considers that \sphinxstyleemphasis{maximizing the future turnover} is the most important objective (81/145 = 0.56) followed by \sphinxstyleemphasis{minimizing the Costs} (45/145 = 0.31) and, less important, \sphinxstyleemphasis{maximizing the working conditions} (19/145 = 0.13), compromise locations \sphinxstyleemphasis{D} as well as \sphinxstyleemphasis{G} become the potential best choices candidates. However, if minimizing the \sphinxstyleemphasis{Costs} does not play much a role, it would perhaps be better to recommend the most advantageous location \sphinxstyleemphasis{A}; or if, on the contrary, the \sphinxstyleemphasis{Costs} objective does matter a lot, recommending the cheapest alternative \sphinxstyleemphasis{C} could definitely become the more convincing best choice recommendation.
+The \sphinxcode{\sphinxupquote{digraphs.Digraph}} class now readily provides the \sphinxcode{\sphinxupquote{showBachetChoiceRecommendation()}} method for directly showing the first and last choices obtained from the previous  partial Bachet ranking result accessible in the \sphinxstyleemphasis{g.pbr} attribute (see \hyperref[\detokenize{tutorial:partialbachetranking10}]{Listing \ref{\detokenize{tutorial:partialbachetranking10}}} Line 1).
+\sphinxSetupCaptionForVerbatim{Bachet choice recommendation}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:partialbachetranking10}}}
+\fvset{hllines={, 1, 9, 13,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showBachetChoiceRecommendation}\PYG{p}{(}\PYG{n}{randomized}\PYG{o}{=}\PYG{l+m+mi}{200}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{4}\PYG{p}{)}
+\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Bachet Choice Recommendations \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{ Ranking by recursively first and last choosing}
+\PYG{g+go}{  1st ranked [\PYGZsq{}A\PYGZsq{}, \PYGZsq{}C\PYGZsq{}, \PYGZsq{}D\PYGZsq{}, \PYGZsq{}G\PYGZsq{}]}
+\PYG{g+go}{    2nd ranked [\PYGZsq{}B\PYGZsq{}, \PYGZsq{}E\PYGZsq{}]}
+\PYG{g+go}{    2nd last ranked [\PYGZsq{}B\PYGZsq{}, \PYGZsq{}E\PYGZsq{}]}
+\PYG{g+go}{  1st last ranked [\PYGZsq{}F\PYGZsq{}]}
+\PYG{g+go}{ Quality of partial Bachet ranking}
+\PYG{g+go}{  Crisp ordinal correlation  : +1.000}
+\PYG{g+go}{  Epistemic determination    : +0.337}
+\PYG{g+go}{  Bipolar\PYGZhy{}valued equivalence : +0.337}
+\PYG{g+go}{ Execution time: 0.207 seconds}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{pbr}
+\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Digraph instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{  Instance class      : PartialBachetRanking}
+\PYG{g+go}{  Instance name       : converse\PYGZhy{}dual\PYGZhy{}rel\PYGZus{}officeChoice\PYGZus{}wk}
+\PYG{g+go}{  Digraph Order       : 7}
+\PYG{g+go}{  Digraph Size        : 10}
+\PYG{g+go}{  Valuation domain    : [\PYGZhy{}1.00;1.00]}
+\PYG{g+go}{  Determinateness (\PYGZpc{}) : 73.81}
+\PYG{g+go}{  Attributes          : [\PYGZsq{}actions\PYGZsq{}, \PYGZsq{}ndigits\PYGZsq{}, \PYGZsq{}valuationdomain\PYGZsq{},}
+\PYG{g+go}{                         \PYGZsq{}objectives\PYGZsq{}, \PYGZsq{}criteria\PYGZsq{}, \PYGZsq{}evaluation\PYGZsq{}, \PYGZsq{}NA\PYGZsq{},}
+\PYG{g+go}{                         \PYGZsq{}order\PYGZsq{}, \PYGZsq{}runTimes\PYGZsq{}, \PYGZsq{}nbrThreads\PYGZsq{}, \PYGZsq{}startMethod\PYGZsq{},}
+\PYG{g+go}{                         \PYGZsq{}gamma\PYGZsq{}, \PYGZsq{}notGamma\PYGZsq{}, \PYGZsq{}name\PYGZsq{}, \PYGZsq{}relation\PYGZsq{},}
+\PYG{g+go}{                         \PYGZsq{}rankings\PYGZsq{}, \PYGZsq{}bachetRankings\PYGZsq{}, \PYGZsq{}randomized\PYGZsq{},}
+\PYG{g+go}{                         \PYGZsq{}seed\PYGZsq{}, \PYGZsq{}maxNbrOfRankings\PYGZsq{}, \PYGZsq{}Polarised\PYGZsq{},}
+\PYG{g+go}{                         \PYGZsq{}partialBachetCorrelation\PYGZsq{}, \PYGZsq{}rankingByChoosing\PYGZsq{}]}
+\end{sphinxVerbatim}
+\sphinxresetverbatimhllines
+
+\sphinxAtStartPar
+Due to the \sphinxstylestrong{Condorcet consistency} of the polarised \sphinxstyleemphasis{Bachet} ranking rule, the partial ranking digraph \sphinxstyleemphasis{g.pbr} represents here faithfully an actual transitive part of the given outranking digraph \sphinxstyleemphasis{g} (see Line 13 and \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{Bachet\sphinxhyphen{}Tutorial\sphinxhyphen{}label}}}).
+
+\sphinxAtStartPar
+Our first choice recommendations eventually  appear essentially depending on the very importance the CEO is attaching to each one of his three decision objectives. In the setting here, where he considers that \sphinxstyleemphasis{maximizing the future turnover} is the most important objective (81/145 = 0.56) followed by \sphinxstyleemphasis{minimizing the Costs} (45/145 = 0.31) and, less important, \sphinxstyleemphasis{maximizing the working conditions} (19/145 = 0.13), compromise locations \sphinxstyleemphasis{G} as well as \sphinxstyleemphasis{D} become the potential first choices candidates. However, if minimizing the \sphinxstyleemphasis{Costs} does not play much a role, it would perhaps be better to recommend the most advantageous location \sphinxstyleemphasis{A}; or if, on the contrary, the \sphinxstyleemphasis{Costs} objective does matter a lot, recommending the cheapest alternative \sphinxstyleemphasis{C} could definitely become the more convincing first choice recommendation.
 
 \sphinxAtStartPar
 It might be worth, as an \sphinxstylestrong{exercise}, to modify the criteria significance weights in the ‘officeChoice.py’ data file in such a way that
@@ -4174,7 +4213,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id333}}{\hyperref[\detokenize{tutorial:the-bachet-ranking}]{\sphinxcrossref{The \sphinxstyleemphasis{Bachet} ranking}}} (\autopageref*{\detokenize{tutorial:the-bachet-ranking}})
+\phantomsection\label{\detokenize{tutorial:id333}}{\hyperref[\detokenize{tutorial:the-polarised-bachet-ranking}]{\sphinxcrossref{The polarised \sphinxstyleemphasis{Bachet} ranking}}} (\autopageref*{\detokenize{tutorial:the-polarised-bachet-ranking}})
 
 \item {} 
 \sphinxAtStartPar
@@ -4405,16 +4444,19 @@ We recover in \hyperref[\detokenize{tutorial:weakcopelandranking}]{Listing \ref{
 \caption{A weak Copeland ranking}\label{\detokenize{tutorial:weakrankingdrawing}}\end{figure}
 
 \sphinxAtStartPar
-A valued version of the \sphinxstyleemphasis{Copeland} ranking\sphinxhyphen{}by\sphinxhyphen{}scoring rule is given by the new \sphinxstyleemphasis{Bachet} ranking rule.
+A similar ranking\sphinxhyphen{}by\sphinxhyphen{}scoring rule is provided by the \sphinxcode{\sphinxupquote{linearOrders.PolarisedBachetRanking}} class.
 
 
-\subsubsection{The \sphinxstyleemphasis{Bachet} ranking}
-\label{\detokenize{tutorial:the-bachet-ranking}}
+\subsubsection{The polarised \sphinxstyleemphasis{Bachet} ranking}
+\label{\detokenize{tutorial:the-polarised-bachet-ranking}}
 \sphinxAtStartPar
 \sphinxstyleemphasis{Bachet} numbers \textendash{}bipolar\sphinxhyphen{}valued \{\sphinxhyphen{}1,0,+1\} base 3 encoded integers, provided by the \sphinxcode{\sphinxupquote{arithmetics.BachetNumber}} class and instantiated by the row vectors and the column vectors \textendash{}both without reflexive terms\textendash{} of the strict outranking digraph’s polarised relation table, model in fact per decision action respectively an \sphinxstylestrong{outrankingness} and a \sphinxstylestrong{negated outrankedness} ranking fitness score similar to the previous \sphinxstyleemphasis{Copeland} ranking scores (see the advanced topic on \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{a new ranking rule based on bipolar\sphinxhyphen{}valued base 3 Bachet numbers}}} ).
 
 \sphinxAtStartPar
-Now, \sphinxstyleemphasis{Bachet} numbers are formulated in a base 3 positional numeral system and the integer values of the \sphinxstyleemphasis{Bachet} ranking scores may depend therefore on the actual ordering of the outranking digraph’s \sphinxstyleemphasis{actions} dictionary. The \sphinxstyleemphasis{Bachet} rule is however, like the \sphinxstyleemphasis{Copeland} rule, \sphinxstylestrong{invariant} under the \sphinxstylestrong{codual} transform and \sphinxstylestrong{Condorcet consistent}, ie. when the outranking digraph models a transitive relation, this relation will be preserved by the \sphinxstyleemphasis{Bachet} ranking scores. Here, as we have seen above, the given digraph’s transitivity degree is only 0.487. To reduce therefore the dependency on the given initial ordering of the \sphinxstyleemphasis{actions} dictionary, we compute below \sphinxstyleemphasis{Bachet} ranking results for 10 random permutations and their reversed orderings of the actions keys (see \hyperref[\detokenize{tutorial:bachetranking}]{Listing \ref{\detokenize{tutorial:bachetranking}}} Line 2) and keep the one ranking that is best correlated with the given outranking digraph.
+Now, \sphinxstyleemphasis{Bachet} numbers are formulated in a base 3 positional numeral system and the integer values of the \sphinxstyleemphasis{Bachet} ranking scores may depend therefore on the actual ordering of the outranking digraph’s \sphinxstyleemphasis{actions} dictionary. The \sphinxstyleemphasis{Bachet} rule is however, like the \sphinxstyleemphasis{Copeland} rule, \sphinxstylestrong{invariant} under the \sphinxstylestrong{codual} transform and \sphinxstylestrong{Condorcet consistent}, ie. when the outranking digraph models a transitive relation, this relation will be preserved by the polarised \sphinxstyleemphasis{Bachet} ranking scores.
+
+\sphinxAtStartPar
+Here, as we have seen above, the given digraph’s transitivity degree is only 0.487. To reduce therefore the dependency on the given initial ordering of the \sphinxstyleemphasis{actions} dictionary, we compute below \sphinxstyleemphasis{Bachet} ranking results for 10 random permutations and their reversed orderings of the actions keys (see \hyperref[\detokenize{tutorial:bachetranking}]{Listing \ref{\detokenize{tutorial:bachetranking}}} Line 2) and keep the one ranking that is best correlated with the given outranking digraph.
 \sphinxSetupCaptionForVerbatim{Computing a \sphinxstyleemphasis{Bachet} ranking}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:bachetranking}}}
 \fvset{hllines={, 2, 16, 20,}}%
@@ -4445,7 +4487,7 @@ Now, \sphinxstyleemphasis{Bachet} numbers are formulated in a base 3 positional 
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-In \hyperref[\detokenize{tutorial:bachetranking}]{Listing \ref{\detokenize{tutorial:bachetranking}}} Line 20 above, we may observe that the \sphinxstyleemphasis{Bachet} scores lead eventually to a ranking result that is better correlated  with the given outranking relation than the previous \sphinxstyleemphasis{Copeland} ranking (+0.715 versus +0.463).
+In \hyperref[\detokenize{tutorial:bachetranking}]{Listing \ref{\detokenize{tutorial:bachetranking}}} Line 20 above, we may observe that the \sphinxstyleemphasis{Bachet} scores lead eventually to a ranking result that is much better correlated  with the given outranking relation than the previous \sphinxstyleemphasis{Copeland} ranking (+0.715 versus +0.463).
 
 \sphinxAtStartPar
 A heatmap view on the performance tableau illustrates the actual quality of this \sphinxstyleemphasis{Bachet} ranking result.
@@ -4525,7 +4567,7 @@ Indeed, the extended \sphinxstyleemphasis{Kendall} tau index of +0.638 leads to 
 \subsubsection{The valued \sphinxstyleemphasis{Bachet} ranking}
 \label{\detokenize{tutorial:the-valued-bachet-ranking}}\label{\detokenize{tutorial:valued-bachet-ranking-label}}
 \sphinxAtStartPar
-The polarised \sphinxstyleemphasis{Bachet} ranking rule only considers the crisp relational structure of the outranking digraph, ignoring the actual credibility of the individual arcs. The \sphinxcode{\sphinxupquote{linearOrders}} module provides now also a \sphinxcode{\sphinxupquote{ValuedBachetRanking}} rule taking into account, like the \sphinxstyleemphasis{NetFlows} rule, the actual bipolar\sphinxhyphen{}valued characteristic determination of the outranking situations. The \sphinxstyleemphasis{Bachet} numbers making up the ranking scores are therefore instantiated from the rows and columns of the normalized relation instead of the polarised relation of the outranking digraph.
+The polarised \sphinxstyleemphasis{Bachet} ranking rule only considers the crisp relational structure of the outranking digraph, ignoring the actual credibility of the individual arcs. The \sphinxcode{\sphinxupquote{linearOrders}} module provides now also a \sphinxcode{\sphinxupquote{ValuedBachetRanking}} rule, taking into account, like the \sphinxstyleemphasis{NetFlows} rule, the actual bipolar\sphinxhyphen{}valued characteristic determination of the outranking situations. The \sphinxstyleemphasis{Bachet} numbers making up the ranking scores are therefore instantiated from the rows and columns of the normalized relation instead of the polarised relation of the outranking digraph.
 \sphinxSetupCaptionForVerbatim{Computing a valued \sphinxstyleemphasis{Bachet} ranking}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:valuedbachetranking}}}
 \fvset{hllines={, 2, 16, 20,}}%
@@ -5114,7 +5156,7 @@ A second strategy for constructing partial rankings makes usage of the \sphinxst
 \sphinxAtStartPar
 As we have noticed before, the randomized \sphinxstyleemphasis{polarised Bachet} ranking rule produces multiple rankings of unequal correlation qualities, respecting all the transitive part of the given outranking digraph. A subset of best correlated \sphinxstyleemphasis{Bachet} rankings represents now a suitable sample for computing a convincing ranking consensus. This second strategy is provided by the \sphinxcode{\sphinxupquote{transitiveDigraphs.PartialBachetRanking}} class. To illustrate its usefulness, let us reconsider the example outranking digraph \sphinxstyleemphasis{g} of \hyperref[\detokenize{tutorial:rankingconsensus}]{Listing \ref{\detokenize{tutorial:rankingconsensus}}}.
 \sphinxSetupCaptionForVerbatim{Partial polarised Bachet ranking digraph}
-\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:weakbachet3}}}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:partialbachet3}}}
 \fvset{hllines={, 6, 20, 21, 22, 23, 24, 25,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{o}{*}
@@ -5146,9 +5188,9 @@ As we have noticed before, the randomized \sphinxstyleemphasis{polarised Bachet}
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-In \hyperref[\detokenize{tutorial:weakbachet3}]{Listing \ref{\detokenize{tutorial:weakbachet3}}} Line 6, we notice that we sample 100 \sphinxstyleemphasis{Bachet} rankings and keep the five best correlated rankings for constructing the ranking consensus (see Lines 20\sphinxhyphen{}25). We may notice that alternative \sphinxstyleemphasis{a5} is always first\sphinxhyphen{}ranked and alternative \sphinxstyleemphasis{a6} second\sphinxhyphen{}ranked. Whereas alternatives \sphinxstyleemphasis{a2}, \sphinxstyleemphasis{a8} and \sphinxstyleemphasis{a9} make up the the tail group. The \sphinxcode{\sphinxupquote{showTransitiveDigraph()}} method confirms this partial ranking (see \hyperref[\detokenize{tutorial:weakbachet4}]{Listing \ref{\detokenize{tutorial:weakbachet4}}} Lines 2\sphinxhyphen{}6 below and \hyperref[\detokenize{tutorial:weakbachetpol}]{Fig.\@ \ref{\detokenize{tutorial:weakbachetpol}}}).
+In \hyperref[\detokenize{tutorial:partialbachet3}]{Listing \ref{\detokenize{tutorial:partialbachet3}}} Line 6, we notice that we sample 100 \sphinxstyleemphasis{Bachet} rankings and keep the five best correlated rankings for constructing the ranking consensus (see Lines 20\sphinxhyphen{}25). We may notice that alternative \sphinxstyleemphasis{a5} is always first\sphinxhyphen{}ranked and alternative \sphinxstyleemphasis{a6} second\sphinxhyphen{}ranked. Whereas alternatives \sphinxstyleemphasis{a2}, \sphinxstyleemphasis{a8} and \sphinxstyleemphasis{a9} make up the tail group. The \sphinxcode{\sphinxupquote{showTransitiveDigraph()}} method confirms this partial ranking (see \hyperref[\detokenize{tutorial:partialbachet4}]{Listing \ref{\detokenize{tutorial:partialbachet4}}} Lines 2\sphinxhyphen{}6 below and \hyperref[\detokenize{tutorial:partialbachetpol}]{Fig.\@ \ref{\detokenize{tutorial:partialbachetpol}}}).
 \sphinxSetupCaptionForVerbatim{Partial polarised Bachet ranking result}
-\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:weakbachet4}}}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:partialbachet4}}}
 \fvset{hllines={, 2, 3, 4, 5, 6, 9, 10, 11,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pbr}\PYG{o}{.}\PYG{n}{showTransitiveDigraph}\PYG{p}{(}\PYG{p}{)}
@@ -5162,10 +5204,10 @@ In \hyperref[\detokenize{tutorial:weakbachet3}]{Listing \ref{\detokenize{tutoria
 \PYG{g+go}{  Crisp ordinal correlation  : +0.806}
 \PYG{g+go}{  Epistemic determination    :  0.179}
 \PYG{g+go}{  Bipolar\PYGZhy{}valued equivalence : +0.144}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pbr}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{weakBachetpol}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pbr}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{partialBachetpol}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+go}{  Exporting to weakBachetpol.dot}
-\PYG{g+go}{  dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng weakBachetpol.dot \PYGZhy{}o weakBachetpol.png}
+\PYG{g+go}{  Exporting to partialBachetpol.dot}
+\PYG{g+go}{  dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng partialBachetpol.dot \PYGZhy{}o partialBachetpol.png}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
 
@@ -5173,8 +5215,8 @@ In \hyperref[\detokenize{tutorial:weakbachet3}]{Listing \ref{\detokenize{tutoria
 \centering
 \capstart
 
-\noindent\sphinxincludegraphics[width=200\sphinxpxdimen]{{weakBachetpol}.png}
-\caption{Polarised Bachet partial ranking result}\label{\detokenize{tutorial:weakbachetpol}}\end{figure}
+\noindent\sphinxincludegraphics[width=200\sphinxpxdimen]{{partialBachetpol}.png}
+\caption{Polarised Bachet partial ranking result}\label{\detokenize{tutorial:partialbachetpol}}\end{figure}
 
 \sphinxAtStartPar
 The resulting \sphinxstyleemphasis{partial ranking} is highly correlated with the common determinated part of the given outranking digraph \sphinxstyleemphasis{g} (+0.806) leading to a \sphinxstyleemphasis{relational equivalence} with the given outranking digraph \sphinxstyleemphasis{g} supported by a criteria significance majority of 57.2\% (see Lines 9\sphinxhyphen{}11 above).
@@ -5183,7 +5225,7 @@ The resulting \sphinxstyleemphasis{partial ranking} is highly correlated with th
 We recover with the \sphinxstyleemphasis{Bachet} ranking rule a ranking consensus actually very similar to the previous consensus obtained from all four \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}scoring} results (see \hyperref[\detokenize{tutorial:rankingconsensusfigure}]{Fig.\@ \ref{\detokenize{tutorial:rankingconsensusfigure}}}).
 
 \sphinxAtStartPar
-The \sphinxcode{\sphinxupquote{PartialBachetRanking}} constructor uses by default the \sphinxstyleemphasis{polarised} version of the \sphinxstyleemphasis{Bachet} ranking rule. Due to its \sphinxstyleemphasis{Condorcet consistency} property, the partial ranking result obtained in \hyperref[\detokenize{tutorial:weakbachetpol}]{Fig.\@ \ref{\detokenize{tutorial:weakbachetpol}}} represents in fact a ranking consensus respecting the actual \sphinxstylestrong{transitive parts} of the given outranking digraph (see the advanced topic dedicated to the \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{Bachet ranking rules}}}).
+The \sphinxcode{\sphinxupquote{PartialBachetRanking}} constructor uses by default the \sphinxstyleemphasis{polarised} version of the \sphinxstyleemphasis{Bachet} ranking rule. Due to its \sphinxstyleemphasis{Condorcet consistency} property, the partial ranking result obtained in \hyperref[\detokenize{tutorial:partialbachetpol}]{Fig.\@ \ref{\detokenize{tutorial:partialbachetpol}}} represents in fact a ranking consensus respecting the actual \sphinxstylestrong{transitive parts} of the given outranking digraph (see the advanced topic dedicated to the \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{Bachet ranking rules}}}).
 
 \sphinxAtStartPar
 The \sphinxcode{\sphinxupquote{PartialBachetRanking}} now provides a “\sphinxstylestrong{Polarised == False}” flag allowing to use instead the \sphinxstylestrong{valued} version of the \sphinxstyleemphasis{Bachet} ranking rule (see below \hyperref[\detokenize{tutorial:weakbachet5}]{Listing \ref{\detokenize{tutorial:weakbachet5}}} Line 1). The five best qualified \sphinxstyleemphasis{Bachet} rankings are shown in Lines 4\sphinxhyphen{}8.
@@ -5217,35 +5259,35 @@ In \hyperref[\detokenize{tutorial:weakbachet6}]{Listing \ref{\detokenize{tutoria
 \PYG{g+go}{    2nd ranked [\PYGZsq{}a7\PYGZsq{}],}
 \PYG{g+go}{    2nd last ranked [\PYGZsq{}\PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}])}
 \PYG{g+go}{  1st last ranked [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}])}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pvbr}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{pvbr}\PYG{o}{.}\PYG{n}{weakBachetCorrelation}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pvbr}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{pvbr}\PYG{o}{.}\PYG{n}{partialBachetCorrelation}\PYG{p}{)}
 \PYG{g+go}{ Correlation indexes:}
 \PYG{g+go}{  Crisp ordinal correlation  : +0.888}
 \PYG{g+go}{  Epistemic determination    :  0.157}
 \PYG{g+go}{  Bipolar\PYGZhy{}valued equivalence : +0.139}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pvbr}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{weakBachetval}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pvbr}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{partialBachetval}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+go}{  Exporting to weakBachetval.dot}
-\PYG{g+go}{  dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng weakBachetval.dot \PYGZhy{}o weakBachetval.png}
+\PYG{g+go}{  Exporting to partialBachetval.dot}
+\PYG{g+go}{  dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng partialBachetval.dot \PYGZhy{}o partialBachetval.png}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-It is worthwhile noticing in \hyperref[\detokenize{tutorial:weakbachetval}]{Fig.\@ \ref{\detokenize{tutorial:weakbachetval}}} that alternative \sphinxstyleemphasis{a1} appears indeed incomparable to the other alternatives except alternatives \sphinxstyleemphasis{a5} and \sphinxstyleemphasis{a6}, a fact already made previously apparent with the partial \sphinxstyleemphasis{polarised Bachet} ranking shown in \hyperref[\detokenize{tutorial:rankingconsensusfigure}]{Fig.\@ \ref{\detokenize{tutorial:rankingconsensusfigure}}}.
+It is worthwhile noticing in \hyperref[\detokenize{tutorial:partialbachetval}]{Fig.\@ \ref{\detokenize{tutorial:partialbachetval}}} that alternative \sphinxstyleemphasis{a1} appears indeed incomparable to the other alternatives except alternatives \sphinxstyleemphasis{a5} and \sphinxstyleemphasis{a6}, a fact already made previously apparent with the partial \sphinxstyleemphasis{polarised Bachet} ranking shown in \hyperref[\detokenize{tutorial:rankingconsensusfigure}]{Fig.\@ \ref{\detokenize{tutorial:rankingconsensusfigure}}}.
 
 \begin{figure}[H]
 \centering
 \capstart
 
-\noindent\sphinxincludegraphics[width=200\sphinxpxdimen]{{weakBachetval}.png}
-\caption{Valued Bachet partial ranking result}\label{\detokenize{tutorial:weakbachetval}}\end{figure}
+\noindent\sphinxincludegraphics[width=200\sphinxpxdimen]{{partialBachetval}.png}
+\caption{Valued Bachet partial ranking result}\label{\detokenize{tutorial:partialbachetval}}\end{figure}
 
 
 \subsubsection{Consensus quality of the partial Bachet rankings}
 \label{\detokenize{tutorial:consensus-quality-of-the-partial-bachet-rankings}}
 \sphinxAtStartPar
-Let us now verify in \hyperref[\detokenize{tutorial:weakbachet7}]{Listing \ref{\detokenize{tutorial:weakbachet7}}} below the consensus quality of the partial \sphinxstyleemphasis{polarised} Bachet ranking \sphinxstyleemphasis{pbr}.
+Let us now verify in \hyperref[\detokenize{tutorial:partialbachet7}]{Listing \ref{\detokenize{tutorial:partialbachet7}}} below the consensus quality of the partial \sphinxstyleemphasis{polarised} Bachet ranking \sphinxstyleemphasis{pbr}.
 \sphinxSetupCaptionForVerbatim{Consensus quality of the partial polarised Bachet ranking}
-\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:weakbachet7}}}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:partialbachet7}}}
 \fvset{hllines={, 1, 5, 6, 21,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pbr}\PYG{o}{.}\PYG{n}{computePartialOutrankingConsensusQuality}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
@@ -5276,9 +5318,9 @@ Let us now verify in \hyperref[\detokenize{tutorial:weakbachet7}]{Listing \ref{\
 Best correlated (+0.444) with the partial ranking appear \sphinxstyleemphasis{Cost} criterion \sphinxstyleemphasis{c01} and Benefit criterion \sphinxstyleemphasis{b09}. The relational equivalences are supported by a nearly 75\% significance majority (Lines 5\sphinxhyphen{}6). Eight out of thirteen criteria show a non negative equivalence and the weighted mean marginal equivalence is slightly positive (+0.108, Line 19). With a standard deviation of +0.240, we obtain however an overall negative fairness score of \sphinxhyphen{}0.132 for the partial polarised Bachet ranking.
 
 \sphinxAtStartPar
-We may redo in \hyperref[\detokenize{tutorial:weakbachet8}]{Listing \ref{\detokenize{tutorial:weakbachet8}}} below the same computation for the partial \sphinxstyleemphasis{valued} Bachet ranking.
+We may redo in \hyperref[\detokenize{tutorial:partialbachet8}]{Listing \ref{\detokenize{tutorial:partialbachet8}}} below the same computation for the partial \sphinxstyleemphasis{valued} Bachet ranking.
 \sphinxSetupCaptionForVerbatim{Consensus quality of the partial valued Bachet ranking}
-\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:weakbachet8}}}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:partialbachet8}}}
 \fvset{hllines={, 1, 5, 6, 16, 19, 20, 21,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pvbr}\PYG{o}{.}\PYG{n}{computePartialOutrankingConsensusQuality}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}

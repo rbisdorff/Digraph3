@@ -2726,7 +2726,7 @@ if __name__ == "__main__":
     Threading = False
     res = open('testsmart.csv','w')
     res.write('"seed","ba1","cop","ba2","nf"\n')
-    sampleSize = 100
+    sampleSize = 1
     #t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
     for sample in range(sampleSize):
         print(sample)
