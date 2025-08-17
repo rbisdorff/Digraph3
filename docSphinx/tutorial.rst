@@ -1788,7 +1788,45 @@ We may finally use the best, with the outranking digraph *g* correlated (+0.816)
 
 In view of :numref:`rankedOfficeChoiceHeatmap`, office locations *G* or *D* make up convincing best choice recommendations with an apparent slight advantage for location *G*. Notice that both alternatives *A* and *C*, with their highly contrasted performance profiles, appear ranked in the midfield. Indeed, as they don't compare well, they may neither be first nor last ranked. This is why, when such largely incomparable or extreme alternatives are observed, linear rankings may fail to deliver adequate first-choice recommendations. Notice finally in the *tau* row above similar marginal ordinal correlation indexes as observed before in :numref:`PartialBachetRanking1` Lines 5-11.  
 
-Our first choice recommendation appears essentially depending on the very importance the CEO is eventually attaching to each one of the three decision objectives he is considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objective (81/145 = 0.56) followed by *minimizing the Costs* (45/145 = 0.31) and, less important, *maximizing the working conditions* (19/145 = 0.13), compromise locations *D* as well as *G* become the potential best choices candidates. However, if minimizing the *Costs* does not play much a role, it would perhaps be better to recommend the most advantageous location *A*; or if, on the contrary, the *Costs* objective does matter a lot, recommending the cheapest alternative *C* could definitely become the more convincing best choice recommendation. 
+The :py:class:`digraphs.Digraph` class now readily provides the :py:meth:`~digraphs.Digraph.showBachetChoiceRecommendation` method for directly showing the first and last choices obtained from the previous  partial Bachet ranking result accessible in the *g.pbr* attribute (see :numref:`PartialBachetRanking10` Line 1).
+
+.. code-block:: pycon
+   :name: PartialBachetRanking10
+   :caption: Bachet choice recommendation
+   :linenos:
+   :emphasize-lines: 1,9,13
+
+   >>> g.showBachetChoiceRecommendation(randomized=200)
+    *---- Bachet Choice Recommendations ----*
+    Ranking by recursively first and last choosing
+     1st ranked ['A', 'C', 'D', 'G']
+       2nd ranked ['B', 'E']
+       2nd last ranked ['B', 'E']
+     1st last ranked ['F']
+    Quality of partial Bachet ranking
+     Crisp ordinal correlation  : +1.000
+     Epistemic determination    : +0.337
+     Bipolar-valued equivalence : +0.337
+    Execution time: 0.207 seconds
+   >>> g.pbr
+    *------- Digraph instance description ------*
+     Instance class      : PartialBachetRanking
+     Instance name       : converse-dual-rel_officeChoice_wk
+     Digraph Order       : 7
+     Digraph Size        : 10
+     Valuation domain    : [-1.00;1.00]
+     Determinateness (%) : 73.81
+     Attributes          : ['actions', 'ndigits', 'valuationdomain',
+                            'objectives', 'criteria', 'evaluation', 'NA',
+			    'order', 'runTimes', 'nbrThreads', 'startMethod',
+			    'gamma', 'notGamma', 'name', 'relation',
+			    'rankings', 'bachetRankings', 'randomized',
+			    'seed', 'maxNbrOfRankings', 'Polarised',
+			    'partialBachetCorrelation', 'rankingByChoosing']
+
+Due to the **Condorcet consistency** of the polarised *Bachet* ranking rule, the partial ranking digraph *g.pbr* represents here faithfully an actual transitive part of the given outranking digraph *g* (see Line 13 and :ref:`Bachet-Tutorial-label`).  
+
+Our first choice recommendations eventually  appear essentially depending on the very importance the CEO is attaching to each one of his three decision objectives. In the setting here, where he considers that *maximizing the future turnover* is the most important objective (81/145 = 0.56) followed by *minimizing the Costs* (45/145 = 0.31) and, less important, *maximizing the working conditions* (19/145 = 0.13), compromise locations *G* as well as *D* become the potential first choices candidates. However, if minimizing the *Costs* does not play much a role, it would perhaps be better to recommend the most advantageous location *A*; or if, on the contrary, the *Costs* objective does matter a lot, recommending the cheapest alternative *C* could definitely become the more convincing first choice recommendation. 
 
 It might be worth, as an **exercise**, to modify the criteria significance weights in the 'officeChoice.py' data file in such a way that
 
@@ -3094,7 +3132,7 @@ We recover in :numref:`weakCopelandRanking` Lines 6 and 8 above, the ranking wit
 A similar ranking-by-scoring rule is provided by the :py:class:`linearOrders.PolarisedBachetRanking` class.	
 
 The polarised *Bachet* ranking
-````````````````````
+``````````````````````````````
 *Bachet* numbers --bipolar-valued {-1,0,+1} base 3 encoded integers, provided by the :py:class:`arithmetics.BachetNumber` class and instantiated by the row vectors and the column vectors --both without reflexive terms-- of the strict outranking digraph's polarised relation table, model in fact per decision action respectively an **outrankingness** and a **negated outrankedness** ranking fitness score similar to the previous *Copeland* ranking scores (see the advanced topic on :ref:`a new ranking rule based on bipolar-valued base 3 Bachet numbers <Bachet-Tutorial-label>` ).
 
 Now, *Bachet* numbers are formulated in a base 3 positional numeral system and the integer values of the *Bachet* ranking scores may depend therefore on the actual ordering of the outranking digraph's *actions* dictionary. The *Bachet* rule is however, like the *Copeland* rule, **invariant** under the **codual** transform and **Condorcet consistent**, ie. when the outranking digraph models a transitive relation, this relation will be preserved by the polarised *Bachet* ranking scores.
