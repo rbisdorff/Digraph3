@@ -1714,7 +1714,7 @@ To get a further interesting insight in the overall outranking situation, we fin
 
 Partially ranking the outranking digraph
 ````````````````````````````````````````
-In :numref:`BachetRanking0` Line 2, we operate the :ref:`epistemic disjunctive fusion <Epistemic-Fusion-label>` of the five best correlated linear rankings obtained from 200 random :ref:`Bachet rankings <Bachet-Tutorial-label>` (see Lines 4-8). In the resulting transitive partial outranking relation, alternatives *A*, *C*, *D* as well as *G* appear all ranked before *B* and *E*, whereas alternative *F* appears always last-ranked (see Lines 11 and 14).
+In :numref:`BachetRanking0` Line 2, we operate the :ref:`epistemic disjunctive fusion <Epistemic-Fusion-label>` of the five best correlated linear rankings obtained from 200 random :ref:`Bachet rankings <Bachet-Tutorial-label>` (see Lines 4-8). In the resulting transitive partial strict outranking relation, alternatives *A*, *C*, *D* as well as *G* appear all ranked before *B* and *E*, whereas alternative *F* appears always last-ranked (see Lines 11 and 14).
 
 .. code-block:: pycon
    :name: BachetRanking0
@@ -1824,7 +1824,7 @@ The :py:class:`digraphs.Digraph` class now readily provides the :py:meth:`~digra
 			    'seed', 'maxNbrOfRankings', 'Polarised',
 			    'partialBachetCorrelation', 'rankingByChoosing']
 
-Due to the **Condorcet consistency** of the polarised *Bachet* ranking rule, the partial ranking digraph *g.pbr* represents here faithfully an actual transitive part of the given outranking digraph *g* (see Line 13 and :ref:`Bachet-Tutorial-label`).  
+Due to the **Condorcet consistency** of the polarised *Bachet* ranking rule, the partial ranking digraph *g.pbr* represents here faithfully an actual transitive and asymmetric part of the given outranking digraph *g* (see Line 13 and :ref:`Bachet-Tutorial-label`).  
 
 Our first choice recommendations eventually  appear essentially depending on the very importance the CEO is attaching to each one of his three decision objectives. In the setting here, where he considers that *maximizing the future turnover* is the most important objective (81/145 = 0.56) followed by *minimizing the Costs* (45/145 = 0.31) and, less important, *maximizing the working conditions* (19/145 = 0.13), compromise locations *G* as well as *D* become the potential first choices candidates. However, if minimizing the *Costs* does not play much a role, it would perhaps be better to recommend the most advantageous location *A*; or if, on the contrary, the *Costs* objective does matter a lot, recommending the cheapest alternative *C* could definitely become the more convincing first choice recommendation. 
 

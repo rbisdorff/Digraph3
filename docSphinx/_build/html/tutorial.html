@@ -1962,7 +1962,7 @@ pairwise perspective (see below). With the given preference discrimination thres
 </section>
 <section id="partially-ranking-the-outranking-digraph">
 <h4><a class="toc-backref" href="#id316" role="doc-backlink"><span class="section-number">1.3.1.6. </span>Partially ranking the outranking digraph</a><a class="headerlink" href="#partially-ranking-the-outranking-digraph" title="Link to this heading"></a></h4>
-<p>In <a class="reference internal" href="#bachetranking0"><span class="std std-numref">Listing 1.14</span></a> Line 2, we operate the <a class="reference internal" href="#epistemic-fusion-label"><span class="std std-ref">epistemic disjunctive fusion</span></a> of the five best correlated linear rankings obtained from 200 random <a class="reference internal" href="pearls.html#bachet-tutorial-label"><span class="std std-ref">Bachet rankings</span></a> (see Lines 4-8). In the resulting transitive partial outranking relation, alternatives <em>A</em>, <em>C</em>, <em>D</em> as well as <em>G</em> appear all ranked before <em>B</em> and <em>E</em>, whereas alternative <em>F</em> appears always last-ranked (see Lines 11 and 14).</p>
+<p>In <a class="reference internal" href="#bachetranking0"><span class="std std-numref">Listing 1.14</span></a> Line 2, we operate the <a class="reference internal" href="#epistemic-fusion-label"><span class="std std-ref">epistemic disjunctive fusion</span></a> of the five best correlated linear rankings obtained from 200 random <a class="reference internal" href="pearls.html#bachet-tutorial-label"><span class="std std-ref">Bachet rankings</span></a> (see Lines 4-8). In the resulting transitive partial strict outranking relation, alternatives <em>A</em>, <em>C</em>, <em>D</em> as well as <em>G</em> appear all ranked before <em>B</em> and <em>E</em>, whereas alternative <em>F</em> appears always last-ranked (see Lines 11 and 14).</p>
 <div class="literal-block-wrapper docutils container" id="bachetranking0">
 <div class="code-block-caption"><span class="caption-number">Listing 1.14 </span><span class="caption-text">Partially ranking the location alternatives</span><a class="headerlink" href="#bachetranking0" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="n">PartialBachetRanking</span>
@@ -2059,7 +2059,7 @@ pairwise perspective (see below). With the given preference discrimination thres
 </pre></div>
 </div>
 </div>
-<p>Due to the <strong>Condorcet consistency</strong> of the polarised <em>Bachet</em> ranking rule, the partial ranking digraph <em>g.pbr</em> represents here faithfully an actual transitive part of the given outranking digraph <em>g</em> (see Line 13 and <a class="reference internal" href="pearls.html#bachet-tutorial-label"><span class="std std-ref">Ranking-by-scoring with bipolar-valued base 3 encoded Bachet numbers</span></a>).</p>
+<p>Due to the <strong>Condorcet consistency</strong> of the polarised <em>Bachet</em> ranking rule, the partial ranking digraph <em>g.pbr</em> represents here faithfully an actual transitive and asymmetric part of the given outranking digraph <em>g</em> (see Line 13 and <a class="reference internal" href="pearls.html#bachet-tutorial-label"><span class="std std-ref">Ranking-by-scoring with bipolar-valued base 3 encoded Bachet numbers</span></a>).</p>
 <p>Our first choice recommendations eventually  appear essentially depending on the very importance the CEO is attaching to each one of his three decision objectives. In the setting here, where he considers that <em>maximizing the future turnover</em> is the most important objective (81/145 = 0.56) followed by <em>minimizing the Costs</em> (45/145 = 0.31) and, less important, <em>maximizing the working conditions</em> (19/145 = 0.13), compromise locations <em>G</em> as well as <em>D</em> become the potential first choices candidates. However, if minimizing the <em>Costs</em> does not play much a role, it would perhaps be better to recommend the most advantageous location <em>A</em>; or if, on the contrary, the <em>Costs</em> objective does matter a lot, recommending the cheapest alternative <em>C</em> could definitely become the more convincing first choice recommendation.</p>
 <p>It might be worth, as an <strong>exercise</strong>, to modify the criteria significance weights in the ‘officeChoice.py’ data file in such a way that</p>
 <blockquote>
@@ -10864,7 +10864,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Aug 17, 2025.
+      <span class="lastupdated">Last updated on Aug 18, 2025.
       </span></p>
   </div>
 
