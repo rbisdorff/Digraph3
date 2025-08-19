@@ -1220,7 +1220,7 @@ class _OutFlowsOrder(LinearOrder):
                 print('%s \t %.2f' %(x[1],x[0]))
 #------------
 
-class _BachetRanking(LinearOrder):
+class _BachetRanking(Digraph):
     """
     abstract class for Bachet ranking rules.
     """
@@ -1235,7 +1235,7 @@ class _BachetRanking(LinearOrder):
                 print('%s \t %.2f' %(x[1],x[0]))
          
     
-class PolarisedBachetRanking(_BachetRanking):
+class PolarisedBachetRanking(LinearOrder,_BachetRanking):
     """    
     Instantiates the Bachet Ranking and Ordering from a given bipolar-valued *Digraph* instance *other*.
 
@@ -1609,7 +1609,7 @@ class PolarisedBachetOrder(PolarisedBachetRanking):
     """
 #------------
 
-class BachetRanking(_BachetRanking):
+class BachetRanking(LinearOrder,_BachetRanking):
     """
     The Condorcet consistency of the polarised Bachet ranking rule guarantees
     that all transitive outranking triples are correctly scored independently
@@ -1756,7 +1756,7 @@ class BachetOrder(BachetRanking):
     """
 
 #------------
-class ValuedBachetRanking(_BachetRanking):
+class ValuedBachetRanking(LinearOrder,_BachetRanking):
     """    
     Instantiates the Bachet Ranking and Ordering from a given bipolar-valued *Digraph* instance *other*.
 

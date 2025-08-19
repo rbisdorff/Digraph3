@@ -67,7 +67,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{August 17, 2025}
+\date{August 19, 2025}
 \release{3.13.7}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -2655,7 +2655,7 @@ To get a further interesting insight in the overall outranking situation, we fin
 \subsubsection{Partially ranking the outranking digraph}
 \label{\detokenize{tutorial:partially-ranking-the-outranking-digraph}}
 \sphinxAtStartPar
-In \hyperref[\detokenize{tutorial:bachetranking0}]{Listing \ref{\detokenize{tutorial:bachetranking0}}} Line 2, we operate the {\hyperref[\detokenize{tutorial:epistemic-fusion-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{epistemic disjunctive fusion}}}}} (\autopageref*{\detokenize{tutorial:epistemic-fusion-label}}) of the five best correlated linear rankings obtained from 200 random \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{Bachet rankings}}} (see Lines 4\sphinxhyphen{}8). In the resulting transitive partial outranking relation, alternatives \sphinxstyleemphasis{A}, \sphinxstyleemphasis{C}, \sphinxstyleemphasis{D} as well as \sphinxstyleemphasis{G} appear all ranked before \sphinxstyleemphasis{B} and \sphinxstyleemphasis{E}, whereas alternative \sphinxstyleemphasis{F} appears always last\sphinxhyphen{}ranked (see Lines 11 and 14).
+In \hyperref[\detokenize{tutorial:bachetranking0}]{Listing \ref{\detokenize{tutorial:bachetranking0}}} Line 2, we operate the {\hyperref[\detokenize{tutorial:epistemic-fusion-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{epistemic disjunctive fusion}}}}} (\autopageref*{\detokenize{tutorial:epistemic-fusion-label}}) of the five best correlated linear rankings obtained from 200 random \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{Bachet rankings}}} (see Lines 4\sphinxhyphen{}8). In the resulting transitive partial strict outranking relation, alternatives \sphinxstyleemphasis{A}, \sphinxstyleemphasis{C}, \sphinxstyleemphasis{D} as well as \sphinxstyleemphasis{G} appear all ranked before \sphinxstyleemphasis{B} and \sphinxstyleemphasis{E}, whereas alternative \sphinxstyleemphasis{F} appears always last\sphinxhyphen{}ranked (see Lines 11 and 14).
 \sphinxSetupCaptionForVerbatim{Partially ranking the location alternatives}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:bachetranking0}}}
 \fvset{hllines={, 2, 4, 5, 6, 7, 8, 11, 14,}}%
@@ -2770,7 +2770,7 @@ The \sphinxcode{\sphinxupquote{digraphs.Digraph}} class now readily provides the
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-Due to the \sphinxstylestrong{Condorcet consistency} of the polarised \sphinxstyleemphasis{Bachet} ranking rule, the partial ranking digraph \sphinxstyleemphasis{g.pbr} represents here faithfully an actual transitive part of the given outranking digraph \sphinxstyleemphasis{g} (see Line 13 and \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{Bachet\sphinxhyphen{}Tutorial\sphinxhyphen{}label}}}).
+Due to the \sphinxstylestrong{Condorcet consistency} of the polarised \sphinxstyleemphasis{Bachet} ranking rule, the partial ranking digraph \sphinxstyleemphasis{g.pbr} represents here faithfully an actual transitive and asymmetric part of the given outranking digraph \sphinxstyleemphasis{g} (see Line 13 and \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{Bachet\sphinxhyphen{}Tutorial\sphinxhyphen{}label}}}).
 
 \sphinxAtStartPar
 Our first choice recommendations eventually  appear essentially depending on the very importance the CEO is attaching to each one of his three decision objectives. In the setting here, where he considers that \sphinxstyleemphasis{maximizing the future turnover} is the most important objective (81/145 = 0.56) followed by \sphinxstyleemphasis{minimizing the Costs} (45/145 = 0.31) and, less important, \sphinxstyleemphasis{maximizing the working conditions} (19/145 = 0.13), compromise locations \sphinxstyleemphasis{G} as well as \sphinxstyleemphasis{D} become the potential first choices candidates. However, if minimizing the \sphinxstyleemphasis{Costs} does not play much a role, it would perhaps be better to recommend the most advantageous location \sphinxstyleemphasis{A}; or if, on the contrary, the \sphinxstyleemphasis{Costs} objective does matter a lot, recommending the cheapest alternative \sphinxstyleemphasis{C} could definitely become the more convincing first choice recommendation.
@@ -4444,7 +4444,7 @@ We recover in \hyperref[\detokenize{tutorial:weakcopelandranking}]{Listing \ref{
 \caption{A weak Copeland ranking}\label{\detokenize{tutorial:weakrankingdrawing}}\end{figure}
 
 \sphinxAtStartPar
-A similar ranking\sphinxhyphen{}by\sphinxhyphen{}scoring rule is provided by the \sphinxcode{\sphinxupquote{linearOrders.PolarisedBachetRanking}} class.
+A similar ranking\sphinxhyphen{}by\sphinxhyphen{}scoring rule is provided by the \sphinxcode{\sphinxupquote{linearOrders.BachetRanking}} class.
 
 
 \subsubsection{The polarised \sphinxstyleemphasis{Bachet} ranking}
@@ -4456,38 +4456,38 @@ A similar ranking\sphinxhyphen{}by\sphinxhyphen{}scoring rule is provided by the
 Now, \sphinxstyleemphasis{Bachet} numbers are formulated in a base 3 positional numeral system and the integer values of the \sphinxstyleemphasis{Bachet} ranking scores may depend therefore on the actual ordering of the outranking digraph’s \sphinxstyleemphasis{actions} dictionary. The \sphinxstyleemphasis{Bachet} rule is however, like the \sphinxstyleemphasis{Copeland} rule, \sphinxstylestrong{invariant} under the \sphinxstylestrong{codual} transform and \sphinxstylestrong{Condorcet consistent}, ie. when the outranking digraph models a transitive relation, this relation will be preserved by the polarised \sphinxstyleemphasis{Bachet} ranking scores.
 
 \sphinxAtStartPar
-Here, as we have seen above, the given digraph’s transitivity degree is only 0.487. To reduce therefore the dependency on the given initial ordering of the \sphinxstyleemphasis{actions} dictionary, we compute below \sphinxstyleemphasis{Bachet} ranking results for 10 random permutations and their reversed orderings of the actions keys (see \hyperref[\detokenize{tutorial:bachetranking}]{Listing \ref{\detokenize{tutorial:bachetranking}}} Line 2) and keep the one ranking that is best correlated with the given outranking digraph.
+Here, as we have seen above, the given digraph’s transitivity degree is only 0.487. To reduce therefore the dependency on the given initial ordering of the \sphinxstyleemphasis{actions} dictionary, we compute below \sphinxstyleemphasis{Bachet} ranking results for the permutation and their reversed ordering of 50 best determined intransitive triples (see \hyperref[\detokenize{tutorial:bachetranking}]{Listing \ref{\detokenize{tutorial:bachetranking}}} Line 2) and keep the one ranking that is best correlated with the given outranking digraph.
 \sphinxSetupCaptionForVerbatim{Computing a \sphinxstyleemphasis{Bachet} ranking}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:bachetranking}}}
 \fvset{hllines={, 2, 16, 20,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{PolarisedBachetRanking}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba} \PYG{o}{=} \PYG{n}{PolarisedBachetRanking}\PYG{p}{(}\PYG{n}{gcd}\PYG{p}{,}\PYG{n}{randomized}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{28}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba} \PYG{o}{=} \PYG{n}{BachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{sampleSize}\PYG{o}{=}\PYG{l+m+mi}{50}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba}\PYG{o}{.}\PYG{n}{showScores}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ Bachet scores in descending order}
 \PYG{g+go}{  action      score}
-\PYG{g+go}{    a5       5096.00}
-\PYG{g+go}{    a6       3074.00}
-\PYG{g+go}{    a7       1794.00}
-\PYG{g+go}{    a3        \PYGZhy{}71.00}
-\PYG{g+go}{    a4       \PYGZhy{}141.00}
-\PYG{g+go}{    a8       \PYGZhy{}360.00}
-\PYG{g+go}{    a1       \PYGZhy{}490.00}
-\PYG{g+go}{    a2       \PYGZhy{}537.00}
-\PYG{g+go}{    a9      \PYGZhy{}1135.00}
+\PYG{g+go}{   a5         6540.00}
+\PYG{g+go}{   a6         5674.00}
+\PYG{g+go}{   a7         830.00}
+\PYG{g+go}{   a3         \PYGZhy{}231.00}
+\PYG{g+go}{   a4         \PYGZhy{}621.00}
+\PYG{g+go}{   a1         \PYGZhy{}640.00}
+\PYG{g+go}{   a9         \PYGZhy{}3893.00}
+\PYG{g+go}{   a8         \PYGZhy{}4332.00}
+\PYG{g+go}{   a2         \PYGZhy{}4905.00}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba}\PYG{o}{.}\PYG{n}{bachetRanking}
-\PYG{g+go}{ [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}]}
+\PYG{g+go}{ [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeRankingCorrelation}\PYG{p}{(}\PYG{n}{ba}\PYG{o}{.}\PYG{n}{bachetRanking}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{corr}\PYG{p}{)}
 \PYG{g+go}{ Correlation indexes:}
-\PYG{g+go}{  Crisp ordinal correlation  : +0.715}
+\PYG{g+go}{  Crisp ordinal correlation  : +0.759}
 \PYG{g+go}{  Epistemic determination    :  0.230}
-\PYG{g+go}{  Bipolar\PYGZhy{}valued equivalence : +0.165}
+\PYG{g+go}{  Bipolar\PYGZhy{}valued equivalence : +0.175}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-In \hyperref[\detokenize{tutorial:bachetranking}]{Listing \ref{\detokenize{tutorial:bachetranking}}} Line 20 above, we may observe that the \sphinxstyleemphasis{Bachet} scores lead eventually to a ranking result that is much better correlated  with the given outranking relation than the previous \sphinxstyleemphasis{Copeland} ranking (+0.715 versus +0.463).
+In \hyperref[\detokenize{tutorial:bachetranking}]{Listing \ref{\detokenize{tutorial:bachetranking}}} Line 20 above, we may observe that the \sphinxstyleemphasis{Bachet} scores lead eventually to a ranking result that is much better correlated  with the given outranking relation than the previous \sphinxstyleemphasis{Copeland} ranking (+0.759 versus +0.463).
 
 \sphinxAtStartPar
 A heatmap view on the performance tableau illustrates the actual quality of this \sphinxstyleemphasis{Bachet} ranking result.
@@ -4506,7 +4506,7 @@ A heatmap view on the performance tableau illustrates the actual quality of this
 \caption{\sphinxstyleemphasis{Bachet} rule ranked heatmap view on the performance records}\label{\detokenize{tutorial:bachetheatmapt}}\end{figure}
 
 \sphinxAtStartPar
-In \hyperref[\detokenize{tutorial:bachetheatmapt}]{Fig.\@ \ref{\detokenize{tutorial:bachetheatmapt}}} we may notice that action \sphinxstyleemphasis{a5}, with all grades above the third 7\sphinxhyphen{}tile (\textgreater{} 42.86\%), appears convincingly first\sphinxhyphen{}ranked. Similarly, with five grades in the lowest 7\sphinxhyphen{}tiled class (\textless{} 14.29\%), action \sphinxstyleemphasis{a9} appears last\sphinxhyphen{}ranked. Most significant in this ranking appear to be the \sphinxstyleemphasis{Benefit} criteria \sphinxstyleemphasis{b09}, \sphinxstyleemphasis{b04} and \sphinxstyleemphasis{b01} with a correlation \textgreater{} +0.40, whereas \sphinxstyleemphasis{Costs} criteria \sphinxstyleemphasis{c02} and \sphinxstyleemphasis{c03} appear somehow in contradiction (\sphinxhyphen{}0.11 and \sphinxhyphen{}0.28) with the proposed \sphinxstyleemphasis{Bachet} ranking. Action \sphinxstyleemphasis{a7}, with only three weak grades, is not first\sphinxhyphen{}ranked because of the fact that on all three \sphinxstyleemphasis{Costs} criteria and on the \sphinxstyleemphasis{Benefit} criterion \sphinxstyleemphasis{b08}, i.e on a majority (33/60) of criteria significance, action \sphinxstyleemphasis{a7} is positively outranked by actions \sphinxstyleemphasis{a6} and \sphinxstyleemphasis{a5}. Notice also the highly contrasted performance record of action \sphinxstyleemphasis{a1} with three grades in the highest 7\sphinxhyphen{}tile (\textgreater{} 85.71\%) and four grades in the lowest 7\sphinxhyphen{}tile (\textless{}14.29\%). A similar contrasted situation is given for action \sphinxstyleemphasis{a3} with 7 grades in the two top 7\sphinxhyphen{}tiles (\textgreater{}71.43\%) and four grades in the two lowest 7\sphinxhyphen{}tiles (\textless{}28.57\%). The mean marginal correlation over all 13 criteria is positive (+0.09). The standard deviation of the marginal correlations is however quite high (+0.261) so that the ranking lacks apparently a bit of fairness (\sphinxhyphen{}0.171).
+In \hyperref[\detokenize{tutorial:bachetheatmapt}]{Fig.\@ \ref{\detokenize{tutorial:bachetheatmapt}}} we may notice that action \sphinxstyleemphasis{a5}, with all grades above the third 7\sphinxhyphen{}tile (\textgreater{} 42.86\%), appears convincingly first\sphinxhyphen{}ranked. Similarly, with six grades in the two lowest 7\sphinxhyphen{}tiled classes (\textless{} 28.57\%), action \sphinxstyleemphasis{a2} appears last\sphinxhyphen{}ranked. Most significant in this ranking appear to be the \sphinxstyleemphasis{Benefit} criteria \sphinxstyleemphasis{b09}, \sphinxstyleemphasis{b04} , \sphinxstyleemphasis{b01} and \sphinxstyleemphasis{b08} with a correlation \textgreater{} +0.20, whereas \sphinxstyleemphasis{Costs} criterion \sphinxstyleemphasis{c03} appears somehow in contradiction (\sphinxhyphen{}0.11 ) with the proposed \sphinxstyleemphasis{Bachet} ranking. Action \sphinxstyleemphasis{a7}, with only three weak grades, is not first\sphinxhyphen{}ranked because of the fact that on all three \sphinxstyleemphasis{Costs} criteria and on the \sphinxstyleemphasis{Benefit} criterion \sphinxstyleemphasis{b08}, i.e on a majority (33/60) of criteria significance, action \sphinxstyleemphasis{a7} is positively outranked by actions \sphinxstyleemphasis{a6} and \sphinxstyleemphasis{a5}. Notice also the highly contrasted performance record of action \sphinxstyleemphasis{a1} with three grades in the highest 7\sphinxhyphen{}tile (\textgreater{} 85.71\%) and four grades in the lowest 7\sphinxhyphen{}tile (\textless{}14.29\%). A similar contrasted situation is given for action \sphinxstyleemphasis{a3} with 7 grades in the two top 7\sphinxhyphen{}tiles (\textgreater{}71.43\%) and four grades in the two lowest 7\sphinxhyphen{}tiles (\textless{}28.57\%). The mean marginal correlation over all 13 criteria is slightly positive (+0.10). The standard deviation of the marginal correlations is a bit high (+0.154) so that the ranking may lack a bit of fairness (\sphinxhyphen{}0.054).
 
 \sphinxAtStartPar
 Let us now consider a similar ranking rule, but working directly on the \sphinxstyleemphasis{bipolar\sphinxhyphen{}valued} outranking digraph.
@@ -4567,27 +4567,29 @@ Indeed, the extended \sphinxstyleemphasis{Kendall} tau index of +0.638 leads to 
 \subsubsection{The valued \sphinxstyleemphasis{Bachet} ranking}
 \label{\detokenize{tutorial:the-valued-bachet-ranking}}\label{\detokenize{tutorial:valued-bachet-ranking-label}}
 \sphinxAtStartPar
-The polarised \sphinxstyleemphasis{Bachet} ranking rule only considers the crisp relational structure of the outranking digraph, ignoring the actual credibility of the individual arcs. The \sphinxcode{\sphinxupquote{linearOrders}} module provides now also a \sphinxcode{\sphinxupquote{ValuedBachetRanking}} rule, taking into account, like the \sphinxstyleemphasis{NetFlows} rule, the actual bipolar\sphinxhyphen{}valued characteristic determination of the outranking situations. The \sphinxstyleemphasis{Bachet} numbers making up the ranking scores are therefore instantiated from the rows and columns of the normalized relation instead of the polarised relation of the outranking digraph.
+The polarised \sphinxstyleemphasis{Bachet} ranking rule only considers the crisp relational structure of the outranking digraph, ignoring the actual credibility of the individual arcs. The \sphinxcode{\sphinxupquote{BachetRanking}} rule provides the \sphinxstyleemphasis{Polarised=False} parameter for taking into account, like the \sphinxstyleemphasis{NetFlows} rule, the actual bipolar\sphinxhyphen{}valued characteristic determination of the outranking situations. The \sphinxstyleemphasis{Bachet} numbers making up the ranking scores are therefore instantiated from the rows and columns of the normalized relation instead of the polarised relation of the outranking digraph.
 \sphinxSetupCaptionForVerbatim{Computing a valued \sphinxstyleemphasis{Bachet} ranking}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:valuedbachetranking}}}
 \fvset{hllines={, 2, 16, 20,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{ValuedBachetRanking}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bav} \PYG{o}{=} \PYG{n}{ValuedBachetRanking}\PYG{p}{(}\PYG{n}{gcd}\PYG{p}{,}\PYG{n}{randomized}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{28}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{BachetRanking}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bav} \PYG{o}{=} \PYG{n}{BachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{Polarised}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,}\PYG{n}{sampleSize}\PYG{o}{=}\PYG{l+m+mi}{50}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bav}\PYG{o}{.}\PYG{n}{showScores}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ Bachet scores in descending order}
 \PYG{g+go}{  action      score}
-\PYG{g+go}{  a5          2179.36}
-\PYG{g+go}{  a6          903.71}
-\PYG{g+go}{  a7          599.92}
-\PYG{g+go}{  a3          \PYGZhy{}375.05}
-\PYG{g+go}{  a4          \PYGZhy{}513.49}
-\PYG{g+go}{  a1          \PYGZhy{}741.73}
-\PYG{g+go}{  a8          \PYGZhy{}1292.76}
-\PYG{g+go}{  a2          \PYGZhy{}1998.61}
-\PYG{g+go}{  a9          \PYGZhy{}4364.85}
+\PYG{g+go}{    a5        1704.29}
+\PYG{g+go}{    a6        1524.37}
+\PYG{g+go}{    a7        723.51}
+\PYG{g+go}{    a3        381.09}
+\PYG{g+go}{    a4        115.35}
+\PYG{g+go}{    a1        \PYGZhy{}57.20}
+\PYG{g+go}{    a8        \PYGZhy{}89.84}
+\PYG{g+go}{    a2        \PYGZhy{}308.25}
+\PYG{g+go}{    a9        \PYGZhy{}2100.44}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bav}\PYG{o}{.}\PYG{n}{bachetRanking}
 \PYG{g+go}{ [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba}\PYG{o}{.}\PYG{n}{bachetRanking}
+\PYG{g+go}{ [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeRankingCorrelation}\PYG{p}{(}\PYG{n}{bav}\PYG{o}{.}\PYG{n}{bachetRanking}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{corr}\PYG{p}{)}
 \PYG{g+go}{ Correlation indexes:}
@@ -4598,7 +4600,7 @@ The polarised \sphinxstyleemphasis{Bachet} ranking rule only considers the crisp
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-With the \sphinxstyleemphasis{valued} version of the \sphinxstyleemphasis{Bachet} ranking rule we recover a similar ranking as the one obtained with the previous polarised version, only actions ‘\sphinxstyleemphasis{a1}’ and ‘\sphinxstyleemphasis{a8}’ are swapped. Notice by the way in \hyperref[\detokenize{tutorial:valuedbachetranking}]{Listing \ref{\detokenize{tutorial:valuedbachetranking}}} Line 2  that we are sampling here 100 random orderings of the \sphinxstyleemphasis{actions} keys. This way we obtain a better correlated ranking result than with the simple \sphinxstyleemphasis{NetFlows} rule (+739 vs +0.638). The valued \sphinxstyleemphasis{Bachet} ranking is like the polarised \sphinxstyleemphasis{Bachet} rule invariant under the codual transform. However, like the \sphinxstyleemphasis{NetFlows} rule, the valued version of the \sphinxstyleemphasis{Bachet} rule is \sphinxstylestrong{not} necessarily \sphinxstylestrong{Condorcet consistent}.
+With the \sphinxstyleemphasis{valued} version of the \sphinxstyleemphasis{Bachet} ranking rule we recover a similar ranking as the one obtained with the previous polarised version, only action ‘\sphinxstyleemphasis{a9}’ is pushed to the bottom. Again we are again permuting 50 of the moste determined intransitive trples. This way we obtain a better correlated ranking result than with the simple \sphinxstyleemphasis{NetFlows} rule (+739 vs +0.638). The valued \sphinxstyleemphasis{Bachet} ranking is like the polarised \sphinxstyleemphasis{Bachet} rule invariant under the codual transform. However, like the \sphinxstyleemphasis{NetFlows} rule, the valued version of the \sphinxstyleemphasis{Bachet} rule is \sphinxstylestrong{not} necessarily \sphinxstylestrong{Condorcet consistent}.
 
 \sphinxAtStartPar
 To appreciate now the actual ranking performances of the \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}scoring} rules seen so far, it is useful to consider \sphinxstyleemphasis{Kemeny}’s and \sphinxstyleemphasis{Slater}’s \sphinxstylestrong{optimal fitting} ranking rules.
@@ -4725,19 +4727,6 @@ Both Kemeny rankings show the same \sphinxstyleemphasis{weighted mean marginal c
 
 \sphinxAtStartPar
 When several rankings with maximal correlation index are given, the \sphinxcode{\sphinxupquote{KemenyRanking}} class constructor instantiates a \sphinxstyleemphasis{most consensual} one, i.e. a ranking with \sphinxstyleemphasis{highest} mean marginal correlation and, in case of ties, with \sphinxstyleemphasis{lowest} weighted standard deviation. Here we obtain ranking: {[}‘a5’, ‘a6’, ‘a7’, ‘a3’, ‘a9’, ‘a4’, ‘a1’, ‘a8’, ‘a2’{]} (see \hyperref[\detokenize{tutorial:kemenyranking}]{Listing \ref{\detokenize{tutorial:kemenyranking}}} Line 4).
-
-\sphinxAtStartPar
-A Monte Carlo experiment, comparing the correlation results obtained by the previous ranking\sphinxhyphen{}by\sphinxhyphen{}scoring rules with the optimal \sphinxstyleemphasis{Kemeny} rule when ranking 100 random Cost\sphinxhyphen{}Benefit performance tableaux of order 10, involving 13 performance criteria, confirms a clear advantage of the polarised \sphinxstyleemphasis{Bachet} (randomized=100) rule against the \sphinxstyleemphasis{Copeland} and the \sphinxstyleemphasis{NetFlows} rules (see \hyperref[\detokenize{tutorial:comparerules10a}]{Fig.\@ \ref{\detokenize{tutorial:comparerules10a}}} below).
-
-\begin{figure}[H]
-\centering
-\capstart
-
-\noindent\sphinxincludegraphics[width=500\sphinxpxdimen]{{compareRules10A}.png}
-\caption{Performance comparison of three ranking\sphinxhyphen{}by\sphinxhyphen{}scoring rules}\label{\detokenize{tutorial:comparerules10a}}\end{figure}
-
-\sphinxAtStartPar
-Mind however that this apparent better performance of the polarised \sphinxstyleemphasis{Bachet} ranking rule is essentially due to computing the \sphinxstyleemphasis{Bachet} scores on 100 permutations and their reverses of the polarised ouranking relation table and keeping the best correlated one. A strategy which meets by the way the ranking strategy of the optimal \sphinxstyleemphasis{Kemeny} rule. This performance advantage compared to the \sphinxstyleemphasis{Copeland} and the \sphinxstyleemphasis{netFlows} rules is hence also limited to the ranking of small outranking digraphs of order \textless{} 20 (see \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{the efficiency of the Bachet ranking rule}}}).
 
 \sphinxAtStartPar
 Let us now present the non\sphinxhyphen{}valued cousin of the optimal \sphinxstyleemphasis{Kemeny} rule.
@@ -5048,9 +5037,9 @@ To compare for instance the four rankings we have previously obtained with \sphi
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{Normalized}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{o}{*}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cop} \PYG{o}{=} \PYG{n}{CopelandOrder}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba} \PYG{o}{=} \PYG{n}{PolarisedBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{randomized}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{28}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba} \PYG{o}{=} \PYG{n}{BachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{Polarised}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}\PYG{n}{sampleSize}\PYG{o}{=}\PYG{l+m+mi}{50}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nf} \PYG{o}{=} \PYG{n}{NetFlowsRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bav} \PYG{o}{=} \PYG{n}{ValuedBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{randomized}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{28}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bav} \PYG{o}{=} \PYG{n}{BachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{Polarised}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,}\PYG{n}{sampleSize}\PYG{o}{=}\PYG{l+m+mi}{50}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rankings} \PYG{o}{=} \PYG{p}{[}\PYG{n}{cop}\PYG{o}{.}\PYG{n}{copelandRanking}\PYG{p}{,}
 \PYG{g+gp}{... }            \PYG{n}{ba}\PYG{o}{.}\PYG{n}{bachetRanking}\PYG{p}{,}
 \PYG{g+gp}{... }            \PYG{n}{nf}\PYG{o}{.}\PYG{n}{netFlowsRanking}\PYG{p}{,}

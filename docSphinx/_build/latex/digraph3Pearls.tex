@@ -67,7 +67,7 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{August 17, 2025}
+\date{August 19, 2025}
 \release{3.13.7}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -4817,7 +4817,7 @@ In Python, the range of integers is luckily only limited by the available CPU me
 \subsubsection{Smart sampling of the permutations of the actions list}
 \label{\detokenize{pearls:smart-sampling-of-the-permutations-of-the-actions-list}}
 \sphinxAtStartPar
-The Condorcet consistency of the polarised Bachet ranking rule guarantees that all transitive outranking triples are correctly scored independently of any given actions ordering. Only the intransitive outranking triples may give diverging ranking results. It is hence opportune to keep transitive triples unchanged in their given initial positions and only permute the first and the last pair in a sample of intransitive triples and keep always the best qualified PolarisedBachetRanking or ValuedBachetRanking result. To explore the usefulness of this sampling approach the \sphinxcode{\sphinxupquote{linearOrders}} module provides the \sphinxcode{\sphinxupquote{SmartBachetRanking}} class.
+The Condorcet consistency of the polarised Bachet ranking rule guarantees that all transitive outranking triples are correctly scored independently of any given actions ordering. Only the intransitive outranking triples may give diverging ranking results. It is hence opportune to keep transitive triples unchanged in their given initial positions and only permute the first and the last pair in a sample of intransitive triples and keep always the best qualified PolarisedBachetRanking or ValuedBachetRanking result. To explore the usefulness of this sampling approach the \sphinxcode{\sphinxupquote{linearOrders}} module provides the \sphinxcode{\sphinxupquote{BachetRanking}} class.
 
 \sphinxAtStartPar
 When reconsidering the random outranking digraph \sphinxstyleemphasis{g}, seen in \hyperref[\detokenize{pearls:optimisingbachet}]{Listing \ref{\detokenize{pearls:optimisingbachet}}},  we get the following very convincing ranking result.
@@ -4831,8 +4831,8 @@ When reconsidering the random outranking digraph \sphinxstyleemphasis{g}, seen i
 \PYG{g+go}{ Transitivity degree of digraph \PYGZlt{}rel\PYGZus{}randomperftab\PYGZgt{}:}
 \PYG{g+go}{   \PYGZsh{}triples x\PYGZgt{}y\PYGZgt{}z: 504, \PYGZsh{}closed: 343, \PYGZsh{}open: 161}
 \PYG{g+go}{   (\PYGZsh{}closed/\PYGZsh{}triples) =  0.681}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{SmartBachetRanking}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sba} \PYG{o}{=} \PYG{n}{SmartBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{Polarised}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}\PYG{n}{sampleSize}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{BachetRanking}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sba} \PYG{o}{=} \PYG{n}{BachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{Polarised}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}\PYG{n}{sampleSize}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sba}\PYG{o}{.}\PYG{n}{showScores}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ Bachet scores in descending order}
 \PYG{g+go}{  action      score}
@@ -4849,7 +4849,7 @@ When reconsidering the random outranking digraph \sphinxstyleemphasis{g}, seen i
 \PYG{g+go}{ [\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeRankingCorrelation}\PYG{p}{(}\PYG{n}{sba}\PYG{o}{.}\PYG{n}{bachetRanking}\PYG{p}{)}
 \PYG{g+go}{ \PYGZob{}\PYGZsq{}correlation\PYGZsq{}: 0.7441963223547806, \PYGZsq{}determination\PYGZsq{}: 0.408625\PYGZcb{}}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sba} \PYG{o}{=} \PYG{n}{SmartBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{sampleSize}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{Polarised}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sba} \PYG{o}{=} \PYG{n}{BachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{sampleSize}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{Polarised}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sba}\PYG{o}{.}\PYG{n}{bachetRanking}
 \PYG{g+go}{ [\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeRankingCorrelation}\PYG{p}{(}\PYG{n}{sba}\PYG{o}{.}\PYG{n}{bachetRanking}\PYG{p}{)}

@@ -1357,7 +1357,7 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 <span class="c1">#------------</span>
 
-<span class="k">class</span> <span class="nc">_BachetRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">_BachetRanking</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    abstract class for Bachet ranking rules.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1374,7 +1374,7 @@
     
 <div class="viewcode-block" id="PolarisedBachetRanking">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.PolarisedBachetRanking">[docs]</a>
-<span class="k">class</span> <span class="nc">PolarisedBachetRanking</span><span class="p">(</span><span class="n">_BachetRanking</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">PolarisedBachetRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">,</span><span class="n">_BachetRanking</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;    </span>
 <span class="sd">    Instantiates the Bachet Ranking and Ordering from a given bipolar-valued *Digraph* instance *other*.</span>
 
@@ -1754,7 +1754,7 @@
 
 <div class="viewcode-block" id="BachetRanking">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.BachetRanking">[docs]</a>
-<span class="k">class</span> <span class="nc">BachetRanking</span><span class="p">(</span><span class="n">_BachetRanking</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">BachetRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">,</span><span class="n">_BachetRanking</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Condorcet consistency of the polarised Bachet ranking rule guarantees</span>
 <span class="sd">    that all transitive outranking triples are correctly scored independently</span>
@@ -1907,7 +1907,7 @@
 <span class="c1">#------------</span>
 <div class="viewcode-block" id="ValuedBachetRanking">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.ValuedBachetRanking">[docs]</a>
-<span class="k">class</span> <span class="nc">ValuedBachetRanking</span><span class="p">(</span><span class="n">_BachetRanking</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">ValuedBachetRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">,</span><span class="n">_BachetRanking</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;    </span>
 <span class="sd">    Instantiates the Bachet Ranking and Ordering from a given bipolar-valued *Digraph* instance *other*.</span>
 
