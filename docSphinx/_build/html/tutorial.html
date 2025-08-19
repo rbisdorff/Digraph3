@@ -3254,7 +3254,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>Here, as we have seen above, the given digraph’s transitivity degree is only 0.487. To reduce therefore the dependency on the given initial ordering of the <em>actions</em> dictionary, we compute below <em>Bachet</em> ranking results for the permutation and their reversed ordering of 50 best determined intransitive triples (see <a class="reference internal" href="#bachetranking"><span class="std std-numref">Listing 1.35</span></a> Line 2) and keep the one ranking that is best correlated with the given outranking digraph.</p>
 <div class="literal-block-wrapper docutils container" id="bachetranking">
 <div class="code-block-caption"><span class="caption-number">Listing 1.35 </span><span class="caption-text">Computing a <em>Bachet</em> ranking</span><a class="headerlink" href="#bachetranking" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">PolarisedBachetRanking</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">BachetRanking</span>
 <span class="hll"><span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 </span><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
 <span class="linenos"> 4</span><span class="go"> Bachet scores in descending order</span>
@@ -3367,7 +3367,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </div>
 </div>
-<p>With the <em>valued</em> version of the <em>Bachet</em> ranking rule we recover a similar ranking as the one obtained with the previous polarised version, only action ‘<em>a9</em>’ is pushed to the bottom. Again we are again permuting 50 of the moste determined intransitive trples. This way we obtain a better correlated ranking result than with the simple <em>NetFlows</em> rule (+739 vs +0.638). The valued <em>Bachet</em> ranking is like the polarised <em>Bachet</em> rule invariant under the codual transform. However, like the <em>NetFlows</em> rule, the valued version of the <em>Bachet</em> rule is <strong>not</strong> necessarily <strong>Condorcet consistent</strong>.</p>
+<p>With the <em>valued</em> version of the <em>Bachet</em> ranking rule we recover a similar ranking as the one obtained with the previous polarised version, only action ‘<em>a9</em>’ is pushed to the bottom. Again we are again permuting 50 of the moste determined intransitive triples. This way we obtain a better correlated ranking result than with the simple <em>NetFlows</em> rule (+739 vs +0.638). The valued <em>Bachet</em> ranking is like the polarised <em>Bachet</em> rule invariant under the codual transform. However, like the <em>NetFlows</em> rule, the valued version of the <em>Bachet</em> rule is <strong>not</strong> necessarily <strong>Condorcet consistent</strong>.</p>
 <p>To appreciate now the actual ranking performances of the <em>ranking-by-scoring</em> rules seen so far, it is useful to consider <em>Kemeny</em>’s and <em>Slater</em>’s <strong>optimal fitting</strong> ranking rules.</p>
 </section>
 <section id="optimal-kemeny-rankings">
@@ -3687,10 +3687,10 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="linenos">12</span><span class="gp">... </span>            <span class="n">nf</span><span class="o">.</span><span class="n">netFlowsRanking</span><span class="p">,</span>
 <span class="linenos">13</span><span class="gp">... </span>            <span class="n">bav</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">]</span>
 <span class="linenos">14</span><span class="gp">&gt;&gt;&gt; </span><span class="n">rankings</span>
-<span class="hll"><span class="linenos">15</span><span class="go"> [&#39;a5&#39;, &#39;a1&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a8&#39;, &#39;a4&#39;, &#39;a9&#39;, &#39;a3&#39;, &#39;a2&#39;]</span>
-</span><span class="hll"><span class="linenos">16</span><span class="go"> [&#39;a5&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a8&#39;, &#39;a1&#39;, &#39;a2&#39;, &#39;a9&#39;]</span>
-</span><span class="hll"><span class="linenos">17</span><span class="go"> [&#39;a5&#39;, &#39;a7&#39;, &#39;a6&#39;, &#39;a3&#39;, &#39;a1&#39;, &#39;a8&#39;, &#39;a4&#39;, &#39;a9&#39;, &#39;a2&#39;]</span>
-</span><span class="hll"><span class="linenos">18</span><span class="go"> [&#39;a5&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a8&#39;, &#39;a9&#39;, &#39;a2&#39;]</span>
+<span class="hll"><span class="linenos">15</span><span class="go"> [[&#39;a5&#39;, &#39;a1&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a8&#39;, &#39;a4&#39;, &#39;a9&#39;, &#39;a3&#39;, &#39;a2&#39;],</span>
+</span><span class="hll"><span class="linenos">16</span><span class="go">  [&#39;a5&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a9&#39;, &#39;a8&#39;, &#39;a2&#39;],</span>
+</span><span class="hll"><span class="linenos">17</span><span class="go">  [&#39;a5&#39;, &#39;a7&#39;, &#39;a6&#39;, &#39;a3&#39;, &#39;a1&#39;, &#39;a8&#39;, &#39;a4&#39;, &#39;a9&#39;, &#39;a2&#39;],</span>
+</span><span class="hll"><span class="linenos">18</span><span class="go">  [&#39;a5&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a8&#39;, &#39;a2&#39;, &#39;a9&#39;]]</span>
 </span><span class="linenos">19</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="n">RankingsFusionDigraph</span>
 <span class="hll"><span class="linenos">20</span><span class="gp">&gt;&gt;&gt; </span><span class="n">rfdg</span> <span class="o">=</span> <span class="n">RankingsFusionDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">rankings</span><span class="p">)</span>
 </span><span class="linenos">21</span><span class="gp">&gt;&gt;&gt; </span><span class="n">rfdg</span>
@@ -3715,11 +3715,11 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <div class="code-block-caption"><span class="caption-number">Listing 1.49 </span><span class="caption-text">Inspecting a partial ranking</span><a class="headerlink" href="#rankingconsensus1" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">rfdg</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">()</span>
 <span class="linenos">2</span><span class="go"> Ranking by Choosing and Rejecting</span>
-<span class="linenos">3</span><span class="go">  1st ranked [&#39;a5&#39;]</span>
-<span class="hll"><span class="linenos">4</span><span class="go">    2nd ranked [&#39;a1&#39;, &#39;a6&#39;, &#39;a7&#39;]</span>
-</span><span class="hll"><span class="linenos">5</span><span class="go">    2nd last ranked [&#39;a1&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a8&#39;])</span>
-</span><span class="linenos">6</span><span class="go">  1st last ranked [&#39;a2&#39;, &#39;a9&#39;])</span>
-</pre></div>
+<span class="hll"><span class="linenos">3</span><span class="go">  1st ranked [&#39;a5&#39;]</span>
+</span><span class="hll"><span class="linenos">4</span><span class="go">    2nd ranked [&#39;a1&#39;, &#39;a6&#39;, &#39;a7&#39;]</span>
+</span><span class="hll"><span class="linenos">5</span><span class="go">    2nd last ranked [&#39;a3&#39;, &#39;a4&#39;, &#39;a8&#39;]</span>
+</span><span class="hll"><span class="linenos">6</span><span class="go">  1st last ranked [&#39;a2&#39;, &#39;a9&#39;]</span>
+</span></pre></div>
 </div>
 </div>
 <p>The nine alternatives are gathered into four levels. Mind that alternative <em>a1</em> appears actually on the 2nd first-ranked <strong>and</strong> on the 2nd last-ranked level (Lines 4 -5).</p>
@@ -3745,7 +3745,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p><span class="caption-number">Fig. 1.27 </span><span class="caption-text"><em>Copeland</em>, <em>NetFlows</em> and <em>Bachet</em> ranking consensus</span><a class="headerlink" href="#rankingconsensusfigure" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p><a class="reference internal" href="#rankingconsensusfigure"><span class="std std-numref">Fig. 1.27</span></a> makes apparent a ranking consensus with the four levels of agreement where action <em>a5</em> appears consistently first-ranked and actions <em>a2</em> and <em>a9</em>, both, last-ranked. Notice again the large incomparability of action <em>a1</em>, a consequence of its contrasted performance record (see <a class="reference internal" href="#bachetheatmapt"><span class="std std-numref">Fig. 1.24</span></a>).</p>
+<p><a class="reference internal" href="#rankingconsensusfigure"><span class="std std-numref">Fig. 1.27</span></a> makes apparent a ranking consensus with the four levels of agreement where action <em>a5</em> appears consistently first-ranked and actions <em>a2</em> and <em>a9</em>, both, last-ranked. Notice again the incomparabilities of action <em>a1</em>, a consequence of its contrasted performance record (see <a class="reference internal" href="#bachetheatmapt"><span class="std std-numref">Fig. 1.24</span></a>).</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">rfdg</span><span class="p">))</span>
 <span class="linenos">2</span><span class="go"> Correlation indexes:</span>
 <span class="hll"><span class="linenos">3</span><span class="go">  Crisp ordinal correlation  : +0.847</span>

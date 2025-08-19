@@ -3145,7 +3145,7 @@ Here, as we have seen above, the given digraph's transitivity degree is only 0.4
    :emphasize-lines: 2,16,20
    :linenos:
 
-   >>> from linearOrders import PolarisedBachetRanking
+   >>> from linearOrders import BachetRanking
    >>> ba = BachetRanking(g,sampleSize=50)
    >>> ba.showScores()
     Bachet scores in descending order
@@ -3279,7 +3279,7 @@ The polarised *Bachet* ranking rule only considers the crisp relational structur
      Epistemic determination    :  0.230
      Bipolar-valued equivalence : +0.170
 
-With the *valued* version of the *Bachet* ranking rule we recover a similar ranking as the one obtained with the previous polarised version, only action '*a9*' is pushed to the bottom. Again we are again permuting 50 of the moste determined intransitive trples. This way we obtain a better correlated ranking result than with the simple *NetFlows* rule (+739 vs +0.638). The valued *Bachet* ranking is like the polarised *Bachet* rule invariant under the codual transform. However, like the *NetFlows* rule, the valued version of the *Bachet* rule is **not** necessarily **Condorcet consistent**. 
+With the *valued* version of the *Bachet* ranking rule we recover a similar ranking as the one obtained with the previous polarised version, only action '*a9*' is pushed to the bottom. Again we are again permuting 50 of the moste determined intransitive triples. This way we obtain a better correlated ranking result than with the simple *NetFlows* rule (+739 vs +0.638). The valued *Bachet* ranking is like the polarised *Bachet* rule invariant under the codual transform. However, like the *NetFlows* rule, the valued version of the *Bachet* rule is **not** necessarily **Condorcet consistent**. 
 
 To appreciate now the actual ranking performances of the *ranking-by-scoring* rules seen so far, it is useful to consider *Kemeny*'s and *Slater*'s **optimal fitting** ranking rules.
 
@@ -3651,10 +3651,10 @@ To compare for instance the four rankings we have previously obtained with *rank
    ...             nf.netFlowsRanking,
    ...             bav.bachetRanking]
    >>> rankings
-    ['a5', 'a1', 'a6', 'a7', 'a8', 'a4', 'a9', 'a3', 'a2']
-    ['a5', 'a6', 'a7', 'a3', 'a4', 'a8', 'a1', 'a2', 'a9']
-    ['a5', 'a7', 'a6', 'a3', 'a1', 'a8', 'a4', 'a9', 'a2']
-    ['a5', 'a6', 'a7', 'a3', 'a4', 'a1', 'a8', 'a9', 'a2']   
+    [['a5', 'a1', 'a6', 'a7', 'a8', 'a4', 'a9', 'a3', 'a2'],
+     ['a5', 'a6', 'a7', 'a3', 'a4', 'a1', 'a9', 'a8', 'a2'],
+     ['a5', 'a7', 'a6', 'a3', 'a1', 'a8', 'a4', 'a9', 'a2'],
+     ['a5', 'a6', 'a7', 'a3', 'a4', 'a1', 'a8', 'a2', 'a9']]
    >>> from transitiveDigraphs import RankingsFusionDigraph
    >>> rfdg = RankingsFusionDigraph(g,rankings)
    >>> rfdg
@@ -3678,14 +3678,14 @@ The generic :py:class:`~transitiveDigraphs.TransitiveDigraph` class provides the
 .. code-block:: pycon
    :name: RankingConsensus1
    :caption: Inspecting a partial ranking
-   :emphasize-lines: 4-5
+   :emphasize-lines: 3-6
 
    >>> rfdg.showTransitiveDigraph()
     Ranking by Choosing and Rejecting
      1st ranked ['a5']
        2nd ranked ['a1', 'a6', 'a7']
-       2nd last ranked ['a1', 'a3', 'a4', 'a8'])
-     1st last ranked ['a2', 'a9'])
+       2nd last ranked ['a3', 'a4', 'a8']
+     1st last ranked ['a2', 'a9']
 
 The nine alternatives are gathered into four levels. Mind that alternative *a1* appears actually on the 2nd first-ranked **and** on the 2nd last-ranked level (Lines 4 -5). 
 
@@ -3715,7 +3715,7 @@ Following an optimistic drawing perspective, alternative *a1* is placed here on 
 
    *Copeland*, *NetFlows* and *Bachet* ranking consensus 	   
     
-:numref:`rankingConsensusFigure` makes apparent a ranking consensus with the four levels of agreement where action *a5* appears consistently first-ranked and actions *a2* and *a9*, both, last-ranked. Notice again the large incomparability of action *a1*, a consequence of its contrasted performance record (see :numref:`bachetHeatmapT`).
+:numref:`rankingConsensusFigure` makes apparent a ranking consensus with the four levels of agreement where action *a5* appears consistently first-ranked and actions *a2* and *a9*, both, last-ranked. Notice again the incomparabilities of action *a1*, a consequence of its contrasted performance record (see :numref:`bachetHeatmapT`).
 	
 .. code-block:: pycon
    :linenos:
