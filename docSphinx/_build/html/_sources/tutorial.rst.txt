@@ -3129,7 +3129,7 @@ We recover in :numref:`weakCopelandRanking` Lines 6 and 8 above, the ranking wit
 
    A weak Copeland ranking 	   
 
-A similar ranking-by-scoring rule is provided by the :py:class:`linearOrders.PolarisedBachetRanking` class.	
+A similar ranking-by-scoring rule is provided by the :py:class:`linearOrders.BachetRanking` class.	
 
 The polarised *Bachet* ranking
 ``````````````````````````````
@@ -3137,7 +3137,7 @@ The polarised *Bachet* ranking
 
 Now, *Bachet* numbers are formulated in a base 3 positional numeral system and the integer values of the *Bachet* ranking scores may depend therefore on the actual ordering of the outranking digraph's *actions* dictionary. The *Bachet* rule is however, like the *Copeland* rule, **invariant** under the **codual** transform and **Condorcet consistent**, ie. when the outranking digraph models a transitive relation, this relation will be preserved by the polarised *Bachet* ranking scores.
 
-Here, as we have seen above, the given digraph's transitivity degree is only 0.487. To reduce therefore the dependency on the given initial ordering of the *actions* dictionary, we compute below *Bachet* ranking results for 10 random permutations and their reversed orderings of the actions keys (see :numref:`BachetRanking` Line 2) and keep the one ranking that is best correlated with the given outranking digraph. 
+Here, as we have seen above, the given digraph's transitivity degree is only 0.487. To reduce therefore the dependency on the given initial ordering of the *actions* dictionary, we compute below *Bachet* ranking results for the permutation and their reversed ordering of 50 best determined intransitive triples (see :numref:`BachetRanking` Line 2) and keep the one ranking that is best correlated with the given outranking digraph. 
 
 .. code-block:: pycon
    :name: BachetRanking
@@ -3146,29 +3146,29 @@ Here, as we have seen above, the given digraph's transitivity degree is only 0.4
    :linenos:
 
    >>> from linearOrders import PolarisedBachetRanking
-   >>> ba = PolarisedBachetRanking(gcd,randomized=10,seed=28)
+   >>> ba = BachetRanking(g,sampleSize=50)
    >>> ba.showScores()
     Bachet scores in descending order
      action 	 score
-       a5       5096.00
-       a6       3074.00
-       a7       1794.00
-       a3        -71.00
-       a4       -141.00
-       a8       -360.00
-       a1       -490.00
-       a2       -537.00
-       a9      -1135.00
+      a5 	 6540.00
+      a6 	 5674.00
+      a7 	 830.00
+      a3 	 -231.00
+      a4 	 -621.00
+      a1 	 -640.00
+      a9 	 -3893.00
+      a8 	 -4332.00
+      a2 	 -4905.00
    >>> ba.bachetRanking
-    ['a5', 'a6', 'a7', 'a3', 'a4', 'a8', 'a1', 'a2', 'a9']
+    ['a5', 'a6', 'a7', 'a3', 'a4', 'a1', 'a9', 'a8', 'a2']
    >>> corr = g.computeRankingCorrelation(ba.bachetRanking)
    >>> g.showCorrelation(corr)
     Correlation indexes:
-     Crisp ordinal correlation  : +0.715
+     Crisp ordinal correlation  : +0.759
      Epistemic determination    :  0.230
-     Bipolar-valued equivalence : +0.165
+     Bipolar-valued equivalence : +0.175
 
-In :numref:`BachetRanking` Line 20 above, we may observe that the *Bachet* scores lead eventually to a ranking result that is much better correlated  with the given outranking relation than the previous *Copeland* ranking (+0.715 versus +0.463).
+In :numref:`BachetRanking` Line 20 above, we may observe that the *Bachet* scores lead eventually to a ranking result that is much better correlated  with the given outranking relation than the previous *Copeland* ranking (+0.759 versus +0.463).
 
 A heatmap view on the performance tableau illustrates the actual quality of this *Bachet* ranking result.
 
@@ -3186,7 +3186,7 @@ A heatmap view on the performance tableau illustrates the actual quality of this
 
    *Bachet* rule ranked heatmap view on the performance records 	   
 
-In :numref:`bachetHeatmapT` we may notice that action *a5*, with all grades above the third 7-tile (> 42.86%), appears convincingly first-ranked. Similarly, with five grades in the lowest 7-tiled class (< 14.29%), action *a9* appears last-ranked. Most significant in this ranking appear to be the *Benefit* criteria *b09*, *b04* and *b01* with a correlation > +0.40, whereas *Costs* criteria *c02* and *c03* appear somehow in contradiction (-0.11 and -0.28) with the proposed *Bachet* ranking. Action *a7*, with only three weak grades, is not first-ranked because of the fact that on all three *Costs* criteria and on the *Benefit* criterion *b08*, i.e on a majority (33/60) of criteria significance, action *a7* is positively outranked by actions *a6* and *a5*. Notice also the highly contrasted performance record of action *a1* with three grades in the highest 7-tile (> 85.71%) and four grades in the lowest 7-tile (<14.29%). A similar contrasted situation is given for action *a3* with 7 grades in the two top 7-tiles (>71.43%) and four grades in the two lowest 7-tiles (<28.57%). The mean marginal correlation over all 13 criteria is positive (+0.09). The standard deviation of the marginal correlations is however quite high (+0.261) so that the ranking lacks apparently a bit of fairness (-0.171).
+In :numref:`bachetHeatmapT` we may notice that action *a5*, with all grades above the third 7-tile (> 42.86%), appears convincingly first-ranked. Similarly, with six grades in the two lowest 7-tiled classes (< 28.57%), action *a2* appears last-ranked. Most significant in this ranking appear to be the *Benefit* criteria *b09*, *b04* , *b01* and *b08* with a correlation > +0.20, whereas *Costs* criterion *c03* appears somehow in contradiction (-0.11 ) with the proposed *Bachet* ranking. Action *a7*, with only three weak grades, is not first-ranked because of the fact that on all three *Costs* criteria and on the *Benefit* criterion *b08*, i.e on a majority (33/60) of criteria significance, action *a7* is positively outranked by actions *a6* and *a5*. Notice also the highly contrasted performance record of action *a1* with three grades in the highest 7-tile (> 85.71%) and four grades in the lowest 7-tile (<14.29%). A similar contrasted situation is given for action *a3* with 7 grades in the two top 7-tiles (>71.43%) and four grades in the two lowest 7-tiles (<28.57%). The mean marginal correlation over all 13 criteria is slightly positive (+0.10). The standard deviation of the marginal correlations is a bit high (+0.154) so that the ranking may lack a bit of fairness (-0.054).
 
 Let us now consider a similar ranking rule, but working directly on the *bipolar-valued* outranking digraph.
 
@@ -3246,7 +3246,7 @@ Indeed, the extended *Kendall* tau index of +0.638 leads to a bipolar-valued *re
 The valued *Bachet* ranking
 ```````````````````````````
 
-The polarised *Bachet* ranking rule only considers the crisp relational structure of the outranking digraph, ignoring the actual credibility of the individual arcs. The :py:mod:`linearOrders` module provides now also a :py:class:`~linearOrders.ValuedBachetRanking` rule, taking into account, like the *NetFlows* rule, the actual bipolar-valued characteristic determination of the outranking situations. The *Bachet* numbers making up the ranking scores are therefore instantiated from the rows and columns of the normalized relation instead of the polarised relation of the outranking digraph. 
+The polarised *Bachet* ranking rule only considers the crisp relational structure of the outranking digraph, ignoring the actual credibility of the individual arcs. The :py:class:`~linearOrders.BachetRanking` rule provides the *Polarised=False* parameter for taking into account, like the *NetFlows* rule, the actual bipolar-valued characteristic determination of the outranking situations. The *Bachet* numbers making up the ranking scores are therefore instantiated from the rows and columns of the normalized relation instead of the polarised relation of the outranking digraph. 
 
 .. code-block:: pycon
    :name: ValuedBachetRanking
@@ -3254,22 +3254,23 @@ The polarised *Bachet* ranking rule only considers the crisp relational structur
    :emphasize-lines: 2,16,20
    :linenos:
 
-   >>> from linearOrders import ValuedBachetRanking
-   >>> bav = ValuedBachetRanking(gcd,randomized=100,seed=28)
+   >>> from linearOrders import BachetRanking
+   >>> bav = BachetRanking(g,Polarised=False,sampleSize=50)
    >>> bav.showScores()
     Bachet scores in descending order
      action 	 score
-     a5 	 2179.36
-     a6 	 903.71
-     a7 	 599.92
-     a3 	 -375.05
-     a4 	 -513.49
-     a1 	 -741.73
-     a8 	 -1292.76
-     a2 	 -1998.61
-     a9 	 -4364.85
+       a5 	 1704.29
+       a6 	 1524.37
+       a7 	 723.51
+       a3 	 381.09
+       a4 	 115.35
+       a1 	 -57.20
+       a8 	 -89.84
+       a2 	 -308.25
+       a9 	 -2100.44
    >>> bav.bachetRanking
     ['a5', 'a6', 'a7', 'a3', 'a4', 'a1', 'a8', 'a2', 'a9']
+    ['a5', 'a6', 'a7', 'a3', 'a4', 'a1', 'a9', 'a8', 'a2']
    >>> corr = g.computeRankingCorrelation(bav.bachetRanking)
    >>> g.showCorrelation(corr)
     Correlation indexes:
@@ -3277,7 +3278,7 @@ The polarised *Bachet* ranking rule only considers the crisp relational structur
      Epistemic determination    :  0.230
      Bipolar-valued equivalence : +0.170
 
-With the *valued* version of the *Bachet* ranking rule we recover a similar ranking as the one obtained with the previous polarised version, only actions '*a1*' and '*a8*' are swapped. Notice by the way in :numref:`ValuedBachetRanking` Line 2  that we are sampling here 100 random orderings of the *actions* keys. This way we obtain a better correlated ranking result than with the simple *NetFlows* rule (+739 vs +0.638). The valued *Bachet* ranking is like the polarised *Bachet* rule invariant under the codual transform. However, like the *NetFlows* rule, the valued version of the *Bachet* rule is **not** necessarily **Condorcet consistent**. 
+With the *valued* version of the *Bachet* ranking rule we recover a similar ranking as the one obtained with the previous polarised version, only action '*a9*' is pushed to the bottom. Again we are again permuting 50 of the moste determined intransitive trples. This way we obtain a better correlated ranking result than with the simple *NetFlows* rule (+739 vs +0.638). The valued *Bachet* ranking is like the polarised *Bachet* rule invariant under the codual transform. However, like the *NetFlows* rule, the valued version of the *Bachet* rule is **not** necessarily **Condorcet consistent**. 
 
 To appreciate now the actual ranking performances of the *ranking-by-scoring* rules seen so far, it is useful to consider *Kemeny*'s and *Slater*'s **optimal fitting** ranking rules.
 
