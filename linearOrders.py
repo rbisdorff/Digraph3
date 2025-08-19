@@ -1752,7 +1752,7 @@ class BachetRanking(LinearOrder,_BachetRanking):
 
 class BachetOrder(BachetRanking):
     """
-    Dummy for RandomizedBachetRanking class
+    Dummy for BachetRanking class
     """
 
 #------------
