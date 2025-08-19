@@ -1611,7 +1611,14 @@ class PolarisedBachetOrder(PolarisedBachetRanking):
 
 class BachetRanking(_BachetRanking):
     """
-    Smart sampling of the permutohedron of the actions list
+    The Condorcet consistency of the polarised Bachet ranking rule guarantees
+    that all transitive outranking triples are correctly scored independently
+    of any given actions ordering. Only the intransitive outranking triples
+    may give diverging ranking results. It is hence opportune to keep
+    transitive triples unchanged in their given initial positions and only
+    permute the first and the last pair in a sample of intransitive triples
+    and keep always the best qualified PolarisedBachetRanking or
+    ValuedBachetRanking result.
 
     *Parameters*
 
@@ -1632,11 +1639,11 @@ class BachetRanking(_BachetRanking):
     Transitivity degree of digraph <rel_randomperftab>:
       #triples x>y>z: 504, #closed: 343, #open: 161
       (#closed/#triples) =  0.681
-    >>> from linearOrders import SmartBachetRanking
-    >>> sba = SmartBachetRanking(g,Polarised=True,sampleSize=3)
+    >>> from linearOrders import BachetRanking
+    >>> sba = BachetRanking(g,Polarised=True,sampleSize=3)
     >>> sba
     *------- Digraph instance description ------*
-    Instance class      : SmartBachetRanking
+    Instance class      : BachetRanking
     Instance name       : rel_randomperftab_best_ranked
     Digraph Order       : 9
     Digraph Size        : 36

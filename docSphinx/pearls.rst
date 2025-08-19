@@ -3412,7 +3412,7 @@ In Python, the range of integers is luckily only limited by the available CPU me
 Smart sampling of the permutations of the actions list
 ......................................................
 
-The Condorcet consistency of the polarised Bachet ranking rule guarantees that all transitive outranking triples are correctly scored independently of any given actions ordering. Only the intransitive outranking triples may give diverging ranking results. It is hence opportune to keep transitive triples unchanged in their given initial positions and only permute the first and the last pair in a sample of intransitive triples and keep always the best qualified PolarisedBachetRanking or ValuedBachetRanking result. To explore the usefulness of this sampling approach the :py:mod:`linearOrders` module provides the :py:class:`~linearOrders.SmartBachetRanking` class.
+The Condorcet consistency of the polarised Bachet ranking rule guarantees that all transitive outranking triples are correctly scored independently of any given actions ordering. Only the intransitive outranking triples may give diverging ranking results. It is hence opportune to keep transitive triples unchanged in their given initial positions and only permute the first and the last pair in a sample of intransitive triples and keep always the best qualified PolarisedBachetRanking or ValuedBachetRanking result. To explore the usefulness of this sampling approach the :py:mod:`linearOrders` module provides the :py:class:`~linearOrders.BachetRanking` class.
 
 When reconsidering the random outranking digraph *g*, seen in :numref:`optimisingBachet`,  we get the following very convincing ranking result. 
 
@@ -3427,8 +3427,8 @@ When reconsidering the random outranking digraph *g*, seen in :numref:`optimisin
     Transitivity degree of digraph <rel_randomperftab>:
       #triples x>y>z: 504, #closed: 343, #open: 161
       (#closed/#triples) =  0.681
-   >>> from linearOrders import SmartBachetRanking
-   >>> sba = SmartBachetRanking(g,Polarised=True,sampleSize=3)
+   >>> from linearOrders import BachetRanking
+   >>> sba = BachetRanking(g,Polarised=True,sampleSize=3)
    >>> sba.showScores()
     Bachet scores in descending order
      action 	 score
@@ -3445,7 +3445,7 @@ When reconsidering the random outranking digraph *g*, seen in :numref:`optimisin
     ['a2', 'a5', 'a9', 'a6', 'a4', 'a8', 'a3', 'a7', 'a1']
    >>> g.computeRankingCorrelation(sba.bachetRanking)
     {'correlation': 0.7441963223547806, 'determination': 0.408625}
-   >>> sba = SmartBachetRanking(g,sampleSize=None,seed=1,Polarised=True)
+   >>> sba = BachetRanking(g,sampleSize=None,seed=1,Polarised=True)
    >>> sba.bachetRanking
     ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1']
    >>> g.computeRankingCorrelation(sba.bachetRanking)

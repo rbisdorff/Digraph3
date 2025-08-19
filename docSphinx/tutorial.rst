@@ -3270,6 +3270,7 @@ The polarised *Bachet* ranking rule only considers the crisp relational structur
        a9 	 -2100.44
    >>> bav.bachetRanking
     ['a5', 'a6', 'a7', 'a3', 'a4', 'a1', 'a8', 'a2', 'a9']
+   >>> ba.bachetRanking
     ['a5', 'a6', 'a7', 'a3', 'a4', 'a1', 'a9', 'a8', 'a2']
    >>> corr = g.computeRankingCorrelation(bav.bachetRanking)
    >>> g.showCorrelation(corr)
@@ -3403,17 +3404,6 @@ To choose now a specific representative among all the potential rankings with ma
 Both Kemeny rankings show the same *weighted mean marginal correlation* (+0.099, see :numref:`consensualKemeny` Lines 19-22, 42-44) with all thirteen performance criteria. However, the second ranking shows a slightly lower *standard deviation* (+0.132 vs +0.177), resulting in a slightly **fairer** ranking result (-0.033 vs -0.079).
 
 When several rankings with maximal correlation index are given, the :py:class:`~linearOrders.KemenyRanking` class constructor instantiates a *most consensual* one, i.e. a ranking with *highest* mean marginal correlation and, in case of ties, with *lowest* weighted standard deviation. Here we obtain ranking: ['a5', 'a6', 'a7', 'a3', 'a9', 'a4', 'a1', 'a8', 'a2'] (see :numref:`KemenyRanking` Line 4).
-
-A Monte Carlo experiment, comparing the correlation results obtained by the previous ranking-by-scoring rules with the optimal *Kemeny* rule when ranking 100 random Cost-Benefit performance tableaux of order 10, involving 13 performance criteria, confirms a clear advantage of the polarised *Bachet* (randomized=100) rule against the *Copeland* and the *NetFlows* rules (see :numref:`compareRules10A` below). 
-
-.. Figure:: compareRules10A.png
-   :name: compareRules10A
-   :width: 500 px
-   :align: center
-
-   Performance comparison of three ranking-by-scoring rules	   
-
-Mind however that this apparent better performance of the polarised *Bachet* ranking rule is essentially due to computing the *Bachet* scores on 100 permutations and their reverses of the polarised ouranking relation table and keeping the best correlated one. A strategy which meets by the way the ranking strategy of the optimal *Kemeny* rule. This performance advantage compared to the *Copeland* and the *netFlows* rules is hence also limited to the ranking of small outranking digraphs of order < 20 (see :ref:`the efficiency of the Bachet ranking rule <Bachet-Tutorial-label>`).
 
 Let us now present the non-valued cousin of the optimal *Kemeny* rule.  
 
@@ -3653,9 +3643,9 @@ To compare for instance the four rankings we have previously obtained with *rank
    >>> g = BipolarOutrankingDigraph(t,Normalized=True)
    >>> from linearOrders import *
    >>> cop = CopelandOrder(g)
-   >>> ba = PolarisedBachetRanking(g,randomized=10,seed=28)
+   >>> ba = BachetRanking(g,Polarised=True,sampleSize=50)
    >>> nf = NetFlowsRanking(g)
-   >>> bav = ValuedBachetRanking(g,randomized=100,seed=28)
+   >>> bav = BachetRanking(g,Polarised=False,sampleSize=50)
    >>> rankings = [cop.copelandRanking,
    ...             ba.bachetRanking,
    ...             nf.netFlowsRanking,

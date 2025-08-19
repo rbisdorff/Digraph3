@@ -1756,7 +1756,14 @@
 <a class="viewcode-back" href="../techDoc.html#linearOrders.BachetRanking">[docs]</a>
 <span class="k">class</span> <span class="nc">BachetRanking</span><span class="p">(</span><span class="n">_BachetRanking</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Smart sampling of the permutohedron of the actions list</span>
+<span class="sd">    The Condorcet consistency of the polarised Bachet ranking rule guarantees</span>
+<span class="sd">    that all transitive outranking triples are correctly scored independently</span>
+<span class="sd">    of any given actions ordering. Only the intransitive outranking triples</span>
+<span class="sd">    may give diverging ranking results. It is hence opportune to keep</span>
+<span class="sd">    transitive triples unchanged in their given initial positions and only</span>
+<span class="sd">    permute the first and the last pair in a sample of intransitive triples</span>
+<span class="sd">    and keep always the best qualified PolarisedBachetRanking or</span>
+<span class="sd">    ValuedBachetRanking result.</span>
 
 <span class="sd">    *Parameters*</span>
 
@@ -1777,11 +1784,11 @@
 <span class="sd">    Transitivity degree of digraph &lt;rel_randomperftab&gt;:</span>
 <span class="sd">      #triples x&gt;y&gt;z: 504, #closed: 343, #open: 161</span>
 <span class="sd">      (#closed/#triples) =  0.681</span>
-<span class="sd">    &gt;&gt;&gt; from linearOrders import SmartBachetRanking</span>
-<span class="sd">    &gt;&gt;&gt; sba = SmartBachetRanking(g,Polarised=True,sampleSize=3)</span>
+<span class="sd">    &gt;&gt;&gt; from linearOrders import BachetRanking</span>
+<span class="sd">    &gt;&gt;&gt; sba = BachetRanking(g,Polarised=True,sampleSize=3)</span>
 <span class="sd">    &gt;&gt;&gt; sba</span>
 <span class="sd">    *------- Digraph instance description ------*</span>
-<span class="sd">    Instance class      : SmartBachetRanking</span>
+<span class="sd">    Instance class      : BachetRanking</span>
 <span class="sd">    Instance name       : rel_randomperftab_best_ranked</span>
 <span class="sd">    Digraph Order       : 9</span>
 <span class="sd">    Digraph Size        : 36</span>
