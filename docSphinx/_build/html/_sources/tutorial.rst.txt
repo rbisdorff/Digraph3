@@ -3687,9 +3687,7 @@ The generic :py:class:`~transitiveDigraphs.TransitiveDigraph` class provides the
        2nd last ranked ['a3', 'a4', 'a8']
      1st last ranked ['a2', 'a9']
 
-The nine alternatives are gathered into four levels. Mind that alternative *a1* appears actually on the 2nd first-ranked **and** on the 2nd last-ranked level (Lines 4 -5). 
-
-The drawing of partial rankings makes usage of a topological sort algorithm [60]_ (see :numref:`RankingConsensus2` Lines 4-7). 
+The nine alternatives are gathered into four levels. Drawings of partial rankings make usage of a topological sort algorithm [60]_ (see :numref:`RankingConsensus2` Lines 4-7). 
 
 .. code-block:: pycon
    :name: RankingConsensus2
@@ -3705,8 +3703,6 @@ The drawing of partial rankings makes usage of a topological sort algorithm [60]
      3 subgraph { rank = same; a2; a9; }
     dot -Grankdir=TB -Tpng rankingsByScoringFusion.dot \
                         -o rankingsByScoringFusion.png
-
-Following an optimistic drawing perspective, alternative *a1* is placed here on the 2nd first-ranked level (Line 5).
 
 .. Figure:: rankingsByScoringFusion.png
    :name: rankingConsensusFigure
@@ -3729,7 +3725,7 @@ Following an optimistic drawing perspective, alternative *a1* is placed here on 
 
 The epistemic fusion of all four *ranking-by-scoring* results delivers here a convincing transitive partial ordering, highly correlated with the given outranking digraph *g* (+0.847), supported by a criteria significance majority of 56.7% (see Lines 3-5 above) . 
 
-A second strategy for constructing partial rankings makes usage of the *randomized Bachet* ranking rule.
+A second strategy for constructing partial rankings makes usage of the *randomized Bachet* ranking rules.
 
 On partially ranking with the Bachet rules
 ``````````````````````````````````````````
