@@ -3687,7 +3687,7 @@ The generic :py:class:`~transitiveDigraphs.TransitiveDigraph` class provides the
        2nd last ranked ['a1', 'a3', 'a4', 'a8']
      1st last ranked ['a2', 'a9']
 
-The nine alternatives are gathered into four levels. Mind that alternative *a1* is positioned in ranks 2, 5, 6 and 7. In the partial ranking it is therefore at the same time *2nd-first* and *2nd-last* ranked (Lines 4-5). To draw such ambiguous partial rankings, we make usage of an optmistic topological sort algorithm keeping ambiguously ranked alternatives on their first-ranked positions [60]_ (see :numref:`RankingConsensus2` Line 5). 
+The nine alternatives are gathered into four levels. Mind that alternative *a1* is at the same time *2nd-first* and *2nd-last* ranked (Lines 4-5). To draw such ambiguous partial rankings, we make usage of an optimistic topological sort algorithm keeping ambiguously ranked alternatives on their first-ranked positions [60]_ (see :numref:`RankingConsensus2` Line 5). 
 
 .. code-block:: pycon
    :name: RankingConsensus2
@@ -3711,7 +3711,7 @@ The nine alternatives are gathered into four levels. Mind that alternative *a1* 
 
    *Copeland*, *NetFlows* and *Bachet* ranking consensus 	   
     
-:numref:`rankingConsensusFigure` makes apparent a ranking consensus with the four levels of agreement where action *a5* appears consistently first-ranked and actions *a2* and *a9*, both, last-ranked. Notice again the incomparabilities of alternatives *a1* and *a9*, a consequence of their contrasted performance records (see :numref:`bachetHeatmapT`).
+:numref:`rankingConsensusFigure` makes apparent a ranking consensus with the four levels of agreement where action *a5* appears consistently first-ranked and actions *a2* and *a9*, both, last-ranked. Notice the incomparabilities of alternatives *a1* and *a9*, a consequence of their contrasted performance records (see :numref:`bachetHeatmapT`).
 	
 .. code-block:: pycon
    :linenos:
