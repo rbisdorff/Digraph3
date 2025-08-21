@@ -3645,7 +3645,7 @@ To compare for instance the four rankings we have previously obtained with *rank
    >>> cop = CopelandOrder(g)
    >>> ba = BachetRanking(g,Polarised=True,sampleSize=50)
    >>> nf = NetFlowsRanking(g)
-   >>> bav = BachetRanking(g,Polarised=False,sampleSize=50)
+   >>> bav = BachetRanking(g,Polarised=False,sampleSize=10)
    >>> rankings = [cop.copelandRanking,
    ...             ba.bachetRanking,
    ...             nf.netFlowsRanking,
@@ -3654,7 +3654,7 @@ To compare for instance the four rankings we have previously obtained with *rank
     [['a5', 'a1', 'a6', 'a7', 'a8', 'a4', 'a9', 'a3', 'a2'],
      ['a5', 'a6', 'a7', 'a3', 'a4', 'a1', 'a9', 'a8', 'a2'],
      ['a5', 'a7', 'a6', 'a3', 'a1', 'a8', 'a4', 'a9', 'a2'],
-     ['a5', 'a6', 'a7', 'a3', 'a4', 'a1', 'a8', 'a2', 'a9']]
+     ['a5', 'a6', 'a7', 'a3', 'a4', 'a8', 'a1', 'a2', 'a9']] 
    >>> from transitiveDigraphs import RankingsFusionDigraph
    >>> rfdg = RankingsFusionDigraph(g,rankings)
    >>> rfdg
@@ -3684,21 +3684,21 @@ The generic :py:class:`~transitiveDigraphs.TransitiveDigraph` class provides the
     Ranking by Choosing and Rejecting
      1st ranked ['a5']
        2nd ranked ['a1', 'a6', 'a7']
-       2nd last ranked ['a3', 'a4', 'a8']
+       2nd last ranked ['a1', 'a3', 'a4', 'a8']
      1st last ranked ['a2', 'a9']
 
-The nine alternatives are gathered into four levels. Drawings of partial rankings make usage of a topological sort algorithm [60]_ (see :numref:`RankingConsensus2` Lines 4-7). 
+The nine alternatives are gathered into four levels. Mind that alternative *a1* is positioned in ranks 2, 5, 6 and 7. In the partial ranking it is therefore at the same time *2nd-first* and *2nd-last* ranked (Lines 4-5). To draw such ambiguous partial rankings, we make usage of an optmistic topological sort algorithm keeping ambiguously ranked alternatives on their first-ranked positions [60]_ (see :numref:`RankingConsensus2` Line 5). 
 
 .. code-block:: pycon
    :name: RankingConsensus2
    :caption: Inspecting a partial ranking
-   :emphasize-lines: 4-7
+   :emphasize-lines: 5
 
    >>> rfdg.exportGraphViz('rankingsByScoringFusion')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to rankingsByScoringFusion.dot
      0 subgraph { rank = same; a5; }
-     1 subgraph { rank = same; a6; a1; a7; }
+     1 subgraph { rank = same; a1; a6; a7; }
      2 subgraph { rank = same; a3; a8; a4; }
      3 subgraph { rank = same; a2; a9; }
     dot -Grankdir=TB -Tpng rankingsByScoringFusion.dot \
@@ -3711,7 +3711,7 @@ The nine alternatives are gathered into four levels. Drawings of partial ranking
 
    *Copeland*, *NetFlows* and *Bachet* ranking consensus 	   
     
-:numref:`rankingConsensusFigure` makes apparent a ranking consensus with the four levels of agreement where action *a5* appears consistently first-ranked and actions *a2* and *a9*, both, last-ranked. Notice again the incomparabilities of action *a1*, a consequence of its contrasted performance record (see :numref:`bachetHeatmapT`).
+:numref:`rankingConsensusFigure` makes apparent a ranking consensus with the four levels of agreement where action *a5* appears consistently first-ranked and actions *a2* and *a9*, both, last-ranked. Notice again the incomparabilities of alternatives *a1* and *a9*, a consequence of their contrasted performance records (see :numref:`bachetHeatmapT`).
 	
 .. code-block:: pycon
    :linenos:
@@ -3719,11 +3719,11 @@ The nine alternatives are gathered into four levels. Drawings of partial ranking
    
    >>> g.showCorrelation(g.computeOrdinalCorrelation(rfdg))
     Correlation indexes:
-     Crisp ordinal correlation  : +0.847
-     Epistemic determination    :  0.157
-     Bipolar-valued equivalence : +0.133
+     Crisp ordinal correlation  : +0.846
+     Epistemic determination    :  0.156
+     Bipolar-valued equivalence : +0.132
 
-The epistemic fusion of all four *ranking-by-scoring* results delivers here a convincing transitive partial ordering, highly correlated with the given outranking digraph *g* (+0.847), supported by a criteria significance majority of 56.7% (see Lines 3-5 above) . 
+The epistemic fusion of all four *ranking-by-scoring* results delivers here a convincing transitive partial ordering, highly correlated with the given outranking digraph *g* (+0.846), supported by a criteria significance majority of 56.6% (see Lines 3-5 above) . 
 
 A second strategy for constructing partial rankings makes usage of the *randomized Bachet* ranking rules.
 

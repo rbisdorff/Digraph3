@@ -3679,7 +3679,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="linenos"> 4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="linenos"> 5</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="linenos"> 6</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-<span class="linenos"> 7</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="n">nf</span> <span class="o">=</span> <span class="n">NetFlowsRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="linenos"> 9</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bav</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 <span class="linenos">10</span><span class="gp">&gt;&gt;&gt; </span><span class="n">rankings</span> <span class="o">=</span> <span class="p">[</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">,</span>
@@ -3690,7 +3690,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="hll"><span class="linenos">15</span><span class="go"> [[&#39;a5&#39;, &#39;a1&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a8&#39;, &#39;a4&#39;, &#39;a9&#39;, &#39;a3&#39;, &#39;a2&#39;],</span>
 </span><span class="hll"><span class="linenos">16</span><span class="go">  [&#39;a5&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a9&#39;, &#39;a8&#39;, &#39;a2&#39;],</span>
 </span><span class="hll"><span class="linenos">17</span><span class="go">  [&#39;a5&#39;, &#39;a7&#39;, &#39;a6&#39;, &#39;a3&#39;, &#39;a1&#39;, &#39;a8&#39;, &#39;a4&#39;, &#39;a9&#39;, &#39;a2&#39;],</span>
-</span><span class="hll"><span class="linenos">18</span><span class="go">  [&#39;a5&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a8&#39;, &#39;a2&#39;, &#39;a9&#39;]]</span>
+</span><span class="hll"><span class="linenos">18</span><span class="go">  [&#39;a5&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a8&#39;, &#39;a1&#39;, &#39;a2&#39;, &#39;a9&#39;]]</span>
 </span><span class="linenos">19</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="n">RankingsFusionDigraph</span>
 <span class="hll"><span class="linenos">20</span><span class="gp">&gt;&gt;&gt; </span><span class="n">rfdg</span> <span class="o">=</span> <span class="n">RankingsFusionDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">rankings</span><span class="p">)</span>
 </span><span class="linenos">21</span><span class="gp">&gt;&gt;&gt; </span><span class="n">rfdg</span>
@@ -3717,22 +3717,22 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="linenos">2</span><span class="go"> Ranking by Choosing and Rejecting</span>
 <span class="hll"><span class="linenos">3</span><span class="go">  1st ranked [&#39;a5&#39;]</span>
 </span><span class="hll"><span class="linenos">4</span><span class="go">    2nd ranked [&#39;a1&#39;, &#39;a6&#39;, &#39;a7&#39;]</span>
-</span><span class="hll"><span class="linenos">5</span><span class="go">    2nd last ranked [&#39;a3&#39;, &#39;a4&#39;, &#39;a8&#39;]</span>
+</span><span class="hll"><span class="linenos">5</span><span class="go">    2nd last ranked [&#39;a1&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a8&#39;]</span>
 </span><span class="hll"><span class="linenos">6</span><span class="go">  1st last ranked [&#39;a2&#39;, &#39;a9&#39;]</span>
 </span></pre></div>
 </div>
 </div>
-<p>The nine alternatives are gathered into four levels. Drawings of partial rankings make usage of a topological sort algorithm <a class="footnote-reference brackets" href="#id249" id="id64" role="doc-noteref"><span class="fn-bracket">[</span>60<span class="fn-bracket">]</span></a> (see <a class="reference internal" href="#rankingconsensus2"><span class="std std-numref">Listing 1.50</span></a> Lines 4-7).</p>
+<p>The nine alternatives are gathered into four levels. Mind that alternative <em>a1</em> is positioned in ranks 2, 5, 6 and 7. In the partial ranking it is therefore at the same time <em>2nd-first</em> and <em>2nd-last</em> ranked. To draw such ambiguous partial rankings, we make usage of an optmistic topological sort algorithm keeping ambiguously ranked alternatives on their first-ranked positions <a class="footnote-reference brackets" href="#id249" id="id64" role="doc-noteref"><span class="fn-bracket">[</span>60<span class="fn-bracket">]</span></a> (see <a class="reference internal" href="#rankingconsensus2"><span class="std std-numref">Listing 1.50</span></a> Line 5).</p>
 <div class="literal-block-wrapper docutils container" id="rankingconsensus2">
 <div class="code-block-caption"><span class="caption-number">Listing 1.50 </span><span class="caption-text">Inspecting a partial ranking</span><a class="headerlink" href="#rankingconsensus2" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">rfdg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;rankingsByScoringFusion&#39;</span><span class="p">)</span>
 <span class="linenos">2</span><span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="linenos">3</span><span class="go"> Exporting to rankingsByScoringFusion.dot</span>
-<span class="hll"><span class="linenos">4</span><span class="go">  0 subgraph { rank = same; a5; }</span>
-</span><span class="hll"><span class="linenos">5</span><span class="go">  1 subgraph { rank = same; a6; a1; a7; }</span>
-</span><span class="hll"><span class="linenos">6</span><span class="go">  2 subgraph { rank = same; a3; a8; a4; }</span>
-</span><span class="hll"><span class="linenos">7</span><span class="go">  3 subgraph { rank = same; a2; a9; }</span>
-</span><span class="linenos">8</span><span class="go"> dot -Grankdir=TB -Tpng rankingsByScoringFusion.dot \</span>
+<span class="linenos">4</span><span class="go">  0 subgraph { rank = same; a5; }</span>
+<span class="hll"><span class="linenos">5</span><span class="go">  1 subgraph { rank = same; a1; a6; a7; }</span>
+</span><span class="linenos">6</span><span class="go">  2 subgraph { rank = same; a3; a8; a4; }</span>
+<span class="linenos">7</span><span class="go">  3 subgraph { rank = same; a2; a9; }</span>
+<span class="linenos">8</span><span class="go"> dot -Grankdir=TB -Tpng rankingsByScoringFusion.dot \</span>
 <span class="linenos">9</span><span class="go">                     -o rankingsByScoringFusion.png</span>
 </pre></div>
 </div>
@@ -3746,12 +3746,12 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p><a class="reference internal" href="#rankingconsensusfigure"><span class="std std-numref">Fig. 1.27</span></a> makes apparent a ranking consensus with the four levels of agreement where action <em>a5</em> appears consistently first-ranked and actions <em>a2</em> and <em>a9</em>, both, last-ranked. Notice again the incomparabilities of action <em>a1</em>, a consequence of its contrasted performance record (see <a class="reference internal" href="#bachetheatmapt"><span class="std std-numref">Fig. 1.24</span></a>).</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">rfdg</span><span class="p">))</span>
 <span class="linenos">2</span><span class="go"> Correlation indexes:</span>
-<span class="hll"><span class="linenos">3</span><span class="go">  Crisp ordinal correlation  : +0.847</span>
-</span><span class="hll"><span class="linenos">4</span><span class="go">  Epistemic determination    :  0.157</span>
-</span><span class="hll"><span class="linenos">5</span><span class="go">  Bipolar-valued equivalence : +0.133</span>
+<span class="hll"><span class="linenos">3</span><span class="go">  Crisp ordinal correlation  : +0.846</span>
+</span><span class="hll"><span class="linenos">4</span><span class="go">  Epistemic determination    :  0.156</span>
+</span><span class="hll"><span class="linenos">5</span><span class="go">  Bipolar-valued equivalence : +0.132</span>
 </span></pre></div>
 </div>
-<p>The epistemic fusion of all four <em>ranking-by-scoring</em> results delivers here a convincing transitive partial ordering, highly correlated with the given outranking digraph <em>g</em> (+0.847), supported by a criteria significance majority of 56.7% (see Lines 3-5 above) .</p>
+<p>The epistemic fusion of all four <em>ranking-by-scoring</em> results delivers here a convincing transitive partial ordering, highly correlated with the given outranking digraph <em>g</em> (+0.846), supported by a criteria significance majority of 56.6% (see Lines 3-5 above) .</p>
 <p>A second strategy for constructing partial rankings makes usage of the <em>randomized Bachet</em> ranking rules.</p>
 </section>
 <section id="on-partially-ranking-with-the-bachet-rules">
@@ -10856,7 +10856,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Aug 20, 2025.
+      <span class="lastupdated">Last updated on Aug 21, 2025.
       </span></p>
   </div>
 
