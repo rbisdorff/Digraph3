@@ -2897,7 +2897,7 @@ class Digraph(object):
                                 else:
                                     intrans += 1
                                     openTriples.append([x,y,z])
-        if (ntriples) > 0:
+        if ntriples > 0:
             tres = Decimal(str(trans))/Decimal(str(ntriples))
             wtres = Decimal(str(trans+weakTrans))/Decimal(str(ntriples))
         else:
@@ -2953,7 +2953,7 @@ class Digraph(object):
                                     nclosed += 1
                                 else:
                                     triples.append([x,y,z])
-        if (ntriples) > 0:
+        if ntriples > 0:
             res = Decimal(str(nclosed))/Decimal(str(ntriples))
         else:
             res = Decimal('1.0')

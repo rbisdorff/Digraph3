@@ -3730,19 +3730,20 @@ A second strategy for constructing partial rankings makes usage of the *randomiz
 On partially ranking with the Bachet rules
 ``````````````````````````````````````````
 
-As we have noticed before, the randomized *polarised Bachet* ranking rule produces multiple rankings of unequal correlation qualities, respecting all the transitive part of the given outranking digraph. A subset of best correlated *Bachet* rankings represents now a suitable sample for computing a convincing ranking consensus. This second strategy is provided by the :py:class:`transitiveDigraphs.PartialBachetRanking` class. To illustrate its usefulness, let us reconsider the example outranking digraph *g* of :numref:`RankingConsensus`. 
+Due to its *Condorcet consistency* property, the Bachet* ranking rules applied to random orderings of the actions will potentially produce multiple ranking results of unequal correlation quality, yet respecting all the actual transitive part of the given outranking digraph. A subset of best correlated *Bachet* rankings represents hence a suitable sample for computing a convincing ranking consensus (see :ref:`Bachet-Tutorial-label`). This second strategy is provided by the :py:class:`transitiveDigraphs.PartialBachetRanking` class. To illustrate its usefulness, let us reconsider the example outranking digraph *g* of :numref:`RankingConsensus`. 
 
 .. code-block:: pycon
    :caption: Partial polarised Bachet ranking digraph
    :name: partialBachet3
-   :emphasize-lines: 6,20-25
+   :emphasize-lines: 6-7,21-26
 
    >>> from outrankingDigraphs import *
    >>> t = RandomCBPerformanceTableau(numberOfActions=9,
    ...                       numberOfCriteria=13,seed=200)
    >>> g = BipolarOutrankingDigraph(t,Normalized=True)
    >>> from transitiveDigraphs import PartialBachetRanking
-   >>> pbr = PartialBachetRanking(g,randomized=100,seed=1,maxNbrOfRankings=5)
+   >>> pbr = PartialBachetRanking(g,Polarised=True,
+   ...                randomized=100,seed=1,maxNbrOfRankings=5)
    >>> pbr
     *------- Digraph instance description ------*
      Instance class      : PartialBachetRanking
@@ -3763,7 +3764,7 @@ As we have noticed before, the randomized *polarised Bachet* ranking rule produc
      (0.6442, ['a5', 'a6', 'a4', 'a3', 'a1', 'a7', 'a9', 'a8', 'a2']),
      (0.6382, ['a5', 'a6', 'a1', 'a7', 'a3', 'a4', 'a8', 'a2', 'a9'])]
 
-In :numref:`partialBachet3` Line 6, we notice that we sample 100 *Bachet* rankings and keep the five best correlated rankings for constructing the ranking consensus (see Lines 20-25). We may notice that alternative *a5* is always first-ranked and alternative *a6* second-ranked. Whereas alternatives *a2*, *a8* and *a9* make up the tail group. The :py:meth:`~transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph` method confirms this partial ranking (see :numref:`partialBachet4` Lines 2-6 below and :numref:`partialBachetpol`).
+In :numref:`partialBachet3` Line 6-8, we notice that we sample 100 polarised *Bachet* rankings and keep the five best correlated rankings for constructing the ranking consensus. In Lines 21-26, we may notice that alternative *a5* is always first-ranked and alternative *a6* second-ranked. Whereas alternatives *a2*, *a8* and *a9* make up the tail group. The :py:meth:`~transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph` method confirms this partial ranking (see :numref:`partialBachet4` Lines 2-6 below and :numref:`partialBachetpol`).
 
 .. code-block:: pycon
    :caption: Partial polarised Bachet ranking result
