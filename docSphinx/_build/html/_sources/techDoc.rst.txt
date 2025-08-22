@@ -17,17 +17,13 @@ Technical Reference of the Digraph3 modules
 
    :New:
 
-        - Added a new :py:class:`transitiveDigraphs.PartialBachetRanking` class using the new :py:class:`linearOrders.PolarisedBachetRanking` class for generating highly correlated **partial rankings** from a given outranking digraph instance.
-
-        - In order to explore potential run time accelerations with CUDA on GPUs, a new cythonized **cnpBipolarDigraphs** module with a numpy integer array implementation of the bipolar-valued characteristic valuation has been added to the cythonized collection of Digraph3 modules.
-	
-        - Following a Python 3.12 recommendation, all multiprocessing resources have been refactored to use by default, instead of the traditional *fork*, the safer *spawn* threading start method. As a consequence, main program code of multiprocessing Digraph3 Python scripts must now start with a *__name__=='__main__'* test in order to avoid its recursive execution in each started thread (see the :py:mod:`multiprocessing` module).
+        - A :py:class:`~arithmetics.BachetNumber` class for computing with bipolar-valued base 3 encoded Bachet numbers
+	  
+        - A :py:class:`~transitiveDigraphs.PartialBachetRanking` class for generating highly correlated **partial rankings** from a given outranking digraph instance.	
 
         - A :py:mod:`pairings` module for solving **fair intergroup** and **intragroup pairing** problems
 
         - A :py:mod:`dynamicProgramming` module for solving **dynamic programming** problems
-
-        - The :py:meth:`digraphsTools.computeSequenceAlignment` method implements the *Needlemann* % *Wunsch* dynamic programming algorithm for computing DNA *sequence alignments*
 
 **Preface**
 
