@@ -145,6 +145,8 @@ class BachetNumber(object):
     >>> print('%s (%d) + %s (%d) = %s (%d)'
     ...       % ( n4, n4.value(), n5, n5.value(),n4 + n5, (n4+n5).value() ))
      '0+1+1' (4) + '-1-1-1' (-13) = '-100' (-9)
+    >>> n6 = n5.permute(1,2)
+    >>> n6
 
     """
     def __repr__(self):
@@ -346,7 +348,8 @@ class BachetNumber(object):
 
     def reverse(self):
         """
-        Reverses the Bachet code
+        Reverses the Bachet vector
+        Return a modified Bachet number
         """
         from copy import deepcopy
         rev = deepcopy(self)
@@ -355,6 +358,23 @@ class BachetNumber(object):
         for i in range(nv):
             result[i] = self.vector[nv-i-1]
         rev.vector = result
+        return rev
+
+    def permute(self,i,j):
+        """
+        Swapps positions i an j in the self Bachet vector.
+        Return a modified Bachet number.
+        """
+        if i > len(self) or i < 1:
+            print('Error: index i ot fitting the vector length !!!')
+            return
+        elif j > len(self) or j < 1:
+            print('Error: index j ot fitting the vector length !!!')
+            return
+        from copy import deepcopy
+        rev = deepcopy(self)
+        rev.vector[j-1] = self.vector[i-1]
+        rev.vector[i-1] = self.vector[j-1]        
         return rev
 
 #------------- end of BachetNumber class ------------------
@@ -1167,8 +1187,9 @@ if __name__ == '__main__':
     n5 = n1.reverse()
     n6 = -n1
     print('%s (%d) + %s (%d) = %s (%d)' % ( n5, n5.value(), n6, n6.value(),n5 + n6, (n5+n6).value() ))
-
-
+    n7 = n6.permute(1,3)
+    print(n7,n7.value())
+    
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')

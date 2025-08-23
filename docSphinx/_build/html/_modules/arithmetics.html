@@ -230,6 +230,8 @@
 <span class="sd">    &gt;&gt;&gt; print(&#39;%s (%d) + %s (%d) = %s (%d)&#39;</span>
 <span class="sd">    ...       % ( n4, n4.value(), n5, n5.value(),n4 + n5, (n4+n5).value() ))</span>
 <span class="sd">     &#39;0+1+1&#39; (4) + &#39;-1-1-1&#39; (-13) = &#39;-100&#39; (-9)</span>
+<span class="sd">    &gt;&gt;&gt; n6 = n5.permute(1,2)</span>
+<span class="sd">    &gt;&gt;&gt; n6</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -436,7 +438,8 @@
 <a class="viewcode-back" href="../techDoc.html#arithmetics.BachetNumber.reverse">[docs]</a>
     <span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Reverses the Bachet code</span>
+<span class="sd">        Reverses the Bachet vector</span>
+<span class="sd">        Return a modified Bachet number</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
         <span class="n">rev</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -445,6 +448,26 @@
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nv</span><span class="p">):</span>
             <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">nv</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">rev</span><span class="o">.</span><span class="n">vector</span> <span class="o">=</span> <span class="n">result</span>
+        <span class="k">return</span> <span class="n">rev</span></div>
+
+
+<div class="viewcode-block" id="BachetNumber.permute">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.BachetNumber.permute">[docs]</a>
+    <span class="k">def</span> <span class="nf">permute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Swapps positions i an j in the self Bachet vector.</span>
+<span class="sd">        Return a modified Bachet number.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="ow">or</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: index i ot fitting the vector length !!!&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="k">elif</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="ow">or</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: index j ot fitting the vector length !!!&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="n">rev</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">rev</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">rev</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>        
         <span class="k">return</span> <span class="n">rev</span></div>
 </div>
 
@@ -1328,8 +1351,9 @@
     <span class="n">n5</span> <span class="o">=</span> <span class="n">n1</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
     <span class="n">n6</span> <span class="o">=</span> <span class="o">-</span><span class="n">n1</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) + </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) = </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">n5</span><span class="p">,</span> <span class="n">n5</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">n6</span><span class="p">,</span> <span class="n">n6</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="n">n5</span> <span class="o">+</span> <span class="n">n6</span><span class="p">,</span> <span class="p">(</span><span class="n">n5</span><span class="o">+</span><span class="n">n6</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="p">))</span>
-
-
+    <span class="n">n7</span> <span class="o">=</span> <span class="n">n6</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">n7</span><span class="p">,</span><span class="n">n7</span><span class="o">.</span><span class="n">value</span><span class="p">())</span>
+    
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enjoy !&#39;</span><span class="p">)</span>
@@ -1344,7 +1368,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Aug 21, 2025.
+      <span class="lastupdated">Last updated on Aug 23, 2025.
       </span></p>
   </div>
 
