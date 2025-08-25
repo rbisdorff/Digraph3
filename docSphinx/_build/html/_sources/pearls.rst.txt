@@ -2934,21 +2934,21 @@ The first 3 principal axes support together about 70% of the total inertia. Most
 Exploring the *better rated*  and the *as well as rated* opinions
 .................................................................
 
-In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asymmetric and symmetric parts of the '*at least as well rated as*' opinions (see the tutorial on :ref:`Manipulating Digraph objects <Digraphs-Tutorial-label>`).
+In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asymmetrical and symmetrical parts of the '*at least as well rated as*' opinions (see the tutorial on :ref:`Manipulating Digraph objects <Digraphs-Tutorial-label>`).
 
-Let us first have a look at the pairwise asymmetric part, namely the '*better rated than*' and '*less well rated than*' opinions of the movie critics. 
+Let us first have a look at the pairwise asymmetrical part, namely the '*better rated than*' and '*less well rated than*' opinions of the movie critics. 
 
    >>> from digraphs import AsymmetricPartialDigraph
    >>> ag = AsymmetricPartialDigraph(g)
    >>> ag.showHTMLRelationTable(actionsList=g.computeNetFlowsRanking(),ndigits=0) 
 
 .. figure:: asymmetricPart.png
-   :alt: asymmetric part of graffiti07 digraph
+   :alt: asymmetrical part of graffiti07 digraph
    :width: 600 px
    :align: center
    :name: asymmetricPart
 
-   Asymmetric part of graffiti07 digraph
+   Asymmetrical part of graffiti07 digraph
 
 We notice here that the *NetFlows* ranking rule inverts in fact just three '*less well ranked than*' opinions and four '*better ranked than*' ones. A similar look at the symmetric part, the pairwise '*as well rated as*' opinions, suggests a preordered preference structure in several *equivalently rated* classes.
 
@@ -2962,7 +2962,7 @@ We notice here that the *NetFlows* ranking rule inverts in fact just three '*les
    :align: center
    :name: symmetricPart
 
-   Symmetric part of graffiti07 digraph
+   Symmetrical part of graffiti07 digraph
 
 Such a preordering of the movies may, for instance, be computed with the :py:func:`~digraphs.Digraph.computeRankingByChoosing` method, where we iteratively extract *dominant kernels* -remaining first choices- and *absorbent kernels* -remaining last choices- (see the tutorial on :ref:`Computing Digraph Kernels <Kernel-Tutorial-label>`). We operate therefore on the asymmetrical '*better rated than*', i.e. the *codual* ([3]_) of the '*at least as well rated as*' opinions (see :numref:`rankGraf` Line 2).
 
@@ -3470,7 +3470,7 @@ The correlation figures show that both the smart polarised and the valued Bachet
 The Bachet rule: a new method for partially ranking
 ...................................................
 
-As we have noticed before, the randomized versions of the :py:class:`~linearOrders.PolarisedBachetRanking` and the :py:class:`~linearOrders.ValuedBachetRanking` constructors potentially produce multiple ranking results of unequal correlation quality, yet respecting all more or less the transitive part of the given outranking digraph. If we collect now a small subset of the best correlated rankings, we can use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class for constructing, by epistemic disjunctive fusion of these selected rankings, a partial *Bachet* ranking result --a transitive asymmetric digraph with indeterminate reflexive relations-- showing actually the potential transitive part of the given polarised outranking digraph. 
+As we have noticed before, the randomized versions of the :py:class:`~linearOrders.PolarisedBachetRanking` and the :py:class:`~linearOrders.ValuedBachetRanking` constructors potentially produce multiple ranking results of unequal correlation quality, yet respecting all more or less the transitive part of the given outranking digraph. If we collect now a small subset of the best correlated rankings, we can use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class for constructing, by epistemic disjunctive fusion of these selected rankings, a partial *Bachet* ranking result --a transitive asymmetrical digraph with indeterminate reflexive relations-- showing actually the potential transitive part of the given polarised outranking digraph. 
 
 To explore this remarquable opportunity, a new :py:class:`~transitiveDigraphs.PartialBachetRanking` class is provided by the :py:mod:`transitiveDigraphs` module. To illustrate its usefulness, let us reconsider the example outranking digraph *g* of :numref:`optimisingBachet`. 
 
@@ -3584,7 +3584,7 @@ In order to provide information about the underlying :py:class:`~transitiveDigra
 
 In :numref:`bachetBCR1` we see confirmed that alternative *a2* shows indeed the very best performance profile and alternatives *a1*, *a3* and *a7* the weakest performance profiles. 
 
-As the *Bachet* choice recommendation is based on a partial transitive asymmetric digraph, actually highly correlated with the given outranking digraph *g* (+0.717, see Line 9 above), a unique initial and a unique terminal prekernel always exist (see :numref:`BachetBCR0` Lines 7 and 14). Both these properties confer the *Bachet choice recommendation algorithm* a computational advantage over the *Rubis* first choice recommendation algorithm based on initial and terminal prekernels directly extracted from the given strict outranking digraph where we, first, must arbitrarily break, the case given, all chordless outranking circuits (see [BIS-2008p]_).
+As the *Bachet* choice recommendation is based on a partial transitive asymmetrical digraph, actually highly correlated with the given outranking digraph *g* (+0.717, see Line 9 above), a unique initial and a unique terminal prekernel always exist (see :numref:`BachetBCR0` Lines 7 and 14). Both these properties confer the *Bachet choice recommendation algorithm* a computational advantage over the *Rubis* first choice recommendation algorithm based on initial and terminal prekernels directly extracted from the given strict outranking digraph where we, first, must arbitrarily break, the case given, all chordless outranking circuits (see [BIS-2008p]_).
 
 Computing initial and terminal *prekernels* in digraphs is the subject of the next Section.
 
@@ -3973,7 +3973,7 @@ It immediately follows that weak chordless circuits are part of the class of dig
 Kernels in lateralized digraphs
 ...............................
 
-Humans do live in an apparent physical space of plain transitive **lateral orientation**, fully empowered in finite geometrical 3D models with **linear orders**, where first, resp. last ranked, nodes deliver unique initial, resp. terminal, kernels. Similarly, in finite **preorders**, the first, resp. last, equivalence classes deliver the unique initial, resp. unique terminal, kernels. More generally, in finite **partial orders**, i.e. asymmetric and transitive digraphs, topological sort algorithms will easily reveal on the first, resp. last, level all unique initial, resp. terminal, kernels.
+Humans do live in an apparent physical space of plain transitive **lateral orientation**, fully empowered in finite geometrical 3D models with **linear orders**, where first, resp. last ranked, nodes deliver unique initial, resp. terminal, kernels. Similarly, in finite **preorders**, the first, resp. last, equivalence classes deliver the unique initial, resp. unique terminal, kernels. More generally, in finite **partial orders**, i.e. asymmetrical and transitive digraphs, topological sort algorithms will easily reveal on the first, resp. last, level all unique initial, resp. terminal, kernels.
 
 In genuine random digraphs, however, we may need to check for each of its MISs, whether *one*, *both*, or *none* of the lateralized external stability conditions may be satisfied. Consider, for instance, the following random digraph instance of order 7 and generated with an arc probability of 30%. 
 
@@ -4661,7 +4661,7 @@ Bipolar-valued outranking digraphs verify two necessary properties [BIS-2013p]_:
 	     
     2) The construction of the outranking relation verifies the coduality principle. For all pairs (*x*, *y*) of decision actions, :math:`r(x \not\succsim y) \;=\; r(y \succnsim x)`.
 
-Now, the codual of complete digraphs correspond to the class of asymmetric digraphs i.e. *partial tournaments*. If, on the one limit, all outranking relations are symmetric, the partial tournament will be empty. On the other hand, if the outranking relation models a linear ranking, the tournament will be complete and transitive.
+Now, the codual of complete digraphs correspond to the class of asymmetrical digraphs i.e. *partial tournaments*. If, on the one limit, all outranking relations are symmetric, the partial tournament will be empty. On the other hand, if the outranking relation models a linear ranking, the tournament will be complete and transitive.
 
 Let us consider for instance such a partial tournament [6]_.
 

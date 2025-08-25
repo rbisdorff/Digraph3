@@ -597,10 +597,10 @@ We may even get a better insight into the :py:class:`~digraphs.Digraph` object *
 
 Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetrical links are drawn in black with an arrowhead showing the direction of the link. Notice the undetermined relational situation (:math:`r(6\,S\,2) = 0.00`) observed between nodes '6' and '2'. The corresponding link is marked in gray with an open arrowhead in the drawing (see :numref:`tutorialValDigraph`). 
 
-Asymmetric and symmetric parts
-``````````````````````````````
+Asymmetrical and symmetrical parts
+``````````````````````````````````
 
-We may now extract both the *symmetric* as well as the *asymmetrical* part of digraph *dg* with the help of two corresponding constructors (see :numref:`asymSymParts`).
+We may now extract both the *symmetrical* as well as the *asymmetrical* part of digraph *dg* with the help of two corresponding constructors (see :numref:`asymSymParts`).
 
 .. code-block:: pycon
    :linenos:
@@ -618,11 +618,11 @@ We may now extract both the *symmetric* as well as the *asymmetrical* part of di
    :width: 600 px
    :align: center
 
-   Asymmetric and symmetric part of the tutorial random valuation digraph
+   Asymmetrical and symmetrical part of the tutorial random valuation digraph
    
 .. note::
 
-    The constructor of the partial objects *asymDg* and *symDg* puts to the indeterminate characteristic value all *not-asymmetrical*, respectively *not-symmetric* links between nodes (see :numref:`asymSymParts`). 
+    The constructor of the partial objects *asymDg* and *symDg* puts to the indeterminate characteristic value all *not-asymmetrical*, respectively *not-symmetrical* links between nodes (see :numref:`asymSymParts`). 
 
 Here below, for illustration the source code of the *relation* constructor of the :py:class:`~digraphs.AsymmetricPartialDigraph` class.
 
@@ -1239,11 +1239,11 @@ Bipolar-valued outranking digraphs are **strongly complete**, i.e. *complete* fr
 
     :math:`r(x \succsim y) + r(y \succsim x) \geq 0.0`.
 
-They furthermore verify the **coduality** principle: the **converse** (the *inverse* ~) of the **dual** [14]_ (the *negation* - ) correspond to their asymetric **strict outranking** part:
+They furthermore verify the **coduality** principle: the **converse** (the *inverse* ~) of the **dual** [14]_ (the *negation* - ) correspond to their asymmetrical **strict outranking** part:
 
     :math:`\sim\big(-r(y \succsim x)\big) \;=\; \sim\big(r(y \not \succsim x)\big) \;=\; r(x \succnsim y)`.
 
-From both properties follows straightway that codual --*strict*-- outranking digraphs are **strongly asymmetric**:
+From both properties follows straightway that codual --*strict*-- outranking digraphs are **strongly asymmetrical**:
 
     :math:`r(x \succnsim y) + r(y \succnsim x) \leq 0.0` 
 
@@ -1824,7 +1824,7 @@ The :py:class:`digraphs.Digraph` class now readily provides the :py:meth:`~digra
 			    'seed', 'maxNbrOfRankings', 'Polarised',
 			    'partialBachetCorrelation', 'rankingByChoosing']
 
-Due to the **Condorcet consistency** of the polarised *Bachet* ranking rule, the partial ranking digraph *g.pbr* represents here faithfully an actual transitive and asymmetric part of the given outranking digraph *g* (see Line 13 and :ref:`Bachet-Tutorial-label`).  
+Due to the **Condorcet consistency** of the polarised *Bachet* ranking rule, the partial ranking digraph *g.pbr* represents here faithfully an actual transitive and asymmetrical part of the given outranking digraph *g* (see Line 13 and :ref:`Bachet-Tutorial-label`).  
 
 Our first choice recommendations eventually  appear essentially depending on the very importance the CEO is attaching to each one of his three decision objectives. In the setting here, where he considers that *maximizing the future turnover* is the most important objective (81/145 = 0.56) followed by *minimizing the Costs* (45/145 = 0.31) and, less important, *maximizing the working conditions* (19/145 = 0.13), compromise locations *G* as well as *D* become the potential first choices candidates. However, if minimizing the *Costs* does not play much a role, it would perhaps be better to recommend the most advantageous location *A*; or if, on the contrary, the *Costs* objective does matter a lot, recommending the cheapest alternative *C* could definitely become the more convincing first choice recommendation. 
 
@@ -1857,7 +1857,7 @@ His commentary was the following: The only initial kernel of this digraph is the
 
 It became thereafter obvious for us all that both the lack of a specific performance tableau as well as the lack of a precisely defined algorithm for computing valid outranking situations do not allow to judge if a given digraph does indeed model a potential outranking relation. In our present bipolar-valued epistemic approach, a valid outranking digraph instance, following from a given performance tableau and the disjunctive epistemic fusion construction of the outranking relation, will necessarily verify the :ref:`strong completeness condition and the coduality principle <Sufficiency-Tutorial-label>`. As a consequence, incomparability situations are now modelled by epistemic indeterminateness not by the actual absence of a reciprocal outranking relation.
 
-The digraph put forward by *Bouyssou* in the October 2005 discussion is not strongly complete --node *a* is not outranking node *d* and vice versa-- and does hence not represent, in our present sense, a valid outranking digraph instance. Yet, it may be a partial tournament and as such it could be a strict outranking digraph, i.e. the asymmetric part --the codual-- of a valid outranking digraph. In this case, nodes *a* and *d* --the kernel of the strict outranking digraph-- would actually for sure outrank each other and, hence, represent both indifferently the natural best choice candidates. However, in this not strict outranking digraph, node *a* becomes also the unique *Condorcet* winner --outranking for sure all other nodes-- and gives hence the evident unique best choice recommendation.
+The digraph put forward by *Bouyssou* in the October 2005 discussion is not strongly complete --node *a* is not outranking node *d* and vice versa-- and does hence not represent, in our present sense, a valid outranking digraph instance. Yet, it may be a partial tournament and as such it could be a strict outranking digraph, i.e. the asymmetrical part --the codual-- of a valid outranking digraph. In this case, nodes *a* and *d* --the kernel of the strict outranking digraph-- would actually for sure outrank each other and, hence, represent both indifferently the natural best choice candidates. However, in this not strict outranking digraph, node *a* becomes also the unique *Condorcet* winner --outranking for sure all other nodes-- and gives hence the evident unique best choice recommendation.
 
 Only after 2013, when the strong completeness and the coduality properties of the outranking digraph were discovered, became it obvious that the initial prekernels of the strict outranking digraph, coupled with the solution of the corresponding kernel equation system, could in fact deliver convincing best choice recommendations (see [BIS-2013]_). Yet, *D. Bouyssou* and the critical audience of the 2005 seminar would be satisfied to see their doubts somehow confirmed by the solution of the office location choice problem shown previously. Indeed, the initial prekernel {*A*, *C*, *D*} of the corresponding strict outranking digraph does not retain location *G* --as it is actually strictly outranked by location *C* -- and proposes solely location *D* as credible best choice candidate. This latter location appears however certainly outranked by location *G*. Keeping location *G* in an indeterminate situation with being or not being a potential best choice candidate in the solution of the corresponding kernel equation system shows that the resulting bipolar-valued choice vector may be an essential complement of information. Showing solely an initial prekernel appears not necessarily sufficient for determining the actual best choice alternative(s). Similarly, questioning the confidence of outranking situations showing, the case given, weak positive credibilities, may result in a more convincing first-choice recommendation.
 
@@ -3279,7 +3279,7 @@ The polarised *Bachet* ranking rule only considers the crisp relational structur
      Epistemic determination    :  0.230
      Bipolar-valued equivalence : +0.170
 
-With the *valued* version of the *Bachet* ranking rule we recover a similar ranking as the one obtained with the previous polarised version, only action '*a9*' is pushed to the bottom. Again we are again permuting 50 of the moste determined intransitive triples. This way we obtain a better correlated ranking result than with the simple *NetFlows* rule (+739 vs +0.638). The valued *Bachet* ranking is like the polarised *Bachet* rule invariant under the codual transform. However, like the *NetFlows* rule, the valued version of the *Bachet* rule is **not** necessarily **Condorcet consistent**. 
+With the *valued* version of the *Bachet* ranking rule we recover a similar ranking as the one obtained with the previous polarised version, only action '*a9*' is pushed to the bottom. Again we are permuting 50 of the moste determined intransitive triples. This way we obtain a better correlated ranking result than with the simple *NetFlows* rule (+739 vs +0.638). The valued *Bachet* ranking is like the polarised *Bachet* rule invariant under the codual transform. However, like the *NetFlows* rule, the valued version of the *Bachet* rule is **not** necessarily **Condorcet consistent**. 
 
 To appreciate now the actual ranking performances of the *ranking-by-scoring* rules seen so far, it is useful to consider *Kemeny*'s and *Slater*'s **optimal fitting** ranking rules.
 
@@ -3625,7 +3625,7 @@ On partially ranking outranking digraphs
 	:depth: 2
 	:local:
 
-In this section, instead of computing linear rankings or orders, we illustrate two ranking strategies for computing *partial rankings* --partially determined transitive asymetrical relations-- from a given outranking digraph.
+In this section, instead of computing linear rankings or orders, we illustrate two ranking strategies for computing *partial rankings* --partially determined transitive asymmetrical relations-- from a given outranking digraph.
 
 Computing a ranking consensus from several linear rankings
 ``````````````````````````````````````````````````````````
@@ -3671,7 +3671,7 @@ To compare for instance the four rankings we have previously obtained with *rank
    >>> rfdg.isTransitive()
     True
 
-By :ref:`epistemic disjunctive fusion <Epistemic-Fusion-label>` of the four *rankings*, the :py:class:`~transitiveDigraphs.RankingsFusionDigraph` constructor computes a transitive asymmetric partial digraph (see :numref:`RankingConsensus`  Lines 32-33). Notice in Lines 15-18 the unstable ranks of alternative *a1* (rank 2,5,6 and 7) which induce contradictory ranking results leadind to many incomparability situations. Ranking and ordering of partial relations do not give now the same result when such incomparabilities do appear.
+By :ref:`epistemic disjunctive fusion <Epistemic-Fusion-label>` of the four *rankings*, the :py:class:`~transitiveDigraphs.RankingsFusionDigraph` constructor computes a transitive asymmetrical partial digraph (see :numref:`RankingConsensus`  Lines 32-33). Notice in Lines 15-18 the unstable ranks of alternative *a1* (rank 2,5,6 and 7) which induce contradictory ranking results leadind to many incomparability situations. Ranking and ordering of partial relations do not give now the same result when such incomparabilities do appear.
 
 The generic :py:class:`~transitiveDigraphs.TransitiveDigraph` class provides therefore a :py:meth:`~transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph` method which recursively extracts conjointly first and last choices --:ref:`initial and terminal kernels <Bipolar-Valued-Kernels-Tutorial-label>`-- as shown in :numref:`RankingConsensus1` Lines 2-6 below. 
 
@@ -3816,7 +3816,7 @@ The :py:class:`~transitiveDigraphs.PartialBachetRanking` now provides a "**Polar
      (0.6503, ['a5', 'a6', 'a7', 'a8', 'a3', 'a9', 'a2', 'a4', 'a1']),
      (0.6462, ['a5', 'a6', 'a1', 'a7', 'a8', 'a2', 'a3', 'a4', 'a9'])]
 
-Again we may notive that alternatives *a5* and *a6* are first-ranked and alternatives *a2*, *a4* and *a9* are last-ranked. It is worthwhile noticing in Lines 4-8 above that alternative *a1* appears in rank 3,4,5 and 9.
+Again we may notice that alternatives *a5* and *a6* are first-ranked and alternatives *a2*, *a4* and *a9* are last-ranked. It is worthwhile noticing in Lines 4-8 above that alternative *a1* appears in rank 3,4,5 and 9.
 
 In :numref:`weakBachet6` Lines 3-6 we observe now a partial ranking taking into account not only the polarised relational structure, but also the **epistemic determination** of the given outranking digraph *g*. And the ordinal correlation with *g*, supported by a similar criteria significance of 57%, gets even higher: +0.888 vs +0.806 (see Lines 9-11).
 
@@ -5416,7 +5416,7 @@ If we resolve its unstable pairs --[*a3*, *b1*] --> [*a3*, *b4*] , and [*a4*, *b
 
 **Unfairness of the Gale-Shapley solution**
 
-The *Gale-Shapley* algorithm is actually based on an asymmetric handling of the two groups of persons by distinguishing a matches proposing group. In our implementation here [44]_, it is group *A*. Now, the proposing group gets by the *Gale-Shapley* algorithm the best possible average group correlation, but of costs of the non-proposing group who gets the worst possible average group correlation in any stable matching [45]_. We may check as follows this unfair result on the previous *Gale-Shapley* solution.
+The *Gale-Shapley* algorithm is actually based on an asymmetrical handling of the two groups of persons by distinguishing a matches proposing group. In our implementation here [44]_, it is group *A*. Now, the proposing group gets by the *Gale-Shapley* algorithm the best possible average group correlation, but of costs of the non-proposing group who gets the worst possible average group correlation in any stable matching [45]_. We may check as follows this unfair result on the previous *Gale-Shapley* solution.
 
 .. code-block:: pycon
    :linenos:
@@ -6793,11 +6793,11 @@ We may furthermore notice in :numref:`aliceRelationMap`, that the four first-ran
 
 Notice in Line 14 above that the most credible best choice among the four first-ranked study programs eventually becomes the *Graduate Interpreter* study program at the *Technical High School* in *Köln* supported by a :math:`(0.75 + 1)/2.0 \,=\,87.5\%` (18/24) majority of global criteria significance [24]_.
 
-In the relation map, shown in :numref:`aliceRelationMap` above, we finally see in the left corner that the *asymetric* part of the outranking relation, i.e. the corresponding *strict* outranking relation, is actually *transitive* (see Lines 3-6 in :numref:`transitivePart`). We can hence make usage of the :py:meth:`~transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph` method from the :py:class:`transitiveDigraphs.TransitiveDigraph` to illustrate our previous first choice recommendation.
+In the relation map, shown in :numref:`aliceRelationMap` above, we finally see in the left corner that the *asymmetrical* part of the outranking relation, i.e. the corresponding *strict* outranking relation, is actually *transitive* (see Lines 3-6 in :numref:`transitivePart`). We can hence make usage of the :py:meth:`~transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph` method from the :py:class:`transitiveDigraphs.TransitiveDigraph` to illustrate our previous first choice recommendation.
 
 .. code-block:: pycon
    :name: transitivePart
-   :caption: The asymetrical outranking is transitive 
+   :caption: The asymmetrical outranking is transitive 
    :linenos:
    :emphasize-lines: 1,6,10-13
 
@@ -11142,7 +11142,7 @@ Appendices
 
 .. [8] See https://hpc.uni.lu/systems/gaia/
 
-.. [13] The class of *self-codual* bipolar-valued digraphs consists of all *weakly asymmetric* digraphs, i.e. digraphs containing only *asymmetrical* and/or *indeterminate* links. Limit cases consists of, on the one side, *full tournaments* with *indeterminate reflexive links*, and, on the other side, *fully indeterminate* digraphs. In this class, the *converse* (inverse ~ ) operator is indeed identical to the *dual* (negation - ) one.
+.. [13] The class of *self-codual* bipolar-valued digraphs consists of all *weakly asymmetrical* digraphs, i.e. digraphs containing only *asymmetrical* and/or *indeterminate* links. Limit cases consists of, on the one side, *full tournaments* with *indeterminate reflexive links*, and, on the other side, *fully indeterminate* digraphs. In this class, the *converse* (inverse ~ ) operator is indeed identical to the *dual* (negation - ) one.
 
 .. [14] Not to be confused with the *dual graph* of a plane graph *g* that has a vertex for each face of *g*. Here we mean the *less than* (strict converse) relation corresponding to a *greater or equal* relation, or the *less than or equal* relation corresponding to a (strict) *better than* relation.
 
