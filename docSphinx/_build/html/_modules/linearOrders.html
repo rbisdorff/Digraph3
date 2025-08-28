@@ -1359,7 +1359,7 @@
 
 <span class="k">class</span> <span class="nc">_BachetRanking</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    abstract class for Bachet ranking rules.</span>
+<span class="sd">    abstract class for generic BachetRanking class methods.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">showScores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;descending&#39;</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bachet scores in </span><span class="si">%s</span><span class="s1"> order&#39;</span> <span class="o">%</span> <span class="n">direction</span><span class="p">)</span>
@@ -1371,78 +1371,78 @@
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">incBachetScores</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 
-    <span class="k">def</span> <span class="nf">permute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Permutes alternatives x and y positions in the Bachet encoding</span>
-<span class="sd">        and computes new decreasing and increasing Bachet Scores.</span>
-<span class="sd">        Returns a reviewed Bachet ranking and order.</span>
+<span class="c1">## Unsuccessful attempt to optimize the BachetRanking constructor</span>
+<span class="c1">## The decBachetScores and incBachetScores are aggregated Bachet numbers</span>
+<span class="c1">## by + (-by) and are hence not suited for permuting the intransitive triples</span>
+<span class="c1">##    def permute(self,x,y):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Permutes alternatives x and y positions in the Bachet encoding</span>
+<span class="c1">##        and computes new decreasing and increasing Bachet Scores.</span>
+<span class="c1">##        Returns a reviewed Bachet ranking and order.</span>
+<span class="c1">##</span>
+<span class="c1">##        Mind the absence of the correlation attribute !</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        from arithmetics import BachetNumber</span>
+<span class="c1">##        from digraphsTools import scoredTuplesSort</span>
+<span class="c1">##        from copy import deepcopy</span>
+<span class="c1">##        permSelf = deepcopy(self)</span>
+<span class="c1">##        _decBachetScores = []</span>
+<span class="c1">##        al = [x for x in self.actions]</span>
+<span class="c1">##        i = al.index(x)</span>
+<span class="c1">##        j = al.index(y)</span>
+<span class="c1">##        for x in self.decBachetScores:</span>
+<span class="c1">##            bx = BachetNumber(x[0])</span>
+<span class="c1">##            sbx = bx.permute(i,j)</span>
+<span class="c1">##            _decBachetScores.append((sbx.value(),x))</span>
+<span class="c1">##        scoredTuplesSort(_decBachetScores,reverse=True)</span>
+<span class="c1">##        decBachetScores = _decBachetScores</span>
+<span class="c1">##        bachetRanking = [x[1][1] for x in _decBachetScores]</span>
+<span class="c1">##        </span>
+<span class="c1">##        _incBachetScores = []</span>
+<span class="c1">##        for x in self.incBachetScores:</span>
+<span class="c1">##            bx = BachetNumber(x[0])</span>
+<span class="c1">##            sbx = bx.permute(i,j)</span>
+<span class="c1">##            _incBachetScores.append((sbx.value(),x))</span>
+<span class="c1">##        scoredTuplesSort(_incBachetScores,reverse=False)</span>
+<span class="c1">##        incBachetScores = _incBachetScores</span>
+<span class="c1">##        bachetOrder = [x[1][1] for x in _incBachetScores]</span>
+<span class="c1">##</span>
+<span class="c1">##                # init relation</span>
+<span class="c1">##        #tr = time()</span>
+<span class="c1">##        #actionsList = [x for x in actions]</span>
+<span class="c1">##        Max = permSelf.valuationdomain[&#39;max&#39;]</span>
+<span class="c1">##        Med = permSelf.valuationdomain[&#39;med&#39;]</span>
+<span class="c1">##        Min = permSelf.valuationdomain[&#39;min&#39;]</span>
+<span class="c1">##        relation = {}</span>
+<span class="c1">##        for x in al:</span>
+<span class="c1">##            xi = bachetRanking.index(x)</span>
+<span class="c1">##            relation[x] = {}</span>
+<span class="c1">##            #print(x,xi)</span>
+<span class="c1">##            for y in al:</span>
+<span class="c1">##                yj = bachetRanking.index(y)</span>
+<span class="c1">##                #print(x,xi,y,yj,max(Med,cRelation[x][y]) )</span>
+<span class="c1">##                if xi &lt; yj:                    </span>
+<span class="c1">##                    relation[x][y] = Max</span>
+<span class="c1">##                elif xi == yj:</span>
+<span class="c1">##                    relation[x][y] = Med</span>
+<span class="c1">##                else:</span>
+<span class="c1">##                    relation[x][y] = Min</span>
+<span class="c1">##                #print(x,xi,y,yj,relation[x][y] )</span>
+<span class="c1">##</span>
+<span class="c1">##        # store attributes</span>
+<span class="c1">##        permSelf.relation = relation</span>
+<span class="c1">##        permSelf.decBachetScores = _decBachetScores</span>
+<span class="c1">##        permSelf.incBachetScores = _incBachetScores</span>
+<span class="c1">##        permSelf.bachetRanking = bachetRanking</span>
+<span class="c1">##        permSelf.bachetOrder = bachetOrder</span>
+<span class="c1">##        #corr = other.computeRankingCorrelation(bachetRanking)</span>
+<span class="c1">##        permSelf.correlation = None</span>
+<span class="c1">##        permSelf.gamma = self.gammaSets()</span>
+<span class="c1">##        permSelf.notGamma = self.notGammaSets()</span>
+<span class="c1">##</span>
+<span class="c1">##        return permSelf                         </span>
 
-<span class="sd">        Mind the absence of the correlation attribute !</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">arithmetics</span> <span class="kn">import</span> <span class="n">BachetNumber</span>
-        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">scoredTuplesSort</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="n">permSelf</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="n">_decBachetScores</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">al</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
-        <span class="n">i</span> <span class="o">=</span> <span class="n">al</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">j</span> <span class="o">=</span> <span class="n">al</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">decBachetScores</span><span class="p">:</span>
-            <span class="n">bx</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="n">sbx</span> <span class="o">=</span> <span class="n">bx</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
-            <span class="n">_decBachetScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">sbx</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="n">x</span><span class="p">))</span>
-        <span class="n">scoredTuplesSort</span><span class="p">(</span><span class="n">_decBachetScores</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">decBachetScores</span> <span class="o">=</span> <span class="n">_decBachetScores</span>
-        <span class="n">bachetRanking</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">_decBachetScores</span><span class="p">]</span>
-        
-        <span class="n">_incBachetScores</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">incBachetScores</span><span class="p">:</span>
-            <span class="n">bx</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="n">sbx</span> <span class="o">=</span> <span class="n">bx</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
-            <span class="n">_incBachetScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">sbx</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="n">x</span><span class="p">))</span>
-        <span class="n">scoredTuplesSort</span><span class="p">(</span><span class="n">_incBachetScores</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="n">incBachetScores</span> <span class="o">=</span> <span class="n">_incBachetScores</span>
-        <span class="n">bachetOrder</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">_incBachetScores</span><span class="p">]</span>
-
-                <span class="c1"># init relation</span>
-        <span class="c1">#tr = time()</span>
-        <span class="c1">#actionsList = [x for x in actions]</span>
-        <span class="n">Max</span> <span class="o">=</span> <span class="n">permSelf</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
-        <span class="n">Med</span> <span class="o">=</span> <span class="n">permSelf</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
-        <span class="n">Min</span> <span class="o">=</span> <span class="n">permSelf</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
-        <span class="n">relation</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">al</span><span class="p">:</span>
-            <span class="n">xi</span> <span class="o">=</span> <span class="n">bachetRanking</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-            <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="c1">#print(x,xi)</span>
-            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">al</span><span class="p">:</span>
-                <span class="n">yj</span> <span class="o">=</span> <span class="n">bachetRanking</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-                <span class="c1">#print(x,xi,y,yj,max(Med,cRelation[x][y]) )</span>
-                <span class="k">if</span> <span class="n">xi</span> <span class="o">&lt;</span> <span class="n">yj</span><span class="p">:</span>                    
-                    <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span>
-                <span class="k">elif</span> <span class="n">xi</span> <span class="o">==</span> <span class="n">yj</span><span class="p">:</span>
-                    <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
-                <span class="c1">#print(x,xi,y,yj,relation[x][y] )</span>
-
-        <span class="c1"># store attributes</span>
-        <span class="n">permSelf</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">relation</span>
-        <span class="n">permSelf</span><span class="o">.</span><span class="n">decBachetScores</span> <span class="o">=</span> <span class="n">_decBachetScores</span>
-        <span class="n">permSelf</span><span class="o">.</span><span class="n">incBachetScores</span> <span class="o">=</span> <span class="n">_incBachetScores</span>
-        <span class="n">permSelf</span><span class="o">.</span><span class="n">bachetRanking</span> <span class="o">=</span> <span class="n">bachetRanking</span>
-        <span class="n">permSelf</span><span class="o">.</span><span class="n">bachetOrder</span> <span class="o">=</span> <span class="n">bachetOrder</span>
-        <span class="c1">#corr = other.computeRankingCorrelation(bachetRanking)</span>
-        <span class="n">permSelf</span><span class="o">.</span><span class="n">correlation</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="n">permSelf</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
-        <span class="n">permSelf</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
-
-        <span class="k">return</span> <span class="n">permSelf</span>
-        
-
-                                      
-                              
-         
+<span class="c1">#----------------</span>
     
 <div class="viewcode-block" id="PolarisedBachetRanking">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.PolarisedBachetRanking">[docs]</a>
@@ -1929,10 +1929,10 @@
         <span class="n">bestCorr</span> <span class="o">=</span> <span class="mf">0.0</span>
         <span class="n">bestList</span> <span class="o">=</span> <span class="n">al</span>
         <span class="k">if</span> <span class="n">Polarised</span><span class="p">:</span>
-            <span class="n">_BachetRanking</span> <span class="o">=</span> <span class="n">PolarisedBachetRanking</span>
+            <span class="n">currBachetRanking</span> <span class="o">=</span> <span class="n">PolarisedBachetRanking</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">_BachetRanking</span> <span class="o">=</span> <span class="n">ValuedBachetRanking</span>
-        <span class="n">bestBa</span> <span class="o">=</span> <span class="n">_BachetRanking</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">al</span><span class="p">,</span>
+            <span class="n">currBachetRanking</span> <span class="o">=</span> <span class="n">ValuedBachetRanking</span>
+        <span class="n">bestBa</span> <span class="o">=</span> <span class="n">currBachetRanking</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">al</span><span class="p">,</span>
                                 <span class="n">orderLimit</span><span class="o">=</span><span class="n">orderLimit</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">rdIndex</span><span class="p">:</span>
             <span class="n">tr</span> <span class="o">=</span> <span class="n">rankedTriples</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
@@ -1944,12 +1944,12 @@
             <span class="n">al</span><span class="p">[</span><span class="n">yi</span><span class="p">]</span> <span class="o">=</span> <span class="n">tr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">al</span><span class="p">)</span>
-            <span class="n">ba</span> <span class="o">=</span> <span class="n">_BachetRanking</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">al</span><span class="p">,</span>
+            <span class="n">ba</span> <span class="o">=</span> <span class="n">currBachetRanking</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">al</span><span class="p">,</span>
                                <span class="n">orderLimit</span><span class="o">=</span><span class="n">orderLimit</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">ba</span><span class="o">.</span><span class="n">correlation</span> <span class="o">&gt;</span> <span class="n">bestCorr</span><span class="p">:</span>
                 <span class="n">bestList</span> <span class="o">=</span> <span class="n">al</span>
                 <span class="n">bestCorr</span> <span class="o">=</span> <span class="n">ba</span><span class="o">.</span><span class="n">correlation</span>
-                <span class="n">bestBa</span> <span class="o">=</span> <span class="n">_BachetRanking</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">bestList</span><span class="p">,</span>
+                <span class="n">bestBa</span> <span class="o">=</span> <span class="n">currBachetRanking</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">bestList</span><span class="p">,</span>
                                        <span class="n">orderLimit</span><span class="o">=</span><span class="n">orderLimit</span><span class="p">)</span>
             <span class="n">yi</span> <span class="o">=</span> <span class="n">al</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
             <span class="n">zi</span> <span class="o">=</span> <span class="n">al</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
@@ -1957,12 +1957,12 @@
             <span class="n">al</span><span class="p">[</span><span class="n">zi</span><span class="p">]</span> <span class="o">=</span> <span class="n">tr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">al</span><span class="p">)</span>
-            <span class="n">ba</span> <span class="o">=</span> <span class="n">_BachetRanking</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">al</span><span class="p">,</span>
+            <span class="n">ba</span> <span class="o">=</span> <span class="n">currBachetRanking</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">al</span><span class="p">,</span>
                                <span class="n">orderLimit</span><span class="o">=</span><span class="n">orderLimit</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">ba</span><span class="o">.</span><span class="n">correlation</span> <span class="o">&gt;</span> <span class="n">bestCorr</span><span class="p">:</span>
                 <span class="n">bestList</span> <span class="o">=</span> <span class="n">al</span>
                 <span class="n">bestCorr</span> <span class="o">=</span> <span class="n">ba</span><span class="o">.</span><span class="n">correlation</span>
-                <span class="n">bestBa</span> <span class="o">=</span> <span class="n">_BachetRanking</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">bestList</span><span class="p">,</span>
+                <span class="n">bestBa</span> <span class="o">=</span> <span class="n">currBachetRanking</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">bestList</span><span class="p">,</span>
                                        <span class="n">orderLimit</span><span class="o">=</span><span class="n">orderLimit</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">att</span> <span class="ow">in</span> <span class="n">bestBa</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">att</span><span class="p">]</span> <span class="o">=</span> <span class="n">bestBa</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">att</span><span class="p">]</span></div>
@@ -3082,7 +3082,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Aug 23, 2025.
+      <span class="lastupdated">Last updated on Aug 28, 2025.
       </span></p>
   </div>
 

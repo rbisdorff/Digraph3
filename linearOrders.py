@@ -1222,7 +1222,7 @@ class _OutFlowsOrder(LinearOrder):
 
 class _BachetRanking(Digraph):
     """
-    abstract class for Bachet ranking rules.
+    abstract class for generic BachetRanking class methods.
     """
     def showScores(self,direction='descending'):
         print('Bachet scores in %s order' % direction)
@@ -1234,78 +1234,78 @@ class _BachetRanking(Digraph):
             for x in self.incBachetScores:
                 print('%s \t %.2f' %(x[1],x[0]))
 
-    def permute(self,x,y):
-        """
-        Permutes alternatives x and y positions in the Bachet encoding
-        and computes new decreasing and increasing Bachet Scores.
-        Returns a reviewed Bachet ranking and order.
+## Unsuccessful attempt to optimize the BachetRanking constructor
+## The decBachetScores and incBachetScores are aggregated Bachet numbers
+## by + (-by) and are hence not suited for permuting the intransitive triples
+##    def permute(self,x,y):
+##        """
+##        Permutes alternatives x and y positions in the Bachet encoding
+##        and computes new decreasing and increasing Bachet Scores.
+##        Returns a reviewed Bachet ranking and order.
+##
+##        Mind the absence of the correlation attribute !
+##        """
+##        from arithmetics import BachetNumber
+##        from digraphsTools import scoredTuplesSort
+##        from copy import deepcopy
+##        permSelf = deepcopy(self)
+##        _decBachetScores = []
+##        al = [x for x in self.actions]
+##        i = al.index(x)
+##        j = al.index(y)
+##        for x in self.decBachetScores:
+##            bx = BachetNumber(x[0])
+##            sbx = bx.permute(i,j)
+##            _decBachetScores.append((sbx.value(),x))
+##        scoredTuplesSort(_decBachetScores,reverse=True)
+##        decBachetScores = _decBachetScores
+##        bachetRanking = [x[1][1] for x in _decBachetScores]
+##        
+##        _incBachetScores = []
+##        for x in self.incBachetScores:
+##            bx = BachetNumber(x[0])
+##            sbx = bx.permute(i,j)
+##            _incBachetScores.append((sbx.value(),x))
+##        scoredTuplesSort(_incBachetScores,reverse=False)
+##        incBachetScores = _incBachetScores
+##        bachetOrder = [x[1][1] for x in _incBachetScores]
+##
+##                # init relation
+##        #tr = time()
+##        #actionsList = [x for x in actions]
+##        Max = permSelf.valuationdomain['max']
+##        Med = permSelf.valuationdomain['med']
+##        Min = permSelf.valuationdomain['min']
+##        relation = {}
+##        for x in al:
+##            xi = bachetRanking.index(x)
+##            relation[x] = {}
+##            #print(x,xi)
+##            for y in al:
+##                yj = bachetRanking.index(y)
+##                #print(x,xi,y,yj,max(Med,cRelation[x][y]) )
+##                if xi < yj:                    
+##                    relation[x][y] = Max
+##                elif xi == yj:
+##                    relation[x][y] = Med
+##                else:
+##                    relation[x][y] = Min
+##                #print(x,xi,y,yj,relation[x][y] )
+##
+##        # store attributes
+##        permSelf.relation = relation
+##        permSelf.decBachetScores = _decBachetScores
+##        permSelf.incBachetScores = _incBachetScores
+##        permSelf.bachetRanking = bachetRanking
+##        permSelf.bachetOrder = bachetOrder
+##        #corr = other.computeRankingCorrelation(bachetRanking)
+##        permSelf.correlation = None
+##        permSelf.gamma = self.gammaSets()
+##        permSelf.notGamma = self.notGammaSets()
+##
+##        return permSelf                         
 
-        Mind the absence of the correlation attribute !
-        """
-        from arithmetics import BachetNumber
-        from digraphsTools import scoredTuplesSort
-        from copy import deepcopy
-        permSelf = deepcopy(self)
-        _decBachetScores = []
-        al = [x for x in self.actions]
-        i = al.index(x)
-        j = al.index(y)
-        for x in self.decBachetScores:
-            bx = BachetNumber(x[0])
-            sbx = bx.permute(i,j)
-            _decBachetScores.append((sbx.value(),x))
-        scoredTuplesSort(_decBachetScores,reverse=True)
-        decBachetScores = _decBachetScores
-        bachetRanking = [x[1][1] for x in _decBachetScores]
-        
-        _incBachetScores = []
-        for x in self.incBachetScores:
-            bx = BachetNumber(x[0])
-            sbx = bx.permute(i,j)
-            _incBachetScores.append((sbx.value(),x))
-        scoredTuplesSort(_incBachetScores,reverse=False)
-        incBachetScores = _incBachetScores
-        bachetOrder = [x[1][1] for x in _incBachetScores]
-
-                # init relation
-        #tr = time()
-        #actionsList = [x for x in actions]
-        Max = permSelf.valuationdomain['max']
-        Med = permSelf.valuationdomain['med']
-        Min = permSelf.valuationdomain['min']
-        relation = {}
-        for x in al:
-            xi = bachetRanking.index(x)
-            relation[x] = {}
-            #print(x,xi)
-            for y in al:
-                yj = bachetRanking.index(y)
-                #print(x,xi,y,yj,max(Med,cRelation[x][y]) )
-                if xi < yj:                    
-                    relation[x][y] = Max
-                elif xi == yj:
-                    relation[x][y] = Med
-                else:
-                    relation[x][y] = Min
-                #print(x,xi,y,yj,relation[x][y] )
-
-        # store attributes
-        permSelf.relation = relation
-        permSelf.decBachetScores = _decBachetScores
-        permSelf.incBachetScores = _incBachetScores
-        permSelf.bachetRanking = bachetRanking
-        permSelf.bachetOrder = bachetOrder
-        #corr = other.computeRankingCorrelation(bachetRanking)
-        permSelf.correlation = None
-        permSelf.gamma = self.gammaSets()
-        permSelf.notGamma = self.notGammaSets()
-
-        return permSelf
-        
-
-                                      
-                              
-         
+#----------------
     
 class PolarisedBachetRanking(LinearOrder,_BachetRanking):
     """    
@@ -1784,10 +1784,10 @@ class BachetRanking(LinearOrder,_BachetRanking):
         bestCorr = 0.0
         bestList = al
         if Polarised:
-            _BachetRanking = PolarisedBachetRanking
+            currBachetRanking = PolarisedBachetRanking
         else:
-            _BachetRanking = ValuedBachetRanking
-        bestBa = _BachetRanking(other,actionsList=al,
+            currBachetRanking = ValuedBachetRanking
+        bestBa = currBachetRanking(other,actionsList=al,
                                 orderLimit=orderLimit)
         for i in rdIndex:
             tr = rankedTriples[i][1]
@@ -1799,12 +1799,12 @@ class BachetRanking(LinearOrder,_BachetRanking):
             al[yi] = tr[0]
             if Debug:
                 print(al)
-            ba = _BachetRanking(other,actionsList=al,
+            ba = currBachetRanking(other,actionsList=al,
                                orderLimit=orderLimit)
             if ba.correlation > bestCorr:
                 bestList = al
                 bestCorr = ba.correlation
-                bestBa = _BachetRanking(other,actionsList=bestList,
+                bestBa = currBachetRanking(other,actionsList=bestList,
                                        orderLimit=orderLimit)
             yi = al.index(tr[1])
             zi = al.index(tr[2])
@@ -1812,12 +1812,12 @@ class BachetRanking(LinearOrder,_BachetRanking):
             al[zi] = tr[1]
             if Debug:
                 print(al)
-            ba = _BachetRanking(other,actionsList=al,
+            ba = currBachetRanking(other,actionsList=al,
                                orderLimit=orderLimit)
             if ba.correlation > bestCorr:
                 bestList = al
                 bestCorr = ba.correlation
-                bestBa = _BachetRanking(other,actionsList=bestList,
+                bestBa = currBachetRanking(other,actionsList=bestList,
                                        orderLimit=orderLimit)
         for att in bestBa.__dict__:
             self.__dict__[att] = bestBa.__dict__[att]

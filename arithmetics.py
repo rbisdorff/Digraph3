@@ -162,17 +162,28 @@ class BachetNumber(object):
         reprString += 'Attributes     : %s\n' % list(self.__dict__.keys())    
         return reprString
     
-    def __init__(self,num_int=None,vector=None):
+    def __init__(self,num_int=None,vector=None,length=0):
         """
         Tranforms a potentially signed integer into a Bachet number
         """
         if num_int is None:
             if vector is not None:
-                self.vector = vector
+                vl = len(vector)
+                if vl >= length:
+                    self.vector = vector
+                else:
+                    nz = length - vl
+                    self.vector = [0 for i in range(nz)]
+                    self.vector = self.vector + vector
             else:
-                self.vector=[0]
+                self.vector=[0 for i in range(length)]
         else:
             self.vector = self._int2bachet(num_int)
+            vl = len(self.vector)
+            if vl < length:
+                nz = length - vl
+                vector = [0 for i in range(nz)]
+                self.vector = vector + self.vector
 
     def __str__(self):
         """
@@ -362,14 +373,16 @@ class BachetNumber(object):
 
     def permute(self,i,j):
         """
-        Swapps positions i an j in the self Bachet vector.
+        Swaps positions i-1 an j-1 in the self Bachet vector.
         Return a modified Bachet number.
         """
         if i > len(self) or i < 1:
-            print('Error: index i ot fitting the vector length !!!')
+            print('Error: index i (%d) not fitting the vector length !!!' % i)
+            print(self)
             return
         elif j > len(self) or j < 1:
-            print('Error: index j ot fitting the vector length !!!')
+            print('Error: index j (%d) not fitting the vector length !!!' % j)
+            print(self)
             return
         from copy import deepcopy
         rev = deepcopy(self)
