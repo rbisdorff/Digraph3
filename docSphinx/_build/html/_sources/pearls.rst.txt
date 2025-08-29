@@ -62,7 +62,7 @@ Pearls of bipolar-valued epistemic logic
    :ref:`Theoretical and computational advancements <Theoretical-Enhancements-label>`
        * :ref:`Coping with missing evaluation and indeterminateness <CopingMissing-Data-label>`
        * :ref:`Ordinal correlation equals bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>`
-       * :ref:`A new ranking rule based on bipolar-valued Bachet numbers <Bachet-Tutorial-label>` 	 
+       * :ref:`Applications of bipolar-valued base 3 Bachet numbers <Bachet-Tutorial-label>` 	 
        * :ref:`On computing graph and digraph kernels <Kernel-Tutorial-label>`
        * :ref:`Computing bipolar-valued kernel membership characteristic vectors <Bipolar-Valued-Kernels-Tutorial-label>`
        * :ref:`On characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>`
@@ -85,7 +85,7 @@ Pearls of bipolar-valued epistemic logic
       \href{https://digraph3.readthedocs.io/en/latest/index.html}{HTML Version}
       \vspace{5mm}
    
-   In this part of the **Digraph3** *documentation*, we provide an insight in computational enhancements one may get when working in a *bipolar-valued epistemic logic* framework, like - easily coping with *missing data* and uncertain criterion *significance weights*, - computing valued *ordinal correlations* between bipolar-valued outranking digraphs, - compting digraph kernels and solving bipolar-valued kernel equation systems and, - testing for stability and confidence of outranking statements when facing uncertain performance criteria significance weights or decision objectives' importance weights.
+   In this part of the **Digraph3** *documentation*, we provide an insight in computational enhancements one may get when working in a *bipolar-valued epistemic logic* framework, like - easily coping with *missing data* and uncertain criterion *significance weights*, - computing valued *ordinal correlations* between bipolar-valued outranking digraphs, - compting digraph *kernels* and solving bipolar-valued *kernel equation systems*, - testing for stability and confidence of outranking statements when facing uncertain performance criteria significance weights or decision objectives' importance weights and, - applying bipolar-valued *base 3 Bachet numbers* for ranking multicriteria incommensurable performance records.
 
    .. raw:: latex
 
