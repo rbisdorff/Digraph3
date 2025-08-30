@@ -2993,8 +2993,8 @@ Back to :ref:`Content Table <Pearls-label>`
 
 .. _Bachet-Tutorial-label:
 
-Ranking-by-scoring with bipolar-valued base 3 encoded Bachet numbers
-````````````````````````````````````````````````````````````````````
+Applications of bipolar-valued base 3 encoded Bachet numbers
+````````````````````````````````````````````````````````````
 .. epigraph::
    
    "*Estant proposee telle quantité qu'on voudra pesant un nombre de livres despuis 1. iusques à 40. inclusivement (sans toutefois admettre les fractions ) on demande combien de pois pour le moins il faudrait employer à cet effect.*" 
@@ -3467,8 +3467,8 @@ Running a MonteCarlo simulation with a sample of 500 random 3 objectives --econo
 
 The correlation figures show that both the smart polarised and the valued Bachet ranking rules, by permuting all potential intransitive outranking triples, come very close to the optimal Kemeny ranking rule (median correlation +0.901 vs +0.914). And in 163/500 (32.6%) polarised cases and in 196/500 (39.2%) valued cases, we even get an optimal Kemeny ranking result.
 
-The Bachet rule: a new method for partially ranking
-...................................................
+Uncovering the partial transitive part of a bipolar-valued outranking digraph
+.............................................................................
 
 As we have noticed before, the randomized versions of the :py:class:`~linearOrders.PolarisedBachetRanking` and the :py:class:`~linearOrders.ValuedBachetRanking` constructors potentially produce multiple ranking results of unequal correlation quality, yet respecting all more or less the transitive part of the given outranking digraph. If we collect now a small subset of the best correlated rankings, we can use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class for constructing, by epistemic disjunctive fusion of these selected rankings, a partial *Bachet* ranking result --a transitive asymmetrical digraph with indeterminate reflexive relations-- showing actually the potential transitive part of the given polarised outranking digraph. 
 
@@ -3526,7 +3526,7 @@ We have this way found an algorithm for computing a *transitively orientable* gr
 .. _Bachet-Choice-Recommender-Tutorial-label:
 
 The Bachet choice recommender algorithm 
-......................................................
+........................................
 
 The first and last levels of a topological sort of partial rankings --their **initial and terminal kernels**-- give indeed convincing candidates for a *first-choice*, respectively a *last-choice* recommendation (see :numref:`partialBachet0` Lines 7-10).
 
