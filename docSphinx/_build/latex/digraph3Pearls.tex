@@ -67,7 +67,7 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{August 19, 2025}
+\date{August 30, 2025}
 \release{3.13.7}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -154,7 +154,7 @@
 \vspace{5mm}
 
 \sphinxAtStartPar
-In this part of the \sphinxstylestrong{Digraph3} \sphinxstyleemphasis{documentation}, we provide an insight in computational enhancements one may get when working in a \sphinxstyleemphasis{bipolar\sphinxhyphen{}valued epistemic logic} framework, like \sphinxhyphen{} easily coping with \sphinxstyleemphasis{missing data} and uncertain criterion \sphinxstyleemphasis{significance weights}, \sphinxhyphen{} computing valued \sphinxstyleemphasis{ordinal correlations} between bipolar\sphinxhyphen{}valued outranking digraphs, \sphinxhyphen{} compting digraph kernels and solving bipolar\sphinxhyphen{}valued kernel equation systems and, \sphinxhyphen{} testing for stability and confidence of outranking statements when facing uncertain performance criteria significance weights or decision objectives’ importance weights.
+In this part of the \sphinxstylestrong{Digraph3} \sphinxstyleemphasis{documentation}, we provide an insight in computational enhancements one may get when working in a \sphinxstyleemphasis{bipolar\sphinxhyphen{}valued epistemic logic} framework, like \sphinxhyphen{} easily coping with \sphinxstyleemphasis{missing data} and uncertain criterion \sphinxstyleemphasis{significance weights}, \sphinxhyphen{} computing valued \sphinxstyleemphasis{ordinal correlations} between bipolar\sphinxhyphen{}valued outranking digraphs, \sphinxhyphen{} compting digraph \sphinxstyleemphasis{kernels} and solving bipolar\sphinxhyphen{}valued \sphinxstyleemphasis{kernel equation systems}, \sphinxhyphen{} testing for stability and confidence of outranking statements when facing uncertain performance criteria significance weights or decision objectives’ importance weights and, \sphinxhyphen{} applying bipolar\sphinxhyphen{}valued \sphinxstyleemphasis{base 3 Bachet numbers} for ranking multicriteria incommensurable performance records.
 
 \sphinxtableofcontents
 
@@ -3631,7 +3631,7 @@ Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id140}}{\hyperref[\detokenize{pearls:ranking-by-scoring-with-bipolar-valued-base-3-encoded-bachet-numbers}]{\sphinxcrossref{Ranking\sphinxhyphen{}by\sphinxhyphen{}scoring with bipolar\sphinxhyphen{}valued base 3 encoded Bachet numbers}}} (\autopageref*{\detokenize{pearls:ranking-by-scoring-with-bipolar-valued-base-3-encoded-bachet-numbers}})
+\phantomsection\label{\detokenize{pearls:id140}}{\hyperref[\detokenize{pearls:applications-of-bipolar-valued-base-3-encoded-bachet-numbers}]{\sphinxcrossref{Applications of bipolar\sphinxhyphen{}valued base 3 encoded Bachet numbers}}} (\autopageref*{\detokenize{pearls:applications-of-bipolar-valued-base-3-encoded-bachet-numbers}})
 
 \item {} 
 \sphinxAtStartPar
@@ -4153,10 +4153,10 @@ The first 3 principal axes support together about 70\% of the total inertia. Mos
 \subsubsection{Exploring the \sphinxstyleemphasis{better rated}  and the \sphinxstyleemphasis{as well as rated} opinions}
 \label{\detokenize{pearls:exploring-the-better-rated-and-the-as-well-as-rated-opinions}}
 \sphinxAtStartPar
-In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asymmetric and symmetric parts of the ‘\sphinxstyleemphasis{at least as well rated as}’ opinions (see the tutorial on \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{Manipulating Digraph objects}}}).
+In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asymmetrical and symmetrical parts of the ‘\sphinxstyleemphasis{at least as well rated as}’ opinions (see the tutorial on \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{Manipulating Digraph objects}}}).
 
 \sphinxAtStartPar
-Let us first have a look at the pairwise asymmetric part, namely the ‘\sphinxstyleemphasis{better rated than}’ and ‘\sphinxstyleemphasis{less well rated than}’ opinions of the movie critics.
+Let us first have a look at the pairwise asymmetrical part, namely the ‘\sphinxstyleemphasis{better rated than}’ and ‘\sphinxstyleemphasis{less well rated than}’ opinions of the movie critics.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{AsymmetricPartialDigraph}
@@ -4169,7 +4169,7 @@ Let us first have a look at the pairwise asymmetric part, namely the ‘\sphinxs
 \capstart
 
 \noindent\sphinxincludegraphics[width=600\sphinxpxdimen]{{asymmetricPart}.png}
-\caption{Asymmetric part of graffiti07 digraph}\label{\detokenize{pearls:asymmetricpart}}\end{figure}
+\caption{Asymmetrical part of graffiti07 digraph}\label{\detokenize{pearls:asymmetricpart}}\end{figure}
 
 \sphinxAtStartPar
 We notice here that the \sphinxstyleemphasis{NetFlows} ranking rule inverts in fact just three ‘\sphinxstyleemphasis{less well ranked than}’ opinions and four ‘\sphinxstyleemphasis{better ranked than}’ ones. A similar look at the symmetric part, the pairwise ‘\sphinxstyleemphasis{as well rated as}’ opinions, suggests a preordered preference structure in several \sphinxstyleemphasis{equivalently rated} classes.
@@ -4185,7 +4185,7 @@ We notice here that the \sphinxstyleemphasis{NetFlows} ranking rule inverts in f
 \capstart
 
 \noindent\sphinxincludegraphics[width=600\sphinxpxdimen]{{symmetricPart}.png}
-\caption{Symmetric part of graffiti07 digraph}\label{\detokenize{pearls:symmetricpart}}\end{figure}
+\caption{Symmetrical part of graffiti07 digraph}\label{\detokenize{pearls:symmetricpart}}\end{figure}
 
 \sphinxAtStartPar
 Such a preordering of the movies may, for instance, be computed with the \sphinxcode{\sphinxupquote{computeRankingByChoosing()}} method, where we iteratively extract \sphinxstyleemphasis{dominant kernels} \sphinxhyphen{}remaining first choices\sphinxhyphen{} and \sphinxstyleemphasis{absorbent kernels} \sphinxhyphen{}remaining last choices\sphinxhyphen{} (see the tutorial on {\hyperref[\detokenize{pearls:kernel-tutorial-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Computing Digraph Kernels}}}}} (\autopageref*{\detokenize{pearls:kernel-tutorial-label}})). We operate therefore on the asymmetrical ‘\sphinxstyleemphasis{better rated than}’, i.e. the \sphinxstyleemphasis{codual} (%
@@ -4221,8 +4221,8 @@ Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std
 
 
 
-\subsection{Ranking\sphinxhyphen{}by\sphinxhyphen{}scoring with bipolar\sphinxhyphen{}valued base 3 encoded Bachet numbers}
-\label{\detokenize{pearls:ranking-by-scoring-with-bipolar-valued-base-3-encoded-bachet-numbers}}\label{\detokenize{pearls:bachet-tutorial-label}}\begin{quote}
+\subsection{Applications of bipolar\sphinxhyphen{}valued base 3 encoded Bachet numbers}
+\label{\detokenize{pearls:applications-of-bipolar-valued-base-3-encoded-bachet-numbers}}\label{\detokenize{pearls:bachet-tutorial-label}}\begin{quote}
 
 \sphinxAtStartPar
 “\sphinxstyleemphasis{Estant proposee telle quantité qu’on voudra pesant un nombre de livres despuis 1. iusques à 40. inclusivement (sans toutefois admettre les fractions ) on demande combien de pois pour le moins il faudrait employer à cet effect.}”
@@ -4260,7 +4260,7 @@ Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id155}}{\hyperref[\detokenize{pearls:the-bachet-rule-a-new-method-for-partially-ranking}]{\sphinxcrossref{The Bachet rule: a new method for partially ranking}}} (\autopageref*{\detokenize{pearls:the-bachet-rule-a-new-method-for-partially-ranking}})
+\phantomsection\label{\detokenize{pearls:id155}}{\hyperref[\detokenize{pearls:uncovering-the-partial-transitive-part-of-a-bipolar-valued-outranking-digraph}]{\sphinxcrossref{Uncovering the partial transitive part of a bipolar\sphinxhyphen{}valued outranking digraph}}} (\autopageref*{\detokenize{pearls:uncovering-the-partial-transitive-part-of-a-bipolar-valued-outranking-digraph}})
 
 \item {} 
 \sphinxAtStartPar
@@ -4995,10 +4995,10 @@ Kemeny
 The correlation figures show that both the smart polarised and the valued Bachet ranking rules, by permuting all potential intransitive outranking triples, come very close to the optimal Kemeny ranking rule (median correlation +0.901 vs +0.914). And in 163/500 (32.6\%) polarised cases and in 196/500 (39.2\%) valued cases, we even get an optimal Kemeny ranking result.
 
 
-\subsubsection{The Bachet rule: a new method for partially ranking}
-\label{\detokenize{pearls:the-bachet-rule-a-new-method-for-partially-ranking}}
+\subsubsection{Uncovering the partial transitive part of a bipolar\sphinxhyphen{}valued outranking digraph}
+\label{\detokenize{pearls:uncovering-the-partial-transitive-part-of-a-bipolar-valued-outranking-digraph}}
 \sphinxAtStartPar
-As we have noticed before, the randomized versions of the \sphinxcode{\sphinxupquote{PolarisedBachetRanking}} and the \sphinxcode{\sphinxupquote{ValuedBachetRanking}} constructors potentially produce multiple ranking results of unequal correlation quality, yet respecting all more or less the transitive part of the given outranking digraph. If we collect now a small subset of the best correlated rankings, we can use the \sphinxcode{\sphinxupquote{transitiveDigraphs.RankingsFusionDigraph}} class for constructing, by epistemic disjunctive fusion of these selected rankings, a partial \sphinxstyleemphasis{Bachet} ranking result \textendash{}a transitive asymmetric digraph with indeterminate reflexive relations\textendash{} showing actually the potential transitive part of the given polarised outranking digraph.
+As we have noticed before, the randomized versions of the \sphinxcode{\sphinxupquote{PolarisedBachetRanking}} and the \sphinxcode{\sphinxupquote{ValuedBachetRanking}} constructors potentially produce multiple ranking results of unequal correlation quality, yet respecting all more or less the transitive part of the given outranking digraph. If we collect now a small subset of the best correlated rankings, we can use the \sphinxcode{\sphinxupquote{transitiveDigraphs.RankingsFusionDigraph}} class for constructing, by epistemic disjunctive fusion of these selected rankings, a partial \sphinxstyleemphasis{Bachet} ranking result \textendash{}a transitive asymmetrical digraph with indeterminate reflexive relations\textendash{} showing actually the potential transitive part of the given polarised outranking digraph.
 
 \sphinxAtStartPar
 To explore this remarquable opportunity, a new \sphinxcode{\sphinxupquote{PartialBachetRanking}} class is provided by the \sphinxcode{\sphinxupquote{transitiveDigraphs}} module. To illustrate its usefulness, let us reconsider the example outranking digraph \sphinxstyleemphasis{g} of \hyperref[\detokenize{pearls:optimisingbachet}]{Listing \ref{\detokenize{pearls:optimisingbachet}}}.
@@ -5119,7 +5119,7 @@ In order to provide information about the underlying \sphinxcode{\sphinxupquote{
 In \hyperref[\detokenize{pearls:bachetbcr1}]{Fig.\@ \ref{\detokenize{pearls:bachetbcr1}}} we see confirmed that alternative \sphinxstyleemphasis{a2} shows indeed the very best performance profile and alternatives \sphinxstyleemphasis{a1}, \sphinxstyleemphasis{a3} and \sphinxstyleemphasis{a7} the weakest performance profiles.
 
 \sphinxAtStartPar
-As the \sphinxstyleemphasis{Bachet} choice recommendation is based on a partial transitive asymmetric digraph, actually highly correlated with the given outranking digraph \sphinxstyleemphasis{g} (+0.717, see Line 9 above), a unique initial and a unique terminal prekernel always exist (see \hyperref[\detokenize{pearls:bachetbcr0}]{Listing \ref{\detokenize{pearls:bachetbcr0}}} Lines 7 and 14). Both these properties confer the \sphinxstyleemphasis{Bachet choice recommendation algorithm} a computational advantage over the \sphinxstyleemphasis{Rubis} first choice recommendation algorithm based on initial and terminal prekernels directly extracted from the given strict outranking digraph where we, first, must arbitrarily break, the case given, all chordless outranking circuits (see \sphinxcite{pearls:bis-2008p}).
+As the \sphinxstyleemphasis{Bachet} choice recommendation is based on a partial transitive asymmetrical digraph, actually highly correlated with the given outranking digraph \sphinxstyleemphasis{g} (+0.717, see Line 9 above), a unique initial and a unique terminal prekernel always exist (see \hyperref[\detokenize{pearls:bachetbcr0}]{Listing \ref{\detokenize{pearls:bachetbcr0}}} Lines 7 and 14). Both these properties confer the \sphinxstyleemphasis{Bachet choice recommendation algorithm} a computational advantage over the \sphinxstyleemphasis{Rubis} first choice recommendation algorithm based on initial and terminal prekernels directly extracted from the given strict outranking digraph where we, first, must arbitrarily break, the case given, all chordless outranking circuits (see \sphinxcite{pearls:bis-2008p}).
 
 \sphinxAtStartPar
 Computing initial and terminal \sphinxstyleemphasis{prekernels} in digraphs is the subject of the next Section.
@@ -5548,7 +5548,7 @@ It immediately follows that weak chordless circuits are part of the class of dig
 \subsubsection{Kernels in lateralized digraphs}
 \label{\detokenize{pearls:kernels-in-lateralized-digraphs}}
 \sphinxAtStartPar
-Humans do live in an apparent physical space of plain transitive \sphinxstylestrong{lateral orientation}, fully empowered in finite geometrical 3D models with \sphinxstylestrong{linear orders}, where first, resp. last ranked, nodes deliver unique initial, resp. terminal, kernels. Similarly, in finite \sphinxstylestrong{preorders}, the first, resp. last, equivalence classes deliver the unique initial, resp. unique terminal, kernels. More generally, in finite \sphinxstylestrong{partial orders}, i.e. asymmetric and transitive digraphs, topological sort algorithms will easily reveal on the first, resp. last, level all unique initial, resp. terminal, kernels.
+Humans do live in an apparent physical space of plain transitive \sphinxstylestrong{lateral orientation}, fully empowered in finite geometrical 3D models with \sphinxstylestrong{linear orders}, where first, resp. last ranked, nodes deliver unique initial, resp. terminal, kernels. Similarly, in finite \sphinxstylestrong{preorders}, the first, resp. last, equivalence classes deliver the unique initial, resp. unique terminal, kernels. More generally, in finite \sphinxstylestrong{partial orders}, i.e. asymmetrical and transitive digraphs, topological sort algorithms will easily reveal on the first, resp. last, level all unique initial, resp. terminal, kernels.
 
 \sphinxAtStartPar
 In genuine random digraphs, however, we may need to check for each of its MISs, whether \sphinxstyleemphasis{one}, \sphinxstyleemphasis{both}, or \sphinxstyleemphasis{none} of the lateralized external stability conditions may be satisfied. Consider, for instance, the following random digraph instance of order 7 and generated with an arc probability of 30\%.
@@ -6339,7 +6339,7 @@ The construction of the outranking relation verifies the coduality principle. Fo
 \end{enumerate}
 
 \sphinxAtStartPar
-Now, the codual of complete digraphs correspond to the class of asymmetric digraphs i.e. \sphinxstyleemphasis{partial tournaments}. If, on the one limit, all outranking relations are symmetric, the partial tournament will be empty. On the other hand, if the outranking relation models a linear ranking, the tournament will be complete and transitive.
+Now, the codual of complete digraphs correspond to the class of asymmetrical digraphs i.e. \sphinxstyleemphasis{partial tournaments}. If, on the one limit, all outranking relations are symmetric, the partial tournament will be empty. On the other hand, if the outranking relation models a linear ranking, the tournament will be complete and transitive.
 
 \sphinxAtStartPar
 Let us consider for instance such a partial tournament %

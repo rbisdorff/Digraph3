@@ -44,7 +44,7 @@ Pearls of bipolar-valued epistemic logic
       * :ref:`Consensus quality of the bipolar-valued outranking relation <Outranking-Consensus-Tutorial-label>`
 
 
-   In this part of the **Digraph3** *documentation*, we provide an insight in computational enhancements one may get when working in a *bipolar-valued epistemic logic* framework, like - easily coping with *missing data* and uncertain criterion *significance weights*, - computing valued *ordinal correlations* between bipolar-valued outranking digraphs,  - computing digraph kernels and solving bipolar-valued kernel equation systems and, - testing for stability and confidence of outranking statements when facing uncertain performance criteria significance weights or decision objectives' importance weights.
+   In this part of the **Digraph3** *documentation*, we provide an insight in computational enhancements one may get when working in a *bipolar-valued epistemic logic* framework, like - easily coping with *missing data* and uncertain criterion *significance weights*, - computing valued *ordinal correlations* between bipolar-valued outranking digraphs,  - computing digraph kernels and solving bipolar-valued kernel equation systems, - testing for stability and confidence of outranking statements when facing uncertain performance criteria significance weights or decision objectives' importance weights and, - applying bipolar-valued *base 3 Bachet numbers* for ranking multicriteria incommensurable performance records.
 	    
    **Contents**
 
