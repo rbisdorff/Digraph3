@@ -1714,7 +1714,7 @@ To get a further interesting insight in the overall outranking situation, we fin
 
 Partially ranking the outranking digraph
 ````````````````````````````````````````
-In :numref:`BachetRanking0` Line 2, we operate the :ref:`epistemic disjunctive fusion <Epistemic-Fusion-label>` of the five best correlated linear rankings obtained from 200 random :ref:`Bachet rankings <Bachet-Tutorial-label>` (see Lines 4-8). In the resulting transitive partial strict outranking relation, alternatives *A*, *C*, *D* as well as *G* appear all ranked before *B* and *E*, whereas alternative *F* appears always last-ranked (see Lines 11 and 14).
+In :numref:`BachetRanking0` Line 2, we operate the :ref:`epistemic disjunctive fusion <Epistemic-Fusion-label>` of the five best correlated linear rankings obtained from 200 random :ref:`Bachet rankings <Bachet-Tutorial-label>` (see Lines 4-8). In the resulting transitive partial outranking relation, alternatives *A*, *C*, *D* as well as *G* appear all ranked before *B* and *E*, whereas alternative *F* appears always last-ranked (see Lines 11 and 14).
 
 .. code-block:: pycon
    :name: BachetRanking0

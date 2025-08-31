@@ -3467,8 +3467,8 @@ Running a MonteCarlo simulation with a sample of 500 random 3 objectives --econo
 
 The correlation figures show that both the smart polarised and the valued Bachet ranking rules, by permuting all potential intransitive outranking triples, come very close to the optimal Kemeny ranking rule (median correlation +0.901 vs +0.914). And in 163/500 (32.6%) polarised cases and in 196/500 (39.2%) valued cases, we even get an optimal Kemeny ranking result.
 
-Revealing the partial transitive part of a bipolar-valued digraph
-.............................................................................
+Revealing the transitive part of a bipolar-valued digraph
+.........................................................
 
 As we have noticed before, the randomized versions of the :py:class:`~linearOrders.PolarisedBachetRanking` and the :py:class:`~linearOrders.ValuedBachetRanking` constructors potentially produce multiple ranking results of unequal correlation quality, yet respecting all more or less the transitive part of the given digraph. If we collect now a small subset of the best correlated rankings, we can use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class for constructing, by epistemic disjunctive fusion of these selected rankings, a partial *Bachet* ranking result --a transitive asymmetrical digraph with indeterminate reflexive relations-- showing actually the potential transitive part of the given polarised outranking digraph. 
 
