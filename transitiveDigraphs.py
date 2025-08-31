@@ -1869,13 +1869,13 @@ class WeakNetFlowsOrder(TransitiveDigraph):
 
 class PartialBachetRanking(TransitiveDigraph):
     """
-    Uses ba default the :py:class:`linearOrders.PolarisedBachetRanking` class for generating a number
+    Uses by default the :py:class:`linearOrders.PolarisedBachetRanking` class for generating a number
     of best correlated Bachet rankings.
 
-    The :py:class:`transitiveDigraphs.RankingsFusionDigraph` uses
+    The :py:class:`~transitiveDigraphs.RankingsFusionDigraph` uses
     these *Bachet* rankings for contructing a partial *Bachet* ranking result.
 
-    - *g* is a valid BipolarOutrankingDigraph instance.
+    - *g* is any normalized bipolar-valued Digraph instance.
     - *randomized = integer* (default = 100) gives the number of random permutations
       used for generating different Bachet ranking results.
     - *maxNbrOfRanking = integer* (defaut = 5) is the number of best correlated
