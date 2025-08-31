@@ -3010,7 +3010,7 @@ Bipolar-valued base 3 encoded Bachet numbers
 
 Bipolar-valued {-1,0,+1} base 3 encoded integers are due to *Claude Gaspard Bachet Sieur de Méziriac* (1581-1638) [20]_. The idea is to represent the value of an integer *n* in a base 3 positional numeration where in each position may appear a **signed bit** --one of the three symbols **{-1,0,+1}**-- called hereafter **sbits** for short.
 
-*Bachet*'s positional *sbits* numeration is simulating a weight balance scale where the number *n* and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for *n = 5* gives for instance :math:`3^2 = (n + 3^1 + 3^0)`. And the *sbits* encoding corresponds hence to the string '+1-1-1'. As, this representation is isomorphic to a base 3 binary encoding, every positive or negative integer may this way be represented with a unique *sbits* string. With four powers of 3, namely :math:`{3^3, 3^2, 3^1, 3^0}`, one may for instance represent any value in the integer range -40 to +40. *Bachet* showed that this bipolar weighing system relies on the smallest possible number of balance weights -base powers- needed in order to balance the scale for any given integer weight *n* [BAC-1622p]_.
+*Bachet*'s positional *sbits* numeration is simulating a weight balance scale where the number *n* and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for *n = 5* gives for instance :math:`3^2 = (n + 3^1 + 3^0)`. And the *sbits* encoding corresponds hence to the string '+1-1-1'. As, this representation is isomorphic to a base 3 binary encoding, every positive or negative integer may so be represented with a unique *sbits* string. With four powers of 3, namely :math:`{3^3, 3^2, 3^1, 3^0}`, one may for instance represent any value in the integer range -40 to +40. *Bachet* showed that this bipolar weighing system relies on the smallest possible number of balance weights -base powers- needed in order to balance the scale for any given integer weight *n* [BAC-1622p]_.
 
 The Digraph3 :py:mod:`arithmetics` module provides with the :py:class:`~arithmetics.BachetNumber` class an implementation for such *sbits* encoded integers. Instantiating a *Bachet* number may be done either with an integer value or with a vector of sbits (see :numref:`BachetNumbers` Lines  2, 6, 11 and 15). The class provides a binary *addition* method and unary *negating* and *reversing* methods as illustrated in Lines 20 and 32-33 below. 
 
@@ -3513,7 +3513,7 @@ The nine performance records are grouped into three performance equivalence clas
 
 A Monte Carlo experiment with the same 500 random Cost-Benefit performance tableaux, reporting the grades obtained by 20 decision actions on 13 criteria already used before, shows with *randomized=100* and *maxNbrOfRankings=5* settings a median partial ranking correlation of +0.936 (min. +0.760) on a common median determination part of 63%% (min. 55%) of the given outranking digraphs. The valued median equivalence of the partial rankings with the given outranking digraphs is hence supported by a median criteria significance majority of 62% (min. 54%).
 
-The :py:class:`~transitiveDigraphs.PartialBachetRanking` class provides this way a valuable and effective method for computing *partial rankings* from given bipolar-valued outranking digraphs. The partial *Bachet* ranking digraph represents in fact the directed version of a **comparability** graph, i.e. :ref:`a Berge or perfect graph <Permutation-Tutorial-label>` .
+The :py:class:`~transitiveDigraphs.PartialBachetRanking` class provides hence a valuable and effective method for computing *partial rankings* from given bipolar-valued outranking digraphs. The partial *Bachet* ranking digraph represents in fact the directed version of a **comparability** graph, i.e. :ref:`a Berge or perfect graph <Permutation-Tutorial-label>` .
 
 .. code-block:: pycon
 
@@ -3521,7 +3521,7 @@ The :py:class:`~transitiveDigraphs.PartialBachetRanking` class provides this way
    >>> cg.isComparabilityGraph()
     True
 
-We have this way found an algorithm for computing a *transitively orientable* graph, close in the :ref:`bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>` sense to the transitive part of a given bipolar-valued outranking digraph. *Partial Bachet* rankings make hence apparent the actual **transitive part** of outranking relations. This interesting finding opens the way to a new design of first- or last-choice recommender algorithms avoiding the necessity to arbitrarily break up potential chordless outranking circuits.
+We have thus found an algorithm for computing a *transitively orientable* graph, close in the :ref:`bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>` sense to the transitive part of a given bipolar-valued outranking digraph. *Partial Bachet* rankings make hence apparent the actual **transitive part** of outranking relations. This interesting finding opens the way to a new design of first- or last-choice recommender algorithms avoiding the necessity to arbitrarily break up potential chordless outranking circuits.
 
 .. _Bachet-Choice-Recommender-Tutorial-label:
 
@@ -4708,7 +4708,7 @@ It is indeed possible to define such a performance tableau by, first, using a si
 
 In :numref:`Bouyssou4OrigPT` Lines 9-12 we notice that criterion *g1* models with a majority margin of 2/5 = 0.40 the requested linear ranking and criterion *g2* warrants with a majority margin of 1/5 = 0.20 that *d* is "*at least as well evaluated as*" *d* (see Lines 18 and 21) leading to the necessary reciprocal outranking situations between *a* and *d*.
 
-It becomes apparent with the partial tournament example here that, when the number of criteria is not constrained, we may model this way compatible pairwise outranking situations independently one of the other.
+It becomes apparent with the partial tournament example here that, when the number of criteria is not constrained, we may model in this way compatible pairwise outranking situations independently one of the other.
 
 Partial tournaments may be strict outranking digraphs
 .....................................................
@@ -4780,7 +4780,7 @@ Each one of the ten performance criteria independently models, with a majority m
 
 And we recover here exactly the random partial tournament shown in :numref:`randomPartialTournament`. 
 
-To all partial tournament we may this way associate a multicriteria performance tableau, making it hence the instance of a potential bipolar-valued strict outranking digraph. Yet, we have not taken care of reproducing the precise characteristic valuation of a given partial tournament. Is it as well possible to always associate a valid performance tableau which produces a strict outranking digraph with exactly the given characteristic valuation?   
+To all partial tournament we may hence associate a multicriteria performance tableau, making it hence the instance of a potential bipolar-valued strict outranking digraph. Yet, we have not taken care of reproducing the precise characteristic valuation of a given partial tournament. Is it as well possible to always associate a valid performance tableau which produces a strict outranking digraph with exactly the given characteristic valuation?   
 
 Recognizing bipolar outranking valuations
 .........................................
