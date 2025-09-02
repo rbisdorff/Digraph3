@@ -1257,8 +1257,14 @@ class _BachetRanking(Digraph):
         j = al.index(y)
         al[i] = y
         al[j] = x
+        #print(self.decBachetScores)
         for x in self.decBachetScores:
-            bx = x[2]
+            try:
+                bx = x[2]
+            except:
+                print('Erreur',x)
+                print(self.decBachetScores)
+                return
             pbx = bx.permute(i+1,j+1)
             by = x[3]
             pby = by.permute(i+1,j+1)
@@ -1312,8 +1318,8 @@ class _BachetRanking(Digraph):
         # store attributes
         permSelf.bachetActionsList = al
         permSelf.relation = relation
-        permSelf.decBachetScores = _decBachetScores
-        permSelf.incBachetScores = _incBachetScores
+        permSelf.decBachetScores = decBachetScores
+        permSelf.incBachetScores = incBachetScores
         permSelf.bachetRanking = bachetRanking
         permSelf.bachetOrder = bachetOrder
         #corr = other.computeRankingCorrelation(bachetRanking)
@@ -1820,9 +1826,9 @@ class NewBachetRanking(LinearOrder,_BachetRanking):
             currBachetRanking = PolarisedBachetRanking
         else:
             currBachetRanking = ValuedBachetRanking
-        ba = currBachetRanking(other,actionsList=al,
+        bestBa = currBachetRanking(other,actionsList=al,
                                 orderLimit=orderLimit,_Permuting=True)
-        bestCorr = ba.correlation
+        bestCorr = bestBa.correlation
         for i in rdIndex:
             tr = rankedTriples[i][1]
             if Debug:
@@ -1833,7 +1839,7 @@ class NewBachetRanking(LinearOrder,_BachetRanking):
             al[j] = tr[0]
             if Debug:
                 print(al)
-            bap = ba.permute(tr[0],tr[1])
+            bap = bestBa.permute(tr[0],tr[1])
             corr = other.computeOrdinalCorrelation(bap)
             bap.correlation = corr['correlation']
             if bap.correlation > bestCorr:
@@ -1849,7 +1855,7 @@ class NewBachetRanking(LinearOrder,_BachetRanking):
             bap = bap.permute(tr[1],tr[2])
             corr = other.computeOrdinalCorrelation(bap)
             bap.correlation = corr['correlation']
-            if ba.correlation > bestCorr:
+            if bap.correlation > bestCorr:
                 bestList = al
                 bestCorr = bap.correlation
                 bestBa = bap
@@ -2081,6 +2087,7 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
                  randomized=0,seed=None,
                  Optimal=False,
                  #Polarised=False,
+                 _Permuting=False,
                  Comments=False,Debug=False):
         """
         constructor for generating a linear order
@@ -2242,8 +2249,12 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
 
 
             for x in actions:
-                vecx = [cRelation[x][y] for y in actions if y != x]
-                vecy = [cRelation[y][x] for y in actions if y != x]
+                if _Permuting:
+                    vecx = [cRelation[x][y] for y in actions]
+                    vecy = [cRelation[y][x] for y in actions]
+                else:
+                    vecx = [cRelation[x][y] for y in actions if y != x]
+                    vecy = [cRelation[y][x] for y in actions if y != x]
                 if Debug:
                     print(vecx,vecy)
                 bx = ar.BachetNumber(vector=vecx)
@@ -2251,12 +2262,22 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
                 bScore = bx + (-by)
                 #bScore = bx
                 #bScore = bx + by
-                incBachetScores.append((bScore.value(),x))
-                decBachetScores.append((bScore.value(),x))
+                if _Permuting:
+                    incBachetScores.append((bScore.value(),x,bx,by))
+                    decBachetScores.append((bScore.value(),x,bx,by))
+                else:
+                    incBachetScores.append((bScore.value(),x))
+                    decBachetScores.append((bScore.value(),x))
                 if BestQualified:
-                    bRevScore = bx.reverse() + (-by.reverse())
-                    incBachetRevScores.append((bRevScore.value(),x))
-                    decBachetRevScores.append((bRevScore.value(),x))
+                    bxrev = bx.reverse()
+                    byrev = by.reverse()
+                    bRevScore =  bxrev + (-byrev)
+                    if _Permuting:
+                        incBachetRevScores.append((bRevScore.value(),x,bxrev,byrev))
+                        decBachetRevScores.append((bRevScore.value(),x,bxrev,byrev))
+                    else:
+                        incBachetRevScores.append((bRevScore.value(),x))
+                        decBachetRevScores.append((bRevScore.value(),x))
             # reversed sorting with keeping the actions initial ordering
             # in case of ties
             if Debug:
@@ -2269,19 +2290,19 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
                 incBachetRevScores.sort(key=itemgetter(0))
                 decBachetRevScores.sort(reverse=True,key=itemgetter(0))
 
-            decBachetScores = [(x[0],x[1]) for x in decBachetScores]
-            incBachetScores = [(x[0],x[1]) for x in incBachetScores]               
+            #decBachetScores = [(x[0],x[1]) for x in decBachetScores]
+            #incBachetScores = [(x[0],x[1]) for x in incBachetScores]               
             #self.decBachetScores = decBachetScores
             #self.incBachetScores = incBachetScores
             if Debug:
                 print(incBachetScores,decBachetScores)
-            if BestQualified:
-                decBachetRevScores = [(x[0],x[1]) for x in decBachetRevScores]
-                incBachetRevScores = [(x[0],x[1]) for x in incBachetRevScores]               
+##            if BestQualified:
+##                decBachetRevScores = [(x[0],x[1]) for x in decBachetRevScores]
+##                incBachetRevScores = [(x[0],x[1]) for x in incBachetRevScores]               
                 #self.decBachetRevScores = decBachetRevScores
                 #self.incBachetRevScores = incBachetRevScores
-                if Debug:
-                    print(incBachetRevScores,decBachetRevScores)
+            if Debug:
+                print(incBachetRevScores,decBachetRevScores)
 
 
         if Comments:
@@ -2991,8 +3012,8 @@ if __name__ == "__main__":
     ##    t = CircularPerformanceTableau()
         #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
         #t = PerformanceTableau('testLin')
-        t = RandomCBPerformanceTableau(numberOfActions=15,
-                                       numberOfCriteria=13,seed=sample+1)
+        t = RandomCBPerformanceTableau(numberOfActions=9,
+                                       numberOfCriteria=13,seed=3)
         g = BipolarOutrankingDigraph(t)
         #g = RandomDigraph(order=7)
         revba1 = [x for x in reversed(g.actions)]
@@ -3058,46 +3079,50 @@ if __name__ == "__main__":
                                            corrcop['correlation'],
                                         corrba2['correlation'],
                                         corrnf['correlation']) )
+        banp = NewBachetRanking(g,Polarised=True)
+        print(banp.correlation)
+        banv = NewBachetRanking(g,Polarised=False)
+        print(banv.correlation)
     res.close()
-    bestBa = PolarisedBachetRanking(g,_Permuting=True)
-    bestCorr = bestBa.correlation
-    bestAl = [x for x in g.actions]
-    print('Initial:', bestCorr, bestAl)
-    triples = g.computeTransitivityDegree(ReturnIntransitiveTriples=True)
-    rankedTriples = []
-    for tr in triples:
-        x = tr[0]
-        y = tr[1]
-        z = tr[2]
-        score = g.relation[x][y] + g.relation[y][z] + g.relation[x][z]
-        rankedTriples.append((score,tr))
-    from digraphsTools import scoredTuplesSort
-    scoredTuplesSort(rankedTriples,reverse=True)
-    nt = len(triples)
-    for i in range(10):
-        tr = rankedTriples[i]
-        bap = bestBa.permute(tr[1][0],tr[1][1])
-        corr = g.computeRankingCorrelation(bap.bachetRanking)
-        bap.correlation = corr['correlation']
-        #print(corr)
-        if corr['correlation'] > bestCorr:
-            bestCorr = corr['correlation']
-            bestAl = bap.bachetActionsList
-            bestBa = bap
-            bestBa.correlation = bestCorr
-            print(bestCorr,bestAl)
-        bap = bestBa.permute(tr[1][1],tr[1][2])
-        corr = g.computeRankingCorrelation(bap.bachetRanking)
-         #print(corr)
-        if corr['correlation'] > bestCorr:
-            bestCorr = corr['correlation']
-            bestAl = bap.bachetActionsList
-            bestBa = bap
-            bestBa.correlation = bestCorr
-            print(bestCorr,bestAl)
-    #rint(bestCorr,bestAl)
-    #baop = PolarisedBachetRanking(g,actionsList=bestAl,BestQualified=False)
-    print(bestBa.correlation)
+##    bestBa = PolarisedBachetRanking(g,_Permuting=True)
+##    bestCorr = bestBa.correlation
+##    bestAl = [x for x in g.actions]
+##    print('Initial:', bestCorr, bestAl)
+##    triples = g.computeTransitivityDegree(ReturnIntransitiveTriples=True)
+##    rankedTriples = []
+##    for tr in triples:
+##        x = tr[0]
+##        y = tr[1]
+##        z = tr[2]
+##        score = g.relation[x][y] + g.relation[y][z] + g.relation[x][z]
+##        rankedTriples.append((score,tr))
+##    from digraphsTools import scoredTuplesSort
+##    scoredTuplesSort(rankedTriples,reverse=True)
+##    nt = len(triples)
+##    for i in range(10):
+##        tr = rankedTriples[i]
+##        bap = bestBa.permute(tr[1][0],tr[1][1])
+##        corr = g.computeRankingCorrelation(bap.bachetRanking)
+##        bap.correlation = corr['correlation']
+##        #print(corr)
+##        if corr['correlation'] > bestCorr:
+##            bestCorr = corr['correlation']
+##            bestAl = bap.bachetActionsList
+##            bestBa = bap
+##            bestBa.correlation = bestCorr
+##            print(bestCorr,bestAl)
+##        bap = bestBa.permute(tr[1][1],tr[1][2])
+##        corr = g.computeRankingCorrelation(bap.bachetRanking)
+##         #print(corr)
+##        if corr['correlation'] > bestCorr:
+##            bestCorr = corr['correlation']
+##            bestAl = bap.bachetActionsList
+##            bestBa = bap
+##            bestBa.correlation = bestCorr
+##            print(bestCorr,bestAl)
+##    #rint(bestCorr,bestAl)
+##    #baop = PolarisedBachetRanking(g,actionsList=bestAl,BestQualified=False)
+##    print(bestBa.correlation)
     
 ##    print(ba4)
 ##    print(ba4.correlation)
