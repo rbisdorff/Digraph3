@@ -833,6 +833,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#linearOrders.NetFlowsOrder"><code class="docutils literal notranslate"><span class="pre">NetFlowsOrder</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#linearOrders.NetFlowsRanking"><code class="docutils literal notranslate"><span class="pre">NetFlowsRanking</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linearOrders.NewBachetRanking"><code class="docutils literal notranslate"><span class="pre">NewBachetRanking</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#linearOrders.PolarisedBachetOrder"><code class="docutils literal notranslate"><span class="pre">PolarisedBachetOrder</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#linearOrders.PolarisedBachetRanking"><code class="docutils literal notranslate"><span class="pre">PolarisedBachetRanking</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#linearOrders.PrincipalOrder"><code class="docutils literal notranslate"><span class="pre">PrincipalOrder</span></code></a></li>
@@ -1534,7 +1535,7 @@ class;</p>
 <dt><a class="reference internal" href="#linearorders-label"><span class="std std-ref">linearOrders module</span></a></dt><dd><p>Additional tools for solving linearly ranking problems with the
 abstract generic root <a class="reference external" href="techDoc.html#linearOrders.LinearOrder">LinearOrder</a>
 class;</p>
-<div class="graphviz"><object data="_images/inheritance-66a0eabb7f1caad8b5f1ecce5e223e2fed2dca64.svg" type="image/svg+xml" class="inheritance graphviz">
+<div class="graphviz"><object data="_images/inheritance-8e4c24c7be050d382e3a2885e7cc1065667eb0f6.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of linearOrders</p></object></div>
 </dd>
 </dl>
@@ -8896,7 +8897,7 @@ given preorderings of the candidates per voter</p>
 <span id="linearorders-label"></span><h2><a class="toc-backref" href="#id16" role="doc-backlink"><span class="section-number">2.14. </span>linearOrders module</a><a class="headerlink" href="#linearorders-module" title="Link to this heading"></a></h2>
 <p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a></p>
 <p><strong>Inheritance Diagram</strong></p>
-<div class="graphviz"><object data="_images/inheritance-66a0eabb7f1caad8b5f1ecce5e223e2fed2dca64.svg" type="image/svg+xml" class="inheritance graphviz">
+<div class="graphviz"><object data="_images/inheritance-8e4c24c7be050d382e3a2885e7cc1065667eb0f6.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of linearOrders</p></object></div>
 <p id="module-linearOrders">Python3 implementation of linear orders
 Dependancy: digraphs module
@@ -9137,14 +9138,75 @@ to the indeterminate value.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="linearOrders.NewBachetRanking">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linearOrders.</span></span><span class="sig-name descname"><span class="pre">NewBachetRanking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actionsList</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orderLimit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Polarised</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampleSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linearOrders.html#NewBachetRanking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linearOrders.NewBachetRanking" title="Link to this definition"></a></dt>
+<dd><p>The Condorcet consistency of the polarised Bachet ranking rule guarantees
+that all transitive outranking triples are correctly scored independently
+of any given actions ordering. Only the intransitive outranking triples
+may give diverging ranking results. It is hence opportune to keep
+transitive triples unchanged in their given initial positions and only
+permute the first and the last pair in a sample of intransitive triples
+and keep always the best qualified PolarisedBachetRanking or
+ValuedBachetRanking result.</p>
+<p><em>Parameters</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>Polarised</em> : if <em>True</em> (default), the <em>PolarisedBachetRanking</em> contructor is used, if <em>False</em> the ValuedBachetRanking constructor is used.</p></li>
+<li><p><em>orderLimit</em> : maximal length of the <em>other.actions</em> dictionary.</p></li>
+<li><p><em>actionsList</em> : a given ordering of the other.actions dictionary. If <em>None</em> the list of other.actions is used.</p></li>
+<li><p><em>sampleSize</em>: number &gt; 0 of intransitive tripes to permute, the potential list of intransitive triples is ranked by decreasing epistemic determination. If <em>None</em> all intransitive tripes are permuted.</p></li>
+</ul>
+</div></blockquote>
+<p><em>Useage example</em></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RandomBipolarOutrankingDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">Transitivity degree of digraph &lt;rel_randomperftab&gt;:</span>
+<span class="go">  #triples x&gt;y&gt;z: 504, #closed: 343, #open: 161</span>
+<span class="go">  (#closed/#triples) =  0.681</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">BachetRanking</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span>
+<span class="go">*------- Digraph instance description ------*</span>
+<span class="go">Instance class      : BachetRanking</span>
+<span class="go">Instance name       : rel_randomperftab_best_ranked</span>
+<span class="go">Digraph Order       : 9</span>
+<span class="go">Digraph Size        : 36</span>
+<span class="go">Valuation domain    : [-1.00;1.00]</span>
+<span class="go">Determinateness (%) : 100.00</span>
+<span class="go">Attributes          : [&#39;intransitiveTriples&#39;, &#39;sampleSize&#39;, &#39;bachetRanking&#39;,</span>
+<span class="go">                       &#39;bachetOrder&#39;, &#39;decBachetScores&#39;, &#39;incBachetScores&#39;,</span>
+<span class="go">                       &#39;name&#39;, &#39;actions&#39;, &#39;order&#39;, &#39;valuationdomain&#39;, &#39;relation&#39;,</span>
+<span class="go">                       &#39;correlation&#39;, &#39;gamma&#39;, &#39;notGamma&#39;, &#39;runTimes&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
+<span class="go">Bachet scores in descending order</span>
+<span class="go"> action      score</span>
+<span class="go">  a2         6056.00</span>
+<span class="go">  a5         4746.00</span>
+<span class="go">  a9         2966.00</span>
+<span class="go">  a6         -306.00</span>
+<span class="go">  a4         -1494.00</span>
+<span class="go">  a8         -1849.00</span>
+<span class="go">  a3         -4801.00</span>
+<span class="go">  a7         -4955.00</span>
+<span class="go">  a1         -5921.00</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span><span class="o">.</span><span class="n">bachetRanking</span>
+<span class="go">[&#39;a2&#39;, &#39;a5&#39;, &#39;a9&#39;, &#39;a6&#39;, &#39;a4&#39;, &#39;a8&#39;, &#39;a3&#39;, &#39;a7&#39;, &#39;a1&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span><span class="o">.</span><span class="n">correlation</span>
+<span class="go">0.7441963223547806</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="linearOrders.PolarisedBachetOrder">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linearOrders.</span></span><span class="sig-name descname"><span class="pre">PolarisedBachetOrder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CoDual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actionsList</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orderLimit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BestQualified</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Optimal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_Polarised</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linearOrders.html#PolarisedBachetOrder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linearOrders.PolarisedBachetOrder" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linearOrders.</span></span><span class="sig-name descname"><span class="pre">PolarisedBachetOrder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CoDual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actionsList</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orderLimit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BestQualified</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Optimal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_Polarised</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_Permuting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linearOrders.html#PolarisedBachetOrder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linearOrders.PolarisedBachetOrder" title="Link to this definition"></a></dt>
 <dd><p>Dummy for PolarisedBachetRanking class</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="linearOrders.PolarisedBachetRanking">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linearOrders.</span></span><span class="sig-name descname"><span class="pre">PolarisedBachetRanking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CoDual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actionsList</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orderLimit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BestQualified</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Optimal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_Polarised</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linearOrders.html#PolarisedBachetRanking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linearOrders.PolarisedBachetRanking" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linearOrders.</span></span><span class="sig-name descname"><span class="pre">PolarisedBachetRanking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CoDual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actionsList</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orderLimit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BestQualified</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Optimal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_Polarised</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_Permuting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linearOrders.html#PolarisedBachetRanking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linearOrders.PolarisedBachetRanking" title="Link to this definition"></a></dt>
 <dd><p>Instantiates the Bachet Ranking and Ordering from a given bipolar-valued <em>Digraph</em> instance <em>other</em>.</p>
 <p><em>Parameters</em></p>
 <blockquote>
@@ -15006,7 +15068,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Aug 31, 2025.
+      <span class="lastupdated">Last updated on Sep 02, 2025.
       </span></p>
   </div>
 
