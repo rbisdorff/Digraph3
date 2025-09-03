@@ -1954,18 +1954,13 @@
 
 <span class="c1">#-------</span>
 
-<div class="viewcode-block" id="NewBachetRanking">
-<a class="viewcode-back" href="../techDoc.html#linearOrders.NewBachetRanking">[docs]</a>
-<span class="k">class</span> <span class="nc">NewBachetRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">,</span><span class="n">_BachetRanking</span><span class="p">):</span>
+<div class="viewcode-block" id="ReflexiveBachetRanking">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.ReflexiveBachetRanking">[docs]</a>
+<span class="k">class</span> <span class="nc">ReflexiveBachetRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">,</span><span class="n">_BachetRanking</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    The Condorcet consistency of the polarised Bachet ranking rule guarantees</span>
-<span class="sd">    that all transitive outranking triples are correctly scored independently</span>
-<span class="sd">    of any given actions ordering. Only the intransitive outranking triples</span>
-<span class="sd">    may give diverging ranking results. It is hence opportune to keep</span>
-<span class="sd">    transitive triples unchanged in their given initial positions and only</span>
-<span class="sd">    permute the first and the last pair in a sample of intransitive triples</span>
-<span class="sd">    and keep always the best qualified PolarisedBachetRanking or</span>
-<span class="sd">    ValuedBachetRanking result.</span>
+<span class="sd">    Variant of the BachetRanking class which uses the relation attribute with the reflexive terms included.</span>
+<span class="sd">    </span>
+<span class="sd">    This strategy allows to use the permute() and reverse() methods of BachetRanking instances.</span>
 
 <span class="sd">    *Parameters*</span>
 
@@ -1986,8 +1981,8 @@
 <span class="sd">    Transitivity degree of digraph &lt;rel_randomperftab&gt;:</span>
 <span class="sd">      #triples x&gt;y&gt;z: 504, #closed: 343, #open: 161</span>
 <span class="sd">      (#closed/#triples) =  0.681</span>
-<span class="sd">    &gt;&gt;&gt; from linearOrders import BachetRanking</span>
-<span class="sd">    &gt;&gt;&gt; sba = BachetRanking(g,Polarised=True,sampleSize=3)</span>
+<span class="sd">    &gt;&gt;&gt; from linearOrders import ReflexiveBachetRanking</span>
+<span class="sd">    &gt;&gt;&gt; sba = ReflexiveBachetRanking(g,Polarised=True,sampleSize=10)</span>
 <span class="sd">    &gt;&gt;&gt; sba</span>
 <span class="sd">    *------- Digraph instance description ------*</span>
 <span class="sd">    Instance class      : BachetRanking</span>
@@ -1999,23 +1994,24 @@
 <span class="sd">    Attributes          : [&#39;intransitiveTriples&#39;, &#39;sampleSize&#39;, &#39;bachetRanking&#39;,</span>
 <span class="sd">                           &#39;bachetOrder&#39;, &#39;decBachetScores&#39;, &#39;incBachetScores&#39;,</span>
 <span class="sd">                           &#39;name&#39;, &#39;actions&#39;, &#39;order&#39;, &#39;valuationdomain&#39;, &#39;relation&#39;,</span>
-<span class="sd">                           &#39;correlation&#39;, &#39;gamma&#39;, &#39;notGamma&#39;, &#39;runTimes&#39;]</span>
+<span class="sd">                           &#39;correlation&#39;, &#39;gamma&#39;, &#39;notGamma&#39;, &#39;runTimes&#39;,</span>
+<span class="sd">                           &#39;bachetActionsList&#39;]</span>
 <span class="sd">    &gt;&gt;&gt; sba.showScores()</span>
-<span class="sd">    Bachet scores in descending order</span>
-<span class="sd">     action 	 score</span>
-<span class="sd">      a2 	 6056.00</span>
-<span class="sd">      a5 	 4746.00</span>
-<span class="sd">      a9 	 2966.00</span>
-<span class="sd">      a6 	 -306.00</span>
-<span class="sd">      a4 	 -1494.00</span>
-<span class="sd">      a8 	 -1849.00</span>
-<span class="sd">      a3 	 -4801.00</span>
-<span class="sd">      a7 	 -4955.00</span>
-<span class="sd">      a1 	 -5921.00</span>
+<span class="sd">     Bachet scores in descending order</span>
+<span class="sd">      action 	 score</span>
+<span class="sd">       a2 	15300.00</span>
+<span class="sd">       a5 	 8764.00</span>
+<span class="sd">       a9 	 2680.00</span>
+<span class="sd">       a6 	 1368.00</span>
+<span class="sd">       a4 	 1242.00</span>
+<span class="sd">       a8 	-2601.00</span>
+<span class="sd">       a3      -17009.00</span>
+<span class="sd">       a7      -18065.00</span>
+<span class="sd">       a1      -19017.00</span>
 <span class="sd">    &gt;&gt;&gt; sba.bachetRanking</span>
-<span class="sd">    [&#39;a2&#39;, &#39;a5&#39;, &#39;a9&#39;, &#39;a6&#39;, &#39;a4&#39;, &#39;a8&#39;, &#39;a3&#39;, &#39;a7&#39;, &#39;a1&#39;]</span>
+<span class="sd">     [&#39;a2&#39;, &#39;a5&#39;, &#39;a9&#39;, &#39;a6&#39;, &#39;a4&#39;, &#39;a8&#39;, &#39;a3&#39;, &#39;a7&#39;, &#39;a1&#39;]</span>
 <span class="sd">    &gt;&gt;&gt; sba.correlation</span>
-<span class="sd">    0.7441963223547806</span>
+<span class="sd">     0.7441963223547806</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -2078,15 +2074,15 @@
             <span class="n">corr</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">bap</span><span class="p">)</span>
             <span class="n">bap</span><span class="o">.</span><span class="n">correlation</span> <span class="o">=</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">bap</span><span class="o">.</span><span class="n">correlation</span> <span class="o">&gt;</span> <span class="n">bestCorr</span><span class="p">:</span>
-                <span class="n">bap</span><span class="o">.</span><span class="n">bestList</span> <span class="o">=</span> <span class="n">al</span>
+                <span class="n">bap</span><span class="o">.</span><span class="n">bachetRankingList</span> <span class="o">=</span> <span class="n">al</span>
                 <span class="n">bestCorr</span> <span class="o">=</span> <span class="n">bap</span><span class="o">.</span><span class="n">correlation</span>
                 <span class="n">bestBa</span> <span class="o">=</span> <span class="n">bap</span>
             <span class="n">bap</span> <span class="o">=</span> <span class="n">bestBa</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
             <span class="n">corr</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">bap</span><span class="p">)</span>
             <span class="n">bap</span><span class="o">.</span><span class="n">correlation</span> <span class="o">=</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">bap</span><span class="o">.</span><span class="n">correlation</span> <span class="o">&gt;</span> <span class="n">bestCorr</span><span class="p">:</span>
-                <span class="n">bap</span><span class="o">.</span><span class="n">bestList</span> <span class="o">=</span> <span class="n">al</span>
-                <span class="n">bap</span><span class="o">.</span><span class="n">bestList</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+                <span class="n">bap</span><span class="o">.</span><span class="n">bachetRankingList</span> <span class="o">=</span> <span class="n">al</span>
+                <span class="n">bap</span><span class="o">.</span><span class="n">bachetRanking</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
                 <span class="n">bestCorr</span> <span class="o">=</span> <span class="n">bap</span><span class="o">.</span><span class="n">correlation</span>
                 <span class="n">bestBa</span> <span class="o">=</span> <span class="n">bap</span>        
             <span class="n">i</span> <span class="o">=</span> <span class="n">al</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
@@ -2099,19 +2095,20 @@
             <span class="n">corr</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">bap</span><span class="p">)</span>
             <span class="n">bap</span><span class="o">.</span><span class="n">correlation</span> <span class="o">=</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">bap</span><span class="o">.</span><span class="n">correlation</span> <span class="o">&gt;</span> <span class="n">bestCorr</span><span class="p">:</span>
-                <span class="n">bap</span><span class="o">.</span><span class="n">bestList</span> <span class="o">=</span> <span class="n">al</span>
+                <span class="n">bap</span><span class="o">.</span><span class="n">bachetRankingList</span> <span class="o">=</span> <span class="n">al</span>
                 <span class="n">bestCorr</span> <span class="o">=</span> <span class="n">bap</span><span class="o">.</span><span class="n">correlation</span>
                 <span class="n">bestBa</span> <span class="o">=</span> <span class="n">bap</span>
             <span class="n">bap</span> <span class="o">=</span> <span class="n">bap</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
             <span class="n">corr</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">bap</span><span class="p">)</span>
             <span class="n">bap</span><span class="o">.</span><span class="n">correlation</span> <span class="o">=</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">bap</span><span class="o">.</span><span class="n">correlation</span> <span class="o">&gt;</span> <span class="n">bestCorr</span><span class="p">:</span>
-                <span class="n">bap</span><span class="o">.</span><span class="n">bestList</span> <span class="o">=</span> <span class="n">al</span>
-                <span class="n">bap</span><span class="o">.</span><span class="n">bestList</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+                <span class="n">bap</span><span class="o">.</span><span class="n">bachetRanking</span> <span class="o">=</span> <span class="n">al</span>
+                <span class="n">bap</span><span class="o">.</span><span class="n">bachetRanking</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
                 <span class="n">bestCorr</span> <span class="o">=</span> <span class="n">bap</span><span class="o">.</span><span class="n">correlation</span>
                 <span class="n">bestBa</span> <span class="o">=</span> <span class="n">bap</span>
         <span class="k">for</span> <span class="n">att</span> <span class="ow">in</span> <span class="n">bestBa</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">att</span><span class="p">]</span> <span class="o">=</span> <span class="n">bestBa</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">att</span><span class="p">]</span></div>
+
 
 
 <span class="c1">#------------</span>
@@ -2120,14 +2117,7 @@
 <a class="viewcode-back" href="../techDoc.html#linearOrders.BachetRanking">[docs]</a>
 <span class="k">class</span> <span class="nc">BachetRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">,</span><span class="n">_BachetRanking</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    The Condorcet consistency of the polarised Bachet ranking rule guarantees</span>
-<span class="sd">    that all transitive outranking triples are correctly scored independently</span>
-<span class="sd">    of any given actions ordering. Only the intransitive outranking triples</span>
-<span class="sd">    may give diverging ranking results. It is hence opportune to keep</span>
-<span class="sd">    transitive triples unchanged in their given initial positions and only</span>
-<span class="sd">    permute the first and the last pair in a sample of intransitive triples</span>
-<span class="sd">    and keep always the best qualified PolarisedBachetRanking or</span>
-<span class="sd">    ValuedBachetRanking result.</span>
+<span class="sd">    </span>
 
 <span class="sd">    *Parameters*</span>
 
@@ -3288,7 +3278,7 @@
     <span class="n">Threading</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">res</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;testsmart.csv&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
     <span class="n">res</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&quot;seed&quot;,&quot;ba1&quot;,&quot;cop&quot;,&quot;ba2&quot;,&quot;nf&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="n">sampleSize</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">sampleSize</span> <span class="o">=</span> <span class="mi">10</span>
     <span class="c1">#t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)</span>
     <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sampleSize</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
@@ -3364,9 +3354,9 @@
                                            <span class="n">corrcop</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">],</span>
                                         <span class="n">corrba2</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">],</span>
                                         <span class="n">corrnf</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">])</span> <span class="p">)</span>
-        <span class="n">banp</span> <span class="o">=</span> <span class="n">NewBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">banp</span> <span class="o">=</span> <span class="n">ReflexiveBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">banp</span><span class="o">.</span><span class="n">correlation</span><span class="p">)</span>
-        <span class="n">banv</span> <span class="o">=</span> <span class="n">NewBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">banv</span> <span class="o">=</span> <span class="n">ReflexiveBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">banv</span><span class="o">.</span><span class="n">correlation</span><span class="p">)</span>
     <span class="n">res</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
     
