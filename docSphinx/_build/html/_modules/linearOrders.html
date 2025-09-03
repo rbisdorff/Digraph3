@@ -1466,6 +1466,96 @@
 
         <span class="k">return</span> <span class="n">permSelf</span>                         
 
+    <span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reverse the actionsList</span>
+<span class="sd">        and computes new decreasing and increasing Bachet Scores.</span>
+<span class="sd">        Returns a reviewed Bachet ranking and order.</span>
+
+<span class="sd">        Mind the absence of the correlation attribute !</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">arithmetics</span> <span class="kn">import</span> <span class="n">BachetNumber</span>
+        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">scoredTuplesSort</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="n">permSelf</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">_decBachetScores</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">actionsList</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bachetActionsList</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">actionsList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
+        <span class="c1">#print(self.decBachetScores)</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">decBachetScores</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">bx</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Erreur&#39;</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">decBachetScores</span><span class="p">)</span>
+                <span class="k">return</span>
+            <span class="n">pbx</span> <span class="o">=</span> <span class="n">bx</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+            <span class="n">by</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+            <span class="n">pby</span> <span class="o">=</span> <span class="n">by</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+            <span class="n">sb</span> <span class="o">=</span> <span class="n">pbx</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="n">pby</span><span class="p">)</span>
+            <span class="n">_decBachetScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">sb</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">pbx</span><span class="p">,</span><span class="n">pby</span><span class="p">))</span>
+            <span class="c1">#print(x[1],pbx,pby)</span>
+        <span class="n">scoredTuplesSort</span><span class="p">(</span><span class="n">_decBachetScores</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">decBachetScores</span> <span class="o">=</span> <span class="n">_decBachetScores</span>
+        <span class="c1">#print(_decBachetScores[0])</span>
+        <span class="n">bachetRanking</span> <span class="o">=</span> <span class="p">[</span><span class="n">sx</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">sx</span> <span class="ow">in</span> <span class="n">decBachetScores</span><span class="p">]</span>
+        <span class="c1">#print(bachetRanking)</span>
+        
+        <span class="n">_incBachetScores</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">incBachetScores</span><span class="p">:</span>
+            <span class="n">bx</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">pbx</span> <span class="o">=</span> <span class="n">bx</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+            <span class="n">by</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+            <span class="n">pby</span> <span class="o">=</span> <span class="n">by</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+            <span class="n">sb</span> <span class="o">=</span> <span class="n">pbx</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="n">pby</span><span class="p">)</span>
+            <span class="n">_incBachetScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">sb</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">pbx</span><span class="p">,</span><span class="n">pby</span><span class="p">))</span>
+            <span class="c1">#print(x[1],pbx,pby)</span>
+        <span class="n">scoredTuplesSort</span><span class="p">(</span><span class="n">_incBachetScores</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">incBachetScores</span> <span class="o">=</span> <span class="n">_incBachetScores</span>
+        <span class="c1">#print(incBachetScores[0])</span>
+        <span class="n">bachetOrder</span> <span class="o">=</span> <span class="p">[</span><span class="n">sx</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">sx</span> <span class="ow">in</span> <span class="n">incBachetScores</span><span class="p">]</span>
+        <span class="c1">#print(bachetOrder)                    </span>
+
+                <span class="c1"># init relation</span>
+        <span class="c1">#tr = time()</span>
+        <span class="c1">#actionsList = [x for x in actions]</span>
+        <span class="n">Max</span> <span class="o">=</span> <span class="n">permSelf</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
+        <span class="n">Med</span> <span class="o">=</span> <span class="n">permSelf</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
+        <span class="n">Min</span> <span class="o">=</span> <span class="n">permSelf</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
+        <span class="n">relation</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">actionsList</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionsList</span><span class="p">:</span>
+            <span class="c1">#print(x,bachetRanking)</span>
+            <span class="n">xi</span> <span class="o">=</span> <span class="n">bachetRanking</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="c1">#print(x,xi)</span>
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actionsList</span><span class="p">:</span>
+                <span class="n">yj</span> <span class="o">=</span> <span class="n">bachetRanking</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+                <span class="c1">#print(x,xi,y,yj,max(Med,cRelation[x][y]) )</span>
+                <span class="k">if</span> <span class="n">xi</span> <span class="o">&lt;</span> <span class="n">yj</span><span class="p">:</span>                    
+                    <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span>
+                <span class="k">elif</span> <span class="n">xi</span> <span class="o">==</span> <span class="n">yj</span><span class="p">:</span>
+                    <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
+                <span class="c1">#print(x,xi,y,yj,relation[x][y] )</span>
+
+        <span class="c1"># store attributes</span>
+        <span class="n">permSelf</span><span class="o">.</span><span class="n">bachetActionsList</span> <span class="o">=</span> <span class="n">actionsList</span>
+        <span class="n">permSelf</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">relation</span>
+        <span class="n">permSelf</span><span class="o">.</span><span class="n">decBachetScores</span> <span class="o">=</span> <span class="n">decBachetScores</span>
+        <span class="n">permSelf</span><span class="o">.</span><span class="n">incBachetScores</span> <span class="o">=</span> <span class="n">incBachetScores</span>
+        <span class="n">permSelf</span><span class="o">.</span><span class="n">bachetRanking</span> <span class="o">=</span> <span class="n">bachetRanking</span>
+        <span class="n">permSelf</span><span class="o">.</span><span class="n">bachetOrder</span> <span class="o">=</span> <span class="n">bachetOrder</span>
+        <span class="c1">#corr = other.computeRankingCorrelation(bachetRanking)</span>
+        <span class="n">permSelf</span><span class="o">.</span><span class="n">correlation</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">permSelf</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="n">permSelf</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
+        <span class="n">permSelf</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="n">permSelf</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">permSelf</span>                         
+
 <span class="c1">#----------------</span>
     
 <div class="viewcode-block" id="PolarisedBachetRanking">
@@ -1930,7 +2020,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">orderLimit</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                 <span class="n">sampleSize</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                 <span class="n">sampleSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 
         <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
@@ -1988,9 +2078,17 @@
             <span class="n">corr</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">bap</span><span class="p">)</span>
             <span class="n">bap</span><span class="o">.</span><span class="n">correlation</span> <span class="o">=</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">bap</span><span class="o">.</span><span class="n">correlation</span> <span class="o">&gt;</span> <span class="n">bestCorr</span><span class="p">:</span>
-                <span class="n">bestList</span> <span class="o">=</span> <span class="n">al</span>
+                <span class="n">bap</span><span class="o">.</span><span class="n">bestList</span> <span class="o">=</span> <span class="n">al</span>
                 <span class="n">bestCorr</span> <span class="o">=</span> <span class="n">bap</span><span class="o">.</span><span class="n">correlation</span>
                 <span class="n">bestBa</span> <span class="o">=</span> <span class="n">bap</span>
+            <span class="n">bap</span> <span class="o">=</span> <span class="n">bestBa</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+            <span class="n">corr</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">bap</span><span class="p">)</span>
+            <span class="n">bap</span><span class="o">.</span><span class="n">correlation</span> <span class="o">=</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">bap</span><span class="o">.</span><span class="n">correlation</span> <span class="o">&gt;</span> <span class="n">bestCorr</span><span class="p">:</span>
+                <span class="n">bap</span><span class="o">.</span><span class="n">bestList</span> <span class="o">=</span> <span class="n">al</span>
+                <span class="n">bap</span><span class="o">.</span><span class="n">bestList</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+                <span class="n">bestCorr</span> <span class="o">=</span> <span class="n">bap</span><span class="o">.</span><span class="n">correlation</span>
+                <span class="n">bestBa</span> <span class="o">=</span> <span class="n">bap</span>        
             <span class="n">i</span> <span class="o">=</span> <span class="n">al</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
             <span class="n">j</span> <span class="o">=</span> <span class="n">al</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
             <span class="n">al</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">tr</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
@@ -2001,7 +2099,15 @@
             <span class="n">corr</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">bap</span><span class="p">)</span>
             <span class="n">bap</span><span class="o">.</span><span class="n">correlation</span> <span class="o">=</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">bap</span><span class="o">.</span><span class="n">correlation</span> <span class="o">&gt;</span> <span class="n">bestCorr</span><span class="p">:</span>
-                <span class="n">bestList</span> <span class="o">=</span> <span class="n">al</span>
+                <span class="n">bap</span><span class="o">.</span><span class="n">bestList</span> <span class="o">=</span> <span class="n">al</span>
+                <span class="n">bestCorr</span> <span class="o">=</span> <span class="n">bap</span><span class="o">.</span><span class="n">correlation</span>
+                <span class="n">bestBa</span> <span class="o">=</span> <span class="n">bap</span>
+            <span class="n">bap</span> <span class="o">=</span> <span class="n">bap</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+            <span class="n">corr</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">bap</span><span class="p">)</span>
+            <span class="n">bap</span><span class="o">.</span><span class="n">correlation</span> <span class="o">=</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">bap</span><span class="o">.</span><span class="n">correlation</span> <span class="o">&gt;</span> <span class="n">bestCorr</span><span class="p">:</span>
+                <span class="n">bap</span><span class="o">.</span><span class="n">bestList</span> <span class="o">=</span> <span class="n">al</span>
+                <span class="n">bap</span><span class="o">.</span><span class="n">bestList</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
                 <span class="n">bestCorr</span> <span class="o">=</span> <span class="n">bap</span><span class="o">.</span><span class="n">correlation</span>
                 <span class="n">bestBa</span> <span class="o">=</span> <span class="n">bap</span>
         <span class="k">for</span> <span class="n">att</span> <span class="ow">in</span> <span class="n">bestBa</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
@@ -3186,13 +3292,13 @@
     <span class="c1">#t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)</span>
     <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sampleSize</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
-        <span class="n">seed</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1000000</span><span class="p">)</span>
+        <span class="c1">#seed = random.randint(1,1000000)</span>
         <span class="n">seed</span> <span class="o">=</span> <span class="n">sample</span> <span class="o">+</span> <span class="mi">1</span>
     <span class="c1">##    t = CircularPerformanceTableau()</span>
         <span class="c1">#t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)</span>
         <span class="c1">#t = PerformanceTableau(&#39;testLin&#39;)</span>
         <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
-                                       <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+                                       <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
         <span class="c1">#g = RandomDigraph(order=7)</span>
         <span class="n">revba1</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">)]</span>
@@ -3263,48 +3369,6 @@
         <span class="n">banv</span> <span class="o">=</span> <span class="n">NewBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">banv</span><span class="o">.</span><span class="n">correlation</span><span class="p">)</span>
     <span class="n">res</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="c1">##    bestBa = PolarisedBachetRanking(g,_Permuting=True)</span>
-<span class="c1">##    bestCorr = bestBa.correlation</span>
-<span class="c1">##    bestAl = [x for x in g.actions]</span>
-<span class="c1">##    print(&#39;Initial:&#39;, bestCorr, bestAl)</span>
-<span class="c1">##    triples = g.computeTransitivityDegree(ReturnIntransitiveTriples=True)</span>
-<span class="c1">##    rankedTriples = []</span>
-<span class="c1">##    for tr in triples:</span>
-<span class="c1">##        x = tr[0]</span>
-<span class="c1">##        y = tr[1]</span>
-<span class="c1">##        z = tr[2]</span>
-<span class="c1">##        score = g.relation[x][y] + g.relation[y][z] + g.relation[x][z]</span>
-<span class="c1">##        rankedTriples.append((score,tr))</span>
-<span class="c1">##    from digraphsTools import scoredTuplesSort</span>
-<span class="c1">##    scoredTuplesSort(rankedTriples,reverse=True)</span>
-<span class="c1">##    nt = len(triples)</span>
-<span class="c1">##    for i in range(10):</span>
-<span class="c1">##        tr = rankedTriples[i]</span>
-<span class="c1">##        bap = bestBa.permute(tr[1][0],tr[1][1])</span>
-<span class="c1">##        corr = g.computeRankingCorrelation(bap.bachetRanking)</span>
-<span class="c1">##        bap.correlation = corr[&#39;correlation&#39;]</span>
-<span class="c1">##        #print(corr)</span>
-<span class="c1">##        if corr[&#39;correlation&#39;] &gt; bestCorr:</span>
-<span class="c1">##            bestCorr = corr[&#39;correlation&#39;]</span>
-<span class="c1">##            bestAl = bap.bachetActionsList</span>
-<span class="c1">##            bestBa = bap</span>
-<span class="c1">##            bestBa.correlation = bestCorr</span>
-<span class="c1">##            print(bestCorr,bestAl)</span>
-<span class="c1">##        bap = bestBa.permute(tr[1][1],tr[1][2])</span>
-<span class="c1">##        corr = g.computeRankingCorrelation(bap.bachetRanking)</span>
-<span class="c1">##         #print(corr)</span>
-<span class="c1">##        if corr[&#39;correlation&#39;] &gt; bestCorr:</span>
-<span class="c1">##            bestCorr = corr[&#39;correlation&#39;]</span>
-<span class="c1">##            bestAl = bap.bachetActionsList</span>
-<span class="c1">##            bestBa = bap</span>
-<span class="c1">##            bestBa.correlation = bestCorr</span>
-<span class="c1">##            print(bestCorr,bestAl)</span>
-<span class="c1">##    #rint(bestCorr,bestAl)</span>
-<span class="c1">##    #baop = PolarisedBachetRanking(g,actionsList=bestAl,BestQualified=False)</span>
-<span class="c1">##    print(bestBa.correlation)</span>
-    
-<span class="c1">##    print(ba4)</span>
-<span class="c1">##    print(ba4.correlation)</span>
     
      
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
@@ -3327,7 +3391,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Sep 02, 2025.
+      <span class="lastupdated">Last updated on Sep 03, 2025.
       </span></p>
   </div>
 

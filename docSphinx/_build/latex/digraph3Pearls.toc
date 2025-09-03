@@ -48,7 +48,7 @@
 \contentsline {subsubsection}{The Bachet ranking rule, a new ranking\sphinxhyphen {}by\sphinxhyphen {}scoring method}{84}{subsubsection*.102}%
 \contentsline {subsubsection}{Efficiency of the Bachet ranking rule settings}{88}{subsubsection*.105}%
 \contentsline {subsubsection}{Smart sampling of the permutations of the actions list}{91}{subsubsection*.106}%
-\contentsline {subsubsection}{Uncovering the partial transitive part of a bipolar\sphinxhyphen {}valued outranking digraph}{92}{subsubsection*.107}%
+\contentsline {subsubsection}{Revealing the transitive part of a bipolar\sphinxhyphen {}valued digraph}{92}{subsubsection*.107}%
 \contentsline {subsubsection}{The Bachet choice recommender algorithm}{94}{subsubsection*.108}%
 \contentsline {subsection}{\numberline {3.4}On computing digraph kernels}{96}{subsection.3.4}%
 \contentsline {subsubsection}{What is a graph kernel ?}{96}{subsubsection*.114}%
