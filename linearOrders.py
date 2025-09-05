@@ -1840,7 +1840,7 @@ class ReflexiveBachetRanking(LinearOrder,_BachetRanking):
     >>> sba = ReflexiveBachetRanking(g,Polarised=True,sampleSize=10)
     >>> sba
     *------- Digraph instance description ------*
-    Instance class      : BachetRanking
+    Instance class      : ReflexiveBachetRanking
     Instance name       : rel_randomperftab_best_ranked
     Digraph Order       : 9
     Digraph Size        : 36

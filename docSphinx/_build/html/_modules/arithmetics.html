@@ -249,7 +249,7 @@
     
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num_int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">vector</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Tranforms a potentially signed integer into a Bachet number</span>
+<span class="sd">        Tranforms a potentially signed integer into a Bachet number.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">num_int</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">vector</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -272,7 +272,7 @@
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Defines the printable string version of a Bachet number</span>
+<span class="sd">        Defines the printable string version of a Bachet number.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">bachet_string</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)):</span>
@@ -285,7 +285,7 @@
        
     <span class="k">def</span> <span class="fm">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Defines an unary negating operator for Bachet encoded numbers</span>
+<span class="sd">        Defines an unary negating operator for Bachet encoded numbers.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
         <span class="n">neg</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -304,7 +304,7 @@
 
     <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Defines the addition operator for Bachet encoded numbers</span>
+<span class="sd">        Defines the addition operator for Bachet encoded numbers.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
         <span class="n">srv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
@@ -359,7 +359,7 @@
 
     <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Defines the multiplication operator for Bachet encoded numbers</span>
+<span class="sd">        Defines the multiplication operator for Bachet encoded numbers.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">n1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
         <span class="n">n2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
@@ -381,8 +381,7 @@
 
     <span class="k">def</span> <span class="nf">_base3toBachet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num_string</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Converts a base 3 encoded integer into a</span>
-<span class="sd">        bipolar {-1,0,+1} encoded one.</span>
+<span class="sd">        Converts a base 3 encoded integer into a bipolar {-1,0,+1} encoded one.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">new_vector</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">num_string</span><span class="p">))]</span>
@@ -406,7 +405,7 @@
 
     <span class="k">def</span> <span class="nf">_int2bachet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num_int</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Converts a signed integer into a Bachet encoded number</span>
+<span class="sd">        Converts a signed integer into a Bachet encoded number.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">num_int</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">unsigned_num_int</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">num_int</span><span class="p">)</span>
@@ -428,7 +427,7 @@
 <a class="viewcode-back" href="../techDoc.html#arithmetics.BachetNumber.value">[docs]</a>
     <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Renders the integer corresponding to the Bachet number</span>
+<span class="sd">        Renders the integer corresponding to the Bachet number.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result_int</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">nv</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span>
@@ -449,8 +448,7 @@
 <a class="viewcode-back" href="../techDoc.html#arithmetics.BachetNumber.reverse">[docs]</a>
     <span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Reverses the Bachet vector</span>
-<span class="sd">        Return a modified Bachet number</span>
+<span class="sd">        Reverses the Bachet vector. Returns a modified Bachet number.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
         <span class="n">rev</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -466,8 +464,7 @@
 <a class="viewcode-back" href="../techDoc.html#arithmetics.BachetNumber.permute">[docs]</a>
     <span class="k">def</span> <span class="nf">permute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Swaps positions i-1 an j-1 in the self Bachet vector.</span>
-<span class="sd">        Return a modified Bachet number.</span>
+<span class="sd">        Swaps positions i-1 an j-1 in the self Bachet vector. Returns a modified Bachet number.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="ow">or</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: index i (</span><span class="si">%d</span><span class="s1">) not fitting the vector length !!!&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
@@ -1381,7 +1378,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Sep 03, 2025.
+      <span class="lastupdated">Last updated on Sep 05, 2025.
       </span></p>
   </div>
 

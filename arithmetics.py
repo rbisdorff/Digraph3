@@ -164,7 +164,7 @@ class BachetNumber(object):
     
     def __init__(self,num_int=None,vector=None,length=0):
         """
-        Tranforms a potentially signed integer into a Bachet number
+        Tranforms a potentially signed integer into a Bachet number.
         """
         if num_int is None:
             if vector is not None:
@@ -187,7 +187,7 @@ class BachetNumber(object):
 
     def __str__(self):
         """
-        Defines the printable string version of a Bachet number
+        Defines the printable string version of a Bachet number.
         """
         bachet_string = '\''
         for i in range(len(self.vector)):
@@ -200,7 +200,7 @@ class BachetNumber(object):
        
     def __neg__(self):
         """
-        Defines an unary negating operator for Bachet encoded numbers
+        Defines an unary negating operator for Bachet encoded numbers.
         """
         from copy import deepcopy
         neg = deepcopy(self)
@@ -219,7 +219,7 @@ class BachetNumber(object):
 
     def __add__(self,other,Debug=False):
         """
-        Defines the addition operator for Bachet encoded numbers
+        Defines the addition operator for Bachet encoded numbers.
         """
         from copy import deepcopy
         srv = self.reverse()
@@ -274,7 +274,7 @@ class BachetNumber(object):
 
     def __mul__(self,other):
         """
-        Defines the multiplication operator for Bachet encoded numbers
+        Defines the multiplication operator for Bachet encoded numbers.
         """
         n1 = self.value()
         n2 = other.value()
@@ -296,8 +296,7 @@ class BachetNumber(object):
 
     def _base3toBachet(self,num_string):
         """
-        Converts a base 3 encoded integer into a
-        bipolar {-1,0,+1} encoded one.
+        Converts a base 3 encoded integer into a bipolar {-1,0,+1} encoded one.
 
         """
         new_vector=[0 for x in range(len(num_string))]
@@ -321,7 +320,7 @@ class BachetNumber(object):
 
     def _int2bachet(self,num_int):
         """
-        Converts a signed integer into a Bachet encoded number
+        Converts a signed integer into a Bachet encoded number.
         """
         if num_int < 0:
             unsigned_num_int = abs(num_int)
@@ -341,7 +340,7 @@ class BachetNumber(object):
        
     def value(self):
         """
-        Renders the integer corresponding to the Bachet number
+        Renders the integer corresponding to the Bachet number.
         """
         result_int = 0
         nv = len(self.vector)
@@ -359,8 +358,7 @@ class BachetNumber(object):
 
     def reverse(self):
         """
-        Reverses the Bachet vector
-        Return a modified Bachet number
+        Reverses the Bachet vector. Returns a modified Bachet number.
         """
         from copy import deepcopy
         rev = deepcopy(self)
@@ -373,8 +371,7 @@ class BachetNumber(object):
 
     def permute(self,i,j):
         """
-        Swaps positions i-1 an j-1 in the self Bachet vector.
-        Return a modified Bachet number.
+        Swaps positions i-1 an j-1 in the self Bachet vector. Returns a modified Bachet number.
         """
         if i > len(self) or i < 1:
             print('Error: index i (%d) not fitting the vector length !!!' % i)
