@@ -1423,7 +1423,7 @@ class _BachetRanking(Digraph):
     
 class PolarisedBachetRanking(LinearOrder,_BachetRanking):
     """    
-    Instantiates the Bachet Ranking and Ordering from a given bipolar-valued *Digraph* instance *other*.
+    Instantiates the polarised Bachet Ranking and Ordering from a given bipolar-valued *Digraph* instance *other*.
 
     *Parameters*
 
@@ -1811,6 +1811,159 @@ class PolarisedBachetOrder(PolarisedBachetRanking):
 
 #-------
 
+##class ReflexiveBachetRanking(LinearOrder,_BachetRanking):
+##    """
+##    Variant of the BachetRanking class which uses the relation attribute with the reflexive terms included.
+##    
+##    This strategy allows to use the permute() and reverse() methods of BachetRanking instances.
+##
+##    *Parameters*
+##
+##        - *Polarised* : if *True* (default), the *PolarisedBachetRanking* contructor is used, if *False* the ValuedBachetRanking constructor is used.
+##
+##        - *orderLimit* : maximal length of the *other.actions* dictionary.
+##
+##        - *actionsList* : a given ordering of the other.actions dictionary. If *None* the list of other.actions is used.
+##
+##        - *sampleSize*: number > 0 of intransitive tripes to permute, the potential list of intransitive triples is ranked by decreasing epistemic determination. If *None* all intransitive tripes are permuted.
+##
+##
+##    *Useage example*
+##    
+##    >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
+##    >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
+##    >>> g.computeTransitivityDegree(Comments=True)
+##    Transitivity degree of digraph <rel_randomperftab>:
+##      #triples x>y>z: 504, #closed: 343, #open: 161
+##      (#closed/#triples) =  0.681
+##    >>> from linearOrders import ReflexiveBachetRanking
+##    >>> sba = ReflexiveBachetRanking(g,Polarised=True,sampleSize=10)
+##    >>> sba
+##    *------- Digraph instance description ------*
+##    Instance class      : ReflexiveBachetRanking
+##    Instance name       : rel_randomperftab_best_ranked
+##    Digraph Order       : 9
+##    Digraph Size        : 36
+##    Valuation domain    : [-1.00;1.00]
+##    Determinateness (%) : 100.00
+##    Attributes          : ['intransitiveTriples', 'sampleSize', 'bachetRanking',
+##                           'bachetOrder', 'decBachetScores', 'incBachetScores',
+##                           'name', 'actions', 'order', 'valuationdomain', 'relation',
+##                           'correlation', 'gamma', 'notGamma', 'runTimes',
+##                           'bachetActionsList']
+##    >>> sba.showScores()
+##     Bachet scores in descending order
+##      action 	 score
+##       a2 	15300.00
+##       a5 	 8764.00
+##       a9 	 2680.00
+##       a6 	 1368.00
+##       a4 	 1242.00
+##       a8 	-2601.00
+##       a3      -17009.00
+##       a7      -18065.00
+##       a1      -19017.00
+##    >>> sba.bachetRanking
+##     ['a2', 'a5', 'a9', 'a6', 'a4', 'a8', 'a3', 'a7', 'a1']
+##    >>> sba.correlation
+##     0.7441963223547806
+##
+##    """
+##    def __init__(self,other,actionsList=None,
+##                 orderLimit=50,Polarised=True,
+##                 sampleSize=None,
+##                 Debug=False):
+##
+##        from copy import deepcopy
+##        triples = other.computeTransitivityDegree(ReturnIntransitiveTriples=True)
+##        self.intransitiveTriples = triples
+##        nt = len(triples)
+##        rankedTriples = []
+##        for tr in triples:
+##            x = tr[0]
+##            y = tr[1]
+##            z = tr[2]
+##            score = other.relation[x][y] + other.relation[y][z] + other.relation[x][z]
+##            rankedTriples.append((score,tr))
+##        from digraphsTools import scoredTuplesSort
+##        scoredTuplesSort(rankedTriples,reverse=True)
+##        if Debug:
+##            print(nt)
+####            print(rankedTriples)
+##        if sampleSize is None:
+##            sampleSize = nt
+##        elif sampleSize < 1:
+##            print('Error: sampleSize must be positive integer!')
+##            return
+##        if nt > sampleSize:
+##            rdIndex = range(sampleSize)
+##        else:
+##            rdIndex = range(nt)
+##        self.sampleSize = sampleSize
+##        t0 = time()
+##        if actionsList is None:
+##            al = [x for x in other.actions]
+##        else:
+##            al = ba.bachetActionsList
+##        if Debug:
+##            print(al)
+##        bestList = al
+##        if Polarised:
+##            currBachetRanking = PolarisedBachetRanking
+##        else:
+##            currBachetRanking = ValuedBachetRanking
+##        bestBa = currBachetRanking(other,actionsList=al,
+##                                orderLimit=orderLimit,_Permuting=True)
+##        bestCorr = bestBa.correlation
+##        for i in rdIndex:
+##            tr = rankedTriples[i][1]
+##            if Debug:
+##                print(tr)
+##            i = al.index(tr[0])
+##            j = al.index(tr[1])
+##            al[i] = tr[1]
+##            al[j] = tr[0]
+##            if Debug:
+##                print(al)
+##            bap = bestBa.permute(tr[0],tr[1])
+##            corr = other.computeOrdinalCorrelation(bap)
+##            bap.correlation = corr['correlation']
+##            if bap.correlation > bestCorr:
+##                bap.bachetRankingList = al
+##                bestCorr = bap.correlation
+##                bestBa = bap
+##            bap = bestBa.reverse()
+##            corr = other.computeOrdinalCorrelation(bap)
+##            bap.correlation = corr['correlation']
+##            if bap.correlation > bestCorr:
+##                bap.bachetRankingList = al
+##                bap.bachetRanking.reverse()
+##                bestCorr = bap.correlation
+##                bestBa = bap        
+##            i = al.index(tr[1])
+##            j = al.index(tr[2])
+##            al[i] = tr[2]
+##            al[j] = tr[1]
+##            if Debug:
+##                print(al)
+##            bap = bap.permute(tr[1],tr[2])
+##            corr = other.computeOrdinalCorrelation(bap)
+##            bap.correlation = corr['correlation']
+##            if bap.correlation > bestCorr:
+##                bap.bachetRankingList = al
+##                bestCorr = bap.correlation
+##                bestBa = bap
+##            bap = bap.reverse()
+##            corr = other.computeOrdinalCorrelation(bap)
+##            bap.correlation = corr['correlation']
+##            if bap.correlation > bestCorr:
+##                bap.bachetRanking = al
+##                bap.bachetRanking.reverse()
+##                bestCorr = bap.correlation
+##                bestBa = bap
+##        for att in bestBa.__dict__:
+##            self.__dict__[att] = bestBa.__dict__[att]
+
 class ReflexiveBachetRanking(LinearOrder,_BachetRanking):
     """
     Variant of the BachetRanking class which uses the relation attribute with the reflexive terms included.
@@ -1825,7 +1978,7 @@ class ReflexiveBachetRanking(LinearOrder,_BachetRanking):
 
         - *actionsList* : a given ordering of the other.actions dictionary. If *None* the list of other.actions is used.
 
-        - *sampleSize*: number > 0 of intransitive tripes to permute, the potential list of intransitive triples is ranked by decreasing epistemic determination. If *None* all intransitive tripes are permuted.
+        - *sampleSize*: number > 0 (default=100) of intransitive tripes to permute, the potential list of intransitive triples is ranked by decreasing epistemic determination. If *None* all intransitive tripes are permuted.
 
 
     *Useage example*
@@ -1871,7 +2024,7 @@ class ReflexiveBachetRanking(LinearOrder,_BachetRanking):
     """
     def __init__(self,other,actionsList=None,
                  orderLimit=50,Polarised=True,
-                 sampleSize=None,
+                 sampleSize=100,
                  Debug=False):
 
         from copy import deepcopy
@@ -1887,8 +2040,8 @@ class ReflexiveBachetRanking(LinearOrder,_BachetRanking):
             rankedTriples.append((score,tr))
         from digraphsTools import scoredTuplesSort
         scoredTuplesSort(rankedTriples,reverse=True)
-        if Debug:
-            print(nt)
+        #if Debug:
+        #    print(nt)
 ##            print(rankedTriples)
         if sampleSize is None:
             sampleSize = nt
@@ -1917,59 +2070,73 @@ class ReflexiveBachetRanking(LinearOrder,_BachetRanking):
         bestCorr = bestBa.correlation
         for i in rdIndex:
             tr = rankedTriples[i][1]
-            if Debug:
-                print(tr)
-            i = al.index(tr[0])
-            j = al.index(tr[1])
-            al[i] = tr[1]
-            al[j] = tr[0]
-            if Debug:
-                print(al)
+##            if Debug:
+##                print(tr)
             bap = bestBa.permute(tr[0],tr[1])
             corr = other.computeOrdinalCorrelation(bap)
             bap.correlation = corr['correlation']
             if bap.correlation > bestCorr:
+                i = al.index(tr[0])
+                j = al.index(tr[1])
+                al[i] = tr[1]
+                al[j] = tr[0]
+                if Debug:
+                    print('perm12',tr,al,bap.correlation)
                 bap.bachetRankingList = al
                 bestCorr = bap.correlation
                 bestBa = bap
+            #else:
+            #    bap = bestBa.permute(tr[1],tr[0]) 
             bap = bestBa.reverse()
             corr = other.computeOrdinalCorrelation(bap)
             bap.correlation = corr['correlation']
             if bap.correlation > bestCorr:
+                al.reverse()
+                if Debug:
+                    print('rev12',tr,al,bap.correlation)
                 bap.bachetRankingList = al
                 bap.bachetRanking.reverse()
                 bestCorr = bap.correlation
-                bestBa = bap        
-            i = al.index(tr[1])
-            j = al.index(tr[2])
-            al[i] = tr[2]
-            al[j] = tr[1]
-            if Debug:
-                print(al)
+                bestBa = bap
+            #else:
+            #    bap.reverse()
             bap = bap.permute(tr[1],tr[2])
             corr = other.computeOrdinalCorrelation(bap)
             bap.correlation = corr['correlation']
             if bap.correlation > bestCorr:
+                i = al.index(tr[1])
+                j = al.index(tr[2])
+                al[i] = tr[2]
+                al[j] = tr[1]
+                if Debug:
+                    print('perm23',tr,al,bap.correlation)
                 bap.bachetRankingList = al
                 bestCorr = bap.correlation
                 bestBa = bap
+            #else:
+            #    bap = bap.permute(tr[2],tr[1])
             bap = bap.reverse()
             corr = other.computeOrdinalCorrelation(bap)
             bap.correlation = corr['correlation']
             if bap.correlation > bestCorr:
+                al.reverse()
+                if Debug:
+                    print('rev23',tr,al,bap.correlation)
                 bap.bachetRanking = al
                 bap.bachetRanking.reverse()
                 bestCorr = bap.correlation
                 bestBa = bap
+            #else:
+            #    bap.reverse()
         for att in bestBa.__dict__:
             self.__dict__[att] = bestBa.__dict__[att]
-
 
 #------------
 
 class BachetRanking(LinearOrder,_BachetRanking):
     """
-    
+
+    Instantiates the Bachet Ranking and Ordering from a given bipolar-valued *Digraph* instance.
 
     *Parameters*
 
@@ -1979,7 +2146,7 @@ class BachetRanking(LinearOrder,_BachetRanking):
 
         - *actionsList* : a given ordering of the other.actions dictionary. If *None* the list of other.actions is used.
 
-        - *sampleSize*: number > 0 of intransitive tripes to permute, the potential list of intransitive triples is ranked by decreasing epistemic determination. If *None* all intransitive tripes are permuted.
+        - *sampleSize*: number > 0 (default=100) of intransitive tripes to permute, the potential list of intransitive triples is ranked by decreasing epistemic determination. If *None* all intransitive tripes are permuted.
 
 
     *Useage example*
@@ -2109,7 +2276,7 @@ class BachetOrder(BachetRanking):
 #------------
 class ValuedBachetRanking(LinearOrder,_BachetRanking):
     """    
-    Instantiates the Bachet Ranking and Ordering from a given bipolar-valued *Digraph* instance *other*.
+    Instantiates the valued Bachet Ranking and Ordering from a given bipolar-valued *Digraph* instance *other*.
 
     *Parameters*
 
@@ -3098,8 +3265,8 @@ if __name__ == "__main__":
 
     Threading = False
     res = open('testsmart.csv','w')
-    res.write('"seed","ba1","cop","ba2","nf"\n')
-    sampleSize = 10
+    res.write('"seed","bap","banp","bav","banv"\n')
+    sampleSize = 5
     #t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
     for sample in range(sampleSize):
         print(sample)
@@ -3122,7 +3289,7 @@ if __name__ == "__main__":
         #print(ba1)
         corrba1 = g.computeRankingCorrelation(ba1.bachetRanking)
         print('Smart polarised Bachet Ranking')
-        print('ba1',ba1.bachetRanking,corrba1)
+        print('bap',ba1.bachetRanking,corrba1)
         cop = CopelandRanking(g,Comments=False,Gamma=False)
         print(cop.copelandRanking)
         corrcop = g.computeRankingCorrelation(cop.copelandRanking)
@@ -3160,25 +3327,27 @@ if __name__ == "__main__":
                                  sampleSize=None,Polarised=False)
         corrba2 = g.computeRankingCorrelation(ba2.bachetRanking)
         print('Smart valued Bachet Ranking')
-        print('ba2',ba2.bachetRanking,corrba2)
+        print('bav',ba2.bachetRanking,corrba2)
 ##        ba3 = ValuedBachetRanking(g,Comments=False,BestQualified=False,
 ##                            CoDual=True,
 ##                            Optimal=True,Debug=True,
 ##                            )
 ##        corrba3 = g.computeRankingCorrelation(ba3.bachetRanking)
 ##        print('ba3',ba3.bachetRanking,corrba3)
+        banp = ReflexiveBachetRanking(g,Polarised=True,Debug=False)
+        print('banp',banp.correlation)
+        banv = ReflexiveBachetRanking(g,Polarised=False,Debug=False)
+        print('banv',banv.correlation)
         print('%d,%.4f,%.4f,%.4f,%.4f\n' % (seed,corrba1['correlation'],
-                                           corrcop['correlation'],
+                                           #corrcop['correlation'],
+                                            banp.correlation,
                                         corrba2['correlation'],
-                                        corrnf['correlation']) )
+                                            banv.correlation,))
+                                        #corrnf['correlation']) )
         res.write('%d,%.4f,%.4f,%.4f,%.4f\n' % (seed,corrba1['correlation'],
                                            corrcop['correlation'],
                                         corrba2['correlation'],
                                         corrnf['correlation']) )
-        banp = ReflexiveBachetRanking(g,Polarised=True)
-        print(banp.correlation)
-        banv = ReflexiveBachetRanking(g,Polarised=False)
-        print(banv.correlation)
     res.close()
     
      
