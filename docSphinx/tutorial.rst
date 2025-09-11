@@ -3730,7 +3730,7 @@ A second strategy for constructing partial rankings makes usage of the *randomiz
 On partially ranking with the Bachet rules
 ``````````````````````````````````````````
 
-Due to its *Condorcet consistency* property, the Bachet* ranking rules applied to random orderings of the actions will potentially produce multiple ranking results of unequal correlation quality, yet respecting all the actual transitive part of the given outranking digraph. A subset of best correlated *Bachet* rankings represents hence a suitable sample for computing a convincing ranking consensus (see :ref:`Bachet-Tutorial-label`). This second strategy is provided by the :py:class:`transitiveDigraphs.PartialBachetRanking` class. To illustrate its usefulness, let us reconsider the example outranking digraph *g* of :numref:`RankingConsensus`. 
+Due to its *Condorcet consistency* property, the polarsed *Bachet* ranking rule applied to random orderings of the actions will potentially produce multiple ranking results of unequal correlation quality, yet respecting all the actual transitive part of the given outranking digraph. A subset of best correlated *Bachet* rankings represents hence a suitable sample for computing a convincing ranking consensus (see :ref:`Bachet-Tutorial-label`). This second strategy is provided by the :py:class:`transitiveDigraphs.PartialBachetRanking` class. To illustrate its usefulness, let us reconsider the example outranking digraph *g* of :numref:`RankingConsensus`. 
 
 .. code-block:: pycon
    :caption: Partial polarised Bachet ranking digraph
@@ -3796,11 +3796,11 @@ In :numref:`partialBachet3` Line 6-8, we notice that we sample 100 polarised *Ba
 
 The resulting *partial ranking* is highly correlated with the common determinated part of the given outranking digraph *g* (+0.806) leading to a *relational equivalence* with the given outranking digraph *g* supported by a criteria significance majority of 57.2% (see Lines 9-11 above).
 
-We recover with the *Bachet* ranking rule a ranking consensus actually very similar to the previous consensus obtained from all four *ranking-by-scoring* results (see :numref:`rankingConsensusFigure`).
+We recover with the polarised *Bachet* ranking rule a ranking consensus actually very similar to the previous consensus obtained from all four *ranking-by-scoring* results (see :numref:`rankingConsensusFigure`).
 
 The :py:class:`~transitiveDigraphs.PartialBachetRanking` constructor uses by default the *polarised* version of the *Bachet* ranking rule. Due to its *Condorcet consistency* property, the partial ranking result obtained in :numref:`partialBachetpol` represents in fact a ranking consensus respecting the actual **transitive parts** of the given outranking digraph (see the advanced topic dedicated to the :ref:`Bachet ranking rules <Bachet-Tutorial-label>`).
 
-The :py:class:`~transitiveDigraphs.PartialBachetRanking` now provides a "**Polarised == False**" flag allowing to use instead the **valued** version of the *Bachet* ranking rule (see below :numref:`weakBachet5` Line 1). The five best qualified *Bachet* rankings are shown in Lines 4-8. 
+The :py:class:`~transitiveDigraphs.PartialBachetRanking` now provides a "**Polarised == False**" flag allowing to use instead the **valued** version of the *Bachet* ranking rule (see below :numref:`weakBachet5` Line 1). The five best qualified valued *Bachet* rankings are shown in Lines 4-8. 
 
 .. code-block:: pycon
    :caption: Five best correlated valued Bachet ranking results

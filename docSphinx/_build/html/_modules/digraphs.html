@@ -3081,6 +3081,7 @@
             <span class="k">return</span> <span class="n">stages</span></div>
 
 
+
 <div class="viewcode-block" id="Digraph.computeWeakTransitivityDegree">
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeWeakTransitivityDegree">[docs]</a>
     <span class="k">def</span> <span class="nf">computeWeakTransitivityDegree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
@@ -3218,11 +3219,12 @@
 
 <div class="viewcode-block" id="Digraph.computeIntransitiveTriples">
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeIntransitiveTriples">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeIntransitiveTriples</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">computeIntransitiveTriples</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the list of intransitive triples detected in self.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">(</span><span class="n">ReturnIntransitiveTriples</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">(</span><span class="n">ReturnIntransitiveTriples</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                              <span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span></div>
 
             
 <div class="viewcode-block" id="Digraph.isTransitive">
@@ -9563,11 +9565,13 @@
 
 <div class="viewcode-block" id="Digraph.showBachetChoiceRecommendation">
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.showBachetChoiceRecommendation">[docs]</a>
-    <span class="k">def</span> <span class="nf">showBachetChoiceRecommendation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">showBachetChoiceRecommendation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                       <span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                       <span class="n">randomized</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
                                        <span class="n">maxNbrOfRankings</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
                                        <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                                        <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                       <span class="n">ChoiceVector</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                       <span class="c1">#ChoiceVector=False,</span>
                                        <span class="n">CoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                        <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                        <span class="p">):</span>
@@ -9607,15 +9611,17 @@
             <span class="n">Comments</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="n">n0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span>
-        <span class="n">cpself</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">CoDual</span><span class="p">:</span>
-            <span class="n">g</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">cpself</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">g</span> <span class="o">=</span> <span class="n">cpself</span>
+        <span class="c1">#cpself = deepcopy(self)</span>
+        <span class="c1">#if CoDual:</span>
+        <span class="c1">#    g = ~(-cpself)</span>
+        <span class="c1">#else:</span>
+        <span class="c1">#    g = cpself</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">g</span><span class="o">.</span><span class="n">recodeValuation</span><span class="p">()</span>
         <span class="n">pbr</span> <span class="o">=</span> <span class="n">PartialBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="n">randomized</span><span class="p">,</span>
-                                        <span class="n">maxNbrOfRankings</span><span class="o">=</span><span class="n">maxNbrOfRankings</span><span class="p">,</span>
-                                        <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span>
+                                   <span class="n">Polarised</span><span class="o">=</span><span class="n">Polarised</span><span class="p">,</span>
+                                   <span class="n">maxNbrOfRankings</span><span class="o">=</span><span class="n">maxNbrOfRankings</span><span class="p">,</span>
+                                   <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span>
                                    <span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pbr</span> <span class="o">=</span> <span class="n">pbr</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- Bachet Choice Recommendations ----*&#39;</span><span class="p">)</span>
@@ -16342,8 +16348,11 @@
     <span class="c1">#print(getcontext().prec)</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">startMethod</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;polarised Bachet BCR&#39;</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">showBachetChoiceRecommendation</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Old BCR&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;valued Bachet BCR&#39;</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">showBachetChoiceRecommendation</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Rubis BCR&#39;</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">showFirstChoiceRecommendation</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
@@ -16370,7 +16379,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Sep 09, 2025.
+      <span class="lastupdated">Last updated on Sep 11, 2025.
       </span></p>
   </div>
 

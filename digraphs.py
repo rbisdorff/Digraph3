@@ -2846,6 +2846,7 @@ class Digraph(object):
         else:
             return stages
 
+
     def computeWeakTransitivityDegree(self,
                 InPercents=False,Comments=False,ReturnWeakIntransitiveTriples=False):
         """
@@ -2975,11 +2976,12 @@ class Digraph(object):
         else:
             return res
 
-    def computeIntransitiveTriples(self):
+    def computeIntransitiveTriples(self,Comments=False):
         """
         Renders the list of intransitive triples detected in self.
         """
-        return self.computeTransitivityDegree(ReturnIntransitiveTriples=True)
+        return self.computeTransitivityDegree(ReturnIntransitiveTriples=True,
+                                              Comments=Comments)
             
     def isTransitive(self,Comments=False):
         """
@@ -8906,11 +8908,13 @@ class Digraph(object):
         """
         self.showBestChoiceRecommendation(**kwargs)
 
-    def showBachetChoiceRecommendation(self,randomized=100,
+    def showBachetChoiceRecommendation(self,
+                                       Polarised=True,
+                                       randomized=100,
                                        maxNbrOfRankings=5,
                                        seed = None,
                                        Comments=False,
-                                       ChoiceVector=False,
+                                       #ChoiceVector=False,
                                        CoDual=True,
                                        Debug=False,
                                        ):
@@ -8950,15 +8954,17 @@ class Digraph(object):
             Comments = True
         t0 = time()
         n0 = self.order
-        cpself = deepcopy(self)
-        if CoDual:
-            g = ~(-cpself)
-        else:
-            g = cpself
+        #cpself = deepcopy(self)
+        #if CoDual:
+        #    g = ~(-cpself)
+        #else:
+        #    g = cpself
+        g = deepcopy(self)
         g.recodeValuation()
         pbr = PartialBachetRanking(g,randomized=randomized,
-                                        maxNbrOfRankings=maxNbrOfRankings,
-                                        seed=seed,
+                                   Polarised=Polarised,
+                                   maxNbrOfRankings=maxNbrOfRankings,
+                                   seed=seed,
                                    Comments=Comments,Debug=Debug)
         self.pbr = pbr
         print('*---- Bachet Choice Recommendations ----*')
@@ -15407,8 +15413,11 @@ if __name__ == "__main__":
     #print(getcontext().prec)
     g = BipolarOutrankingDigraph(t,Threading=False,startMethod='spawn')
     print(g)
+    print('polarised Bachet BCR')
     g.showBachetChoiceRecommendation(Comments=True,seed=2)
-    print('Old BCR')
+    print('valued Bachet BCR')
+    g.showBachetChoiceRecommendation(Comments=True,seed=2,Polarised=False)
+    print('Rubis BCR')
     g.showFirstChoiceRecommendation(Comments=True)
 
     print('*------------------*')
