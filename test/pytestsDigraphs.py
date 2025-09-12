@@ -753,4 +753,17 @@ def testBipartitePartialDigraph():
     from digraphs import BipartitePartialDigraph
     bpg = BipartitePartialDigraph(rrq,rrq.actionsOrig,rrq.profiles)
     rrq.computeOrdinalCorrelation(bpg)
-     
+
+def testBachetChoiceRecommendation():
+    print('*-------- Bachet choice recommendation ----*')
+    from outrankingDigraphs import RandomBipolarOutrankingDigraph
+    g = RandomBipolarOutrankingDigraph(seed=1)
+    print('Polarised version')
+    g.showChoiceRecommendation(Polarised=True,seed=None)
+    print('Valued version')
+    g.showChoiceRecommendation(Polarised=False,seed=None)
+    print('Rubis first choice')
+    g.showChoiceRecommendation(method='Rubis',ChoiceVector=False)
+    
+
+    

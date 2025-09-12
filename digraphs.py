@@ -8492,6 +8492,7 @@ class Digraph(object):
                                           _OldCoca=_OldCoca,
                                           BrokenCocs=BrokenCocs)
 
+    
     def showFirstChoiceRecommendation(self,Verbose=False,
                                           Comments=True,
                                           ChoiceVector=False,
@@ -8907,6 +8908,40 @@ class Digraph(object):
         Dummy for backward portable showBestChoiceRecommendation().
         """
         self.showBestChoiceRecommendation(**kwargs)
+
+    def showChoiceRecommendation(self, method='Bachet',
+                                       Polarised=True,
+                                       randomized=100,
+                                       maxNbrOfRankings=5,
+                                       seed=None,
+                                       ChoiceVector=False,
+                                       ):
+        """
+        Dummy for the :py:meth:`~digraphs.Digraph.showBachetRecommendation` method.
+
+        *Polarised*: True (by default) | False
+        *randomized*: positive integer (100 by default)
+        *maxNbrOfRankings*: positive integer > 0 (5 by default)
+        """
+        if method == 'Bachet':
+            print('Bachet choice recommendation')
+            self.showBachetChoiceRecommendation(
+                                       Polarised=Polarised,
+                                       randomized=randomized,
+                                       maxNbrOfRankings=maxNbrOfRankings,
+                                       seed = seed,
+                                       Comments=False,
+                                       )
+        elif method == 'Rubis':
+            print('Rubis choice recommendation')
+            self.showFirstChoiceRecommendation(Verbose=False,
+                                          Comments=True,
+                                          ChoiceVector=ChoiceVector,
+                                          )
+
+        else:
+            print('Error: method = "Bachet" or "Rubis"  not "%s"' % method) 
+                
 
     def showBachetChoiceRecommendation(self,
                                        Polarised=True,
