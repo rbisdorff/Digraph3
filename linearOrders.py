@@ -1512,7 +1512,6 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
                  BestQualified=True,
                  randomized=0,seed=None,
                  Optimal=False,
-                 _Polarised=False,
                  _Permuting=False,
                  Comments=False,Debug=False):
         """
@@ -1564,13 +1563,18 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
                            'max': Max,
                            'hasIntegerValuation':True}
         # with Condorcet Digraph valuation
-        if not _Polarised:
+        try:
+            Polarised = self.Polarised
+        except:
+            Polarised = False
+        if not Polarised:
             c = PolarisedDigraph(other,level=other.valuationdomain['med'],\
                                  StrictCut=True,KeepValues=False)
             if Debug:
                 print(c)
             c.recodeValuation(ndigits=0)
             cRelation = c.relation
+            self.Polarised = True
         else:
             c = other
             cRelation = otherRelation
@@ -1587,7 +1591,6 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
             actions = [x for x in other.actions]
             for p in all_perms(actions): 
                 ba = PolarisedBachetRanking(c,orderLimit=orderLimit,
-                                   _Polarised=True,
                                    BestQualified=False,
                                    actionsList=p)
                 corr = other.computeRankingCorrelation(ba.bachetRanking)
@@ -1624,7 +1627,6 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
             for i in range(randomized):
                 random.shuffle(randomActions) 
                 ba = PolarisedBachetRanking(c,orderLimit=orderLimit,
-                                   _Polarised=True,
                                    BestQualified=True,
                                    actionsList=randomActions)
                 corr = other.computeRankingCorrelation(ba.bachetRanking)
@@ -1660,20 +1662,10 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
             if BestQualified:
                 incBachetRevScores = []
                 decBachetRevScores = []
-
-            # with Condorcet Digraph valuation
-            #c = PolarisedDigraph(other,level=other.valuationdomain['med'],\
-            #                 StrictCut=True,KeepValues=False)
-            #if Debug:
-            #    print(c)
-            #c.recodeValuation(ndigits=0)
-            # ## moved above the Optimal section
-            if _Polarised:
+            if Polarised:
                 cRelation = otherRelation
             else:
                 cRelation = c.relation
-
-
             for x in actions:
                 if _Permuting:
                     vecx = [int(cRelation[x][y]) for y in actions]
@@ -1686,8 +1678,6 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
                 bx = ar.BachetNumber(vector=vecx)
                 by = ar.BachetNumber(vector=vecy)
                 bScore = bx + (-by)
-                #bScore = bx
-                #bScore = bx + by
                 if _Permuting:
                     incBachetScores.append((bScore.value(),x,bx,by))
                     decBachetScores.append((bScore.value(),x,bx,by))
@@ -1716,18 +1706,8 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
                 incBachetRevScores.sort(key=itemgetter(0))
                 decBachetRevScores.sort(reverse=True,key=itemgetter(0))
 
-            #decBachetScores = [(x[0],x[1]) for x in decBachetScores]
-            #incBachetScores = [(x[0],x[1]) for x in incBachetScores]               
-            #self.decBachetScores = decBachetScores
-            #self.incBachetScores = incBachetScores
             if Debug:
                 print(incBachetScores,decBachetScores)
-##            if BestQualified:
-##                decBachetRevScores = [(x[0],x[1]) for x in decBachetRevScores]
-##                incBachetRevScores = [(x[0],x[1]) for x in incBachetRevScores]               
-##                #self.decBachetRevScores = decBachetRevScores
-##                #self.incBachetRevScores = incBachetRevScores
-            if Debug:
                 print(incBachetRevScores,decBachetRevScores)
 
 
@@ -1796,7 +1776,7 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
         self.order = n
         self.valuationdomain = valuationdomain
         self.relation = deepcopy(relation)
-        if not _Polarised:
+        if not Polarised:
             corr = other.computeRankingCorrelation(self.bachetRanking)
             self.correlation = corr['correlation']
         self.gamma = self.gammaSets()

@@ -1651,7 +1651,6 @@
                  <span class="n">BestQualified</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">randomized</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">Optimal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                 <span class="n">_Polarised</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">_Permuting</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -1703,13 +1702,18 @@
                            <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="n">Max</span><span class="p">,</span>
                            <span class="s1">&#39;hasIntegerValuation&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">}</span>
         <span class="c1"># with Condorcet Digraph valuation</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">_Polarised</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">Polarised</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Polarised</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">Polarised</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">Polarised</span><span class="p">:</span>
             <span class="n">c</span> <span class="o">=</span> <span class="n">PolarisedDigraph</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="n">other</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">],</span>\
                                  <span class="n">StrictCut</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">KeepValues</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
             <span class="n">c</span><span class="o">.</span><span class="n">recodeValuation</span><span class="p">(</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
             <span class="n">cRelation</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">relation</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Polarised</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">c</span> <span class="o">=</span> <span class="n">other</span>
             <span class="n">cRelation</span> <span class="o">=</span> <span class="n">otherRelation</span>
@@ -1726,7 +1730,6 @@
             <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">all_perms</span><span class="p">(</span><span class="n">actions</span><span class="p">):</span> 
                 <span class="n">ba</span> <span class="o">=</span> <span class="n">PolarisedBachetRanking</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="n">orderLimit</span><span class="p">,</span>
-                                   <span class="n">_Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                    <span class="n">BestQualified</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">actionsList</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
                 <span class="n">corr</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
@@ -1763,7 +1766,6 @@
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">randomized</span><span class="p">):</span>
                 <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">randomActions</span><span class="p">)</span> 
                 <span class="n">ba</span> <span class="o">=</span> <span class="n">PolarisedBachetRanking</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="n">orderLimit</span><span class="p">,</span>
-                                   <span class="n">_Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                    <span class="n">BestQualified</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                    <span class="n">actionsList</span><span class="o">=</span><span class="n">randomActions</span><span class="p">)</span>
                 <span class="n">corr</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
@@ -1799,20 +1801,10 @@
             <span class="k">if</span> <span class="n">BestQualified</span><span class="p">:</span>
                 <span class="n">incBachetRevScores</span> <span class="o">=</span> <span class="p">[]</span>
                 <span class="n">decBachetRevScores</span> <span class="o">=</span> <span class="p">[]</span>
-
-            <span class="c1"># with Condorcet Digraph valuation</span>
-            <span class="c1">#c = PolarisedDigraph(other,level=other.valuationdomain[&#39;med&#39;],\</span>
-            <span class="c1">#                 StrictCut=True,KeepValues=False)</span>
-            <span class="c1">#if Debug:</span>
-            <span class="c1">#    print(c)</span>
-            <span class="c1">#c.recodeValuation(ndigits=0)</span>
-            <span class="c1"># ## moved above the Optimal section</span>
-            <span class="k">if</span> <span class="n">_Polarised</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Polarised</span><span class="p">:</span>
                 <span class="n">cRelation</span> <span class="o">=</span> <span class="n">otherRelation</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">cRelation</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">relation</span>
-
-
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">_Permuting</span><span class="p">:</span>
                     <span class="n">vecx</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">cRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">]</span>
@@ -1825,8 +1817,6 @@
                 <span class="n">bx</span> <span class="o">=</span> <span class="n">ar</span><span class="o">.</span><span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">vecx</span><span class="p">)</span>
                 <span class="n">by</span> <span class="o">=</span> <span class="n">ar</span><span class="o">.</span><span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">vecy</span><span class="p">)</span>
                 <span class="n">bScore</span> <span class="o">=</span> <span class="n">bx</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="n">by</span><span class="p">)</span>
-                <span class="c1">#bScore = bx</span>
-                <span class="c1">#bScore = bx + by</span>
                 <span class="k">if</span> <span class="n">_Permuting</span><span class="p">:</span>
                     <span class="n">incBachetScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">bScore</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="n">x</span><span class="p">,</span><span class="n">bx</span><span class="p">,</span><span class="n">by</span><span class="p">))</span>
                     <span class="n">decBachetScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">bScore</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="n">x</span><span class="p">,</span><span class="n">bx</span><span class="p">,</span><span class="n">by</span><span class="p">))</span>
@@ -1855,18 +1845,8 @@
                 <span class="n">incBachetRevScores</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
                 <span class="n">decBachetRevScores</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 
-            <span class="c1">#decBachetScores = [(x[0],x[1]) for x in decBachetScores]</span>
-            <span class="c1">#incBachetScores = [(x[0],x[1]) for x in incBachetScores]               </span>
-            <span class="c1">#self.decBachetScores = decBachetScores</span>
-            <span class="c1">#self.incBachetScores = incBachetScores</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">incBachetScores</span><span class="p">,</span><span class="n">decBachetScores</span><span class="p">)</span>
-<span class="c1">##            if BestQualified:</span>
-<span class="c1">##                decBachetRevScores = [(x[0],x[1]) for x in decBachetRevScores]</span>
-<span class="c1">##                incBachetRevScores = [(x[0],x[1]) for x in incBachetRevScores]               </span>
-<span class="c1">##                #self.decBachetRevScores = decBachetRevScores</span>
-<span class="c1">##                #self.incBachetRevScores = incBachetRevScores</span>
-            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">incBachetRevScores</span><span class="p">,</span><span class="n">decBachetRevScores</span><span class="p">)</span>
 
 
@@ -1935,7 +1915,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">n</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">valuationdomain</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">relation</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">_Polarised</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">Polarised</span><span class="p">:</span>
             <span class="n">corr</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">correlation</span> <span class="o">=</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
@@ -3550,7 +3530,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Sep 12, 2025.
+      <span class="lastupdated">Last updated on Sep 13, 2025.
       </span></p>
   </div>
 
