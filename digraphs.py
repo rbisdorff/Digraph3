@@ -11918,6 +11918,64 @@ class ConverseDigraph(Digraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
+class BalancedRankingsDigraph(Digraph):
+    """
+    Instantiates the majority margins digraph from balancing
+    a list of rankings.
+    """
+
+    def __init__(self,other,rankings,weights=None):
+        from copy import deepcopy
+        from decimal import Decimal
+        self.name = other.name + '-balanced-rankings'
+        self.actions = deepcopy(other.actions)
+        self.order = len(other.actions)
+        #self.valuationdomain = deepcopy(dg1.valuationdomain)
+        #actionsList = list(self.actions)
+        #max = self.valuationdomain['max']
+        #Med = self.valuationdomain['med']
+        lr = len(rankings)
+        self.valuationdomain = {}
+        self.valuationdomain['max'] = lr
+        self.valuationdomain['min'] = -lr
+        self.valuationdomain['med'] = 0
+        self.valuationdomain['hasIntegerValuation'] = True
+        balancedRelation = {}
+        actionsList = [x for x in self.actions]
+        print(actionsList)
+        for x in actionsList:                 
+            balancedRelation[x] = {}                          
+            for y in actionsList:
+                mxy = 0             
+                if x != y:
+                    for ranking in rankings:
+                        #print(ranking[1],x,y)
+                        ix = ranking.index(x)
+                        iy = ranking.index(y)
+                        #print(ix,iy)
+                        if ix < iy:
+                            mxy += 1
+                        elif ix > iy:
+                            mxy -= 1
+                print(x,y,mxy)
+                balancedRelation[x][y] = mxy
+                        
+                    
+##                    if operator == "o-max":
+##                        fx[y] = omax(Med,(dg1x[y],dg2x[y]))
+##                    elif operator == "o-average":
+##                        fx[y] = symmetricAverage(Med,(dg1x[y],dg2x[y]),weights)
+##                    elif operator == "o-min":
+##                        fx[y] = omin(Med,(dg1x[y],dg2x[y]))
+##                    else:
+##                        print('!! Error: wrong fusion operator: %s' % operator)
+##                        print('operator := "o-max (default)" | "o-min" | "o-average"') 
+##                        return
+        print          
+        self.relation = deepcopy(balancedRelation)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+
 class FusionDigraph(Digraph):
     """
     Instantiates the epistemic fusion of 
@@ -15441,8 +15499,8 @@ if __name__ == "__main__":
     from randomDigraphs import *
     from decimal import Decimal, getcontext
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=10,numberOfCriteria=11,
-                                             missingDataProbability=0.05,seed=2)
+                                 numberOfActions=10,numberOfCriteria=13,
+                                             missingDataProbability=0.05,seed=4)
                           
     #t = CircularPerformanceTableau()
     #print(getcontext().prec)
@@ -15454,6 +15512,18 @@ if __name__ == "__main__":
     g.showBachetChoiceRecommendation(Comments=True,seed=2,Polarised=False)
     print('Rubis BCR')
     g.showFirstChoiceRecommendation(Comments=True)
+
+    from transitiveDigraphs import *
+    pbr = PartialBachetRanking(g)
+    rankings = [r[1] for r in pbr.bachetRankings]
+    br = BalancedRankingsDigraph(g,rankings)
+    rankings[0].reverse()
+    rankings[1].reverse()
+    #rankings[2].reverse()
+    #rankings[3].reverse()
+    #rankings[4].reverse()
+    br1 = BalancedRankingsDigraph(g,rankings)
+     
 
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')

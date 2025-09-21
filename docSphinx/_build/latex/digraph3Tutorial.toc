@@ -35,14 +35,14 @@
 \contentsline {subsubsection}{Designing a best choice recommender system}{40}{subsubsection*.78}%
 \contentsline {subsubsection}{Computing the first choice recommendation}{41}{subsubsection*.79}%
 \contentsline {subsubsection}{Partially ranking the outranking digraph}{46}{subsubsection*.80}%
-\contentsline {subsubsection}{Notes}{50}{subsubsection*.81}%
+\contentsline {subsubsection}{Historical Notes}{50}{subsubsection*.81}%
 \contentsline {subsection}{\numberline {2.2}How to create a new performance tableau instance}{52}{subsection.2.2}%
 \contentsline {subsubsection}{Editing a template file}{52}{subsubsection*.90}%
 \contentsline {subsubsection}{Editing the decision alternatives}{54}{subsubsection*.91}%
 \contentsline {subsubsection}{Editing the decision objectives}{55}{subsubsection*.92}%
-\contentsline {subsubsection}{Editing the family of performance criteria}{56}{subsubsection*.93}%
+\contentsline {subsubsection}{Editing the family of performance criteria}{57}{subsubsection*.93}%
 \contentsline {subsubsection}{Editing the performance table}{59}{subsubsection*.94}%
-\contentsline {subsubsection}{Inspecting the template outranking relation}{60}{subsubsection*.95}%
+\contentsline {subsubsection}{Inspecting the template outranking relation}{61}{subsubsection*.95}%
 \contentsline {subsubsection}{Ranking the template peformance tableau}{63}{subsubsection*.96}%
 \contentsline {subsection}{\numberline {2.3}Generating random performance tableaux with the \sphinxstyleliteralintitle {\sphinxupquote {randPerfTabs}} module}{64}{subsection.2.3}%
 \contentsline {subsubsection}{Introduction}{64}{subsubsection*.103}%

@@ -1992,48 +1992,66 @@ class PartialBachetRanking(TransitiveDigraph):
         if Comments:
             self.showTransitiveDigraph(WithCoverCredibility=False)
 
-##    def computeBoostedRanking(self):
-##        """
-##        Renders an ordred list of decision actions ranked in
-##        decreasing preference direction following the rankingRule
-##        on each component.
-##        """
-##        ranking = []
-##        components = self.computeRankingByChoosing()
-##        for i in range(len(components['result'])):
-##            ranking += components['result'][i][0][1]
-##        ordering = []
-##        components = self.computeRankingByChoosing()
-##        for i in range(len(components['result'])):
-##            ordering += components['result'][i][1][1]
-##        boostedRanking = ranking
-##        for x in reversed(ordering):
-##            if x not in ranking:
-##                boostedRanking.append(x)
-##        return boostedRanking
-##
-##    def computeBoostedOrdering(self):
-##        """
-##        Renders an ordred list of decision actions ranked in
-##        decreasing preference direction following the rankingRule
-##        on each component.
-##        """
-##        ranking = []
-##        components = self.rankingByChoosing
-##        for i in range(len(components['result'])):
-##            ranking += components['result'][i][0][1]
-##        ordering = []
-##        components = self.rankingByChoosing
-##        for i in range(len(components['result'])):
-##            ordering += components['result'][i][1][1]
-##        boostedOrdering = ordering
-##        for x in reversed(ranking):
-##            if x not in ordering:
-##                boostedOrdering.append(x)
-##        return boostedOrdering
 
-    def computePartialOutrankingConsensusQuality(self,Sorted=True,
-                                                 Comments=False):
+    def saveRankingsPerformanceTableau(self,
+                                       fileName='rankingsPerformanceTableau',
+                                       valueDigits=0,
+                                       NA = -999,
+                                       Comments=True):
+        """
+        save the *self.bachetRankings* attribute into a PerformanceTableau object.
+        """
+        if Comments:
+            print('*--- Saving performance tableau in file: <' \
+              + str(fileName) + '.py> ---*')
+        fileNameExt = str(fileName)+str('.py')
+        fo = open(fileNameExt, 'w')
+        fo.write('# Saved performance Tableau: \n')
+        fo.write('from decimal import Decimal\n')
+        fo.write('from collections import OrderedDict\n')
+        # name
+        fo.write("name = \'%s\'\n" % fileName)
+        # actions
+        actions = self.actions
+        fo.write('actions = OrderedDict([\n')
+        for x in actions:
+            fo.write('(\'%s\', {\n' % str(x))
+            for it in self.actions[x].keys():
+                fo.write('\'%s\': %s,\n' % (it,repr(self.actions[x][it])) )
+            fo.write('}),\n')
+        fo.write('])\n')
+        # objectives
+        fo.write('objectives = OrderedDict([\n')
+        fo.write('])\n')            
+        # criteria
+        fo.write('criteria = OrderedDict([\n')
+        nr = len(self.bachetRankings)
+        for i in range(nr):
+            fo.write('(\'r%d\', {\n' % (i+1))
+            fo.write('\'shortName\': \'r%d\',\n' % (i+1))
+            fo.write('\'comment\': \'qualified Bachet ranking\',\n')
+            fo.write('\'name\': \'ranking%d\',\n' % (i+1))
+            fo.write('\'scale\': (Decimal(0),Decimal(%d)),\n' % nr)
+            fo.write('\'preferenceDirection\': \'min\', \n')
+            fo.write('\'thresholds\': {\'ind\':  (Decimal(0), Decimal(0)),\n')
+            fo.write('\'pref\': (Decimal(1), Decimal(0)),\n')
+            fo.write('\'veto\': (Decimal(%d), Decimal(0))},\n' % (nr+10))
+            fo.write('\'weight\': %.4f,\n' %  self.bachetRankings[i][0]) 
+            fo.write('}),\n')                         
+        fo.write('])\n')
+        # missing data symbol
+        fo.write("NA = Decimal('%s')\n" % (str(self.NA)) )
+        # evaluations
+        fo.write('evaluation = {\n')
+        for i in range(nr):
+            fo.write('\'r%d\': {\n' % (i+1))
+            for x in actions:                                      
+                fo.write('\'' + str(x) + '\':' + str(self.bachetRankings[i][1].index(x)) + ',\n')
+            fo.write('},\n')
+        fo.write( '}\n')
+        fo.close()
+
+    def computePartialOutrankingConsensusQuality(self,Sorted=True,Comments=False):
         """
         Renders or shows the consensus data of apartial Bachet ranking
         """
@@ -2236,9 +2254,9 @@ if __name__ == "__main__":
     pbr = PartialBachetRanking(g,randomized=200,seed=1,Polarised=True,Comments=False,Debug=False)
     print(pbr)
     pbr.showTransitiveDigraph()
-    pbr.exportGraphViz('wbg')
-    TransitiveDigraph.exportGraphViz(pbr,'test')
-
+    #pbr.exportGraphViz('wbg')
+    #TransitiveDigraph.exportGraphViz(pbr,'test')
+    pbr.saveRankingsPerformanceTableau('test')
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')

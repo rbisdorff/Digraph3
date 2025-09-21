@@ -2164,50 +2164,71 @@
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">(</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="c1">##    def computeBoostedRanking(self):</span>
-<span class="c1">##        &quot;&quot;&quot;</span>
-<span class="c1">##        Renders an ordred list of decision actions ranked in</span>
-<span class="c1">##        decreasing preference direction following the rankingRule</span>
-<span class="c1">##        on each component.</span>
-<span class="c1">##        &quot;&quot;&quot;</span>
-<span class="c1">##        ranking = []</span>
-<span class="c1">##        components = self.computeRankingByChoosing()</span>
-<span class="c1">##        for i in range(len(components[&#39;result&#39;])):</span>
-<span class="c1">##            ranking += components[&#39;result&#39;][i][0][1]</span>
-<span class="c1">##        ordering = []</span>
-<span class="c1">##        components = self.computeRankingByChoosing()</span>
-<span class="c1">##        for i in range(len(components[&#39;result&#39;])):</span>
-<span class="c1">##            ordering += components[&#39;result&#39;][i][1][1]</span>
-<span class="c1">##        boostedRanking = ranking</span>
-<span class="c1">##        for x in reversed(ordering):</span>
-<span class="c1">##            if x not in ranking:</span>
-<span class="c1">##                boostedRanking.append(x)</span>
-<span class="c1">##        return boostedRanking</span>
-<span class="c1">##</span>
-<span class="c1">##    def computeBoostedOrdering(self):</span>
-<span class="c1">##        &quot;&quot;&quot;</span>
-<span class="c1">##        Renders an ordred list of decision actions ranked in</span>
-<span class="c1">##        decreasing preference direction following the rankingRule</span>
-<span class="c1">##        on each component.</span>
-<span class="c1">##        &quot;&quot;&quot;</span>
-<span class="c1">##        ranking = []</span>
-<span class="c1">##        components = self.rankingByChoosing</span>
-<span class="c1">##        for i in range(len(components[&#39;result&#39;])):</span>
-<span class="c1">##            ranking += components[&#39;result&#39;][i][0][1]</span>
-<span class="c1">##        ordering = []</span>
-<span class="c1">##        components = self.rankingByChoosing</span>
-<span class="c1">##        for i in range(len(components[&#39;result&#39;])):</span>
-<span class="c1">##            ordering += components[&#39;result&#39;][i][1][1]</span>
-<span class="c1">##        boostedOrdering = ordering</span>
-<span class="c1">##        for x in reversed(ranking):</span>
-<span class="c1">##            if x not in ordering:</span>
-<span class="c1">##                boostedOrdering.append(x)</span>
-<span class="c1">##        return boostedOrdering</span>
+
+<div class="viewcode-block" id="PartialBachetRanking.saveRankingsPerformanceTableau">
+<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PartialBachetRanking.saveRankingsPerformanceTableau">[docs]</a>
+    <span class="k">def</span> <span class="nf">saveRankingsPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                       <span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;rankingsPerformanceTableau&#39;</span><span class="p">,</span>
+                                       <span class="n">valueDigits</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                       <span class="n">NA</span> <span class="o">=</span> <span class="o">-</span><span class="mi">999</span><span class="p">,</span>
+                                       <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        save the *self.bachetRankings* attribute into a PerformanceTableau object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*--- Saving performance tableau in file: &lt;&#39;</span> \
+              <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.py&gt; ---*&#39;</span><span class="p">)</span>
+        <span class="n">fileNameExt</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;.py&#39;</span><span class="p">)</span>
+        <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileNameExt</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;# Saved performance Tableau: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;from decimal import Decimal</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;from collections import OrderedDict</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="c1"># name</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;name = </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">fileName</span><span class="p">)</span>
+        <span class="c1"># actions</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;actions = OrderedDict([</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;(</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">, {</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">: </span><span class="si">%s</span><span class="s1">,</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">it</span><span class="p">,</span><span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">it</span><span class="p">]))</span> <span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;}),</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;])</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="c1"># objectives</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;objectives = OrderedDict([</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;])</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>            
+        <span class="c1"># criteria</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;criteria = OrderedDict([</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">nr</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bachetRankings</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr</span><span class="p">):</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;(</span><span class="se">\&#39;</span><span class="s1">r</span><span class="si">%d</span><span class="se">\&#39;</span><span class="s1">, {</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">shortName</span><span class="se">\&#39;</span><span class="s1">: </span><span class="se">\&#39;</span><span class="s1">r</span><span class="si">%d</span><span class="se">\&#39;</span><span class="s1">,</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">comment</span><span class="se">\&#39;</span><span class="s1">: </span><span class="se">\&#39;</span><span class="s1">qualified Bachet ranking</span><span class="se">\&#39;</span><span class="s1">,</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">name</span><span class="se">\&#39;</span><span class="s1">: </span><span class="se">\&#39;</span><span class="s1">ranking</span><span class="si">%d</span><span class="se">\&#39;</span><span class="s1">,</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">scale</span><span class="se">\&#39;</span><span class="s1">: (Decimal(0),Decimal(</span><span class="si">%d</span><span class="s1">)),</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">nr</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">preferenceDirection</span><span class="se">\&#39;</span><span class="s1">: </span><span class="se">\&#39;</span><span class="s1">min</span><span class="se">\&#39;</span><span class="s1">, </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">thresholds</span><span class="se">\&#39;</span><span class="s1">: {</span><span class="se">\&#39;</span><span class="s1">ind</span><span class="se">\&#39;</span><span class="s1">:  (Decimal(0), Decimal(0)),</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">pref</span><span class="se">\&#39;</span><span class="s1">: (Decimal(1), Decimal(0)),</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">veto</span><span class="se">\&#39;</span><span class="s1">: (Decimal(</span><span class="si">%d</span><span class="s1">), Decimal(0))},</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">nr</span><span class="o">+</span><span class="mi">10</span><span class="p">))</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">weight</span><span class="se">\&#39;</span><span class="s1">: </span><span class="si">%.4f</span><span class="s1">,</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>  <span class="bp">self</span><span class="o">.</span><span class="n">bachetRankings</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> 
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;}),</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>                         
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;])</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="c1"># missing data symbol</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;NA = Decimal(&#39;</span><span class="si">%s</span><span class="s2">&#39;)</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">NA</span><span class="p">))</span> <span class="p">)</span>
+        <span class="c1"># evaluations</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;evaluation = {</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr</span><span class="p">):</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">r</span><span class="si">%d</span><span class="se">\&#39;</span><span class="s1">: {</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>                                      
+                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bachetRankings</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39;,</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;},</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="s1">&#39;}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
 
 <div class="viewcode-block" id="PartialBachetRanking.computePartialOutrankingConsensusQuality">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PartialBachetRanking.computePartialOutrankingConsensusQuality">[docs]</a>
-    <span class="k">def</span> <span class="nf">computePartialOutrankingConsensusQuality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                                 <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">computePartialOutrankingConsensusQuality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders or shows the consensus data of apartial Bachet ranking</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2427,9 +2448,9 @@
     <span class="n">pbr</span> <span class="o">=</span> <span class="n">PartialBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">pbr</span><span class="p">)</span>
     <span class="n">pbr</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">()</span>
-    <span class="n">pbr</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;wbg&#39;</span><span class="p">)</span>
-    <span class="n">TransitiveDigraph</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">pbr</span><span class="p">,</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
-
+    <span class="c1">#pbr.exportGraphViz(&#39;wbg&#39;)</span>
+    <span class="c1">#TransitiveDigraph.exportGraphViz(pbr,&#39;test&#39;)</span>
+    <span class="n">pbr</span><span class="o">.</span><span class="n">saveRankingsPerformanceTableau</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enjoy !&#39;</span><span class="p">)</span>
@@ -2444,7 +2465,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Sep 13, 2025.
+      <span class="lastupdated">Last updated on Sep 21, 2025.
       </span></p>
   </div>
 
