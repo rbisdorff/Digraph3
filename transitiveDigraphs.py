@@ -2031,11 +2031,11 @@ class PartialBachetRanking(TransitiveDigraph):
             fo.write('\'shortName\': \'r%d\',\n' % (i+1))
             fo.write('\'comment\': \'qualified Bachet ranking\',\n')
             fo.write('\'name\': \'ranking%d\',\n' % (i+1))
-            fo.write('\'scale\': (Decimal(0),Decimal(%d)),\n' % nr)
+            fo.write('\'scale\': (Decimal(1),Decimal(%d)),\n' % (nr+1) )
             fo.write('\'preferenceDirection\': \'min\', \n')
             fo.write('\'thresholds\': {\'ind\':  (Decimal(0), Decimal(0)),\n')
             fo.write('\'pref\': (Decimal(1), Decimal(0)),\n')
-            fo.write('\'veto\': (Decimal(%d), Decimal(0))},\n' % (nr+10))
+            fo.write('\'veto\': (Decimal(%d), Decimal(0))},\n' % (nr+10) )
             fo.write('\'weight\': %.4f,\n' %  self.bachetRankings[i][0]) 
             fo.write('}),\n')                         
         fo.write('])\n')
@@ -2046,7 +2046,7 @@ class PartialBachetRanking(TransitiveDigraph):
         for i in range(nr):
             fo.write('\'r%d\': {\n' % (i+1))
             for x in actions:                                      
-                fo.write('\'' + str(x) + '\':' + str(self.bachetRankings[i][1].index(x)) + ',\n')
+                fo.write('\'%s\': %d,\n' % (str(x), -(self.bachetRankings[i][1].index(x)+1) ) )
             fo.write('},\n')
         fo.write( '}\n')
         fo.close()
