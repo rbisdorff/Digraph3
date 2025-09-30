@@ -3009,7 +3009,7 @@ Bipolar-valued base 3 encoded Bachet numbers
 
    -- Cl. G. Bachet (1622) [24]_
 
-Bipolar-valued {-1,0,+1} base 3 encoded integers are due to *Claude Gaspard Bachet Sieur de Méziriac* (1581-1638) [20]_. The idea is to represent the value of an integer *n* in a base 3 positional numeration where in each position may appear a **signed bit** --one of the three symbols **{-1,0,+1}**-- called hereafter **sbits** for short.
+Bipolar-valued {-1,0,+1} base 3 encoded integers are due to *Claude Gaspard Bachet de Méziriac* (1581-1638) [20]_. The idea is to represent the value of an integer *n* in a base 3 positional numeration where in each position may appear a **signed bit** --one of the three symbols **{-1,0,+1}**-- called hereafter **sbits** for short.
 
 *Bachet*'s positional *sbits* numeration is simulating a weight balance scale where the number *n* and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for *n = 5* gives for instance :math:`3^2 = (n + 3^1 + 3^0)`. And the *sbits* encoding corresponds hence to the string '+1-1-1'. As, this representation is isomorphic to a base 3 binary encoding, every positive or negative integer may so be represented with a unique *sbits* string. With four powers of 3, namely :math:`{3^3, 3^2, 3^1, 3^0}`, one may for instance represent any value in the integer range -40 to +40. *Bachet* showed that this bipolar weighing system relies on the smallest possible number of balance weights -base powers- needed in order to balance the scale for any given integer weight *n* [BAC-1622p]_.
 
