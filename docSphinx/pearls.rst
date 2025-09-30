@@ -2995,11 +2995,6 @@ Back to :ref:`Content Table <Pearls-label>`
 
 Applications of bipolar-valued base 3 encoded Bachet numbers
 ````````````````````````````````````````````````````````````
-.. epigraph::
-   
-   "*Estant proposee telle quantité qu'on voudra pesant un nombre de livres despuis 1. iusques à 40. inclusivement (sans toutefois admettre les fractions ) on demande combien de pois pour le moins il faudrait employer à cet effect.*" 
-
-   -- Cl. G. Bachet (1622) [24]_
 
 .. contents:: 
    :depth: 1
@@ -3007,6 +3002,12 @@ Applications of bipolar-valued base 3 encoded Bachet numbers
 
 Bipolar-valued base 3 encoded Bachet numbers
 ............................................
+
+.. epigraph::
+   
+   "*Estant proposee telle quantité qu'on voudra pesant un nombre de livres despuis 1. iusques à 40. inclusivement (sans toutefois admettre les fractions ) on demande combien de pois pour le moins il faudrait employer à cet effect.*" 
+
+   -- Cl. G. Bachet (1622) [24]_
 
 Bipolar-valued {-1,0,+1} base 3 encoded integers are due to *Claude Gaspard Bachet Sieur de Méziriac* (1581-1638) [20]_. The idea is to represent the value of an integer *n* in a base 3 positional numeration where in each position may appear a **signed bit** --one of the three symbols **{-1,0,+1}**-- called hereafter **sbits** for short.
 
