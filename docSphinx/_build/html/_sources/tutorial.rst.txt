@@ -98,7 +98,7 @@
      
        * :ref:`Working with the graphs module <Graphs-Tutorial-label>`
        * :ref:`Computing the non isomorphic MISs of the 12-cycle graph <IsomorphicMIS-Tutorial-label>`
-       * :ref:`About split, interval and permutation graphs <Permutation-Tutorial-label>`
+       * :ref:`About cpmparability, split, interval and permutation graphs <Permutation-Tutorial-label>`
        * :ref:`On tree graphs and graph forests <Trees-Tutorial-label>`
 
    **Preface**
@@ -10173,8 +10173,8 @@ Back to :ref:`Content Table <Tutorial-label>`
 
 .. _Permutation-Tutorial-label:
 
-About split, interval and permutation graphs
---------------------------------------------
+About comparability, split, interval and permutation graphs
+-----------------------------------------------------------
 
 .. contents:: 
 	:depth: 1
