@@ -1980,7 +1980,11 @@ class BachetRanking(LinearOrder,_BachetRanking):
 
         - *actionsList* : a given ordering of the other.actions dictionary. If *None* the list of other.actions is used.
 
-        - *sampleSize*: number > 0 (default=100) of intransitive tripes to permute, the potential list of intransitive triples is ranked by decreasing epistemic determination. If *None* all intransitive tripes are permuted.
+        - *sampleSize*: number > 0 (default=100) of intransitive tripes to permute,
+
+        - *Randomized*: True (default)| False; if *True*, a random sample of *sampleSize* from the list of intransitive triples is permuted.
+
+        - *TriplesSorted*: False (default) | True; If *True*, the list of intransitive triples is ranked by determination score.
 
 
     *Useage example*
