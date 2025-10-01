@@ -2319,7 +2319,9 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">orderLimit</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                 <span class="n">sampleSize</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                 <span class="n">sampleSize</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">TriplesSorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">Randomized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 
         <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
@@ -2331,10 +2333,15 @@
             <span class="n">x</span> <span class="o">=</span> <span class="n">tr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">y</span> <span class="o">=</span> <span class="n">tr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">z</span> <span class="o">=</span> <span class="n">tr</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-            <span class="n">score</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">z</span><span class="p">]</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">z</span><span class="p">]</span>
+            <span class="n">score</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">z</span><span class="p">]</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">z</span><span class="p">]</span>
             <span class="n">rankedTriples</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">score</span><span class="p">,</span><span class="n">tr</span><span class="p">))</span>
-        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">scoredTuplesSort</span>
-        <span class="n">scoredTuplesSort</span><span class="p">(</span><span class="n">rankedTriples</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">TriplesSorted</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">scoredTuplesSort</span>
+            <span class="n">scoredTuplesSort</span><span class="p">(</span><span class="n">rankedTriples</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">Randomized</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">random</span> <span class="k">as</span> <span class="nn">rd</span>
+            <span class="n">rd</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+            <span class="n">rd</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">rankedTriples</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">nt</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">rankedTriples</span><span class="p">)</span>
@@ -3423,9 +3430,9 @@
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing class and methods -------&#39;</span><span class="p">)</span>
 
     <span class="n">Threading</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;testsmart.csv&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-    <span class="n">res</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&quot;seed&quot;,&quot;bap&quot;,&quot;banp&quot;,&quot;bav&quot;,&quot;banv&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="n">sampleSize</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;testsmart13CBpolRandSs200.csv&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&quot;seed&quot;,&quot;nt&quot;,&quot;basort&quot;,&quot;cop&quot;,&quot;barand&quot;,&quot;nf&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">sampleSize</span> <span class="o">=</span> <span class="mi">100</span>
     <span class="c1">#t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)</span>
     <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sampleSize</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
@@ -3434,23 +3441,28 @@
     <span class="c1">##    t = CircularPerformanceTableau()</span>
         <span class="c1">#t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)</span>
         <span class="c1">#t = PerformanceTableau(&#39;testLin&#39;)</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
                                        <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">triples</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeIntransitiveTriples</span><span class="p">()</span>
+        <span class="n">nt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">triples</span><span class="p">)</span>
         <span class="c1">#g = RandomDigraph(order=7)</span>
         <span class="n">revba1</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">)]</span>
         <span class="n">ba1</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span>
-                            <span class="n">orderLimit</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                            <span class="n">orderLimit</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
                             <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                             <span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                             <span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                            <span class="n">TriplesSorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                            <span class="n">Randomized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                            <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span>
                             <span class="p">)</span>
         <span class="c1">#print(ba1)</span>
         <span class="n">corrba1</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba1</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Smart polarised Bachet Ranking&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;bap&#39;</span><span class="p">,</span><span class="n">ba1</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">,</span><span class="n">corrba1</span><span class="p">)</span>
+        <span class="c1">#print(&#39;Smart polarised Bachet Ranking&#39;)</span>
+        <span class="c1">#print(&#39;bap&#39;,ba1.bachetRanking,corrba1)</span>
         <span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Gamma</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
+        <span class="c1">#print(cop.copelandRanking)</span>
         <span class="n">corrcop</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
 <span class="c1">##        print(&#39;cop&#39;,cop.copelandRanking,corrcop)</span>
 <span class="c1">##        wcop1 = _WeightedCopelandRanking(g,Comments=False,Debug=False)</span>
@@ -3483,10 +3495,14 @@
 <span class="c1">##                            )</span>
         <span class="c1">#print(ba2)</span>
         <span class="n">ba2</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                 <span class="n">sampleSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                            <span class="n">sampleSize</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+                            <span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                            <span class="n">TriplesSorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                            <span class="n">Randomized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                            <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
         <span class="n">corrba2</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba2</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Smart valued Bachet Ranking&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;bav&#39;</span><span class="p">,</span><span class="n">ba2</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">,</span><span class="n">corrba2</span><span class="p">)</span>
+        <span class="c1">#print(&#39;Smart valued Bachet Ranking&#39;)</span>
+        <span class="c1">#print(&#39;bav&#39;,ba2.bachetRanking,corrba2)</span>
 <span class="c1">##        ba3 = ValuedBachetRanking(g,Comments=False,BestQualified=False,</span>
 <span class="c1">##                            CoDual=True,</span>
 <span class="c1">##                            Optimal=True,Debug=True,</span>
@@ -3494,16 +3510,16 @@
 <span class="c1">##        corrba3 = g.computeRankingCorrelation(ba3.bachetRanking)</span>
 <span class="c1">##        print(&#39;ba3&#39;,ba3.bachetRanking,corrba3)</span>
         <span class="n">banp</span> <span class="o">=</span> <span class="n">ReflexiveBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;banp&#39;</span><span class="p">,</span><span class="n">banp</span><span class="o">.</span><span class="n">correlation</span><span class="p">)</span>
+        <span class="c1">#print(&#39;banp&#39;,banp.correlation)</span>
         <span class="n">banv</span> <span class="o">=</span> <span class="n">ReflexiveBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;banv&#39;</span><span class="p">,</span><span class="n">banv</span><span class="o">.</span><span class="n">correlation</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">,</span><span class="si">%.4f</span><span class="s1">,</span><span class="si">%.4f</span><span class="s1">,</span><span class="si">%.4f</span><span class="s1">,</span><span class="si">%.4f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">seed</span><span class="p">,</span><span class="n">corrba1</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">],</span>
-                                           <span class="c1">#corrcop[&#39;correlation&#39;],</span>
-                                            <span class="n">banp</span><span class="o">.</span><span class="n">correlation</span><span class="p">,</span>
+        <span class="c1">#print(&#39;banv&#39;,banv.correlation)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">,</span><span class="si">%d</span><span class="s1">,</span><span class="si">%.4f</span><span class="s1">,</span><span class="si">%.4f</span><span class="s1">,</span><span class="si">%.4f</span><span class="s1">,</span><span class="si">%.4f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">seed</span><span class="p">,</span><span class="n">nt</span><span class="p">,</span><span class="n">corrba1</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">],</span>
+                                           <span class="n">corrcop</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">],</span>
+                                            <span class="c1">#banp.correlation,</span>
                                         <span class="n">corrba2</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">],</span>
-                                            <span class="n">banv</span><span class="o">.</span><span class="n">correlation</span><span class="p">,))</span>
-                                        <span class="c1">#corrnf[&#39;correlation&#39;]) )</span>
-        <span class="n">res</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">,</span><span class="si">%.4f</span><span class="s1">,</span><span class="si">%.4f</span><span class="s1">,</span><span class="si">%.4f</span><span class="s1">,</span><span class="si">%.4f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">seed</span><span class="p">,</span><span class="n">corrba1</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">],</span>
+                                            <span class="c1">#banv.correlation,))</span>
+                                        <span class="n">corrnf</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">])</span> <span class="p">)</span>
+        <span class="n">res</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">,</span><span class="si">%d</span><span class="s1">,</span><span class="si">%.4f</span><span class="s1">,</span><span class="si">%.4f</span><span class="s1">,</span><span class="si">%.4f</span><span class="s1">,</span><span class="si">%.4f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">seed</span><span class="p">,</span><span class="n">nt</span><span class="p">,</span><span class="n">corrba1</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">],</span>
                                            <span class="n">corrcop</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">],</span>
                                         <span class="n">corrba2</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">],</span>
                                         <span class="n">corrnf</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">])</span> <span class="p">)</span>
@@ -3530,7 +3546,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Sep 30, 2025.
+      <span class="lastupdated">Last updated on Oct 01, 2025.
       </span></p>
   </div>
 

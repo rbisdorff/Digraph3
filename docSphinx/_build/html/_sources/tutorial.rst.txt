@@ -98,7 +98,7 @@
      
        * :ref:`Working with the graphs module <Graphs-Tutorial-label>`
        * :ref:`Computing the non isomorphic MISs of the 12-cycle graph <IsomorphicMIS-Tutorial-label>`
-       * :ref:`About cpmparability, split, interval and permutation graphs <Permutation-Tutorial-label>`
+       * :ref:`About comparability, split, interval and permutation graphs <Permutation-Tutorial-label>`
        * :ref:`On tree graphs and graph forests <Trees-Tutorial-label>`
 
    **Preface**

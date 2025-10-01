@@ -2172,6 +2172,7 @@ class BachetRanking(LinearOrder,_BachetRanking):
     def __init__(self,other,actionsList=None,
                  orderLimit=50,Polarised=True,
                  sampleSize=100,TriplesSorted=True,
+                 Randomized=False,
                  seed=None,
                  Debug=False):
 
@@ -2189,7 +2190,7 @@ class BachetRanking(LinearOrder,_BachetRanking):
         if TriplesSorted:
             from digraphsTools import scoredTuplesSort
             scoredTuplesSort(rankedTriples,reverse=True)
-        else:
+        elif Randomized:
             import random as rd
             rd.seed(seed)
             rd.shuffle(rankedTriples)
@@ -3250,7 +3251,7 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
     Threading = False
-    res = open('testsmartval13CBSort.csv','w')
+    res = open('testsmart13CBpolRandSs200.csv','w')
     res.write('"seed","nt","basort","cop","barand","nf"\n')
     sampleSize = 100
     #t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
@@ -3269,11 +3270,13 @@ if __name__ == "__main__":
         #g = RandomDigraph(order=7)
         revba1 = [x for x in reversed(g.actions)]
         ba1 = BachetRanking(g,
-                            orderLimit=20,sampleSize=100,
+                            orderLimit=20,sampleSize=200,
                             Debug=False,
                             actionsList=None,
                             Polarised=True,
-                            TriplesSorted=False,seed=seed,
+                            TriplesSorted=True,
+                            Randomized=False,
+                            seed=seed,
                             )
         #print(ba1)
         corrba1 = g.computeRankingCorrelation(ba1.bachetRanking)
@@ -3313,9 +3316,11 @@ if __name__ == "__main__":
 ##                            )
         #print(ba2)
         ba2 = BachetRanking(g,Debug=False,
-                            sampleSize=100,
-                            Polarised=False,
-                            TriplesSorted=True,seed=seed)
+                            sampleSize=200,
+                            Polarised=True,
+                            TriplesSorted=False,
+                            Randomized=True,
+                            seed=seed)
         corrba2 = g.computeRankingCorrelation(ba2.bachetRanking)
         #print('Smart valued Bachet Ranking')
         #print('bav',ba2.bachetRanking,corrba2)
