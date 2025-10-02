@@ -1234,7 +1234,7 @@ class _BachetRanking(Digraph):
             for x in self.incBachetScores:
                 print('%s \t %.2f' %(x[1],x[0]))
 
-    def permute(self,x,y):
+    def _permute(self,x,y):
         """
         Permutes alternatives x and y positions in the Bachet encoding
         and computes new decreasing and increasing Bachet Scores.
@@ -1329,7 +1329,7 @@ class _BachetRanking(Digraph):
 
         return permSelf                         
 
-    def reverse(self):
+    def _reverse(self):
         """
         Reverse the actionsList
         and computes new decreasing and increasing Bachet Scores.
@@ -2048,7 +2048,7 @@ class BachetRanking(LinearOrder,_BachetRanking):
         if TriplesSorted:
             from digraphsTools import scoredTuplesSort
             scoredTuplesSort(rankedTriples,reverse=True)
-        elif Randomized:
+        if Randomized:
             import random as rd
             rd.seed(seed)
             rd.shuffle(rankedTriples)
@@ -3109,18 +3109,19 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
     Threading = False
-    res = open('test11CBvalSortvsRdSs200Chk.csv','w')
-    res.write('"seed","nt","bavsort","cop","bavrand","nf"\n')
-    sampleSize = 500
+    #res = open('test11CBvalRandvsSrtRdSs200All.csv','w')
+    res = open('tes.csv','w')
+    res.write('"seed","nt","baprand","bapsort","bapsortrand","bap"\n')
+    sampleSize = 1
     #t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
     for sample in range(sampleSize):
         print(sample)
         #seed = random.randint(1,1000000)
-        seed = sample + 1
+        seed = 9
     ##    t = CircularPerformanceTableau()
         #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
         #t = PerformanceTableau('testLin')
-        t = RandomCBPerformanceTableau(numberOfActions=11,
+        t = RandomCBPerformanceTableau(numberOfActions=13,
                                        numberOfCriteria=13,seed=seed)
         g = BipolarOutrankingDigraph(t)
         triples = g.computeIntransitiveTriples()
@@ -3132,8 +3133,8 @@ if __name__ == "__main__":
                             Debug=False,
                             actionsList=None,
                             Polarised=False,
-                            TriplesSorted=True,
-                            Randomized=False,
+                            TriplesSorted=False,
+                            Randomized=True,
                             seed=seed,
                             )
         #print(ba1)
@@ -3176,10 +3177,24 @@ if __name__ == "__main__":
         ba2 = BachetRanking(g,Debug=False,
                             sampleSize=200,
                             Polarised=False,
-                            TriplesSorted=False,
-                            Randomized=True,
+                            TriplesSorted=True,
+                            Randomized=False,
                             seed=seed)
         corrba2 = g.computeRankingCorrelation(ba2.bachetRanking)
+        ba3 = BachetRanking(g,Debug=False,
+                            sampleSize=200,
+                            Polarised=False,
+                            TriplesSorted=True,
+                            Randomized=True,
+                            seed=seed)
+        corrba3 = g.computeRankingCorrelation(ba3.bachetRanking)
+        ba4 = BachetRanking(g,Debug=False,
+                            sampleSize=200,
+                            Polarised=False,
+                            TriplesSorted=False,
+                            Randomized=False,
+                            seed=seed)
+        corrba4 = g.computeRankingCorrelation(ba4.bachetRanking)
         #print('Smart valued Bachet Ranking')
         #print('bav',ba2.bachetRanking,corrba2)
 ##        ba3 = ValuedBachetRanking(g,Comments=False,BestQualified=False,
@@ -3193,15 +3208,15 @@ if __name__ == "__main__":
         #banv = ReflexiveBachetRanking(g,Polarised=False,Debug=False)
         #print('banv',banv.correlation)
         print('%d,%d,%.4f,%.4f,%.4f,%.4f\n' % (seed,nt,corrba1['correlation'],
-                                           corrcop['correlation'],
+                                           corrba2['correlation'],
                                             #banp.correlation,
-                                        corrba2['correlation'],
+                                        corrba3['correlation'],
                                             #banv.correlation,))
-                                        corrnf['correlation']) )
+                                        corrba4['correlation']) )
         res.write('%d,%d,%.4f,%.4f,%.4f,%.4f\n' % (seed,nt,corrba1['correlation'],
-                                           corrcop['correlation'],
-                                        corrba2['correlation'],
-                                        corrnf['correlation']) )
+                                           corrba2['correlation'],
+                                        corrba3['correlation'],
+                                        corrba4['correlation']) )
     res.close()
     
      

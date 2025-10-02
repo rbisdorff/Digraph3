@@ -3284,27 +3284,27 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </span><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
 <span class="linenos"> 4</span><span class="go"> Bachet scores in descending order</span>
 <span class="linenos"> 5</span><span class="go">  action      score</span>
-<span class="linenos"> 6</span><span class="go">   a5         6540.00</span>
-<span class="linenos"> 7</span><span class="go">   a6         5674.00</span>
-<span class="linenos"> 8</span><span class="go">   a7         830.00</span>
-<span class="linenos"> 9</span><span class="go">   a3         -231.00</span>
-<span class="linenos">10</span><span class="go">   a4         -621.00</span>
-<span class="linenos">11</span><span class="go">   a1         -640.00</span>
-<span class="linenos">12</span><span class="go">   a9         -3893.00</span>
-<span class="linenos">13</span><span class="go">   a8         -4332.00</span>
-<span class="linenos">14</span><span class="go">   a2         -4905.00</span>
+<span class="linenos"> 6</span><span class="go">   a5         6488.00</span>
+<span class="linenos"> 7</span><span class="go">   a6         6246.00</span>
+<span class="linenos"> 8</span><span class="go">   a7          390.00</span>
+<span class="linenos"> 9</span><span class="go">   a3         -161.00</span>
+<span class="linenos">10</span><span class="go">   a4         -167.00</span>
+<span class="linenos">11</span><span class="go">   a1         -198.00</span>
+<span class="linenos">12</span><span class="go">   a8        -4352.00</span>
+<span class="linenos">13</span><span class="go">   a9         4473.00</span>
+<span class="linenos">14</span><span class="go">   a2        -4555.00</span>
 <span class="linenos">15</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span><span class="o">.</span><span class="n">bachetRanking</span>
-<span class="hll"><span class="linenos">16</span><span class="go"> [&#39;a5&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a9&#39;, &#39;a8&#39;, &#39;a2&#39;]</span>
+<span class="hll"><span class="linenos">16</span><span class="go"> [&#39;a5&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a8&#39;, &#39;a9&#39;, &#39;a2&#39;]</span>
 </span><span class="linenos">17</span><span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
 <span class="linenos">18</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
 <span class="linenos">19</span><span class="go"> Correlation indexes:</span>
-<span class="hll"><span class="linenos">20</span><span class="go">  Crisp ordinal correlation  : +0.759</span>
+<span class="hll"><span class="linenos">20</span><span class="go">  Crisp ordinal correlation  : +0.767</span>
 </span><span class="linenos">21</span><span class="go">  Epistemic determination    :  0.230</span>
-<span class="linenos">22</span><span class="go">  Bipolar-valued equivalence : +0.175</span>
+<span class="linenos">22</span><span class="go">  Bipolar-valued equivalence : +0.177</span>
 </pre></div>
 </div>
 </div>
-<p>In <a class="reference internal" href="#bachetranking"><span class="std std-numref">Listing 1.35</span></a> Line 20 above, we may observe that the <em>Bachet</em> scores lead eventually to a ranking result that is much better correlated  with the given outranking relation than the previous <em>Copeland</em> ranking (+0.759 versus +0.463).</p>
+<p>In <a class="reference internal" href="#bachetranking"><span class="std std-numref">Listing 1.35</span></a> Line 20 above, we may observe that the <em>Bachet</em> scores lead eventually to a ranking result that is much better correlated  with the given outranking relation than the previous <em>Copeland</em> ranking (+0.767 versus +0.463).</p>
 <p>A heatmap view on the performance tableau illustrates the actual quality of this <em>Bachet</em> ranking result.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="linenos">2</span><span class="gp">... </span>                             <span class="n">colorLevels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
@@ -3318,7 +3318,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p><span class="caption-number">Fig. 1.24 </span><span class="caption-text"><em>Bachet</em> rule ranked heatmap view on the performance records</span><a class="headerlink" href="#bachetheatmapt" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>In <a class="reference internal" href="#bachetheatmapt"><span class="std std-numref">Fig. 1.24</span></a> we may notice that action <em>a5</em>, with all grades above the third 7-tile (&gt; 42.86%), appears convincingly first-ranked. Similarly, with six grades in the two lowest 7-tiled classes (&lt; 28.57%), action <em>a2</em> appears last-ranked. Most significant in this ranking appear to be the <em>Benefit</em> criteria <em>b09</em>, <em>b04</em> , <em>b01</em> and <em>b08</em> with a correlation &gt; +0.20, whereas <em>Costs</em> criterion <em>c03</em> appears somehow in contradiction (-0.11 ) with the proposed <em>Bachet</em> ranking. Action <em>a7</em>, with only three weak grades, is not first-ranked because of the fact that on all three <em>Costs</em> criteria and on the <em>Benefit</em> criterion <em>b08</em>, i.e on a majority (33/60) of criteria significance, action <em>a7</em> is positively outranked by actions <em>a6</em> and <em>a5</em>. Notice also the highly contrasted performance record of action <em>a1</em> with three grades in the highest 7-tile (&gt; 85.71%) and four grades in the lowest 7-tile (&lt;14.29%). A similar contrasted situation is given for action <em>a3</em> with 7 grades in the two top 7-tiles (&gt;71.43%) and four grades in the two lowest 7-tiles (&lt;28.57%). The mean marginal correlation over all 13 criteria is slightly positive (+0.10). The standard deviation of the marginal correlations is a bit high (+0.154) so that the ranking may lack a bit of fairness (-0.054).</p>
+<p>In <a class="reference internal" href="#bachetheatmapt"><span class="std std-numref">Fig. 1.24</span></a> we may notice that action <em>a5</em>, with all grades above the third 7-tile (&gt; 42.86%), appears convincingly first-ranked. Similarly, with six grades in the two lowest 7-tiled classes (&lt; 28.57%), action <em>a2</em> appears last-ranked. Most significant in this ranking appear to be the <em>Benefit</em> criteria <em>b09</em>, <em>b04</em> , <em>b01</em>, <em>c01</em> and <em>b08</em> with a correlation &gt; +0.20, whereas <em>Costs</em> criteria <em>c03</em> and <em>b05</em> appear somehow in contradiction (&lt; -0.20 ) with the proposed <em>Bachet</em> ranking. Action <em>a7</em>, with only three weak grades, is not first-ranked because of the fact that on all three <em>Costs</em> criteria and on the <em>Benefit</em> criterion <em>b08</em>, i.e on a majority (33/60) of criteria significance, action <em>a7</em> is positively outranked by actions <em>a6</em> and <em>a5</em>. Notice also the highly contrasted performance record of action <em>a1</em> with three grades in the highest 7-tile (&gt; 85.71%) and four grades in the lowest 7-tile (&lt;14.29%). A similar contrasted situation is given for action <em>a3</em> with 7 grades in the two top 7-tiles (&gt;71.43%) and four grades in the two lowest 7-tiles (&lt;28.57%). The mean marginal correlation over all 13 criteria is slightly positive (+0.10). The standard deviation of the marginal correlations is a bit high (+0.198) so that the ranking may lack a bit of fairness (-0.096).</p>
 <p>Let us now consider a similar ranking rule, but working directly on the <em>bipolar-valued</em> outranking digraph.</p>
 </section>
 <section id="the-netflows-ranking">
@@ -3370,30 +3370,30 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="hll"><span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bav</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 </span><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bav</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
 <span class="linenos"> 4</span><span class="go"> Bachet scores in descending order</span>
-<span class="linenos"> 5</span><span class="go">  action      score</span>
-<span class="linenos"> 6</span><span class="go">    a5        1704.29</span>
-<span class="linenos"> 7</span><span class="go">    a6        1524.37</span>
-<span class="linenos"> 8</span><span class="go">    a7        723.51</span>
-<span class="linenos"> 9</span><span class="go">    a3        381.09</span>
-<span class="linenos">10</span><span class="go">    a4        115.35</span>
-<span class="linenos">11</span><span class="go">    a1        -57.20</span>
-<span class="linenos">12</span><span class="go">    a8        -89.84</span>
-<span class="linenos">13</span><span class="go">    a2        -308.25</span>
-<span class="linenos">14</span><span class="go">    a9        -2100.44</span>
+<span class="linenos"> 5</span><span class="go">  action       score</span>
+<span class="linenos"> 6</span><span class="go">   a6         1475.28</span>
+<span class="linenos"> 7</span><span class="go">   a5         1303.38</span>
+<span class="linenos"> 8</span><span class="go">   a7          446.79</span>
+<span class="linenos"> 9</span><span class="go">   a4           53.55</span>
+<span class="linenos">10</span><span class="go">   a1           45.20</span>
+<span class="linenos">11</span><span class="go">   a8         -283.78</span>
+<span class="linenos">12</span><span class="go">   a3         -563.71</span>
+<span class="linenos">13</span><span class="go">   a2         -813.29</span>
+<span class="linenos">14</span><span class="go">   a9        -2336.65</span>
 <span class="linenos">15</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bav</span><span class="o">.</span><span class="n">bachetRanking</span>
-<span class="hll"><span class="linenos">16</span><span class="go"> [&#39;a5&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a8&#39;, &#39;a2&#39;, &#39;a9&#39;]</span>
+<span class="hll"><span class="linenos">16</span><span class="go"> [&#39;a6&#39;, &#39;a5&#39;, &#39;a7&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a8&#39;, &#39;a3&#39;, &#39;a2&#39;, &#39;a9&#39;]</span>
 </span><span class="linenos">17</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span><span class="o">.</span><span class="n">bachetRanking</span>
-<span class="linenos">18</span><span class="go"> [&#39;a5&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a9&#39;, &#39;a8&#39;, &#39;a2&#39;]</span>
+<span class="linenos">18</span><span class="go"> [&#39;a5&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a8&#39;, &#39;a9&#39;, &#39;a2&#39;]</span>
 <span class="linenos">19</span><span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">bav</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
 <span class="hll"><span class="linenos">20</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
 </span><span class="linenos">21</span><span class="go"> Correlation indexes:</span>
-<span class="linenos">22</span><span class="go">  Crisp ordinal correlation  : +0.739</span>
+<span class="linenos">22</span><span class="go">  Crisp ordinal correlation  : +0.676</span>
 <span class="linenos">23</span><span class="go">  Epistemic determination    :  0.230</span>
-<span class="linenos">24</span><span class="go">  Bipolar-valued equivalence : +0.170</span>
+<span class="linenos">24</span><span class="go">  Bipolar-valued equivalence : +0.156</span>
 </pre></div>
 </div>
 </div>
-<p>With the <em>valued</em> version of the <em>Bachet</em> ranking rule we recover a similar ranking as the one obtained with the previous polarised version, only action ‘<em>a9</em>’ is pushed to the bottom. Again we are permuting 50 of the moste determined intransitive triples. This way we obtain a better correlated ranking result than with the simple <em>NetFlows</em> rule (+739 vs +0.638). The valued <em>Bachet</em> ranking is like the polarised <em>Bachet</em> rule invariant under the codual transform. However, like the <em>NetFlows</em> rule, the valued version of the <em>Bachet</em> rule is <strong>not</strong> necessarily <strong>Condorcet consistent</strong>.</p>
+<p>With the <em>valued</em> version of the <em>Bachet</em> ranking rule we recover a similar ranking as the one obtained with the previous polarised version. Again we are permuting 50 intransitive triples. This way we obtain a better correlated ranking result than with the simple <em>NetFlows</em> rule (+676 vs +0.638). The valued <em>Bachet</em> ranking is like the polarised <em>Bachet</em> rule invariant under the codual transform. However, like the <em>NetFlows</em> rule, the valued version of the <em>Bachet</em> rule is <strong>not</strong> necessarily <strong>Condorcet consistent</strong>.</p>
 <p>To appreciate now the actual ranking performances of the <em>ranking-by-scoring</em> rules seen so far, it is useful to consider <em>Kemeny</em>’s and <em>Slater</em>’s <strong>optimal fitting</strong> ranking rules.</p>
 </section>
 <section id="optimal-kemeny-rankings">
@@ -3716,9 +3716,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="linenos">13</span><span class="gp">... </span>            <span class="n">bav</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">]</span>
 <span class="linenos">14</span><span class="gp">&gt;&gt;&gt; </span><span class="n">rankings</span>
 <span class="hll"><span class="linenos">15</span><span class="go"> [[&#39;a5&#39;, &#39;a1&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a8&#39;, &#39;a4&#39;, &#39;a9&#39;, &#39;a3&#39;, &#39;a2&#39;],</span>
-</span><span class="hll"><span class="linenos">16</span><span class="go">  [&#39;a5&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a9&#39;, &#39;a8&#39;, &#39;a2&#39;],</span>
+</span><span class="hll"><span class="linenos">16</span><span class="go">  [&#39;a5&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a8&#39;, &#39;a9&#39;, &#39;a2&#39;],</span>
 </span><span class="hll"><span class="linenos">17</span><span class="go">  [&#39;a5&#39;, &#39;a7&#39;, &#39;a6&#39;, &#39;a3&#39;, &#39;a1&#39;, &#39;a8&#39;, &#39;a4&#39;, &#39;a9&#39;, &#39;a2&#39;],</span>
-</span><span class="hll"><span class="linenos">18</span><span class="go">  [&#39;a5&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a8&#39;, &#39;a1&#39;, &#39;a2&#39;, &#39;a9&#39;]]</span>
+</span><span class="hll"><span class="linenos">18</span><span class="go">  [&#39;a5&#39;, &#39;a7&#39;, &#39;a6&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a8&#39;, &#39;a1&#39;, &#39;a2&#39;, &#39;a9&#39;]]</span>
 </span><span class="linenos">19</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="n">RankingsFusionDigraph</span>
 <span class="hll"><span class="linenos">20</span><span class="gp">&gt;&gt;&gt; </span><span class="n">rfdg</span> <span class="o">=</span> <span class="n">RankingsFusionDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">rankings</span><span class="p">)</span>
 </span><span class="linenos">21</span><span class="gp">&gt;&gt;&gt; </span><span class="n">rfdg</span>
@@ -3726,9 +3726,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="linenos">23</span><span class="go"> Instance class      : RankingsFusionDigraph</span>
 <span class="linenos">24</span><span class="go"> Instance name       : rel_randomCBperftab_wk</span>
 <span class="linenos">25</span><span class="go"> Digraph Order       : 9</span>
-<span class="linenos">26</span><span class="go"> Digraph Size        : 25</span>
+<span class="linenos">26</span><span class="go"> Digraph Size        : 26</span>
 <span class="linenos">27</span><span class="go"> Valuation domain    : [-1.00;1.00]</span>
-<span class="linenos">28</span><span class="go"> Determinateness (%) : 84.72</span>
+<span class="linenos">28</span><span class="go"> Determinateness (%) : 86.11</span>
 <span class="linenos">29</span><span class="go"> Attributes          : [&#39;name&#39;, &#39;actions&#39;, ... ,</span>
 <span class="linenos">30</span><span class="go">                        &#39;valuationdomain&#39;, &#39;relation&#39;, ... ,</span>
 <span class="linenos">31</span><span class="go">                        &#39;rankings&#39;, &#39;fusionOperator&#39;]</span>
@@ -3750,7 +3750,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </span></pre></div>
 </div>
 </div>
-<p>The nine alternatives are gathered into four levels. Mind that alternative <em>a1</em> is at the same time <em>2nd-first</em> and <em>2nd-last</em> ranked (Lines 4-5). To draw such ambiguous partial rankings, we make usage of an optimistic topological sort algorithm keeping ambiguously ranked alternatives on their first-ranked positions <a class="footnote-reference brackets" href="#id250" id="id65" role="doc-noteref"><span class="fn-bracket">[</span>60<span class="fn-bracket">]</span></a> (see <a class="reference internal" href="#rankingconsensus2"><span class="std std-numref">Listing 1.50</span></a> Line 5).</p>
+<p>The nine alternatives are gathered into four levels. Mind that alternative a1 is at the same time 2nd-first and 2nd-last ranked (Lines 4-5). To draw such partial rankings, we make usage of an optimistic topological sort algorithm keeping ambiguously ranked alternatives on their best-ranked positions <a class="footnote-reference brackets" href="#id250" id="id65" role="doc-noteref"><span class="fn-bracket">[</span>60<span class="fn-bracket">]</span></a> (see <a class="reference internal" href="#rankingconsensus2"><span class="std std-numref">Listing 1.50</span></a> Line 5).</p>
 <div class="literal-block-wrapper docutils container" id="rankingconsensus2">
 <div class="code-block-caption"><span class="caption-number">Listing 1.50 </span><span class="caption-text">Inspecting a partial ranking</span><a class="headerlink" href="#rankingconsensus2" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">rfdg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;rankingsByScoringFusion&#39;</span><span class="p">)</span>
@@ -10959,7 +10959,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Oct 01, 2025.
+      <span class="lastupdated">Last updated on Oct 02, 2025.
       </span></p>
   </div>
 

@@ -3150,25 +3150,25 @@ Here, as we have seen above, the given digraph's transitivity degree is only 0.4
    >>> ba.showScores()
     Bachet scores in descending order
      action 	 score
-      a5 	 6540.00
-      a6 	 5674.00
-      a7 	 830.00
-      a3 	 -231.00
-      a4 	 -621.00
-      a1 	 -640.00
-      a9 	 -3893.00
-      a8 	 -4332.00
-      a2 	 -4905.00
+      a5 	 6488.00
+      a6 	 6246.00
+      a7 	  390.00
+      a3 	 -161.00
+      a4 	 -167.00
+      a1 	 -198.00
+      a8 	-4352.00
+      a9 	 4473.00
+      a2 	-4555.00
    >>> ba.bachetRanking
-    ['a5', 'a6', 'a7', 'a3', 'a4', 'a1', 'a9', 'a8', 'a2']
+    ['a5', 'a6', 'a7', 'a3', 'a4', 'a1', 'a8', 'a9', 'a2']
    >>> corr = g.computeRankingCorrelation(ba.bachetRanking)
    >>> g.showCorrelation(corr)
     Correlation indexes:
-     Crisp ordinal correlation  : +0.759
+     Crisp ordinal correlation  : +0.767
      Epistemic determination    :  0.230
-     Bipolar-valued equivalence : +0.175
+     Bipolar-valued equivalence : +0.177
 
-In :numref:`BachetRanking` Line 20 above, we may observe that the *Bachet* scores lead eventually to a ranking result that is much better correlated  with the given outranking relation than the previous *Copeland* ranking (+0.759 versus +0.463).
+In :numref:`BachetRanking` Line 20 above, we may observe that the *Bachet* scores lead eventually to a ranking result that is much better correlated  with the given outranking relation than the previous *Copeland* ranking (+0.767 versus +0.463).
 
 A heatmap view on the performance tableau illustrates the actual quality of this *Bachet* ranking result.
 
@@ -3186,7 +3186,7 @@ A heatmap view on the performance tableau illustrates the actual quality of this
 
    *Bachet* rule ranked heatmap view on the performance records 	   
 
-In :numref:`bachetHeatmapT` we may notice that action *a5*, with all grades above the third 7-tile (> 42.86%), appears convincingly first-ranked. Similarly, with six grades in the two lowest 7-tiled classes (< 28.57%), action *a2* appears last-ranked. Most significant in this ranking appear to be the *Benefit* criteria *b09*, *b04* , *b01* and *b08* with a correlation > +0.20, whereas *Costs* criterion *c03* appears somehow in contradiction (-0.11 ) with the proposed *Bachet* ranking. Action *a7*, with only three weak grades, is not first-ranked because of the fact that on all three *Costs* criteria and on the *Benefit* criterion *b08*, i.e on a majority (33/60) of criteria significance, action *a7* is positively outranked by actions *a6* and *a5*. Notice also the highly contrasted performance record of action *a1* with three grades in the highest 7-tile (> 85.71%) and four grades in the lowest 7-tile (<14.29%). A similar contrasted situation is given for action *a3* with 7 grades in the two top 7-tiles (>71.43%) and four grades in the two lowest 7-tiles (<28.57%). The mean marginal correlation over all 13 criteria is slightly positive (+0.10). The standard deviation of the marginal correlations is a bit high (+0.154) so that the ranking may lack a bit of fairness (-0.054).
+In :numref:`bachetHeatmapT` we may notice that action *a5*, with all grades above the third 7-tile (> 42.86%), appears convincingly first-ranked. Similarly, with six grades in the two lowest 7-tiled classes (< 28.57%), action *a2* appears last-ranked. Most significant in this ranking appear to be the *Benefit* criteria *b09*, *b04* , *b01*, *c01* and *b08* with a correlation > +0.20, whereas *Costs* criteria *c03* and *b05* appear somehow in contradiction (< -0.20 ) with the proposed *Bachet* ranking. Action *a7*, with only three weak grades, is not first-ranked because of the fact that on all three *Costs* criteria and on the *Benefit* criterion *b08*, i.e on a majority (33/60) of criteria significance, action *a7* is positively outranked by actions *a6* and *a5*. Notice also the highly contrasted performance record of action *a1* with three grades in the highest 7-tile (> 85.71%) and four grades in the lowest 7-tile (<14.29%). A similar contrasted situation is given for action *a3* with 7 grades in the two top 7-tiles (>71.43%) and four grades in the two lowest 7-tiles (<28.57%). The mean marginal correlation over all 13 criteria is slightly positive (+0.10). The standard deviation of the marginal correlations is a bit high (+0.198) so that the ranking may lack a bit of fairness (-0.096).
 
 Let us now consider a similar ranking rule, but working directly on the *bipolar-valued* outranking digraph.
 
@@ -3258,28 +3258,28 @@ The polarised *Bachet* ranking rule only considers the crisp relational structur
    >>> bav = BachetRanking(g,Polarised=False,sampleSize=50)
    >>> bav.showScores()
     Bachet scores in descending order
-     action 	 score
-       a5 	 1704.29
-       a6 	 1524.37
-       a7 	 723.51
-       a3 	 381.09
-       a4 	 115.35
-       a1 	 -57.20
-       a8 	 -89.84
-       a2 	 -308.25
-       a9 	 -2100.44
+     action       score 
+      a6 	 1475.28
+      a5 	 1303.38
+      a7 	  446.79
+      a4 	   53.55
+      a1 	   45.20
+      a8 	 -283.78
+      a3 	 -563.71
+      a2 	 -813.29
+      a9 	-2336.65
    >>> bav.bachetRanking
-    ['a5', 'a6', 'a7', 'a3', 'a4', 'a1', 'a8', 'a2', 'a9']
+    ['a6', 'a5', 'a7', 'a4', 'a1', 'a8', 'a3', 'a2', 'a9']
    >>> ba.bachetRanking
-    ['a5', 'a6', 'a7', 'a3', 'a4', 'a1', 'a9', 'a8', 'a2']
+    ['a5', 'a6', 'a7', 'a3', 'a4', 'a1', 'a8', 'a9', 'a2']
    >>> corr = g.computeRankingCorrelation(bav.bachetRanking)
    >>> g.showCorrelation(corr)
     Correlation indexes:
-     Crisp ordinal correlation  : +0.739
+     Crisp ordinal correlation  : +0.676
      Epistemic determination    :  0.230
-     Bipolar-valued equivalence : +0.170
+     Bipolar-valued equivalence : +0.156
 
-With the *valued* version of the *Bachet* ranking rule we recover a similar ranking as the one obtained with the previous polarised version, only action '*a9*' is pushed to the bottom. Again we are permuting 50 of the moste determined intransitive triples. This way we obtain a better correlated ranking result than with the simple *NetFlows* rule (+739 vs +0.638). The valued *Bachet* ranking is like the polarised *Bachet* rule invariant under the codual transform. However, like the *NetFlows* rule, the valued version of the *Bachet* rule is **not** necessarily **Condorcet consistent**. 
+With the *valued* version of the *Bachet* ranking rule we recover a similar ranking as the one obtained with the previous polarised version. Again we are permuting 50 intransitive triples. This way we obtain a better correlated ranking result than with the simple *NetFlows* rule (+676 vs +0.638). The valued *Bachet* ranking is like the polarised *Bachet* rule invariant under the codual transform. However, like the *NetFlows* rule, the valued version of the *Bachet* rule is **not** necessarily **Condorcet consistent**. 
 
 To appreciate now the actual ranking performances of the *ranking-by-scoring* rules seen so far, it is useful to consider *Kemeny*'s and *Slater*'s **optimal fitting** ranking rules.
 
@@ -3652,9 +3652,9 @@ To compare for instance the four rankings we have previously obtained with *rank
    ...             bav.bachetRanking]
    >>> rankings
     [['a5', 'a1', 'a6', 'a7', 'a8', 'a4', 'a9', 'a3', 'a2'],
-     ['a5', 'a6', 'a7', 'a3', 'a4', 'a1', 'a9', 'a8', 'a2'],
+     ['a5', 'a6', 'a7', 'a3', 'a4', 'a1', 'a8', 'a9', 'a2'],
      ['a5', 'a7', 'a6', 'a3', 'a1', 'a8', 'a4', 'a9', 'a2'],
-     ['a5', 'a6', 'a7', 'a3', 'a4', 'a8', 'a1', 'a2', 'a9']] 
+     ['a5', 'a7', 'a6', 'a3', 'a4', 'a8', 'a1', 'a2', 'a9']]
    >>> from transitiveDigraphs import RankingsFusionDigraph
    >>> rfdg = RankingsFusionDigraph(g,rankings)
    >>> rfdg
@@ -3662,9 +3662,9 @@ To compare for instance the four rankings we have previously obtained with *rank
     Instance class      : RankingsFusionDigraph
     Instance name       : rel_randomCBperftab_wk
     Digraph Order       : 9
-    Digraph Size        : 25
+    Digraph Size        : 26
     Valuation domain    : [-1.00;1.00]
-    Determinateness (%) : 84.72
+    Determinateness (%) : 86.11
     Attributes          : ['name', 'actions', ... ,
                            'valuationdomain', 'relation', ... ,
 	                   'rankings', 'fusionOperator']
@@ -3687,7 +3687,7 @@ The generic :py:class:`~transitiveDigraphs.TransitiveDigraph` class provides the
        2nd last ranked ['a1', 'a3', 'a4', 'a8']
      1st last ranked ['a2', 'a9']
 
-The nine alternatives are gathered into four levels. Mind that alternative *a1* is at the same time *2nd-first* and *2nd-last* ranked (Lines 4-5). To draw such ambiguous partial rankings, we make usage of an optimistic topological sort algorithm keeping ambiguously ranked alternatives on their first-ranked positions [60]_ (see :numref:`RankingConsensus2` Line 5). 
+The nine alternatives are gathered into four levels. Mind that alternative a1 is at the same time 2nd-first and 2nd-last ranked (Lines 4-5). To draw such partial rankings, we make usage of an optimistic topological sort algorithm keeping ambiguously ranked alternatives on their best-ranked positions [60]_ (see :numref:`RankingConsensus2` Line 5). 
 
 .. code-block:: pycon
    :name: RankingConsensus2
