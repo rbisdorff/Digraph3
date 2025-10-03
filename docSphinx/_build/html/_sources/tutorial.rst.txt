@@ -3146,7 +3146,7 @@ Here, as we have seen above, the given digraph's transitivity degree is only 0.4
    :linenos:
 
    >>> from linearOrders import BachetRanking
-   >>> ba = BachetRanking(g,sampleSize=50)
+   >>> ba = BachetRanking(g,Polarised=True,sampleSize=50,seed=5)
    >>> ba.showScores()
     Bachet scores in descending order
      action 	 score
@@ -3255,31 +3255,31 @@ The polarised *Bachet* ranking rule only considers the crisp relational structur
    :linenos:
 
    >>> from linearOrders import BachetRanking
-   >>> bav = BachetRanking(g,Polarised=False,sampleSize=50)
+   >>> bav = BachetRanking(g,Polarised=False,sampleSize=50,seed=7)
    >>> bav.showScores()
     Bachet scores in descending order
      action       score 
-      a6 	 1475.28
-      a5 	 1303.38
-      a7 	  446.79
-      a4 	   53.55
-      a1 	   45.20
-      a8 	 -283.78
-      a3 	 -563.71
-      a2 	 -813.29
-      a9 	-2336.65
+      a5 	 1682.39
+      a6 	 1503.57
+      a7 	  745.72
+      a3 	  406.28
+      a4 	  122.53
+      a8 	  -86.24
+      a1 	 -170.00
+      a2 	 -289.05
+      a9 	-2070.23
    >>> bav.bachetRanking
-    ['a6', 'a5', 'a7', 'a4', 'a1', 'a8', 'a3', 'a2', 'a9']
+    ['a5', 'a6', 'a7', 'a3', 'a4', 'a8', 'a1', 'a2', 'a9']
    >>> ba.bachetRanking
     ['a5', 'a6', 'a7', 'a3', 'a4', 'a1', 'a8', 'a9', 'a2']
    >>> corr = g.computeRankingCorrelation(bav.bachetRanking)
    >>> g.showCorrelation(corr)
     Correlation indexes:
-     Crisp ordinal correlation  : +0.676
+     Crisp ordinal correlation  : +0.715
      Epistemic determination    :  0.230
-     Bipolar-valued equivalence : +0.156
+     Bipolar-valued equivalence : +0.165
 
-With the *valued* version of the *Bachet* ranking rule we recover a similar ranking as the one obtained with the previous polarised version. Again we are permuting 50 intransitive triples. This way we obtain a better correlated ranking result than with the simple *NetFlows* rule (+676 vs +0.638). The valued *Bachet* ranking is like the polarised *Bachet* rule invariant under the codual transform. However, like the *NetFlows* rule, the valued version of the *Bachet* rule is **not** necessarily **Condorcet consistent**. 
+With the *valued* version of the *Bachet* ranking rule we recover a similar ranking as the one obtained with the previous polarised version. Again we are permuting 50 intransitive triples. This way we obtain a better correlated ranking result than with the simple *NetFlows* rule (+715 vs +0.638). The valued *Bachet* ranking is like the polarised *Bachet* rule invariant under the codual transform. However, like the *NetFlows* rule, the valued version of the *Bachet* rule is **not** necessarily **Condorcet consistent**. 
 
 To appreciate now the actual ranking performances of the *ranking-by-scoring* rules seen so far, it is useful to consider *Kemeny*'s and *Slater*'s **optimal fitting** ranking rules.
 
@@ -3643,9 +3643,9 @@ To compare for instance the four rankings we have previously obtained with *rank
    >>> g = BipolarOutrankingDigraph(t,Normalized=True)
    >>> from linearOrders import *
    >>> cop = CopelandOrder(g)
-   >>> ba = BachetRanking(g,Polarised=True,sampleSize=50)
+   >>> ba = BachetRanking(g,Polarised=True,sampleSize=50,seed=5)
    >>> nf = NetFlowsRanking(g)
-   >>> bav = BachetRanking(g,Polarised=False,sampleSize=10)
+   >>> bav = BachetRanking(g,Polarised=False,sampleSize=50,seed=7)
    >>> rankings = [cop.copelandRanking,
    ...             ba.bachetRanking,
    ...             nf.netFlowsRanking,
@@ -3654,7 +3654,7 @@ To compare for instance the four rankings we have previously obtained with *rank
     [['a5', 'a1', 'a6', 'a7', 'a8', 'a4', 'a9', 'a3', 'a2'],
      ['a5', 'a6', 'a7', 'a3', 'a4', 'a1', 'a8', 'a9', 'a2'],
      ['a5', 'a7', 'a6', 'a3', 'a1', 'a8', 'a4', 'a9', 'a2'],
-     ['a5', 'a7', 'a6', 'a3', 'a4', 'a8', 'a1', 'a2', 'a9']]
+     ['a5', 'a6', 'a7', 'a3', 'a4', 'a8', 'a1', 'a2', 'a9']]
    >>> from transitiveDigraphs import RankingsFusionDigraph
    >>> rfdg = RankingsFusionDigraph(g,rankings)
    >>> rfdg
@@ -3662,9 +3662,9 @@ To compare for instance the four rankings we have previously obtained with *rank
     Instance class      : RankingsFusionDigraph
     Instance name       : rel_randomCBperftab_wk
     Digraph Order       : 9
-    Digraph Size        : 26
+    Digraph Size        : 25
     Valuation domain    : [-1.00;1.00]
-    Determinateness (%) : 86.11
+    Determinateness (%) : 84.72
     Attributes          : ['name', 'actions', ... ,
                            'valuationdomain', 'relation', ... ,
 	                   'rankings', 'fusionOperator']
@@ -3719,11 +3719,11 @@ The nine alternatives are gathered into four levels. Mind that alternative a1 is
    
    >>> g.showCorrelation(g.computeOrdinalCorrelation(rfdg))
     Correlation indexes:
-     Crisp ordinal correlation  : +0.846
-     Epistemic determination    :  0.156
-     Bipolar-valued equivalence : +0.132
+     Crisp ordinal correlation  : +0.847
+     Epistemic determination    :  0.157
+     Bipolar-valued equivalence : +0.133
 
-The epistemic fusion of all four *ranking-by-scoring* results delivers here a convincing transitive partial ordering, highly correlated with the given outranking digraph *g* (+0.846), supported by a criteria significance majority of 56.6% (see Lines 3-5 above) . 
+The epistemic fusion of all four *ranking-by-scoring* results delivers here a convincing transitive partial ordering, highly correlated with the given outranking digraph *g* (+0.847), supported by a criteria significance majority of 56.6% (see Lines 3-5 above) . 
 
 A second strategy for constructing partial rankings makes usage of the *randomized Bachet* ranking rules.
 
