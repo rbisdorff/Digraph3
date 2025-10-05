@@ -3378,32 +3378,30 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span class="hll"><span class="linenos"> 5</span><span class="go">   #triples x&gt;y&gt;z: 504, #closed: 343, #open: 161</span>
 </span><span class="linenos"> 6</span><span class="go">   (#closed/#triples) =  0.681</span>
 <span class="linenos"> 7</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">BachetRanking</span>
-<span class="hll"><span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="hll"><span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 </span><span class="linenos"> 9</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
 <span class="linenos">10</span><span class="go"> Bachet scores in descending order</span>
-<span class="linenos">11</span><span class="go">  action      score</span>
-<span class="linenos">12</span><span class="go">   a2         6056.00</span>
+<span class="linenos">11</span><span class="go">  action       score</span>
+<span class="linenos">12</span><span class="go">   a2         6380.00</span>
 <span class="linenos">13</span><span class="go">   a5         4746.00</span>
-<span class="linenos">14</span><span class="go">   a9         2966.00</span>
+<span class="linenos">14</span><span class="go">   a9         2480.00</span>
 <span class="linenos">15</span><span class="go">   a6         -306.00</span>
-<span class="linenos">16</span><span class="go">   a4         -1494.00</span>
-<span class="linenos">17</span><span class="go">   a8         -1849.00</span>
-<span class="linenos">18</span><span class="go">   a3         -4801.00</span>
-<span class="linenos">19</span><span class="go">   a7         -4955.00</span>
-<span class="linenos">20</span><span class="go">   a1         -5921.00</span>
+<span class="linenos">16</span><span class="go">   a8         -877.00</span>
+<span class="linenos">17</span><span class="go">   a4        -1494.00</span>
+<span class="linenos">18</span><span class="go">   a3        -4315.00</span>
+<span class="linenos">19</span><span class="go">   a7        -4955.00</span>
+<span class="linenos">20</span><span class="go">   a1        -6083.00</span>
 <span class="linenos">21</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span><span class="o">.</span><span class="n">bachetRanking</span>
-<span class="hll"><span class="linenos">22</span><span class="go"> [&#39;a2&#39;, &#39;a5&#39;, &#39;a9&#39;, &#39;a6&#39;, &#39;a4&#39;, &#39;a8&#39;, &#39;a3&#39;, &#39;a7&#39;, &#39;a1&#39;]</span>
-</span><span class="linenos">23</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">sba</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
-<span class="hll"><span class="linenos">24</span><span class="go"> {&#39;correlation&#39;: 0.7441963223547806, &#39;determination&#39;: 0.408625}</span>
-</span><span class="hll"><span class="linenos">25</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span class="linenos">26</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span><span class="o">.</span><span class="n">bachetRanking</span>
-<span class="hll"><span class="linenos">27</span><span class="go"> [&#39;a2&#39;, &#39;a5&#39;, &#39;a9&#39;, &#39;a6&#39;, &#39;a8&#39;, &#39;a4&#39;, &#39;a3&#39;, &#39;a7&#39;, &#39;a1&#39;]</span>
-</span><span class="linenos">28</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">sba</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
-<span class="hll"><span class="linenos">29</span><span class="go"> {&#39;correlation&#39;: 0.7585058291696407, &#39;determination&#39;: 0.408625}</span>
-</span></pre></div>
+<span class="hll"><span class="linenos">22</span><span class="go"> [&#39;a2&#39;, &#39;a5&#39;, &#39;a9&#39;, &#39;a6&#39;, &#39;a8&#39;, &#39;a4&#39;, &#39;a3&#39;, &#39;a7&#39;, &#39;a1&#39;]</span>
+</span><span class="linenos">23</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">sba</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">))</span>
+<span class="linenos">24</span><span class="go"> Correlation indexes:</span>
+<span class="hll"><span class="linenos">25</span><span class="go">  Crisp ordinal correlation  : +0.759</span>
+</span><span class="linenos">26</span><span class="go">  Epistemic determination    :  0.409</span>
+<span class="linenos">27</span><span class="go">  Bipolar-valued equivalence : +0.310</span>
+</pre></div>
 </div>
 </div>
-<p>In <a class="reference internal" href="#smartbachet"><span class="std std-numref">Listing 3.50</span></a> Line 5 we notice that the given random outranking digraph presents 161 intransitive outranking triples. When sampling in Line 8 the permutations of 3 of these intransitive triples, we discover a ranking result that differs only in the positions of actions <em>a4</em> and <em>a8</em> from the optimal Kemeny ranking seen in <a class="reference internal" href="#optimalkemeny1"><span class="std std-numref">Listing 3.49</span></a>. When permuting now all the 161 intransitive outranking triples by setting <em>sampleSize=None</em> (Line 25), we actually obtain this optimal Kemeny ranking result (see Lines 27, 29).</p>
+<p>In <a class="reference internal" href="#smartbachet"><span class="std std-numref">Listing 3.50</span></a> Line 5 we notice that the given random outranking digraph presents 161 intransitive outranking triples. When randomly sampling in Line 8 the permutations of 100 of these intransitive triples, we discover a ranking result that corresponfs to the optimal Kemeny ranking seen in <a class="reference internal" href="#optimalkemeny1"><span class="std std-numref">Listing 3.49</span></a>.</p>
 <p>Running a MonteCarlo simulation with a sample of 500 random 3 objectives –economic, environmental and societal– performance tableaux of 9 decision actions marked on 13 performance criteria, gives the following ordinal correlations statistics between the corresponding ranking results and the given bipolar-valued outranking digraph <em>g</em>.</p>
 <blockquote>
 <div><table class="docutils align-default">
@@ -5257,7 +5255,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Oct 02, 2025.
+      <span class="lastupdated">Last updated on Oct 05, 2025.
       </span></p>
   </div>
 

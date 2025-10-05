@@ -3421,7 +3421,7 @@ When reconsidering the random outranking digraph *g*, seen in :numref:`optimisin
 .. code-block:: pycon
    :caption: Smart *Bachet* ranking result
    :name: smartBachet
-   :emphasize-lines: 5,8,22,24,25,27,29
+   :emphasize-lines: 5,8,22,25
 
    >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
    >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
@@ -3430,30 +3430,28 @@ When reconsidering the random outranking digraph *g*, seen in :numref:`optimisin
       #triples x>y>z: 504, #closed: 343, #open: 161
       (#closed/#triples) =  0.681
    >>> from linearOrders import BachetRanking
-   >>> sba = BachetRanking(g,Polarised=True,sampleSize=3)
+   >>> sba = BachetRanking(g,Polarised=True,sampleSize=100)
    >>> sba.showScores()
     Bachet scores in descending order
-     action 	 score
-      a2 	 6056.00
+     action 	  score
+      a2 	 6380.00
       a5 	 4746.00
-      a9 	 2966.00
+      a9 	 2480.00
       a6 	 -306.00
-      a4 	 -1494.00
-      a8 	 -1849.00
-      a3 	 -4801.00
-      a7 	 -4955.00
-      a1 	 -5921.00
-   >>> sba.bachetRanking
-    ['a2', 'a5', 'a9', 'a6', 'a4', 'a8', 'a3', 'a7', 'a1']
-   >>> g.computeRankingCorrelation(sba.bachetRanking)
-    {'correlation': 0.7441963223547806, 'determination': 0.408625}
-   >>> sba = BachetRanking(g,sampleSize=None,seed=1,Polarised=True)
+      a8 	 -877.00
+      a4 	-1494.00
+      a3 	-4315.00
+      a7 	-4955.00
+      a1 	-6083.00
    >>> sba.bachetRanking
     ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1']
-   >>> g.computeRankingCorrelation(sba.bachetRanking)
-    {'correlation': 0.7585058291696407, 'determination': 0.408625}
+   >>> g.showCorrelation(g.computeRankingCorrelation(sba.bachetRanking))
+    Correlation indexes:
+     Crisp ordinal correlation  : +0.759
+     Epistemic determination    :  0.409
+     Bipolar-valued equivalence : +0.310
 
-In :numref:`smartBachet` Line 5 we notice that the given random outranking digraph presents 161 intransitive outranking triples. When sampling in Line 8 the permutations of 3 of these intransitive triples, we discover a ranking result that differs only in the positions of actions *a4* and *a8* from the optimal Kemeny ranking seen in :numref:`optimalKemeny1`. When permuting now all the 161 intransitive outranking triples by setting *sampleSize=None* (Line 25), we actually obtain this optimal Kemeny ranking result (see Lines 27, 29).
+In :numref:`smartBachet` Line 5 we notice that the given random outranking digraph presents 161 intransitive outranking triples. When randomly sampling in Line 8 the permutations of 100 of these intransitive triples, we discover a ranking result that corresponfs to the optimal Kemeny ranking seen in :numref:`optimalKemeny1`.
 
 Running a MonteCarlo simulation with a sample of 500 random 3 objectives --economic, environmental and societal-- performance tableaux of 9 decision actions marked on 13 performance criteria, gives the following ordinal correlations statistics between the corresponding ranking results and the given bipolar-valued outranking digraph *g*. 
 
