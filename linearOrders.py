@@ -1990,6 +1990,7 @@ class BachetRanking(LinearOrder,_BachetRanking):
 
         - *TriplesSorted*: False (default) | True; If *True*, the list of intransitive triples is ranked by determination score.
 
+        - *RunTimeOPtimized*: False (default) | True: If *True*, each intransitive triple is permuted only once. 
 
     *Useage example*
     
