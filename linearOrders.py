@@ -1624,14 +1624,18 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
             randomActions = [x for x in actions]
             correlation = -1.0
             bar = None
+            triples = other.computeIntransitiveTriples()
+            #print(len(triples))
             for i in range(randomized):
                 random.shuffle(randomActions) 
                 ba = PolarisedBachetRanking(c,orderLimit=orderLimit,
                                    BestQualified=True,
                                    actionsList=randomActions)
                 corr = other.computeRankingCorrelation(ba.bachetRanking)
+                #print(corr['correlation'])
                 if corr['correlation'] > correlation:
                     correlation = corr['correlation']
+                    #print(i, corr['correlation'])
                     bar = ba
             self.runTimes = bar.runTimes
             self.runTimes['bachet'] = time()-t0
@@ -2031,20 +2035,39 @@ class BachetRanking(LinearOrder,_BachetRanking):
                  orderLimit=50,Polarised=True,
                  sampleSize=100,TriplesSorted=False,
                  Randomized=True,
+                 RunTimeOptimized=False,
                  seed=None,
                  Debug=False):
 
         from copy import deepcopy
-        triples = other.computeTransitivityDegree(ReturnIntransitiveTriples=True)
+        if RunTimeOptimized:
+            triples = (~(-other)).computeTransitivityDegree(ReturnIntransitiveTriples=True)
+        else:
+            triples = other.computeTransitivityDegree(ReturnIntransitiveTriples=True)
         self.intransitiveTriples = triples
         nt = len(triples)
         rankedTriples = []
+        triplesSet = set()
         for tr in triples:
+            triplesSet.add(frozenset(tuple(tr)))
+        triplesList = [tuple(s) for s in triplesSet]
+        triplesList.sort()
+        
+        for s in triplesList:
+            tr = tuple(s)
             x = tr[0]
             y = tr[1]
             z = tr[2]
+            #triplesSet.add(frozenset(tuple(tr)))
+            #print(tr,triplesSet)
             score = other.relation[x][y] + other.relation[y][z] - other.relation[x][z]
-            rankedTriples.append((score,tr))
+            rankedTriples.append((score,list(tr)))
+        #self.triplesSet = triplesSet
+        #print(len(triplesSet),len(rankedTriples))
+        #return
+        nt = len(rankedTriples)
+        print(nt)
+        #print(nt)
         if TriplesSorted:
             from digraphsTools import scoredTuplesSort
             scoredTuplesSort(rankedTriples,reverse=True)
@@ -2081,9 +2104,11 @@ class BachetRanking(LinearOrder,_BachetRanking):
         bestBa = currBachetRanking(other,actionsList=al,
                                 orderLimit=orderLimit)
         for i in rdIndex:
+        #for st in triplesSet:
             tr = rankedTriples[i][1]
-            if Debug:
-                print(tr)
+            #tr = list(st)
+            #if Debug:
+            #print(tr)
             xi = al.index(tr[0])
             yi = al.index(tr[1])
             al[xi] = tr[1]
@@ -2097,6 +2122,9 @@ class BachetRanking(LinearOrder,_BachetRanking):
                 bestCorr = ba.correlation
                 bestBa = currBachetRanking(other,actionsList=bestList,
                                        orderLimit=orderLimit)
+                bestBa.bestList = bestList
+                #print(i,ba.correlation)
+
             yi = al.index(tr[1])
             zi = al.index(tr[2])
             al[yi] = tr[2]
@@ -2110,6 +2138,9 @@ class BachetRanking(LinearOrder,_BachetRanking):
                 bestCorr = ba.correlation
                 bestBa = currBachetRanking(other,actionsList=bestList,
                                        orderLimit=orderLimit)
+                bestBa.bestList = bestList
+                #print(i,ba.correlation)
+
         for att in bestBa.__dict__:
             self.__dict__[att] = bestBa.__dict__[att]
 
@@ -3109,15 +3140,17 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
     Threading = False
-    #res = open('test11CBvalRandvsSrtRdSs200All.csv','w')
-    res = open('tes.csv','w')
-    res.write('"seed","nt","baprand","bapsort","bapsortrand","bap"\n')
-    sampleSize = 1
+    res = open('test13CBvalRandvsSrtRdSs200AllOpt.csv','w')
+    #res = open('tes.csv','w')
+    res.write('"seed","nt","baprsopt","baprs","bapopt","bap"\n')
+    sampleSize = 100
+    randomSize = 200
     #t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
     for sample in range(sampleSize):
         print(sample)
         #seed = random.randint(1,1000000)
         seed = 9
+        seed = sample + 1
     ##    t = CircularPerformanceTableau()
         #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
         #t = PerformanceTableau('testLin')
@@ -3126,15 +3159,17 @@ if __name__ == "__main__":
         g = BipolarOutrankingDigraph(t)
         triples = g.computeIntransitiveTriples()
         nt = len(triples)
+        print(nt)
         #g = RandomDigraph(order=7)
         revba1 = [x for x in reversed(g.actions)]
         ba1 = BachetRanking(g,
-                            orderLimit=20,sampleSize=200,
+                            orderLimit=20,sampleSize=randomSize,
                             Debug=False,
                             actionsList=None,
                             Polarised=False,
-                            TriplesSorted=False,
+                            TriplesSorted=True,
                             Randomized=True,
+                            RunTimeOptimized=True,
                             seed=seed,
                             )
         #print(ba1)
@@ -3175,24 +3210,27 @@ if __name__ == "__main__":
 ##                            )
         #print(ba2)
         ba2 = BachetRanking(g,Debug=False,
-                            sampleSize=200,
+                            sampleSize=randomSize,
                             Polarised=False,
                             TriplesSorted=True,
-                            Randomized=False,
+                            Randomized=True,
+                            RunTimeOptimized=False,
                             seed=seed)
         corrba2 = g.computeRankingCorrelation(ba2.bachetRanking)
         ba3 = BachetRanking(g,Debug=False,
                             sampleSize=200,
                             Polarised=False,
-                            TriplesSorted=True,
-                            Randomized=True,
+                            TriplesSorted=False,
+                            Randomized=False,
+                            RunTimeOptimized=True,
                             seed=seed)
         corrba3 = g.computeRankingCorrelation(ba3.bachetRanking)
         ba4 = BachetRanking(g,Debug=False,
-                            sampleSize=200,
+                            sampleSize=randomSize,
                             Polarised=False,
                             TriplesSorted=False,
                             Randomized=False,
+                            RunTimeOptimized=False,
                             seed=seed)
         corrba4 = g.computeRankingCorrelation(ba4.bachetRanking)
         #print('Smart valued Bachet Ranking')

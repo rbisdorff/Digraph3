@@ -3280,7 +3280,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <div class="literal-block-wrapper docutils container" id="bachetranking">
 <div class="code-block-caption"><span class="caption-number">Listing 1.35 </span><span class="caption-text">Computing a <em>Bachet</em> ranking</span><a class="headerlink" href="#bachetranking" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">BachetRanking</span>
-<span class="hll"><span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="hll"><span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
 </span><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
 <span class="linenos"> 4</span><span class="go"> Bachet scores in descending order</span>
 <span class="linenos"> 5</span><span class="go">  action      score</span>
@@ -3367,7 +3367,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <div class="literal-block-wrapper docutils container" id="valuedbachetranking">
 <div class="code-block-caption"><span class="caption-number">Listing 1.38 </span><span class="caption-text">Computing a valued <em>Bachet</em> ranking</span><a class="headerlink" href="#valuedbachetranking" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">BachetRanking</span>
-<span class="hll"><span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bav</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="hll"><span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bav</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 </span><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bav</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
 <span class="linenos"> 4</span><span class="go"> Bachet scores in descending order</span>
 <span class="linenos"> 5</span><span class="go">  action       score</span>
@@ -10959,7 +10959,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Oct 03, 2025.
+      <span class="lastupdated">Last updated on Oct 05, 2025.
       </span></p>
   </div>
 

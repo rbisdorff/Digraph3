@@ -3146,7 +3146,7 @@ Here, as we have seen above, the given digraph's transitivity degree is only 0.4
    :linenos:
 
    >>> from linearOrders import BachetRanking
-   >>> ba = BachetRanking(g,Polarised=True,sampleSize=50,seed=5)
+   >>> ba = BachetRanking(g,Polarised=True,sampleSize=50,seed=7)
    >>> ba.showScores()
     Bachet scores in descending order
      action 	 score
@@ -3255,7 +3255,7 @@ The polarised *Bachet* ranking rule only considers the crisp relational structur
    :linenos:
 
    >>> from linearOrders import BachetRanking
-   >>> bav = BachetRanking(g,Polarised=False,sampleSize=50,seed=7)
+   >>> bav = BachetRanking(g,Polarised=False,sampleSize=50,seed=4)
    >>> bav.showScores()
     Bachet scores in descending order
      action       score 
