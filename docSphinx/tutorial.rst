@@ -3421,7 +3421,7 @@ The **Slater** ranking rule is identical to *Kemeny*'s but works, instead, on th
    >>> sl = SlaterRanking(gcd,orderLimit=9)
    >>> sl.slaterRanking
     ['a5', 'a6', 'a4', 'a1', 'a3', 'a7', 'a8', 'a9', 'a2']
-   >>> corr = gcd.computeOrderCorrelation(sl.slaterRanking)
+   >>> corr = gcd.computeRankingCorrelation(sl.slaterRanking)
    >>> sl.showCorrelation(corr)
     Correlation indexes:
      Extended Kendall tau       : +0.676
