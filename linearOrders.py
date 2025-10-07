@@ -3141,21 +3141,21 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
     Threading = False
-    res = open('test13CBvalRandvsSrtRdSs200AllOpt.csv','w')
+    res = open('test15CBvalRandvsSrtRdSs200AllOptCtrl.csv','w')
     #res = open('tes.csv','w')
     res.write('"seed","nt","baprsopt","baprs","bapopt","bap"\n')
     sampleSize = 100
-    randomSize = 200
+    randomSize = None
     #t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
     for sample in range(sampleSize):
         print(sample)
         #seed = random.randint(1,1000000)
         seed = 9
-        seed = sample + 1
+        seed = sample + 101
     ##    t = CircularPerformanceTableau()
         #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
         #t = PerformanceTableau('testLin')
-        t = RandomCBPerformanceTableau(numberOfActions=13,
+        t = RandomCBPerformanceTableau(numberOfActions=15,
                                        numberOfCriteria=13,seed=seed)
         g = BipolarOutrankingDigraph(t)
         triples = g.computeIntransitiveTriples()
@@ -3177,9 +3177,9 @@ if __name__ == "__main__":
         corrba1 = g.computeRankingCorrelation(ba1.bachetRanking)
         #print('Smart polarised Bachet Ranking')
         #print('bap',ba1.bachetRanking,corrba1)
-        cop = CopelandRanking(g,Comments=False,Gamma=False)
+        #cop = CopelandRanking(g,Comments=False,Gamma=False)
         #print(cop.copelandRanking)
-        corrcop = g.computeRankingCorrelation(cop.copelandRanking)
+        #corrcop = g.computeRankingCorrelation(cop.copelandRanking)
 ##        print('cop',cop.copelandRanking,corrcop)
 ##        wcop1 = _WeightedCopelandRanking(g,Comments=False,Debug=False)
 ##        print(wcop1.copelandRanking)
@@ -3191,8 +3191,8 @@ if __name__ == "__main__":
 ##        print(wcop2.copelandRanking)
 ##        corrwcop2 = g.computeRankingCorrelation(wcop2.copelandRanking)
 ##        print('wcop2',wcop2.copelandRanking,corrwcop2)
-        nf = NetFlowsRanking(g)
-        corrnf = g.computeRankingCorrelation(nf.netFlowsRanking)
+##        nf = NetFlowsRanking(g)
+##        corrnf = g.computeRankingCorrelation(nf.netFlowsRanking)
 ##        print('nf',nf.netFlowsRanking,corrnf)
 ##        ke = KemenyRanking(g,orderLimit=9)
 ##        corrke = g.computeRankingCorrelation(ke.kemenyRanking)
@@ -3219,7 +3219,7 @@ if __name__ == "__main__":
                             seed=seed)
         corrba2 = g.computeRankingCorrelation(ba2.bachetRanking)
         ba3 = BachetRanking(g,Debug=False,
-                            sampleSize=200,
+                            sampleSize=randomSize,
                             Polarised=False,
                             TriplesSorted=False,
                             Randomized=False,
