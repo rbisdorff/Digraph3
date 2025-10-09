@@ -3255,7 +3255,7 @@ The polarised *Bachet* ranking rule only considers the crisp relational structur
    :linenos:
 
    >>> from linearOrders import BachetRanking
-   >>> bav = BachetRanking(g,Polarised=False,sampleSize=50,seed=4)
+   >>> bav = BachetRanking(g,Polarised=False,sampleSize=50,seed=9)
    >>> bav.showScores()
     Bachet scores in descending order
      action       score 
