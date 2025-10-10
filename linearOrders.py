@@ -649,9 +649,7 @@ class NetFlowsRanking(LinearOrder):
     .. note:: The NetFlows ranking rule is invariant under the codual transform
     """
     
-    def __init__(self,other,CoDual=False,
-                 #Valued=False,
-                 Comments=False,Debug=False):
+    def __init__(self,other,CoDual=False,Valued=False,Comments=False,Debug=False):
         """
         constructor for generating a linear order
         from a given other digraph following
@@ -752,40 +750,40 @@ class NetFlowsRanking(LinearOrder):
         # init relation
         tr = time()
         actionKeys = [x for x in actions] 
-##        if Valued:        
-##            for x in actionKeys:
-##                xi = netFlowsRanking.index(x)
-##                selfRelation[x] = {}
-##                for y in actionKeys:
-##                    yj = netFlowsRanking.index(y)
-##                    if xi < yj:
-##                        selfRelation[x][y] = max(Med, otherRelation[x][y])
-##                    elif xi == yj:
-##                        selfRelation[x][y] = Med
-##                    else:
-##                        selfRelation[x][y] = min(Med, otherRelation[x][y])
-##        else:
-        for x in actionKeys:
-            xi = netFlowsRanking.index(x)
-            selfRelation[x] = {}
-            for y in actionKeys:
-                yj = netFlowsRanking.index(y)
-                if xi < yj:
-                    selfRelation[x][y] = Max
-                elif xi == yj:
-                    selfRelation[x][y] = Med
-                else:
-                    selfRelation[x][y] = Min            
+        if Valued:        
+            for x in actionKeys:
+                xi = netFlowsRanking.index(x)
+                selfRelation[x] = {}
+                for y in actionKeys:
+                    yj = netFlowsRanking.index(y)
+                    if xi < yj:
+                        selfRelation[x][y] = max(Med, otherRelation[x][y])
+                    elif xi == yj:
+                        selfRelation[x][y] = Med
+                    else:
+                        selfRelation[x][y] = min(Med, otherRelation[x][y])
+        else:
+            for x in actionKeys:
+                xi = netFlowsRanking.index(x)
+                selfRelation[x] = {}
+                for y in actionKeys:
+                    yj = netFlowsRanking.index(y)
+                    if xi < yj:
+                        selfRelation[x][y] = Max
+                    elif xi == yj:
+                        selfRelation[x][y] = Med
+                    else:
+                        selfRelation[x][y] = Min            
         runTimes['relation'] = time() - tr      
         
         # store self attributes
         self.name = other.name + '_ranked'        
         self.actions = actions
         self.order = n
-        #if not Valued:
-        self.valuationdomain = valuationdomain
-        #else:
-        #    self.valuationdomain = copy(other.valuationdomain)
+        if not Valued:
+            self.valuationdomain = valuationdomain
+        else:
+            self.valuationdomain = copy(other.valuationdomain)
         self.relation = selfRelation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -1549,12 +1547,12 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
             otherRelation = deepcopy(other.relation)
         n = len(other.actions)
         if actionsList is None:
-            #actions = [x for x in reversed(other.actions)]
-            actions = deepcopy(other.actions)
-        else:
-            actions = OrderedDict()
-            for x in actionsList:
-                actions[x] = deepcopy(other.actions[x])
+            actionsList = [x for x in other.actions]
+            #actions = deepcopy(other.actions)
+##        else:
+##            actions = OrderedDict()
+##            for x in actionsList:
+##                actions[x] = deepcopy(other.actions[x])
         gamma = other.gamma
         selfRelation = {}
         Min = Decimal('-1')
@@ -1590,8 +1588,8 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
             maximalRankings = []
             correlation = -1.0
             from digraphsTools import all_perms
-            actions = [x for x in other.actions]
-            for p in all_perms(actions): 
+            actionsList = [x for x in other.actions]
+            for p in all_perms(actionsList): 
                 ba = PolarisedBachetRanking(c,orderLimit=orderLimit,
                                    BestQualified=False,
                                    actionsList=p)
@@ -1608,6 +1606,7 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
             self.incBachetScores = bar.incBachetScores
             self.bachetRanking = bar.bachetRanking
             self.bachetOrder = bar.bachetOrder
+            self.actionsList = bar.actionsList
             self.correlation = correlation
             self.actions = bar.actions
             self.order = bar.order
@@ -1623,7 +1622,7 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
             import random
             random.seed(seed)
             #from random import shuffle
-            randomActions = [x for x in actions]
+            randomActions = [x for x in actionsList]
             correlation = -1.0
             bar = None
             triples = other.computeIntransitiveTriples()
@@ -1647,6 +1646,7 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
             self.bachetRanking = bar.bachetRanking
             self.bachetOrder = bar.bachetOrder
             self.correlation = correlation
+            self.actionsList = bar.actionsList
             self.actions = bar.actions
             self.order = bar.order
             self.valuationdomain = bar.valuationdomain
@@ -1672,13 +1672,13 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
                 cRelation = otherRelation
             else:
                 cRelation = c.relation
-            for x in actions:
+            for x in actionsList:
                 if _Permuting:
-                    vecx = [int(cRelation[x][y]) for y in actions]
-                    vecy = [int(cRelation[y][x]) for y in actions]
+                    vecx = [int(cRelation[x][y]) for y in actionsList]
+                    vecy = [int(cRelation[y][x]) for y in actionsList]
                 else:   
-                    vecx = [int(cRelation[x][y]) for y in actions if y != x]
-                    vecy = [int(cRelation[y][x]) for y in actions if y != x]
+                    vecx = [int(cRelation[x][y]) for y in actionsList if y != x]
+                    vecy = [int(cRelation[y][x]) for y in actionsList if y != x]
                 if Debug:
                     print(vecx,vecy)
                 bx = ar.BachetNumber(vector=vecx)
@@ -1742,11 +1742,13 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
                 decBachetScores = decBachetRevScores
                 bachetOrder = bachetRevOrder
                 incBachetScores = incBachetRevScores
+                actionsList.reverse()
 
         self.bachetRanking = bachetRanking
         self.bachetOrder = bachetOrder
         self.decBachetScores = decBachetScores
         self.incBachetScores = incBachetScores
+        self.actionsList = actionsList
         if Comments:
             print('Bachet Ranking:')
             print(bachetRanking)
@@ -1755,7 +1757,7 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
 
         # init relation
         tr = time()
-        actionsList = [x for x in actions]
+        #actionsList = [x for x in actions]
         relation = {}
         for x in actionsList:
             xi = bachetRanking.index(x)
@@ -1778,7 +1780,7 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
             self.name = other.name + '_best_ranked'
         else:
             self.name = other.name + '_ranked'         
-        self.actions = actions
+        self.actions = deepcopy(other.actions)
         self.order = n
         self.valuationdomain = valuationdomain
         self.relation = deepcopy(relation)
@@ -2037,43 +2039,35 @@ class BachetRanking(LinearOrder,_BachetRanking):
     def __init__(self,other,actionsList=None,
                  orderLimit=50,Polarised=True,
                  sampleSize=100,TriplesSorted=False,
-                 Randomized=True,
-                 RunTimeOptimized=False,
+                 Randomized=False,
+                 CoDualTriples=True,
                  seed=None,
+                 Logging=False,
+                 Comments=False,
                  Debug=False):
 
         from copy import deepcopy
-        if RunTimeOptimized:
-            triples = (~(-other)).computeTransitivityDegree(ReturnIntransitiveTriples=True)
+        if CoDualTriples:
+            triplesList = (~(-other)).computeTransitivityDegree(ReturnIntransitiveTriples=True)
         else:
-            triples = other.computeTransitivityDegree(ReturnIntransitiveTriples=True)
-        self.intransitiveTriples = triples
-        nt = len(triples)
-        rankedTriples = []
-        triplesSet = set()
-        for tr in triples:
-            triplesSet.add(frozenset(tuple(tr)))
-        triplesList = [tuple(s) for s in triplesSet]
+            triplesList = other.computeTransitivityDegree(ReturnIntransitiveTriples=True)
         triplesList.sort()
-        
+        self.intransitiveTriples = triplesList
+        nt = len(triplesList)
+        rankedTriples = []
         for s in triplesList:
             tr = tuple(s)
             x = tr[0]
             y = tr[1]
             z = tr[2]
-            #triplesSet.add(frozenset(tuple(tr)))
-            #print(tr,triplesSet)
-            score = other.relation[x][y] + other.relation[y][z] - other.relation[x][z]
+            score = other.relation[x][y] + other.relation[y][z] + other.relation[x][z]
             rankedTriples.append((score,list(tr)))
-        #self.triplesSet = triplesSet
-        #print(len(triplesSet),len(rankedTriples))
-        #return
         nt = len(rankedTriples)
-        print(nt)
-        #print(nt)
+        if Comments:
+            print('Nbr of Triles:', nt)
         if TriplesSorted:
             from digraphsTools import scoredTuplesSort
-            scoredTuplesSort(rankedTriples,reverse=True)
+            scoredTuplesSort(rankedTriples,reverse=True                             )
         if Randomized:
             import random as rd
             rd.seed(seed)
@@ -2098,14 +2092,23 @@ class BachetRanking(LinearOrder,_BachetRanking):
             al = actionsList
         if Debug:
             print(al)
-        bestCorr = 0.0
-        bestList = al
+        #bestCorr = 0.0
+        #bestList = al
         if Polarised:
             currBachetRanking = PolarisedBachetRanking
         else:
             currBachetRanking = ValuedBachetRanking
+        
         bestBa = currBachetRanking(other,actionsList=al,
+                                   BestQualified=True,randomized=0,
                                 orderLimit=orderLimit)
+        al = bestBa.actionsList
+        bestCorr = bestBa.correlation
+        #print(al)
+        if Logging:
+            log = open('logging.txt','w')
+            log.write(str(al))
+            log.write('%.4f\n' % bestBa.correlation)
         for i in rdIndex:
         #for st in triplesSet:
             tr = rankedTriples[i][1]
@@ -2116,17 +2119,35 @@ class BachetRanking(LinearOrder,_BachetRanking):
             yi = al.index(tr[1])
             al[xi] = tr[1]
             al[yi] = tr[0]
+            
             if Debug:
                 print(al)
             ba = currBachetRanking(other,actionsList=al,
+                                   BestQualified=True,
                                orderLimit=orderLimit)
+            al = ba.actionsList
             if ba.correlation > bestCorr:
-                bestList = al
                 bestCorr = ba.correlation
-                bestBa = currBachetRanking(other,actionsList=bestList,
+                bestBa = currBachetRanking(other,actionsList=al,
+                                           BestQualified=True,
                                        orderLimit=orderLimit)
-                bestBa.bestList = bestList
-                #print(i,ba.correlation)
+                al = bestBa.actionsList
+                if Comments:
+                    print(i,ba.correlation)
+            else: # restoring the previous actionsList
+                xi = al.index(tr[1])
+                yi = al.index(tr[0])
+                al[xi] = tr[0]
+                al[yi] = tr[1]
+                al[xi] = tr[0]
+                al[yi] = tr[1]
+            if Debug:
+                print(al)
+            if Logging:
+                log.write('%d, %.4f,' % (i,rankedTriples[i][0]))
+                log.write(str(rankedTriples[i][1]))
+                log.write(str(al))
+                log.write('%.4f\n' % ba.correlation)
 
             yi = al.index(tr[1])
             zi = al.index(tr[2])
@@ -2134,18 +2155,36 @@ class BachetRanking(LinearOrder,_BachetRanking):
             al[zi] = tr[1]
             if Debug:
                 print(al)
-            ba = currBachetRanking(other,actionsList=al,
-                               orderLimit=orderLimit)
+            ba = currBachetRanking(other,actionsList=al,BestQualified=True,
+                            orderLimit=orderLimit)
+            al = ba.actionsList
             if ba.correlation > bestCorr:
-                bestList = al
                 bestCorr = ba.correlation
-                bestBa = currBachetRanking(other,actionsList=bestList,
+                bestBa = currBachetRanking(other,actionsList=al,
+                                           BestQualified=True,
                                        orderLimit=orderLimit)
-                bestBa.bestList = bestList
-                #print(i,ba.correlation)
+                al = bestBa.actionsList
+                if Comments:
+                    print(i,ba.correlation)
+            else: # restoring the previous actionsList
+                yi = al.index(tr[2])
+                zi = al.index(tr[1])
+                al[yi] = tr[1]
+                al[zi] = tr[2]
+                al[yi] = tr[1]
+                al[zi] = tr[2]
+                #print(al,bestBa.correlation)
+            if Logging:
+                log.write('%d, %.4f,' % (i,rankedTriples[i][0]))
+                log.write(str(rankedTriples[i][1]))
+                log.write(str(al))
+                log.write('%.4f\n' % ba.correlation)
+                
 
         for att in bestBa.__dict__:
             self.__dict__[att] = bestBa.__dict__[att]
+        if Logging:
+            log.close()
 
 class BachetOrder(BachetRanking):
     """
@@ -2303,7 +2342,6 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
             actions = [x for x in other.actions]
             for p in all_perms(actions): 
                 ba = ValuedBachetRanking(c,orderLimit=orderLimit,
-                                   #Polarised=True,
                                    BestQualified=False,
                                    actionsList=p)
                 corr = other.computeRankingCorrelation(ba.bachetRanking)
@@ -2389,14 +2427,14 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
 ##            else:
             cRelation = otherRelation
 
-
-            for x in actions:
+            actionsList = [x for x in actions]
+            for x in actionsList:
                 if _Permuting:
-                    vecx = [cRelation[x][y] for y in actions]
-                    vecy = [cRelation[y][x] for y in actions]
+                    vecx = [cRelation[x][y] for y in actionsList]
+                    vecy = [cRelation[y][x] for y in actionsList]
                 else:
-                    vecx = [cRelation[x][y] for y in actions if y != x]
-                    vecy = [cRelation[y][x] for y in actions if y != x]
+                    vecx = [cRelation[x][y] for y in actionsList if y != x]
+                    vecy = [cRelation[y][x] for y in actionsList if y != x]
                 if Debug:
                     print(vecx,vecy)
                 bx = ar.BachetNumber(vector=vecx)
@@ -2468,11 +2506,13 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
             corr = other.computeRankingCorrelation(bachetRanking)
             corrRev = other.computeRankingCorrelation(bachetRevRanking)
             if corrRev['correlation'] > corr['correlation']:
+                actionsList.reverse()
                 bachetRanking = bachetRevRanking
                 decBachetScores = decBachetRevScores
                 bachetOrder = bachetRevOrder
                 incBachetScores = incBachetRevScores
 
+        self.actionsList = actionsList
         self.bachetRanking = bachetRanking
         self.bachetOrder = bachetOrder
         self.decBachetScores = decBachetScores
@@ -2540,6 +2580,10 @@ class CopelandRanking(LinearOrder):
     The Copeland ranking and the Copeland ordering are stored in
     the attributes *self.copelandRanking* and *self.copelandOrder*.
 
+    When *Valued == *True*, the *other* outranking characteristic values,
+    concordant with the Copeland ranking, are kept whereas
+    the discordant ones are set to the indeterminate value.
+
     .. note::
 
        The Copeland ranking rule is invariant under the codual transform
@@ -2547,6 +2591,7 @@ class CopelandRanking(LinearOrder):
     
     """
     def __init__(self,other,CoDual=False,Gamma=False,
+                 Valued=False,
                  Comments=False,Debug=False):
         """
         constructor for generating a linear order
@@ -2649,11 +2694,11 @@ class CopelandRanking(LinearOrder):
             for y in actionsList:
                 yj = copelandRanking.index(y)
                 if xi < yj:
-                    relation[x][y] = Max
+                    relation[x][y] = max(Med, otherRelation[x][y])
                 elif xi == yj:
                     relation[x][y] = Med
                 else:
-                    relation[x][y] = Min
+                    relation[x][y] = min(Med, otherRelation[x][y])
         runTimes['relation'] = time() - tr
         
         # store attributes
@@ -2847,10 +2892,8 @@ class KemenyRanking(LinearOrder):
     a given bipolar-valued Digraph instance of small order.
     Multiple Kemeny rankings are sorted in decreasing order of their mean marginal correlations
     and the resulting Kemeny ranking is the first one in this list.
-
-    The Kemeny ranking result is stored in self.kemenyRanking. In self.kemenyOrder is stored the reversed ranking.
     """
-    def __init__(self,other,orderLimit=7,Debug=False):
+    def __init__(self,other,orderLimit=7,Valued=False,Debug=False):
         """
         constructor for generating a linear order
         from a given other digraph by exact enumeration
@@ -2867,11 +2910,22 @@ class KemenyRanking(LinearOrder):
         Min = other.valuationdomain['min']
         Max = other.valuationdomain['max']
         Med = other.valuationdomain['med']
+        #relation = copy(other.relation)
+##        kemenyRankings = other.computeKemenyRanking(orderLimit=orderLimit,Debug=False)
+##        # [0] = ordered actions list, [1] = maximal Kemeny index
+##        
+##        kemenyRanking = kemenyRankings[0]
+##        maxKemenyIndex = kemenyRankings[1]
+##        maximalRankings = deepcopy(other.maximalRankings)
         kemenyRankings = other.computeKemenyRanking(orderLimit=orderLimit,Debug=False)
         if kemenyRankings is None:
             print('Intantiation error: unable to compute the Kemeny Order !!!')
             print('Digraph order %d is required to be lower than 8!' % n)
             return
+##        elif len(other.maximalRankings) == 1:
+##            kemenyRanking = kemenyRankings[0]
+##            maxKemenyIndex = kemenyRankings[1]
+##            maximalRankings = list(other.maximalRankings)
         else:
             from operator import itemgetter
             orderedMaximalRankings = []
@@ -2883,9 +2937,8 @@ class KemenyRanking(LinearOrder):
                     maxKemenyIndex = kemenyRankings[1]
                     maximalRankings = list(other.maximalRankings)
                     break
-                orderedMaximalRankings.append(('%.4f' % (margCorr[1]),
-                                               '%.4f' % (margCorr[2]),
-                                               r))
+                orderedMaximalRankings.append(('%.4f' % (margCorr[1]), '%.4f' \
+                                               % (margCorr[2]),r))
             if len(orderedMaximalRankings) > 1:
                 s = sorted(orderedMaximalRankings,key=itemgetter(1))
                 s = sorted(s,key=itemgetter(0),reverse=True)
@@ -2905,28 +2958,30 @@ class KemenyRanking(LinearOrder):
         Max = Decimal('1.0')
         Med = Decimal('0.0')
         valuationdomain = {'min': Min, 'med': Med, 'max': Max}
-        #if not Valued:
-        relation = {}
-        n = len(actions)
-        self.order = n
-        for i in range(n):
-            x = kemenyRanking[i]
-            relation[x] = {}
-            for j in range(n):
-                y = kemenyRanking[j]
-                relation[x][y] = Med
-                if i < j:
-                    relation[x][y] = Max
-                    try:
-                        relation[y][x] = Min
-                    except:
-                        relation[y] = {x: Min}
-                elif i > j:
-                    relation[x][y] = Min
-                    try:
-                        relation[y][x] = Max
-                    except:
-                        relation[y] = {y: Max}
+        if not Valued:
+            relation = {}
+            n = len(actions)
+            self.order = n
+            for i in range(n):
+                x = kemenyRanking[i]
+                relation[x] = {}
+                for j in range(n):
+                    y = kemenyRanking[j]
+                    relation[x][y] = Med
+                    if i < j:
+                        relation[x][y] = Max
+                        try:
+                            relation[y][x] = Min
+                        except:
+                            relation[y] = {x: Min}
+                    elif i > j:
+                        relation[x][y] = Min
+                        try:
+                            relation[y][x] = Max
+                        except:
+                            relation[y] = {y: Max}
+        else:
+            relation = other.computeValuedRankingRelation(kemenyRanking)
 
         self.name = other.name + '_ranked'        
         self.actions = actions
@@ -2936,10 +2991,10 @@ class KemenyRanking(LinearOrder):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         self.kemenyRanking = kemenyRanking
-        self.kemenyOrder = list(reversed(list(kemenyRanking)))
         self.maxKemenyIndex = maxKemenyIndex
         self.maximalRankings = maximalRankings
         self.orderedMaximalRankings = orderedMaximalRankings
+        self.kemenyOrder = list(reversed(list(kemenyRanking)))
         if Debug:
             self.showRelationTable()
             print('Kemeny Ranking = ', self.kemenyRanking)
@@ -3128,17 +3183,18 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
     Threading = False
-    res = open('testCtrl.csv','w')
+    res = open('test9CBPolSsNoneCtrl1.csv','w')
     #res = open('tes.csv','w')
-    res.write('"seed","nt","baprsopt","baprs","bapopt","bap"\n')
+    res.write('"seed","nt","baptft","bapttt","bapfft","bapfff"\n')
     sampleSize = 1
-    randomSize = None
+    randomSize = 10
+    Polarised=True
     #t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
     for sample in range(sampleSize):
         print(sample)
         #seed = random.randint(1,1000000)
         seed = 9
-        seed = sample + 101
+        seed = sample + 1
     ##    t = CircularPerformanceTableau()
         #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
         #t = PerformanceTableau('testLin')
@@ -3154,18 +3210,18 @@ if __name__ == "__main__":
                             orderLimit=20,sampleSize=randomSize,
                             Debug=False,
                             actionsList=None,
-                            Polarised=False,
+                            Polarised=Polarised,
                             TriplesSorted=True,
-                            Randomized=True,
-                            RunTimeOptimized=True,
+                            Randomized=False,
+                            CoDualTriples=True,
                             seed=seed,
+                            Logging=False,
                             )
         #print(ba1)
         corrba1 = g.computeRankingCorrelation(ba1.bachetRanking)
         #print('Smart polarised Bachet Ranking')
         #print('bap',ba1.bachetRanking,corrba1)
         cop = CopelandRanking(g,Comments=False,Gamma=False)
-        print(cop.copelandRanking)
         corrcop = g.computeRankingCorrelation(cop.copelandRanking)
         print('cop',cop.copelandRanking,corrcop)
 ##        wcop1 = _WeightedCopelandRanking(g,Comments=False,Debug=False)
@@ -3181,9 +3237,9 @@ if __name__ == "__main__":
 ##        nf = NetFlowsRanking(g)
 ##        corrnf = g.computeRankingCorrelation(nf.netFlowsRanking)
 ##        print('nf',nf.netFlowsRanking,corrnf)
-##        ke = KemenyRanking(g,orderLimit=9)
-##        corrke = g.computeRankingCorrelation(ke.kemenyRanking)
-##        print('ke',ke.kemenyRanking,corrke)
+        ke = KemenyRanking(g,orderLimit=9)
+        corrke = g.computeRankingCorrelation(ke.kemenyRanking)
+        print('ke',ke.kemenyRanking,corrke)
 ##        randomActions = [x for x in g.actions]
 ##        #print(randomActions)
 ##        random.shuffle(randomActions)
@@ -3199,26 +3255,26 @@ if __name__ == "__main__":
         #print(ba2)
         ba2 = BachetRanking(g,Debug=False,
                             sampleSize=randomSize,
-                            Polarised=False,
+                            Polarised=Polarised,
                             TriplesSorted=True,
                             Randomized=True,
-                            RunTimeOptimized=False,
+                            CoDualTriples=True,
                             seed=seed)
         corrba2 = g.computeRankingCorrelation(ba2.bachetRanking)
         ba3 = BachetRanking(g,Debug=False,
                             sampleSize=randomSize,
-                            Polarised=False,
+                            Polarised=Polarised,
                             TriplesSorted=False,
                             Randomized=False,
-                            RunTimeOptimized=True,
+                            CoDualTriples=True,
                             seed=seed)
         corrba3 = g.computeRankingCorrelation(ba3.bachetRanking)
         ba4 = BachetRanking(g,Debug=False,
                             sampleSize=randomSize,
-                            Polarised=False,
+                            Polarised=Polarised,
                             TriplesSorted=False,
                             Randomized=False,
-                            RunTimeOptimized=False,
+                            CoDualTriples=False,
                             seed=seed)
         corrba4 = g.computeRankingCorrelation(ba4.bachetRanking)
         #print('Smart valued Bachet Ranking')
