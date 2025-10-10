@@ -2540,10 +2540,6 @@ class CopelandRanking(LinearOrder):
     The Copeland ranking and the Copeland ordering are stored in
     the attributes *self.copelandRanking* and *self.copelandOrder*.
 
-    When *Valued == *True*, the *other* outranking characteristic values,
-    concordant with the Copeland ranking, are kept whereas
-    the discordant ones are set to the indeterminate value.
-
     .. note::
 
        The Copeland ranking rule is invariant under the codual transform
@@ -2551,7 +2547,6 @@ class CopelandRanking(LinearOrder):
     
     """
     def __init__(self,other,CoDual=False,Gamma=False,
-                 Valued=False,
                  Comments=False,Debug=False):
         """
         constructor for generating a linear order
@@ -2852,8 +2847,10 @@ class KemenyRanking(LinearOrder):
     a given bipolar-valued Digraph instance of small order.
     Multiple Kemeny rankings are sorted in decreasing order of their mean marginal correlations
     and the resulting Kemeny ranking is the first one in this list.
+
+    The Kemeny ranking result is stored in self.kemenyRanking. In self.kemenyOrder is stored the reversed ranking.
     """
-    def __init__(self,other,orderLimit=7,Valued=False,Debug=False):
+    def __init__(self,other,orderLimit=7,Debug=False):
         """
         constructor for generating a linear order
         from a given other digraph by exact enumeration
@@ -2870,22 +2867,11 @@ class KemenyRanking(LinearOrder):
         Min = other.valuationdomain['min']
         Max = other.valuationdomain['max']
         Med = other.valuationdomain['med']
-        #relation = copy(other.relation)
-##        kemenyRankings = other.computeKemenyRanking(orderLimit=orderLimit,Debug=False)
-##        # [0] = ordered actions list, [1] = maximal Kemeny index
-##        
-##        kemenyRanking = kemenyRankings[0]
-##        maxKemenyIndex = kemenyRankings[1]
-##        maximalRankings = deepcopy(other.maximalRankings)
         kemenyRankings = other.computeKemenyRanking(orderLimit=orderLimit,Debug=False)
         if kemenyRankings is None:
             print('Intantiation error: unable to compute the Kemeny Order !!!')
             print('Digraph order %d is required to be lower than 8!' % n)
             return
-##        elif len(other.maximalRankings) == 1:
-##            kemenyRanking = kemenyRankings[0]
-##            maxKemenyIndex = kemenyRankings[1]
-##            maximalRankings = list(other.maximalRankings)
         else:
             from operator import itemgetter
             orderedMaximalRankings = []
@@ -2897,8 +2883,9 @@ class KemenyRanking(LinearOrder):
                     maxKemenyIndex = kemenyRankings[1]
                     maximalRankings = list(other.maximalRankings)
                     break
-                orderedMaximalRankings.append(('%.4f' % (margCorr[1]), '%.4f' \
-                                               % (margCorr[2]),r))
+                orderedMaximalRankings.append(('%.4f' % (margCorr[1]),
+                                               '%.4f' % (margCorr[2]),
+                                               r))
             if len(orderedMaximalRankings) > 1:
                 s = sorted(orderedMaximalRankings,key=itemgetter(1))
                 s = sorted(s,key=itemgetter(0),reverse=True)
@@ -2918,30 +2905,28 @@ class KemenyRanking(LinearOrder):
         Max = Decimal('1.0')
         Med = Decimal('0.0')
         valuationdomain = {'min': Min, 'med': Med, 'max': Max}
-        if not Valued:
-            relation = {}
-            n = len(actions)
-            self.order = n
-            for i in range(n):
-                x = kemenyRanking[i]
-                relation[x] = {}
-                for j in range(n):
-                    y = kemenyRanking[j]
-                    relation[x][y] = Med
-                    if i < j:
-                        relation[x][y] = Max
-                        try:
-                            relation[y][x] = Min
-                        except:
-                            relation[y] = {x: Min}
-                    elif i > j:
-                        relation[x][y] = Min
-                        try:
-                            relation[y][x] = Max
-                        except:
-                            relation[y] = {y: Max}
-        else:
-            relation = other.computeValuedRankingRelation(kemenyRanking)
+        #if not Valued:
+        relation = {}
+        n = len(actions)
+        self.order = n
+        for i in range(n):
+            x = kemenyRanking[i]
+            relation[x] = {}
+            for j in range(n):
+                y = kemenyRanking[j]
+                relation[x][y] = Med
+                if i < j:
+                    relation[x][y] = Max
+                    try:
+                        relation[y][x] = Min
+                    except:
+                        relation[y] = {x: Min}
+                elif i > j:
+                    relation[x][y] = Min
+                    try:
+                        relation[y][x] = Max
+                    except:
+                        relation[y] = {y: Max}
 
         self.name = other.name + '_ranked'        
         self.actions = actions
@@ -2951,10 +2936,10 @@ class KemenyRanking(LinearOrder):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         self.kemenyRanking = kemenyRanking
+        self.kemenyOrder = list(reversed(list(kemenyRanking)))
         self.maxKemenyIndex = maxKemenyIndex
         self.maximalRankings = maximalRankings
         self.orderedMaximalRankings = orderedMaximalRankings
-        self.kemenyOrder = list(reversed(list(kemenyRanking)))
         if Debug:
             self.showRelationTable()
             print('Kemeny Ranking = ', self.kemenyRanking)
@@ -3157,7 +3142,7 @@ if __name__ == "__main__":
     ##    t = CircularPerformanceTableau()
         #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
         #t = PerformanceTableau('testLin')
-        t = RandomCBPerformanceTableau(numberOfActions=15,
+        t = RandomCBPerformanceTableau(numberOfActions=7,
                                        numberOfCriteria=13,seed=seed)
         g = BipolarOutrankingDigraph(t)
         triples = g.computeIntransitiveTriples()
