@@ -1317,7 +1317,8 @@ class SortingDigraph(BipolarOutrankingDigraph):
             fo = io.StringIO()
         else:
             #nameExt = fileName+'.xmcda2'
-            fo = codecs.open(nameExt,'w',encoding='utf-8')
+            #fo = codecs.open(nameExt,'w',encoding='utf-8')
+            fo = open(nameExt,'w')
         fo.write('<?xml version="1.0" encoding="UTF-8"?>\n')
         fo.write('<?xml-stylesheet type="text/xsl" href="xmcda2Rubis.xsl"?>\n')
         fo.write(str('<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.decision-deck.org/2010/XMCDA-2.1.0-Rubis http://leopold-loewenheim.uni.lu/XMCDA2/XMCDA-2.1.0-Rubis.xsd" xmlns:xmcda="http://www.decision-deck.org/2010/XMCDA-2.1.0-Rubis" instanceID="void">\n'))

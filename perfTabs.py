@@ -3287,7 +3287,7 @@ The performance evaluations of each decision alternative on each criterion are g
         """
         save performance tableau object self in XMCDA 2.0 format including decision objectives, the case given.
         """
-        import codecs
+        #import codecs
         if not isStringIO:
             print('*----- saving performance tableau in XMCDA 2.0 format  -------------*')
         nameExt = fileName+'.xml'
@@ -3300,7 +3300,8 @@ The performance evaluations of each decision alternative on each criterion are g
             fo = io.StringIO()
         else:
             #nameExt = fileName+'.xmcda2'
-            fo = codecs.open(nameExt,'w',encoding='utf-8')
+            #fo = codecs.open(nameExt,'w',encoding='utf-8')
+            fo = open(nameExt,'w')
         fo.write('<?xml version="1.0" encoding="UTF-8"?>\n')
         if servingD3:
             fo.write('<!-- ?xml-stylesheet type="text/xsl" href="xmcda2Rubis.xsl"? -->\n')
