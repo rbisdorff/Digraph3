@@ -2133,7 +2133,7 @@
 
 <span class="sd">        - *actionsList* : a given ordering of the other.actions dictionary. If *None* the list of other.actions is used.</span>
 
-<span class="sd">        - *sampleSize*: number &gt; 0 (default=100) of intransitive tripes to permute,</span>
+<span class="sd">        - *sampleSize*: number &gt; 0 | None (default); number of intransitive tripes to permute; if *None* all triples are permuted.</span>
 
 <span class="sd">        - *Randomized*: True (default)| False; if *True*, a random sample of *sampleSize* from the list of intransitive triples is permuted.</span>
 
@@ -2183,9 +2183,9 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">orderLimit</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                 <span class="n">sampleSize</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">TriplesSorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">sampleSize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">TriplesSorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">Randomized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                 <span class="n">CoDualTriples</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">CoDualTriples</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">Logging</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>

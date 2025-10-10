@@ -1988,7 +1988,7 @@ class BachetRanking(LinearOrder,_BachetRanking):
 
         - *actionsList* : a given ordering of the other.actions dictionary. If *None* the list of other.actions is used.
 
-        - *sampleSize*: number > 0 (default=100) of intransitive tripes to permute,
+        - *sampleSize*: number > 0 | None (default); number of intransitive tripes to permute; if *None* all triples are permuted.
 
         - *Randomized*: True (default)| False; if *True*, a random sample of *sampleSize* from the list of intransitive triples is permuted.
 
@@ -2038,9 +2038,9 @@ class BachetRanking(LinearOrder,_BachetRanking):
     """
     def __init__(self,other,actionsList=None,
                  orderLimit=50,Polarised=True,
-                 sampleSize=100,TriplesSorted=False,
+                 sampleSize=None,TriplesSorted=False,
                  Randomized=False,
-                 CoDualTriples=True,
+                 CoDualTriples=False,
                  seed=None,
                  Logging=False,
                  Comments=False,

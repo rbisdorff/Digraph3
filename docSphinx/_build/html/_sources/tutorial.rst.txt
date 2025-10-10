@@ -3135,7 +3135,7 @@ The polarised *Bachet* ranking
 ``````````````````````````````
 *Bachet* numbers --bipolar-valued {-1,0,+1} base 3 encoded integers, provided by the :py:class:`arithmetics.BachetNumber` class and instantiated by the row vectors and the column vectors --both without reflexive terms-- of the strict outranking digraph's polarised relation table, model in fact per decision action respectively an **outrankingness** and a **negated outrankedness** ranking fitness score similar to the previous *Copeland* ranking scores (see the advanced topic on :ref:`a new ranking rule based on bipolar-valued base 3 Bachet numbers <Bachet-Tutorial-label>` ).
 
-Now, *Bachet* numbers are formulated in a base 3 positional numeral system and the integer values of the *Bachet* ranking scores may depend therefore on the actual ordering of the outranking digraph's *actions* dictionary. The *Bachet* rule is however, like the *Copeland* rule, **invariant** under the **codual** transform and **Condorcet consistent**, ie. when the outranking digraph models a transitive relation, this relation will be preserved by the polarised *Bachet* ranking scores.
+Now, *Bachet* numbers are formulated in a base 3 positional numeral system and the integer values of the *Bachet* ranking scores may depend therefore on the actual ordering of the outranking digraph's *actions* dictionary. The polarised *BachetRanking* class result rule is however, unlike the *Copeland* rule, **not invariant** under the **codual** transform [62]_, but **Condorcet consistent**, ie. when the outranking digraph models a transitive relation, this relation will be preserved by the polarised *BachetRanking* ranking scores.
 
 Here, as we have seen above, the given digraph's transitivity degree is only 0.487. To reduce therefore the dependency on the given initial ordering of the *actions* dictionary, we compute below *Bachet* ranking results for the permutation and their reversed ordering of 50 best determined intransitive triples (see :numref:`BachetRanking` Line 2) and keep the one ranking that is best correlated with the given outranking digraph. 
 
@@ -3251,11 +3251,12 @@ The polarised *Bachet* ranking rule only considers the crisp relational structur
 .. code-block:: pycon
    :name: ValuedBachetRanking
    :caption: Computing a valued *Bachet* ranking
-   :emphasize-lines: 2,16,20
+   :emphasize-lines: 2-3,17,21
    :linenos:
 
    >>> from linearOrders import BachetRanking
-   >>> bav = BachetRanking(g,Polarised=False,sampleSize=50,seed=9)
+   >>> bav = BachetRanking(g,Polarised=False,sampleSize=100,
+   ...                     Randomized=True,seed=6)
    >>> bav.showScores()
     Bachet scores in descending order
      action       score 
@@ -3279,7 +3280,7 @@ The polarised *Bachet* ranking rule only considers the crisp relational structur
      Epistemic determination    :  0.230
      Bipolar-valued equivalence : +0.165
 
-With the *valued* version of the *Bachet* ranking rule we recover a similar ranking as the one obtained with the previous polarised version. Again we are permuting 50 intransitive triples. This way we obtain a better correlated ranking result than with the simple *NetFlows* rule (+715 vs +0.638). The valued *Bachet* ranking is like the polarised *Bachet* rule invariant under the codual transform. However, like the *NetFlows* rule, the valued version of the *Bachet* rule is **not** necessarily **Condorcet consistent**. 
+With the *valued* version of the *Bachet* ranking rule we recover a similar ranking as the one obtained with the previous polarised version. We are permuting 100 randomly chosen intransitive triples (see :numref:`ValuedBachetRanking` Lines 2-3). This way we obtain a better correlated ranking result than with the simple *NetFlows* rule (+715 vs +0.638). The valued *BachetRanking* class result is, like the previous polarised *BachetRanking* class result **not** invariant under the **codual transform** [62]_ and, like the *NetFlows* rule  **not** necessarily **Condorcet consistent**. 
 
 To appreciate now the actual ranking performances of the *ranking-by-scoring* rules seen so far, it is useful to consider *Kemeny*'s and *Slater*'s **optimal fitting** ranking rules.
 
@@ -11238,6 +11239,8 @@ Appendices
 .. [60] Topological Sort Algorithm 2.4 from *Algorithmic Graph Theory and Perfect Graphs* p.44 [GOL-2004]_.
 
 .. [61] Laboratoires d'Analyse et de Modélisation de Systèmes d'Aide à la Décision, Université Paris-Dauphine, UMR 7243 CNRS.
+
+.. [62] The set of intransitive triples of an outranking digraph *g* and its associated codual *gcd*, to be permuted in the search for a best qualified ranking result, are usually not the same. 
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
