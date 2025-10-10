@@ -776,7 +776,9 @@
 <span class="sd">    .. note:: The NetFlows ranking rule is invariant under the codual transform</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Valued</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="c1">#Valued=False,</span>
+                 <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructor for generating a linear order</span>
 <span class="sd">        from a given other digraph following</span>
@@ -877,40 +879,40 @@
         <span class="c1"># init relation</span>
         <span class="n">tr</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="n">actionKeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">]</span> 
-        <span class="k">if</span> <span class="n">Valued</span><span class="p">:</span>        
-            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionKeys</span><span class="p">:</span>
-                <span class="n">xi</span> <span class="o">=</span> <span class="n">netFlowsRanking</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-                <span class="n">selfRelation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-                <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actionKeys</span><span class="p">:</span>
-                    <span class="n">yj</span> <span class="o">=</span> <span class="n">netFlowsRanking</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">xi</span> <span class="o">&lt;</span> <span class="n">yj</span><span class="p">:</span>
-                        <span class="n">selfRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span> <span class="n">otherRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span>
-                    <span class="k">elif</span> <span class="n">xi</span> <span class="o">==</span> <span class="n">yj</span><span class="p">:</span>
-                        <span class="n">selfRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">selfRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span> <span class="n">otherRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionKeys</span><span class="p">:</span>
-                <span class="n">xi</span> <span class="o">=</span> <span class="n">netFlowsRanking</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-                <span class="n">selfRelation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-                <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actionKeys</span><span class="p">:</span>
-                    <span class="n">yj</span> <span class="o">=</span> <span class="n">netFlowsRanking</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">xi</span> <span class="o">&lt;</span> <span class="n">yj</span><span class="p">:</span>
-                        <span class="n">selfRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span>
-                    <span class="k">elif</span> <span class="n">xi</span> <span class="o">==</span> <span class="n">yj</span><span class="p">:</span>
-                        <span class="n">selfRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">selfRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>            
+<span class="c1">##        if Valued:        </span>
+<span class="c1">##            for x in actionKeys:</span>
+<span class="c1">##                xi = netFlowsRanking.index(x)</span>
+<span class="c1">##                selfRelation[x] = {}</span>
+<span class="c1">##                for y in actionKeys:</span>
+<span class="c1">##                    yj = netFlowsRanking.index(y)</span>
+<span class="c1">##                    if xi &lt; yj:</span>
+<span class="c1">##                        selfRelation[x][y] = max(Med, otherRelation[x][y])</span>
+<span class="c1">##                    elif xi == yj:</span>
+<span class="c1">##                        selfRelation[x][y] = Med</span>
+<span class="c1">##                    else:</span>
+<span class="c1">##                        selfRelation[x][y] = min(Med, otherRelation[x][y])</span>
+<span class="c1">##        else:</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionKeys</span><span class="p">:</span>
+            <span class="n">xi</span> <span class="o">=</span> <span class="n">netFlowsRanking</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">selfRelation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actionKeys</span><span class="p">:</span>
+                <span class="n">yj</span> <span class="o">=</span> <span class="n">netFlowsRanking</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">xi</span> <span class="o">&lt;</span> <span class="n">yj</span><span class="p">:</span>
+                    <span class="n">selfRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span>
+                <span class="k">elif</span> <span class="n">xi</span> <span class="o">==</span> <span class="n">yj</span><span class="p">:</span>
+                    <span class="n">selfRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">selfRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>            
         <span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;relation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tr</span>      
         
         <span class="c1"># store self attributes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_ranked&#39;</span>        
         <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">actions</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">n</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">Valued</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">valuationdomain</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
+        <span class="c1">#if not Valued:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">valuationdomain</span>
+        <span class="c1">#else:</span>
+        <span class="c1">#    self.valuationdomain = copy(other.valuationdomain)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">selfRelation</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
@@ -2809,11 +2811,11 @@
             <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actionsList</span><span class="p">:</span>
                 <span class="n">yj</span> <span class="o">=</span> <span class="n">copelandRanking</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">xi</span> <span class="o">&lt;</span> <span class="n">yj</span><span class="p">:</span>
-                    <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span> <span class="n">otherRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span>
+                    <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span>
                 <span class="k">elif</span> <span class="n">xi</span> <span class="o">==</span> <span class="n">yj</span><span class="p">:</span>
                     <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span> <span class="n">otherRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span>
+                    <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
         <span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;relation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tr</span>
         
         <span class="c1"># store attributes</span>
@@ -3317,10 +3319,10 @@
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing class and methods -------&#39;</span><span class="p">)</span>
 
     <span class="n">Threading</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test15CBvalRandvsSrtRdSs200AllOptCtrl.csv&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;testCtrl.csv&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
     <span class="c1">#res = open(&#39;tes.csv&#39;,&#39;w&#39;)</span>
     <span class="n">res</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&quot;seed&quot;,&quot;nt&quot;,&quot;baprsopt&quot;,&quot;baprs&quot;,&quot;bapopt&quot;,&quot;bap&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="n">sampleSize</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="n">sampleSize</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">randomSize</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="c1">#t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)</span>
     <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sampleSize</span><span class="p">):</span>
@@ -3353,10 +3355,10 @@
         <span class="n">corrba1</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba1</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
         <span class="c1">#print(&#39;Smart polarised Bachet Ranking&#39;)</span>
         <span class="c1">#print(&#39;bap&#39;,ba1.bachetRanking,corrba1)</span>
-        <span class="c1">#cop = CopelandRanking(g,Comments=False,Gamma=False)</span>
-        <span class="c1">#print(cop.copelandRanking)</span>
-        <span class="c1">#corrcop = g.computeRankingCorrelation(cop.copelandRanking)</span>
-<span class="c1">##        print(&#39;cop&#39;,cop.copelandRanking,corrcop)</span>
+        <span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Gamma</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
+        <span class="n">corrcop</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cop&#39;</span><span class="p">,</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">,</span><span class="n">corrcop</span><span class="p">)</span>
 <span class="c1">##        wcop1 = _WeightedCopelandRanking(g,Comments=False,Debug=False)</span>
 <span class="c1">##        print(wcop1.copelandRanking)</span>
 <span class="c1">##        corrwcop1 = g.computeRankingCorrelation(wcop1.copelandRanking)</span>
@@ -3455,7 +3457,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Oct 09, 2025.
+      <span class="lastupdated">Last updated on Oct 10, 2025.
       </span></p>
   </div>
 

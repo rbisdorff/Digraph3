@@ -649,7 +649,9 @@ class NetFlowsRanking(LinearOrder):
     .. note:: The NetFlows ranking rule is invariant under the codual transform
     """
     
-    def __init__(self,other,CoDual=False,Valued=False,Comments=False,Debug=False):
+    def __init__(self,other,CoDual=False,
+                 #Valued=False,
+                 Comments=False,Debug=False):
         """
         constructor for generating a linear order
         from a given other digraph following
@@ -750,40 +752,40 @@ class NetFlowsRanking(LinearOrder):
         # init relation
         tr = time()
         actionKeys = [x for x in actions] 
-        if Valued:        
-            for x in actionKeys:
-                xi = netFlowsRanking.index(x)
-                selfRelation[x] = {}
-                for y in actionKeys:
-                    yj = netFlowsRanking.index(y)
-                    if xi < yj:
-                        selfRelation[x][y] = max(Med, otherRelation[x][y])
-                    elif xi == yj:
-                        selfRelation[x][y] = Med
-                    else:
-                        selfRelation[x][y] = min(Med, otherRelation[x][y])
-        else:
-            for x in actionKeys:
-                xi = netFlowsRanking.index(x)
-                selfRelation[x] = {}
-                for y in actionKeys:
-                    yj = netFlowsRanking.index(y)
-                    if xi < yj:
-                        selfRelation[x][y] = Max
-                    elif xi == yj:
-                        selfRelation[x][y] = Med
-                    else:
-                        selfRelation[x][y] = Min            
+##        if Valued:        
+##            for x in actionKeys:
+##                xi = netFlowsRanking.index(x)
+##                selfRelation[x] = {}
+##                for y in actionKeys:
+##                    yj = netFlowsRanking.index(y)
+##                    if xi < yj:
+##                        selfRelation[x][y] = max(Med, otherRelation[x][y])
+##                    elif xi == yj:
+##                        selfRelation[x][y] = Med
+##                    else:
+##                        selfRelation[x][y] = min(Med, otherRelation[x][y])
+##        else:
+        for x in actionKeys:
+            xi = netFlowsRanking.index(x)
+            selfRelation[x] = {}
+            for y in actionKeys:
+                yj = netFlowsRanking.index(y)
+                if xi < yj:
+                    selfRelation[x][y] = Max
+                elif xi == yj:
+                    selfRelation[x][y] = Med
+                else:
+                    selfRelation[x][y] = Min            
         runTimes['relation'] = time() - tr      
         
         # store self attributes
         self.name = other.name + '_ranked'        
         self.actions = actions
         self.order = n
-        if not Valued:
-            self.valuationdomain = valuationdomain
-        else:
-            self.valuationdomain = copy(other.valuationdomain)
+        #if not Valued:
+        self.valuationdomain = valuationdomain
+        #else:
+        #    self.valuationdomain = copy(other.valuationdomain)
         self.relation = selfRelation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -2652,11 +2654,11 @@ class CopelandRanking(LinearOrder):
             for y in actionsList:
                 yj = copelandRanking.index(y)
                 if xi < yj:
-                    relation[x][y] = max(Med, otherRelation[x][y])
+                    relation[x][y] = Max
                 elif xi == yj:
                     relation[x][y] = Med
                 else:
-                    relation[x][y] = min(Med, otherRelation[x][y])
+                    relation[x][y] = Min
         runTimes['relation'] = time() - tr
         
         # store attributes
@@ -3141,10 +3143,10 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
     Threading = False
-    res = open('test15CBvalRandvsSrtRdSs200AllOptCtrl.csv','w')
+    res = open('testCtrl.csv','w')
     #res = open('tes.csv','w')
     res.write('"seed","nt","baprsopt","baprs","bapopt","bap"\n')
-    sampleSize = 100
+    sampleSize = 1
     randomSize = None
     #t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
     for sample in range(sampleSize):
@@ -3177,10 +3179,10 @@ if __name__ == "__main__":
         corrba1 = g.computeRankingCorrelation(ba1.bachetRanking)
         #print('Smart polarised Bachet Ranking')
         #print('bap',ba1.bachetRanking,corrba1)
-        #cop = CopelandRanking(g,Comments=False,Gamma=False)
-        #print(cop.copelandRanking)
-        #corrcop = g.computeRankingCorrelation(cop.copelandRanking)
-##        print('cop',cop.copelandRanking,corrcop)
+        cop = CopelandRanking(g,Comments=False,Gamma=False)
+        print(cop.copelandRanking)
+        corrcop = g.computeRankingCorrelation(cop.copelandRanking)
+        print('cop',cop.copelandRanking,corrcop)
 ##        wcop1 = _WeightedCopelandRanking(g,Comments=False,Debug=False)
 ##        print(wcop1.copelandRanking)
 ##        corrwcop1 = g.computeRankingCorrelation(wcop1.copelandRanking)
