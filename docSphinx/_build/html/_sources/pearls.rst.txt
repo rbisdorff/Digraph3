@@ -22,6 +22,7 @@
 
 .. _Advanced-Topics-label:
 
+
 Pearls of bipolar-valued epistemic logic
 ========================================
 
@@ -3219,7 +3220,7 @@ The :py:mod:`linearOrders` module provides now a :py:class:`~linearOrders.Polari
 
 The class delivers as usual a ranking (*self.bachetRanking*) and a corresponding ordering result (*self.bachetOrder*) besides the decreasing list (*self.decBachetScores*) and the increasing list of the corresponding *Bachet* ranking scores (*self.incBachetScores*). Due to potential ties observed among *Bachet* scores and the lexicographic resolving of such ties, the decreasing and increasing lists of ranking scores might indeed not always be just the reversed version of one another. The *self.correlation* attribute contains the ordinal correlation index between the given outranking relation and the computed *Bachet* ranking.
 
-Note that, like the *Copeland* and the *NetFlows* ranking rules, the *Bachet* ranking rule, with a given ordering of the actions' keys, the Bachet ranking scores are **invariant** under the **codual** transform [22]_.
+Note that, like the *Copeland* and the *NetFlows* ranking rules, the *Bachet* ranking scores are **invariant** under the **codual** transform [22]_.
 
 Mind however that a base 3 sbits numbering system is a *positional numeral system*, implying that the *Bachet* ranking scores, as noticed before, depend essentially on the very ordering of the rows and columns of the outranking digraph's *self.relation* attribute when the relation shows a low transitivity degree. However, when the strict outranking digraph is *transitive*, the *Bachet* ranking scores will consistently model the orientations of all transitive triples independently of the ordering of the rows and columns of the *self.relation* attribute. The polarised *Bachet* ranking scores are hence, like the *Copeland* scores, **Condorcet consistent**, i.e. when the polarised strict outranking digraph models a *transitive* relation, its *Bachet* ranking scores will always be consistent with this strict outranking relation [23]_.
 
@@ -3420,7 +3421,7 @@ When reconsidering the random outranking digraph *g*, seen in :numref:`optimisin
 
 .. code-block:: pycon
    :caption: Smart *Bachet* ranking result
-   :name: smartBachet
+   :name: smartBachet0
    :emphasize-lines: 5,8,22,25
 
    >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
@@ -3451,7 +3452,7 @@ When reconsidering the random outranking digraph *g*, seen in :numref:`optimisin
      Epistemic determination    :  0.409
      Bipolar-valued equivalence : +0.310
 
-In :numref:`smartBachet` Line 5 we notice that the given random outranking digraph presents 161 intransitive outranking triples. When randomly sampling in Line 8 the permutations of 100 of these intransitive triples, we discover a ranking result that corresponfs to the optimal Kemeny ranking seen in :numref:`optimalKemeny1`.
+In :numref:`smartBachet0` Line 5 we notice that the given random outranking digraph presents 161 intransitive outranking triples. When randomly sampling in Line 8 the permutations of 100 of these intransitive triples, we discover a ranking result that corresponfs to the optimal Kemeny ranking seen in :numref:`optimalKemeny1`.
 
 Running a MonteCarlo simulation with a sample of 500 random 3 objectives --economic, environmental and societal-- performance tableaux of 9 decision actions marked on 13 performance criteria, gives the following ordinal correlations statistics between the corresponding ranking results and the given bipolar-valued outranking digraph *g*. 
 
@@ -3467,10 +3468,31 @@ Running a MonteCarlo simulation with a sample of 500 random 3 objectives --econo
 
 The correlation figures show that both the smart polarised and the valued Bachet ranking rules, by permuting all potential intransitive outranking triples, come very close to the optimal Kemeny ranking rule (median correlation +0.901 vs +0.914). And in 163/500 (32.6%) polarised cases and in 196/500 (39.2%) valued cases, we even get an optimal Kemeny ranking result.
 
+Notice however in :numref:`smartBachet1` below, that the :py:class:`~linearOrders.BachetRanking` constructor is no more invariant under the codual transform.
+
+.. code-block:: pycon
+   :caption: Smart codual *Bachet* ranking result
+   :name: smartBachet1
+   :emphasize-lines: 4,9
+
+   >>> gcd = ~(-g)
+   >>> gcd.computeTransitivityDegree(Comments=True)
+    Transitivity degree of digraph <converse-dual-rel_randomperftab>:
+     #triples x>y>z: 26, #closed: 15, #open: 11
+     (#closed/#triples) =  0.577
+   >>> sba = BachetRanking(gcd,Polarised=True,sampleSize=100)
+   >>> g.showCorrelation(g.computeRankingCorrelation(sba.bachetRanking))
+    Correlation indexes:
+     Crisp ordinal correlation  : +0.744
+     Epistemic determination    :  0.409
+     Bipolar-valued equivalence : +0.304
+
+As we observe only 11 intransitive triples in the codual outranking digraph *gcd* (see Line 4), the smart sampling leads eventually to a ranking result that is no more the optimal Kemeny ranking (+0.744 versus +0.758, see Line 9). The Condorcet consistency of the ranking of all the transitive triples is however still guaranteed.
+
 Revealing the transitive part of a bipolar-valued digraph
 .........................................................
 
-As we have noticed before, the randomized versions of the :py:class:`~linearOrders.PolarisedBachetRanking` and the :py:class:`~linearOrders.ValuedBachetRanking` constructors potentially produce multiple ranking results of unequal correlation quality, yet respecting all more or less the transitive part of the given digraph. If we collect now a small subset of the best correlated rankings, we can use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class for constructing, by epistemic disjunctive fusion of these selected rankings, a partial *Bachet* ranking result --a transitive asymmetrical digraph with indeterminate reflexive relations-- showing actually the potential transitive part of the given polarised outranking digraph. 
+As we have noticed before, the randomized versions of the :py:class:`~linearOrders.PolarisedBachetRanking` and the :py:class:`~linearOrders.ValuedBachetRanking` constructors potentially produce multiple ranking results of unequal correlation quality, yet respecting due to the Condorcet consistency property all more or less the transitive part of the given digraph. If we collect now a small subset of the best correlated rankings, we can use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class for constructing, by epistemic disjunctive fusion of these selected rankings, a partial *Bachet* ranking result --a transitive asymmetrical digraph with indeterminate reflexive relations-- showing actually the potential transitive part of the given polarised outranking digraph. 
 
 To explore this remarquable opportunity, a new :py:class:`~transitiveDigraphs.PartialBachetRanking` class is provided by the :py:mod:`transitiveDigraphs` module. To illustrate its usefulness, let us reconsider the example outranking digraph *g* of :numref:`optimisingBachet`. 
 
@@ -3590,7 +3612,7 @@ The implementation of the :py:class:`~arithmetics.BachetNumber` class dates from
 
 The power of the **epistemic disjunctive fusion** operator, for instance, is indeed impressive. When two arguments prove the *Truthfulness* of a logical statement, their fusion will be **True**. When two arguments prove the **Falseness** of the statement, their fusion will be **False**, However, when they provide conjointly a proof of Falseness and and a proof of Truthfulness, their fusion will be **indeterminate** (zero knowledge). It is worthwhile noticing again the essential computational role this indeterminate **zero** value is taking on in such a *Bachet* computer.
 
-Remarquable is even more the unexpected **Condorcet Consistency** of the Bachet polarised ranking scores which allows us to effectively reveal, with the :py:class:`~transitiveDigraphs.PartialBachetRanking` constructor, the transitive part of any given bipolar-valued digraph.    
+Remarquable is even more the unexpected **Condorcet Consistency** of the *polarised* Bachet ranking scores which allows us to effectively reveal, with the :py:class:`~transitiveDigraphs.PartialBachetRanking` constructor, the transitive part of any given bipolar-valued digraph.    
 
 ..............................................
 
