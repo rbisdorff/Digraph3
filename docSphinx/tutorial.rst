@@ -3280,7 +3280,7 @@ The polarised *Bachet* ranking rule only considers the crisp relational structur
      Epistemic determination    :  0.230
      Bipolar-valued equivalence : +0.165
 
-With the *valued* version of the *Bachet* ranking rule we recover a similar ranking as the one obtained with the previous polarised version. We are randomly prtmuting the 40 intransitive triples (see :numref:`ValuedBachetRanking` Lines 2-3). This way we obtain a better correlated ranking result than with the simple *NetFlows* rule (+715 vs +0.638). The valued *BachetRanking* class result is, like the previous polarised *BachetRanking* class result **not** invariant under the **codual transform** [62]_ and, like the *NetFlows* rule  **not** necessarily **Condorcet consistent**. 
+With the *valued* version of the *Bachet* ranking rule we recover a similar ranking as the one obtained with the previous polarised version. We are randomly permuting the 40 intransitive triples (see :numref:`ValuedBachetRanking` Lines 2-3). This way we obtain a better correlated ranking result than with the simple *NetFlows* rule (+715 vs +0.638). The valued *BachetRanking* class result is, like the previous polarised *BachetRanking* class result **not** invariant under the **codual transform** [62]_ and, like the *NetFlows* rule  **not** necessarily **Condorcet consistent**. 
 
 To appreciate now the actual ranking performances of the *ranking-by-scoring* rules seen so far, it is useful to consider *Kemeny*'s and *Slater*'s **optimal fitting** ranking rules.
 
