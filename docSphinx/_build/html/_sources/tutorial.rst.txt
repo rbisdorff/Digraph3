@@ -3631,12 +3631,12 @@ In this section, instead of computing linear rankings or orders, we illustrate t
 Computing a ranking consensus from several linear rankings
 ``````````````````````````````````````````````````````````
 
-To compare for instance the four rankings we have previously obtained with *ranking-by-scoring* strategies, it is worthwhile vizualizing the **ranking consensus**  one may observe between the *Copeland*, the *NetFlows* and both *Bachet* ranking results. To compute such a ranking consensus we make usage in :numref:`RankingConsensus` of the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class (see Line 20).
+To compare for instance the four rankings we have previously obtained with *ranking-by-scoring* strategies, it is worthwhile vizualizing the **ranking consensus**  one may observe between the *Copeland*, the *NetFlows* and both *Bachet* ranking results (see :numref:`RankingConsensus` Lines 16-19). To compute such a ranking consensus we make usage of the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class (see Lines 20-21).
 
 .. code-block:: pycon
    :name: RankingConsensus
    :caption: Computing a rankings consensus
-   :emphasize-lines: 15-18,20,32-33
+   :emphasize-lines: 16-19,20-21,33-34
 
    >>> from outrankingDigraphs import *
    >>> t = RandomCBPerformanceTableau(numberOfActions=9,
@@ -3644,9 +3644,10 @@ To compare for instance the four rankings we have previously obtained with *rank
    >>> g = BipolarOutrankingDigraph(t,Normalized=True)
    >>> from linearOrders import *
    >>> cop = CopelandOrder(g)
-   >>> ba = BachetRanking(g,Polarised=True,sampleSize=50,seed=5)
+   >>> ba = BachetRanking(g,Polarised=True,sampleSize=40)
    >>> nf = NetFlowsRanking(g)
-   >>> bav = BachetRanking(g,Polarised=False,sampleSize=50,seed=7)
+   >>> bav = BachetRanking(g,Polarised=False,sampleSize=40,
+   ...                     Randomized=True,seed=6)
    >>> rankings = [cop.copelandRanking,
    ...             ba.bachetRanking,
    ...             nf.netFlowsRanking,
@@ -3672,7 +3673,7 @@ To compare for instance the four rankings we have previously obtained with *rank
    >>> rfdg.isTransitive()
     True
 
-By :ref:`epistemic disjunctive fusion <Epistemic-Fusion-label>` of the four *rankings*, the :py:class:`~transitiveDigraphs.RankingsFusionDigraph` constructor computes a transitive asymmetrical partial digraph (see :numref:`RankingConsensus`  Lines 32-33). Notice in Lines 15-18 the unstable ranks of alternative *a1* (rank 2,5,6 and 7) which induce contradictory ranking results leadind to many incomparability situations. Ranking and ordering of partial relations do not give now the same result when such incomparabilities do appear.
+By :ref:`epistemic disjunctive fusion <Epistemic-Fusion-label>` of the four *rankings*, the :py:class:`~transitiveDigraphs.RankingsFusionDigraph` constructor computes a transitive asymmetrical partial digraph (see :numref:`RankingConsensus`  Lines 33-34). Notice in Lines 15-18 the unstable ranks of alternative *a1* (rank 2,5,6 and 7) which induce contradictory ranking results leadind to many incomparability situations. Ranking and ordering of partial relations do not give now the same result when such incomparabilities do appear.
 
 The generic :py:class:`~transitiveDigraphs.TransitiveDigraph` class provides therefore a :py:meth:`~transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph` method which recursively extracts conjointly first and last choices --:ref:`initial and terminal kernels <Bipolar-Valued-Kernels-Tutorial-label>`-- as shown in :numref:`RankingConsensus1` Lines 2-6 below. 
 
