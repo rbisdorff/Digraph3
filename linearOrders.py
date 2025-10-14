@@ -2067,7 +2067,7 @@ class BachetRanking(LinearOrder,_BachetRanking):
             print('Nbr of Triles:', nt)
         if TriplesSorted:
             from digraphsTools import scoredTuplesSort
-            scoredTuplesSort(rankedTriples,reverse=True                             )
+            scoredTuplesSort(rankedTriples,reverse=True)
         if Randomized:
             import random as rd
             rd.seed(seed)
@@ -2100,10 +2100,12 @@ class BachetRanking(LinearOrder,_BachetRanking):
             currBachetRanking = ValuedBachetRanking
         
         bestBa = currBachetRanking(other,actionsList=al,
-                                   BestQualified=True,randomized=0,
+                                   BestQualified=False,randomized=0,
                                 orderLimit=orderLimit)
-        al = bestBa.actionsList
         bestCorr = bestBa.correlation
+        al = bestBa.actionsList
+        if Debug:
+            print('init 0: ',al,bestCorr)
         #print(al)
         if Logging:
             log = open('logging.txt','w')
@@ -2113,36 +2115,35 @@ class BachetRanking(LinearOrder,_BachetRanking):
         #for st in triplesSet:
             tr = rankedTriples[i][1]
             #tr = list(st)
-            #if Debug:
-            #print(tr)
+            if Debug:
+                print('permuting:',tr)
             xi = al.index(tr[0])
             yi = al.index(tr[1])
             al[xi] = tr[1]
             al[yi] = tr[0]
             
             if Debug:
-                print(al)
+                print('permuted:',tr[0],tr[1],al)
             ba = currBachetRanking(other,actionsList=al,
                                    BestQualified=True,
                                orderLimit=orderLimit)
-            al = ba.actionsList
-            if ba.correlation > bestCorr:
+            if Debug:
+                print((i+1),al,ba.correlation)
+            if ba.correlation >= bestCorr:
                 bestCorr = ba.correlation
                 bestBa = currBachetRanking(other,actionsList=al,
                                            BestQualified=True,
                                        orderLimit=orderLimit)
                 al = bestBa.actionsList
-                if Comments:
-                    print(i,ba.correlation)
+                if Debug:
+                    print('bestQualified:', (i+1),al,bestBa.correlation)
             else: # restoring the previous actionsList
                 xi = al.index(tr[1])
                 yi = al.index(tr[0])
                 al[xi] = tr[0]
                 al[yi] = tr[1]
-                al[xi] = tr[0]
-                al[yi] = tr[1]
-            if Debug:
-                print(al)
+                if Debug:
+                    print('restore:ing:', tr[1],tr[0],al,ba.correlation)
             if Logging:
                 log.write('%d, %.4f,' % (i,rankedTriples[i][0]))
                 log.write(str(rankedTriples[i][1]))
@@ -2154,26 +2155,26 @@ class BachetRanking(LinearOrder,_BachetRanking):
             al[yi] = tr[2]
             al[zi] = tr[1]
             if Debug:
-                print(al)
+                print('permuted:', tr[2],tr[1],al)
             ba = currBachetRanking(other,actionsList=al,BestQualified=True,
                             orderLimit=orderLimit)
-            al = ba.actionsList
-            if ba.correlation > bestCorr:
+            if Debug:
+                print((i+1),al,ba.actionsList,ba.correlation)
+            if ba.correlation >= bestCorr:
                 bestCorr = ba.correlation
                 bestBa = currBachetRanking(other,actionsList=al,
                                            BestQualified=True,
                                        orderLimit=orderLimit)
                 al = bestBa.actionsList
-                if Comments:
-                    print(i,ba.correlation)
+                if Debug:
+                    print('bestQualified',(i+1),bestBa.correlation)
             else: # restoring the previous actionsList
                 yi = al.index(tr[2])
                 zi = al.index(tr[1])
                 al[yi] = tr[1]
                 al[zi] = tr[2]
-                al[yi] = tr[1]
-                al[zi] = tr[2]
-                #print(al,bestBa.correlation)
+                if Debug:
+                    print('restoring', tr[2],tr[1],al,ba.correlation)
             if Logging:
                 log.write('%d, %.4f,' % (i,rankedTriples[i][0]))
                 log.write(str(rankedTriples[i][1]))
@@ -3183,22 +3184,22 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
     Threading = False
-    res = open('test9CBPolSsNoneCtrl1.csv','w')
+    res = open('test9CBPolAll50Ctrl.csv','w')
     #res = open('tes.csv','w')
-    res.write('"seed","nt","baptft","bapttt","bapfft","bapfff"\n')
-    sampleSize = 1
-    randomSize = 10
+    res.write('"seed","nt","baptft","bapttt","bapfft","bapfff","cop","nf","ke"\n')
+    sampleSize = 100
+    randomSize = None
     Polarised=True
     #t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
     for sample in range(sampleSize):
         print(sample)
         #seed = random.randint(1,1000000)
-        seed = 9
+        #seed = 55
         seed = sample + 1
     ##    t = CircularPerformanceTableau()
         #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
         #t = PerformanceTableau('testLin')
-        t = RandomCBPerformanceTableau(numberOfActions=7,
+        t = RandomCBPerformanceTableau(numberOfActions=9,
                                        numberOfCriteria=13,seed=seed)
         g = BipolarOutrankingDigraph(t)
         triples = g.computeIntransitiveTriples()
@@ -3223,7 +3224,7 @@ if __name__ == "__main__":
         #print('bap',ba1.bachetRanking,corrba1)
         cop = CopelandRanking(g,Comments=False,Gamma=False)
         corrcop = g.computeRankingCorrelation(cop.copelandRanking)
-        print('cop',cop.copelandRanking,corrcop)
+        #print('cop',cop.copelandRanking,corrcop)
 ##        wcop1 = _WeightedCopelandRanking(g,Comments=False,Debug=False)
 ##        print(wcop1.copelandRanking)
 ##        corrwcop1 = g.computeRankingCorrelation(wcop1.copelandRanking)
@@ -3234,12 +3235,12 @@ if __name__ == "__main__":
 ##        print(wcop2.copelandRanking)
 ##        corrwcop2 = g.computeRankingCorrelation(wcop2.copelandRanking)
 ##        print('wcop2',wcop2.copelandRanking,corrwcop2)
-##        nf = NetFlowsRanking(g)
-##        corrnf = g.computeRankingCorrelation(nf.netFlowsRanking)
-##        print('nf',nf.netFlowsRanking,corrnf)
+        nf = NetFlowsRanking(g)
+        corrnf = g.computeRankingCorrelation(nf.netFlowsRanking)
+        #print('nf',nf.netFlowsRanking,corrnf)
         ke = KemenyRanking(g,orderLimit=9)
         corrke = g.computeRankingCorrelation(ke.kemenyRanking)
-        print('ke',ke.kemenyRanking,corrke)
+        #print('ke',ke.kemenyRanking,corrke)
 ##        randomActions = [x for x in g.actions]
 ##        #print(randomActions)
 ##        random.shuffle(randomActions)
@@ -3289,16 +3290,22 @@ if __name__ == "__main__":
         #print('banp',banp.correlation)
         #banv = ReflexiveBachetRanking(g,Polarised=False,Debug=False)
         #print('banv',banv.correlation)
-        print('%d,%d,%.4f,%.4f,%.4f,%.4f\n' % (seed,nt,corrba1['correlation'],
-                                           corrba2['correlation'],
-                                            #banp.correlation,
-                                        corrba3['correlation'],
-                                            #banv.correlation,))
-                                        corrba4['correlation']) )
-        res.write('%d,%d,%.4f,%.4f,%.4f,%.4f\n' % (seed,nt,corrba1['correlation'],
-                                           corrba2['correlation'],
-                                        corrba3['correlation'],
-                                        corrba4['correlation']) )
+        print('%d,%d,%.4f,%.4f,%.4f,%.4f,%.4f,%.4f,%.4f\n' % (seed,nt,
+                                            corrba1['correlation'],
+                                            corrba2['correlation'],
+                                            corrba3['correlation'],
+                                               corrba4['correlation'],
+                                               corrcop['correlation'],
+                                               corrnf['correlation'],
+                                               corrke['correlation']) )
+        res.write('%d,%d,%.4f,%.4f,%.4f,%.4f,%.4f,%.4f,%.4f\n' % (seed,nt,
+                                            corrba1['correlation'],
+                                            corrba2['correlation'],
+                                            corrba3['correlation'],
+                                            corrba4['correlation'],
+                                            corrcop['correlation'],
+                                            corrnf['correlation'],
+                                            corrke['correlation']) )
     res.close()
     
      

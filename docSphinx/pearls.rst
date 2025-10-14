@@ -3060,8 +3060,8 @@ The Digraph3 :py:mod:`arithmetics` module provides with the :py:class:`~arithmet
    ...       % ( n4, n4.value(), n5, n5.value(),n4 + n5, (n4+n5).value() ))
      '-1-1+1' (-11) + '-1-1-1' (-13) = '-10+10' (-24)
 
-Examples of sbits encoded Bachet numbers
-........................................
+Examples of Bachet numbers
+..........................
 
 Examples of such *sbits* encoded *Bachet* numbers are immediately provided by the rows and columns of the *self.relation* attribute of a polarised outranking digraph instance (see :numref:`examplesBachet` Lines 4-6  and 12-15 below). 
 
@@ -3106,7 +3106,7 @@ The *Bachet* numbers, instantiated by the row vectors without reflexive terms  a
 
 The sum *rx + (-cx)* of both the **outrankingness** and the **negated outrankedness** measures renders now per decision action *x* a potential ranking score, similar to *Copeland* or *NetFlows* ranking scores [21]_.
 
-In our example here we obtain the *Bachet* ranking 'a4' (26) > 'a3' (4) > 'a2' (1) > 'a1' (-11) (see Line 30 above). A ranking result, which is the corresponding optimal *Kemeny* ranking maximally correlated with the given outranking digraph (tau = 0.795, see Lines 4 and 8 below).
+In our example here we obtain the *Bachet* ranking 'a4' (26) > 'a3' (4) > 'a2' (1) > 'a1' (-11) (see Line 30 above). A ranking result, which is the corresponding optimal *Kemeny*, ranking maximally correlated with the given outranking digraph *g* (tau = 0.795, see Lines 4 and 8 below).
 
 .. code-block:: pycon
    :linenos:		

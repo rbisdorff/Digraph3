@@ -120,7 +120,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#applications-of-bipolar-valued-base-3-encoded-bachet-numbers">3.3.3. Applications of bipolar-valued base 3 encoded Bachet numbers</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#bipolar-valued-base-3-encoded-bachet-numbers">3.3.3.1. Bipolar-valued base 3 encoded Bachet numbers</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#examples-of-sbits-encoded-bachet-numbers">3.3.3.2. Examples of sbits encoded Bachet numbers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples-of-bachet-numbers">3.3.3.2. Examples of Bachet numbers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#the-bachet-ranking-rule-a-new-ranking-by-scoring-method">3.3.3.3. The Bachet ranking rule, a new ranking-by-scoring method</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#efficiency-of-the-bachet-ranking-rule-settings">3.3.3.4. Efficiency of the Bachet ranking rule settings</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#smart-sampling-of-the-permutations-of-the-actions-list">3.3.3.5. Smart sampling of the permutations of the actions list</a></li>
@@ -2968,7 +2968,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <nav class="contents local" id="id37">
 <ul class="simple">
 <li><p><a class="reference internal" href="#bipolar-valued-base-3-encoded-bachet-numbers" id="id150">Bipolar-valued base 3 encoded Bachet numbers</a></p></li>
-<li><p><a class="reference internal" href="#examples-of-sbits-encoded-bachet-numbers" id="id151">Examples of sbits encoded Bachet numbers</a></p></li>
+<li><p><a class="reference internal" href="#examples-of-bachet-numbers" id="id151">Examples of Bachet numbers</a></p></li>
 <li><p><a class="reference internal" href="#the-bachet-ranking-rule-a-new-ranking-by-scoring-method" id="id152">The Bachet ranking rule, a new ranking-by-scoring method</a></p></li>
 <li><p><a class="reference internal" href="#efficiency-of-the-bachet-ranking-rule-settings" id="id153">Efficiency of the Bachet ranking rule settings</a></p></li>
 <li><p><a class="reference internal" href="#smart-sampling-of-the-permutations-of-the-actions-list" id="id154">Smart sampling of the permutations of the actions list</a></p></li>
@@ -3027,8 +3027,8 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 </div>
 </div>
 </section>
-<section id="examples-of-sbits-encoded-bachet-numbers">
-<h4><a class="toc-backref" href="#id151" role="doc-backlink"><span class="section-number">3.3.3.2. </span>Examples of sbits encoded Bachet numbers</a><a class="headerlink" href="#examples-of-sbits-encoded-bachet-numbers" title="Link to this heading"></a></h4>
+<section id="examples-of-bachet-numbers">
+<h4><a class="toc-backref" href="#id151" role="doc-backlink"><span class="section-number">3.3.3.2. </span>Examples of Bachet numbers</a><a class="headerlink" href="#examples-of-bachet-numbers" title="Link to this heading"></a></h4>
 <p>Examples of such <em>sbits</em> encoded <em>Bachet</em> numbers are immediately provided by the rows and columns of the <em>self.relation</em> attribute of a polarised outranking digraph instance (see <a class="reference internal" href="#examplesbachet"><span class="std std-numref">Listing 3.44</span></a> Lines 4-6  and 12-15 below).</p>
 <div class="literal-block-wrapper docutils container" id="examplesbachet">
 <div class="code-block-caption"><span class="caption-number">Listing 3.44 </span><span class="caption-text">Examples of sbits encoded numbers</span><a class="headerlink" href="#examplesbachet" title="Link to this code"></a></div>
@@ -3067,7 +3067,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 </div>
 <p>The <em>Bachet</em> numbers, instantiated by the row vectors without reflexive terms  and the column vectors without reflexive terms of the digraph’s <em>self.relation</em> attribute, model in fact respectively an <strong>outrankingness</strong> measure <em>rx</em> and an <strong>outrankedness</strong> measure <em>cx</em> (see Lines 16-27).</p>
 <p>The sum <em>rx + (-cx)</em> of both the <strong>outrankingness</strong> and the <strong>negated outrankedness</strong> measures renders now per decision action <em>x</em> a potential ranking score, similar to <em>Copeland</em> or <em>NetFlows</em> ranking scores <a class="footnote-reference brackets" href="#id98" id="id41" role="doc-noteref"><span class="fn-bracket">[</span>21<span class="fn-bracket">]</span></a>.</p>
-<p>In our example here we obtain the <em>Bachet</em> ranking ‘a4’ (26) &gt; ‘a3’ (4) &gt; ‘a2’ (1) &gt; ‘a1’ (-11) (see Line 30 above). A ranking result, which is the corresponding optimal <em>Kemeny</em> ranking maximally correlated with the given outranking digraph (tau = 0.795, see Lines 4 and 8 below).</p>
+<p>In our example here we obtain the <em>Bachet</em> ranking ‘a4’ (26) &gt; ‘a3’ (4) &gt; ‘a2’ (1) &gt; ‘a1’ (-11) (see Line 30 above). A ranking result, which is the corresponding optimal <em>Kemeny</em>, ranking maximally correlated with the given outranking digraph <em>g</em> (tau = 0.795, see Lines 4 and 8 below).</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">KemenyRanking</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ke</span> <span class="o">=</span> <span class="n">KemenyRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ke</span><span class="o">.</span><span class="n">kemenyRanking</span>
@@ -5273,7 +5273,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Oct 11, 2025.
+      <span class="lastupdated">Last updated on Oct 14, 2025.
       </span></p>
   </div>
 
