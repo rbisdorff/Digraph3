@@ -9574,11 +9574,26 @@
                                        <span class="n">ChoiceVector</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                        <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Dummy for the :py:meth:`~digraphs.Digraph.showBachetRecommendation` method.</span>
+<span class="sd">        Generic choice recommender method.</span>
 
-<span class="sd">        *Polarised*: True (by default) | False</span>
-<span class="sd">        *randomized*: positive integer (100 by default)</span>
-<span class="sd">        *maxNbrOfRankings*: positive integer &gt; 0 (5 by default)</span>
+<span class="sd">        **Parameters**</span>
+<span class="sd">        </span>
+<span class="sd">        *method*: &#39;Bachet&#39; (default) | &#39;Rubis&#39;; the Bachet method is based on the conjoint</span>
+<span class="sd">        extracton of initial and terminal prekernels from the partial Bachet ranking,</span>
+<span class="sd">        whereas the Rubis method is based on the extraction of an initial and</span>
+<span class="sd">        terminal prekernels directly from the given outranking digraph.</span>
+
+<span class="sd">        *Polarised*: *True* (by default) | False; Bachet parameter</span>
+
+<span class="sd">        *randomized*: positive integer (100 by default); Bachet Parameter</span>
+
+<span class="sd">        *maxNbrOfRankings*: positive integer &gt; 0 (5 by default); Bachet parameter</span>
+
+<span class="sd">        *seed*: Bachet parameter for making the randomization reproducible</span>
+
+<span class="sd">        *ChoiceVector*: Rubis parameter for showing complete prekernel</span>
+<span class="sd">        characteristic vectors.</span>
+<span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;Bachet&#39;</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bachet choice recommendation&#39;</span><span class="p">)</span>
@@ -16490,7 +16505,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Oct 14, 2025.
+      <span class="lastupdated">Last updated on Oct 15, 2025.
       </span></p>
   </div>
 

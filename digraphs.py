@@ -8917,11 +8917,26 @@ class Digraph(object):
                                        ChoiceVector=False,
                                        ):
         """
-        Dummy for the :py:meth:`~digraphs.Digraph.showBachetRecommendation` method.
+        Generic choice recommender method.
 
-        *Polarised*: True (by default) | False
-        *randomized*: positive integer (100 by default)
-        *maxNbrOfRankings*: positive integer > 0 (5 by default)
+        **Parameters**
+        
+        *method*: 'Bachet' (default) | 'Rubis'; the Bachet method is based on the conjoint
+        extracton of initial and terminal prekernels from the partial Bachet ranking,
+        whereas the Rubis method is based on the extraction of an initial and
+        terminal prekernels directly from the given outranking digraph.
+
+        *Polarised*: *True* (by default) | False; Bachet parameter
+
+        *randomized*: positive integer (100 by default); Bachet Parameter
+
+        *maxNbrOfRankings*: positive integer > 0 (5 by default); Bachet parameter
+
+        *seed*: Bachet parameter for making the randomization reproducible
+
+        *ChoiceVector*: Rubis parameter for showing complete prekernel
+        characteristic vectors.
+        
         """
         if method == 'Bachet':
             print('Bachet choice recommendation')

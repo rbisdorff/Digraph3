@@ -3552,7 +3552,7 @@ The Bachet choice recommender algorithm
 
 The first and last levels of a topological sort of partial rankings --their **initial and terminal kernels**-- give indeed convincing candidates for a *first-choice*, respectively a *last-choice* recommendation (see :numref:`partialBachet0` Lines 7-10).
 
-To explore this opportunity, a :py:meth:`~digraphs.Digraph.showBachetChoiceRecommendation` method has been added to the :py:class:`~digraphs.Digraph` class (see :numref:`BachetBCR0` lines 3-4). 
+To explore this opportunity, a :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method has been added to the :py:class:`~digraphs.Digraph` class (see :numref:`BachetBCR0` lines 3-4). 
 
 .. code-block:: pycon
    :caption: *Bachet* choice recommendations
@@ -3561,7 +3561,7 @@ To explore this opportunity, a :py:meth:`~digraphs.Digraph.showBachetChoiceRecom
 
    >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
    >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
-   >>> g.showBachetChoiceRecommendation(randomized=100,
+   >>> g.showChoiceRecommendation('Bachet',randomized=100,
    ...                             maxNbrOfRankings=5,seed=4)
     *---- Bachet Choice Recommendations ----*
     Ranking by recursively first and last choosing 
@@ -3583,7 +3583,7 @@ In order to provide information about the underlying :py:class:`~transitiveDigra
    :emphasize-lines: 2,7-8
 
    >>> print(g.pbr.bachetRankings)
-    [(0.7442, ['a2', 'a5', 'a9', 'a6', 'a4', 'a8', 'a3', 'a7', 'a1']),
+    [(0.7442, ['a2',, 'a5', 'a9', 'a6', 'a4', 'a8', 'a3', 'a7', 'a1']),
      (0.6369, ['a2', 'a5', 'a9', 'a6', 'a8', 'a7', 'a3', 'a4', 'a1']),
      (0.6333, ['a2', 'a5', 'a9', 'a4', 'a6', 'a1', 'a8', 'a3', 'a7']),
      (0.6315, ['a2', 'a9', 'a5', 'a8', 'a3', 'a6', 'a7', 'a4', 'a1']),
@@ -3600,9 +3600,35 @@ In order to provide information about the underlying :py:class:`~transitiveDigra
 
    Bachet choice recommendations
 
-In :numref:`bachetBCR1` we see confirmed that alternative *a2* shows indeed the very best performance profile and alternatives *a1*, *a3* and *a7* the weakest performance profiles. 
+In :numref:`bachetBCR1` we see confirmed that alternative *a2* shows indeed the very best and alternative *a1* the weakest performance profile. This finding is as well confirmed below with the corresponding *Rubis* first and last choice recommendations computed from the codual outranking digraph.
 
-As the *Bachet* choice recommendation is based on a partial transitive asymmetrical digraph, actually highly correlated with the given outranking digraph *g* (+0.821), a unique initial and a unique terminal prekernel always exist (see :numref:`BachetBCR0` Lines 7 and 10). Both these properties confer the *Bachet choice recommendation algorithm* a computational advantage over the *Rubis* first choice recommendation algorithm based on initial and terminal prekernels directly extracted from the given strict outranking digraph where we, first, must arbitrarily break, the case given, all chordless outranking circuits (see [BIS-2008p]_).
+.. code-block:: pycon
+   :emphasize-lines: 1,8,14,16,22
+		     
+   >>> (~(-g)).showChoiceRecommendation('Rubis')
+    Rubis choice recommendations
+    ***********************
+     Credibility domain: [-1.00,1.00]
+     === >> potential first choice(s)
+     * choice              : ['a2']
+       independence        : 1.00
+       dominance           : 0.42
+       absorbency          : -1.00
+       covering (%)        : 100.00
+       determinateness (%) : 71.06
+      - most credible action(s) = { 'a2': 0.42 }
+     === >> potential last choice(s) 
+     * choice              : ['a1']
+       independence        : 1.00
+       dominance           : -0.29
+       absorbency          : 0.18
+       covered (%)         : 100.00
+       determinateness (%) : 59.21
+      - most credible action(s) = { 'a1': 0.18 }
+      Execution time: 0.045 seconds
+      *****************************
+
+As the *Bachet* choice recommendations are based on a partial transitive asymmetrical digraph, actually highly correlated with the given outranking digraph *g* (+0.821), a unique initial and a unique terminal prekernel always exist (see :numref:`BachetBCR0` Lines 7 and 10). Both these properties confer the *Bachet choice recommendation algorithm* a computational advantage over the *Rubis* first choice recommendation algorithm based on initial and terminal prekernels directly extracted from the given strict outranking digraph where we, first, must arbitrarily break, the case given, all chordless outranking circuits (see [BIS-2008p]_).
 
 Computing initial and terminal *prekernels* in digraphs is the subject of the next Section.
 
