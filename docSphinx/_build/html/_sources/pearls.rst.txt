@@ -3583,7 +3583,7 @@ In order to provide information about the underlying :py:class:`~transitiveDigra
    :emphasize-lines: 2,7-8
 
    >>> print(g.pbr.bachetRankings)
-    [(0.7442, ['a2',, 'a5', 'a9', 'a6', 'a4', 'a8', 'a3', 'a7', 'a1']),
+    [(0.7442, ['a2', 'a5', 'a9', 'a6', 'a4', 'a8', 'a3', 'a7', 'a1']),
      (0.6369, ['a2', 'a5', 'a9', 'a6', 'a8', 'a7', 'a3', 'a4', 'a1']),
      (0.6333, ['a2', 'a5', 'a9', 'a4', 'a6', 'a1', 'a8', 'a3', 'a7']),
      (0.6315, ['a2', 'a9', 'a5', 'a8', 'a3', 'a6', 'a7', 'a4', 'a1']),
@@ -3600,10 +3600,12 @@ In order to provide information about the underlying :py:class:`~transitiveDigra
 
    Bachet choice recommendations
 
-In :numref:`bachetBCR1` we see confirmed that alternative *a2* shows indeed the very best and alternative *a1* the weakest performance profile. This finding is as well confirmed below with the corresponding *Rubis* first and last choice recommendations computed from the codual outranking digraph.
+In :numref:`bachetBCR1` we see confirmed that alternative *a2* shows indeed the very best and alternative *a1* the weakest performance profile. This finding is as well confirmed in :numref:`RubisBCR0` below with the corresponding *Rubis* first and last choice recommendations computed from the codual outranking digraph.
 
 .. code-block:: pycon
-   :emphasize-lines: 1,8,14,16,22
+   :caption: *Rubis* choice recommendations
+   :name: RubisBCR0
+   :emphasize-lines: 1,6,12,14,20
 		     
    >>> (~(-g)).showChoiceRecommendation('Rubis')
     Rubis choice recommendations
