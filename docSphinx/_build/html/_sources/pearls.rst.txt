@@ -3577,10 +3577,10 @@ To explore this opportunity, a :py:meth:`~digraphs.Digraph.showChoiceRecommendat
 
 Alternative *a2* appears clearly as the first-choice candidate, whereas alternatives *a1*, *a3* and *a7* appear as potential last-choice candidates (see Lines 7 and 10 above). The partial ranking is well ordinally correlated with the outranking digraph *g* (+0.821) supported by a criteria significance majority of 62%. 
 
-In order to provide information about the underlying :py:class:`~transitiveDigraphs.PartialBachetRanking` digraph, the corresponding instance is stored in the *g.pbr* attribute. We may thus consult the five Bachet rankings used by the :py:class:`~transitiveDigraphs.RankingsFusionDigraph` constructor and provide the best correlated one for ranking the performance heatmap of the given performance tableau (see Lines 2 and 7-8).
+In order to provide information about the underlying :py:class:`~transitiveDigraphs.PartialBachetRanking` digraph, the corresponding instance is stored in the *g.pbr* attribute. We may thus consult the five Bachet rankings used by the :py:class:`~transitiveDigraphs.RankingsFusionDigraph` constructor and provide the best correlated one for ranking the valued adjacency matrix of the outranking digraph *g* (see Lines 2 and 7 below).
 
 .. code-block:: pycon
-   :emphasize-lines: 2,7-8
+   :emphasize-lines: 2,7
 
    >>> print(g.pbr.bachetRankings)
     [(0.7442, ['a2', 'a5', 'a9', 'a6', 'a4', 'a8', 'a3', 'a7', 'a1']),
@@ -3588,47 +3588,52 @@ In order to provide information about the underlying :py:class:`~transitiveDigra
      (0.6333, ['a2', 'a5', 'a9', 'a4', 'a6', 'a1', 'a8', 'a3', 'a7']),
      (0.6315, ['a2', 'a9', 'a5', 'a8', 'a3', 'a6', 'a7', 'a4', 'a1']),
      (0.6297, ['a2', 'a5', 'a9', 'a3', 'a6', 'a8', 'a7', 'a4', 'a1'])]
-   >>> g.showHTMLPerformanceHeatmap(Correlations=True,
-   ...                    actionsList=g.pbr.bachetRankings[0][1])
+   >>> g.showHTMLRelationTable(actionsList=g.pbr.bachetRankings[0][1])
 
 
 .. Figure:: bachetBCR.png
    :name: bachetBCR1
-   :alt: Bachet choice recommendations
+   :alt: 
    :width: 450 px
    :align: center
 
-   Bachet choice recommendations
+   Ranked adjacency matrix of the outranking digraph
 
-In :numref:`bachetBCR1` we see confirmed that alternative *a2* shows indeed the very best and alternative *a1* the weakest performance profile. This finding is as well confirmed in :numref:`RubisBCR0` below with the corresponding *Rubis* first and last choice recommendations computed from the codual outranking digraph.
+In :numref:`bachetBCR1` we see confirmed that alternative *a2* positively outranks all other alternatives and shows hence the very best performance profile. Alternative *a1* and *a7* show the weakest performance profile. This finding is as well confirmed in :numref:`RubisBCR0` below with the corresponding *Rubis* first and last choice recommendations.
 
 .. code-block:: pycon
    :caption: *Rubis* choice recommendations
    :name: RubisBCR0
-   :emphasize-lines: 1,6,12,14,20
+   :emphasize-lines: 1,6,12-14,16,22-24
 		     
-   >>> (~(-g)).showChoiceRecommendation('Rubis')
+   >>> g.showChoiceRecommendation('Rubis')
     Rubis choice recommendations
     ***********************
      Credibility domain: [-1.00,1.00]
      === >> potential first choice(s)
-     * choice              : ['a2']
-       independence        : 1.00
-       dominance           : 0.42
-       absorbency          : -1.00
-       covering (%)        : 100.00
-       determinateness (%) : 71.06
-      - most credible action(s) = { 'a2': 0.42 }
+     * choice              : ['a2', 'a4', 'a6']
+       independence        : 0.16
+       dominance           : 0.16
+       absorbency          : -0.42
+       covering (%)        : 50.00
+       determinateness (%) : 63.01
+     - characteristic vector = { 'a2': 0.42, 'a6': 0.16, 'a4': 0.16,
+                 'a9': -0.16, 'a5': -0.16, 'a3': -0.16, 'a1': -0.29,
+		 'a8': -0.42, 'a7': -0.42, }
      === >> potential last choice(s) 
-     * choice              : ['a1']
-       independence        : 1.00
-       dominance           : -0.29
-       absorbency          : 0.18
-       covered (%)         : 100.00
-       determinateness (%) : 59.21
-      - most credible action(s) = { 'a1': 0.18 }
-      Execution time: 0.045 seconds
+     * choice              : ['a1', 'a4', 'a7']
+       independence        : 0.00
+       dominance           : -0.58
+       absorbency          : 0.11
+       covered (%)         : 50.00
+       determinateness (%) : 54.53
+     - characteristic vector = { 'a1': 0.18, 'a4': 0.08,
+                  'a7': 0.00, 'a6': 0.00, 'a8': -0.05, 'a5': -0.08,
+		  'a9': -0.11, 'a3': -0.13, 'a2': -0.18, }
+      Execution time: 0.033 seconds
       *****************************
+
+Most credible first choice appears appears indeed to be alternative *a2* with a convincing 71% majority of criteria significance, followed by alternatives *a4* and *a6* with a 58% majority of criteria significance (Line 14). Most credible recommended last choice appears to be  alternative *a1* with a 59% majority of criteria significance (Line 22). Notice the ambiguous recommendation of alternative *a4* as potential *first* **and** *last* choice. This explains its appearance in the midfield of the best correlated Bachet ranking here.
 
 As the *Bachet* choice recommendations are based on a partial transitive asymmetrical digraph, actually highly correlated with the given outranking digraph *g* (+0.821), a unique initial and a unique terminal prekernel always exist (see :numref:`BachetBCR0` Lines 7 and 10). Both these properties confer the *Bachet choice recommendation algorithm* a computational advantage over the *Rubis* first choice recommendation algorithm based on initial and terminal prekernels directly extracted from the given strict outranking digraph where we, first, must arbitrarily break, the case given, all chordless outranking circuits (see [BIS-2008p]_).
 
