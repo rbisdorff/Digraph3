@@ -275,6 +275,11 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             reprString += "Start method       : \'%s\'\n" % self.startMethod
         except:
             pass
+        try:
+            reprString += "multiInterpreters  : \'%s\'\n" % (self.runTimes['multiInterpreters'])
+        except:
+            pass
+        
         reprString += 'Total time         : %.5f\n' % val1
         reprString += 'Data input         : %.5f\n' % val2
         reprString += 'Compute relation   : %.5f\n' % val3
@@ -291,7 +296,9 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
     def __init__(self,argPerfTab,WithGammaSets=True,
                  Normalized=True,ndigits=4,
-                 startMethod=None,nbrCores=None,Comments=False):
+                 startMethod=None,
+                 MultipleInterpreters=False,
+                 nbrCores=None,Comments=False):
         from decimal import Decimal
         from time import time
         runTimes = {}
@@ -334,12 +341,21 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         if Comments:
             print(splitIndex)
         tasks = [(splitIndex[i],perfTab,Comments) for i in range(nbrCores)]
-        with ctx_in_main.Pool(processes=nbrCores) as pool:
-            #print(tasks)
-            for result in pool.imap(worker_func1, tasks):
-                #print(result[0])
-                relation.update(result[0])
-                considerableDiffs.update(result[1])
+        if MultipleInterpreters:
+            import concurrent.futures as cf
+            with cf.ProcessPoolExecutor(mp_context=ctx_in_main) as pool:
+                for result in pool.map(worker_func1, tasks):
+                    #print(result[0])
+                    relation.update(result[0])
+                    considerableDiffs.update(result[1])
+            runTimes['multiInterpreters'] = True
+        else:
+            with ctx_in_main.Pool(processes=nbrCores) as pool:
+                #print(tasks)
+                for result in pool.map(worker_func1, tasks):
+                    #print(result[0])
+                    relation.update(result[0])
+                    considerableDiffs.update(result[1])
         runTimes['computeRelation'] = time() - t1
         self.relation = relation
         self.largePerformanceDifferencesCount = considerableDiffs
@@ -434,102 +450,30 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         
 #-----------------
 
-    # def recodeValuation(self,newMin=-1.0,newMax=1.0,ndigits=4,
-    #                     nbrCores=None,startMethod=None,
-    #                     Comments=False,Debug=False):
-    #     """
-    #     Recodes the characteristic valuation domain according
-    #     to the parameters given. 
-
-    #     *ndigits* indicates the number of decimal digits of the valuation. 
-
-    #     """
-    #     from decimal import Decimal
-    #     #if ndigits is not None:
-    #     formatString = '%%.%df' % ndigits
-    #     #else:
-    #     #    formatString = '%f'
-    #     oldMax = Decimal(formatString % self.valuationdomain['max'])
-    #     oldMin = Decimal(formatString % self.valuationdomain['min'])
-    #     oldMed = Decimal(formatString % self.valuationdomain['med'])
-    #     try:
-    #         oldPrecision = self.valuationdomain['precision']
-    #     except:
-    #         oldPrecision = Decimal(formatString % 0.0)
-
-    #     oldAmplitude = oldMax - oldMin
-    #     if Debug:
-    #         print(oldMin, oldMed, oldMax, oldAmplitude)
-    #     oldrelation = self.relation
-
-    #     newMin = Decimal(formatString % newMin)
-    #     newMax = Decimal(formatString % newMax)
-    #     # the normalized median is set to a strict zero value
-    #     if newMin == Decimal('-1.00') and newMax == Decimal('1.00'):
-    #         newMed = Decimal('0.0')
-    #     else:
-    #         newMed = Decimal(formatString % ((newMax + newMin)/Decimal('2.0')) )
-    #     newPrecision = oldPrecision/oldMax
-
-    #     newAmplitude = newMax - newMin
-    #     if Debug:
-    #         print(newMin, newMed, newMax, newAmplitude)
-    #         print('old and new precison', oldPrecision, newPrecision) 
-    #     actions = self.actions
-    #     actionsList = [x for x in actions]
-        
-    #     if startMethod is None:
-    #         startMethod = 'spawn'
-    #     ctx_in_main = multiprocessing.get_context(startMethod)
-    #     if nbrCores is None:
-    #         nbrCores = ctx_in_main.cpu_count()
-    #     splitIndex = qtilingIndexList(actionsList,nbrCores,Debug=False)
-    #     if Comments:
-    #         print(splitIndex)
-    #     args = [oldrelation, oldMax, oldMed, oldMin,
-    #               newMax, newMed, newMin,
-    #               actionsList,formatString]
-    #     tasks = [(splitIndex[i],args,
-    #               #oldrelation, oldMax, oldMed, oldMin,
-    #               #newMax, newMed, newMin,
-    #               #actionsList,formatString,
-    #               Comments) for i in range(nbrCores)]
-        
-    #     newrelation = {}
-    #     with ctx_in_main.Pool(processes=nbrCores) as pool:
-    #         #print(tasks)
-    #         for result in pool.imap(worker_func2, tasks):
-    #             #print(result[0])
-    #             newrelation.update(result)
-        
-    #     # install new values in self
-    #     self.valuationdomain['max'] = newMax
-    #     self.valuationdomain['min'] = newMin
-    #     self.valuationdomain['med'] = newMed
-    #     self.valuationdomain['precision'] = newPrecision
-    #     if ndigits == 0:
-    #         self.valuationdomain['hasIntegerValuation'] = True
-    #     else:
-    #         self.valuationdomain['hasIntegerValuation'] = False
-    #     self.relation = newrelation
-
 ###################################
 # testing the module
 
 if __name__ == '__main__':
+    import sys
     from randomPerfTabs import Random3ObjectivesPerformanceTableau
     pt = Random3ObjectivesPerformanceTableau(
                               numberOfActions=1000,seed=2,
         commonScale=(0.0,1000.0))
+    from time import time
+    t0 = time()
     bg = MPBipolarOutrankingDigraph(argPerfTab=pt,Normalized=True,
                                     startMethod=None,
-                                    nbrCores=5,Comments=True)
+                                    nbrCores=None,Comments=True)
     print(bg)
-    from time import time as t
-    t1=t();bg.recodeValuation();print(t()-t1)
-    #bg.showRelationTable()
-    #g = BipolarOutrankingDigraph(pt)
-    #g.showRelationTable()
+    print('Run time: %.4f' % (time() - t0) )
+    # concurrent.futures multiple interpreters Python3.14+
+    t0 = time()
+    bg = MPBipolarOutrankingDigraph(argPerfTab=pt,Normalized=True,
+                                startMethod=None,
+                                MultipleInterpreters=True,
+                                nbrCores=None,Comments=True)
+    print(bg)
+    print('Run time: %.4f' % (time() - t0) )
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
