@@ -183,6 +183,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         * *ndigits*: number of decimal digits of the characteristic valuation, by default set to 4.
         * *nbrCores*: controls the maximal number of cores that will be used in the multiprocessing phases. If *None* is given, the *os.cpu_count()* method is used in order to determine the number of available cores on the SMP machine.
         * *startMethod*: 'spawn' (default) | 'forkserver' | 'fork'
+        * *MultipleInterpreters*: False (default) | True. When running a Python3.14+ version, the *concurrent.futures.ProcessPoolExecutor* is used in stead of the *nmultiprocessing.Pool* executor. 
 
     *Usage example*
 
@@ -217,32 +218,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
      Compute relation   : 2.79447
      Normalize relation : 0.72327
      Gamma sets         : 0.54659
-    
-
-.. warning:: When using the *forkserver* or the *spawn* multiprocessing start-methods
-    in a python script file, mind that both start-methods re-import
-    into every multiprocessing thread the submitted program file.
-    In order to avoid hence the program script from being recursively
-    executed and producing loads of zombie threads before being killed by the OS,
-    it is compulsory necessary to always explicitely protect the entry point
-    of the main program code with the *if __name__ == '__main__':* test.
-    This is not necessary when using instead the classical Unix *fork*
-    start-method where multiprocessing threads continue in fact
-    the main program code from the point on where they were launched.
-
-    *Example Python script*::
-    
-        from randomPerfTabs import Random3ObjectivesPerformanceTableau
-        from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
-        if __name__ == '__main__':
-            pt = Random3ObjectivesPerformanceTableau(
-                          numberOfActions=500,seed=2)
-            bg = MPBipolarOutrankingDigraph(pt,Normalized=True,
-                                startMethod='spawn',
-                                nbrCores=8)
-            print(bg)
-      
-
+       
     """
     def __repr__(self):
         """

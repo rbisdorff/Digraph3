@@ -8663,6 +8663,8 @@ This attribute allows to print out the relation table with the considerable perf
 
 In Lines 7-8 above, we may for instance notice a considerably large positive performance difference when comparing alternatives 'a002' and 'a004' which results in a polarised *for certain valid* outranking situation: :math:`r(a_{002} \succsim a_{004}) = +13.00`. The converse situation is observed in Lines 11-12 where we may notice the corresponding considerably large negative performance difference leading this time to a polarised *for certain invalid* outranking situation: :math:`r(a_{004} \succsim a_{002}) = -13.00`.
 
+**NEW**: Using the new Python3.14.0 interpreter it is possible to run, instead of the *multiprocessing.Pool* executor, the new *concurrent.futures.ProcessPoolExecutor* who makes available the isolated parallel run of multiple interpreters (see the python documentation of the *concurrent.futures* module). Mind that the exchange of arguments and results between the main function and the multiples interpreters is still operated through pickling of arguments and results. Default start method for the interpreters is the 'spawn' method. The main() function must hence be protected against recursive execution with the *__name__ == '__main__'* test. The *multiprocessor.Pool* executor is slightly quicker than the new *concurrent.futures.ProcessPoolExecutor*.  
+
 Setting the Threading parameters
 ````````````````````````````````
 

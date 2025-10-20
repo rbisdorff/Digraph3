@@ -6652,8 +6652,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <dl class="py class">
 <dt class="sig sig-object py" id="mpOutrankingDigraphs.MPBipolarOutrankingDigraph">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mpOutrankingDigraphs.</span></span><span class="sig-name descname"><span class="pre">MPBipolarOutrankingDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argPerfTab</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">WithGammaSets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndigits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startMethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MultipleInterpreters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrCores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpOutrankingDigraphs.html#MPBipolarOutrankingDigraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mpOutrankingDigraphs.MPBipolarOutrankingDigraph" title="Link to this definition"></a></dt>
-<dd><blockquote>
-<div><p>New variable start-method based MP implementation of the BipolarOutrankingDigraph class.</p>
+<dd><p>New variable start-method based MP implementation of the BipolarOutrankingDigraph class.</p>
 <dl class="simple">
 <dt><em>Parameters</em>:</dt><dd><ul class="simple">
 <li><p><em>argPerfTab</em>: may be eithet the name of a PerformanceTableau object or the file name without extension of a previously saved PerformanceTableau instance</p></li>
@@ -6661,6 +6660,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <li><p><em>ndigits</em>: number of decimal digits of the characteristic valuation, by default set to 4.</p></li>
 <li><p><em>nbrCores</em>: controls the maximal number of cores that will be used in the multiprocessing phases. If <em>None</em> is given, the <em>os.cpu_count()</em> method is used in order to determine the number of available cores on the SMP machine.</p></li>
 <li><p><em>startMethod</em>: ‘spawn’ (default) | ‘forkserver’ | ‘fork’</p></li>
+<li><p><em>MultipleInterpreters</em>: False (default) | True. When running a Python3.14+ version, the <em>concurrent.futures.ProcessPoolExecutor</em> is used in stead of the <em>nmultiprocessing.Pool</em> executor.</p></li>
 </ul>
 </dd>
 </dl>
@@ -6696,32 +6696,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <span class="go"> Normalize relation : 0.72327</span>
 <span class="go"> Gamma sets         : 0.54659</span>
 </pre></div>
-</div>
-</div></blockquote>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>When using the <em>forkserver</em> or the <em>spawn</em> multiprocessing start-methods
-in a python script file, mind that both start-methods re-import
-into every multiprocessing thread the submitted program file.
-In order to avoid hence the program script from being recursively
-executed and producing loads of zombie threads before being killed by the OS,
-it is compulsory necessary to always explicitely protect the entry point
-of the main program code with the <em>if __name__ == ‘__main__’:</em> test.
-This is not necessary when using instead the classical Unix <em>fork</em>
-start-method where multiprocessing threads continue in fact
-the main program code from the point on where they were launched.</p>
-<p><em>Example Python script</em>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
-<span class="kn">from</span> <span class="nn">mpOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">MPBipolarOutrankingDigraph</span>
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">pt</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span>
-                  <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">bg</span> <span class="o">=</span> <span class="n">MPBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">pt</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                        <span class="n">startMethod</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">,</span>
-                        <span class="n">nbrCores</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">bg</span><span class="p">)</span>
-</pre></div>
-</div>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="mpOutrankingDigraphs.MPBipolarOutrankingDigraph.showPolarisations">

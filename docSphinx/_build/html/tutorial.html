@@ -8355,6 +8355,7 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <p>In Lines 7-8 above, we may for instance notice a considerably large positive performance difference when comparing alternatives ‘a002’ and ‘a004’ which results in a polarised <em>for certain valid</em> outranking situation: <img class="math" src="_images/math/a4a3e22647b37f88122f34450e585223989d23ed.png" alt="r(a_{002} \succsim a_{004}) = +13.00"/>. The converse situation is observed in Lines 11-12 where we may notice the corresponding considerably large negative performance difference leading this time to a polarised <em>for certain invalid</em> outranking situation: <img class="math" src="_images/math/786722952e014ff77e96a786a90fb4994257f2b9.png" alt="r(a_{004} \succsim a_{002}) = -13.00"/>.</p>
+<p><strong>NEW</strong>: Using the new Python3.14.0 interpreter it is possible to run, instead of the <em>multiprocessing.Pool</em> executor, the new <em>concurrent.futures.ProcessPoolExecutor</em> who makes available the isolated parallel run of multiple interpreters (see the python documentation of the <em>concurrent.futures</em> module). Mind that the exchange of arguments and results between the main function and the multiples interpreters is still operated through pickling of arguments and results. Default start method for the interpreters is the ‘spawn’ method. The main() function must hence be protected against recursive execution with the <em>__name__ == ‘__main__’</em> test. The <em>multiprocessor.Pool</em> executor is slightly quicker than the new <em>concurrent.futures.ProcessPoolExecutor</em>.</p>
 </section>
 <section id="setting-the-threading-parameters">
 <h4><a class="toc-backref" href="#id399" role="doc-backlink"><span class="section-number">1.5.2.3. </span>Setting the Threading parameters</a><a class="headerlink" href="#setting-the-threading-parameters" title="Link to this heading"></a></h4>
@@ -10966,7 +10967,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Oct 19, 2025.
+      <span class="lastupdated">Last updated on Oct 20, 2025.
       </span></p>
   </div>
 
