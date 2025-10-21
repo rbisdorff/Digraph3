@@ -188,7 +188,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     *Usage example*
 
     (11th Gen Intel® Core™ i5-11400 × 12, 64.0 GiB memory, Ubuntu 24.04.3 LTS, Python3.14.0):
-
+    
     >>> from randomPerfTabs import RandomCBPerformanceTableau
     >>> pt = RandomCBPerformanceTableau(
     ...         numberOfActions=1000,numberOfCriteria=13,
@@ -215,11 +215,11 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
      Threads            : 8
      Start method       : 'spawn'
      multiInterpreters  : 'True'
-     Total time         : 6.45354
+     Total time         : 6.43912
      Data input         : 0.00000
-     Compute relation   : 4.74019
-     Normalize relation : 1.18409
-     Gamma sets         : 0.52920
+     Compute relation   : 4.75611
+     Normalize relation : 1.10785
+     Gamma sets         : 0.57510
     
 
 .. warning:: When using the *forkserver* or the *spawn* multiprocessing start-methods
