@@ -187,7 +187,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
     *Usage example*
 
-    (11th Gen Intel® Core™ i5-11400 × 12, 16.0 GiB memory, Ubuntu 23.10, Python3.12.0):
+    (11th Gen Intel® Core™ i5-11400 × 12, 64.0 GiB memory, Ubuntu 24.04.3 LTS, Python3.14.0):
 
     >>> from randomPerfTabs import RandomCBPerformanceTableau
     >>> pt = RandomCBPerformanceTableau(
@@ -195,7 +195,8 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     ...         seed=10)
     >>> from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
     >>> bg = MPBipolarOutrankingDigraph(pt,Normalized=True,ndigits=2,
-    ...                                 nbrCores=8,startMethod='spawn')
+    ...                                 nbrCores=8,startMethod='spawn',
+    ...                                 MultipleInterpreters=True)
     >>> bg
      *------- Object instance description ------*
      Instance class       : MPBipolarOutrankingDigraph
@@ -213,11 +214,12 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
      ----  Constructor run times (in sec.) ----
      Threads            : 8
      Start method       : 'spawn'
-     Total time         : 4.06436
+     multiInterpreters  : 'True'
+     Total time         : 6.45354
      Data input         : 0.00000
-     Compute relation   : 2.79447
-     Normalize relation : 0.72327
-     Gamma sets         : 0.54659
+     Compute relation   : 4.74019
+     Normalize relation : 1.18409
+     Gamma sets         : 0.52920
     
 
 .. warning:: When using the *forkserver* or the *spawn* multiprocessing start-methods
@@ -229,20 +231,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     of the main program code with the *if __name__ == '__main__':* test.
     This is not necessary when using instead the classical Unix *fork*
     start-method where multiprocessing threads continue in fact
-    the main program code from the point on where they were launched.
-
-    *Example Python script*::
-    
-        from randomPerfTabs import Random3ObjectivesPerformanceTableau
-        from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
-        if __name__ == '__main__':
-            pt = Random3ObjectivesPerformanceTableau(
-                          numberOfActions=500,seed=2)
-            bg = MPBipolarOutrankingDigraph(pt,Normalized=True,
-                                startMethod='spawn',
-                                nbrCores=8)
-            print(bg)
-      
+    the main program code from the point on where they were launched.      
 
     """
     def __repr__(self):
