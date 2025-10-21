@@ -8535,14 +8535,12 @@ Using Digraph3 multiprocessing resources
 Computing with multiple threads in parallel
 ```````````````````````````````````````````
 
-Modern desktop and laptop computers usually provide a multithreaded CPU which allows to run several threads in parallel [53]_. In the Digraph3 resources we offer this usage with a *Threading*, a *nbrCores* or *nbrOfCPUs* and a *startMethod* parameter (see below Lines 7-8)  
+Modern desktop and laptop computers usually provide a multithreaded CPU which allows to run several threads in parallel [53]_. In the Digraph3 resources we offer this usage with a *Threading*, a *nbrCores* or *nbrOfCPUs* and a *startMethod* parameter (see below Lines 5-6)  
 
 .. code-block:: pycon
    :linenos:
-   :emphasize-lines: 7-8,25
+   :emphasize-lines: 5-6,25
       
-   ...$ python3
-    Python 3.11.6 (main, Oct  8 2023, 05:06:43) [GCC 13.2.0] on linux
    >>> from randomPerfTabs import RandomPerformanceTableau
    >>> t = RandomPerformanceTableau(numberOfActions=500,
    ...                        numberOfCriteria=13,seed=1)
@@ -8605,11 +8603,11 @@ These run times were obtained on a common desktop computer equipped with an 11th
 Using the mpOutrankingDigraphs module
 `````````````````````````````````````
 
-A refactored and streamlined multiprocessing :py:mod:`mpOutrankingDigraphs` module for even faster computing bipolar outranking digraphs with up to several hundreds or thousands of decision actions has been recently added to the Digraph3 resources (see Line 21 below).
+A refactored and streamlined multiprocessing :py:mod:`mpOutrankingDigraphs` module for even faster computing bipolar outranking digraphs with up to several hundreds or thousands of decision actions has been added to the Digraph3 resources (see Lines 2-3 below).
 
 .. code-block:: pycon
    :linenos:
-   :emphasize-lines: 19,24
+   :emphasize-lines: 2-3,16
 
    >>> from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
    >>> mpg = MPBipolarOutrankingDigraph(t,nbrCores=10,
@@ -8663,8 +8661,6 @@ This attribute allows to print out the relation table with the considerable perf
 
 In Lines 7-8 above, we may for instance notice a considerably large positive performance difference when comparing alternatives 'a002' and 'a004' which results in a polarised *for certain valid* outranking situation: :math:`r(a_{002} \succsim a_{004}) = +13.00`. The converse situation is observed in Lines 11-12 where we may notice the corresponding considerably large negative performance difference leading this time to a polarised *for certain invalid* outranking situation: :math:`r(a_{004} \succsim a_{002}) = -13.00`.
 
-**NEW**: Using the new Python3.14.0 interpreter it is possible to run, instead of the *multiprocessing.Pool* executor, the new *concurrent.futures.ProcessPoolExecutor* who makes available the isolated parallel run of multiple interpreters (see the python documentation of the *concurrent.futures* module). Mind that the exchange of arguments and results between the main function and the multiples interpreters is still operated through pickling of arguments and results. Default start method for the interpreters is the 'spawn' method. The main() function must hence be protected against recursive execution with the *__name__ == '__main__'* test. The *multiprocessor.Pool* executor is slightly quicker than the new *concurrent.futures.ProcessPoolExecutor*.  
-
 Setting the Threading parameters
 ````````````````````````````````
 
@@ -8672,23 +8668,32 @@ Without specifying the number of cores (*nbrCores=None*) or the threading start 
 
 It is possible to use instead the *forkserver* or the more traditional Posix *fork* start method (default on Linux) [52]_. Mind that the latter method, due to the very architecture of the Python interpreter C code, cannot be safe against specific dead locks leading to  hanging or freezing applications and zombie processes. [51]_
 
+As of Python3.14+, it is possible to run multiple isolated python interpreters in parallel. The :py:class:`~mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor provides the '*MultipleInterpreters* = *True*' setting for this purpose. The running interpreter minor version may be checked with '*sys.version_info[1] >= 14*'. 
+
 When writing multiprocessing Digraph3 Python scripts not using the Posix *fork* start method, it is furthermore essential to protect the main program code with a *__name__=='__main__'* test against recursive re-excution (see below).
 
 .. code-block:: python
    :linenos:
 
-   from outrankingDigraphs import BipolarOutrankingDigraph
-   from randomPerfTabs import RandomPerformanceTableau
-   # main program code
-   if __name__ == '__main__':
-      t = RandomPerformanceTableau(numberOfActions=1000,
-                                   numberOfCriteria=13,seed=1)
-      g = BipolarOutrankingDigraph(t,
-                                   Threading=True,
-				   nbrCores=10,
-				   startMethod='spawn',
-				   Comments=True)
-      print(g)
+   >>> from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
+   >>> from randomPerfTabs import RandomPerformanceTableau
+   >>> # main program code
+   >>> if __name__ == '__main__':
+   >>>    import sys
+   >>>    t = RandomPerformanceTableau(numberOfActions=1000,
+   ...                                numberOfCriteria=13,seed=1)
+   >>>    if sys.version_info[1] >= 14:
+   >>>       g = MPBipolarOutrankingDigraph(t,
+   ...				   nbrCores=10,
+   ...				   startMethod='spawn',
+   ...				   MultipleInterpreters=True,
+   ...				   Comments=True)
+   >>>    else:
+   >>>       g = MPBipolarOutrankingDigraph(t,
+   ...				   nbrCores=10,
+   ...				   startMethod='spawn',
+   ...				   Comments=True)
+   >>>    print(g)
 
 Back to :ref:`Content Table <Tutorial-label>`
 

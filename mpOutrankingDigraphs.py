@@ -182,8 +182,8 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         * *Normalized*: the valuation domain is set by default to the sum of the criteria weights. If *True*, the valuation domain is recoded to [-1.0,+1.0].
         * *ndigits*: number of decimal digits of the characteristic valuation, by default set to 4.
         * *nbrCores*: controls the maximal number of cores that will be used in the multiprocessing phases. If *None* is given, the *os.cpu_count()* method is used in order to determine the number of available cores on the SMP machine.
-        * *startMethod*: 'spawn' (default) | 'forkserver' | 'fork'
-        * *MultipleInterpreters*: False (default) | True. When running a Python3.14+ version, the *concurrent.futures.ProcessPoolExecutor* is used in stead of the *nmultiprocessing.Pool* executor. 
+        * *startMethod*: 'spawn' (default) | 'forkserver' | 'fork'; if *None* the default is used.
+        * *MultiInterpreter*: False (default) | True; as of Python3.14+ when True isolated multiple interpreters may be run in parallel.
 
     *Usage example*
 
@@ -218,7 +218,32 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
      Compute relation   : 2.79447
      Normalize relation : 0.72327
      Gamma sets         : 0.54659
-       
+    
+
+.. warning:: When using the *forkserver* or the *spawn* multiprocessing start-methods
+    in a python script file, mind that both start-methods re-import
+    into every multiprocessing thread the submitted program file.
+    In order to avoid hence the program script from being recursively
+    executed and producing loads of zombie threads before being killed by the OS,
+    it is compulsory necessary to always explicitely protect the entry point
+    of the main program code with the *if __name__ == '__main__':* test.
+    This is not necessary when using instead the classical Unix *fork*
+    start-method where multiprocessing threads continue in fact
+    the main program code from the point on where they were launched.
+
+    *Example Python script*::
+    
+        from randomPerfTabs import Random3ObjectivesPerformanceTableau
+        from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
+        if __name__ == '__main__':
+            pt = Random3ObjectivesPerformanceTableau(
+                          numberOfActions=500,seed=2)
+            bg = MPBipolarOutrankingDigraph(pt,Normalized=True,
+                                startMethod='spawn',
+                                nbrCores=8)
+            print(bg)
+      
+
     """
     def __repr__(self):
         """
@@ -277,6 +302,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                  nbrCores=None,Comments=False):
         from decimal import Decimal
         from time import time
+        from sys import version_info
         runTimes = {}
         t0 = time()
         if type(argPerfTab) == str:
@@ -318,13 +344,17 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             print(splitIndex)
         tasks = [(splitIndex[i],perfTab,Comments) for i in range(nbrCores)]
         if MultipleInterpreters:
-            import concurrent.futures as cf
-            with cf.ProcessPoolExecutor(mp_context=ctx_in_main) as pool:
-                for result in pool.map(worker_func1, tasks):
-                    #print(result[0])
-                    relation.update(result[0])
-                    considerableDiffs.update(result[1])
-            runTimes['multiInterpreters'] = True
+            if version_info[1] >= 14 :
+                import concurrent.futures as cf
+                #with cf.ProcessPoolExecutor(mp_context=ctx_in_main) as pool:
+                with cf.InterpreterPoolExecutor() as pool:
+                    for result in pool.map(worker_func1, tasks):
+                        #print(result[0])
+                        relation.update(result[0])
+                        considerableDiffs.update(result[1])
+                runTimes['multiInterpreters'] = True
+            else:
+                print('For multiple interpreters Python3.14+ is required!')
         else:
             with ctx_in_main.Pool(processes=nbrCores) as pool:
                 #print(tasks)
@@ -443,12 +473,13 @@ if __name__ == '__main__':
     print(bg)
     print('Run time: %.4f' % (time() - t0) )
     # concurrent.futures multiple interpreters Python3.14+
-    t0 = time()
-    bg = MPBipolarOutrankingDigraph(argPerfTab=pt,Normalized=True,
-                                startMethod=None,
-                                MultipleInterpreters=True,
-                                nbrCores=None,Comments=True)
-    print(bg)
+    if sys.version_info[1] >= 14:
+        t0 = time()
+        bg = MPBipolarOutrankingDigraph(argPerfTab=pt,Normalized=True,
+                                    startMethod=None,
+                                    MultipleInterpreters=True,
+                                    nbrCores=None,Comments=True)
+        print(bg)
     print('Run time: %.4f' % (time() - t0) )
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
