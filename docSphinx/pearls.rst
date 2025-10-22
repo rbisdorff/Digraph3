@@ -3106,7 +3106,7 @@ The *Bachet* numbers, instantiated by the row vectors without reflexive terms  a
 
 The sum *rx + (-cx)* of both the **outrankingness** and the **negated outrankedness** measures renders now per decision action *x* a potential ranking score, similar to *Copeland* or *NetFlows* ranking scores [21]_.
 
-In our example here we obtain the *Bachet* ranking 'a4' (26) > 'a3' (4) > 'a2' (1) > 'a1' (-11) (see Line 30 above). A ranking result, which is the corresponding optimal *Kemeny*, ranking maximally correlated with the given outranking digraph *g* (tau = 0.795, see Lines 4 and 8 below).
+In our example here we obtain the *Bachet* ranking 'a4' (26) > 'a3' (4) > 'a2' (1) > 'a1' (-11) (see Line 30 above). A ranking result, which is the corresponding optimal *Kemeny* ranking, a ranking  maximally correlated with the given outranking digraph *g* (tau = 0.795, see Lines 4 and 8 below).
 
 .. code-block:: pycon
    :linenos:		

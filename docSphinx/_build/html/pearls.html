@@ -3067,7 +3067,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 </div>
 <p>The <em>Bachet</em> numbers, instantiated by the row vectors without reflexive terms  and the column vectors without reflexive terms of the digraph’s <em>self.relation</em> attribute, model in fact respectively an <strong>outrankingness</strong> measure <em>rx</em> and an <strong>outrankedness</strong> measure <em>cx</em> (see Lines 16-27).</p>
 <p>The sum <em>rx + (-cx)</em> of both the <strong>outrankingness</strong> and the <strong>negated outrankedness</strong> measures renders now per decision action <em>x</em> a potential ranking score, similar to <em>Copeland</em> or <em>NetFlows</em> ranking scores <a class="footnote-reference brackets" href="#id98" id="id41" role="doc-noteref"><span class="fn-bracket">[</span>21<span class="fn-bracket">]</span></a>.</p>
-<p>In our example here we obtain the <em>Bachet</em> ranking ‘a4’ (26) &gt; ‘a3’ (4) &gt; ‘a2’ (1) &gt; ‘a1’ (-11) (see Line 30 above). A ranking result, which is the corresponding optimal <em>Kemeny</em>, ranking maximally correlated with the given outranking digraph <em>g</em> (tau = 0.795, see Lines 4 and 8 below).</p>
+<p>In our example here we obtain the <em>Bachet</em> ranking ‘a4’ (26) &gt; ‘a3’ (4) &gt; ‘a2’ (1) &gt; ‘a1’ (-11) (see Line 30 above). A ranking result, which is the corresponding optimal <em>Kemeny</em> ranking, a ranking  maximally correlated with the given outranking digraph <em>g</em> (tau = 0.795, see Lines 4 and 8 below).</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">KemenyRanking</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ke</span> <span class="o">=</span> <span class="n">KemenyRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ke</span><span class="o">.</span><span class="n">kemenyRanking</span>
@@ -5304,7 +5304,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Oct 16, 2025.
+      <span class="lastupdated">Last updated on Oct 22, 2025.
       </span></p>
   </div>
 
