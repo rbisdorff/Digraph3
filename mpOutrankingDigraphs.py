@@ -30,55 +30,55 @@ from time import time
 from decimal import Decimal
 from digraphs import qtilingIndexList
 
-def worker_func2(args,Debug=False):
-    #in variables
-    splitIndex = args[0]
-    if Debug:
-        print('splitIndex', splitIndex)
-    oldrelation = args[1][0]
-    oldMax = args[1][1]
-    oldMed = args[1][2]
-    oldMin = args[1][3]
-    #oldPrecision = argd[5]
-    oldAmplitude = oldMax - oldMin
-    if Debug:
-        print(oldMin, oldMed, oldMax, oldAmplitude)
-    newMax = args[1][4]
-    newMed = args[1][5]
-    newMin = args[1][6]
-    #newPrecision = args[9]
-    newAmplitude = newMax - newMin
-    if Debug:
-        print(newMin, newMed, newMax, newAmplitude)
-        #print('old and new precison', oldPrecision, newPrecision) 
-    
-    actionsList = args[1][7]
-    formatString = args[1][8]
-    Comments = args[2]
-    if Comments:
-        print('starting splitIndex', splitIndex)
-    newrelation = {}
-    for i in range(splitIndex[0],splitIndex[1]):
-        x = actionsList[i]
-        #for x in actions:
-        newrelation[x] = {}
-        nrx = newrelation[x]
-        orx = oldrelation[x]
-        for y in actionsList:
-            if orx[y] == oldMax:
-                nrx[y] = newMax
-            elif orx[y] == oldMin:
-                nrx[y] = newMin
-            elif orx[y] == oldMed:
-                nrx[y] = newMed
-            else:
-                newValue = newMin + ((orx[y] - oldMin)/oldAmplitude)*newAmplitude
-                nrx[y] = Decimal(formatString % newValue)
-                #nrx[y] = newMin + ((orx[y] - oldMin)/oldAmplitude)*newAmplitude
-                if Debug:
-                    print(x,y,orx[y],nrx[y])
-
-    return newrelation
+##def worker_func2(args,Debug=False):
+##    #in variables
+##    splitIndex = args[0]
+##    if Debug:
+##        print('splitIndex', splitIndex)
+##    oldrelation = args[1][0]
+##    oldMax = args[1][1]
+##    oldMed = args[1][2]
+##    oldMin = args[1][3]
+##    #oldPrecision = argd[5]
+##    oldAmplitude = oldMax - oldMin
+##    if Debug:
+##        print(oldMin, oldMed, oldMax, oldAmplitude)
+##    newMax = args[1][4]
+##    newMed = args[1][5]
+##    newMin = args[1][6]
+##    #newPrecision = args[9]
+##    newAmplitude = newMax - newMin
+##    if Debug:
+##        print(newMin, newMed, newMax, newAmplitude)
+##        #print('old and new precison', oldPrecision, newPrecision) 
+##    
+##    actionsList = args[1][7]
+##    formatString = args[1][8]
+##    Comments = args[2]
+##    if Comments:
+##        print('starting splitIndex', splitIndex)
+##    newrelation = {}
+##    for i in range(splitIndex[0],splitIndex[1]):
+##        x = actionsList[i]
+##        #for x in actions:
+##        newrelation[x] = {}
+##        nrx = newrelation[x]
+##        orx = oldrelation[x]
+##        for y in actionsList:
+##            if orx[y] == oldMax:
+##                nrx[y] = newMax
+##            elif orx[y] == oldMin:
+##                nrx[y] = newMin
+##            elif orx[y] == oldMed:
+##                nrx[y] = newMed
+##            else:
+##                newValue = newMin + ((orx[y] - oldMin)/oldAmplitude)*newAmplitude
+##                nrx[y] = Decimal(formatString % newValue)
+##                #nrx[y] = newMin + ((orx[y] - oldMin)/oldAmplitude)*newAmplitude
+##                if Debug:
+##                    print(x,y,orx[y],nrx[y])
+##
+##    return newrelation
 
 def worker_func1(args):
     # computing the genuine bipolar-valued outranking situations
@@ -384,6 +384,10 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     def showPolarisations(self):       
         """
         Prints out all negative and positive polarised outranking situations observed in the *MPBipolarOutrankingDigraph* instance.
+
+        A specific method for MPBipolarOutrankingDigraph instances is required
+        because *vetos* and *negativeVetos* attributes are not included here.
+        
         """
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
