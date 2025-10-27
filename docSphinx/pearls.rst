@@ -3492,7 +3492,7 @@ As we observe only 11 intransitive triples in the codual outranking digraph *gcd
 Revealing the transitive part of a bipolar-valued digraph
 .........................................................
 
-As we have noticed before, the randomized versions of the :py:class:`~linearOrders.PolarisedBachetRanking` and the :py:class:`~linearOrders.ValuedBachetRanking` constructors potentially produce multiple ranking results of unequal correlation quality, yet respecting due to the Condorcet consistency property all more or less the transitive part of the given digraph. If we collect now a small subset of the best correlated rankings, we can use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class for constructing, by epistemic disjunctive fusion of these selected rankings, a partial *Bachet* ranking result --a transitive asymmetrical digraph with indeterminate reflexive relations-- showing actually the potential transitive part of the given polarised outranking digraph. 
+As we have noticed before, the randomized versions of the :py:class:`~linearOrders.PolarisedBachetRanking` and the :py:class:`~linearOrders.ValuedBachetRanking` constructors potentially produce multiple ranking results of unequal correlation quality, yet due to the Condorcet consistency property respecting all more or less the transitive part of the given digraph. If we collect now a small subset of the best correlated rankings, we can use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class for constructing, by epistemic disjunctive fusion of these selected rankings, a partial *Bachet* ranking result --a transitive asymmetrical digraph with indeterminate reflexive relations-- showing actually the potential transitive part of a given polarised outranking digraph. 
 
 To explore this remarquable opportunity, a new :py:class:`~transitiveDigraphs.PartialBachetRanking` class is provided by the :py:mod:`transitiveDigraphs` module. To illustrate its usefulness, let us reconsider the example outranking digraph *g* of :numref:`optimisingBachet`. 
 
@@ -3577,9 +3577,11 @@ To explore this opportunity, a :py:meth:`~digraphs.Digraph.showChoiceRecommendat
 
 Alternative *a2* appears clearly as the first-choice candidate, whereas alternatives *a1*, *a3* and *a7* appear as potential last-choice candidates (see Lines 7 and 10 above). The partial ranking is well ordinally correlated with the outranking digraph *g* (+0.821) supported by a criteria significance majority of 62%. 
 
-In order to provide information about the underlying :py:class:`~transitiveDigraphs.PartialBachetRanking` digraph, the corresponding instance is stored in the *g.pbr* attribute. We may thus consult the five Bachet rankings used by the :py:class:`~transitiveDigraphs.RankingsFusionDigraph` constructor and provide the best correlated one for ranking the valued adjacency matrix of the outranking digraph *g* (see Lines 2 and 7 below).
+In order to provide information about the underlying :py:class:`~transitiveDigraphs.PartialBachetRanking` digraph, the corresponding instance is stored in the *g.pbr* attribute. We may thus consult the five Bachet rankings used by the :py:class:`~transitiveDigraphs.RankingsFusionDigraph` constructor and provide the best correlated one for ranking the valued adjacency matrix of the outranking digraph *g* (see :numref:`BachetBCR9` Lines 2 and 7 below).
 
 .. code-block:: pycon
+   :name: BachetBCR9
+   :caption: Details of partial Bachet ranking
    :emphasize-lines: 2,7
 
    >>> print(g.pbr.bachetRankings)
@@ -3633,9 +3635,9 @@ In :numref:`bachetBCR1` we see confirmed that alternative *a2* positively outran
       Execution time: 0.033 seconds
       *****************************
 
-Most credible first choice appears indeed to be alternative *a2* with a convincing 71% majority of criteria significance, followed by alternatives *a4* and *a6* with a 58% majority of criteria significance (Line 14). Most credible recommended last choice appears to be  alternative *a1* with a 59% majority of criteria significance (Line 22). Notice the ambiguous recommendation of alternative *a4* as potential *first* **and** *last* choice. This explains its appearance in the midfield of the best correlated Bachet ranking here.
+Most credible first choice appears indeed to be alternative *a2* with a convincing 71% majority of criteria significance, followed by alternatives *a4* and *a6* with a 58% majority of criteria significance (Line 14). Most credible recommended last choice appears to be  alternative *a1* with a 59% majority of criteria significance (Line 22). Notice the ambiguous recommendation of alternative *a4* as potential *first* **and** *last* choice. This explains its appearance in the midfield of the best correlated Bachet ranking here (see :numref:`BachetBCR9` Line 2).
 
-As the *Bachet* choice recommendations are based on a partial transitive asymmetrical digraph, actually highly correlated with the given outranking digraph *g* (+0.821), a unique initial and a unique terminal prekernel always exist (see :numref:`BachetBCR0` Lines 7 and 10). Both these properties confer the *Bachet choice recommendation algorithm* a computational advantage over the *Rubis* first choice recommendation algorithm based on initial and terminal prekernels directly extracted from the given strict outranking digraph where we, first, must arbitrarily break, the case given, all chordless outranking circuits (see [BIS-2008p]_).
+As the *Bachet* choice recommendation is based on a partial transitive asymmetrical digraph, actually highly correlated with the given outranking digraph *g* (+0.821), a unique initial and a unique terminal prekernel always exist (see :numref:`BachetBCR0` Lines 7 and 10). Both these properties confer the *Bachet choice recommendation algorithm* a computational advantage over the *Rubis* first choice recommendation algorithm based on initial and terminal prekernels directly extracted from the given strict outranking digraph where we, first, must arbitrarily break, the case given, all chordless outranking circuits (see [BIS-2008p]_).
 
 Computing initial and terminal *prekernels* in digraphs is the subject of the next Section.
 
@@ -3643,7 +3645,7 @@ Computing initial and terminal *prekernels* in digraphs is the subject of the ne
    
 The implementation of the :py:class:`~arithmetics.BachetNumber` class dates from 2012 when preparing the lectures of a first Semester course on *Discrete Mathematics* for computer scientists. But, it is only in Spring 2025 that we realized how remarquably well *Bachet*'s signed bits weighing design is adapted to our bipolar-valued epistemic logic approach. The *Bachet* ranking rules illustrate here convincingly the benefit one may indeed obtain when computing, not in a binary {0,1} bit world, like today all bit-wise computing devices, but instead in a bipolar-valued {-1,0,+1} world with **sbit-wise Bachet computers**.
 
-The power of the **epistemic disjunctive fusion** operator, for instance, is indeed impressive. When two arguments prove the *Truthfulness* of a logical statement, their fusion will be **True**. When two arguments prove the **Falseness** of the statement, their fusion will be **False**, However, when they provide conjointly a proof of Falseness and and a proof of Truthfulness, their fusion will be **indeterminate** (zero knowledge). It is worthwhile noticing again the essential computational role this indeterminate **zero** value is taking on in such a *Bachet* computer.
+The power of the **epistemic disjunctive fusion** operator, for instance, is indeed impressive. When two arguments prove the *Truthfulness* of a logical statement, their fusion will be **True**. When two arguments prove the **Falseness** of the statement, their fusion will be **False**, However, when they provide conjointly a proof of *Falseness* **and** a proof of *Truthfulness*, their fusion will be **indeterminate** (zero knowledge). It is worthwhile noticing again the essential computational role this indeterminate **zero** value is taking on in such a *Bachet* computer.
 
 Remarquable is even more the unexpected **Condorcet Consistency** of the *polarised* Bachet ranking scores which allows us to effectively reveal, with the :py:class:`~transitiveDigraphs.PartialBachetRanking` constructor, the transitive part of any given bipolar-valued digraph.    
 
