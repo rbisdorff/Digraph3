@@ -40,7 +40,7 @@ Pearls of bipolar-valued epistemic logic
    
    :New:
 
-      * :ref:`New ranking rules based on bipolar-valued base 3 Bachet numbers <Bachet-Tutorial-label>`	 
+      * :ref:`Applications of bipolar-valued base 3 encoded Bachet numbers <Bachet-Tutorial-label>`	 
       *	:ref:`Condorcet's 1785 critical perspective on the simple plurality voting rule <Condorcet-Tutorial-label>`
       * :ref:`On characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>`     
       * :ref:`Consensus quality of the bipolar-valued outranking relation <Outranking-Consensus-Tutorial-label>`
