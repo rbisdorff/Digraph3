@@ -5454,7 +5454,7 @@ Appendix
 
 .. [BAC-1622p] Claude Gaspard Bachet, sieur de Méziriac, *Problèmes plaisants et délectables…* , 1st ed. Pierre Rigaud & Associates, Lyon, France 1622, pp. 143-146
 
-.. [JIN-2003] Jin, Y., He, H. and Lü, Y (2003), "Ternary optical computer principle". *Sci China Ser* F 46:145–150. https://doi.org/10.1360/03yf9012
+.. [JIN-2003] Jin, Y., He, H. and Lü, Y (2003), "Ternary optical computer principle". *Sci China Ser* F 46:145–150, https://link.springer.com/article/10.1360/03yf9012
 .. only:: html
 
     Endnotes
