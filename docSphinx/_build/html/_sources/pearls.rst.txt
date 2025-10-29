@@ -3641,9 +3641,10 @@ As the *Bachet* choice recommendation is based on a partial transitive asymmetri
 
 Computing initial and terminal *prekernels* in digraphs is the subject of the next Section.
 
-**Notes**
+Notes
+.....
    
-The implementation of the :py:class:`~arithmetics.BachetNumber` class dates from 2012 when preparing the lectures of a first Semester course on *Discrete Mathematics* for computer scientists. But, it is only in Spring 2025 that we realized how remarquably well *Bachet*'s signed bits weighing design is adapted to our bipolar-valued epistemic logic approach. The *Bachet* ranking rules illustrate here convincingly the benefit one may indeed obtain when computing, not in a binary {0,1} bit world, like today all bit-wise computing devices, but instead in a bipolar-valued {-1,0,+1} world with **sbit-wise Bachet computers**.
+The initial Python implementation of the :py:class:`~arithmetics.BachetNumber` class dates from 2012 when preparing the lectures of a first Semester course on *Discrete Mathematics* for computer scientists. But, it is only in Spring 2025 that we realized how remarquably well *Bachet*'s signed bits weighing design is adapted to our bipolar-valued epistemic logic approach. The *Bachet* ranking rules illustrate here convincingly the benefit one may indeed obtain when computing, not in a binary {0,1} bit world, like today all bit-wise computing devices, but instead in a bipolar-valued {-1,0,+1} world with **sbit-wise Bachet computers** [25]_.
 
 The power of the **epistemic disjunctive fusion** operator, for instance, is indeed impressive. When two arguments prove the *Truthfulness* of a logical statement, their fusion will be **True**. When two arguments prove the **Falseness** of the statement, their fusion will be **False**, However, when they provide conjointly a proof of *Falseness* **and** a proof of *Truthfulness*, their fusion will be **indeterminate** (zero knowledge). It is worthwhile noticing again the essential computational role this indeterminate **zero** value is taking on in such a *Bachet* computer.
 
@@ -5453,6 +5454,7 @@ Appendix
 
 .. [BAC-1622p] Claude Gaspard Bachet, sieur de Méziriac, *Problèmes plaisants et délectables…* , 1st ed. Pierre Rigaud & Associates, Lyon, France 1622, pp. 143-146
 
+.. [JIN-2003] Jin, Y., He, H. and Lü, Y (2003), "Ternary optical computer principle". *Sci China Ser* F 46:145–150. https://doi.org/10.1360/03yf9012
 .. only:: html
 
     Endnotes
@@ -5499,6 +5501,8 @@ Appendix
 .. [23] To prove the *Condorcet consistency* property of the *Bachet* ranking rule, it is sufficient to notice that the contributions of a transitive triplet *'ai' > 'aj' > 'ak'* to the corresponding *Bachet* ranking scores will respect the actual ordering of the triplet with all positional permutations of [..., ai, ..., aj, ...,ak, ...] in a relation table.
 
 .. [24] "*Being proposed to assess with a weight balance a quantity weighing an integer number of pounds between 1 and 40 included, how many balance weights at minimum are needed for being able to do so*".
+
+.. [25] *Balanced ternary optical* computer designs have recently gained a lot of attention in China (https://en.wikipedia.org/wiki/Balanced_ternary, [JIN-2003]_). Such signed bits or *trits* based HPC computer systems provide indeed many technical and computational advantages --much less electrical energy required, less water cooling, millions of trits may be easily assembled, high speed of read and write access, etc-- compared to classical HPC or 'dreamed' HPC quantum computers.
 
 .. raw:: latex
 
