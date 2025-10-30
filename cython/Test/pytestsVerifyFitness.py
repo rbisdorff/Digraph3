@@ -53,7 +53,7 @@ def testSparseModelFitness():
 
 def testCQRModelFitness():
     print('==>> Testing cQuantilesRanking fitness')
-    MP = True
+    MP = False
     Nsim = 1
     nbrOfActions = 100
     minimalComponentSize=1
@@ -85,7 +85,7 @@ def testCQRModelFitness():
 def testEstimateCorrelation():
     print('==>> Testing Correlation estimation fitness')
     import random
-    MP = True
+    MP = False
     Nsim = 1
     nbrOfActions = 5000
     sampleSize = 200
