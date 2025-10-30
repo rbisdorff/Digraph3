@@ -3011,9 +3011,9 @@ Bipolar-valued base 3 encoded Bachet numbers
 
    -- Cl. G. Bachet (1622) [24]_
 
-Bipolar-valued {-1,0,+1} base 3 encoded integers are due to *Claude Gaspard Bachet de Méziriac* (1581-1638) [20]_. The idea is to represent the value of an integer *n* in a base 3 positional numeration where in each position may appear a **signed bit** --one of the three symbols **{-1,0,+1}**-- called hereafter **sbits** for short.
+Bipolar-valued {-1,0,+1} base 3 encoded integers are due to *Claude Gaspard Bachet de Méziriac* (1581-1638) [20]_. The idea is to represent the value of an integer *n* in a base 3 positional numeration where in each position may appear one of the three symbols **{-1,0,+1}** called hereafter **sbits** for short. 
 
-*Bachet*'s positional *sbits* numeration is simulating a weight balance scale where the number *n* and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for *n = 5* gives for instance :math:`3^2 = (n + 3^1 + 3^0)`. And the *sbits* encoding corresponds hence to the string '+1-1-1'. As, this representation is isomorphic to a base 3 binary encoding, every positive or negative integer may so be represented with a unique *sbits* string. With four powers of 3, namely :math:`{3^3, 3^2, 3^1, 3^0}`, one may for instance represent any value in the integer range -40 to +40. *Bachet* showed that this bipolar weighing system relies on the smallest possible number of balance weights -base powers- needed in order to balance the scale for any given integer weight *n* [BAC-1622p]_.
+*Bachet*'s positional *sbits* numeration, called nowadays **balanced ternary numeral system** [25]_ , is simulating a weight balance scale where the number *n* and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for *n = 5* gives for instance :math:`3^2 = (n + 3^1 + 3^0)`. And the *sbits* encoding corresponds hence to the string '+1-1-1'. As, this representation is isomorphic to a base 3 binary encoding, every positive or negative integer may so be represented with a unique *sbits* string. With four powers of 3, namely :math:`{3^3, 3^2, 3^1, 3^0}`, one may for instance represent any value in the integer range -40 to +40. *Bachet* showed that this bipolar weighing system relies on the smallest possible number of balance weights -base powers- needed in order to balance the scale for any given integer weight *n* [BAC-1622p]_.
 
 The Digraph3 :py:mod:`arithmetics` module provides with the :py:class:`~arithmetics.BachetNumber` class an implementation for such *sbits* encoded integers. Instantiating a *Bachet* number may be done either with an integer value or with a vector of sbits (see :numref:`BachetNumbers` Lines  2, 6, 11 and 15). The class provides a binary *addition* method and unary *negating* and *reversing* methods as illustrated in Lines 20 and 32-33 below. 
 
@@ -3643,8 +3643,12 @@ Computing initial and terminal *prekernels* in digraphs is the subject of the ne
 
 Notes
 .....
+
+.. epigraph::
    
-The initial Python implementation of the :py:class:`~arithmetics.BachetNumber` class dates from 2012 when preparing the lectures of a first Semester course on *Discrete Mathematics* for computer scientists. But, it is only in Spring 2025 that we realized how remarquably well *Bachet*'s signed bits weighing design is adapted to our bipolar-valued epistemic logic approach. The *Bachet* ranking rules illustrate here convincingly the benefit one may indeed obtain when computing, not in a binary {0,1} bit world, like today all bit-wise computing devices, but instead in a bipolar-valued {-1,0,+1} world with **sbit-wise Bachet computers** [25]_.
+   "The complexity of arithmetic circuitry for balanced ternary arithmetic is not much greater than it is for the binary system, and a given number requires only :math:`\log_3 2 \approx 63\%` as many digit positions for its representation." -- D. Knuth [KNU-1997]_
+	      
+Our initial Python implementation of the :py:class:`~arithmetics.BachetNumber` class dates from 2012 when preparing the lectures of a first Semester course on *Discrete Mathematics* for computer scientists. But, it is only in Spring 2025 that we realized how remarquably well *Bachet*'s signed bits weighing design is adapted to our bipolar-valued epistemic logic approach. The *Bachet* ranking rules illustrate here convincingly the benefit one may indeed obtain when computing, not in a binary {0,1} bit world, like today all bit-wise computing devices, but instead in a bipolar-valued {-1,0,+1} world with **balanced ternary Bachet computers** [26]_.
 
 The power of the **epistemic disjunctive fusion** operator, for instance, is indeed impressive. When two arguments prove the *Truthfulness* of a logical statement, their fusion will be **True**. When two arguments prove the **Falseness** of the statement, their fusion will be **False**, However, when they provide conjointly a proof of *Falseness* **and** a proof of *Truthfulness*, their fusion will be **indeterminate** (zero knowledge). It is worthwhile noticing again the essential computational role this indeterminate **zero** value is taking on in such a *Bachet* computer.
 
@@ -5455,6 +5459,9 @@ Appendix
 .. [BAC-1622p] Claude Gaspard Bachet, sieur de Méziriac, *Problèmes plaisants et délectables…* , 1st ed. Pierre Rigaud & Associates, Lyon, France 1622, pp. 143-146
 
 .. [JIN-2003] Jin, Y., He, H. and Lü, Y (2003), "Ternary optical computer principle". *Sci China Ser* F 46:145–150, https://link.springer.com/article/10.1360/03yf9012
+
+.. [KNU-1997] Knuth, Donald (1997), "The art of Computer Programming". Vol. 2. Addison-Wesley. pp. 195–213. ISBN 0-201-89684-2.
+
 .. only:: html
 
     Endnotes
@@ -5502,9 +5509,12 @@ Appendix
 
 .. [24] "*Being proposed to assess with a weight balance a quantity weighing an integer number of pounds between 1 and 40 included, how many balance weights at minimum are needed for being able to do so*".
 
-.. [25] *Balanced ternary optical* computer designs have recently gained a lot of attention in China (https://en.wikipedia.org/wiki/Balanced_ternary, [JIN-2003]_). Such signed bits or *trits* based HPC computer systems provide indeed many technical and computational advantages --much less electrical energy required, less water cooling, millions of trits may be easily assembled, high speed of read and write access, etc-- compared to classical HPC or 'dreamed' HPC quantum computers.
+.. [25] https://en.wikipedia.org/wiki/Balanced_ternary
+
+.. [26] *Balanced ternary optical* HPC designs have recently gained in China a lot of attention [JIN-2003]_. Signed bits based optical computer systems provide indeed many technical and computational advantages --much less electrical energy required, no water cooling, millions of optical sbits may be easily assembled, ultra high speed faithful read and write access, etc-- compared to classical HPC or 'dreamed' HPC quantum computers.
 
 .. raw:: latex
 
    \endgroup
+
 
