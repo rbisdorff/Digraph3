@@ -482,7 +482,7 @@ class SparseIntegerDigraph(object):
                 return rxpg[x][y]
             except AttributeError:
                 componentRanking = self.components[cx]['componentRanking']
-                if componentRanking.index(x) < componentRanking.index(x):
+                if componentRanking.index(x) < componentRanking.index(y):
                     return Max
                 else:
                     return Min
