@@ -378,23 +378,23 @@ class BachetNumber(object):
         rev.vector = result
         return rev
 
-    def permute(self,i,j):
-        """
-        Swaps positions i-1 an j-1 in the self Bachet vector. Returns a modified Bachet number.
-        """
-        if i > len(self) or i < 1:
-            print('Error: index i (%d) not fitting the vector length !!!' % i)
-            print(self)
-            return
-        elif j > len(self) or j < 1:
-            print('Error: index j (%d) not fitting the vector length !!!' % j)
-            print(self)
-            return
-        from copy import deepcopy
-        rev = deepcopy(self)
-        rev.vector[j-1] = self.vector[i-1]
-        rev.vector[i-1] = self.vector[j-1]        
-        return rev
+##    def permute(self,i,j):
+##        """
+##        Swaps positions i-1 an j-1 in the self Bachet vector. Returns a modified Bachet number.
+##        """
+##        if i > len(self) or i < 1:
+##            print('Error: index i (%d) not fitting the vector length !!!' % i)
+##            print(self)
+##            return
+##        elif j > len(self) or j < 1:
+##            print('Error: index j (%d) not fitting the vector length !!!' % j)
+##            print(self)
+##            return
+##        from copy import deepcopy
+##        rev = deepcopy(self)
+##        rev.vector[j-1] = self.vector[i-1]
+##        rev.vector[i-1] = self.vector[j-1]        
+##        return rev
 
 #------------- end of BachetNumber class ------------------
     
@@ -1200,14 +1200,15 @@ if __name__ == '__main__':
     n2 = BachetNumber(154)
     n3 = n1 + n2
     n4 = n1 * n2
-    print('%s (%d) + %s (%d) = %s (%d)' % (n1, n1.value(), n2, n2.value(), n3, n3.value() ))
-    print('%s (%d) * %s (%d) = %s (%d)' % (n1, n1.value(), n2, n2.value(), n4, n4.value() ))
+    print('\'%s\' (%d) + \'%s\' (%d) = \'%s\' (%d)' % (n1, n1.value(), n2, n2.value(), n3, n3.value() ))
+    print('\'%s\' (%d) * \'%s\' (%d) = \'%s\' (%d)' % (n1, n1.value(), n2, n2.value(), n4, n4.value() ))
 
     n5 = n1.reverse()
     n6 = -n1
-    print('%s (%d) + %s (%d) = %s (%d)' % ( n5, n5.value(), n6, n6.value(),n5 + n6, (n5+n6).value() ))
-    n7 = n6.permute(1,3)
-    print(n7,n7.value())
+    print('\'%s\' (%d) + \'%s\' (%d) = \'%s\' (%d)' % ( n5, n5.value(), n6, n6.value(),
+                                                       (n5 + n6), (n5+n6).value() ))
+##    n7 = n6.permute(1,3)
+##    print(n7,n7.value())
     
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
