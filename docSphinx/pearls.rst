@@ -3007,9 +3007,9 @@ Bipolar-valued base 3 encoded Bachet numbers
 
 .. epigraph::
    
-   "*Estant proposee telle quantité qu'on voudra pesant un nombre de livres despuis 1. iusques à 40. inclusivement (sans toutefois admettre les fractions ) on demande combien de pois pour le moins il faudrait employer à cet effect.*" 
+   "*Estant proposee telle quantité qu'on voudra pesant un nombre de livres despuis 1. iusques à 40. inclusivement (sans toutefois admettre les fractions ) on demande combien de pois pour le moins il faudrait employer à cet effect.*" [24]_
 
-   -- Cl. G. Bachet (1622) [24]_
+   -- Cl. G. Bachet (1622) 
 
 Bipolar-valued {-1,0,+1} base 3 encoded integers are due to *Claude Gaspard Bachet de Méziriac* (1581-1638) [20]_. The idea is to represent the value of an integer *n* in a base 3 positional numeration where in each position may appear one of the three symbols **{-1,0,+1}** called hereafter **sbits** for short. 
 
@@ -5511,7 +5511,7 @@ Appendix
 
 .. [25] https://en.wikipedia.org/wiki/Balanced_ternary
 
-.. [26] *Balanced ternary optical* HPC designs have recently gained in China a lot of attention [JIN-2003]_. Compared to classical HPC or 'dreamed' HPC quantum computers, balanced ternary based optical computer systems provide indeed many technical and computational advantages. Much less electrical energy required, no water cooling, millions of optical sbits may be easily assembled, ultra high speed faithful read and write access, etc.
+.. [26] *Balanced ternary optical* HPC designs have recently gained in China a lot of attention [JIN-2003]_. Compared to classical HPC or 'dreamed' quantum computers, balanced ternary based optical computer systems provide indeed many technical and computational advantages. Much less electrical energy required, no water cooling, millions of optical trits may be easily assembled, faithful ultra high speed read and write access, etc.
 
 .. raw:: latex
 
