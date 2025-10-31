@@ -3646,7 +3646,7 @@ Notes
 
 .. epigraph::
    
-   "The complexity of arithmetic circuitry for balanced ternary arithmetic is not much greater than it is for the binary system, and a given number requires only :math:`\log_3 2 \approx 63\%` as many digit positions for its representation." -- D. Knuth [KNU-1997]_
+   "The complexity of arithmetic circuitry for balanced ternary arithmetic is not much greater than it is for the binary system, and a given number requires only :math:`\log_3 2 \approx 63\%` as many digit positions for its representation. ... perhaps the symmetric properties and simple arithmetic of this number system will prove to be quite important someday ..." -- D. Knuth [KNU-1997]_
 	      
 Our initial Python implementation of the :py:class:`~arithmetics.BachetNumber` class dates from 2012 when preparing the lectures of a first Semester course on *Discrete Mathematics* for computer scientists. But, it is only in Spring 2025 that we realized how remarquably well *Bachet*'s signed bits weighing design is adapted to our bipolar-valued epistemic logic approach. The *Bachet* ranking rules illustrate here convincingly the benefit one may indeed obtain when computing, not in a binary {0,1} bit world, like today all bit-wise computing devices, but instead in a bipolar-valued {-1,0,+1} world with **balanced ternary Bachet computers** [26]_.
 
@@ -5460,7 +5460,7 @@ Appendix
 
 .. [JIN-2003] Jin, Y., He, H. and Lü, Y (2003), "Ternary optical computer principle". *Sci China Ser* F 46:145–150, https://link.springer.com/article/10.1360/03yf9012
 
-.. [KNU-1997] Knuth, Donald (1997), "The art of Computer Programming". Vol. 2. Addison-Wesley. pp. 195–213. ISBN 0-201-89684-2.
+.. [KNU-1997] Knuth, Donald (1997), "The art of Computer Programming Third Edition". Vol. 2. Addison-Wesley. pp. 207-208. ISBN 0-201-89684-2.
 
 .. only:: html
 
@@ -5511,7 +5511,7 @@ Appendix
 
 .. [25] https://en.wikipedia.org/wiki/Balanced_ternary
 
-.. [26] *Balanced ternary optical* HPC designs have recently gained in China a lot of attention [JIN-2003]_. Signed bits based optical computer systems provide indeed many technical and computational advantages --much less electrical energy required, no water cooling, millions of optical sbits may be easily assembled, ultra high speed faithful read and write access, etc-- compared to classical HPC or 'dreamed' HPC quantum computers.
+.. [26] *Balanced ternary optical* HPC designs have recently gained in China a lot of attention [JIN-2003]_. Compared to classical HPC or 'dreamed' HPC quantum computers, balanced ternary based optical computer systems provide indeed many technical and computational advantages. Much less electrical energy required, no water cooling, millions of optical sbits may be easily assembled, ultra high speed faithful read and write access, etc.
 
 .. raw:: latex
 
