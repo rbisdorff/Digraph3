@@ -3051,12 +3051,12 @@ The Digraph3 :py:mod:`arithmetics` module provides with the :py:class:`~arithmet
      Length         : 4
      Value          : 18
      Attributes     : ['vector']
-   >>> print('%s (%d) + %s (%d) = %s (%d)'
+   >>> print('\'%s\' (%d) + \'%s\' (%d) = \'%s\' (%d)'
    ...        % (n1, n1.value(), n2, n2.value(), n3, n3.value() ))
      '+1-1-1' (5) + '+1+1+1' (13) = '+1-100' (18)
    >>> n4 = n1.reverse()
    >>> n5 = -n2
-   >>> print('%s (%d) + %s (%d) = %s (%d)'
+   >>> print('\'%s\' (%d) + \'%s\' (%d) = \'%s\' (%d)'
    ...       % ( n4, n4.value(), n5, n5.value(),n4 + n5, (n4+n5).value() ))
      '-1-1+1' (-11) + '-1-1-1' (-13) = '-10+10' (-24)
 
@@ -3492,7 +3492,7 @@ As we observe only 11 intransitive triples in the codual outranking digraph *gcd
 Revealing the transitive part of a bipolar-valued digraph
 .........................................................
 
-As we have noticed before, the randomized versions of the :py:class:`~linearOrders.PolarisedBachetRanking` and the :py:class:`~linearOrders.ValuedBachetRanking` constructors potentially produce multiple ranking results of unequal correlation quality, yet due to the Condorcet consistency property respecting all more or less the transitive part of the given digraph. If we collect now a small subset of the best correlated rankings, we can use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class for constructing, by epistemic disjunctive fusion of these selected rankings, a partial *Bachet* ranking result --a transitive asymmetrical digraph with indeterminate reflexive relations-- showing actually the potential transitive part of a given polarised outranking digraph. 
+As we have noticed before, the randomized versions of the :py:class:`~linearOrders.PolarisedBachetRanking` and the :py:class:`~linearOrders.ValuedBachetRanking` constructors potentially produce multiple ranking results of unequal correlation quality, yet respecting --due to the Condorcet consistency property-- all more or less the transitive part of the given digraph. If we collect now a small subset of the best correlated rankings, we can use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class for constructing, by epistemic disjunctive fusion of these selected rankings, a partial *Bachet* ranking result --a transitive asymmetrical digraph with indeterminate reflexive relations-- showing actually the potential transitive part of a given polarised outranking digraph. 
 
 To explore this remarquable opportunity, a new :py:class:`~transitiveDigraphs.PartialBachetRanking` class is provided by the :py:mod:`transitiveDigraphs` module. To illustrate its usefulness, let us reconsider the example outranking digraph *g* of :numref:`optimisingBachet`. 
 

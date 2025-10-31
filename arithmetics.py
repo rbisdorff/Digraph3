@@ -155,7 +155,7 @@ class BachetNumber(object):
         """
         reprString = '*------- Bachet number description ------*\n'
         reprString += 'Instance class : %s\n' % self.__class__.__name__
-        reprString += 'String         : %s\n' % str(self)
+        reprString += 'String         : \'%s\'\n' % str(self)
         reprString += 'Vector         : %s\n' % self.vector
         reprString += 'Length         : %d\n' % len(self)
         reprString += 'Value          : %d\n' % self.value()
@@ -189,13 +189,14 @@ class BachetNumber(object):
         """
         Defines the printable string version of a Bachet number.
         """
-        bachet_string = '\''
+        #bachet_string = '\''
+        bachet_string = ''
         for i in range(len(self.vector)):
             if self.vector[i] != 0:
                 bachet_string += '%+d' % (self.vector[i])
             else:
                 bachet_string += '%d' % (self.vector[i])
-        bachet_string += "\'"
+        #bachet_string += "\'"
         return bachet_string
        
     def __neg__(self):
@@ -280,6 +281,14 @@ class BachetNumber(object):
         n2 = other.value()
         n3 = n1 * n2
         return BachetNumber(n3)
+
+    def __eq__(self,other):
+        """
+        Return the self==other value
+        """
+        n1 = self.value()
+        n2 = other.value()
+        return n1==n2
     
     def _base10to3(self,num):
         """
