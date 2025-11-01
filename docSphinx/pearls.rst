@@ -5504,9 +5504,9 @@ Appendix
 
 .. [21] See the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`
 
-.. [22] To prove the *invariance* of the *Bachet* ranking under the *codual transform*, it is sufficient to notice that the contribution to the *Bachet* scores of any pair of actions, outranking each other and situated respectively in positions *p* and *q* in a relation relation table, amounts to  :math:`(3^p + 3^q) - (3^p + 3^q) = 0`. Same zero contribution :math:`(-3^p - 3^q) - (-3^p - 3^q) = 0` occurs for any pair positively *not outranking* each other.
+.. [22] To prove the *invariance* of the *Bachet* ranking scores under the *codual transform*, it is sufficient to notice that the contribution to the *Bachet* scores of any pair of actions, outranking each other and situated respectively in positions *p* and *q* in a relation relation table, amounts to  :math:`(3^p + 3^q) - (3^p + 3^q) = 0`. Same zero contribution :math:`(-3^p - 3^q) - (-3^p - 3^q) = 0` occurs for any pair positively *not outranking* each other.
 
-.. [23] To prove the *Condorcet consistency* property of the *Bachet* ranking rule, it is sufficient to notice that the contributions of a transitive triplet *'ai' > 'aj' > 'ak'* to the corresponding *Bachet* ranking scores will respect the actual ordering of the triplet with all positional permutations of [..., ai, ..., aj, ...,ak, ...] in a relation table.
+.. [23] To prove the *Condorcet consistency* property of the *Bachet* ranking scores, it is sufficient to notice that the contributions of a transitive triplet *'ai' > 'aj' > 'ak'* to the corresponding *Bachet* ranking scores will respect the actual ordering of the triplet with all positional permutations of [..., ai, ..., aj, ...,ak, ...] in a relation table.
 
 .. [24] "*Being proposed to assess with a weight balance a quantity weighing an integer number of pounds between 1 and 40 included, how many balance weights at minimum are needed for being able to do so*".
 
