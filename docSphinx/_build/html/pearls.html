@@ -3114,7 +3114,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 </span></pre></div>
 </div>
 </div>
-<p>With the reversed <em>Bachet</em> numbers we obtain the ranking ‘a4’ (26) &gt; ‘a3’ (-12) &gt; ‘a1’ (-19) &gt; ‘a2’ (-23). This ranking result is less well correlated (+0.526) with the given outranking digraph, but corresponds in fact to the actual <em>Copeland</em> ranking.</p>
+<p>With the reversed <em>Bachet</em> numbers we obtain the ranking ‘a4’ (26) &gt; ‘a3’ (-12) &gt; ‘a1’ (-19) &gt; ‘a2’ (-23). This ranking result is less well correlated (+0.526) with the given outranking digraph, yet corresponds in fact to the actual <em>Copeland</em> ranking.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">CopelandRanking</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cop</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
@@ -3132,10 +3132,18 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span class="hll"><span class="linenos">15</span><span class="go">  Crisp ordinal correlation  : +0.526</span>
 </span><span class="linenos">16</span><span class="go">  Epistemic determination    :  0.621</span>
 <span class="linenos">17</span><span class="go">  Bipolar-valued equivalence : +0.327</span>
+<span class="linenos">18</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="n">WeakCopelandOrder</span>
+<span class="linenos">19</span><span class="gp">&gt;&gt;&gt; </span><span class="n">wcop</span> <span class="o">=</span> <span class="n">WeakCopelandOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="linenos">20</span><span class="gp">&gt;&gt;&gt; </span><span class="n">corrw</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeordinalCorrelation</span><span class="p">(</span><span class="n">wcop</span><span class="p">)</span>
+<span class="linenos">21</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corrw</span><span class="p">)</span>
+<span class="linenos">22</span><span class="go"> Correlation indexes:</span>
+<span class="hll"><span class="linenos">23</span><span class="go">  Crisp ordinal correlation  : +0.763</span>
+</span><span class="linenos">24</span><span class="go">  Epistemic determination    :  0.537</span>
+<span class="linenos">25</span><span class="go">  Bipolar-valued equivalence : +0.410</span>
 </pre></div>
 </div>
-<p>The <em>Copeland</em> ranking rule delivers indeed for this example outranking digraph ranking scores with a tie between actions ‘a1’ and ‘a2’ which is by convention resolved by following a lexicographic rule favouring in this case action ‘a1’. This ranking is however much less correlated to the given outranking digraph than the optimal <em>Kemeny</em> ranking (see +0.795 above).</p>
-<p>Nevertheless, the <em>Bachet</em> ranking scores of the original and the reversed ordering of the polarised relation table lead in our example here to very plausible and convincing ranking results. This hindsight gave the positive stimulus for implementing this new <em>ranking-by-scoring</em> rule.</p>
+<p>For the example outranking digraph here, the <em>Copeland</em> ranking rule delivers indeed ranking scores with a tie between actions ‘a1’ and ‘a2’, which is by convention resolved by following a lexicographic rule favouring in this case action ‘a1’. This ranking is however much less correlated with the given outranking digraph than the optimal <em>Kemeny</em> ranking (+0.526 vs +0.795). The corresponding weak Copeland ranking shows nonetheless a high correlation index (+0.763, see Line 23).</p>
+<p>The <em>Bachet</em> ranking scores of the original and the reversed ordering of the polarised relation table thus lead in our example here to very plausible and convincing ranking results. This hindsight gave the positive stimulus for implementing this new <em>ranking-by-scoring</em> rule.</p>
 </section>
 <section id="the-bachet-ranking-rule-a-new-ranking-by-scoring-method">
 <h4><a class="toc-backref" href="#id159" role="doc-backlink"><span class="section-number">3.3.3.3. </span>The Bachet ranking rule, a new ranking-by-scoring method</a><a class="headerlink" href="#the-bachet-ranking-rule-a-new-ranking-by-scoring-method" title="Link to this heading"></a></h4>
@@ -5298,11 +5306,11 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 </aside>
 <aside class="footnote brackets" id="id103" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id44">22</a><span class="fn-bracket">]</span></span>
-<p>To prove the <em>invariance</em> of the <em>Bachet</em> ranking scores under the <em>codual transform</em>, it is sufficient to notice that the contribution to the <em>Bachet</em> scores of any pair of actions, outranking each other and situated respectively in positions <em>p</em> and <em>q</em> in a relation relation table, amounts to  <img class="math" src="_images/math/39a6dc5d75ad673b005175591e314661ed681488.png" alt="(3^p + 3^q) - (3^p + 3^q) = 0"/>. Same zero contribution <img class="math" src="_images/math/a09c5f5f0d092edafa03a0de775ced47d6617417.png" alt="(-3^p - 3^q) - (-3^p - 3^q) = 0"/> occurs for any pair positively <em>not outranking</em> each other.</p>
+<p>To prove the <em>invariance</em> of the ordering of <em>Bachet</em> ranking scores under the <em>codual transform</em>, it is sufficient to notice that the contribution to the <em>Bachet</em> scores of any pair of actions, outranking each other and situated respectively in positions <em>p</em> and <em>q</em> in a relation relation table, amounts to  <img class="math" src="_images/math/39a6dc5d75ad673b005175591e314661ed681488.png" alt="(3^p + 3^q) - (3^p + 3^q) = 0"/>. Same zero contribution <img class="math" src="_images/math/a09c5f5f0d092edafa03a0de775ced47d6617417.png" alt="(-3^p - 3^q) - (-3^p - 3^q) = 0"/> occurs for any pair positively <em>not outranking</em> each other.</p>
 </aside>
 <aside class="footnote brackets" id="id104" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id45">23</a><span class="fn-bracket">]</span></span>
-<p>To prove the <em>Condorcet consistency</em> property of the <em>Bachet</em> ranking scores, it is sufficient to notice that the contributions of a transitive triplet <em>‘ai’ &gt; ‘aj’ &gt; ‘ak’</em> to the corresponding <em>Bachet</em> ranking scores will respect the actual ordering of the triplet with all positional permutations of […, ai, …, aj, …,ak, …] in a relation table.</p>
+<p>To prove the <em>Condorcet consistency</em> property of the ordering of <em>Bachet</em> ranking scores, it is sufficient to notice that the contributions of a transitive triplet <em>‘ai’ &gt; ‘aj’ &gt; ‘ak’</em> to the corresponding <em>Bachet</em> ranking scores will respect the actual ordering of the triplet with all positional permutations of […, ai, …, aj, …,ak, …] in a relation table.</p>
 </aside>
 <aside class="footnote brackets" id="id105" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id38">24</a><span class="fn-bracket">]</span></span>

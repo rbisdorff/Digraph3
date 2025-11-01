@@ -3158,11 +3158,11 @@ If we reverse however the given ordering of the *actions* dictionary, we may obt
    ...        ra2.value()-ca2.value(), ra1.value()-ca1.value())
     26 -12 -23 -19
 
-With the reversed *Bachet* numbers we obtain the ranking 'a4' (26) > 'a3' (-12) > 'a1' (-19) > 'a2' (-23). This ranking result is less well correlated (+0.526) with the given outranking digraph, but corresponds in fact to the actual *Copeland* ranking.
+With the reversed *Bachet* numbers we obtain the ranking 'a4' (26) > 'a3' (-12) > 'a1' (-19) > 'a2' (-23). This ranking result is less well correlated (+0.526) with the given outranking digraph, yet corresponds in fact to the actual *Copeland* ranking.
 
 .. code-block:: pycon
    :linenos:
-   :emphasize-lines: 11,15
+   :emphasize-lines: 11,15,23
       
    >>> from linearOrders import CopelandRanking
    >>> cop = CopelandRanking(g)
@@ -3181,10 +3181,19 @@ With the reversed *Bachet* numbers we obtain the ranking 'a4' (26) > 'a3' (-12) 
      Crisp ordinal correlation  : +0.526
      Epistemic determination    :  0.621
      Bipolar-valued equivalence : +0.327
+   >>> from transitiveDigraphs import WeakCopelandOrder
+   >>> wcop = WeakCopelandOrder(g)
+   >>> corrw = g.computeordinalCorrelation(wcop)
+   >>> g.showCorrelation(corrw)
+    Correlation indexes:
+     Crisp ordinal correlation  : +0.763
+     Epistemic determination    :  0.537
+     Bipolar-valued equivalence : +0.410
+   
 
-The *Copeland* ranking rule delivers indeed for this example outranking digraph ranking scores with a tie between actions 'a1' and 'a2' which is by convention resolved by following a lexicographic rule favouring in this case action 'a1'. This ranking is however much less correlated to the given outranking digraph than the optimal *Kemeny* ranking (see +0.795 above).
+For the example outranking digraph here, the *Copeland* ranking rule delivers indeed ranking scores with a tie between actions 'a1' and 'a2', which is by convention resolved by following a lexicographic rule favouring in this case action 'a1'. This ranking is however much less correlated with the given outranking digraph than the optimal *Kemeny* ranking (+0.526 vs +0.795). The corresponding weak Copeland ranking shows nonetheless a high correlation index (+0.763, see Line 23).
 
-Nevertheless, the *Bachet* ranking scores of the original and the reversed ordering of the polarised relation table lead in our example here to very plausible and convincing ranking results. This hindsight gave the positive stimulus for implementing this new *ranking-by-scoring* rule.  
+The *Bachet* ranking scores of the original and the reversed ordering of the polarised relation table thus lead in our example here to very plausible and convincing ranking results. This hindsight gave the positive stimulus for implementing this new *ranking-by-scoring* rule.  
 
 The Bachet ranking rule, a new ranking-by-scoring method
 ........................................................
@@ -5504,9 +5513,9 @@ Appendix
 
 .. [21] See the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`
 
-.. [22] To prove the *invariance* of the *Bachet* ranking scores under the *codual transform*, it is sufficient to notice that the contribution to the *Bachet* scores of any pair of actions, outranking each other and situated respectively in positions *p* and *q* in a relation relation table, amounts to  :math:`(3^p + 3^q) - (3^p + 3^q) = 0`. Same zero contribution :math:`(-3^p - 3^q) - (-3^p - 3^q) = 0` occurs for any pair positively *not outranking* each other.
+.. [22] To prove the *invariance* of the ordering of *Bachet* ranking scores under the *codual transform*, it is sufficient to notice that the contribution to the *Bachet* scores of any pair of actions, outranking each other and situated respectively in positions *p* and *q* in a relation relation table, amounts to  :math:`(3^p + 3^q) - (3^p + 3^q) = 0`. Same zero contribution :math:`(-3^p - 3^q) - (-3^p - 3^q) = 0` occurs for any pair positively *not outranking* each other.
 
-.. [23] To prove the *Condorcet consistency* property of the *Bachet* ranking scores, it is sufficient to notice that the contributions of a transitive triplet *'ai' > 'aj' > 'ak'* to the corresponding *Bachet* ranking scores will respect the actual ordering of the triplet with all positional permutations of [..., ai, ..., aj, ...,ak, ...] in a relation table.
+.. [23] To prove the *Condorcet consistency* property of the ordering of *Bachet* ranking scores, it is sufficient to notice that the contributions of a transitive triplet *'ai' > 'aj' > 'ak'* to the corresponding *Bachet* ranking scores will respect the actual ordering of the triplet with all positional permutations of [..., ai, ..., aj, ...,ak, ...] in a relation table.
 
 .. [24] "*Being proposed to assess with a weight balance a quantity weighing an integer number of pounds between 1 and 40 included, how many balance weights at minimum are needed for being able to do so*".
 
