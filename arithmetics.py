@@ -162,9 +162,10 @@ class BachetNumber(object):
         reprString += 'Attributes     : %s\n' % list(self.__dict__.keys())    
         return reprString
     
-    def __init__(self,num_int=None,vector=None,length=0):
+    def __init__(self,num_int=None,vector=None,length=1):
         """
         Tranforms a potentially signed integer into a Bachet number.
+        Returns [0] when no arguments are given. 
         """
         if num_int is None:
             if vector is not None:
@@ -185,21 +186,78 @@ class BachetNumber(object):
                 vector = [0 for i in range(nz)]
                 self.vector = vector + self.vector
 
-    def __str__(self):
+    def _base10to3(self,num):
+        """
+        Change a base 10 number to a base 3 number.
+        """
+        new_num_string = ''
+        current = num
+        while current != 0:
+            remainder = current%3
+            remainder_string = str(remainder)
+            new_num_string = remainder_string + new_num_string
+            current = current//3
+        return new_num_string
+
+    def _base3toBachet(self,num_string):
+        """
+        Converts a base 3 encoded integer into a bipolar {-1,0,+1} encoded one.
+
+        """
+        new_vector=[0 for x in range(len(num_string))]
+        reste = 0
+        for i in range(len(num_string)-1,-1,-1):
+            num = eval(num_string[i])+reste
+            if num == 2:
+                new_vector[i] = -1
+                reste = 1
+            elif num == 3:
+                new_vector[i] = 0
+                reste = 1
+            else:
+                new_vector[i] = num
+                reste = 0
+        
+        if reste == 1:
+            new_vector = [1] + new_vector
+            
+        return new_vector
+
+    def _int2bachet(self,num_int):
+        """
+        Converts a signed integer into a Bachet encoded number.
+        """
+        if num_int < 0:
+            unsigned_num_int = abs(num_int)
+        else:
+            unsigned_num_int = num_int
+        base3_unsigned_num_int = self._base10to3(unsigned_num_int)
+        bachet_unsigned_num_int = self._base3toBachet(base3_unsigned_num_int)
+        if num_int > 0:
+            return bachet_unsigned_num_int
+        elif num_int == 0:
+            return [0]
+        else:
+            bachet_vector = bachet_unsigned_num_int
+            for i in range(len(bachet_unsigned_num_int)):
+                bachet_vector[i] = bachet_unsigned_num_int[i]*-1
+            return bachet_vector
+        
+    def __str__(self, /):
         """
         Defines the printable string version of a Bachet number.
         """
-        #bachet_string = '\''
         bachet_string = ''
         for i in range(len(self.vector)):
             if self.vector[i] != 0:
                 bachet_string += '%+d' % (self.vector[i])
             else:
                 bachet_string += '%d' % (self.vector[i])
-        #bachet_string += "\'"
         return bachet_string
-       
-    def __neg__(self):
+
+    # ---- arithmetic operations
+    
+    def __neg__(self, /):
         """
         Defines an unary negating operator for Bachet encoded numbers.
         """
@@ -209,14 +267,13 @@ class BachetNumber(object):
             neg.vector[i] = neg.vector[i] * -1
         return neg
         
-##    def __add__(self,other):
-##        """
-##        Defines the addition operator for Bachet encoded numbers
-##        """
-##        n1 = self.value()
-##        n2 = other.value()
-##        n3 = n1 + n2
-##        return BachetNumber(n3)        
+    def __abs__(self, /):
+        """
+        Defines the addition operator for Bachet encoded numbers
+        """
+        v1 = int(self)
+        v2 = abs(v1)
+        return BachetNumber(v2)        
 
     def __add__(self,other,Debug=False):
         """
@@ -273,7 +330,7 @@ class BachetNumber(object):
         result = new.reverse()
         return result
 
-    def __mul__(self,other):
+    def __mul__(self,other,/):
         """
         Defines the multiplication operator for Bachet encoded numbers.
         """
@@ -282,70 +339,74 @@ class BachetNumber(object):
         n3 = n1 * n2
         return BachetNumber(n3)
 
-    def __eq__(self,other):
+    def __eq__(self,other, /):
         """
         Return the self==other value
         """
         n1 = self.value()
         n2 = other.value()
         return n1==n2
+
+    def __ge__(self,other, /):
+        """
+        Return self>=other
+        """
+        v1 = self.value()
+        v2 = other.value()
+        return v1>=v2
+
+    def __gt__(self,other, /):
+        """
+        Return self>other
+        """
+        v1 = self.value()
+        v2 = other.value()
+        return v1>v2
+
+    def __le__(self,other, /):
+        """
+        Return self<=other
+        """
+        v1 = self.value()
+        v2 = other.value()
+        return v1<=v2
+
+    def __lt__(self,other, /):
+        """
+        Return self>other
+        """
+        v1 = self.value()
+        v2 = other.value()
+        return v1<v2
     
-    def _base10to3(self,num):
+    def __ne__(self,other, /):
         """
-        Change a base 10 number to a base 3 number.
+        Return self!=other
         """
-        new_num_string = ''
-        current = num
-        while current != 0:
-            remainder = current%3
-            remainder_string = str(remainder)
-            new_num_string = remainder_string + new_num_string
-            current = current//3
-        return new_num_string
+        v1 = self.value()
+        v2 = other.value()
+        return v1!=v2
 
-    def _base3toBachet(self,num_string):
+    def __sub__(self,other, /):
         """
-        Converts a base 3 encoded integer into a bipolar {-1,0,+1} encoded one.
+        Return self-other
+        """
+        return self + (-other)
 
+    def __int__(self, /):
         """
-        new_vector=[0 for x in range(len(num_string))]
-        reste = 0
-        for i in range(len(num_string)-1,-1,-1):
-            num = eval(num_string[i])+reste
-            if num == 2:
-                new_vector[i] = -1
-                reste = 1
-            elif num == 3:
-                new_vector[i] = 0
-                reste = 1
-            else:
-                new_vector[i] = num
-                reste = 0
-        
-        if reste == 1:
-            new_vector = [1] + new_vector
-            
-        return new_vector
+        Return self.value()
+        """
+        return self.value()
 
-    def _int2bachet(self,num_int):
+    def __divmod__(self,other, /):
         """
-        Converts a signed integer into a Bachet encoded number.
+        Return divmod(self,other)
         """
-        if num_int < 0:
-            unsigned_num_int = abs(num_int)
-        else:
-            unsigned_num_int = num_int
-        base3_unsigned_num_int = self._base10to3(unsigned_num_int)
-        bachet_unsigned_num_int = self._base3toBachet(base3_unsigned_num_int)
-        if num_int > 0:
-            return bachet_unsigned_num_int
-        elif num_int == 0:
-            return '0',[0]
-        else:
-            bachet_vector = bachet_unsigned_num_int
-            for i in range(len(bachet_unsigned_num_int)):
-                bachet_vector[i] = bachet_unsigned_num_int[i]*-1
-            return bachet_vector
+        q,r = divmod(int(self),int(other))
+        return BachetNumber(q),BachetNumber(r)
+               
+    
        
     def value(self):
         """
@@ -378,23 +439,20 @@ class BachetNumber(object):
         rev.vector = result
         return rev
 
-##    def permute(self,i,j):
-##        """
-##        Swaps positions i-1 an j-1 in the self Bachet vector. Returns a modified Bachet number.
-##        """
-##        if i > len(self) or i < 1:
-##            print('Error: index i (%d) not fitting the vector length !!!' % i)
-##            print(self)
-##            return
-##        elif j > len(self) or j < 1:
-##            print('Error: index j (%d) not fitting the vector length !!!' % j)
-##            print(self)
-##            return
-##        from copy import deepcopy
-##        rev = deepcopy(self)
-##        rev.vector[j-1] = self.vector[i-1]
-##        rev.vector[i-1] = self.vector[j-1]        
-##        return rev
+    def __invert__(self, /):
+        """
+        Return ~self
+        """
+        return self.reverse()
+
+    def __mod__(self, other, /):
+        """
+        Return self%other
+        """
+        v1 = int(self)
+        v2 = int(other)
+        v3 = v1%v2
+        return BachetNumber(v3)
 
 #------------- end of BachetNumber class ------------------
     
