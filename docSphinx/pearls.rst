@@ -3009,18 +3009,18 @@ Bipolar-valued base 3 encoded Bachet numbers
    
    "*Estant proposee telle quantité qu'on voudra pesant un nombre de livres despuis 1. iusques à 40. inclusivement (sans toutefois admettre les fractions ) on demande combien de pois pour le moins il faudrait employer à cet effect.*" [24]_
 
-   -- Cl. G. Bachet (1622) 
+   -- Cl. G. Bachet (1622) [BAC-1622p]_
 
 Bipolar-valued {-1,0,+1} base 3 encoded integers are due to *Claude Gaspard Bachet de Méziriac* (1581-1638) [20]_. The idea is to represent the value of an integer *n* in a base 3 positional numeration where in each position may appear one of the three symbols **{-1,0,+1}** called hereafter **sbits** for short. 
 
 *Bachet*'s positional *sbits* numeration, called nowadays **balanced ternary numeral system** [25]_ , is simulating a weight balance scale where the number *n* and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for *n = 5* gives for instance :math:`3^2 = (n + 3^1 + 3^0)`. And the *sbits* encoding corresponds hence to the string '+1-1-1'. As, this representation is isomorphic to a base 3 binary encoding, every positive or negative integer may so be represented with a unique *sbits* string. With four powers of 3, namely :math:`{3^3, 3^2, 3^1, 3^0}`, one may for instance represent any value in the integer range -40 to +40. *Bachet* showed that this bipolar weighing system relies on the smallest possible number of balance weights -base powers- needed in order to balance the scale for any given integer weight *n* [BAC-1622p]_.
 
-The Digraph3 :py:mod:`arithmetics` module provides with the :py:class:`~arithmetics.BachetNumber` class an implementation for such *sbits* encoded integers. Instantiating a *Bachet* number may be done either with an integer value or with a vector of sbits (see :numref:`BachetNumbers` Lines  2, 6, 11 and 15). The class provides a binary *addition* method and unary *negating* and *reversing* methods as illustrated in Lines 20 and 32-33 below. 
+The Digraph3 :py:mod:`arithmetics` module provides with the :py:class:`~arithmetics.BachetNumber` class an implementation for such *sbits* encoded integers. Instantiating a *Bachet* number may be done either with an integer value or with a vector of sbits (see :numref:`BachetNumbers` Lines  2, 6, 11 and 15). The class provides the classical arithmetic operations from the standrad *int* class, like binary *addition* and unary *negating* and *reversing* as illustrated in Lines 20 and 32-34 below. 
 
 .. code-block:: pycon
    :caption: Working with *Bachet* sbits encoded numbers
    :name: BachetNumbers
-   :emphasize-lines: 2,6,11,15,20,31-33,36
+   :emphasize-lines: 2,6,11,15,20,31-34,37
    :linenos:
     
    >>> from arithmetics import BachetNumber
@@ -3054,10 +3054,11 @@ The Digraph3 :py:mod:`arithmetics` module provides with the :py:class:`~arithmet
    >>> print('\'%s\' (%d) + \'%s\' (%d) = \'%s\' (%d)'
    ...        % (n1, n1.value(), n2, n2.value(), n3, n3.value() ))
      '+1-1-1' (5) + '+1+1+1' (13) = '+1-100' (18)
-   >>> n4 = n1.reverse()
+   >>> n4 = n1.reverse()   # n4 = ~n1
    >>> n5 = -n2
+   >>> n6 = n4 + n5        # n6 = ~n1 - n2
    >>> print('\'%s\' (%d) + \'%s\' (%d) = \'%s\' (%d)'
-   ...       % ( n4, n4.value(), n5, n5.value(),n4 + n5, (n4+n5).value() ))
+   ...       % ( n4, n4.value(), n5, n5.value(),n6, n6.value() ) )
      '-1-1+1' (-11) + '-1-1-1' (-13) = '-10+10' (-24)
 
 Examples of Bachet numbers
