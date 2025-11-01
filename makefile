@@ -43,7 +43,7 @@ sphinxLatexPDF:
 		${MAKE} -C ${BUILDDIR}/latex all-pdf; \
 		cp ${BUILDDIR}/latex/digraph3*.pdf ${BUILDDIR}/html/_static; \
 		cp ${BUILDDIR}/latex/digraph3*.pdf _static;\
-		echo "The PDF files are in /docSphinx/_statec";\
+		echo "The PDF files are in /docSphinx/_static";\
 		echo "              and in /docSphinx/_build/html/_static")
 
 # make sphinx ebook

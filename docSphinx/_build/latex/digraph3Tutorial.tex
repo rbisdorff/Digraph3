@@ -67,7 +67,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{October 30, 2025}
+\date{November 01, 2025}
 \release{3.14.0}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -12243,7 +12243,7 @@ For sparse outranking digraphs, the adjacency table is implemented as a dynamic 
 \PYG{g+go}{               return rxpg[x][y]}
 \PYG{g+go}{           except AttributeError:}
 \PYG{g+go}{               componentRanking = self.components[cx][\PYGZsq{}componentRanking\PYGZsq{}]}
-\PYG{g+go}{               if componentRanking.index(x) \PYGZlt{} componentRanking.index(x):}
+\PYG{g+go}{               if componentRanking.index(x) \PYGZlt{} componentRanking.index(y):}
 \PYG{g+go}{                   return Max}
 \PYG{g+go}{               else:}
 \PYG{g+go}{                   return Min}
