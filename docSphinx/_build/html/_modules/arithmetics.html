@@ -191,6 +191,8 @@
 <span class="sd">    Bipolar-valued {-1,0,+1} base 3 encoded integers due to Claude Gaspard Bachet de Méziriac (1621)</span>
 <span class="sd">    </span>
 <span class="sd">    https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac</span>
+
+<span class="sd">    The class implements all the arithmetic operations and comparison operators from the int class.</span>
 <span class="sd">    </span>
 <span class="sd">    &gt;&gt;&gt; from arithmetics import BachetNumber</span>
 <span class="sd">    &gt;&gt;&gt; n1 = BachetNumber(12)</span>
@@ -225,13 +227,12 @@
 <span class="sd">     &#39;+1+10&#39; (12) + &#39;+1+1+1&#39; (13) = 10-11 (25)</span>
 <span class="sd">    &gt;&gt;&gt; print(&#39;length of %s = %d&#39; % (n1, len(n1)))</span>
 <span class="sd">     length of &#39;+1+10&#39; = 3</span>
-<span class="sd">    &gt;&gt;&gt; n4 = n1.reverse()</span>
+<span class="sd">    &gt;&gt;&gt; n4 = n1.reverse() # n4 = ~n1</span>
 <span class="sd">    &gt;&gt;&gt; n5 = -n2</span>
+<span class="sd">    &gt;&gt;&gt; n6 = n4 + n5   # n6 = n4 + (-n2) = n4 - n2</span>
 <span class="sd">    &gt;&gt;&gt; print(&#39;%s (%d) + %s (%d) = %s (%d)&#39;</span>
-<span class="sd">    ...       % ( n4, n4.value(), n5, n5.value(),n4 + n5, (n4+n5).value() ))</span>
+<span class="sd">    ...       % ( n4, n4.value(), n5, n5.value(),n6, n6.value() ))</span>
 <span class="sd">     &#39;0+1+1&#39; (4) + &#39;-1-1-1&#39; (-13) = &#39;-100&#39; (-9)</span>
-<span class="sd">    &gt;&gt;&gt; n6 = n5.permute(1,2)</span>
-<span class="sd">    &gt;&gt;&gt; n6</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -340,6 +341,21 @@
                 <span class="n">bachet_string</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">bachet_string</span>
 
+    <span class="k">def</span> <span class="nf">_encodeTernary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the ternary 0,1,2 code of the Bachet vector</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">code_string</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">vector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">code_string</span> <span class="o">+=</span> <span class="s1">&#39;0&#39;</span>
+            <span class="k">elif</span> <span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">code_string</span> <span class="o">+=</span> <span class="s1">&#39;1&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">code_string</span> <span class="o">+=</span> <span class="s1">&#39;2&#39;</span>
+        <span class="k">return</span> <span class="n">code_string</span>
+            
     <span class="c1"># ---- arithmetic operations</span>
     
     <span class="k">def</span> <span class="fm">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
@@ -347,9 +363,10 @@
 <span class="sd">        Defines an unary negating operator for Bachet encoded numbers.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="n">neg</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">neg</span><span class="p">)):</span>
-            <span class="n">neg</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">neg</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">negVector</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)):</span>
+            <span class="n">negVector</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">neg</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span> <span class="o">=</span> <span class="n">negVector</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">neg</span>
         
     <span class="k">def</span> <span class="fm">__abs__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
@@ -428,32 +445,69 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the self==other value</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">n1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
-        <span class="n">n2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+        <span class="n">n1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_encodeTernary</span><span class="p">()</span>
+        <span class="n">n2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">_encodeTernary</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">n1</span><span class="o">==</span><span class="n">n2</span>
 
     <span class="k">def</span> <span class="fm">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return self&gt;=other</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
-        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">v1</span><span class="o">&gt;=</span><span class="n">v2</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_encodeTernary</span><span class="p">()</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">_encodeTernary</span><span class="p">()</span>
+        <span class="n">nz</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">nz</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">nz</span><span class="p">)):</span>
+                <span class="n">vector</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="s1">&#39;1&#39;</span>
+            <span class="n">v1</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="n">v1</span>
+        <span class="k">elif</span> <span class="n">nz</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nz</span><span class="p">):</span>
+                <span class="n">vector</span> <span class="o">+=</span> <span class="s1">&#39;1&#39;</span>
+            <span class="n">v2</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="n">v2</span>
+        <span class="k">return</span> <span class="n">v1</span> <span class="o">&gt;=</span> <span class="n">v2</span>
 
     <span class="k">def</span> <span class="fm">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return self&gt;other</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
-        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_encodeTernary</span><span class="p">()</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">_encodeTernary</span><span class="p">()</span>
+        <span class="n">nz</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">nz</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">nz</span><span class="p">)):</span>
+                <span class="n">vector</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="s1">&#39;1&#39;</span>
+            <span class="n">v1</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="n">v1</span>
+        <span class="k">elif</span> <span class="n">nz</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nz</span><span class="p">):</span>
+                <span class="n">vector</span> <span class="o">+=</span> <span class="s1">&#39;1&#39;</span>
+            <span class="n">v2</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="n">v2</span>
+        <span class="c1">#v1 = self.value()</span>
+        <span class="c1">#v2 = other.value()</span>
         <span class="k">return</span> <span class="n">v1</span><span class="o">&gt;</span><span class="n">v2</span>
 
     <span class="k">def</span> <span class="fm">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return self&lt;=other</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
-        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_encodeTernary</span><span class="p">()</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">_encodeTernary</span><span class="p">()</span>
+        <span class="n">nz</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">nz</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">nz</span><span class="p">)):</span>
+                <span class="n">vector</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="s1">&#39;1&#39;</span>
+            <span class="n">v1</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="n">v1</span>
+        <span class="k">elif</span> <span class="n">nz</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nz</span><span class="p">):</span>
+                <span class="n">vector</span> <span class="o">+=</span> <span class="s1">&#39;1&#39;</span>
+            <span class="n">v2</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="n">v2</span>
+        <span class="c1">#v1 = self.value()</span>
+        <span class="c1">#v2 = other.value()</span>
         <span class="k">return</span> <span class="n">v1</span><span class="o">&lt;=</span><span class="n">v2</span>
 
     <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
@@ -468,15 +522,30 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return self!=other</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
-        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_encodeTernary</span><span class="p">()</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">_encodeTernary</span><span class="p">()</span>
+        <span class="n">nz</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">nz</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">nz</span><span class="p">)):</span>
+                <span class="n">vector</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="s1">&#39;1&#39;</span>
+            <span class="n">v1</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="n">v1</span>
+        <span class="k">elif</span> <span class="n">nz</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nz</span><span class="p">):</span>
+                <span class="n">vector</span> <span class="o">+=</span> <span class="s1">&#39;1&#39;</span>
+            <span class="n">v2</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="n">v2</span>
+        <span class="c1">#v1 = self.value()</span>
+        <span class="c1">#v2 = other.value()</span>
         <span class="k">return</span> <span class="n">v1</span><span class="o">!=</span><span class="n">v2</span>
 
     <span class="k">def</span> <span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return self-other</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="n">other</span><span class="p">)</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="bp">self</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="n">other</span><span class="p">)</span>
+        <span class="n">new</span><span class="o">.</span><span class="n">integerValue</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="n">_computeIntegerValue</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">new</span>
 
     <span class="k">def</span> <span class="fm">__int__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -491,13 +560,22 @@
         <span class="n">q</span><span class="p">,</span><span class="n">r</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">other</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">q</span><span class="p">),</span><span class="n">BachetNumber</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
                
-    
-       
 <div class="viewcode-block" id="BachetNumber.value">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.BachetNumber.value">[docs]</a>
     <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Renders the integer corresponding to the Bachet number.</span>
+<span class="sd">        Return the integer value of the Bachet number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">integerValue</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">integerValue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computeIntegerValue</span><span class="p">()</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">integerValue</span></div>
+
+       
+    <span class="k">def</span> <span class="nf">_computeIntegerValue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Computes the integer corresponding to the Bachet vector.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result_int</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">nv</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span>
@@ -505,8 +583,7 @@
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nv</span><span class="p">):</span>
             <span class="n">result_int</span> <span class="o">+=</span> <span class="n">base3Power</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">nv</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">base3Power</span> <span class="o">*=</span> <span class="mi">3</span> <span class="c1"># 3**i</span>
-        <span class="k">return</span> <span class="n">result_int</span></div>
-
+        <span class="k">return</span> <span class="n">result_int</span>
 
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -527,6 +604,7 @@
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nv</span><span class="p">):</span>
             <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">nv</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">rev</span><span class="o">.</span><span class="n">vector</span> <span class="o">=</span> <span class="n">result</span>
+        <span class="n">rev</span><span class="o">.</span><span class="n">integerValue</span> <span class="o">=</span> <span class="n">rev</span><span class="o">.</span><span class="n">_computeIntegerValue</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">rev</span></div>
 
 
@@ -1443,7 +1521,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Nov 01, 2025.
+      <span class="lastupdated">Last updated on Nov 10, 2025.
       </span></p>
   </div>
 
