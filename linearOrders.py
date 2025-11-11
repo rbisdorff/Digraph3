@@ -1209,30 +1209,42 @@ class _OutFlowsOrder(LinearOrder):
 ##            self.showRelationTable()
 ##            self.showOrdering()
 
-    def showScores(self,direction='descending'):
-        print('Out flow scores in %s order' % direction)
-        print('action \t score')
-        if direction == 'descending':
-            for x in self.outFlows:
-                print('%s \t %.2f' %(x[1],x[0]))
-        else:
-            for x in reversed(self.outFlows):
-                print('%s \t %.2f' %(x[1],x[0]))
 #------------
 
 class _BachetRanking(Digraph):
     """
     abstract class for generic BachetRanking class methods.
     """
-    def showScores(self,direction='descending'):
+    def showScores(self,direction='descending',
+                   Valued=False,TernaryStrings=False):
         print('Bachet scores in %s order' % direction)
         print('action \t score')
-        if direction == 'descending':
-            for x in self.decBachetScores:
-                print('%s \t %.2f' %(x[1],x[0].value()))
+        if Valued:
+            if direction == 'descending':
+                for x in self.decBachetScores:
+                    if self.Polarised:
+                        print('%s \t %+d' %(x[1],int(x[0])))
+                    else:
+                        print('%s \t %.2f' %(x[1],x[0].value()))
+            else:
+                for x in self.incBachetScores:
+                    if self.Polarised:
+                        print('%s \t %+d' %(x[1],int(x[0])))
+                    else:
+                        print('%s \t %.2f' %(x[1],x[0].value()))
         else:
-            for x in self.incBachetScores:
-                print('%s \t %.2f' %(x[1],x[0].value()))
+            if direction == 'descending':
+                for x in self.decBachetScores:
+                    if TernaryStrings:
+                        print('%s \t \'%s\'' % ( x[1], x[0].ternaryCode() ) )
+                    else:
+                        print('%s \t \'%s\'' % ( x[1], str(x[0]) ) )
+            else:
+                for x in self.incBachetScores:
+                    if TernaryStrings:
+                        print('%s \t \'%s\'' % ( x[1], x[0].ternaryCode() ) )
+                    else:
+                        print('%s \t \'%s\'' % ( x[1], str(x[0]) ) )
 
 ##    def _permute(self,x,y):
 ##        """
@@ -2181,9 +2193,10 @@ class BachetRanking(LinearOrder,_BachetRanking):
                 log.write(str(al))
                 log.write('%.4f\n' % ba.correlation)
                 
-
+        bestBa.Polarised = Polarised
         for att in bestBa.__dict__:
             self.__dict__[att] = bestBa.__dict__[att]
+        self.Polarised = Polarised
         if Logging:
             log.close()
 
@@ -2354,6 +2367,7 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
             self.runTimes = bar.runTimes
             self.runTimes['bachet'] = time()-t0
             self.name = other.name + '_optimal_ranked'
+            self.Polarised = False
             self.decBachetScores = bar.decBachetScores
             self.incBachetScores = bar.incBachetScores
             self.bachetRanking = bar.bachetRanking
@@ -2389,6 +2403,7 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
             self.runTimes = bar.runTimes
             self.runTimes['bachet'] = time()-t0
             self.name = other.name + '_randomized_ranked'
+            self.Polarised = False
             self.decBachetScores = bar.decBachetScores
             self.incBachetScores = bar.incBachetScores
             self.bachetRanking = bar.bachetRanking
@@ -2512,8 +2527,9 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
                 decBachetScores = decBachetRevScores
                 bachetOrder = bachetRevOrder
                 incBachetScores = incBachetRevScores
-
+                
         self.actionsList = actionsList
+        self.Polarised = False
         self.bachetRanking = bachetRanking
         self.bachetOrder = bachetOrder
         self.decBachetScores = decBachetScores
@@ -3257,7 +3273,7 @@ if __name__ == "__main__":
         #print(ba2)
         ba2 = BachetRanking(g,Debug=False,
                             sampleSize=randomSize,
-                            Polarised=Polarised,
+                            Polarised=False,
                             TriplesSorted=True,
                             Randomized=True,
                             CoDualTriples=True,

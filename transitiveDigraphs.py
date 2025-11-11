@@ -1882,6 +1882,7 @@ class PartialBachetRanking(TransitiveDigraph):
       rankings that are used for constructing the *RankingsFusionDigraph* instance.
     - *Polarised = {True (default) | False}*, When Polarised = False, the
       :py:class:`linearOrders.ValuedBachetRanking` class is used.
+    - *orderLimit = integer (100 default)*, saveguarding the effective computation of Bachet rankings 
 
     >>> from randomPerfTabs import RandomCBPerformanceTableau
     >>> t = RandomCBPerformanceTableau(numberOfActions=20,
@@ -1917,7 +1918,8 @@ class PartialBachetRanking(TransitiveDigraph):
     
     def __init__(self,g,randomized=100,maxNbrOfRankings=5,
                  seed=None,Polarised=True,
-                 Comments=False,Debug=False):
+                 Comments=False,Debug=False,
+                 orderLimit=100):
         from time import time
         if Polarised:
             from linearOrders import PolarisedBachetRanking as BachetRanking
@@ -1932,7 +1934,9 @@ class PartialBachetRanking(TransitiveDigraph):
         j = 0
         for i in range(randomized):
             random.shuffle(actions)
-            ba = BachetRanking(g,actionsList=actions,BestQualified=False)
+            ba = BachetRanking(g,actionsList=actions,
+                               BestQualified=False,
+                               orderLimit=orderLimit)
             corrKey = '%.4f' % ba.correlation
             try:
                 statistics[corrKey]['freq'] += 1
@@ -2249,7 +2253,7 @@ if __name__ == "__main__":
     ****************************************************
     """)
 
-    pt = RandomCBPerformanceTableau(numberOfActions=9,numberOfCriteria=13,seed=100)
+    pt = RandomCBPerformanceTableau(numberOfActions=50,numberOfCriteria=13,seed=100)
     g = BipolarOutrankingDigraph(pt)
     pbr = PartialBachetRanking(g,randomized=200,seed=1,Polarised=True,Comments=False,Debug=False)
     print(pbr)

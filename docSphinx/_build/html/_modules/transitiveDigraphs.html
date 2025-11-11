@@ -2054,6 +2054,7 @@
 <span class="sd">      rankings that are used for constructing the *RankingsFusionDigraph* instance.</span>
 <span class="sd">    - *Polarised = {True (default) | False}*, When Polarised = False, the</span>
 <span class="sd">      :py:class:`linearOrders.ValuedBachetRanking` class is used.</span>
+<span class="sd">    - *orderLimit = integer (100 default)*, saveguarding the effective computation of Bachet rankings </span>
 
 <span class="sd">    &gt;&gt;&gt; from randomPerfTabs import RandomCBPerformanceTableau</span>
 <span class="sd">    &gt;&gt;&gt; t = RandomCBPerformanceTableau(numberOfActions=20,</span>
@@ -2089,7 +2090,8 @@
     
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">maxNbrOfRankings</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
                  <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                 <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                 <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">orderLimit</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
         <span class="k">if</span> <span class="n">Polarised</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">PolarisedBachetRanking</span> <span class="k">as</span> <span class="n">BachetRanking</span>
@@ -2104,7 +2106,9 @@
         <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">randomized</span><span class="p">):</span>
             <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
-            <span class="n">ba</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">actions</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">ba</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">actions</span><span class="p">,</span>
+                               <span class="n">BestQualified</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                               <span class="n">orderLimit</span><span class="o">=</span><span class="n">orderLimit</span><span class="p">)</span>
             <span class="n">corrKey</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">ba</span><span class="o">.</span><span class="n">correlation</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">statistics</span><span class="p">[</span><span class="n">corrKey</span><span class="p">][</span><span class="s1">&#39;freq&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -2443,7 +2447,7 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
 
-    <span class="n">pt</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">pt</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">pt</span><span class="p">)</span>
     <span class="n">pbr</span> <span class="o">=</span> <span class="n">PartialBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">pbr</span><span class="p">)</span>
