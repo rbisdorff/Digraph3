@@ -3189,14 +3189,14 @@ if __name__ == "__main__":
     #res = open('tes.csv','w')
     res.write('"seed","nt","baptft","bapttt","bapfft","bapfff","cop","nf","ke"\n')
     sampleSize = 1
-    randomSize = None
-    Polarised=False
+    randomSize = 50
+    Polarised=True
     #t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
     for sample in range(sampleSize):
         print(sample)
         #seed = random.randint(1,1000000)
         seed = 8
-        #seed = sample + 1
+        seed = sample + 1
     ##    t = CircularPerformanceTableau()
         #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
         #t = PerformanceTableau('testLin')
@@ -3239,7 +3239,7 @@ if __name__ == "__main__":
         nf = NetFlowsRanking(g)
         corrnf = g.computeRankingCorrelation(nf.netFlowsRanking)
         #print('nf',nf.netFlowsRanking,corrnf)
-        ke = KemenyRanking(g,orderLimit=9)
+        ke = KemenyRanking(g,orderLimit=11)
         corrke = g.computeRankingCorrelation(ke.kemenyRanking)
         #print('ke',ke.kemenyRanking,corrke)
 ##        randomActions = [x for x in g.actions]

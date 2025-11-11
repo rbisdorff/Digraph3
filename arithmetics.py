@@ -255,21 +255,6 @@ class BachetNumber(object):
             else:
                 bachet_string += '%d' % (self.vector[i])
         return bachet_string
-
-    def _encodeTernary(self):
-        """
-        Returns the ternary 0,1,2 code of the Bachet vector
-        """
-        code_string = ''
-        vector = self.vector
-        for i in range(len(self.vector)):
-            if vector[i] == -1:
-                code_string += '0'
-            elif vector[i] == 0:
-                code_string += '1'
-            else:
-                code_string += '2'
-        return code_string
             
     # ---- arithmetic operations
     
@@ -302,11 +287,9 @@ class BachetNumber(object):
         n1 = len(self)
         n2 = len(other)
         if n1 >= n2:
-            new = deepcopy(self)
-            new.vector = [0 for i in range(n1)]
+            vector = [0 for i in range(n1)]
         else:
-            new = deepcopy(other)
-            new.vector = [0 for i in range(n2)]
+            vector = [0 for i in range(n2)]
         n = max(n1,n2)
         reste = 0
         for i in range(n):
@@ -322,30 +305,30 @@ class BachetNumber(object):
             if Debug:
                 print('i,psi,poi,reste,pi', i,psi,poi,reste,pi)
             if pi == 2:
-                new.vector[i] = -1
+                vector[i] = -1
                 reste = 1
             elif pi == 3:
-                new.vector[i] = 0
+                vector[i] = 0
                 reste = 1
             elif pi == -2:
-                new.vector[i] = 1
+                vector[i] = 1
                 reste = -1
             elif pi == -3:
-                new.vector[i] = 0
+                vector[i] = 0
                 reste = -1
             else:
-                new.vector[i] = pi
+                vector[i] = pi
                 reste = 0
             if Debug:
                 print("reste",reste)
         if reste != 0:
             if Debug:
                 print('add',reste)
-            new.vector = new.vector + [reste]
+            vector = vector + [reste]
         if Debug:
-            print(new.vector)
-        result = new.reverse()
-        return result
+            print(vector)
+        new = ~(BachetNumber(vector=vector))
+        return new
 
     def __mul__(self,other,/):
         """
@@ -360,16 +343,16 @@ class BachetNumber(object):
         """
         Return the self==other value
         """
-        n1 = self._encodeTernary()
-        n2 = other._encodeTernary()
-        return n1==n2
+        v1 = self.ternaryCode()
+        v2 = other.ternaryCode()
+        return v1==v2
 
     def __ge__(self,other, /):
         """
         Return self>=other
         """
-        v1 = self._encodeTernary()
-        v2 = other._encodeTernary()
+        v1 = self.ternaryCode()
+        v2 = other.ternaryCode()
         nz = len(v1) - len(v2)
         if nz < 0:
             vector = ''
@@ -387,8 +370,8 @@ class BachetNumber(object):
         """
         Return self>other
         """
-        v1 = self._encodeTernary()
-        v2 = other._encodeTernary()
+        v1 = self.ternaryCode()
+        v2 = other.ternaryCode()
         nz = len(v1) - len(v2)
         if nz < 0:
             vector = ''
@@ -400,16 +383,14 @@ class BachetNumber(object):
             for i in range(nz):
                 vector += '1'
             v2 = vector + v2
-        #v1 = self.value()
-        #v2 = other.value()
         return v1>v2
 
     def __le__(self,other, /):
         """
         Return self<=other
         """
-        v1 = self._encodeTernary()
-        v2 = other._encodeTernary()
+        v1 = self.ternaryCode()
+        v2 = other.ternaryCode()
         nz = len(v1) - len(v2)
         if nz < 0:
             vector = ''
@@ -421,24 +402,14 @@ class BachetNumber(object):
             for i in range(nz):
                 vector += '1'
             v2 = vector + v2
-        #v1 = self.value()
-        #v2 = other.value()
         return v1<=v2
 
     def __lt__(self,other, /):
         """
         Return self>other
         """
-        v1 = self.value()
-        v2 = other.value()
-        return v1<v2
-    
-    def __ne__(self,other, /):
-        """
-        Return self!=other
-        """
-        v1 = self._encodeTernary()
-        v2 = other._encodeTernary()
+        v1 = self.ternaryCode()
+        v2 = other.ternaryCode()
         nz = len(v1) - len(v2)
         if nz < 0:
             vector = ''
@@ -450,8 +421,25 @@ class BachetNumber(object):
             for i in range(nz):
                 vector += '1'
             v2 = vector + v2
-        #v1 = self.value()
-        #v2 = other.value()
+        return v1<v2
+    
+    def __ne__(self,other, /):
+        """
+        Return self!=other
+        """
+        v1 = self.ternaryCode()
+        v2 = other.ternaryCode()
+        nz = len(v1) - len(v2)
+        if nz < 0:
+            vector = ''
+            for i in range(abs(nz)):
+                vector = vector + '1'
+            v1 = vector + v1
+        elif nz > 0:
+            vector = ''
+            for i in range(nz):
+                vector += '1'
+            v2 = vector + v2
         return v1!=v2
 
     def __sub__(self,other, /):
@@ -459,7 +447,6 @@ class BachetNumber(object):
         Return self-other
         """
         new = self + (-other)
-        new.integerValue = new._computeIntegerValue()
         return new
 
     def __int__(self, /):
@@ -484,7 +471,7 @@ class BachetNumber(object):
         except:
             self.integerValue = self._computeIntegerValue()
             return self.integerValue
-       
+
     def _computeIntegerValue(self):
         """
         Computes the integer corresponding to the Bachet vector.
@@ -497,6 +484,33 @@ class BachetNumber(object):
             base3Power *= 3 # 3**i
         return result_int
 
+        
+    def ternaryCode(self):
+        """
+        Return the ternary {0,1,2} code of the Bachet number
+        """
+        try:
+            return self.ternaryString
+        except:
+            self.ternaryString = self._encodeTernaryCode()
+            return self.ternaryString
+
+    def _encodeTernaryCode(self):
+        """
+        Returns the ternary 0,1,2 code of the Bachet vector
+        """
+        codeString = ''
+        vector = self.vector
+        for i in range(len(self.vector)):
+            if vector[i] == -1:
+                codeString += '0'
+            elif vector[i] == 0:
+                codeString += '1'
+            else:
+                codeString += '2'
+        self.ternaryString = codeString
+        return codeString
+
     def __len__(self):
         """
         Returns the length of the Bachet encoding
@@ -508,13 +522,11 @@ class BachetNumber(object):
         Reverses the Bachet vector. Returns a modified Bachet number.
         """
         from copy import deepcopy
-        rev = deepcopy(self)
         nv = len(self.vector)
         result = [0 for i in range(nv)]
         for i in range(nv):
             result[i] = self.vector[nv-i-1]
-        rev.vector = result
-        rev.integerValue = rev._computeIntegerValue()
+        rev = BachetNumber(vector=result)
         return rev
 
     def __invert__(self, /):
