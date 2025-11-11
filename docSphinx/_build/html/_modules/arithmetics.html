@@ -556,28 +556,30 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">integerValue</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">integerValue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computeIntegerValue</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">integerValue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computeValue</span><span class="p">()</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">integerValue</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_computeIntegerValue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_computeValue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Computes the integer corresponding to the Bachet vector.</span>
+<span class="sd">        Computes the integer or decimal value corresponding to the</span>
+<span class="sd">        polarised, respectively valued, Bachet vector.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">result_int</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">nv</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span>
         <span class="n">base3Power</span> <span class="o">=</span> <span class="mi">1</span>   <span class="c1"># 3**0</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nv</span><span class="p">):</span>
-            <span class="n">result_int</span> <span class="o">+=</span> <span class="n">base3Power</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">nv</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">value</span> <span class="o">+=</span> <span class="n">base3Power</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">nv</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">base3Power</span> <span class="o">*=</span> <span class="mi">3</span> <span class="c1"># 3**i</span>
-        <span class="k">return</span> <span class="n">result_int</span>
+        <span class="k">return</span> <span class="n">value</span>
 
         
 <div class="viewcode-block" id="BachetNumber.ternaryCode">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.BachetNumber.ternaryCode">[docs]</a>
     <span class="k">def</span> <span class="nf">ternaryCode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the ternary {0,1,2} code of the Bachet number</span>
+<span class="sd">        Return the ternary {0,1,2} code of the Bachet number.</span>
+<span class="sd">        Used for alphabetically comparing Bachet numbers.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ternaryString</span>

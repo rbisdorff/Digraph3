@@ -469,25 +469,27 @@ class BachetNumber(object):
         try:
             return self.integerValue
         except:
-            self.integerValue = self._computeIntegerValue()
+            self.integerValue = self._computeValue()
             return self.integerValue
 
-    def _computeIntegerValue(self):
+    def _computeValue(self):
         """
-        Computes the integer corresponding to the Bachet vector.
+        Computes the integer or decimal value corresponding to the
+        polarised, respectively valued, Bachet vector.
         """
-        result_int = 0
+        value = 0
         nv = len(self.vector)
         base3Power = 1   # 3**0
         for i in range(nv):
-            result_int += base3Power*self.vector[nv-i-1]
+            value += base3Power*self.vector[nv-i-1]
             base3Power *= 3 # 3**i
-        return result_int
+        return value
 
         
     def ternaryCode(self):
         """
-        Return the ternary {0,1,2} code of the Bachet number
+        Return the ternary {0,1,2} code of the Bachet number.
+        Used for alphabetically comparing Bachet numbers.
         """
         try:
             return self.ternaryString

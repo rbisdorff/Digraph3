@@ -8981,18 +8981,18 @@ Copyright (C) 2011-2025  Raymond Bisdorff</p>
 <span class="go">                       &#39;bachetOrder&#39;, &#39;decBachetScores&#39;, &#39;incBachetScores&#39;,</span>
 <span class="go">                       &#39;name&#39;, &#39;actions&#39;, &#39;order&#39;, &#39;valuationdomain&#39;, &#39;relation&#39;,</span>
 <span class="go">                       &#39;correlation&#39;, &#39;gamma&#39;, &#39;notGamma&#39;, &#39;runTimes&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span><span class="o">.</span><span class="n">showScores</span><span class="p">(</span><span class="n">Valued</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">Bachet scores in descending order</span>
 <span class="go"> action      score</span>
-<span class="go">  a2         6056.00</span>
-<span class="go">  a5         4746.00</span>
-<span class="go">  a9         2966.00</span>
-<span class="go">  a6         -306.00</span>
-<span class="go">  a4         -1494.00</span>
-<span class="go">  a8         -1849.00</span>
-<span class="go">  a3         -4801.00</span>
-<span class="go">  a7         -4955.00</span>
-<span class="go">  a1         -5921.00</span>
+<span class="go">  a2         +6056</span>
+<span class="go">  a5         +4746</span>
+<span class="go">  a9         +2966</span>
+<span class="go">  a6          -306</span>
+<span class="go">  a4         -1494</span>
+<span class="go">  a8         -1849</span>
+<span class="go">  a3         -4801</span>
+<span class="go">  a7         -4955</span>
+<span class="go">  a1         -5921</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span><span class="o">.</span><span class="n">bachetRanking</span>
 <span class="go">[&#39;a2&#39;, &#39;a5&#39;, &#39;a9&#39;, &#39;a6&#39;, &#39;a4&#39;, &#39;a8&#39;, &#39;a3&#39;, &#39;a7&#39;, &#39;a1&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span><span class="o">.</span><span class="n">correlation</span>
@@ -9193,7 +9193,7 @@ to the indeterminate value.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">PolarisedBachetRanking</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- solely given ordering of the actions&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span> <span class="o">=</span> <span class="n">PolarisedBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span><span class="o">.</span><span class="n">showScores</span><span class="p">(</span><span class="n">Valued</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go"> Bachet scores in descending order</span>
 <span class="go"> action      score</span>
 <span class="go"> a2          6020.00</span>
@@ -9209,7 +9209,7 @@ to the indeterminate value.</p>
 <span class="go"> {&#39;correlation&#39;: 0.3935624213996805, &#39;determination&#39;: 0.408625}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- given and reversed ordering of the actions&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ba2</span> <span class="o">=</span> <span class="n">PolarisedBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba2</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba2</span><span class="o">.</span><span class="n">showScores</span><span class="p">(</span><span class="n">Valued</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
 <span class="go"> Bachet scores in descending order</span>
 <span class="go"> action      score</span>
 <span class="go"> a2          6380.00</span>
@@ -9225,7 +9225,7 @@ to the indeterminate value.</p>
 <span class="go"> {&#39;correlation&#39;: 0.6314945107236328, &#39;determination&#39;: 0.408625}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- using 10 random ordering and their reversed versions&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ba3</span> <span class="o">=</span> <span class="n">PolarisedBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba3</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba3</span><span class="o">.</span><span class="n">showScores</span><span class="p">(</span><span class="n">Valued</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go"> Bachet scores in descending order</span>
 <span class="go"> action      score</span>
 <span class="go"> a2          6540.00</span>
@@ -9317,32 +9317,32 @@ a given bipolar-valued Digraph instance</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">ValuedBachetRanking</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- solely given ordering and the reverse of the actions&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span> <span class="o">=</span> <span class="n">ValuedBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span><span class="o">.</span><span class="n">showScores</span><span class="p">(</span><span class="n">Valued</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
 <span class="go"> Bachet scores in descending order</span>
-<span class="go"> action      score</span>
-<span class="go"> a2          3126.01</span>
-<span class="go"> a5          1660.68</span>
-<span class="go"> a9          1439.05</span>
-<span class="go"> a3          490.35</span>
-<span class="go"> a6          288.43</span>
-<span class="go"> a4          -59.94</span>
-<span class="go"> a8          -107.58</span>
-<span class="go"> a7          -270.58</span>
+<span class="go"> action       score</span>
+<span class="go"> a2          +3126.01</span>
+<span class="go"> a5          +1660.68</span>
+<span class="go"> a9          +1439.05</span>
+<span class="go"> a3           +490.35</span>
+<span class="go"> a6           +288.43</span>
+<span class="go"> a4            -59.94</span>
+<span class="go"> a8           -107.58</span>
+<span class="go"> a7           -270.58</span>
 <span class="go"> a1          -2948.69</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba1</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">))</span>
 <span class="go"> {&#39;correlation&#39;: 0.6314945107236328, &#39;determination&#39;: 0.408625}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- using 100 random orderings and their reversed versions&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ba2</span> <span class="o">=</span> <span class="n">ValuedBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba2</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba2</span><span class="o">.</span><span class="n">showScores</span><span class="p">(</span><span class="n">Valued</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go"> Bachet scores in descending order</span>
-<span class="go"> action      score</span>
-<span class="go"> a2          3580.93</span>
-<span class="go"> a9          2725.92</span>
-<span class="go"> a5          1773.33</span>
-<span class="go"> a6          672.79</span>
-<span class="go"> a8          -115.16</span>
-<span class="go"> a4          -489.13</span>
-<span class="go"> a3          -652.16</span>
+<span class="go"> action       score</span>
+<span class="go"> a2          +3580.93</span>
+<span class="go"> a9          +2725.92</span>
+<span class="go"> a5          +1773.33</span>
+<span class="go"> a6           +672.79</span>
+<span class="go"> a8           -115.16</span>
+<span class="go"> a4           -489.13</span>
+<span class="go"> a3           -652.16</span>
 <span class="go"> a7          -1102.77</span>
 <span class="go"> a1          -1550.40</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba3</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">))</span>
@@ -12199,7 +12199,8 @@ Springer Verlag London 1998.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="arithmetics.BachetNumber.ternaryCode">
 <span class="sig-name descname"><span class="pre">ternaryCode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#BachetNumber.ternaryCode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.BachetNumber.ternaryCode" title="Link to this definition"></a></dt>
-<dd><p>Return the ternary {0,1,2} code of the Bachet number</p>
+<dd><p>Return the ternary {0,1,2} code of the Bachet number.
+Used for alphabetically comparing Bachet numbers.</p>
 </dd></dl>
 
 <dl class="py method">

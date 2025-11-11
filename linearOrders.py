@@ -1225,26 +1225,38 @@ class _BachetRanking(Digraph):
                     if self.Polarised:
                         print('%s \t %+d' %(x[1],int(x[0])))
                     else:
-                        print('%s \t %.2f' %(x[1],x[0].value()))
+                        print('%s \t %.2f' %(x[1],x[0]))
             else:
                 for x in self.incBachetScores:
                     if self.Polarised:
                         print('%s \t %+d' %(x[1],int(x[0])))
                     else:
-                        print('%s \t %.2f' %(x[1],x[0].value()))
+                        print('%s \t %.2f' %(x[1],x[0]))
         else:
             if direction == 'descending':
                 for x in self.decBachetScores:
                     if TernaryStrings:
-                        print('%s \t \'%s\'' % ( x[1], x[0].ternaryCode() ) )
+                        if self.Polarised:
+                            print('%s \t \'%s\'' % ( x[1], x[0].ternaryCode() ))
+                        else:
+                            print('%s \t %.2f' % ( x[1], x[0] ) )
                     else:
-                        print('%s \t \'%s\'' % ( x[1], str(x[0]) ) )
+                        if self.Polarised:
+                            print('%s \t %d' % ( x[1], int(x[0]) ) )
+                        else:
+                            print('%s \t %.2f' % ( x[1], x[0] ) )
             else:
                 for x in self.incBachetScores:
                     if TernaryStrings:
-                        print('%s \t \'%s\'' % ( x[1], x[0].ternaryCode() ) )
+                        if self.Polarised:
+                            print('%s \t \'%s\'' % ( x[1], x[0].ternaryCode() ) )
+                        else:
+                            print('%s \t %.2f' % ( x[1], x[0] ) )
                     else:
-                        print('%s \t \'%s\'' % ( x[1], str(x[0]) ) )
+                        if self.Polarised:
+                            print('%s \t %d' % ( x[1], int(x[0]) ) )
+                        else:
+                            print('%s \t %.2f' % ( x[1], x[0] ) )
 
 ##    def _permute(self,x,y):
 ##        """
@@ -1462,7 +1474,7 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
     >>> from linearOrders import PolarisedBachetRanking
     >>> print('*---- solely given ordering of the actions')
     >>> ba1 = PolarisedBachetRanking(g,BestQualified=False)
-    >>> ba1.showScores()
+    >>> ba1.showScores(Valued=True)
      Bachet scores in descending order
      action 	 score
      a2 	 6020.00
@@ -1478,7 +1490,7 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
      {'correlation': 0.3935624213996805, 'determination': 0.408625}
     >>> print('*---- given and reversed ordering of the actions')
     >>> ba2 = PolarisedBachetRanking(g,BestQualified=True)
-    >>> ba2.showScores() 
+    >>> ba2.showScores(Valued=True) 
      Bachet scores in descending order
      action 	 score
      a2 	 6380.00
@@ -1494,7 +1506,7 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
      {'correlation': 0.6314945107236328, 'determination': 0.408625}
     >>> print('*---- using 10 random ordering and their reversed versions')
     >>> ba3 = PolarisedBachetRanking(g,BestQualified=True,randomized=10)
-    >>> ba3.showScores()
+    >>> ba3.showScores(Valued=True)
      Bachet scores in descending order
      action 	 score
      a2 	 6540.00
@@ -1524,7 +1536,6 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
                  BestQualified=True,
                  randomized=0,seed=None,
                  Optimal=False,
-                 #_Permuting=False,
                  Comments=False,Debug=False):
         """
         constructor for generating a linear order
@@ -2030,18 +2041,18 @@ class BachetRanking(LinearOrder,_BachetRanking):
                            'bachetOrder', 'decBachetScores', 'incBachetScores',
                            'name', 'actions', 'order', 'valuationdomain', 'relation',
                            'correlation', 'gamma', 'notGamma', 'runTimes']
-    >>> sba.showScores()
+    >>> sba.showScores(Valued=True)
     Bachet scores in descending order
      action 	 score
-      a2 	 6056.00
-      a5 	 4746.00
-      a9 	 2966.00
-      a6 	 -306.00
-      a4 	 -1494.00
-      a8 	 -1849.00
-      a3 	 -4801.00
-      a7 	 -4955.00
-      a1 	 -5921.00
+      a2 	 +6056
+      a5 	 +4746
+      a9 	 +2966
+      a6 	  -306
+      a4 	 -1494
+      a8 	 -1849
+      a3 	 -4801
+      a7 	 -4955
+      a1 	 -5921
     >>> sba.bachetRanking
     ['a2', 'a5', 'a9', 'a6', 'a4', 'a8', 'a3', 'a7', 'a1']
     >>> sba.correlation
@@ -2104,8 +2115,6 @@ class BachetRanking(LinearOrder,_BachetRanking):
             al = actionsList
         if Debug:
             print(al)
-        #bestCorr = 0.0
-        #bestList = al
         if Polarised:
             currBachetRanking = PolarisedBachetRanking
         else:
@@ -2118,15 +2127,12 @@ class BachetRanking(LinearOrder,_BachetRanking):
         al = bestBa.actionsList
         if Debug:
             print('init 0: ',al,bestCorr)
-        #print(al)
         if Logging:
             log = open('logging.txt','w')
             log.write(str(al))
             log.write('%.4f\n' % bestBa.correlation)
         for i in rdIndex:
-        #for st in triplesSet:
             tr = rankedTriples[i][1]
-            #tr = list(st)
             if Debug:
                 print('permuting:',tr)
             xi = al.index(tr[0])
@@ -2235,32 +2241,32 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
     >>> from linearOrders import ValuedBachetRanking
     >>> print('*---- solely given ordering and the reverse of the actions')
     >>> ba1 = ValuedBachetRanking(g,BestQualified=True)
-    >>> ba1.showScores() 
+    >>> ba1.showScores(Valued=True) 
      Bachet scores in descending order
-     action 	 score
-     a2 	 3126.01
-     a5 	 1660.68
-     a9 	 1439.05
-     a3 	 490.35
-     a6 	 288.43
-     a4 	 -59.94
-     a8 	 -107.58
-     a7 	 -270.58
+     action 	  score
+     a2 	 +3126.01
+     a5 	 +1660.68
+     a9 	 +1439.05
+     a3 	  +490.35
+     a6 	  +288.43
+     a4 	   -59.94
+     a8 	  -107.58
+     a7 	  -270.58
      a1 	 -2948.69
     >>> print(g.computeRankingCorrelation(ba1.bachetRanking))
      {'correlation': 0.6314945107236328, 'determination': 0.408625}
     >>> print('*---- using 100 random orderings and their reversed versions')
     >>> ba2 = ValuedBachetRanking(g,randomized=100)
-    >>> ba2.showScores()
+    >>> ba2.showScores(Valued=True)
      Bachet scores in descending order
-     action 	 score
-     a2 	 3580.93
-     a9 	 2725.92
-     a5 	 1773.33
-     a6 	 672.79
-     a8 	 -115.16
-     a4 	 -489.13
-     a3 	 -652.16
+     action 	  score
+     a2 	 +3580.93
+     a9 	 +2725.92
+     a5 	 +1773.33
+     a6 	  +672.79
+     a8 	  -115.16
+     a4 	  -489.13
+     a3 	  -652.16
      a7 	 -1102.77
      a1 	 -1550.40
     >>> print(g.computeRankingCorrelation(ba3.bachetRanking))
@@ -2281,8 +2287,6 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
                  BestQualified=True,
                  randomized=0,seed=None,
                  Optimal=False,
-                 #Polarised=False,
-                 #_Permuting=False,
                  Comments=False,Debug=False):
         """
         constructor for generating a linear order
@@ -2462,8 +2466,8 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
 ##                    incBachetScores.append((bScore,x,bx,by))
 ##                    decBachetScores.append((bScore,x,bx,by))
 ##                else:
-                incBachetScores.append((bScore,x))
-                decBachetScores.append((bScore,x))
+                incBachetScores.append((bScore.value(),x))
+                decBachetScores.append((bScore.value(),x))
                 if BestQualified:
                     bxrev = bx.reverse()
                     byrev = by.reverse()
@@ -2472,8 +2476,8 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
 ##                        incBachetRevScores.append((bRevScore.value(),x,bxrev,byrev))
 ##                        decBachetRevScores.append((bRevScore.value(),x,bxrev,byrev))
 ##                    else:
-                    incBachetRevScores.append((bRevScore,x))
-                    decBachetRevScores.append((bRevScore,x))
+                    incBachetRevScores.append((bRevScore.value(),x))
+                    decBachetRevScores.append((bRevScore.value(),x))
             # reversed sorting with keeping the actions initial ordering
             # in case of ties
             if Debug:
@@ -2570,7 +2574,6 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
         self.order = n
         self.valuationdomain = valuationdomain
         self.relation = deepcopy(relation)
-        #if not Polarised:
         corr = other.computeRankingCorrelation(self.bachetRanking)
         self.correlation = corr['correlation']
         self.gamma = self.gammaSets()
