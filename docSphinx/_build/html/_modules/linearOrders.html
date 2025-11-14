@@ -1359,41 +1359,41 @@
         <span class="k">if</span> <span class="n">Valued</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;descending&#39;</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">decBachetScores</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Polarised</span><span class="p">:</span>
-                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%+d</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+                    <span class="c1">#if self.Polarised:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%+d</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+                    <span class="c1">#else:</span>
+                    <span class="c1">#    print(&#39;%s \t %.2f&#39; %(x[1],x[0].value()))</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">incBachetScores</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Polarised</span><span class="p">:</span>
-                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%+d</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+                    <span class="c1">#if self.Polarised:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%+d</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+                    <span class="c1">#else:</span>
+                    <span class="c1">#print(&#39;%s \t %.2f&#39; %(x[1],x[0].value()))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;descending&#39;</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">decBachetScores</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">TernaryStrings</span><span class="p">:</span>
-                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Polarised</span><span class="p">:</span>
-                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ternaryCode</span><span class="p">()</span> <span class="p">))</span>
-                        <span class="k">else</span><span class="p">:</span>
-                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span> <span class="p">)</span>
+                        <span class="c1">#if self.Polarised:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ternaryCode</span><span class="p">()</span> <span class="p">))</span>
+                        <span class="c1">#else:</span>
+                        <span class="c1">#    print(&#39;%s \t %.2f&#39; % ( x[1], x[0].value() ) )</span>
                     <span class="k">else</span><span class="p">:</span>
-                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Polarised</span><span class="p">:</span>
-                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">)</span> <span class="p">)</span>
-                        <span class="k">else</span><span class="p">:</span>
-                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span> <span class="p">)</span>
+                        <span class="c1">#if self.Polarised:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%+d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">)</span> <span class="p">)</span>
+                        <span class="c1">#else:</span>
+                        <span class="c1">#    print(&#39;%s \t %.2f&#39; % ( x[1], x[0].value() ) )</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">incBachetScores</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">TernaryStrings</span><span class="p">:</span>
-                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Polarised</span><span class="p">:</span>
-                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ternaryCode</span><span class="p">()</span> <span class="p">)</span> <span class="p">)</span>
-                        <span class="k">else</span><span class="p">:</span>
-                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span> <span class="p">)</span>
+                        <span class="c1">#if self.Polarised:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ternaryCode</span><span class="p">()</span> <span class="p">)</span> <span class="p">)</span>
+                        <span class="c1">#else:</span>
+                        <span class="c1">#    print(&#39;%s \t %.2f&#39; % ( x[1], x[0] ) )</span>
                     <span class="k">else</span><span class="p">:</span>
-                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Polarised</span><span class="p">:</span>
-                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">)</span> <span class="p">)</span>
-                        <span class="k">else</span><span class="p">:</span>
-                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span> <span class="p">)</span>
+                        <span class="c1">#if self.Polarised:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%+d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">)</span> <span class="p">)</span>
+                        <span class="c1">#else:</span>
+                        <span class="c1">#    print(&#39;%s \t %.2f&#39; % ( x[1], x[0] ) )</span>
 
 <span class="c1">##    def _permute(self,x,y):</span>
 <span class="c1">##        &quot;&quot;&quot;</span>
@@ -2617,8 +2617,8 @@
 <span class="c1">##                    incBachetScores.append((bScore,x,bx,by))</span>
 <span class="c1">##                    decBachetScores.append((bScore,x,bx,by))</span>
 <span class="c1">##                else:</span>
-                <span class="n">incBachetScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">bScore</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="n">x</span><span class="p">))</span>
-                <span class="n">decBachetScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">bScore</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="n">x</span><span class="p">))</span>
+                <span class="n">incBachetScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">bScore</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
+                <span class="n">decBachetScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">bScore</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
                 <span class="k">if</span> <span class="n">BestQualified</span><span class="p">:</span>
                     <span class="n">bxrev</span> <span class="o">=</span> <span class="n">bx</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
                     <span class="n">byrev</span> <span class="o">=</span> <span class="n">by</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
@@ -2627,8 +2627,8 @@
 <span class="c1">##                        incBachetRevScores.append((bRevScore.value(),x,bxrev,byrev))</span>
 <span class="c1">##                        decBachetRevScores.append((bRevScore.value(),x,bxrev,byrev))</span>
 <span class="c1">##                    else:</span>
-                    <span class="n">incBachetRevScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">bRevScore</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="n">x</span><span class="p">))</span>
-                    <span class="n">decBachetRevScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">bRevScore</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="n">x</span><span class="p">))</span>
+                    <span class="n">incBachetRevScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">bRevScore</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
+                    <span class="n">decBachetRevScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">bRevScore</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
             <span class="c1"># reversed sorting with keeping the actions initial ordering</span>
             <span class="c1"># in case of ties</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -3380,17 +3380,17 @@
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing class and methods -------&#39;</span><span class="p">)</span>
 
     <span class="n">Threading</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test9CBPolAll50Ctrl.csv&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test9CBPolRd50500Ctrl1.csv&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
     <span class="c1">#res = open(&#39;tes.csv&#39;,&#39;w&#39;)</span>
     <span class="n">res</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&quot;seed&quot;,&quot;nt&quot;,&quot;baptft&quot;,&quot;bapttt&quot;,&quot;bapfft&quot;,&quot;bapfff&quot;,&quot;cop&quot;,&quot;nf&quot;,&quot;ke&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="n">sampleSize</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">randomSize</span> <span class="o">=</span> <span class="mi">50</span>
-    <span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span>
+    <span class="n">Polarised</span><span class="o">=</span><span class="kc">False</span>
     <span class="c1">#t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)</span>
     <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sampleSize</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
         <span class="c1">#seed = random.randint(1,1000000)</span>
-        <span class="n">seed</span> <span class="o">=</span> <span class="mi">8</span>
+        <span class="c1">#seed = 8</span>
         <span class="n">seed</span> <span class="o">=</span> <span class="n">sample</span> <span class="o">+</span> <span class="mi">1</span>
     <span class="c1">##    t = CircularPerformanceTableau()</span>
         <span class="c1">#t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)</span>
@@ -3452,7 +3452,7 @@
         <span class="c1">#print(ba2)</span>
         <span class="n">ba2</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                             <span class="n">sampleSize</span><span class="o">=</span><span class="n">randomSize</span><span class="p">,</span>
-                            <span class="n">Polarised</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                            <span class="n">Polarised</span><span class="o">=</span><span class="n">Polarised</span><span class="p">,</span>
                             <span class="n">TriplesSorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                             <span class="n">Randomized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                             <span class="n">CoDualTriples</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -3525,7 +3525,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Nov 11, 2025.
+      <span class="lastupdated">Last updated on Nov 14, 2025.
       </span></p>
   </div>
 

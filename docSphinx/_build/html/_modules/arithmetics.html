@@ -255,13 +255,16 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">num_int</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">vector</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">vl</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span>
+                <span class="n">ln</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span>
+                <span class="n">num_int</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_computeValue</span><span class="p">(</span><span class="n">vector</span><span class="p">))</span>
+                <span class="n">b</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">num_int</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">ln</span><span class="p">)</span>
+                <span class="n">vl</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">vl</span> <span class="o">&gt;=</span> <span class="n">length</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">vector</span> <span class="o">=</span> <span class="n">vector</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">vector</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">vector</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">nz</span> <span class="o">=</span> <span class="n">length</span> <span class="o">-</span> <span class="n">vl</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">vector</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nz</span><span class="p">)]</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">vector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector</span> <span class="o">+</span> <span class="n">vector</span>
+                    <span class="n">zvector</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nz</span><span class="p">)]</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">vector</span> <span class="o">=</span> <span class="n">zvector</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="n">vector</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">)]</span>
         <span class="k">else</span><span class="p">:</span>
@@ -351,21 +354,28 @@
         <span class="n">negVector</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)):</span>
             <span class="n">negVector</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">neg</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span> <span class="o">=</span> <span class="n">negVector</span><span class="p">)</span>
+        <span class="n">ln</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span>
+        <span class="n">neg</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span> <span class="o">=</span> <span class="n">negVector</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">ln</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">neg</span>
         
     <span class="k">def</span> <span class="fm">__abs__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Defines the addition operator for Bachet encoded numbers</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ln</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span>
         <span class="n">v1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">v2</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>        
+        <span class="k">return</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">v2</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">ln</span><span class="p">)</span>        
 
     <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Defines the addition operator for Bachet encoded numbers.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+<span class="c1">##        v1 = self.value()</span>
+<span class="c1">##        v2 = other.value()</span>
+<span class="c1">##        nv = v1 + v2</span>
+<span class="c1">##        new = BachetNumber(nv)</span>
+<span class="c1">##        return new</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
         <span class="n">srv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
         <span class="n">orv</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
@@ -412,17 +422,18 @@
             <span class="n">vector</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="p">[</span><span class="n">reste</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span>
-        <span class="n">new</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">vector</span><span class="p">))</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">vector</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">n</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">new</span>
 
     <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="o">/</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Defines the multiplication operator for Bachet encoded numbers.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ln</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">))</span>
         <span class="n">n1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
         <span class="n">n2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
         <span class="n">n3</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">*</span> <span class="n">n2</span>
-        <span class="k">return</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">n3</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">n3</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">ln</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -560,16 +571,18 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">integerValue</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_computeValue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_computeValue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">vector</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes the integer or decimal value corresponding to the</span>
 <span class="sd">        polarised, respectively valued, Bachet vector.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">vector</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">vector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector</span>
         <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">nv</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span>
+        <span class="n">nv</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span>
         <span class="n">base3Power</span> <span class="o">=</span> <span class="mi">1</span>   <span class="c1"># 3**0</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nv</span><span class="p">):</span>
-            <span class="n">value</span> <span class="o">+=</span> <span class="n">base3Power</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">nv</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">value</span> <span class="o">+=</span> <span class="n">base3Power</span><span class="o">*</span><span class="n">vector</span><span class="p">[</span><span class="n">nv</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">base3Power</span> <span class="o">*=</span> <span class="mi">3</span> <span class="c1"># 3**i</span>
         <span class="k">return</span> <span class="n">value</span>
 
@@ -616,12 +629,12 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reverses the Bachet vector. Returns a modified Bachet number.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="n">nv</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nv</span><span class="p">)]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nv</span><span class="p">):</span>
-            <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">nv</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">rev</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">result</span><span class="p">)</span>
+        <span class="c1">#from copy import deepcopy</span>
+        <span class="n">ln</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ln</span><span class="p">)]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ln</span><span class="p">):</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">ln</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">rev</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">result</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">ln</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">rev</span></div>
 
 
@@ -1538,7 +1551,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Nov 11, 2025.
+      <span class="lastupdated">Last updated on Nov 14, 2025.
       </span></p>
   </div>
 

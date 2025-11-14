@@ -1222,41 +1222,41 @@ class _BachetRanking(Digraph):
         if Valued:
             if direction == 'descending':
                 for x in self.decBachetScores:
-                    if self.Polarised:
-                        print('%s \t %+d' %(x[1],int(x[0])))
-                    else:
-                        print('%s \t %.2f' %(x[1],x[0]))
+                    #if self.Polarised:
+                    print('%s \t %+d' %(x[1],int(x[0])))
+                    #else:
+                    #    print('%s \t %.2f' %(x[1],x[0].value()))
             else:
                 for x in self.incBachetScores:
-                    if self.Polarised:
-                        print('%s \t %+d' %(x[1],int(x[0])))
-                    else:
-                        print('%s \t %.2f' %(x[1],x[0]))
+                    #if self.Polarised:
+                    print('%s \t %+d' %(x[1],int(x[0])))
+                    #else:
+                    #print('%s \t %.2f' %(x[1],x[0].value()))
         else:
             if direction == 'descending':
                 for x in self.decBachetScores:
                     if TernaryStrings:
-                        if self.Polarised:
-                            print('%s \t \'%s\'' % ( x[1], x[0].ternaryCode() ))
-                        else:
-                            print('%s \t %.2f' % ( x[1], x[0] ) )
+                        #if self.Polarised:
+                        print('%s \t \'%s\'' % ( x[1], x[0].ternaryCode() ))
+                        #else:
+                        #    print('%s \t %.2f' % ( x[1], x[0].value() ) )
                     else:
-                        if self.Polarised:
-                            print('%s \t %d' % ( x[1], int(x[0]) ) )
-                        else:
-                            print('%s \t %.2f' % ( x[1], x[0] ) )
+                        #if self.Polarised:
+                        print('%s \t %+d' % ( x[1], int(x[0]) ) )
+                        #else:
+                        #    print('%s \t %.2f' % ( x[1], x[0].value() ) )
             else:
                 for x in self.incBachetScores:
                     if TernaryStrings:
-                        if self.Polarised:
-                            print('%s \t \'%s\'' % ( x[1], x[0].ternaryCode() ) )
-                        else:
-                            print('%s \t %.2f' % ( x[1], x[0] ) )
+                        #if self.Polarised:
+                        print('%s \t \'%s\'' % ( x[1], x[0].ternaryCode() ) )
+                        #else:
+                        #    print('%s \t %.2f' % ( x[1], x[0] ) )
                     else:
-                        if self.Polarised:
-                            print('%s \t %d' % ( x[1], int(x[0]) ) )
-                        else:
-                            print('%s \t %.2f' % ( x[1], x[0] ) )
+                        #if self.Polarised:
+                        print('%s \t %+d' % ( x[1], int(x[0]) ) )
+                        #else:
+                        #    print('%s \t %.2f' % ( x[1], x[0] ) )
 
 ##    def _permute(self,x,y):
 ##        """
@@ -2466,8 +2466,8 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
 ##                    incBachetScores.append((bScore,x,bx,by))
 ##                    decBachetScores.append((bScore,x,bx,by))
 ##                else:
-                incBachetScores.append((bScore.value(),x))
-                decBachetScores.append((bScore.value(),x))
+                incBachetScores.append((bScore,x))
+                decBachetScores.append((bScore,x))
                 if BestQualified:
                     bxrev = bx.reverse()
                     byrev = by.reverse()
@@ -2476,8 +2476,8 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
 ##                        incBachetRevScores.append((bRevScore.value(),x,bxrev,byrev))
 ##                        decBachetRevScores.append((bRevScore.value(),x,bxrev,byrev))
 ##                    else:
-                    incBachetRevScores.append((bRevScore.value(),x))
-                    decBachetRevScores.append((bRevScore.value(),x))
+                    incBachetRevScores.append((bRevScore,x))
+                    decBachetRevScores.append((bRevScore,x))
             # reversed sorting with keeping the actions initial ordering
             # in case of ties
             if Debug:
@@ -3204,17 +3204,17 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
     Threading = False
-    res = open('test9CBPolAll50Ctrl.csv','w')
+    res = open('test9CBPolRd50500Ctrl1.csv','w')
     #res = open('tes.csv','w')
     res.write('"seed","nt","baptft","bapttt","bapfft","bapfff","cop","nf","ke"\n')
     sampleSize = 1
     randomSize = 50
-    Polarised=True
+    Polarised=False
     #t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
     for sample in range(sampleSize):
         print(sample)
         #seed = random.randint(1,1000000)
-        seed = 8
+        #seed = 8
         seed = sample + 1
     ##    t = CircularPerformanceTableau()
         #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
@@ -3276,7 +3276,7 @@ if __name__ == "__main__":
         #print(ba2)
         ba2 = BachetRanking(g,Debug=False,
                             sampleSize=randomSize,
-                            Polarised=False,
+                            Polarised=Polarised,
                             TriplesSorted=True,
                             Randomized=True,
                             CoDualTriples=True,

@@ -170,13 +170,16 @@ class BachetNumber(object):
         """
         if num_int is None:
             if vector is not None:
-                vl = len(vector)
+                ln = len(vector)
+                num_int = round(self._computeValue(vector))
+                b = BachetNumber(num_int,length=ln)
+                vl = len(b.vector)
                 if vl >= length:
-                    self.vector = vector
+                    self.vector = b.vector
                 else:
                     nz = length - vl
-                    self.vector = [0 for i in range(nz)]
-                    self.vector = self.vector + vector
+                    zvector = [0 for i in range(nz)]
+                    self.vector = zvector + b.vector
             else:
                 self.vector=[0 for i in range(length)]
         else:
@@ -266,21 +269,28 @@ class BachetNumber(object):
         negVector = []
         for i in range(len(self.vector)):
             negVector.append(self.vector[i] * -1)
-        neg = BachetNumber(vector = negVector)
+        ln = len(self.vector)
+        neg = BachetNumber(vector = negVector,length=ln)
         return neg
         
     def __abs__(self, /):
         """
         Defines the addition operator for Bachet encoded numbers
         """
+        ln = len(self.vector)
         v1 = int(self)
         v2 = abs(v1)
-        return BachetNumber(v2)        
+        return BachetNumber(v2,length=ln)        
 
     def __add__(self,other,Debug=False):
         """
         Defines the addition operator for Bachet encoded numbers.
         """
+##        v1 = self.value()
+##        v2 = other.value()
+##        nv = v1 + v2
+##        new = BachetNumber(nv)
+##        return new
         from copy import deepcopy
         srv = self.reverse()
         orv = other.reverse()
@@ -327,17 +337,18 @@ class BachetNumber(object):
             vector = vector + [reste]
         if Debug:
             print(vector)
-        new = ~(BachetNumber(vector=vector))
+        new = ~(BachetNumber(vector=vector,length=n))
         return new
 
     def __mul__(self,other,/):
         """
         Defines the multiplication operator for Bachet encoded numbers.
         """
+        ln = max(len(self),len(other))
         n1 = self.value()
         n2 = other.value()
         n3 = n1 * n2
-        return BachetNumber(n3)
+        return BachetNumber(n3,length=ln)
 
     def __eq__(self,other, /):
         """
@@ -472,16 +483,18 @@ class BachetNumber(object):
             self.integerValue = self._computeValue()
             return self.integerValue
 
-    def _computeValue(self):
+    def _computeValue(self,vector=None):
         """
         Computes the integer or decimal value corresponding to the
         polarised, respectively valued, Bachet vector.
         """
+        if vector is None:
+            vector = self.vector
         value = 0
-        nv = len(self.vector)
+        nv = len(vector)
         base3Power = 1   # 3**0
         for i in range(nv):
-            value += base3Power*self.vector[nv-i-1]
+            value += base3Power*vector[nv-i-1]
             base3Power *= 3 # 3**i
         return value
 
@@ -523,12 +536,12 @@ class BachetNumber(object):
         """
         Reverses the Bachet vector. Returns a modified Bachet number.
         """
-        from copy import deepcopy
-        nv = len(self.vector)
-        result = [0 for i in range(nv)]
-        for i in range(nv):
-            result[i] = self.vector[nv-i-1]
-        rev = BachetNumber(vector=result)
+        #from copy import deepcopy
+        ln = len(self.vector)
+        result = [0 for i in range(ln)]
+        for i in range(ln):
+            result[i] = self.vector[ln-i-1]
+        rev = BachetNumber(vector=result,length=ln)
         return rev
 
     def __invert__(self, /):
