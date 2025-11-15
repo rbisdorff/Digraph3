@@ -1537,7 +1537,7 @@ class;</p>
 <dt><a class="reference internal" href="#linearorders-label"><span class="std std-ref">linearOrders module</span></a></dt><dd><p>Additional tools for solving linearly ranking problems with the
 abstract generic root <a class="reference external" href="techDoc.html#linearOrders.LinearOrder">LinearOrder</a>
 class;</p>
-<div class="graphviz"><object data="_images/inheritance-e156a76925ab2cd485177fc064f2964aedd51412.svg" type="image/svg+xml" class="inheritance graphviz">
+<div class="graphviz"><object data="_images/inheritance-944ad0bb9451d34bde5f69ec13b05ca3b44cf835.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of linearOrders</p></object></div>
 </dd>
 </dl>
@@ -8916,7 +8916,7 @@ given preorderings of the candidates per voter</p>
 <span id="linearorders-label"></span><h2><a class="toc-backref" href="#id16" role="doc-backlink"><span class="section-number">2.14. </span>linearOrders module</a><a class="headerlink" href="#linearorders-module" title="Link to this heading"></a></h2>
 <p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a></p>
 <p><strong>Inheritance Diagram</strong></p>
-<div class="graphviz"><object data="_images/inheritance-e156a76925ab2cd485177fc064f2964aedd51412.svg" type="image/svg+xml" class="inheritance graphviz">
+<div class="graphviz"><object data="_images/inheritance-944ad0bb9451d34bde5f69ec13b05ca3b44cf835.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of linearOrders</p></object></div>
 <p id="module-linearOrders">Python3 implementation of linear orders
 Dependancy: digraphs module
@@ -9161,7 +9161,8 @@ to the indeterminate value.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="linearOrders.PolarisedBachetRanking">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linearOrders.</span></span><span class="sig-name descname"><span class="pre">PolarisedBachetRanking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CoDual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actionsList</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orderLimit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BestQualified</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Optimal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linearOrders.html#PolarisedBachetRanking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linearOrders.PolarisedBachetRanking" title="Link to this definition"></a></dt>
-<dd><p>Instantiates the polarised Bachet Ranking and Ordering from a given bipolar-valued <em>Digraph</em> instance <em>other</em>.</p>
+<dd><p>Instantiates the polarised Bachet Ranking and Ordering from a
+given bipolar-valued <em>Digraph</em> instance <em>other</em>.</p>
 <p><em>Parameters</em></p>
 <blockquote>
 <div><ul class="simple">
@@ -9172,68 +9173,28 @@ to the indeterminate value.</p>
 <li><p><em>Optimal</em>: (False by default) all possible permutations of the given other.actions ordering are ranked and the best correlated ranking is eventually returned.</p></li>
 </ul>
 </div></blockquote>
-<p>For each action <em>x</em> in <em>other.actions</em>, the polarised integer row vector of the <em>other.relation</em> attribute without the reflexive terms defines a <em>Bachet vector</em> which correponds to a significance weight <em>rbx</em> of its <strong>outrankingness credibility</strong>. Similarly, the corresponding polarised integer column vector in the <em>other.relation</em> attribute without the reflexive terms defines a <em>Bachet vector</em> whose negation correponds to a significance weight <em>-cbx</em> of its <strong>not outrankedness credibility</strong>.</p>
-<p>Taking now the sum <em>rbx + (-cbx)</em> of both credibilities gives us per action <em>x</em> a Bachet fitness score of the statement that <em>x</em> may be <em>first-ranked</em>. Sorting in decreasing (resp. increasing) order these Bachet fitness scores gives the <em>Bachet ranking</em>, respective <em>ordering</em>, result. Both results are stored in the <em>self.bachetRanking</em> resp. <em>self.bachetOrder</em> attribute.</p>
-<p>Like the Copeland and the NetFlows rules, the Bachet ranking rule is <em>invariant</em> under the <em>codual</em> transform. The Bachet rule is furthermore, like the Copeland rule, also <em>Condorcet consistent</em>, i.e. when the outranking digraph models a linear relation, its Bachet ranking result will be consistent with this linear outranking relation.</p>
+<p><em>Usage</em></p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*==&gt;&gt; testing BachetRanking Class ----*&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RandomBipolarOutrankingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">PolarisedBachetRanking</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- solely given ordering of the actions&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span> <span class="o">=</span> <span class="n">PolarisedBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span><span class="o">.</span><span class="n">showScores</span><span class="p">(</span><span class="n">Valued</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="go"> Bachet scores in descending order</span>
-<span class="go"> action      score</span>
-<span class="go"> a2          6020.00</span>
-<span class="go"> a8          3353.00</span>
-<span class="go"> a9          3088.00</span>
-<span class="go"> a3          2379.00</span>
-<span class="go"> a6          476.00</span>
-<span class="go"> a7          435.00</span>
-<span class="go"> a4          322.00</span>
-<span class="go"> a5          -1254.00</span>
-<span class="go"> a1          -5849.00</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba1</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">))</span>
-<span class="go"> {&#39;correlation&#39;: 0.3935624213996805, &#39;determination&#39;: 0.408625}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- given and reversed ordering of the actions&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba2</span> <span class="o">=</span> <span class="n">PolarisedBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba2</span><span class="o">.</span><span class="n">showScores</span><span class="p">(</span><span class="n">Valued</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span> <span class="o">=</span> <span class="n">PolarisedBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span> 
 <span class="go"> Bachet scores in descending order</span>
 <span class="go"> action      score</span>
-<span class="go"> a2          6380.00</span>
-<span class="go"> a9          2480.00</span>
-<span class="go"> a5          1830.00</span>
-<span class="go"> a8          -877.00</span>
-<span class="go"> a3          -1399.00</span>
-<span class="go"> a6          -1764.00</span>
-<span class="go"> a7          -2039.00</span>
-<span class="go"> a4          -4410.00</span>
-<span class="go"> a1          -6083.00</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba2</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">))</span>
-<span class="go"> {&#39;correlation&#39;: 0.6314945107236328, &#39;determination&#39;: 0.408625}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- using 10 random ordering and their reversed versions&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba3</span> <span class="o">=</span> <span class="n">PolarisedBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba3</span><span class="o">.</span><span class="n">showScores</span><span class="p">(</span><span class="n">Valued</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="go"> Bachet scores in descending order</span>
-<span class="go"> action      score</span>
-<span class="go"> a2          6540.00</span>
-<span class="go"> a5          3016.00</span>
-<span class="go"> a9          802.00</span>
-<span class="go"> a6          -106.00</span>
-<span class="go"> a4          -534.00</span>
-<span class="go"> a8          -4719.00</span>
-<span class="go"> a3          -5741.00</span>
-<span class="go"> a7          -5891.00</span>
-<span class="go"> a1          -6405.00</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba3</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">))</span>
-<span class="go"> {&#39;correlation&#39;: 0.7441963223547806, &#39;determination&#39;: 0.408625}</span>
+<span class="go"> a2          +6380</span>
+<span class="go"> a9          +2480</span>
+<span class="go"> a5          +1830</span>
+<span class="go"> a8          -877</span>
+<span class="go"> a3          -1399</span>
+<span class="go"> a6          -1764</span>
+<span class="go"> a7          -2039</span>
+<span class="go"> a4          -4410</span>
+<span class="go"> a1          -6083</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ba</span><span class="o">.</span><span class="n">correlation</span><span class="p">)</span>
+<span class="go"> 0.6314945107236328</span>
 </pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Mind that the Bachet numbering system is a positional {-1,0,+1} numeral system that is isomorphic to the {0,1,2} base 3 numeral system. A Bachet ranking result is therefore depending on the very ordering of the rows and columns of the <em>other.relation</em> attribute when there is a lack of transitivity observed in the relation. It is hence recommended (<em>BestQualified=True</em> setting by default) to compute a first Bachet ranking result with the given order of the <em>other.actions</em> atribute and a second one with the reversed order. The best qualified of both ranking results is eventually returned.</p>
-<p>Mind also that the integer value range of Bachet numbers gets quickly huge with the length of the given row and column chracteristic vectors. The digraph <em>orderLimit</em> parameter is therefore set by default to 50, allowing to tackle integer values in the huge integer range +-358948993845926294385124. When there is need to tackle digraphs of larger order, this <em>orderLimit</em> parameter may be adjusted.</p>
-<p>When the ranking result appears suspiciously uncorrelated with the given outranking digraph, it is recommended to set the <em>randomized</em> parameter to a positive integer <em>n</em>. In this case, <em>n</em> random orderings of the decision actions with their reversed versions will be used for generating Bachet rankings. The best correlated ranking will eventually be returned.</p>
 </div>
 </dd></dl>
 
@@ -9296,52 +9257,28 @@ a given bipolar-valued Digraph instance</p>
 <li><p><em>Optimal</em>: (False by default) all possible permutations of the given other.actions ordering are ranked and the best correlated ranking is eventually returned.</p></li>
 </ul>
 </div></blockquote>
-<p>For each action <em>x</em> in <em>other.actions</em>, the row vector of the <em>other.relation</em> attribute without the reflexive terms defines a <em>Bachet vector</em> which correponds to a significance weight <em>rbx</em> of its <strong>outrankingness credibility</strong>. Similarly, the corresponding column vector in the <em>other.relation</em> attribute without the reflexive terms defines a <em>Bachet vector</em> whose negation correponds to a significance weight <em>-cbx</em> of its <strong>negated outrankedness credibility</strong>.</p>
-<p>Taking now the sum <em>rbx + (-cbx)</em> of both credibilities gives us per action <em>x</em> a valued Bachet fitness score of the statement that <em>x</em> may be <em>first-ranked</em>. Sorting in decreasing (resp. increasing) order these Bachet fitness scores gives the <em>Bachet ranking</em>, respective <em>ordering</em>, result. Both results are stored in the <em>self.bachetRanking</em> resp. <em>self.bachetOrder</em> attribute.</p>
-<p>Like the Copeland and the NetFlows rules, the Bachet ranking rule is <em>invariant</em> under the <em>codual</em> transform. The Bachet rule is however, unlike the Copeland rule, not necessarily  <em>Condorcet consistent</em>.</p>
+<p><em>Usage</em></p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*==&gt;&gt; testing ValuedBachetRanking Class ----*&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RandomBipolarOutrankingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">ValuedBachetRanking</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- solely given ordering and the reverse of the actions&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span> <span class="o">=</span> <span class="n">ValuedBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span><span class="o">.</span><span class="n">showScores</span><span class="p">(</span><span class="n">Valued</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span><span class="o">.</span><span class="n">showScores</span> 
 <span class="go"> Bachet scores in descending order</span>
 <span class="go"> action       score</span>
-<span class="go"> a2          +3126.01</span>
-<span class="go"> a5          +1660.68</span>
-<span class="go"> a9          +1439.05</span>
-<span class="go"> a3           +490.35</span>
-<span class="go"> a6           +288.43</span>
-<span class="go"> a4            -59.94</span>
-<span class="go"> a8           -107.58</span>
-<span class="go"> a7           -270.58</span>
-<span class="go"> a1          -2948.69</span>
+<span class="go"> a2          +3126</span>
+<span class="go"> a5          +1660</span>
+<span class="go"> a9          +1439</span>
+<span class="go"> a3           +490</span>
+<span class="go"> a6           +288</span>
+<span class="go"> a4            -59</span>
+<span class="go"> a8           -107</span>
+<span class="go"> a7           -270</span>
+<span class="go"> a1          -2948</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba1</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">))</span>
 <span class="go"> {&#39;correlation&#39;: 0.6314945107236328, &#39;determination&#39;: 0.408625}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- using 100 random orderings and their reversed versions&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba2</span> <span class="o">=</span> <span class="n">ValuedBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba2</span><span class="o">.</span><span class="n">showScores</span><span class="p">(</span><span class="n">Valued</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="go"> Bachet scores in descending order</span>
-<span class="go"> action       score</span>
-<span class="go"> a2          +3580.93</span>
-<span class="go"> a9          +2725.92</span>
-<span class="go"> a5          +1773.33</span>
-<span class="go"> a6           +672.79</span>
-<span class="go"> a8           -115.16</span>
-<span class="go"> a4           -489.13</span>
-<span class="go"> a3           -652.16</span>
-<span class="go"> a7          -1102.77</span>
-<span class="go"> a1          -1550.40</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba3</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">))</span>
-<span class="go"> {&#39;correlation&#39;: 0.7459841609734544, &#39;determination&#39;: 0.408625}</span>
 </pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Mind that the Bachet numbering system is a positional {-1,0,+1} numeral system that is isomorphic to the {0,1,2} base 3 numeral system. A Bachet ranking result is therefore depending on the very ordering of the rows and columns of the <em>other.relation</em> attribute when there is a lack of transitivity observed in the relation. It is hence recommended (<em>BestQualified=True</em> setting by default) to compute a first Bachet ranking result with the given order of the <em>other.actions</em> atribute and a second one with the reversed order. The best qualified of both ranking results is eventually returned.</p>
-<p>Mind also that the integer value range of Bachet numbers gets quickly huge with the length of the given row and column chracteristic vectors. The digraph <em>orderLimit</em> parameter is therefore set by default to 50, allowing to tackle integer values in the huge integer range +-358948993845926294385124. When there is need to tackle digraphs of larger order, this <em>orderLimit</em> parameter may be adjusted.</p>
-<p>When the ranking result appears suspiciously uncorrelated with the given outranking digraph, it is recommended to set the <em>randomized</em> parameter to a positive integer <em>n</em>. In this case, <em>n</em> random orderings of the decision actions with their reversed versions will be used for generating Bachet rankings. The best correlated ranking will eventually be returned.</p>
 </div>
 </dd></dl>
 
@@ -15028,7 +14965,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Nov 14, 2025.
+      <span class="lastupdated">Last updated on Nov 15, 2025.
       </span></p>
   </div>
 

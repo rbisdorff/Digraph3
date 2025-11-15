@@ -1216,238 +1216,22 @@ class _BachetRanking(Digraph):
     abstract class for generic BachetRanking class methods.
     """
     def showScores(self,direction='descending',
-                   Valued=False,TernaryStrings=False):
+                   TernaryStrings=False):
         print('Bachet scores in %s order' % direction)
         print('action \t score')
-        if Valued:
-            if direction == 'descending':
-                for x in self.decBachetScores:
-                    #if self.Polarised:
-                    print('%s \t %+d' %(x[1],int(x[0])))
-                    #else:
-                    #    print('%s \t %.2f' %(x[1],x[0].value()))
-            else:
-                for x in self.incBachetScores:
-                    #if self.Polarised:
-                    print('%s \t %+d' %(x[1],int(x[0])))
-                    #else:
-                    #print('%s \t %.2f' %(x[1],x[0].value()))
+        if direction == 'descending':
+            for x in self.decBachetScores:
+                print('%s \t %+d' %(x[1],int(x[0])))
         else:
-            if direction == 'descending':
-                for x in self.decBachetScores:
-                    if TernaryStrings:
-                        #if self.Polarised:
-                        print('%s \t \'%s\'' % ( x[1], x[0].ternaryCode() ))
-                        #else:
-                        #    print('%s \t %.2f' % ( x[1], x[0].value() ) )
-                    else:
-                        #if self.Polarised:
-                        print('%s \t %+d' % ( x[1], int(x[0]) ) )
-                        #else:
-                        #    print('%s \t %.2f' % ( x[1], x[0].value() ) )
-            else:
-                for x in self.incBachetScores:
-                    if TernaryStrings:
-                        #if self.Polarised:
-                        print('%s \t \'%s\'' % ( x[1], x[0].ternaryCode() ) )
-                        #else:
-                        #    print('%s \t %.2f' % ( x[1], x[0] ) )
-                    else:
-                        #if self.Polarised:
-                        print('%s \t %+d' % ( x[1], int(x[0]) ) )
-                        #else:
-                        #    print('%s \t %.2f' % ( x[1], x[0] ) )
-
-##    def _permute(self,x,y):
-##        """
-##        Permutes alternatives x and y positions in the Bachet encoding
-##        and computes new decreasing and increasing Bachet Scores.
-##        Returns a reviewed Bachet ranking and order.
-##
-##        Mind the absence of the correlation attribute !
-##        """
-##        from arithmetics import BachetNumber
-##        from digraphsTools import scoredTuplesSort
-##        from copy import deepcopy
-##        permSelf = deepcopy(self)
-##        _decBachetScores = []
-##        try:
-##            actionsList = self.bachetActionsList
-##        except:
-##            al = [x for x in self.actions]
-##        else:
-##            al = actionsList
-##        i = al.index(x)
-##        j = al.index(y)
-##        al[i] = y
-##        al[j] = x
-##        #print(self.decBachetScores)
-##        for x in self.decBachetScores:
-##            try:
-##                bx = x[2]
-##            except:
-##                print('Erreur',x)
-##                print(self.decBachetScores)
-##                return
-##            pbx = bx.permute(i+1,j+1)
-##            by = x[3]
-##            pby = by.permute(i+1,j+1)
-##            sb = pbx + (-pby)
-##            _decBachetScores.append((sb.value(),x[1],pbx,pby))
-##            #print(x[1],pbx,pby)
-##        scoredTuplesSort(_decBachetScores,reverse=True)
-##        decBachetScores = _decBachetScores
-##        #print(_decBachetScores[0])
-##        bachetRanking = [sx[1] for sx in decBachetScores]
-##        #print(bachetRanking)
-##        
-##        _incBachetScores = []
-##        for x in self.incBachetScores:
-##            bx = x[2]
-##            pbx = bx.permute(i+1,j+1)
-##            by = x[3]
-##            pby = by.permute(i+1,j+1)
-##            sb = pbx + (-pby)
-##            _incBachetScores.append((sb.value(),x[1],pbx,pby))
-##            #print(x[1],pbx,pby)
-##        scoredTuplesSort(_incBachetScores,reverse=False)
-##        incBachetScores = _incBachetScores
-##        #print(incBachetScores[0])
-##        bachetOrder = [sx[1] for sx in incBachetScores]
-##        #print(bachetOrder)                    
-##
-##                # init relation
-##        #tr = time()
-##        #actionsList = [x for x in actions]
-##        Max = permSelf.valuationdomain['max']
-##        Med = permSelf.valuationdomain['med']
-##        Min = permSelf.valuationdomain['min']
-##        relation = {}
-##        for x in al:
-##            #print(x,bachetRanking)
-##            xi = bachetRanking.index(x)
-##            relation[x] = {}
-##            #print(x,xi)
-##            for y in al:
-##                yj = bachetRanking.index(y)
-##                #print(x,xi,y,yj,max(Med,cRelation[x][y]) )
-##                if xi < yj:                    
-##                    relation[x][y] = Max
-##                elif xi == yj:
-##                    relation[x][y] = Med
-##                else:
-##                    relation[x][y] = Min
-##                #print(x,xi,y,yj,relation[x][y] )
-##
-##        # store attributes
-##        permSelf.bachetActionsList = al
-##        permSelf.relation = relation
-##        permSelf.decBachetScores = decBachetScores
-##        permSelf.incBachetScores = incBachetScores
-##        permSelf.bachetRanking = bachetRanking
-##        permSelf.bachetOrder = bachetOrder
-##        #corr = other.computeRankingCorrelation(bachetRanking)
-##        permSelf.correlation = None
-##        permSelf.gamma = permSelf.gammaSets()
-##        permSelf.notGamma = permSelf.notGammaSets()
-##
-##        return permSelf                         
-
-    def _reverse(self):
-        """
-        Reverse the actionsList
-        and computes new decreasing and increasing Bachet Scores.
-        Returns a reviewed Bachet ranking and order.
-
-        Mind the absence of the correlation attribute !
-        """
-        from arithmetics import BachetNumber
-        from digraphsTools import scoredTuplesSort
-        from copy import deepcopy
-        permSelf = deepcopy(self)
-        _decBachetScores = []
-        try:
-            actionsList = self.bachetActionsList
-        except:
-            actionsList = [x for x in self.actions]
-        #print(self.decBachetScores)
-        for x in self.decBachetScores:
-            try:
-                bx = x[2]
-            except:
-                print('Erreur',x)
-                print(self.decBachetScores)
-                return
-            pbx = bx.reverse()
-            by = x[3]
-            pby = by.reverse()
-            sb = pbx + (-pby)
-            _decBachetScores.append((sb,x[1],pbx,pby))
-            #print(x[1],pbx,pby)
-        scoredTuplesSort(_decBachetScores,reverse=True)
-        decBachetScores = _decBachetScores
-        #print(_decBachetScores[0])
-        bachetRanking = [sx[1] for sx in decBachetScores]
-        #print(bachetRanking)
-        
-        _incBachetScores = []
-        for x in self.incBachetScores:
-            bx = x[2]
-            pbx = bx.reverse()
-            by = x[3]
-            pby = by.reverse()
-            sb = pbx + (-pby)
-            _incBachetScores.append((sb,x[1],pbx,pby))
-            #print(x[1],pbx,pby)
-        scoredTuplesSort(_incBachetScores,reverse=False)
-        incBachetScores = _incBachetScores
-        #print(incBachetScores[0])
-        bachetOrder = [sx[1] for sx in incBachetScores]
-        #print(bachetOrder)                    
-
-                # init relation
-        #tr = time()
-        #actionsList = [x for x in actions]
-        Max = permSelf.valuationdomain['max']
-        Med = permSelf.valuationdomain['med']
-        Min = permSelf.valuationdomain['min']
-        relation = {}
-        actionsList.reverse()
-        for x in actionsList:
-            #print(x,bachetRanking)
-            xi = bachetRanking.index(x)
-            relation[x] = {}
-            #print(x,xi)
-            for y in actionsList:
-                yj = bachetRanking.index(y)
-                #print(x,xi,y,yj,max(Med,cRelation[x][y]) )
-                if xi < yj:                    
-                    relation[x][y] = Max
-                elif xi == yj:
-                    relation[x][y] = Med
-                else:
-                    relation[x][y] = Min
-                #print(x,xi,y,yj,relation[x][y] )
-
-        # store attributes
-        permSelf.bachetActionsList = actionsList
-        permSelf.relation = relation
-        permSelf.decBachetScores = decBachetScores
-        permSelf.incBachetScores = incBachetScores
-        permSelf.bachetRanking = bachetRanking
-        permSelf.bachetOrder = bachetOrder
-        #corr = other.computeRankingCorrelation(bachetRanking)
-        permSelf.correlation = None
-        permSelf.gamma = permSelf.gammaSets()
-        permSelf.notGamma = permSelf.notGammaSets()
-
-        return permSelf                         
+            for x in self.incBachetScores:
+                print('%s \t %+d' %(x[1],int(x[0])))
 
 #----------------
     
 class PolarisedBachetRanking(LinearOrder,_BachetRanking):
     """    
-    Instantiates the polarised Bachet Ranking and Ordering from a given bipolar-valued *Digraph* instance *other*.
+    Instantiates the polarised Bachet Ranking and Ordering from a
+    given bipolar-valued *Digraph* instance *other*.
 
     *Parameters*
 
@@ -1461,75 +1245,29 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
 
         - *Optimal*: (False by default) all possible permutations of the given other.actions ordering are ranked and the best correlated ranking is eventually returned.
     
-
-    For each action *x* in *other.actions*, the polarised integer row vector of the *other.relation* attribute without the reflexive terms defines a *Bachet vector* which correponds to a significance weight *rbx* of its **outrankingness credibility**. Similarly, the corresponding polarised integer column vector in the *other.relation* attribute without the reflexive terms defines a *Bachet vector* whose negation correponds to a significance weight *-cbx* of its **not outrankedness credibility**.
-
-    Taking now the sum *rbx + (-cbx)* of both credibilities gives us per action *x* a Bachet fitness score of the statement that *x* may be *first-ranked*. Sorting in decreasing (resp. increasing) order these Bachet fitness scores gives the *Bachet ranking*, respective *ordering*, result. Both results are stored in the *self.bachetRanking* resp. *self.bachetOrder* attribute. 
-
-    Like the Copeland and the NetFlows rules, the Bachet ranking rule is *invariant* under the *codual* transform. The Bachet rule is furthermore, like the Copeland rule, also *Condorcet consistent*, i.e. when the outranking digraph models a linear relation, its Bachet ranking result will be consistent with this linear outranking relation.
-
+    *Usage*
+    
     >>> print("*==>> testing BachetRanking Class ----*")
     >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
     >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
     >>> from linearOrders import PolarisedBachetRanking
-    >>> print('*---- solely given ordering of the actions')
-    >>> ba1 = PolarisedBachetRanking(g,BestQualified=False)
-    >>> ba1.showScores(Valued=True)
-     Bachet scores in descending order
-     action 	 score
-     a2 	 6020.00
-     a8 	 3353.00
-     a9 	 3088.00
-     a3 	 2379.00
-     a6 	 476.00
-     a7 	 435.00
-     a4 	 322.00
-     a5 	 -1254.00
-     a1 	 -5849.00
-    >>> print(g.computeRankingCorrelation(ba1.bachetRanking))
-     {'correlation': 0.3935624213996805, 'determination': 0.408625}
     >>> print('*---- given and reversed ordering of the actions')
-    >>> ba2 = PolarisedBachetRanking(g,BestQualified=True)
-    >>> ba2.showScores(Valued=True) 
+    >>> ba = PolarisedBachetRanking(g,BestQualified=True)
+    >>> ba.showScores() 
      Bachet scores in descending order
      action 	 score
-     a2 	 6380.00
-     a9 	 2480.00
-     a5 	 1830.00
-     a8 	 -877.00
-     a3 	 -1399.00
-     a6 	 -1764.00
-     a7 	 -2039.00
-     a4 	 -4410.00
-     a1 	 -6083.00
-    >>> print(g.computeRankingCorrelation(ba2.bachetRanking))
-     {'correlation': 0.6314945107236328, 'determination': 0.408625}
-    >>> print('*---- using 10 random ordering and their reversed versions')
-    >>> ba3 = PolarisedBachetRanking(g,BestQualified=True,randomized=10)
-    >>> ba3.showScores(Valued=True)
-     Bachet scores in descending order
-     action 	 score
-     a2 	 6540.00
-     a5 	 3016.00
-     a9 	 802.00
-     a6 	 -106.00
-     a4 	 -534.00
-     a8 	 -4719.00
-     a3 	 -5741.00
-     a7 	 -5891.00
-     a1 	 -6405.00
-    >>> print(g.computeRankingCorrelation(ba3.bachetRanking))
-     {'correlation': 0.7441963223547806, 'determination': 0.408625}
-
-    
-    .. note::
-
-       Mind that the Bachet numbering system is a positional {-1,0,+1} numeral system that is isomorphic to the {0,1,2} base 3 numeral system. A Bachet ranking result is therefore depending on the very ordering of the rows and columns of the *other.relation* attribute when there is a lack of transitivity observed in the relation. It is hence recommended (*BestQualified=True* setting by default) to compute a first Bachet ranking result with the given order of the *other.actions* atribute and a second one with the reversed order. The best qualified of both ranking results is eventually returned.
-
-       Mind also that the integer value range of Bachet numbers gets quickly huge with the length of the given row and column chracteristic vectors. The digraph *orderLimit* parameter is therefore set by default to 50, allowing to tackle integer values in the huge integer range +-358948993845926294385124. When there is need to tackle digraphs of larger order, this *orderLimit* parameter may be adjusted.
-
-       When the ranking result appears suspiciously uncorrelated with the given outranking digraph, it is recommended to set the *randomized* parameter to a positive integer *n*. In this case, *n* random orderings of the decision actions with their reversed versions will be used for generating Bachet rankings. The best correlated ranking will eventually be returned.   
-    
+     a2 	 +6380
+     a9 	 +2480
+     a5 	 +1830
+     a8 	 -877
+     a3 	 -1399
+     a6 	 -1764
+     a7 	 -2039
+     a4 	 -4410
+     a1 	 -6083
+    >>> print(ba.correlation)
+     0.6314945107236328
+   
     """
     def __init__(self,other,CoDual=False,actionsList=None,
                  orderLimit=50,
@@ -1540,7 +1278,7 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
         """
         constructor for generating a linear order
         from a given other digraph following
-        the Bachet ordering rule
+        the polarised Bachet ordering rule
         """
 
         # check orderLimit
@@ -1554,11 +1292,12 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
         from operator import itemgetter
         import arithmetics as ar
         from copy import deepcopy
+        from decimal import Decimal
         if Debug:
             Comments=True
         #timings
         tt = time()
-        runTimes = OrderedDict()
+        runTimes = {}
         # prepare local variables
         if CoDual:
             otherCoDual = CoDualDigraph(other)
@@ -1571,11 +1310,6 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
         n = len(other.actions)
         if actionsList is None:
             actionsList = [x for x in other.actions]
-            #actions = deepcopy(other.actions)
-##        else:
-##            actions = OrderedDict()
-##            for x in actionsList:
-##                actions[x] = deepcopy(other.actions[x])
         gamma = other.gamma
         selfRelation = {}
         Min = Decimal('-1')
@@ -1604,10 +1338,8 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
         
         runTimes['prepareLocals'] = time()-tt
 
-        if Optimal:
+        if Optimal: # trying all possible permutations of the actionsList
             t0 = time()
-                        # with Condorcet Digraph valuation
-
             maximalRankings = []
             correlation = -1.0
             from digraphsTools import all_perms
@@ -1640,7 +1372,7 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
             self.runTimes['totalTime'] = time()-tt
             return
 
-        elif randomized > 0:
+        elif randomized > 0: # trying a subset of random shuffeling
             t0 = time()
             import random
             random.seed(seed)
@@ -1648,18 +1380,14 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
             randomActions = [x for x in actionsList]
             correlation = -1.0
             bar = None
-            triples = other.computeIntransitiveTriples()
-            #print(len(triples))
             for i in range(randomized):
                 random.shuffle(randomActions) 
                 ba = PolarisedBachetRanking(c,orderLimit=orderLimit,
                                    BestQualified=True,
                                    actionsList=randomActions)
                 corr = other.computeRankingCorrelation(ba.bachetRanking)
-                #print(corr['correlation'])
                 if corr['correlation'] > correlation:
                     correlation = corr['correlation']
-                    #print(i, corr['correlation'])
                     bar = ba
             self.runTimes = bar.runTimes
             self.runTimes['bachet'] = time()-t0
@@ -1682,7 +1410,6 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
         else: # not randomized
             
             if BestQualified:
-                #Optimal = True
                 if Comments:
                     print('Both Bachet ranking with the given order and the reversed order of the decision actions are computed and the best qualified is eventually returned')
             tnf = time()
@@ -1696,10 +1423,6 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
             else:
                 cRelation = c.relation
             for x in actionsList:
-##                if _Permuting:
-##                    vecx = [int(cRelation[x][y]) for y in actionsList]
-##                    vecy = [int(cRelation[y][x]) for y in actionsList]
-##                else:   
                 vecx = [int(cRelation[x][y]) for y in actionsList if y != x]
                 vecy = [int(cRelation[y][x]) for y in actionsList if y != x]
                 if Debug:
@@ -1707,20 +1430,12 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
                 bx = ar.BachetNumber(vector=vecx)
                 by = ar.BachetNumber(vector=vecy)
                 bScore = bx + (-by)
-##                if _Permuting:
-##                    incBachetScores.append((bScore,x,bx,by))
-##                    decBachetScores.append((bScore,x,bx,by))
-##                else:
                 incBachetScores.append((bScore,x))
                 decBachetScores.append((bScore,x))
                 if BestQualified:
                     bxrev = bx.reverse()
                     byrev = by.reverse()
                     bRevScore =  bxrev + (-byrev)
-##                    if _Permuting:
-##                        incBachetRevScores.append((bRevScore,x,bxrev,byrev))
-##                        decBachetRevScores.append((bRevScore,x,bxrev,byrev))
-##                    else:
                     incBachetRevScores.append((bRevScore,x))
                     decBachetRevScores.append((bRevScore,x))
             # reversed sorting with keeping the actions initial ordering
@@ -1743,11 +1458,11 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
         if Comments:
             print('Bachet decreasing scores')
             for x in decBachetScores:
-                print( '%s : %d' %( x[1],x[0].value() ) )
+                print( '%s : %+d' %( x[1],int(x[0]) ) )
             if BestQualified:
                 print('reversed Bachet decreasing scores')
                 for x in decBachetRevScores:
-                    print( '%s : %d' %( x[1],x[0].value() ) )
+                    print( '%s : %+d' %( x[1],int(x[0]) ) )
 
 
         bachetRanking = [x[1] for x in decBachetScores]
@@ -1788,14 +1503,12 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
             #print(x,xi)
             for y in actionsList:
                 yj = bachetRanking.index(y)
-                #print(x,xi,y,yj,max(Med,cRelation[x][y]) )
                 if xi < yj:                    
                     relation[x][y] = Max
                 elif xi == yj:
                     relation[x][y] = Med
                 else:
                     relation[x][y] = Min
-                #print(x,xi,y,yj,relation[x][y] )
         runTimes['relation'] = time() - tr
 
         # store attributes
@@ -1819,182 +1532,6 @@ class PolarisedBachetOrder(PolarisedBachetRanking):
     """
     Dummy for PolarisedBachetRanking class
     """
-
-#-------
-
-##class ReflexiveBachetRanking(LinearOrder,_BachetRanking):
-##    """
-##    Variant of the BachetRanking class which uses the relation attribute with the reflexive terms included.
-##    
-##    This strategy allows to use the permute() and reverse() methods of BachetRanking instances.
-##
-##    *Parameters*
-##
-##        - *Polarised* : if *True* (default), the *PolarisedBachetRanking* contructor is used, if *False* the ValuedBachetRanking constructor is used.
-##
-##        - *orderLimit* : maximal length of the *other.actions* dictionary.
-##
-##        - *actionsList* : a given ordering of the other.actions dictionary. If *None* the list of other.actions is used.
-##
-##        - *sampleSize*: number > 0 (default=100) of intransitive tripes to permute, the potential list of intransitive triples is ranked by decreasing epistemic determination. If *None* all intransitive tripes are permuted.
-##
-##
-##    *Useage example*
-##    
-##    >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
-##    >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
-##    >>> g.computeTransitivityDegree(Comments=True)
-##    Transitivity degree of digraph <rel_randomperftab>:
-##      #triples x>y>z: 504, #closed: 343, #open: 161
-##      (#closed/#triples) =  0.681
-##    >>> from linearOrders import ReflexiveBachetRanking
-##    >>> sba = ReflexiveBachetRanking(g,Polarised=True,sampleSize=10)
-##    >>> sba
-##    *------- Digraph instance description ------*
-##    Instance class      : ReflexiveBachetRanking
-##    Instance name       : rel_randomperftab_best_ranked
-##    Digraph Order       : 9
-##    Digraph Size        : 36
-##    Valuation domain    : [-1.00;1.00]
-##    Determinateness (%) : 100.00
-##    Attributes          : ['intransitiveTriples', 'sampleSize', 'bachetRanking',
-##                           'bachetOrder', 'decBachetScores', 'incBachetScores',
-##                           'name', 'actions', 'order', 'valuationdomain', 'relation',
-##                           'correlation', 'gamma', 'notGamma', 'runTimes',
-##                           'bachetActionsList']
-##    >>> sba.showScores()
-##     Bachet scores in descending order
-##      action 	 score
-##       a2 	15300.00
-##       a5 	 8764.00
-##       a9 	 2680.00
-##       a6 	 1368.00
-##       a4 	 1242.00
-##       a8 	-2601.00
-##       a3      -17009.00
-##       a7      -18065.00
-##       a1      -19017.00
-##    >>> sba.bachetRanking
-##     ['a2', 'a5', 'a9', 'a6', 'a4', 'a8', 'a3', 'a7', 'a1']
-##    >>> sba.correlation
-##     0.7441963223547806
-##
-##    """
-##    def __init__(self,other,actionsList=None,
-##                 orderLimit=50,Polarised=True,
-##                 sampleSize=100,
-##                 TriplesSorted=True,
-##                 Randomized=False,seed=None,
-##                 Debug=False):
-##
-##        from copy import deepcopy
-##        triples = other.computeTransitivityDegree(ReturnIntransitiveTriples=True)
-##        self.intransitiveTriples = triples
-##        nt = len(triples)
-##        rankedTriples = []
-##        for tr in triples:
-##            x = tr[0]
-##            y = tr[1]
-##            z = tr[2]
-##            score = other.relation[x][y] + other.relation[y][z] + other.relation[x][z]
-##            rankedTriples.append((score,tr))
-##        if TriplesSorted:
-##            from digraphsTools import scoredTuplesSort
-##            scoredTuplesSort(rankedTriples,reverse=True)
-##        elif Randomized:
-##            import random as rd
-##            rd.seed(seed)
-##            rd.shuffle(rankedTriples)
-##        #if Debug:
-##            #print(nt)
-##            #print(rankedTriples)
-##        if sampleSize is None:
-##            sampleSize = nt
-##        elif sampleSize < 1:
-##            print('Error: sampleSize must be positive integer!')
-##            return
-##        if nt > sampleSize:
-##            rdIndex = range(sampleSize)
-##        else:
-##            rdIndex = range(nt)
-##        self.sampleSize = sampleSize
-##        t0 = time()
-##        if actionsList is None:
-##            al = [x for x in other.actions]
-##        else:
-##            al = ba.bachetActionsList
-##        if Debug:
-##            print(al)
-##        bestList = al
-##        if Polarised:
-##            currBachetRanking = PolarisedBachetRanking
-##        else:
-##            currBachetRanking = ValuedBachetRanking
-##        bestBa = currBachetRanking(other,actionsList=al,
-##                                orderLimit=orderLimit,_Permuting=True)
-##        bestCorr = bestBa.correlation
-##        for i in rdIndex:
-##            tr = rankedTriples[i][1]
-####            if Debug:
-####                print(tr)
-##            bap = bestBa.permute(tr[0],tr[1])
-##            corr = other.computeOrdinalCorrelation(bap)
-##            bap.correlation = corr['correlation']
-##            if bap.correlation > bestCorr:
-##                i = al.index(tr[0])
-##                j = al.index(tr[1])
-##                al[i] = tr[1]
-##                al[j] = tr[0]
-##                if Debug:
-##                    print('perm12',tr,al,bap.correlation)
-##                bap.bachetRankingList = al
-##                bestCorr = bap.correlation
-##                bestBa = bap
-##            #else:
-##            #    bap = bestBa.permute(tr[1],tr[0]) 
-##            bap = bestBa.reverse()
-##            corr = other.computeOrdinalCorrelation(bap)
-##            bap.correlation = corr['correlation']
-##            if bap.correlation > bestCorr:
-##                al.reverse()
-##                if Debug:
-##                    print('rev12',tr,al,bap.correlation)
-##                bap.bachetRankingList = al
-##                bap.bachetRanking.reverse()
-##                bestCorr = bap.correlation
-##                bestBa = bap
-##            #else:
-##            #    bap.reverse()
-##            bap = bap.permute(tr[1],tr[2])
-##            corr = other.computeOrdinalCorrelation(bap)
-##            bap.correlation = corr['correlation']
-##            if bap.correlation > bestCorr:
-##                i = al.index(tr[1])
-##                j = al.index(tr[2])
-##                al[i] = tr[2]
-##                al[j] = tr[1]
-##                if Debug:
-##                    print('perm23',tr,al,bap.correlation)
-##                bap.bachetRankingList = al
-##                bestCorr = bap.correlation
-##                bestBa = bap
-##            #else:
-##            #    bap = bap.permute(tr[2],tr[1])
-##            bap = bap.reverse()
-##            corr = other.computeOrdinalCorrelation(bap)
-##            bap.correlation = corr['correlation']
-##            if bap.correlation > bestCorr:
-##                al.reverse()
-##                if Debug:
-##                    print('rev23',tr,al,bap.correlation)
-##                bap.bachetRanking = al
-##                bap.bachetRanking.reverse()
-##                bestCorr = bap.correlation
-##                bestBa = bap
-##            #else:
-##            #    bap.reverse()
-##        for att in bestBa.__dict__:
-##            self.__dict__[att] = bestBa.__dict__[att]
 
 #------------
 
@@ -2227,59 +1764,29 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
         - *randomized*: integer number (default = 0) of random orderings of the other.actions that are ranked and the best correlated is eventually returned.
 
         - *Optimal*: (False by default) all possible permutations of the given other.actions ordering are ranked and the best correlated ranking is eventually returned.
+
+    *Usage*
     
-
-    For each action *x* in *other.actions*, the row vector of the *other.relation* attribute without the reflexive terms defines a *Bachet vector* which correponds to a significance weight *rbx* of its **outrankingness credibility**. Similarly, the corresponding column vector in the *other.relation* attribute without the reflexive terms defines a *Bachet vector* whose negation correponds to a significance weight *-cbx* of its **negated outrankedness credibility**.
-
-    Taking now the sum *rbx + (-cbx)* of both credibilities gives us per action *x* a valued Bachet fitness score of the statement that *x* may be *first-ranked*. Sorting in decreasing (resp. increasing) order these Bachet fitness scores gives the *Bachet ranking*, respective *ordering*, result. Both results are stored in the *self.bachetRanking* resp. *self.bachetOrder* attribute. 
-
-    Like the Copeland and the NetFlows rules, the Bachet ranking rule is *invariant* under the *codual* transform. The Bachet rule is however, unlike the Copeland rule, not necessarily  *Condorcet consistent*.
-
     >>> print("*==>> testing ValuedBachetRanking Class ----*")
     >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
     >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
     >>> from linearOrders import ValuedBachetRanking
     >>> print('*---- solely given ordering and the reverse of the actions')
     >>> ba1 = ValuedBachetRanking(g,BestQualified=True)
-    >>> ba1.showScores(Valued=True) 
+    >>> ba1.showScores 
      Bachet scores in descending order
      action 	  score
-     a2 	 +3126.01
-     a5 	 +1660.68
-     a9 	 +1439.05
-     a3 	  +490.35
-     a6 	  +288.43
-     a4 	   -59.94
-     a8 	  -107.58
-     a7 	  -270.58
-     a1 	 -2948.69
+     a2 	 +3126
+     a5 	 +1660
+     a9 	 +1439
+     a3 	  +490
+     a6 	  +288
+     a4 	   -59
+     a8 	  -107
+     a7 	  -270
+     a1 	 -2948
     >>> print(g.computeRankingCorrelation(ba1.bachetRanking))
      {'correlation': 0.6314945107236328, 'determination': 0.408625}
-    >>> print('*---- using 100 random orderings and their reversed versions')
-    >>> ba2 = ValuedBachetRanking(g,randomized=100)
-    >>> ba2.showScores(Valued=True)
-     Bachet scores in descending order
-     action 	  score
-     a2 	 +3580.93
-     a9 	 +2725.92
-     a5 	 +1773.33
-     a6 	  +672.79
-     a8 	  -115.16
-     a4 	  -489.13
-     a3 	  -652.16
-     a7 	 -1102.77
-     a1 	 -1550.40
-    >>> print(g.computeRankingCorrelation(ba3.bachetRanking))
-     {'correlation': 0.7459841609734544, 'determination': 0.408625}
-
-    
-    .. note::
-
-       Mind that the Bachet numbering system is a positional {-1,0,+1} numeral system that is isomorphic to the {0,1,2} base 3 numeral system. A Bachet ranking result is therefore depending on the very ordering of the rows and columns of the *other.relation* attribute when there is a lack of transitivity observed in the relation. It is hence recommended (*BestQualified=True* setting by default) to compute a first Bachet ranking result with the given order of the *other.actions* atribute and a second one with the reversed order. The best qualified of both ranking results is eventually returned.
-
-       Mind also that the integer value range of Bachet numbers gets quickly huge with the length of the given row and column chracteristic vectors. The digraph *orderLimit* parameter is therefore set by default to 50, allowing to tackle integer values in the huge integer range +-358948993845926294385124. When there is need to tackle digraphs of larger order, this *orderLimit* parameter may be adjusted.
-
-       When the ranking result appears suspiciously uncorrelated with the given outranking digraph, it is recommended to set the *randomized* parameter to a positive integer *n*. In this case, *n* random orderings of the decision actions with their reversed versions will be used for generating Bachet rankings. The best correlated ranking will eventually be returned.   
     
     """
     def __init__(self,other,CoDual=False,actionsList=None,
@@ -2301,6 +1808,7 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
             print('!!! Error: the given digraph order %d is greater than the allowed orderLimit %d. ' % (other.order,orderLimit))
             return
         from collections import OrderedDict
+        from decimal import Decimal
         from time import time
         from operator import itemgetter
         import arithmetics as ar
@@ -2336,15 +1844,6 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
                            'med': Med,\
                            'max': Max,
                            'hasIntegerValuation':True}
-        # with Condorcet Digraph valuation
-##        if not Polarised:
-##            c = PolarisedDigraph(other,level=other.valuationdomain['med'],\
-##                                 StrictCut=True,KeepValues=False)
-##            if Debug:
-##                print(c)
-##            c.recodeValuation(ndigits=0)
-##            cRelation = c.relation
-##        else:
         c = other
         cRelation = otherRelation
         
@@ -2397,7 +1896,6 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
             for i in range(randomized):
                 random.shuffle(randomActions) 
                 ba = ValuedBachetRanking(c,orderLimit=orderLimit,
-                                   #Polarised=True,
                                    BestQualified=True,
                                    actionsList=randomActions)
                 corr = other.computeRankingCorrelation(ba.bachetRanking)
@@ -2420,14 +1918,20 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
             self.gamma = bar.gamma,
             self.notGamma = bar.notGamma
             self.runTimes['totalTime'] = time()-tt
+            if Comments:
+                print('Bachet decreasing scores')
+                for x in self.decBachetScores:
+                    print( '%s : %+d' %( x[1],int(x[0]) ) )
+                print('Bachet Ranking:')
+                print(self.bachetRanking)
+                print('Correlation:',self.correlation)
+                
             return
 
         else: # not randomized
             
-            if BestQualified:
-                #Optimal = True
-                if Comments:
-                    print('Both Bachet ranking with the given order and the reversed order of the decision actions are computed and the best qualified is eventually returned')
+            if BestQualified and Comments:
+                print('Both Bachet ranking with the given order and the reversed order of the decision actions are computed and the best qualified is eventually returned')
             tnf = time()
             incBachetScores = []
             decBachetScores = []
@@ -2435,24 +1939,10 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
                 incBachetRevScores = []
                 decBachetRevScores = []
 
-            # with Condorcet Digraph valuation
-            #c = PolarisedDigraph(other,level=other.valuationdomain['med'],\
-            #                 StrictCut=True,KeepValues=False)
-            #if Debug:
-            #    print(c)
-            #c.recodeValuation(ndigits=0)
-            # ## moved above the Optimal section
-##            if Polarised:
-##                cRelation = otherRelation
-##            else:
             cRelation = otherRelation
 
             actionsList = [x for x in actions]
             for x in actionsList:
-##                if _Permuting:
-##                    vecx = [cRelation[x][y] for y in actionsList]
-##                    vecy = [cRelation[y][x] for y in actionsList]
-##                else:
                 vecx = [cRelation[x][y] for y in actionsList if y != x]
                 vecy = [cRelation[y][x] for y in actionsList if y != x]
                 if Debug:
@@ -2460,22 +1950,12 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
                 bx = ar.BachetNumber(vector=vecx)
                 by = ar.BachetNumber(vector=vecy)
                 bScore = bx + (-by)
-                #bScore = bx
-                #bScore = bx + by
-##                if _Permuting:
-##                    incBachetScores.append((bScore,x,bx,by))
-##                    decBachetScores.append((bScore,x,bx,by))
-##                else:
                 incBachetScores.append((bScore,x))
                 decBachetScores.append((bScore,x))
                 if BestQualified:
                     bxrev = bx.reverse()
                     byrev = by.reverse()
                     bRevScore =  bxrev + (-byrev)
-##                    if _Permuting:
-##                        incBachetRevScores.append((bRevScore.value(),x,bxrev,byrev))
-##                        decBachetRevScores.append((bRevScore.value(),x,bxrev,byrev))
-##                    else:
                     incBachetRevScores.append((bRevScore,x))
                     decBachetRevScores.append((bRevScore,x))
             # reversed sorting with keeping the actions initial ordering
@@ -2489,30 +1969,10 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
                     print(incBachetRevScores,decBachetRevScores)
                 incBachetRevScores.sort(key=itemgetter(0))
                 decBachetRevScores.sort(reverse=True,key=itemgetter(0))
-
-            #decBachetScores = [(x[0],x[1]) for x in decBachetScores]
-            #incBachetScores = [(x[0],x[1]) for x in incBachetScores]               
-            #self.decBachetScores = decBachetScores
-            #self.incBachetScores = incBachetScores
             if Debug:
                 print(incBachetScores,decBachetScores)
-##            if BestQualified:
-##                decBachetRevScores = [(x[0],x[1]) for x in decBachetRevScores]
-##                incBachetRevScores = [(x[0],x[1]) for x in incBachetRevScores]               
-                #self.decBachetRevScores = decBachetRevScores
-                #self.incBachetRevScores = incBachetRevScores
-            if Debug:
+            if BestQualified and Debug:
                 print(incBachetRevScores,decBachetRevScores)
-
-
-        if Comments:
-            print('Bachet decreasing scores')
-            for x in decBachetScores:
-                print( '%s : %.f' %( x[1],x[0] ) )
-            if BestQualified:
-                print('reversed Bachet decreasing scores')
-                for x in decBachetRevScores:
-                    print( '%s : %f' %( x[1],x[0] ) )
 
 
         bachetRanking = [x[1] for x in decBachetScores]
@@ -2539,6 +1999,10 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
         self.decBachetScores = decBachetScores
         self.incBachetScores = incBachetScores
         if Comments:
+            print('Bachet decreasing scores')
+            for x in decBachetScores:
+                print( '%s : %+d' %( x[1],int(x[0]) ) )
+        if Comments:
             print('Bachet Ranking:')
             print(bachetRanking)
 
@@ -2547,7 +2011,6 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
         # init relation
         tr = time()
         actionsList = [x for x in actions]
-        #print('actionsList',BachetRanking)
         relation = {}
         for x in actionsList:
             xi = bachetRanking.index(x)
@@ -2555,14 +2018,12 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
             #print(x,xi)
             for y in actionsList:
                 yj = bachetRanking.index(y)
-                #print(x,xi,y,yj,max(Med,cRelation[x][y]) )
                 if xi < yj:                    
                     relation[x][y] = Max
                 elif xi == yj:
                     relation[x][y] = Med
                 else:
                     relation[x][y] = Min
-                #print(x,xi,y,yj,relation[x][y] )
         runTimes['relation'] = time() - tr
 
         # store attributes
@@ -3204,7 +2665,7 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
     Threading = False
-    res = open('test9CBPolRd50500Ctrl1.csv','w')
+    res = open('test9CBPolRd50500Ctrl2.csv','w')
     #res = open('tes.csv','w')
     res.write('"seed","nt","baptft","bapttt","bapfft","bapfff","cop","nf","ke"\n')
     sampleSize = 1
