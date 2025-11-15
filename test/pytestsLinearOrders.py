@@ -80,7 +80,7 @@ def testRandomLinearOrders():
 
 def testRankingCorrelations():
     print('*-------- Testing ranking qualities -------')
-    from linearOrders import _OutFlowsOrder
+    #from linearOrders import _OutFlowsOrder
     t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=5,seed=100)
     g = BipolarOutrankingDigraph(t,Normalized=True)
     g.showRelationTable()
@@ -123,13 +123,13 @@ def testRankingCorrelations():
     print(g.computeOrdinalCorrelation(nf))
     nf.showScores()
     print()
-    print('==>> out flows ordering:')
-    of = _OutFlowsOrder(g)
-    #g.showRelationTable()
-    print(of.outFlowsRanking)
-    print(of.outFlowsOrder)
-    print(g.computeOrdinalCorrelation(of))
-    of.showScores(direction='increasing')
+##    print('==>> out flows ordering:')
+##    of = _OutFlowsOrder(g)
+##    #g.showRelationTable()
+##    print(of.outFlowsRanking)
+##    print(of.outFlowsOrder)
+##    print(g.computeOrdinalCorrelation(of))
+##    #of.showScores(direction='increasing')
     print()
     print('==>> Kohler ordering:')
     ko = KohlerOrder(g)
