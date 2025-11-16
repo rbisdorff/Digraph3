@@ -2199,10 +2199,10 @@ class CopelandRanking(LinearOrder):
         print('action \t score')
         if direction == 'descending':
             for x in self.decCopelandScores:
-                print('%s \t %.2f' %(x[1],x[0]))
+                print('%s \t %+d' %(x[1],x[0]))
         else:
             for x in self.incCopelandScores:
-                print('%s \t %.2f' %(x[1],x[0]))
+                print('%s \t %+d' %(x[1],x[0]))
          
 class CopelandOrder(CopelandRanking):
     """

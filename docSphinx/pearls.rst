@@ -3450,16 +3450,16 @@ When reconsidering the random outranking digraph *g*, seen in :numref:`optimisin
    >>> sba = BachetRanking(g,Polarised=True,sampleSize=100)
    >>> sba.showScores()
     Bachet scores in descending order
-     action 	  score
-      a2 	 6380.00
-      a5 	 4746.00
-      a9 	 2480.00
-      a6 	 -306.00
-      a8 	 -877.00
-      a4 	-1494.00
-      a3 	-4315.00
-      a7 	-4955.00
-      a1 	-6083.00
+     action 	 score
+      a2 	 +6380
+      a5 	 +4746
+      a9 	 +2480
+      a6 	  -306
+      a8 	  -877
+      a4 	 -1494
+      a3 	 -4315
+      a7 	 -4955
+      a1 	 -6083
    >>> sba.bachetRanking
     ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1']
    >>> g.showCorrelation(g.computeRankingCorrelation(sba.bachetRanking))

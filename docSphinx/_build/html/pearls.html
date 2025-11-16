@@ -3373,16 +3373,16 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span class="hll"><span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 </span><span class="linenos"> 9</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
 <span class="linenos">10</span><span class="go"> Bachet scores in descending order</span>
-<span class="linenos">11</span><span class="go">  action       score</span>
-<span class="linenos">12</span><span class="go">   a2         6380.00</span>
-<span class="linenos">13</span><span class="go">   a5         4746.00</span>
-<span class="linenos">14</span><span class="go">   a9         2480.00</span>
-<span class="linenos">15</span><span class="go">   a6         -306.00</span>
-<span class="linenos">16</span><span class="go">   a8         -877.00</span>
-<span class="linenos">17</span><span class="go">   a4        -1494.00</span>
-<span class="linenos">18</span><span class="go">   a3        -4315.00</span>
-<span class="linenos">19</span><span class="go">   a7        -4955.00</span>
-<span class="linenos">20</span><span class="go">   a1        -6083.00</span>
+<span class="linenos">11</span><span class="go">  action      score</span>
+<span class="linenos">12</span><span class="go">   a2         +6380</span>
+<span class="linenos">13</span><span class="go">   a5         +4746</span>
+<span class="linenos">14</span><span class="go">   a9         +2480</span>
+<span class="linenos">15</span><span class="go">   a6          -306</span>
+<span class="linenos">16</span><span class="go">   a8          -877</span>
+<span class="linenos">17</span><span class="go">   a4         -1494</span>
+<span class="linenos">18</span><span class="go">   a3         -4315</span>
+<span class="linenos">19</span><span class="go">   a7         -4955</span>
+<span class="linenos">20</span><span class="go">   a1         -6083</span>
 <span class="linenos">21</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span><span class="o">.</span><span class="n">bachetRanking</span>
 <span class="hll"><span class="linenos">22</span><span class="go"> [&#39;a2&#39;, &#39;a5&#39;, &#39;a9&#39;, &#39;a6&#39;, &#39;a8&#39;, &#39;a4&#39;, &#39;a3&#39;, &#39;a7&#39;, &#39;a1&#39;]</span>
 </span><span class="linenos">23</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">sba</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">))</span>
