@@ -3259,16 +3259,16 @@ The polarised *Bachet* ranking rule only considers the crisp relational structur
    ...                     Randomized=True,seed=11)
    >>> bav.showScores()
     Bachet scores in descending order
-     action       score 
-      a5 	 1682.39
-      a6 	 1503.57
-      a7 	  745.72
-      a3 	  406.28
-      a4 	  122.53
-      a8 	  -86.24
-      a1 	 -170.00
-      a2 	 -289.05
-      a9 	-2070.23
+     action      score 
+      a5 	 +1676
+      a6 	 +1492
+      a7 	  +712
+      a3 	  +370
+      a4 	   +74
+      a8 	  -120
+      a1 	  -269
+      a2 	  -286
+      a9 	 -2071
    >>> bav.bachetRanking
     ['a5', 'a6', 'a7', 'a3', 'a4', 'a8', 'a1', 'a2', 'a9']
    >>> ba.bachetRanking
@@ -3916,11 +3916,9 @@ We may redo in :numref:`partialBachet8` below the same computation for the parti
 
 The valued partial Bachet ranking pays a more accurate attention to the marginal criteria significance weights: 10/60 = 0.167 for the three  Costs criteria and 3/60 = 0.050 for the Benefit criteria. Criteria *c01* and *c03* for instance, with a significance of 0.167, are hence given more attention. The weighted mean marginal correlation appears slightly lower (+0.098 vs +0.108). The standard deviation being however lower (+0.204 vs +0.240), we obtain a slightly better overall fairness score (-0.107 vs -0.132, see Lines 19-21).    
 
-.. note::
+As shown above, *Bachet* ranking rules may effectively deliver new methods for constructing convincing partial rankings and, by the way, a tool for computing potential first or last choice recommendations. Actually the :ref:`initial and terminal prekernels <Bipolar-Valued-Kernels-Tutorial-label>` of such partial transitive digraphs. Mind however that the *Bachet* ranking rules can only handle small outranking digraphs ( < 50 ). For larger ( > 50 ) or big ( > 1000 ) outranking digraphs it is opportune to turn to order statistics and compute **weak rankings** --rankings with ties-- by sorting the multicriteria performance records into *relative* or *absolute* performance **quantile equivalence classes**.
 
-   As shown above, the *Bachet* ranking rules may effectively deliver new methods for constructing convincing partial rankings and, by the way, a tool for computing potential first or last choice recommendations. Actually the :ref:`initial and terminal prekernels <Bipolar-Valued-Kernels-Tutorial-label>` of such partial transitive digraphs. Mind however that the *Bachet* ranking rules can only handle small outranking digraphs ( < 50 ). For larger ( > 50 ) or big ( > 1000 ) outranking digraphs it is opportune to turn to order statistics and compute **weak rankings** --rankings with ties-- by sorting the multicriteria performance records into *relative* or *absolute* performance **quantile equivalence classes**.
-
-   This order statistics based **rating** approach is presented in the following tutorials.  
+This order statistics based **rating** approach is presented in the following tutorials.  
 
 Back to :ref:`Content Table <Tutorial-label>`
 

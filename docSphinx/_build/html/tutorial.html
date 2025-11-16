@@ -3345,16 +3345,16 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </span><span class="hll"><span class="linenos"> 3</span><span class="gp">... </span>                    <span class="n">Randomized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
 </span><span class="linenos"> 4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bav</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
 <span class="linenos"> 5</span><span class="go"> Bachet scores in descending order</span>
-<span class="linenos"> 6</span><span class="go">  action       score</span>
-<span class="linenos"> 7</span><span class="go">   a5         1682.39</span>
-<span class="linenos"> 8</span><span class="go">   a6         1503.57</span>
-<span class="linenos"> 9</span><span class="go">   a7          745.72</span>
-<span class="linenos">10</span><span class="go">   a3          406.28</span>
-<span class="linenos">11</span><span class="go">   a4          122.53</span>
-<span class="linenos">12</span><span class="go">   a8          -86.24</span>
-<span class="linenos">13</span><span class="go">   a1         -170.00</span>
-<span class="linenos">14</span><span class="go">   a2         -289.05</span>
-<span class="linenos">15</span><span class="go">   a9        -2070.23</span>
+<span class="linenos"> 6</span><span class="go">  action      score</span>
+<span class="linenos"> 7</span><span class="go">   a5         +1676</span>
+<span class="linenos"> 8</span><span class="go">   a6         +1492</span>
+<span class="linenos"> 9</span><span class="go">   a7          +712</span>
+<span class="linenos">10</span><span class="go">   a3          +370</span>
+<span class="linenos">11</span><span class="go">   a4           +74</span>
+<span class="linenos">12</span><span class="go">   a8          -120</span>
+<span class="linenos">13</span><span class="go">   a1          -269</span>
+<span class="linenos">14</span><span class="go">   a2          -286</span>
+<span class="linenos">15</span><span class="go">   a9         -2071</span>
 <span class="linenos">16</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bav</span><span class="o">.</span><span class="n">bachetRanking</span>
 <span class="hll"><span class="linenos">17</span><span class="go"> [&#39;a5&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a8&#39;, &#39;a1&#39;, &#39;a2&#39;, &#39;a9&#39;]</span>
 </span><span class="linenos">18</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span><span class="o">.</span><span class="n">bachetRanking</span>
@@ -3922,11 +3922,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 </div>
 <p>The valued partial Bachet ranking pays a more accurate attention to the marginal criteria significance weights: 10/60 = 0.167 for the three  Costs criteria and 3/60 = 0.050 for the Benefit criteria. Criteria <em>c01</em> and <em>c03</em> for instance, with a significance of 0.167, are hence given more attention. The weighted mean marginal correlation appears slightly lower (+0.098 vs +0.108). The standard deviation being however lower (+0.204 vs +0.240), we obtain a slightly better overall fairness score (-0.107 vs -0.132, see Lines 19-21).</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>As shown above, the <em>Bachet</em> ranking rules may effectively deliver new methods for constructing convincing partial rankings and, by the way, a tool for computing potential first or last choice recommendations. Actually the <a class="reference internal" href="pearls.html#bipolar-valued-kernels-tutorial-label"><span class="std std-ref">initial and terminal prekernels</span></a> of such partial transitive digraphs. Mind however that the <em>Bachet</em> ranking rules can only handle small outranking digraphs ( &lt; 50 ). For larger ( &gt; 50 ) or big ( &gt; 1000 ) outranking digraphs it is opportune to turn to order statistics and compute <strong>weak rankings</strong> –rankings with ties– by sorting the multicriteria performance records into <em>relative</em> or <em>absolute</em> performance <strong>quantile equivalence classes</strong>.</p>
+<p>As shown above, <em>Bachet</em> ranking rules may effectively deliver new methods for constructing convincing partial rankings and, by the way, a tool for computing potential first or last choice recommendations. Actually the <a class="reference internal" href="pearls.html#bipolar-valued-kernels-tutorial-label"><span class="std std-ref">initial and terminal prekernels</span></a> of such partial transitive digraphs. Mind however that the <em>Bachet</em> ranking rules can only handle small outranking digraphs ( &lt; 50 ). For larger ( &gt; 50 ) or big ( &gt; 1000 ) outranking digraphs it is opportune to turn to order statistics and compute <strong>weak rankings</strong> –rankings with ties– by sorting the multicriteria performance records into <em>relative</em> or <em>absolute</em> performance <strong>quantile equivalence classes</strong>.</p>
 <p>This order statistics based <strong>rating</strong> approach is presented in the following tutorials.</p>
-</div>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 <hr class="docutils" />
 </section>
