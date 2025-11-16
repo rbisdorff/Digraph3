@@ -2997,6 +2997,12 @@ Back to :ref:`Content Table <Pearls-label>`
 
 Applications of bipolar-valued base 3 encoded Bachet numbers
 ````````````````````````````````````````````````````````````
+.. epigraph::
+   
+   "The complexity of arithmetic circuitry for balanced ternary arithmetic is not much greater than it is for the binary system, and a given number requires only :math:`\log_3 2 \approx 63\%` as many digit positions for its representation. [...] perhaps the symmetric properties and simple arithmetic of this number system will prove to be quite important someday [...]"
+
+   -- D. Knuth [KNU-1997]_
+	      
 
 .. contents:: 
    :depth: 1
@@ -3169,10 +3175,10 @@ With the reversed *Bachet* numbers we obtain the ranking 'a4' (26) > 'a3' (-12) 
    >>> cop.showScores()
     Copeland scores in descending order
      action 	 score
-       a4 	 6.00
-       a3 	 0.00
-       a1 	-3.00
-       a2 	-3.00
+       a4 	  +6
+       a3 	   0
+       a1 	  -3
+       a2 	  -3
    >>> cop.copelandRanking
     ['a4', 'a3', 'a1', 'a2']
    >>> corr = g.computeRankingCorrelation(cop.copelandRanking)
@@ -3223,10 +3229,10 @@ The :py:mod:`linearOrders` module provides now a :py:class:`~linearOrders.Polari
    >>> ba.showScores()
     Bachet scores in descending order
       action 	 score
-        a4 	 26.00
-        a3 	  4.00
-        a2 	  1.00
-        a1      -11.00
+        a4 	  +26
+        a3 	   +4
+        a2 	   +1
+        a1        -11
 
 The class delivers as usual a ranking (*self.bachetRanking*) and a corresponding ordering result (*self.bachetOrder*) besides the decreasing list (*self.decBachetScores*) and the increasing list of the corresponding *Bachet* ranking scores (*self.incBachetScores*). Due to potential ties observed among *Bachet* scores and the lexicographic resolving of such ties, the decreasing and increasing lists of ranking scores might indeed not always be just the reversed version of one another. The *self.correlation* attribute contains the ordinal correlation index between the given outranking relation and the computed *Bachet* ranking.
 
@@ -3304,15 +3310,15 @@ It appears hence to be opportune to compute a first *Bachet* ranking result with
    >>> ba1.showScores()
      Bachet scores in descending order
       action 	 score
-        a2 	 6020.00
-        a8 	 3353.00
-        a9 	 3088.00
-        a3 	 2379.00
-        a6 	 476.00
-        a7 	 435.00
-        a4 	 322.00
-        a5 	 -1254.00
-        a1 	 -5849.00
+        a2 	 +6020
+        a8 	 +3353
+        a9 	 +3088
+        a3 	 +2379
+        a6 	  +476
+        a7 	  +435
+        a4 	  +322
+        a5 	 -1254
+        a1 	 -5849
    >>> g.computeRankingCorrelation(ba1.bachetRanking)
      {'correlation': +0.3936, 'determination': 0.4086}
     *---- given and reversed ordering of the actions ---*')
@@ -3320,15 +3326,15 @@ It appears hence to be opportune to compute a first *Bachet* ranking result with
    >>> ba2.showScores() 
      Bachet scores in descending order
       action 	 score
-        a2 	 6380.00
-        a9 	 2480.00
-        a5 	 1830.00
-        a8 	-877.00
-        a3 	-1399.00
-        a6 	 1764.00
-        a7 	-2039.00
-        a4 	-4410.00
-        a1 	-6083.00
+        a2 	 +6380
+        a9 	 +2480
+        a5 	 +1830
+        a8 	  -877
+        a3 	 -1399
+        a6 	 -1764
+        a7 	 -2039
+        a4 	 -4410
+        a1 	 -6083
    >>> g.computeRankingCorrelation(ba2.bachetRanking)
     {'correlation': +0.6315, 'determination': 0.4086}
 
@@ -3346,15 +3352,15 @@ Yet, when observing a somehow lower transitivity degree, as we may notice in :nu
    >>> ba3.showScores()
      Bachet scores in descending order
       action 	 score
-        a2 	 6552.00
-        a5 	 4442.00
-        a9 	 2300.00
-        a6 	  -84.00
-        a8 	 -153.00
-        a4 	 -978.00
-        a3 	-4031.00
-        a7 	-4605.00
-        a1 	-6453.00
+        a2 	 +6552
+        a5 	 +4442
+        a9 	 +2300
+        a6 	   -84
+        a8 	  -153
+        a4 	  -978
+        a3 	 -4031
+        a7 	 -4605
+        a1 	 -6453
    >>> g.computeRankingCorrelation(ba3.bachetRanking)
     {'correlation': +0.7585, 'determination': 0.4086}
 
@@ -3654,10 +3660,6 @@ Computing initial and terminal *prekernels* in digraphs is the subject of the ne
 Notes
 .....
 
-.. epigraph::
-   
-   "The complexity of arithmetic circuitry for balanced ternary arithmetic is not much greater than it is for the binary system, and a given number requires only :math:`\log_3 2 \approx 63\%` as many digit positions for its representation. ... perhaps the symmetric properties and simple arithmetic of this number system will prove to be quite important someday ..." -- D. Knuth [KNU-1997]_
-	      
 Our initial Python implementation of the :py:class:`~arithmetics.BachetNumber` class dates from 2012 when preparing the lectures of a first Semester course on *Discrete Mathematics* for computer scientists. But, it is only in Spring 2025 that we realized how remarquably well *Bachet*'s signed bits weighing design is adapted to our bipolar-valued epistemic logic approach. The *Bachet* ranking rules illustrate here convincingly the benefit one may indeed obtain when computing, not in a binary {0,1} bit world, like today all bit-wise computing devices, but instead in a bipolar-valued {-1,0,+1} world with **balanced ternary Bachet computers** [26]_.
 
 The power of the **epistemic disjunctive fusion** operator, for instance, is indeed impressive. When two arguments prove the *Truthfulness* of a logical statement, their fusion will be **True**. When two arguments prove the **Falseness** of the statement, their fusion will be **False**, However, when they provide conjointly a proof of *Falseness* **and** a proof of *Truthfulness*, their fusion will be **indeterminate** (zero knowledge). It is worthwhile noticing again the essential computational role this indeterminate **zero** value is taking on in such a *Bachet* computer.

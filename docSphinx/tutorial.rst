@@ -3150,15 +3150,15 @@ Here, as we have seen above, the given digraph's transitivity degree is only 0.4
    >>> ba.showScores()
     Bachet scores in descending order
      action 	 score
-      a5 	 6488.00
-      a6 	 6246.00
-      a7 	  390.00
-      a3 	 -161.00
-      a4 	 -167.00
-      a1 	 -198.00
-      a8 	-4352.00
-      a9 	 4473.00
-      a2 	-4555.00
+      a5 	 +5084
+      a6 	 +4478
+      a7 	 +3954
+      a3 	   +79
+      a4 	   +75
+      a1 	   -22
+      a8 	 -3240
+      a9 	 -4411
+      a2 	 -6081
    >>> ba.bachetRanking
     ['a5', 'a6', 'a7', 'a3', 'a4', 'a1', 'a8', 'a9', 'a2']
    >>> corr = g.computeRankingCorrelation(ba.bachetRanking)

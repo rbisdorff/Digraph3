@@ -284,13 +284,8 @@ class BachetNumber(object):
 
     def __add__(self,other,Debug=False):
         """
-        Defines the addition operator for Bachet encoded numbers.
+        Defines the balanced ternary addition operator for Bachet encoded numbers.
         """
-##        v1 = self.value()
-##        v2 = other.value()
-##        nv = v1 + v2
-##        new = BachetNumber(nv)
-##        return new
         from copy import deepcopy
         srv = self.reverse()
         orv = other.reverse()
@@ -356,6 +351,17 @@ class BachetNumber(object):
         """
         v1 = self.ternaryCode()
         v2 = other.ternaryCode()
+        nz = len(v1) - len(v2)
+        if nz < 0:
+            vector = ''
+            for i in range(abs(nz)):
+                vector = vector + '1'
+            v1 = vector + v1
+        elif nz > 0:
+            vector = ''
+            for i in range(nz):
+                vector += '1'
+            v2 = vector + v2
         return v1==v2
 
     def __ge__(self,other, /):
