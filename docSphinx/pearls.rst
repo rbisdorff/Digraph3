@@ -2888,7 +2888,7 @@ The ordinal correlation between the global *NetFlows* ranking and the digraph *g
 
 .. code-block:: pycon
    :linenos:
-   :caption: Correlation between outrankings global *NetFlows* Ranking
+   :caption: Ordinal correlation between *NetFlows* ranking and outranking digraph
    :name: globalCorr
    :emphasize-lines: 4
 
