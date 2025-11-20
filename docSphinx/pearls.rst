@@ -3295,7 +3295,7 @@ When we reconsider above digraph *g*'s polarised relation table, we may indeed n
     ['a3', 'a4', 'a2', 'a1'] ['a4', 'a1', 'a3', 'a2'] 0.6890
      ['a1', 'a2', 'a4', 'a3'] ['a4', 'a3', 'a2', 'a1'] 0.7950
      
-It appears hence to be opportune to compute a first *Bachet* ranking result with the given order of the *self.actions* atribute and a second one with the corresponding reversed ordering. The best correlated of both ranking results is eventually returned. The :py:class:`~linearOrders.PolarisedBachetRanking` class provides therefore the *BestQualified* parameter set by default to *True* (see below :numref:`optimisingBachet` Lines 5 and 19,21,35). Computing the reversed version of the *Bachet* rule is indeed computationally easy as it just requires to reverse the previously used *Bachet* vectors, a method directly provided by the :py:mod:`~arithmetics.BachetNumber` class. 
+It appears hence to be opportune to compute a first *Bachet* ranking result with the given order of the *self.actions* attribute and a second one with the corresponding reversed ordering. The best correlated of both ranking results is eventually returned. The :py:class:`~linearOrders.PolarisedBachetRanking` class provides therefore the *BestQualified* parameter set by default to *True* (see below :numref:`optimisingBachet` Lines 5 and 19,21,35). Computing the reversed version of the *Bachet* rule is indeed computationally easy as it just requires to reverse the previously used *Bachet* vectors, a method directly provided by the :py:mod:`~arithmetics.BachetNumber` class. 
 
 .. code-block:: pycon
    :caption: Optimising the *Bachet* ranking result I
@@ -3383,7 +3383,7 @@ The correlation +0.7585 above corresponds, in the example given here, again to t
 Efficiency of the Bachet ranking rule settings
 ..............................................
 
-We may check the quality of the *optimal Bachet ranking* result with a corresponding performance heatmap statistic.
+We may check the quality of the *optimal Bachet ranking* result with a corresponding performance heat map statistic.
 
 .. code-block:: pycon
 
@@ -3396,7 +3396,7 @@ We may check the quality of the *optimal Bachet ranking* result with a correspon
    :width: 400 px
    :align: center
 
-   *Bachet* randomized 100 rule ranked performance heatmap view
+   *Bachet* randomized 100 rule ranked performance heat map view
 
 In :numref:`bachetHeatmap` we may observe that the *ba3.bachetRanking* is positively correlated to six out of seven performance criteria with a mean correlation of +0.213 and a positive ranking fairness (+0.06).  With four out of seven performance grades in the highest quintile [80% - 100%], action *a2* is convincingly first-ranked. Similarly, action *a1*, with only one performance in the fourth quintile [60%-80%] shows the weakest performances and is last-ranked. It is worthwhile noticing that action *a9* is actually ranked before actions *a6* and *a8* despite an apparent lesser performance profile. This is due to both the considerable negative performance differences (-85.89 and -87.20) observed on criterion *g2* triggering in fact a polarised outranking situation in favour of action *a9*.
 
@@ -3470,7 +3470,7 @@ When reconsidering the random outranking digraph *g*, seen in :numref:`optimisin
      Epistemic determination    :  0.409
      Bipolar-valued equivalence : +0.310
 
-In :numref:`smartBachet0` Line 5 we notice that the given random outranking digraph presents 161 intransitive outranking triples. When randomly sampling in Line 8 the permutations of 100 of these intransitive triples, we discover a ranking result that corresponfs to the optimal Kemeny ranking seen in :numref:`optimalKemeny1`.
+In :numref:`smartBachet0` Line 5 we notice that the given random outranking digraph presents 161 intransitive outranking triples. When randomly sampling in Line 8 the permutations of 100 of these intransitive triples, we discover a ranking result that corresponds to the optimal Kemeny ranking seen in :numref:`optimalKemeny1`.
 
 Running a MonteCarlo simulation with a sample of 500 random 3 objectives --economic, environmental and societal-- performance tableaux of 9 decision actions marked on 13 performance criteria, gives the following ordinal correlations statistics between the corresponding ranking results and the given bipolar-valued outranking digraph *g*. 
 
@@ -3512,7 +3512,7 @@ Revealing the transitive part of a bipolar-valued digraph
 
 As we have noticed before, the randomized versions of the :py:class:`~linearOrders.PolarisedBachetRanking` and the :py:class:`~linearOrders.ValuedBachetRanking` constructors potentially produce multiple ranking results of unequal correlation quality, yet respecting --due to the Condorcet consistency property-- all more or less the transitive part of the given digraph. If we collect now a small subset of the best correlated rankings, we can use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class for constructing, by epistemic disjunctive fusion of these selected rankings, a partial *Bachet* ranking result --a transitive asymmetrical digraph with indeterminate reflexive relations-- showing actually the potential transitive part of a given polarised outranking digraph. 
 
-To explore this remarquable opportunity, a new :py:class:`~transitiveDigraphs.PartialBachetRanking` class is provided by the :py:mod:`transitiveDigraphs` module. To illustrate its usefulness, let us reconsider the example outranking digraph *g* of :numref:`optimisingBachet`. 
+To explore this remarkable opportunity, a new :py:class:`~transitiveDigraphs.PartialBachetRanking` class is provided by the :py:mod:`transitiveDigraphs` module. To illustrate its usefulness, let us reconsider the example outranking digraph *g* of :numref:`optimisingBachet`. 
 
 .. code-block:: pycon
    :caption: Partial *Bachet* ranking result
@@ -3662,11 +3662,11 @@ Computing initial and terminal *prekernels* in digraphs is the subject of the ne
 Notes
 .....
 
-Our initial Python implementation of the :py:class:`~arithmetics.BachetNumber` class dates from 2012 when preparing the lectures of a first Semester course on *Discrete Mathematics* for computer scientists. But, it is only in Spring 2025 that we realized how remarquably well *Bachet*'s signed bits weighing design is adapted to our bipolar-valued epistemic logic approach. The *Bachet* ranking rules illustrate here convincingly the benefit one may indeed obtain when computing, not in a binary {0,1} bit world, like today all bit-wise computing devices, but instead in a bipolar-valued {-1,0,+1} world with **balanced ternary Bachet computers** [26]_.
+Our initial Python implementation of the :py:class:`~arithmetics.BachetNumber` class dates from 2012 when preparing the lectures of a first Semester course on *Discrete Mathematics* for computer scientists. But, it is only in Spring 2025 that we realized how remarkably well *Bachet*'s signed bits weighing design is adapted to our bipolar-valued epistemic logic approach. The *Bachet* ranking rules illustrate here convincingly the benefit one may indeed obtain when computing, not in a binary {0,1} bit world, like today all bit-wise computing devices, but instead in a bipolar-valued {-1,0,+1} world with **balanced ternary Bachet computers** [26]_.
 
 The power of the **epistemic disjunctive fusion** operator, for instance, is indeed impressive. When two arguments prove the *Truthfulness* of a logical statement, their fusion will be **True**. When two arguments prove the **Falseness** of the statement, their fusion will be **False**, However, when they provide conjointly a proof of *Falseness* **and** a proof of *Truthfulness*, their fusion will be **indeterminate** (zero knowledge). It is worthwhile noticing again the essential computational role this indeterminate **zero** value is taking on in such a *Bachet* computer.
 
-Remarquable is even more the unexpected **Condorcet Consistency** of the *polarised* Bachet ranking scores which allows us to effectively reveal, with the :py:class:`~transitiveDigraphs.PartialBachetRanking` constructor, the transitive part of any given bipolar-valued digraph.    
+Remarkable is even more the unexpected **Condorcet Consistency** of the *polarised* Bachet ranking scores which allows us to effectively reveal, with the :py:class:`~transitiveDigraphs.PartialBachetRanking` constructor, the transitive part of any given bipolar-valued digraph.    
 
 ..............................................
 
