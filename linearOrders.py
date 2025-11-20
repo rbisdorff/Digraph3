@@ -1751,7 +1751,9 @@ class BachetOrder(BachetRanking):
 #------------
 class ValuedBachetRanking(LinearOrder,_BachetRanking):
     """    
-    Instantiates the valued Bachet Ranking and Ordering from a given bipolar-valued *Digraph* instance *other*.
+    Instantiates the valued Bachet Ranking and Ordering from a given normalized bipolar-valued *Digraph* instance *other*.
+    Th decimal base 3 value obtained from a partially determined characteristic vector is rounded
+    to an integer value and corresponding integer Bachet vector. 
 
     *Parameters*
 
