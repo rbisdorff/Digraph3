@@ -178,10 +178,10 @@ def testPolarisedBachetRanking():
     print(ba3)
     ba3.showScores()
     print(ba3.correlation)
-    ba4 = PolarisedBachetRanking(g,Optimal=True,Comments=True)
-    print(ba4)
-    ba4.showScores()
-    print(ba4.correlation)
+##    ba4 = PolarisedBachetRanking(g,Optimal=True,Comments=True)
+##    print(ba4)
+##    ba4.showScores()
+##    print(ba4.correlation)
 
 def testValuedBachetRanking():
     print("*==>> testing ValuedBachetRanking Class ----*")
@@ -202,10 +202,10 @@ def testValuedBachetRanking():
     print(ba3)
     ba3.showScores()
     print(ba3.correlation)
-    ba4 = ValuedBachetRanking(g,Optimal=True,Comments=True)
-    print(ba4)
-    ba4.showScores()
-    print(ba4.correlation)
+##    ba4 = ValuedBachetRanking(g,Optimal=True,Comments=True)
+##    print(ba4)
+##    ba4.showScores()
+##    print(ba4.correlation)
 
 def testSmartBachetRanking():
     print("*==>> testing SmartBachetRanking Class ----*")

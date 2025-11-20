@@ -3428,6 +3428,8 @@ Mind however that the *Bachet* ranking rule, even of comparable complexity :math
 
 In Python, the range of integers is luckily only limited by the available CPU memory and the *orderLimit* parameter may be adjusted to tackle, if required, outranking digraphs of orders > 50. The randomized *Bachet* ranking rule might however need in these cases a smart permutohedron sampling strategy in order to achieve convincingly correlated ranking results. 
 
+.. _BachetRanking-rule-label:
+
 Smart sampling of the permutations of the actions list
 ......................................................
 
