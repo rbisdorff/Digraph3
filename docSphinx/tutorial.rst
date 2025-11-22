@@ -67,7 +67,7 @@
        * :ref:`Computing a best choice recommendation <Rubis-Tutorial-label>`
        * :ref:`How to create a new performance tableau instance <New-PerformanceTableau-Tutorial-label>`
        * :ref:`Generating random performance tableaux <RandomPerformanceTableau-Tutorial-label>`
-       * :ref:`Linear ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`
+       * :ref:`Linearly ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`
        * :ref:`Partially ranking with multiple incommensurable criteria <Partial-Ranking-Tutorial-label>`
        * :ref:`Rating into relative performance quantiles <QuantilesRating-Tutorial-label>`
        * :ref:`Rating-by-ranking with learned performance quantile limits <LearnedRating-Tutorial-label>`
@@ -2930,8 +2930,8 @@ Back to :ref:`Content Table <Tutorial-label>`
 
 .. _Ranking-Tutorial-label:
 
-Ranking with multiple incommensurable criteria
-----------------------------------------------
+Lineraly ranking with multiple incommensurable criteria
+-------------------------------------------------------
    
 .. contents:: 
 	:depth: 2
@@ -3129,11 +3129,11 @@ We recover in :numref:`weakCopelandRanking` Lines 6 and 8 above, the ranking wit
 
    A weak Copeland ranking 	   
 
-A similar ranking-by-scoring rule is provided by the :py:class:`linearOrders.BachetRanking` class.	
+A similar ranking-by-scoring rule is provided by the :py:class:`~linearOrders.BachetRanking` class.	
 
 The polarised *Bachet* ranking
 ``````````````````````````````
-*Bachet* numbers --bipolar-valued {-1,0,+1} base 3 encoded integers, provided by the :py:class:`arithmetics.BachetNumber` class and instantiated by the row vectors and the column vectors --both without reflexive terms-- of the strict outranking digraph's polarised relation table, model in fact per decision action respectively an **outrankingness** and a **negated outrankedness** ranking fitness score similar to the previous *Copeland* ranking scores (see the advanced topic on :ref:`a new ranking rule based on bipolar-valued base 3 Bachet numbers <Bachet-Tutorial-label>` ).
+*Bachet* numbers --bipolar-valued {-1,0,+1} base 3 encoded integers, provided by the :py:class:`~arithmetics.BachetNumber` class and instantiated by the row vectors and the column vectors --both without reflexive terms-- of the strict outranking digraph's polarised relation table, model in fact per decision action respectively an **outrankingness** and a **negated outrankedness** ranking fitness score similar to the previous *Copeland* ranking scores (see the advanced topic on :ref:`a new ranking rule based on bipolar-valued base 3 Bachet numbers <Bachet-Tutorial-label>` ).
 
 Now, *Bachet* numbers are formulated in a positional numbering system and the integer values of the *Bachet* ranking scores therefore depend on the actual ordering of the outranking digraph's *actions* dictionary. The polarised :py:class:`~linearOrders.BachetRanking` rule is nevertheless **Condorcet consistent**, ie. when the outranking digraph models a transitive relation, this relation will be preserved by the polarised *BachetRanking* ranking scores. However, unlike the *Copeland* rule, the rule is **not invariant** under the **codual** transform [62]_.
 
