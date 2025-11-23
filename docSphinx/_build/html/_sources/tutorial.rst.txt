@@ -1771,7 +1771,7 @@ In :numref:`BachetRanking0` Line 2, we operate the :ref:`epistemic disjunctive f
      Standard deviation (b)                 : +0.476
      Partial ranking fairness (a)-(b)       : +0.002
 
-The partial Bachet ranking is a 100% consistent with the *Proximity* criterion, 85% consistent with *Visibility* and 75% consistent with the *Costs* criterion. These three criteria are the most significant ones (see Lines 5 aand 7). The least considered criteria are the *Standing* and even more the *Comfort* criterion. The partial Bachet ranking is indeed  only 35% consistent with the *Standing* and only 15% consistent with the latter one (see Lines 10-11). The mean weighted marginal ordinal correlation index (+0.478, Line 13) over all the criteria shows eventually a partial ranking consensus supported by a nearly 75% significance majority.   
+The partial *Bachet* ranking is a 100% consistent with the *Proximity* criterion, 85% consistent with *Visibility* and 75% consistent with the *Costs* criterion. These three criteria are the most significant ones (see Lines 5 aand 7). The least considered criteria are the *Standing* and even more the *Comfort* criterion. The partial *Bachet* ranking is indeed  only 35% consistent with the *Standing* and only 15% consistent with the latter one (see Lines 10-11). The mean weighted marginal ordinal correlation index (+0.478, Line 13) over all the criteria shows eventually a partial ranking consensus supported by a nearly 75% significance majority.   
 
 We may finally use the best, with the outranking digraph *g* correlated (+0.816), *Bachet* ranking ['G', 'D', 'A', 'C', 'B', 'E', 'F']  for showing in :numref:`rankedOfficeChoiceHeatmap` a from best to worst ranked performance heatmap of all the potential office locations.
 
@@ -1787,7 +1787,7 @@ We may finally use the best, with the outranking digraph *g* correlated (+0.816)
 
 In view of :numref:`rankedOfficeChoiceHeatmap`, office locations *G* or *D* make up convincing best choice recommendations with an apparent slight advantage for location *G*. Notice that both alternatives *A* and *C*, with their highly contrasted performance profiles, appear ranked in the midfield. Indeed, as they don't compare well, they may neither be first nor last ranked. This is why, when such largely incomparable or extreme alternatives are observed, linear rankings may fail to deliver adequate first-choice recommendations. Notice finally in the *tau* row above similar marginal ordinal correlation indexes as observed before in :numref:`PartialBachetRanking1` Lines 5-11.  
 
-The :py:class:`digraphs.Digraph` class now readily provides the :py:meth:`~digraphs.Digraph.showBachetChoiceRecommendation` method for directly showing the first and last choices obtained from the previous  partial Bachet ranking result accessible in the *g.pbr* attribute (see :numref:`PartialBachetRanking10` Line 1).
+The :py:class:`digraphs.Digraph` class now readily provides the :py:meth:`~digraphs.Digraph.showBachetChoiceRecommendation` method for directly showing the first and last choices obtained from the previous  partial *Bachet* ranking result accessible in the *g.pbr* attribute (see :numref:`PartialBachetRanking10` Line 1).
 
 .. code-block:: pycon
    :name: PartialBachetRanking10
@@ -3728,8 +3728,8 @@ The epistemic fusion of all four *ranking-by-scoring* results delivers here a co
 
 A second strategy for constructing partial rankings makes usage of the *randomized Bachet* ranking rules.
 
-On partially ranking with the Bachet rules
-``````````````````````````````````````````
+On partially ranking with the *Bachet* rules
+````````````````````````````````````````````
 
 Due to its *Condorcet consistency* property, the polarsed *Bachet* ranking rule applied to random orderings of the actions will potentially produce multiple ranking results of unequal correlation quality, yet respecting all the actual transitive part of the given outranking digraph. A subset of best correlated *Bachet* rankings represents hence a suitable sample for computing a convincing ranking consensus (see :ref:`Bachet-Tutorial-label`). This second strategy is provided by the :py:class:`transitiveDigraphs.PartialBachetRanking` class. To illustrate its usefulness, let us reconsider the example outranking digraph *g* of :numref:`RankingConsensus`. 
 
@@ -3853,7 +3853,7 @@ It is worthwhile noticing in :numref:`partialBachetval` that alternative *a1* ap
 
 Consensus quality of the partial Bachet rankings
 ````````````````````````````````````````````````
-Let us now verify in :numref:`partialBachet7` below the consensus quality of the partial *polarised* Bachet ranking *pbr*.
+Let us now verify in :numref:`partialBachet7` below the consensus quality of the partial polarised *Bachet* ranking *pbr*.
 
 .. code-block:: pycon
    :caption: Consensus quality of the partial polarised Bachet ranking
@@ -3882,9 +3882,9 @@ Let us now verify in :numref:`partialBachet7` below the consensus quality of the
      Standard deviation (b)                 : +0.240
      Partial ranking fairness (a)-(b)       : -0.132
 
-Best correlated (+0.444) with the partial ranking appear *Cost* criterion *c01* and Benefit criterion *b09*. The relational equivalences are supported by a nearly 75% significance majority (Lines 5-6). Eight out of thirteen criteria show a non negative equivalence and the weighted mean marginal equivalence is slightly positive (+0.108, Line 19). With a standard deviation of +0.240, we obtain however an overall negative fairness score of -0.132 for the partial polarised Bachet ranking.
+Best correlated (+0.444) with the partial ranking appear *Cost* criterion *c01* and Benefit criterion *b09*. The relational equivalences are supported by a nearly 75% significance majority (Lines 5-6). Eight out of thirteen criteria show a non negative equivalence and the weighted mean marginal equivalence is slightly positive (+0.108, Line 19). With a standard deviation of +0.240, we obtain however an overall negative fairness score of -0.132 for the partial polarised *Bachet* ranking.
 
-We may redo in :numref:`partialBachet8` below the same computation for the partial *valued* Bachet ranking. 
+We may redo in :numref:`partialBachet8` below the same computation for the partial valued *Bachet* ranking. 
 
 .. code-block:: pycon
    :caption: Consensus quality of the partial valued Bachet ranking
@@ -3913,7 +3913,7 @@ We may redo in :numref:`partialBachet8` below the same computation for the parti
      Standard deviation (b)                : +0.204
      Partial ranking fairness (a)-(b)      : -0.107
 
-The valued partial Bachet ranking pays a more accurate attention to the marginal criteria significance weights: 10/60 = 0.167 for the three  Costs criteria and 3/60 = 0.050 for the Benefit criteria. Criteria *c01* and *c03* for instance, with a significance of 0.167, are hence given more attention. The weighted mean marginal correlation appears slightly lower (+0.098 vs +0.108). The standard deviation being however lower (+0.204 vs +0.240), we obtain a slightly better overall fairness score (-0.107 vs -0.132, see Lines 19-21).    
+The valued partial *Bachet* ranking pays a more accurate attention to the marginal criteria significance weights: 10/60 = 0.167 for the three  Costs criteria and 3/60 = 0.050 for the Benefit criteria. Criteria *c01* and *c03* for instance, with a significance of 0.167, are hence given more attention. The weighted mean marginal correlation appears slightly lower (+0.098 vs +0.108). The standard deviation being however lower (+0.204 vs +0.240), we obtain a slightly better overall fairness score (-0.107 vs -0.132, see Lines 19-21).    
 
 As shown above, *Bachet* ranking rules may effectively deliver new methods for constructing convincing partial rankings and, by the way, a tool for computing potential first or last choice recommendations. Actually the :ref:`initial and terminal prekernels <Bipolar-Valued-Kernels-Tutorial-label>` of such partial transitive digraphs. Mind however that the *Bachet* ranking rules can only handle small outranking digraphs ( < 50 ). For larger ( > 50 ) or big ( > 1000 ) outranking digraphs it is opportune to turn to order statistics and compute **weak rankings** --rankings with ties-- by sorting the multicriteria performance records into *relative* or *absolute* performance **quantile equivalence classes**.
 
@@ -4749,7 +4749,7 @@ For instance, candidate *a1* is ranked four times before and once behind candida
 
 Notice that in the case of linear voting profiles, majority margins always verify a zero sum property: *M(x,y)* + *M(y,x)* = 0 for all candidates *x* and *y* (see :numref:`condorcetDigraph` Lines 26-28). This is not true in general for arbitrary voting profiles. The *majority margins* digraph of linear voting profiles defines in fact a *weak tournament* and belongs, hence, to the class of *self-codual* bipolar-valued digraphs ([13]_).
     
-Now, a candidate *x*, showing a positive majority margin *M(x,y)*, is beating candidate *y*  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in her row in the *majority margins* digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommends to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate *a1* who is hence the **Condorcet winner** (see :numref:`condorcetDigraph` Line 26).
+Now, a candidate *x*, showing a positive majority margin *M(x,y)*, is beating candidate *y*  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in her row in the *majority margins* digraph relation table, beats all other candidates with absolute majority of votes. *Condorcet* recommends to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate *a1* who is hence the **Condorcet winner** (see :numref:`condorcetDigraph` Line 26).
 
 .. code-block:: pycon
    :linenos:
@@ -9370,7 +9370,7 @@ We consider now a partial performance tableau *best10*, consisting only, for ins
    >>> g.computeTransitivityDegree()
     0.78
 
-Three alternatives -#155874, #426464 and #567308- qualify as Condorcet winners, i.e. they each **positively outrank** all the other nine alternatives. No chordless outranking circuits are detected, yet the transitivity of the apparent outranking relation is not given. And, no clear ranking alignment hence appears when inspecting the *strict* outranking digraph (i.e. the codual ~(-*g*) of *g*) shown in :numref:`converse-dual_rel_best10`.
+Three alternatives -#155874, #426464 and #567308- qualify as *Condorcet* winners, i.e. they each **positively outrank** all the other nine alternatives. No chordless outranking circuits are detected, yet the transitivity of the apparent outranking relation is not given. And, no clear ranking alignment hence appears when inspecting the *strict* outranking digraph (i.e. the codual ~(-*g*) of *g*) shown in :numref:`converse-dual_rel_best10`.
   
 .. code-block:: pycon
    :linenos:
