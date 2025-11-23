@@ -153,7 +153,7 @@ Working with the *Digraph3* software resources
 
 Purpose
 ```````
-The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar-valued digraph or graph. These include such features as maximal independent, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate a Master Course |location_linkHTML1| |location_linkLatex1| given at the University of Luxembourg in the context of its *Master in Information and Computer Science* (MICS). 
+The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar-valued digraph or graph. These include such features as best-choice recommendations, linear rankings, performance ratings, fair pairings, etc. Most of the available computing resources are meant to illustrate a Master Course |location_linkHTML1| |location_linkLatex1| given at the University of Luxembourg in the context of its *Master in Information and Computer Science* (MICS). 
 
 The Python development of these computing resources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.
 
@@ -206,9 +206,8 @@ You may start an interactive Python3 terminal session in the *Digraph3* director
    :linenos:
 
    $HOME/.../Digraph3$ python3
-   Python 3.10.0 (default, Oct 21 2021, 10:53:53)
-   [GCC 11.2.0] on linux Type "help", "copyright",
-   "credits" or "license" for more information.
+   Python 3.12.3 (main, Aug 14 2025, 17:47:21) [GCC 13.3.0] on linux
+   Type "help", "copyright", "credits" or "license" for more information.
    >>>
 
 For exploring the classes and methods provided by the *Digraph3* modules (see the `Reference manual <techDoc.html>`_) enter the *Python3* commands following the session prompts marked with ``>>>`` or ``...`` . The lines without the prompt are console output from the Python3 interpreter.
@@ -618,7 +617,7 @@ We may now extract both the *symmetrical* as well as the *asymmetrical* part of 
    :width: 600 px
    :align: center
 
-   Asymmetrical and symmetrical part of the tutorial random valuation digraph
+   Asymmetrical and symmetrical parts of the tutorial random valuation digraph
    
 .. note::
 
