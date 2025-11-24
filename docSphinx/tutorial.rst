@@ -1305,7 +1305,7 @@ Computing a best choice recommendation
 ---------------------------------------
 
 .. epigraph::
-   "*The goal of our research was to design a resolution method ... that is easy to put into practice, that requires as few and reliable hypotheses as possible, and that meets the needs [of the decision maker] ...* "
+   "*... L’objectif des recherches était de mettre au point une méthode de résolution ... qui soit facile à utiliser, qui nécessite des hypotèses simples, aussi peu nombreuses et peu contestables que possible et qui puisse répondre aux besoins...*" [63]_
 
    -- B. Roy et al. (1966)
    
@@ -1843,7 +1843,9 @@ The next tutorial shows how to create or edit a performance tableau.
 
 Historical Notes
 ````````````````
-Following a seminar presentation in 2005 at the LAMSADE [61]_, where the author promoted the use of kernels of the outranking digraph as suitable candidates for delivering best choice recommendations [BIS-2005]_, a critical discussion started about the methodological requirement for a convincing best choice recommendation to be *internally stable* (pragmatic principle **P3**). *Denis Bouyssou* illustrated his doubts with the potential outranking digraph shown in :numref:`bouyssou2005`.
+The seminal article by *Bernard Roy* et al. about the outranking based best choice selection procedure called *ELECTRE* dates from 1966 and was actively promoted thereafter by the LAMSADE [61]_, *Roy*'s research laboratory at the newly founded University Paris 9 Dauphine ([ROY-1966]_). Our critical perspective on this seminal text may be consulted in [BIS-2009]_.
+
+Following a seminar presentation in 2005 at the LAMSADE, where the author promoted the use of kernels of the outranking digraph as suitable candidates for delivering best choice recommendations [BIS-2005]_, a critical discussion started about the methodological requirement for a convincing best choice recommendation to be *internally stable* (pragmatic principle **P3**). *Denis Bouyssou* illustrated his doubts with the potential outranking digraph shown in :numref:`bouyssou2005`.
 
 .. figure:: bouyssou2005.png
    :name: bouyssou2005
@@ -11068,6 +11070,8 @@ Appendices
 
 .. [LAM-2009] Lamboray C. (2009) "A prudent characterization of the Ranked Pairs Rule". *Social Choice and Welfare* 32 pp. 129-155.
 
+.. [BIS-2009] Bisdorff R. (2008) "Re-reading the user manual". Research note FSTC/ILIAS University of Luxembourg, Luxembourg, Dec. 16 2008 (downloadable `PDF file 172.7kB <./_static/RoyMemorandumBisdorff.pdf>`_). 
+
 .. [BIS-2008] Bisdorff R., Meyer P. and Roubens M. (2008) "RUBIS: a bipolar-valued outranking method for the choice problem". 4OR, *A Quarterly Journal of Operations Research* Springer-Verlag, Volume 6,  Number 2 pp. 143-165. (Online) Electronic version: DOI: 10.1007/s10288-007-0045-5 (downloadable preliminary version `PDF file 271.5Kb <http://hdl.handle.net/10993/23716>`_).
 
 .. [ISOMIS-08] Bisdorff R. and Marichal J.-L. (2008). "Counting non-isomorphic maximal independent sets of the n-cycle graph". *Journal of Integer Sequences*, Vol. 11 Article 08.5.7 (`openly accessible here <https://cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html>`_).
@@ -11245,7 +11249,9 @@ Appendices
 
 .. [61] Laboratoires d'Analyse et de Modélisation de Systèmes d'Aide à la Décision, Université Paris-Dauphine, UMR 7243 CNRS.
 
-.. [62] The set of intransitive triples of an outranking digraph *g* and its associated codual *gcd*, to be permuted in the search for a best qualified ranking result, are usually not the same. 
+.. [62] The set of intransitive triples of an outranking digraph *g* and its associated codual *gcd*, to be permuted in the search for a best qualified ranking result, are usually not the same.
+
+.. [63] "*The goal of our research was to design a resolution method ... that is easy to put into practice, that requires as few and reliable hypotheses as possible, and that meets the needs [of the decision maker] ...* " [ROY-1966]_
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
