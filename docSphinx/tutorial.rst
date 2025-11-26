@@ -1842,21 +1842,23 @@ The seminal article by *Bernard Roy* et al. about the outranking based best choi
 
 The originally proposed meticulous performance tableau may be modelled by the following performance tableau data stored under the name *roy66V1.py* in the *examples* directory of the Digraph3 resources. 
 
-======= ======== ==== ==== ==== ==== ==== ==== ======= ===========
- Criteria         Decision actions' grades      Scale   Veto
----------------- ----------------------------- ------- -----------
- Ident.  weight   a1   a2   a3   a4   a5   a6           threshold
-======= ======== ==== ==== ==== ==== ==== ==== ======= =========== 
-  g1     3        10   0    0    20   20   20   0-20    11
-  g2     3        20   5    10   5    10   10   0-20    11
-  g3     3        5    5    0    10   15   20   0-20    11
-  g4     1        10   16   16   10   10   13   4-16    7
-  g5     1        16   10   7    10   13   13   4-16    7
-======= ======== ==== ==== ==== ==== ==== ==== ======= ===========
+======= ======== ==== ==== ==== ==== ==== ==== ========= ===========
+ Criteria         Actions' performance grades   Grading   Veto
+---------------- ----------------------------- --------- -----------
+ Ident.  weight   a1   a2   a3   a4   a5   a6   Scale     Threshold
+======= ======== ==== ==== ==== ==== ==== ==== ========= =========== 
+  g1     3        10   0    0    20   20   20   0-20      11
+  g2     3        20   5    10   5    10   10   0-20      11
+  g3     3        5    5    0    10   15   20   0-20      11
+  g4     1        10   16   16   10   10   13   4-16      7
+  g5     1        16   10   7    10   13   13   4-16      7
+======= ======== ==== ==== ==== ==== ==== ==== ========= ===========
 
-The original linguistic grades: *bad*, *weak*, *average*, *good* and *excellent* have here been numerically recoded 0, 5, 10, 15 and 20 for the first three major performance criteria, and 4, 7, 10, 13 and 16 for the two minor criteria. The respective chosen veto thresholds 11 and 7 imply the polarisation of the outranking statements when the difference between the grade levels is greater than two levels.      
+Underlining the original design decision that the *ELECTRE* method only takes into considering ordinal performance grades, the originally proposed actions' grades were of linguistic nature: *bad*, *weak*, *average*, *good* and *excellent*. They have been here numerically recoded as 0, 5, 10, 15 and 20 for the first three major performance criteria, and 4, 7, 10, 13 and 16 for the two minor criteria. The proposed veto thresholds 11 and 7 imply the polarisation of the outranking statements when the difference between two grades is greater than two linguistic levels.      
 
-In :numref:`roy66V1A` below we compute the corresponding outranking digraph *g*  (Lines 2-3). The resulting valued adjacency matrix, shown in :numref:`roy66V1Figures`, makes apparent that only the pair (*a1*, *a4*) shows in fact a vetoed outranking statement. All other polarisations are certainly confirming either a valid or an invalid pairwise outranking situation. It is worthwhile noticing that the resulting outranking relation is transitive (Line 5). Using the *NetFlows* ranking *a6* > *a5* > *a1* > *a4* > *a2* > *a3* (Line 8 and 10), we show in :numref:`roy66V1Figures` below the corresponding very convinving performance heatmap.
+In :numref:`roy66V1A` below we compute the corresponding outranking digraph *g*  (Lines 2-3). The resulting valued adjacency matrix, shown in :numref:`roy66V1Figures`, makes apparent that only the pair (*a1*, *a4*) shows in fact a vetoed outranking statement. All other polarisations are certainly confirming either a valid (+1.0) or an invalid (-1.0) pairwise outranking situation.
+
+It is worthwhile noticing that the resulting outranking relation is transitive (Line 5). Using the *NetFlows* ranking: *a6* > *a5* > *a1* > *a4* > *a2* > *a3* (Line 8 and 10), we show in :numref:`roy66V1Figures` below the corresponding very convinving performance heatmap.
 
 .. code-block:: pycon
    :name: roy66V1A
@@ -1910,7 +1912,7 @@ In :numref:`roy66V1A` below we compute the corresponding outranking digraph *g* 
 
 Finally, our *Rubis* first choice recommendation (Lines 17,23,25 and 31) confirms that action *a6* gives indeed a most credible first choice and actions *a3* a most credible last choice.
 
-Following a seminar presentation in 2005 at the LAMSADE, where the author promoted this usage of the initial kernels of outranking digraphs as suitable candidates for delivering best choice recommendations [BIS-2005]_, a critical discussion started about the methodological requirement for a convincing best choice recommendation to be *internally stable* (pragmatic principle **P3**). *Denis Bouyssou* illustrated his doubts with the potential outranking digraph shown in :numref:`bouyssou2005`.
+Following a seminar presentation in 2005 at the LAMSADE, where the author promoted this *Rubis* usage of the initial kernels of outranking digraphs as suitable candidates for delivering best choice recommendations [BIS-2005]_, a critical discussion started about the methodological requirement for a convincing best choice recommendation to be *internally stable* (pragmatic principle **P3**). *Denis Bouyssou* illustrated his doubts with the potential outranking digraph shown in :numref:`bouyssou2005`.
 
 .. figure:: bouyssou2005.png
    :name: bouyssou2005
@@ -1925,9 +1927,9 @@ It became thereafter obvious for us all that both the lack of a specific perform
 
 The digraph put forward by *Bouyssou* in the October 2005 discussion is not strongly complete --node *a* is not outranking node *d* and vice versa-- and does hence not represent, in our present sense, a valid outranking digraph instance. Yet, it may be a partial tournament and as such it could be a strict outranking digraph, i.e. the asymmetrical part --the codual-- of a valid outranking digraph. In this case, nodes *a* and *d* --the kernel of the strict outranking digraph-- would actually positively outrank each other and, hence, represent both indifferently the natural best choice candidates. However, in this not strict outranking digraph, node *a* becomes also the unique *Condorcet* winner --positively outranking all other nodes-- and gives hence the evident unique best choice recommendation.
 
-Only after 2013, when the strong completeness and the coduality properties of the outranking digraph were discovered, became it obvious that the initial prekernels of the strict outranking digraph, coupled with the solution of the corresponding kernel equation system, could in fact deliver convincing best choice recommendations (see [BIS-2013]_). Yet, *D. Bouyssou* and the critical audience of the 2005 seminar would be satisfied to see their doubts somehow confirmed by the solution of the office location choice problem shown previously. Indeed, the initial prekernel {*A*, *C*, *D*} of the corresponding strict outranking digraph does not retain location *G* --as it is actually strictly outranked by location *C* -- and proposes solely location *D* as credible best choice candidate. This latter location appears however certainly outranked by location *G*. Keeping location *G* in an indeterminate situation with being or not being a potential best choice candidate in the solution of the corresponding kernel equation system shows that the resulting bipolar-valued choice vector may be an essential complement of information. Showing solely an initial prekernel appears hence not necessarily sufficient for determining the actual best choice alternative(s). Similarly, questioning the confidence of outranking statements showing, the case given, weak positive credibilities, may result in a more convincing first-choice recommendation.
+Only after 2013, when the strong completeness and the coduality properties of the outranking digraph were discovered, became it obvious that the initial prekernels of the strict outranking digraph, coupled with the solution of the corresponding kernel equation system, could in fact deliver convincing best choice recommendations (see [BIS-2013]_). Yet, *Bouyssou* and the critical audience of the 2005 seminar would be satisfied to see their doubts somehow confirmed by the solution of the office location choice problem shown previously. Indeed, the initial prekernel {*A*, *C*, *D*} of the corresponding strict outranking digraph does not retain location *G* --as it is actually strictly outranked by location *C* -- and proposes solely location *D* as credible best choice candidate. This latter location appears however certainly outranked by location *G*. Keeping location *G* in an indeterminate situation with being or not being a potential best choice candidate in the solution of the corresponding kernel equation system shows that the resulting bipolar-valued choice vector may be an essential complement of information. Showing solely an initial prekernel appears hence not necessarily sufficient for determining the actual best choice alternative(s). Similarly, questioning the confidence of outranking statements showing, the case given, weak positive credibilities, may result in a more convincing first-choice recommendation.
 
-But it is the new :ref:`Bachet partial ranking rule <Partial-Ranking-Tutorial-label>` that allows nowadays to compute a partial transitive tournament, very close in a bipolar-valued  ordinal correlation sense to the actual transitive part of the given outranking digraph, that definitely supports our kernels based recommending approach. The unique initial and terminal kernels of such a transitive tournament, easily found via a topological sort algorithm, may indeed deliver more effectively any convincing first and/or last choice recommendations.
+But it is the new :ref:`Bachet partial ranking rule <Partial-Ranking-Tutorial-label>` that allows nowadays to compute a partial transitive tournament, very close in a bipolar-valued  ordinal correlation sense to the actual transitive part of the given outranking digraph, that definitely supports our kernels based recommending approach. The unique initial and terminal kernels of such a transitive tournament, easily found via a topological sort algorithm, may indeed deliver more effectively convincing first and/or last choice recommendations.
 
 .. seealso::
 
