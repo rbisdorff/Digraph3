@@ -1913,7 +1913,7 @@ In :numref:`roy66V1A` below we compute the corresponding outranking digraph *g* 
 
    Solving the seminal best choice recommendation problem
 
-Finally, our *Rubis* first choice recommendation (Lines 16,22,24,30) confirms that action *a6* gives indeed a most credible first choice and actions *a3* a most credible last choice .
+Finally, our *Rubis* first choice recommendation (Lines 17,23,25 and 31) confirms that action *a6* gives indeed a most credible first choice and actions *a3* a most credible last choice .
 
 Following a seminar presentation in 2005 at the LAMSADE, where the author promoted this usage of the initial kernels of outranking digraphs as suitable candidates for delivering best choice recommendations [BIS-2005]_, a critical discussion started about the methodological requirement for a convincing best choice recommendation to be *internally stable* (pragmatic principle **P3**). *Denis Bouyssou* illustrated his doubts with the potential outranking digraph shown in :numref:`bouyssou2005`.
 
