@@ -1274,11 +1274,11 @@ Historical Notes
 
 The seminal work on outranking digraphs goes back to the seventies and eighties when *Bernard Roy* joined the just starting *University Paris-Dauphine* and founded there the *Laboratoire d’Analyse et de Modélisation de Systèmes pour l’Aide à la Décision* (LAMSADE). The LAMSADE became the major site in the development of the outranking approach to multiple-criteria decision aiding ([ROY-1991]_).
 
-The ongoing success of the original *outranking* concept stems from the fact that it is rooted in a sound pragmatism. The multiple-criteria performance tableau, necessarily associated with a given outranking digraph, is indeed convincingly objective and meaningful ([ROY-1993]_). And, ideas from social choice theory gave initially the insight that a pairwise voting mechanism à la *Condorcet* could provide an order-statistical tool for aggregating a set of preference points of view into what *Marc Barbut* called the *central Condorcet* point of view ([CON-1785]_ and [BAR-1980]_); in fact the median of the multiple preference points of view, at minimal absolute *Kendall*'s ordinal correlation distance from all individual points of view (see :ref:`Ordinal correlation equals bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>`).
+The ongoing success of the original *outranking* concept stems indeed from the fact that it is rooted in a sound pragmatism. The multiple-criteria performance tableau object, necessarily associated with a given outranking digraph, is indeed convincingly objective and meaningful ([ROY-1993]_). And, ideas from social choice theory gave initially the insight that a pairwise voting mechanism à la *Condorcet* could provide an order-statistical tool for aggregating a set of preference points of view into what *Marc Barbut* called the *central Condorcet* point of view ([CON-1785]_ and [BAR-1980]_); in fact the median of the multiple preference points of view, at minimal absolute *Kendall*'s ordinal correlation distance from all individual points of view (see :ref:`Ordinal correlation equals bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>`).
 
 Considering thus each performance criterion as a subset of unanimous voters and balancing the votes in favour against considerable counter-performances in disfavour gave eventually rise to the concept of *outranking situation*, a distinctive feature of the Multiple-Criteria Decision Aiding approach ([ROY-1991]_).  A modern definition would be: an alternative *x* is said to *outrank* alternative *y* when – a *significant majority* of criteria confirm that alternative *x* has to be considered as *at least as well evaluated as* an alternative *y* (the *concordance* argument); and – no discordant criterion opens to significant doubt the validity of the previous confirmation by revealing a considerable counter-performance of alternative *x* compared to *y* (the *discordance* argument).
 
-If the concordance argument was always well received, the discordance argument however, very confused in the beginning ([ROY-1966]_), could only be handled in an epistemically correct and logically sound way by using a bipolar-valued epistemic logic ([BIS-2013]_). The outranking situation had consequently to receive an explicit *negative* definition: An alternative *x* is said to *do not outrank* an alternative *y* when – a *significant majority* of criteria confirm that alternative *x* has to be considered as *not at least as well evaluated as* alternative *y*; and – no discordant criterion opens to significant doubt the validity of the previous confirmation by revealing a considerable *better* performance of alternative *x* compared to *y*.
+If the concordance argument was always well received, the discordance argument however, very confused in the beginning ([ROY-1966]_, [BIS-2009]_), could only be handled in an epistemically correct and logically sound way by using a bipolar-valued epistemic logic ([BIS-2013]_). The outranking situation had consequently to receive an explicit *negative* definition: An alternative *x* is said to *do not outrank* an alternative *y* when – a *significant majority* of criteria confirm that alternative *x* has to be considered as *not at least as well evaluated as* alternative *y*; and – no discordant criterion opens to significant doubt the validity of the previous confirmation by revealing a considerable *better* performance of alternative *x* compared to *y*.
 
 Furthermore, the initial conjunctive aggregation of the concordance and discordance arguments had to be replaced by a disjunctive epistemic fusion operation, polarising in a logically sound and epistemically correct way the concordance with the discordance argument. This way, bipolar-valued outranking  digraphs gained two very useful properties from a measure theoretical perspective. They are *strongly complete*; incomparability situations are no longer attested by the absence of positive outranking relations, but instead by epistemic indeterminateness. And, they verify the *coduality principle*: the negation of the epistemic '*at least as well evaluated as*' situation corresponds formally to the strict converse epistemic '*less well evaluated than*' situation.
 
@@ -1845,7 +1845,77 @@ Historical Notes
 ````````````````
 The seminal article by *Bernard Roy* et al. about the outranking based best choice selection procedure called *ELECTRE* dates from 1966 and was actively promoted thereafter by the LAMSADE [61]_, *Roy*'s research laboratory at the newly founded University Paris 9 Dauphine ([ROY-1966]_). Our critical perspective on this seminal text may be consulted in [BIS-2009]_.
 
-Following a seminar presentation in 2005 at the LAMSADE, where the author promoted the use of kernels of the outranking digraph as suitable candidates for delivering best choice recommendations [BIS-2005]_, a critical discussion started about the methodological requirement for a convincing best choice recommendation to be *internally stable* (pragmatic principle **P3**). *Denis Bouyssou* illustrated his doubts with the potential outranking digraph shown in :numref:`bouyssou2005`.
+The originally proposed meticulous performance tableau may be modelled by the following performance tableau data stored under the name *roy66V1.py* in the *examples* directory of the Digraph3 resources. 
+
+======= ======== ==== ==== ==== ==== ==== ==== ======= ===========
+ Criteria         Decision actions' grades      Scale   Veto
+---------------- ----------------------------- ------- -----------
+ Ident.  weight   a1   a2   a3   a4   a5   a6           threshold
+======= ======== ==== ==== ==== ==== ==== ==== ======= =========== 
+  g1     3        10   0    0    20   20   20   0-20    11
+  g2     3        20   5    10   5    10   10   0-20    11
+  g3     3        5    5    0    10   15   20   0-20    11
+  g4     1        10   16   16   10   10   13   4-16    7
+  g5     1        16   10   7    10   13   13   4-16    7
+======= ======== ==== ==== ==== ==== ==== ==== ======= ===========
+
+The original linguistic grades: *bad*, *weak*, *average*, *good* and *excellent* have been numerically recoded 0, 5, 10, 15 and 20 for the first three major performance criteria, and 4, 7, 10, 13 and 16 for the two minor criteria. The respective chosen veto thresholds 11 and 7 imply the polarisation of the outranking statements when the difference between the grade levels is greater than two levels. The resulting valued adjacency matrix shown in :numref:`roy66V1Figures` makes apparent that only the pair (*a1*, *a4*) shows a doubtful outranking situation. All other polarisation are certainly confirming either a valid or an invalid outranking situation.     
+
+In :numref:`roy66V1A` below we compute the corresponding outranking digraph *g*  (Lines 2-3) . It is worthwhile noticing that the resulting outranking digraph is transitive (Line 5). Using a *NetFlows* ranking (Line 8 and 10), we show in :numref:`roy66V1Figures` the corresponding very convinving performance heatmap.
+
+.. code-block:: pycon
+   :name: roy66V1A
+   :caption: The original ELECTRE best choice problem
+   :linenos:
+   :emphasize-lines: 2-3,5,8-10,17,23,25,31-33
+
+   >>> >>> from outrankingDigraphs import *
+   >>> pt = PerformanceTableau('roy66V1')
+   >>> g = BipolarOutrankingDigraph(pt)
+   >>> g.isTransitive()
+    True
+   >>> ranking = g.computeNetFlowsRanking()
+   >>> ranking
+    ['a6', 'a5', 'a1', 'a4', 'a2', 'a3']
+   >>> g.showHTMLRelationTable(actionsList=ranking)
+   >>> g.showHTMLPerformanceHeatmap(colorLevels=5,actionsList=ranking)
+   >>> g.showChoiceRecommendation('Rubis')
+    Rubis choice recommendation
+    ***********************
+     First choice recommendation(s) (BCR)   
+     Credibility domain: [-1.00,1.00]
+     === >> potential first choice(s)
+     * choice              : ['a5', 'a6']
+       independence        : 0.27
+       dominance           : 0.45
+       absorbency          : -1.00
+       covering (%)        : 100.00
+       determinateness (%) : 89.39
+       - most credible action(s) = { 'a6': 1.00, 'a5': 0.27, }
+     === >> potential last choice(s) 
+     * choice              : ['a2', 'a3']
+       independence        : 0.27
+       dominance           : -1.00
+       absorbency          : 1.00
+       covered (%)         : 100.00
+       determinateness (%) : 71.21
+       - most credible action(s) = { 'a3': 0.45, 'a2': 0.27, }
+   >>> (~(-g)).exportGraphViz('roy66V1',firstChoice=['a6','a5'],
+   ...                        lastChoice=['a2','a3'])
+    *---- exporting a dot file for GraphViz tools ---------*
+     Exporting to roy66V1.dot
+     dot -Grankdir=BT -Tpng roy66V1.dot -o roy66V1.png
+
+.. figure:: roy66V1Figures.png
+   :name: roy66V1Figures
+   :width: 500 px
+   :align: center
+
+   Solving the seminal best choice recommendation problem
+
+Finally, our *Rubis* first choice recommendation confirms that action *a6* gives indeed a most credible first choice and actions *a3* a most credible last choice (Lines 16,22,24,30).
+
+Following a seminar presentation in 2005 at the LAMSADE, where the author promoted this usage of the initial kernels of outranking digraphs as suitable candidates for delivering best choice recommendations [BIS-2005]_, a critical discussion started about the methodological requirement for a convincing best choice recommendation to be *internally stable* (pragmatic principle **P3**). *Denis Bouyssou* illustrated his doubts with the potential outranking digraph shown in :numref:`bouyssou2005`.
 
 .. figure:: bouyssou2005.png
    :name: bouyssou2005
@@ -1860,9 +1930,9 @@ It became thereafter obvious for us all that both the lack of a specific perform
 
 The digraph put forward by *Bouyssou* in the October 2005 discussion is not strongly complete --node *a* is not outranking node *d* and vice versa-- and does hence not represent, in our present sense, a valid outranking digraph instance. Yet, it may be a partial tournament and as such it could be a strict outranking digraph, i.e. the asymmetrical part --the codual-- of a valid outranking digraph. In this case, nodes *a* and *d* --the kernel of the strict outranking digraph-- would actually positively outrank each other and, hence, represent both indifferently the natural best choice candidates. However, in this not strict outranking digraph, node *a* becomes also the unique *Condorcet* winner --positively outranking all other nodes-- and gives hence the evident unique best choice recommendation.
 
-Only after 2013, when the strong completeness and the coduality properties of the outranking digraph were discovered, became it obvious that the initial prekernels of the strict outranking digraph, coupled with the solution of the corresponding kernel equation system, could in fact deliver convincing best choice recommendations (see [BIS-2013]_). Yet, *D. Bouyssou* and the critical audience of the 2005 seminar would be satisfied to see their doubts somehow confirmed by the solution of the office location choice problem shown previously. Indeed, the initial prekernel {*A*, *C*, *D*} of the corresponding strict outranking digraph does not retain location *G* --as it is actually strictly outranked by location *C* -- and proposes solely location *D* as credible best choice candidate. This latter location appears however certainly outranked by location *G*. Keeping location *G* in an indeterminate situation with being or not being a potential best choice candidate in the solution of the corresponding kernel equation system shows that the resulting bipolar-valued choice vector may be an essential complement of information. Showing solely an initial prekernel appears not necessarily sufficient for determining the actual best choice alternative(s). Similarly, questioning the confidence of outranking situations showing, the case given, weak positive credibilities, may result in a more convincing first-choice recommendation.
+Only after 2013, when the strong completeness and the coduality properties of the outranking digraph were discovered, became it obvious that the initial kernels of the strict outranking digraph, coupled with the solution of the corresponding kernel equation system, could in fact deliver convincing best choice recommendations (see [BIS-2013]_). Yet, *D. Bouyssou* and the critical audience of the 2005 seminar would be satisfied to see their doubts somehow confirmed by the solution of the office location choice problem shown previously. Indeed, the initial prekernel {*A*, *C*, *D*} of the corresponding strict outranking digraph does not retain location *G* --as it is actually strictly outranked by location *C* -- and proposes solely location *D* as credible best choice candidate. This latter location appears however certainly outranked by location *G*. Keeping location *G* in an indeterminate situation with being or not being a potential best choice candidate in the solution of the corresponding kernel equation system shows that the resulting bipolar-valued choice vector may be an essential complement of information. Showing solely an initial prekernel appears not necessarily sufficient for determining the actual best choice alternative(s). Similarly, questioning the confidence of outranking situations showing, the case given, weak positive credibilities, may result in a more convincing first-choice recommendation.
 
-But it is the new :ref:`Bachet partial ranking rule <Partial-Ranking-Tutorial-label>` that allows nowadays to compute a partial transitive tournament, very close in a bipolar-valued  ordinal correlation sense to the actual transitive part of the given outranking digraph, that definitely supports our prekernels based recommending approach. The unique initial and terminal prekernels of such a transitive tournament, easily found via a topological sort algorithm, may indeed deliver more effectively any convincing first and/or last choice recommendations.
+But it is the new :ref:`Bachet partial ranking rule <Partial-Ranking-Tutorial-label>` that allows nowadays to compute a partial transitive tournament, very close in a bipolar-valued  ordinal correlation sense to the actual transitive part of the given outranking digraph, that definitely supports our kernels based recommending approach. The unique initial and terminal kernels of such a transitive tournament, easily found via a topological sort algorithm, may indeed deliver more effectively any convincing first and/or last choice recommendations.
 
 Back to :ref:`Content Table <Tutorial-label>`
 
