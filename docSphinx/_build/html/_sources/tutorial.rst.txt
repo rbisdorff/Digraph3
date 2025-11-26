@@ -1836,11 +1836,6 @@ What will become the best choice recommendation under this working hypothesis?
 
 The next tutorial shows how to create or edit a performance tableau.
 
-.. seealso::
-
-   - :ref:`Alice’s best choice: A selection case study <Alice-Tutorial-label>`  
-   - Lecture 7 notes from the MICS Algorithmic Decision Theory course: [ADT-L7]_.
-
 Historical Notes
 ````````````````
 The seminal article by *Bernard Roy* et al. about the outranking based best choice selection procedure called *ELECTRE* dates from 1966 and was actively promoted thereafter by the LAMSADE [61]_, *Roy*'s research laboratory at the newly founded University Paris 9 Dauphine ([ROY-1966]_). Our critical perspective on this seminal text may be consulted in [BIS-2009]_.
@@ -1861,7 +1856,7 @@ The originally proposed meticulous performance tableau may be modelled by the fo
 
 The original linguistic grades: *bad*, *weak*, *average*, *good* and *excellent* have here been numerically recoded 0, 5, 10, 15 and 20 for the first three major performance criteria, and 4, 7, 10, 13 and 16 for the two minor criteria. The respective chosen veto thresholds 11 and 7 imply the polarisation of the outranking statements when the difference between the grade levels is greater than two levels.      
 
-In :numref:`roy66V1A` below we compute the corresponding outranking digraph *g*  (Lines 2-3). The resulting valued adjacency matrix, shown in :numref:`roy66V1Figures`, makes apparent that only the pair (*a1*, *a4*) shows in fact a doubtful outranking situation. All other polarisations are certainly confirming either a valid or an invalid pairwise outranking statement. It is worthwhile noticing that the resulting outranking relation is transitive (Line 5). Using the *NetFlows* ranking *a6* > *a5* > *a1* > *a4* > *a2* > *a3* (Line 8 and 10), we show in :numref:`roy66V1Figures` below the corresponding very convinving performance heatmap.
+In :numref:`roy66V1A` below we compute the corresponding outranking digraph *g*  (Lines 2-3). The resulting valued adjacency matrix, shown in :numref:`roy66V1Figures`, makes apparent that only the pair (*a1*, *a4*) shows in fact a vetoed outranking statement. All other polarisations are certainly confirming either a valid or an invalid pairwise outranking situation. It is worthwhile noticing that the resulting outranking relation is transitive (Line 5). Using the *NetFlows* ranking *a6* > *a5* > *a1* > *a4* > *a2* > *a3* (Line 8 and 10), we show in :numref:`roy66V1Figures` below the corresponding very convinving performance heatmap.
 
 .. code-block:: pycon
    :name: roy66V1A
@@ -1908,12 +1903,12 @@ In :numref:`roy66V1A` below we compute the corresponding outranking digraph *g* 
 
 .. figure:: roy66V1Figures.png
    :name: roy66V1Figures
-   :width: 500 px
+   :width: 550 px
    :align: center
 
    Solving the seminal best choice recommendation problem
 
-Finally, our *Rubis* first choice recommendation (Lines 17,23,25 and 31) confirms that action *a6* gives indeed a most credible first choice and actions *a3* a most credible last choice .
+Finally, our *Rubis* first choice recommendation (Lines 17,23,25 and 31) confirms that action *a6* gives indeed a most credible first choice and actions *a3* a most credible last choice.
 
 Following a seminar presentation in 2005 at the LAMSADE, where the author promoted this usage of the initial kernels of outranking digraphs as suitable candidates for delivering best choice recommendations [BIS-2005]_, a critical discussion started about the methodological requirement for a convincing best choice recommendation to be *internally stable* (pragmatic principle **P3**). *Denis Bouyssou* illustrated his doubts with the potential outranking digraph shown in :numref:`bouyssou2005`.
 
@@ -1924,15 +1919,20 @@ Following a seminar presentation in 2005 at the LAMSADE, where the author promot
 
    The internal stability of a best choice recommendation in question
 
-His commentary was the following: The only initial kernel of this digraph is the choice {*a*, *d*}. Yet, it is an ambiguous recommendation, as this choice is conjointly an *initial* --**outranking**-- and *terminal* --**outranked**-- *prekernel*. If the instability of the best choice recommendation is, however, not considered a problem then the choice {*a*, *b*} shows the most convincing strict outranking quality and could be recommended in priority as best choice candidates. Adding alternative *d* to the set of potential best choice candidates is not convincing as there exists in the given digraph the node *b*, which is better evaluated than *d*. The argument that the incomparability between *a* and *d* should favour *d* as potential best choice is interesting but another hypothesis could be that *b* perhaps outranks *a*. In this latter case, it seams clear that the actual best choice recommendation should be reduced to node *b*, unless one disposes of other information, like a performance tableau and/or the actual computation method of the outranking situations. In any case, one has to be very clear about the available information when judging a best choice procedure.
+His commentary was the following: The only initial kernel of this digraph is the choice {*a*, *d*}. Yet, it is an ambiguous recommendation, as this choice is conjointly an *initial* --**outranking**-- and *terminal* --**outranked**-- *kernel*. If the instability of the best choice recommendation is, however, not considered a problem then the choice {*a*, *b*} shows the most convincing strict outranking quality and could be recommended in priority as best choice candidates. Adding alternative *d* to the set of potential best choice candidates is not convincing as there exists in the given digraph the node *b*, which is better evaluated than *d*. The argument that the incomparability between *a* and *d* should favour *d* as potential best choice is interesting but another hypothesis could be that *b* perhaps outranks *a*. In this latter case, it seams clear that the actual best choice recommendation should be reduced to node *b*, unless one disposes of other information, like a performance tableau and/or the actual computation method of the outranking situations. In any case, one has to be very clear about the available information when judging a best choice procedure.
 
 It became thereafter obvious for us all that both the lack of a specific performance tableau as well as the lack of a precisely defined algorithm for computing valid outranking situations do not allow to judge if a given digraph does indeed model a potential outranking relation. In our present bipolar-valued epistemic approach, a valid outranking digraph instance, following from a given performance tableau and the disjunctive epistemic fusion construction of the outranking relation, will necessarily verify the :ref:`strong completeness condition and the coduality principle <Sufficiency-Tutorial-label>`. As a consequence, incomparability situations are now modelled by epistemic indeterminateness not by the actual absence of a reciprocal outranking relation.
 
 The digraph put forward by *Bouyssou* in the October 2005 discussion is not strongly complete --node *a* is not outranking node *d* and vice versa-- and does hence not represent, in our present sense, a valid outranking digraph instance. Yet, it may be a partial tournament and as such it could be a strict outranking digraph, i.e. the asymmetrical part --the codual-- of a valid outranking digraph. In this case, nodes *a* and *d* --the kernel of the strict outranking digraph-- would actually positively outrank each other and, hence, represent both indifferently the natural best choice candidates. However, in this not strict outranking digraph, node *a* becomes also the unique *Condorcet* winner --positively outranking all other nodes-- and gives hence the evident unique best choice recommendation.
 
-Only after 2013, when the strong completeness and the coduality properties of the outranking digraph were discovered, became it obvious that the initial kernels of the strict outranking digraph, coupled with the solution of the corresponding kernel equation system, could in fact deliver convincing best choice recommendations (see [BIS-2013]_). Yet, *D. Bouyssou* and the critical audience of the 2005 seminar would be satisfied to see their doubts somehow confirmed by the solution of the office location choice problem shown previously. Indeed, the initial prekernel {*A*, *C*, *D*} of the corresponding strict outranking digraph does not retain location *G* --as it is actually strictly outranked by location *C* -- and proposes solely location *D* as credible best choice candidate. This latter location appears however certainly outranked by location *G*. Keeping location *G* in an indeterminate situation with being or not being a potential best choice candidate in the solution of the corresponding kernel equation system shows that the resulting bipolar-valued choice vector may be an essential complement of information. Showing solely an initial prekernel appears not necessarily sufficient for determining the actual best choice alternative(s). Similarly, questioning the confidence of outranking situations showing, the case given, weak positive credibilities, may result in a more convincing first-choice recommendation.
+Only after 2013, when the strong completeness and the coduality properties of the outranking digraph were discovered, became it obvious that the initial prekernels of the strict outranking digraph, coupled with the solution of the corresponding kernel equation system, could in fact deliver convincing best choice recommendations (see [BIS-2013]_). Yet, *D. Bouyssou* and the critical audience of the 2005 seminar would be satisfied to see their doubts somehow confirmed by the solution of the office location choice problem shown previously. Indeed, the initial prekernel {*A*, *C*, *D*} of the corresponding strict outranking digraph does not retain location *G* --as it is actually strictly outranked by location *C* -- and proposes solely location *D* as credible best choice candidate. This latter location appears however certainly outranked by location *G*. Keeping location *G* in an indeterminate situation with being or not being a potential best choice candidate in the solution of the corresponding kernel equation system shows that the resulting bipolar-valued choice vector may be an essential complement of information. Showing solely an initial prekernel appears hence not necessarily sufficient for determining the actual best choice alternative(s). Similarly, questioning the confidence of outranking statements showing, the case given, weak positive credibilities, may result in a more convincing first-choice recommendation.
 
 But it is the new :ref:`Bachet partial ranking rule <Partial-Ranking-Tutorial-label>` that allows nowadays to compute a partial transitive tournament, very close in a bipolar-valued  ordinal correlation sense to the actual transitive part of the given outranking digraph, that definitely supports our kernels based recommending approach. The unique initial and terminal kernels of such a transitive tournament, easily found via a topological sort algorithm, may indeed deliver more effectively any convincing first and/or last choice recommendations.
+
+.. seealso::
+
+   - :ref:`Alice’s best choice: A selection case study <Alice-Tutorial-label>`  
+   - Lecture 7 notes from the MICS Algorithmic Decision Theory course: [ADT-L7]_.
 
 Back to :ref:`Content Table <Tutorial-label>`
 
