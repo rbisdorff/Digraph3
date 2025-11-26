@@ -1859,9 +1859,9 @@ The originally proposed meticulous performance tableau may be modelled by the fo
   g5     1        16   10   7    10   13   13   4-16    7
 ======= ======== ==== ==== ==== ==== ==== ==== ======= ===========
 
-The original linguistic grades: *bad*, *weak*, *average*, *good* and *excellent* have been numerically recoded 0, 5, 10, 15 and 20 for the first three major performance criteria, and 4, 7, 10, 13 and 16 for the two minor criteria. The respective chosen veto thresholds 11 and 7 imply the polarisation of the outranking statements when the difference between the grade levels is greater than two levels. The resulting valued adjacency matrix shown in :numref:`roy66V1Figures` makes apparent that only the pair (*a1*, *a4*) shows a doubtful outranking situation. All other polarisation are certainly confirming either a valid or an invalid outranking situation.     
+The original linguistic grades: *bad*, *weak*, *average*, *good* and *excellent* have here been numerically recoded 0, 5, 10, 15 and 20 for the first three major performance criteria, and 4, 7, 10, 13 and 16 for the two minor criteria. The respective chosen veto thresholds 11 and 7 imply the polarisation of the outranking statements when the difference between the grade levels is greater than two levels.      
 
-In :numref:`roy66V1A` below we compute the corresponding outranking digraph *g*  (Lines 2-3) . It is worthwhile noticing that the resulting outranking digraph is transitive (Line 5). Using a *NetFlows* ranking (Line 8 and 10), we show in :numref:`roy66V1Figures` the corresponding very convinving performance heatmap.
+In :numref:`roy66V1A` below we compute the corresponding outranking digraph *g*  (Lines 2-3). The resulting valued adjacency matrix, shown in :numref:`roy66V1Figures`, makes apparent that only the pair (*a1*, *a4*) shows in fact a doubtful outranking situation. All other polarisations are certainly confirming either a valid or an invalid pairwise outranking statement. It is worthwhile noticing that the resulting outranking relation is transitive (Line 5). Using the *NetFlows* ranking *a6* > *a5* > *a1* > *a4* > *a2* > *a3* (Line 8 and 10), we show in :numref:`roy66V1Figures` below the corresponding very convinving performance heatmap.
 
 .. code-block:: pycon
    :name: roy66V1A
@@ -1913,7 +1913,7 @@ In :numref:`roy66V1A` below we compute the corresponding outranking digraph *g* 
 
    Solving the seminal best choice recommendation problem
 
-Finally, our *Rubis* first choice recommendation confirms that action *a6* gives indeed a most credible first choice and actions *a3* a most credible last choice (Lines 16,22,24,30).
+Finally, our *Rubis* first choice recommendation (Lines 16,22,24,30) confirms that action *a6* gives indeed a most credible first choice and actions *a3* a most credible last choice .
 
 Following a seminar presentation in 2005 at the LAMSADE, where the author promoted this usage of the initial kernels of outranking digraphs as suitable candidates for delivering best choice recommendations [BIS-2005]_, a critical discussion started about the methodological requirement for a convincing best choice recommendation to be *internally stable* (pragmatic principle **P3**). *Denis Bouyssou* illustrated his doubts with the potential outranking digraph shown in :numref:`bouyssou2005`.
 
