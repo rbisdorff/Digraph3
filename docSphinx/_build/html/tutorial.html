@@ -2111,68 +2111,68 @@ pairwise perspective (see below). With the given preference discrimination thres
 <tbody>
 <tr class="row-odd"><td><p>g1</p></td>
 <td><p>3</p></td>
-<td><p>10</p></td>
+<td><p>2</p></td>
 <td><p>0</p></td>
 <td><p>0</p></td>
-<td><p>20</p></td>
-<td><p>20</p></td>
-<td><p>20</p></td>
-<td><p>0-20</p></td>
-<td><p>11</p></td>
+<td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>0-4</p></td>
+<td><p>2.5</p></td>
 </tr>
 <tr class="row-even"><td><p>g2</p></td>
 <td><p>3</p></td>
-<td><p>20</p></td>
-<td><p>5</p></td>
-<td><p>10</p></td>
-<td><p>5</p></td>
-<td><p>10</p></td>
-<td><p>10</p></td>
-<td><p>0-20</p></td>
-<td><p>11</p></td>
+<td><p>4</p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+<td><p>0-4</p></td>
+<td><p>2.5</p></td>
 </tr>
 <tr class="row-odd"><td><p>g3</p></td>
 <td><p>3</p></td>
-<td><p>5</p></td>
-<td><p>5</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
 <td><p>0</p></td>
-<td><p>10</p></td>
-<td><p>15</p></td>
-<td><p>20</p></td>
-<td><p>0-20</p></td>
-<td><p>11</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>4</p></td>
+<td><p>0-4</p></td>
+<td><p>2.5</p></td>
 </tr>
 <tr class="row-even"><td><p>g4</p></td>
 <td><p>1</p></td>
-<td><p>10</p></td>
-<td><p>16</p></td>
-<td><p>16</p></td>
-<td><p>10</p></td>
-<td><p>10</p></td>
-<td><p>13</p></td>
-<td><p>4-16</p></td>
-<td><p>7</p></td>
+<td><p>2</p></td>
+<td><p>4</p></td>
+<td><p>4</p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>0-4</p></td>
+<td><p>2.5</p></td>
 </tr>
 <tr class="row-odd"><td><p>g5</p></td>
 <td><p>1</p></td>
-<td><p>16</p></td>
-<td><p>10</p></td>
-<td><p>7</p></td>
-<td><p>10</p></td>
-<td><p>13</p></td>
-<td><p>13</p></td>
-<td><p>4-16</p></td>
-<td><p>7</p></td>
+<td><p>4</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>3</p></td>
+<td><p>0-4</p></td>
+<td><p>2.5</p></td>
 </tr>
 </tbody>
 </table>
-<p>Underlining the original design decision that the <em>ELECTRE</em> method only takes into considering ordinal performance grades, the originally proposed actions’ grades were of linguistic nature: <em>bad</em>, <em>weak</em>, <em>average</em>, <em>good</em> and <em>excellent</em>. They have been here numerically recoded as 0, 5, 10, 15 and 20 for the first three major performance criteria, and 4, 7, 10, 13 and 16 for the two minor criteria. The proposed veto thresholds 11 and 7 imply the polarisation of the outranking statements when the difference between two grades is greater than two linguistic levels.</p>
+<p>Underlining the original design decision that the <em>ELECTRE</em> method takes into account solely ordinal performance grades, the proposed actions’ grades were of linguistic nature: <em>bad</em> (0), <em>weak</em> (1), <em>average</em> (2), <em>good</em> (3) and <em>excellent</em> (4). They have been here numerically recoded as 0, 1, 2, 3 and 4. The proposed veto threshold 2.5 implies the polarisation of the outranking statements when the difference between two grades is greater than two linguistic levels.</p>
 <p>In <a class="reference internal" href="#roy66v1a"><span class="std std-numref">Listing 1.17</span></a> below we compute the corresponding outranking digraph <em>g</em>  (Lines 2-3). The resulting valued adjacency matrix, shown in <a class="reference internal" href="#roy66v1figures"><span class="std std-numref">Fig. 1.16</span></a>, makes apparent that only the pair (<em>a1</em>, <em>a4</em>) shows in fact a vetoed outranking statement. All other polarisations are certainly confirming either a valid (+1.0) or an invalid (-1.0) pairwise outranking situation.</p>
 <p>It is worthwhile noticing that the resulting outranking relation is transitive (Line 5). Using the <em>NetFlows</em> ranking: <em>a6</em> &gt; <em>a5</em> &gt; <em>a1</em> &gt; <em>a4</em> &gt; <em>a2</em> &gt; <em>a3</em> (Line 8 and 10), we show in <a class="reference internal" href="#roy66v1figures"><span class="std std-numref">Fig. 1.16</span></a> below the corresponding very convinving performance heatmap.</p>
 <div class="literal-block-wrapper docutils container" id="roy66v1a">
 <div class="code-block-caption"><span class="caption-number">Listing 1.17 </span><span class="caption-text">The original ELECTRE best choice problem</span><a class="headerlink" href="#roy66v1a" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="hll"><span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">pt</span> <span class="o">=</span> <span class="n">PerformanceTableau</span><span class="p">(</span><span class="s1">&#39;roy66V1&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="hll"><span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">pt</span> <span class="o">=</span> <span class="n">PerformanceTableau</span><span class="p">(</span><span class="s1">&#39;roy66&#39;</span><span class="p">)</span>
 </span><span class="hll"><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">pt</span><span class="p">)</span>
 </span><span class="linenos"> 4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">isTransitive</span><span class="p">()</span>
 <span class="hll"><span class="linenos"> 5</span><span class="go"> True</span>
@@ -2202,11 +2202,11 @@ pairwise perspective (see below). With the given preference discrimination thres
 <span class="linenos">29</span><span class="go">    covered (%)         : 100.00</span>
 <span class="linenos">30</span><span class="go">    determinateness (%) : 71.21</span>
 <span class="hll"><span class="linenos">31</span><span class="go">    - most credible action(s) = { &#39;a3&#39;: 0.45, &#39;a2&#39;: 0.27, }</span>
-</span><span class="hll"><span class="linenos">32</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">))</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;roy66V1&#39;</span><span class="p">,</span><span class="n">firstChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a6&#39;</span><span class="p">,</span><span class="s1">&#39;a5&#39;</span><span class="p">],</span>
+</span><span class="hll"><span class="linenos">32</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">))</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;roy66&#39;</span><span class="p">,</span><span class="n">firstChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a6&#39;</span><span class="p">,</span><span class="s1">&#39;a5&#39;</span><span class="p">],</span>
 </span><span class="hll"><span class="linenos">33</span><span class="gp">... </span>                       <span class="n">lastChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span><span class="s1">&#39;a3&#39;</span><span class="p">])</span>
 </span><span class="linenos">34</span><span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="linenos">35</span><span class="go">  Exporting to roy66V1.dot</span>
-<span class="linenos">36</span><span class="go">  dot -Grankdir=BT -Tpng roy66V1.dot -o roy66V1.png</span>
+<span class="linenos">36</span><span class="go">  dot -Grankdir=BT -Tpng roy66.dot -o roy66.png</span>
 </pre></div>
 </div>
 </div>

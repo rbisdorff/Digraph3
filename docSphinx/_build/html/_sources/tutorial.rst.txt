@@ -1847,14 +1847,14 @@ The originally proposed meticulous performance tableau may be modelled by the fo
 ---------------- ----------------------------- --------- -----------
  Ident.  weight   a1   a2   a3   a4   a5   a6   Scale     Threshold
 ======= ======== ==== ==== ==== ==== ==== ==== ========= =========== 
-  g1     3        10   0    0    20   20   20   0-20      11
-  g2     3        20   5    10   5    10   10   0-20      11
-  g3     3        5    5    0    10   15   20   0-20      11
-  g4     1        10   16   16   10   10   13   4-16      7
-  g5     1        16   10   7    10   13   13   4-16      7
+  g1     3        2    0    0    4    4    4    0-4       2.5
+  g2     3        4    1    2    1    2    2    0-4       2.5
+  g3     3        1    1    0    2    3    4    0-4       2.5
+  g4     1        2    4    4    2    2    3    0-4       2.5
+  g5     1        4    2    1    2    3    3    0-4       2.5
 ======= ======== ==== ==== ==== ==== ==== ==== ========= ===========
 
-Underlining the original design decision that the *ELECTRE* method only takes into considering ordinal performance grades, the originally proposed actions' grades were of linguistic nature: *bad*, *weak*, *average*, *good* and *excellent*. They have been here numerically recoded as 0, 5, 10, 15 and 20 for the first three major performance criteria, and 4, 7, 10, 13 and 16 for the two minor criteria. The proposed veto thresholds 11 and 7 imply the polarisation of the outranking statements when the difference between two grades is greater than two linguistic levels.      
+Underlining the original design decision that the *ELECTRE* method takes into account solely ordinal performance grades, the proposed actions' grades were of linguistic nature: *bad* (0), *weak* (1), *average* (2), *good* (3) and *excellent* (4). They have been here numerically recoded as 0, 1, 2, 3 and 4. The proposed veto threshold 2.5 implies the polarisation of the outranking statements when the difference between two grades is greater than two linguistic levels.      
 
 In :numref:`roy66V1A` below we compute the corresponding outranking digraph *g*  (Lines 2-3). The resulting valued adjacency matrix, shown in :numref:`roy66V1Figures`, makes apparent that only the pair (*a1*, *a4*) shows in fact a vetoed outranking statement. All other polarisations are certainly confirming either a valid (+1.0) or an invalid (-1.0) pairwise outranking situation.
 
@@ -1866,8 +1866,8 @@ It is worthwhile noticing that the resulting outranking relation is transitive (
    :linenos:
    :emphasize-lines: 2-3,5,8-10,17,23,25,31-33
 
-   >>> >>> from outrankingDigraphs import *
-   >>> pt = PerformanceTableau('roy66V1')
+   >>> from outrankingDigraphs import *
+   >>> pt = PerformanceTableau('roy66')
    >>> g = BipolarOutrankingDigraph(pt)
    >>> g.isTransitive()
     True
@@ -1897,11 +1897,11 @@ It is worthwhile noticing that the resulting outranking relation is transitive (
        covered (%)         : 100.00
        determinateness (%) : 71.21
        - most credible action(s) = { 'a3': 0.45, 'a2': 0.27, }
-   >>> (~(-g)).exportGraphViz('roy66V1',firstChoice=['a6','a5'],
+   >>> (~(-g)).exportGraphViz('roy66',firstChoice=['a6','a5'],
    ...                        lastChoice=['a2','a3'])
     *---- exporting a dot file for GraphViz tools ---------*
      Exporting to roy66V1.dot
-     dot -Grankdir=BT -Tpng roy66V1.dot -o roy66V1.png
+     dot -Grankdir=BT -Tpng roy66.dot -o roy66.png
 
 .. figure:: roy66V1Figures.png
    :name: roy66V1Figures
