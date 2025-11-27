@@ -1856,15 +1856,13 @@ The originally proposed meticulous illustrative performance tableau may be model
 
 Underlining the fact that the *ELECTRE* method takes into account solely ordinal performance grades, the proposed actions' grades were of linguistic nature: *bad*, *weak*, *average*, *good* and *excellent*. They have been here arbitrarily recoded as 0, 1, 2, 3 and 4. To show the usefulness of taking conjointly into account *concordance* **and** *discordance* arguments, an effective **veto discrimination threshold** of 2.5 is proposed, implying the polarisation of the outranking statements when the difference between two grades on a performance criterion is greater than two linguistic levels.      
 
-In :numref:`roy66V1A` below we compute the corresponding outranking digraph *g*  (Lines 2-3). The resulting valued adjacency matrix, shown in :numref:`roy66V1Figures`, makes apparent that only the pair (*a1*, *a4*) shows in fact a **vetoed outranking** statement. All other polarisations are certainly confirming either a valid (+1.0) or an invalid (-1.0) pairwise outranking situation.
-
-It is worthwhile noticing that the resulting outranking relation is transitive (Line 5). Using the *NetFlows* ranking: *a6* > *a5* > *a1* > *a4* > *a2* > *a3* (Line 8 and 10), we show in :numref:`roy66V1Figures` below the corresponding very convinving performance heatmap.
+In :numref:`roy66V1A` below we compute the corresponding outranking digraph *g*  (Lines 2-3).
 
 .. code-block:: pycon
    :name: roy66V1A
    :caption: The original ELECTRE best choice problem
    :linenos:
-   :emphasize-lines: 2-3,5,8-10,17,25,32-33
+   :emphasize-lines: 2-3,5,8-10,17,25
 
    >>> from outrankingDigraphs import *
    >>> pt = PerformanceTableau('roy66')
@@ -1903,6 +1901,10 @@ It is worthwhile noticing that the resulting outranking relation is transitive (
      Exporting to roy66V1.dot
      dot -Grankdir=BT -Tpng roy66.dot -o roy66.png
 
+The resulting **valued adjacency matrix**, shown in :numref:`roy66V1Figures` below, makes apparent that only the pair (*a1*, *a4*) shows in fact a **vetoed outranking** statement. All other polarisations are certainly confirming either a valid (+1.0) or an invalid (-1.0) pairwise outranking situation. As a result, alternatives *a5* and *a6* are *Condorcet* winners, i.e. outranking all other alternatives. And, alternatives *a2* and *a3* are *Condorcet* losers, i.e. they are outranked by all the other alternatives. 
+
+Using the *NetFlows* ranking: *a6* > *a5* > *a1* > *a4* > *a2* > *a3* (Lines 8 and 10), we show in :numref:`roy66V1Figures` below the corresponding very convincing **performance heatmap**.
+
 .. figure:: roy66V1Figures.png
    :name: roy66V1Figures
    :width: 550 px
@@ -1910,7 +1912,7 @@ It is worthwhile noticing that the resulting outranking relation is transitive (
 
    Solving the seminal best choice recommendation problem
 
-Finally, our *Rubis* first choice recommendation (Lines 17 and 25) confirms, with the help of the initial and terminal kernels of digraph *g*, that alternatives *a6* and *a5* are potential first choice candidates and alternatives  *a3* and *a2* are potential last choice candidates.
+Finally, our *Rubis* choice recommendation (Lines 17 and 25 in :numref:`roy66V1A`) confirms, with the help of the initial and terminal kernels of digraph *g*, that alternatives *a6* and *a5* are potential first choice candidates and alternatives  *a3* and *a2* are potential last choice candidates.
 
 Following a seminar presentation in 2005 at the LAMSADE, where the author promoted our *Rubis* usage of the outranking kernels as suitable candidates for delivering choice recommendations [BIS-2005]_, a critical discussion started about the methodological requirement for a convincing best choice recommendation to be *internally stable* (pragmatic principle **P3**). *Denis Bouyssou* illustrated his doubts with the potential outranking digraph shown in :numref:`bouyssou2005`.
 
