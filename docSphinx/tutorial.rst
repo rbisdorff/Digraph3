@@ -1838,9 +1838,9 @@ The next tutorial shows how to create or edit a performance tableau.
 
 Historical Notes
 ````````````````
-The seminal article by *Bernard Roy* et al. about the outranking based best choice selection procedure called *ELECTRE* dates from 1966 and was actively promoted thereafter by the LAMSADE [61]_, *Roy*'s research laboratory at the newly founded University Paris 9 Dauphine ([ROY-1966]_). Our critical perspective on this seminal text may be consulted in [BIS-2009]_.
+The seminal article by *Bernard Roy* et al. about the outranking based best choice selection procedure called *ELECTRE* dates from 1966 and was actively promoted thereafter by the LAMSADE [61]_, *Roy*'s research laboratory at the newly founded University Paris 9 Dauphine ([ROY-1966]_). Our critical perspective on this seminal text may be consulted in [BIS-2009]_. Revolutionary for that time was the idea to solve this classical decision problem not by looking for **the best** decision alternative, but **recommending**, with the help of the **kernel** of the outranking digraph, a *subset* of potential best choice candidates.
 
-The originally proposed meticulous performance tableau may be modelled by the following performance tableau data stored under the name *roy66V1.py* in the *examples* directory of the Digraph3 resources. 
+The originally proposed meticulous illustrative performance tableau may be modelled at present by the following performance tableau data stored under the name *roy66.py* in the *examples* directory of the Digraph3 resources. 
 
 ======= ======== ==== ==== ==== ==== ==== ==== ========= ===========
  Criteria         Actions' performance grades   Grading   Veto
@@ -1854,9 +1854,9 @@ The originally proposed meticulous performance tableau may be modelled by the fo
   g5     1        4    2    1    2    3    3    0-4       2.5
 ======= ======== ==== ==== ==== ==== ==== ==== ========= ===========
 
-Underlining the original design decision that the *ELECTRE* method takes into account solely ordinal performance grades, the proposed actions' grades were of linguistic nature: *bad* (0), *weak* (1), *average* (2), *good* (3) and *excellent* (4). They have been here numerically recoded as 0, 1, 2, 3 and 4. The proposed veto threshold 2.5 implies the polarisation of the outranking statements when the difference between two grades is greater than two linguistic levels.      
+Underlining the fact that the *ELECTRE* method takes into account solely ordinal performance grades, the proposed actions' grades were of linguistic nature: *bad*, *weak*, *average*, *good* and *excellent*. They have been here arbitrarily recoded as 0, 1, 2, 3 and 4. To show the usefulness of taking conjointly into account *concordance* **and** *discordance* arguments, an effective **veto discrimination threshold** of 2.5 is proposed, implying the polarisation of the outranking statements when the difference between two grades on a performance criterion is greater than two linguistic levels.      
 
-In :numref:`roy66V1A` below we compute the corresponding outranking digraph *g*  (Lines 2-3). The resulting valued adjacency matrix, shown in :numref:`roy66V1Figures`, makes apparent that only the pair (*a1*, *a4*) shows in fact a vetoed outranking statement. All other polarisations are certainly confirming either a valid (+1.0) or an invalid (-1.0) pairwise outranking situation.
+In :numref:`roy66V1A` below we compute the corresponding outranking digraph *g*  (Lines 2-3). The resulting valued adjacency matrix, shown in :numref:`roy66V1Figures`, makes apparent that only the pair (*a1*, *a4*) shows in fact a **vetoed outranking** statement. All other polarisations are certainly confirming either a valid (+1.0) or an invalid (-1.0) pairwise outranking situation.
 
 It is worthwhile noticing that the resulting outranking relation is transitive (Line 5). Using the *NetFlows* ranking: *a6* > *a5* > *a1* > *a4* > *a2* > *a3* (Line 8 and 10), we show in :numref:`roy66V1Figures` below the corresponding very convinving performance heatmap.
 
@@ -1864,7 +1864,7 @@ It is worthwhile noticing that the resulting outranking relation is transitive (
    :name: roy66V1A
    :caption: The original ELECTRE best choice problem
    :linenos:
-   :emphasize-lines: 2-3,5,8-10,17,23,25,31-33
+   :emphasize-lines: 2-3,5,8-10,17,25,32-33
 
    >>> from outrankingDigraphs import *
    >>> pt = PerformanceTableau('roy66')
@@ -1910,9 +1910,9 @@ It is worthwhile noticing that the resulting outranking relation is transitive (
 
    Solving the seminal best choice recommendation problem
 
-Finally, our *Rubis* first choice recommendation (Lines 17,23,25 and 31) confirms that action *a6* gives indeed a most credible first choice and actions *a3* a most credible last choice.
+Finally, our *Rubis* first choice recommendation (Lines 17 and 25) confirms, with the help of the initial and terminal kernels of digraph *g*, that alternatives *a6* and *a5* are potential first choice candidates and alternatives  *a3* and *a2* are potential last choice candidates.
 
-Following a seminar presentation in 2005 at the LAMSADE, where the author promoted this *Rubis* usage of the initial kernels of outranking digraphs as suitable candidates for delivering best choice recommendations [BIS-2005]_, a critical discussion started about the methodological requirement for a convincing best choice recommendation to be *internally stable* (pragmatic principle **P3**). *Denis Bouyssou* illustrated his doubts with the potential outranking digraph shown in :numref:`bouyssou2005`.
+Following a seminar presentation in 2005 at the LAMSADE, where the author promoted our *Rubis* usage of the outranking kernels as suitable candidates for delivering choice recommendations [BIS-2005]_, a critical discussion started about the methodological requirement for a convincing best choice recommendation to be *internally stable* (pragmatic principle **P3**). *Denis Bouyssou* illustrated his doubts with the potential outranking digraph shown in :numref:`bouyssou2005`.
 
 .. figure:: bouyssou2005.png
    :name: bouyssou2005
@@ -1923,7 +1923,7 @@ Following a seminar presentation in 2005 at the LAMSADE, where the author promot
 
 His commentary was the following: The only initial kernel of this digraph is the choice {*a*, *d*}. Yet, it is an ambiguous recommendation, as this choice is conjointly an *initial* --**outranking**-- and *terminal* --**outranked**-- *kernel*. If the instability of the best choice recommendation is, however, not considered a problem then the choice {*a*, *b*} shows the most convincing strict outranking quality and could be recommended in priority as best choice candidates. Adding alternative *d* to the set of potential best choice candidates is not convincing as there exists in the given digraph the node *b*, which is better evaluated than *d*. The argument that the incomparability between *a* and *d* should favour *d* as potential best choice is interesting but another hypothesis could be that *b* perhaps outranks *a*. In this latter case, it seams clear that the actual best choice recommendation should be reduced to node *b*, unless one disposes of other information, like a performance tableau and/or the actual computation method of the outranking situations. In any case, one has to be very clear about the available information when judging a best choice procedure.
 
-It became thereafter obvious for us all that both the lack of a specific performance tableau as well as the lack of a precisely defined algorithm for computing valid outranking situations do not allow to judge if a given digraph does indeed model a potential outranking relation. In our present bipolar-valued epistemic approach, a valid outranking digraph instance, following from a given performance tableau and the disjunctive epistemic fusion construction of the outranking relation, will necessarily verify the :ref:`strong completeness condition and the coduality principle <Sufficiency-Tutorial-label>`. As a consequence, incomparability situations are now modelled by epistemic indeterminateness not by the actual absence of a reciprocal outranking relation.
+It became thereafter obvious for us all that both the lack of a specific performance tableau as well as the lack of a precisely defined algorithm for computing valid outranking situations do not allow to judge if a given digraph does indeed model a potential outranking relation. In our present bipolar-valued epistemic approach, a valid outranking digraph instance, following from a given performance tableau and the disjunctive epistemic fusion construction of the outranking relation, will necessarily verify the :ref:`strong completeness condition and the coduality principle <Sufficiency-Tutorial-label>`. As a consequence, incomparability situations are now modelled by *epistemic indeterminateness* and not by the actual absence of a reciprocal outranking relation.
 
 The digraph put forward by *Bouyssou* in the October 2005 discussion is not strongly complete --node *a* is not outranking node *d* and vice versa-- and does hence not represent, in our present sense, a valid outranking digraph instance. Yet, it may be a partial tournament and as such it could be a strict outranking digraph, i.e. the asymmetrical part --the codual-- of a valid outranking digraph. In this case, nodes *a* and *d* --the kernel of the strict outranking digraph-- would actually positively outrank each other and, hence, represent both indifferently the natural best choice candidates. However, in this not strict outranking digraph, node *a* becomes also the unique *Condorcet* winner --positively outranking all other nodes-- and gives hence the evident unique best choice recommendation.
 
