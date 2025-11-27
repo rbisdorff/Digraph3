@@ -1862,18 +1862,36 @@ In :numref:`roy66V1A` below we compute the corresponding outranking digraph *g* 
    :name: roy66V1A
    :caption: The original ELECTRE best choice problem
    :linenos:
-   :emphasize-lines: 2-3,5,8-10,17,25
+   :emphasize-lines: 2-3,6-8
 
    >>> from outrankingDigraphs import *
    >>> pt = PerformanceTableau('roy66')
    >>> g = BipolarOutrankingDigraph(pt)
-   >>> g.isTransitive()
-    True
    >>> ranking = g.computeNetFlowsRanking()
    >>> ranking
     ['a6', 'a5', 'a1', 'a4', 'a2', 'a3']
    >>> g.showHTMLRelationTable(actionsList=ranking)
    >>> g.showHTMLPerformanceHeatmap(colorLevels=5,actionsList=ranking)
+
+Using the *NetFlows* ranking: *a6* > *a5* > *a1* > *a4* > *a2* > *a3* (Lines 6 and 7) we show in :numref:`roy66V1Figures` below the corresponding **valued adjacency matrix**. The bipolar-valued outranking relation makes apparent that only the pair (*a1*, *a4*) shows in fact a **vetoed outranking** statement. All other polarisations are certainly confirming either a *valid* (**+1.0**) or an invalid (**-1.0**) pairwise outranking situation. One may furthermore notice that alternatives *a5* and *a6* are indifferent *Condorcet* winners, i.e. they outrank both all other alternatives. And, alternatives *a2* and *a3* are indifferent *Condorcet* losers, i.e. they are outranked by all the other alternatives. 
+
+Using again the same *NetFlows* ranking: *a6* > *a5* > *a1* > *a4* > *a2* > *a3* (Line 9), we show in :numref:`roy66V1Figures` below also the corresponding very convincing **performance heatmap**.
+
+.. figure:: roy66V1Figures.png
+   :name: roy66V1Figures
+   :width: 550 px
+   :align: center
+
+   Solving the seminal best choice recommendation problem
+
+Finally, in :numref:`roy66V1B` Lines 1,7 and 15, our *Rubis* choice recommendation confirms, with the help of the initial and terminal kernels of digraph *g*, that alternatives *a6* and *a5* are potential first choice candidates and alternatives  *a3* and *a2* are potential last choice candidates. The *graphviz* drawing of the corresponding strict outranking digraph, oriented by the initial and terminal kernels, shows its transitive structure (Line 23-25). 
+
+.. code-block:: pycon
+   :name: roy66V1B
+   :caption: The Rubis choice recommendation
+   :linenos:
+   :emphasize-lines: 1,7,15,23-25
+
    >>> g.showChoiceRecommendation('Rubis')
     Rubis choice recommendation
     ***********************
@@ -1895,26 +1913,15 @@ In :numref:`roy66V1A` below we compute the corresponding outranking digraph *g* 
        covered (%)         : 100.00
        determinateness (%) : 71.21
        - most credible action(s) = { 'a3': 0.45, 'a2': 0.27, }
+   >>> g.isTransitive()
+    True
    >>> (~(-g)).exportGraphViz('roy66',firstChoice=['a6','a5'],
    ...                        lastChoice=['a2','a3'])
     *---- exporting a dot file for GraphViz tools ---------*
      Exporting to roy66V1.dot
      dot -Grankdir=BT -Tpng roy66.dot -o roy66.png
 
-The resulting **valued adjacency matrix**, shown in :numref:`roy66V1Figures` below, makes apparent that only the pair (*a1*, *a4*) shows in fact a **vetoed outranking** statement. All other polarisations are certainly confirming either a valid (+1.0) or an invalid (-1.0) pairwise outranking situation. As a result, alternatives *a5* and *a6* are *Condorcet* winners, i.e. outranking all other alternatives. And, alternatives *a2* and *a3* are *Condorcet* losers, i.e. they are outranked by all the other alternatives. 
-
-Using the *NetFlows* ranking: *a6* > *a5* > *a1* > *a4* > *a2* > *a3* (Lines 8 and 10), we show in :numref:`roy66V1Figures` below the corresponding very convincing **performance heatmap**.
-
-.. figure:: roy66V1Figures.png
-   :name: roy66V1Figures
-   :width: 550 px
-   :align: center
-
-   Solving the seminal best choice recommendation problem
-
-Finally, our *Rubis* choice recommendation (Lines 17 and 25 in :numref:`roy66V1A`) confirms, with the help of the initial and terminal kernels of digraph *g*, that alternatives *a6* and *a5* are potential first choice candidates and alternatives  *a3* and *a2* are potential last choice candidates.
-
-Following a seminar presentation in 2005 at the LAMSADE, where the author promoted our *Rubis* usage of the outranking kernels as suitable candidates for delivering choice recommendations [BIS-2005]_, a critical discussion started about the methodological requirement for a convincing best choice recommendation to be *internally stable* (pragmatic principle **P3**). *Denis Bouyssou* illustrated his doubts with the potential outranking digraph shown in :numref:`bouyssou2005`.
+Following now a seminar presentation in 2005 at the LAMSADE, where the author promoted this usage of the outranking kernels as suitable candidates for delivering choice recommendations [BIS-2005]_, a critical discussion started about the methodological requirement for a convincing best choice recommendation to be *internally stable* (pragmatic principle **P3**). *Denis Bouyssou* illustrated his doubts with the potential outranking digraph shown in :numref:`bouyssou2005`.
 
 .. figure:: bouyssou2005.png
    :name: bouyssou2005
