@@ -551,6 +551,7 @@ INPUT ./symmetricPart.png
 INPUT ./symmetricPart.png
 INPUT ./symmetricPart.png
 INPUT ./symmetricPart.png
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcti1200.tfm
 INPUT ./BachetHeatmap.png
 INPUT ./BachetHeatmap.png
 INPUT ./BachetHeatmap.png
@@ -799,6 +800,7 @@ INPUT digraph3Pearls.ind
 INPUT digraph3Pearls.aux
 INPUT ./digraph3Pearls.out
 INPUT ./digraph3Pearls.out
+INPUT /home/bisdorff/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcti1200.600pk
 INPUT /home/bisdorff/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk
 INPUT /home/bisdorff/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecso1200.600pk
 INPUT /home/bisdorff/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecso1440.600pk
