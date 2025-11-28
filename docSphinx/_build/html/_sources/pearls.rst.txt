@@ -2999,7 +2999,7 @@ Applications of bipolar-valued base 3 encoded Bachet numbers
 ````````````````````````````````````````````````````````````
 .. epigraph::
    
-   "The complexity of arithmetic circuitry for balanced ternary arithmetic is not much greater than it is for the binary system, and a given number requires only :math:`\log_3 2 \approx 63\%` as many digit positions for its representation. [...] perhaps the symmetric properties and simple arithmetic of this number system will prove to be quite important someday [...]"
+   "*The complexity of arithmetic circuitry for balanced ternary arithmetic is not much greater than it is for the binary system, and a given number requires only :math:`\log_3 2 \approx 63\%` as many digit positions for its representation. [...] perhaps the symmetric properties and simple arithmetic of this number system will prove to be quite important someday* [...]"
 
    -- D. Knuth [KNU-1997]_
 	      
