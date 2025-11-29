@@ -67,7 +67,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{November 28, 2025}
+\date{November 29, 2025}
 \release{3.14.0}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -3030,7 +3030,7 @@ g5
 \sphinxattableend\end{savenotes}
 
 \sphinxAtStartPar
-Underlining the fact that the \sphinxstyleemphasis{ELECTRE} method takes into account solely ordinal performance grades, the proposed actions’ grades were of linguistic nature: \sphinxstyleemphasis{bad}, \sphinxstyleemphasis{weak}, \sphinxstyleemphasis{average}, \sphinxstyleemphasis{good} and \sphinxstyleemphasis{excellent}. They have been here arbitrarily recoded as 0, 1, 2, 3 and 4. To show the usefulness of taking conjointly into account \sphinxstyleemphasis{concordance} \sphinxstylestrong{and} \sphinxstyleemphasis{discordance} arguments, an effective \sphinxstylestrong{veto discrimination threshold} of 2.5 is proposed, implying the polarisation of the outranking statements when the difference between two grades on a performance criterion is greater than two linguistic levels.
+Underlining the fact that the \sphinxstyleemphasis{ELECTRE} method takes into account solely ordinal performance grades, the originally proposed actions’ grades were of ordinal linguistic nature: \sphinxstyleemphasis{bad}, \sphinxstyleemphasis{weak}, \sphinxstyleemphasis{average}, \sphinxstyleemphasis{good} and \sphinxstyleemphasis{excellent}. They have here arbitrarily been recoded as 0, 1, 2, 3 and 4. To show the usefulness of taking conjointly into account \sphinxstyleemphasis{concordance} \sphinxstylestrong{and} \sphinxstyleemphasis{discordance} arguments, an effective \sphinxstylestrong{veto discrimination threshold} of 2.5 is proposed, implying the polarisation of the outranking statements when the difference between two grades on a performance criterion is greater than two linguistic levels.
 
 \sphinxAtStartPar
 In \hyperref[\detokenize{tutorial:roy66v1a}]{Listing \ref{\detokenize{tutorial:roy66v1a}}} below we compute the corresponding outranking digraph \sphinxstyleemphasis{g}  (Lines 2\sphinxhyphen{}3).
@@ -3063,12 +3063,12 @@ Using again the same \sphinxstyleemphasis{NetFlows} ranking: \sphinxstyleemphasi
 \caption{Solving the seminal best choice recommendation problem}\label{\detokenize{tutorial:roy66v1figures}}\end{figure}
 
 \sphinxAtStartPar
-Finally, in \hyperref[\detokenize{tutorial:roy66v1b}]{Listing \ref{\detokenize{tutorial:roy66v1b}}} Lines 1,7 and 15, our \sphinxstyleemphasis{Rubis} choice recommendation confirms, with the help of the initial and terminal kernels of digraph \sphinxstyleemphasis{g}, that alternatives \sphinxstyleemphasis{a6} and \sphinxstyleemphasis{a5} are potential first choice candidates and alternatives  \sphinxstyleemphasis{a3} and \sphinxstyleemphasis{a2} are potential last choice candidates. The \sphinxstyleemphasis{graphviz} drawing of the corresponding strict outranking digraph, oriented by the initial and terminal kernels, shows its transitive structure (Line 23\sphinxhyphen{}25).
+Finally, in \hyperref[\detokenize{tutorial:roy66v1b}]{Listing \ref{\detokenize{tutorial:roy66v1b}}}, our \sphinxstyleemphasis{Rubis} best choice recommendation confirms, with the help of the initial and terminal kernels of the corresponding strict outranking digraph (Lines 1,7 and 16), that alternatives \sphinxstyleemphasis{a6} and \sphinxstyleemphasis{a5} are potential first choice candidates and alternatives  \sphinxstyleemphasis{a3} and \sphinxstyleemphasis{a2} are potential last choice candidates. The \sphinxstyleemphasis{graphviz} drawing of the strict outranking digraph, oriented by the initial and terminal kernels, shows its transitive structure (see \hyperref[\detokenize{tutorial:roy66v1figures}]{Fig.\@ \ref{\detokenize{tutorial:roy66v1figures}}}).
 \sphinxSetupCaptionForVerbatim{The Rubis choice recommendation}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:roy66v1b}}}
-\fvset{hllines={, 1, 7, 15, 23, 24, 25,}}%
+\fvset{hllines={, 1, 7, 13, 14, 16, 22, 23, 24, 25, 26, 27,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showChoiceRecommendation}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Rubis}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showRubisBestChoiceRecommendation}\PYG{p}{(}\PYG{n}{CoDual}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+go}{ Rubis choice recommendation}
 \PYG{g+go}{ ***********************}
 \PYG{g+go}{  First choice recommendation(s) (BCR)}
@@ -3080,7 +3080,8 @@ Finally, in \hyperref[\detokenize{tutorial:roy66v1b}]{Listing \ref{\detokenize{t
 \PYG{g+go}{    absorbency          : \PYGZhy{}1.00}
 \PYG{g+go}{    covering (\PYGZpc{})        : 100.00}
 \PYG{g+go}{    determinateness (\PYGZpc{}) : 89.39}
-\PYG{g+go}{    \PYGZhy{} most credible action(s) = \PYGZob{} \PYGZsq{}a6\PYGZsq{}: 1.00, \PYGZsq{}a5\PYGZsq{}: 0.27, \PYGZcb{}}
+\PYG{g+go}{    \PYGZhy{} first choice credibilities = \PYGZob{} \PYGZsq{}a6\PYGZsq{}: 1.00, \PYGZsq{}a5\PYGZsq{}: 0.27,}
+\PYG{g+go}{         \PYGZsq{}a4\PYGZsq{}: \PYGZhy{}0.45, \PYGZsq{}a3\PYGZsq{}: \PYGZhy{}1.00, \PYGZsq{}a2\PYGZsq{}: \PYGZhy{}1.00, \PYGZsq{}a1\PYGZsq{}: \PYGZhy{}1.00,  \PYGZcb{}}
 \PYG{g+go}{  === \PYGZgt{}\PYGZgt{} potential last choice(s)}
 \PYG{g+go}{  * choice              : [\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}]}
 \PYG{g+go}{    independence        : 0.27}
@@ -3088,8 +3089,9 @@ Finally, in \hyperref[\detokenize{tutorial:roy66v1b}]{Listing \ref{\detokenize{t
 \PYG{g+go}{    absorbency          : 1.00}
 \PYG{g+go}{    covered (\PYGZpc{})         : 100.00}
 \PYG{g+go}{    determinateness (\PYGZpc{}) : 71.21}
-\PYG{g+go}{    \PYGZhy{} most credible action(s) = \PYGZob{} \PYGZsq{}a3\PYGZsq{}: 0.45, \PYGZsq{}a2\PYGZsq{}: 0.27, \PYGZcb{}}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{isTransitive}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{    \PYGZhy{} last choice credibilities = \PYGZob{} \PYGZsq{}a3\PYGZsq{}: 0.45, \PYGZsq{}a2\PYGZsq{}: 0.27,}
+\PYG{g+go}{          \PYGZsq{}a6\PYGZsq{}: \PYGZhy{}0.45, \PYGZsq{}a5\PYGZsq{}: \PYGZhy{}0.45, \PYGZsq{}a4\PYGZsq{}: \PYGZhy{}0.45, \PYGZsq{}a1\PYGZsq{}: \PYGZhy{}0.45, \PYGZcb{}}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{o}{\PYGZti{}}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{g}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{isTransitive}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ True}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{o}{\PYGZti{}}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{g}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{roy66}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{n}{firstChoice}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a6}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,}
 \PYG{g+gp}{... }                       \PYG{n}{lastChoice}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
@@ -3100,7 +3102,7 @@ Finally, in \hyperref[\detokenize{tutorial:roy66v1b}]{Listing \ref{\detokenize{t
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-Following now a seminar presentation in 2005 at the LAMSADE, where the author promoted this usage of the outranking kernels as suitable candidates for delivering choice recommendations \sphinxcite{tutorial:bis-2005}, a critical discussion started about the methodological requirement for a convincing best choice recommendation to be \sphinxstyleemphasis{internally stable} (pragmatic principle \sphinxstylestrong{P3}). \sphinxstyleemphasis{Denis Bouyssou} illustrated his doubts with the potential outranking digraph shown in \hyperref[\detokenize{tutorial:bouyssou2005}]{Fig.\@ \ref{\detokenize{tutorial:bouyssou2005}}}.
+Following now a seminar presentation in 2005 at the LAMSADE, where the author promoted this usage of the strict outranking kernels as suitable candidates for delivering choice recommendations \sphinxcite{tutorial:bis-2005}, a critical discussion started about the methodological requirement for a convincing best choice recommendation to be \sphinxstyleemphasis{internally stable} (pragmatic principle \sphinxstylestrong{P3}). \sphinxstyleemphasis{Denis Bouyssou} illustrated his doubts with the potential outranking digraph shown in \hyperref[\detokenize{tutorial:bouyssou2005}]{Fig.\@ \ref{\detokenize{tutorial:bouyssou2005}}}.
 
 \begin{figure}[H]
 \centering
@@ -3122,7 +3124,7 @@ The digraph put forward by \sphinxstyleemphasis{Bouyssou} in the October 2005 di
 Only after 2013, when the strong completeness and the coduality properties of the outranking digraph were discovered, became it obvious that the initial prekernels of the strict outranking digraph, coupled with the solution of the corresponding kernel equation system, could in fact deliver convincing best choice recommendations (see \sphinxcite{tutorial:bis-2013}). Yet, \sphinxstyleemphasis{Bouyssou} and the critical audience of the 2005 seminar would be satisfied to see their doubts somehow confirmed by the solution of the office location choice problem shown previously. Indeed, the initial prekernel \{\sphinxstyleemphasis{A}, \sphinxstyleemphasis{C}, \sphinxstyleemphasis{D}\} of the corresponding strict outranking digraph does not retain location \sphinxstyleemphasis{G} \textendash{}as it is actually strictly outranked by location \sphinxstyleemphasis{C} \textendash{} and proposes solely location \sphinxstyleemphasis{D} as credible best choice candidate. This latter location appears however certainly outranked by location \sphinxstyleemphasis{G}. Keeping location \sphinxstyleemphasis{G} in an indeterminate situation with being or not being a potential best choice candidate in the solution of the corresponding kernel equation system shows that the resulting bipolar\sphinxhyphen{}valued choice vector may be an essential complement of information. Showing solely an initial prekernel appears hence not necessarily sufficient for determining the actual best choice alternative(s). Similarly, questioning the confidence of outranking statements showing, the case given, weak positive credibilities, may result in a more convincing first\sphinxhyphen{}choice recommendation.
 
 \sphinxAtStartPar
-But it is the new {\hyperref[\detokenize{tutorial:partial-ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Bachet partial ranking rule}}}}} (\autopageref*{\detokenize{tutorial:partial-ranking-tutorial-label}}) that allows nowadays to compute a partial transitive tournament, very close in a bipolar\sphinxhyphen{}valued  ordinal correlation sense to the actual transitive part of the given outranking digraph, that definitely supports our kernels based recommending approach. The unique initial and terminal kernels of such a transitive tournament, easily found via a topological sort algorithm, may indeed deliver more effectively convincing first and/or last choice recommendations.
+But it is the new {\hyperref[\detokenize{tutorial:partial-ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Bachet partial ranking rule}}}}} (\autopageref*{\detokenize{tutorial:partial-ranking-tutorial-label}}) that allows nowadays to compute a partial transitive tournament, very close in a bipolar\sphinxhyphen{}valued  ordinal correlation sense to the actual transitive part of the given strict outranking digraph, that definitely supports our kernels based recommending approach. The unique initial and terminal kernels of such a transitive asymmetric digraph, easily found via a topological sort algorithm, may indeed deliver more effectively convincing first and/or last choice recommendations.
 
 
 \begin{sphinxseealso}{See also:}

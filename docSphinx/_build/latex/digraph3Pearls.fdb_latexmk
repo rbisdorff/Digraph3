@@ -1,11 +1,11 @@
 # Fdb version 4
-["makeindex digraph3Pearls.idx"] 1742131581.77404 "digraph3Pearls.idx" "digraph3Pearls.ind" "digraph3Pearls" 1764338419.49752 0
-  "digraph3Pearls.idx" 1764338416.20527 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+["makeindex digraph3Pearls.idx"] 1742131581.77404 "digraph3Pearls.idx" "digraph3Pearls.ind" "digraph3Pearls" 1764414871.58092 0
+  "digraph3Pearls.idx" 1764414868.09517 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
   "digraph3Pearls.ilg"
   "digraph3Pearls.ind"
   (rewritten before read)
-["pdflatex"] 1764338415.72366 "digraph3Pearls.tex" "digraph3Pearls.pdf" "digraph3Pearls" 1764338419.49764 0
+["pdflatex"] 1764414867.41888 "digraph3Pearls.tex" "digraph3Pearls.pdf" "digraph3Pearls" 1764414871.58104 0
   "/etc/texmf/web2c/texmf.cnf" 1697638898.09346 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/bisdorff/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk" 1706520336.98266 31928 219cae0d4d3156a2cb87c1cbab0a6c51 ""
   "/home/bisdorff/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk" 1706520337.99465 49076 f6856dd67d7f0c96ea99627dcffa5999 ""
@@ -31,7 +31,6 @@
   "/home/bisdorff/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk" 1706520333.20269 24132 74fe831fc1148fe97141886f7f302f58 ""
   "/home/bisdorff/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecxc1728.600pk" 1706520337.66265 50756 2934ee142afc969b8edcd964815949e6 ""
   "/home/bisdorff/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk" 1706520334.08668 14040 cfd89d9413c70b1c5c877df6d9c32bd7 ""
-  "/home/bisdorff/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcti1200.600pk" 1764338415.25029 17148 4ce3029757fcb69d211eb5f423db10fc ""
   "/home/bisdorff/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tctt1200.600pk" 1706520332.91469 11344 181c84db9d66dcc787976fc47f3389a9 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx1200.tfm" 1136768653 3584 402da0b29eafbad07963b1224b222f18 ""
@@ -63,7 +62,6 @@
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ectt1200.tfm" 1136768653 1536 487c9b46984a816c7ed238d0674595c7 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecxc1728.tfm" 1136768653 3072 629ccb5632ab27677dcbf3fd9db69fad ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm" 1136768653 1536 74b7293ec3713bb7fdca8dd1bd1f469c ""
-  "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcti1200.tfm" 1136768653 2048 4bf576aaa733142ac4e68faea01bc92e ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tctt1200.tfm" 1136768653 1536 efbcae87f87156de95906dc6e6580595 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -217,11 +215,11 @@
   "correlationTable.png" 1718428518.49073 50102 7e60e3c38680cfc795a5a7bb6851b804 ""
   "criteriaCorrelationTable.png" 1718428518.49173 155055 65e3b8a8881e3ccc2c62f091801afb44 ""
   "dendogram.png" 1718428518.49173 35541 9e36c14dc4e9ad21c4aa50adc1b3ee06 ""
-  "digraph3Pearls.aux" 1764338419.21323 74607 6042171f544946cf2708d8b78f7be52a "pdflatex"
+  "digraph3Pearls.aux" 1764414871.27214 74607 6042171f544946cf2708d8b78f7be52a "pdflatex"
   "digraph3Pearls.ind" 1742131581.78538 0 d41d8cd98f00b204e9800998ecf8427e "makeindex digraph3Pearls.idx"
-  "digraph3Pearls.out" 1764338419.21723 21015 ca8ac4685e375cc02d1af2fb79de7927 "pdflatex"
-  "digraph3Pearls.tex" 1764338409.91037 582937 949a892f1ff601d450beb0c4ac72c0be ""
-  "digraph3Pearls.toc" 1764338419.21723 7769 a35ac3059d749a94eab748c66cc6aad5 "pdflatex"
+  "digraph3Pearls.out" 1764414871.27614 21015 ca8ac4685e375cc02d1af2fb79de7927 "pdflatex"
+  "digraph3Pearls.tex" 1764414866.63918 582924 1969ee7315129880b136874cce233d0e ""
+  "digraph3Pearls.toc" 1764414871.27614 7769 a35ac3059d749a94eab748c66cc6aad5 "pdflatex"
   "divGraph.png" 1718428518.50373 24390 b06fbd98e3345494f14c38fe9dc7657c ""
   "dualChordlessCircuit.png" 1718428518.50373 42179 2859130e8357d66ccd923f51dd2efd4b ""
   "graffiti07_1.png" 1718428518.50473 123646 fb9f8b4c40c1f2ce1c9144e7371da2fb ""
@@ -252,7 +250,7 @@
   "robustHeatmap.png" 1718428518.52573 157849 be99b1e63b93b89aa32bcbaa8c9c6d7b ""
   "simulLikelihood.png" 1718428518.52673 22562 cf4b77dc733a465112a7dad344b7c667 ""
   "sphinx.sty" 1747746702.39367 54203 ee7fe875437470f5328ee20661bb9f1d ""
-  "sphinxhighlight.sty" 1764338344.66038 7553 83fb52292c17957d9f4aadcb28c57a87 ""
+  "sphinxhighlight.sty" 1764414806.63769 7553 83fb52292c17957d9f4aadcb28c57a87 ""
   "sphinxhowto.cls" 1718428518.52773 3256 55d5772de2f18cad818d98a3e6e8e37b ""
   "sphinxlatexadmonitions.sty" 1747746702.39467 19111 5e67a0f91439018bceb7cadf319345e6 ""
   "sphinxlatexcontainers.sty" 1747746702.39467 900 d61f923db071a7b54d3cee8a1e6935d3 ""
@@ -267,7 +265,7 @@
   "sphinxlatexstylepage.sty" 1747746702.39667 2671 e63daf3b9f0f8a387a8b4ba09c515982 ""
   "sphinxlatexstyletext.sty" 1747746702.39667 6759 9e932c65374cfb62686485d331bc975c ""
   "sphinxlatextables.sty" 1747746702.39667 57643 7f1013c2fa11942370d867527bdda568 ""
-  "sphinxmessages.sty" 1764338409.98337 745 3f5fcd6cdd7964ed608767954a8ced6f ""
+  "sphinxmessages.sty" 1764414866.71118 745 3f5fcd6cdd7964ed608767954a8ced6f ""
   "sphinxoptionsgeometry.sty" 1747746702.39667 2060 6c27b3eba37bde592ae8908ab2c1ac0f ""
   "sphinxoptionshyperref.sty" 1747746702.39767 1093 e468489bae7631a7f387b4b0f7bc15d4 ""
   "sphinxpackageboxes.sty" 1747746702.39767 36106 1be2053eb1cb9b083b3a75e3657bcb24 ""
