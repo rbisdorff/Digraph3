@@ -1854,7 +1854,7 @@ The originally proposed meticulous illustrative performance tableau may be model
   g5     1        4    2    1    2    3    3    0-4       2.5
 ======= ======== ==== ==== ==== ==== ==== ==== ========= ===========
 
-Underlining the fact that the *ELECTRE* method takes into account solely ordinal performance grades, the proposed actions' grades were of linguistic nature: *bad*, *weak*, *average*, *good* and *excellent*. They have been here arbitrarily recoded as 0, 1, 2, 3 and 4. To show the usefulness of taking conjointly into account *concordance* **and** *discordance* arguments, an effective **veto discrimination threshold** of 2.5 is proposed, implying the polarisation of the outranking statements when the difference between two grades on a performance criterion is greater than two linguistic levels.      
+Underlining the fact that the *ELECTRE* method takes into account solely ordinal performance grades, the originally proposed actions' grades were of ordinal linguistic nature: *bad*, *weak*, *average*, *good* and *excellent*. They have here arbitrarily been recoded as 0, 1, 2, 3 and 4. To show the usefulness of taking conjointly into account *concordance* **and** *discordance* arguments, an effective **veto discrimination threshold** of 2.5 is proposed, implying the polarisation of the outranking statements when the difference between two grades on a performance criterion is greater than two linguistic levels.      
 
 In :numref:`roy66V1A` below we compute the corresponding outranking digraph *g*  (Lines 2-3).
 
@@ -1884,15 +1884,15 @@ Using again the same *NetFlows* ranking: *a6* > *a5* > *a1* > *a4* > *a2* > *a3*
 
    Solving the seminal best choice recommendation problem
 
-Finally, in :numref:`roy66V1B` Lines 1,7 and 15, our *Rubis* choice recommendation confirms, with the help of the initial and terminal kernels of digraph *g*, that alternatives *a6* and *a5* are potential first choice candidates and alternatives  *a3* and *a2* are potential last choice candidates. The *graphviz* drawing of the corresponding strict outranking digraph, oriented by the initial and terminal kernels, shows its transitive structure (Line 23-25). 
+Finally, in :numref:`roy66V1B`, our *Rubis* best choice recommendation confirms, with the help of the initial and terminal kernels of the corresponding strict outranking digraph (Lines 1,7 and 16), that alternatives *a6* and *a5* are potential first choice candidates and alternatives  *a3* and *a2* are potential last choice candidates. The *graphviz* drawing of the strict outranking digraph, oriented by the initial and terminal kernels, shows its transitive structure (see :numref:`roy66V1Figures`). 
 
 .. code-block:: pycon
    :name: roy66V1B
    :caption: The Rubis choice recommendation
    :linenos:
-   :emphasize-lines: 1,7,15,23-25
+   :emphasize-lines: 1,7,13-14,16,22-27
 
-   >>> g.showChoiceRecommendation('Rubis')
+   >>> g.showRubisBestChoiceRecommendation(CoDual=True)
     Rubis choice recommendation
     ***********************
      First choice recommendation(s) (BCR)   
@@ -1904,7 +1904,8 @@ Finally, in :numref:`roy66V1B` Lines 1,7 and 15, our *Rubis* choice recommendati
        absorbency          : -1.00
        covering (%)        : 100.00
        determinateness (%) : 89.39
-       - most credible action(s) = { 'a6': 1.00, 'a5': 0.27, }
+       - first choice credibilities = { 'a6': 1.00, 'a5': 0.27,
+	    'a4': -0.45, 'a3': -1.00, 'a2': -1.00, 'a1': -1.00,  }
      === >> potential last choice(s) 
      * choice              : ['a2', 'a3']
        independence        : 0.27
@@ -1912,8 +1913,9 @@ Finally, in :numref:`roy66V1B` Lines 1,7 and 15, our *Rubis* choice recommendati
        absorbency          : 1.00
        covered (%)         : 100.00
        determinateness (%) : 71.21
-       - most credible action(s) = { 'a3': 0.45, 'a2': 0.27, }
-   >>> g.isTransitive()
+       - last choice credibilities = { 'a3': 0.45, 'a2': 0.27,
+	     'a6': -0.45, 'a5': -0.45, 'a4': -0.45, 'a1': -0.45, }
+   >>> (~(-g)).isTransitive()
     True
    >>> (~(-g)).exportGraphViz('roy66',firstChoice=['a6','a5'],
    ...                        lastChoice=['a2','a3'])
@@ -1921,7 +1923,7 @@ Finally, in :numref:`roy66V1B` Lines 1,7 and 15, our *Rubis* choice recommendati
      Exporting to roy66V1.dot
      dot -Grankdir=BT -Tpng roy66.dot -o roy66.png
 
-Following now a seminar presentation in 2005 at the LAMSADE, where the author promoted this usage of the outranking kernels as suitable candidates for delivering choice recommendations [BIS-2005]_, a critical discussion started about the methodological requirement for a convincing best choice recommendation to be *internally stable* (pragmatic principle **P3**). *Denis Bouyssou* illustrated his doubts with the potential outranking digraph shown in :numref:`bouyssou2005`.
+Following now a seminar presentation in 2005 at the LAMSADE, where the author promoted this usage of the strict outranking kernels as suitable candidates for delivering choice recommendations [BIS-2005]_, a critical discussion started about the methodological requirement for a convincing best choice recommendation to be *internally stable* (pragmatic principle **P3**). *Denis Bouyssou* illustrated his doubts with the potential outranking digraph shown in :numref:`bouyssou2005`.
 
 .. figure:: bouyssou2005.png
    :name: bouyssou2005
@@ -1938,7 +1940,7 @@ The digraph put forward by *Bouyssou* in the October 2005 discussion is not stro
 
 Only after 2013, when the strong completeness and the coduality properties of the outranking digraph were discovered, became it obvious that the initial prekernels of the strict outranking digraph, coupled with the solution of the corresponding kernel equation system, could in fact deliver convincing best choice recommendations (see [BIS-2013]_). Yet, *Bouyssou* and the critical audience of the 2005 seminar would be satisfied to see their doubts somehow confirmed by the solution of the office location choice problem shown previously. Indeed, the initial prekernel {*A*, *C*, *D*} of the corresponding strict outranking digraph does not retain location *G* --as it is actually strictly outranked by location *C* -- and proposes solely location *D* as credible best choice candidate. This latter location appears however certainly outranked by location *G*. Keeping location *G* in an indeterminate situation with being or not being a potential best choice candidate in the solution of the corresponding kernel equation system shows that the resulting bipolar-valued choice vector may be an essential complement of information. Showing solely an initial prekernel appears hence not necessarily sufficient for determining the actual best choice alternative(s). Similarly, questioning the confidence of outranking statements showing, the case given, weak positive credibilities, may result in a more convincing first-choice recommendation.
 
-But it is the new :ref:`Bachet partial ranking rule <Partial-Ranking-Tutorial-label>` that allows nowadays to compute a partial transitive tournament, very close in a bipolar-valued  ordinal correlation sense to the actual transitive part of the given outranking digraph, that definitely supports our kernels based recommending approach. The unique initial and terminal kernels of such a transitive tournament, easily found via a topological sort algorithm, may indeed deliver more effectively convincing first and/or last choice recommendations.
+But it is the new :ref:`Bachet partial ranking rule <Partial-Ranking-Tutorial-label>` that allows nowadays to compute a partial transitive tournament, very close in a bipolar-valued  ordinal correlation sense to the actual transitive part of the given strict outranking digraph, that definitely supports our kernels based recommending approach. The unique initial and terminal kernels of such a transitive asymmetric digraph, easily found via a topological sort algorithm, may indeed deliver more effectively convincing first and/or last choice recommendations.
 
 .. seealso::
 
