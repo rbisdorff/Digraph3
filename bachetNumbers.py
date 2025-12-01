@@ -87,7 +87,7 @@ class BachetNumber(object):
         reprString += 'String         : \'%s\'\n' % str(self)
         reprString += 'Vector         : %s\n' % self.vector
         reprString += 'Length         : %d\n' % len(self)
-        reprString += 'Value          : %d\n' % self.value()
+        reprString += 'Value          : %d\n' % int(self)
         reprString += 'Attributes     : %s\n' % list(self.__dict__.keys())    
         return reprString
     
@@ -277,18 +277,18 @@ class BachetNumber(object):
         """
         Return the self==other value
         """
-        v1 = self._ternaryCode()
-        v2 = other._ternaryCode()
+        v1 = list(self.vector)
+        v2 = list(other.vector)
         nz = len(v1) - len(v2)
         if nz < 0:
-            vector = ''
-            for i in range(abs(nz)):
-                vector = vector + '1'
+            vector = [o for i in range(abs(nz))]
+            #for i in range(abs(nz)):
+            #    vector = vector + [1]
             v1 = vector + v1
         elif nz > 0:
-            vector = ''
-            for i in range(nz):
-                vector += '1'
+            vector = [0 for i in range(nz)]
+            #for i in range(nz):
+            #    vector += [1]
             v2 = vector + v2
         return v1==v2
 
@@ -296,18 +296,14 @@ class BachetNumber(object):
         """
         Return self>=other
         """
-        v1 = self._ternaryCode()
-        v2 = other._ternaryCode()
+        v1 = list(self.vector)
+        v2 = list(other.vector)
         nz = len(v1) - len(v2)
         if nz < 0:
-            vector = ''
-            for i in range(abs(nz)):
-                vector = vector + '1'
+            vector = [0 for i in range(abs(nz))]
             v1 = vector + v1
         elif nz > 0:
-            vector = ''
-            for i in range(nz):
-                vector += '1'
+            vector = [0 for i in range(nz)]
             v2 = vector + v2
         return v1 >= v2
 
@@ -315,18 +311,14 @@ class BachetNumber(object):
         """
         Return self>other
         """
-        v1 = self._ternaryCode()
-        v2 = other._ternaryCode()
+        v1 = list(self.vector)
+        v2 = list(other.vector)
         nz = len(v1) - len(v2)
         if nz < 0:
-            vector = ''
-            for i in range(abs(nz)):
-                vector = vector + '1'
+            vector = [0 for i in range(abs(nz))]
             v1 = vector + v1
         elif nz > 0:
-            vector = ''
-            for i in range(nz):
-                vector += '1'
+            vector = [0 for i in range(nz)]
             v2 = vector + v2
         return v1>v2
 
@@ -334,18 +326,14 @@ class BachetNumber(object):
         """
         Return self<=other
         """
-        v1 = self._ternaryCode()
-        v2 = other._ternaryCode()
+        v1 = list(self.vector)
+        v2 = list(other.vector)
         nz = len(v1) - len(v2)
         if nz < 0:
-            vector = ''
-            for i in range(abs(nz)):
-                vector = vector + '1'
+            vector = [0 for i in range(abs(nz))]
             v1 = vector + v1
         elif nz > 0:
-            vector = ''
-            for i in range(nz):
-                vector += '1'
+            vector = [0 for i in range(nz)]
             v2 = vector + v2
         return v1<=v2
 
@@ -353,18 +341,14 @@ class BachetNumber(object):
         """
         Return self>other
         """
-        v1 = self._ternaryCode()
-        v2 = other._ternaryCode()
+        v1 = list(self.vector)
+        v2 = list(other.vector)
         nz = len(v1) - len(v2)
         if nz < 0:
-            vector = ''
-            for i in range(abs(nz)):
-                vector = vector + '1'
+            vector = [0 for i in range(abs(nz))]
             v1 = vector + v1
         elif nz > 0:
-            vector = ''
-            for i in range(nz):
-                vector += '1'
+            vector = [0 for i in range(nz)]
             v2 = vector + v2
         return v1<v2
     
@@ -372,18 +356,14 @@ class BachetNumber(object):
         """
         Return self!=other
         """
-        v1 = self._ternaryCode()
-        v2 = other._ternaryCode()
+        v1 = list(self.vector)
+        v2 = list(other.vector)
         nz = len(v1) - len(v2)
         if nz < 0:
-            vector = ''
-            for i in range(abs(nz)):
-                vector = vector + '1'
+            vector = [0 for i in range(abs(nz))]
             v1 = vector + v1
         elif nz > 0:
-            vector = ''
-            for i in range(nz):
-                vector += '1'
+            vector = [0 for i in range(nz)]
             v2 = vector + v2
         return v1!=v2
 
@@ -427,32 +407,32 @@ class BachetNumber(object):
         return value
 
         
-    def _ternaryCode(self):
-        """
-        Return the ternary {0,1,2} code of the Bachet number.
-        Used for alphabetically comparing Bachet numbers.
-        """
-        try:
-            return self.ternaryString
-        except:
-            self.ternaryString = self._encodeTernaryCode()
-            return self.ternaryString
-
-    def _encodeTernaryCode(self):
-        """
-        Return the ternary 0,1,2 code of the Bachet vector
-        """
-        codeString = ''
-        vector = self.vector
-        for i in range(len(self.vector)):
-            if vector[i] == -1:
-                codeString += '0'
-            elif vector[i] == 0:
-                codeString += '1'
-            else:
-                codeString += '2'
-        self.ternaryString = codeString
-        return codeString
+##    def _ternaryCode(self):
+##        """
+##        Return the ternary {0,1,2} code of the Bachet number.
+##        Used for alphabetically comparing Bachet numbers.
+##        """
+##        try:
+##            return self.ternaryString
+##        except:
+##            self.ternaryString = self._encodeTernaryCode()
+##            return self.ternaryString
+##
+##    def _encodeTernaryCode(self):
+##        """
+##        Return the ternary 0,1,2 code of the Bachet vector
+##        """
+##        codeString = ''
+##        vector = self.vector
+##        for i in range(len(self.vector)):
+##            if vector[i] == -1:
+##                codeString += '0'
+##            elif vector[i] == 0:
+##                codeString += '1'
+##            else:
+##                codeString += '2'
+##        self.ternaryString = codeString
+##        return codeString
 
     def __len__(self):
         """
