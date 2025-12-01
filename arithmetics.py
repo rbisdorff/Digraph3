@@ -138,7 +138,7 @@ class BachetNumber(object):
      Value          : 25
      Attributes     : ['vector']
     >>> print('%s (%d) + %s (%d) = %s (%d)'
-    ...        % (n1, n1.value(), n2, n2.value(), n3, n3.value() ))
+    ...        % (n1, int(n1), n2, int(n2), n3, int(n3) ))
      '+1+10' (12) + '+1+1+1' (13) = 10-11 (25)
     >>> print('length of %s = %d' % (n1, len(n1)))
      length of '+1+10' = 3
@@ -146,7 +146,7 @@ class BachetNumber(object):
     >>> n5 = -n2
     >>> n6 = n4 + n5   # n6 = n4 + (-n2) = n4 - n2
     >>> print('%s (%d) + %s (%d) = %s (%d)'
-    ...       % ( n4, n4.value(), n5, n5.value(),n6, n6.value() ))
+    ...       % ( n4, int(n4), n5, int(n5),n6, int(n6) ) )
      '0+1+1' (4) + '-1-1-1' (-13) = '-100' (-9)
 
     """
@@ -349,8 +349,8 @@ class BachetNumber(object):
         """
         Return the self==other value
         """
-        v1 = self.ternaryCode()
-        v2 = other.ternaryCode()
+        v1 = self._ternaryCode()
+        v2 = other._ternaryCode()
         nz = len(v1) - len(v2)
         if nz < 0:
             vector = ''
@@ -368,8 +368,8 @@ class BachetNumber(object):
         """
         Return self>=other
         """
-        v1 = self.ternaryCode()
-        v2 = other.ternaryCode()
+        v1 = self._ternaryCode()
+        v2 = other._ternaryCode()
         nz = len(v1) - len(v2)
         if nz < 0:
             vector = ''
@@ -387,8 +387,8 @@ class BachetNumber(object):
         """
         Return self>other
         """
-        v1 = self.ternaryCode()
-        v2 = other.ternaryCode()
+        v1 = self._ternaryCode()
+        v2 = other._ternaryCode()
         nz = len(v1) - len(v2)
         if nz < 0:
             vector = ''
@@ -406,8 +406,8 @@ class BachetNumber(object):
         """
         Return self<=other
         """
-        v1 = self.ternaryCode()
-        v2 = other.ternaryCode()
+        v1 = self._ternaryCode()
+        v2 = other._ternaryCode()
         nz = len(v1) - len(v2)
         if nz < 0:
             vector = ''
@@ -425,8 +425,8 @@ class BachetNumber(object):
         """
         Return self>other
         """
-        v1 = self.ternaryCode()
-        v2 = other.ternaryCode()
+        v1 = self._ternaryCode()
+        v2 = other._ternaryCode()
         nz = len(v1) - len(v2)
         if nz < 0:
             vector = ''
@@ -444,8 +444,8 @@ class BachetNumber(object):
         """
         Return self!=other
         """
-        v1 = self.ternaryCode()
-        v2 = other.ternaryCode()
+        v1 = self._ternaryCode()
+        v2 = other._ternaryCode()
         nz = len(v1) - len(v2)
         if nz < 0:
             vector = ''
@@ -505,7 +505,7 @@ class BachetNumber(object):
         return value
 
         
-    def ternaryCode(self):
+    def _ternaryCode(self):
         """
         Return the ternary {0,1,2} code of the Bachet number.
         Used for alphabetically comparing Bachet numbers.

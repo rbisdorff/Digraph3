@@ -1126,7 +1126,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#module-arithmetics">2.21. arithmetics module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.BachetNumber"><code class="docutils literal notranslate"><span class="pre">BachetNumber</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#arithmetics.BachetNumber.reverse"><code class="docutils literal notranslate"><span class="pre">BachetNumber.reverse()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#arithmetics.BachetNumber.ternaryCode"><code class="docutils literal notranslate"><span class="pre">BachetNumber.ternaryCode()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#arithmetics.BachetNumber.value"><code class="docutils literal notranslate"><span class="pre">BachetNumber.value()</span></code></a></li>
 </ul>
 </li>
@@ -8926,7 +8925,7 @@ given preorderings of the candidates per voter</p>
 </section>
 <section id="linearorders-module">
 <span id="linearorders-label"></span><h2><a class="toc-backref" href="#id16" role="doc-backlink"><span class="section-number">2.14. </span>linearOrders module</a><a class="headerlink" href="#linearorders-module" title="Link to this heading"></a></h2>
-<p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a></p>
+<p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#ranking-tutorial-label"><span class="std std-ref">Lineraly ranking with multiple incommensurable criteria</span></a></p>
 <p><strong>Inheritance Diagram</strong></p>
 <div class="graphviz"><object data="_images/inheritance-dc812318efed497036eec599d41721d3a20e84d6.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of linearOrders</p></object></div>
@@ -12117,7 +12116,7 @@ Springer Verlag London 1998.</p>
 <span class="go"> Value          : 25</span>
 <span class="go"> Attributes     : [&#39;vector&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) + </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) = </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">)&#39;</span>
-<span class="gp">... </span>       <span class="o">%</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n1</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n2</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">n3</span><span class="p">,</span> <span class="n">n3</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="p">))</span>
+<span class="gp">... </span>       <span class="o">%</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n1</span><span class="p">),</span> <span class="n">n2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n2</span><span class="p">),</span> <span class="n">n3</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n3</span><span class="p">)</span> <span class="p">))</span>
 <span class="go"> &#39;+1+10&#39; (12) + &#39;+1+1+1&#39; (13) = 10-11 (25)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;length of </span><span class="si">%s</span><span class="s1"> = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">n1</span><span class="p">)))</span>
 <span class="go"> length of &#39;+1+10&#39; = 3</span>
@@ -12125,7 +12124,7 @@ Springer Verlag London 1998.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n5</span> <span class="o">=</span> <span class="o">-</span><span class="n">n2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n6</span> <span class="o">=</span> <span class="n">n4</span> <span class="o">+</span> <span class="n">n5</span>   <span class="c1"># n6 = n4 + (-n2) = n4 - n2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) + </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) = </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">)&#39;</span>
-<span class="gp">... </span>      <span class="o">%</span> <span class="p">(</span> <span class="n">n4</span><span class="p">,</span> <span class="n">n4</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">n5</span><span class="p">,</span> <span class="n">n5</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="n">n6</span><span class="p">,</span> <span class="n">n6</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="p">))</span>
+<span class="gp">... </span>      <span class="o">%</span> <span class="p">(</span> <span class="n">n4</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n4</span><span class="p">),</span> <span class="n">n5</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n5</span><span class="p">),</span><span class="n">n6</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n6</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span>
 <span class="go"> &#39;0+1+1&#39; (4) + &#39;-1-1-1&#39; (-13) = &#39;-100&#39; (-9)</span>
 </pre></div>
 </div>
@@ -12133,13 +12132,6 @@ Springer Verlag London 1998.</p>
 <dt class="sig sig-object py" id="arithmetics.BachetNumber.reverse">
 <span class="sig-name descname"><span class="pre">reverse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#BachetNumber.reverse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.BachetNumber.reverse" title="Link to this definition"></a></dt>
 <dd><p>Reverses the Bachet vector. Returns a modified Bachet number.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="arithmetics.BachetNumber.ternaryCode">
-<span class="sig-name descname"><span class="pre">ternaryCode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#BachetNumber.ternaryCode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.BachetNumber.ternaryCode" title="Link to this definition"></a></dt>
-<dd><p>Return the ternary {0,1,2} code of the Bachet number.
-Used for alphabetically comparing Bachet numbers.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -15006,7 +14998,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Nov 22, 2025.
+      <span class="lastupdated">Last updated on Dec 01, 2025.
       </span></p>
   </div>
 

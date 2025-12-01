@@ -223,7 +223,7 @@
 <span class="sd">     Value          : 25</span>
 <span class="sd">     Attributes     : [&#39;vector&#39;]</span>
 <span class="sd">    &gt;&gt;&gt; print(&#39;%s (%d) + %s (%d) = %s (%d)&#39;</span>
-<span class="sd">    ...        % (n1, n1.value(), n2, n2.value(), n3, n3.value() ))</span>
+<span class="sd">    ...        % (n1, int(n1), n2, int(n2), n3, int(n3) ))</span>
 <span class="sd">     &#39;+1+10&#39; (12) + &#39;+1+1+1&#39; (13) = 10-11 (25)</span>
 <span class="sd">    &gt;&gt;&gt; print(&#39;length of %s = %d&#39; % (n1, len(n1)))</span>
 <span class="sd">     length of &#39;+1+10&#39; = 3</span>
@@ -231,7 +231,7 @@
 <span class="sd">    &gt;&gt;&gt; n5 = -n2</span>
 <span class="sd">    &gt;&gt;&gt; n6 = n4 + n5   # n6 = n4 + (-n2) = n4 - n2</span>
 <span class="sd">    &gt;&gt;&gt; print(&#39;%s (%d) + %s (%d) = %s (%d)&#39;</span>
-<span class="sd">    ...       % ( n4, n4.value(), n5, n5.value(),n6, n6.value() ))</span>
+<span class="sd">    ...       % ( n4, int(n4), n5, int(n5),n6, int(n6) ) )</span>
 <span class="sd">     &#39;0+1+1&#39; (4) + &#39;-1-1-1&#39; (-13) = &#39;-100&#39; (-9)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -434,8 +434,8 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the self==other value</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ternaryCode</span><span class="p">()</span>
-        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">ternaryCode</span><span class="p">()</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ternaryCode</span><span class="p">()</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">_ternaryCode</span><span class="p">()</span>
         <span class="n">nz</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">nz</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -453,8 +453,8 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return self&gt;=other</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ternaryCode</span><span class="p">()</span>
-        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">ternaryCode</span><span class="p">()</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ternaryCode</span><span class="p">()</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">_ternaryCode</span><span class="p">()</span>
         <span class="n">nz</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">nz</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -472,8 +472,8 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return self&gt;other</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ternaryCode</span><span class="p">()</span>
-        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">ternaryCode</span><span class="p">()</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ternaryCode</span><span class="p">()</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">_ternaryCode</span><span class="p">()</span>
         <span class="n">nz</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">nz</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -491,8 +491,8 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return self&lt;=other</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ternaryCode</span><span class="p">()</span>
-        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">ternaryCode</span><span class="p">()</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ternaryCode</span><span class="p">()</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">_ternaryCode</span><span class="p">()</span>
         <span class="n">nz</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">nz</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -510,8 +510,8 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return self&gt;other</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ternaryCode</span><span class="p">()</span>
-        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">ternaryCode</span><span class="p">()</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ternaryCode</span><span class="p">()</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">_ternaryCode</span><span class="p">()</span>
         <span class="n">nz</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">nz</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -529,8 +529,8 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return self!=other</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ternaryCode</span><span class="p">()</span>
-        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">ternaryCode</span><span class="p">()</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ternaryCode</span><span class="p">()</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">_ternaryCode</span><span class="p">()</span>
         <span class="n">nz</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">nz</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -593,9 +593,7 @@
         <span class="k">return</span> <span class="n">value</span>
 
         
-<div class="viewcode-block" id="BachetNumber.ternaryCode">
-<a class="viewcode-back" href="../techDoc.html#arithmetics.BachetNumber.ternaryCode">[docs]</a>
-    <span class="k">def</span> <span class="nf">ternaryCode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_ternaryCode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the ternary {0,1,2} code of the Bachet number.</span>
 <span class="sd">        Used for alphabetically comparing Bachet numbers.</span>
@@ -604,8 +602,7 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ternaryString</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ternaryString</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_encodeTernaryCode</span><span class="p">()</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ternaryString</span></div>
-
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ternaryString</span>
 
     <span class="k">def</span> <span class="nf">_encodeTernaryCode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -1557,7 +1554,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Nov 22, 2025.
+      <span class="lastupdated">Last updated on Dec 01, 2025.
       </span></p>
   </div>
 
