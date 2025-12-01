@@ -75,20 +75,6 @@ def testContinuedFraction():
     print('eval(cf(sqrt(2))_%d) = ' % (len(cf)-1), decimalEvalContinuedFraction(cf) )
     print('sqrt(2)              = ', sqrt(2) )
     
-def testBachetIntegerEncoding():
-    print('==>> Testing Bachet encoding of integers')
-    n1 = BachetNumber(12)
-    n2 = BachetNumber(13)
-    n3 = n1 + n2
-    n4 = n1 * n2
-    print('%s (%d) + %s (%d) = %s (%d)' % (n1, n1.value(), n2, n2.value(), n3, n3.value() ))
-    print('%s (%d) * %s (%d) = %s (%d)' % (n1, n1.value(), n2, n2.value(), n4, n4.value() ))
-
-    print('length of %s = %d' % (n1, len(n1)))
-    n5 = n1.reverse()
-    n6 = -n2
-    print('%s (%d) + %s (%d) = %s (%d)' % ( n5, n5.value(), n6, n6.value(),n5 + n6, (n5+n6).value() ))
-    
     
 
 
