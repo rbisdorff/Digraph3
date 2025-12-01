@@ -2,6 +2,7 @@ README
 digraph3_copyright.html
 digraphsTools.py
 arithmetics.py
+bachetNumbers.py
 digraphs.py
 perfTabs.py
 performanceQuantiles.py

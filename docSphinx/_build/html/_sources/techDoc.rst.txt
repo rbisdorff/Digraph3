@@ -302,6 +302,9 @@ Miscellaneous tools
 * :ref:`arithmetics-label` 
      Some common methods and tools for computing with integer numbers.
 
+* :ref:`bachetNumbers-label`
+     Implementation of the bipolar-valued base 3 Bachet integers
+
 ..  * :ref:`xmcda-label` 
      Methods and tools for handling XMCDA encoded performance tableaux and digraphs.
      
@@ -683,17 +686,31 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 
 -------------
 
-.. _xmcda-label:
+.. _bachetNumbers-label:
 
-xmcda module
-------------
+bachetNumbers module
+--------------------
 
-.. automodule:: xmcda
+.. automodule:: bachetNumbers
    :member-order: alphabetical
    :no-inherited-members:
    :members:
 
 Back to the :ref:`Table of Contents <Contents-Table-label>`
+
+-------------
+
+.. .. _xmcda-label:
+
+   xmcda module
+   ------------
+
+   .. automodule:: xmcda
+      :member-order: alphabetical
+      :no-inherited-members:
+      :members:
+
+   Back to the :ref:`Table of Contents <Contents-Table-label>`
 
 -------------
 

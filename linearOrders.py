@@ -1290,7 +1290,7 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
         from collections import OrderedDict
         from time import time
         from operator import itemgetter
-        import arithmetics as ar
+        import bachetNumbers as ar
         from copy import deepcopy
         from decimal import Decimal
         if Debug:
@@ -1813,7 +1813,7 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
         from decimal import Decimal
         from time import time
         from operator import itemgetter
-        import arithmetics as ar
+        import bachetNumbers as ar
         from copy import deepcopy
         if Debug:
             Comments=True

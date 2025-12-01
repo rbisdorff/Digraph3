@@ -184,479 +184,470 @@
 <span class="c1"># Discrete Mathematics lectures 2008</span>
 <span class="c1"># (c) 2025 RB </span>
 
-<div class="viewcode-block" id="BachetNumber">
-<a class="viewcode-back" href="../techDoc.html#arithmetics.BachetNumber">[docs]</a>
-<span class="k">class</span> <span class="nc">BachetNumber</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Bipolar-valued {-1,0,+1} base 3 encoded integers due to Claude Gaspard Bachet de Méziriac (1621)</span>
-<span class="sd">    </span>
-<span class="sd">    https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac</span>
-
-<span class="sd">    The class implements all the arithmetic operations and comparison operators from the int class.</span>
-<span class="sd">    </span>
-<span class="sd">    &gt;&gt;&gt; from arithmetics import BachetNumber</span>
-<span class="sd">    &gt;&gt;&gt; n1 = BachetNumber(12)</span>
-<span class="sd">    &gt;&gt;&gt; n1</span>
-<span class="sd">     *------- Bachet number description ------*</span>
-<span class="sd">     Instance class : BachetNumber</span>
-<span class="sd">     String         : &#39;+1+10&#39;</span>
-<span class="sd">     Vector         : [1, 1, 0]</span>
-<span class="sd">     Length         : 3</span>
-<span class="sd">     Value          : 12</span>
-<span class="sd">     Attributes     : [&#39;vector&#39;]  </span>
-<span class="sd">    &gt;&gt;&gt; n2 = BachetNumber(vector=[1,1,1])</span>
-<span class="sd">    &gt;&gt;&gt; n2</span>
-<span class="sd">     *------- Bachet number description ------*</span>
-<span class="sd">     Instance class : BachetNumber</span>
-<span class="sd">     String         : &#39;+1+1+1&#39;</span>
-<span class="sd">     Vector         : [1, 1, 1]</span>
-<span class="sd">     Length         : 3</span>
-<span class="sd">     Value          : 13</span>
-<span class="sd">     Attributes     : [&#39;vector&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; n3 = n1 + n2</span>
-<span class="sd">    &gt;&gt;&gt; n3</span>
-<span class="sd">     *------- Bachet number description ------*</span>
-<span class="sd">     Instance class : BachetNumber</span>
-<span class="sd">     String         : &#39;+10-1+1&#39;</span>
-<span class="sd">     Vector         : [1, 0, -1, 1]</span>
-<span class="sd">     Length         : 4</span>
-<span class="sd">     Value          : 25</span>
-<span class="sd">     Attributes     : [&#39;vector&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; print(&#39;%s (%d) + %s (%d) = %s (%d)&#39;</span>
-<span class="sd">    ...        % (n1, int(n1), n2, int(n2), n3, int(n3) ))</span>
-<span class="sd">     &#39;+1+10&#39; (12) + &#39;+1+1+1&#39; (13) = 10-11 (25)</span>
-<span class="sd">    &gt;&gt;&gt; print(&#39;length of %s = %d&#39; % (n1, len(n1)))</span>
-<span class="sd">     length of &#39;+1+10&#39; = 3</span>
-<span class="sd">    &gt;&gt;&gt; n4 = n1.reverse() # n4 = ~n1</span>
-<span class="sd">    &gt;&gt;&gt; n5 = -n2</span>
-<span class="sd">    &gt;&gt;&gt; n6 = n4 + n5   # n6 = n4 + (-n2) = n4 - n2</span>
-<span class="sd">    &gt;&gt;&gt; print(&#39;%s (%d) + %s (%d) = %s (%d)&#39;</span>
-<span class="sd">    ...       % ( n4, int(n4), n5, int(n5),n6, int(n6) ) )</span>
-<span class="sd">     &#39;0+1+1&#39; (4) + &#39;-1-1-1&#39; (-13) = &#39;-100&#39; (-9)</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Default presentation method for Bchet number instances.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">reprString</span> <span class="o">=</span> <span class="s1">&#39;*------- Bachet number description ------*</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Instance class : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
-        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;String         : </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Vector         : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector</span>
-        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Length         : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Value          : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
-        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Attributes     : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>    
-        <span class="k">return</span> <span class="n">reprString</span>
-    
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num_int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">vector</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Tranforms a potentially signed integer into a Bachet number.</span>
-<span class="sd">        Returns [0] when no arguments are given. </span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">num_int</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">vector</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">ln</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span>
-                <span class="n">num_int</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_computeValue</span><span class="p">(</span><span class="n">vector</span><span class="p">))</span>
-                <span class="n">b</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">num_int</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">ln</span><span class="p">)</span>
-                <span class="n">vl</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">vl</span> <span class="o">&gt;=</span> <span class="n">length</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">vector</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">vector</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">nz</span> <span class="o">=</span> <span class="n">length</span> <span class="o">-</span> <span class="n">vl</span>
-                    <span class="n">zvector</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nz</span><span class="p">)]</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">vector</span> <span class="o">=</span> <span class="n">zvector</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="n">vector</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">)]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">vector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_int2bachet</span><span class="p">(</span><span class="n">num_int</span><span class="p">)</span>
-            <span class="n">vl</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">vl</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">:</span>
-                <span class="n">nz</span> <span class="o">=</span> <span class="n">length</span> <span class="o">-</span> <span class="n">vl</span>
-                <span class="n">vector</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nz</span><span class="p">)]</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">vector</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector</span>
-
-    <span class="k">def</span> <span class="nf">_base10to3</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Change a base 10 number to a base 3 number.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">new_num_string</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-        <span class="n">current</span> <span class="o">=</span> <span class="n">num</span>
-        <span class="k">while</span> <span class="n">current</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">remainder</span> <span class="o">=</span> <span class="n">current</span><span class="o">%</span><span class="mi">3</span>
-            <span class="n">remainder_string</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">remainder</span><span class="p">)</span>
-            <span class="n">new_num_string</span> <span class="o">=</span> <span class="n">remainder_string</span> <span class="o">+</span> <span class="n">new_num_string</span>
-            <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">//</span><span class="mi">3</span>
-        <span class="k">return</span> <span class="n">new_num_string</span>
-
-    <span class="k">def</span> <span class="nf">_base3toBachet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num_string</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Converts a base 3 encoded integer into a bipolar {-1,0,+1} encoded one.</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">new_vector</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">num_string</span><span class="p">))]</span>
-        <span class="n">reste</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">num_string</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-            <span class="n">num</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">num_string</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">+</span><span class="n">reste</span>
-            <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-                <span class="n">new_vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-                <span class="n">reste</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="k">elif</span> <span class="n">num</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-                <span class="n">new_vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-                <span class="n">reste</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">new_vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">num</span>
-                <span class="n">reste</span> <span class="o">=</span> <span class="mi">0</span>
-        
-        <span class="k">if</span> <span class="n">reste</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">new_vector</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">new_vector</span>
-            
-        <span class="k">return</span> <span class="n">new_vector</span>
-
-    <span class="k">def</span> <span class="nf">_int2bachet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num_int</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Converts a signed integer into a Bachet encoded number.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">num_int</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">unsigned_num_int</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">num_int</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">unsigned_num_int</span> <span class="o">=</span> <span class="n">num_int</span>
-        <span class="n">base3_unsigned_num_int</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_base10to3</span><span class="p">(</span><span class="n">unsigned_num_int</span><span class="p">)</span>
-        <span class="n">bachet_unsigned_num_int</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_base3toBachet</span><span class="p">(</span><span class="n">base3_unsigned_num_int</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">num_int</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">bachet_unsigned_num_int</span>
-        <span class="k">elif</span> <span class="n">num_int</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">bachet_vector</span> <span class="o">=</span> <span class="n">bachet_unsigned_num_int</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bachet_unsigned_num_int</span><span class="p">)):</span>
-                <span class="n">bachet_vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">bachet_unsigned_num_int</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*-</span><span class="mi">1</span>
-            <span class="k">return</span> <span class="n">bachet_vector</span>
-        
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Defines the printable string version of a Bachet number.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">bachet_string</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)):</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">bachet_string</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="si">%+d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">bachet_string</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-        <span class="k">return</span> <span class="n">bachet_string</span>
-            
-    <span class="c1"># ---- arithmetic operations</span>
-    
-    <span class="k">def</span> <span class="fm">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Defines an unary negating operator for Bachet encoded numbers.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="n">negVector</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)):</span>
-            <span class="n">negVector</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">ln</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span>
-        <span class="n">neg</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span> <span class="o">=</span> <span class="n">negVector</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">ln</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">neg</span>
-        
-    <span class="k">def</span> <span class="fm">__abs__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Defines the addition operator for Bachet encoded numbers</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">ln</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span>
-        <span class="n">v1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="n">v2</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">v2</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">ln</span><span class="p">)</span>        
-
-    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Defines the balanced ternary addition operator for Bachet encoded numbers.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="n">srv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
-        <span class="n">orv</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
-        <span class="n">n1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="n">n2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">n1</span> <span class="o">&gt;=</span> <span class="n">n2</span><span class="p">:</span>
-            <span class="n">vector</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n1</span><span class="p">)]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">vector</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n2</span><span class="p">)]</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">)</span>
-        <span class="n">reste</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">psi</span> <span class="o">=</span> <span class="n">srv</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-            <span class="k">except</span><span class="p">:</span>
-                <span class="n">psi</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">poi</span> <span class="o">=</span> <span class="n">orv</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-            <span class="k">except</span><span class="p">:</span>
-                <span class="n">poi</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">pi</span> <span class="o">=</span> <span class="n">psi</span> <span class="o">+</span> <span class="n">poi</span> <span class="o">+</span> <span class="n">reste</span>
-            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;i,psi,poi,reste,pi&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span><span class="n">psi</span><span class="p">,</span><span class="n">poi</span><span class="p">,</span><span class="n">reste</span><span class="p">,</span><span class="n">pi</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">pi</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-                <span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-                <span class="n">reste</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="k">elif</span> <span class="n">pi</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-                <span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-                <span class="n">reste</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="k">elif</span> <span class="n">pi</span> <span class="o">==</span> <span class="o">-</span><span class="mi">2</span><span class="p">:</span>
-                <span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-                <span class="n">reste</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-            <span class="k">elif</span> <span class="n">pi</span> <span class="o">==</span> <span class="o">-</span><span class="mi">3</span><span class="p">:</span>
-                <span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-                <span class="n">reste</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">pi</span>
-                <span class="n">reste</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;reste&quot;</span><span class="p">,</span><span class="n">reste</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">reste</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;add&#39;</span><span class="p">,</span><span class="n">reste</span><span class="p">)</span>
-            <span class="n">vector</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="p">[</span><span class="n">reste</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span>
-        <span class="n">new</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">vector</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">n</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">new</span>
-
-    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="o">/</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Defines the multiplication operator for Bachet encoded numbers.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">ln</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">))</span>
-        <span class="n">n1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
-        <span class="n">n2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
-        <span class="n">n3</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">*</span> <span class="n">n2</span>
-        <span class="k">return</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">n3</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">ln</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the self==other value</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ternaryCode</span><span class="p">()</span>
-        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">_ternaryCode</span><span class="p">()</span>
-        <span class="n">nz</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">nz</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">nz</span><span class="p">)):</span>
-                <span class="n">vector</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="s1">&#39;1&#39;</span>
-            <span class="n">v1</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="n">v1</span>
-        <span class="k">elif</span> <span class="n">nz</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nz</span><span class="p">):</span>
-                <span class="n">vector</span> <span class="o">+=</span> <span class="s1">&#39;1&#39;</span>
-            <span class="n">v2</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="n">v2</span>
-        <span class="k">return</span> <span class="n">v1</span><span class="o">==</span><span class="n">v2</span>
-
-    <span class="k">def</span> <span class="fm">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return self&gt;=other</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ternaryCode</span><span class="p">()</span>
-        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">_ternaryCode</span><span class="p">()</span>
-        <span class="n">nz</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">nz</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">nz</span><span class="p">)):</span>
-                <span class="n">vector</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="s1">&#39;1&#39;</span>
-            <span class="n">v1</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="n">v1</span>
-        <span class="k">elif</span> <span class="n">nz</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nz</span><span class="p">):</span>
-                <span class="n">vector</span> <span class="o">+=</span> <span class="s1">&#39;1&#39;</span>
-            <span class="n">v2</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="n">v2</span>
-        <span class="k">return</span> <span class="n">v1</span> <span class="o">&gt;=</span> <span class="n">v2</span>
-
-    <span class="k">def</span> <span class="fm">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return self&gt;other</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ternaryCode</span><span class="p">()</span>
-        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">_ternaryCode</span><span class="p">()</span>
-        <span class="n">nz</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">nz</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">nz</span><span class="p">)):</span>
-                <span class="n">vector</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="s1">&#39;1&#39;</span>
-            <span class="n">v1</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="n">v1</span>
-        <span class="k">elif</span> <span class="n">nz</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nz</span><span class="p">):</span>
-                <span class="n">vector</span> <span class="o">+=</span> <span class="s1">&#39;1&#39;</span>
-            <span class="n">v2</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="n">v2</span>
-        <span class="k">return</span> <span class="n">v1</span><span class="o">&gt;</span><span class="n">v2</span>
-
-    <span class="k">def</span> <span class="fm">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return self&lt;=other</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ternaryCode</span><span class="p">()</span>
-        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">_ternaryCode</span><span class="p">()</span>
-        <span class="n">nz</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">nz</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">nz</span><span class="p">)):</span>
-                <span class="n">vector</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="s1">&#39;1&#39;</span>
-            <span class="n">v1</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="n">v1</span>
-        <span class="k">elif</span> <span class="n">nz</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nz</span><span class="p">):</span>
-                <span class="n">vector</span> <span class="o">+=</span> <span class="s1">&#39;1&#39;</span>
-            <span class="n">v2</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="n">v2</span>
-        <span class="k">return</span> <span class="n">v1</span><span class="o">&lt;=</span><span class="n">v2</span>
-
-    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return self&gt;other</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ternaryCode</span><span class="p">()</span>
-        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">_ternaryCode</span><span class="p">()</span>
-        <span class="n">nz</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">nz</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">nz</span><span class="p">)):</span>
-                <span class="n">vector</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="s1">&#39;1&#39;</span>
-            <span class="n">v1</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="n">v1</span>
-        <span class="k">elif</span> <span class="n">nz</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nz</span><span class="p">):</span>
-                <span class="n">vector</span> <span class="o">+=</span> <span class="s1">&#39;1&#39;</span>
-            <span class="n">v2</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="n">v2</span>
-        <span class="k">return</span> <span class="n">v1</span><span class="o">&lt;</span><span class="n">v2</span>
-    
-    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return self!=other</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ternaryCode</span><span class="p">()</span>
-        <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">_ternaryCode</span><span class="p">()</span>
-        <span class="n">nz</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">nz</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">nz</span><span class="p">)):</span>
-                <span class="n">vector</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="s1">&#39;1&#39;</span>
-            <span class="n">v1</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="n">v1</span>
-        <span class="k">elif</span> <span class="n">nz</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">vector</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nz</span><span class="p">):</span>
-                <span class="n">vector</span> <span class="o">+=</span> <span class="s1">&#39;1&#39;</span>
-            <span class="n">v2</span> <span class="o">=</span> <span class="n">vector</span> <span class="o">+</span> <span class="n">v2</span>
-        <span class="k">return</span> <span class="n">v1</span><span class="o">!=</span><span class="n">v2</span>
-
-    <span class="k">def</span> <span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return self-other</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">new</span> <span class="o">=</span> <span class="bp">self</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="n">other</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">new</span>
-
-    <span class="k">def</span> <span class="fm">__int__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return self.value()</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="fm">__divmod__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return divmod(self,other)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">q</span><span class="p">,</span><span class="n">r</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">other</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">q</span><span class="p">),</span><span class="n">BachetNumber</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
-               
-<div class="viewcode-block" id="BachetNumber.value">
-<a class="viewcode-back" href="../techDoc.html#arithmetics.BachetNumber.value">[docs]</a>
-    <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the integer value of the Bachet number</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">integerValue</span>
-        <span class="k">except</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">integerValue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computeValue</span><span class="p">()</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">integerValue</span></div>
-
-
-    <span class="k">def</span> <span class="nf">_computeValue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">vector</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Computes the integer or decimal value corresponding to the</span>
-<span class="sd">        polarised, respectively valued, Bachet vector.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">vector</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">vector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector</span>
-        <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">nv</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span>
-        <span class="n">base3Power</span> <span class="o">=</span> <span class="mi">1</span>   <span class="c1"># 3**0</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nv</span><span class="p">):</span>
-            <span class="n">value</span> <span class="o">+=</span> <span class="n">base3Power</span><span class="o">*</span><span class="n">vector</span><span class="p">[</span><span class="n">nv</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-            <span class="n">base3Power</span> <span class="o">*=</span> <span class="mi">3</span> <span class="c1"># 3**i</span>
-        <span class="k">return</span> <span class="n">value</span>
-
-        
-    <span class="k">def</span> <span class="nf">_ternaryCode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the ternary {0,1,2} code of the Bachet number.</span>
-<span class="sd">        Used for alphabetically comparing Bachet numbers.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ternaryString</span>
-        <span class="k">except</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">ternaryString</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_encodeTernaryCode</span><span class="p">()</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ternaryString</span>
-
-    <span class="k">def</span> <span class="nf">_encodeTernaryCode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the ternary 0,1,2 code of the Bachet vector</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">codeString</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-        <span class="n">vector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)):</span>
-            <span class="k">if</span> <span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-                <span class="n">codeString</span> <span class="o">+=</span> <span class="s1">&#39;0&#39;</span>
-            <span class="k">elif</span> <span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">codeString</span> <span class="o">+=</span> <span class="s1">&#39;1&#39;</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">codeString</span> <span class="o">+=</span> <span class="s1">&#39;2&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ternaryString</span> <span class="o">=</span> <span class="n">codeString</span>
-        <span class="k">return</span> <span class="n">codeString</span>
-
-    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the length of the Bachet encoding</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span>
-
-<div class="viewcode-block" id="BachetNumber.reverse">
-<a class="viewcode-back" href="../techDoc.html#arithmetics.BachetNumber.reverse">[docs]</a>
-    <span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Reverses the Bachet vector. Returns a modified Bachet number.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1">#from copy import deepcopy</span>
-        <span class="n">ln</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ln</span><span class="p">)]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ln</span><span class="p">):</span>
-            <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">ln</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">rev</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">result</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="n">ln</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">rev</span></div>
-
-
-    <span class="k">def</span> <span class="fm">__invert__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return ~self</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="fm">__mod__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="o">/</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return self%other</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">v1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="n">v2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
-        <span class="n">v3</span> <span class="o">=</span> <span class="n">v1</span><span class="o">%</span><span class="n">v2</span>
-        <span class="k">return</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">v3</span><span class="p">)</span></div>
-
-
+<span class="c1">##class BachetNumber(object):</span>
+<span class="c1">##    &quot;&quot;&quot;</span>
+<span class="c1">##    Bipolar-valued {-1,0,+1} base 3 encoded integers due to Claude Gaspard Bachet de Méziriac (1621)</span>
+<span class="c1">##    </span>
+<span class="c1">##    https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac</span>
+<span class="c1">##</span>
+<span class="c1">##    The class implements all the arithmetic operations and comparison operators from the int class.</span>
+<span class="c1">##    </span>
+<span class="c1">##    &gt;&gt;&gt; from arithmetics import BachetNumber</span>
+<span class="c1">##    &gt;&gt;&gt; n1 = BachetNumber(12)</span>
+<span class="c1">##    &gt;&gt;&gt; n1</span>
+<span class="c1">##     *------- Bachet number description ------*</span>
+<span class="c1">##     Instance class : BachetNumber</span>
+<span class="c1">##     String         : &#39;+1+10&#39;</span>
+<span class="c1">##     Vector         : [1, 1, 0]</span>
+<span class="c1">##     Length         : 3</span>
+<span class="c1">##     Value          : 12</span>
+<span class="c1">##     Attributes     : [&#39;vector&#39;]  </span>
+<span class="c1">##    &gt;&gt;&gt; n2 = BachetNumber(vector=[1,1,1])</span>
+<span class="c1">##    &gt;&gt;&gt; n2</span>
+<span class="c1">##     *------- Bachet number description ------*</span>
+<span class="c1">##     Instance class : BachetNumber</span>
+<span class="c1">##     String         : &#39;+1+1+1&#39;</span>
+<span class="c1">##     Vector         : [1, 1, 1]</span>
+<span class="c1">##     Length         : 3</span>
+<span class="c1">##     Value          : 13</span>
+<span class="c1">##     Attributes     : [&#39;vector&#39;]</span>
+<span class="c1">##    &gt;&gt;&gt; n3 = n1 + n2</span>
+<span class="c1">##    &gt;&gt;&gt; n3</span>
+<span class="c1">##     *------- Bachet number description ------*</span>
+<span class="c1">##     Instance class : BachetNumber</span>
+<span class="c1">##     String         : &#39;+10-1+1&#39;</span>
+<span class="c1">##     Vector         : [1, 0, -1, 1]</span>
+<span class="c1">##     Length         : 4</span>
+<span class="c1">##     Value          : 25</span>
+<span class="c1">##     Attributes     : [&#39;vector&#39;]</span>
+<span class="c1">##    &gt;&gt;&gt; print(&#39;%s (%d) + %s (%d) = %s (%d)&#39;</span>
+<span class="c1">##    ...        % (n1, int(n1), n2, int(n2), n3, int(n3) ))</span>
+<span class="c1">##     &#39;+1+10&#39; (12) + &#39;+1+1+1&#39; (13) = 10-11 (25)</span>
+<span class="c1">##    &gt;&gt;&gt; print(&#39;length of %s = %d&#39; % (n1, len(n1)))</span>
+<span class="c1">##     length of &#39;+1+10&#39; = 3</span>
+<span class="c1">##    &gt;&gt;&gt; n4 = n1.reverse() # n4 = ~n1</span>
+<span class="c1">##    &gt;&gt;&gt; n5 = -n2</span>
+<span class="c1">##    &gt;&gt;&gt; n6 = n4 + n5   # n6 = n4 + (-n2) = n4 - n2</span>
+<span class="c1">##    &gt;&gt;&gt; print(&#39;%s (%d) + %s (%d) = %s (%d)&#39;</span>
+<span class="c1">##    ...       % ( n4, int(n4), n5, int(n5),n6, int(n6) ) )</span>
+<span class="c1">##     &#39;0+1+1&#39; (4) + &#39;-1-1-1&#39; (-13) = &#39;-100&#39; (-9)</span>
+<span class="c1">##</span>
+<span class="c1">##    &quot;&quot;&quot;</span>
+<span class="c1">##    def __repr__(self):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Default presentation method for Bchet number instances.</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        reprString = &#39;*------- Bachet number description ------*\n&#39;</span>
+<span class="c1">##        reprString += &#39;Instance class : %s\n&#39; % self.__class__.__name__</span>
+<span class="c1">##        reprString += &#39;String         : \&#39;%s\&#39;\n&#39; % str(self)</span>
+<span class="c1">##        reprString += &#39;Vector         : %s\n&#39; % self.vector</span>
+<span class="c1">##        reprString += &#39;Length         : %d\n&#39; % len(self)</span>
+<span class="c1">##        reprString += &#39;Value          : %d\n&#39; % self.value()</span>
+<span class="c1">##        reprString += &#39;Attributes     : %s\n&#39; % list(self.__dict__.keys())    </span>
+<span class="c1">##        return reprString</span>
+<span class="c1">##    </span>
+<span class="c1">##    def __init__(self,num_int=None,vector=None,length=1):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Tranforms a potentially signed integer into a Bachet number.</span>
+<span class="c1">##        Returns [0] when no arguments are given. </span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        if num_int is None:</span>
+<span class="c1">##            if vector is not None:</span>
+<span class="c1">##                ln = len(vector)</span>
+<span class="c1">##                num_int = round(self._computeValue(vector))</span>
+<span class="c1">##                b = BachetNumber(num_int,length=ln)</span>
+<span class="c1">##                vl = len(b.vector)</span>
+<span class="c1">##                if vl &gt;= length:</span>
+<span class="c1">##                    self.vector = b.vector</span>
+<span class="c1">##                else:</span>
+<span class="c1">##                    nz = length - vl</span>
+<span class="c1">##                    zvector = [0 for i in range(nz)]</span>
+<span class="c1">##                    self.vector = zvector + b.vector</span>
+<span class="c1">##            else:</span>
+<span class="c1">##                self.vector=[0 for i in range(length)]</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            self.vector = self._int2bachet(num_int)</span>
+<span class="c1">##            vl = len(self.vector)</span>
+<span class="c1">##            if vl &lt; length:</span>
+<span class="c1">##                nz = length - vl</span>
+<span class="c1">##                vector = [0 for i in range(nz)]</span>
+<span class="c1">##                self.vector = vector + self.vector</span>
+<span class="c1">##</span>
+<span class="c1">##    def _base10to3(self,num):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Change a base 10 number to a base 3 number.</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        new_num_string = &#39;&#39;</span>
+<span class="c1">##        current = num</span>
+<span class="c1">##        while current != 0:</span>
+<span class="c1">##            remainder = current%3</span>
+<span class="c1">##            remainder_string = str(remainder)</span>
+<span class="c1">##            new_num_string = remainder_string + new_num_string</span>
+<span class="c1">##            current = current//3</span>
+<span class="c1">##        return new_num_string</span>
+<span class="c1">##</span>
+<span class="c1">##    def _base3toBachet(self,num_string):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Converts a base 3 encoded integer into a bipolar {-1,0,+1} encoded one.</span>
+<span class="c1">##</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        new_vector=[0 for x in range(len(num_string))]</span>
+<span class="c1">##        reste = 0</span>
+<span class="c1">##        for i in range(len(num_string)-1,-1,-1):</span>
+<span class="c1">##            num = eval(num_string[i])+reste</span>
+<span class="c1">##            if num == 2:</span>
+<span class="c1">##                new_vector[i] = -1</span>
+<span class="c1">##                reste = 1</span>
+<span class="c1">##            elif num == 3:</span>
+<span class="c1">##                new_vector[i] = 0</span>
+<span class="c1">##                reste = 1</span>
+<span class="c1">##            else:</span>
+<span class="c1">##                new_vector[i] = num</span>
+<span class="c1">##                reste = 0</span>
+<span class="c1">##        </span>
+<span class="c1">##        if reste == 1:</span>
+<span class="c1">##            new_vector = [1] + new_vector</span>
+<span class="c1">##            </span>
+<span class="c1">##        return new_vector</span>
+<span class="c1">##</span>
+<span class="c1">##    def _int2bachet(self,num_int):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Converts a signed integer into a Bachet encoded number.</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        if num_int &lt; 0:</span>
+<span class="c1">##            unsigned_num_int = abs(num_int)</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            unsigned_num_int = num_int</span>
+<span class="c1">##        base3_unsigned_num_int = self._base10to3(unsigned_num_int)</span>
+<span class="c1">##        bachet_unsigned_num_int = self._base3toBachet(base3_unsigned_num_int)</span>
+<span class="c1">##        if num_int &gt; 0:</span>
+<span class="c1">##            return bachet_unsigned_num_int</span>
+<span class="c1">##        elif num_int == 0:</span>
+<span class="c1">##            return [0]</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            bachet_vector = bachet_unsigned_num_int</span>
+<span class="c1">##            for i in range(len(bachet_unsigned_num_int)):</span>
+<span class="c1">##                bachet_vector[i] = bachet_unsigned_num_int[i]*-1</span>
+<span class="c1">##            return bachet_vector</span>
+<span class="c1">##        </span>
+<span class="c1">##    def __str__(self, /):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Defines the printable string version of a Bachet number.</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        bachet_string = &#39;&#39;</span>
+<span class="c1">##        for i in range(len(self.vector)):</span>
+<span class="c1">##            if self.vector[i] != 0:</span>
+<span class="c1">##                bachet_string += &#39;%+d&#39; % (self.vector[i])</span>
+<span class="c1">##            else:</span>
+<span class="c1">##                bachet_string += &#39;%d&#39; % (self.vector[i])</span>
+<span class="c1">##        return bachet_string</span>
+<span class="c1">##            </span>
+<span class="c1">##    # ---- arithmetic operations</span>
+<span class="c1">##    </span>
+<span class="c1">##    def __neg__(self, /):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Defines an unary negating operator for Bachet encoded numbers.</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        from copy import deepcopy</span>
+<span class="c1">##        negVector = []</span>
+<span class="c1">##        for i in range(len(self.vector)):</span>
+<span class="c1">##            negVector.append(self.vector[i] * -1)</span>
+<span class="c1">##        ln = len(self.vector)</span>
+<span class="c1">##        neg = BachetNumber(vector = negVector,length=ln)</span>
+<span class="c1">##        return neg</span>
+<span class="c1">##        </span>
+<span class="c1">##    def __abs__(self, /):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Defines the addition operator for Bachet encoded numbers</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        ln = len(self.vector)</span>
+<span class="c1">##        v1 = int(self)</span>
+<span class="c1">##        v2 = abs(v1)</span>
+<span class="c1">##        return BachetNumber(v2,length=ln)        </span>
+<span class="c1">##</span>
+<span class="c1">##    def __add__(self,other,Debug=False):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Defines the balanced ternary addition operator for Bachet encoded numbers.</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        from copy import deepcopy</span>
+<span class="c1">##        srv = self.reverse()</span>
+<span class="c1">##        orv = other.reverse()</span>
+<span class="c1">##        n1 = len(self)</span>
+<span class="c1">##        n2 = len(other)</span>
+<span class="c1">##        if n1 &gt;= n2:</span>
+<span class="c1">##            vector = [0 for i in range(n1)]</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            vector = [0 for i in range(n2)]</span>
+<span class="c1">##        n = max(n1,n2)</span>
+<span class="c1">##        reste = 0</span>
+<span class="c1">##        for i in range(n):</span>
+<span class="c1">##            try:</span>
+<span class="c1">##                psi = srv.vector[i]</span>
+<span class="c1">##            except:</span>
+<span class="c1">##                psi = 0</span>
+<span class="c1">##            try:</span>
+<span class="c1">##                poi = orv.vector[i]</span>
+<span class="c1">##            except:</span>
+<span class="c1">##                poi = 0</span>
+<span class="c1">##            pi = psi + poi + reste</span>
+<span class="c1">##            if Debug:</span>
+<span class="c1">##                print(&#39;i,psi,poi,reste,pi&#39;, i,psi,poi,reste,pi)</span>
+<span class="c1">##            if pi == 2:</span>
+<span class="c1">##                vector[i] = -1</span>
+<span class="c1">##                reste = 1</span>
+<span class="c1">##            elif pi == 3:</span>
+<span class="c1">##                vector[i] = 0</span>
+<span class="c1">##                reste = 1</span>
+<span class="c1">##            elif pi == -2:</span>
+<span class="c1">##                vector[i] = 1</span>
+<span class="c1">##                reste = -1</span>
+<span class="c1">##            elif pi == -3:</span>
+<span class="c1">##                vector[i] = 0</span>
+<span class="c1">##                reste = -1</span>
+<span class="c1">##            else:</span>
+<span class="c1">##                vector[i] = pi</span>
+<span class="c1">##                reste = 0</span>
+<span class="c1">##            if Debug:</span>
+<span class="c1">##                print(&quot;reste&quot;,reste)</span>
+<span class="c1">##        if reste != 0:</span>
+<span class="c1">##            if Debug:</span>
+<span class="c1">##                print(&#39;add&#39;,reste)</span>
+<span class="c1">##            vector = vector + [reste]</span>
+<span class="c1">##        if Debug:</span>
+<span class="c1">##            print(vector)</span>
+<span class="c1">##        new = ~(BachetNumber(vector=vector,length=n))</span>
+<span class="c1">##        return new</span>
+<span class="c1">##</span>
+<span class="c1">##    def __mul__(self,other,/):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Defines the multiplication operator for Bachet encoded numbers.</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        ln = max(len(self),len(other))</span>
+<span class="c1">##        n1 = self.value()</span>
+<span class="c1">##        n2 = other.value()</span>
+<span class="c1">##        n3 = n1 * n2</span>
+<span class="c1">##        return BachetNumber(n3,length=ln)</span>
+<span class="c1">##</span>
+<span class="c1">##    def __eq__(self,other, /):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Return the self==other value</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        v1 = self._ternaryCode()</span>
+<span class="c1">##        v2 = other._ternaryCode()</span>
+<span class="c1">##        nz = len(v1) - len(v2)</span>
+<span class="c1">##        if nz &lt; 0:</span>
+<span class="c1">##            vector = &#39;&#39;</span>
+<span class="c1">##            for i in range(abs(nz)):</span>
+<span class="c1">##                vector = vector + &#39;1&#39;</span>
+<span class="c1">##            v1 = vector + v1</span>
+<span class="c1">##        elif nz &gt; 0:</span>
+<span class="c1">##            vector = &#39;&#39;</span>
+<span class="c1">##            for i in range(nz):</span>
+<span class="c1">##                vector += &#39;1&#39;</span>
+<span class="c1">##            v2 = vector + v2</span>
+<span class="c1">##        return v1==v2</span>
+<span class="c1">##</span>
+<span class="c1">##    def __ge__(self,other, /):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Return self&gt;=other</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        v1 = self._ternaryCode()</span>
+<span class="c1">##        v2 = other._ternaryCode()</span>
+<span class="c1">##        nz = len(v1) - len(v2)</span>
+<span class="c1">##        if nz &lt; 0:</span>
+<span class="c1">##            vector = &#39;&#39;</span>
+<span class="c1">##            for i in range(abs(nz)):</span>
+<span class="c1">##                vector = vector + &#39;1&#39;</span>
+<span class="c1">##            v1 = vector + v1</span>
+<span class="c1">##        elif nz &gt; 0:</span>
+<span class="c1">##            vector = &#39;&#39;</span>
+<span class="c1">##            for i in range(nz):</span>
+<span class="c1">##                vector += &#39;1&#39;</span>
+<span class="c1">##            v2 = vector + v2</span>
+<span class="c1">##        return v1 &gt;= v2</span>
+<span class="c1">##</span>
+<span class="c1">##    def __gt__(self,other, /):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Return self&gt;other</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        v1 = self._ternaryCode()</span>
+<span class="c1">##        v2 = other._ternaryCode()</span>
+<span class="c1">##        nz = len(v1) - len(v2)</span>
+<span class="c1">##        if nz &lt; 0:</span>
+<span class="c1">##            vector = &#39;&#39;</span>
+<span class="c1">##            for i in range(abs(nz)):</span>
+<span class="c1">##                vector = vector + &#39;1&#39;</span>
+<span class="c1">##            v1 = vector + v1</span>
+<span class="c1">##        elif nz &gt; 0:</span>
+<span class="c1">##            vector = &#39;&#39;</span>
+<span class="c1">##            for i in range(nz):</span>
+<span class="c1">##                vector += &#39;1&#39;</span>
+<span class="c1">##            v2 = vector + v2</span>
+<span class="c1">##        return v1&gt;v2</span>
+<span class="c1">##</span>
+<span class="c1">##    def __le__(self,other, /):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Return self&lt;=other</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        v1 = self._ternaryCode()</span>
+<span class="c1">##        v2 = other._ternaryCode()</span>
+<span class="c1">##        nz = len(v1) - len(v2)</span>
+<span class="c1">##        if nz &lt; 0:</span>
+<span class="c1">##            vector = &#39;&#39;</span>
+<span class="c1">##            for i in range(abs(nz)):</span>
+<span class="c1">##                vector = vector + &#39;1&#39;</span>
+<span class="c1">##            v1 = vector + v1</span>
+<span class="c1">##        elif nz &gt; 0:</span>
+<span class="c1">##            vector = &#39;&#39;</span>
+<span class="c1">##            for i in range(nz):</span>
+<span class="c1">##                vector += &#39;1&#39;</span>
+<span class="c1">##            v2 = vector + v2</span>
+<span class="c1">##        return v1&lt;=v2</span>
+<span class="c1">##</span>
+<span class="c1">##    def __lt__(self,other, /):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Return self&gt;other</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        v1 = self._ternaryCode()</span>
+<span class="c1">##        v2 = other._ternaryCode()</span>
+<span class="c1">##        nz = len(v1) - len(v2)</span>
+<span class="c1">##        if nz &lt; 0:</span>
+<span class="c1">##            vector = &#39;&#39;</span>
+<span class="c1">##            for i in range(abs(nz)):</span>
+<span class="c1">##                vector = vector + &#39;1&#39;</span>
+<span class="c1">##            v1 = vector + v1</span>
+<span class="c1">##        elif nz &gt; 0:</span>
+<span class="c1">##            vector = &#39;&#39;</span>
+<span class="c1">##            for i in range(nz):</span>
+<span class="c1">##                vector += &#39;1&#39;</span>
+<span class="c1">##            v2 = vector + v2</span>
+<span class="c1">##        return v1&lt;v2</span>
+<span class="c1">##    </span>
+<span class="c1">##    def __ne__(self,other, /):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Return self!=other</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        v1 = self._ternaryCode()</span>
+<span class="c1">##        v2 = other._ternaryCode()</span>
+<span class="c1">##        nz = len(v1) - len(v2)</span>
+<span class="c1">##        if nz &lt; 0:</span>
+<span class="c1">##            vector = &#39;&#39;</span>
+<span class="c1">##            for i in range(abs(nz)):</span>
+<span class="c1">##                vector = vector + &#39;1&#39;</span>
+<span class="c1">##            v1 = vector + v1</span>
+<span class="c1">##        elif nz &gt; 0:</span>
+<span class="c1">##            vector = &#39;&#39;</span>
+<span class="c1">##            for i in range(nz):</span>
+<span class="c1">##                vector += &#39;1&#39;</span>
+<span class="c1">##            v2 = vector + v2</span>
+<span class="c1">##        return v1!=v2</span>
+<span class="c1">##</span>
+<span class="c1">##    def __sub__(self,other, /):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Return self-other</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        new = self + (-other)</span>
+<span class="c1">##        return new</span>
+<span class="c1">##</span>
+<span class="c1">##    def __int__(self, /):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Return self.value()</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        return self.value()</span>
+<span class="c1">##</span>
+<span class="c1">##    def __divmod__(self,other, /):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Return divmod(self,other)</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        q,r = divmod(int(self),int(other))</span>
+<span class="c1">##        return BachetNumber(q),BachetNumber(r)</span>
+<span class="c1">##               </span>
+<span class="c1">##    def value(self):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Return the integer value of the Bachet number</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        try:</span>
+<span class="c1">##            return self.integerValue</span>
+<span class="c1">##        except:</span>
+<span class="c1">##            self.integerValue = self._computeValue()</span>
+<span class="c1">##            return self.integerValue</span>
+<span class="c1">##</span>
+<span class="c1">##    def _computeValue(self,vector=None):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Computes the integer or decimal value corresponding to the</span>
+<span class="c1">##        polarised, respectively valued, Bachet vector.</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        if vector is None:</span>
+<span class="c1">##            vector = self.vector</span>
+<span class="c1">##        value = 0</span>
+<span class="c1">##        nv = len(vector)</span>
+<span class="c1">##        base3Power = 1   # 3**0</span>
+<span class="c1">##        for i in range(nv):</span>
+<span class="c1">##            value += base3Power*vector[nv-i-1]</span>
+<span class="c1">##            base3Power *= 3 # 3**i</span>
+<span class="c1">##        return value</span>
+<span class="c1">##</span>
+<span class="c1">##        </span>
+<span class="c1">##    def _ternaryCode(self):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Return the ternary {0,1,2} code of the Bachet number.</span>
+<span class="c1">##        Used for alphabetically comparing Bachet numbers.</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        try:</span>
+<span class="c1">##            return self.ternaryString</span>
+<span class="c1">##        except:</span>
+<span class="c1">##            self.ternaryString = self._encodeTernaryCode()</span>
+<span class="c1">##            return self.ternaryString</span>
+<span class="c1">##</span>
+<span class="c1">##    def _encodeTernaryCode(self):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Returns the ternary 0,1,2 code of the Bachet vector</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        codeString = &#39;&#39;</span>
+<span class="c1">##        vector = self.vector</span>
+<span class="c1">##        for i in range(len(self.vector)):</span>
+<span class="c1">##            if vector[i] == -1:</span>
+<span class="c1">##                codeString += &#39;0&#39;</span>
+<span class="c1">##            elif vector[i] == 0:</span>
+<span class="c1">##                codeString += &#39;1&#39;</span>
+<span class="c1">##            else:</span>
+<span class="c1">##                codeString += &#39;2&#39;</span>
+<span class="c1">##        self.ternaryString = codeString</span>
+<span class="c1">##        return codeString</span>
+<span class="c1">##</span>
+<span class="c1">##    def __len__(self):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Returns the length of the Bachet encoding</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        return len(self.vector)</span>
+<span class="c1">##</span>
+<span class="c1">##    def reverse(self):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Reverses the Bachet vector. Returns a modified Bachet number.</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        #from copy import deepcopy</span>
+<span class="c1">##        ln = len(self.vector)</span>
+<span class="c1">##        result = [0 for i in range(ln)]</span>
+<span class="c1">##        for i in range(ln):</span>
+<span class="c1">##            result[i] = self.vector[ln-i-1]</span>
+<span class="c1">##        rev = BachetNumber(vector=result,length=ln)</span>
+<span class="c1">##        return rev</span>
+<span class="c1">##</span>
+<span class="c1">##    def __invert__(self, /):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Return ~self</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        return self.reverse()</span>
+<span class="c1">##</span>
+<span class="c1">##    def __mod__(self, other, /):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Return self%other</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        v1 = int(self)</span>
+<span class="c1">##        v2 = int(other)</span>
+<span class="c1">##        v3 = v1%v2</span>
+<span class="c1">##        return BachetNumber(v3)</span>
+<span class="c1">##</span>
 <span class="c1">#------------- end of BachetNumber class ------------------</span>
     
 <div class="viewcode-block" id="primesBelow">

@@ -17,7 +17,7 @@ JOBS=""
 CC=gcc
 CFLAGS=-Wall -O3
 
-modules = arithmetics.py digraphs.py digraphsTools.py graphs.py linearOrders.py mpOutrankingDigraphs.py outrankingDigraphs.py pairings.py performanceQuantiles.py perfTabs.py randomDigraphs.py randomNumbers.py randomPerfTabs.py ratingDigraphs.py sortingDigraphs.py sparseOutrankingDigraphs.py transitiveDigraphs.py dynamicProgramming.py votingProfiles.py xmcda.py
+modules = arithmetics.py bachetNumbers.py digraphs.py digraphsTools.py graphs.py linearOrders.py mpOutrankingDigraphs.py outrankingDigraphs.py pairings.py performanceQuantiles.py perfTabs.py randomDigraphs.py randomNumbers.py randomPerfTabs.py ratingDigraphs.py sortingDigraphs.py sparseOutrankingDigraphs.py transitiveDigraphs.py dynamicProgramming.py votingProfiles.py xmcda.py
 
 readme:
 		echo -n " Digraph3 python3 modules' installer \n (c) R Bisdorff 2013-2022 Emeritus University of Luxembourg\n Usage: \n ..$$ make install      # installs with sudo in Python3+ (Linux, Mac OS)\n ..$$ make installVenv  # installs in a user's virtual python environment\n ..$$ make tests        # runs a series of pytests \n ..$$ make verbosetests # runs the verbose pytests\n ..$$ make pTests       # runs all available pytests with GNU parallel\n\n Technical documentation available here:\n http://digraph3.readthedocs.io/en/latest/ \n"

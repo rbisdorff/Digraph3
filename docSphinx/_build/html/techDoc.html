@@ -1124,11 +1124,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-arithmetics">2.21. arithmetics module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#arithmetics.BachetNumber"><code class="docutils literal notranslate"><span class="pre">BachetNumber</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#arithmetics.BachetNumber.reverse"><code class="docutils literal notranslate"><span class="pre">BachetNumber.reverse()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#arithmetics.BachetNumber.value"><code class="docutils literal notranslate"><span class="pre">BachetNumber.value()</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.QuadraticResiduesDigraph"><code class="docutils literal notranslate"><span class="pre">QuadraticResiduesDigraph</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.bezout"><code class="docutils literal notranslate"><span class="pre">bezout()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.cf2Rational"><code class="docutils literal notranslate"><span class="pre">cf2Rational()</span></code></a></li>
@@ -1155,12 +1150,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.zn_units"><code class="docutils literal notranslate"><span class="pre">zn_units()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#module-xmcda">2.22. xmcda module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#xmcda.saveRobustRubisChoiceXSL"><code class="docutils literal notranslate"><span class="pre">saveRobustRubisChoiceXSL()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#xmcda.saveRubisChoiceXSL"><code class="docutils literal notranslate"><span class="pre">saveRubisChoiceXSL()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#xmcda.saveRubisXSL"><code class="docutils literal notranslate"><span class="pre">saveRubisXSL()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#xmcda.saveXMCDARubisBestChoiceRecommendation"><code class="docutils literal notranslate"><span class="pre">saveXMCDARubisBestChoiceRecommendation()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#xmcda.showXMCDARubisBestChoiceRecommendation"><code class="docutils literal notranslate"><span class="pre">showXMCDARubisBestChoiceRecommendation()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-bachetNumbers">2.22. bachetNumbers module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bachetNumbers.BachetNumber"><code class="docutils literal notranslate"><span class="pre">BachetNumber</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bachetNumbers.BachetNumber.reverse"><code class="docutils literal notranslate"><span class="pre">BachetNumber.reverse()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#cythonized-modules-for-big-digraphs">2.23. Cythonized modules for big digraphs</a><ul>
@@ -1256,7 +1250,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">New<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p>A <a class="reference internal" href="#arithmetics.BachetNumber" title="arithmetics.BachetNumber"><code class="xref py py-class docutils literal notranslate"><span class="pre">BachetNumber</span></code></a> class for computing with bipolar-valued base 3 encoded Bachet numbers</p></li>
+<li><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">BachetNumber</span></code> class for computing with bipolar-valued base 3 encoded Bachet numbers</p></li>
 <li><p>A <a class="reference internal" href="#transitiveDigraphs.PartialBachetRanking" title="transitiveDigraphs.PartialBachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">PartialBachetRanking</span></code></a> class for generating highly correlated <strong>partial rankings</strong> from a given outranking digraph instance.</p></li>
 <li><p>A <a class="reference internal" href="#module-pairings" title="pairings"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pairings</span></code></a> module for solving <strong>fair intergroup</strong> and <strong>intragroup pairing</strong> problems</p></li>
 <li><p>A <a class="reference internal" href="#module-dynamicProgramming" title="dynamicProgramming"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dynamicProgramming</span></code></a> module for solving <strong>dynamic programming</strong> problems</p></li>
@@ -1294,7 +1288,7 @@
 <li><p><a class="reference internal" href="#randomnumbers-module" id="id21">randomNumbers module</a></p></li>
 <li><p><a class="reference internal" href="#module-digraphsTools" id="id22">digraphsTools module</a></p></li>
 <li><p><a class="reference internal" href="#module-arithmetics" id="id23">arithmetics module</a></p></li>
-<li><p><a class="reference internal" href="#module-xmcda" id="id24">xmcda module</a></p></li>
+<li><p><a class="reference internal" href="#module-bachetNumbers" id="id24">bachetNumbers module</a></p></li>
 <li><p><a class="reference internal" href="#cythonized-modules-for-big-digraphs" id="id25">Cythonized modules for big digraphs</a></p></li>
 <li><p><a class="reference internal" href="#indices-and-tables" id="id26">Indices and tables</a></p></li>
 </ul>
@@ -1561,6 +1555,11 @@ generic root <a class="reference external" href="techDoc.html#transitiveDigraphs
 </li>
 <li><dl class="simple">
 <dt><a class="reference internal" href="#arithmetics-label"><span class="std std-ref">arithmetics module</span></a></dt><dd><p>Some common methods and tools for computing with integer numbers.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><a class="reference internal" href="#bachetnumbers-label"><span class="std std-ref">bachetNumbers module</span></a></dt><dd><p>Implementation of the bipolar-valued base 3 Bachet integers</p>
 </dd>
 </dl>
 </li>
@@ -12082,67 +12081,6 @@ Springer Verlag London 1998.</p>
 <p>You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p>
 </div></blockquote>
 <dl class="py class">
-<dt class="sig sig-object py" id="arithmetics.BachetNumber">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">BachetNumber</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_int</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#BachetNumber"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.BachetNumber" title="Link to this definition"></a></dt>
-<dd><p>Bipolar-valued {-1,0,+1} base 3 encoded integers due to Claude Gaspard Bachet de Méziriac (1621)</p>
-<p><a class="reference external" href="https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac">https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac</a></p>
-<p>The class implements all the arithmetic operations and comparison operators from the int class.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">arithmetics</span> <span class="kn">import</span> <span class="n">BachetNumber</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span>
-<span class="go"> *------- Bachet number description ------*</span>
-<span class="go"> Instance class : BachetNumber</span>
-<span class="go"> String         : &#39;+1+10&#39;</span>
-<span class="go"> Vector         : [1, 1, 0]</span>
-<span class="go"> Length         : 3</span>
-<span class="go"> Value          : 12</span>
-<span class="go"> Attributes     : [&#39;vector&#39;]  </span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span>
-<span class="go"> *------- Bachet number description ------*</span>
-<span class="go"> Instance class : BachetNumber</span>
-<span class="go"> String         : &#39;+1+1+1&#39;</span>
-<span class="go"> Vector         : [1, 1, 1]</span>
-<span class="go"> Length         : 3</span>
-<span class="go"> Value          : 13</span>
-<span class="go"> Attributes     : [&#39;vector&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">+</span> <span class="n">n2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span>
-<span class="go"> *------- Bachet number description ------*</span>
-<span class="go"> Instance class : BachetNumber</span>
-<span class="go"> String         : &#39;+10-1+1&#39;</span>
-<span class="go"> Vector         : [1, 0, -1, 1]</span>
-<span class="go"> Length         : 4</span>
-<span class="go"> Value          : 25</span>
-<span class="go"> Attributes     : [&#39;vector&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) + </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) = </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">)&#39;</span>
-<span class="gp">... </span>       <span class="o">%</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n1</span><span class="p">),</span> <span class="n">n2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n2</span><span class="p">),</span> <span class="n">n3</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n3</span><span class="p">)</span> <span class="p">))</span>
-<span class="go"> &#39;+1+10&#39; (12) + &#39;+1+1+1&#39; (13) = 10-11 (25)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;length of </span><span class="si">%s</span><span class="s1"> = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">n1</span><span class="p">)))</span>
-<span class="go"> length of &#39;+1+10&#39; = 3</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">n4</span> <span class="o">=</span> <span class="n">n1</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span> <span class="c1"># n4 = ~n1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">n5</span> <span class="o">=</span> <span class="o">-</span><span class="n">n2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">n6</span> <span class="o">=</span> <span class="n">n4</span> <span class="o">+</span> <span class="n">n5</span>   <span class="c1"># n6 = n4 + (-n2) = n4 - n2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) + </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) = </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">)&#39;</span>
-<span class="gp">... </span>      <span class="o">%</span> <span class="p">(</span> <span class="n">n4</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n4</span><span class="p">),</span> <span class="n">n5</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n5</span><span class="p">),</span><span class="n">n6</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n6</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span>
-<span class="go"> &#39;0+1+1&#39; (4) + &#39;-1-1-1&#39; (-13) = &#39;-100&#39; (-9)</span>
-</pre></div>
-</div>
-<dl class="py method">
-<dt class="sig sig-object py" id="arithmetics.BachetNumber.reverse">
-<span class="sig-name descname"><span class="pre">reverse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#BachetNumber.reverse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.BachetNumber.reverse" title="Link to this definition"></a></dt>
-<dd><p>Reverses the Bachet vector. Returns a modified Bachet number.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="arithmetics.BachetNumber.value">
-<span class="sig-name descname"><span class="pre">value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#BachetNumber.value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.BachetNumber.value" title="Link to this definition"></a></dt>
-<dd><p>Return the integer value of the Bachet number</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
 <dt class="sig sig-object py" id="arithmetics.QuadraticResiduesDigraph">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">QuadraticResiduesDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">integers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[3,</span> <span class="pre">5,</span> <span class="pre">7,</span> <span class="pre">11,</span> <span class="pre">13,</span> <span class="pre">17,</span> <span class="pre">19]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#QuadraticResiduesDigraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.QuadraticResiduesDigraph" title="Link to this definition"></a></dt>
 <dd><p>The <strong>Legendre</strong> symbol <em>(a/p)</em> of any pair of non null integers <em>a</em> and <em>p</em> is:</p>
@@ -12533,110 +12471,79 @@ Euler’s number of coprime elements a in Zn.</p>
 <p>Back to the <a class="reference internal" href="#contents-table-label"><span class="std std-ref">Table of Contents</span></a></p>
 <hr class="docutils" />
 </section>
-<section id="module-xmcda">
-<span id="xmcda-module"></span><span id="xmcda-label"></span><h2><a class="toc-backref" href="#id24" role="doc-backlink"><span class="section-number">2.22. </span>xmcda module</a><a class="headerlink" href="#module-xmcda" title="Link to this heading"></a></h2>
-<p>Python3+ implementation of xmcda tools</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>These resources are now deprecated and should no more be considered for ongoing usage!! They were developped in the context of now obsolete xml encoded web services deployments. A replacement alternative is given with the standard save() methods of performance tableaux, digraphs and graphs.</p>
-</div>
-<p>Copyright (C) 2016-2025  Raymond Bisdorff</p>
-<blockquote>
-<div><p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.</p>
-<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</p>
-<p>You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p>
-</div></blockquote>
-<dl class="py function">
-<dt class="sig sig-object py" id="xmcda.saveRobustRubisChoiceXSL">
-<span class="sig-prename descclassname"><span class="pre">xmcda.</span></span><span class="sig-name descname"><span class="pre">saveRobustRubisChoiceXSL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xmcda2RubisRobustChoice.xsl'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/xmcda.html#saveRobustRubisChoiceXSL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xmcda.saveRobustRubisChoiceXSL" title="Link to this definition"></a></dt>
-<dd><p>Save the robust version of the Rubis Best-Choice XMCDA 2.0 XSL style sheet in the current working directory
-This style sheet allows to browse an XMCDA 2.0 encoded robust Rubis Best-Choice recommendation.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>When accessing an XMCDA encoded data file in a browser, for safety reasons, the corresponding XSL style sheet
-must be present in the same working directory.</p>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="xmcda.saveRubisChoiceXSL">
-<span class="sig-prename descclassname"><span class="pre">xmcda.</span></span><span class="sig-name descname"><span class="pre">saveRubisChoiceXSL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xmcda2RubisChoice.xsl'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/xmcda.html#saveRubisChoiceXSL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xmcda.saveRubisChoiceXSL" title="Link to this definition"></a></dt>
-<dd><p>Save the local Rubis Best-Choice XMCDA 2.0 XSL style sheet in the current working directory
-This style sheet allows to browse an XMCDA 2.0 encoded Rubis Best-Choice recommendation.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>When accessing an XMCDA encoded data file in a browser, for safety reasons, the corresponding XSL style sheet
-must be present in the same working directory.</p>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="xmcda.saveRubisXSL">
-<span class="sig-prename descclassname"><span class="pre">xmcda.</span></span><span class="sig-name descname"><span class="pre">saveRubisXSL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xmcda2Rubis.xsl'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Extended</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/xmcda.html#saveRubisXSL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xmcda.saveRubisXSL" title="Link to this definition"></a></dt>
-<dd><p>Save the standard Rubis XMCDA 2.0 XSL style sheet in the current working directory.
-This style sheet allows to visualize an XMCDA 2.0 encoded performance tableau in a browser.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>When accessing an XMCDA encoded data file in a browser, for safety reasons, the corresponding XSL style sheet
-must be present in the same working directory.</p>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="xmcda.saveXMCDARubisBestChoiceRecommendation">
-<span class="sig-prename descclassname"><span class="pre">xmcda.</span></span><span class="sig-name descname"><span class="pre">saveXMCDARubisBestChoiceRecommendation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">problemFileName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tempDir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valuationType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/xmcda.html#saveXMCDARubisBestChoiceRecommendation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xmcda.saveXMCDARubisBestChoiceRecommendation" title="Link to this definition"></a></dt>
-<dd><p>Store an XMCDA2 encoded solution file of the Rubis best-choice recommendation.</p>
-<blockquote>
-<div><p>The valuationType parameter allows to work:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>on the standard bipolar outranking digraph (valuationType = ‘bipolar’, default),</p></li>
-<li><p>on the normalized –[-1,1] valued– bipolar outranking digraph (valuationType = ‘normalized’),</p></li>
-<li><p>on the robust –ordinal criteria weights– bipolar outranking digraph (valuationType = ‘robust’),</p></li>
-<li><p>on the confident outranking digraph (valuationType = ‘confident’),</p></li>
-<li><p>ignoring considerable performances differences (valuationType = ‘noVeto’).</p></li>
-</ul>
-</div></blockquote>
-</div></blockquote>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The method requires an Unix like OS like Ubuntu or Mac OSX and depends on:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>the R statistics package for Principal Component Analysis graphic,</p></li>
-<li><p>the C calmat matrix interpreter (see Digraph3/calmat/README)</p></li>
-<li><p>the xpdf ressources ( …$ apt-get install xpdf on Ubuntu) for converting pdf files to ppm format, and ppm files to png format.</p></li>
-</ul>
-</div></blockquote>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="xmcda.showXMCDARubisBestChoiceRecommendation">
-<span class="sig-prename descclassname"><span class="pre">xmcda.</span></span><span class="sig-name descname"><span class="pre">showXMCDARubisBestChoiceRecommendation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">problemFileName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valuationType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/xmcda.html#showXMCDARubisBestChoiceRecommendation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xmcda.showXMCDARubisBestChoiceRecommendation" title="Link to this definition"></a></dt>
-<dd><p>Launches a browser window with the XMCDA2 solution of the
-Rubis Solver computed from a stored XMCDA2 encoded performance tableau.</p>
-<p>The valuationType parameter allows to work:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>on the standard bipolar outranking digraph (valuationType = ‘bipolar’, default),</p></li>
-<li><p>on the normalized –[-1,1] valued– bipolar outranking digraph (valuationType = ‘normalized’),</p></li>
-<li><p>on the robust –ordinal criteria weights– bipolar outranking digraph (valuationType = ‘robust’),</p></li>
-<li><p>on the confident outranking digraph (valuationType = ‘confident’),</p></li>
-<li><p>ignoring considerable performances differences (valuationType = ‘noVeto’).</p></li>
-</ul>
-</div></blockquote>
-<p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">xmcda</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">saveXMCDA2</span><span class="p">(</span><span class="s1">&#39;example&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">xmcda</span><span class="o">.</span><span class="n">showXMCDARubisBestChoiceRecommendation</span><span class="p">(</span><span class="n">problemFileName</span><span class="o">=</span><span class="s1">&#39;example&#39;</span><span class="p">)</span>
+<section id="module-bachetNumbers">
+<span id="bachetnumbers-module"></span><span id="bachetnumbers-label"></span><h2><a class="toc-backref" href="#id24" role="doc-backlink"><span class="section-number">2.22. </span>bachetNumbers module</a><a class="headerlink" href="#module-bachetNumbers" title="Link to this heading"></a></h2>
+<p>Python3+ implementation of bipolar-valued base 3 integers</p>
+<p>Copyright (C) 2025 Raymond Bisdorff</p>
+<p>This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 3 of the License,
+or (at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with this program; if not, write to the
+Free Software Foundation, Inc., 51 Franklin Street,
+Fifth Floor, Boston, MA 02110-1301 USA.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="bachetNumbers.BachetNumber">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bachetNumbers.</span></span><span class="sig-name descname"><span class="pre">BachetNumber</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_int</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bachetNumbers.html#BachetNumber"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bachetNumbers.BachetNumber" title="Link to this definition"></a></dt>
+<dd><p>Bipolar-valued {-1,0,+1} base 3 encoded integers due to Claude Gaspard Bachet de Méziriac (1621)</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac">https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac</a></p>
+<p>The class implements all the arithmetic operations and comparison operators from the int class.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bachetNumbers</span> <span class="kn">import</span> <span class="n">BachetNumber</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span>
+<span class="go"> *------- Bachet number description ------*</span>
+<span class="go"> Instance class : BachetNumber</span>
+<span class="go"> String         : &#39;+1+10&#39;</span>
+<span class="go"> Vector         : [1, 1, 0]</span>
+<span class="go"> Length         : 3</span>
+<span class="go"> Value          : 12</span>
+<span class="go"> Attributes     : [&#39;vector&#39;]  </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span>
+<span class="go"> *------- Bachet number description ------*</span>
+<span class="go"> Instance class : BachetNumber</span>
+<span class="go"> String         : &#39;+1+1+1&#39;</span>
+<span class="go"> Vector         : [1, 1, 1]</span>
+<span class="go"> Length         : 3</span>
+<span class="go"> Value          : 13</span>
+<span class="go"> Attributes     : [&#39;vector&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">+</span> <span class="n">n2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span>
+<span class="go"> *------- Bachet number description ------*</span>
+<span class="go"> Instance class : BachetNumber</span>
+<span class="go"> String         : &#39;+10-1+1&#39;</span>
+<span class="go"> Vector         : [1, 0, -1, 1]</span>
+<span class="go"> Length         : 4</span>
+<span class="go"> Value          : 25</span>
+<span class="go"> Attributes     : [&#39;vector&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) + </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) = </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">)&#39;</span>
+<span class="gp">... </span>       <span class="o">%</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n1</span><span class="p">),</span> <span class="n">n2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n2</span><span class="p">),</span> <span class="n">n3</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n3</span><span class="p">)</span> <span class="p">))</span>
+<span class="go"> &#39;+1+10&#39; (12) + &#39;+1+1+1&#39; (13) = 10-11 (25)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;length of </span><span class="si">%s</span><span class="s1"> = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">n1</span><span class="p">)))</span>
+<span class="go"> length of &#39;+1+10&#39; = 3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n4</span> <span class="o">=</span> <span class="n">n1</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span> <span class="c1"># n4 = ~n1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n5</span> <span class="o">=</span> <span class="o">-</span><span class="n">n2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n6</span> <span class="o">=</span> <span class="n">n4</span> <span class="o">+</span> <span class="n">n5</span>   <span class="c1"># n6 = n4 + (-n2) = n4 - n2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) + </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) = </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">)&#39;</span>
+<span class="gp">... </span>      <span class="o">%</span> <span class="p">(</span> <span class="n">n4</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n4</span><span class="p">),</span> <span class="n">n5</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n5</span><span class="p">),</span><span class="n">n6</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n6</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span>
+<span class="go"> &#39;0+1+1&#39; (4) + &#39;-1-1-1&#39; (-13) = &#39;-100&#39; (-9)</span>
 </pre></div>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="bachetNumbers.BachetNumber.reverse">
+<span class="sig-name descname"><span class="pre">reverse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bachetNumbers.html#BachetNumber.reverse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bachetNumbers.BachetNumber.reverse" title="Link to this definition"></a></dt>
+<dd><p>Reverse the Bachet vector. ! Returns a modified BachetNumber object.</p>
+</dd></dl>
+
 </dd></dl>
 
 <p>Back to the <a class="reference internal" href="#contents-table-label"><span class="std std-ref">Table of Contents</span></a></p>
+<hr class="docutils" />
 <hr class="docutils" />
 </section>
 <section id="cythonized-modules-for-big-digraphs">

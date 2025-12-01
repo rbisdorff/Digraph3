@@ -101,470 +101,470 @@ class QuadraticResiduesDigraph(Digraph):
 # Discrete Mathematics lectures 2008
 # (c) 2025 RB 
 
-class BachetNumber(object):
-    """
-    Bipolar-valued {-1,0,+1} base 3 encoded integers due to Claude Gaspard Bachet de Méziriac (1621)
-    
-    https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac
-
-    The class implements all the arithmetic operations and comparison operators from the int class.
-    
-    >>> from arithmetics import BachetNumber
-    >>> n1 = BachetNumber(12)
-    >>> n1
-     *------- Bachet number description ------*
-     Instance class : BachetNumber
-     String         : '+1+10'
-     Vector         : [1, 1, 0]
-     Length         : 3
-     Value          : 12
-     Attributes     : ['vector']  
-    >>> n2 = BachetNumber(vector=[1,1,1])
-    >>> n2
-     *------- Bachet number description ------*
-     Instance class : BachetNumber
-     String         : '+1+1+1'
-     Vector         : [1, 1, 1]
-     Length         : 3
-     Value          : 13
-     Attributes     : ['vector']
-    >>> n3 = n1 + n2
-    >>> n3
-     *------- Bachet number description ------*
-     Instance class : BachetNumber
-     String         : '+10-1+1'
-     Vector         : [1, 0, -1, 1]
-     Length         : 4
-     Value          : 25
-     Attributes     : ['vector']
-    >>> print('%s (%d) + %s (%d) = %s (%d)'
-    ...        % (n1, int(n1), n2, int(n2), n3, int(n3) ))
-     '+1+10' (12) + '+1+1+1' (13) = 10-11 (25)
-    >>> print('length of %s = %d' % (n1, len(n1)))
-     length of '+1+10' = 3
-    >>> n4 = n1.reverse() # n4 = ~n1
-    >>> n5 = -n2
-    >>> n6 = n4 + n5   # n6 = n4 + (-n2) = n4 - n2
-    >>> print('%s (%d) + %s (%d) = %s (%d)'
-    ...       % ( n4, int(n4), n5, int(n5),n6, int(n6) ) )
-     '0+1+1' (4) + '-1-1-1' (-13) = '-100' (-9)
-
-    """
-    def __repr__(self):
-        """
-        Default presentation method for Bchet number instances.
-        """
-        reprString = '*------- Bachet number description ------*\n'
-        reprString += 'Instance class : %s\n' % self.__class__.__name__
-        reprString += 'String         : \'%s\'\n' % str(self)
-        reprString += 'Vector         : %s\n' % self.vector
-        reprString += 'Length         : %d\n' % len(self)
-        reprString += 'Value          : %d\n' % self.value()
-        reprString += 'Attributes     : %s\n' % list(self.__dict__.keys())    
-        return reprString
-    
-    def __init__(self,num_int=None,vector=None,length=1):
-        """
-        Tranforms a potentially signed integer into a Bachet number.
-        Returns [0] when no arguments are given. 
-        """
-        if num_int is None:
-            if vector is not None:
-                ln = len(vector)
-                num_int = round(self._computeValue(vector))
-                b = BachetNumber(num_int,length=ln)
-                vl = len(b.vector)
-                if vl >= length:
-                    self.vector = b.vector
-                else:
-                    nz = length - vl
-                    zvector = [0 for i in range(nz)]
-                    self.vector = zvector + b.vector
-            else:
-                self.vector=[0 for i in range(length)]
-        else:
-            self.vector = self._int2bachet(num_int)
-            vl = len(self.vector)
-            if vl < length:
-                nz = length - vl
-                vector = [0 for i in range(nz)]
-                self.vector = vector + self.vector
-
-    def _base10to3(self,num):
-        """
-        Change a base 10 number to a base 3 number.
-        """
-        new_num_string = ''
-        current = num
-        while current != 0:
-            remainder = current%3
-            remainder_string = str(remainder)
-            new_num_string = remainder_string + new_num_string
-            current = current//3
-        return new_num_string
-
-    def _base3toBachet(self,num_string):
-        """
-        Converts a base 3 encoded integer into a bipolar {-1,0,+1} encoded one.
-
-        """
-        new_vector=[0 for x in range(len(num_string))]
-        reste = 0
-        for i in range(len(num_string)-1,-1,-1):
-            num = eval(num_string[i])+reste
-            if num == 2:
-                new_vector[i] = -1
-                reste = 1
-            elif num == 3:
-                new_vector[i] = 0
-                reste = 1
-            else:
-                new_vector[i] = num
-                reste = 0
-        
-        if reste == 1:
-            new_vector = [1] + new_vector
-            
-        return new_vector
-
-    def _int2bachet(self,num_int):
-        """
-        Converts a signed integer into a Bachet encoded number.
-        """
-        if num_int < 0:
-            unsigned_num_int = abs(num_int)
-        else:
-            unsigned_num_int = num_int
-        base3_unsigned_num_int = self._base10to3(unsigned_num_int)
-        bachet_unsigned_num_int = self._base3toBachet(base3_unsigned_num_int)
-        if num_int > 0:
-            return bachet_unsigned_num_int
-        elif num_int == 0:
-            return [0]
-        else:
-            bachet_vector = bachet_unsigned_num_int
-            for i in range(len(bachet_unsigned_num_int)):
-                bachet_vector[i] = bachet_unsigned_num_int[i]*-1
-            return bachet_vector
-        
-    def __str__(self, /):
-        """
-        Defines the printable string version of a Bachet number.
-        """
-        bachet_string = ''
-        for i in range(len(self.vector)):
-            if self.vector[i] != 0:
-                bachet_string += '%+d' % (self.vector[i])
-            else:
-                bachet_string += '%d' % (self.vector[i])
-        return bachet_string
-            
-    # ---- arithmetic operations
-    
-    def __neg__(self, /):
-        """
-        Defines an unary negating operator for Bachet encoded numbers.
-        """
-        from copy import deepcopy
-        negVector = []
-        for i in range(len(self.vector)):
-            negVector.append(self.vector[i] * -1)
-        ln = len(self.vector)
-        neg = BachetNumber(vector = negVector,length=ln)
-        return neg
-        
-    def __abs__(self, /):
-        """
-        Defines the addition operator for Bachet encoded numbers
-        """
-        ln = len(self.vector)
-        v1 = int(self)
-        v2 = abs(v1)
-        return BachetNumber(v2,length=ln)        
-
-    def __add__(self,other,Debug=False):
-        """
-        Defines the balanced ternary addition operator for Bachet encoded numbers.
-        """
-        from copy import deepcopy
-        srv = self.reverse()
-        orv = other.reverse()
-        n1 = len(self)
-        n2 = len(other)
-        if n1 >= n2:
-            vector = [0 for i in range(n1)]
-        else:
-            vector = [0 for i in range(n2)]
-        n = max(n1,n2)
-        reste = 0
-        for i in range(n):
-            try:
-                psi = srv.vector[i]
-            except:
-                psi = 0
-            try:
-                poi = orv.vector[i]
-            except:
-                poi = 0
-            pi = psi + poi + reste
-            if Debug:
-                print('i,psi,poi,reste,pi', i,psi,poi,reste,pi)
-            if pi == 2:
-                vector[i] = -1
-                reste = 1
-            elif pi == 3:
-                vector[i] = 0
-                reste = 1
-            elif pi == -2:
-                vector[i] = 1
-                reste = -1
-            elif pi == -3:
-                vector[i] = 0
-                reste = -1
-            else:
-                vector[i] = pi
-                reste = 0
-            if Debug:
-                print("reste",reste)
-        if reste != 0:
-            if Debug:
-                print('add',reste)
-            vector = vector + [reste]
-        if Debug:
-            print(vector)
-        new = ~(BachetNumber(vector=vector,length=n))
-        return new
-
-    def __mul__(self,other,/):
-        """
-        Defines the multiplication operator for Bachet encoded numbers.
-        """
-        ln = max(len(self),len(other))
-        n1 = self.value()
-        n2 = other.value()
-        n3 = n1 * n2
-        return BachetNumber(n3,length=ln)
-
-    def __eq__(self,other, /):
-        """
-        Return the self==other value
-        """
-        v1 = self._ternaryCode()
-        v2 = other._ternaryCode()
-        nz = len(v1) - len(v2)
-        if nz < 0:
-            vector = ''
-            for i in range(abs(nz)):
-                vector = vector + '1'
-            v1 = vector + v1
-        elif nz > 0:
-            vector = ''
-            for i in range(nz):
-                vector += '1'
-            v2 = vector + v2
-        return v1==v2
-
-    def __ge__(self,other, /):
-        """
-        Return self>=other
-        """
-        v1 = self._ternaryCode()
-        v2 = other._ternaryCode()
-        nz = len(v1) - len(v2)
-        if nz < 0:
-            vector = ''
-            for i in range(abs(nz)):
-                vector = vector + '1'
-            v1 = vector + v1
-        elif nz > 0:
-            vector = ''
-            for i in range(nz):
-                vector += '1'
-            v2 = vector + v2
-        return v1 >= v2
-
-    def __gt__(self,other, /):
-        """
-        Return self>other
-        """
-        v1 = self._ternaryCode()
-        v2 = other._ternaryCode()
-        nz = len(v1) - len(v2)
-        if nz < 0:
-            vector = ''
-            for i in range(abs(nz)):
-                vector = vector + '1'
-            v1 = vector + v1
-        elif nz > 0:
-            vector = ''
-            for i in range(nz):
-                vector += '1'
-            v2 = vector + v2
-        return v1>v2
-
-    def __le__(self,other, /):
-        """
-        Return self<=other
-        """
-        v1 = self._ternaryCode()
-        v2 = other._ternaryCode()
-        nz = len(v1) - len(v2)
-        if nz < 0:
-            vector = ''
-            for i in range(abs(nz)):
-                vector = vector + '1'
-            v1 = vector + v1
-        elif nz > 0:
-            vector = ''
-            for i in range(nz):
-                vector += '1'
-            v2 = vector + v2
-        return v1<=v2
-
-    def __lt__(self,other, /):
-        """
-        Return self>other
-        """
-        v1 = self._ternaryCode()
-        v2 = other._ternaryCode()
-        nz = len(v1) - len(v2)
-        if nz < 0:
-            vector = ''
-            for i in range(abs(nz)):
-                vector = vector + '1'
-            v1 = vector + v1
-        elif nz > 0:
-            vector = ''
-            for i in range(nz):
-                vector += '1'
-            v2 = vector + v2
-        return v1<v2
-    
-    def __ne__(self,other, /):
-        """
-        Return self!=other
-        """
-        v1 = self._ternaryCode()
-        v2 = other._ternaryCode()
-        nz = len(v1) - len(v2)
-        if nz < 0:
-            vector = ''
-            for i in range(abs(nz)):
-                vector = vector + '1'
-            v1 = vector + v1
-        elif nz > 0:
-            vector = ''
-            for i in range(nz):
-                vector += '1'
-            v2 = vector + v2
-        return v1!=v2
-
-    def __sub__(self,other, /):
-        """
-        Return self-other
-        """
-        new = self + (-other)
-        return new
-
-    def __int__(self, /):
-        """
-        Return self.value()
-        """
-        return self.value()
-
-    def __divmod__(self,other, /):
-        """
-        Return divmod(self,other)
-        """
-        q,r = divmod(int(self),int(other))
-        return BachetNumber(q),BachetNumber(r)
-               
-    def value(self):
-        """
-        Return the integer value of the Bachet number
-        """
-        try:
-            return self.integerValue
-        except:
-            self.integerValue = self._computeValue()
-            return self.integerValue
-
-    def _computeValue(self,vector=None):
-        """
-        Computes the integer or decimal value corresponding to the
-        polarised, respectively valued, Bachet vector.
-        """
-        if vector is None:
-            vector = self.vector
-        value = 0
-        nv = len(vector)
-        base3Power = 1   # 3**0
-        for i in range(nv):
-            value += base3Power*vector[nv-i-1]
-            base3Power *= 3 # 3**i
-        return value
-
-        
-    def _ternaryCode(self):
-        """
-        Return the ternary {0,1,2} code of the Bachet number.
-        Used for alphabetically comparing Bachet numbers.
-        """
-        try:
-            return self.ternaryString
-        except:
-            self.ternaryString = self._encodeTernaryCode()
-            return self.ternaryString
-
-    def _encodeTernaryCode(self):
-        """
-        Returns the ternary 0,1,2 code of the Bachet vector
-        """
-        codeString = ''
-        vector = self.vector
-        for i in range(len(self.vector)):
-            if vector[i] == -1:
-                codeString += '0'
-            elif vector[i] == 0:
-                codeString += '1'
-            else:
-                codeString += '2'
-        self.ternaryString = codeString
-        return codeString
-
-    def __len__(self):
-        """
-        Returns the length of the Bachet encoding
-        """
-        return len(self.vector)
-
-    def reverse(self):
-        """
-        Reverses the Bachet vector. Returns a modified Bachet number.
-        """
-        #from copy import deepcopy
-        ln = len(self.vector)
-        result = [0 for i in range(ln)]
-        for i in range(ln):
-            result[i] = self.vector[ln-i-1]
-        rev = BachetNumber(vector=result,length=ln)
-        return rev
-
-    def __invert__(self, /):
-        """
-        Return ~self
-        """
-        return self.reverse()
-
-    def __mod__(self, other, /):
-        """
-        Return self%other
-        """
-        v1 = int(self)
-        v2 = int(other)
-        v3 = v1%v2
-        return BachetNumber(v3)
-
+##class BachetNumber(object):
+##    """
+##    Bipolar-valued {-1,0,+1} base 3 encoded integers due to Claude Gaspard Bachet de Méziriac (1621)
+##    
+##    https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac
+##
+##    The class implements all the arithmetic operations and comparison operators from the int class.
+##    
+##    >>> from arithmetics import BachetNumber
+##    >>> n1 = BachetNumber(12)
+##    >>> n1
+##     *------- Bachet number description ------*
+##     Instance class : BachetNumber
+##     String         : '+1+10'
+##     Vector         : [1, 1, 0]
+##     Length         : 3
+##     Value          : 12
+##     Attributes     : ['vector']  
+##    >>> n2 = BachetNumber(vector=[1,1,1])
+##    >>> n2
+##     *------- Bachet number description ------*
+##     Instance class : BachetNumber
+##     String         : '+1+1+1'
+##     Vector         : [1, 1, 1]
+##     Length         : 3
+##     Value          : 13
+##     Attributes     : ['vector']
+##    >>> n3 = n1 + n2
+##    >>> n3
+##     *------- Bachet number description ------*
+##     Instance class : BachetNumber
+##     String         : '+10-1+1'
+##     Vector         : [1, 0, -1, 1]
+##     Length         : 4
+##     Value          : 25
+##     Attributes     : ['vector']
+##    >>> print('%s (%d) + %s (%d) = %s (%d)'
+##    ...        % (n1, int(n1), n2, int(n2), n3, int(n3) ))
+##     '+1+10' (12) + '+1+1+1' (13) = 10-11 (25)
+##    >>> print('length of %s = %d' % (n1, len(n1)))
+##     length of '+1+10' = 3
+##    >>> n4 = n1.reverse() # n4 = ~n1
+##    >>> n5 = -n2
+##    >>> n6 = n4 + n5   # n6 = n4 + (-n2) = n4 - n2
+##    >>> print('%s (%d) + %s (%d) = %s (%d)'
+##    ...       % ( n4, int(n4), n5, int(n5),n6, int(n6) ) )
+##     '0+1+1' (4) + '-1-1-1' (-13) = '-100' (-9)
+##
+##    """
+##    def __repr__(self):
+##        """
+##        Default presentation method for Bchet number instances.
+##        """
+##        reprString = '*------- Bachet number description ------*\n'
+##        reprString += 'Instance class : %s\n' % self.__class__.__name__
+##        reprString += 'String         : \'%s\'\n' % str(self)
+##        reprString += 'Vector         : %s\n' % self.vector
+##        reprString += 'Length         : %d\n' % len(self)
+##        reprString += 'Value          : %d\n' % self.value()
+##        reprString += 'Attributes     : %s\n' % list(self.__dict__.keys())    
+##        return reprString
+##    
+##    def __init__(self,num_int=None,vector=None,length=1):
+##        """
+##        Tranforms a potentially signed integer into a Bachet number.
+##        Returns [0] when no arguments are given. 
+##        """
+##        if num_int is None:
+##            if vector is not None:
+##                ln = len(vector)
+##                num_int = round(self._computeValue(vector))
+##                b = BachetNumber(num_int,length=ln)
+##                vl = len(b.vector)
+##                if vl >= length:
+##                    self.vector = b.vector
+##                else:
+##                    nz = length - vl
+##                    zvector = [0 for i in range(nz)]
+##                    self.vector = zvector + b.vector
+##            else:
+##                self.vector=[0 for i in range(length)]
+##        else:
+##            self.vector = self._int2bachet(num_int)
+##            vl = len(self.vector)
+##            if vl < length:
+##                nz = length - vl
+##                vector = [0 for i in range(nz)]
+##                self.vector = vector + self.vector
+##
+##    def _base10to3(self,num):
+##        """
+##        Change a base 10 number to a base 3 number.
+##        """
+##        new_num_string = ''
+##        current = num
+##        while current != 0:
+##            remainder = current%3
+##            remainder_string = str(remainder)
+##            new_num_string = remainder_string + new_num_string
+##            current = current//3
+##        return new_num_string
+##
+##    def _base3toBachet(self,num_string):
+##        """
+##        Converts a base 3 encoded integer into a bipolar {-1,0,+1} encoded one.
+##
+##        """
+##        new_vector=[0 for x in range(len(num_string))]
+##        reste = 0
+##        for i in range(len(num_string)-1,-1,-1):
+##            num = eval(num_string[i])+reste
+##            if num == 2:
+##                new_vector[i] = -1
+##                reste = 1
+##            elif num == 3:
+##                new_vector[i] = 0
+##                reste = 1
+##            else:
+##                new_vector[i] = num
+##                reste = 0
+##        
+##        if reste == 1:
+##            new_vector = [1] + new_vector
+##            
+##        return new_vector
+##
+##    def _int2bachet(self,num_int):
+##        """
+##        Converts a signed integer into a Bachet encoded number.
+##        """
+##        if num_int < 0:
+##            unsigned_num_int = abs(num_int)
+##        else:
+##            unsigned_num_int = num_int
+##        base3_unsigned_num_int = self._base10to3(unsigned_num_int)
+##        bachet_unsigned_num_int = self._base3toBachet(base3_unsigned_num_int)
+##        if num_int > 0:
+##            return bachet_unsigned_num_int
+##        elif num_int == 0:
+##            return [0]
+##        else:
+##            bachet_vector = bachet_unsigned_num_int
+##            for i in range(len(bachet_unsigned_num_int)):
+##                bachet_vector[i] = bachet_unsigned_num_int[i]*-1
+##            return bachet_vector
+##        
+##    def __str__(self, /):
+##        """
+##        Defines the printable string version of a Bachet number.
+##        """
+##        bachet_string = ''
+##        for i in range(len(self.vector)):
+##            if self.vector[i] != 0:
+##                bachet_string += '%+d' % (self.vector[i])
+##            else:
+##                bachet_string += '%d' % (self.vector[i])
+##        return bachet_string
+##            
+##    # ---- arithmetic operations
+##    
+##    def __neg__(self, /):
+##        """
+##        Defines an unary negating operator for Bachet encoded numbers.
+##        """
+##        from copy import deepcopy
+##        negVector = []
+##        for i in range(len(self.vector)):
+##            negVector.append(self.vector[i] * -1)
+##        ln = len(self.vector)
+##        neg = BachetNumber(vector = negVector,length=ln)
+##        return neg
+##        
+##    def __abs__(self, /):
+##        """
+##        Defines the addition operator for Bachet encoded numbers
+##        """
+##        ln = len(self.vector)
+##        v1 = int(self)
+##        v2 = abs(v1)
+##        return BachetNumber(v2,length=ln)        
+##
+##    def __add__(self,other,Debug=False):
+##        """
+##        Defines the balanced ternary addition operator for Bachet encoded numbers.
+##        """
+##        from copy import deepcopy
+##        srv = self.reverse()
+##        orv = other.reverse()
+##        n1 = len(self)
+##        n2 = len(other)
+##        if n1 >= n2:
+##            vector = [0 for i in range(n1)]
+##        else:
+##            vector = [0 for i in range(n2)]
+##        n = max(n1,n2)
+##        reste = 0
+##        for i in range(n):
+##            try:
+##                psi = srv.vector[i]
+##            except:
+##                psi = 0
+##            try:
+##                poi = orv.vector[i]
+##            except:
+##                poi = 0
+##            pi = psi + poi + reste
+##            if Debug:
+##                print('i,psi,poi,reste,pi', i,psi,poi,reste,pi)
+##            if pi == 2:
+##                vector[i] = -1
+##                reste = 1
+##            elif pi == 3:
+##                vector[i] = 0
+##                reste = 1
+##            elif pi == -2:
+##                vector[i] = 1
+##                reste = -1
+##            elif pi == -3:
+##                vector[i] = 0
+##                reste = -1
+##            else:
+##                vector[i] = pi
+##                reste = 0
+##            if Debug:
+##                print("reste",reste)
+##        if reste != 0:
+##            if Debug:
+##                print('add',reste)
+##            vector = vector + [reste]
+##        if Debug:
+##            print(vector)
+##        new = ~(BachetNumber(vector=vector,length=n))
+##        return new
+##
+##    def __mul__(self,other,/):
+##        """
+##        Defines the multiplication operator for Bachet encoded numbers.
+##        """
+##        ln = max(len(self),len(other))
+##        n1 = self.value()
+##        n2 = other.value()
+##        n3 = n1 * n2
+##        return BachetNumber(n3,length=ln)
+##
+##    def __eq__(self,other, /):
+##        """
+##        Return the self==other value
+##        """
+##        v1 = self._ternaryCode()
+##        v2 = other._ternaryCode()
+##        nz = len(v1) - len(v2)
+##        if nz < 0:
+##            vector = ''
+##            for i in range(abs(nz)):
+##                vector = vector + '1'
+##            v1 = vector + v1
+##        elif nz > 0:
+##            vector = ''
+##            for i in range(nz):
+##                vector += '1'
+##            v2 = vector + v2
+##        return v1==v2
+##
+##    def __ge__(self,other, /):
+##        """
+##        Return self>=other
+##        """
+##        v1 = self._ternaryCode()
+##        v2 = other._ternaryCode()
+##        nz = len(v1) - len(v2)
+##        if nz < 0:
+##            vector = ''
+##            for i in range(abs(nz)):
+##                vector = vector + '1'
+##            v1 = vector + v1
+##        elif nz > 0:
+##            vector = ''
+##            for i in range(nz):
+##                vector += '1'
+##            v2 = vector + v2
+##        return v1 >= v2
+##
+##    def __gt__(self,other, /):
+##        """
+##        Return self>other
+##        """
+##        v1 = self._ternaryCode()
+##        v2 = other._ternaryCode()
+##        nz = len(v1) - len(v2)
+##        if nz < 0:
+##            vector = ''
+##            for i in range(abs(nz)):
+##                vector = vector + '1'
+##            v1 = vector + v1
+##        elif nz > 0:
+##            vector = ''
+##            for i in range(nz):
+##                vector += '1'
+##            v2 = vector + v2
+##        return v1>v2
+##
+##    def __le__(self,other, /):
+##        """
+##        Return self<=other
+##        """
+##        v1 = self._ternaryCode()
+##        v2 = other._ternaryCode()
+##        nz = len(v1) - len(v2)
+##        if nz < 0:
+##            vector = ''
+##            for i in range(abs(nz)):
+##                vector = vector + '1'
+##            v1 = vector + v1
+##        elif nz > 0:
+##            vector = ''
+##            for i in range(nz):
+##                vector += '1'
+##            v2 = vector + v2
+##        return v1<=v2
+##
+##    def __lt__(self,other, /):
+##        """
+##        Return self>other
+##        """
+##        v1 = self._ternaryCode()
+##        v2 = other._ternaryCode()
+##        nz = len(v1) - len(v2)
+##        if nz < 0:
+##            vector = ''
+##            for i in range(abs(nz)):
+##                vector = vector + '1'
+##            v1 = vector + v1
+##        elif nz > 0:
+##            vector = ''
+##            for i in range(nz):
+##                vector += '1'
+##            v2 = vector + v2
+##        return v1<v2
+##    
+##    def __ne__(self,other, /):
+##        """
+##        Return self!=other
+##        """
+##        v1 = self._ternaryCode()
+##        v2 = other._ternaryCode()
+##        nz = len(v1) - len(v2)
+##        if nz < 0:
+##            vector = ''
+##            for i in range(abs(nz)):
+##                vector = vector + '1'
+##            v1 = vector + v1
+##        elif nz > 0:
+##            vector = ''
+##            for i in range(nz):
+##                vector += '1'
+##            v2 = vector + v2
+##        return v1!=v2
+##
+##    def __sub__(self,other, /):
+##        """
+##        Return self-other
+##        """
+##        new = self + (-other)
+##        return new
+##
+##    def __int__(self, /):
+##        """
+##        Return self.value()
+##        """
+##        return self.value()
+##
+##    def __divmod__(self,other, /):
+##        """
+##        Return divmod(self,other)
+##        """
+##        q,r = divmod(int(self),int(other))
+##        return BachetNumber(q),BachetNumber(r)
+##               
+##    def value(self):
+##        """
+##        Return the integer value of the Bachet number
+##        """
+##        try:
+##            return self.integerValue
+##        except:
+##            self.integerValue = self._computeValue()
+##            return self.integerValue
+##
+##    def _computeValue(self,vector=None):
+##        """
+##        Computes the integer or decimal value corresponding to the
+##        polarised, respectively valued, Bachet vector.
+##        """
+##        if vector is None:
+##            vector = self.vector
+##        value = 0
+##        nv = len(vector)
+##        base3Power = 1   # 3**0
+##        for i in range(nv):
+##            value += base3Power*vector[nv-i-1]
+##            base3Power *= 3 # 3**i
+##        return value
+##
+##        
+##    def _ternaryCode(self):
+##        """
+##        Return the ternary {0,1,2} code of the Bachet number.
+##        Used for alphabetically comparing Bachet numbers.
+##        """
+##        try:
+##            return self.ternaryString
+##        except:
+##            self.ternaryString = self._encodeTernaryCode()
+##            return self.ternaryString
+##
+##    def _encodeTernaryCode(self):
+##        """
+##        Returns the ternary 0,1,2 code of the Bachet vector
+##        """
+##        codeString = ''
+##        vector = self.vector
+##        for i in range(len(self.vector)):
+##            if vector[i] == -1:
+##                codeString += '0'
+##            elif vector[i] == 0:
+##                codeString += '1'
+##            else:
+##                codeString += '2'
+##        self.ternaryString = codeString
+##        return codeString
+##
+##    def __len__(self):
+##        """
+##        Returns the length of the Bachet encoding
+##        """
+##        return len(self.vector)
+##
+##    def reverse(self):
+##        """
+##        Reverses the Bachet vector. Returns a modified Bachet number.
+##        """
+##        #from copy import deepcopy
+##        ln = len(self.vector)
+##        result = [0 for i in range(ln)]
+##        for i in range(ln):
+##            result[i] = self.vector[ln-i-1]
+##        rev = BachetNumber(vector=result,length=ln)
+##        return rev
+##
+##    def __invert__(self, /):
+##        """
+##        Return ~self
+##        """
+##        return self.reverse()
+##
+##    def __mod__(self, other, /):
+##        """
+##        Return self%other
+##        """
+##        v1 = int(self)
+##        v2 = int(other)
+##        v3 = v1%v2
+##        return BachetNumber(v3)
+##
 #------------- end of BachetNumber class ------------------
     
 def primesBelow(N,Odd=False):
