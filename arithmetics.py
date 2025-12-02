@@ -101,7 +101,12 @@ class QuadraticResiduesDigraph(Digraph):
 # Discrete Mathematics lectures 2008
 # (c) 2025 RB 
 
-##class BachetNumber(object):
+from bachetNumbers import BachetNumber as BN
+
+class BachetNumber(BN):
+    """
+    Redirected to the bachetNumbers module
+    """
 ##    """
 ##    Bipolar-valued {-1,0,+1} base 3 encoded integers due to Claude Gaspard Bachet de Méziriac (1621)
 ##    
@@ -1352,32 +1357,17 @@ if __name__ == '__main__':
 
     
     ######  scratch pad for testing the module components
-##    from math import sqrt
-##    p = 5
-##    q = 8
-##    print('p =',p,', q =',q)
-##    print('cf(p,q) = ', simpleContinuedFraction(p,q) )
-##    print('eval(cf(p,q)) = ', decimalEvalContinuedFraction(simpleContinuedFraction(p,q)) )
-##    cf = [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
-##    print('cf(sqrt(2))_%d = ' % (len(cf)-1), cf )
-##    print('eval(cf(sqrt(2))_%d) = ' % (len(cf)-1), decimalEvalContinuedFraction(cf) )
-##    print('sqrt(2)              = ', sqrt(2) )
-##
+    from math import sqrt
+    p = 5
+    q = 8
+    print('p =',p,', q =',q)
+    print('cf(p,q) = ', simpleContinuedFraction(p,q) )
+    print('eval(cf(p,q)) = ', decimalEvalContinuedFraction(simpleContinuedFraction(p,q)) )
+    cf = [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
+    print('cf(sqrt(2))_%d = ' % (len(cf)-1), cf )
+    print('eval(cf(sqrt(2))_%d) = ' % (len(cf)-1), decimalEvalContinuedFraction(cf) )
+    print('sqrt(2)              = ', sqrt(2) )
 
-    print('*-----Computing with Bachet numbers----------*') 
-    n1 = BachetNumber(12)
-    n2 = BachetNumber(154)
-    n3 = n1 + n2
-    n4 = n1 * n2
-    print('\'%s\' (%d) + \'%s\' (%d) = \'%s\' (%d)' % (n1, n1.value(), n2, n2.value(), n3, n3.value() ))
-    print('\'%s\' (%d) * \'%s\' (%d) = \'%s\' (%d)' % (n1, n1.value(), n2, n2.value(), n4, n4.value() ))
-
-    n5 = n1.reverse()
-    n6 = -n1
-    print('\'%s\' (%d) + \'%s\' (%d) = \'%s\' (%d)' % ( n5, n5.value(), n6, n6.value(),
-                                                       (n5 + n6), (n5+n6).value() ))
-##    n7 = n6.permute(1,3)
-##    print(n7,n7.value())
     
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')

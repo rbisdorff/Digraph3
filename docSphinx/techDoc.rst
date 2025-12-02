@@ -17,7 +17,7 @@ Technical Reference of the Digraph3 modules
 
    :New:
 
-        - A :py:class:`~arithmetics.BachetNumber` class for computing with bipolar-valued base 3 encoded Bachet numbers
+        - A :py:class:`~bachetNumbers.BachetNumber` class for computing with bipolar-valued base 3 encoded Bachet numbers
 	  
         - A :py:class:`~transitiveDigraphs.PartialBachetRanking` class for generating highly correlated **partial rankings** from a given outranking digraph instance.	
 
