@@ -26,8 +26,16 @@ __version__ = "$Revision: Python 3.12.8 $"
 
 # ------ Bachet bipolar {-1,0,1} base 3 encoded integers ---------------
 # Discrete Mathematics lectures 2008
-# (c) 2025 RB 
+# (c) 2025 RB
+
 from bachetNumbers import *
+from decimal import Decimal
+
+def toDecimal(self,/):
+    """
+    Return Decimal(int(self))
+    """
+    return Decimal(int(self))
 
 class BachetNumber(object):
     """
@@ -263,16 +271,6 @@ class BachetNumber(object):
         new = ~(BachetNumber(vector=vector,length=n))
         return new
 
-    def __mul__(self,other,/):
-        """
-        Defines the multiplication operator for Bachet encoded numbers.
-        """
-        ln = max(len(self),len(other))
-        n1 = int(self)
-        n2 = int(other)
-        n3 = n1 * n2
-        return BachetNumber(n3,length=ln)
-
     def __eq__(self,other, /):
         """
         Return the self==other value
@@ -374,6 +372,29 @@ class BachetNumber(object):
         new = self + (-other)
         return new
 
+    def __divmod__(self,other, /):
+        """
+        Return BachetNumber(q),BachetNumber(r) where q,r = divmod(int(self),int(other))
+        """
+        ln = max(len(self),len(other))
+        q,r = divmod(int(self),int(other))
+        return BachetNumber(q,length=ln),BachetNumber(r,length=ln)
+
+    def __floordiv__(self,other,/):
+        ln = max(len(self),len(other))
+        q = int(self)//int(other)
+        return BachetNumber(q,length=ln)
+  
+    def __mul__(self,other,/):
+        """
+        Defines the multiplication operator for Bachet encoded numbers.
+        """
+        ln = max(len(self),len(other))
+        n1 = int(self)
+        n2 = int(other)
+        n3 = n1 * n2
+        return BachetNumber(n3,length=ln)
+
     def __int__(self, /):
         """
         Return self.integerValue
@@ -384,16 +405,9 @@ class BachetNumber(object):
             self.integerValue = self._computeValue()
             return self.integerValue
 
-    def __divmod__(self,other, /):
-        """
-        Return BachetNumber(q),BachetNumber(r) where q,r = divmod(int(self),int(other))
-        """
-        q,r = divmod(int(self),int(other))
-        return BachetNumber(q),BachetNumber(r)
-
     def _computeValue(self,vector=None):
         """
-        Computes the integer or decimal value corresponding to the
+        Computes the integer value corresponding to the
         polarised, respectively valued, Bachet vector.
         """
         if vector is None:
@@ -406,7 +420,12 @@ class BachetNumber(object):
             base3Power *= 3 # 3**i
         return value
 
-        
+    def __float__(self,/):
+        """
+        Return float(self)
+        """
+        return float(int(self))   
+
 ##    def _ternaryCode(self):
 ##        """
 ##        Return the ternary {0,1,2} code of the Bachet number.
