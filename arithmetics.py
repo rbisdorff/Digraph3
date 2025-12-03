@@ -101,7 +101,7 @@ class QuadraticResiduesDigraph(Digraph):
 # Discrete Mathematics lectures 2008
 # (c) 2025 RB 
 
-from bachetNumbers import BachetNumber as BN
+from bachetNumbers import BachetInteger as BN
 
 class BachetNumber(BN):
     """

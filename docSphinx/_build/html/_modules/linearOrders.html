@@ -1429,7 +1429,7 @@
         <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
         <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
         <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
-        <span class="kn">import</span> <span class="nn">bachetNumbers</span> <span class="k">as</span> <span class="nn">ar</span>
+        <span class="kn">from</span> <span class="nn">bachetNumbers</span> <span class="kn">import</span> <span class="n">BachetInteger</span> <span class="k">as</span> <span class="n">BachetNumber</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
         <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -1566,8 +1566,8 @@
                 <span class="n">vecy</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">cRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">])</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actionsList</span> <span class="k">if</span> <span class="n">y</span> <span class="o">!=</span> <span class="n">x</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="n">vecx</span><span class="p">,</span><span class="n">vecy</span><span class="p">)</span>
-                <span class="n">bx</span> <span class="o">=</span> <span class="n">ar</span><span class="o">.</span><span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">vecx</span><span class="p">)</span>
-                <span class="n">by</span> <span class="o">=</span> <span class="n">ar</span><span class="o">.</span><span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">vecy</span><span class="p">)</span>
+                <span class="n">bx</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">vecx</span><span class="p">)</span>
+                <span class="n">by</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">vecy</span><span class="p">)</span>
                 <span class="n">bScore</span> <span class="o">=</span> <span class="n">bx</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="n">by</span><span class="p">)</span>
                 <span class="n">incBachetScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">bScore</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
                 <span class="n">decBachetScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">bScore</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
@@ -1964,7 +1964,7 @@
         <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
         <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
         <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
-        <span class="kn">import</span> <span class="nn">bachetNumbers</span> <span class="k">as</span> <span class="nn">ar</span>
+        <span class="kn">from</span> <span class="nn">bachetNumbers</span> <span class="kn">import</span> <span class="n">BachetInteger</span> <span class="k">as</span> <span class="n">BachetNumber</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span>
@@ -2100,8 +2100,8 @@
                 <span class="n">vecy</span> <span class="o">=</span> <span class="p">[</span><span class="n">cRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actionsList</span> <span class="k">if</span> <span class="n">y</span> <span class="o">!=</span> <span class="n">x</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="n">vecx</span><span class="p">,</span><span class="n">vecy</span><span class="p">)</span>
-                <span class="n">bx</span> <span class="o">=</span> <span class="n">ar</span><span class="o">.</span><span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">vecx</span><span class="p">)</span>
-                <span class="n">by</span> <span class="o">=</span> <span class="n">ar</span><span class="o">.</span><span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">vecy</span><span class="p">)</span>
+                <span class="n">bx</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">vecx</span><span class="p">)</span>
+                <span class="n">by</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">vecy</span><span class="p">)</span>
                 <span class="n">bScore</span> <span class="o">=</span> <span class="n">bx</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="n">by</span><span class="p">)</span>
                 <span class="n">incBachetScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">bScore</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
                 <span class="n">decBachetScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">bScore</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
@@ -2851,6 +2851,7 @@
     <span class="n">Polarised</span><span class="o">=</span><span class="kc">False</span>
     <span class="c1">#t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)</span>
     <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sampleSize</span><span class="p">):</span>
+        <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
         <span class="c1">#seed = random.randint(1,1000000)</span>
         <span class="c1">#seed = 8</span>
@@ -2936,6 +2937,7 @@
                             <span class="n">Randomized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                             <span class="n">CoDualTriples</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                             <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;run time:&#39;</span><span class="p">,</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span><span class="n">t0</span><span class="p">)</span>
         <span class="n">corrba4</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba4</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
         <span class="c1">#print(&#39;Smart valued Bachet Ranking&#39;)</span>
         <span class="c1">#print(&#39;bav&#39;,ba2.bachetRanking,corrba2)</span>
@@ -2988,7 +2990,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Dec 02, 2025.
+      <span class="lastupdated">Last updated on Dec 03, 2025.
       </span></p>
   </div>
 

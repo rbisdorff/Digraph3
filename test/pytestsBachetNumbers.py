@@ -8,8 +8,8 @@ from bachetNumbers import *
     
 def testBachetIntegerEncoding():
     print('==>> Testing Bachet encoding of integers')
-    n1 = BachetNumber(12)
-    n2 = BachetNumber(13)
+    n1 = BachetVector(12)
+    n2 = BachetInteger(13)
     n3 = n1 + n2
     n4 = n1 * n2
     print('%s (%d) + %s (%d) = %s (%d)' % (n1, int(n1), n2, int(n2), n3, int(n3) ))

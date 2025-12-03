@@ -1,6 +1,12 @@
 #!/Usr/bin/env python3
 """
-Python3+ implementation of bipolar-valued base 3 integers
+Python3+ implementation of bipolar-valued base 3 integers.
+
+Two versions are provided:
+
+    - the *BachetInteger* class (default) based on the int() values of the Bachet numbers 
+
+    - the *BachetVector* class based on the balanced ternary vectors,
 
 Copyright (C) 2025 Raymond Bisdorff
 
