@@ -3081,7 +3081,7 @@ Examples of such *sbits* encoded *Bachet* numbers are immediately provided by th
 
    >>> from outrankingDigraphs import *
    >>> from linearOrders import *
-   >>> from arithmetics import BachetNumber
+   >>> from bachetNumbers import BachetNumber
    >>> g = RandomBipolarOutrankingDigraph(numberOfActions=4,seed=1)
    >>> pg = PolarisedDigraph(g,level=g.valuationdomain['med'],
    ...                      StrictCut=True,KeepValues=False)

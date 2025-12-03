@@ -1290,7 +1290,7 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
         from collections import OrderedDict
         from time import time
         from operator import itemgetter
-        import bachetNumbers as ar
+        from bachetNumbers import BachetInteger as BachetNumber
         from copy import deepcopy
         from decimal import Decimal
         if Debug:
@@ -1427,8 +1427,8 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
                 vecy = [int(cRelation[y][x]) for y in actionsList if y != x]
                 if Debug:
                     print(vecx,vecy)
-                bx = ar.BachetNumber(vector=vecx)
-                by = ar.BachetNumber(vector=vecy)
+                bx = BachetNumber(vector=vecx)
+                by = BachetNumber(vector=vecy)
                 bScore = bx + (-by)
                 incBachetScores.append((bScore,x))
                 decBachetScores.append((bScore,x))
@@ -1813,7 +1813,7 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
         from decimal import Decimal
         from time import time
         from operator import itemgetter
-        import bachetNumbers as ar
+        from bachetNumbers import BachetInteger as BachetNumber
         from copy import deepcopy
         if Debug:
             Comments=True
@@ -1949,8 +1949,8 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
                 vecy = [cRelation[y][x] for y in actionsList if y != x]
                 if Debug:
                     print(vecx,vecy)
-                bx = ar.BachetNumber(vector=vecx)
-                by = ar.BachetNumber(vector=vecy)
+                bx = BachetNumber(vector=vecx)
+                by = BachetNumber(vector=vecy)
                 bScore = bx + (-by)
                 incBachetScores.append((bScore,x))
                 decBachetScores.append((bScore,x))
@@ -2675,6 +2675,7 @@ if __name__ == "__main__":
     Polarised=False
     #t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
     for sample in range(sampleSize):
+        t0 = time()
         print(sample)
         #seed = random.randint(1,1000000)
         #seed = 8
@@ -2760,6 +2761,7 @@ if __name__ == "__main__":
                             Randomized=False,
                             CoDualTriples=False,
                             seed=seed)
+        print('run time:', time() -t0)
         corrba4 = g.computeRankingCorrelation(ba4.bachetRanking)
         #print('Smart valued Bachet Ranking')
         #print('bav',ba2.bachetRanking,corrba2)
