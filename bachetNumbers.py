@@ -105,15 +105,21 @@ class BachetVector(object):
         reprString += 'Attributes     : %s\n' % list(self.__dict__.keys())    
         return reprString
     
-    def __init__(self,num_int=None,vector=None,length=1):
+    def __init__(self,/,num_int=None,vector=None,length=1):
         """
         Tranforms a potentially signed integer into a Bachet number.
         Returns [0] when no arguments are given. 
         """
+        
         if num_int is None:
             if vector is not None:
+                value = self._computeValue(vector)
+                num_int = int(value)
+                self.integerValue = num_int
+                if num_int != value:
+                    self.decimalValue = value
+                    self.decimalVector = vector
                 ln = len(vector)
-                num_int = round(self._computeValue(vector))
                 b = BachetVector(num_int,length=ln)
                 vl = len(b.vector)
                 if vl >= length:
@@ -125,6 +131,7 @@ class BachetVector(object):
             else:
                 self.vector=[0 for i in range(length)]
         else:
+            self.integerValue = num_int
             self.vector = self._int2bachet(num_int)
             vl = len(self.vector)
             if vl < length:
@@ -132,7 +139,7 @@ class BachetVector(object):
                 vector = [0 for i in range(nz)]
                 self.vector = vector + self.vector
 
-    def _base10to3(self,num):
+    def _base10to3(self,num,/):
         """
         Change a base 10 number to a base 3 number.
         """
@@ -145,7 +152,7 @@ class BachetVector(object):
             current = current//3
         return new_num_string
 
-    def _base3toBachet(self,num_string):
+    def _base3toBachet(self,num_string,/):
         """
         Converts a base 3 encoded integer into a bipolar {-1,0,+1} encoded one.
 
@@ -169,7 +176,7 @@ class BachetVector(object):
             
         return new_vector
 
-    def _int2bachet(self,num_int):
+    def _int2bachet(self,num_int,/):
         """
         Converts a signed integer into a Bachet encoded number.
         """
@@ -224,7 +231,7 @@ class BachetVector(object):
         v2 = abs(v1)
         return BachetVector(v2,length=ln)        
 
-    def __add__(self,other,Debug=False):
+    def __add__(self,other,/,Debug=False):
         """
         Defines the balanced ternary addition operator for Bachet encoded numbers.
         """
@@ -432,13 +439,13 @@ class BachetVector(object):
         """
         return float(int(self))   
 
-    def __len__(self):
+    def __len__(self,/):
         """
         Return the length of the BachetNumber vector attribute
         """
         return len(self.vector)
 
-    def reverse(self):
+    def reverse(self, /):
         """
         Reverse the Bachet vector. ! Returns a modified BachetNumber object.
         """
@@ -516,7 +523,7 @@ class BachetInteger(object):
      '0+1+1' (4) + '-1-1-1' (-13) = '-100' (-9)
 
     """
-    def __repr__(self):
+    def __repr__(self,/):
         """
         Default presentation method for Bchet number instances.
         """
@@ -529,15 +536,20 @@ class BachetInteger(object):
         reprString += 'Attributes     : %s\n' % list(self.__dict__.keys())    
         return reprString
     
-    def __init__(self,num_int=None,vector=None,length=1):
+    def __init__(self,/,num_int=None,vector=None,length=1):
         """
         Tranforms a potentially signed integer into a Bachet number.
         Returns [0] when no arguments are given. 
         """
         if num_int is None:
             if vector is not None:
+                value = self._computeValue(vector)
+                num_int = int(value)
+                self.integerValue = num_int
+                if num_int != value:
+                    self.decimalValue = value
+                    self.decimalVector = vector
                 ln = len(vector)
-                num_int = round(self._computeValue(vector))
                 b = BachetInteger(num_int,length=ln)
                 vl = len(b.vector)
                 if vl >= length:
@@ -556,7 +568,7 @@ class BachetInteger(object):
                 vector = [0 for i in range(nz)]
                 self.vector = vector + self.vector
 
-    def _base10to3(self,num):
+    def _base10to3(self,num,/):
         """
         Change a base 10 number to a base 3 number.
         """
@@ -569,7 +581,7 @@ class BachetInteger(object):
             current = current//3
         return new_num_string
 
-    def _base3toBachet(self,num_string):
+    def _base3toBachet(self,num_string,/):
         """
         Converts a base 3 encoded integer into a bipolar {-1,0,+1} encoded one.
 
@@ -593,7 +605,7 @@ class BachetInteger(object):
             
         return new_vector
 
-    def _int2bachet(self,num_int):
+    def _int2bachet(self,num_int,/):
         """
         Converts a signed integer into a Bachet encoded number.
         """
@@ -648,7 +660,7 @@ class BachetInteger(object):
         v2 = abs(v1)
         return BachetInteger(v2)        
 
-    def __add__(self,other):
+    def __add__(self,other,/):
         """
         Defines the balanced ternary addition operator for Bachet encoded numbers.
         """
@@ -656,7 +668,7 @@ class BachetInteger(object):
         v2 = int(other)
         v3 = v1 + v2
         return BachetInteger(v3)
-    def __radd__(self,other):
+    def __radd__(self,other,/):
         """
         Defines the balanced ternary addition operator for Bachet encoded numbers.
         """
@@ -759,7 +771,7 @@ class BachetInteger(object):
             self.integerValue = self._computeValue()
             return self.integerValue
 
-    def _computeValue(self,vector=None):
+    def _computeValue(self,/,vector=None):
         """
         Computes the integer value corresponding to the
         polarised, respectively valued, Bachet vector.
@@ -785,7 +797,7 @@ class BachetInteger(object):
         """
         return len(self.vector)
 
-    def reverse(self):
+    def reverse(self,/):
         """
         Reverse the Bachet vector. ! Returns a modified BachetNumber object.
         """
@@ -827,8 +839,8 @@ if __name__ == '__main__':
     """)
 
     ######  scratch pad for testing the module components
-    from bachetNumbers import BachetVector as BachetNumber
-    print('*-----Computing with Bachet numbers----------*') 
+    from bachetNumbers import BachetInteger as BachetNumber
+    print('*-----Computing with BachetInteger numbers----------*') 
     n1 = BachetNumber(12)
     n2 = BachetNumber(154)
     n3 = n1 + n2
@@ -840,10 +852,19 @@ if __name__ == '__main__':
     n6 = -n1
     print('\'%s\' (%d) + \'%s\' (%d) = \'%s\' (%d)' % ( n5, int(n5), n6, int(n6),
                                                        (n5 + n6), int(n5+n6) ))
-  
-    print('*------------------*')
-    print('If you see this line all tests were passed successfully :-)')
-    print('Enjoy !')
+    from bachetNumbers import BachetVector as BachetNumber
+    print('*-----Computing with BachetVector numbers----------*') 
+    n1 = BachetNumber(12)
+    n2 = BachetNumber(154)
+    n3 = n1 + n2
+    n4 = n1 * n2
+    print('\'%s\' (%d) + \'%s\' (%d) = \'%s\' (%d)' % (n1, int(n1), n2, int(n2), n3, int(n3) ))
+    print('\'%s\' (%d) * \'%s\' (%d) = \'%s\' (%d)' % (n1, int(n1), n2, int(n2), n4, int(n4) ))
+
+    n5 = n1.reverse()
+    n6 = -n1
+    print('\'%s\' (%d) + \'%s\' (%d) = \'%s\' (%d)' % ( n5, int(n5), n6, int(n6),
+                                                       (n5 + n6), int(n5+n6) ))
 
     ## timings
     from random import shuffle
@@ -860,6 +881,12 @@ if __name__ == '__main__':
     for s in range(1000):
         bv = bv + BachetNumber(s)
     print('addbv');print(time() - t0)
+
+    #############
+    print('*------------------*')
+    print('If you see this line all tests were passed successfully :-)')
+    print('Enjoy !')
+
     
     
 #####################################
