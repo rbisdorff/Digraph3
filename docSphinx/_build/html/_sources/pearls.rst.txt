@@ -3021,7 +3021,7 @@ Bipolar-valued {-1,0,+1} base 3 encoded integers are due to *Claude Gaspard Bach
 
 *Bachet*'s positional *sbits* numeration, called nowadays **balanced ternary numeral system** [25]_ , is simulating a weight balance scale where the number *n* and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for *n = 5* gives for instance :math:`3^2 = (n + 3^1 + 3^0)`. And the *sbits* encoding corresponds hence to the string '+1-1-1'. As, this representation is isomorphic to a base 3 ternary encoding, every positive or negative integer may so be represented with a unique *sbits* string. With four powers of 3, namely :math:`{3^3, 3^2, 3^1, 3^0}`, one may for instance represent any value in the integer range -40 to +40. *Bachet* showed that this bipolar weighing system relies on the smallest possible number of balance weights -base powers- needed in order to balance the scale for any given integer weight *n* [BAC-1622p]_.
 
-The Digraph3 :py:mod:`bachetNumbers` module provides with the :py:class:`~bachetNumbers.BachetNumber` class an implementation for such *sbits* encoded integers. Instantiating a *Bachet* number may be done either with an integer value or with a vector of sbits (see :numref:`BachetNumbers` Lines  2, 6, 11 and 15). The class provides the classical arithmetic operators from the standard *int* class, like binary *addition* and unary *negating* and *reversing* as illustrated in Lines 20 and 32-34 below. 
+The Digraph3 :py:mod:`bachetNumbers` module provides with the :py:class:`~bachetNumbers.BachetInteger` class an implementation for such *sbits* encoded integers. Instantiating a *Bachet* number may be done either with an integer value or with a vector of sbits (see :numref:`BachetNumbers` Lines  2, 6, 11 and 15). The class provides the classical arithmetic operators from the standard *int* class, like binary *addition* and unary *negating* and *reversing* as illustrated in Lines 20 and 32-34 below. 
 
 .. code-block:: pycon
    :caption: Working with *Bachet* sbits encoded numbers
@@ -3029,11 +3029,11 @@ The Digraph3 :py:mod:`bachetNumbers` module provides with the :py:class:`~bachet
    :emphasize-lines: 2,6,11,15,20,31-34,37
    :linenos:
     
-   >>> from bachetNumbers import BachetNumber
+   >>> from bachetNumbers import BachetInteger as BachetNumber
    >>> n1 = BachetNumber(5)
    >>> n1
      *------- Bachet number description ------*
-     Instance class : BachetNumber
+     Instance class : BachetInteger
      String         : '+1-1-1'
      Vector         : [1, -1, -1]
      Length         : 3
@@ -3042,7 +3042,7 @@ The Digraph3 :py:mod:`bachetNumbers` module provides with the :py:class:`~bachet
    >>> n2 = BachetNumber(vector=[1,1,1])
    >>> n2
      *------- Bachet number description ------*
-     Instance class : BachetNumber
+     Instance class : BachetInteger
      String         : '+1+1+1'
      Vector         : [1, 1, 1]
      Length         : 3
@@ -3051,7 +3051,7 @@ The Digraph3 :py:mod:`bachetNumbers` module provides with the :py:class:`~bachet
    >>> n3 = n1 + n2
    >>> n3
      *------- Bachet number description ------*
-     Instance class : BachetNumber
+     Instance class : BachetInteger
      String         : '+1-100'
      Vector         : [1, -1, 0, 0]
      Length         : 4
@@ -3081,7 +3081,7 @@ Examples of such *sbits* encoded *Bachet* numbers are immediately provided by th
 
    >>> from outrankingDigraphs import *
    >>> from linearOrders import *
-   >>> from bachetNumbers import BachetNumber
+   >>> from bachetNumbers import BachetInteger as BachetNumber
    >>> g = RandomBipolarOutrankingDigraph(numberOfActions=4,seed=1)
    >>> pg = PolarisedDigraph(g,level=g.valuationdomain['med'],
    ...                      StrictCut=True,KeepValues=False)
@@ -3296,7 +3296,7 @@ When we reconsider above digraph *g*'s polarised relation table, we may indeed n
     ['a3', 'a4', 'a2', 'a1'] ['a4', 'a1', 'a3', 'a2'] 0.6890
      ['a1', 'a2', 'a4', 'a3'] ['a4', 'a3', 'a2', 'a1'] 0.7950
      
-It appears hence to be opportune to compute a first *Bachet* ranking result with the given order of the *self.actions* attribute and a second one with the corresponding reversed ordering. The best correlated of both ranking results is eventually returned. The :py:class:`~linearOrders.PolarisedBachetRanking` class provides therefore the *BestQualified* parameter set by default to *True* (see below :numref:`optimisingBachet` Lines 5 and 19,21,35). Computing the reversed version of the *Bachet* rule is indeed computationally easy as it just requires to reverse the previously used *Bachet* vectors, a method directly provided by the :py:mod:`~bachetNumbers.BachetNumber` class. 
+It appears hence to be opportune to compute a first *Bachet* ranking result with the given order of the *self.actions* attribute and a second one with the corresponding reversed ordering. The best correlated of both ranking results is eventually returned. The :py:class:`~linearOrders.PolarisedBachetRanking` class provides therefore the *BestQualified* parameter set by default to *True* (see below :numref:`optimisingBachet` Lines 5 and 19,21,35). Computing the reversed version of the *Bachet* rule is indeed computationally easy as it just requires to reverse the previously used *Bachet* vectors, a method directly provided by the :py:mod:`~bachetNumbers.BachetInteger` class. 
 
 .. code-block:: pycon
    :caption: Optimising the *Bachet* ranking result I
@@ -3663,7 +3663,7 @@ Computing initial and terminal *prekernels* in digraphs is the subject of the ne
 Notes
 .....
 
-Our initial Python implementation of the :py:class:`~bachetNumbers.BachetNumber` class dates from 2012 when preparing the lectures of a first Semester course on *Discrete Mathematics* for computer scientists. But, it is only in Spring 2025 that we realized how remarkably well *Bachet*'s signed bits weighing design is adapted to our bipolar-valued epistemic logic approach. The *Bachet* ranking rules illustrate here convincingly the benefit one may indeed obtain when computing, not in a binary {0,1} bit world, like today all bit-wise computing devices, but instead in a bipolar-valued {-1,0,+1} world with **balanced ternary Bachet computers** [26]_.
+Our initial Python implementation of the :py:class:`~bachetNumbers.BachetInteger` class dates from 2012 when preparing the lectures of a first Semester course on *Discrete Mathematics* for computer scientists. But, it is only in Spring 2025 that we realized how remarkably well *Bachet*'s signed bits weighing design is adapted to our bipolar-valued epistemic logic approach. The *Bachet* ranking rules illustrate here convincingly the benefit one may indeed obtain when computing, not in a binary {0,1} bit world, like today all bit-wise computing devices, but instead in a bipolar-valued {-1,0,+1} world with **balanced ternary Bachet computers** [26]_.
 
 The power of the **epistemic disjunctive fusion** operator, for instance, is indeed impressive. When two arguments prove the *Truthfulness* of a logical statement, their fusion will be **True**. When two arguments prove the **Falseness** of the statement, their fusion will be **False**, However, when they provide conjointly a proof of *Falseness* **and** a proof of *Truthfulness*, their fusion will be **indeterminate** (zero knowledge). It is worthwhile noticing again the essential computational role this indeterminate **zero** value is taking on in such a *Bachet* computer.
 
