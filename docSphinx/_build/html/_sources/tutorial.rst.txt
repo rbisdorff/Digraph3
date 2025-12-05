@@ -53,6 +53,10 @@
 
       - Two tutorials on computing :ref:`fair intergroup<Fair-InterGroup-Pairings-label>` and :ref:`fair intragroup<Fair-IntraGroup-Pairings-label>` pairing solutions	      
 
+   **Preface**
+   
+   The tutorials in this document describe the practical usage of our *Digraph3* Python3 software resources in the field of *Algorithmic Decision Theory* and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They mainly illustrate practical tools for a Master Course |location_link4| at the University of Luxembourg. The document contains first a set of tutorials introducing the main objects available in the Digraph3 collection of Python3 modules, like **bipolar-valued digraphs**, **outranking digraphs**, and **multicriteria performance tableaux**. The second and methodological part of this tutorials is decision problem oriented and shows how to edit multicriteria performance tableaux, how to compute the potential **winner(s)** of an election, how to build a **best choice recommendation**, and how to **rate** or **linearly rank** with multiple incommensurable performance criteria. A third part presents three **evaluation** and **decision case studies**. A fourth part with more graph theoretical tutorials follows. One on working with **undirected graphs**, followed by a tutorial on how to compute **non isomorphic maximal independent sets** (kernels) in the n-cycle graph. Special tutorials are devoted to *perfect* graphs, like *split*, *interval* and *permutation* graphs, and to *tree-graphs* and *forests*. Finally we discuss the **fair intergroup and intragroup pairing** problem.
+
    Contents
    --------
 
@@ -100,10 +104,6 @@
        * :ref:`Computing the non isomorphic MISs of the 12-cycle graph <IsomorphicMIS-Tutorial-label>`
        * :ref:`About comparability, split, interval and permutation graphs <Permutation-Tutorial-label>`
        * :ref:`On tree graphs and graph forests <Trees-Tutorial-label>`
-
-   **Preface**
-   
-   The tutorials in this document describe the practical usage of our *Digraph3* Python3 software resources in the field of *Algorithmic Decision Theory* and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They mainly illustrate practical tools for a Master Course |location_link4| at the University of Luxembourg. The document contains first a set of tutorials introducing the main objects available in the Digraph3 collection of Python3 modules, like **bipolar-valued digraphs**, **outranking digraphs**, and **multicriteria performance tableaux**. The second and methodological part of this tutorials is decision problem oriented and shows how to edit multicriteria performance tableaux, how to compute the potential **winner(s)** of an election, how to build a **best choice recommendation**, and how to **rate** or **linearly rank** with multiple incommensurable performance criteria. A third part presents three **evaluation** and **decision case studies**. A fourth part with more graph theoretical tutorials follows. One on working with **undirected graphs**, followed by a tutorial on how to compute **non isomorphic maximal independent sets** (kernels) in the n-cycle graph. Special tutorials are devoted to *perfect* graphs, like *split*, *interval* and *permutation* graphs, and to *tree-graphs* and *forests*. Finally we discuss the **fair intergroup and intragroup pairing** problem.
 
    **Appendices**
        * :ref:`Bibliography <Appendices-label>`

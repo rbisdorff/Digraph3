@@ -11,7 +11,7 @@
 \contentsline {subsection}{\numberline {1.2}Working with the \sphinxstyleliteralintitle {\sphinxupquote {digraphs}} module}{10}{subsection.1.2}%
 \contentsline {subsubsection}{Random digraphs}{11}{subsubsection*.32}%
 \contentsline {subsubsection}{Graphviz drawings}{13}{subsubsection*.33}%
-\contentsline {subsubsection}{Asymmetrical and symmetrical parts}{13}{subsubsection*.34}%
+\contentsline {subsubsection}{Asymmetrical and symmetrical parts}{14}{subsubsection*.34}%
 \contentsline {subsubsection}{Border and inner parts}{15}{subsubsection*.35}%
 \contentsline {subsubsection}{Fusion by epistemic disjunction}{17}{subsubsection*.36}%
 \contentsline {subsubsection}{Dual, converse and codual digraphs}{18}{subsubsection*.37}%

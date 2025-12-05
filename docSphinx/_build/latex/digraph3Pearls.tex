@@ -67,7 +67,7 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{November 29, 2025}
+\date{December 05, 2025}
 \release{3.14.0}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -4300,16 +4300,16 @@ Bipolar\sphinxhyphen{}valued \{\sphinxhyphen{}1,0,+1\} base 3 encoded integers a
 \end{footnote} , is simulating a weight balance scale where the number \sphinxstyleemphasis{n} and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for \sphinxstyleemphasis{n = 5} gives for instance \(3^2 = (n + 3^1 + 3^0)\). And the \sphinxstyleemphasis{sbits} encoding corresponds hence to the string ‘+1\sphinxhyphen{}1\sphinxhyphen{}1’. As, this representation is isomorphic to a base 3 ternary encoding, every positive or negative integer may so be represented with a unique \sphinxstyleemphasis{sbits} string. With four powers of 3, namely \({3^3, 3^2, 3^1, 3^0}\), one may for instance represent any value in the integer range \sphinxhyphen{}40 to +40. \sphinxstyleemphasis{Bachet} showed that this bipolar weighing system relies on the smallest possible number of balance weights \sphinxhyphen{}base powers\sphinxhyphen{} needed in order to balance the scale for any given integer weight \sphinxstyleemphasis{n} \sphinxcite{pearls:bac-1622p}.
 
 \sphinxAtStartPar
-The Digraph3 \sphinxcode{\sphinxupquote{arithmetics}} module provides with the \sphinxcode{\sphinxupquote{BachetNumber}} class an implementation for such \sphinxstyleemphasis{sbits} encoded integers. Instantiating a \sphinxstyleemphasis{Bachet} number may be done either with an integer value or with a vector of sbits (see \hyperref[\detokenize{pearls:bachetnumbers}]{Listing \ref{\detokenize{pearls:bachetnumbers}}} Lines  2, 6, 11 and 15). The class provides the classical arithmetic operations from the standard \sphinxstyleemphasis{int} class, like binary \sphinxstyleemphasis{addition} and unary \sphinxstyleemphasis{negating} and \sphinxstyleemphasis{reversing} as illustrated in Lines 20 and 32\sphinxhyphen{}34 below.
+The Digraph3 \sphinxcode{\sphinxupquote{bachetNumbers}} module provides with the \sphinxcode{\sphinxupquote{BachetInteger}} class an implementation for such \sphinxstyleemphasis{sbits} encoded integers. Instantiating a \sphinxstyleemphasis{Bachet} number may be done either with an integer value or with a vector of sbits (see \hyperref[\detokenize{pearls:bachetnumbers}]{Listing \ref{\detokenize{pearls:bachetnumbers}}} Lines  2, 6, 11 and 15). The class provides the classical arithmetic operators from the standard \sphinxstyleemphasis{int} class, like binary \sphinxstyleemphasis{addition} and unary \sphinxstyleemphasis{negating} and \sphinxstyleemphasis{reversing} as illustrated in Lines 20 and 32\sphinxhyphen{}34 below.
 \sphinxSetupCaptionForVerbatim{Working with \sphinxstyleemphasis{Bachet} sbits encoded numbers}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:bachetnumbers}}}
 \fvset{hllines={, 2, 6, 11, 15, 20, 31, 32, 33, 34, 37,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{arithmetics} \PYG{k+kn}{import} \PYG{n}{BachetNumber}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{bachetNumbers} \PYG{k+kn}{import} \PYG{n}{BachetInteger} \PYG{k}{as} \PYG{n}{BachetNumber}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{n1} \PYG{o}{=} \PYG{n}{BachetNumber}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{n1}
 \PYG{g+go}{  *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Bachet number description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+go}{  Instance class : BachetNumber}
+\PYG{g+go}{  Instance class : BachetInteger}
 \PYG{g+go}{  String         : \PYGZsq{}+1\PYGZhy{}1\PYGZhy{}1\PYGZsq{}}
 \PYG{g+go}{  Vector         : [1, \PYGZhy{}1, \PYGZhy{}1]}
 \PYG{g+go}{  Length         : 3}
@@ -4318,7 +4318,7 @@ The Digraph3 \sphinxcode{\sphinxupquote{arithmetics}} module provides with the \
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{n2} \PYG{o}{=} \PYG{n}{BachetNumber}\PYG{p}{(}\PYG{n}{vector}\PYG{o}{=}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{n2}
 \PYG{g+go}{  *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Bachet number description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+go}{  Instance class : BachetNumber}
+\PYG{g+go}{  Instance class : BachetInteger}
 \PYG{g+go}{  String         : \PYGZsq{}+1+1+1\PYGZsq{}}
 \PYG{g+go}{  Vector         : [1, 1, 1]}
 \PYG{g+go}{  Length         : 3}
@@ -4327,20 +4327,21 @@ The Digraph3 \sphinxcode{\sphinxupquote{arithmetics}} module provides with the \
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{n3} \PYG{o}{=} \PYG{n}{n1} \PYG{o}{+} \PYG{n}{n2}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{n3}
 \PYG{g+go}{  *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Bachet number description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+go}{  Instance class : BachetNumber}
+\PYG{g+go}{  Instance class : BachetInteger}
 \PYG{g+go}{  String         : \PYGZsq{}+1\PYGZhy{}100\PYGZsq{}}
 \PYG{g+go}{  Vector         : [1, \PYGZhy{}1, 0, 0]}
 \PYG{g+go}{  Length         : 4}
 \PYG{g+go}{  Value          : 18}
 \PYG{g+go}{  Attributes     : [\PYGZsq{}vector\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{ (}\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s1}{) + }\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{ (}\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s1}{) = }\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{ (}\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s1}{)}\PYG{l+s+s1}{\PYGZsq{}}
-\PYG{g+gp}{... }       \PYG{o}{\PYGZpc{}} \PYG{p}{(}\PYG{n}{n1}\PYG{p}{,} \PYG{n}{n1}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{n2}\PYG{p}{,} \PYG{n}{n2}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{n3}\PYG{p}{,} \PYG{n}{n3}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)} \PYG{p}{)}\PYG{p}{)}
+\PYG{g+gp}{... }       \PYG{o}{\PYGZpc{}} \PYG{p}{(}\PYG{n}{n1}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{n1}\PYG{p}{)}\PYG{p}{,} \PYG{n}{n2}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{n2}\PYG{p}{)}\PYG{p}{,} \PYG{n}{n3}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{n3}\PYG{p}{)} \PYG{p}{)}\PYG{p}{)}
+\PYG{g+go}{ \PYGZsh{} int(n1) = n1.value()}
 \PYG{g+go}{  \PYGZsq{}+1\PYGZhy{}1\PYGZhy{}1\PYGZsq{} (5) + \PYGZsq{}+1+1+1\PYGZsq{} (13) = \PYGZsq{}+1\PYGZhy{}100\PYGZsq{} (18)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{n4} \PYG{o}{=} \PYG{n}{n1}\PYG{o}{.}\PYG{n}{reverse}\PYG{p}{(}\PYG{p}{)}   \PYG{c+c1}{\PYGZsh{} n4 = \PYGZti{}n1}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{n4} \PYG{o}{=} \PYG{o}{\PYGZti{}}\PYG{n}{n1}   \PYG{c+c1}{\PYGZsh{} \PYGZti{}n1 = n1.reverse()}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{n5} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{n}{n2}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{n6} \PYG{o}{=} \PYG{n}{n4} \PYG{o}{+} \PYG{n}{n5}        \PYG{c+c1}{\PYGZsh{} n6 = \PYGZti{}n1 \PYGZhy{} n2}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{ (}\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s1}{) + }\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{ (}\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s1}{) = }\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{ (}\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s1}{)}\PYG{l+s+s1}{\PYGZsq{}}
-\PYG{g+gp}{... }      \PYG{o}{\PYGZpc{}} \PYG{p}{(} \PYG{n}{n4}\PYG{p}{,} \PYG{n}{n4}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{n5}\PYG{p}{,} \PYG{n}{n5}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,}\PYG{n}{n6}\PYG{p}{,} \PYG{n}{n6}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)} \PYG{p}{)} \PYG{p}{)}
+\PYG{g+gp}{... }      \PYG{o}{\PYGZpc{}} \PYG{p}{(} \PYG{n}{n4}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{n4}\PYG{p}{)}\PYG{p}{,} \PYG{n}{n5}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{n5}\PYG{p}{)}\PYG{p}{,} \PYG{n}{n6}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{n6}\PYG{p}{)} \PYG{p}{)} \PYG{p}{)}
 \PYG{g+go}{  \PYGZsq{}\PYGZhy{}1\PYGZhy{}1+1\PYGZsq{} (\PYGZhy{}11) + \PYGZsq{}\PYGZhy{}1\PYGZhy{}1\PYGZhy{}1\PYGZsq{} (\PYGZhy{}13) = \PYGZsq{}\PYGZhy{}10+10\PYGZsq{} (\PYGZhy{}24)}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
@@ -4356,7 +4357,7 @@ Examples of such \sphinxstyleemphasis{sbits} encoded \sphinxstyleemphasis{Bachet
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{o}{*}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{o}{*}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{arithmetics} \PYG{k+kn}{import} \PYG{n}{BachetNumber}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{bachetNumbers} \PYG{k+kn}{import} \PYG{n}{BachetInteger} \PYG{k}{as} \PYG{n}{BachetNumber}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{RandomBipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pg} \PYG{o}{=} \PYG{n}{PolarisedDigraph}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{level}\PYG{o}{=}\PYG{n}{g}\PYG{o}{.}\PYG{n}{valuationdomain}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{med}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,}
 \PYG{g+gp}{... }                     \PYG{n}{StrictCut}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}\PYG{n}{KeepValues}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
@@ -4373,16 +4374,16 @@ Examples of such \sphinxstyleemphasis{sbits} encoded \sphinxstyleemphasis{Bachet
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ra2} \PYG{o}{=} \PYG{n}{BachetNumber}\PYG{p}{(}\PYG{n}{vector}\PYG{o}{=}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ra3} \PYG{o}{=} \PYG{n}{BachetNumber}\PYG{p}{(}\PYG{n}{vector}\PYG{o}{=}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ra4} \PYG{o}{=} \PYG{n}{BachetNumber}\PYG{p}{(}\PYG{n}{vector}\PYG{o}{=}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(} \PYG{n}{ra1}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{ra2}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{ra3}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{ra4}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)} \PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{ra1}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{ra2}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{ra3}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{ra4}\PYG{p}{)} \PYG{p}{)}
 \PYG{g+go}{  2 5 11 13}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ca1} \PYG{o}{=} \PYG{n}{BachetNumber}\PYG{p}{(}\PYG{n}{vector}\PYG{o}{=}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ca2} \PYG{o}{=} \PYG{n}{BachetNumber}\PYG{p}{(}\PYG{n}{vector}\PYG{o}{=}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ca3} \PYG{o}{=} \PYG{n}{BachetNumber}\PYG{p}{(}\PYG{n}{vector}\PYG{o}{=}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ca4} \PYG{o}{=} \PYG{n}{BachetNumber}\PYG{p}{(}\PYG{n}{vector}\PYG{o}{=}\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{ca1}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,}\PYG{n}{ca2}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,}\PYG{n}{ca3}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,}\PYG{n}{ca4}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{ca1}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{ca2}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{ca3}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{ca4}\PYG{p}{)} \PYG{p}{)}
 \PYG{g+go}{  13 4 7 \PYGZhy{}13}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(} \PYG{n}{ra1}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{n}{ca1}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{ra2}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{n}{ca2}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,}
-\PYG{g+gp}{... }       \PYG{n}{ra3}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{n}{ca3}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{ra4}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{n}{ca4}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)} \PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{ra1}\PYG{o}{\PYGZhy{}}\PYG{n}{ca1}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{ra2}\PYG{o}{\PYGZhy{}}\PYG{n}{ca2}\PYG{p}{)}\PYG{p}{,}
+\PYG{g+gp}{... }       \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{ra3}\PYG{o}{\PYGZhy{}}\PYG{n}{ca3}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{ra4}\PYG{o}{\PYGZhy{}}\PYG{n}{ca4}\PYG{p}{)} \PYG{p}{)}
 \PYG{g+go}{  \PYGZhy{}11 1 4 26}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
@@ -4422,7 +4423,7 @@ If we reverse however the given ordering of the \sphinxstyleemphasis{actions} di
 \fvset{hllines={, 1, 2, 6, 7, 8, 9, 16, 22, 25,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pg}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{n}{actionsSubset}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,}
-\PYG{g+gp}{... }                     \PYG{n}{RefelxiveTerms}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+gp}{... }                     \PYG{n}{ReflexiveTerms}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
 \PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{g+go}{    S   | \PYGZsq{}a4\PYGZsq{} \PYGZsq{}a3\PYGZsq{} \PYGZsq{}a2\PYGZsq{} \PYGZsq{}a1\PYGZsq{}}
 \PYG{g+go}{  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -4435,16 +4436,16 @@ If we reverse however the given ordering of the \sphinxstyleemphasis{actions} di
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ra3} \PYG{o}{=} \PYG{n}{BachetNumber}\PYG{p}{(}\PYG{n}{vector}\PYG{o}{=}\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ra2} \PYG{o}{=} \PYG{n}{BachetNumber}\PYG{p}{(}\PYG{n}{vector}\PYG{o}{=}\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ra1} \PYG{o}{=} \PYG{n}{BachetNumber}\PYG{p}{(}\PYG{n}{vector}\PYG{o}{=}\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(} \PYG{n}{ra1}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{ra2}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{ra3}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{ra4}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)} \PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{ra1}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{ra2}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{ra3}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{ra4}\PYG{p}{)} \PYG{p}{)}
 \PYG{g+go}{ \PYGZhy{}6 \PYGZhy{}11 \PYGZhy{}5 13}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ca4} \PYG{o}{=} \PYG{n}{BachetNumber}\PYG{p}{(}\PYG{n}{vector}\PYG{o}{=}\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ca3} \PYG{o}{=} \PYG{n}{BachetNumber}\PYG{p}{(}\PYG{n}{vector}\PYG{o}{=}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ca2} \PYG{o}{=} \PYG{n}{BachetNumber}\PYG{p}{(}\PYG{n}{vector}\PYG{o}{=}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ca1} \PYG{o}{=} \PYG{n}{BachetNumber}\PYG{p}{(}\PYG{n}{vector}\PYG{o}{=}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(} \PYG{n}{ca1}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{ca2}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{ca3}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{ca4}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)} \PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{ca1}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{ca2}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{ca3}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{ca4}\PYG{p}{)} \PYG{p}{)}
 \PYG{g+go}{ 13 12 7 \PYGZhy{}13}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(} \PYG{n}{ra4}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{n}{ca4}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{ra3}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{n}{ca3}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,}
-\PYG{g+gp}{... }       \PYG{n}{ra2}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{n}{ca2}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{ra1}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{o}{\PYGZhy{}}\PYG{n}{ca1}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{ra4}\PYG{o}{\PYGZhy{}}\PYG{n}{ca4}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{ra3}\PYG{o}{\PYGZhy{}}\PYG{n}{ca3}\PYG{p}{)}\PYG{p}{,}
+\PYG{g+gp}{... }       \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{ra2}\PYG{o}{\PYGZhy{}}\PYG{n}{ca2}\PYG{p}{)}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{ra1}\PYG{o}{\PYGZhy{}}\PYG{n}{ca1}\PYG{p}{)} \PYG{p}{)}
 \PYG{g+go}{ 26 \PYGZhy{}12 \PYGZhy{}23 \PYGZhy{}19}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
@@ -4595,7 +4596,7 @@ When we reconsider above digraph \sphinxstyleemphasis{g}’s polarised relation 
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-It appears hence to be opportune to compute a first \sphinxstyleemphasis{Bachet} ranking result with the given order of the \sphinxstyleemphasis{self.actions} attribute and a second one with the corresponding reversed ordering. The best correlated of both ranking results is eventually returned. The \sphinxcode{\sphinxupquote{PolarisedBachetRanking}} class provides therefore the \sphinxstyleemphasis{BestQualified} parameter set by default to \sphinxstyleemphasis{True} (see below \hyperref[\detokenize{pearls:optimisingbachet}]{Listing \ref{\detokenize{pearls:optimisingbachet}}} Lines 5 and 19,21,35). Computing the reversed version of the \sphinxstyleemphasis{Bachet} rule is indeed computationally easy as it just requires to reverse the previously used \sphinxstyleemphasis{Bachet} vectors, a method directly provided by the \sphinxcode{\sphinxupquote{BachetNumber}} class.
+It appears hence to be opportune to compute a first \sphinxstyleemphasis{Bachet} ranking result with the given order of the \sphinxstyleemphasis{self.actions} attribute and a second one with the corresponding reversed ordering. The best correlated of both ranking results is eventually returned. The \sphinxcode{\sphinxupquote{PolarisedBachetRanking}} class provides therefore the \sphinxstyleemphasis{BestQualified} parameter set by default to \sphinxstyleemphasis{True} (see below \hyperref[\detokenize{pearls:optimisingbachet}]{Listing \ref{\detokenize{pearls:optimisingbachet}}} Lines 5 and 19,21,35). Computing the reversed version of the \sphinxstyleemphasis{Bachet} rule is indeed computationally easy as it just requires to reverse the previously used \sphinxstyleemphasis{Bachet} vectors, a method directly provided by the \sphinxcode{\sphinxupquote{BachetInteger}} class.
 \sphinxSetupCaptionForVerbatim{Optimising the \sphinxstyleemphasis{Bachet} ranking result I}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:optimisingbachet}}}
 \fvset{hllines={, 5, 19, 21, 35,}}%
@@ -4832,7 +4833,7 @@ Mind however that the \sphinxstyleemphasis{Bachet} ranking rule, even of compara
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{v} \PYG{o}{=} \PYG{p}{[}\PYG{l+m+mi}{1} \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{50}\PYG{p}{)}\PYG{p}{]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{n} \PYG{o}{=} \PYG{n}{BachetNumber}\PYG{p}{(}\PYG{n}{vector}\PYG{o}{=}\PYG{n}{v}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{n}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{n}\PYG{p}{)}
 \PYG{g+go}{ 358948993845926294385124}
 \end{sphinxVerbatim}
 
@@ -5206,7 +5207,7 @@ Computing initial and terminal \sphinxstyleemphasis{prekernels} in digraphs is t
 \subsubsection{Notes}
 \label{\detokenize{pearls:notes}}
 \sphinxAtStartPar
-Our initial Python implementation of the \sphinxcode{\sphinxupquote{BachetNumber}} class dates from 2012 when preparing the lectures of a first Semester course on \sphinxstyleemphasis{Discrete Mathematics} for computer scientists. But, it is only in Spring 2025 that we realized how remarkably well \sphinxstyleemphasis{Bachet}’s signed bits weighing design is adapted to our bipolar\sphinxhyphen{}valued epistemic logic approach. The \sphinxstyleemphasis{Bachet} ranking rules illustrate here convincingly the benefit one may indeed obtain when computing, not in a binary \{0,1\} bit world, like today all bit\sphinxhyphen{}wise computing devices, but instead in a bipolar\sphinxhyphen{}valued \{\sphinxhyphen{}1,0,+1\} world with \sphinxstylestrong{balanced ternary Bachet computers} %
+Our initial Python implementation of the \sphinxcode{\sphinxupquote{BachetInteger}} class dates from 2012 when preparing the lectures of a first Semester course on \sphinxstyleemphasis{Discrete Mathematics} for computer scientists. But, it is only in Spring 2025 that we realized how remarkably well \sphinxstyleemphasis{Bachet}’s signed bits weighing design is adapted to our bipolar\sphinxhyphen{}valued epistemic logic approach. The \sphinxstyleemphasis{Bachet} ranking rules illustrate here convincingly the benefit one may indeed obtain when computing, not in a binary \{0,1\} bit world, like today all bit\sphinxhyphen{}wise computing devices, but instead in a bipolar\sphinxhyphen{}valued \{\sphinxhyphen{}1,0,+1\} world with \sphinxstylestrong{balanced ternary Bachet computers} %
 \begin{footnote}[26]\sphinxAtStartFootnote
 \sphinxstyleemphasis{Balanced ternary optical} HPC designs have recently gained in China a lot of attention \sphinxcite{pearls:jin-2003}. Compared to classical HPC or ‘dreamed’ quantum computers, balanced ternary based optical computer systems provide indeed many technical and computational advantages. Much less electrical energy required, no water cooling, millions of optical trits may be easily assembled, faithful ultra high speed read and write access, etc.
 %
