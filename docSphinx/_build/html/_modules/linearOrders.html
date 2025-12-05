@@ -773,10 +773,12 @@
 <span class="sd">    outranking characteristic values. The discordant characteritic values are set</span>
 <span class="sd">    to the indeterminate value.</span>
 
+<span class="sd">    When *Bachet==True&quot;, the ranking scores per alternative x correpond to the decimal value of the Bachet numbers. </span>
+
 <span class="sd">    .. note:: The NetFlows ranking rule is invariant under the codual transform</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Valued</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Valued</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Bachet</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructor for generating a linear order</span>
 <span class="sd">        from a given other digraph following</span>
@@ -817,14 +819,31 @@
         <span class="n">tnf</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="n">incnetFlows</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">decnetFlows</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">Bachet</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">bachetNumbers</span> <span class="kn">import</span> <span class="n">BachetInteger</span> <span class="k">as</span> <span class="n">BachetNumber</span>
         <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">Med</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;standard&#39;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
-                <span class="n">incxnetFlows</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">otherRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">-</span> <span class="n">otherRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">])</span>\
-                                 <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">)</span>
-                <span class="n">decxnetFlows</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">otherRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">-</span> <span class="n">otherRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span>\
-                                 <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">Bachet</span><span class="p">:</span>
+                    <span class="c1">#print(&#39;to be implemented&#39;)</span>
+                    <span class="n">vecx</span> <span class="o">=</span> <span class="p">[</span><span class="n">otherRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span> <span class="k">if</span> <span class="n">y</span> <span class="o">!=</span> <span class="n">x</span><span class="p">]</span>
+                    <span class="n">vecy</span> <span class="o">=</span> <span class="p">[</span><span class="n">otherRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span> <span class="k">if</span> <span class="n">y</span> <span class="o">!=</span> <span class="n">x</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">vecx</span><span class="p">,</span><span class="n">vecy</span><span class="p">)</span>
+                    <span class="n">bx</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">vecx</span><span class="p">)</span>
+                    <span class="n">by</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">vecy</span><span class="p">)</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">incxnetFlows</span> <span class="o">=</span> <span class="n">bx</span><span class="o">.</span><span class="n">decimalValue</span> <span class="o">-</span> <span class="n">by</span><span class="o">.</span><span class="n">decimalValue</span>
+                        <span class="n">decxnetFlows</span> <span class="o">=</span> <span class="n">by</span><span class="o">.</span><span class="n">decimalValue</span> <span class="o">-</span> <span class="n">bx</span><span class="o">.</span><span class="n">decimalValue</span>
+                    <span class="k">except</span><span class="p">:</span>
+                        <span class="n">incxnetFlows</span> <span class="o">=</span> <span class="n">bx</span> <span class="o">-</span> <span class="n">by</span>
+                        <span class="n">decxnetFlows</span> <span class="o">=</span> <span class="n">by</span> <span class="o">-</span> <span class="n">bx</span>                        
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">incxnetFlows</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">otherRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">-</span> <span class="n">otherRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">])</span>\
+                                     <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">)</span>
+                    <span class="n">decxnetFlows</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">otherRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">-</span> <span class="n">otherRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span>\
+                                     <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">)</span>
 <span class="c1">##                xnetflows = sum((otherRelation[x][y])\</span>
 <span class="c1">##                                 for y in actions)</span>
                 <span class="n">incnetFlows</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">incxnetFlows</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
@@ -836,12 +855,27 @@
             <span class="n">otherMin</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
             
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
-                <span class="n">incxnetFlows</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">otherRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">+</span>\
-                                <span class="p">(</span><span class="n">otherMax</span> <span class="o">-</span> <span class="n">otherRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">+</span> <span class="n">otherMin</span><span class="p">))</span>\
-                                 <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">)</span>
-                <span class="n">decxnetFlows</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">otherRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">+</span>\
-                                <span class="p">(</span><span class="n">otherMax</span> <span class="o">-</span> <span class="n">otherRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">+</span> <span class="n">otherMin</span><span class="p">))</span>\
-                                 <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">Bachet</span><span class="p">:</span>
+                    <span class="c1">#print(&#39;to be implemented&#39;)</span>
+                    <span class="n">vecx</span> <span class="o">=</span> <span class="p">[</span><span class="n">otherRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span> <span class="k">if</span> <span class="n">y</span> <span class="o">!=</span> <span class="n">x</span><span class="p">]</span>
+                    <span class="n">vecy</span> <span class="o">=</span> <span class="p">[</span><span class="n">otherRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span> <span class="k">if</span> <span class="n">y</span> <span class="o">!=</span> <span class="n">x</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">vecx</span><span class="p">,</span><span class="n">vecy</span><span class="p">)</span>
+                    <span class="n">bx</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">vecx</span><span class="p">)</span>
+                    <span class="n">by</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">vecy</span><span class="p">)</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">incxnetFlows</span> <span class="o">=</span> <span class="n">bx</span><span class="o">.</span><span class="n">decimalValue</span> <span class="o">-</span> <span class="n">by</span><span class="o">.</span><span class="n">decimalValue</span>
+                        <span class="n">decxnetFlows</span> <span class="o">=</span> <span class="n">by</span><span class="o">.</span><span class="n">decimalValue</span> <span class="o">-</span> <span class="n">bx</span><span class="o">.</span><span class="n">decimalValue</span>
+                    <span class="k">except</span><span class="p">:</span>
+                        <span class="n">incxnetFlows</span> <span class="o">=</span> <span class="n">bx</span> <span class="o">-</span> <span class="n">by</span>
+                        <span class="n">decxnetFlows</span> <span class="o">=</span> <span class="n">by</span> <span class="o">-</span> <span class="n">bx</span>                        
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">incxnetFlows</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">otherRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">+</span>\
+                                    <span class="p">(</span><span class="n">otherMax</span> <span class="o">-</span> <span class="n">otherRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">+</span> <span class="n">otherMin</span><span class="p">))</span>\
+                                     <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">)</span>
+                    <span class="n">decxnetFlows</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">otherRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">+</span>\
+                                    <span class="p">(</span><span class="n">otherMax</span> <span class="o">-</span> <span class="n">otherRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">+</span> <span class="n">otherMin</span><span class="p">))</span>\
+                                     <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">)</span>
                 <span class="n">incnetFlows</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">incxnetFlows</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
                 <span class="n">decnetFlows</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">decxnetFlows</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -1803,7 +1837,7 @@
             <span class="n">currBachetRanking</span> <span class="o">=</span> <span class="n">ValuedBachetRanking</span>
         
         <span class="n">bestBa</span> <span class="o">=</span> <span class="n">currBachetRanking</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">al</span><span class="p">,</span>
-                                   <span class="n">BestQualified</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                   <span class="n">BestQualified</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                                 <span class="n">orderLimit</span><span class="o">=</span><span class="n">orderLimit</span><span class="p">)</span>
         <span class="n">bestCorr</span> <span class="o">=</span> <span class="n">bestBa</span><span class="o">.</span><span class="n">correlation</span>
         <span class="n">al</span> <span class="o">=</span> <span class="n">bestBa</span><span class="o">.</span><span class="n">actionsList</span>
@@ -2329,17 +2363,31 @@
         <span class="n">tr</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="n">actionsList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">]</span>
         <span class="n">relation</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionsList</span><span class="p">:</span>
-            <span class="n">xi</span> <span class="o">=</span> <span class="n">copelandRanking</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-            <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actionsList</span><span class="p">:</span>
-                <span class="n">yj</span> <span class="o">=</span> <span class="n">copelandRanking</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">xi</span> <span class="o">&lt;</span> <span class="n">yj</span><span class="p">:</span>
-                    <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span> <span class="n">otherRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span>
-                <span class="k">elif</span> <span class="n">xi</span> <span class="o">==</span> <span class="n">yj</span><span class="p">:</span>
-                    <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span> <span class="n">otherRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">Valued</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionsList</span><span class="p">:</span>
+                <span class="n">xi</span> <span class="o">=</span> <span class="n">copelandRanking</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actionsList</span><span class="p">:</span>
+                    <span class="n">yj</span> <span class="o">=</span> <span class="n">copelandRanking</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">xi</span> <span class="o">&lt;</span> <span class="n">yj</span><span class="p">:</span>
+                        <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span> <span class="n">otherRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span>
+                    <span class="k">elif</span> <span class="n">xi</span> <span class="o">==</span> <span class="n">yj</span><span class="p">:</span>
+                        <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span> <span class="n">otherRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionsList</span><span class="p">:</span>
+                <span class="n">xi</span> <span class="o">=</span> <span class="n">copelandRanking</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actionsList</span><span class="p">:</span>
+                    <span class="n">yj</span> <span class="o">=</span> <span class="n">copelandRanking</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">xi</span> <span class="o">&lt;</span> <span class="n">yj</span><span class="p">:</span>
+                        <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span>
+                    <span class="k">elif</span> <span class="n">xi</span> <span class="o">==</span> <span class="n">yj</span><span class="p">:</span>
+                        <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
+                        
         <span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;relation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tr</span>
         
         <span class="c1"># store attributes</span>
@@ -2843,12 +2891,12 @@
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing class and methods -------&#39;</span><span class="p">)</span>
 
     <span class="n">Threading</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test9CBPolRd50500Ctrl2.csv&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test9CBPolRd50500Ctrl3.csv&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
     <span class="c1">#res = open(&#39;tes.csv&#39;,&#39;w&#39;)</span>
     <span class="n">res</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&quot;seed&quot;,&quot;nt&quot;,&quot;baptft&quot;,&quot;bapttt&quot;,&quot;bapfft&quot;,&quot;bapfff&quot;,&quot;cop&quot;,&quot;nf&quot;,&quot;ke&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="n">sampleSize</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">sampleSize</span> <span class="o">=</span> <span class="mi">10</span>
     <span class="n">randomSize</span> <span class="o">=</span> <span class="mi">50</span>
-    <span class="n">Polarised</span><span class="o">=</span><span class="kc">False</span>
+    <span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span>
     <span class="c1">#t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)</span>
     <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sampleSize</span><span class="p">):</span>
         <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
@@ -2895,7 +2943,7 @@
 <span class="c1">##        print(wcop2.copelandRanking)</span>
 <span class="c1">##        corrwcop2 = g.computeRankingCorrelation(wcop2.copelandRanking)</span>
 <span class="c1">##        print(&#39;wcop2&#39;,wcop2.copelandRanking,corrwcop2)</span>
-        <span class="n">nf</span> <span class="o">=</span> <span class="n">NetFlowsRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+        <span class="n">nf</span> <span class="o">=</span> <span class="n">NetFlowsRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Bachet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">corrnf</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">nf</span><span class="o">.</span><span class="n">netFlowsRanking</span><span class="p">)</span>
         <span class="c1">#print(&#39;nf&#39;,nf.netFlowsRanking,corrnf)</span>
         <span class="n">ke</span> <span class="o">=</span> <span class="n">KemenyRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
@@ -2990,7 +3038,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Dec 03, 2025.
+      <span class="lastupdated">Last updated on Dec 05, 2025.
       </span></p>
   </div>
 

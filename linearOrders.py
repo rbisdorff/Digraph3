@@ -646,10 +646,12 @@ class NetFlowsRanking(LinearOrder):
     outranking characteristic values. The discordant characteritic values are set
     to the indeterminate value.
 
+    When *Bachet==True", the ranking scores per alternative x correpond to the decimal value of the Bachet numbers. 
+
     .. note:: The NetFlows ranking rule is invariant under the codual transform
     """
     
-    def __init__(self,other,CoDual=False,Valued=False,Comments=False,Debug=False):
+    def __init__(self,other,CoDual=False,Valued=False,Bachet=False,Comments=False,Debug=False):
         """
         constructor for generating a linear order
         from a given other digraph following
@@ -690,14 +692,31 @@ class NetFlowsRanking(LinearOrder):
         tnf = time()
         incnetFlows = []
         decnetFlows = []
+        if Bachet:
+            from bachetNumbers import BachetInteger as BachetNumber
         if other.valuationdomain['med'] == Med:
             if Debug:
                 print('standard')
             for x in actions:
-                incxnetFlows = sum((otherRelation[x][y] - otherRelation[y][x])\
-                                 for y in actions)
-                decxnetFlows = sum((otherRelation[y][x] - otherRelation[x][y])\
-                                 for y in actions)
+                if Bachet:
+                    #print('to be implemented')
+                    vecx = [otherRelation[x][y] for y in actions if y != x]
+                    vecy = [otherRelation[y][x] for y in actions if y != x]
+                    if Debug:
+                        print(vecx,vecy)
+                    bx = BachetNumber(vector=vecx)
+                    by = BachetNumber(vector=vecy)
+                    try:
+                        incxnetFlows = bx.decimalValue - by.decimalValue
+                        decxnetFlows = by.decimalValue - bx.decimalValue
+                    except:
+                        incxnetFlows = bx - by
+                        decxnetFlows = by - bx                        
+                else:
+                    incxnetFlows = sum((otherRelation[x][y] - otherRelation[y][x])\
+                                     for y in actions)
+                    decxnetFlows = sum((otherRelation[y][x] - otherRelation[x][y])\
+                                     for y in actions)
 ##                xnetflows = sum((otherRelation[x][y])\
 ##                                 for y in actions)
                 incnetFlows.append((incxnetFlows,x))
@@ -709,12 +728,27 @@ class NetFlowsRanking(LinearOrder):
             otherMin = other.valuationdomain['min']
             
             for x in actions:
-                incxnetFlows = sum((otherRelation[x][y] +\
-                                (otherMax - otherRelation[y][x] + otherMin))\
-                                 for y in actions)
-                decxnetFlows = sum((otherRelation[y][x] +\
-                                (otherMax - otherRelation[x][y] + otherMin))\
-                                 for y in actions)
+                if Bachet:
+                    #print('to be implemented')
+                    vecx = [otherRelation[x][y] for y in actions if y != x]
+                    vecy = [otherRelation[y][x] for y in actions if y != x]
+                    if Debug:
+                        print(vecx,vecy)
+                    bx = BachetNumber(vector=vecx)
+                    by = BachetNumber(vector=vecy)
+                    try:
+                        incxnetFlows = bx.decimalValue - by.decimalValue
+                        decxnetFlows = by.decimalValue - bx.decimalValue
+                    except:
+                        incxnetFlows = bx - by
+                        decxnetFlows = by - bx                        
+                else:
+                    incxnetFlows = sum((otherRelation[x][y] +\
+                                    (otherMax - otherRelation[y][x] + otherMin))\
+                                     for y in actions)
+                    decxnetFlows = sum((otherRelation[y][x] +\
+                                    (otherMax - otherRelation[x][y] + otherMin))\
+                                     for y in actions)
                 incnetFlows.append((incxnetFlows,x))
                 decnetFlows.append((decxnetFlows,x))
                 if Debug:
@@ -1658,7 +1692,7 @@ class BachetRanking(LinearOrder,_BachetRanking):
             currBachetRanking = ValuedBachetRanking
         
         bestBa = currBachetRanking(other,actionsList=al,
-                                   BestQualified=False,randomized=0,
+                                   BestQualified=True,randomized=0,
                                 orderLimit=orderLimit)
         bestCorr = bestBa.correlation
         al = bestBa.actionsList
@@ -2172,17 +2206,31 @@ class CopelandRanking(LinearOrder):
         tr = time()
         actionsList = [x for x in actions]
         relation = {}
-        for x in actionsList:
-            xi = copelandRanking.index(x)
-            relation[x] = {}
-            for y in actionsList:
-                yj = copelandRanking.index(y)
-                if xi < yj:
-                    relation[x][y] = max(Med, otherRelation[x][y])
-                elif xi == yj:
-                    relation[x][y] = Med
-                else:
-                    relation[x][y] = min(Med, otherRelation[x][y])
+        if Valued:
+            for x in actionsList:
+                xi = copelandRanking.index(x)
+                relation[x] = {}
+                for y in actionsList:
+                    yj = copelandRanking.index(y)
+                    if xi < yj:
+                        relation[x][y] = max(Med, otherRelation[x][y])
+                    elif xi == yj:
+                        relation[x][y] = Med
+                    else:
+                        relation[x][y] = min(Med, otherRelation[x][y])
+        else:
+            for x in actionsList:
+                xi = copelandRanking.index(x)
+                relation[x] = {}
+                for y in actionsList:
+                    yj = copelandRanking.index(y)
+                    if xi < yj:
+                        relation[x][y] = Max
+                    elif xi == yj:
+                        relation[x][y] = Med
+                    else:
+                        relation[x][y] = Min
+                        
         runTimes['relation'] = time() - tr
         
         # store attributes
@@ -2667,12 +2715,12 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
     Threading = False
-    res = open('test9CBPolRd50500Ctrl2.csv','w')
+    res = open('test9CBPolRd50500Ctrl3.csv','w')
     #res = open('tes.csv','w')
     res.write('"seed","nt","baptft","bapttt","bapfft","bapfff","cop","nf","ke"\n')
-    sampleSize = 1
+    sampleSize = 10
     randomSize = 50
-    Polarised=False
+    Polarised=True
     #t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
     for sample in range(sampleSize):
         t0 = time()
@@ -2719,7 +2767,7 @@ if __name__ == "__main__":
 ##        print(wcop2.copelandRanking)
 ##        corrwcop2 = g.computeRankingCorrelation(wcop2.copelandRanking)
 ##        print('wcop2',wcop2.copelandRanking,corrwcop2)
-        nf = NetFlowsRanking(g)
+        nf = NetFlowsRanking(g,Bachet=True)
         corrnf = g.computeRankingCorrelation(nf.netFlowsRanking)
         #print('nf',nf.netFlowsRanking,corrnf)
         ke = KemenyRanking(g,orderLimit=11)
