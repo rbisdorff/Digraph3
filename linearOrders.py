@@ -463,7 +463,10 @@ class RankedPairsRanking(LinearOrder):
 ##        if Leximin:
 ##            self.relation = (-g).relation
 ##        else:
-        self.relation = g.relation
+        if Valued:
+            self.relation = other.computeValuedRankingRelation(rankedPairsRanking)
+        else:
+            self.relation = g.relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         #self.rankedPairsOrder = self.computeOrder()
@@ -480,8 +483,6 @@ class RankedPairsRanking(LinearOrder):
             #self.rankedPairsOrder = list(reversed(rankedPairsRanking))
             self.rankedPairsOrder = rankedPairsOrder
 
-        if Valued:
-            self.relation = other.computeValuedRankingRelation(rankedPairsRanking)
     
         if Debug:
             print('Ranked Pairs Ranking = ', self.rankedPairsRanking)
@@ -646,17 +647,15 @@ class NetFlowsRanking(LinearOrder):
     outranking characteristic values. The discordant characteritic values are set
     to the indeterminate value.
 
-    When *Bachet==True", the ranking scores per alternative x correpond to the decimal value of the Bachet numbers. 
-
     .. note:: The NetFlows ranking rule is invariant under the codual transform
+    
     """
     
-    def __init__(self,other,CoDual=False,Valued=False,Bachet=False,Comments=False,Debug=False):
+    def __init__(self,other,CoDual=False,Valued=False,Comments=False,Debug=False):
         """
         constructor for generating a linear order
         from a given other digraph following
         the net flows ordering rule.
-
 
         """
 
@@ -692,30 +691,15 @@ class NetFlowsRanking(LinearOrder):
         tnf = time()
         incnetFlows = []
         decnetFlows = []
-        if Bachet:
-            from bachetNumbers import BachetInteger as BachetNumber
+##        if Bachet:
+##            from bachetNumbers import BachetInteger as BachetNumber
         if other.valuationdomain['med'] == Med:
             if Debug:
                 print('standard')
             for x in actions:
-                if Bachet:
-                    #print('to be implemented')
-                    vecx = [otherRelation[x][y] for y in actions if y != x]
-                    vecy = [otherRelation[y][x] for y in actions if y != x]
-                    if Debug:
-                        print(vecx,vecy)
-                    bx = BachetNumber(vector=vecx)
-                    by = BachetNumber(vector=vecy)
-                    try:
-                        incxnetFlows = bx.decimalValue - by.decimalValue
-                        decxnetFlows = by.decimalValue - bx.decimalValue
-                    except:
-                        incxnetFlows = bx - by
-                        decxnetFlows = by - bx                        
-                else:
-                    incxnetFlows = sum((otherRelation[x][y] - otherRelation[y][x])\
+                incxnetFlows = sum((otherRelation[x][y] - otherRelation[y][x])\
                                      for y in actions)
-                    decxnetFlows = sum((otherRelation[y][x] - otherRelation[x][y])\
+                decxnetFlows = sum((otherRelation[y][x] - otherRelation[x][y])\
                                      for y in actions)
 ##                xnetflows = sum((otherRelation[x][y])\
 ##                                 for y in actions)
@@ -728,25 +712,25 @@ class NetFlowsRanking(LinearOrder):
             otherMin = other.valuationdomain['min']
             
             for x in actions:
-                if Bachet:
-                    #print('to be implemented')
-                    vecx = [otherRelation[x][y] for y in actions if y != x]
-                    vecy = [otherRelation[y][x] for y in actions if y != x]
-                    if Debug:
-                        print(vecx,vecy)
-                    bx = BachetNumber(vector=vecx)
-                    by = BachetNumber(vector=vecy)
-                    try:
-                        incxnetFlows = bx.decimalValue - by.decimalValue
-                        decxnetFlows = by.decimalValue - bx.decimalValue
-                    except:
-                        incxnetFlows = bx - by
-                        decxnetFlows = by - bx                        
-                else:
-                    incxnetFlows = sum((otherRelation[x][y] +\
+##                if Bachet:
+##                    #print('to be implemented')
+##                    vecx = [otherRelation[x][y] for y in actions if y != x]
+##                    vecy = [otherRelation[y][x] for y in actions if y != x]
+##                    if Debug:
+##                        print(vecx,vecy)
+##                    bx = BachetNumber(vector=vecx)
+##                    by = BachetNumber(vector=vecy)
+##                    try:
+##                        incxnetFlows = bx.decimalValue - by.decimalValue
+##                        decxnetFlows = by.decimalValue - bx.decimalValue
+##                    except:
+##                        incxnetFlows = bx - by
+##                        decxnetFlows = by - bx                        
+##                else:
+                incxnetFlows = sum((otherRelation[x][y] +\
                                     (otherMax - otherRelation[y][x] + otherMin))\
                                      for y in actions)
-                    decxnetFlows = sum((otherRelation[y][x] +\
+                decxnetFlows = sum((otherRelation[y][x] +\
                                     (otherMax - otherRelation[x][y] + otherMin))\
                                      for y in actions)
                 incnetFlows.append((incxnetFlows,x))
@@ -2715,10 +2699,10 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
     Threading = False
-    res = open('test9CBPolRd50500Ctrl3.csv','w')
+    res = open('test9CBPolRd50500Ctr.csv','w')
     #res = open('tes.csv','w')
     res.write('"seed","nt","baptft","bapttt","bapfft","bapfff","cop","nf","ke"\n')
-    sampleSize = 10
+    sampleSize = 1
     randomSize = 50
     Polarised=True
     #t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
@@ -2767,7 +2751,7 @@ if __name__ == "__main__":
 ##        print(wcop2.copelandRanking)
 ##        corrwcop2 = g.computeRankingCorrelation(wcop2.copelandRanking)
 ##        print('wcop2',wcop2.copelandRanking,corrwcop2)
-        nf = NetFlowsRanking(g,Bachet=True)
+        nf = NetFlowsRanking(g)
         corrnf = g.computeRankingCorrelation(nf.netFlowsRanking)
         #print('nf',nf.netFlowsRanking,corrnf)
         ke = KemenyRanking(g,orderLimit=11)
