@@ -1,8 +1,6 @@
-"actions","g1","g2","g3","g4","g5"
-"a1",1.00,-17.92,-33.99,26.68,3.00
-"a2",8.00,-30.71,-77.77,66.35,6.00
-"a3",8.00,-41.65,-69.84,53.43,8.00
-"a4",2.00,-39.49,-16.99,18.62,2.00
-"a5",6.00,-91.87,-74.85,83.09,7.00
-"a6",7.00,-32.47,-24.91,79.24,9.00
-"a7",4.00,-91.11,-7.44,48.22,7.00
+"criteria","name","weight","scale","prefDir","thresholds","a1","a2","a3","a4","a5","a6","a7"
+"b1","random ordinal benefit criterion","3","(0, 10)","max","OrderedDict()",2.00,3.00,3.00,2.00,7.00,9.00,5.00
+"b2","random cardinal benefit criterion","3","(0.0, 100.0)","max","OrderedDict({'ind': (Decimal('5.383579161312723'), Decimal('0')), 'pref': (Decimal('10.1'), Decimal('0')), 'veto': (Decimal('58.12993634167577'), Decimal('0'))})",20.66,47.34,57.44,69.06,35.23,52.77,92.47
+"c1","random cardinal cost criterion","2","(0.0, 100.0)","min","OrderedDict({'ind': (Decimal('2.3265623888010514'), Decimal('0')), 'pref': (Decimal('4.46'), Decimal('0')), 'veto': (Decimal('64.22948970791712'), Decimal('0'))})",-28.65,-15.47,-81.69,-77.23,-57.33,-39.33,-79.57
+"c2","random cardinal cost criterion","2","(0.0, 100.0)","min","OrderedDict({'ind': (Decimal('1.4179255399329134'), Decimal('0')), 'pref': (Decimal('4.78'), Decimal('0')), 'veto': (Decimal('42.99100927584742'), Decimal('0'))})",-79.26,-52.85,-77.77,-57.77,-39.65,-58.08,-34.87
+"c3","random cardinal cost criterion","2","(0.0, 100.0)","min","OrderedDict({'ind': (Decimal('5.198193773475817'), Decimal('0')), 'pref': (Decimal('8.65'), Decimal('0')), 'veto': (Decimal('69.59017840021572'), Decimal('0'))})",-3.19,-44.47,-66.35,-34.80,-43.45,-71.82,-87.54

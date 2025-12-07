@@ -2814,21 +2814,20 @@ which provides ranks (linearly ordered performances without ties) of a given num
 </div></blockquote>
 <dl class="simple">
 <dt><em>Parameters</em>:</dt><dd><ul class="simple">
-<li><p>If <em>numberOfActions</em> == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated</p></li>
-<li><p>If <em>numberOfCriteria</em> == None, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated</p></li>
-<li><p><em>weightDistribution</em> = {‘equiobjectives’|’fixed’|’random’|’equisignificant’ (default = ‘equisignificant’)}</p></li>
-<li><p>default <em>weightScale</em> for ‘random’ weightDistribution is 1 - numberOfCriteria</p></li>
-<li><p>All cardinal criteria are evaluated with decimals between 0.0 and 100.0 whereas ordinal criteria are evaluated with integers between 0 and 10.</p></li>
-<li><p>commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).</p></li>
-<li><p>commonPercentiles = {‘ind’:5, ‘pref’:10, [‘weakveto’:90,] ‘veto’:95} are expressed in percents (reversed for vetoes) and only concern cardinal criteria.</p></li>
-<li><p>missingDataProbability := 0 &lt;= float &lt;= 1.0 ; probability of missing performance evaluation on a criterion for an alternative (default 0.025).</p></li>
+<li><p>If <em>numberOfActions</em> is <em>None</em>, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated, otherwise a minimal integer greater than 5 is required</p></li>
+<li><p>If <em>numberOfCriteria</em> is <em>None</em>, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated, otherwise a poitive integer is required</p></li>
+<li><p><em>weightDistribution</em> := {‘equiobjectives’|’fixed’|’random’|’equisignificant’ (default = ‘equisignificant’)}</p></li>
+<li><p>Default <em>weightScale</em> for ‘random’ weightDistribution is 1 - numberOfCriteria</p></li>
+<li><p>All <em>cardinal</em> criteria are evaluated with decimals between 0.0 and 100.0 whereas <em>ordinal</em> criteria are evaluated with integers between 0 and 10</p></li>
+<li><p><em>commonPercentiles</em> := {‘ind’:5, ‘pref’:10, ‘veto’:95} (default) are expressed in percents (reversed for vetoes) and only concern cardinal criteria.</p></li>
+<li><p><em>missingDataProbability</em> := 0 &lt;= float &lt;= 1.0 ; probability of missing performance evaluation on a criterion for an alternative (default 0.025).</p></li>
 <li><p>NA := &lt;Decimal&gt; (default = -999); missing data symbol.</p></li>
 </ul>
 </dd>
 </dl>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Minimal number of decision actions required is 3 !</p>
+<p>Minimal number of decision actions required is 6 !</p>
 </div>
 <p>Example Python session</p>
 <div class="literal-block-wrapper docutils container" id="randomcbperformancetableau">
@@ -2844,28 +2843,34 @@ which provides ranks (linearly ordered performances without ties) of a given num
 <span class="linenos"> 9</span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showActions</span><span class="p">()</span>
 <span class="linenos">10</span><span class="go"> *----- show decision action --------------*</span>
 <span class="linenos">11</span><span class="go"> key:  a1</span>
-<span class="linenos">12</span><span class="go">   short name: a1</span>
+<span class="linenos">12</span><span class="go">   short name: a1c</span>
 <span class="hll"><span class="linenos">13</span><span class="go">   name:       random cheap decision action</span>
 </span><span class="linenos">14</span><span class="go"> key:  a2</span>
-<span class="linenos">15</span><span class="go">   short name: a2</span>
+<span class="linenos">15</span><span class="go">   short name: a2n</span>
 <span class="hll"><span class="linenos">16</span><span class="go">   name:       random neutral decision action</span>
 </span><span class="linenos">17</span><span class="go"> ...</span>
-<span class="linenos">18</span><span class="go"> key:  a7</span>
+<span class="linenos">18</span><span class="go"> key:  a7a</span>
 <span class="linenos">19</span><span class="go">   short name: a7</span>
 <span class="hll"><span class="linenos">20</span><span class="go">   name:       random advantageous decision action</span>
 </span><span class="linenos">21</span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showCriteria</span><span class="p">()</span>
 <span class="linenos">22</span><span class="go"> *----  criteria -----*</span>
-<span class="hll"><span class="linenos">23</span><span class="go"> g1 &#39;random ordinal benefit criterion&#39;</span>
-</span><span class="linenos">24</span><span class="go">   Scale = (0, 10)</span>
-<span class="linenos">25</span><span class="go">   Weight = 2</span>
-<span class="linenos">26</span><span class="go"> ...</span>
-<span class="hll"><span class="linenos">27</span><span class="go"> g2 &#39;random cardinal cost criterion&#39;</span>
-</span><span class="linenos">28</span><span class="go">   Scale = (0.0, 100.0)</span>
-<span class="linenos">29</span><span class="go">   Weight = 3</span>
-<span class="linenos">30</span><span class="go">   Threshold ind  :  1.76 + 0.00x ; percentile:   9.5</span>
-<span class="linenos">31</span><span class="go">   Threshold pref :  2.16 + 0.00x ; percentile:  14.3</span>
-<span class="linenos">32</span><span class="go">   Threshold veto : 73.19 + 0.00x ; percentile:  95.2</span>
+<span class="hll"><span class="linenos">23</span><span class="go"> c1 random cardinal cost criterion</span>
+</span><span class="linenos">24</span><span class="go">  Preference direction: min</span>
+<span class="linenos">25</span><span class="go">  Scale = (0.00, 100.00)</span>
+<span class="linenos">26</span><span class="go">  Weight = 0.167</span>
+<span class="hll"><span class="linenos">27</span><span class="go">  Threshold ind : 2.33 + 0.00x ; percentile: 4.76</span>
+</span><span class="linenos">28</span><span class="go">  Threshold pref : 4.46 + 0.00x ; percentile: 14.29</span>
+<span class="linenos">29</span><span class="go">  Threshold veto : 64.23 + 0.00x ; percentile: 95.24</span>
+<span class="linenos">30</span><span class="go"> c2 &#39;random cardinal cost criterion&#39;</span>
+<span class="linenos">31</span><span class="go"> ...</span>
+<span class="linenos">32</span><span class="go"> c3 &#39;random cardinal cost criterion&#39;</span>
 <span class="linenos">33</span><span class="go"> ...</span>
+<span class="linenos">34</span><span class="go"> b1 random ordinal benefit criterion</span>
+<span class="linenos">35</span><span class="go">  Preference direction: max</span>
+<span class="linenos">36</span><span class="go">  Scale = (0.00, 10.00)</span>
+<span class="linenos">37</span><span class="go">  Weight = 0.250</span>
+<span class="linenos">38</span><span class="go"> b2 random cardinal benefit criterion</span>
+<span class="linenos">39</span><span class="go"> ...</span>
 </pre></div>
 </div>
 </div>
@@ -2875,42 +2880,46 @@ which provides ranks (linearly ordered performances without ties) of a given num
 <span class="linenos"> 3</span><span class="go"> Instance name      : randomCBperftab</span>
 <span class="linenos"> 4</span><span class="go"> #Actions           : 7</span>
 <span class="linenos"> 5</span><span class="go"> #Criteria          : 5</span>
-<span class="linenos"> 6</span><span class="go">  Criterion name       : g1</span>
-<span class="linenos"> 7</span><span class="go">    Criterion weight     : 2</span>
+<span class="linenos"> 6</span><span class="go">  Criterion name       : b1</span>
+<span class="linenos"> 7</span><span class="go">    Criterion weight     : 3</span>
 <span class="linenos"> 8</span><span class="go">    criterion scale    : 0.00 - 10.00</span>
-<span class="linenos"> 9</span><span class="go">    mean evaluation    : 5.14</span>
-<span class="linenos">10</span><span class="go">    standard deviation : 2.64</span>
-<span class="linenos">11</span><span class="go">    maximal evaluation : 8.00</span>
-<span class="linenos">12</span><span class="go">    quantile Q3 (x_75) : 8.00</span>
-<span class="linenos">13</span><span class="go">    median evaluation  : 6.50</span>
-<span class="linenos">14</span><span class="go">    quantile Q1 (x_25) : 3.50</span>
-<span class="linenos">15</span><span class="go">    minimal evaluation : 1.00</span>
-<span class="linenos">16</span><span class="go">    mean absolute difference      : 2.94</span>
-<span class="linenos">17</span><span class="go">    standard difference deviation : 3.74</span>
-<span class="linenos">18</span><span class="go">  Criterion name       : g2</span>
-<span class="linenos">19</span><span class="go">    Criterion weight     : 3</span>
-<span class="linenos">20</span><span class="go">    criterion scale    : -100.00 - 0.00</span>
-<span class="linenos">21</span><span class="go">    mean evaluation    : -49.32</span>
-<span class="linenos">22</span><span class="go">    standard deviation : 27.59</span>
-<span class="linenos">23</span><span class="go">    maximal evaluation : 0.00</span>
-<span class="linenos">24</span><span class="go">    quantile Q3 (x_75) : -27.51</span>
-<span class="linenos">25</span><span class="go">    median evaluation  : -35.98</span>
-<span class="linenos">26</span><span class="go">    quantile Q1 (x_25) : -54.02</span>
-<span class="linenos">27</span><span class="go">    minimal evaluation : -91.87</span>
-<span class="linenos">28</span><span class="go">    mean absolute difference      : 28.72</span>
-<span class="linenos">29</span><span class="go">    standard difference deviation : 39.02</span>
-<span class="linenos">30</span><span class="go">  ...</span>
+<span class="linenos"> 9</span><span class="go">    missing evaluations : 0</span>
+<span class="linenos">10</span><span class="go">    mean evaluation       : 4.43</span>
+<span class="linenos">11</span><span class="go">    standard deviation    : 2.50</span>
+<span class="linenos">12</span><span class="go">    maximal evaluation    : 9.00</span>
+<span class="linenos">13</span><span class="go">    quantile Q3 (x_75)    : 7.50</span>
+<span class="linenos">14</span><span class="go">    median evaluation     : 4.00</span>
+<span class="linenos">15</span><span class="go">    quantile Q1 (x_25)    : 2.75</span>
+<span class="linenos">16</span><span class="go">    minimal evaluation    : 2.00</span>
+<span class="linenos">17</span><span class="go">    mean absolute difference      : 2.69</span>
+<span class="linenos">18</span><span class="go">    standard difference deviation : 3.53</span>
+<span class="linenos">19</span><span class="go">   ...</span>
+<span class="linenos">20</span><span class="go">  Criterion name       : c1</span>
+<span class="linenos">21</span><span class="go">    Criterion weight     : 2</span>
+<span class="linenos">22</span><span class="go">    criterion scale      : -100.00 - 0.00</span>
+<span class="linenos">23</span><span class="go">    missing evaluations : 0</span>
+<span class="linenos">24</span><span class="go">    mean evaluation       : -54.18</span>
+<span class="linenos">25</span><span class="go">    standard deviation    :  24.82</span>
+<span class="linenos">26</span><span class="go">    maximal evaluation    :   0.00</span>
+<span class="linenos">27</span><span class="go">    quantile Q3 (x_75)    : -25.36</span>
+<span class="linenos">28</span><span class="go">    median evaluation     : -48.33</span>
+<span class="linenos">29</span><span class="go">    quantile Q1 (x_25)    : -77.81</span>
+<span class="linenos">30</span><span class="go">    minimal evaluation    : -81.69</span>
+<span class="linenos">31</span><span class="go">    mean absolute difference      : 27.62</span>
+<span class="linenos">32</span><span class="go">    standard difference deviation : 35.11</span>
+<span class="linenos">33</span><span class="go">   ...</span>
 </pre></div>
 </div>
-<p>A (potentially ranked) colored heatmap with 5 color levels is also provided.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<p>A <em>Copeland</em> ranked colored heatmap with 5 color levels is also provided.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                             <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <figure class="align-center" id="id264">
-<a class="reference internal image-reference" href="_images/randomCBHeatmap.png"><img alt="_images/randomCBHeatmap.png" src="_images/randomCBHeatmap.png" style="width: 400px;" />
+<a class="reference internal image-reference" href="_images/randomCBHeatmap.png"><img alt="_images/randomCBHeatmap.png" src="_images/randomCBHeatmap.png" style="width: 350px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.20 </span><span class="caption-text">Unranked heatmap of a random Cost-Benefit performance tableau</span><a class="headerlink" href="#id264" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 1.20 </span><span class="caption-text">Ranked heatmap of a random Cost-Benefit performance tableau</span><a class="headerlink" href="#id264" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>Such a performance tableau may be stored and re-accessed as follows.</p>
@@ -2921,20 +2930,9 @@ which provides ranks (linearly ordered performances without ties) of a given num
 <span class="linenos">5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">PerformanceTableau</span><span class="p">(</span><span class="s1">&#39;temp&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>If needed for instance in an R session, a CSV version of the performance tableau may be created as follows.</p>
+<p>If needed –for instance in an R session– a CSV version of the performance tableau may be created as follows.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">saveCSV</span><span class="p">(</span><span class="s1">&#39;temp&#39;</span><span class="p">)</span>
 <span class="linenos">2</span><span class="go"> * --- Storing performance tableau in CSV format in file temp.csv</span>
-</pre></div>
-</div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>...$<span class="w"> </span>less<span class="w"> </span>temp.csv
-<span class="linenos">2</span><span class="w"> </span><span class="s2">&quot;actions&quot;</span>,<span class="s2">&quot;g1&quot;</span>,<span class="s2">&quot;g2&quot;</span>,<span class="s2">&quot;g3&quot;</span>,<span class="s2">&quot;g4&quot;</span>,<span class="s2">&quot;g5&quot;</span>
-<span class="linenos">3</span><span class="w"> </span><span class="s2">&quot;a1&quot;</span>,1.00,-17.92,-33.99,26.68,3.00
-<span class="linenos">4</span><span class="w"> </span><span class="s2">&quot;a2&quot;</span>,8.00,-30.71,-77.77,66.35,6.00
-<span class="linenos">5</span><span class="w"> </span><span class="s2">&quot;a3&quot;</span>,8.00,-41.65,-69.84,53.43,8.00
-<span class="linenos">6</span><span class="w"> </span><span class="s2">&quot;a4&quot;</span>,2.00,-39.49,-16.99,18.62,2.00
-<span class="linenos">7</span><span class="w"> </span><span class="s2">&quot;a5&quot;</span>,6.00,-91.87,-74.85,83.09,7.00
-<span class="linenos">8</span><span class="w"> </span><span class="s2">&quot;a6&quot;</span>,7.00,-32.47,-24.91,79.24,9.00
-<span class="linenos">9</span><span class="w"> </span><span class="s2">&quot;a7&quot;</span>,4.00,-91.11,-7.44,48.22,7.00
 </pre></div>
 </div>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
@@ -11117,7 +11115,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Dec 05, 2025.
+      <span class="lastupdated">Last updated on Dec 07, 2025.
       </span></p>
   </div>
 

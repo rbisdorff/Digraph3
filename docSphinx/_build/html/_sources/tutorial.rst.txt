@@ -123,7 +123,7 @@
       \href{https://digraph3.readthedocs.io/en/latest/index.html}{HTML Version}
       \vspace{5mm}
 
-   The tutorials in this document describe the practical usage of our *Digraph3* Python3 software resources in the field of *Algorithmic Decision Theory* and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They mainly illustrate practical tools for a Master Course |location_link4| at the University of Luxembourg. The document contains first a set of tutorials introducing the main objects available in the Digraph3 collection of Python3 modules, like **digraphs**, **outranking digraphs**, **performance tableaux** and **voting profiles**. Some of the tutorials are decision problem oriented and show how to compute the potential **winner(s)** of an election, how to build a **best choice recommendation**, or how to **rate** or **linearly rank** with multiple incommensurable performance criteria. More graph theoretical tutorials follow. One on working with **undirected graphs**, followed by tutorials on how to tackle big outranking digraphs. Finally, special tutorials are devoted to *perfect* graphs, like *split*, *interval* and *permutation* graphs, and to *tree-graphs* and *forests*.
+   The tutorials in this document describe the practical usage of our *Digraph3* Python3 software resources in the field of *Algorithmic Decision Theory* and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They mainly illustrate practical tools for a Master Course |location_link4| at the University of Luxembourg. The document contains first a set of tutorials introducing the main objects available in the Digraph3 collection of Python3 modules, like **digraphs**, **outranking digraphs**, **performance tableaux** and **voting profiles**. Some of the tutorials are decision problem oriented and show how to compute the potential **winner(s)** of an election, how to build a **best choice recommendation**, or how to **rate** or **linearly rank** with multiple incommensurable performance criteria. We also discuss the **fair intergroup and intragroup pairing** problem. More graph theoretical tutorials follow. One on working with **undirected graphs**, followed by tutorials on how to tackle big outranking digraphs. Finally, special tutorials are devoted to *perfect* graphs, like *split*, *interval* and *permutation* graphs, and to *tree-graphs* and *forests*. 
 
    .. raw:: latex
 
@@ -2558,19 +2558,18 @@ We provide the :py:class:`~randomPerfTabs.RandomCBPerformanceTableau` class for 
     * On cardinal criteria, both of cost or of benefit type, we observe following constant preference discrimination quantiles: 5\% indifferent situations, 90\% strict preference situations, and 5\% considerable performance differences. 
 
 *Parameters*:
-    * If *numberOfActions* == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated
-    * If *numberOfCriteria* == None, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated
-    * *weightDistribution* = {'equiobjectives'|'fixed'|'random'|'equisignificant' (default = 'equisignificant')}
-    * default *weightScale* for 'random' weightDistribution is 1 - numberOfCriteria
-    * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 whereas ordinal criteria are evaluated with integers between 0 and 10.
-    * commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).
-    * commonPercentiles = {'ind':5, 'pref':10, ['weakveto':90,] 'veto':95} are expressed in percents (reversed for vetoes) and only concern cardinal criteria.
-    * missingDataProbability := 0 <= float <= 1.0 ; probability of missing performance evaluation on a criterion for an alternative (default 0.025).
+    * If *numberOfActions* is *None*, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated, otherwise a minimal integer greater than 5 is required
+    * If *numberOfCriteria* is *None*, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated, otherwise a poitive integer is required
+    * *weightDistribution* := {'equiobjectives'|'fixed'|'random'|'equisignificant' (default = 'equisignificant')}
+    * Default *weightScale* for 'random' weightDistribution is 1 - numberOfCriteria
+    * All *cardinal* criteria are evaluated with decimals between 0.0 and 100.0 whereas *ordinal* criteria are evaluated with integers between 0 and 10
+    * *commonPercentiles* := {'ind':5, 'pref':10, 'veto':95} (default) are expressed in percents (reversed for vetoes) and only concern cardinal criteria.
+    * *missingDataProbability* := 0 <= float <= 1.0 ; probability of missing performance evaluation on a criterion for an alternative (default 0.025).
     * NA := <Decimal> (default = -999); missing data symbol. 
 
 .. warning::
 
-    Minimal number of decision actions required is 3 ! 
+    Minimal number of decision actions required is 6 ! 
 
 Example Python session
 
@@ -2591,28 +2590,34 @@ Example Python session
    >>> t.showActions()
     *----- show decision action --------------*
     key:  a1
-      short name: a1
+      short name: a1c
       name:       random cheap decision action
     key:  a2
-      short name: a2
+      short name: a2n
       name:       random neutral decision action
     ...
-    key:  a7
+    key:  a7a
       short name: a7
       name:       random advantageous decision action
    >>> t.showCriteria()
     *----  criteria -----*
-    g1 'random ordinal benefit criterion'
-      Scale = (0, 10)
-      Weight = 2
+    c1 random cardinal cost criterion
+     Preference direction: min
+     Scale = (0.00, 100.00)
+     Weight = 0.167 
+     Threshold ind : 2.33 + 0.00x ; percentile: 4.76
+     Threshold pref : 4.46 + 0.00x ; percentile: 14.29
+     Threshold veto : 64.23 + 0.00x ; percentile: 95.24
+    c2 'random cardinal cost criterion'
     ...
-    g2 'random cardinal cost criterion'
-      Scale = (0.0, 100.0)
-      Weight = 3 
-      Threshold ind  :  1.76 + 0.00x ; percentile:   9.5
-      Threshold pref :  2.16 + 0.00x ; percentile:  14.3
-      Threshold veto : 73.19 + 0.00x ; percentile:  95.2
+    c3 'random cardinal cost criterion'
     ...
+    b1 random ordinal benefit criterion
+     Preference direction: max
+     Scale = (0.00, 10.00)
+     Weight = 0.250 
+    b2 random cardinal benefit criterion
+    ... 
 
 In the example above, we may notice the three types of decision actions (:numref:`randomCBPerformanceTableau` Lines 10-20), as well as the two types (Lines 22-32) of criteria with either an **ordinal** or a **cardinal** performance measuring scale. In the latter case, by default about 5% of the random performance differences will be below the **indifference** and 10% below the **preference discriminating threshold**. About 5% will be considered as **considerably large**. More statistics about the generated performances is available as follows.
 
@@ -2624,41 +2629,45 @@ In the example above, we may notice the three types of decision actions (:numref
     Instance name      : randomCBperftab
     #Actions           : 7
     #Criteria          : 5
-     Criterion name       : g1
-       Criterion weight     : 2
-       criterion scale    : 0.00 - 10.00
-       mean evaluation    : 5.14
-       standard deviation : 2.64
-       maximal evaluation : 8.00
-       quantile Q3 (x_75) : 8.00
-       median evaluation  : 6.50
-       quantile Q1 (x_25) : 3.50
-       minimal evaluation : 1.00
-       mean absolute difference      : 2.94
-       standard difference deviation : 3.74
-     Criterion name       : g2
+     Criterion name       : b1
        Criterion weight     : 3
-       criterion scale    : -100.00 - 0.00
-       mean evaluation    : -49.32
-       standard deviation : 27.59
-       maximal evaluation : 0.00
-       quantile Q3 (x_75) : -27.51
-       median evaluation  : -35.98
-       quantile Q1 (x_25) : -54.02
-       minimal evaluation : -91.87
-       mean absolute difference      : 28.72
-       standard difference deviation : 39.02
-     ...
+       criterion scale    : 0.00 - 10.00
+       missing evaluations : 0
+       mean evaluation       : 4.43
+       standard deviation    : 2.50
+       maximal evaluation    : 9.00
+       quantile Q3 (x_75)    : 7.50
+       median evaluation     : 4.00
+       quantile Q1 (x_25)    : 2.75
+       minimal evaluation    : 2.00
+       mean absolute difference      : 2.69
+       standard difference deviation : 3.53
+      ...
+     Criterion name       : c1
+       Criterion weight     : 2
+       criterion scale      : -100.00 - 0.00
+       missing evaluations : 0
+       mean evaluation       : -54.18
+       standard deviation    :  24.82
+       maximal evaluation    :   0.00
+       quantile Q3 (x_75)    : -25.36
+       median evaluation     : -48.33
+       quantile Q1 (x_25)    : -77.81
+       minimal evaluation    : -81.69
+       mean absolute difference      : 27.62
+       standard difference deviation : 35.11
+      ...
 
-A (potentially ranked) colored heatmap with 5 color levels is also provided.
+A *Copeland* ranked colored heatmap with 5 color levels is also provided.
     
->>> t.showHTMLPerformanceHeatmap(colorLevels=5,rankingRule=None)
+>>> t.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True,
+...                              rankingRule='Copeland')
 
 .. figure:: randomCBHeatmap.png
-   :width: 400 px
+   :width: 350 px
    :align: center
 
-   Unranked heatmap of a random Cost-Benefit performance tableau
+   Ranked heatmap of a random Cost-Benefit performance tableau
    
 Such a performance tableau may be stored and re-accessed as follows.
 
@@ -2671,26 +2680,13 @@ Such a performance tableau may be stored and re-accessed as follows.
    >>> from perfTabs import PerformanceTableau
    >>> t = PerformanceTableau('temp')
 
-If needed for instance in an R session, a CSV version of the performance tableau may be created as follows.
+If needed --for instance in an R session-- a CSV version of the performance tableau may be created as follows.
 
 .. code-block:: pycon
    :linenos:
 
    >>> t.saveCSV('temp')
     * --- Storing performance tableau in CSV format in file temp.csv
-
-.. code-block:: bash
-   :linenos:
-
-   ...$ less temp.csv
-    "actions","g1","g2","g3","g4","g5"
-    "a1",1.00,-17.92,-33.99,26.68,3.00
-    "a2",8.00,-30.71,-77.77,66.35,6.00
-    "a3",8.00,-41.65,-69.84,53.43,8.00
-    "a4",2.00,-39.49,-16.99,18.62,2.00
-    "a5",6.00,-91.87,-74.85,83.09,7.00
-    "a6",7.00,-32.47,-24.91,79.24,9.00
-    "a7",4.00,-91.11,-7.44,48.22,7.00
 
 Back to :ref:`Content Table <Tutorial-label>`
 
