@@ -67,7 +67,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{December 05, 2025}
+\date{December 08, 2025}
 \release{3.14.0}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -154,7 +154,7 @@
 \vspace{5mm}
 
 \sphinxAtStartPar
-The tutorials in this document describe the practical usage of our \sphinxstyleemphasis{Digraph3} Python3 software resources in the field of \sphinxstyleemphasis{Algorithmic Decision Theory} and more specifically in \sphinxstylestrong{outranking} based \sphinxstyleemphasis{Multiple Criteria Decision Aid} (MCDA). They mainly illustrate practical tools for a Master Course  at the University of Luxembourg. The document contains first a set of tutorials introducing the main objects available in the Digraph3 collection of Python3 modules, like \sphinxstylestrong{digraphs}, \sphinxstylestrong{outranking digraphs}, \sphinxstylestrong{performance tableaux} and \sphinxstylestrong{voting profiles}. Some of the tutorials are decision problem oriented and show how to compute the potential \sphinxstylestrong{winner(s)} of an election, how to build a \sphinxstylestrong{best choice recommendation}, or how to \sphinxstylestrong{rate} or \sphinxstylestrong{linearly rank} with multiple incommensurable performance criteria. We also discuss the \sphinxstylestrong{fair intergroup and intragroup pairing} problem. More graph theoretical tutorials follow. One on working with \sphinxstylestrong{undirected graphs}, followed by tutorials on how to tackle big outranking digraphs. Finally, special tutorials are devoted to \sphinxstyleemphasis{perfect} graphs, like \sphinxstyleemphasis{split}, \sphinxstyleemphasis{interval} and \sphinxstyleemphasis{permutation} graphs, and to \sphinxstyleemphasis{tree\sphinxhyphen{}graphs} and \sphinxstyleemphasis{forests}.
+The tutorials in this document describe the practical usage of our \sphinxstyleemphasis{Digraph3} Python3 software resources in the field of \sphinxstyleemphasis{Algorithmic Decision Theory} and more specifically in \sphinxstylestrong{outranking} based \sphinxstyleemphasis{Multiple Criteria Decision Aid} (MCDA). They mainly illustrate practical tools for a Master Course  at the University of Luxembourg. The document contains first a set of tutorials introducing the main objects available in the Digraph3 collection of Python3 modules, like \sphinxstylestrong{bipolar\sphinxhyphen{}valued digraphs}, \sphinxstylestrong{outranking digraphs}, and \sphinxstylestrong{multicriteria performance tableaux}. The second and methodological part of this tutorials is decision problem oriented and shows how to edit multicriteria performance tableaux, how to compute the potential \sphinxstylestrong{winner(s)} of an election, how to build a \sphinxstylestrong{best choice recommendation}, and how to \sphinxstylestrong{rate} or \sphinxstylestrong{linearly rank} with multiple incommensurable performance criteria. We finally discuss the \sphinxstylestrong{fair intergroup} and \sphinxstylestrong{intragroup pairing} problems. A third part presents three \sphinxstylestrong{evaluation} and \sphinxstylestrong{decision case studies}. A fourth part with more graph theoretical tutorials follows. One on working with \sphinxstylestrong{undirected graphs}, followed by a tutorial on how to compute \sphinxstylestrong{non isomorphic maximal independent sets} (kernels) in the n\sphinxhyphen{}cycle graph. Special tutorials are devoted to \sphinxstyleemphasis{perfect} graphs, like \sphinxstyleemphasis{split}, \sphinxstyleemphasis{interval} and \sphinxstyleemphasis{permutation} graphs, and to \sphinxstyleemphasis{tree\sphinxhyphen{}graphs} and \sphinxstyleemphasis{forests}.
 
 \sphinxtableofcontents
 
@@ -3903,35 +3903,31 @@ On cardinal criteria, both of cost or of benefit type, we observe following cons
 \sphinxlineitem{\sphinxstyleemphasis{Parameters}:}\begin{itemize}
 \item {} 
 \sphinxAtStartPar
-If \sphinxstyleemphasis{numberOfActions} == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated
+If \sphinxstyleemphasis{numberOfActions} is \sphinxstyleemphasis{None}, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated, otherwise a minimal integer greater than 5 is required
 
 \item {} 
 \sphinxAtStartPar
-If \sphinxstyleemphasis{numberOfCriteria} == None, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated
+If \sphinxstyleemphasis{numberOfCriteria} is \sphinxstyleemphasis{None}, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated, otherwise a poitive integer is required
 
 \item {} 
 \sphinxAtStartPar
-\sphinxstyleemphasis{weightDistribution} = \{‘equiobjectives’|’fixed’|’random’|’equisignificant’ (default = ‘equisignificant’)\}
+\sphinxstyleemphasis{weightDistribution} := \{‘equiobjectives’|’fixed’|’random’|’equisignificant’ (default = ‘equisignificant’)\}
 
 \item {} 
 \sphinxAtStartPar
-default \sphinxstyleemphasis{weightScale} for ‘random’ weightDistribution is 1 \sphinxhyphen{} numberOfCriteria
+Default \sphinxstyleemphasis{weightScale} for ‘random’ weightDistribution is 1 \sphinxhyphen{} numberOfCriteria
 
 \item {} 
 \sphinxAtStartPar
-All cardinal criteria are evaluated with decimals between 0.0 and 100.0 whereas ordinal criteria are evaluated with integers between 0 and 10.
+All \sphinxstyleemphasis{cardinal} criteria are evaluated with decimals between 0.0 and 100.0 whereas \sphinxstyleemphasis{ordinal} criteria are evaluated with integers between 0 and 10
 
 \item {} 
 \sphinxAtStartPar
-commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).
+\sphinxstyleemphasis{commonPercentiles} := \{‘ind’:5, ‘pref’:10, ‘veto’:95\} (default) are expressed in percents (reversed for vetoes) and only concern cardinal criteria.
 
 \item {} 
 \sphinxAtStartPar
-commonPercentiles = \{‘ind’:5, ‘pref’:10, {[}‘weakveto’:90,{]} ‘veto’:95\} are expressed in percents (reversed for vetoes) and only concern cardinal criteria.
-
-\item {} 
-\sphinxAtStartPar
-missingDataProbability := 0 \textless{}= float \textless{}= 1.0 ; probability of missing performance evaluation on a criterion for an alternative (default 0.025).
+\sphinxstyleemphasis{missingDataProbability} := 0 \textless{}= float \textless{}= 1.0 ; probability of missing performance evaluation on a criterion for an alternative (default 0.025).
 
 \item {} 
 \sphinxAtStartPar
@@ -3943,7 +3939,7 @@ NA := \textless{}Decimal\textgreater{} (default = \sphinxhyphen{}999); missing d
 
 \begin{sphinxadmonition}{warning}{Warning:}
 \sphinxAtStartPar
-Minimal number of decision actions required is 3 !
+Minimal number of decision actions required is 6 !
 \end{sphinxadmonition}
 
 \sphinxAtStartPar
@@ -3963,27 +3959,33 @@ Example Python session
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showActions}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} show decision action \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ key:  a1}
-\PYG{g+go}{   short name: a1}
+\PYG{g+go}{   short name: a1c}
 \PYG{g+go}{   name:       random cheap decision action}
 \PYG{g+go}{ key:  a2}
-\PYG{g+go}{   short name: a2}
+\PYG{g+go}{   short name: a2n}
 \PYG{g+go}{   name:       random neutral decision action}
 \PYG{g+go}{ ...}
-\PYG{g+go}{ key:  a7}
+\PYG{g+go}{ key:  a7a}
 \PYG{g+go}{   short name: a7}
 \PYG{g+go}{   name:       random advantageous decision action}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showCriteria}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  criteria \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+go}{ g1 \PYGZsq{}random ordinal benefit criterion\PYGZsq{}}
-\PYG{g+go}{   Scale = (0, 10)}
-\PYG{g+go}{   Weight = 2}
+\PYG{g+go}{ c1 random cardinal cost criterion}
+\PYG{g+go}{  Preference direction: min}
+\PYG{g+go}{  Scale = (0.00, 100.00)}
+\PYG{g+go}{  Weight = 0.167}
+\PYG{g+go}{  Threshold ind : 2.33 + 0.00x ; percentile: 4.76}
+\PYG{g+go}{  Threshold pref : 4.46 + 0.00x ; percentile: 14.29}
+\PYG{g+go}{  Threshold veto : 64.23 + 0.00x ; percentile: 95.24}
+\PYG{g+go}{ c2 \PYGZsq{}random cardinal cost criterion\PYGZsq{}}
 \PYG{g+go}{ ...}
-\PYG{g+go}{ g2 \PYGZsq{}random cardinal cost criterion\PYGZsq{}}
-\PYG{g+go}{   Scale = (0.0, 100.0)}
-\PYG{g+go}{   Weight = 3}
-\PYG{g+go}{   Threshold ind  :  1.76 + 0.00x ; percentile:   9.5}
-\PYG{g+go}{   Threshold pref :  2.16 + 0.00x ; percentile:  14.3}
-\PYG{g+go}{   Threshold veto : 73.19 + 0.00x ; percentile:  95.2}
+\PYG{g+go}{ c3 \PYGZsq{}random cardinal cost criterion\PYGZsq{}}
+\PYG{g+go}{ ...}
+\PYG{g+go}{ b1 random ordinal benefit criterion}
+\PYG{g+go}{  Preference direction: max}
+\PYG{g+go}{  Scale = (0.00, 10.00)}
+\PYG{g+go}{  Weight = 0.250}
+\PYG{g+go}{ b2 random cardinal benefit criterion}
 \PYG{g+go}{ ...}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
@@ -3997,46 +3999,50 @@ In the example above, we may notice the three types of decision actions (\hyperr
 \PYG{g+go}{ Instance name      : randomCBperftab}
 \PYG{g+go}{ \PYGZsh{}Actions           : 7}
 \PYG{g+go}{ \PYGZsh{}Criteria          : 5}
-\PYG{g+go}{  Criterion name       : g1}
-\PYG{g+go}{    Criterion weight     : 2}
-\PYG{g+go}{    criterion scale    : 0.00 \PYGZhy{} 10.00}
-\PYG{g+go}{    mean evaluation    : 5.14}
-\PYG{g+go}{    standard deviation : 2.64}
-\PYG{g+go}{    maximal evaluation : 8.00}
-\PYG{g+go}{    quantile Q3 (x\PYGZus{}75) : 8.00}
-\PYG{g+go}{    median evaluation  : 6.50}
-\PYG{g+go}{    quantile Q1 (x\PYGZus{}25) : 3.50}
-\PYG{g+go}{    minimal evaluation : 1.00}
-\PYG{g+go}{    mean absolute difference      : 2.94}
-\PYG{g+go}{    standard difference deviation : 3.74}
-\PYG{g+go}{  Criterion name       : g2}
+\PYG{g+go}{  Criterion name       : b1}
 \PYG{g+go}{    Criterion weight     : 3}
-\PYG{g+go}{    criterion scale    : \PYGZhy{}100.00 \PYGZhy{} 0.00}
-\PYG{g+go}{    mean evaluation    : \PYGZhy{}49.32}
-\PYG{g+go}{    standard deviation : 27.59}
-\PYG{g+go}{    maximal evaluation : 0.00}
-\PYG{g+go}{    quantile Q3 (x\PYGZus{}75) : \PYGZhy{}27.51}
-\PYG{g+go}{    median evaluation  : \PYGZhy{}35.98}
-\PYG{g+go}{    quantile Q1 (x\PYGZus{}25) : \PYGZhy{}54.02}
-\PYG{g+go}{    minimal evaluation : \PYGZhy{}91.87}
-\PYG{g+go}{    mean absolute difference      : 28.72}
-\PYG{g+go}{    standard difference deviation : 39.02}
-\PYG{g+go}{  ...}
+\PYG{g+go}{    criterion scale    : 0.00 \PYGZhy{} 10.00}
+\PYG{g+go}{    missing evaluations : 0}
+\PYG{g+go}{    mean evaluation       : 4.43}
+\PYG{g+go}{    standard deviation    : 2.50}
+\PYG{g+go}{    maximal evaluation    : 9.00}
+\PYG{g+go}{    quantile Q3 (x\PYGZus{}75)    : 7.50}
+\PYG{g+go}{    median evaluation     : 4.00}
+\PYG{g+go}{    quantile Q1 (x\PYGZus{}25)    : 2.75}
+\PYG{g+go}{    minimal evaluation    : 2.00}
+\PYG{g+go}{    mean absolute difference      : 2.69}
+\PYG{g+go}{    standard difference deviation : 3.53}
+\PYG{g+go}{   ...}
+\PYG{g+go}{  Criterion name       : c1}
+\PYG{g+go}{    Criterion weight     : 2}
+\PYG{g+go}{    criterion scale      : \PYGZhy{}100.00 \PYGZhy{} 0.00}
+\PYG{g+go}{    missing evaluations : 0}
+\PYG{g+go}{    mean evaluation       : \PYGZhy{}54.18}
+\PYG{g+go}{    standard deviation    :  24.82}
+\PYG{g+go}{    maximal evaluation    :   0.00}
+\PYG{g+go}{    quantile Q3 (x\PYGZus{}75)    : \PYGZhy{}25.36}
+\PYG{g+go}{    median evaluation     : \PYGZhy{}48.33}
+\PYG{g+go}{    quantile Q1 (x\PYGZus{}25)    : \PYGZhy{}77.81}
+\PYG{g+go}{    minimal evaluation    : \PYGZhy{}81.69}
+\PYG{g+go}{    mean absolute difference      : 27.62}
+\PYG{g+go}{    standard difference deviation : 35.11}
+\PYG{g+go}{   ...}
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
-A (potentially ranked) colored heatmap with 5 color levels is also provided.
+A \sphinxstyleemphasis{Copeland} ranked colored heatmap with 5 color levels is also provided.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{colorLevels}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{rankingRule}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{colorLevels}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{Correlations}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}
+\PYG{g+gp}{... }                             \PYG{n}{rankingRule}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Copeland}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{figure}[H]
 \centering
 \capstart
 
-\noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{randomCBHeatmap}.png}
-\caption{Unranked heatmap of a random Cost\sphinxhyphen{}Benefit performance tableau}\label{\detokenize{tutorial:id264}}\end{figure}
+\noindent\sphinxincludegraphics[width=350\sphinxpxdimen]{{randomCBHeatmap}.png}
+\caption{Ranked heatmap of a random Cost\sphinxhyphen{}Benefit performance tableau}\label{\detokenize{tutorial:id264}}\end{figure}
 
 \sphinxAtStartPar
 Such a performance tableau may be stored and re\sphinxhyphen{}accessed as follows.
@@ -4050,23 +4056,11 @@ Such a performance tableau may be stored and re\sphinxhyphen{}accessed as follow
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
-If needed for instance in an R session, a CSV version of the performance tableau may be created as follows.
+If needed \textendash{}for instance in an R session\textendash{} a CSV version of the performance tableau may be created as follows.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{saveCSV}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{temp}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{} Storing performance tableau in CSV format in file temp.csv}
-\end{sphinxVerbatim}
-
-\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-...\PYGZdl{}\PYG{+w}{ }less\PYG{+w}{ }temp.csv
-\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}actions\PYGZdq{}},\PYG{l+s+s2}{\PYGZdq{}g1\PYGZdq{}},\PYG{l+s+s2}{\PYGZdq{}g2\PYGZdq{}},\PYG{l+s+s2}{\PYGZdq{}g3\PYGZdq{}},\PYG{l+s+s2}{\PYGZdq{}g4\PYGZdq{}},\PYG{l+s+s2}{\PYGZdq{}g5\PYGZdq{}}
-\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}a1\PYGZdq{}},1.00,\PYGZhy{}17.92,\PYGZhy{}33.99,26.68,3.00
-\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}a2\PYGZdq{}},8.00,\PYGZhy{}30.71,\PYGZhy{}77.77,66.35,6.00
-\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}a3\PYGZdq{}},8.00,\PYGZhy{}41.65,\PYGZhy{}69.84,53.43,8.00
-\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}a4\PYGZdq{}},2.00,\PYGZhy{}39.49,\PYGZhy{}16.99,18.62,2.00
-\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}a5\PYGZdq{}},6.00,\PYGZhy{}91.87,\PYGZhy{}74.85,83.09,7.00
-\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}a6\PYGZdq{}},7.00,\PYGZhy{}32.47,\PYGZhy{}24.91,79.24,9.00
-\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}a7\PYGZdq{}},4.00,\PYGZhy{}91.11,\PYGZhy{}7.44,48.22,7.00
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar

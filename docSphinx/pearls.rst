@@ -2999,10 +2999,7 @@ Applications of bipolar-valued base 3 encoded Bachet numbers
 ````````````````````````````````````````````````````````````
 .. epigraph::
    
-   "*The complexity of arithmetic circuitry for balanced ternary arithmetic is not much greater than it is for the binary system, and a given number requires only* :math:`\log_3 2 \approx 63\%` *as many digit positions for its representation. [...] perhaps the symmetric properties and simple arithmetic of this number system will prove to be quite important someday* [...]"
-
-   -- D. Knuth [KNU-1997]_
-	      
+   "*The complexity of arithmetic circuitry for balanced ternary arithmetic is not much greater than it is for the binary system, and a given number requires only* :math:`\log_3 2 \approx 63\%` *as many digit positions for its representation. [...] perhaps the symmetric properties and simple arithmetic of this number system will prove to be quite important someday* [...]" -- D. Knuth [KNU-1997]_
 
 .. contents:: 
    :depth: 1
@@ -3014,7 +3011,6 @@ Bipolar-valued base 3 encoded Bachet numbers
 .. epigraph::
    
    "*Estant proposee telle quantité qu'on voudra pesant un nombre de livres despuis 1. iusques à 40. inclusivement (sans toutefois admettre les fractions ) on demande combien de pois pour le moins il faudrait employer à cet effect.*" [24]_
-
    -- Cl. G. Bachet (1622) [BAC-1622p]_
 
 Bipolar-valued {-1,0,+1} base 3 encoded integers are due to *Claude Gaspard Bachet de Méziriac* (1581-1638) [20]_. The idea is to represent the value of an integer *n* in a base 3 positional numeration where in each position may appear one of the three symbols **{-1,0,+1}** called hereafter **sbits** for short. 
