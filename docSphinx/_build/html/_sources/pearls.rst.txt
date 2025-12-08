@@ -99,9 +99,7 @@ Enhancing the outranking based MCDA approach
 --------------------------------------------
 
 .. epigraph::
-   "*The goal of our research was to design a resolution method* [..] *that is easy to put into practice, that requires as few and reliable hypotheses as possible, and that meets the needs* [of the decision maker]." 
-
-   -- Benayoun R, Roy B, Sussmann B [13]_ 
+   "*The goal of our research was to design a resolution method* [..] *that is easy to put into practice, that requires as few and reliable hypotheses as possible, and that meets the needs* [of the decision maker]."  -- B. Roy et al. [13]_ 
 
 .. contents::
    :depth: 1
@@ -1103,9 +1101,7 @@ Enhancing social choice procedures
 ``````````````````````````````````````````````````````````````````````
 .. epigraph::
    
-   "*In order to meet both essential conditions for making* [social] *choices --the probability to obtain a decision & the one that the decision may be correct-- it is required* [...], *in case of decisions on complicated questions, to thouroughly develop the system of simple propositions that make them up, that every potential opinion is well explained, that the opinion of each voter is collected on each one of the propositions that make up each question & not only on the global result*." 
-
-   -- Condorcet, Jean-Antoine-Nicolas de Caritat marquis de (1785) [12]_
+   "*In order to meet both essential conditions for making* [social] *choices --the probability to obtain a decision & the one that the decision may be correct-- it is required* [...], *in case of decisions on complicated questions, to thouroughly develop the system of simple propositions that make them up, that every potential opinion is well explained, that the opinion of each voter is collected on each one of the propositions that make up each question & not only on the global result*."  -- J.-A. N. Condorcet (1785) [12]_
 
 .. contents::
    :depth: 1
@@ -2386,9 +2382,7 @@ Selecting the winner of a primary election: a critical commentary
    :local:
 	   
 .. epigraph::
-   "*A rating is not a vote.*" [9]_
-
-   -- Fr. Hollande (2022)
+   "*A rating is not a vote.*" [9]_ -- Fr. Hollande (2022)
 
 The French popular primary presidential election 2022
 .....................................................
