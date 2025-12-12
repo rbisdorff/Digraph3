@@ -225,7 +225,7 @@ class BpvSet(object):
         newOther = deepcopy(other)
         newOther.recodeValuation()
         inter = BpvSet()
-        inter.name = self.name+'&'+other.name
+        inter.name = self.name+'and'+other.name
         
         #print('self',union.support)
         #print('other',newOther.support)
@@ -269,7 +269,7 @@ class BpvSet(object):
         newOther = deepcopy(other)
         newOther.recodeValuation()
         union = BpvSet()
-        union.name = self.name+'&'+other.name
+        union.name = self.name+'or'+other.name
         #print('self',union.support)
         #print('other',newOther.support)
         for it in newSelf.support:
