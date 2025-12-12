@@ -5469,7 +5469,7 @@ A bipolar-valued set $X$ --a **bpv-set** for short-- consists of a support set :
 
     When  :math:`r(x in X)\,=\, 0.0`, elemnt $x$ is neither included nor excluded from set $X$. For any potential element $z$ not included in the support set $E_X$, :math:`r(z \in X) \,=\, -1.0`. The empty bpv-set consists hence of an empty support set :math:`E_{\emptyset} \,=\, \emptyset`. Furthermore, for all potential element $x$, :math:`r(x \in \emptyset) \,=\, -1.0`. 
 
-Let *X* and *Y* be two bpv-sets. We define the classical **set union** :math:`\cup` and \**intersection** :math:`\cap` as follows:
+Let *X* and *Y* be two bpv-sets. We define the classical **set union** :math:`\cup` and **intersection** :math:`\cap` as follows:
 
 :math:`X \cup Y` consists of the support set :math:`E_{X \cup Y} = E_X \cup E_Y` and for every *z* in :math:`E_{X \cup Y}` the membership characteristic becomes
 
@@ -5485,14 +5485,15 @@ The **set difference** between two bpv-sets *X* and *Y*, denoted *X - Y*, is the
 
 The **symmetric difference** of bpv-sets *X* and *Y*, denoted *X ^ Y*, is the bpv-set of all objects that are a member of exactly one of *X* and *Y* (elements which are in one of the sets, but not in both). It is the set difference of their union and intersection, :math:`(X \cup Y) \,-\, (X \cap Y)` or the union of their reciprocal set differences :math:`(X - Y) \,\cup\, (X - Y)`.
 
-The :py:class:`~bipolarValuedSets.BpvSet` class of the :py:mod:`bipolarValuedSets` module provides a Python implementation of such bvp-sets.
+The :py:class:`~bipolarValuedSets.BpvSet` class of the :py:mod:`bipolarValuedSets` module provides a Python implementation of such bvp-sets. In :numref:`bipolarValuedSets1` we use the :py:class:`~bipolarValuedSets.RandomBpvSet` class for generating to random bpv-sets *X* and *Y* with a common support of three elements *s1*, *s2* and *s3*. 
 
 .. code-block:: pycon
-   :caption: Working with bipolar-valued sets
-   :name: bipolarValuedSets
+   :caption: Working with bipolar-valued sets I
+   :name: bipolarValuedSets1
    :linenos:
+   :emphasize-lines: 5-9,13-
 
-   >>> from bipolarValuedSets import *
+   >>> from bipolarValuedSets import RandomBpvSet
    >>> X = RandomBpvSet(numberOfElements=5,elementNamePrefix='s',
    ...     undeterminateness=0.1,valuationRange=(-1, 1),ndigits=4, seed=1)
    >>> X.showMembershipCharacteristics()
@@ -5507,7 +5508,40 @@ The :py:class:`~bipolarValuedSets.BpvSet` class of the :py:mod:`bipolarValuedSet
     s1:  +0.9121
     s2:  +0.8957
     s3:  -0.8869
+
+In :numref:`bipolarValuedSets2` below we illustrate the bipolar-valued set *union* and *intersection*.
+
+.. code-block:: pycon
+   :caption: Working with bipolar-valued sets II
+   :name: bipolarValuedSets2
+   :linenos:
+   :emphasize-lines: 3-7,11-
+
+   >>> (X|Y).showMembershipCharacteristics()
+   # | is Python's set union symbol
+    s1:  +0.9100
+    s2:  +0.9000
+    s3:  +0.5300
+    s5:  +0.0000
+    s4:  -0.4900
+   >>> (X&Y).showMembershipCharacteristics()
+   # & is Python's set intersection symbol
+    s2:  +0.6900
+    s1:  -0.7300
+    s3:  -0.8900
+    s4:  -1.0000
+    s5:  -1.0000
+
+Finally, in :numref:`bipolarValuedSets3` below we illustrate the bipolar-valued set *difference* and *symmetric difference*. 
+
+.. code-block:: pycon
+   :caption: Working with bipolar-valued sets III
+   :name: bipolarValuedSets3
+   :linenos:
+   :emphasize-lines: 3-7,14-
+ 
    >>> (X-Y).showMembershipCharacteristics()
+   # Python's set difference is \
     s1:  +0.9100
     s2:  +0.9000
     s3:  -0.5300
@@ -5518,14 +5552,12 @@ The :py:class:`~bipolarValuedSets.BpvSet` class of the :py:mod:`bipolarValuedSet
     s2:  +0.6900
     s1:  -0.7300
    >>> (Y^X).showMembershipCharacteristics()
+   # ^ is Python's symmetrix difference symbol 
     s1:  +0.9100
     s2:  +0.9000
     s3:  +0.8900
     s4:  -1.0000
     s5:  -1.0000
-     
-
-
 
 Back to :ref:`Content Table <Pearls-label>`
 

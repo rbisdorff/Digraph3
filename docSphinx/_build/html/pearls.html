@@ -5168,7 +5168,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>Element $x$ is more or less excluded from the set $X$ when <img class="math" src="_images/math/2ca21de0ad374717cb39dd2b019ccc9efe0437af.png" alt="r(x in X) \,&lt;\, 0.0"/>.</p>
 <p>When  <img class="math" src="_images/math/db3a4fc8f8403357218452dcc79b37e87b330d3a.png" alt="r(x in X)\,=\, 0.0"/>, elemnt $x$ is neither included nor excluded from set $X$. For any potential element $z$ not included in the support set $E_X$, <img class="math" src="_images/math/60ba098ffb1ec2fe52757b64f99af9007b5a48e6.png" alt="r(z \in X) \,=\, -1.0"/>. The empty bpv-set consists hence of an empty support set <img class="math" src="_images/math/11c2aa794251fd283b48945863950c3fab90d155.png" alt="E_{\emptyset} \,=\, \emptyset"/>. Furthermore, for all potential element $x$, <img class="math" src="_images/math/f7fb2319563cd618784032add2345c255aa94088.png" alt="r(x \in \emptyset) \,=\, -1.0"/>.</p>
 </div></blockquote>
-<p>Let <em>X</em> and <em>Y</em> be two bpv-sets. We define the classical <strong>set union</strong> <img class="math" src="_images/math/64bb6f03c6784a295e36ef26a393eb8a960ddcf7.png" alt="\cup"/> and **intersection** <img class="math" src="_images/math/dc4690ad5e9a41a5da9188f0d69a1242daed46e9.png" alt="\cap"/> as follows:</p>
+<p>Let <em>X</em> and <em>Y</em> be two bpv-sets. We define the classical <strong>set union</strong> <img class="math" src="_images/math/64bb6f03c6784a295e36ef26a393eb8a960ddcf7.png" alt="\cup"/> and <strong>intersection</strong> <img class="math" src="_images/math/dc4690ad5e9a41a5da9188f0d69a1242daed46e9.png" alt="\cap"/> as follows:</p>
 <p><img class="math" src="_images/math/e04f2bcb1c5908c1d955cd733b9245eba86c4e6c.png" alt="X \cup Y"/> consists of the support set <img class="math" src="_images/math/74dcdc4c4c31dfe8d33c52044aa0693ae7ba2b38.png" alt="E_{X \cup Y} = E_X \cup E_Y"/> and for every <em>z</em> in <img class="math" src="_images/math/effdf032e28d11677329a1161f6a3f598905b032.png" alt="E_{X \cup Y}"/> the membership characteristic becomes</p>
 <blockquote>
 <div><p><img class="math" src="_images/math/c2d76fd65b8537d506d25215d557dd2f7519678a.png" alt="r(z \in X \cup Y) \;=\; \max\big(r(z \in X),r(z \in Y) \big)"/> when both <em>z</em> in <em>X</em> and <em>z</em> in <em>Y</em>; otherwise  <img class="math" src="_images/math/e9364d339ee214c4cc0242a4fc60436ac9e24624.png" alt="r(z \in X \cup Y) \;=\; r(z \in X)$ when $z \in X$ and $r(z \in X \cup Y) \;=\; r(z \in Y)"/> when <em>z</em> in <em>Y</em>.</p>
@@ -5179,41 +5179,69 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </div></blockquote>
 <p>The <strong>set difference</strong> between two bpv-sets <em>X</em> and <em>Y</em>, denoted <em>X - Y</em>, is the bpv-set of all members of <em>X</em> that are not members of <em>Y</em>.</p>
 <p>The <strong>symmetric difference</strong> of bpv-sets <em>X</em> and <em>Y</em>, denoted <em>X ^ Y</em>, is the bpv-set of all objects that are a member of exactly one of <em>X</em> and <em>Y</em> (elements which are in one of the sets, but not in both). It is the set difference of their union and intersection, <img class="math" src="_images/math/e30f09e33648a3099522b73e8dccac121e0e1d0b.png" alt="(X \cup Y) \,-\, (X \cap Y)"/> or the union of their reciprocal set differences <img class="math" src="_images/math/57103f33b03f6179cdad76c333fc802ce185bf78.png" alt="(X - Y) \,\cup\, (X - Y)"/>.</p>
-<p>The <a class="reference internal" href="techDoc.html#bipolarValuedSets.BpvSet" title="bipolarValuedSets.BpvSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">BpvSet</span></code></a> class of the <a class="reference internal" href="techDoc.html#module-bipolarValuedSets" title="bipolarValuedSets"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bipolarValuedSets</span></code></a> module provides a Python implementation of such bvp-sets.</p>
-<div class="literal-block-wrapper docutils container" id="bipolarvaluedsets">
-<div class="code-block-caption"><span class="caption-number">Listing 3.69 </span><span class="caption-text">Working with bipolar-valued sets</span><a class="headerlink" href="#bipolarvaluedsets" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bipolarValuedSets</span> <span class="kn">import</span> <span class="o">*</span>
+<p>The <a class="reference internal" href="techDoc.html#bipolarValuedSets.BpvSet" title="bipolarValuedSets.BpvSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">BpvSet</span></code></a> class of the <a class="reference internal" href="techDoc.html#module-bipolarValuedSets" title="bipolarValuedSets"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bipolarValuedSets</span></code></a> module provides a Python implementation of such bvp-sets. In <a class="reference internal" href="#bipolarvaluedsets1"><span class="std std-numref">Listing 3.69</span></a> we use the <a class="reference internal" href="techDoc.html#bipolarValuedSets.RandomBpvSet" title="bipolarValuedSets.RandomBpvSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">RandomBpvSet</span></code></a> class for generating to random bpv-sets <em>X</em> and <em>Y</em> with a common support of three elements <em>s1</em>, <em>s2</em> and <em>s3</em>.</p>
+<div class="literal-block-wrapper docutils container" id="bipolarvaluedsets1">
+<div class="code-block-caption"><span class="caption-number">Listing 3.69 </span><span class="caption-text">Working with bipolar-valued sets I</span><a class="headerlink" href="#bipolarvaluedsets1" title="Link to this code"></a></div>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bipolarValuedSets</span> <span class="kn">import</span> <span class="n">RandomBpvSet</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">RandomBpvSet</span><span class="p">(</span><span class="n">numberOfElements</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">elementNamePrefix</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span>
 <span class="linenos"> 3</span><span class="gp">... </span>    <span class="n">undeterminateness</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">valuationRange</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="linenos"> 4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="linenos"> 5</span><span class="go"> s2:  +0.6949</span>
-<span class="linenos"> 6</span><span class="go"> s3:  +0.5275</span>
-<span class="linenos"> 7</span><span class="go"> s5:  +0.0000</span>
-<span class="linenos"> 8</span><span class="go"> s4:  -0.4899</span>
-<span class="linenos"> 9</span><span class="go"> s1:  -0.7313</span>
-<span class="linenos">10</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="n">RandomBpvSet</span><span class="p">(</span><span class="n">numberOfElements</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">elementNamePrefix</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span>
+<span class="hll"><span class="linenos"> 5</span><span class="go"> s2:  +0.6949</span>
+</span><span class="hll"><span class="linenos"> 6</span><span class="go"> s3:  +0.5275</span>
+</span><span class="hll"><span class="linenos"> 7</span><span class="go"> s5:  +0.0000</span>
+</span><span class="hll"><span class="linenos"> 8</span><span class="go"> s4:  -0.4899</span>
+</span><span class="hll"><span class="linenos"> 9</span><span class="go"> s1:  -0.7313</span>
+</span><span class="linenos">10</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="n">RandomBpvSet</span><span class="p">(</span><span class="n">numberOfElements</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">elementNamePrefix</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span>
 <span class="linenos">11</span><span class="gp">... </span>   <span class="n">undeterminateness</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">valuationRange</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="linenos">12</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="linenos">13</span><span class="go"> s1:  +0.9121</span>
-<span class="linenos">14</span><span class="go"> s2:  +0.8957</span>
-<span class="linenos">15</span><span class="go"> s3:  -0.8869</span>
-<span class="linenos">16</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">-</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="linenos">17</span><span class="go"> s1:  +0.9100</span>
-<span class="linenos">18</span><span class="go"> s2:  +0.9000</span>
-<span class="linenos">19</span><span class="go"> s3:  -0.5300</span>
-<span class="linenos">20</span><span class="go"> s4:  -1.0000</span>
-<span class="linenos">21</span><span class="go"> s5:  -1.0000</span>
-<span class="linenos">22</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Y</span><span class="o">-</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="linenos">23</span><span class="go"> s3:  +0.8900</span>
-<span class="linenos">24</span><span class="go"> s2:  +0.6900</span>
-<span class="linenos">25</span><span class="go"> s1:  -0.7300</span>
-<span class="linenos">26</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Y</span><span class="o">^</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="linenos">27</span><span class="go"> s1:  +0.9100</span>
-<span class="linenos">28</span><span class="go"> s2:  +0.9000</span>
-<span class="linenos">29</span><span class="go"> s3:  +0.8900</span>
-<span class="linenos">30</span><span class="go"> s4:  -1.0000</span>
-<span class="linenos">31</span><span class="go"> s5:  -1.0000</span>
-</pre></div>
+<span class="hll"><span class="linenos">13</span><span class="go"> s1:  +0.9121</span>
+</span><span class="hll"><span class="linenos">14</span><span class="go"> s2:  +0.8957</span>
+</span><span class="hll"><span class="linenos">15</span><span class="go"> s3:  -0.8869</span>
+</span></pre></div>
+</div>
+</div>
+<p>In <a class="reference internal" href="#bipolarvaluedsets2"><span class="std std-numref">Listing 3.70</span></a> below we illustrate the bipolar-valued set <em>union</em> and <em>intersection</em>.</p>
+<div class="literal-block-wrapper docutils container" id="bipolarvaluedsets2">
+<div class="code-block-caption"><span class="caption-number">Listing 3.70 </span><span class="caption-text">Working with bipolar-valued sets II</span><a class="headerlink" href="#bipolarvaluedsets2" title="Link to this code"></a></div>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">|</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="linenos"> 2</span><span class="go"># | is Python&#39;s set union symbol</span>
+<span class="hll"><span class="linenos"> 3</span><span class="go"> s1:  +0.9100</span>
+</span><span class="hll"><span class="linenos"> 4</span><span class="go"> s2:  +0.9000</span>
+</span><span class="hll"><span class="linenos"> 5</span><span class="go"> s3:  +0.5300</span>
+</span><span class="hll"><span class="linenos"> 6</span><span class="go"> s5:  +0.0000</span>
+</span><span class="hll"><span class="linenos"> 7</span><span class="go"> s4:  -0.4900</span>
+</span><span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">&amp;</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="linenos"> 9</span><span class="go"># &amp; is Python&#39;s set intersection symbol</span>
+<span class="linenos">10</span><span class="go"> s2:  +0.6900</span>
+<span class="hll"><span class="linenos">11</span><span class="go"> s1:  -0.7300</span>
+</span><span class="hll"><span class="linenos">12</span><span class="go"> s3:  -0.8900</span>
+</span><span class="hll"><span class="linenos">13</span><span class="go"> s4:  -1.0000</span>
+</span><span class="hll"><span class="linenos">14</span><span class="go"> s5:  -1.0000</span>
+</span></pre></div>
+</div>
+</div>
+<p>Finally, in <a class="reference internal" href="#bipolarvaluedsets3"><span class="std std-numref">Listing 3.71</span></a> below we illustrate the bipolar-valued set <em>difference</em> and <em>symmetric difference</em>.</p>
+<div class="literal-block-wrapper docutils container" id="bipolarvaluedsets3">
+<div class="code-block-caption"><span class="caption-number">Listing 3.71 </span><span class="caption-text">Working with bipolar-valued sets III</span><a class="headerlink" href="#bipolarvaluedsets3" title="Link to this code"></a></div>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">-</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="linenos"> 2</span><span class="go"># Python&#39;s set difference is \</span>
+<span class="hll"><span class="linenos"> 3</span><span class="go"> s1:  +0.9100</span>
+</span><span class="hll"><span class="linenos"> 4</span><span class="go"> s2:  +0.9000</span>
+</span><span class="hll"><span class="linenos"> 5</span><span class="go"> s3:  -0.5300</span>
+</span><span class="hll"><span class="linenos"> 6</span><span class="go"> s4:  -1.0000</span>
+</span><span class="hll"><span class="linenos"> 7</span><span class="go"> s5:  -1.0000</span>
+</span><span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Y</span><span class="o">-</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="linenos"> 9</span><span class="go"> s3:  +0.8900</span>
+<span class="linenos">10</span><span class="go"> s2:  +0.6900</span>
+<span class="linenos">11</span><span class="go"> s1:  -0.7300</span>
+<span class="linenos">12</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Y</span><span class="o">^</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="linenos">13</span><span class="go"># ^ is Python&#39;s symmetrix difference symbol</span>
+<span class="hll"><span class="linenos">14</span><span class="go"> s1:  +0.9100</span>
+</span><span class="hll"><span class="linenos">15</span><span class="go"> s2:  +0.9000</span>
+</span><span class="hll"><span class="linenos">16</span><span class="go"> s3:  +0.8900</span>
+</span><span class="hll"><span class="linenos">17</span><span class="go"> s4:  -1.0000</span>
+</span><span class="hll"><span class="linenos">18</span><span class="go"> s5:  -1.0000</span>
+</span></pre></div>
 </div>
 </div>
 <p>Back to <a class="reference internal" href="#pearls-label"><span class="std std-ref">Content Table</span></a></p>

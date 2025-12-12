@@ -252,8 +252,7 @@ class BpvSet(object):
         return inter
 
     def __or__(self,other,/):
-        """
-        Return the bipolar-valued self|other set
+        """      Return the bipolar-valued self|other set
         """
         return self.union(other)
 
