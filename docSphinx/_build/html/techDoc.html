@@ -1163,8 +1163,25 @@
 <li class="toctree-l3"><a class="reference internal" href="#bachetNumbers.toDecimal"><code class="docutils literal notranslate"><span class="pre">toDecimal()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#cythonized-modules-for-big-digraphs">2.23. Cythonized modules for big digraphs</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#cnpbipolardigraphs-module">2.23.1. cnpBipolarDigraphs module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-bipolarValuedSets">2.23. bipolarValuedSets module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bipolarValuedSets.BpvSet"><code class="docutils literal notranslate"><span class="pre">BpvSet</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.computeCardinality"><code class="docutils literal notranslate"><span class="pre">BpvSet.computeCardinality()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.computeDeterminateness"><code class="docutils literal notranslate"><span class="pre">BpvSet.computeDeterminateness()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.difference"><code class="docutils literal notranslate"><span class="pre">BpvSet.difference()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.dual"><code class="docutils literal notranslate"><span class="pre">BpvSet.dual()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.intersection"><code class="docutils literal notranslate"><span class="pre">BpvSet.intersection()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.recodeValuation"><code class="docutils literal notranslate"><span class="pre">BpvSet.recodeValuation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.save"><code class="docutils literal notranslate"><span class="pre">BpvSet.save()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.showMembershipCharacteristics"><code class="docutils literal notranslate"><span class="pre">BpvSet.showMembershipCharacteristics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.union"><code class="docutils literal notranslate"><span class="pre">BpvSet.union()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bipolarValuedSets.BpvSetUnion"><code class="docutils literal notranslate"><span class="pre">BpvSetUnion</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bipolarValuedSets.RandomBpvSet"><code class="docutils literal notranslate"><span class="pre">RandomBpvSet</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cythonized-modules-for-big-digraphs">2.24. Cythonized modules for big digraphs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cnpbipolardigraphs-module">2.24.1. cnpBipolarDigraphs module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#cnpBipolarDigraphs.CoDualnpDigraph"><code class="docutils literal notranslate"><span class="pre">CoDualnpDigraph</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cnpBipolarDigraphs.ConversenpDigraph"><code class="docutils literal notranslate"><span class="pre">ConversenpDigraph</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cnpBipolarDigraphs.DualnpDigraph"><code class="docutils literal notranslate"><span class="pre">DualnpDigraph</span></code></a></li>
@@ -1172,7 +1189,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#cnpBipolarDigraphs.npDigraph"><code class="docutils literal notranslate"><span class="pre">npDigraph</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#crandperftabs-module">2.23.2. cRandPerfTabs module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#crandperftabs-module">2.24.2. cRandPerfTabs module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#cRandPerfTabs.cNormalizedPerformanceTableau"><code class="docutils literal notranslate"><span class="pre">cNormalizedPerformanceTableau</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cRandPerfTabs.cPartialPerformanceTableau"><code class="docutils literal notranslate"><span class="pre">cPartialPerformanceTableau</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau"><code class="docutils literal notranslate"><span class="pre">cPerformanceTableau</span></code></a></li>
@@ -1182,27 +1199,27 @@
 <li class="toctree-l4"><a class="reference internal" href="#cRandPerfTabs.cRandomRankPerformanceTableau"><code class="docutils literal notranslate"><span class="pre">cRandomRankPerformanceTableau</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#cintegeroutrankingdigraphs-module">2.23.3. cIntegerOutrankingDigraphs module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cintegeroutrankingdigraphs-module">2.24.3. cIntegerOutrankingDigraphs module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph"><code class="docutils literal notranslate"><span class="pre">IntegerBipolarOutrankingDigraph</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#cintegersortingdigraphs-module">2.23.4. cIntegerSortingDigraphs module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cintegersortingdigraphs-module">2.24.4. cIntegerSortingDigraphs module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph"><code class="docutils literal notranslate"><span class="pre">IntegerQuantilesSortingDigraph</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#csparseintegeroutrankingdigraphs-module">2.23.5. cSparseIntegerOutrankingDigraphs module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#csparseintegeroutrankingdigraphs-module">2.24.5. cSparseIntegerOutrankingDigraphs module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph"><code class="docutils literal notranslate"><span class="pre">SparseIntegerDigraph</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph"><code class="docutils literal notranslate"><span class="pre">SparseIntegerOutrankingDigraph</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cSparseIntegerOutrankingDigraphs.cQuantilesRankingDigraph"><code class="docutils literal notranslate"><span class="pre">cQuantilesRankingDigraph</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#cquantilesrankingdigraphs-module">2.23.6. cQuantilesRankingDigraphs module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cquantilesrankingdigraphs-module">2.24.6. cQuantilesRankingDigraphs module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#cQuantilesRankingDigraphs.cQuantilesRankingDigraph"><code class="docutils literal notranslate"><span class="pre">cQuantilesRankingDigraph</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#indices-and-tables">2.24. Indices and tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#indices-and-tables">2.25. Indices and tables</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pearls.html">3. Pearls of bipolar-valued epistemic logic</a></li>
@@ -1295,8 +1312,9 @@
 <li><p><a class="reference internal" href="#module-digraphsTools" id="id22">digraphsTools module</a></p></li>
 <li><p><a class="reference internal" href="#module-arithmetics" id="id23">arithmetics module</a></p></li>
 <li><p><a class="reference internal" href="#module-bachetNumbers" id="id24">bachetNumbers module</a></p></li>
-<li><p><a class="reference internal" href="#cythonized-modules-for-big-digraphs" id="id25">Cythonized modules for big digraphs</a></p></li>
-<li><p><a class="reference internal" href="#indices-and-tables" id="id26">Indices and tables</a></p></li>
+<li><p><a class="reference internal" href="#module-bipolarValuedSets" id="id25">bipolarValuedSets module</a></p></li>
+<li><p><a class="reference internal" href="#cythonized-modules-for-big-digraphs" id="id26">Cythonized modules for big digraphs</a></p></li>
+<li><p><a class="reference internal" href="#indices-and-tables" id="id27">Indices and tables</a></p></li>
 </ul>
 </nav>
 <section id="installation">
@@ -1566,6 +1584,11 @@ generic root <a class="reference external" href="techDoc.html#transitiveDigraphs
 </li>
 <li><dl class="simple">
 <dt><a class="reference internal" href="#bachetnumbers-label"><span class="std std-ref">bachetNumbers module</span></a></dt><dd><p>Implementation of the bipolar-valued base 3 Bachet integers</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><a class="reference internal" href="#bipolarvaluedsets-label"><span class="std std-ref">bipolarValuedSets module</span></a></dt><dd><p>Implementation of the bipolar-valued base 3 Bachet integers</p>
 </dd>
 </dl>
 </li>
@@ -12622,12 +12645,103 @@ Fifth Floor, Boston, MA 02110-1301 USA.</p>
 <dd><p>Return Decimal(int(self))</p>
 </dd></dl>
 
+<hr class="docutils" />
+</section>
+<section id="module-bipolarValuedSets">
+<span id="bipolarvaluedsets-module"></span><span id="bipolarvaluedsets-label"></span><h2><a class="toc-backref" href="#id25" role="doc-backlink"><span class="section-number">2.23. </span>bipolarValuedSets module</a><a class="headerlink" href="#module-bipolarValuedSets" title="Link to this heading"></a></h2>
+<p>Python3+ implementation of the bipolarValuedSets module.</p>
+<p>Copyright (C) 2025  Raymond Bisdorff</p>
+<blockquote>
+<div><p>This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 3 of the License, or
+(at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p>
+</div></blockquote>
+<dl class="py class">
+<dt class="sig sig-object py" id="bipolarValuedSets.BpvSet">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bipolarValuedSets.</span></span><span class="sig-name descname"><span class="pre">BpvSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bipolarValuedSets.html#BpvSet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bipolarValuedSets.BpvSet" title="Link to this definition"></a></dt>
+<dd><p>Root class. See the final scratch part</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="bipolarValuedSets.BpvSet.computeCardinality">
+<span class="sig-name descname"><span class="pre">computeCardinality</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bipolarValuedSets.html#BpvSet.computeCardinality"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bipolarValuedSets.BpvSet.computeCardinality" title="Link to this definition"></a></dt>
+<dd><p>Return the number of positively included elements</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bipolarValuedSets.BpvSet.computeDeterminateness">
+<span class="sig-name descname"><span class="pre">computeDeterminateness</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bipolarValuedSets.html#BpvSet.computeDeterminateness"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bipolarValuedSets.BpvSet.computeDeterminateness" title="Link to this definition"></a></dt>
+<dd><p>Return the mean absolute characteristic value</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bipolarValuedSets.BpvSet.difference">
+<span class="sig-name descname"><span class="pre">difference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="positional-only-separator o"><abbr title="Positional-only parameter separator (PEP 570)"><span class="pre">/</span></abbr></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bipolarValuedSets.html#BpvSet.difference"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bipolarValuedSets.BpvSet.difference" title="Link to this definition"></a></dt>
+<dd><p>Return the set difference between self and other</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bipolarValuedSets.BpvSet.dual">
+<span class="sig-name descname"><span class="pre">dual</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bipolarValuedSets.html#BpvSet.dual"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bipolarValuedSets.BpvSet.dual" title="Link to this definition"></a></dt>
+<dd><p>Return the complement or dual of self wrt self.support</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bipolarValuedSets.BpvSet.intersection">
+<span class="sig-name descname"><span class="pre">intersection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="positional-only-separator o"><abbr title="Positional-only parameter separator (PEP 570)"><span class="pre">/</span></abbr></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bipolarValuedSets.html#BpvSet.intersection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bipolarValuedSets.BpvSet.intersection" title="Link to this definition"></a></dt>
+<dd><p>Return the set intersection of self and other</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bipolarValuedSets.BpvSet.recodeValuation">
+<span class="sig-name descname"><span class="pre">recodeValuation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">newMin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newMax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndigits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bipolarValuedSets.html#BpvSet.recodeValuation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bipolarValuedSets.BpvSet.recodeValuation" title="Link to this definition"></a></dt>
+<dd><p>Specialization for recoding the valuation of a BpvSet membership chracteristics
+By default the valuation domain is normalized to [-1;1]</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bipolarValuedSets.BpvSet.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tempBpvSet'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bipolarValuedSets.html#BpvSet.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bipolarValuedSets.BpvSet.save" title="Link to this definition"></a></dt>
+<dd><p>Permanent storage of a BvpSet instance</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bipolarValuedSets.BpvSet.showMembershipCharacteristics">
+<span class="sig-name descname"><span class="pre">showMembershipCharacteristics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ndigits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bipolarValuedSets.html#BpvSet.showMembershipCharacteristics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bipolarValuedSets.BpvSet.showMembershipCharacteristics" title="Link to this definition"></a></dt>
+<dd><p>When <em>Normalized</em>, the charactritic values are recoded into the [-1,1] range</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bipolarValuedSets.BpvSet.union">
+<span class="sig-name descname"><span class="pre">union</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="positional-only-separator o"><abbr title="Positional-only parameter separator (PEP 570)"><span class="pre">/</span></abbr></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bipolarValuedSets.html#BpvSet.union"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bipolarValuedSets.BpvSet.union" title="Link to this definition"></a></dt>
+<dd><p>Return the bipolar-valued set union of self and other</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bipolarValuedSets.BpvSetUnion">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bipolarValuedSets.</span></span><span class="sig-name descname"><span class="pre">BpvSetUnion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">setA</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">setB</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndigits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bipolarValuedSets.html#BpvSetUnion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bipolarValuedSets.BpvSetUnion" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bipolarValuedSets.RandomBpvSet">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bipolarValuedSets.</span></span><span class="sig-name descname"><span class="pre">RandomBpvSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numberOfElements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elementNamePrefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'x'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">undeterminateness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valuationRange</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(-1,</span> <span class="pre">1)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndigits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bipolarValuedSets.html#RandomBpvSet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bipolarValuedSets.RandomBpvSet" title="Link to this definition"></a></dt>
+<dd><p><em>undeterminateness</em> parameter (in float % [0.0,1.0], default=0.1)</p>
+</dd></dl>
+
 <p>Back to the <a class="reference internal" href="#contents-table-label"><span class="std std-ref">Table of Contents</span></a></p>
 <hr class="docutils" />
 <hr class="docutils" />
 </section>
 <section id="cythonized-modules-for-big-digraphs">
-<span id="cythonized-label"></span><h2><a class="toc-backref" href="#id25" role="doc-backlink"><span class="section-number">2.23. </span>Cythonized modules for big digraphs</a><a class="headerlink" href="#cythonized-modules-for-big-digraphs" title="Link to this heading"></a></h2>
+<span id="cythonized-label"></span><h2><a class="toc-backref" href="#id26" role="doc-backlink"><span class="section-number">2.24. </span>Cythonized modules for big digraphs</a><a class="headerlink" href="#cythonized-modules-for-big-digraphs" title="Link to this heading"></a></h2>
 <p>The following modules are compiled C-extensions using the Cython pre-compiler. No Python code source is provided for inspection. To distinguish them from the corresponding pure Python modules, a c- prefix is used.</p>
 <blockquote>
 <div><dl class="simple">
@@ -12652,7 +12766,7 @@ Fifth Floor, Boston, MA 02110-1301 USA.</p>
 <p>These cythonized modules, specifically designed for being run on HPC clusters (see <a class="reference external" href="https://hpc.uni.lu">https://hpc.uni.lu</a>), are starting with <em>Threading=True</em> their multiprocessing threads by default with the <em>spawn</em> start method. The main program code of Python scripts using these modules must therefore be protected with the <em>__name__==”__main__”</em> test from recursive re-execution. The threading start method is actually configurable with the <em>StartMethod</em> parameter: <em>spawn</em>, <em>forkserver</em> or <em>fork</em>. The latter is not safe –especially on not Linux systems– and may result in dead locks and hence return partial or false results.</p>
 </div>
 <section id="cnpbipolardigraphs-module">
-<span id="cnpbipolardigraphs-label"></span><h3><span class="section-number">2.23.1. </span>cnpBipolarDigraphs module<a class="headerlink" href="#cnpbipolardigraphs-module" title="Link to this heading"></a></h3>
+<span id="cnpbipolardigraphs-label"></span><h3><span class="section-number">2.24.1. </span>cnpBipolarDigraphs module<a class="headerlink" href="#cnpbipolardigraphs-module" title="Link to this heading"></a></h3>
 <p><strong>Inheritance Diagram</strong></p>
 <div class="graphviz"><object data="_images/inheritance-50a5b4000cc9e0b68dbb3dd0a5d49cf1c7c4076c.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of cnpBipolarDigraphs</p></object></div>
@@ -12904,7 +13018,7 @@ where +nx1 = dominated, -nx1 = absorbed neighborhood</p>
 <hr class="docutils" />
 </section>
 <section id="crandperftabs-module">
-<span id="crandperftabs-label"></span><h3><span class="section-number">2.23.2. </span>cRandPerfTabs module<a class="headerlink" href="#crandperftabs-module" title="Link to this heading"></a></h3>
+<span id="crandperftabs-label"></span><h3><span class="section-number">2.24.2. </span>cRandPerfTabs module<a class="headerlink" href="#crandperftabs-module" title="Link to this heading"></a></h3>
 <p><strong>Inheritance Diagram</strong></p>
 <div class="graphviz"><object data="_images/inheritance-e8150b253e70701f3cf19e4ff5507711520f7d35.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of cRandPerfTabs</p></object></div>
@@ -13310,7 +13424,7 @@ matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p
 <hr class="docutils" />
 </section>
 <section id="cintegeroutrankingdigraphs-module">
-<span id="cintegeroutrankingdigraphs-label"></span><h3><span class="section-number">2.23.3. </span>cIntegerOutrankingDigraphs module<a class="headerlink" href="#cintegeroutrankingdigraphs-module" title="Link to this heading"></a></h3>
+<span id="cintegeroutrankingdigraphs-label"></span><h3><span class="section-number">2.24.3. </span>cIntegerOutrankingDigraphs module<a class="headerlink" href="#cintegeroutrankingdigraphs-module" title="Link to this heading"></a></h3>
 <div class="graphviz"><object data="_images/inheritance-75717757dfc744737d0c70dbc313263790d58f84.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of cIntegerOutrankingDigraphs</p></object></div>
 <p id="module-cIntegerOutrankingDigraphs">c-Extension for the Digraph3 collection.
@@ -13536,7 +13650,7 @@ is by convention 0.0 at determination level 0.0 .</p>
 <hr class="docutils" />
 </section>
 <section id="cintegersortingdigraphs-module">
-<span id="cintegersortingdigraphs-label"></span><h3><span class="section-number">2.23.4. </span>cIntegerSortingDigraphs module<a class="headerlink" href="#cintegersortingdigraphs-module" title="Link to this heading"></a></h3>
+<span id="cintegersortingdigraphs-label"></span><h3><span class="section-number">2.24.4. </span>cIntegerSortingDigraphs module<a class="headerlink" href="#cintegersortingdigraphs-module" title="Link to this heading"></a></h3>
 <div class="graphviz"><object data="_images/inheritance-89937aad52916677177ec0a1a2682f1a939a6b7f.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of cIntegerSortingDigraphs</p></object></div>
 <p id="module-cIntegerSortingDigraphs">c-Extension for the Digraph3 collection.
@@ -13887,7 +14001,7 @@ the high category limit.</p>
 <hr class="docutils" />
 </section>
 <section id="csparseintegeroutrankingdigraphs-module">
-<span id="csparseintegeroutrankingdigraphs-label"></span><h3><span class="section-number">2.23.5. </span>cSparseIntegerOutrankingDigraphs module<a class="headerlink" href="#csparseintegeroutrankingdigraphs-module" title="Link to this heading"></a></h3>
+<span id="csparseintegeroutrankingdigraphs-label"></span><h3><span class="section-number">2.24.5. </span>cSparseIntegerOutrankingDigraphs module<a class="headerlink" href="#csparseintegeroutrankingdigraphs-module" title="Link to this heading"></a></h3>
 <p><strong>Inheritance Diagram</strong></p>
 <div class="graphviz"><object data="_images/inheritance-908b29e0e2d0c7508905298f076a052cfde68063.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of cSparseIntegerOutrankingDigraphs</p></object></div>
@@ -14705,7 +14819,7 @@ Components are stored in an ordered dictionary.</p>
 <hr class="docutils" />
 </section>
 <section id="cquantilesrankingdigraphs-module">
-<span id="cquantilesrankingdigraphs-label"></span><h3><span class="section-number">2.23.6. </span>cQuantilesRankingDigraphs module<a class="headerlink" href="#cquantilesrankingdigraphs-module" title="Link to this heading"></a></h3>
+<span id="cquantilesrankingdigraphs-label"></span><h3><span class="section-number">2.24.6. </span>cQuantilesRankingDigraphs module<a class="headerlink" href="#cquantilesrankingdigraphs-module" title="Link to this heading"></a></h3>
 <p id="module-cQuantilesRankingDigraphs">c-Extension for the Digraph3 collection.
 Module cQuantilesRankingDigraphs.py is a c-compiled partial version of the corresponding <a class="reference internal" href="#module-sparseOutrankingDigraphs" title="sparseOutrankingDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sparseOutrankingDigraphs</span></code></a> module for handling quantiles ranking digraphs of very large order.</p>
 <p>Copyright (C) 2025  Raymond Bisdorff</p>
@@ -14964,7 +15078,7 @@ Components are stored in an ordered dictionary.</p>
 </section>
 <hr class="docutils" />
 <section id="indices-and-tables">
-<h2><a class="toc-backref" href="#id26" role="doc-backlink"><span class="section-number">2.24. </span>Indices and tables</a><a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id27" role="doc-backlink"><span class="section-number">2.25. </span>Indices and tables</a><a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
@@ -14985,7 +15099,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Dec 08, 2025.
+      <span class="lastupdated">Last updated on Dec 12, 2025.
       </span></p>
   </div>
 

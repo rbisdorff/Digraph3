@@ -305,6 +305,9 @@ Miscellaneous tools
 * :ref:`bachetNumbers-label`
      Implementation of the bipolar-valued base 3 Bachet integers
 
+* :ref:`bipolarValuedSets-label`
+     Implementation of the bipolar-valued base 3 Bachet integers
+
 ..  * :ref:`xmcda-label` 
      Methods and tools for handling XMCDA encoded performance tableaux and digraphs.
      
@@ -692,6 +695,18 @@ bachetNumbers module
 --------------------
 
 .. automodule:: bachetNumbers
+   :member-order: alphabetical
+   :no-inherited-members:
+   :members:
+
+-------------
+
+.. _bipolarValuedSets-label:
+
+bipolarValuedSets module
+------------------------
+
+.. automodule:: bipolarValuedSets
    :member-order: alphabetical
    :no-inherited-members:
    :members:

@@ -1,6 +1,6 @@
 #######################
 # R. Bisdorff
-# pytest functions for the arithmetics module
+# pytest functions for the bachetNumbers module
 # ..$python3 -m pip install pytest  # installing the pytest package
 ########################
 

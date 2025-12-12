@@ -3,6 +3,7 @@ digraph3_copyright.html
 digraphsTools.py
 arithmetics.py
 bachetNumbers.py
+bipolarValuedSets.py
 digraphs.py
 perfTabs.py
 performanceQuantiles.py
@@ -53,6 +54,8 @@ doc/rel_rubyExample.eps
 doc/sedpngs
 test/nosetests
 test/pytestsArithmetics.py
+test/pytestsBachetNumbers.py
+test/pytestsBipolarValuedSets.py
 test/pytestsDigraphs.py
 test/pytestsOutrankingDigraphs.py
 test/pytestsSortingDigraphs.py
