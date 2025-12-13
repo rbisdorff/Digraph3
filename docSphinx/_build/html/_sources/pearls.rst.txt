@@ -5433,18 +5433,18 @@ Let now *P* and *Q* be two propositions, logical **conjunction** :math:`\land`, 
 
 It is worthwhile noticing that the bipolar-valued logical implication is not necessarily transitive. Suppose for instance that a majority of voters validate proposition *P* and another majority validates the second proposition *Q* and still another majority of voters validates indeed the third proposition *R*. There is no epistemic reason why the evidence concerning statements :math:`P \Rightarrow Q` and :math:`Q \Rightarrow R` should necessarily induce the evidence that :math:`P \Rightarrow R`.
 
-In fact, we are working in a balanced ternary logic with negative (false), positive (true) and null (indeterminate) characteristic values. A negative affirmation becomes here a positive refutation and vice versa. 
+In fact, we are working in a balanced ternary logic with negative (false), positive (true) and null (indeterminate) characteristic values. A negative affirmation becomes here a positive refutation and vice versa [BIS-2004_3p]_. 
 
-Epistemic fusion of propositional evidences
-...........................................
+.. Epistemic fusion of propositional evidences
+.. ...........................................
 
-Let proposition *P* stating again what candidate should be winning the election. Suppose furthermore that the assembly of voters is split into two groups and let the result be characterised by two characteristic functions
+.. Let proposition *P* stating again what candidate should be winning the election. Suppose furthermore that the assembly of voters is split into two groups and let the result be characterised by two characteristic functions
 
       :math:`r_1(P) \in [-1.0;+1.0]`,
 
       :math:`r_2(P) \in [-1.0;+1.0]`.
 
-We may aggregate these characteristic functions with the help of a **disjunctive fusion** operator :math:`\oplus`.
+.. We may aggregate these characteristic functions with the help of a **disjunctive fusion** operator :math:`\oplus`.
 
    - :math:`r(P) \;=\: r_1(P) \,\oplus\, r_2(P) \;=`
 
@@ -5454,20 +5454,20 @@ We may aggregate these characteristic functions with the help of a **disjunctive
 
       :math:`\hspace{10mm} \; \; 0.0` otherwise.
 
-   Mind that the :math:`\oplus` operator, like a mean or average, is not associative when multiple characteristic functions must be fused together. In this case, all positive and negative terms get separately fused and their respective final results get again submitted to the :math:`\oplus` operator.
+.. Mind that the :math:`\oplus` operator, like a mean or average, is not associative when multiple characteristic functions must be fused together. In this case, all positive and negative terms get separately fused and their respective final results get again submitted to the :math:`\oplus` operator.
 
-As a consequence, when there exist conjointly positive and negative epistemic evidences for a statement, the proposition always get an *indeterminate* status. This way all tautologies and antologies of a classical propositional calculus like the Boolean algebra remain effectively valid when only working with fully determined statements [BIS-2004_3p]_.
+.. As a consequence, when there exist conjointly positive and negative epistemic evidences for a statement, the proposition always get an *indeterminate* status. This way all tautologies and antologies of a classical propositional calculus like the Boolean algebra remain effectively valid when only working with fully determined statements.
 
 Bipolar-valued set theory
 .........................
 
 A bipolar-valued set $X$ --a **bpv-set** for short-- consists of a support set :math:`E_X` of potential elements and a dictionary providing for every element :math:`x \in E_X` a bipolar-valued membership characteristic function :math:`r(x \in X)` taking values in the decimal interval [-1.0;+1.0].
 
-    Element $x$ is more or less included in the set $X$ when :math:`r(x in X) \,>\, 0.0`;
+    Element $x$ is more or less included in the set $X$ when :math:`r(x \in X) \,>\, 0.0`;
 
-    Element $x$ is more or less excluded from the set $X$ when :math:`r(x in X) \,<\, 0.0`.
+    Element $x$ is more or less excluded from the set $X$ when :math:`r(x \in X) \,<\, 0.0`.
 
-    When  :math:`r(x in X)\,=\, 0.0`, elemnt $x$ is neither included nor excluded from set $X$. For any potential element $z$ not included in the support set $E_X$, :math:`r(z \in X) \,=\, -1.0`. The empty bpv-set consists hence of an empty support set :math:`E_{\emptyset} \,=\, \emptyset`. Furthermore, for all potential element $x$, :math:`r(x \in \emptyset) \,=\, -1.0`. 
+    When  :math:`r(x \in X)\,=\, 0.0`, elemnt $x$ is neither included nor excluded from set $X$. For any potential element $z$ not included in the support set $E_X$, :math:`r(z \in X) \,=\, -1.0`. The empty bpv-set consists hence of an empty support set :math:`E_{\emptyset} \,=\, \emptyset`. Furthermore, for all potential element $x$, :math:`r(x \in \emptyset) \,=\, -1.0`. 
 
 Let *X* and *Y* be two bpv-sets. We define the classical **set union** :math:`\cup` and **intersection** :math:`\cap` as follows:
 
@@ -5544,9 +5544,9 @@ Finally, in :numref:`bipolarValuedSets3` below we illustrate the bipolar-valued 
    # Python's set difference is \
     s1:  +0.9100
     s2:  +0.9000
+    s5:  +0.0000
+    s4:  -0.4900
     s3:  -0.5300
-    s4:  -1.0000
-    s5:  -1.0000
    >>> (Y-X).showMembershipCharacteristics()
     s3:  +0.8900
     s2:  +0.6900
@@ -5556,8 +5556,8 @@ Finally, in :numref:`bipolarValuedSets3` below we illustrate the bipolar-valued 
     s1:  +0.9100
     s2:  +0.9000
     s3:  +0.8900
-    s4:  -1.0000
-    s5:  -1.0000
+    s5:  +0.0000
+    s5:  -4.9000
 
 Back to :ref:`Content Table <Pearls-label>`
 

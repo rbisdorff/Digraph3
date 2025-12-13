@@ -307,6 +307,30 @@ class BpvSet(object):
         else:
             return False
 
+    def isSubset(self,other,/):
+        """
+        Return the bipolar-valued credibility that self is a bpv-subset of other
+        """
+        from copy import deepcopy
+        newSelf = deepcopy(self)
+        newSelf.recodeValuation()
+        newOther = deepcopy(other)
+        newOther.recodeValuation()
+        Min = newSelf.valuationDomain['min']
+        Max = newSelf.valuationDomain['max']
+        res = Max
+        for it in newSelf.support:
+            print(it)
+            try:
+                resit = -( min(newSelf.membership[it],-(newOther.membership[it])) )
+                print(res,newSelf.membership[it],newOther.membership[it],resit)
+            except:
+                print('other does not contain;^',it)
+                return Min
+            if resit < res:
+                res = resit
+        return res
+
     def __sub__(self,other,/):
         """
         Return the set difference self-other
@@ -334,7 +358,7 @@ class BpvSet(object):
             try:
                 membership[it] = -min(newSelf.membership[it],-newOther.membership[it])
             except:
-                membership[it] = Min
+                membership[it] = newSelf.membership[it]
         diff.ndigits = min(newSelf.ndigits, newOther.ndigits)
         diff.membership = membership
         diff.determinateness = diff.computeDeterminateness()
