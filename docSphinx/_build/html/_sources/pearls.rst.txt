@@ -5461,27 +5461,27 @@ In fact, we are working in a balanced ternary logic with negative (false), posit
 Bipolar-valued set theory
 .........................
 
-A bipolar-valued set $X$ --a **bpv-set** for short-- consists of a support set :math:`E_X` of potential elements and a dictionary providing for every element :math:`x \in E_X` a bipolar-valued membership characteristic function :math:`r(x \in X)` taking values in the decimal interval [-1.0;+1.0].
+A bipolar-valued set *X*, a **bpv-set** for short, consists of a support set :math:`E_X` of potential elements and a dictionary providing for every element :math:`x \in E_X` a bipolar-valued membership characteristic function :math:`r(x \in X)` taking values in the decimal interval [-1.0;+1.0].
 
-    Element $x$ is more or less included in the set $X$ when :math:`r(x \in X) \,>\, 0.0`;
+    Element *x* is more or less included in the set *X* when :math:`r(x \in X) \,>\, 0.0`;
 
-    Element $x$ is more or less excluded from the set $X$ when :math:`r(x \in X) \,<\, 0.0`.
+    Element *x* is more or less excluded from the set *X* when :math:`r(x \in X) \,<\, 0.0`.
 
-    When  :math:`r(x \in X)\,=\, 0.0`, elemnt $x$ is neither included nor excluded from set $X$. For any potential element $z$ not included in the support set $E_X$, :math:`r(z \in X) \,=\, -1.0`. The empty bpv-set consists hence of an empty support set :math:`E_{\emptyset} \,=\, \emptyset`. Furthermore, for all potential element $x$, :math:`r(x \in \emptyset) \,=\, -1.0`. 
+    When  :math:`r(x \in X)\,=\, 0.0`, element *x* is neither included nor excluded from set *X*.
+
+For any potential element *z* not included in the support set :math:`E_X`, :math:`r(z \in X) \,=\, -1.0`. The empty bpv-set consists hence of an empty support set :math:`E_{\emptyset} \,=\, \emptyset`. Furthermore, for all potential element *x*, :math:`r(x \in \emptyset) \,=\, -1.0`. 
 
 Let *X* and *Y* be two bpv-sets. We define the classical **set union** :math:`\cup` and **intersection** :math:`\cap` as follows:
 
-:math:`X \cup Y` consists of the support set :math:`E_{X \cup Y} = E_X \cup E_Y` and for every *z* in :math:`E_{X \cup Y}` the membership characteristic becomes
+    :math:`X \cup Y` consists of the support set :math:`E_{X \cup Y} = E_X \cup E_Y` and for every *z* in :math:`E_{X \cup Y}` the membership characteristic becomes
 
-    :math:`r(z \in X \cup Y) \;=\; \max\big(r(z \in X),r(z \in Y) \big)` when both *z* in *X* and *z* in *Y*; otherwise  :math:`r(z \in X \cup Y) \;=\; r(z \in X)$ when $z \in X$ and $r(z \in X \cup Y) \;=\; r(z \in Y)` when *z* in *Y*.
+         :math:`r(z \in X \cup Y) \;=\; \max\big(r(z \in X),r(z \in Y) \big)` when both *z* in *X* and *z* in *Y*; otherwise  :math:`r(z \in X \cup Y) \;=\; r(z \in X)$ when $z \in X$ and $r(z \in X \cup Y) \;=\; r(z \in Y)` when *z* in *Y*.
 
-:math:`X \cap Y` consists of the support set :math:`E_{X \cap Y} = E_X\cap E_Y` and for every :math:`z \in E_{X \cap Y}` the membership characteristic becomes
+    :math:`X \cap Y` consists of the support set :math:`E_{X \cap Y} = E_X\cap E_Y` and for every :math:`z \in E_{X \cap Y}` the membership characteristic becomes
 
-      :math:`r(z \in X \cap Y) \;=\; \min\big(r(z \in X),r(z \in Y) \big)` when both *z* in *X* and *z* in *Y*; otherwise  :math:`r(z \in X \cap Y) \;=\; -1.0`.
+         :math:`r(z \in X \cap Y) \;=\; \min\big(r(z \in X),r(z \in Y) \big)` when both *z* in *X* and *z* in *Y*; otherwise  :math:`r(z \in X \cap Y) \;=\; -1.0`.
 
-.. We say now say that bpv-set $X$ is as \textbf{subset} of pbv-set $Y$ --denoted $X \,\subseteq\,Y$-- when the support set $E_X$ is a subset of the support set of $Y$ and $\forall x \in E_X: r(x \in X) \;\Rightarrow\; r(x \in Y)$. It follows that $r(X \subseteq Y) \;=\; \min_{\forall x \in E_X} \big[-r \big(\,\min(r(x \in X),-r(x \in Y)\,)\big) \big]$. And $X$ is a proper subset of $Y$ --denoted $X \subsetneq Y$ when $r(X \subseteq Y) \;>\; 0.0$ and $r(Y \subseteq X) \;<\; 0.0$.
-
-The **set difference** between two bpv-sets *X* and *Y*, denoted *X - Y*, is the bpv-set of all members of *X* that are not members of *Y*.
+The **set difference** between two bpv-sets *X* and *Y*, denoted *X-Y*, is the bpv-set of all members of *X* that are not members of *Y*.
 
 The **symmetric difference** of bpv-sets *X* and *Y*, denoted *X ^ Y*, is the bpv-set of all objects that are a member of exactly one of *X* and *Y* (elements which are in one of the sets, but not in both). It is the set difference of their union and intersection, :math:`(X \cup Y) \,-\, (X \cap Y)` or the union of their reciprocal set differences :math:`(X - Y) \,\cup\, (X - Y)`.
 
@@ -5551,8 +5551,9 @@ Finally, in :numref:`bipolarValuedSets3` below we illustrate the bipolar-valued 
     s3:  +0.8900
     s2:  +0.6900
     s1:  -0.7300
-   >>> (Y^X).showMembershipCharacteristics()
-   # ^ is Python's symmetrix difference symbol 
+   >>> (Y^X).showMembershipCharacteristics() 
+   # ^ is Python's symmetrix difference symbol
+   # X^Y = (X-Y)|(Y-X) or (X|Y)-(X&Y)
     s1:  +0.9100
     s2:  +0.9000
     s3:  +0.8900
