@@ -66,10 +66,10 @@ Pearls of bipolar-valued epistemic logic
        * :ref:`Ordinal correlation equals bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>`
        * :ref:`Applications of bipolar-valued base 3 Bachet numbers <Bachet-Tutorial-label>` 	 
        * :ref:`On computing graph and digraph kernels <Kernel-Tutorial-label>`
+       * :ref:`On computational bipolar-valued set theory <Bipolar-Valued-Sets-Tutorial-label>`
        * :ref:`Computing bipolar-valued kernel membership characteristic vectors <Bipolar-Valued-Kernels-Tutorial-label>`
        * :ref:`On characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>`
        * :ref:`Consensus quality of the bipolar-valued outranking relation <Outranking-Consensus-Tutorial-label>`
-       * :ref:`Introduction to bipolar-valued set theory <Bipolar-Valued-Sets-Tutorial-label>`
 
 --------------------------------------------------------
 
@@ -4243,7 +4243,7 @@ With such unique disjoint initial and terminal prekernels (see Line 4 and 10), t
       determinateness (%) : 64.62
       - most credible action(s) = { 'a7': 48.84, }
 
-Notice that solving bipolar-valued kernel equation systems (see :ref:`Bipolar-Valued Kernels <Bipolar-Valued-Kernels-Tutorial-label>` in the Advanced Topics) provides furthermore a positive characterization of the most credible decision actions in each respective choice recommendation (see Lines 14 and 23 above). Actions 'a2' and 'a4' are equivalent candidates for a unique best choice, and action 'a7' is clearly confirmed as the last choice.
+Notice that solving bipolar-valued kernel equation systems (see :ref:`Bipolar-Valued Kernels <Bipolar-Valued-Kernels-Tutorial-label>` below) provides furthermore a positive characterization of the most credible decision actions in each respective choice recommendation (see Lines 14 and 23 above). Actions 'a2' and 'a4' are equivalent candidates for a unique best choice, and action 'a7' is clearly confirmed as the last choice.
 
 In :numref:`bestWorstOrientation` below, we orient the drawing of the strict outranking digraph instance with the help of these first and last choice recommendations. 
 
@@ -4378,6 +4378,181 @@ And, checking maximality of independent choices via the external stability condi
 Back to :ref:`Content Table <Pearls-label>`
 
 ----------------
+
+.. _Bipolar-Valued-Sets-Tutorial-label:
+
+Computing with bipolar-valued sets
+``````````````````````````````````
+
+.. contents:: 
+	:depth: 1
+	:local:
+
+Bipolar-valued epistemic logic
+..............................
+
+In bipolar-valued epistemic logic we assemble conjointly some evidence for a statemnt to be true and other evidence for the same statement to be false. First example is given by the statement *P*: '*this candidate should win the election*'. There are some voters who support its truthfulness and some voters who support, on the contrary its falseness. Yet, there may also be some voters who don't give any opinion, they abstain from voting. What logical status should be given to the statement *P* ?
+
+Following *Condorcet* [CON-1785p]_ we are going to balance the votes in favour against the votes in disfavour. As a result we obtain a bipolar-valued credibility which qualifies statement *P* as certainly true when all voters support its truth, more or less true when more voters support its truthfulness than its falseness, more or less false when more voters support its falseness than its truthfulness and certainly false if all the voters support its falseness. There may however appear a special case when the same number of voters support its truthfulness respectively its falseness, or all voters abstain from voting. In these cases, statement *P* becomes neither *true* nor *false*, but **indeterminate**. It is a *zero knowledge* situation.
+
+First important consequence is that the logical status of any statement is considered to be indeterminate as long as no evidence is yet collected. Reconsidering for instance proposition *P*, its logical status is indeterminate as long as no voting has been organized. More important is furthermore the consequence that negating the truthfulness or falseness of a proposition does no more imply its falseness, repective its truthfulness, but its falseness **or** indeterminate state, respecively its truthfulness **or** indeterminate state. Double negation does no more automatically imply truthfulness.  
+
+Bipolar-valued propositional calculus
+.....................................
+
+In order to formalize the previous intuitions, we are attaching to any logical proposition or stement *P* a characteristic function *r(P)* taking value in the decimal interval [-1.0;+1.0] with follolwing semantics:
+
+  - :math:`0.0 < r(P) \le +1.0` means statement *P* is **more true than false**;
+  - :math:`-1.0 < r(P) < 0.0` means statement *P* is **more false than true**;
+  - :math:`r(P) = 0.0` means statement *P* is **indeterminate**.
+  
+Negating a statement is hence operated by changing the sign of its characteristic function: :math:`r(\neg P) = -r(P)`. An important consequence appears. This **negation** :math:`\neg` operation does not necessarily correspond to taking the complement logical value. Indeed, *not true* does now only imply *false or indeterminate* and *not false* does only imply *true or indeterminate*. 
+
+Let now *P* and *Q* be two propositions, logical **conjunction** :math:`\land`, **disjunction** :math:`\lor` and **implication** :math:`\Rightarrow` may be computed as follows:
+
+   - :math:`r(P \land Q) \,=\, \min\big(r(P),r(Q)\big)`;
+   - :math:`r(P \lor Q) \,=\, \max\big(r(P),r(Q)\big)`;
+   - :math:`r(P \Rightarrow Q)  \,=\, r\big(\neg(P \land \neg Q)\big) \,=\, -r \big(\,\min(r(P),-r(Q)\,)\big)`.
+
+It is worthwhile noticing that the bipolar-valued logical implication is not necessarily transitive. Suppose for instance that a majority of voters validate proposition *P* and another majority validates the second proposition *Q* and still another majority of voters validates indeed the third proposition *R*. There is no epistemic reason why the evidence concerning statements :math:`P \Rightarrow Q` and :math:`Q \Rightarrow R` should necessarily induce the evidence that :math:`P \Rightarrow R`.
+
+In fact, we are working in a balanced ternary logic with negative (false), positive (true) and null (indeterminate) characteristic values. A negative affirmation becomes here a positive refutation and vice versa [BIS-2004_3p]_. 
+
+.. Epistemic fusion of propositional evidences
+.. ...........................................
+
+.. Let proposition *P* stating again what candidate should be winning the election. Suppose furthermore that the assembly of voters is split into two groups and let the result be characterised by two characteristic functions
+
+      :math:`r_1(P) \in [-1.0;+1.0]`,
+
+      :math:`r_2(P) \in [-1.0;+1.0]`.
+
+.. We may aggregate these characteristic functions with the help of a **disjunctive fusion** operator :math:`\oplus`.
+
+   - :math:`r(P) \;=\: r_1(P) \,\oplus\, r_2(P) \;=`
+
+     :math:`\hspace{10mm} \max\big(r_1(P),r_2(P)\big)`  when :math:`r_1(P) \geq 0.0 \; \land \; r_2(P) \geq 0.0`;
+
+     :math:`\hspace{10mm} \; \; \min\big(r_1(P),r_2(P)\big)` when :math:`r_1(P) \leq 0.0 \; \land \; r_2(P) \leq 0.0`;
+
+      :math:`\hspace{10mm} \; \; 0.0` otherwise.
+
+.. Mind that the :math:`\oplus` operator, like a mean or average, is not associative when multiple characteristic functions must be fused together. In this case, all positive and negative terms get separately fused and their respective final results get again submitted to the :math:`\oplus` operator.
+
+.. As a consequence, when there exist conjointly positive and negative epistemic evidences for a statement, the proposition always get an *indeterminate* status. This way all tautologies and antologies of a classical propositional calculus like the Boolean algebra remain effectively valid when only working with fully determined statements.
+
+Computational Bipolar-valued set theory
+.......................................
+
+A bipolar-valued set *X*, a **bpv-set** for short, consists of a support set :math:`E_X` of potential elements and a dictionary providing for every element :math:`x \in E_X` a bipolar-valued membership characteristic function :math:`r(x \in X)` taking values in the decimal interval [-1.0;+1.0]:
+
+    - Element *x* is more or less included in the set *X* when :math:`r(x \in X) \,>\, 0.0`;
+    - Element *x* is more or less excluded from the set *X* when :math:`r(x \in X) \,<\, 0.0`;
+    - When  :math:`r(x \in X)\,=\, 0.0`, element *x* is neither included nor excluded from set *X*.
+
+For any potential element *z* not included in the support set :math:`E_X`, :math:`r(z \in X) \,=\, -1.0`. The empty bpv-set consists hence of an empty support set :math:`E_{\emptyset} \,=\, \emptyset`. Furthermore, for all potential element *x*, :math:`r(x \in \emptyset) \,=\, -1.0`.
+
+Let *X* and *Y* be two bpv-sets. We define the classical **set union** :math:`\cup` and **intersection** :math:`\cap` as follows. :math:`X \cup Y` consists of the support set :math:`E_{X \cup Y} = E_X\, \cup \, E_Y` and for every *z* in :math:`E_{X \cup Y}` the membership characteristic becomes :math:`r(z \in X \cup Y)\; =`
+
+    - :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*; otherwise
+    - :math:`r(z \in X)` when :math:`z \in X`, and
+    - :math:`r(z \in Y)` when :math:`z \in Y`.
+
+The bpv-set :math:`(X \cap Y)` consists of the support set :math:`E_{X \cap Y} = E_X\,\cap\, E_Y` and for every :math:`z \in E_{X \cap Y}` the membership characteristic becomes :math:`r \big(\,z \in (X \cap Y)\,\big) \;=`
+
+    - :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*; otherwise
+    - :math:`r(z \in X \cap Y) \;=\; -1.0`.
+
+The **set difference** between two bpv-sets *X* and *Y*, denoted *X-Y*, is the bpv-set of all members of *X* that are not members of *Y*. For all :math:`z \in E_{X \cup Y}`,
+
+    - :math:`r\big(\,z \in (X - Y)\,\big) \,=\, -\min\big(\,r(z \in X),-r(z \in Y)\,\big)`          when both :math:`z \in E_X \land z \in E_Y`, otherwise
+
+    -  :math:`r \big(\,z \in (X - Y)\,\big) \,=\, r(z \in X)`.
+
+The **symmetric difference** of bpv-sets *X* and *Y*, denoted *X^Y*, is the set difference of their union and intersection, :math:`(X \cup Y) \,-\, (X \cap Y)` or the union of their reciprocal set differences :math:`(X - Y) \,\cup\, (X - Y)`.
+
+The :py:class:`~bipolarValuedSets.BpvSet` class of the :py:mod:`bipolarValuedSets` module provides a Python implementation of such bvp-sets. In :numref:`bipolarValuedSets1` we use the :py:class:`~bipolarValuedSets.RandomBpvSet` class for generating to random bpv-sets *X* and *Y* with a common support of three elements *s1*, *s2* and *s3*. 
+
+.. code-block:: pycon
+   :caption: Working with bipolar-valued sets I
+   :name: bipolarValuedSets1
+   :linenos:
+   :emphasize-lines: 5-9,13-
+
+   >>> from bipolarValuedSets import RandomBpvSet
+   >>> X = RandomBpvSet(numberOfElements=5,elementNamePrefix='s',
+   ...     undeterminateness=0.1,valuationRange=(-1, 1),ndigits=4,seed=1)
+   >>> X.showMembershipCharacteristics()
+    s2:  +0.6949
+    s3:  +0.5275
+    s5:  +0.0000
+    s4:  -0.4899
+    s1:  -0.7313
+   >>> Y = RandomBpvSet(numberOfElements=3,elementNamePrefix='s',
+   ...    undeterminateness=0.1,valuationRange=(-1, 1),ndigits=4,seed=2)
+   >>> Y.showMembershipCharacteristics()
+    s1:  +0.9121
+    s2:  +0.8957
+    s3:  -0.8869
+
+In :numref:`bipolarValuedSets2` below we illustrate the bipolar-valued set **union** and **intersection**.
+
+.. code-block:: pycon
+   :caption: Working with bipolar-valued sets II
+   :name: bipolarValuedSets2
+   :linenos:
+   :emphasize-lines: 3-7,11-
+
+   >>> (X|Y).showMembershipCharacteristics()
+   # | is Python's set union symbol
+    s1:  +0.9100
+    s2:  +0.9000
+    s3:  +0.5300
+    s5:  +0.0000
+    s4:  -0.4900
+   >>> (X&Y).showMembershipCharacteristics()
+   # & is Python's set intersection symbol
+    s2:  +0.6900
+    s1:  -0.7300
+    s3:  -0.8900
+    s4:  -1.0000
+    s5:  -1.0000
+
+Finally, in :numref:`bipolarValuedSets3` below we illustrate the bipolar-valued set **difference** and **symmetric difference**. 
+
+.. code-block:: pycon
+   :caption: Working with bipolar-valued sets III
+   :name: bipolarValuedSets3
+   :linenos:
+   :emphasize-lines: 3-7,14-
+ 
+   >>> (X-Y).showMembershipCharacteristics()
+   # Python's set difference is -
+    s1:  +0.9100
+    s2:  +0.9000
+    s5:  +0.0000
+    s4:  -0.4900
+    s3:  -0.5300
+   >>> (Y-X).showMembershipCharacteristics()
+    s3:  +0.8900
+    s2:  +0.6900
+    s1:  -0.7300
+   >>> (Y^X).showMembershipCharacteristics() 
+   # ^ is Python's symmetrix difference symbol
+   # X^Y = (X-Y)|(Y-X) or (X|Y)-(X&Y)
+    s1:  +0.9100
+    s2:  +0.9000
+    s3:  +0.8900
+    s5:  +0.0000
+    s5:  -4.9000
+
+.. note::
+
+   The *relation* attribute of a bipolar-valued digraph is an example of a bpv-set where the support is given by the oriented tuples of the digraph's nodes. The *edges* attribute of bipolar-valued graphs is a second example of bpv-sets, where the support is given by the non-oriented pairs of vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership charcateristic vectors from the *Rubis* best choice computation. This is the topic of the next tutorial.
+
+Back to :ref:`Content Table <Pearls-label>`
+
+-------------------
 
 .. _Bipolar-Valued-Kernels-Tutorial-label:
 
@@ -5391,174 +5566,6 @@ Let us conclude by showing in :numref:`R-session` how to draw with the *R* stati
     key:  p7
      name: public policy p7 Eco- Soc~ Env~
      profile: {'Eco':'weak', 'Soc':'fair', 'Env':'fair'}
-
-Back to :ref:`Content Table <Pearls-label>`
-
--------------------
-
-.. _Bipolar-Valued-Sets-Tutorial-label:
-
-Working with bipolar-valued sets
-````````````````````````````````
-
-.. contents:: 
-	:depth: 1
-	:local:
-
-Introduction
-............
-
-In bipolar-valued epistemic logic we assemble conjointly some evidence for a statemnt to be true and other evidence for the same statement to be false. First example is given by the statement *P*: '*this candidate should win the election*'. There are some voters who support its truthfulness and some voters who support, on the contrary its falseness. Yet, there may also be some voters who don't give any opinion, they abstain from voting. What logical status should be given to the statement *P* ?
-
-Following *Condorcet* [CON-1785p]_ we are going to balance the votes in favour against the votes in disfavour. As a result we obtain a bipolar-valued credibility which qualifies statement *P* as certainly true when all voters support its truth, more or less true when more voters support its truthfulness than its falseness, more or less false when more voters support its falseness than its truthfulness and certainly false if all the voters support its falseness. There may however appear a special case when the same number of voters support its truthfulness respectively its falseness, or all voters abstain from voting. In these cases, statement *P* becomes neither *true* nor *false*, but **indeterminate**. It is a *zero knowledge* situation.
-
-First important consequence is that the logical status of any statement is considered to be indeterminate as long as no evidence is yet collected. Reconsidering for instance proposition *P*, its logical status is indeterminate as long as no voting has been organized. More important is furthermore the consequence that negating the truthfulness or falseness of a proposition does no more imply its falseness, repective its truthfulness, but its falseness **or** indeterminate state, respecively its truthfulness **or** indeterminate state. Double negation does no more automatically imply truthfulness.  
-
-Bipolar-valued propositional calculus
-.....................................
-
-In order to formalize the previous intuitions, we are attaching to any logical proposition or stement *P* a characteristic function *r(P)* taking value in the decimal interval [-1.0;+1.0] with follolwing semantics:
-
-  - :math:`0.0 < r(P) \le +1.0` means statement *P* is **more true than false**;
-  - :math:`-1.0 < r(P) < 0.0` means statement *P* is **more false than true**;
-  - :math:`r(P) = 0.0` means statement *P* is **indeterminate**.
-  
-Negating a statement is hence operated by changing the sign of its characteristic function: :math:`r(\neg P) = -r(P)`. An important consequence appears. This **negation** :math:`\neg` operation does not necessarily correspond to taking the complement logical value. Indeed, *not true* does now only imply *false or indeterminate* and *not false* does only imply *true or indeterminate*. 
-
-Let now *P* and *Q* be two propositions, logical **conjunction** :math:`\land`, **disjunction** :math:`\lor` and **implication** :math:`\Rightarrow` may be computed as follows:
-
-   - :math:`r(P \land Q) \,=\, \min\big(r(P),r(Q)\big)`;
-   - :math:`r(P \lor Q) \,=\, \max\big(r(P),r(Q)\big)`;
-   - :math:`r(P \Rightarrow Q)  \,=\, r\big(\neg(P \land \neg Q)\big) \,=\, -r \big(\,\min(r(P),-r(Q)\,)\big)`.
-
-It is worthwhile noticing that the bipolar-valued logical implication is not necessarily transitive. Suppose for instance that a majority of voters validate proposition *P* and another majority validates the second proposition *Q* and still another majority of voters validates indeed the third proposition *R*. There is no epistemic reason why the evidence concerning statements :math:`P \Rightarrow Q` and :math:`Q \Rightarrow R` should necessarily induce the evidence that :math:`P \Rightarrow R`.
-
-In fact, we are working in a balanced ternary logic with negative (false), positive (true) and null (indeterminate) characteristic values. A negative affirmation becomes here a positive refutation and vice versa [BIS-2004_3p]_. 
-
-.. Epistemic fusion of propositional evidences
-.. ...........................................
-
-.. Let proposition *P* stating again what candidate should be winning the election. Suppose furthermore that the assembly of voters is split into two groups and let the result be characterised by two characteristic functions
-
-      :math:`r_1(P) \in [-1.0;+1.0]`,
-
-      :math:`r_2(P) \in [-1.0;+1.0]`.
-
-.. We may aggregate these characteristic functions with the help of a **disjunctive fusion** operator :math:`\oplus`.
-
-   - :math:`r(P) \;=\: r_1(P) \,\oplus\, r_2(P) \;=`
-
-     :math:`\hspace{10mm} \max\big(r_1(P),r_2(P)\big)`  when :math:`r_1(P) \geq 0.0 \; \land \; r_2(P) \geq 0.0`;
-
-     :math:`\hspace{10mm} \; \; \min\big(r_1(P),r_2(P)\big)` when :math:`r_1(P) \leq 0.0 \; \land \; r_2(P) \leq 0.0`;
-
-      :math:`\hspace{10mm} \; \; 0.0` otherwise.
-
-.. Mind that the :math:`\oplus` operator, like a mean or average, is not associative when multiple characteristic functions must be fused together. In this case, all positive and negative terms get separately fused and their respective final results get again submitted to the :math:`\oplus` operator.
-
-.. As a consequence, when there exist conjointly positive and negative epistemic evidences for a statement, the proposition always get an *indeterminate* status. This way all tautologies and antologies of a classical propositional calculus like the Boolean algebra remain effectively valid when only working with fully determined statements.
-
-Bipolar-valued set theory
-.........................
-
-A bipolar-valued set *X*, a **bpv-set** for short, consists of a support set :math:`E_X` of potential elements and a dictionary providing for every element :math:`x \in E_X` a bipolar-valued membership characteristic function :math:`r(x \in X)` taking values in the decimal interval [-1.0;+1.0].
-
-    Element *x* is more or less included in the set *X* when :math:`r(x \in X) \,>\, 0.0`;
-
-    Element *x* is more or less excluded from the set *X* when :math:`r(x \in X) \,<\, 0.0`.
-
-    When  :math:`r(x \in X)\,=\, 0.0`, element *x* is neither included nor excluded from set *X*.
-
-For any potential element *z* not included in the support set :math:`E_X`, :math:`r(z \in X) \,=\, -1.0`. The empty bpv-set consists hence of an empty support set :math:`E_{\emptyset} \,=\, \emptyset`. Furthermore, for all potential element *x*, :math:`r(x \in \emptyset) \,=\, -1.0`. 
-
-Let *X* and *Y* be two bpv-sets. We define the classical **set union** :math:`\cup` and **intersection** :math:`\cap` as follows:
-
-    :math:`X \cup Y` consists of the support set :math:`E_{X \cup Y} = E_X \cup E_Y` and for every *z* in :math:`E_{X \cup Y}` the membership characteristic becomes
-
-         :math:`r(z \in X \cup Y) \;=\; \max\big(r(z \in X),r(z \in Y) \big)` when both *z* in *X* and *z* in *Y*; otherwise  :math:`r(z \in X \cup Y) \;=\; r(z \in X)$ when $z \in X$ and $r(z \in X \cup Y) \;=\; r(z \in Y)` when *z* in *Y*.
-
-    :math:`X \cap Y` consists of the support set :math:`E_{X \cap Y} = E_X\cap E_Y` and for every :math:`z \in E_{X \cap Y}` the membership characteristic becomes
-
-         :math:`r(z \in X \cap Y) \;=\; \min\big(r(z \in X),r(z \in Y) \big)` when both *z* in *X* and *z* in *Y*; otherwise  :math:`r(z \in X \cap Y) \;=\; -1.0`.
-
-The **set difference** between two bpv-sets *X* and *Y*, denoted *X-Y*, is the bpv-set of all members of *X* that are not members of *Y*.
-
-The **symmetric difference** of bpv-sets *X* and *Y*, denoted *X ^ Y*, is the bpv-set of all objects that are a member of exactly one of *X* and *Y* (elements which are in one of the sets, but not in both). It is the set difference of their union and intersection, :math:`(X \cup Y) \,-\, (X \cap Y)` or the union of their reciprocal set differences :math:`(X - Y) \,\cup\, (X - Y)`.
-
-The :py:class:`~bipolarValuedSets.BpvSet` class of the :py:mod:`bipolarValuedSets` module provides a Python implementation of such bvp-sets. In :numref:`bipolarValuedSets1` we use the :py:class:`~bipolarValuedSets.RandomBpvSet` class for generating to random bpv-sets *X* and *Y* with a common support of three elements *s1*, *s2* and *s3*. 
-
-.. code-block:: pycon
-   :caption: Working with bipolar-valued sets I
-   :name: bipolarValuedSets1
-   :linenos:
-   :emphasize-lines: 5-9,13-
-
-   >>> from bipolarValuedSets import RandomBpvSet
-   >>> X = RandomBpvSet(numberOfElements=5,elementNamePrefix='s',
-   ...     undeterminateness=0.1,valuationRange=(-1, 1),ndigits=4, seed=1)
-   >>> X.showMembershipCharacteristics()
-    s2:  +0.6949
-    s3:  +0.5275
-    s5:  +0.0000
-    s4:  -0.4899
-    s1:  -0.7313
-   >>> Y = RandomBpvSet(numberOfElements=3,elementNamePrefix='s',
-   ...    undeterminateness=0.1,valuationRange=(-1, 1),ndigits=4,seed=2)
-   >>> Y.showMembershipCharacteristics()
-    s1:  +0.9121
-    s2:  +0.8957
-    s3:  -0.8869
-
-In :numref:`bipolarValuedSets2` below we illustrate the bipolar-valued set *union* and *intersection*.
-
-.. code-block:: pycon
-   :caption: Working with bipolar-valued sets II
-   :name: bipolarValuedSets2
-   :linenos:
-   :emphasize-lines: 3-7,11-
-
-   >>> (X|Y).showMembershipCharacteristics()
-   # | is Python's set union symbol
-    s1:  +0.9100
-    s2:  +0.9000
-    s3:  +0.5300
-    s5:  +0.0000
-    s4:  -0.4900
-   >>> (X&Y).showMembershipCharacteristics()
-   # & is Python's set intersection symbol
-    s2:  +0.6900
-    s1:  -0.7300
-    s3:  -0.8900
-    s4:  -1.0000
-    s5:  -1.0000
-
-Finally, in :numref:`bipolarValuedSets3` below we illustrate the bipolar-valued set *difference* and *symmetric difference*. 
-
-.. code-block:: pycon
-   :caption: Working with bipolar-valued sets III
-   :name: bipolarValuedSets3
-   :linenos:
-   :emphasize-lines: 3-7,14-
- 
-   >>> (X-Y).showMembershipCharacteristics()
-   # Python's set difference is \
-    s1:  +0.9100
-    s2:  +0.9000
-    s5:  +0.0000
-    s4:  -0.4900
-    s3:  -0.5300
-   >>> (Y-X).showMembershipCharacteristics()
-    s3:  +0.8900
-    s2:  +0.6900
-    s1:  -0.7300
-   >>> (Y^X).showMembershipCharacteristics() 
-   # ^ is Python's symmetrix difference symbol
-   # X^Y = (X-Y)|(Y-X) or (X|Y)-(X&Y)
-    s1:  +0.9100
-    s2:  +0.9000
-    s3:  +0.8900
-    s5:  +0.0000
-    s5:  -4.9000
 
 Back to :ref:`Content Table <Pearls-label>`
 

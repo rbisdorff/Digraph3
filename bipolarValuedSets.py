@@ -237,7 +237,7 @@ class BpvSet(object):
             #print(it)
             if it not in inter.support:
                 inter.support[it] = newOther.support[it]
-        #print('union',union.support)
+        
         membership = {}
         Min = inter.valuationDomain['min']
         for it in inter.support:
@@ -348,7 +348,7 @@ class BpvSet(object):
         newOther = deepcopy(other)
         newOther.recodeValuation()
         diff = BpvSet()
-        diff.name = self.name+'\\'+other.name
+        diff.name = self.name+'-'+other.name
         diff.support = newSelf.support
         membership = {}
         Min = diff.valuationDomain['min']
@@ -399,27 +399,7 @@ class BpvSet(object):
         return ((self - other) | (other - self))
         
         
-#-----------------            
-
-class _EmptyBpvSet(BpvSet):
-    """
-    Template BpvSet
-    """
-    def __init__(self,numberOfElements=5,
-                 elementNamePrefix='x',
-                 undeterminateness=0.1,
-                 valuationRange=(-1,1),
-                 ndigits = 4,
-                 seed=None,
-                 Debug=False):
-        self.name = 'emptypbvSet'
-        self.support = {}
-        self.valuationDomain = {'min': Decimal('-1'),
-                           'med': Decimal('0'),
-                           'max': Decimal('+1')}
-        self.cardinality = 0
-        self.membership = {}
-                            
+#-----------------                                        
 
 class RandomBpvSet(BpvSet):
     """
@@ -481,76 +461,7 @@ class RandomBpvSet(BpvSet):
             if membership[it] > Med:
                 cardinality += 1
         self.cardinality = cardinality
-        self.determinateness = self.computeDeterminateness()
-
-#----- cloassical set operator
-
-        
-
-class BpvSetUnion(BpvSet):
-    """
-    
-    """
-    def __init__(self,setA,setB,ndigits=2,Debug=False):
-        from copy import deepcopy
-        # set union name
-        self.name = '%s' % (setA.name)
-        # unified items
-        items = {}
-        items.update(setA.items)
-        items.update(setB.items)
-        if Debug:
-            print()
-            print('items union', items)
-        self.items = support
-        numberOfItems = len(items)
-        # setting the valuation domain
-        formatString = '%%.%df' % ndigits
-        if Debug:
-            print(ndigits,formatString)
-        Max = setA.valuationDomain['max'] + setB.valuationDomain['max']
-        Med = Decimal('0')
-        Min = setA.valuationDomain['min'] + setB.valuationDomain['min']
-        newAmplitude = Max - Min
-        valuationDomain = {'min': Min, 'med': Med, 'max': Max}
-        if Debug:
-            print(valuationDomain,newAmplitude)
-        self.valuationDomain = valuationDomain
-        # computing the membership characteristics
-        #A = deepcopy(setA)
-        #A.recodeValuation()
-        #B = deepcopy(setB)
-        #B.recodeValuation()
-        membership = {}
-        for it in items:
-            if it in setA.items and it in setB.items:
-                membership[it] = Decimal(formatString % (\
-                  setA.membership[it] + setB.membership[it] ) )
-                if Debug:
-                    print('AB',it,setA.membership[it],setB.membership[it],membership[it])
-            elif it in setA.items:
-                membership[it] = Decimal(formatString % (\
-                    Med + setA.membership[it]) ) 
-                if Debug:
-                    print('A',it,setA.membership[it],membership[it])
-            elif it in setB.items:
-                membership[it] = Decimal(formatString % (\
-                    Med + setB.membership[it] ) )
-                if Debug:
-                    print('B',it,setB.membership[it],membership[it])
-        if Debug:
-            print(membership)
-        self.membership = membership
-        # compute cardinality
-        dimension = 0
-        determinateness = Decimal(0)
-        for it in items:
-            if membership[it] > Med:
-                dimension += 1
-            determinateness += abs(membership[it])
-        denominator = dimension*Max
-        self.determinateness = determinateness / denominator
-        self.cardinality = dimension
+        self.determinateness = self.computeDeterminateness()       
         
 #############################################
 # scratch space for testing ongoing developments
