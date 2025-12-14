@@ -14,7 +14,6 @@ def testBpvSet():
                       seed=1000,
                       Debug=False)
     
-    #X.showMembershipCharacteristics(Normalized=False)
     X.showMembershipCharacteristics(Normalized=True,ndigits=2)
     Y = RandomBpvSet(numberOfElements=5,elementNamePrefix='s',
                       undeterminateness=0.2,
@@ -22,7 +21,6 @@ def testBpvSet():
                       seed=2000,
                       Debug=False)
     
-    #Y.showMembershipCharacteristics(Normalized=False)
     Y.showMembershipCharacteristics(Normalized=True,ndigits=2)
     U = X&Y
     print('set conjunction')
@@ -36,7 +34,10 @@ def testBpvSet():
     T = X^Y
     print('set symmetric difference')
     T.showMembershipCharacteristics()
-    
+    print('set stripping and updating')
+    S = T.strip(InSite=False)
+    Q = X.update(T)
+    R = Y.update(S)
     
     
 
