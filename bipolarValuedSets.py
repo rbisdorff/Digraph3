@@ -227,8 +227,7 @@ class BpvSet(object):
         inter = BpvSet()
         inter.name = self.name+'and'+other.name
         
-        #print('self',union.support)
-        #print('other',newOther.support)
+        # union of the supports
         for it in newSelf.support:
             #print(it)
             if it not in inter.support:
@@ -269,8 +268,8 @@ class BpvSet(object):
         newOther.recodeValuation()
         union = BpvSet()
         union.name = self.name+'or'+other.name
-        #print('self',union.support)
-        #print('other',newOther.support)
+
+        # union of the supports
         for it in newSelf.support:
             #print(it)
             if it not in union.support:
@@ -279,7 +278,7 @@ class BpvSet(object):
             #print(it)
             if it not in union.support:
                 union.support[it] = newOther.support[it]
-        #print('union',union.support)
+
         membership = {}
         Max = union.valuationDomain['max']
         for it in union.support:
@@ -349,7 +348,17 @@ class BpvSet(object):
         newOther.recodeValuation()
         diff = BpvSet()
         diff.name = self.name+'-'+other.name
-        diff.support = newSelf.support
+
+        # union of the supports
+        for it in newSelf.support:
+            #print(it)
+            if it not in diff.support:
+                diff.support[it] = newSelf.support[it]
+        for it in newOther.support:
+            #print(it)
+            if it not in diff.support:
+                diff.support[it] = newOther.support[it]
+
         membership = {}
         Min = diff.valuationDomain['min']
         Med = diff.valuationDomain['med']
@@ -358,7 +367,10 @@ class BpvSet(object):
             try:
                 membership[it] = -min(newSelf.membership[it],-newOther.membership[it])
             except:
-                membership[it] = newSelf.membership[it]
+                try:
+                    membership[it] = newSelf.membership[it]
+                except:
+                    membership[it] = Min
         diff.ndigits = min(newSelf.ndigits, newOther.ndigits)
         diff.membership = membership
         diff.determinateness = diff.computeDeterminateness()
@@ -397,7 +409,47 @@ class BpvSet(object):
         Return all elements that are exactly in one of the sets
         """
         return ((self - other) | (other - self))
-        
+
+    def update(self,other,/):
+        """
+        Return the union of X and Y
+        """
+        return self.union(other)
+
+    def strip(self,cutLevel=None,Strict=True,InSite=True):
+        """
+        Strip the support at cutLevel. If None, cutLevel is valuation minimum.
+        If Strict is True, cutLevel is stripped !
+        """
+        if cutLevel is None:
+            cutLevel = self.valuationDomain['min']
+        new = BpvSet()
+        new.name = self.name
+        new.valuationDomain = self.valuationDomain
+        support = self.support
+        membership = self.membership
+        for it in support:
+            if Strict:
+                if membership[it] > cutLevel:
+                    new.support[it] = support[it]
+                    new.membership[it] = membership[it]
+            else:
+                if membership[it] >= cutLevel:
+                    new.support[it] = support[it]
+                    new.membership[it] = membership[it]
+        new.ndigits = self.ndigits
+        if InSite:
+            self.support = new.support
+            self.membership = new.membership
+            self.cardinality = new.computeCardinality()
+            self.determinateness = new.computeDeterminateness()
+            return self
+        else:
+            new.cardinality = new.computeCardinality()
+            new.determinateness = new.computeDeterminateness()
+            return new
+                
+                    
         
 #-----------------                                        
 
@@ -480,21 +532,23 @@ if __name__ == "__main__":
 
     print('*-------- Testing classes and methods -------')
 
-    X = RandomBpvSet(numberOfElements=3,elementNamePrefix='s',
-                      undeterminateness=0.2,
-                      valuationRange=(-10,10),
-                      seed=1000,
+    X = RandomBpvSet(numberOfElements=5,elementNamePrefix='s',
+                      undeterminateness=0.1,
+                      valuationRange=(-1,1),ndigits=4,
+                      seed=1,
                       Debug=False)
     
     #X.showMembershipCharacteristics(Normalized=False)
-    X.showMembershipCharacteristics(Normalized=True,ndigits=2)
-    Y = RandomBpvSet(numberOfElements=5,elementNamePrefix='s',
-                      undeterminateness=0.2,
-                      valuationRange=(-10,10),
-                      seed=2000,
+    X.showMembershipCharacteristics()
+    Y = RandomBpvSet(numberOfElements=3,elementNamePrefix='s',
+                      undeterminateness=0.1,
+                      valuationRange=(-1,1),
+                      seed=2,ndigits=4,
                       Debug=False)
     
     #Y.showMembershipCharacteristics(Normalized=False)
-    Y.showMembershipCharacteristics(Normalized=True,ndigits=2)
-    U = X&Y
+    Y.showMembershipCharacteristics()
+    D = Y - X
+    E = D.strip(InSite=False)
+    D.strip()
     

@@ -1174,7 +1174,9 @@
 <li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.recodeValuation"><code class="docutils literal notranslate"><span class="pre">BpvSet.recodeValuation()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.save"><code class="docutils literal notranslate"><span class="pre">BpvSet.save()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.showMembershipCharacteristics"><code class="docutils literal notranslate"><span class="pre">BpvSet.showMembershipCharacteristics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.strip"><code class="docutils literal notranslate"><span class="pre">BpvSet.strip()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.union"><code class="docutils literal notranslate"><span class="pre">BpvSet.union()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.update"><code class="docutils literal notranslate"><span class="pre">BpvSet.update()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#bipolarValuedSets.RandomBpvSet"><code class="docutils literal notranslate"><span class="pre">RandomBpvSet</span></code></a></li>
@@ -12724,9 +12726,22 @@ By default the valuation domain is normalized to [-1;1]</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="bipolarValuedSets.BpvSet.strip">
+<span class="sig-name descname"><span class="pre">strip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cutLevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InSite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bipolarValuedSets.html#BpvSet.strip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bipolarValuedSets.BpvSet.strip" title="Link to this definition"></a></dt>
+<dd><p>Strip the support at cutLevel. If None, cutLevel is valuation minimum.
+If Strict is True, cutLevel is stripped !</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="bipolarValuedSets.BpvSet.union">
 <span class="sig-name descname"><span class="pre">union</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="positional-only-separator o"><abbr title="Positional-only parameter separator (PEP 570)"><span class="pre">/</span></abbr></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bipolarValuedSets.html#BpvSet.union"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bipolarValuedSets.BpvSet.union" title="Link to this definition"></a></dt>
 <dd><p>Return the bipolar-valued set union of self and other</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bipolarValuedSets.BpvSet.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="positional-only-separator o"><abbr title="Positional-only parameter separator (PEP 570)"><span class="pre">/</span></abbr></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bipolarValuedSets.html#BpvSet.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bipolarValuedSets.BpvSet.update" title="Link to this definition"></a></dt>
+<dd><p>Return the union of X and Y</p>
 </dd></dl>
 
 </dd></dl>
@@ -15100,7 +15115,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Dec 13, 2025.
+      <span class="lastupdated">Last updated on Dec 14, 2025.
       </span></p>
   </div>
 

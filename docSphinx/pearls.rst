@@ -4450,28 +4450,30 @@ A bipolar-valued set *X*, a **bpv-set** for short, consists of a support set :ma
     - Element *x* is more or less excluded from the set *X* when :math:`r(x \in X) \,<\, 0.0`;
     - When  :math:`r(x \in X)\,=\, 0.0`, element *x* is neither included nor excluded from set *X*.
 
-For any potential element *z* not included in the support set :math:`E_X`, :math:`r(z \in X) \,=\, -1.0`. The empty bpv-set consists hence of an empty support set :math:`E_{\emptyset} \,=\, \emptyset`. Furthermore, for all potential element *x*, :math:`r(x \in \emptyset) \,=\, -1.0`.
+For any potential element *z* not included in the support set :math:`E_X`, :math:`r(z \in X) \,=\, -1.0`. The empty bpv-set consists of an empty support set :math:`E_{\emptyset} \,=\, \emptyset`. For all potential element *x* if follows hence that :math:`r(x \in \emptyset) \,=\, -1.0`.
 
-Let *X* and *Y* be two bpv-sets. We define the classical **set union** :math:`\cup` and **intersection** :math:`\cap` as follows. :math:`X \cup Y` consists of the support set :math:`E_{X \cup Y} = E_X\, \cup \, E_Y` and for every *z* in :math:`E_{X \cup Y}` the membership characteristic becomes :math:`r(z \in X \cup Y)\; =`
+Let *X* and *Y* be two bpv-sets. The support for any set operation is the union of the support of the arguments. We define the classical **set union** :math:`\cup` and **intersection** :math:`\cap` as follows.
+
+For all :math:`z \in E_{X \cup Y}` the membership characteristic :math:`r\big(\,z \in (X \cup Y)\,\big)\; =`
 
     - :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*; otherwise
     - :math:`r(z \in X)` when :math:`z \in X`, and
     - :math:`r(z \in Y)` when :math:`z \in Y`.
 
-The bpv-set :math:`(X \cap Y)` consists of the support set :math:`E_{X \cap Y} = E_X\,\cap\, E_Y` and for every :math:`z \in E_{X \cap Y}` the membership characteristic becomes :math:`r \big(\,z \in (X \cap Y)\,\big) \;=`
+For every :math:`z \in E_{X \cup Y}` the membership characteristic :math:`r\big(\,z \in (X \cap Y)\,\big)\; =` 
 
-    - :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*; otherwise
-    - :math:`r(z \in X \cap Y) \;=\; -1.0`.
+    - :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*;
+    - :math:`-1.0` otherwise.
 
-The **set difference** between two bpv-sets *X* and *Y*, denoted *X-Y*, is the bpv-set of all members of *X* that are not members of *Y*. For all :math:`z \in E_{X \cup Y}`,
+The **set difference** between two bpv-sets *X* and *Y*, denoted *X-Y*, is the bpv-set of all members of *X* that are not members of *Y*. For all :math:`z \in E_{X \cup Y}`, the membership characteristic :math:`r\big(\,z \in (X - Y)\, \big)\; =` 
 
-    - :math:`r\big(\,z \in (X - Y)\,\big) \,=\, -\min\big(\,r(z \in X),-r(z \in Y)\,\big)`          when both :math:`z \in E_X \land z \in E_Y`, otherwise
+    - :math:`-\min\big(\,r(z \in X),-r(z \in Y)\,\big)` when both :math:`z \in E_X \land z \in E_Y`,
 
-    -  :math:`r \big(\,z \in (X - Y)\,\big) \,=\, r(z \in X)`.
+    - :math:`r(z \in X)` otherwise.
 
-The **symmetric difference** of bpv-sets *X* and *Y*, denoted *X^Y*, is the set difference of their union and intersection, :math:`(X \cup Y) \,-\, (X \cap Y)` or the union of their reciprocal set differences :math:`(X - Y) \,\cup\, (X - Y)`.
+The **symmetric difference** of bpv-sets *X* and *Y*, denoted *X^Y*, is the set difference of their union and intersection, :math:`(X-Y) \; = \; (X \cup Y) \,-\, (X \cap Y)` or the union of their reciprocal set differences :math:`(Y-X) \;=\; (X - Y) \,\cup\, (Y - X)`.
 
-The :py:class:`~bipolarValuedSets.BpvSet` class of the :py:mod:`bipolarValuedSets` module provides a Python implementation of such bvp-sets. In :numref:`bipolarValuedSets1` we use the :py:class:`~bipolarValuedSets.RandomBpvSet` class for generating to random bpv-sets *X* and *Y* with a common support of three elements *s1*, *s2* and *s3*. 
+The :py:mod:`bipolarValuedSets` Digraph3 module provides, with the :py:class:`~bipolarValuedSets.BpvSet` class, a Python implementation of such bvp-sets. In :numref:`bipolarValuedSets1` we use the :py:class:`~bipolarValuedSets.RandomBpvSet` class for generating to random bpv-sets *X* and *Y* with a common support of three elements *s1*, *s2* and *s3*. 
 
 .. code-block:: pycon
    :caption: Working with bipolar-valued sets I
@@ -4537,6 +4539,8 @@ Finally, in :numref:`bipolarValuedSets3` below we illustrate the bipolar-valued 
     s3:  +0.8900
     s2:  +0.6900
     s1:  -0.7300
+    s4:  -1.0000
+    s5:  -1.0000
    >>> (Y^X).showMembershipCharacteristics() 
    # ^ is Python's symmetrix difference symbol
    # X^Y = (X-Y)|(Y-X) or (X|Y)-(X&Y)
