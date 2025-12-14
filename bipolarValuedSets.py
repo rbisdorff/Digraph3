@@ -104,6 +104,13 @@ class BpvSet(object):
         print('Valuation domain: [%+.2f;%+.2f]' % (
             valuationDomain['min'],valuationDomain['max'] ))            
 
+    def showPositiveElements(self,/):
+        """
+        Return the stricly positive members of the set
+        """
+        Sp = self.strip(InSite=False,cutLevel=self.valuationDomain['med'])
+        Sp.showMembershipCharacteristics()
+        
     def recodeValuation(self,newMin=-1,newMax=1,ndigits=2,Debug=False):
         """
         Specialization for recoding the valuation of a BpvSet membership chracteristics
@@ -210,7 +217,7 @@ class BpvSet(object):
 
     def __and__(self,other,/):
         """
-        Return the bipolar-valued self&other
+        Return self&other
         """
         return self.intersection(other)
 
@@ -251,7 +258,7 @@ class BpvSet(object):
         return inter
 
     def __or__(self,other,/):
-        """      Return the bipolar-valued self|other set
+        """      Return self|other 
         """
         return self.union(other)
 
@@ -332,7 +339,7 @@ class BpvSet(object):
 
     def __sub__(self,other,/):
         """
-        Return the set difference self-other
+        Return self-other
         """
         return self.difference(other)
 
@@ -379,7 +386,7 @@ class BpvSet(object):
 
     def __neg__(self,/):
         """
-        Return the complement or dual of self wrt self.support
+        Return -self
         """
         return self.dual()
 
@@ -449,8 +456,51 @@ class BpvSet(object):
             new.determinateness = new.computeDeterminateness()
             return new
                 
+    def polarise(self,cutLevel=None,Strict=True,InSite=True):
+        """
+        Polarize self at cutLevel. If None, cutLevel is 0.0.
+        If Strict is True, all valuations > cutLevel are set to +1.0 and
+        all valuations < -cutLevel are set to -1.0.
+        All valuation in the range [cutLevel;-cutLevel] are set to 0.0 !
+        If cutLevel = 0.0, the polarisation is always strict ! 
+        """
+        if cutLevel is None:
+            cutLevel = self.valuationDomain['min']
+            Strict = True
+        new = BpvSet()
+        new.name = self.name
+        new.valuationDomain = self.valuationDomain
+        Min = new.valuationDomain['min']
+        Med = new.valuationDomain['med']
+        Max = new.valuationDomain['max']
+        new.support = self.support
+        membership = self.membership
+        for it in new.support:
+            if Strict:
+                if membership[it] > cutLevel:
+                    new.membership[it] = Max
+                elif membership[it] < -cutLevel:
+                    new.membership[it] = Min
+                else:
+                    new.membership[it] = Med
+            else:
+                if membership[it] >= cutLevel:
+                    new.membership[it] = Max
+                elif membership[it] <= -cutLevel:
+                    new.membership[it] = Min
+                else:
+                    new.membership[it] = Med
+        new.ndigits = self.ndigits
+        if InSite:
+            self.membership = new.membership
+            self.cardinality = new.computeCardinality()
+            self.determinateness = new.computeDeterminateness()
+            return self
+        else:
+            new.cardinality = new.computeCardinality()
+            new.determinateness = new.computeDeterminateness()
+            return new
                     
-        
 #-----------------                                        
 
 class RandomBpvSet(BpvSet):

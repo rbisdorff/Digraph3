@@ -1171,9 +1171,11 @@
 <li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.dual"><code class="docutils literal notranslate"><span class="pre">BpvSet.dual()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.intersection"><code class="docutils literal notranslate"><span class="pre">BpvSet.intersection()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.isSubset"><code class="docutils literal notranslate"><span class="pre">BpvSet.isSubset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.polarise"><code class="docutils literal notranslate"><span class="pre">BpvSet.polarise()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.recodeValuation"><code class="docutils literal notranslate"><span class="pre">BpvSet.recodeValuation()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.save"><code class="docutils literal notranslate"><span class="pre">BpvSet.save()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.showMembershipCharacteristics"><code class="docutils literal notranslate"><span class="pre">BpvSet.showMembershipCharacteristics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.showPositiveElements"><code class="docutils literal notranslate"><span class="pre">BpvSet.showPositiveElements()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.strip"><code class="docutils literal notranslate"><span class="pre">BpvSet.strip()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.union"><code class="docutils literal notranslate"><span class="pre">BpvSet.union()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.update"><code class="docutils literal notranslate"><span class="pre">BpvSet.update()</span></code></a></li>
@@ -12707,6 +12709,16 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="bipolarValuedSets.BpvSet.polarise">
+<span class="sig-name descname"><span class="pre">polarise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cutLevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InSite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bipolarValuedSets.html#BpvSet.polarise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bipolarValuedSets.BpvSet.polarise" title="Link to this definition"></a></dt>
+<dd><p>Polarize self at cutLevel. If None, cutLevel is 0.0.
+If Strict is True, all valuations &gt; cutLevel are set to +1.0 and
+all valuations &lt; -cutLevel are set to -1.0.
+All valuation in the range [cutLevel;-cutLevel] are set to 0.0 !
+If cutLevel = 0.0, the polarisation is always strict !</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="bipolarValuedSets.BpvSet.recodeValuation">
 <span class="sig-name descname"><span class="pre">recodeValuation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">newMin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newMax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndigits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bipolarValuedSets.html#BpvSet.recodeValuation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bipolarValuedSets.BpvSet.recodeValuation" title="Link to this definition"></a></dt>
 <dd><p>Specialization for recoding the valuation of a BpvSet membership chracteristics
@@ -12723,6 +12735,12 @@ By default the valuation domain is normalized to [-1;1]</p>
 <dt class="sig sig-object py" id="bipolarValuedSets.BpvSet.showMembershipCharacteristics">
 <span class="sig-name descname"><span class="pre">showMembershipCharacteristics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ndigits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bipolarValuedSets.html#BpvSet.showMembershipCharacteristics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bipolarValuedSets.BpvSet.showMembershipCharacteristics" title="Link to this definition"></a></dt>
 <dd><p>When <em>Normalized</em>, the charactritic values are recoded into the [-1,1] range</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bipolarValuedSets.BpvSet.showPositiveElements">
+<span class="sig-name descname"><span class="pre">showPositiveElements</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bipolarValuedSets.html#BpvSet.showPositiveElements"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bipolarValuedSets.BpvSet.showPositiveElements" title="Link to this definition"></a></dt>
+<dd><p>Return the stricly positive members of the set</p>
 </dd></dl>
 
 <dl class="py method">
