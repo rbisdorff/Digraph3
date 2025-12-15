@@ -39,12 +39,11 @@ Pearls of bipolar-valued epistemic logic
 .. only:: html
    
    :New:
-
+      
+      * :ref:`On computational bipolar-valued set theory <Bipolar-Valued-Sets-Tutorial-label>`
       * :ref:`Applications of bipolar-valued base 3 encoded Bachet numbers <Bachet-Tutorial-label>`	 
       *	:ref:`Condorcet's 1785 critical perspective on the simple plurality voting rule <Condorcet-Tutorial-label>`
       * :ref:`On characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>`     
-      * :ref:`Consensus quality of the bipolar-valued outranking relation <Outranking-Consensus-Tutorial-label>`
-
 
    In this part of the **Digraph3** *documentation*, we provide an insight in computational enhancements one may get when working in a *bipolar-valued epistemic logic* framework, like - easily coping with *missing data* and uncertain criterion *significance weights*, - computing valued *ordinal correlations* between bipolar-valued outranking digraphs,  - computing digraph kernels and solving bipolar-valued kernel equation systems, - testing for stability and confidence of outranking statements when facing uncertain performance criteria significance weights or decision objectives' importance weights and, - applying bipolar-valued *base 3 Bachet numbers* for ranking multicriteria incommensurable performance records.
 	    
