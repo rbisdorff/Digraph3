@@ -4399,7 +4399,7 @@ First important consequence is that the logical status of any statement is consi
 Bipolar-valued propositional calculus
 .....................................
 
-In order to formalize the previous intuitions, we are attaching to any logical proposition or stement *P* a characteristic function *r(P)* taking value in the decimal interval [-1.0;+1.0] with follolwing semantics:
+In order to formalize the previous intuitions, we are attaching to any logical proposition or stement *P* a characteristic function *r(P)* taking value in the decimal interval [-1.0;+1.0] with following semantics:
 
   - :math:`0.0 < r(P) \le +1.0` means statement *P* is **more true than false**;
   - :math:`-1.0 < r(P) < 0.0` means statement *P* is **more false than true**;
@@ -4449,7 +4449,7 @@ A bipolar-valued set *X*, a **bpv-set** for short, consists of a support set :ma
     - Element *x* is more or less excluded from the set *X* when :math:`r(x \in X) \,<\, 0.0`;
     - When  :math:`r(x \in X)\,=\, 0.0`, element *x* is neither included nor excluded from set *X*.
 
-For any potential element *z* not included in the support set :math:`E_X`, :math:`r(z \in X) \,=\, -1.0`. The empty bpv-set consists of an empty support set :math:`E_{\emptyset} \,=\, \emptyset`. For all potential element *x* if follows hence that :math:`r(x \in \emptyset) \,=\, -1.0`.
+For any potential element *z* not included in the support set :math:`E_X`, :math:`r(z \in X) \,=\, -1.0`. The empty bpv-set consists of an empty support set :math:`E_{\emptyset} \,=\, \emptyset`. For all potential element *x* it follows hence that :math:`r(x \in \emptyset) \,=\, -1.0`.
 
 Let *X* and *Y* be two bpv-sets. The support for any set operation is the union of the support of the arguments. We define the classical **set union** :math:`\cup` and **intersection** :math:`\cap` as follows.
 
