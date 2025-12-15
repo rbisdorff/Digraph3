@@ -4391,7 +4391,7 @@ Computing with bipolar-valued sets
 Bipolar-valued epistemic logic
 ..............................
 
-In bipolar-valued epistemic logic we assemble conjointly some evidence for a statemnt to be true and other evidence for the same statement to be false. First example is given by the statement *P*: '*this candidate should win the election*'. There are some voters who support its truthfulness and some voters who support, on the contrary its falseness. Yet, there may also be some voters who don't give any opinion, they abstain from voting. What logical status should be given to the statement *P* ?
+In bipolar-valued epistemic logic we assemble conjointly some evidence for a statement to be true and other evidence for the same statement to be false. First example is given by the statement *P*: '*this candidate should win the election*'. There are some voters who support its truthfulness and some voters who support, on the contrary its falseness. Yet, there may also be some voters who don't give any opinion, they abstain from voting. What logical status should be given to the statement *P* ?
 
 Following *Condorcet* [CON-1785p]_ we are going to balance the votes in favour against the votes in disfavour. As a result we obtain a bipolar-valued credibility which qualifies statement *P* as certainly true when all voters support its truth, more or less true when more voters support its truthfulness than its falseness, more or less false when more voters support its falseness than its truthfulness and certainly false if all the voters support its falseness. There may however appear a special case when the same number of voters support its truthfulness respectively its falseness, or all voters abstain from voting. In these cases, statement *P* becomes neither *true* nor *false*, but **indeterminate**. It is a *zero knowledge* situation.
 
@@ -4441,7 +4441,7 @@ In fact, we are working in a balanced ternary logic with negative (false), posit
 
 .. As a consequence, when there exist conjointly positive and negative epistemic evidences for a statement, the proposition always get an *indeterminate* status. This way all tautologies and antologies of a classical propositional calculus like the Boolean algebra remain effectively valid when only working with fully determined statements.
 
-Computational Bipolar-valued set theory
+Computational bipolar-valued set theory
 .......................................
 
 A bipolar-valued set *X*, a **bpv-set** for short, consists of a support set :math:`E_X` of potential elements and a dictionary providing for every element :math:`x \in E_X` a bipolar-valued membership characteristic function :math:`r(x \in X)` taking values in the decimal interval [-1.0;+1.0]:
@@ -4550,9 +4550,11 @@ Finally, in :numref:`bipolarValuedSets3` below we illustrate the bipolar-valued 
     s5:  +0.0000
     s5:  -4.9000
 
+The :py:class:`~bipolarValuedSets.BvpSet` class furthermore provides a :py:meth:`~bipolarValuedSets.BvpSet.strip` method which removes potential non elements from the support of an bpv-set instance. A :py:meth:`~bipolarValuedSets.BvpSet.polarise` method is also provided for setting all positive and negative membership credibilities to +1.0, respectively to -1.0 . In the limit case of no indetermined membership characteristics, we recover this way standard crisp sets and the previous set operations simply implement a Boolean algebra [BIS-2004_3p]_. 
+
 .. note::
 
-   The *relation* attribute of a bipolar-valued digraph is an example of a bpv-set where the support is given by the oriented tuples of the digraph's nodes. The *edges* attribute of bipolar-valued graphs is a second example of bpv-sets, where the support is given by the non-oriented pairs of vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership charcateristic vectors from the *Rubis* best choice computation. This is the topic of the next tutorial.
+   The *relation* attribute of a bipolar-valued digraph is an example of a bpv-set where the support is given by the oriented tuples of the digraph's nodes. The *edges* attribute of bipolar-valued graphs is a second example of bpv-sets, where the support is given by the non-oriented pairs of vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership charcateristic vectors from the *Rubis* best choice computation [BIS-2006_1p]_. This is the topic of the next tutorial.
 
 Back to :ref:`Content Table <Pearls-label>`
 
@@ -4869,7 +4871,7 @@ The adjacency matrix of a symmetric digraph staying *unchanged* by the transposi
 Historical notes
 ................
 
-Following the observation that an independent absorbent choice in an acyclic digraph corresponds to the zero values of the associated *Grundy* function, *J. Riguet* [RIG-1948p]_ introduced the name **noyau** (kernel) for such a choice. Terminal kernels where in the sequel studied by *Claude Berge* [BER-1958p]_ in the context of Combinatorial Game Theory. Initial kernels --independent and dominating choices-- were introduced under the name game solutions by *John von Neumann* [NEU-1944p]_. The absorbent version of the crisp kernel equation system  was first introduced by *Schmidt G. and Ströhlein Th.* [SCH-1985p]_ in the context of their thorough exploration of relational algebra.
+Following the observation that an independent absorbent choice in an acyclic digraph corresponds to the zero values --the kernel-- of the associated *Grundy* function, *J. Riguet* [RIG-1948p]_ introduced the name **noyau** (kernel) for such a choice. Terminal kernels where in the sequel studied by *Claude Berge* [BER-1958p]_ in the context of Combinatorial Game Theory. Initial kernels --independent and dominating choices-- were introduced under the name game solutions by *John von Neumann* [NEU-1944p]_. The absorbent version of the crisp kernel equation system  was first introduced by *Schmidt G. and Ströhlein Th.* [SCH-1985p]_ in the context of their thorough exploration of relational algebra.
 
 The fuzzy version of kernel equation systems was first investigated by *Kitainik L.* [KIT-1993p]_. Commenting on this work at a meeting in Spring 1995 of the EURO Working Group on Multicriteria Decision Aiding in Lausanne (Switzerland), *Marc Roubens* feared that solving such fuzzy kernel equation systems could be computationally difficult. Triggered by his pessimistic remark and knowing about kernel equation systems and the *Neumann* fixpoint theorem ([NEU-1944p]_, [SCH-1985p]_), I immediately started to implement in Prolog a solver for the valued version of Equation :math:`T(Y)`, the equation system serving as constraints for a discrete labelling of all possible rational solution vectors. And in Summer 1995, we luckily obtained with a commercial finite domain solver the very first valued initial and terminal kernels from a didactic outranking digraph of order 8, well known in the multiple-criteria decision aiding community. The computation took several seconds on a CRAY 6412 superserver with 12 processors operating in a nowadays ridiculous CPU speed of 90 Mhz. The labelled solution vectors, obtained in the sequel for any outranking digraph with a single initial or terminal kernel, were structured in a way that suggested the converging stages of the *Neumann* fixpoint algorithm and so gave the initial hint for our Algorithm ([BIS-1996p]_, [BIS-1997p]_). 
 

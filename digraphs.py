@@ -8602,8 +8602,8 @@ class Digraph(object):
         if Comments:
             print('First choice recommendation(s) (BCR)')
             print(' (in decreasing order of determinateness)   ')
-            print('Credibility domain: [%.2f,%.2f]' % (g.valuationdomain['min'],\
-                                                                        g.valuationdomain['max']) )
+            print('Credibility domain: [%.2f,%.2f]' % (g.valuationdomain['min'],
+                                        g.valuationdomain['max']) )
         Med = g.valuationdomain['med']
         bestChoice = set()
         bestChoiceData = None

@@ -38,6 +38,10 @@ def testBpvSet():
     S = T.strip(InSite=False)
     Q = X.update(T)
     R = Y.update(S)
+    print('set polarising')
+    Yp = Y.polarise(0.5, InSite=False, Strict=False)
+    Yp.showMembershipCharacteristics()
+    
     
     
 
