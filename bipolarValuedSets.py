@@ -111,7 +111,7 @@ class BpvSet(object):
         Sp = self.strip(InSite=False,cutLevel=self.valuationDomain['med'])
         Sp.showMembershipCharacteristics()
         
-    def recodeValuation(self,newMin=-1,newMax=1,ndigits=2,Debug=False):
+    def recodeValuation(self,newMin=-1,newMax=1,ndigits=None,Debug=False):
         """
         Specialization for recoding the valuation of a BpvSet membership chracteristics
         By default the valuation domain is normalized to [-1;1]
@@ -126,6 +126,8 @@ class BpvSet(object):
         oldAmplitude = oldMax - oldMin
         if Debug:
             print(oldMin, oldMed, oldMax, oldAmplitude)
+        if ndigits is None:
+            ndigits = self.ndigits
         formatString = '%%2.%df' % ndigits
         newMin = Decimal(formatString % newMin)
         newMax = Decimal(formatString % newMax)
@@ -372,7 +374,7 @@ class BpvSet(object):
         Max = diff.valuationDomain['max']
         for it in diff.support:
             try:
-                membership[it] = -min(newSelf.membership[it],-newOther.membership[it])
+                membership[it] = min(newSelf.membership[it],-newOther.membership[it])
             except:
                 try:
                     membership[it] = newSelf.membership[it]

@@ -4301,8 +4301,9 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>The <strong>set difference</strong> between two bpv-sets <em>X</em> and <em>Y</em>, denoted <em>X-Y</em>, is the bpv-set of all members of <em>X</em> that are not members of <em>Y</em>. For all <img class="math" src="_images/math/2f85bc4c834f81d3d8587c571049602d7d40d148.png" alt="z \in E_{X \cup Y}"/>, the membership characteristic <img class="math" src="_images/math/d2058492186a1abdb5f19208f3b169796ea32056.png" alt="r\big(\,z \in (X - Y)\, \big)\; ="/></p>
 <blockquote>
 <div><ul class="simple">
-<li><p><img class="math" src="_images/math/06edc80baab89578b38baaec29617db9616ff4e3.png" alt="-\min\big(\,r(z \in X),-r(z \in Y)\,\big)"/> when both <img class="math" src="_images/math/40c91cd6e1c263e01923d79bca868b1d54ae940b.png" alt="z \in E_X \land z \in E_Y"/>,</p></li>
-<li><p><img class="math" src="_images/math/5d8b976e2862b5d489aab1cf78235c34e79fe930.png" alt="r(z \in X)"/> otherwise.</p></li>
+<li><p><img class="math" src="_images/math/1db00e26adb44dbc002c6570f8155708514d1b3a.png" alt="\min\big(\,r(z \in X),-r(z \in Y)\,\big)"/> when both <img class="math" src="_images/math/40c91cd6e1c263e01923d79bca868b1d54ae940b.png" alt="z \in E_X \land z \in E_Y"/>;</p></li>
+<li><p><img class="math" src="_images/math/5d8b976e2862b5d489aab1cf78235c34e79fe930.png" alt="r(z \in X)"/> when <img class="math" src="_images/math/b8a589c015e6f7ed0ba616bba1d61094547bbb15.png" alt="z \in E_X"/>;</p></li>
+<li><p><img class="math" src="_images/math/26f3fc3c1a88f417dfecaccadb181c5941ec0f10.png" alt="-1.0"/> otherwise.</p></li>
 </ul>
 </div></blockquote>
 <p>The <strong>symmetric difference</strong> of bpv-sets <em>X</em> and <em>Y</em>, denoted <em>X^Y</em>, is the set difference of their union and intersection, <img class="math" src="_images/math/0c5dbff8741803723e6927ab8150b8660c75fa24.png" alt="(X-Y) \; = \; (X \cup Y) \,-\, (X \cap Y)"/> or the union of their reciprocal set differences <img class="math" src="_images/math/b9a8de4f073ab05fada8b3622b28da731a164428.png" alt="(Y-X) \;=\; (X - Y) \,\cup\, (Y - X)"/>.</p>
@@ -4331,17 +4332,17 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <div class="literal-block-wrapper docutils container" id="bipolarvaluedsets2">
 <div class="code-block-caption"><span class="caption-number">Listing 3.57 </span><span class="caption-text">Working with bipolar-valued sets II</span><a class="headerlink" href="#bipolarvaluedsets2" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">|</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="linenos"> 2</span><span class="go"># | is Python&#39;s set union symbol</span>
-<span class="hll"><span class="linenos"> 3</span><span class="go"> s1:  +0.9100</span>
-</span><span class="hll"><span class="linenos"> 4</span><span class="go"> s2:  +0.9000</span>
-</span><span class="hll"><span class="linenos"> 5</span><span class="go"> s3:  +0.5300</span>
+<span class="linenos"> 2</span><span class="go"> # Python&#39;s set union symbol is |</span>
+<span class="hll"><span class="linenos"> 3</span><span class="go"> s1:  +0.9121</span>
+</span><span class="hll"><span class="linenos"> 4</span><span class="go"> s2:  +0.8957</span>
+</span><span class="hll"><span class="linenos"> 5</span><span class="go"> s3:  +0.5275</span>
 </span><span class="hll"><span class="linenos"> 6</span><span class="go"> s5:  +0.0000</span>
-</span><span class="hll"><span class="linenos"> 7</span><span class="go"> s4:  -0.4900</span>
+</span><span class="hll"><span class="linenos"> 7</span><span class="go"> s4:  -0.4899</span>
 </span><span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">&amp;</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="linenos"> 9</span><span class="go"># &amp; is Python&#39;s set intersection symbol</span>
-<span class="linenos">10</span><span class="go"> s2:  +0.6900</span>
-<span class="hll"><span class="linenos">11</span><span class="go"> s1:  -0.7300</span>
-</span><span class="hll"><span class="linenos">12</span><span class="go"> s3:  -0.8900</span>
+<span class="linenos"> 9</span><span class="go"> # Python&#39;s set intersection symbol is &amp;</span>
+<span class="linenos">10</span><span class="go"> s2:  +0.6949</span>
+<span class="hll"><span class="linenos">11</span><span class="go"> s1:  -0.7313</span>
+</span><span class="hll"><span class="linenos">12</span><span class="go"> s3:  -0.8869</span>
 </span><span class="hll"><span class="linenos">13</span><span class="go"> s4:  -1.0000</span>
 </span><span class="hll"><span class="linenos">14</span><span class="go"> s5:  -1.0000</span>
 </span></pre></div>
@@ -4351,33 +4352,33 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <div class="literal-block-wrapper docutils container" id="bipolarvaluedsets3">
 <div class="code-block-caption"><span class="caption-number">Listing 3.58 </span><span class="caption-text">Working with bipolar-valued sets III</span><a class="headerlink" href="#bipolarvaluedsets3" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">-</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="linenos"> 2</span><span class="go"># Python&#39;s set difference is -</span>
-<span class="hll"><span class="linenos"> 3</span><span class="go"> s1:  +0.9100</span>
-</span><span class="hll"><span class="linenos"> 4</span><span class="go"> s2:  +0.9000</span>
-</span><span class="hll"><span class="linenos"> 5</span><span class="go"> s5:  +0.0000</span>
-</span><span class="hll"><span class="linenos"> 6</span><span class="go"> s4:  -0.4900</span>
-</span><span class="hll"><span class="linenos"> 7</span><span class="go"> s3:  -0.5300</span>
+<span class="linenos"> 2</span><span class="go"> # Python&#39;s set difference is -</span>
+<span class="hll"><span class="linenos"> 3</span><span class="go"> s3:  +0.5275</span>
+</span><span class="hll"><span class="linenos"> 4</span><span class="go"> s5:  +0.0000</span>
+</span><span class="hll"><span class="linenos"> 5</span><span class="go"> s4:  -0.4899</span>
+</span><span class="hll"><span class="linenos"> 6</span><span class="go"> s2:  -0.8957</span>
+</span><span class="hll"><span class="linenos"> 7</span><span class="go"> s1:  -0.9121</span>
 </span><span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Y</span><span class="o">-</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="linenos"> 9</span><span class="go"> s3:  +0.8900</span>
-<span class="linenos">10</span><span class="go"> s2:  +0.6900</span>
-<span class="linenos">11</span><span class="go"> s1:  -0.7300</span>
+<span class="linenos"> 9</span><span class="go"> s1:  +0.7313</span>
+<span class="linenos">10</span><span class="go"> s2:  -0.6949</span>
+<span class="linenos">11</span><span class="go"> s3:  -0.8869</span>
 <span class="linenos">12</span><span class="go"> s4:  -1.0000</span>
 <span class="linenos">13</span><span class="go"> s5:  -1.0000</span>
 <span class="hll"><span class="linenos">14</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Y</span><span class="o">^</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-</span><span class="hll"><span class="linenos">15</span><span class="go"># ^ is Python&#39;s symmetrix difference symbol</span>
+</span><span class="hll"><span class="linenos">15</span><span class="go"># Python&#39;s symmetrix difference symbol is ^</span>
 </span><span class="hll"><span class="linenos">16</span><span class="go"># X^Y = (X-Y)|(Y-X) or (X|Y)-(X&amp;Y)</span>
-</span><span class="hll"><span class="linenos">17</span><span class="go"> s1:  +0.9100</span>
-</span><span class="hll"><span class="linenos">18</span><span class="go"> s2:  +0.9000</span>
-</span><span class="hll"><span class="linenos">19</span><span class="go"> s3:  +0.8900</span>
-</span><span class="hll"><span class="linenos">20</span><span class="go"> s5:  +0.0000</span>
-</span><span class="hll"><span class="linenos">21</span><span class="go"> s5:  -4.9000</span>
+</span><span class="hll"><span class="linenos">17</span><span class="go"> s1:  +0.7313</span>
+</span><span class="hll"><span class="linenos">18</span><span class="go"> s3:  +0.5275</span>
+</span><span class="hll"><span class="linenos">19</span><span class="go"> s5:  +0.0000</span>
+</span><span class="hll"><span class="linenos">20</span><span class="go"> s4:  -0.4899</span>
+</span><span class="hll"><span class="linenos">21</span><span class="go"> s2:  -0.6949</span>
 </span></pre></div>
 </div>
 </div>
 <p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">BvpSet</span></code> class furthermore provides a <code class="xref py py-meth docutils literal notranslate"><span class="pre">strip()</span></code> method which removes potential non elements from the support of an bpv-set instance. A <code class="xref py py-meth docutils literal notranslate"><span class="pre">polarise()</span></code> method is also provided for setting all positive and negative membership credibilities to +1.0, respectively to -1.0 . In the limit case of no indetermined membership characteristics, we recover this way standard crisp sets and the previous set operations simply implement a Boolean algebra <a class="reference internal" href="#bis-2004-3p" id="id58"><span>[BIS-2004_3p]</span></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The <em>relation</em> attribute of a bipolar-valued digraph is an example of a bpv-set where the support is given by the oriented tuples of the digraph’s nodes. The <em>edges</em> attribute of bipolar-valued graphs is a second example of bpv-sets, where the support is given by the non-oriented pairs of vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership charcateristic vectors from the <em>Rubis</em> best choice computation <a class="reference internal" href="#bis-2006-1p" id="id59"><span>[BIS-2006_1p]</span></a>. This is the topic of the next tutorial.</p>
+<p>The <em>relation</em> attribute of a bipolar-valued digraph is an example of a bpv-set where the support is given by the oriented tuples of the digraph’s nodes. The <em>edges</em> attribute of bipolar-valued graphs is a second example of a bpv-set, where the support is given by the non-oriented pairs of vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership charcateristic vectors from the <em>Rubis</em> best choice computation <a class="reference internal" href="#bis-2006-1p" id="id59"><span>[BIS-2006_1p]</span></a>. This is the topic of the next tutorial.</p>
 </div>
 <p>Back to <a class="reference internal" href="#pearls-label"><span class="std std-ref">Content Table</span></a></p>
 <hr class="docutils" />

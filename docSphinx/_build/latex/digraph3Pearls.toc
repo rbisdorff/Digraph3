@@ -60,7 +60,7 @@
 \contentsline {subsection}{\numberline {3.5}Computing with bipolar\sphinxhyphen {}valued sets}{119}{subsection.3.5}%
 \contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued epistemic logic}{119}{subsubsection*.127}%
 \contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued propositional calculus}{120}{subsubsection*.128}%
-\contentsline {subsubsection}{Computational Bipolar\sphinxhyphen {}valued set theory}{120}{subsubsection*.129}%
+\contentsline {subsubsection}{Computational bipolar\sphinxhyphen {}valued set theory}{120}{subsubsection*.129}%
 \contentsline {subsection}{\numberline {3.6}Bipolar\sphinxhyphen {}valued kernel membership characteristic vectors}{123}{subsection.3.6}%
 \contentsline {subsubsection}{Kernel equation systems}{123}{subsubsection*.133}%
 \contentsline {subsubsection}{Solving bipolar\sphinxhyphen {}valued kernel equation systems}{124}{subsubsection*.134}%

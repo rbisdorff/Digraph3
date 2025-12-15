@@ -4467,9 +4467,9 @@ For every :math:`z \in E_{X \cup Y}` the membership characteristic :math:`r\big(
 
 The **set difference** between two bpv-sets *X* and *Y*, denoted *X-Y*, is the bpv-set of all members of *X* that are not members of *Y*. For all :math:`z \in E_{X \cup Y}`, the membership characteristic :math:`r\big(\,z \in (X - Y)\, \big)\; =` 
 
-    - :math:`-\min\big(\,r(z \in X),-r(z \in Y)\,\big)` when both :math:`z \in E_X \land z \in E_Y`,
-
-    - :math:`r(z \in X)` otherwise.
+    - :math:`\min\big(\,r(z \in X),-r(z \in Y)\,\big)` when both :math:`z \in E_X \land z \in E_Y`;
+    - :math:`r(z \in X)` when :math:`z \in E_X`;
+    - :math:`-1.0` otherwise.
 
 The **symmetric difference** of bpv-sets *X* and *Y*, denoted *X^Y*, is the set difference of their union and intersection, :math:`(X-Y) \; = \; (X \cup Y) \,-\, (X \cap Y)` or the union of their reciprocal set differences :math:`(Y-X) \;=\; (X - Y) \,\cup\, (Y - X)`.
 
@@ -4506,17 +4506,17 @@ In :numref:`bipolarValuedSets2` below we illustrate the bipolar-valued set **uni
    :emphasize-lines: 3-7,11-
 
    >>> (X|Y).showMembershipCharacteristics()
-   # | is Python's set union symbol
-    s1:  +0.9100
-    s2:  +0.9000
-    s3:  +0.5300
+    # Python's set union symbol is |
+    s1:  +0.9121
+    s2:  +0.8957
+    s3:  +0.5275
     s5:  +0.0000
-    s4:  -0.4900
+    s4:  -0.4899
    >>> (X&Y).showMembershipCharacteristics()
-   # & is Python's set intersection symbol
-    s2:  +0.6900
-    s1:  -0.7300
-    s3:  -0.8900
+    # Python's set intersection symbol is &
+    s2:  +0.6949
+    s1:  -0.7313
+    s3:  -0.8869
     s4:  -1.0000
     s5:  -1.0000
 
@@ -4529,32 +4529,32 @@ Finally, in :numref:`bipolarValuedSets3` below we illustrate the bipolar-valued 
    :emphasize-lines: 3-7,14-
  
    >>> (X-Y).showMembershipCharacteristics()
-   # Python's set difference is -
-    s1:  +0.9100
-    s2:  +0.9000
+    # Python's set difference is -
+    s3:  +0.5275
     s5:  +0.0000
-    s4:  -0.4900
-    s3:  -0.5300
+    s4:  -0.4899
+    s2:  -0.8957
+    s1:  -0.9121
    >>> (Y-X).showMembershipCharacteristics()
-    s3:  +0.8900
-    s2:  +0.6900
-    s1:  -0.7300
+    s1:  +0.7313
+    s2:  -0.6949
+    s3:  -0.8869
     s4:  -1.0000
     s5:  -1.0000
    >>> (Y^X).showMembershipCharacteristics() 
-   # ^ is Python's symmetrix difference symbol
+   # Python's symmetrix difference symbol is ^
    # X^Y = (X-Y)|(Y-X) or (X|Y)-(X&Y)
-    s1:  +0.9100
-    s2:  +0.9000
-    s3:  +0.8900
+    s1:  +0.7313
+    s3:  +0.5275
     s5:  +0.0000
-    s5:  -4.9000
-
+    s4:  -0.4899
+    s2:  -0.6949
+ 
 The :py:class:`~bipolarValuedSets.BvpSet` class furthermore provides a :py:meth:`~bipolarValuedSets.BvpSet.strip` method which removes potential non elements from the support of an bpv-set instance. A :py:meth:`~bipolarValuedSets.BvpSet.polarise` method is also provided for setting all positive and negative membership credibilities to +1.0, respectively to -1.0 . In the limit case of no indetermined membership characteristics, we recover this way standard crisp sets and the previous set operations simply implement a Boolean algebra [BIS-2004_3p]_. 
 
 .. note::
 
-   The *relation* attribute of a bipolar-valued digraph is an example of a bpv-set where the support is given by the oriented tuples of the digraph's nodes. The *edges* attribute of bipolar-valued graphs is a second example of bpv-sets, where the support is given by the non-oriented pairs of vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership charcateristic vectors from the *Rubis* best choice computation [BIS-2006_1p]_. This is the topic of the next tutorial.
+   The *relation* attribute of a bipolar-valued digraph is an example of a bpv-set where the support is given by the oriented tuples of the digraph's nodes. The *edges* attribute of bipolar-valued graphs is a second example of a bpv-set, where the support is given by the non-oriented pairs of vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership charcateristic vectors from the *Rubis* best choice computation [BIS-2006_1p]_. This is the topic of the next tutorial.
 
 Back to :ref:`Content Table <Pearls-label>`
 
