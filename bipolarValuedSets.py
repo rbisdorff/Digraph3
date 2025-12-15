@@ -427,11 +427,13 @@ class BpvSet(object):
 
     def strip(self,cutLevel=None,Strict=True,InSite=True):
         """
-        Strip the support at cutLevel. If None, cutLevel is valuation minimum.
+        Strip the support at *cutLevel*.
+        If None, *cutLevel* is set to the valuation minimum and *Strict* is forced to True.
         If Strict is True, cutLevel is stripped !
         """
         if cutLevel is None:
             cutLevel = self.valuationDomain['min']
+            Strict = True
         new = BpvSet()
         new.name = self.name
         new.valuationDomain = self.valuationDomain

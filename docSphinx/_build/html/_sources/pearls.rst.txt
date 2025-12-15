@@ -4468,9 +4468,9 @@ The **set difference** between two bpv-sets *X* and *Y*, denoted *X-Y*, is the b
     - :math:`r(z \in X)` when :math:`z \in E_X`;
     - :math:`-1.0` otherwise.
 
-The **symmetric difference** of bpv-sets *X* and *Y*, denoted *X^Y*, is the set difference of their union and intersection, :math:`(X-Y) \; = \; (X \cup Y) \,-\, (X \cap Y)` or the union of their reciprocal set differences :math:`(Y-X) \;=\; (X - Y) \,\cup\, (Y - X)`.
+The **symmetric difference** of bpv-sets *X* and *Y*, denoted *X^Y*, is the set difference of their union and intersection, :math:`(X \cup Y) \,-\, (X \cap Y)` or the union of their reciprocal set differences :math:`(X - Y) \,\cup\, (Y - X)`.
 
-The :py:mod:`bipolarValuedSets` Digraph3 module provides, with the :py:class:`~bipolarValuedSets.BpvSet` class, a Python implementation of such bvp-sets. In :numref:`bipolarValuedSets1` we use the :py:class:`~bipolarValuedSets.RandomBpvSet` class for generating to random bpv-sets *X* and *Y* with a common support of three elements *s1*, *s2* and *s3*. 
+The :py:mod:`bipolarValuedSets` Digraph3 module provides, with the :py:class:`~bipolarValuedSets.BpvSet` class, a Python implementation of such bpv-sets. In :numref:`bipolarValuedSets1` we use the :py:class:`~bipolarValuedSets.RandomBpvSet` class for generating two random bpv-sets *X* and *Y* with a common support of three elements *s1*, *s2* and *s3*. 
 
 .. code-block:: pycon
    :caption: Working with bipolar-valued sets I
@@ -4547,7 +4547,7 @@ Finally, in :numref:`bipolarValuedSets3` below we illustrate the bipolar-valued 
     s4:  -0.4899
     s2:  -0.6949
  
-The :py:class:`~bipolarValuedSets.BvpSet` class furthermore provides a :py:meth:`~bipolarValuedSets.BvpSet.strip` method which removes potential non elements from the support of an bpv-set instance. A :py:meth:`~bipolarValuedSets.BvpSet.polarise` method is also provided for setting all positive and negative membership credibilities to +1.0, respectively to -1.0 . In the limit case of no indetermined membership characteristics, we recover this way standard crisp sets and the previous set operations simply implement a Boolean algebra [BIS-2004_3p]_. 
+The :py:class:`~bipolarValuedSets.BpvSet` class furthermore provides a :py:meth:`~bipolarValuedSets.BpvSet.strip` method which removes potential non elements from the support of an bpv-set instance. A :py:meth:`~bipolarValuedSets.BpvSet.polarise` method is also provided for setting all positive and negative membership credibilities to +1.0, respectively to -1.0 . In the limit case of no indetermined membership characteristics, we recover this way standard crisp sets and the previous set operations simply implement a Boolean algebra [BIS-2004_3p]_. 
 
 .. note::
 
