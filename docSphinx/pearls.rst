@@ -4399,13 +4399,13 @@ First important consequence is that the logical status of any statement is consi
 Bipolar-valued propositional calculus
 .....................................
 
-In order to formalize the previous intuitions, we are attaching to any logical proposition or stement *P* a characteristic function *r(P)* taking value in the decimal interval [-1.0;+1.0] with following semantics:
+In order to formalize the previous intuitions, we are attaching to any logical proposition or statement *P* a characteristic function *r(P)* taking value in the decimal interval [-1.0;+1.0] with following semantics:
 
   - :math:`0.0 < r(P) \le +1.0` means statement *P* is **more true than false**;
   - :math:`-1.0 < r(P) < 0.0` means statement *P* is **more false than true**;
   - :math:`r(P) = 0.0` means statement *P* is **indeterminate**.
   
-Negating a statement is hence operated by changing the sign of its characteristic function: :math:`r(\neg P) = -r(P)`. An important consequence appears. This **negation** :math:`\neg` operation does not necessarily correspond to taking the complement logical value. Indeed, *not true* does now only imply *false or indeterminate* and *not false* does only imply *true or indeterminate*. 
+Negating a statement is hence operated by changing the sign of its characteristic function: :math:`r(\neg P) = -r(P)`. An important consequence appears. This **negation** :math:`\neg` operation does not necessarily correspond to taking the complement logical value. Indeed, *not true* does now only imply *false or indeterminate* and *not false* does only imply *true or indeterminate*. In fact, we are working in a balanced ternary logic with **negative** (false), **positive** (true) and **null** (indeterminate) characteristic values. A negative affirmation becomes here a positive refutation and vice versa [BIS-2004_3p]_. 
 
 Let now *P* and *Q* be two propositions, logical **conjunction** :math:`\land`, **disjunction** :math:`\lor` and **implication** :math:`\Rightarrow` may be computed as follows:
 
@@ -4413,9 +4413,7 @@ Let now *P* and *Q* be two propositions, logical **conjunction** :math:`\land`, 
    - :math:`r(P \lor Q) \,=\, \max\big(r(P),r(Q)\big)`;
    - :math:`r(P \Rightarrow Q)  \,=\, r\big(\neg(P \land \neg Q)\big) \,=\, -r \big(\,\min(r(P),-r(Q)\,)\big)`.
 
-It is worthwhile noticing that the bipolar-valued logical implication is not necessarily transitive. Suppose for instance that a majority of voters validate proposition *P* and another majority validates the second proposition *Q* and still another majority of voters validates indeed the third proposition *R*. There is no epistemic reason why the evidence concerning statements :math:`P \Rightarrow Q` and :math:`Q \Rightarrow R` should necessarily induce the evidence that :math:`P \Rightarrow R`.
-
-In fact, we are working in a balanced ternary logic with negative (false), positive (true) and null (indeterminate) characteristic values. A negative affirmation becomes here a positive refutation and vice versa [BIS-2004_3p]_. 
+It is worthwhile noticing that the bipolar-valued logical implication is not necessarily transitive. Suppose for instance that a majority of voters validate proposition :math:`P \Rightarrow Q` and another majority validates the proposition :math:`Q \Rightarrow R`. There is no epistemic reason why the separate evidences of both these statements should necessarily induce the evidence of :math:`P \Rightarrow R`.
 
 .. Epistemic fusion of propositional evidences
 .. ...........................................
