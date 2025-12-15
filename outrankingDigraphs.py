@@ -1259,14 +1259,15 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         from copy import deepcopy
         corr = self.computeActionsComparisonCorrelations()
         n = self.order
-        g = EmptyDigraph(order=n)
-        g.__class__ = Digraph
+        g = Digraph()
+        #g.__class__ = Digraph
         g.name = 'actCorrGraph'
         g.valuationdomain = {'min':Decimal('-1.0'),'med':Decimal('0.0'),'max':Decimal('1.0')}
         Min = g.valuationdomain['min']
         Med = g.valuationdomain['med']
         Max = g.valuationdomain['max']
         g.actions = deepcopy(self.actions)
+        g.order = len(g.actions)
         g.relation = self.computeActionsComparisonCorrelations()
         g.gamma = g.gammaSets()
         g.notGamma = g.notGammaSets()
@@ -1281,8 +1282,8 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         criteriaList.sort()
         corr,d = self.computeCriteriaCorrelations(ValuedCorrelation=ValuedCorrelation)
         n = len(criteriaList)
-        g = EmptyDigraph(order=n)
-        g.__class__ = Digraph
+        g = Digraph()
+        #g.__class__ = Digraph
         if ValuedCorrelation:
             g.name = 'valCorrGraph'
         else:
@@ -1307,6 +1308,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 relation[item[1]]['m'] = item[0]
                 relation['m'][item[1]] = item[0]
         g.actions = criteriaList
+        g.order = n
         g.relation = relation
         #g.gamma = g.gammaSets()
         #g.notGamma = g.notGammaSets()

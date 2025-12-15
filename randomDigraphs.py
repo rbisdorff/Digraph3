@@ -55,7 +55,7 @@ class RandomDigraph(Digraph):
         else:
             import random
             random.seed(seed)
-            from digraphs import EmptyDigraph
+            #from digraphs import Digraph
             if Bipolar:
                 domain = ('-1.0','1.0')
             else:

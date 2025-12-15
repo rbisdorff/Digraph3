@@ -728,11 +728,11 @@ class Graph(object):
         Decimal('0.7142857142857142857142857143')
         
         """
-        from digraphs import Digraph, EmptyDigraph
+        from digraphs import Digraph
         from copy import deepcopy
         
-        g = EmptyDigraph(order=self.order)
-        g.__class__ = Digraph
+        g = Digraph()
+        #g.__class__ = Digraph
         g.name = 'oriented_'+self.name
         g.actions = deepcopy(self.vertices)
         g.valuationdomain = deepcopy(self.valuationDomain)
@@ -741,6 +741,7 @@ class Graph(object):
         Med = g.valuationdomain['med']
         relation = {}
         actionKeysList = [a for a in g.actions]
+        g.order = len(actionKeysList)
         for x in actionKeysList:
             relation[x] = {}
             for y in actionKeysList:
@@ -827,7 +828,7 @@ class Graph(object):
                             'transitivityDegree']
         Dual transitivity degree: 1.000
         """
-        from digraphs import EmptyDigraph
+        from digraphs import Digraph
         from transitiveDigraphs import TransitiveDigraph
         from copy import deepcopy
 
@@ -837,7 +838,7 @@ class Graph(object):
             if Debug:
                 for arc in self.edgeOrientations:
                     print(arc, self.edgeOrientations[arc])
-            g = EmptyDigraph(order=self.order)
+            g = Digraph()
             g.__class__ = TransitiveDigraph
             g.name = 'trans_oriented_'+self.name
             g.actions = deepcopy(self.vertices)
@@ -847,6 +848,7 @@ class Graph(object):
             Med = g.valuationdomain['med']
             relation = {}
             actionKeysList = [a for a in g.actions]
+            g.order = len(actionKeysList)
             for x in actionKeysList:
                 relation[x] = {}
                 for y in actionKeysList:
@@ -1538,9 +1540,9 @@ class Graph(object):
         Converts a Graph object into a symmetric Digraph object.
         """
         from copy import deepcopy
-        from digraphs import Digraph, EmptyDigraph
-        dg = EmptyDigraph(order=self.order)
-        dg.__class__ = Digraph
+        from digraphs import Digraph
+        dg = Digraph()
+        #dg.__class__ = Digraph
         dg.name = deepcopy(self.name)
         dg.actions = deepcopy(self.vertices)
         dg.order = len(dg.actions)
@@ -4817,14 +4819,15 @@ class PermutationGraph(Graph):
             :align: center 
 
         """
-        from digraphs import EmptyDigraph
+        from digraphs import Digraph
         from transitiveDigraphs import TransitiveDigraph
         from copy import deepcopy
         
-        g = EmptyDigraph(order=self.order)
+        g = Digraph()
         g.__class__ = TransitiveDigraph
         g.name = 'oriented_'+self.name
         g.actions = deepcopy(self.vertices)
+        g.order = len(g.actions)
         g.valuationdomain = deepcopy(self.valuationDomain)
         Max = g.valuationdomain['max']
         Min = g.valuationdomain['min']

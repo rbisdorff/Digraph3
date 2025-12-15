@@ -163,16 +163,25 @@ class Digraph(object):
         from randomDigraphs import RandomValuationDigraph
         from decimal import Decimal
         if file is None:
-            g = RandomValuationDigraph(order=order)
-            self.name = g.name
-            self.actions = g.actions
-            self.order = len(self.actions)
-            self.valuationdomain = g.valuationdomain
-            self.convertValuationToDecimal()
-            self.relation = g.relation
-            self.convertRelationToDecimal()
-            self.gamma = self.gammaSets()
-            self.notGamma = self.notGammaSets()
+            self.name = 'emptyDigraph'
+            self.actions = {}
+            self.order = 0
+            self.valuationdomain = {'min': Decimal(-1),
+                                    'med': Decimal(0),
+                                    'max': Decimal(1) }
+            self.relation = {}
+            self.gamma = {}
+            self.notGamma = {}
+##            g = RandomValuationDigraph(order=order)
+##            self.name = g.name
+##            self.actions = g.actions
+##            self.order = len(self.actions)
+##            self.valuationdomain = g.valuationdomain
+##            self.convertValuationToDecimal()
+##            self.relation = g.relation
+##            self.convertRelationToDecimal()
+##            self.gamma = self.gammaSets()
+##            self.notGamma = self.notGammaSets()
         else:
             fileName = file+'.py'
             argDict = {}
@@ -12924,38 +12933,38 @@ class _RandomRegularDigraph(Digraph):
                 self.notGamma = self.notGammaSets()
                 self.componentslist = self.components()
 
-class EmptyDigraph(Digraph):
-    """
-    Parameters:
-        order > 0 (default=5); valuationdomain =(Min,Max).
-
-    Specialization of the general Digraph class for generating
-    temporary empty graphs of given order in {-1,0,1}.
-
-    """
-    def __init__(self,order=5,valuationdomain = (-1.0,1.0)):
-        import sys,array,copy
-        from collections import OrderedDict
-        self.name = 'empty'
-        self.order = order
-        actionlist = list(range(order+1))
-        actionlist.remove(0)
-        actions = OrderedDict()
-        for x in actionlist:
-            actions[str(x)] = {'name':str(x)}
-        self.actions = actions
-        Min = Decimal(str((valuationdomain[0])))
-        Max = Decimal(str((valuationdomain[1])))
-        Med = (Max + Min)/Decimal('2')
-        self.valuationdomain = {'min':Min,'med':Med,'max':Max}
-        relation = {}
-        for x in actions:
-            relation[x] = {}
-            for y in actions:
-                relation[x][y] = Min
-        self.relation = relation
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
+##class EmptyDigraph(Digraph):
+##    """
+##    Parameters:
+##        order > 0 (default=5); valuationdomain =(Min,Max).
+##
+##    Specialization of the general Digraph class for generating
+##    temporary empty graphs of given order in {-1,0,1}.
+##
+##    """
+##    def __init__(self,order=5,valuationdomain = (-1.0,1.0)):
+##        import sys,array,copy
+##        from collections import OrderedDict
+##        self.name = 'empty'
+##        self.order = order
+##        actionlist = list(range(order+1))
+##        actionlist.remove(0)
+##        actions = OrderedDict()
+##        for x in actionlist:
+##            actions[str(x)] = {'name':str(x)}
+##        self.actions = actions
+##        Min = Decimal(str((valuationdomain[0])))
+##        Max = Decimal(str((valuationdomain[1])))
+##        Med = (Max + Min)/Decimal('2')
+##        self.valuationdomain = {'min':Min,'med':Med,'max':Max}
+##        relation = {}
+##        for x in actions:
+##            relation[x] = {}
+##            for y in actions:
+##                relation[x][y] = Min
+##        self.relation = relation
+##        self.gamma = self.gammaSets()
+##        self.notGamma = self.notGammaSets()
 
 class IndeterminateDigraph(Digraph):
     """

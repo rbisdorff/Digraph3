@@ -341,7 +341,7 @@ class BpvSet(object):
 
     def __sub__(self,other,/):
         """
-        Return self-other
+        Return difference self - other
         """
         return self.difference(other)
 
@@ -415,7 +415,7 @@ class BpvSet(object):
 
     def __xor__(self,other,/):
         """
-        Return all elements that are exactly in one of the sets
+        Return symmetric difference self^other
         """
         return ((self - other) | (other - self))
 

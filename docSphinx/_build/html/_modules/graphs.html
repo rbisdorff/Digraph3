@@ -845,11 +845,11 @@
 <span class="sd">        Decimal(&#39;0.7142857142857142857142857143&#39;)</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">Digraph</span><span class="p">,</span> <span class="n">EmptyDigraph</span>
+        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">Digraph</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
         
-        <span class="n">g</span> <span class="o">=</span> <span class="n">EmptyDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">)</span>
-        <span class="n">g</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">Digraph</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">()</span>
+        <span class="c1">#g.__class__ = Digraph</span>
         <span class="n">g</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;oriented_&#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span>
         <span class="n">g</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">)</span>
         <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valuationDomain</span><span class="p">)</span>
@@ -858,6 +858,7 @@
         <span class="n">Med</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
         <span class="n">relation</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">actionKeysList</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionKeysList</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionKeysList</span><span class="p">:</span>
             <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actionKeysList</span><span class="p">:</span>
@@ -947,7 +948,7 @@
 <span class="sd">                            &#39;transitivityDegree&#39;]</span>
 <span class="sd">        Dual transitivity degree: 1.000</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">EmptyDigraph</span>
+        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">Digraph</span>
         <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="n">TransitiveDigraph</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
 
@@ -957,7 +958,7 @@
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">arc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edgeOrientations</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">edgeOrientations</span><span class="p">[</span><span class="n">arc</span><span class="p">])</span>
-            <span class="n">g</span> <span class="o">=</span> <span class="n">EmptyDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">)</span>
+            <span class="n">g</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">()</span>
             <span class="n">g</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">TransitiveDigraph</span>
             <span class="n">g</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;trans_oriented_&#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span>
             <span class="n">g</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">)</span>
@@ -967,6 +968,7 @@
             <span class="n">Med</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
             <span class="n">relation</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="n">actionKeysList</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionKeysList</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionKeysList</span><span class="p">:</span>
                 <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
                 <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actionKeysList</span><span class="p">:</span>
@@ -1688,9 +1690,9 @@
 <span class="sd">        Converts a Graph object into a symmetric Digraph object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">Digraph</span><span class="p">,</span> <span class="n">EmptyDigraph</span>
-        <span class="n">dg</span> <span class="o">=</span> <span class="n">EmptyDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">)</span>
-        <span class="n">dg</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">Digraph</span>
+        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">Digraph</span>
+        <span class="n">dg</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">()</span>
+        <span class="c1">#dg.__class__ = Digraph</span>
         <span class="n">dg</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="n">dg</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">)</span>
         <span class="n">dg</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dg</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
@@ -5150,14 +5152,15 @@
 <span class="sd">            :align: center </span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">EmptyDigraph</span>
+        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">Digraph</span>
         <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="n">TransitiveDigraph</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
         
-        <span class="n">g</span> <span class="o">=</span> <span class="n">EmptyDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">)</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">()</span>
         <span class="n">g</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">TransitiveDigraph</span>
         <span class="n">g</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;oriented_&#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span>
         <span class="n">g</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">)</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
         <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valuationDomain</span><span class="p">)</span>
         <span class="n">Max</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
         <span class="n">Min</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
