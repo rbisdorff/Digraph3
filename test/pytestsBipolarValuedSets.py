@@ -41,6 +41,12 @@ def testBpvSet():
     print('set polarising')
     Yp = Y.polarise(0.5, InSite=False, Strict=False)
     Yp.showMembershipCharacteristics()
+    print('saving and reloading')
+    X.save()
+    X.showMembershipCharacteristics()
+    X = BpvSet('tempBpvSet')
+    X.showMembershipCharacteristics()
+    
     
     
     

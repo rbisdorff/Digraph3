@@ -4392,7 +4392,7 @@ Bipolar-valued epistemic logic
 
 In bipolar-valued epistemic logic we assemble conjointly some evidence for a statement to be true and other evidence for the same statement to be false. First example is given by the statement *P*: '*this candidate should win the election*'. There are some voters who support its truthfulness and some voters who support, on the contrary its falseness. Yet, there may also be some voters who don't give any opinion, they abstain from voting. What logical status should be given to the statement *P* ?
 
-Following *Condorcet* [CON-1785p]_ we are going to balance the votes in favour against the votes in disfavour. As a result we obtain a bipolar-valued credibility which qualifies statement *P* as certainly true when all voters support its truth, more or less true when more voters support its truthfulness than its falseness, more or less false when more voters support its falseness than its truthfulness and certainly false if all the voters support its falseness. There may however appear a special case when the same number of voters support its truthfulness respectively its falseness, or all voters abstain from voting. In these cases, statement *P* becomes neither *true* nor *false*, but **indeterminate**. It is a *zero knowledge* situation.
+Following *Condorcet* [CON-1785p]_ we are going to balance the votes in favour against the votes in disfavour. As a result we obtain a bipolar-valued credibility which qualifies statement *P* as **certainly true** when all voters support its truth, **more or less true** when more voters support its truthfulness than its falseness, **more or less false** when more voters support its falseness than its truthfulness and **certainly false** when all the voters support its falseness. There may however appear a special case when the same number of voters support its truthfulness respectively its falseness, or all voters abstain from voting. In these cases, statement *P* becomes neither *true* nor *false*, but **indeterminate**. It is a *zero knowledge* situation.
 
 First important consequence is that the logical status of any statement is considered to be indeterminate as long as no evidence is yet collected. Reconsidering for instance proposition *P*, its logical status is indeterminate as long as no voting has been organized. More important is furthermore the consequence that negating the truthfulness or falseness of a proposition does no more imply its falseness, repective its truthfulness, but its falseness **or** indeterminate state, respecively its truthfulness **or** indeterminate state. Double negation does no more automatically imply truthfulness.  
 
@@ -4401,13 +4401,13 @@ Bipolar-valued propositional calculus
 
 In order to formalize the previous intuitions, we are attaching to any logical proposition or statement *P* a characteristic function *r(P)* taking value in the decimal interval [-1.0;+1.0] with following semantics:
 
-  - :math:`0.0 < r(P) \le +1.0` means statement *P* is **more true than false**;
-  - :math:`-1.0 < r(P) < 0.0` means statement *P* is **more false than true**;
+  - :math:`0.0 < r(P) \le +1.0` means statement *P* is **more or less true**;
+  - :math:`-1.0 \ge r(P) < 0.0` means statement *P* is **more or less false**;
   - :math:`r(P) = 0.0` means statement *P* is **indeterminate**.
   
-Negating a statement is hence operated by changing the sign of its characteristic function: :math:`r(\neg P) = -r(P)`. An important consequence appears. This **negation** :math:`\neg` operation does not necessarily correspond to taking the complement logical value. Indeed, *not true* does now only imply *false or indeterminate* and *not false* does only imply *true or indeterminate*. In fact, we are working in a balanced ternary logic with **negative** (false), **positive** (true) and **null** (indeterminate) characteristic values. A negative affirmation becomes here a positive refutation and vice versa [BIS-2004_3p]_. 
+Negating a statement is hence operated by changing the sign of its characteristic function: :math:`r(\neg P) = -r(P)`. An important consequence appears. This **negation** :math:`\neg` operation does not necessarily correspond to taking the complement logical value. Indeed, *not true* does now only imply *false or indeterminate* and *not false* does only imply *true or indeterminate*. In fact, we are working in a balanced ternary logic with **negative** (false), **positive** (true) and **null** (indeterminate) characteristic values. A negative *affirmation* becomes here a positive *refutation* and vice versa [BIS-2004_3p]_. 
 
-Let now *P* and *Q* be two propositions, logical **conjunction** :math:`\land`, **disjunction** :math:`\lor` and **implication** :math:`\Rightarrow` may be computed as follows:
+Let now *P* and *Q* be two bipolar-valued propositions, logical **conjunction** :math:`\land`, **disjunction** :math:`\lor` and **implication** :math:`\Rightarrow` may be computed as follows:
 
    - :math:`r(P \land Q) \,=\, \min\big(r(P),r(Q)\big)`;
    - :math:`r(P \lor Q) \,=\, \max\big(r(P),r(Q)\big)`;
@@ -4449,7 +4449,7 @@ A bipolar-valued set *X*, a **bpv-set** for short, consists of a support set :ma
 
 For any potential element *z* not included in the support set :math:`E_X`, :math:`r(z \in X) \,=\, -1.0`. The empty bpv-set consists of an empty support set :math:`E_{\emptyset} \,=\, \emptyset`. For all potential element *x* it follows hence that :math:`r(x \in \emptyset) \,=\, -1.0`.
 
-Let *X* and *Y* be two bpv-sets. The support for any set operation is the union of the support of the arguments. We define the classical **set union** :math:`\cup` and **intersection** :math:`\cap` as follows.
+Let *X* and *Y* be two bpv-sets. The support for logical bpv-set operations is the union of the support of the arguments. We define the classical **set union** :math:`\cup` and **intersection** :math:`\cap` as follows.
 
 For all :math:`z \in E_{X \cup Y}` the membership characteristic :math:`r\big(\,z \in (X \cup Y)\,\big)\; =`
 
@@ -4457,7 +4457,7 @@ For all :math:`z \in E_{X \cup Y}` the membership characteristic :math:`r\big(\,
     - :math:`r(z \in X)` when :math:`z \in X`, and
     - :math:`r(z \in Y)` when :math:`z \in Y`.
 
-For every :math:`z \in E_{X \cup Y}` the membership characteristic :math:`r\big(\,z \in (X \cap Y)\,\big)\; =` 
+For all :math:`z \in E_{X \cup Y}` the membership characteristic :math:`r\big(\,z \in (X \cap Y)\,\big)\; =` 
 
     - :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*;
     - :math:`-1.0` otherwise.
@@ -4500,7 +4500,7 @@ In :numref:`bipolarValuedSets2` below we illustrate the bipolar-valued set **uni
    :caption: Working with bipolar-valued sets II
    :name: bipolarValuedSets2
    :linenos:
-   :emphasize-lines: 3-7,11-
+   :emphasize-lines: 3-7,10-
 
    >>> (X|Y).showMembershipCharacteristics()
     # Python's set union symbol is |
@@ -4523,7 +4523,7 @@ Finally, in :numref:`bipolarValuedSets3` below we illustrate the bipolar-valued 
    :caption: Working with bipolar-valued sets III
    :name: bipolarValuedSets3
    :linenos:
-   :emphasize-lines: 3-7,14-
+   :emphasize-lines: 3-7,9-13,17-
  
    >>> (X-Y).showMembershipCharacteristics()
     # Python's set difference is -
@@ -4547,7 +4547,7 @@ Finally, in :numref:`bipolarValuedSets3` below we illustrate the bipolar-valued 
     s4:  -0.4899
     s2:  -0.6949
  
-The :py:class:`~bipolarValuedSets.BpvSet` class furthermore provides a :py:meth:`~bipolarValuedSets.BpvSet.strip` method which removes potential non elements from the support of an bpv-set instance. A :py:meth:`~bipolarValuedSets.BpvSet.polarise` method is also provided for setting all positive and negative membership credibilities to +1.0, respectively to -1.0 . In the limit case of no indetermined membership characteristics, we recover this way standard crisp sets and the previous set operations simply implement a Boolean algebra [BIS-2004_3p]_. 
+The :py:class:`~bipolarValuedSets.BpvSet` class provides furthermore a :py:meth:`~bipolarValuedSets.BpvSet.strip` method which removes potential false elements from the support of a bpv-set. A :py:meth:`~bipolarValuedSets.BpvSet.polarise` method is also provided for setting all positive and negative membership credibilities to +1.0, respectively to -1.0 . In the limit case of no indeterminate membership characteristics, we recover this way standard crisp sets and the previous set operations simply implement a Boolean algebra [BIS-2004_3p]_. 
 
 .. note::
 

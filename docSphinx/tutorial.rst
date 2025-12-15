@@ -391,7 +391,7 @@ Further methods are provided for inspecting this :py:class:`~digraphs.Digraph` o
     for digraph              : <tutorialDigraph.py>
     order                    : 5 nodes
     size                     : 12 arcs
-    # undetermined           : 0 arcs
+    # indeterminate          : 0 arcs
     determinateness (%)      : 100.0
     arc density              : 0.60
     double arc density       : 0.40
@@ -594,7 +594,7 @@ We may even get a better insight into the :py:class:`~digraphs.Digraph` object *
 
    The tutorial random valuation digraph
 
-Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetrical links are drawn in black with an arrowhead showing the direction of the link. Notice the undetermined relational situation (:math:`r(6\,S\,2) = 0.00`) observed between nodes '6' and '2'. The corresponding link is marked in gray with an open arrowhead in the drawing (see :numref:`tutorialValDigraph`). 
+Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetrical links are drawn in black with an arrowhead showing the direction of the link. Notice the indeterminate relational situation (:math:`r(6\,S\,2) = 0.00`) observed between nodes '6' and '2'. The corresponding link is marked in gray with an open arrowhead in the drawing (see :numref:`tutorialValDigraph`). 
 
 Asymmetrical and symmetrical parts
 ``````````````````````````````````
