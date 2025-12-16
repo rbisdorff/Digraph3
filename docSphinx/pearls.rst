@@ -4447,7 +4447,9 @@ A bipolar-valued set *X*, a **bpv-set** for short, consists of a support set :ma
     - Element *x* is more or less excluded from the set *X* when :math:`r(x \in X) \,<\, 0.0`;
     - When  :math:`r(x \in X)\,=\, 0.0`, element *x* is neither included nor excluded from set *X*.
 
-For any potential element *z* not included in the support set :math:`E_X`, :math:`r(z \in X) \,=\, -1.0`. The empty bpv-set consists of an empty support set :math:`E_{\emptyset} \,=\, \emptyset`. For all potential element *x* it follows hence that :math:`r(x \in \emptyset) \,=\, -1.0`.
+We may distinguish three special bpv-sets: the **crisp** bpv-set *X* where all members of the support :math:`E_X` are certainly members of *X*, the **relatively empty** bpv-set *X* where all members of its support :math:`E_X` are certainly non-members of *X* and the special **indeterminate** case where all members of its support :math:`E_X` are indeterminate members of *X*, i.e :math:`r(z \in X) \;=\; 0.0 , \; \forall \,z \in\, E_X`.
+
+Mind that for any potential element *z* not included in the support set :math:`E_X`, we consider its potential *X* membership characteristic :math:`r(z \in X)` to be -1.0. The **absolute empty** bpv-set :math:`\emptyset` consists hence of an empty support set :math:`E_{\emptyset} \,=\, \emptyset`. And, for any element *x* it follows that :math:`r(x \in \emptyset) \,=\, -1.0`.
 
 Let *X* and *Y* be two bpv-sets. The support for logical bpv-set operations is the union of the support of the arguments. We define the classical **set union** :math:`\cup` and **intersection** :math:`\cap` as follows.
 
@@ -4547,7 +4549,7 @@ Finally, in :numref:`bipolarValuedSets3` below we illustrate the bipolar-valued 
     s4:  -0.4899
     s2:  -0.6949
  
-The :py:class:`~bipolarValuedSets.BpvSet` class provides furthermore a :py:meth:`~bipolarValuedSets.BpvSet.strip` method which removes potential false elements from the support of a bpv-set. A :py:meth:`~bipolarValuedSets.BpvSet.polarise` method is also provided for setting all positive and negative membership credibilities to +1.0, respectively to -1.0 . In the limit case of no indeterminate membership characteristics, we recover this way standard crisp sets and the previous set operations simply implement a Boolean algebra [BIS-2004_3p]_. 
+The :py:class:`~bipolarValuedSets.BpvSet` class provides furthermore a :py:meth:`~bipolarValuedSets.BpvSet.strip` method which removes potential non-elements from the support of a bpv-set. A :py:meth:`~bipolarValuedSets.BpvSet.polarise` method is also provided for setting all positive and negative membership credibilities to +1.0, respectively to -1.0 . In the limit case of no indeterminate membership characteristics, we recover this way standard crisp sets and the previous set operations implement in fact a Boolean algebra [BIS-2004_3p]_. 
 
 .. note::
 
