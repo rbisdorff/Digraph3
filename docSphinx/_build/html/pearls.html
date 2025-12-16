@@ -4375,7 +4375,26 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </span></pre></div>
 </div>
 </div>
-<p>The <a class="reference internal" href="techDoc.html#bipolarValuedSets.BpvSet" title="bipolarValuedSets.BpvSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">BpvSet</span></code></a> class provides furthermore a <a class="reference internal" href="techDoc.html#bipolarValuedSets.BpvSet.strip" title="bipolarValuedSets.BpvSet.strip"><code class="xref py py-meth docutils literal notranslate"><span class="pre">strip()</span></code></a> method which removes potential non-elements from the support of a bpv-set. A <a class="reference internal" href="techDoc.html#bipolarValuedSets.BpvSet.polarise" title="bipolarValuedSets.BpvSet.polarise"><code class="xref py py-meth docutils literal notranslate"><span class="pre">polarise()</span></code></a> method is also provided for setting all positive and negative membership credibilities to +1.0, respectively to -1.0 . In the limit case of no indeterminate membership characteristics, we recover this way standard crisp sets and the previous set operations implement in fact a Boolean algebra <a class="reference internal" href="#bis-2004-3p" id="id58"><span>[BIS-2004_3p]</span></a>.</p>
+<p>The <a class="reference internal" href="techDoc.html#bipolarValuedSets.BpvSet" title="bipolarValuedSets.BpvSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">BpvSet</span></code></a> class provides furthermore a <a class="reference internal" href="techDoc.html#bipolarValuedSets.BpvSet.isSubset" title="bipolarValuedSets.BpvSet.isSubset"><code class="xref py py-meth docutils literal notranslate"><span class="pre">isSubset()</span></code></a> method for computing the bipolar-valued subset statement and a <a class="reference internal" href="techDoc.html#bipolarValuedSets.BpvSet.strip" title="bipolarValuedSets.BpvSet.strip"><code class="xref py py-meth docutils literal notranslate"><span class="pre">strip()</span></code></a> method which removes potential non-elements from the support of a bpv-set.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">D</span> <span class="o">=</span> <span class="n">Y</span> <span class="o">-</span> <span class="n">X</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D</span><span class="o">.</span><span class="n">isSubset</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+<span class="go"> Decimal(&#39;0.8869&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D1</span> <span class="o">=</span> <span class="n">D</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="n">InSite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D1</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="go"> s1:  +0.7313</span>
+<span class="go"> s2:  -0.6949</span>
+<span class="go"> s3:  -0.8869</span>
+</pre></div>
+</div>
+<p>Finally, a <a class="reference internal" href="techDoc.html#bipolarValuedSets.BpvSet.polarise" title="bipolarValuedSets.BpvSet.polarise"><code class="xref py py-meth docutils literal notranslate"><span class="pre">polarise()</span></code></a> method is provided for setting all positive and negative membership credibilities of a bpv-set to +1.0, respectively to -1.0 .</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">D2</span> <span class="o">=</span> <span class="n">D1</span><span class="o">.</span><span class="n">polarise</span><span class="p">(</span><span class="n">InSite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D2</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="go"> s1:  +1.0000</span>
+<span class="go"> s2:  -1.0000</span>
+<span class="go"> s3:  -1.0000</span>
+</pre></div>
+</div>
+<p>In the limit case of no indeterminate membership characteristics, we recover this way standard crisp sets and the previous set operations implement in fact a Boolean algebra <a class="reference internal" href="#bis-2004-3p" id="id58"><span>[BIS-2004_3p]</span></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The <em>relation</em> attribute of a bipolar-valued digraph is an example of a bpv-set where the support is given by the oriented tuples of the digraph’s nodes. The <em>edges</em> attribute of bipolar-valued graphs is a second example of a bpv-set, where the support is given by the non-oriented pairs of vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership charcateristic vectors from the <em>Rubis</em> best choice computation <a class="reference internal" href="#bis-2006-1p" id="id59"><span>[BIS-2006_1p]</span></a>. This is the topic of the next tutorial.</p>

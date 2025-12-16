@@ -4549,7 +4549,26 @@ Finally, in :numref:`bipolarValuedSets3` below we illustrate the bipolar-valued 
     s4:  -0.4899
     s2:  -0.6949
  
-The :py:class:`~bipolarValuedSets.BpvSet` class provides furthermore a :py:meth:`~bipolarValuedSets.BpvSet.strip` method which removes potential non-elements from the support of a bpv-set. A :py:meth:`~bipolarValuedSets.BpvSet.polarise` method is also provided for setting all positive and negative membership credibilities to +1.0, respectively to -1.0 . In the limit case of no indeterminate membership characteristics, we recover this way standard crisp sets and the previous set operations implement in fact a Boolean algebra [BIS-2004_3p]_. 
+The :py:class:`~bipolarValuedSets.BpvSet` class provides furthermore a :py:meth:`~bipolarValuedSets.BpvSet.isSubset` method for computing the bipolar-valued subset statement and a :py:meth:`~bipolarValuedSets.BpvSet.strip` method which removes potential non-elements from the support of a bpv-set.
+
+   >>> D = Y - X
+   >>> D.isSubset(Y)
+    Decimal('0.8869')
+   >>> D1 = D.strip(InSite=False)
+   >>> D1.showMembershipCharacteristics()
+    s1:  +0.7313
+    s2:  -0.6949
+    s3:  -0.8869
+
+Finally, a :py:meth:`~bipolarValuedSets.BpvSet.polarise` method is provided for setting all positive and negative membership credibilities of a bpv-set to +1.0, respectively to -1.0 .
+
+   >>> D2 = D1.polarise(InSite=False)
+   >>> D2.showMembershipCharacteristics()
+    s1:  +1.0000
+    s2:  -1.0000
+    s3:  -1.0000
+
+In the limit case of no indeterminate membership characteristics, we recover this way standard crisp sets and the previous set operations implement in fact a Boolean algebra [BIS-2004_3p]_. 
 
 .. note::
 

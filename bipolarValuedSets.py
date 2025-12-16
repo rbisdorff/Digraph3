@@ -333,8 +333,9 @@ class BpvSet(object):
                 resit = -( min(newSelf.membership[it],-(newOther.membership[it])) )
                 print(res,newSelf.membership[it],newOther.membership[it],resit)
             except:
-                print('other does not contain;^',it)
-                return Min
+                newOther.membership[it] = Min
+                resit = -( min(newSelf.membership[it],-(newOther.membership[it])) )
+                print(res,newSelf.membership[it],newOther.membership[it],resit)
             if resit < res:
                 res = resit
         return res
@@ -469,7 +470,7 @@ class BpvSet(object):
         If cutLevel = 0.0, the polarisation is always strict ! 
         """
         if cutLevel is None:
-            cutLevel = self.valuationDomain['min']
+            cutLevel = self.valuationDomain['med']
             Strict = True
         new = BpvSet()
         new.name = self.name
