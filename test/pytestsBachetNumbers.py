@@ -30,10 +30,10 @@ def testBachetAdditionTimings():
         bi = bi + BachetInteger(s)
     
     print('addbi');print(time() - t0)
-    bv = BachetNumber(0)
+    bv = BachetVector(0)
     t0 = time()
     for s in range(1000):
-        bv = bv + BachetNumber(s)
+        bv = bv + BachetVector(s)
     print('addbv');print(time() - t0)
 def testBachetMultiplying():
     print('==>> Testing Bachet vector Multiplications')
