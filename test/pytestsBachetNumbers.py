@@ -19,6 +19,32 @@ def testBachetIntegerEncoding():
     n5 = n1.reverse()
     n6 = -n2
     print('%s (%d) + %s (%d) = %s (%d)' % ( n5, int(n5), n6, int(n6),n5 + n6, int(n5+n6) ))
+def testBachetAdditionTimings():
+    print('==>> Testing Bachet addition runtimes')
+    from random import shuffle
+    from time import time
+
+    bi = BachetInteger(0)
+    t0 = time()
+    for s in range(1000):
+        bi = bi + BachetInteger(s)
+    
+    print('addbi');print(time() - t0)
+    bv = BachetNumber(0)
+    t0 = time()
+    for s in range(1000):
+        bv = bv + BachetNumber(s)
+    print('addbv');print(time() - t0)
+def testBachetMultiplying():
+    print('==>> Testing Bachet vector Multiplications')
+    b1 = BachetInteger(12)
+    b2 = BachetInteger(24)
+    res = b1.vectormul(b2)
+    print(res,int(res))
+    b1 = BachetVector(12)
+    b2 = BachetVector(24)
+    res = b1*b2
+    print(res,int(res))
     
     
 

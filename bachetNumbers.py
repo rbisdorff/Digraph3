@@ -398,17 +398,43 @@ class BachetVector(object):
         q = int(self)//int(other)
         return BachetVector(q,length=ln)
   
-    def __mul__(self,other,/):
-        """
-        Defines the multiplication operator for Bachet encoded numbers.
-        """
-        ln = max(len(self),len(other))
-        n1 = int(self)
-        n2 = int(other)
-        n3 = n1 * n2
-        return BachetVector(n3,length=ln)
+##    def __mul__(self,other,/):
+##        """
+##        Defines the multiplication operator for Bachet encoded numbers.
+##        """
+##        ln = max(len(self),len(other))
+##        n1 = int(self)
+##        n2 = int(other)
+##        n3 = n1 * n2
+##        return BachetVector(n3,length=ln)
 
-    def __int__(self, /):
+    def __mul__(self,other,Debug=False):
+        """
+        Return self*other computed vectorwise
+        """
+        n = len(other)
+        otherReverse = ~other
+        res = BachetInteger()
+        for i in range(n):
+            ivector = self.vector + [0 for j in range(i)]
+            if Debug:
+                print(i,ivector,otherReverse.vector[i])
+            if otherReverse.vector[i] == -1:
+                res = res - BachetInteger(vector=ivector)
+            elif otherReverse.vector[i] == 1:
+                res = res + BachetInteger(vector=ivector)
+            if Debug:
+                print(res)
+        return res
+        
+    def _refreshInt(self,/):
+        """
+        Recompute self.integerValue
+        """
+        self.integerValue = self._computeValue()
+        return self.integerValue
+
+    def __int__(self,/):
         """
         Return self.integerValue
         """
@@ -761,10 +787,36 @@ class BachetInteger(object):
         n3 = n1 * n2
         return BachetInteger(n3)
 
-    def __int__(self, /):
+    def vectormul(self,other,Debug=False):
+        """
+        Return self*other
+        """
+        n = len(other)
+        otherReverse = ~other
+        res = BachetInteger()
+        for i in range(n):
+            ivector = self.vector + [0 for j in range(i)]
+            if Debug:
+                print(i,ivector,otherReverse.vector[i])
+            if otherReverse.vector[i] == -1:
+                res = res - BachetInteger(vector=ivector)
+            elif otherReverse.vector[i] == 1:
+                res = res + BachetInteger(vector=ivector)
+            if Debug:
+                print(res)
+        return res
+           
+    def _refreshInt(self,/):
+        """
+        Recompute self.integerValue
+        """
+        self.integerValue = self._computeValue()
+        return self.integerValue
+
+    def __int__(self,/):
         """
         Return self.integerValue
-        """
+        """           
         try:
             return self.integerValue
         except:
@@ -867,21 +919,31 @@ if __name__ == '__main__':
                                                        (n5 + n6), int(n5+n6) ))
 
     ## timings
-    from random import shuffle
-    from time import time
+##    from random import shuffle
+##    from time import time
+##
+##    bi = BachetInteger(0)
+##    t0 = time()
+##    for s in range(1000):
+##        bi = bi + BachetInteger(s)
+##    
+##    print('addbi');print(time() - t0)
+##    bv = BachetNumber(0)
+##    t0 = time()
+##    for s in range(1000):
+##        bv = bv + BachetNumber(s)
+##    print('addbv');print(time() - t0)
 
-    bi = BachetInteger(0)
-    t0 = time()
-    for s in range(1000):
-        bi = bi + BachetInteger(s)
+    ## vectormul
+    b1 = BachetInteger(12)
+    b2 = BachetInteger(24)
+    res = b1.vectormul(b2)
+    print(res,int(res))
+    b1 = BachetVector(12)
+    b2 = BachetVector(24)
+    res = b1*b2
+    print(res,int(res))
     
-    print('addbi');print(time() - t0)
-    bv = BachetNumber(0)
-    t0 = time()
-    for s in range(1000):
-        bv = bv + BachetNumber(s)
-    print('addbv');print(time() - t0)
-
     #############
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')

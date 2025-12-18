@@ -4572,7 +4572,7 @@ In the limit case of no indeterminate membership characteristics, we recover thi
 
 .. note::
 
-   The *relation* attribute of a bipolar-valued digraph is an example of a bpv-set where the support is given by the oriented tuples of the digraph's nodes. The *edges* attribute of bipolar-valued graphs is a second example of a bpv-set, where the support is given by the non-oriented pairs of vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership charcateristic vectors from the *Rubis* best choice computation [BIS-2006_1p]_. This is the topic of the next tutorial.
+   The *relation* attribute of a bipolar-valued digraph is an example of a bpv-set where the support is given by the oriented pairs of the digraph's nodes. The *edges* attribute of bipolar-valued graphs is a second example of a bpv-set, where the support is given by the non-oriented pairs of the graph's vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership charcateristic vectors from the *Rubis* best choice computation [BIS-2006_1p]_. This is the topic of the next tutorial.
 
 Back to :ref:`Content Table <Pearls-label>`
 
