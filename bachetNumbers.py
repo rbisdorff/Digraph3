@@ -233,7 +233,8 @@ class BachetVector(object):
 
     def __add__(self,other,/,Debug=False):
         """
-        Defines the balanced ternary addition operator for Bachet encoded numbers.
+        Defines the balanced ternary addition operator
+        for Bachet encoded numbers.
         """
         from copy import deepcopy
         srv = self.reverse()
@@ -387,7 +388,11 @@ class BachetVector(object):
             
     def _vdivmod(self,other,Debug=False,/):
         """
-        Return divmod(self,other)
+        Return divmod(self,other) computed Bachet vector wise
+
+        The quotient search starts from 0 and is recursively incremented
+        by base 3 powers until a fix-point remainder value is attained. 
+        
         """
         if int(other) == 0:
             print('Error: Dividend must not be zero')
@@ -395,11 +400,13 @@ class BachetVector(object):
         n = abs(BachetVector(vector=self.vector))
         q = abs(BachetVector(vector=[1]))
         aOther = abs(other)
-        r = n - (q*aOther)
+        ri = n - (q*aOther)
+        rj = BachetVector()
         j = 0
         if Debug:
-            print(j,int(n),int(q),int(q*aOther),int(r))
-        while r > other and j < 10:
+            print(j,int(n),int(q),int(q*aOther),int(ri))
+        while ri > rj:
+            ri = n - (q * aOther)
             ivector = [1]
             i = 0
             while (q * aOther) <= n:
@@ -407,24 +414,28 @@ class BachetVector(object):
                 q = q + BachetVector(vector=ivector)
                 i += 1
             q = q - BachetVector(vector=ivector)
-            while (q * aOther) <= n:
-                q = q + BachetVector(vector=[1])
-                i += 1
-            q = q - BachetVector(vector=[1])
             j += 1          
-            r = n - (q * aOther)
+            rj = n - (q * aOther)
             if Debug:
-                print(j,int(n),int(q),int(q*aOther),int(r))
+                print(j,int(n),int(q),int(aOther),int(q*aOther),int(rj))
+        while (q * aOther) <= n:
+            if Debug:
+                print('*', end='')
+            q = q + BachetVector(vector=[1])
+        if Debug:
+            print()        
         if int(self) >= 0 and int(other) >= 0:
+            q = q - BachetVector(vector=[1])
+            r = n - q * aOther
             return q,r
         elif int(self) < 0 and int(other) < 0:
-            return q,r
+            q = q - BachetVector(vector=[1])
+            r = n - q*aOther
+            return q,-r
         elif int(self) < 0 and int(other) > 0:
-            q = (q + BachetVector(vector=[1]))
             r = n - (q * aOther)
             return -q,-r
         elif int(self) > 0 and int(other) < 0:
-            q = (q + BachetVector(vector=[1]))
             r = n - (q * aOther)
             return -q,r
         
@@ -445,7 +456,7 @@ class BachetVector(object):
 ##        ln = max(len(self),len(other))
 ##        q = int(self)//int(other)
 ##        return BachetVector(q,length=ln)
-        q,r = self._vdivmod(other)
+        q,r = divmod(self,other)
         return q
     
     def __mod__(self,other,/):
@@ -455,7 +466,7 @@ class BachetVector(object):
 ##        ln = max(len(self),len(other))
 ##        q = int(self)//int(other)
 ##        return BachetVector(q,length=ln)
-        q,r = self._vdivmod(other)
+        q,r = divmod(self,other)
         return r
   
 ##    def __mul__(self,other,/):
@@ -836,7 +847,7 @@ class BachetInteger(object):
 
     def __floordiv__(self,other,/):
         #ln = max(len(self),len(other))
-        q,r = self._vdivmod(other)
+        q,r = divmod(self,other)
         #q = int(self)//int(other)
         return q
   
@@ -955,48 +966,48 @@ if __name__ == '__main__':
     """)
 
     ######  scratch pad for testing the module components
-    from bachetNumbers import BachetVector as BachetNumber
-    print('*-----Computing with BachetInteger numbers----------*') 
-    n1 = BachetNumber(12)
-    n2 = BachetNumber(154)
-    n3 = n1 + n2
-    n4 = n1 * n2
-    print('\'%s\' (%d) + \'%s\' (%d) = \'%s\' (%d)' % (n1, int(n1), n2, int(n2), n3, int(n3) ))
-    print('\'%s\' (%d) * \'%s\' (%d) = \'%s\' (%d)' % (n1, int(n1), n2, int(n2), n4, int(n4) ))
-
-    n5 = n1.reverse()
-    n6 = -n1
-    print('\'%s\' (%d) + \'%s\' (%d) = \'%s\' (%d)' % ( n5, int(n5), n6, int(n6),
-                                                       (n5 + n6), int(n5+n6) ))
-    from bachetNumbers import BachetVector as BachetNumber
-    print('*-----Computing with BachetVector numbers----------*') 
-    n1 = BachetNumber(12)
-    n2 = BachetNumber(154)
-    n3 = n1 + n2
-    n4 = n1 * n2
-    print('\'%s\' (%d) + \'%s\' (%d) = \'%s\' (%d)' % (n1, int(n1), n2, int(n2), n3, int(n3) ))
-    print('\'%s\' (%d) * \'%s\' (%d) = \'%s\' (%d)' % (n1, int(n1), n2, int(n2), n4, int(n4) ))
-
-    n5 = n1.reverse()
-    n6 = -n1
-    print('\'%s\' (%d) + \'%s\' (%d) = \'%s\' (%d)' % ( n5, int(n5), n6, int(n6),
-                                                       (n5 + n6), int(n5+n6) ))
-
-    ## timings
-    from random import shuffle
-    from time import time
-
-    bi = BachetInteger(0)
-    t0 = time()
-    for s in range(1000):
-        bi = bi + BachetInteger(s)
-    
-    print('addbi');print(time() - t0)
-    bv = BachetVector(0)
-    t0 = time()
-    for s in range(1000):
-        bv = bv + BachetVector(s)
-    print('addbv');print(time() - t0)
+##    from bachetNumbers import BachetVector as BachetNumber
+##    print('*-----Computing with BachetInteger numbers----------*') 
+##    n1 = BachetNumber(12)
+##    n2 = BachetNumber(154)
+##    n3 = n1 + n2
+##    n4 = n1 * n2
+##    print('\'%s\' (%d) + \'%s\' (%d) = \'%s\' (%d)' % (n1, int(n1), n2, int(n2), n3, int(n3) ))
+##    print('\'%s\' (%d) * \'%s\' (%d) = \'%s\' (%d)' % (n1, int(n1), n2, int(n2), n4, int(n4) ))
+##
+##    n5 = n1.reverse()
+##    n6 = -n1
+##    print('\'%s\' (%d) + \'%s\' (%d) = \'%s\' (%d)' % ( n5, int(n5), n6, int(n6),
+##                                                       (n5 + n6), int(n5+n6) ))
+##    from bachetNumbers import BachetVector as BachetNumber
+##    print('*-----Computing with BachetVector numbers----------*') 
+##    n1 = BachetNumber(12)
+##    n2 = BachetNumber(154)
+##    n3 = n1 + n2
+##    n4 = n1 * n2
+##    print('\'%s\' (%d) + \'%s\' (%d) = \'%s\' (%d)' % (n1, int(n1), n2, int(n2), n3, int(n3) ))
+##    print('\'%s\' (%d) * \'%s\' (%d) = \'%s\' (%d)' % (n1, int(n1), n2, int(n2), n4, int(n4) ))
+##
+##    n5 = n1.reverse()
+##    n6 = -n1
+##    print('\'%s\' (%d) + \'%s\' (%d) = \'%s\' (%d)' % ( n5, int(n5), n6, int(n6),
+##                                                       (n5 + n6), int(n5+n6) ))
+##
+##    ## timings
+##    from random import shuffle
+##    from time import time
+##
+##    bi = BachetInteger(0)
+##    t0 = time()
+##    for s in range(1000):
+##        bi = bi + BachetInteger(s)
+##    
+##    print('addbi');print(time() - t0)
+##    bv = BachetVector(0)
+##    t0 = time()
+##    for s in range(1000):
+##        bv = bv + BachetVector(s)
+##    print('addbv');print(time() - t0)
 
     ## vectormul
 ##    b1 = BachetInteger(12)
@@ -1027,6 +1038,12 @@ if __name__ == '__main__':
     print('3)%d / %d = %d rest %d' % (int(n), int(d), int(q), int(r)) ) 
     q,r = divmod(int(n),int(d))
     print('3)%d / %d = %d rest %d' % (int(n), int(d), int(q), int(r)) ) 
+    n = BachetVector(vector=[-1,1,1,1,1,1,1,1])
+    d = BachetVector(vector=[-1,-1,-1,1])
+    q,r = n._vdivmod(d)
+    print('4)%d / %d = %d rest %d' % (int(n), int(d), int(q), int(r)) ) 
+    q,r = divmod(int(n),int(d))
+    print('4)%d / %d = %d rest %d' % (int(n), int(d), int(q), int(r)) ) 
     #############
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
