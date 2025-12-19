@@ -3186,7 +3186,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <p>Note that, like the <em>Copeland</em> and the <em>NetFlows</em> ranking rules, the <em>Bachet</em> ranking scores are <strong>invariant</strong> under the <strong>codual</strong> transform <a class="footnote-reference brackets" href="#id108" id="id45" role="doc-noteref"><span class="fn-bracket">[</span>22<span class="fn-bracket">]</span></a>.</p>
 <p>Mind however that a base 3 sbits numbering system is <strong>positional</strong>, implying that the <em>Bachet</em> ranking scores, as noticed before, depend essentially on the very ordering of the rows and columns of the outranking digraph’s <em>self.relation</em> attribute. However, when the strict outranking digraph is <em>transitive</em>, the <em>Bachet</em> ranking scores will consistently model the orderings of all transitive triples independently of the ordering of the rows and columns of the <em>self.relation</em> attribute. The polarised <em>Bachet</em> ranking scores are hence, like the <em>Copeland</em> scores, <strong>Condorcet consistent</strong>, i.e. when the polarised strict outranking digraph models a <em>transitive</em> relation, its <em>Bachet</em> ranking scores will always be consistent with this strict outranking relation <a class="footnote-reference brackets" href="#id109" id="id46" role="doc-noteref"><span class="fn-bracket">[</span>23<span class="fn-bracket">]</span></a>.</p>
 <p>Our random outranking digraph <em>g</em>, generated above in <a class="reference internal" href="#examplesbachet"><span class="std std-numref">Listing 3.44</span></a> Line 4 is for instance not transitive. Its transitivity degree amounts to 0.833 (see below).</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree: </span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">())</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree: </span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()))</span>
 <span class="linenos"> 2</span><span class="go"> Transitivity degree: 0.8333</span>
 <span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">pg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 <span class="linenos"> 4</span><span class="go"> * ---- Relation Table -----</span>
@@ -3485,13 +3485,13 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span class="linenos"> 6</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sba</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">gcd</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="linenos"> 7</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">sba</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">))</span>
 <span class="linenos"> 8</span><span class="go"> Correlation indexes:</span>
-<span class="hll"><span class="linenos"> 9</span><span class="go">  Crisp ordinal correlation  : +0.744</span>
+<span class="hll"><span class="linenos"> 9</span><span class="go">  Crisp ordinal correlation  : +0.631</span>
 </span><span class="linenos">10</span><span class="go">  Epistemic determination    :  0.409</span>
-<span class="linenos">11</span><span class="go">  Bipolar-valued equivalence : +0.304</span>
+<span class="linenos">11</span><span class="go">  Bipolar-valued equivalence : +0.258</span>
 </pre></div>
 </div>
 </div>
-<p>As we observe only 11 intransitive triples in the codual outranking digraph <em>gcd</em> (see Line 4), the smart sampling leads eventually to a ranking result that is no more the optimal Kemeny ranking (+0.744 versus +0.758, see Line 9). The Condorcet consistency of the ranking of all the transitive triples is however still guaranteed.</p>
+<p>As we observe only 11 intransitive triples in the codual outranking digraph <em>gcd</em> (see Line 4), the smart sampling leads eventually to a ranking result that is no more the optimal Kemeny ranking (+0.631 versus +0.758, see Line 9). The Condorcet consistency of the ranking of all the transitive triples is however still guaranteed.</p>
 </section>
 <section id="revealing-the-transitive-part-of-a-bipolar-valued-digraph">
 <h4><a class="toc-backref" href="#id168" role="doc-backlink"><span class="section-number">3.3.3.6. </span>Revealing the transitive part of a bipolar-valued digraph</a><a class="headerlink" href="#revealing-the-transitive-part-of-a-bipolar-valued-digraph" title="Link to this heading"></a></h4>
@@ -5521,7 +5521,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Dec 17, 2025.
+      <span class="lastupdated">Last updated on Dec 19, 2025.
       </span></p>
   </div>
 

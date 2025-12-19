@@ -3236,7 +3236,7 @@ Our random outranking digraph *g*, generated above in :numref:`examplesBachet` L
 .. code-block:: pycon
    :linenos:
 
-   >>> print('Transitivity degree: %.4f' % (g.computeTransitivityDegree())
+   >>> print('Transitivity degree: %.4f' % (g.computeTransitivityDegree()))
     Transitivity degree: 0.8333
    >>> pg.showRelationTable(ReflexiveTerms= False)
     * ---- Relation Table -----
@@ -3492,11 +3492,11 @@ Notice however in :numref:`smartBachet1` below, that the :py:class:`~linearOrder
    >>> sba = BachetRanking(gcd,Polarised=True,sampleSize=100)
    >>> g.showCorrelation(g.computeRankingCorrelation(sba.bachetRanking))
     Correlation indexes:
-     Crisp ordinal correlation  : +0.744
+     Crisp ordinal correlation  : +0.631
      Epistemic determination    :  0.409
-     Bipolar-valued equivalence : +0.304
+     Bipolar-valued equivalence : +0.258
 
-As we observe only 11 intransitive triples in the codual outranking digraph *gcd* (see Line 4), the smart sampling leads eventually to a ranking result that is no more the optimal Kemeny ranking (+0.744 versus +0.758, see Line 9). The Condorcet consistency of the ranking of all the transitive triples is however still guaranteed.
+As we observe only 11 intransitive triples in the codual outranking digraph *gcd* (see Line 4), the smart sampling leads eventually to a ranking result that is no more the optimal Kemeny ranking (+0.631 versus +0.758, see Line 9). The Condorcet consistency of the ranking of all the transitive triples is however still guaranteed.
 
 Revealing the transitive part of a bipolar-valued digraph
 .........................................................

@@ -37,12 +37,6 @@ __version__ = "$Revision: Python 3.12.8 $"
 from bachetNumbers import *
 from decimal import Decimal
 
-def toDecimal(self,/):
-    """
-    Return Decimal(int(self))
-    """
-    return Decimal(int(self))
-
 class _BachetNumber(object):
     """
     Abstract base class for Bachet numbers
@@ -116,6 +110,13 @@ class _BachetNumber(object):
             for i in range(len(bachet_unsigned_num_int)):
                 bachet_vector[i] = bachet_unsigned_num_int[i]*-1
             return bachet_vector
+
+    def toDecimal(self,/):
+        """
+        Return Decimal(int(self))
+        """
+        from decimal import Decimal
+        return Decimal(int(self))
         
     def __str__(self, /):
         """
@@ -800,20 +801,25 @@ if __name__ == '__main__':
                                                        (n5 + n6), int(n5+n6) ))
 
     ## timings
+    print('Timings: int(Bachet), Bachet.vector and inbuilt integers')
     from random import shuffle
     from time import time
 
     bi = BachetInteger(0)
     t0 = time()
-    for s in range(1000):
+    for s in range(10000,20000):
         bi = bi + BachetInteger(s)
-    
-    print('addbi');print(time() - t0)
+    print('addbi: ',bi,', ',int(bi));print(time() - t0)
     bv = BachetVector(0)
     t0 = time()
-    for s in range(1000):
+    for s in range(10000,20000):
         bv = bv + BachetVector(s)
-    print('addbv');print(time() - t0)
+    print('addbv: ',bv,', ',int(bv));print(time() - t0)
+    i = 0
+    t0 = time()
+    for s in range(10000,20000):
+        i += s
+    print('addint: ',i);print(time() - t0)
 
     ## vectormul
     b1 = BachetVector(12)
