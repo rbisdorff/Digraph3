@@ -66,6 +66,16 @@ def testBachetDivmod():
     q,r = divmod(int(n),int(d))
     print('3)%d / %d = %d rest %d' % (int(n), int(d), int(q), int(r)) ) 
     
+def testBachetMiscelaneous():
+    n = BachetVector(vector=[-1,1,1,1,1,1,1,1])
+    print('==>> Testing miscelaneous Bachet operators')
+    print('n = \'%s\' = %d' % (str(n), int(n)) )
+    print('abs(%d) = %d' % ( int(n), int(abs(n)) ) )
+    print('sign of %d = %d' % ( int(n),n.sign() ) )
+    print('sign of %d = %d' % ( int(-n),(-n).sign() ) )
+    print('sign of %d = %d' % ( int(BachetVector()), BachetVector().sign() ) )
+    print('abs(%d) = %d' % ( int(BachetVector()), BachetVector().sign() ) )
+    
     
 
 
