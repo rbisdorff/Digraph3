@@ -384,19 +384,79 @@ class BachetVector(object):
         """
         new = self + (-other)
         return new
-
+            
+    def _vdivmod(self,other,Debug=False,/):
+        """
+        Return divmod(self,other)
+        """
+        if int(other) == 0:
+            print('Error: Dividend must not be zero')
+            return None,None
+        n = abs(BachetVector(vector=self.vector))
+        q = abs(BachetVector(vector=[1]))
+        aOther = abs(other)
+        r = n - (q*aOther)
+        j = 0
+        if Debug:
+            print(j,int(n),int(q),int(q*aOther),int(r))
+        while r > other and j < 10:
+            ivector = [1]
+            i = 0
+            while (q * aOther) <= n:
+                ivector.append(0)
+                q = q + BachetVector(vector=ivector)
+                i += 1
+            q = q - BachetVector(vector=ivector)
+            while (q * aOther) <= n:
+                q = q + BachetVector(vector=[1])
+                i += 1
+            q = q - BachetVector(vector=[1])
+            j += 1          
+            r = n - (q * aOther)
+            if Debug:
+                print(j,int(n),int(q),int(q*aOther),int(r))
+        if int(self) >= 0 and int(other) >= 0:
+            return q,r
+        elif int(self) < 0 and int(other) < 0:
+            return q,r
+        elif int(self) < 0 and int(other) > 0:
+            q = (q + BachetVector(vector=[1]))
+            r = n - (q * aOther)
+            return -q,-r
+        elif int(self) > 0 and int(other) < 0:
+            q = (q + BachetVector(vector=[1]))
+            r = n - (q * aOther)
+            return -q,r
+        
     def __divmod__(self,other, /):
         """
         Return BachetNumber(q),BachetNumber(r) where q,r = divmod(int(self),int(other))
         """
-        ln = max(len(self),len(other))
-        q,r = divmod(int(self),int(other))
-        return BachetVector(q,length=ln),BachetVector(r,length=ln)
+##        ln = max(len(self),len(other))
+##        q,r = divmod(int(self),int(other))
+##        return BachetVector(q,length=ln),BachetVector(r,length=ln)
+        q,r = self._vdivmod(other)
+        return q,r
 
     def __floordiv__(self,other,/):
-        ln = max(len(self),len(other))
-        q = int(self)//int(other)
-        return BachetVector(q,length=ln)
+        """
+        Return self//other
+        """
+##        ln = max(len(self),len(other))
+##        q = int(self)//int(other)
+##        return BachetVector(q,length=ln)
+        q,r = self._vdivmod(other)
+        return q
+    
+    def __mod__(self,other,/):
+        """
+        Return self%other
+        """
+##        ln = max(len(self),len(other))
+##        q = int(self)//int(other)
+##        return BachetVector(q,length=ln)
+        q,r = self._vdivmod(other)
+        return r
   
 ##    def __mul__(self,other,/):
 ##        """
@@ -411,6 +471,8 @@ class BachetVector(object):
     def __mul__(self,other,Debug=False):
         """
         Return self*other computed vectorwise
+        KNUTH D. Seminumerical Algorithmas Vol2 3Ed.
+        Addison-Wesley 1998 ISBN 0-201-89684-2 p.2008
         """
         n = len(other)
         otherReverse = ~other
@@ -489,14 +551,14 @@ class BachetVector(object):
         """
         return self.reverse()
 
-    def __mod__(self, other, /):
-        """
-        Return self%other
-        """
-        v1 = int(self)
-        v2 = int(other)
-        v3 = v1%v2
-        return BachetVector(v3)
+##    def __mod__(self, other, /):
+##        """
+##        Return self%other
+##        """
+##        v1 = int(self)
+##        v2 = int(other)
+##        v3 = v1%v2
+##        return BachetVector(v3)
 
 #------------- end of BachetNumber class ------------------
     
@@ -731,8 +793,8 @@ class BachetInteger(object):
         """
         Return self<=other
         """
-        v1 = int(v1)
-        v2 = int(v2)
+        v1 = int(self)
+        v2 = int(other)
         return v1<=v2
 
     def __lt__(self,other, /):
@@ -774,8 +836,9 @@ class BachetInteger(object):
 
     def __floordiv__(self,other,/):
         #ln = max(len(self),len(other))
-        q = int(self)//int(other)
-        return BachetInteger(q)
+        q,r = self._vdivmod(other)
+        #q = int(self)//int(other)
+        return q
   
     def __mul__(self,other,/):
         """
@@ -786,8 +849,9 @@ class BachetInteger(object):
         n2 = int(other)
         n3 = n1 * n2
         return BachetInteger(n3)
+        #self._vmul(other)
 
-    def vectormul(self,other,Debug=False):
+    def _vmul(self,other,Debug=False):
         """
         Return self*other
         """
@@ -891,7 +955,7 @@ if __name__ == '__main__':
     """)
 
     ######  scratch pad for testing the module components
-    from bachetNumbers import BachetInteger as BachetNumber
+    from bachetNumbers import BachetVector as BachetNumber
     print('*-----Computing with BachetInteger numbers----------*') 
     n1 = BachetNumber(12)
     n2 = BachetNumber(154)
@@ -919,31 +983,50 @@ if __name__ == '__main__':
                                                        (n5 + n6), int(n5+n6) ))
 
     ## timings
-##    from random import shuffle
-##    from time import time
-##
-##    bi = BachetInteger(0)
-##    t0 = time()
-##    for s in range(1000):
-##        bi = bi + BachetInteger(s)
-##    
-##    print('addbi');print(time() - t0)
-##    bv = BachetNumber(0)
-##    t0 = time()
-##    for s in range(1000):
-##        bv = bv + BachetNumber(s)
-##    print('addbv');print(time() - t0)
+    from random import shuffle
+    from time import time
+
+    bi = BachetInteger(0)
+    t0 = time()
+    for s in range(1000):
+        bi = bi + BachetInteger(s)
+    
+    print('addbi');print(time() - t0)
+    bv = BachetVector(0)
+    t0 = time()
+    for s in range(1000):
+        bv = bv + BachetVector(s)
+    print('addbv');print(time() - t0)
 
     ## vectormul
-    b1 = BachetInteger(12)
-    b2 = BachetInteger(24)
-    res = b1.vectormul(b2)
-    print(res,int(res))
-    b1 = BachetVector(12)
-    b2 = BachetVector(24)
-    res = b1*b2
-    print(res,int(res))
-    
+##    b1 = BachetInteger(12)
+##    b2 = BachetInteger(24)
+##    res = b1.vectormul(b2)
+##    print(res,int(res))
+##    b1 = BachetVector(12)
+##    b2 = BachetVector(24)
+##    res = b1*b2
+##    print(res,int(res))
+
+    ## vectordivide
+    n = BachetVector(vector=[1,1,1,1,1,1,1,1])
+    d = BachetVector(vector=[1,-1,-1,1])
+    q,r = n._vdivmod(d)
+    print('1) %d / %d = %d rest %d' % (int(n), int(d), int(q), int(r)) ) 
+    q,r = divmod(int(n),int(d))
+    print('1) %d / %d = %d rest %d' % (int(n), int(d), int(q), int(r)) ) 
+    n = BachetVector(vector=[-1,1,1,1,1,1,1,1])
+    d = BachetVector(vector=[1,-1,-1,1])
+    q,r = n._vdivmod(d)
+    print('2)%d / %d = %d rest %d' % (int(n), int(d), int(q), int(r)) ) 
+    q,r = divmod(int(n),int(d))
+    print('2)%d / %d = %d rest %d' % (int(n), int(d), int(q), int(r)) ) 
+    n = BachetVector(vector=[1,1,1,1,1,1,1,1])
+    d = BachetVector(vector=[-1,-1,-1,1])
+    q,r = n._vdivmod(d)
+    print('3)%d / %d = %d rest %d' % (int(n), int(d), int(q), int(r)) ) 
+    q,r = divmod(int(n),int(d))
+    print('3)%d / %d = %d rest %d' % (int(n), int(d), int(q), int(r)) ) 
     #############
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')

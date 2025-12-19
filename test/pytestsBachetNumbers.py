@@ -39,12 +39,32 @@ def testBachetMultiplying():
     print('==>> Testing Bachet vector Multiplications')
     b1 = BachetInteger(12)
     b2 = BachetInteger(24)
-    res = b1.vectormul(b2)
+    res = b1*b2
     print(res,int(res))
     b1 = BachetVector(12)
     b2 = BachetVector(24)
     res = b1*b2
     print(res,int(res))
+def testBachetDivmod():
+    print('==>> Testing Bachet vector divmod')
+    n = BachetVector(vector=[1,1,1,1,1,1,1,1])
+    d = BachetVector(vector=[1,-1,-1,1])
+    q,r = n._vdivmod(d)
+    print('1) %d / %d = %d rest %d' % (int(n), int(d), int(q), int(r)) ) 
+    q,r = divmod(int(n),int(d))
+    print('1) %d / %d = %d rest %d' % (int(n), int(d), int(q), int(r)) ) 
+    n = BachetVector(vector=[-1,1,1,1,1,1,1,1])
+    d = BachetVector(vector=[1,-1,-1,1])
+    q,r = n._vdivmod(d)
+    print('2)%d / %d = %d rest %d' % (int(n), int(d), int(q), int(r)) ) 
+    q,r = divmod(int(n),int(d))
+    print('2)%d / %d = %d rest %d' % (int(n), int(d), int(q), int(r)) ) 
+    n = BachetVector(vector=[1,1,1,1,1,1,1,1])
+    d = BachetVector(vector=[-1,-1,-1,1])
+    q,r = n._vdivmod(d)
+    print('3)%d / %d = %d rest %d' % (int(n), int(d), int(q), int(r)) ) 
+    q,r = divmod(int(n),int(d))
+    print('3)%d / %d = %d rest %d' % (int(n), int(d), int(q), int(r)) ) 
     
     
 
