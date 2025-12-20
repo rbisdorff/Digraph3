@@ -37,9 +37,12 @@ __version__ = "$Revision: Python 3.12.8 $"
 from bachetNumbers import *
 from decimal import Decimal
 
-class _BachetNumber(object):
+class BachetNumber(object):
     """
-    Abstract base class for Bachet numbers
+    Abstract base class for Bipolar-valued {-1,0,+1} base 3 encoded integers due to Claude Gaspard Bachet de Méziriac (1621)
+    
+    https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac
+
     """
     def __repr__(self):
         """
@@ -258,28 +261,24 @@ class _BachetNumber(object):
 
 #-----   end of abstract Bachet number's base class    
 
-class BachetVector(_BachetNumber):
+class BachetVector(BachetNumber):
     """
-    Bipolar-valued {-1,0,+1} base 3 encoded integers due to Claude Gaspard Bachet de Méziriac (1621)
-    
-    https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac
-
     The class implements all arithmetic operations and comparison operators from the int class via the Bachet vectors.
     
-    >>> from bachetNumbers import BachetVector as BachetNumber
-    >>> n1 = BachetNumber(12)
+    >>> from bachetNumbers import BachetVector
+    >>> n1 = BachetVector(12)
     >>> n1
      *------- Bachet number description ------*
-     Instance class : BachetNumber
+     Instance class : BachetVector
      String         : '+1+10'
      Vector         : [1, 1, 0]
      Length         : 3
      Value          : 12
      Attributes     : ['vector']  
-    >>> n2 = BachetNumber(vector=[1,1,1])
+    >>> n2 = BachetVector(vector=[1,1,1])
     >>> n2
      *------- Bachet number description ------*
-     Instance class : BachetNumber
+     Instance class : BachetVector
      String         : '+1+1+1'
      Vector         : [1, 1, 1]
      Length         : 3
@@ -288,7 +287,7 @@ class BachetVector(_BachetNumber):
     >>> n3 = n1 + n2
     >>> n3
      *------- Bachet number description ------*
-     Instance class : BachetNumber
+     Instance class : BachetVector
      String         : '+10-1+1'
      Vector         : [1, 0, -1, 1]
      Length         : 4
@@ -343,7 +342,7 @@ class BachetVector(_BachetNumber):
                 self.vector = vector + self.vector
 
             
-    # ---- arithmetic vector-based operators
+    # ---- vector-wise arithmetic operators
             
     def __add__(self,other,/,Debug=False):
         """
@@ -577,28 +576,26 @@ class BachetVector(_BachetNumber):
 
 #------------- end of BachetVector class ------------------
     
-class BachetInteger(_BachetNumber):
+class BachetInteger(BachetNumber):
     """
-    Bipolar-valued {-1,0,+1} base 3 encoded integers due to Claude Gaspard Bachet de Méziriac (1621)
+    The class implements by integer value all the arithmetic operations
+    and comparison operators from the int class.
+    This class is faster then the BachetVector class with very large integers. 
     
-    https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac
-
-    The class implements by integer value all the arithmetic operations and comparison operators from the int class.
-    
-    >>> from bachetNumbers import BachetInteger as BachetNumber
+    >>> from bachetNumbers import BachetInteger
     >>> n1 = BachetInteger(12)
     >>> n1
      *------- Bachet Integer description ------*
-     Instance class : BachetNumber
+     Instance class : BachetInteger
      String         : '+1+10'
      Vector         : [1, 1, 0]
      Length         : 3
      Value          : 12
      Attributes     : ['vector']  
-    >>> n2 = BachetNumber(vector=[1,1,1])
+    >>> n2 = BachetInteger(vector=[1,1,1])
     >>> n2
      *------- Bachet Integer description ------*
-     Instance class : BachetNumber
+     Instance class : BachetInteger
      String         : '+1+1+1'
      Vector         : [1, 1, 1]
      Length         : 3
@@ -607,7 +604,7 @@ class BachetInteger(_BachetNumber):
     >>> n3 = n1 + n2
     >>> n3
      *------- Bachet number description ------*
-     Instance class : BachetNumber
+     Instance class : BachetInteger
      String         : '+10-1+1'
      Vector         : [1, 0, -1, 1]
      Length         : 4
@@ -659,20 +656,8 @@ class BachetInteger(_BachetNumber):
                 vector = [0 for i in range(nz)]
                 self.vector = vector + self.vector
             
-    # ---- arithmetic operations based on int() transform
-    
-    def __neg__(self, /):
-        """
-        Defines an unary negating operator for Bachet encoded numbers.
-        """
-        from copy import deepcopy
-        negVector = []
-        ln = len(self.vector)
-        for i in range(ln):
-            negVector.append(self.vector[i] * -1)
-        neg = BachetInteger(vector = negVector,length=ln)
-        return neg
-        
+    # ---- arithmetic operations based on int() transforms
+            
     def __abs__(self, /):
         """
         Defines the addition operator for Bachet encoded numbers

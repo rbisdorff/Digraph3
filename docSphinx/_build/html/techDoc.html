@@ -1151,9 +1151,15 @@
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.zn_units"><code class="docutils literal notranslate"><span class="pre">zn_units()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#module-bachetNumbers">2.22. bachetNumbers module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#bachetNumbers.BachetInteger"><code class="docutils literal notranslate"><span class="pre">BachetInteger</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bachetnumbers-module">2.22. bachetNumbers module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#bachetNumbers.BachetVector"><code class="docutils literal notranslate"><span class="pre">BachetVector</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bachetNumbers.BachetInteger"><code class="docutils literal notranslate"><span class="pre">BachetInteger</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bachetNumbers.BachetNumber"><code class="docutils literal notranslate"><span class="pre">BachetNumber</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bachetNumbers.BachetNumber.toDecimal"><code class="docutils literal notranslate"><span class="pre">BachetNumber.toDecimal()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bachetNumbers.BachetNumber.sign"><code class="docutils literal notranslate"><span class="pre">BachetNumber.sign()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bachetNumbers.BachetNumber.reverse"><code class="docutils literal notranslate"><span class="pre">BachetNumber.reverse()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-bipolarValuedSets">2.23. bipolarValuedSets module</a><ul>
@@ -1308,7 +1314,7 @@
 <li><p><a class="reference internal" href="#randomnumbers-module" id="id21">randomNumbers module</a></p></li>
 <li><p><a class="reference internal" href="#module-digraphsTools" id="id22">digraphsTools module</a></p></li>
 <li><p><a class="reference internal" href="#module-arithmetics" id="id23">arithmetics module</a></p></li>
-<li><p><a class="reference internal" href="#module-bachetNumbers" id="id24">bachetNumbers module</a></p></li>
+<li><p><a class="reference internal" href="#bachetnumbers-module" id="id24">bachetNumbers module</a></p></li>
 <li><p><a class="reference internal" href="#module-bipolarValuedSets" id="id25">bipolarValuedSets module</a></p></li>
 <li><p><a class="reference internal" href="#cythonized-modules-for-big-digraphs" id="id26">Cythonized modules for big digraphs</a></p></li>
 <li><p><a class="reference internal" href="#indices-and-tables" id="id27">Indices and tables</a></p></li>
@@ -1580,7 +1586,7 @@ generic root <a class="reference external" href="techDoc.html#transitiveDigraphs
 </dl>
 </li>
 <li><dl class="simple">
-<dt><a class="reference internal" href="#bachetnumbers-label"><span class="std std-ref">bachetNumbers module</span></a></dt><dd><p>Implementation of the bipolar-valued base 3 Bachet integers</p>
+<dt><a class="reference internal" href="#bachetnumbers-label"><span class="std std-ref">bachetNumbers module</span></a></dt><dd><p>Implementation of the bipolar-valued base 3 Bachet integers with abstract BachetNumbers class</p>
 </dd>
 </dl>
 </li>
@@ -12503,9 +12509,11 @@ Euler’s number of coprime elements a in Zn.</p>
 <p>Back to the <a class="reference internal" href="#contents-table-label"><span class="std std-ref">Table of Contents</span></a></p>
 <hr class="docutils" />
 </section>
-<section id="module-bachetNumbers">
-<span id="bachetnumbers-module"></span><span id="bachetnumbers-label"></span><h2><a class="toc-backref" href="#id24" role="doc-backlink"><span class="section-number">2.22. </span>bachetNumbers module</a><a class="headerlink" href="#module-bachetNumbers" title="Link to this heading"></a></h2>
-<p>Python3+ implementation of bipolar-valued base 3 integers.</p>
+<section id="bachetnumbers-module">
+<span id="bachetnumbers-label"></span><h2><a class="toc-backref" href="#id24" role="doc-backlink"><span class="section-number">2.22. </span>bachetNumbers module</a><a class="headerlink" href="#bachetnumbers-module" title="Link to this heading"></a></h2>
+<div class="graphviz"><object data="_images/inheritance-62fe4ba8aa3f9c318291ede608a41ef02678dee2.svg" type="image/svg+xml" class="inheritance graphviz">
+<p class="warning">Inheritance diagram of bachetNumbers</p></object></div>
+<p id="module-bachetNumbers">Python3+ implementation of bipolar-valued base 3 integers.</p>
 <p>Two versions are provided:</p>
 <blockquote>
 <div><ul class="simple">
@@ -12527,25 +12535,23 @@ along with this program; if not, write to the
 Free Software Foundation, Inc., 51 Franklin Street,
 Fifth Floor, Boston, MA 02110-1301 USA.</p>
 <dl class="py class">
-<dt class="sig sig-object py" id="bachetNumbers.BachetInteger">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bachetNumbers.</span></span><span class="sig-name descname"><span class="pre">BachetInteger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_int</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bachetNumbers.html#BachetInteger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bachetNumbers.BachetInteger" title="Link to this definition"></a></dt>
-<dd><p>Bipolar-valued {-1,0,+1} base 3 encoded integers due to Claude Gaspard Bachet de Méziriac (1621)</p>
-<p><a class="reference external" href="https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac">https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac</a></p>
-<p>The class implements by integer value all the arithmetic operations and comparison operators from the int class.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bachetNumbers</span> <span class="kn">import</span> <span class="n">BachetInteger</span> <span class="k">as</span> <span class="n">BachetNumber</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">BachetInteger</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<dt class="sig sig-object py" id="bachetNumbers.BachetVector">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bachetNumbers.</span></span><span class="sig-name descname"><span class="pre">BachetVector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_int</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bachetNumbers.html#BachetVector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bachetNumbers.BachetVector" title="Link to this definition"></a></dt>
+<dd><p>The class implements all arithmetic operations and comparison operators from the int class via the Bachet vectors.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bachetNumbers</span> <span class="kn">import</span> <span class="n">BachetVector</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">BachetVector</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span>
-<span class="go"> *------- Bachet Integer description ------*</span>
-<span class="go"> Instance class : BachetNumber</span>
+<span class="go"> *------- Bachet number description ------*</span>
+<span class="go"> Instance class : BachetVector</span>
 <span class="go"> String         : &#39;+1+10&#39;</span>
 <span class="go"> Vector         : [1, 1, 0]</span>
 <span class="go"> Length         : 3</span>
 <span class="go"> Value          : 12</span>
 <span class="go"> Attributes     : [&#39;vector&#39;]  </span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">BachetVector</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span>
-<span class="go"> *------- Bachet Integer description ------*</span>
-<span class="go"> Instance class : BachetNumber</span>
+<span class="go"> *------- Bachet number description ------*</span>
+<span class="go"> Instance class : BachetVector</span>
 <span class="go"> String         : &#39;+1+1+1&#39;</span>
 <span class="go"> Vector         : [1, 1, 1]</span>
 <span class="go"> Length         : 3</span>
@@ -12554,7 +12560,7 @@ Fifth Floor, Boston, MA 02110-1301 USA.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">+</span> <span class="n">n2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span>
 <span class="go"> *------- Bachet number description ------*</span>
-<span class="go"> Instance class : BachetNumber</span>
+<span class="go"> Instance class : BachetVector</span>
 <span class="go"> String         : &#39;+10-1+1&#39;</span>
 <span class="go"> Vector         : [1, 0, -1, 1]</span>
 <span class="go"> Length         : 4</span>
@@ -12576,25 +12582,25 @@ Fifth Floor, Boston, MA 02110-1301 USA.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="bachetNumbers.BachetVector">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bachetNumbers.</span></span><span class="sig-name descname"><span class="pre">BachetVector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_int</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bachetNumbers.html#BachetVector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bachetNumbers.BachetVector" title="Link to this definition"></a></dt>
-<dd><p>Bipolar-valued {-1,0,+1} base 3 encoded integers due to Claude Gaspard Bachet de Méziriac (1621)</p>
-<p><a class="reference external" href="https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac">https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac</a></p>
-<p>The class implements all arithmetic operations and comparison operators from the int class via the Bachet vectors.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bachetNumbers</span> <span class="kn">import</span> <span class="n">BachetVector</span> <span class="k">as</span> <span class="n">BachetNumber</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<dt class="sig sig-object py" id="bachetNumbers.BachetInteger">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bachetNumbers.</span></span><span class="sig-name descname"><span class="pre">BachetInteger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_int</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bachetNumbers.html#BachetInteger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bachetNumbers.BachetInteger" title="Link to this definition"></a></dt>
+<dd><p>The class implements by integer value all the arithmetic operations
+and comparison operators from the int class.
+This class is faster then the BachetVector class with very large integers.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bachetNumbers</span> <span class="kn">import</span> <span class="n">BachetInteger</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">BachetInteger</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span>
-<span class="go"> *------- Bachet number description ------*</span>
-<span class="go"> Instance class : BachetNumber</span>
+<span class="go"> *------- Bachet Integer description ------*</span>
+<span class="go"> Instance class : BachetInteger</span>
 <span class="go"> String         : &#39;+1+10&#39;</span>
 <span class="go"> Vector         : [1, 1, 0]</span>
 <span class="go"> Length         : 3</span>
 <span class="go"> Value          : 12</span>
 <span class="go"> Attributes     : [&#39;vector&#39;]  </span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">BachetInteger</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span>
-<span class="go"> *------- Bachet number description ------*</span>
-<span class="go"> Instance class : BachetNumber</span>
+<span class="go"> *------- Bachet Integer description ------*</span>
+<span class="go"> Instance class : BachetInteger</span>
 <span class="go"> String         : &#39;+1+1+1&#39;</span>
 <span class="go"> Vector         : [1, 1, 1]</span>
 <span class="go"> Length         : 3</span>
@@ -12603,7 +12609,7 @@ Fifth Floor, Boston, MA 02110-1301 USA.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">+</span> <span class="n">n2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span>
 <span class="go"> *------- Bachet number description ------*</span>
-<span class="go"> Instance class : BachetNumber</span>
+<span class="go"> Instance class : BachetInteger</span>
 <span class="go"> String         : &#39;+10-1+1&#39;</span>
 <span class="go"> Vector         : [1, 0, -1, 1]</span>
 <span class="go"> Length         : 4</span>
@@ -12622,6 +12628,32 @@ Fifth Floor, Boston, MA 02110-1301 USA.</p>
 <span class="go"> &#39;0+1+1&#39; (4) + &#39;-1-1-1&#39; (-13) = &#39;-100&#39; (-9)</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bachetNumbers.BachetNumber">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bachetNumbers.</span></span><span class="sig-name descname"><span class="pre">BachetNumber</span></span><a class="reference internal" href="_modules/bachetNumbers.html#BachetNumber"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bachetNumbers.BachetNumber" title="Link to this definition"></a></dt>
+<dd><p>Abstract base class for Bipolar-valued {-1,0,+1} base 3 encoded integers due to Claude Gaspard Bachet de Méziriac (1621)</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac">https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="bachetNumbers.BachetNumber.toDecimal">
+<span class="sig-name descname"><span class="pre">toDecimal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bachetNumbers.html#BachetNumber.toDecimal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bachetNumbers.BachetNumber.toDecimal" title="Link to this definition"></a></dt>
+<dd><p>Return Decimal(int(self))</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bachetNumbers.BachetNumber.sign">
+<span class="sig-name descname"><span class="pre">sign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bachetNumbers.html#BachetNumber.sign"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bachetNumbers.BachetNumber.sign" title="Link to this definition"></a></dt>
+<dd><p>Return the first non-negative position in self.vector
+Returns 0 if int(self) = 0</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bachetNumbers.BachetNumber.reverse">
+<span class="sig-name descname"><span class="pre">reverse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bachetNumbers.html#BachetNumber.reverse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bachetNumbers.BachetNumber.reverse" title="Link to this definition"></a></dt>
+<dd><p>Reverse the Bachet vector. ! Returns a modified BachetNumber object.</p>
+</dd></dl>
+
 </dd></dl>
 
 <hr class="docutils" />
@@ -15109,7 +15141,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Dec 19, 2025.
+      <span class="lastupdated">Last updated on Dec 20, 2025.
       </span></p>
   </div>
 

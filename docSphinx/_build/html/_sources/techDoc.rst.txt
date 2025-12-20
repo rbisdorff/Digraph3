@@ -303,7 +303,7 @@ Miscellaneous tools
      Some common methods and tools for computing with integer numbers.
 
 * :ref:`bachetNumbers-label`
-     Implementation of the bipolar-valued base 3 Bachet integers
+     Implementation of the bipolar-valued base 3 Bachet integers with abstract BachetNumbers class
 
 * :ref:`bipolarValuedSets-label`
      Implementation of the bipolar-valued base 3 Bachet integers
@@ -694,8 +694,12 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 bachetNumbers module
 --------------------
 
+.. inheritance-diagram:: bachetNumbers
+   :top-classes: bachetNumbers.BachetNumber
+   :parts: 1  
+
 .. automodule:: bachetNumbers
-   :member-order: alphabetical
+   :member-order: bysource
    :no-inherited-members:
    :members:
 
