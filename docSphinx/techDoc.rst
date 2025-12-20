@@ -17,7 +17,7 @@ Technical Reference of the Digraph3 modules
 
    :New:
 
-        - A :py:class:`~bachetNumbers.BachetInteger` class for computing with bipolar-valued base 3 encoded Bachet numbers
+        - A :py:mod:`bachetNumbers` module for computing with bipolar-valued base 3 encoded Bachet numbers
 	  
         - A :py:class:`~transitiveDigraphs.PartialBachetRanking` class for generating highly correlated **partial rankings** from a given outranking digraph instance.	
 
@@ -663,6 +663,22 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 
 -------------
 
+.. _bachetNumbers-label:
+
+bachetNumbers module
+--------------------
+
+.. inheritance-diagram:: bachetNumbers
+   :top-classes: bachetNumbers.BachetNumber
+   :parts: 1  
+
+.. automodule:: bachetNumbers
+   :member-order: bysource
+   :no-inherited-members:
+   :members:
+
+-------------
+
 .. _digraphsTools-label:
 
 digraphsTools module
@@ -686,22 +702,6 @@ arithmetics module
    :members:
 
 Back to the :ref:`Table of Contents <Contents-Table-label>`
-
--------------
-
-.. _bachetNumbers-label:
-
-bachetNumbers module
---------------------
-
-.. inheritance-diagram:: bachetNumbers
-   :top-classes: bachetNumbers.BachetNumber
-   :parts: 1  
-
-.. automodule:: bachetNumbers
-   :member-order: bysource
-   :no-inherited-members:
-   :members:
 
 -------------
 

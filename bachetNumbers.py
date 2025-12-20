@@ -1,12 +1,17 @@
 #!/Usr/bin/env python3
 """
-Python3+ implementation of bipolar-valued base 3 integers.
+Python3+ implementation of bipolar-valued base 3 integers due to
+Claude Gaspard Bachet de Méziriac (1621)
 
 Two versions are provided:
 
-    - the *BachetInteger* class (default) based on the int() values of the Bachet numbers 
+    - the *BachetVector* class based on the balanced ternary vectors 
 
-    - the *BachetVector* class based on the balanced ternary vectors,
+    - the *BachetInteger* class based on the int() values of the Bachet numbers,
+      faster with large integer numbers 
+
+
+:ref:`See applications of bipolar-valued base 3 encoded Bachet numbers <Bachet-Tutorial-label>`
 
 Copyright (C) 2025 Raymond Bisdorff
 
@@ -39,9 +44,7 @@ from decimal import Decimal
 
 class BachetNumber(object):
     """
-    Abstract base class for Bipolar-valued {-1,0,+1} base 3 encoded integers due to Claude Gaspard Bachet de Méziriac (1621)
-    
-    https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac
+    Abstract base class for Bipolar-valued {-1,0,+1} base 3 encoded integers 
 
     """
     def __repr__(self):
