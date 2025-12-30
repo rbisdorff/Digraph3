@@ -150,7 +150,7 @@ class BachetNumber(object):
 
     def sign(self,/,Debug=True):
         """
-        Return the first non-negative position in self.vector
+        Return the first non-zero position (-1 or +1) in self.vector
         Returns 0 if int(self) = 0
         """
         ln = len(self)

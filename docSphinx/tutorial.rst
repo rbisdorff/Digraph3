@@ -1130,7 +1130,7 @@ Given the previous random performance tableau *pt*, the :py:class:`~outrankingDi
 	'order', 'gamma', 'notGamma', ...
 	]
 
-The resulting digraph contains 20 positive (valid) outranking realtions. And, the mean majority criteria significance support of all the pairwise outranking situations is 63.3% (see :numref:`tutOutrankingDigraph` Lines 8-9). We may inspect the complete [-1.0,+1.0]-valued adjacency table as follows.
+The resulting digraph contains 20 positive (valid) outranking relations. And, the mean majority criteria significance support of all the pairwise outranking situations is 63.3% (see :numref:`tutOutrankingDigraph` Lines 8-9). We may inspect the complete [-1.0,+1.0]-valued adjacency table as follows.
  
 .. code-block:: pycon
    :linenos:
@@ -1148,16 +1148,16 @@ The resulting digraph contains 20 positive (valid) outranking realtions. And, th
       'a7' | +0.00  +0.71  +0.57  +0.43  +0.29  +0.00  +1.00  
        Valuation domain: [-1.0; 1.0]
 
-Considering the given performance tableau *pt*, the :py:class:`~outrankingDigraphs.BipolarOutrankingDigraph` class constructor computes the characteristic value :math:`r(x,y)` of a **pairwise outranking** relation ":math:`x\, \succsim \,y`" (see [BIS-2013]_, [ADT-L7]_) in a default *normalised* **valuation domain** [-1.0,+1.0] with the *median value* 0.0 acting as **indeterminate** characteristic value. The semantics of :math:`r(x,y)` are the following.
+Considering the given performance tableau *pt*, the :py:class:`~outrankingDigraphs.BipolarOutrankingDigraph` class constructor computes the characteristic value :math:`r(x \, \succsim \, y)` of a **pairwise outranking** relation ":math:`x\, \succsim \,y`" (see [BIS-2013]_, [ADT-L7]_) in a default *normalised* **valuation domain** [-1.0,+1.0] with the *median value* 0.0 acting as **indeterminate** characteristic value. The semantics of :math:`r(x\, \succsim \, y)` are the following.
 
-    1. When :math:`r(x,y) > 0.0`, it is more *True* than *False* that *x* **outranks** *y*, i.e. alternative *x* is at least as well performing than alternative *y* on a weighted majority of criteria **and** there is no considerable negative performance difference observed in disfavour of *x*,
-    2. When :math:`r(x,y) < 0.0`, it is more *False* than *True* that *x* **outranks** *y*, i.e. alternative *x* is **not** at least as well performing on a weighted majority of criteria than alternative *y* **and** there is no considerable positive performance difference observed in favour of *x*,
-    3. When :math:`r(x,y) = 0.0`, it is **indeterminate** whether *x* outranks *y* or not.
+    1. When :math:`r(x \, \succsim \, y) > 0.0`, it is more *True* than *False* that *x* **outranks** *y*, i.e. alternative *x* is at least as well performing than alternative *y* on a weighted majority of criteria **and** there is no considerable negative performance difference observed in disfavour of *x*,
+    2. When :math:`r(x \, \succsim \,y) < 0.0`, it is more *False* than *True* that *x* **outranks** *y*, i.e. alternative *x* is **not** at least as well performing on a weighted majority of criteria than alternative *y* **and** there is no considerable positive performance difference observed in favour of *x*,
+    3. When :math:`r(x \, \succsim \,y) = 0.0`, it is **indeterminate** whether *x* outranks *y* or not.
 
 Pairwise comparisons
 ````````````````````
 
-From above given semantics, we may consider (see Line 5 above) that *a1* outranks *a2* (:math:`r(a_{1},a_{2}) > 0.0`), but not *a7* (:math:`r(a_{1},a_{7}) = 0.0`). In order to comprehend the characteristic values shown in the relation table above, we may furthermore inspect the details of the pairwise multiple criteria comparison between alternatives *a1* and *a2*.
+From above given semantics, we may consider (see Line 5 above) that *a1* outranks *a2* (:math:`r\big( a_{1} \, \succsim \, a_{2} \big ) > 0.0`), but not *a7* (:math:`r\big(a_{1} \, \succsim \, a_{7}\big) = 0.0`). In order to comprehend the characteristic values shown in the relation table above, we may furthermore inspect the details of the pairwise multiple criteria comparison between alternatives *a1* and *a2*.
 
 .. code-block:: pycon
    :linenos:
@@ -1225,7 +1225,7 @@ All outranking digraphs, being of root type :py:class:`~digraphs.Digraph`, inher
 
 .. warning::
 
- Notice that the reflexive self comparison characteristic :math:`r(x,x)` is set above by default to the median indeterminate valuation value 0; the reflexive terms of binary relation being generally ignored in most of the *Digraph3* resources. 
+ Notice that the reflexive self comparison characteristic :math:`r(x \, \succsim \, x)` is set above by default to the median indeterminate valuation value 0; the reflexive terms of binary relation being generally ignored in most of the *Digraph3* resources. 
 
 .. _CoDual-Digraph-label:
  
