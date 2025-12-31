@@ -1157,7 +1157,7 @@ Considering the given performance tableau *pt*, the :py:class:`~outrankingDigrap
 Pairwise comparisons
 ````````````````````
 
-From above given semantics, we may consider (see Line 5 above) that *a1* outranks *a2* (:math:`r\big( a_{1} \, \succsim \, a_{2} \big ) > 0.0`), but not *a7* (:math:`r\big(a_{1} \, \succsim \, a_{7}\big) = 0.0`). In order to comprehend the characteristic values shown in the relation table above, we may furthermore inspect the details of the pairwise multiple criteria comparison between alternatives *a1* and *a2*.
+From above given semantics, we may consider (see Line 5 above) that *a1* outranks *a2* :math:`\big( r( a_{1} \, \succsim \, a_{2}) > 0.0 \big)`, but not *a7* :math:`\big(r(a_{1} \, \succsim \, a_{7}) = 0.0 \big)`. In order to comprehend the characteristic values shown in the relation table above, we may furthermore inspect the details of the pairwise multiple criteria comparison between alternatives *a1* and *a2*.
 
 .. code-block:: pycon
    :linenos:
@@ -1198,7 +1198,7 @@ The outranking characteristic value :math:`r(a_1 \succsim a_2)` represents the *
              ----------------------------------------
      Valuation in range: -7.00 to +7.00; r(x,y)= +1/7 => 0.0
 
-This time, we observe a 57.1% majority of criteria significance [(1/7 + 1)/2 = 0.571] warranting an *as well as performing* situation. Yet, we also observe a considerable negative performance difference on criterion *g1* (see first row in the relation table above). Both contradictory facts trigger eventually an *indeterminate* outranking situation [BIS-2013]_. 
+This time, we observe a 57.1% majority of criteria significance [(1/7 + 1)/2 = 0.571] warranting an *as well as performing* situation. Yet, we also observe a considerable negative performance difference on criterion *g1* (see first row in the relation table above). Both contradictory facts trigger eventually an **indeterminate** outranking situation [BIS-2013]_. 
 
 Recoding the digraph valuation
 ``````````````````````````````
@@ -1240,7 +1240,7 @@ They furthermore verify the **coduality** principle: the **converse** (the *inve
 
     :math:`\sim\big(-r(y \succsim x)\big) \;=\; \sim\big(r(y \not \succsim x)\big) \;=\; r(x \succnsim y)`.
 
-From both properties follows straightway that codual --*strict*-- outranking digraphs are **strongly asymmetrical**:
+From both properties follows straightway that codual, i.e. *strict*, outranking digraphs are **strongly asymmetrical**:
 
     :math:`r(x \succnsim y) + r(y \succnsim x) \leq 0.0` 
 
@@ -6607,13 +6607,13 @@ Alice's best choice: A *selection* case study [19]_
          :width: 150 px
          :align: center
 
-   Alice D. , 19 years old German student finishing her secondary studies in Köln (Germany), desires to undertake foreign languages studies. She will probably receive her "Abitur" with satisfactory and/or good marks and  wants to start her further studies thereafter.
+   Alice D. , 19 years old German student finishing her secondary studies in Köln (Germany), desires to undertake foreign languages studies. She will probably receive her 'Abitur' with satisfactory and/or good marks and  wants to start her further studies thereafter.
 
    She would not mind staying in Köln, yet is ready to move elsewhere if necessary. The length of the higher studies do concern her, as she wants to earn her life as soon as possible.  Her parents however agree to financially support her study fees as well as her living costs during her studies.
 
 .. only:: latex
 
-   |linkAlice| Alice D. , 19 years old German student finishing her secondary studies in Köln (Germany), desires to undertake foreign languages studies. She will probably receive her "Abitur" with satisfactory and/or good marks and  wants to start her further studies thereafter.
+   |linkAlice| Alice D. , 19 years old German student finishing her secondary studies in Köln (Germany), desires to undertake foreign languages studies. She will probably receive her 'Abitur' with satisfactory and/or good marks and  wants to start her further studies thereafter.
 
    She would not mind staying in Köln, yet is ready to move elsewhere if necessary. The length of the higher studies do concern her, as she wants to earn her life as soon as possible.  Her parents however agree to financially support her study fees, as well as, her living costs during her studies.
 
@@ -7532,7 +7532,7 @@ Among the 145 detected robust outranking circuits reported in :numref:`robustCir
 	     the given significance weights;
        0   : indeterminate relational situation.
 
-In :numref:`robustDenotation`, we may notice that the robust outranking circuit ['albt', 'unlu', 'ariz', 'hels']  will reappear with all potential criteria significance weight vectors that are compatible with given preorder: *gtch* = *gres* > *gcit* > *gint* > *gind*. Notice also the (+1|-1) marked outranking situations, like the one between 'albt' and 'ariz'. The statement that "*Arizona State University* strictly  outranks *University of Alberta*" is in fact valid with the precise THE weight vector, but not with all potential weight vectors compatible with the given significance preorder. All these outranking situations are hence put into **doubt** (:math:`r(x \succsim y) = 0.00`) and the corresponding CS Depts, like *University of Alberta* and *Arizona State University*, become **incomparable** in a *robust outranking* sense.  
+In :numref:`robustDenotation`, we may notice that the robust outranking circuit ['albt', 'unlu', 'ariz', 'hels']  will reappear with all potential criteria significance weight vectors that are compatible with given preorder: *gtch* = *gres* > *gcit* > *gint* > *gind*. Notice also the (+1|-1) marked outranking situations, like the one between 'albt' and 'ariz'. The statement that '*Arizona State University* strictly  outranks *University of Alberta*' is in fact valid with the precise THE weight vector, but not with all potential weight vectors compatible with the given significance preorder. All these outranking situations are hence put into **doubt** (:math:`r(x \succsim y) = 0.00`) and the corresponding CS Depts, like *University of Alberta* and *Arizona State University*, become **incomparable** in a *robust outranking* sense.  
 
 Showing many incomparabilities and indifferences; not being transitive and containing many robust outranking circuits; all these relational characteristics, make that no ranking algorithm, applied to digraph *rdg*, does exist that would produce a *unique* optimal linear ranking result. Methodologically, we are only left with *ranking heuristics*. In the previous tutorial on :ref:`ranking with multiple criteria <Ranking-Tutorial-label>` we have seen now several potential heuristic ranking rules that may be applied to rank from a pairwise outranking digraph; yet, delivering all potentially more or less diverging results. Considering the order of digraph *rdg* (75) and the largely unequal THE criteria significance weights, we rather opt, in this tutorial, for the :ref:`NetFlows ranking rule <NetFlows-Ranking-label>` [41]_. Its complexity in :math:`O(n^2)` is indeed quite tractable and, by avoiding potential *tyranny of short majority* effects, the *NetFlows* rule specifically takes the ranking criteria significance into a more fairly balanced account.
 
@@ -8792,7 +8792,7 @@ Five cythonized Digraph3 modules, prefixed with the letter *c* and taking a *pyx
     - *cSparseIntegerOutrankingDigraphs.pyx*
     - *cQuantilesRankingDigraphs.pyx*
 
-Their automatic compilation and installation (*...Digraph3$ make installPip*), alongside the standard Digraph3 python3 modules, requires the *cython* compiler [6]_ ( *...$ python3 m pip install cython wheel* ) and a C compiler ( *...$ sudo apt install gcc* ). Local *inplace* compilation and installation ( *.../Digraph3/cython$ make* ) is provided with a corresponding *makefile* in the "Digraph3/cython* directory.
+Their automatic compilation and installation (*...Digraph3$ make installPip*), alongside the standard Digraph3 python3 modules, requires the *cython* compiler [6]_ ( *...$ python3 m pip install cython wheel* ) and a C compiler ( *...$ sudo apt install gcc* ). Local *inplace* compilation and installation ( *.../Digraph3/cython$ make* ) is provided with a corresponding *makefile* in the *Digraph3/cython* directory.
 
 Big Data performance tableaux
 `````````````````````````````
