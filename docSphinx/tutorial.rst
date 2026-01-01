@@ -41,22 +41,6 @@
 
 .. only:: html
 	  
-   :New:
-
-      - A tutorial on :ref:`extracting partial rankings <Partial-Ranking-Tutorial-label>` from a given outranking digraph
-      
-      - The *Bachet* ranking rules are illustrated in the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`
-          
-      - A tutorial on :ref:`using the Digraph3 HPC resources <HPC-Ranking-Tutorial-label>` for ranking several millions of multicriteria performance records via sparse outranking digraphs
-	
-      - A tutorial on :ref:`using multiprocessing resources <Multiprocessing-Tutorial-label>` when tackling large performance tableaux with several hundreds of decision alternatives.
-
-      - Two tutorials on computing :ref:`fair intergroup<Fair-InterGroup-Pairings-label>` and :ref:`fair intragroup<Fair-IntraGroup-Pairings-label>` pairing solutions	      
-
-   **Preface**
-   
-   The tutorials in this document describe the practical usage of our *Digraph3* Python3 software resources in the field of *Algorithmic Decision Theory* and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They mainly illustrate practical tools for a Master Course |location_link4| at the University of Luxembourg. The document contains first a set of tutorials introducing the main objects available in the Digraph3 collection of Python3 modules, like **bipolar-valued digraphs**, **outranking digraphs**, and **multicriteria performance tableaux**. The second and methodological set of tutorials is decision problem oriented and shows how to edit multicriteria performance tableaux, how to compute the potential **winner(s)** of an election, how to build a **best choice recommendation**, and how to **rate** or **linearly rank** with multiple incommensurable performance criteria. We finally discuss the **fair intergroup** and **intragroup pairing** problems. A third part presents three **evaluation** and **decision case studies**. A fourth and fifth part present tools for working with **big outranking digraphs**. The last part is devoted to **undirected graphs** with a tutorial on how to compute **non isomorphic maximal independent sets** (kernels) in the n-cycle graph. Special tutorials are finally introducing  **perfect** graphs, like *split*, *interval* and *permutation* graphs.
-
    Contents
    --------
 
@@ -108,6 +92,20 @@
    **Appendices**
        * :ref:`Bibliography <Appendices-label>`
        * :ref:`Endnotes <Endnotes-label>`
+
+   **Abstract**: The tutorials in this document describe the practical usage of our *Digraph3* Python3 software resources in the field of *Algorithmic Decision Theory* and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They mainly illustrate practical tools for a Master Course |location_link4| at the University of Luxembourg. The document contains first a set of tutorials introducing the main objects available in the Digraph3 collection of Python3 modules, like **bipolar-valued digraphs**, **outranking digraphs**, and **multicriteria performance tableaux**. The second and methodological set of tutorials is decision problem oriented and shows how to edit multicriteria performance tableaux, how to compute the potential **winner(s)** of an election, how to build a **best choice recommendation**, and how to **rate** or **linearly rank** with multiple incommensurable performance criteria. We finally discuss the **fair intergroup** and **intragroup pairing** problems. A third part presents three **evaluation** and **decision case studies**. A fourth and fifth part present tools for working with **big outranking digraphs**. The last part is devoted to **undirected graphs** with a tutorial on how to compute **non isomorphic maximal independent sets** (kernels) in the n-cycle graph. Special tutorials are finally introducing  **perfect** graphs, like *split*, *interval* and *permutation* graphs.
+
+   :New:
+
+      - A tutorial on :ref:`extracting partial rankings <Partial-Ranking-Tutorial-label>` from a given outranking digraph
+      
+      - The *Bachet* ranking rules are illustrated in the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`
+          
+      - A tutorial on :ref:`using the Digraph3 HPC resources <HPC-Ranking-Tutorial-label>` for ranking several millions of multicriteria performance records via sparse outranking digraphs
+	
+      - A tutorial on :ref:`using multiprocessing resources <Multiprocessing-Tutorial-label>` when tackling large performance tableaux with several hundreds of decision alternatives.
+
+      - Two tutorials on computing :ref:`fair intergroup<Fair-InterGroup-Pairings-label>` and :ref:`fair intragroup<Fair-IntraGroup-Pairings-label>` pairing solutions	      
 
 -------------------------------------
 
@@ -489,6 +487,8 @@ Working with the :py:mod:`digraphs` module
 .. contents:: 
 	:depth: 2
 	:local:
+
+**Abstract**: The tutorial introduces bipolar-valued digraphs, the fundamental root type of all the specialised digraphs implemented in the *Digraph3* modules. With the help of a randomly valued digraph, we illustrate some basic digraph manipulation methods, like drawing the digraph, dividing the digraph into its asymmetric and symmetric parts, separating the border from the inner part, computing associated dual, converse and codual digraphs, and operating symmetric and transitive closures
 
 -----------------------
 
@@ -985,7 +985,7 @@ It was *Denis Bouyssou* who first suggested us end of the nineties, when we star
 
 It is only in 2004, when we succeeded in assessing the stability of the outranking digraph when solely ordinal criteria significance weights are given, that it became clear and evident for us that the characteristic valuation domain had to be shifted to a [-1.0;+1.0]-valued domain (see :ref:`Ordinal correlation equals bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>` and [BIS-2004b]_). In this bipolar valuation, the 50% majority threshold corresponds now to the median 0.0 value, characterising with the correct zero value an epistemic indeterminateness -no knowledge- situation. Furthermore, identifying truth and falseness directly by the sign of the characteristic value revealed itself to be very efficient not only from a computational point of view, but also from scientific and semiotic perspectives. A positive (resp. negative) characteristic value now attest a logically valid (resp. invalid) statement and a negative affirmation now means a positive refutation and vice versa. Furthermore, the median zero value gives way to efficiently handling partial objects -like the border or the assymetric part of a digraph- and, even more important from a practical decision making point of view, any missing data.
 
-The bipolar [-1.0;+1.0]-valued characteristic domain opened so the way to important new operations and concepts, like the disjunctive epistemic fusion operation seen before that confers the outranking digraph a logically sound and epistemically correct definition ([BIS-2013]_). *Kendall*'s ordinal correlation index could be extended to a bipolar-valued relational equivalence index between digraphs (see :ref:`Ordinal correlation equals bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>` and [BIS-2012]_). Making usage of the bipolar-valued *Gaussian* error function (*erf*) naturally led to defining a bipolar-valued likelihood function, where a positive, resp. negative, value gives the likelihood of an affirmation, resp. a refutation.      
+The bipolar [-1.0;+1.0]-valued characteristic domain opened so the way to important new operations and concepts, like the disjunctive epistemic fusion operation seen before which confers the outranking digraph a logically sound and epistemically correct definition ([BIS-2013]_). *Kendall*'s ordinal correlation index could be extended to a bipolar-valued relational equivalence index between digraphs (see :ref:`Ordinal correlation equals bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>` and [BIS-2012]_). Making usage of the bipolar-valued *Gaussian* error function (*erf*) naturally led to defining a bipolar-valued likelihood function, where a positive, resp. negative, value gives the likelihood of an affirmation, resp. a refutation.      
 
 
 Back to :ref:`Content Table <Tutorial-label>`
@@ -997,12 +997,11 @@ Back to :ref:`Content Table <Tutorial-label>`
 Working with the :py:mod:`outrankingDigraphs` module
 ----------------------------------------------------
 
-.. epigraph::
-   "*The rule for the combination of independent concurrent arguments takes a very simple form when expressed in terms of the intensity of belief ... It is this: Take the sum of all the feelings of belief which would be produced separately by all the arguments pro, subtract from that the similar sum for arguments con, and the remainder is the feeling of belief which ought to have the whole. This is a proceeding which men often resort to, under the name of balancing reasons.*" -- C.S. Peirce, The probability of induction (1878)
-
 .. contents:: 
 	:depth: 2
 	:local:
+
+**Abstract**: In this chapter, we introduce the main formal object of this book, namely the bipolar-valued outranking digraph. With a randomly generated multiple-criteria performance tableau, we construct the corresponding bipolar-valued outranking relation from pairwise comparisons. The resulting bipolar-valued outranking characteristics may be recoded. Finally, the codual outranking digraph gives us the associated strict outranking relation.
 
 .. only:: html
 
@@ -1012,6 +1011,8 @@ Working with the :py:mod:`outrankingDigraphs` module
 
 Outranking digraph model
 ````````````````````````
+.. epigraph::
+   "*The rule for the combination of independent concurrent arguments takes a very simple form when expressed in terms of the intensity of belief ... It is this: Take the sum of all the feelings of belief which would be produced separately by all the arguments pro, subtract from that the similar sum for arguments con, and the remainder is the feeling of belief which ought to have the whole. This is a proceeding which men often resort to, under the name of balancing reasons.*" -- C.S. Peirce, The probability of induction (1878)
 
 In this *Digraph3* module, the :py:class:`~outrankingDigraphs.BipolarOutrankingDigraph` class from the :py:mod:`outrankingDigraphs` module provides our standard **outranking digraph** constructor. Such an instance represents a **hybrid** object of both, the :py:class:`~perfTabs.PerformanceTableau` type and the :py:class:`~outrankingDigraphs.OutrankingDigraph` type. A given object consists hence in:
 

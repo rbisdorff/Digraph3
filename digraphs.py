@@ -11966,7 +11966,7 @@ class BalancedRankingsDigraph(Digraph):
         self.valuationdomain['hasIntegerValuation'] = True
         balancedRelation = {}
         actionsList = [x for x in self.actions]
-        print(actionsList)
+        #print(actionsList)
         for x in actionsList:                 
             balancedRelation[x] = {}                          
             for y in actionsList:
@@ -11981,7 +11981,7 @@ class BalancedRankingsDigraph(Digraph):
                             mxy += 1
                         elif ix > iy:
                             mxy -= 1
-                print(x,y,mxy)
+                #print(x,y,mxy)
                 balancedRelation[x][y] = mxy
                         
                     
@@ -11995,7 +11995,7 @@ class BalancedRankingsDigraph(Digraph):
 ##                        print('!! Error: wrong fusion operator: %s' % operator)
 ##                        print('operator := "o-max (default)" | "o-min" | "o-average"') 
 ##                        return
-        print          
+        #print          
         self.relation = deepcopy(balancedRelation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
