@@ -3097,7 +3097,7 @@ The strict outranking relation  :math:`\succnsim` shown here is apparently *not 
      #triples x>y>z: 78, #closed: 38, #open: 40
      #closed/#triples =  0.487
     
-With only 49% of the required transitive arcs, the strict outranking relation here is hence very far from being transitive; a serious problem when a linear ordering of the decision alternatives is looked for. Let us furthermore see if there are any cyclic outrankings.
+With only 49% of the required transitive triples, the strict outranking relation here is hence very far from being transitive; a serious problem when a linear ordering of the decision alternatives is looked for. Let us furthermore see if there are any cyclic outrankings.
     
 .. code-block:: pycon
    :linenos:
@@ -3297,7 +3297,7 @@ A further valued version of the *Copeland* rule, called **NetFlows** rule, compu
    >>> cop.copelandRanking
     ['a5', 'a1', 'a6', 'a7', 'a8', 'a4', 'a9', 'a3', 'a2']
 
-It is worthwhile noticing again that, similar to the *Copeland* and the *Bachet* ranking rules seen before, the *NetFlows* ranking rule is also **invariant** under the :ref:`codual transform <Codual-Transform-label>` and delivers again the same ranking result indifferently from digraphs *g* or *gcd* (see :numref:`NetFlowsRanking` Line 14). Yet, the *NetFlows* ranking rule, working directly with the bipolar characteristic values of the outranking relation is **not** necessarily **Condorcet consistent**. 
+It is worthwhile noticing again that, similar to the *Copeland* ranking rule seen before, the *NetFlows* ranking rule is also **invariant** under the :ref:`codual transform <Codual-Transform-label>` and delivers again the same ranking result indifferently from digraphs *g* or *gcd* (see :numref:`NetFlowsRanking` Line 14). Yet, the *NetFlows* ranking rule, working directly with the bipolar characteristic values of the outranking relation is **not** necessarily **Condorcet consistent**. 
 
 In our example here, the *NetFlows* scores deliver  a ranking *without ties* which is rather different from the one delivered by *Copeland*'s rule (see :numref:`NetFlowsRanking` Line 16). It may happen, however, that we obtain, as with the *Copeland* scores above, only a ranking result with ties, which may then be resolved again by following a lexicographic rule. In such cases, it is possible to construct again a *weak ranking* with the corresponding :py:class:`~transitiveDigraphs.WeakNetFlowsOrder` class.
 
@@ -3323,7 +3323,7 @@ Indeed, the extended *Kendall* tau index of +0.638 leads to a bipolar-valued *re
 The valued *Bachet* ranking
 ```````````````````````````
 
-The polarised *Bachet* ranking rule only considers the crisp relational structure of the outranking digraph, ignoring the actual credibility of the individual arcs. The :py:class:`~linearOrders.BachetRanking` rule provides the *Polarised=False* parameter for taking into account, like the *NetFlows* rule, the actual bipolar-valued characteristic determination of the outranking situations. The *Bachet* numbers making up the ranking scores are therefore instantiated from the rows and columns of the normalized relation instead of the polarised relation of the outranking digraph. 
+The polarised *Bachet* ranking rule only considers the crisp relational structure of the outranking digraph, ignoring the actual credibility of the individual outranking situations. The :py:class:`~linearOrders.BachetRanking` rule now provides the *Polarised=False* parameter for taking into account, like the *NetFlows* rule, the actual bipolar-valued characteristic determination of the outranking situations. The *Bachet* numbers making up the ranking scores are therefore instantiated from the rows and columns of the normalized relation instead of the polarised relation of the outranking digraph. 
 
 .. code-block:: pycon
    :name: ValuedBachetRanking

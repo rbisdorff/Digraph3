@@ -306,7 +306,7 @@ Miscellaneous tools
      Implementation of the bipolar-valued base 3 Bachet integers with abstract BachetNumbers class
 
 * :ref:`bipolarValuedSets-label`
-     Implementation of the bipolar-valued base 3 Bachet integers
+     Implementation of bipolar-valued set operations   
 
 ..  * :ref:`xmcda-label` 
      Methods and tools for handling XMCDA encoded performance tableaux and digraphs.
