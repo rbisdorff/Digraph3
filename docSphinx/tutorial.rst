@@ -695,7 +695,7 @@ Being much *denser* than a linear order, the actual inner part of our tutorial r
 
    Border and inner part of the tutorial random valuation digraph *rdg*
 
-Indeed, a *complete* digraph on the limit has no inner part (privacy!) at all, whereas *empty* and *indeterminate* digraphs admit both, an empty border and an empty inner part.
+Indeed, a *complete* digraph on the limit has no inner part (privacy!) at all ass all its arcs appear in the border. Notice that *empty* and *indeterminate* digraphs admit both, an empty border and an empty inner part. When in general a given digraph does not admit any initial or terminal prekernels, its border part will be empty and its inner part will contain all its arcs. 
 
 .. _Epistemic-Fusion-label:
 
