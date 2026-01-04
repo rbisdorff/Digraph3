@@ -39,9 +39,9 @@ Pearls of bipolar-valued epistemic logic
 .. only:: html
    
    :New:
-      
-      * :ref:`On computational bipolar-valued set theory <Bipolar-Valued-Sets-Tutorial-label>`
+
       * :ref:`Applications of bipolar-valued base 3 encoded Bachet numbers <Bachet-Tutorial-label>`	 
+      * :ref:`On computational bipolar-valued set theory <Bipolar-Valued-Sets-Tutorial-label>`
       *	:ref:`Condorcet's 1785 critical perspective on the simple plurality voting rule <Condorcet-Tutorial-label>`
       * :ref:`On characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>`     
 

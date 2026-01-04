@@ -6904,7 +6904,7 @@ In the relation map, shown in :numref:`aliceRelationMap` above, we finally see i
 
    The strict outranking relation	   
 
-In :numref:`transitivePart` and in :numref:`strictOutranking1` we find actually confirmed  that all the *Graduate Intergreter* studies come first, followed by the *Qualified Translator* studies. Last come the *Köln Chamber of Commerce*'s specialized studies. This confirms again the high significance Alice attaches to the *attractiveness* of her further stdies and of her future profession (see criteria *AS* and *AP* in :numref:`aliceHeatmap`).
+In :numref:`transitivePart` and in :numref:`strictOutranking1` we find actually confirmed  that all the *Graduate Intergreter* studies come first, followed by the *Qualified Translator* studies. Last come the *Köln Chamber of Commerce*'s specialized studies. This confirms again the high significance Alice attaches to the *attractiveness* of her further studies and of her future profession (see criteria *AS* and *AP* in :numref:`aliceHeatmap`).
 
 Let us now, for instance, check the pairwise outranking situations observed between the *Graduate Interpreter* studies in *Köln* and the  *Graduate Interpreter* studies in *Saabrücken* (see *I-FHK* and *I-USB* in :numref:`aliceHeatmap`).
 
@@ -7058,7 +7058,7 @@ We may compute these **unopposed** outranking situations [25]_ with help of the 
 
 We keep 28 out the 67 standard outranking situations, which leads to an **oppositeness degree** of (1.0 - 28/67) = 58.21% (:numref:`aliceUnopposedOutrankings` Line 10). Remarkable furthermore is that this unopposed outranking digraph *uop* is actually *transitive*, i.e. modelling a *partial ranking* of the study programs (Line 14).
 
-We may hence make use of the :py:meth:`~transitiveDigraphs.TransitiveDigraph.exportGraphViz` method of the :py:class:`~transitiveDigraphs.TransitiveDigraph` class for drawing the corresponding partial ranking.
+We may hence use the :py:meth:`~transitiveDigraphs.TransitiveDigraph.exportGraphViz` method of the :py:class:`~transitiveDigraphs.TransitiveDigraph` class for drawing the corresponding partial ranking.
 
 .. code-block:: pycon
    :linenos:
