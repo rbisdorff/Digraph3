@@ -695,7 +695,7 @@ Being much *denser* than a linear order, the actual inner part of our tutorial r
 
    Border and inner part of the tutorial random valuation digraph *rdg*
 
-Indeed, a *complete* digraph on the limit has no inner part (privacy!) at all ass all its arcs appear in the border. Notice that *empty* and *indeterminate* digraphs admit both, an empty border and an empty inner part. When in general a given digraph does not admit any initial or terminal prekernels, its border part will be empty and its inner part will contain all its arcs. 
+Indeed, a *complete* digraph on the limit has no inner part (privacy!) at all ass all its arcs appear in the border. Notice that *empty* and *indeterminate* digraphs admit both, an empty border and an empty inner part. When in general a given digraph does not admit any initial or terminal prekernels, its border part will be empty and its inner part will contain all its arcs [65]_. 
 
 .. _Epistemic-Fusion-label:
 
@@ -11327,6 +11327,8 @@ Appendices
 .. [63] "*The goal of our research was to design a resolution method ... that is easy to put into practice, that requires as few and reliable hypotheses as possible, and that meets the needs [of the decision maker] ...* " [ROY-1966]_
 
 .. [64] The *officeChoice.py* data file may be found in the *examples* directory of the Digraph3 resources.
+
+.. [65] An example of a borderless :py:class:`~randomDigraphs.RandomOutrankingValuationDigraph` instance may be found in the *examples* directory of the *Digraphs3* resources under the name *borderlessROV9S25.py*.
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
