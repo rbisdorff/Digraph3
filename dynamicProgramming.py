@@ -382,17 +382,19 @@ class RandomDynamicProgrammingDigraph(DynamicProgrammingDigraph):
         self.valuationdomain = {'min':Min,'med':Med,'max':Max,
                                 'hasIntegerValuation': False}
         self.relation = deepcopy(g.relation)
-        self.closeTransitive(Reverse = False)
-        self.costsRange = costsRange
-        self.preferenceDirection = preferenceDirection
-        self.costs = costs
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
         self.source = source
         self.sink = sink
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
         self.stages = self.computeStages(Debug=Debug)
         self.nstages = len(self.stages)
+        self.costs = costs
+        self.costsRange = costsRange
+        self.preferenceDirection = preferenceDirection
         self.optimalPath = self.computeDynamicProgrammingSolution(Debug=Debug)    
+        self.closeTransitive(Reverse = False,InSite=True)
+##        self.gamma = self.gammaSets()
+##        self.notGamma = self.notGammaSets()
 
 # --------------------
 

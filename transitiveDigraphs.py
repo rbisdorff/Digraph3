@@ -447,7 +447,10 @@ class TransitiveDigraph(Digraph):
             fo.write(sameRank)
 
         # open transitive links and write the positive arcs
-        relation = digraph.closeTransitive(Reverse=True,InSite=False)
+        #if WithBestPathDecoration:
+        #    relation = digraph.closeTransitive(Reverse=False,InSite=False)
+        #else:
+        relation = digraph.closeTransitive(Reverse=True,InSite=False) 
         for i in range(k-1):
             ich = rankingByChoosing[i][1]
             for x in ich:

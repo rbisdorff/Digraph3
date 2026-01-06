@@ -552,7 +552,10 @@
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">sameRank</span><span class="p">)</span>
 
         <span class="c1"># open transitive links and write the positive arcs</span>
-        <span class="n">relation</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">closeTransitive</span><span class="p">(</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">InSite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1">#if WithBestPathDecoration:</span>
+        <span class="c1">#    relation = digraph.closeTransitive(Reverse=False,InSite=False)</span>
+        <span class="c1">#else:</span>
+        <span class="n">relation</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">closeTransitive</span><span class="p">(</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">InSite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
             <span class="n">ich</span> <span class="o">=</span> <span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ich</span><span class="p">:</span>
