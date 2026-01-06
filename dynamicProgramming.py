@@ -382,7 +382,7 @@ class RandomDynamicProgrammingDigraph(DynamicProgrammingDigraph):
         self.valuationdomain = {'min':Min,'med':Med,'max':Max,
                                 'hasIntegerValuation': False}
         self.relation = deepcopy(g.relation)
-        self.closeTransitive(Reverse = True)
+        self.closeTransitive(Reverse = False)
         self.costsRange = costsRange
         self.preferenceDirection = preferenceDirection
         self.costs = costs

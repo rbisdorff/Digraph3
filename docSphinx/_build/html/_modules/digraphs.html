@@ -12768,7 +12768,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;hasIntegerValuation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="n">balancedRelation</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">actionsList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)</span>
+        <span class="c1">#print(actionsList)</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionsList</span><span class="p">:</span>                 
             <span class="n">balancedRelation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>                          
             <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actionsList</span><span class="p">:</span>
@@ -12783,7 +12783,7 @@
                             <span class="n">mxy</span> <span class="o">+=</span> <span class="mi">1</span>
                         <span class="k">elif</span> <span class="n">ix</span> <span class="o">&gt;</span> <span class="n">iy</span><span class="p">:</span>
                             <span class="n">mxy</span> <span class="o">-=</span> <span class="mi">1</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">mxy</span><span class="p">)</span>
+                <span class="c1">#print(x,y,mxy)</span>
                 <span class="n">balancedRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">mxy</span>
                         
                     
@@ -12797,7 +12797,7 @@
 <span class="c1">##                        print(&#39;!! Error: wrong fusion operator: %s&#39; % operator)</span>
 <span class="c1">##                        print(&#39;operator := &quot;o-max (default)&quot; | &quot;o-min&quot; | &quot;o-average&quot;&#39;) </span>
 <span class="c1">##                        return</span>
-        <span class="nb">print</span>          
+        <span class="c1">#print          </span>
         <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">balancedRelation</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span></div>
@@ -16514,7 +16514,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Dec 31, 2025.
+      <span class="lastupdated">Last updated on Jan 06, 2026.
       </span></p>
   </div>
 
