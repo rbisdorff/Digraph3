@@ -1,4 +1,7 @@
-# Saved digraph instance
+# example of borderless RandomOutrankingValuationDigraph instance
+# order = 9, seed = 25, default other parameters
+# RB (c) 2025
+#############################
 from decimal import Decimal
 from collections import OrderedDict
 actions = OrderedDict([
