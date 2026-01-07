@@ -266,9 +266,11 @@ class DynamicProgrammingDigraph(Digraph):
                        Comments=True,graphType='png',
                        graphSize='7,7',bgcolor='cornsilk',
                        fontSize=10,Debug=False):
-
-        from transitiveDigraphs import TransitiveDigraph
+        """
+        Using the exportGraphViz() version of the TransitiveDigraph class
+        """
         self.closeTransitive(InSite=True)
+        from transitiveDigraphs import TransitiveDigraph
         TransitiveDigraph.exportGraphViz(self,
                         fileName=fileName,direction=direction,
                        WithBestPathDecoration=WithBestPathDecoration,

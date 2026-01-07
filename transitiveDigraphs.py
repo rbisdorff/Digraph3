@@ -477,13 +477,13 @@ class TransitiveDigraph(Digraph):
                                 lineWidth = 1
                                 if relation[x][y] > digraph.valuationdomain['med']:
                                     #arcColor = 'black'
-                                    edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' %\
-                                        (_safeName(x),_safeName(y),lineWidth,arcColor)
+                                    edge = '%s-> %s [taillabel="%.0f",labelfontsize="9",style="setlinewidth(%d)",color=%s] ;\n' %\
+                                        (_safeName(x),_safeName(y),digraph.costs[x][y],lineWidth,arcColor)
                                     fo.write(edge)
                                 elif relation[y][x] > digraph.valuationdomain['med']:
                                     #arcColor = 'black'
-                                    edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' %\
-                                        (_safeName(y),_safeName(x),lineWidth,arcColor)
+                                    edge = '%s-> %s [taillabel="%.0f",labelfontsize="9",style="setlinewidth(%d)",color=%s] ;\n' %\
+                                        (_safeName(y),_safeName(x),digraph.costs[y][x],lineWidth,arcColor)
                                     fo.write(edge)
 
                         else:
