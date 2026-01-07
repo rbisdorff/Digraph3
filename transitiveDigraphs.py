@@ -509,8 +509,6 @@ class TransitiveDigraph(Digraph):
                                                   
         fo.write('}\n \n')
         fo.close()
-        # restore original relation
-        #relation = deepcopy(originalRelation)
         
         commandString = 'dot -Grankdir=TB -T'+graphType+' ' +dotName+\
                         ' -o '+name+'.'+graphType

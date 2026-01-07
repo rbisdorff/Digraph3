@@ -851,6 +851,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#dynamicProgramming.DynamicProgrammingDigraph"><code class="docutils literal notranslate"><span class="pre">DynamicProgrammingDigraph</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#dynamicProgramming.DynamicProgrammingDigraph.computeDynamicProgrammingSolution"><code class="docutils literal notranslate"><span class="pre">DynamicProgrammingDigraph.computeDynamicProgrammingSolution()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dynamicProgramming.DynamicProgrammingDigraph.computeStages"><code class="docutils literal notranslate"><span class="pre">DynamicProgrammingDigraph.computeStages()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dynamicProgramming.DynamicProgrammingDigraph.exportGraphViz"><code class="docutils literal notranslate"><span class="pre">DynamicProgrammingDigraph.exportGraphViz()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dynamicProgramming.DynamicProgrammingDigraph.save"><code class="docutils literal notranslate"><span class="pre">DynamicProgrammingDigraph.save()</span></code></a></li>
 </ul>
 </li>
@@ -1450,7 +1451,7 @@ with abstract generic root <code class="xref py py-class docutils literal notran
 <li><dl>
 <dt><a class="reference internal" href="#dynamicprogramming-label"><span class="std std-ref">dynamicProgramming module</span></a></dt><dd><p>Classes and methods for solving dynamic programming problems
 with generic root <a class="reference internal" href="#dynamicProgramming.DynamicProgrammingDigraph" title="dynamicProgramming.DynamicProgrammingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicProgrammingDigraph</span></code></a> class.</p>
-<div class="graphviz"><object data="_images/inheritance-4d90e984f9053c76ddc128b22fe1c8aae6cb041f.svg" type="image/svg+xml" class="inheritance graphviz">
+<div class="graphviz"><object data="_images/inheritance-7ec24c464c39545298a828cbcbe7b5b986b5fc34.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of dynamicProgramming</p></object></div>
 </dd>
 </dl>
@@ -9332,7 +9333,7 @@ to an integer value and corresponding integer Bachet vector.</p>
 <section id="dynamicprogramming-module">
 <span id="dynamicprogramming-label"></span><h2><a class="toc-backref" href="#id17" role="doc-backlink"><span class="section-number">2.15. </span>dynamicProgramming module</a><a class="headerlink" href="#dynamicprogramming-module" title="Link to this heading"></a></h2>
 <p><strong>Inheritance Diagram</strong></p>
-<div class="graphviz"><object data="_images/inheritance-648d3b2e722638683e5b7074c487e6c2a811cc5e.svg" type="image/svg+xml" class="inheritance graphviz">
+<div class="graphviz"><object data="_images/inheritance-7ec24c464c39545298a828cbcbe7b5b986b5fc34.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of dynamicProgramming</p></object></div>
 <p id="module-dynamicProgramming">Python3 implementation of a solver for <strong>dynamic programming</strong> problems.</p>
 <p>Copyright (C) 2024-2025 Raymond Bisdorff</p>
@@ -9384,6 +9385,12 @@ is stored in the <em>self.bestSum</em> attribute.</p>
 <a class="reference internal" href="#dynamicProgramming.DynamicProgrammingDigraph" title="dynamicProgramming.DynamicProgrammingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicProgrammingDigraph</span></code></a> object into a list
 of successive stages –subsets of states– by taking the progessive union of the <em>gama</em> sets,
 starting from a single <em>self.source</em> node and ending in a single <em>self.sink</em> node.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dynamicProgramming.DynamicProgrammingDigraph.exportGraphViz">
+<span class="sig-name descname"><span class="pre">exportGraphViz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'best'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">WithBestPathDecoration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ArrowHeads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'png'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'7,7'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bgcolor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cornsilk'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dynamicProgramming.html#DynamicProgrammingDigraph.exportGraphViz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynamicProgramming.DynamicProgrammingDigraph.exportGraphViz" title="Link to this definition"></a></dt>
+<dd><p>export GraphViz dot file  for graph drawing filtering.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -15143,7 +15150,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jan 06, 2026.
+      <span class="lastupdated">Last updated on Jan 07, 2026.
       </span></p>
   </div>
 

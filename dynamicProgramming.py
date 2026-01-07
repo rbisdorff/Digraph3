@@ -23,8 +23,8 @@ Copyright (C) 2024-2025 Raymond Bisdorff
 
 __version__ = "$Revision: Python 3.13.13 $"
 
-from transitiveDigraphs import TransitiveDigraph        
-class DynamicProgrammingDigraph(TransitiveDigraph):
+from digraphs import Digraph
+class DynamicProgrammingDigraph(Digraph):
     """
     Implementation of the *Bellman*, *Dijkstra*, or *Viterbi* min-sum algorithm for
     solving the canonical dynamic programming problem
@@ -258,7 +258,25 @@ class DynamicProgrammingDigraph(TransitiveDigraph):
             if Debug:
                 print(stages[i][answer[i]])
             optimalPath.append(stages[i][answer[i]])
-        return optimalPath            
+        return optimalPath
+
+    def exportGraphViz(self,fileName=None,direction='best',
+                       WithBestPathDecoration=True,
+                       ArrowHeads=True,
+                       Comments=True,graphType='png',
+                       graphSize='7,7',bgcolor='cornsilk',
+                       fontSize=10,Debug=False):
+
+        from transitiveDigraphs import TransitiveDigraph
+        self.closeTransitive(InSite=True)
+        TransitiveDigraph.exportGraphViz(self,
+                        fileName=fileName,direction=direction,
+                       WithBestPathDecoration=WithBestPathDecoration,
+                       ArrowHeads=ArrowHeads,
+                       Comments=Comments,graphType=graphType,
+                       graphSize=graphSize,bgcolor=bgcolor,
+                       fontSize=fontSize,Debug=Debug)
+        self.closeTransitive(Reverse=True,InSite=True)
 
 from dynamicProgramming import DynamicProgrammingDigraph
 class RandomDynamicProgrammingDigraph(DynamicProgrammingDigraph):
@@ -392,7 +410,7 @@ class RandomDynamicProgrammingDigraph(DynamicProgrammingDigraph):
         self.costsRange = costsRange
         self.preferenceDirection = preferenceDirection
         self.optimalPath = self.computeDynamicProgrammingSolution(Debug=Debug)    
-        self.closeTransitive(Reverse = False,InSite=True)
+        #self.closeTransitive(Reverse = False,InSite=True)
 ##        self.gamma = self.gammaSets()
 ##        self.notGamma = self.notGammaSets()
 
