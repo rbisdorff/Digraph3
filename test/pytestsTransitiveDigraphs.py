@@ -169,24 +169,4 @@ def testFairestCopelandRanking():
     print(wcg.copelandPreRanking)
     print(wcg.copelandPermutations)
     print(wcg.fairestCopelandRanking)
-
-def testDynamicProgrammingModule():
-    print('*====>>>> test dynamic programming solutions ----')
-    from dynamicProgramming import DynamicProgrammingDigraph,\
-                                   RandomDynamicProgrammingDigraph
-    dg = RandomDynamicProgrammingDigraph(order=12,
-                                         maxStages=4,
-                                         costsRange=(5,10),
-                                         preferenceDirection='min',
-                                         seed=2)
-    print(dg.optimalPath)
-    print(dg.bestSum)
-    print(dg.preferenceDirection)
-    dg.exportGraphViz('testDP',WithBestPathDecoration=True)
-    dg.save()
-
-    dg1 = DynamicProgrammingDigraph('tempDPdigraph')
-    print(dg1.optimalPath)
-    print(dg1.bestSum)
-    print(dg1.preferenceDirection)
     

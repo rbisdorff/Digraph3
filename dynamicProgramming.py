@@ -21,7 +21,7 @@ Copyright (C) 2024-2025 Raymond Bisdorff
 
 """
 
-__version__ = "$Revision: Python 3.13.13 $"
+__version__ = "$Revision: Python 3.4.2 $"
 
 from digraphs import Digraph
 class DynamicProgrammingDigraph(Digraph):
@@ -260,25 +260,139 @@ class DynamicProgrammingDigraph(Digraph):
             optimalPath.append(stages[i][answer[i]])
         return optimalPath
 
-    def exportGraphViz(self,fileName=None,direction='best',
-                       WithBestPathDecoration=True,
-                       ArrowHeads=True,
+    def exportGraphViz(self,fileName=None,
+                       ArrowHeads=False,
                        Comments=True,graphType='png',
                        graphSize='7,7',bgcolor='cornsilk',
                        fontSize=10,Debug=False):
         """
-        Using the exportGraphViz() version of the TransitiveDigraph class
+        export GraphViz dot file for Hasse diagram drawing filtering.
         """
-        self.closeTransitive(InSite=True)
-        from transitiveDigraphs import TransitiveDigraph
-        TransitiveDigraph.exportGraphViz(self,
-                        fileName=fileName,direction=direction,
-                       WithBestPathDecoration=WithBestPathDecoration,
-                       ArrowHeads=ArrowHeads,
-                       Comments=Comments,graphType=graphType,
-                       graphSize=graphSize,bgcolor=bgcolor,
-                       fontSize=fontSize,Debug=Debug)
-        self.closeTransitive(Reverse=True,InSite=True)
+        import os
+        from copy import copy as deepcopy
+            
+        def _safeName(t0):
+            t = t0.split(sep="-")
+            t1 = t[0]
+            n = len(t)
+            if n > 1:
+                for i in range(1,n):
+                    t1 += '%s%s' % ('_',t[i])
+            return t1
+        # working on a deepcopy of self
+        digraph = deepcopy(self)
+##        if direction == 'best':
+##            try:
+##                rankingByChoosing = digraph.rankingByBestChoosing['result']
+##            except:
+##                digraph.computeRankingByBestChoosing()
+##                rankingByChoosing = digraph.rankingByBestChoosing['result']
+##        else:
+##            try:
+##                rankingByChoosing = digraph.rankingByLastChoosing['result']
+##            except:
+##                digraph.computeRankingByLastChoosing()
+##                rankingByChoosing = digraph.rankingByLastChoosing['result']
+##        if Debug:
+##            print(rankingByChoosing)
+        
+        if Comments:
+            print('*---- exporting a dot file for GraphViz tools ---------*')
+        actionKeys = [x for x in digraph.actions]
+        n = len(actionKeys)
+        #if relation is None:
+        #    relation = deepcopy(digraph.relation)
+        Med = digraph.valuationdomain['med']
+        i = 0
+        if fileName is None:
+            name = digraph.name
+        else:
+            name = fileName
+        dotName = name+'.dot'
+        if Comments:
+            print('Exporting to '+dotName)
+        fo = open(dotName,'w')
+        fo.write('digraph G {\n')
+        if bgcolor is None:
+            fo.write('graph [ ordering = out, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
+        else:
+            fo.write('graph [ bgcolor = %s, ordering = out, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "' % bgcolor)
+        fo.write('\\nDigraph3 (graphviz)\\n R. Bisdorff, 2025", size="')
+        fo.write(graphSize),fo.write('",fontsize=%d];\n' % fontSize)
+        
+        # writing graph nodes
+        for x in actionKeys:
+            try:
+                nodeName = digraph.actions[x]['shortName']
+            except:
+                nodeName = str(x)                    
+            if x in digraph.optimalPath:
+                node = '%s [shape = "circle", fillcolor=lightcoral, style=filled, label = "%s", fontsize=%d];\n'\
+                   % (str(_safeName(x)),_safeName(nodeName),fontSize)           
+            else:
+                node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
+                   % (str(_safeName(x)),_safeName(nodeName),fontSize)       
+            fo.write(node)
+            
+        # same ranks for Hasses equivalence classes
+        stages = digraph.stages 
+        #k = len(rankingByChoosing)
+        k = len(digraph.stages)
+        for i in range(k):
+            sameRank = 'subgraph { rank=same; '
+            #ich = rankingByChoosing[i][1]
+            ich = stages[i]
+            for x in ich:
+                sameRank += str(_safeName(x))+'; '
+            sameRank += '}\n'
+            print(i,sameRank)
+            fo.write(sameRank)
+
+        # writing the decorated edges
+        print(digraph.optimalPath)
+        relation = digraph.relation
+        for i in range(k-1):
+            ich = stages[i]
+            for x in ich:
+                for j in range(i+1,k):
+                    jch = stages[j]
+                    for y in jch:  # optimal path edges
+                        if x in digraph.optimalPath and y in digraph.optimalPath:
+                            arcColor = 'blue'
+                            lineWidth = 2
+                            if relation[x][y] > digraph.valuationdomain['med']:
+                                edge = '%s-> %s [label="%.0f",style="setlinewidth(%d)",color=%s] ;\n' %\
+                                    (_safeName(x),_safeName(y),digraph.costs[x][y],lineWidth,arcColor)
+                                fo.write(edge)
+                            elif relation[y][x] > digraph.valuationdomain['med']:
+                                edge = '%s-> %s [label="%.0f",style="setlinewidth(%d)",color=%s] ;\n' %\
+                                    (_safeName(y),_safeName(x),digraph.costs[y][x],lineWidth,arcColor)
+                                fo.write(edge)
+                        else:      # non-optimal path edges
+                            arcColor= 'grey'
+                            lineWidth = 1
+                            if relation[x][y] > digraph.valuationdomain['med']:
+                                edge = '%s-> %s [taillabel="%.0f",labelfontsize="9",style="setlinewidth(%d)",color=%s] ;\n' %\
+                                    (_safeName(x),_safeName(y),digraph.costs[x][y],lineWidth,arcColor)
+                                fo.write(edge)
+                            elif relation[y][x] > digraph.valuationdomain['med']:
+                                edge = '%s-> %s [taillabel="%.0f",labelfontsize="9",style="setlinewidth(%d)",color=%s] ;\n' %\
+                                    (_safeName(y),_safeName(x),digraph.costs[y][x],lineWidth,arcColor)
+                                fo.write(edge)
+                                                  
+        fo.write('}\n \n')
+        fo.close()
+        
+        commandString = 'dot -Grankdir=TB -T'+graphType+' ' +dotName+\
+                        ' -o '+name+'.'+graphType
+        if Comments:
+            print(commandString)
+        try:
+            os.system(commandString)
+        except:
+            if Comments:
+                print('graphViz tools not avalaible! Please check installation.')
+
 
 from dynamicProgramming import DynamicProgrammingDigraph
 class RandomDynamicProgrammingDigraph(DynamicProgrammingDigraph):
@@ -388,11 +502,6 @@ class RandomDynamicProgrammingDigraph(DynamicProgrammingDigraph):
                     costs[x][y] = random.randint(costsRange[0],costsRange[1])
                 else:
                     costs[x][y] = Decimal('0')
-##                if x == y:
-##                    costs[x][y] = Decimal('0')
-##                else:
-##                    costs[x][y] = random.randint(costsRange[0],costsRange[1]) \
-##                              * g.relation[x][y]
         if Debug:
             print(costs)
 
@@ -412,9 +521,6 @@ class RandomDynamicProgrammingDigraph(DynamicProgrammingDigraph):
         self.costsRange = costsRange
         self.preferenceDirection = preferenceDirection
         self.optimalPath = self.computeDynamicProgrammingSolution(Debug=Debug)    
-        #self.closeTransitive(Reverse = False,InSite=True)
-##        self.gamma = self.gammaSets()
-##        self.notGamma = self.notGammaSets()
 
 # --------------------
 
@@ -442,7 +548,7 @@ if __name__ == '__main__':
     print(dg.optimalPath)
     print(dg.bestSum)
     print(dg.preferenceDirection)
-    dg.exportGraphViz('testDP',WithBestPathDecoration=True)
+    dg.exportGraphViz('testDP')
     dg.save()
 
     dg1 = DynamicProgrammingDigraph('tempDPdigraph')

@@ -216,6 +216,18 @@ verboseTransitiveDigraphsTests:
 		done
 		(cd ${TESTDIR}; ${PYTEST} -vs ../pytestsTransitiveDigraphs.py)
 
+dynamicProgrammingDigraphsTests:
+		for md in ${modules}; do \
+		    cp $$md ${TESTDIR}/; \
+		done
+		(cd ${TESTDIR}; ${PYTEST} -v ../pytestsDynamicProgrammingDigraphs.py)
+
+verboseDynamicProgrammingDigraphsTests:
+		for md in ${modules}; do \
+		    cp $$md ${TESTDIR}/; \
+		done
+		(cd ${TESTDIR}; ${PYTEST} -vs ../pytestsDynamicProgrammingDigraphs.py)
+
 randomDigraphsTests:
 		for md in ${modules}; do \
 		    cp $$md ${TESTDIR}/; \
