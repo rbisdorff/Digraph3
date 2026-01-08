@@ -419,7 +419,7 @@ class RandomDynamicProgrammingDigraph(DynamicProgrammingDigraph):
      ['a01', 'a10', 'a09', 'a05', 'a12']
     >>> print(dg.bestSum)
      26
-    >>> dg.exportGraphViz('testDP',WithBestPathDecoration=True)
+    >>> dg.exportGraphViz('testDP')
      *---- exporting a dot file for GraphViz tools ---------*
      Exporting to testDP.dot
      dot -Grankdir=TB -Tpng testDP.dot -o testDP.png
