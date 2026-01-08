@@ -9389,8 +9389,8 @@ starting from a single <em>self.source</em> node and ending in a single <em>self
 
 <dl class="py method">
 <dt class="sig sig-object py" id="dynamicProgramming.DynamicProgrammingDigraph.exportGraphViz">
-<span class="sig-name descname"><span class="pre">exportGraphViz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'best'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">WithBestPathDecoration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ArrowHeads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'png'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'7,7'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bgcolor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cornsilk'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dynamicProgramming.html#DynamicProgrammingDigraph.exportGraphViz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynamicProgramming.DynamicProgrammingDigraph.exportGraphViz" title="Link to this definition"></a></dt>
-<dd><p>Using the exportGraphViz() version of the TransitiveDigraph class</p>
+<span class="sig-name descname"><span class="pre">exportGraphViz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ArrowHeads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'png'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'7,7'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bgcolor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cornsilk'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dynamicProgramming.html#DynamicProgrammingDigraph.exportGraphViz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dynamicProgramming.DynamicProgrammingDigraph.exportGraphViz" title="Link to this definition"></a></dt>
+<dd><p>export GraphViz dot file for Hasse diagram drawing filtering.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -9429,9 +9429,9 @@ added by the class constructor.</p>
 <span class="go">  Instance class      : RandomDynamicProgrammingDigraph</span>
 <span class="go">  Instance name       : randomDPdigraph</span>
 <span class="go">  Digraph Order       : 12</span>
-<span class="go">  Digraph Size        : 28</span>
+<span class="go">  Digraph Size        : 24</span>
 <span class="go">  Valuation domain    : [-1.00;1.00]</span>
-<span class="go">  Determinateness (%) : 80.30</span>
+<span class="go">  Determinateness (%) : 68.18</span>
 <span class="go">  Attributes          : [&#39;name&#39;, &#39;order&#39;, &#39;actions&#39;, &#39;valuationdomain&#39;,</span>
 <span class="go">                        &#39;relation&#39;, &#39;gamma&#39;, &#39;notGamma&#39;,</span>
 <span class="go">                        &#39;costsRange&#39;, &#39;preferenceDirection&#39;,</span>
@@ -9439,9 +9439,9 @@ added by the class constructor.</p>
 <span class="go">                        &#39;stages&#39;, &#39;nstages&#39;,</span>
 <span class="go">                        &#39;bestSum&#39;, &#39;optimalPath&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">dg</span><span class="o">.</span><span class="n">optimalPath</span><span class="p">)</span>
-<span class="go"> [&#39;a01&#39;, &#39;a09&#39;, &#39;a02&#39;, &#39;a05&#39;, &#39;a12&#39;]</span>
+<span class="go"> [&#39;a01&#39;, &#39;a10&#39;, &#39;a09&#39;, &#39;a05&#39;, &#39;a12&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">dg</span><span class="o">.</span><span class="n">bestSum</span><span class="p">)</span>
-<span class="go"> 25.0</span>
+<span class="go"> 26</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;testDP&#39;</span><span class="p">,</span><span class="n">WithBestPathDecoration</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go"> Exporting to testDP.dot</span>
@@ -15150,7 +15150,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jan 07, 2026.
+      <span class="lastupdated">Last updated on Jan 08, 2026.
       </span></p>
   </div>
 

@@ -281,21 +281,6 @@ class DynamicProgrammingDigraph(Digraph):
             return t1
         # working on a deepcopy of self
         digraph = deepcopy(self)
-##        if direction == 'best':
-##            try:
-##                rankingByChoosing = digraph.rankingByBestChoosing['result']
-##            except:
-##                digraph.computeRankingByBestChoosing()
-##                rankingByChoosing = digraph.rankingByBestChoosing['result']
-##        else:
-##            try:
-##                rankingByChoosing = digraph.rankingByLastChoosing['result']
-##            except:
-##                digraph.computeRankingByLastChoosing()
-##                rankingByChoosing = digraph.rankingByLastChoosing['result']
-##        if Debug:
-##            print(rankingByChoosing)
-        
         if Comments:
             print('*---- exporting a dot file for GraphViz tools ---------*')
         actionKeys = [x for x in digraph.actions]
@@ -421,9 +406,9 @@ class RandomDynamicProgrammingDigraph(DynamicProgrammingDigraph):
       Instance class      : RandomDynamicProgrammingDigraph
       Instance name       : randomDPdigraph
       Digraph Order       : 12
-      Digraph Size        : 28
+      Digraph Size        : 24
       Valuation domain    : [-1.00;1.00]
-      Determinateness (%) : 80.30
+      Determinateness (%) : 68.18
       Attributes          : ['name', 'order', 'actions', 'valuationdomain',
                             'relation', 'gamma', 'notGamma',
                             'costsRange', 'preferenceDirection',
@@ -431,9 +416,9 @@ class RandomDynamicProgrammingDigraph(DynamicProgrammingDigraph):
                             'stages', 'nstages',
                             'bestSum', 'optimalPath']
     >>> print(dg.optimalPath)
-     ['a01', 'a09', 'a02', 'a05', 'a12']
+     ['a01', 'a10', 'a09', 'a05', 'a12']
     >>> print(dg.bestSum)
-     25.0
+     26
     >>> dg.exportGraphViz('testDP',WithBestPathDecoration=True)
      *---- exporting a dot file for GraphViz tools ---------*
      Exporting to testDP.dot
