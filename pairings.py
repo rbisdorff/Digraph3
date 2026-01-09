@@ -2364,7 +2364,8 @@ class FairnessEnhancedIntraGroupMatching(IntraGroupPairing):
     *Parameters*:   
         * *intraVp* : a IntraGroup voting profile instance with *2k* voters where the *2k-1* candidates of
           each person are the other persons
-        * *initialMatching* : the matching from which the fairness enhancing algorithm is starting
+        * *initialMatching* : None (default) | 'random' | 'bestCopeland' the matching from which
+          the fairness enhancing algorithm is starting.
           If *None*, a right --[pi,pi+1] for i = 1..2k-1 step 3-- and a left --[pi,p-i] for i = 1..k-- initial matching will be used
           elif 'random' a random maximal matching will be used with given *seed*
           elif 'bestCopeland' the best Copeland matching will be used as initial matching

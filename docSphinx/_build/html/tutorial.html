@@ -8105,7 +8105,7 @@ fecop 75.78% success rate</p>
 </section>
 <section id="computing-a-fair-pairing-solution">
 <h4><a class="toc-backref" href="#id400" role="doc-backlink"><span class="section-number">1.4.4.2. </span>Computing a fair pairing solution</a><a class="headerlink" href="#computing-a-fair-pairing-solution" title="Link to this heading"></a></h4>
-<p>The <a class="reference internal" href="techDoc.html#module-pairings" title="pairings"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pairings</span></code></a> module provides the <a class="reference internal" href="techDoc.html#pairings.FairestIntraGroupPairing" title="pairings.FairestIntraGroupPairing"><code class="xref py py-class docutils literal notranslate"><span class="pre">FairestIntraGroupPairing</span></code></a> constructor for computing by brute force over all 9!! = 945 potential pairings the best correlated solution with respect to the previously given <em>bavp</em> voting profile.</p>
+<p>The <a class="reference internal" href="techDoc.html#module-pairings" title="pairings"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pairings</span></code></a> module provides the <a class="reference internal" href="techDoc.html#pairings.FairestIntraGroupPairing" title="pairings.FairestIntraGroupPairing"><code class="xref py py-class docutils literal notranslate"><span class="pre">FairestIntraGroupPairing</span></code></a> constructor for computing by brute force over all 9!! = 945 potential pairings the best correlated solution with respect to the previously given <em>bavp</em> voting profile (see <a class="reference internal" href="#fair-intragroup-pairings-label"><span class="std std-ref">tutorial on computing fair intragroup pairings</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="classmates2">
 <div class="code-block-caption"><span class="caption-number">Listing 1.115 </span><span class="caption-text">Solving the intragroup pairing problem</span><a class="headerlink" href="#classmates2" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pairings</span> <span class="kn">import</span> <span class="n">FairestIntraGroupPairing</span>
@@ -8153,11 +8153,11 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 </div>
-<p>Looking in <a class="reference internal" href="#classmates2"><span class="std std-numref">Listing 1.115</span></a> at the fairest pairing solution, we are lucky here as the solution is highly correlated (+0.920) to the pairing wishes of the ten classmates. All students, except <em>Gaby</em>, are in fact paired with an approved partner. Notice that with such a small group the brute force approach testing all 945 potential pairings takes about four seconds. We may try to reduce the overall runtime by using a smart fairness enhancing solver.</p>
+<p>Looking in <a class="reference internal" href="#classmates2"><span class="std std-numref">Listing 1.115</span></a> at the fairest pairing solution, we are lucky here as the pairing solution is highly correlated with the pairing wishes of the ten classmates (+0.920, see Line 41). All students, except <em>Gaby</em>, are in fact paired with an approved partner and no student is paired with a disapproved partner. Notice that with such a small group, the brute force approach testing all 945 potential pairings takes only about four seconds. We may nevertheless try to reduce this runtime figure by using a smart fairness enhancing solver.</p>
 </section>
 <section id="using-a-fairness-enhancing-solver">
 <h4><a class="toc-backref" href="#id401" role="doc-backlink"><span class="section-number">1.4.4.3. </span>Using a fairness enhancing solver</a><a class="headerlink" href="#using-a-fairness-enhancing-solver" title="Link to this heading"></a></h4>
-<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">p~pairings.FairnessEnhancedIntraGroupMatching</span></code> constructor allows us indeed to significantly reduce this run time.</p>
+<p>The <a class="reference internal" href="techDoc.html#pairings.FairnessEnhancedIntraGroupMatching" title="pairings.FairnessEnhancedIntraGroupMatching"><code class="xref py py-class docutils literal notranslate"><span class="pre">pairings.FairnessEnhancedIntraGroupMatching</span></code></a> constructor may indeed reduce sometimes significantly this run time, especially with larger groups.</p>
 <div class="literal-block-wrapper docutils container" id="classmates3">
 <div class="code-block-caption"><span class="caption-number">Listing 1.116 </span><span class="caption-text">Fairness enhanced solving of the pairing problem</span><a class="headerlink" href="#classmates3" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pairings</span> <span class="kn">import</span> <span class="n">FairnessEnhancedIntraGroupMatching</span>
@@ -8170,7 +8170,7 @@ fecop 75.78% success rate</p>
 <span class="linenos"> 8</span><span class="go">   correlation: 0.790</span>
 <span class="linenos"> 9</span><span class="go"> ===&gt;&gt;&gt; Enhancing right initial matching</span>
 <span class="linenos">10</span><span class="go">  Initial right matching</span>
-<span class="hll"><span class="linenos">11</span><span class="go">  [{&#39;A&#39;, &#39;J&#39;}, {&#39;C&#39;, &#39;H&#39;}, {&#39;E&#39;, &#39;F&#39;}, {&#39;G&#39;, &#39;D&#39;}, {&#39;I&#39;, &#39;B&#39;}]</span>
+<span class="hll"><span class="linenos">11</span><span class="go">  [{&#39;J&#39;, &#39;A&#39;}, {&#39;I&#39;, &#39;B&#39;}, {&#39;H&#39;, &#39;C&#39;}, {&#39;G&#39;, &#39;D&#39;}, {&#39;F&#39;, &#39;E&#39;}]</span>
 </span><span class="linenos">12</span><span class="go">  Fairness enhanced right matching</span>
 <span class="linenos">13</span><span class="go">  [{&#39;A&#39;, &#39;I&#39;}, {&#39;C&#39;, &#39;F&#39;}, {&#39;E&#39;, &#39;B&#39;}, {&#39;G&#39;, &#39;J&#39;}, {&#39;D&#39;, &#39;H&#39;}]</span>
 <span class="linenos">14</span><span class="go">  correlation: 0.920</span>
@@ -8186,7 +8186,7 @@ fecop 75.78% success rate</p>
 </span></pre></div>
 </div>
 </div>
-<p>In <a class="reference internal" href="#classmates3"><span class="std std-numref">Listing 1.116</span></a> we may notice that the fairness enhancing procedure starts from two initial pairing solutions, a right one and a left one (see Lines 5 and 11). With the right inital pairing, we obtain in fact the same optimal fairest pairing solution as before in less the 1/5th of a second, i.e. the previous brute force time divided by 20 (see Line 23).</p>
+<p>In <a class="reference internal" href="#classmates3"><span class="std std-numref">Listing 1.116</span></a> we may notice that the fairness enhancing procedure  starts by default from two initial pairing solutions, a right one and a left one (see Lines 5 and 11). With the right inital pairing, we obtain in fact the same optimal fairest pairing solution as before. With a global run time of less than 1/5th of a second, the previous brute force run time is actually divided by 20 (see Line 23).</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 <hr class="docutils" />
 </section>

@@ -8326,7 +8326,7 @@ In :numref:`classmates1` we may notice that pairing *Alice* with *Carol* and *Bo
 Computing a fair pairing solution
 `````````````````````````````````
 
-The :py:mod:`pairings` module provides the :py:class:`~pairings.FairestIntraGroupPairing` constructor for computing by brute force over all 9!! = 945 potential pairings the best correlated solution with respect to the previously given *bavp* voting profile.
+The :py:mod:`pairings` module provides the :py:class:`~pairings.FairestIntraGroupPairing` constructor for computing by brute force over all 9!! = 945 potential pairings the best correlated solution with respect to the previously given *bavp* voting profile (see :ref:`tutorial on computing fair intragroup pairings <Fair-IntraGroup-Pairings-label>`).
 
 .. code-block:: pycon
    :name: classmates2
@@ -8377,12 +8377,12 @@ The :py:mod:`pairings` module provides the :py:class:`~pairings.FairestIntraGrou
      Average correlation : +0.920
      Standard deviation  :  0.253
 
-Looking in :numref:`classmates2` at the fairest pairing solution, we are lucky here as the solution is highly correlated (+0.920) to the pairing wishes of the ten classmates. All students, except *Gaby*, are in fact paired with an approved partner. Notice that with such a small group the brute force approach testing all 945 potential pairings takes about four seconds. We may try to reduce the overall runtime by using a smart fairness enhancing solver.
+Looking in :numref:`classmates2` at the fairest pairing solution, we are lucky here as the pairing solution is highly correlated with the pairing wishes of the ten classmates (+0.920, see Line 41). All students, except *Gaby*, are in fact paired with an approved partner and no student is paired with a disapproved partner. Notice that with such a small group, the brute force approach testing all 945 potential pairings takes only about four seconds. We may nevertheless try to reduce this runtime figure by using a smart fairness enhancing solver.
 
 Using a fairness enhancing solver
 `````````````````````````````````
 
-The :py:class:`p~pairings.FairnessEnhancedIntraGroupMatching` constructor allows us indeed to significantly reduce this run time.
+The :py:class:`pairings.FairnessEnhancedIntraGroupMatching` constructor may indeed reduce sometimes significantly this run time, especially with larger groups.
 
 .. code-block:: pycon
    :name: classmates3
@@ -8400,7 +8400,7 @@ The :py:class:`p~pairings.FairnessEnhancedIntraGroupMatching` constructor allows
       correlation: 0.790
     ===>>> Enhancing right initial matching
      Initial right matching
-     [{'A', 'J'}, {'C', 'H'}, {'E', 'F'}, {'G', 'D'}, {'I', 'B'}]
+     [{'J', 'A'}, {'I', 'B'}, {'H', 'C'}, {'G', 'D'}, {'F', 'E'}]
      Fairness enhanced right matching
      [{'A', 'I'}, {'C', 'F'}, {'E', 'B'}, {'G', 'J'}, {'D', 'H'}]
      correlation: 0.920
@@ -8414,7 +8414,7 @@ The :py:class:`p~pairings.FairnessEnhancedIntraGroupMatching` constructor allows
      Average correlation: +0.920
      Total run time: 0.188 sec.
 
-In :numref:`classmates3` we may notice that the fairness enhancing procedure starts from two initial pairing solutions, a right one and a left one (see Lines 5 and 11). With the right inital pairing, we obtain in fact the same optimal fairest pairing solution as before in less the 1/5th of a second, i.e. the previous brute force time divided by 20 (see Line 23).
+In :numref:`classmates3` we may notice that the fairness enhancing procedure  starts by default from two initial pairing solutions, a right one and a left one (see Lines 5 and 11). With the right inital pairing, we obtain in fact the same optimal fairest pairing solution as before. With a global run time of less than 1/5th of a second, the previous brute force run time is actually divided by 20 (see Line 23).
 
 Back to :ref:`Content Table <Tutorial-label>`   
 
