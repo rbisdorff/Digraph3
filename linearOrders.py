@@ -1596,7 +1596,7 @@ class BachetRanking(LinearOrder,_BachetRanking):
                            'bachetOrder', 'decBachetScores', 'incBachetScores',
                            'name', 'actions', 'order', 'valuationdomain', 'relation',
                            'correlation', 'gamma', 'notGamma', 'runTimes']
-    >>> sba.showScores(Valued=True)
+    >>> sba.showScores()
     Bachet scores in descending order
      action 	 score
       a2 	 +6056
