@@ -11279,7 +11279,8 @@ one for the intergroup pairing problem. The enhancing is guided by Copeland rank
 <dt><em>Parameters</em>:   </dt><dd><ul class="simple">
 <li><p><em>intraVp</em> : a IntraGroup voting profile instance with <em>2k</em> voters where the <em>2k-1</em> candidates of
 each person are the other persons</p></li>
-<li><p><em>initialMatching</em> : the matching from which the fairness enhancing algorithm is starting
+<li><p><em>initialMatching</em> : None (default) | ‘random’ | ‘bestCopeland’ the matching from which
+the fairness enhancing algorithm is starting.
 If <em>None</em>, a right –[pi,pi+1] for i = 1..2k-1 step 3– and a left –[pi,p-i] for i = 1..k– initial matching will be used
 elif ‘random’ a random maximal matching will be used with given <em>seed</em>
 elif ‘bestCopeland’ the best Copeland matching will be used as initial matching</p></li>

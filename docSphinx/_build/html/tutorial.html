@@ -200,7 +200,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#classmates-matching-an-intragroup-pairing-case-study">1.4.4. Classmates matching: An <em>intragroup pairing</em> case study</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#a-classmmates-matching-problem">1.4.4.1. A Classmmates matching problem</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#a-classmates-matching-problem">1.4.4.1. A Classmates matching problem</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#computing-a-fair-pairing-solution">1.4.4.2. Computing a fair pairing solution</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#using-a-fairness-enhancing-solver">1.4.4.3. Using a fairness enhancing solver</a></li>
 </ul>
@@ -8000,13 +8000,13 @@ fecop 75.78% success rate</p>
 <span id="roommatesmatching-tutorial-label"></span><h3><a class="toc-backref" href="#id385" role="doc-backlink"><span class="section-number">1.4.4. </span>Classmates matching: An <em>intragroup pairing</em> case study</a><a class="headerlink" href="#classmates-matching-an-intragroup-pairing-case-study" title="Link to this heading"></a></h3>
 <nav class="contents local" id="id146">
 <ul class="simple">
-<li><p><a class="reference internal" href="#a-classmmates-matching-problem" id="id399">A Classmmates matching problem</a></p></li>
+<li><p><a class="reference internal" href="#a-classmates-matching-problem" id="id399">A Classmates matching problem</a></p></li>
 <li><p><a class="reference internal" href="#computing-a-fair-pairing-solution" id="id400">Computing a fair pairing solution</a></p></li>
 <li><p><a class="reference internal" href="#using-a-fairness-enhancing-solver" id="id401">Using a fairness enhancing solver</a></p></li>
 </ul>
 </nav>
-<section id="a-classmmates-matching-problem">
-<h4><a class="toc-backref" href="#id399" role="doc-backlink"><span class="section-number">1.4.4.1. </span>A Classmmates matching problem</a><a class="headerlink" href="#a-classmmates-matching-problem" title="Link to this heading"></a></h4>
+<section id="a-classmates-matching-problem">
+<h4><a class="toc-backref" href="#id399" role="doc-backlink"><span class="section-number">1.4.4.1. </span>A Classmates matching problem</a><a class="headerlink" href="#a-classmates-matching-problem" title="Link to this heading"></a></h4>
 <p>A class of ten university students must be paired for a class activity. The students submitted the following approval-disapproval preferences.</p>
 <blockquote>
 <div><table class="docutils align-default">
@@ -8101,7 +8101,7 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 </div>
-<p>In <a class="reference internal" href="#classmates1"><span class="std std-numref">Listing 1.114</span></a> we may notice that pairing <em>Alice</em> with <em>Carol</em> and <em>Bob</em> with <em>Edward</em> is evident as both do approve their reciprocal partners. <em>Gaby</em> however wants to be paired with <em>Edward</em> or <em>Henry</em>, yet both do not approve her as potential partner. Notice also that <em>Edward</em> wishes to be paired only with male colleagues and <em>Isabel</em> only with female ones. What is now a pairing solution which takes the fairest account of these individual approval and disapproval votes.</p>
+<p>In <a class="reference internal" href="#classmates1"><span class="std std-numref">Listing 1.114</span></a> we may notice that pairing <em>Alice</em> with <em>Carol</em> and <em>Bob</em> with <em>Edward</em> is evident as both do approve their reciprocal partners. <em>Gaby</em> however wants to be paired with <em>Edward</em> or <em>Henry</em>, yet both do not approve her as potential partner. Notice also that <em>Edward</em> wishes to be paired only with male partners and <em>Isabel</em> only with female ones. What is now a pairing solution which takes the fairest account of these individual approval and disapproval votes.</p>
 </section>
 <section id="computing-a-fair-pairing-solution">
 <h4><a class="toc-backref" href="#id400" role="doc-backlink"><span class="section-number">1.4.4.2. </span>Computing a fair pairing solution</a><a class="headerlink" href="#computing-a-fair-pairing-solution" title="Link to this heading"></a></h4>
@@ -8161,7 +8161,7 @@ fecop 75.78% success rate</p>
 <div class="literal-block-wrapper docutils container" id="classmates3">
 <div class="code-block-caption"><span class="caption-number">Listing 1.116 </span><span class="caption-text">Fairness enhanced solving of the pairing problem</span><a class="headerlink" href="#classmates3" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pairings</span> <span class="kn">import</span> <span class="n">FairnessEnhancedIntraGroupMatching</span>
-<span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fep</span> <span class="o">=</span> <span class="n">FairnessEnhancedIntraGroupMatching</span><span class="p">(</span><span class="n">bapv</span><span class="p">)</span>
+<span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fep</span> <span class="o">=</span> <span class="n">FairnessEnhancedIntraGroupMatching</span><span class="p">(</span><span class="n">bavp</span><span class="p">)</span>
 <span class="linenos"> 3</span><span class="go"> ===&gt;&gt;&gt; Enhancing left initial matching</span>
 <span class="linenos"> 4</span><span class="go">  Initial left matching</span>
 <span class="hll"><span class="linenos"> 5</span><span class="go">  [{&#39;A&#39;, &#39;B&#39;}, {&#39;C&#39;, &#39;D&#39;}, {&#39;E&#39;, &#39;F&#39;}, {&#39;G&#39;, &#39;H&#39;}, {&#39;I&#39;, &#39;J&#39;}]</span>

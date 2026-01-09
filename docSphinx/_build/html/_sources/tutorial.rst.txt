@@ -8257,8 +8257,8 @@ Classmates matching: An *intragroup pairing* case study
 	:depth: 2
 	:local:
 
-A Classmmates matching problem
-``````````````````````````````
+A Classmates matching problem
+`````````````````````````````
 A class of ten university students must be paired for a class activity. The students submitted the following approval-disapproval preferences.
 
    ===========  ============ ===============
@@ -8320,7 +8320,7 @@ The given pairing preferences are gathered in a :py:class:`~votingProfiles.Bipol
     Approvals   : ['D', 'G']
     Disapprovals: ['B', 'C', 'E']
 
-In :numref:`classmates1` we may notice that pairing *Alice* with *Carol* and *Bob* with *Edward* is evident as both do approve their reciprocal partners. *Gaby* however wants to be paired with *Edward* or *Henry*, yet both do not approve her as potential partner. Notice also that *Edward* wishes to be paired only with male colleagues and *Isabel* only with female ones. What is now a pairing solution which takes the fairest account of these individual approval and disapproval votes.  
+In :numref:`classmates1` we may notice that pairing *Alice* with *Carol* and *Bob* with *Edward* is evident as both do approve their reciprocal partners. *Gaby* however wants to be paired with *Edward* or *Henry*, yet both do not approve her as potential partner. Notice also that *Edward* wishes to be paired only with male partners and *Isabel* only with female ones. What is now a pairing solution which takes the fairest account of these individual approval and disapproval votes.  
 
 
 Computing a fair pairing solution
@@ -8391,7 +8391,7 @@ The :py:class:`pairings.FairnessEnhancedIntraGroupMatching` constructor may inde
    :emphasize-lines: 5,11,17-21,23
 
    >>> from pairings import FairnessEnhancedIntraGroupMatching
-   >>> fep = FairnessEnhancedIntraGroupMatching(bapv)
+   >>> fep = FairnessEnhancedIntraGroupMatching(bavp)
     ===>>> Enhancing left initial matching
      Initial left matching
      [{'A', 'B'}, {'C', 'D'}, {'E', 'F'}, {'G', 'H'}, {'I', 'J'}]
