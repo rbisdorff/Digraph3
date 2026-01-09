@@ -68,6 +68,7 @@
        * :ref:`Alice’s best choice: A selection case study <Alice-Tutorial-label>`
        * :ref:`The best academic Computer Science Depts: A ranking case study <THERanking-Tutorial-label>`
        * :ref:`The best students, where do they study? A rating case study <RatingUniversities-Tutorial-label>`
+       * :ref:`How to fairly match classmates? A pairing case study <RoommatesMatching-Tutorial-label>`	 
        * :ref:`Exercises <Exercises-label>`
 
    * :ref:`Working with big outranking digraphs <BigDigraphs-Tutorial-label>`
@@ -8240,6 +8241,180 @@ To conclude
 In the end, both the *Copeland* *rating-by-ranking*, as well as the *rating-by-sorting* approach give luckily, in our case study here, very similar results. The first approach, with its *forced* linear ranking, determines on the one hand, *precise* enrolment quality equivalence classes; a result, depending potentially a lot on the actually applied ranking rule. The *rating-by-sorting* approach, on the other hand, only determines for each University a less precise but *prudent* rating of its individual enrolment quality, furthermore supported by a known majority of performance criteria significance; a somehow *fairer* and *robuster* result, but, much less evident for easily comparing the apparent enrolment quality among Universities. Contradictorily, or sparsely valuated Universities, for instance, will appear trivially rated into a large midfield of adjacent 9-tiles.
 
 Let us conclude by saying that we prefer this latter *rating-by-sorting* approach; perhaps impreciser, due the case given, to missing and contradictory performance data; yet, well grounded in a powerful bipolar-valued logical and espistemic framework (see the :ref:`advanced topics of the Digraph3 documentation <Advanced-Topics-label>`).
+
+Back to :ref:`Content Table <Tutorial-label>`   
+
+--------------
+
+.. _RoommatesMatching-Tutorial-label:
+
+
+Classmates matching: An *intragroup pairing* case study
+-------------------------------------------------------
+
+
+.. contents:: 
+	:depth: 2
+	:local:
+
+A Classmmates matching problem
+``````````````````````````````
+A class of ten university students must be paired for a class activity. The students submitted the following approval-disapproval preferences.
+
+   ===========  ============ ===============
+    Students     Approvals   Disapprovals  
+   ===========  ============ ===============
+    Alice (A)    C, F, I      B, G         
+    Bob (B)      D, E, G      H, I, J      
+    Carol (C)    A, F         B, G, I, J   
+    Dan (D)      H            A, B, C   
+    Edward (E)   B, D, F, H   A, C, G, I, J 
+    Felix (F)    C, H, I      B, J         
+    Gaby (G)     E, H         A, C, D      
+    Henry (H)    D, F         B, E         
+    Isabel(I)    A, C, G, J   B, D, E,F, H 
+    Jane (J)     D, G         B, C, E      
+   ===========  ============ =============== 
+
+The given pairing preferences are gathered in a :py:class:`~votingProfiles.BipolarApprovalVotingProfile` object stored under the name *classmates.py* in the *examples* directory of the *Digraph3* resources.
+
+.. code-block:: pycon
+   :name: classmates1
+   :linenos:
+   :caption: Example of intragroup pairing preferences
+   :emphasize-lines: 7,13,10,16,25,18,28,32
+
+   >>> from votingProfiles import BipolarApprovalVotingProfile
+   >>> bavp = BipolarApprovalVotingProfile('classmates')
+   >>> bavp.showBipolarApprovals()
+    Bipolar approval ballots
+    ------------------------
+    A :
+    Approvals   : ['C', 'F', 'I']
+    Disapprovals: ['B', 'G']
+    B :
+    Approvals   : ['D', 'E', 'G']
+    Disapprovals: ['H', 'I', 'J']
+    C :
+    Approvals   : ['A', 'F']
+    Disapprovals: ['B', 'G', 'I', 'J']
+    D :
+    Approvals   : ['H']
+    Disapprovals: ['A', 'B', 'C']
+    E :
+    Approvals   : ['B', 'D', 'F', 'H']
+    Disapprovals: ['A', 'C', 'G', 'I', 'J']
+    F :
+    Approvals   : ['C', 'H', 'I']
+    Disapprovals: ['B', 'J']
+    G :
+    Approvals   : ['E', 'H']
+    Disapprovals: ['A', 'C', 'D']
+    H :
+    Approvals   : ['D', 'F']
+    Disapprovals: ['B', 'E']
+    I :
+    Approvals   : ['A', 'C', 'G', 'J']
+    Disapprovals: ['B', 'D', 'E', 'F', 'H']
+    J :
+    Approvals   : ['D', 'G']
+    Disapprovals: ['B', 'C', 'E']
+
+In :numref:`classmates1` we may notice that pairing *Alice* with *Carol* and *Bob* with *Edward* is evident as both do approve their reciprocal partners. *Gaby* however wants to be paired with *Edward* or *Henry*, yet both do not approve her as potential partner. Notice also that *Edward* wishes to be paired only with male colleagues and *Isabel* only with female ones. What is now a pairing solution which takes the fairest account of these individual approval and disapproval votes.  
+
+
+Computing a fair pairing solution
+`````````````````````````````````
+
+The :py:mod:`pairings` module provides the :py:class:`~pairings.FairestIntraGroupPairing` constructor for computing by brute force over all 9!! = 945 potential pairings the best correlated solution with respect to the previously given *bavp* voting profile.
+
+.. code-block:: pycon
+   :name: classmates2
+   :linenos:
+   :caption: Solving the intragroup pairing problem
+   :emphasize-lines: 15,23-27,30-39,41
+
+   >>> from pairings import FairestIntraGroupPairing
+   >>> fp = FairestIntraGroupPairing(bavp,orderLimit=10)
+   >>> fp
+    *------- IntraGroupPairing instance description ------*
+     Instance class    : FairestIntraGroupPairing
+     Instance name     : IntraGroupPairing
+     Group size        : 10
+     Nbr of matchings  : 945
+     Attributes        : ['name', 'persons', 'order', 'vpA',
+                          'nbrOfMatchings', 'pairings', 'matching',
+			  'avgCorr', 'stdCorr', 'groupScores',
+			  'runTimes', 'vertices', 'valuationDomain',
+			  'edges', 'gamma']
+     ----  Constructor run times (in sec.) ----
+      Total time           : 4.04574
+      Data input           : 0.00001
+      Maximal matchings    : 0.10362
+      Pairing correlations : 3.94153
+      Sorting Fitness      : 0.00052
+      Storing results      : 0.00006
+   >>> fp.showMatchingFairness()
+    Matched pairs
+     {'A', 'I'}
+     {'B', 'E'}
+     {'C', 'F'}
+     {'G', 'J'}
+     {'H', 'D'}
+    ----
+    Individual correlations:
+     'A': +1.000
+     'B': +1.000
+     'C': +1.000
+     'D': +1.000
+     'E': +1.000
+     'F': +1.000
+     'G': +0.200
+     'H': +1.000
+     'I': +1.000
+     'J': +1.000
+    -----
+     Average correlation : +0.920
+     Standard deviation  :  0.253
+
+Looking in :numref:`classmates2` at the fairest pairing solution, we are lucky here as the solution is highly correlated (+0.920) to the pairing wishes of the ten classmates. All students, except *Gaby*, are in fact paired with an approved partner. Notice that with such a small group the brute force approach testing all 945 potential pairings takes about four seconds. We may try to reduce the overall runtime by using a smart fairness enhancing solver.
+
+Using a fairness enhancing solver
+`````````````````````````````````
+
+The :py:class:`p~pairings.FairnessEnhancedIntraGroupMatching` constructor allows us indeed to significantly reduce this run time.
+
+.. code-block:: pycon
+   :name: classmates3
+   :linenos:
+   :caption: Fairness enhanced solving of the pairing problem
+   :emphasize-lines: 5,11,17-21,23
+
+   >>> from pairings import FairnessEnhancedIntraGroupMatching
+   >>> fep = FairnessEnhancedIntraGroupMatching(bapv)
+    ===>>> Enhancing left initial matching
+     Initial left matching
+     [{'A', 'B'}, {'C', 'D'}, {'E', 'F'}, {'G', 'H'}, {'I', 'J'}]
+     Fairness enhanced left matching
+     [{'A', 'C'}, {'B', 'G'}, {'E', 'D'}, {'F', 'H'}, {'I', 'J'}]
+      correlation: 0.790
+    ===>>> Enhancing right initial matching
+     Initial right matching
+     [{'A', 'J'}, {'C', 'H'}, {'E', 'F'}, {'G', 'D'}, {'I', 'B'}]
+     Fairness enhanced right matching
+     [{'A', 'I'}, {'C', 'F'}, {'E', 'B'}, {'G', 'J'}, {'D', 'H'}]
+     correlation: 0.920
+    ===>>> Best fairness enhanced matching
+     Matched pairs
+      {'A', 'I'}
+      {'C', 'F'}
+      {'D', 'H'}
+      {'E', 'B'}
+      {'G', 'J'}
+     Average correlation: +0.920
+     Total run time: 0.188 sec.
+
+In :numref:`classmates3` we may notice that the fairness enhancing procedure starts from two initial pairing solutions, a right one and a left one (see Lines 5 and 11). With the right inital pairing, we obtain in fact the same optimal fairest pairing solution as before in less the 1/5th of a second, i.e. the previous brute force time divided by 20 (see Line 23).
 
 Back to :ref:`Content Table <Tutorial-label>`   
 
