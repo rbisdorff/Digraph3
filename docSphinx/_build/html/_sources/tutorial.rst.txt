@@ -6144,7 +6144,7 @@ We are lucky here with the given example of reciprocal bipolar approval voting p
    >>> fecop.Iterations
     0
 
-A Monte Carlo simulation with 1000 intergroup pairing problems of order 6 with approval and disapproval probabilities of 30% shows actually that both starting points --*initalMatching* = *None* and *initialMatching* = 'bestCopeland'-- of the fairness enhancing heuristic may diverge positively and negatively in their respective best solutions.
+A Monte Carlo simulation with 1000 intergroup pairing problems of order 6 with approval and disapproval probabilities of 30% shows actually that both starting points --*initialMatching* = *None* and *initialMatching* = 'bestCopeland'-- of the fairness enhancing heuristic may diverge positively and negatively in their respective best solutions.
 
 .. Figure:: femfecopComparison.png
    :alt: Influence of the fairness enhancing start matching
@@ -6180,7 +6180,7 @@ For intergroup pairing problems of higher order, it appears however that the bes
 
 The median overall average correlation with the individual pairing preferences amounts to +0.886 with a maximum at +0.923. The *Unfairness* statistic indicates the absolute difference between the average correlations obtained in group A versus group B.
 
-In order to study the potential difference in quality and fairness of the pairing solutions obtained by starting the fairness enhancing procedure from both the left and right inital matching, from the best determined *Copeland* matching as well as from the fairest *Gale-Shapley* we ran a Monte Carlo simulation with 1000 random intergroup pairing problems of order 20 and where the individual pairing preferences were given with complete linear voting profiles (see :numref:`compFemCopGs`).
+In order to study the potential difference in quality and fairness of the pairing solutions obtained by starting the fairness enhancing procedure from both the left and right initial matching, from the best determined *Copeland* matching as well as from the fairest *Gale-Shapley* we ran a Monte Carlo simulation with 1000 random intergroup pairing problems of order 20 and where the individual pairing preferences were given with complete linear voting profiles (see :numref:`compFemCopGs`).
 
 .. Figure:: compFemCopGS.png
    :alt: Comapring fairness enhancing results from different initial matchings
@@ -8414,7 +8414,7 @@ The :py:class:`pairings.FairnessEnhancedIntraGroupMatching` constructor may inde
      Average correlation: +0.920
      Total run time: 0.188 sec.
 
-In :numref:`classmates3` we may notice that the fairness enhancing procedure  starts by default from two initial pairing solutions, a right one and a left one (see Lines 5 and 11). With the right inital pairing, we obtain in fact the same optimal fairest pairing solution as before. With a global run time of less than 1/5th of a second, the previous brute force run time is actually divided by 20 (see Line 23).
+In :numref:`classmates3` we may notice that the fairness enhancing procedure  starts by default from two initial pairing solutions, a right one and a left one (see Lines 5 and 11). With the right initial pairing, we obtain in fact the same optimal fairest pairing solution as before. With a global run time of less than 1/5th of a second, the previous brute force run time is actually divided by 20 (see Line 23).
 
 Back to :ref:`Content Table <Tutorial-label>`   
 

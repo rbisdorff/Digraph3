@@ -868,7 +868,7 @@ To appreciate the apparent orientation of the standard and robust strict outrank
 
    Heat map of the random 3 objectives performance tableau ordered by the *NetFlows* ranking rule
 
-As the inital prekernel is here validated at stability level +2, recommending alternatives *p4*, as well as *p2*, as potential first choices, appears well justified. Alternative *a4* represents indeed an overall *best compromise choice* between all decision objectives, whereas alternative *p2* gives an unanimous best choice with respect to two out of three decision objectives. Up to the decision maker to make his final choice.
+As the initial prekernel is here validated at stability level +2, recommending alternatives *p4*, as well as *p2*, as potential first choices, appears well justified. Alternative *a4* represents indeed an overall *best compromise choice* between all decision objectives, whereas alternative *p2* gives an unanimous best choice with respect to two out of three decision objectives. Up to the decision maker to make his final choice.
 
 For concluding, let us mention that it is precisely again our bipolar-valued *logical characteristic framework* that provides us here with a **first order distributional dominance** test for effectively qualifying the stability level 2 *robustness* of an outranking digraph when facing performance tableaux with criteria of only ordinal-valued significance weights. A real world application of our stability analysis with such a kind of performance tableau may be consulted in [BIS-2015p]_.
 
