@@ -8167,7 +8167,7 @@ fecop 75.78% success rate</p>
 <p><span class="caption-number">Fig. 1.71 </span><span class="caption-text">Fairest intragroup pairing solution</span><a class="headerlink" href="#fairestintragrouppairing2" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>Notice that with such a small group, the brute force approach testing all 945 potential pairings takes only about four seconds. We may nevertheless try to reduce this runtime figure by using a smart fairness enhancing solver.</p>
+<p>Notice that with such a small group, the brute force approach testing all 945 potential pairings takes only about four seconds (see Line 15 in <a class="reference internal" href="#classmates2"><span class="std std-numref">Listing 1.115</span></a>). We may nevertheless try to reduce this runtime figure by using a smart fairness enhancing solver.</p>
 </section>
 <section id="using-a-fairness-enhancing-solver">
 <h4><a class="toc-backref" href="#id401" role="doc-backlink"><span class="section-number">1.4.4.3. </span>Using a fairness enhancing solver</a><a class="headerlink" href="#using-a-fairness-enhancing-solver" title="Link to this heading"></a></h4>
@@ -8200,7 +8200,7 @@ fecop 75.78% success rate</p>
 </span></pre></div>
 </div>
 </div>
-<p>In <a class="reference internal" href="#classmates3"><span class="std std-numref">Listing 1.116</span></a> we may notice that the fairness enhancing procedure  starts by default from two initial pairing solutions, a right one and a left one (see Lines 5 and 11). With the right initial pairing, we obtain in fact the same optimal fairest pairing solution as before. With a global run time of less than 1/5th of a second, the previous brute force run time is actually divided by 20 (see Line 23).</p>
+<p>In <a class="reference internal" href="#classmates3"><span class="std std-numref">Listing 1.116</span></a> we may notice that the fairness enhancing procedure  starts by default from two initial pairing solutions, a right one and a left one (see Lines 5 and 11). Starting from the initial pairings, the solver tries to swap either the two exterior persons p1 &lt;-&gt; p4 and/or the interior persons p2 &lt;-&gt; p3 of two pairs [[p1,p2],[p3,p4]] in order to enhance the fairness of the so far obtained pairing. Here we recover in fact the same optimal fairest pairing solution as before in a global run time of less than 1/5th of a second. The previous brute force run time is actually divided by 20 (see Line 23).</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 <hr class="docutils" />
 </section>

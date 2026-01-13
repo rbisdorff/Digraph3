@@ -8392,7 +8392,7 @@ Looking in :numref:`classmates2` at the fairest pairing solution, we are lucky h
 
     Fairest intragroup pairing solution
 
-Notice that with such a small group, the brute force approach testing all 945 potential pairings takes only about four seconds. We may nevertheless try to reduce this runtime figure by using a smart fairness enhancing solver.
+Notice that with such a small group, the brute force approach testing all 945 potential pairings takes only about four seconds (see Line 15 in :numref:`classmates2`). We may nevertheless try to reduce this runtime figure by using a smart fairness enhancing solver.
 
 Using a fairness enhancing solver
 `````````````````````````````````
@@ -8429,7 +8429,7 @@ The :py:class:`pairings.FairnessEnhancedIntraGroupMatching` constructor may inde
      Average correlation: +0.920
      Total run time: 0.188 sec.
 
-In :numref:`classmates3` we may notice that the fairness enhancing procedure  starts by default from two initial pairing solutions, a right one and a left one (see Lines 5 and 11). With the right initial pairing, we obtain in fact the same optimal fairest pairing solution as before. With a global run time of less than 1/5th of a second, the previous brute force run time is actually divided by 20 (see Line 23).
+In :numref:`classmates3` we may notice that the fairness enhancing procedure  starts by default from two initial pairing solutions, a right one and a left one (see Lines 5 and 11). Starting from the initial pairings, the solver tries to swap either the two exterior persons p1 <-> p4 and/or the interior persons p2 <-> p3 of two pairs [[p1,p2],[p3,p4]] in order to enhance the fairness of the so far obtained pairing. Here we recover in fact the same optimal fairest pairing solution as before in a global run time of less than 1/5th of a second. The previous brute force run time is actually divided by 20 (see Line 23).
 
 Back to :ref:`Content Table <Tutorial-label>`   
 
