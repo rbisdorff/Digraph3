@@ -8377,7 +8377,22 @@ The :py:mod:`pairings` module provides the :py:class:`~pairings.FairestIntraGrou
      Average correlation : +0.920
      Standard deviation  :  0.253
 
-Looking in :numref:`classmates2` at the fairest pairing solution, we are lucky here as the pairing solution is highly correlated with the pairing wishes of the ten classmates (+0.920, see Line 41). All students, except *Gaby*, are in fact paired with an approved partner and no student is paired with a disapproved partner. Notice that with such a small group, the brute force approach testing all 945 potential pairings takes only about four seconds. We may nevertheless try to reduce this runtime figure by using a smart fairness enhancing solver.
+Looking in :numref:`classmates2` at the fairest pairing solution, we are lucky here as the pairing result is highly correlated with the pairing wishes of the ten classmates (+0.920, see Line 41). All students, except *Gaby*, are in fact paired with an approved partner and no student is paired with a disapproved partner. We may illustrate in :numref:`fairestIntraGroupPairing2` the resulting fairest intragroup pairing with a graphviz drawing.
+
+   >>> fp.exportGraphViz('fairestIntraGroupPairing2')
+    *---- exporting a dot file for GraphViz tools ---------*
+    Exporting to fairestIntraGroupPairing2.dot
+    fdp -Tpng fairestIntraGroupPairing2.dot -o fairestIntraGroupPairing2.png
+
+.. Figure:: fairestIntraGroupPairing2.png
+    :alt: Fairest Pairing Drawing
+    :name: fairestIntraGroupPairing2
+    :width: 250 px
+    :align: center
+
+    Fairest intragroup pairing solution
+
+Notice that with such a small group, the brute force approach testing all 945 potential pairings takes only about four seconds. We may nevertheless try to reduce this runtime figure by using a smart fairness enhancing solver.
 
 Using a fairness enhancing solver
 `````````````````````````````````
@@ -8394,15 +8409,15 @@ The :py:class:`pairings.FairnessEnhancedIntraGroupMatching` constructor may inde
    >>> fep = FairnessEnhancedIntraGroupMatching(bavp)
     ===>>> Enhancing left initial matching
      Initial left matching
-     [{'A', 'B'}, {'C', 'D'}, {'E', 'F'}, {'G', 'H'}, {'I', 'J'}]
+     [['A', 'B'], ['C', 'D'], ['E', 'F'], ['G', 'H'], ['I', 'J']]
      Fairness enhanced left matching
-     [{'A', 'C'}, {'B', 'G'}, {'E', 'D'}, {'F', 'H'}, {'I', 'J'}]
+     [['A', 'C'], ['B', 'G'], ['E', 'D'], ['F', 'H'], ['I', 'J']]
       correlation: 0.790
     ===>>> Enhancing right initial matching
      Initial right matching
-     [{'J', 'A'}, {'I', 'B'}, {'H', 'C'}, {'G', 'D'}, {'F', 'E'}]
+     [['J', 'A'], ['I', 'B'], ['H', 'C'], ['G', 'D'], ['F', 'E']]
      Fairness enhanced right matching
-     [{'A', 'I'}, {'C', 'F'}, {'E', 'B'}, {'G', 'J'}, {'D', 'H'}]
+     [['A', 'I'], ['C', 'F'], ['E', 'B'], ['G', 'J'], ['D', 'H']]
      correlation: 0.920
     ===>>> Best fairness enhanced matching
      Matched pairs
