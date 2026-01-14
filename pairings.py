@@ -2591,10 +2591,15 @@ class FairnessEnhancedIntraGroupMatching(IntraGroupPairing):
                 initialMatching = cop.matching
                 if Comments:
                     print('initial best Copeland matching')
-            self.initialMatching = initialMatching
-            if Debug:
-                print('*---- Given Initial Matching ----*')
+            elif type(initialMatching) == list or type(initialMatching) == frozenset:
+                self.initialMatching = initialMatching
+                if Debug:
+                    print('*---- Given Initial Matching ----*')
                 print(persons,initialMatching)
+            else:
+                print('Error !!: initialMatching = %s is not correctly given' % initialMatching )
+                print('Must be either None, "bestCopeland" or a given intragroup pairing solution')
+                return
             corrInitialCop, stdDevCop, groupScoresCop =\
                 self.computeIndividualCorrelations(initialMatching)
             if corrInitialCop == Decimal('1'):
@@ -3277,8 +3282,8 @@ if __name__ == "__main__":
 ##                                              Comments=True,Debug=False)
 ##    fegm = FairnessEnhancedIntraGroupMatching(vpG,initialMatching=fp.pairings[0][0],
 ##                                              Comments=True,Debug=False)
-    fem = FairnessEnhancedIntraGroupMatching(vpG,initialMatching='bestCopeland',
-                                              Comments=True,Debug=False)
+    fem = FairnessEnhancedIntraGroupMatching(vpG,initialMatching='BestCopeland',
+                                              Comments=True,Debug=True)
 ##    
 ##    print('==>> Copeland')
 ##    cop.showMatchingFairness(WithIndividualCorrelations=True)
