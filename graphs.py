@@ -1986,12 +1986,13 @@ class Graph(object):
     def showCliques(self):
         self.computeCliques(Comments=True)
 
-    def showEdgesCharacteristicValues(self,ndigits=2):
+    def showEdgesCharacteristicValues(self,edges=None,ndigits=2):
         """
         Prints the edge links of the bipartite graph instance
         """
         verticesKeys = [x for x in self.vertices]
-        edges = self.edges
+        if edges is None:
+            edges = self.edges
 
         try:
             IntegerValuation = self.valuationDomain['IntegerValuation']

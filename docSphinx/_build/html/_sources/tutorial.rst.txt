@@ -8257,7 +8257,7 @@ Classmates matching: An *intragroup pairing* case study
 	:depth: 2
 	:local:
 
-A Classmates matching problem
+A classmates matching problem
 `````````````````````````````
 A class of ten university students must be paired for a class activity. The students submitted the following approval-disapproval preferences.
 
@@ -8429,7 +8429,54 @@ The :py:class:`pairings.FairnessEnhancedIntraGroupMatching` constructor may inde
      Average correlation: +0.920
      Total run time: 0.188 sec.
 
-In :numref:`classmates3` we may notice that the fairness enhancing procedure  starts by default from two initial pairing solutions, a right one and a left one (see Lines 5 and 11). Starting from the initial pairings, the solver tries to swap either the two exterior persons p1 <-> p4 and/or the interior persons p2 <-> p3 of two pairs [[p1,p2],[p3,p4]] in order to enhance the fairness of the so far obtained pairing. Here we recover in fact the same optimal fairest pairing solution as before in a global run time of less than 1/5th of a second. The previous brute force run time is actually divided by 20 (see Line 23).
+In :numref:`classmates3` we may notice that the fairness enhancing procedure  starts by default from two initial pairing solutions, a right one and a left one (see Lines 5 and 11). Starting from the initial pairings, the solver tries to swap either the two exterior persons *p1* <-> *p4* and/or the interior persons *p2* <-> *p3* of two pairs [[*p1,p2*], [*p3,p4*]] in order to enhance the fairness of the so far obtained pairing. Here we recover in fact the same optimal fairest pairing solution as before in a global run time of less than 1/5th of a second.
+
+Instead of starting from the default initial right and left pairings, we may also start the fairness enhancing search from the best *Copeland* matching, i.e. an initial pairing where for each person we choose as potential partner a person that shows a high fairness enhancement potential.
+
+.. code-block:: pycon
+   :name: classmates4
+   :linenos:
+   :caption: Fairness enhancing pairwise Copeland scores
+
+   >>> fep.showCopelandScores()
+         | 'B' 'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J'	 
+    -----|------------------------------------
+     'A' |  +0 +16 -14 -10  -2 -14   0 +12  +2	 
+     'B' |     -12 -14 +12 -16	+2 -16 -10 -14	 
+     'C' |  	   -14 -10 +14 -14   0 +12 -14	 
+     'D' |  	       +12  -2 -14 +16 -10 +16	 
+     'E' |  	 	    -2 +16 -16 -10 -14	 
+     'F' |  	 	        +2 +16 -10  +2	 
+     'G' |  	 	 	     0 +12 +16	 
+     'H' |  	 	 	       -10  +2	 
+     'I' |  	 	 	 	    +2	 
+
+In :numref:`classmates4` above we see for instance confirmed that the fairest potenial partner for *Alice* is *Carol* with a *Copeland* score 0f +16. A same *Copeland* score of +16 is shown for matching *Dan* with *Henry* as well as *Gaby* with *Jane*. In :numref:`classmates5` below try to enhance the intragroup pairing solving by starting this time from this best *Copeland* pairing solution (see Line 2).
+
+.. code-block:: pycon
+   :name: classmates5
+   :linenos:
+   :caption: Fairness enhanced solving of the pairing problem
+   :emphasize-lines: 2,5,7,10-16
+
+   >>> fep = FairnessEnhancedIntraGroupMatching(bavp,
+   ...                          initialMatching='bestCopeland')
+    initial best Copeland matching
+     *---- Initial matching ----*
+     [['B', 'E'], ['C', 'A'], ['D', 'H'], ['F', 'I'], ['G', 'J']]
+     Enhancing iteration :  1
+     Enhancing iteration :  2
+     ===>>> Best fairness enhanced matching
+     Matched pairs
+     {'A', 'I'}
+     {'B', 'E'}
+     {'C', 'F'}
+     {'D', 'H'}
+     {'G', 'J'}
+     Average correlation: +0.920
+     Total run time: 0.082 sec.
+
+We may reach the fairest possible pairing solution within two fairness enhancing steps (see Line 5 and 7). Total run time is thus eventually reduced to a tenth of a second (see Line 16). The previous brute force run time of about 4 seonds is actually divided by 40 (see :numref:`classmates2` Line 15).
 
 Back to :ref:`Content Table <Tutorial-label>`   
 

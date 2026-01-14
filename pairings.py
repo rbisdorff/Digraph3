@@ -2137,6 +2137,19 @@ class IntraGroupPairing(Graph):
             score += ba[b][candidates[i]] - ba[candidates[i]][b]
         return score
 
+    def showCopelandScores(self):
+        try:
+            copelandScores = self.copelandScores
+        except:
+            copelandScores = self.computeCopelandScores()
+        copEdges = {}
+        for p1 in self.persons:
+            for p2 in self.persons:
+                if p1 != p2:
+                    edgeKey = frozenset([p1,p2])
+                    copEdges[edgeKey] = copelandScores[p1][p2]
+        self.showEdgesCharacteristicValues(edges=copEdges,ndigits=0)
+
     def enhanceMatchingFairness(self,matching,
                                 Comments=False,Debug=False):
         """
