@@ -8451,7 +8451,9 @@ Instead of starting from the default initial right and left pairings, we may als
      'H' |  	 	 	       -10  +2	 
      'I' |  	 	 	 	    +2	 
 
-In :numref:`classmates4` above we see for instance confirmed that the fairest potenial partner for *Alice* is *Carol* with a *Copeland* score 0f +16. A same *Copeland* score of +16 is shown for matching *Dan* with *Henry* as well as *Gaby* with *Jane*. In :numref:`classmates5` below try to enhance the intragroup pairing solving by starting this time from this best *Copeland* pairing solution (see Line 2).
+In :numref:`classmates4` above we see for instance confirmed that the fairest potenial partner for *Alice* is *Carol* with a *Copeland* score 0f +16. A same *Copeland* score of +16 is shown for matching *Dan* with *Henry* as well as *Gaby* with *Jane*. *Bob* and *Edward show a *Copeland* score of +12. Finally we are only left with *Felix* and *Isabel*. *Felix* approves *Isabel* but *Isabel* does only approve female partners; their *Copeland* score is hence negative (-10) [66]_.
+
+In :numref:`classmates5` below we try to enhance the fairness of a matching solution by starting this time from this best *Copeland* pairing solution (see Line 2).
 
 .. code-block:: pycon
    :name: classmates5
@@ -8463,7 +8465,7 @@ In :numref:`classmates4` above we see for instance confirmed that the fairest po
    ...                          initialMatching='bestCopeland')
     initial best Copeland matching
      *---- Initial matching ----*
-     [['B', 'E'], ['C', 'A'], ['D', 'H'], ['F', 'I'], ['G', 'J']]
+     [['C', 'A'], ['D', 'H'], ['G', 'J'], ['B', 'E'], ['F', 'I']]
      Enhancing iteration :  1
      Enhancing iteration :  2
      ===>>> Best fairness enhanced matching
@@ -8476,7 +8478,7 @@ In :numref:`classmates4` above we see for instance confirmed that the fairest po
      Average correlation: +0.920
      Total run time: 0.082 sec.
 
-We may reach the fairest possible pairing solution within two fairness enhancing steps (see Line 5 and 7). Total run time is thus eventually reduced to a tenth of a second (see Line 16). The previous brute force run time of about 4 seonds is actually divided by 40 (see :numref:`classmates2` Line 15).
+We may reach the fairest possible pairing solution within two fairness enhancing steps by exchanging *Alice* with *Felix* and *Carol* with *Isabel* (see Lines 5, 10,12). Total run time is thus reduced to a tenth of a second (see Line 16). The previous brute force run time of about 4 seonds is eventually divided by 40 (see :numref:`classmates2` Line 15).
 
 Back to :ref:`Content Table <Tutorial-label>`   
 
@@ -11566,6 +11568,8 @@ Appendices
 .. [64] The *officeChoice.py* data file may be found in the *examples* directory of the Digraph3 resources.
 
 .. [65] An example of a borderless :py:class:`~randomDigraphs.RandomOutrankingValuationDigraph` instance may be found in the *examples* directory of the *Digraphs3* resources under the name *borderlessROV9S25.py*.
+
+.. [66] The best *Copeland* initial matching is computed following a greedy *Copeland* scores ranked otential pairs list.  
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
