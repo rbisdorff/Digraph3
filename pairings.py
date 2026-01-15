@@ -2137,18 +2137,67 @@ class IntraGroupPairing(Graph):
             score += ba[b][candidates[i]] - ba[candidates[i]][b]
         return score
 
-    def showCopelandScores(self):
+    def showMatchingFitnessScores(self):
         try:
-            copelandScores = self.copelandScores
+            Test = self.copelandInitialMatching
         except:
-            copelandScores = self.computeCopelandScores()
+            print('The initial matching is not the best Copeland matching')
+            return
+        copelandScores = self.copelandScores
         copEdges = {}
+        MaxScore = 0
         for p1 in self.persons:
             for p2 in self.persons:
                 if p1 != p2:
                     edgeKey = frozenset([p1,p2])
-                    copEdges[edgeKey] = copelandScores[p1][p2]
+                    copp1p2 = copelandScores[p1][p2]
+                    copEdges[edgeKey] = copp1p2
+                    if abs(copp1p2) > MaxScore:
+                        MaxScore = abs(copp1p2)
         self.showEdgesCharacteristicValues(edges=copEdges,ndigits=0)
+        print('Valuation range: [%d; %d]' % (-MaxScore,MaxScore))
+        
+    def showEdgesCharacteristicValues(self,edges=None,ndigits=2):
+        """
+        Prints the edge links of the bipartite graph instance
+        """
+        verticesKeys = [x for x in self.vertices]
+        if edges is None:
+            edges = self.edges
+
+        try:
+            IntegerValuation = self.valuationDomain['IntegerValuation']
+        except:
+            IntegerValuation = False
+
+        print('\t|', end=' ')
+        n = len(verticesKeys)
+        for i in range(1,n):
+            x = verticesKeys[i]
+            print("'"+x+"'\t", end=' ')
+        print('\n--------|--------------------')
+        for i in range(n-1):
+            x = verticesKeys[i]
+            print("  '"+x+"' | ", end=' ')
+            for j in range(1,n):
+                if j < (i+1):
+                    print('\t',end=' ')
+                else:
+                    y = verticesKeys[j]
+                    edgeKey = frozenset([x,y])
+                    if IntegerValuation:
+                        print('%+d\t' % (edges[edgeKey]), end=' ')
+                    else:
+                        formatString = '%%+2.%df\t' % ndigits
+                        print(formatString % (edges[edgeKey]), end=' ')
+            print('')
+##        if IntegerValuation:
+##            print('Valuation domain: [%+d;%+d]'% (self.valuationDomain['min'],
+##                                                 self.valuationDomain['max']))
+##        else:
+##            formatString = 'Valuation domain: [%%+2.%df;%%+2.%df]' % (ndigits,ndigits)
+##            print( formatString % (self.valuationDomain['min'],
+##                                   self.valuationDomain['max']))
 
     def enhanceMatchingFairness(self,matching,
                                 Comments=False,Debug=False):
@@ -2392,7 +2441,7 @@ class FairnessEnhancedIntraGroupMatching(IntraGroupPairing):
                  _nbrOfSwappingRetrials=None,
                  #RandomInit=False,
                  seed=None,
-                 Comments=True,Debug=False):
+                 Comments=False,Debug=False):
         from decimal import Decimal
         from time import time
         from copy import deepcopy
@@ -2589,8 +2638,9 @@ class FairnessEnhancedIntraGroupMatching(IntraGroupPairing):
                 from pairings import BestCopelandIntraGroupMatching
                 cop = BestCopelandIntraGroupMatching(self.vpA,Comments=False)
                 initialMatching = cop.matching
+                self.copelandInitialMatching = cop.matching
                 if Comments:
-                    print('initial best Copeland matching')
+                    print('Best Copeland initial matching')
             elif type(initialMatching) == list or type(initialMatching) == frozenset:
                 self.initialMatching = initialMatching
                 if Debug:
@@ -2605,7 +2655,7 @@ class FairnessEnhancedIntraGroupMatching(IntraGroupPairing):
             if corrInitialCop == Decimal('1'):
                 if Comments or Debug:
                     print('Initial Copeland matching is fairest possible')
-                self.matching = initialMatchingCop
+                self.matching = initialMatching
                 self.maxCorr = corrInitialCop
                 self.iterations = 0
                 self.matchesVisited = []
@@ -2634,11 +2684,13 @@ class FairnessEnhancedIntraGroupMatching(IntraGroupPairing):
 ##        runTimes['totalTime'] = t4 -t0
 ##        self.runTimes = runTimes
         if Debug:
-            print(self.initialMatching)
+            try:
+                print(self.initialMatching)
+            except:
+                print(self.copelandInitialMatching)
             print(self.matching)
             print(self.maxCorr)
             print(self.iterations)
-            print(self.matchesVisited)
         # store graph data
         tg = time()
         self.vertices = deepcopy(intraVp.voters)
@@ -3282,8 +3334,8 @@ if __name__ == "__main__":
 ##                                              Comments=True,Debug=False)
 ##    fegm = FairnessEnhancedIntraGroupMatching(vpG,initialMatching=fp.pairings[0][0],
 ##                                              Comments=True,Debug=False)
-    fem = FairnessEnhancedIntraGroupMatching(vpG,initialMatching='BestCopeland',
-                                              Comments=True,Debug=True)
+    fem = FairnessEnhancedIntraGroupMatching(vpG,initialMatching='bestCopeland',
+                                              Comments=False,Debug=False)
 ##    
 ##    print('==>> Copeland')
 ##    cop.showMatchingFairness(WithIndividualCorrelations=True)

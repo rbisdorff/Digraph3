@@ -203,6 +203,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#a-classmates-matching-problem">1.4.4.1. A classmates matching problem</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#computing-a-fair-pairing-solution">1.4.4.2. Computing a fair pairing solution</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#using-a-fairness-enhancing-solver">1.4.4.3. Using a fairness enhancing solver</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#guiding-the-choice-of-the-initial-matching">1.4.4.4. Guiding the choice of the initial matching</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#exercises">1.4.5. Exercises</a><ul>
@@ -8003,6 +8004,7 @@ fecop 75.78% success rate</p>
 <li><p><a class="reference internal" href="#a-classmates-matching-problem" id="id401">A classmates matching problem</a></p></li>
 <li><p><a class="reference internal" href="#computing-a-fair-pairing-solution" id="id402">Computing a fair pairing solution</a></p></li>
 <li><p><a class="reference internal" href="#using-a-fairness-enhancing-solver" id="id403">Using a fairness enhancing solver</a></p></li>
+<li><p><a class="reference internal" href="#guiding-the-choice-of-the-initial-matching" id="id404">Guiding the choice of the initial matching</a></p></li>
 </ul>
 </nav>
 <section id="a-classmates-matching-problem">
@@ -8175,7 +8177,7 @@ fecop 75.78% success rate</p>
 <div class="literal-block-wrapper docutils container" id="classmates3">
 <div class="code-block-caption"><span class="caption-number">Listing 1.116 </span><span class="caption-text">Fairness enhanced solving of the pairing problem</span><a class="headerlink" href="#classmates3" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pairings</span> <span class="kn">import</span> <span class="n">FairnessEnhancedIntraGroupMatching</span>
-<span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fep</span> <span class="o">=</span> <span class="n">FairnessEnhancedIntraGroupMatching</span><span class="p">(</span><span class="n">bavp</span><span class="p">)</span>
+<span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fep</span> <span class="o">=</span> <span class="n">FairnessEnhancedIntraGroupMatching</span><span class="p">(</span><span class="n">bavp</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="linenos"> 3</span><span class="go"> ===&gt;&gt;&gt; Enhancing left initial matching</span>
 <span class="linenos"> 4</span><span class="go">  Initial left matching</span>
 <span class="hll"><span class="linenos"> 5</span><span class="go">  [[&#39;A&#39;, &#39;B&#39;], [&#39;C&#39;, &#39;D&#39;], [&#39;E&#39;, &#39;F&#39;], [&#39;G&#39;, &#39;H&#39;], [&#39;I&#39;, &#39;J&#39;]]</span>
@@ -8200,49 +8202,61 @@ fecop 75.78% success rate</p>
 </span></pre></div>
 </div>
 </div>
-<p>In <a class="reference internal" href="#classmates3"><span class="std std-numref">Listing 1.116</span></a> we may notice that the fairness enhancing procedure  starts by default from two initial pairing solutions, a right one and a left one (see Lines 5 and 11). Starting from the initial pairings, the solver tries to swap either the two exterior persons <em>p1</em> &lt;-&gt; <em>p4</em> and/or the interior persons <em>p2</em> &lt;-&gt; <em>p3</em> of two pairs [[<em>p1,p2</em>], [<em>p3,p4</em>]] in order to enhance the fairness of the so far obtained pairing. Here we recover in fact the same optimal fairest pairing solution as before in a global run time of less than 1/5th of a second.</p>
-<p>Instead of starting from the default initial right and left pairings, we may also start the fairness enhancing search from the best <em>Copeland</em> matching, i.e. an initial pairing where for each person we choose as potential partner a person that shows a high fairness enhancement potential.</p>
+<p>In <a class="reference internal" href="#classmates3"><span class="std std-numref">Listing 1.116</span></a> we may notice that the fairness enhancing procedure  starts by default from two initial pairing solutions, a right one and a left one (see Lines 5 and 11). Starting from the initial pairings, the solver tries to swap either the two exterior persons <em>p1</em> &lt;-&gt; <em>p4</em> and/or the interior persons <em>p2</em> &lt;-&gt; <em>p3</em> of two potential student pairs [[<em>p1,p2</em>], [<em>p3,p4</em>]] in order to enhance the fairness of the so far obtained pairing. Here we recover in fact the same optimal fairest pairing solution as before in a global run time of less than 1/5th of a second.</p>
+</section>
+<section id="guiding-the-choice-of-the-initial-matching">
+<h4><a class="toc-backref" href="#id404" role="doc-backlink"><span class="section-number">1.4.4.4. </span>Guiding the choice of the initial matching</a><a class="headerlink" href="#guiding-the-choice-of-the-initial-matching" title="Link to this heading"></a></h4>
+<p>Instead of starting from the default initial right and left pairings, we may also start in <a class="reference internal" href="#classmates4"><span class="std std-numref">Listing 1.117</span></a> below the fairness enhancing search from the best <em>Copeland</em> matching, i.e. an initial pairing where for each person we choose as potential partner a person that shows the highest possible fitness score with respect to her respective given individual pairing preferences.</p>
 <div class="literal-block-wrapper docutils container" id="classmates4">
-<div class="code-block-caption"><span class="caption-number">Listing 1.117 </span><span class="caption-text">Fairness enhancing pairwise Copeland scores</span><a class="headerlink" href="#classmates4" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fep</span><span class="o">.</span><span class="n">showCopelandScores</span><span class="p">()</span>
-<span class="linenos"> 2</span><span class="go">      | &#39;B&#39; &#39;C&#39; &#39;D&#39; &#39;E&#39; &#39;F&#39; &#39;G&#39; &#39;H&#39; &#39;I&#39; &#39;J&#39;</span>
-<span class="linenos"> 3</span><span class="go"> -----|------------------------------------</span>
-<span class="linenos"> 4</span><span class="go">  &#39;A&#39; |  +0 +16 -14 -10  -2 -14   0 +12  +2</span>
-<span class="linenos"> 5</span><span class="go">  &#39;B&#39; |     -12 -14 +12 -16  +2 -16 -10 -14</span>
-<span class="linenos"> 6</span><span class="go">  &#39;C&#39; |         -14 -10 +14 -14   0 +12 -14</span>
-<span class="linenos"> 7</span><span class="go">  &#39;D&#39; |             +12  -2 -14 +16 -10 +16</span>
-<span class="linenos"> 8</span><span class="go">  &#39;E&#39; |                  -2 +16 -16 -10 -14</span>
-<span class="linenos"> 9</span><span class="go">  &#39;F&#39; |                      +2 +16 -10  +2</span>
-<span class="linenos">10</span><span class="go">  &#39;G&#39; |                           0 +12 +16</span>
-<span class="linenos">11</span><span class="go">  &#39;H&#39; |                             -10  +2</span>
-<span class="linenos">12</span><span class="go">  &#39;I&#39; |                                  +2</span>
-</pre></div>
-</div>
-</div>
-<p>In <a class="reference internal" href="#classmates4"><span class="std std-numref">Listing 1.117</span></a> above we see for instance confirmed that the fairest potenial partner for <em>Alice</em> is <em>Carol</em> with a <em>Copeland</em> score 0f +16. A same <em>Copeland</em> score of +16 is shown for matching <em>Dan</em> with <em>Henry</em> as well as <em>Gaby</em> with <em>Jane</em>. <em>Bob</em> and <em>Edward show a *Copeland</em> score of +12. Finally we are only left with <em>Felix</em> and <em>Isabel</em>. <em>Felix</em> approves <em>Isabel</em> but <em>Isabel</em> does only approve female partners; their <em>Copeland</em> score is hence negative (-10) <a class="footnote-reference brackets" href="#id268" id="id147" role="doc-noteref"><span class="fn-bracket">[</span>66<span class="fn-bracket">]</span></a>.</p>
-<p>In <a class="reference internal" href="#classmates5"><span class="std std-numref">Listing 1.118</span></a> below we try to enhance the fairness of a matching solution by starting this time from this best <em>Copeland</em> pairing solution (see Line 2).</p>
-<div class="literal-block-wrapper docutils container" id="classmates5">
-<div class="code-block-caption"><span class="caption-number">Listing 1.118 </span><span class="caption-text">Fairness enhanced solving of the pairing problem</span><a class="headerlink" href="#classmates5" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fep</span> <span class="o">=</span> <span class="n">FairnessEnhancedIntraGroupMatching</span><span class="p">(</span><span class="n">bavp</span><span class="p">,</span>
+<div class="code-block-caption"><span class="caption-number">Listing 1.117 </span><span class="caption-text">Matching fitness scores</span><a class="headerlink" href="#classmates4" title="Link to this code"></a></div>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fec</span> <span class="o">=</span> <span class="n">FairnessEnhancedIntraGroupMatching</span><span class="p">(</span><span class="n">bavp</span><span class="p">,</span>
 <span class="hll"><span class="linenos"> 2</span><span class="gp">... </span>                         <span class="n">initialMatching</span><span class="o">=</span><span class="s1">&#39;bestCopeland&#39;</span><span class="p">)</span>
-</span><span class="linenos"> 3</span><span class="go"> initial best Copeland matching</span>
-<span class="linenos"> 4</span><span class="go">  *---- Initial matching ----*</span>
-<span class="hll"><span class="linenos"> 5</span><span class="go">  [[&#39;C&#39;, &#39;A&#39;], [&#39;D&#39;, &#39;H&#39;], [&#39;G&#39;, &#39;J&#39;], [&#39;B&#39;, &#39;E&#39;], [&#39;F&#39;, &#39;I&#39;]]</span>
-</span><span class="linenos"> 6</span><span class="go">  Enhancing iteration :  1</span>
-<span class="hll"><span class="linenos"> 7</span><span class="go">  Enhancing iteration :  2</span>
-</span><span class="linenos"> 8</span><span class="go">  ===&gt;&gt;&gt; Best fairness enhanced matching</span>
-<span class="linenos"> 9</span><span class="go">  Matched pairs</span>
-<span class="hll"><span class="linenos">10</span><span class="go">  {&#39;A&#39;, &#39;I&#39;}</span>
-</span><span class="hll"><span class="linenos">11</span><span class="go">  {&#39;B&#39;, &#39;E&#39;}</span>
-</span><span class="hll"><span class="linenos">12</span><span class="go">  {&#39;C&#39;, &#39;F&#39;}</span>
-</span><span class="hll"><span class="linenos">13</span><span class="go">  {&#39;D&#39;, &#39;H&#39;}</span>
-</span><span class="hll"><span class="linenos">14</span><span class="go">  {&#39;G&#39;, &#39;J&#39;}</span>
-</span><span class="hll"><span class="linenos">15</span><span class="go">  Average correlation: +0.920</span>
-</span><span class="hll"><span class="linenos">16</span><span class="go">  Total run time: 0.082 sec.</span>
+</span><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fec</span><span class="o">.</span><span class="n">showMatchingFitnessScores</span><span class="p">()</span>
+<span class="linenos"> 4</span><span class="go">      | &#39;B&#39; &#39;C&#39; &#39;D&#39; &#39;E&#39; &#39;F&#39; &#39;G&#39; &#39;H&#39; &#39;I&#39; &#39;J&#39;</span>
+<span class="linenos"> 5</span><span class="go"> -----|------------------------------------</span>
+<span class="hll"><span class="linenos"> 6</span><span class="go">  &#39;A&#39; |  +0 +16 -14 -10  -2 -14   0 +12  +2</span>
+</span><span class="hll"><span class="linenos"> 7</span><span class="go">  &#39;B&#39; |     -12 -14 +12 -16  +2 -16 -10 -14</span>
+</span><span class="linenos"> 8</span><span class="go">  &#39;C&#39; |         -14 -10 +14 -14   0 +12 -14</span>
+<span class="hll"><span class="linenos"> 9</span><span class="go">  &#39;D&#39; |             +12  -2 -14 +16 -10 +16</span>
+</span><span class="linenos">10</span><span class="go">  &#39;E&#39; |                  -2 +16 -16 -10 -14</span>
+<span class="hll"><span class="linenos">11</span><span class="go">  &#39;F&#39; |                      +2 +16 -10  +2</span>
+</span><span class="linenos">12</span><span class="go">  &#39;G&#39; |                           0 +12 +16</span>
+<span class="hll"><span class="linenos">13</span><span class="go">  &#39;H&#39; |                             -10  +2</span>
+</span><span class="linenos">14</span><span class="go">  &#39;I&#39; |                                  +2</span>
+<span class="linenos">15</span><span class="go">  Valuation range: [-18; 18]</span>
+<span class="linenos">16</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fec</span><span class="o">.</span><span class="n">copelandInitialMatching</span>
+<span class="hll"><span class="linenos">17</span><span class="go">{{&#39;C&#39;, &#39;A&#39;}, {&#39;E&#39;, &#39;B&#39;}, {&#39;H&#39;, &#39;D&#39;}, {&#39;J&#39;, &#39;G&#39;}, {&#39;I&#39;, &#39;F&#39;}}</span>
 </span></pre></div>
 </div>
 </div>
-<p>We may reach the fairest possible pairing solution within two fairness enhancing steps by exchanging <em>Alice</em> with <em>Felix</em> and <em>Carol</em> with <em>Isabel</em> (see Lines 5, 10,12). Total run time is thus reduced to a tenth of a second (see Line 16). The previous brute force run time of about 4 seonds is eventually divided by 40 (see <a class="reference internal" href="#classmates2"><span class="std std-numref">Listing 1.115</span></a> Line 15).</p>
+<p>The pairwise fitness scores shown in Lines 6-14 above result from the sum of the <em>Copeland</em> ranking scores of the respective potential partners of both the matched persons. The fitness figures confirm for instance that the best fitting potential partner for <em>Alice</em> is <em>Carol</em> with a score of +16 (see Line 6). A same matching fitness score of +16 is shown for matching <em>Dan</em> with <em>Henry</em> as well as <em>Gaby</em> with <em>Jane</em> (see Lines 9 and 13). <em>Bob</em> and <em>Edward show a  matching fitness score of +12 (see Line 7). Finally we are only left with *Felix</em> and <em>Isabel</em>. <em>Felix</em> approves <em>Isabel</em> but <em>Isabel</em> does only approve female partners; their matching fitness score becomes hence negative (-10, see Line 11)) <a class="footnote-reference brackets" href="#id268" id="id147" role="doc-noteref"><span class="fn-bracket">[</span>66<span class="fn-bracket">]</span></a>. In Line 17 is shown the resulting best fitting <em>Copeland</em> matching.</p>
+<p>Starting from this initial matching, we may now reach indeed the fairest possible pairing solution within two fairness enhancing steps by exchanging <em>Alice</em> with <em>Felix</em> and <em>Carol</em> with <em>Isabel</em>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fec</span><span class="o">.</span><span class="n">showMatchingFairness</span><span class="p">()</span>
+<span class="go"> Matched pairs</span>
+<span class="go">  {&#39;C&#39;, &#39;F&#39;}</span>
+<span class="go">  {&#39;E&#39;, &#39;B&#39;}</span>
+<span class="go">  {&#39;H&#39;, &#39;D&#39;}</span>
+<span class="go">  {&#39;I&#39;, &#39;A&#39;}</span>
+<span class="go">  {&#39;J&#39;, &#39;G&#39;}</span>
+<span class="go"> ----</span>
+<span class="go"> Individual correlations:</span>
+<span class="go">  &#39;A&#39;: +1.000</span>
+<span class="go">  &#39;B&#39;: +1.000</span>
+<span class="go">  &#39;C&#39;: +1.000</span>
+<span class="go">  &#39;D&#39;: +1.000</span>
+<span class="go">  &#39;E&#39;: +1.000</span>
+<span class="go">  &#39;F&#39;: +1.000</span>
+<span class="go">  &#39;G&#39;: +0.200</span>
+<span class="go">  &#39;H&#39;: +1.000</span>
+<span class="go">  &#39;I&#39;: +1.000</span>
+<span class="go">  &#39;J&#39;: +1.000</span>
+<span class="go"> -----</span>
+<span class="go">  Average correlation : +0.920</span>
+<span class="go">  Standard deviation  :  0.253</span>
+<span class="go">  Total run time: 0.073 sec.</span>
+</pre></div>
+</div>
+<p>Total run time is thus reduced to less than a tenth of a second (see Line 16). The previous brute force run time of about 4 seonds is eventually divided by more than <img class="math" src="_images/math/60fab63ccca841be102cc416be541b3507f0b1e9.png" alt="4.0/0.073 \approx 54"/> (see <a class="reference internal" href="#classmates2"><span class="std std-numref">Listing 1.115</span></a> Line 16).</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 <hr class="docutils" />
 </section>
@@ -8252,16 +8266,16 @@ fecop 75.78% success rate</p>
 <p>We propose hereafter some decision problems which may serve as exercises and exam questions in an <em>Algorithmic Decision Theory</em> Course. They cover <em>selection</em>, <em>ranking</em> and <em>rating</em> decision problems. The exercises are marked as follows: § (warming up), §§ (home work), §§§ (research work).</p>
 <nav class="contents local" id="id148">
 <ul class="simple">
-<li><p><a class="reference internal" href="#who-will-receive-the-best-student-award" id="id404">Who will receive the best student award? (§)</a></p></li>
-<li><p><a class="reference internal" href="#how-to-fairly-rank-movies" id="id405">How to fairly rank movies (§)</a></p></li>
-<li><p><a class="reference internal" href="#what-is-your-best-choice-recommendation" id="id406">What is your best choice recommendation? (§)</a></p></li>
-<li><p><a class="reference internal" href="#what-is-the-best-public-policy" id="id407">What is the best public policy? (§§)</a></p></li>
-<li><p><a class="reference internal" href="#a-fair-diploma-validation-decision" id="id408">A fair diploma validation decision (§§§)</a></p></li>
+<li><p><a class="reference internal" href="#who-will-receive-the-best-student-award" id="id405">Who will receive the best student award? (§)</a></p></li>
+<li><p><a class="reference internal" href="#how-to-fairly-rank-movies" id="id406">How to fairly rank movies (§)</a></p></li>
+<li><p><a class="reference internal" href="#what-is-your-best-choice-recommendation" id="id407">What is your best choice recommendation? (§)</a></p></li>
+<li><p><a class="reference internal" href="#what-is-the-best-public-policy" id="id408">What is the best public policy? (§§)</a></p></li>
+<li><p><a class="reference internal" href="#a-fair-diploma-validation-decision" id="id409">A fair diploma validation decision (§§§)</a></p></li>
 </ul>
 </nav>
 <p>Solutions should be supported both by computational Python code using the <strong>Digraph3</strong> programming resources as well as by methodological and algorithmic arguments from the <a class="reference external" href="adtLectures.html">Algorithmic Decision Theory</a> Lectures.</p>
 <section id="who-will-receive-the-best-student-award">
-<h4><a class="toc-backref" href="#id404" role="doc-backlink"><span class="section-number">1.4.5.1. </span>Who will receive the best student award? (§)</a><a class="headerlink" href="#who-will-receive-the-best-student-award" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id405" role="doc-backlink"><span class="section-number">1.4.5.1. </span>Who will receive the best student award? (§)</a><a class="headerlink" href="#who-will-receive-the-best-student-award" title="Link to this heading"></a></h4>
 <p><strong>Data</strong></p>
 <p>Below in <a class="reference internal" href="#gradesex1"><span class="std std-numref">Table 1.6</span></a> you see the actual grades obtained by four students : <em>Ariana</em> (A), <em>Bruce</em> (B), <em>Clare</em> (C) and <em>Daniel</em> (D) in five courses: <em>C1</em>, <em>C2</em>, <em>C3</em>, <em>C4</em> and <em>C5</em> weighted by their respective ECTS points.</p>
 <table class="docutils align-default" id="gradesex1">
@@ -8323,7 +8337,7 @@ fecop 75.78% success rate</p>
 </ol>
 </section>
 <section id="how-to-fairly-rank-movies">
-<h4><a class="toc-backref" href="#id405" role="doc-backlink"><span class="section-number">1.4.5.2. </span>How to fairly rank movies (§)</a><a class="headerlink" href="#how-to-fairly-rank-movies" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id406" role="doc-backlink"><span class="section-number">1.4.5.2. </span>How to fairly rank movies (§)</a><a class="headerlink" href="#how-to-fairly-rank-movies" title="Link to this heading"></a></h4>
 <p><strong>Data</strong></p>
 <ul class="simple">
 <li><p>File <a class="reference external" href="_static/graffiti03.py">graffiti03.py</a>  contains a performance tableau about the rating of movies to be seen in the city of Luxembourg, February 2003. Its content is shown in <a class="reference internal" href="#graffiti03-1"><span class="std std-numref">Fig. 1.72</span></a> below.</p></li>
@@ -8353,7 +8367,7 @@ fecop 75.78% success rate</p>
 </ol>
 </section>
 <section id="what-is-your-best-choice-recommendation">
-<h4><a class="toc-backref" href="#id406" role="doc-backlink"><span class="section-number">1.4.5.3. </span>What is your best choice recommendation? (§)</a><a class="headerlink" href="#what-is-your-best-choice-recommendation" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id407" role="doc-backlink"><span class="section-number">1.4.5.3. </span>What is your best choice recommendation? (§)</a><a class="headerlink" href="#what-is-your-best-choice-recommendation" title="Link to this heading"></a></h4>
 <p><strong>Data</strong> <a class="footnote-reference brackets" href="#id246" id="id149" role="doc-noteref"><span class="fn-bracket">[</span>46<span class="fn-bracket">]</span></a></p>
 <p>A person, who wants to by a TV set, retains after a first selection, eight potential TV models. To make up her choice these eight models were evaluated with respect to three decision objectives of <em>equal importance</em>: - <strong>Costs</strong> of the set (to be minimized); - <strong>Picture and Sound</strong> quality of the TV (to be maximized): - <strong>Maintenace contract</strong> quality of the provider (to be maximized).</p>
 <p>The <strong>Costs</strong> objective is assessed by the price of the TV set (criterion <em>Pr</em> to be minimized). <em>Picture</em> quality (criterion <em>Pq</em>), <em>Sound</em> quality (criterion <em>Sq</em>) and <em>Maintenace contract</em> quality (criterion <em>Mq</em>) are each assessed on a four-level qualitative performance scale: -1 (<em>not good</em>), 0 (<em>average</em>), 1 (<em>good</em>) and 2 (<em>very good</em>).</p>
@@ -8436,7 +8450,7 @@ fecop 75.78% success rate</p>
 </ol>
 </section>
 <section id="what-is-the-best-public-policy">
-<h4><a class="toc-backref" href="#id407" role="doc-backlink"><span class="section-number">1.4.5.4. </span>What is the best public policy? (§§)</a><a class="headerlink" href="#what-is-the-best-public-policy" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id408" role="doc-backlink"><span class="section-number">1.4.5.4. </span>What is the best public policy? (§§)</a><a class="headerlink" href="#what-is-the-best-public-policy" title="Link to this heading"></a></h4>
 <p><strong>Data files</strong></p>
 <ul class="simple">
 <li><p>File <a class="reference external" href="_static/perfTab_1.py">perfTab_1.py</a>  contains a <a class="reference internal" href="#three-objectives-performance-tableau-label"><span class="std std-ref">3 Objectives performance tableau</span></a> with 100 performance records concerning public policies evaluated with respect to an economic, a societal and an environmental public decision objective.</p></li>
@@ -8454,7 +8468,7 @@ fecop 75.78% success rate</p>
 </ol>
 </section>
 <section id="a-fair-diploma-validation-decision">
-<h4><a class="toc-backref" href="#id408" role="doc-backlink"><span class="section-number">1.4.5.5. </span>A fair diploma validation decision (§§§)</a><a class="headerlink" href="#a-fair-diploma-validation-decision" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id409" role="doc-backlink"><span class="section-number">1.4.5.5. </span>A fair diploma validation decision (§§§)</a><a class="headerlink" href="#a-fair-diploma-validation-decision" title="Link to this heading"></a></h4>
 <p><strong>Data</strong></p>
 <p>Use the <a class="reference internal" href="techDoc.html#randomPerfTabs.RandomAcademicPerformanceTableau" title="randomPerfTabs.RandomAcademicPerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">RandomAcademicPerformanceTableau</span></code></a> constructor from the <strong>Digraph3</strong> Python resources for generating realistic random students performance tableaux concerning a curriculum of nine ECTS weighted Courses. Assume that all the gradings are done on an integer scale from 0 (weakest) to 20 (best). It is known that all grading procedures are inevitably imprecise; therefore we will assume an indifference threshold of 1 point and a preference theshold of 2 points. Thurthermore, a performance difference of more than 12 points is considerable and will trigger an outranking polarisation. To validate eventually their curriculum, the students are required to obtain more or less 10 points in each course.</p>
 <p><strong>Questions</strong></p>
@@ -8472,26 +8486,26 @@ fecop 75.78% success rate</p>
 <p>This part introduces python resources for tackling large and big outranking digraphs. First we introduce a sparse model of large outranking digraphs (order &lt; 1000). In a second section we show how to use multiprocessing resources for working with multiple threads in parallel (order &lt; 10000). Finally, we introduce multiprocessing C-versions of the main Digraph3 modules for working with very big outranking digraphs (order &gt; 10000).</p>
 <nav class="contents local" id="id150">
 <ul class="simple">
-<li><p><a class="reference internal" href="#sparse-bipolar-valued-outranking-digraphs" id="id409">Sparse bipolar-valued outranking digraphs</a></p></li>
-<li><p><a class="reference internal" href="#using-digraph3-multiprocessing-resources" id="id410">Using Digraph3 multiprocessing resources</a></p></li>
-<li><p><a class="reference internal" href="#on-ranking-big-outranking-digraphs" id="id411">On ranking big outranking digraphs</a></p></li>
+<li><p><a class="reference internal" href="#sparse-bipolar-valued-outranking-digraphs" id="id410">Sparse bipolar-valued outranking digraphs</a></p></li>
+<li><p><a class="reference internal" href="#using-digraph3-multiprocessing-resources" id="id411">Using Digraph3 multiprocessing resources</a></p></li>
+<li><p><a class="reference internal" href="#on-ranking-big-outranking-digraphs" id="id412">On ranking big outranking digraphs</a></p></li>
 </ul>
 </nav>
 <section id="sparse-bipolar-valued-outranking-digraphs">
-<span id="sparseoutranking-tutorial-label"></span><h3><a class="toc-backref" href="#id409" role="doc-backlink"><span class="section-number">1.5.1. </span>Sparse bipolar-valued outranking digraphs</a><a class="headerlink" href="#sparse-bipolar-valued-outranking-digraphs" title="Link to this heading"></a></h3>
+<span id="sparseoutranking-tutorial-label"></span><h3><a class="toc-backref" href="#id410" role="doc-backlink"><span class="section-number">1.5.1. </span>Sparse bipolar-valued outranking digraphs</a><a class="headerlink" href="#sparse-bipolar-valued-outranking-digraphs" title="Link to this heading"></a></h3>
 <nav class="contents local" id="id151">
 <ul class="simple">
-<li><p><a class="reference internal" href="#the-sparse-pre-ranked-outranking-digraph-model" id="id412">The sparse pre-ranked outranking digraph model</a></p></li>
-<li><p><a class="reference internal" href="#ranking-pre-ranked-sparse-outranking-digraphs" id="id413">Ranking pre-ranked sparse outranking digraphs</a></p></li>
+<li><p><a class="reference internal" href="#the-sparse-pre-ranked-outranking-digraph-model" id="id413">The sparse pre-ranked outranking digraph model</a></p></li>
+<li><p><a class="reference internal" href="#ranking-pre-ranked-sparse-outranking-digraphs" id="id414">Ranking pre-ranked sparse outranking digraphs</a></p></li>
 </ul>
 </nav>
 <p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">RatinbByRelativeQuantilesDigraph</span></code> constructor gives via the rating by relative quantiles a linearly ordered decomposition of the corresponding bipolar-valued outranking digraph (see <a class="reference internal" href="#quantilesordering"><span class="std std-numref">Listing 1.61</span></a>). This decomposition leads us to a new <strong>sparse pre-ranked</strong> outranking digraph model.</p>
 <section id="the-sparse-pre-ranked-outranking-digraph-model">
-<h4><a class="toc-backref" href="#id412" role="doc-backlink"><span class="section-number">1.5.1.1. </span>The sparse pre-ranked outranking digraph model</a><a class="headerlink" href="#the-sparse-pre-ranked-outranking-digraph-model" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id413" role="doc-backlink"><span class="section-number">1.5.1.1. </span>The sparse pre-ranked outranking digraph model</a><a class="headerlink" href="#the-sparse-pre-ranked-outranking-digraph-model" title="Link to this heading"></a></h4>
 <p>We may notice that a given outranking digraph -the association of a set of decision alternatives and an outranking relation- is, following the methodological requirements of the outranking approach, necessarily associated with a corresponding performance tableau. And, we may use this underlying performance tableau for linearly decomposing the set of potential decision alternatives into <strong>ordered quantiles equivalence classes</strong> by using the quantiles sorting technique seen in the previous Section.</p>
-<p>In the coding example shown in <a class="reference internal" href="#prerankedoutrankingdigraph"><span class="std std-numref">Listing 1.119</span></a> below, we generate for instance, first (Lines 2-3), a simple performance tableau of 75 decision alternatives and, secondly (Lines 4), we construct the corresponding <a class="reference internal" href="techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph" title="sparseOutrankingDigraphs.PreRankedOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreRankedOutrankingDigraph</span></code></a> instance called <em>prg</em>. Notice by the way the <em>BigData</em> flag (Line 3) used here for generating a parsimoniously commented performance tableau.</p>
+<p>In the coding example shown in <a class="reference internal" href="#prerankedoutrankingdigraph"><span class="std std-numref">Listing 1.118</span></a> below, we generate for instance, first (Lines 2-3), a simple performance tableau of 75 decision alternatives and, secondly (Lines 4), we construct the corresponding <a class="reference internal" href="techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph" title="sparseOutrankingDigraphs.PreRankedOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreRankedOutrankingDigraph</span></code></a> instance called <em>prg</em>. Notice by the way the <em>BigData</em> flag (Line 3) used here for generating a parsimoniously commented performance tableau.</p>
 <div class="literal-block-wrapper docutils container" id="prerankedoutrankingdigraph">
-<div class="code-block-caption"><span class="caption-number">Listing 1.119 </span><span class="caption-text">Computing a <em>pre-ranked</em> sparse outranking digraph</span><a class="headerlink" href="#prerankedoutrankingdigraph" title="Link to this code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 1.118 </span><span class="caption-text">Computing a <em>pre-ranked</em> sparse outranking digraph</span><a class="headerlink" href="#prerankedoutrankingdigraph" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span>
 <span class="linenos"> 3</span><span class="gp">... </span>                              <span class="n">BigData</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
@@ -8519,9 +8533,9 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 </div>
-<p>The ordering of the 5-tiling result is following the <strong>average</strong> lower and upper quintile limits strategy (see previous section and <a class="reference internal" href="#prerankedoutrankingdigraph"><span class="std std-numref">Listing 1.119</span></a> Line 14). We obtain here 9 ordered components of minimal order 1 and maximal order 25. The corresponding <strong>pre-ranked decomposition</strong> may be visualized as follows.</p>
+<p>The ordering of the 5-tiling result is following the <strong>average</strong> lower and upper quintile limits strategy (see previous section and <a class="reference internal" href="#prerankedoutrankingdigraph"><span class="std std-numref">Listing 1.118</span></a> Line 14). We obtain here 9 ordered components of minimal order 1 and maximal order 25. The corresponding <strong>pre-ranked decomposition</strong> may be visualized as follows.</p>
 <div class="literal-block-wrapper docutils container" id="quantilesdecomposition">
-<div class="code-block-caption"><span class="caption-number">Listing 1.120 </span><span class="caption-text">The quantiles decomposition of a pre-ranked outranking digraph</span><a class="headerlink" href="#quantilesdecomposition" title="Link to this code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 1.119 </span><span class="caption-text">The quantiles decomposition of a pre-ranked outranking digraph</span><a class="headerlink" href="#quantilesdecomposition" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">prg</span><span class="o">.</span><span class="n">showDecomposition</span><span class="p">()</span>
 <span class="linenos"> 2</span><span class="go"> *--- quantiles decomposition in decreasing order---*</span>
 <span class="hll"><span class="linenos"> 3</span><span class="go">  c1. ]0.80-1.00] : [5, 42, 43, 47]</span>
@@ -8540,7 +8554,7 @@ fecop 75.78% success rate</p>
 </span></pre></div>
 </div>
 </div>
-<p>The highest quintile class (]80%-100%]) contains decision alternatives <em>5</em>, <em>42</em>, <em>43</em> and <em>47</em>. Lowest quintile class (]-20%]) gathers alternatives <em>57</em> and <em>59</em> (see <a class="reference internal" href="#quantilesdecomposition"><span class="std std-numref">Listing 1.120</span></a> Lines 3 and 15). We may inspect the resulting sparse outranking relation map as follows in a browser view.</p>
+<p>The highest quintile class (]80%-100%]) contains decision alternatives <em>5</em>, <em>42</em>, <em>43</em> and <em>47</em>. Lowest quintile class (]-20%]) gathers alternatives <em>57</em> and <em>59</em> (see <a class="reference internal" href="#quantilesdecomposition"><span class="std std-numref">Listing 1.119</span></a> Lines 3 and 15). We may inspect the resulting sparse outranking relation map as follows in a browser view.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prg</span><span class="o">.</span><span class="n">showHTMLRelationMap</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -8551,7 +8565,7 @@ fecop 75.78% success rate</p>
 <p><span class="caption-number">Fig. 1.73 </span><span class="caption-text">The relation map of a sparse outranking digraph</span><a class="headerlink" href="#sparse75relationmap" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>In <a class="reference internal" href="#sparse75relationmap"><span class="std std-numref">Fig. 1.73</span></a> we easily recognize the 9 linearly ordered quantile equivalence classes. <em>Green</em> and <em>light-green</em> show positive <strong>outranking</strong> situations, whereas positive <strong>outranked</strong> situations are shown in <strong>red</strong> and <strong>light-red</strong>. Indeterminate situations appear in white. In each one of the 9 quantile equivalence classes we recover in fact the corresponding bipolar-valued outranking <em>sub-relation</em>, which leads to an actual <strong>fill-rate</strong> of 20.4% (see <a class="reference internal" href="#prerankedoutrankingdigraph"><span class="std std-numref">Listing 1.119</span></a> Line 20).</p>
+<p>In <a class="reference internal" href="#sparse75relationmap"><span class="std std-numref">Fig. 1.73</span></a> we easily recognize the 9 linearly ordered quantile equivalence classes. <em>Green</em> and <em>light-green</em> show positive <strong>outranking</strong> situations, whereas positive <strong>outranked</strong> situations are shown in <strong>red</strong> and <strong>light-red</strong>. Indeterminate situations appear in white. In each one of the 9 quantile equivalence classes we recover in fact the corresponding bipolar-valued outranking <em>sub-relation</em>, which leads to an actual <strong>fill-rate</strong> of 20.4% (see <a class="reference internal" href="#prerankedoutrankingdigraph"><span class="std std-numref">Listing 1.118</span></a> Line 20).</p>
 <p>We may now check how faithful the sparse model represents the complete outranking relation.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
 <span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">)</span>
@@ -8564,7 +8578,7 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <p>The ordinal correlation index between the standard and the sparse outranking relations is quite high (+0.863) and their bipolar-valued equivalence is supported by a mean criteria significance majority of (1.0+0.272)/2 = 64%.</p>
-<p>It is worthwhile noticing in <a class="reference internal" href="#prerankedoutrankingdigraph"><span class="std std-numref">Listing 1.119</span></a> Line 18 that sparse pre-ranked outranking digraphs do not contain a <em>relation</em> attribute. The access to pairwise outranking characteristic values is here provided via a corresponding <code class="xref py py-meth docutils literal notranslate"><span class="pre">relation()</span></code> function.</p>
+<p>It is worthwhile noticing in <a class="reference internal" href="#prerankedoutrankingdigraph"><span class="std std-numref">Listing 1.118</span></a> Line 18 that sparse pre-ranked outranking digraphs do not contain a <em>relation</em> attribute. The access to pairwise outranking characteristic values is here provided via a corresponding <code class="xref py py-meth docutils literal notranslate"><span class="pre">relation()</span></code> function.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">def</span> <span class="nf">relation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
 <span class="linenos"> 2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="linenos"> 3</span><span class="sd">    Dynamic construction of the global</span>
@@ -8588,10 +8602,10 @@ fecop 75.78% success rate</p>
 <p>All reflexive situations are set to the <em>indeterminate</em> value. When two decision alternatives belong to a same component -quantile equivalence class- we access the relation attribute of the corresponding outranking sub-digraph. Otherwise we just check the respective ranks of the components.</p>
 </section>
 <section id="ranking-pre-ranked-sparse-outranking-digraphs">
-<h4><a class="toc-backref" href="#id413" role="doc-backlink"><span class="section-number">1.5.1.2. </span>Ranking pre-ranked sparse outranking digraphs</a><a class="headerlink" href="#ranking-pre-ranked-sparse-outranking-digraphs" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id414" role="doc-backlink"><span class="section-number">1.5.1.2. </span>Ranking pre-ranked sparse outranking digraphs</a><a class="headerlink" href="#ranking-pre-ranked-sparse-outranking-digraphs" title="Link to this heading"></a></h4>
 <p>Each one of these 9 ordered components may now be locally ranked by using a suitable ranking rule. Best operational results, both in run times and quality, are more or less equally given with the <em>Copeland</em> and the <em>NetFlows</em> rules. The eventually obtained linear ordering (from the worst to best) is stored in a <em>prg.boostedOrder</em> attribute. A reversed linear ranking (from the best to the worst) is stored in a <em>prg.boostedRanking</em> attribute.</p>
 <div class="literal-block-wrapper docutils container" id="boostedranking">
-<div class="code-block-caption"><span class="caption-number">Listing 1.121 </span><span class="caption-text">Showing the component wise <em>Copeland</em> ranking</span><a class="headerlink" href="#boostedranking" title="Link to this code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 1.120 </span><span class="caption-text">Showing the component wise <em>Copeland</em> ranking</span><a class="headerlink" href="#boostedranking" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">prg</span><span class="o">.</span><span class="n">boostedRanking</span>
 <span class="linenos">2</span><span class="go"> [43, 47, 42, 5, 73, 65, 68, 32, 62, 70, 35, 22, 75, 45, 1,</span>
 <span class="linenos">3</span><span class="go">  61, 41, 34, 4, 13, 40, 14, 2, 54, 63, 37, 56, 71, 69, 36,</span>
@@ -8601,7 +8615,7 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 </div>
-<p>Alternative <em>43</em> appears <em>first ranked</em>, whereas alternative <em>57</em> is <em>last ranked</em> (see <a class="reference internal" href="#boostedranking"><span class="std std-numref">Listing 1.121</span></a> Line 2 and 6). The quality of this ranking result may be assessed by computing its ordinal correlation with the standard outranking relation.</p>
+<p>Alternative <em>43</em> appears <em>first ranked</em>, whereas alternative <em>57</em> is <em>last ranked</em> (see <a class="reference internal" href="#boostedranking"><span class="std std-numref">Listing 1.120</span></a> Line 2 and 6). The quality of this ranking result may be assessed by computing its ordinal correlation with the standard outranking relation.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">prg</span><span class="o">.</span><span class="n">boostedRanking</span><span class="p">)</span>
 <span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
 <span class="linenos">3</span><span class="go"> Correlation indexes:</span>
@@ -8623,16 +8637,16 @@ fecop 75.78% success rate</p>
 </section>
 </section>
 <section id="using-digraph3-multiprocessing-resources">
-<span id="multiprocessing-tutorial-label"></span><h3><a class="toc-backref" href="#id410" role="doc-backlink"><span class="section-number">1.5.2. </span>Using Digraph3 multiprocessing resources</a><a class="headerlink" href="#using-digraph3-multiprocessing-resources" title="Link to this heading"></a></h3>
+<span id="multiprocessing-tutorial-label"></span><h3><a class="toc-backref" href="#id411" role="doc-backlink"><span class="section-number">1.5.2. </span>Using Digraph3 multiprocessing resources</a><a class="headerlink" href="#using-digraph3-multiprocessing-resources" title="Link to this heading"></a></h3>
 <nav class="contents local" id="id152">
 <ul class="simple">
-<li><p><a class="reference internal" href="#computing-with-multiple-threads-in-parallel" id="id414">Computing with multiple threads in parallel</a></p></li>
-<li><p><a class="reference internal" href="#using-the-mpoutrankingdigraphs-module" id="id415">Using the mpOutrankingDigraphs module</a></p></li>
-<li><p><a class="reference internal" href="#setting-the-threading-parameters" id="id416">Setting the Threading parameters</a></p></li>
+<li><p><a class="reference internal" href="#computing-with-multiple-threads-in-parallel" id="id415">Computing with multiple threads in parallel</a></p></li>
+<li><p><a class="reference internal" href="#using-the-mpoutrankingdigraphs-module" id="id416">Using the mpOutrankingDigraphs module</a></p></li>
+<li><p><a class="reference internal" href="#setting-the-threading-parameters" id="id417">Setting the Threading parameters</a></p></li>
 </ul>
 </nav>
 <section id="computing-with-multiple-threads-in-parallel">
-<h4><a class="toc-backref" href="#id414" role="doc-backlink"><span class="section-number">1.5.2.1. </span>Computing with multiple threads in parallel</a><a class="headerlink" href="#computing-with-multiple-threads-in-parallel" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id415" role="doc-backlink"><span class="section-number">1.5.2.1. </span>Computing with multiple threads in parallel</a><a class="headerlink" href="#computing-with-multiple-threads-in-parallel" title="Link to this heading"></a></h4>
 <p>Modern desktop and laptop computers usually provide a multithreaded CPU which allows to run several threads in parallel <a class="footnote-reference brackets" href="#id253" id="id153" role="doc-noteref"><span class="fn-bracket">[</span>53<span class="fn-bracket">]</span></a>. In the Digraph3 resources we offer this usage with a <em>Threading</em>, a <em>nbrCores</em> or <em>nbrOfCPUs</em> and a <em>startMethod</em> parameter (see below Lines 5-6)</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
@@ -8691,7 +8705,7 @@ fecop 75.78% success rate</p>
 <p>These run times were obtained on a common desktop computer equipped with an 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 BG of CPU memory.</p>
 </section>
 <section id="using-the-mpoutrankingdigraphs-module">
-<h4><a class="toc-backref" href="#id415" role="doc-backlink"><span class="section-number">1.5.2.2. </span>Using the mpOutrankingDigraphs module</a><a class="headerlink" href="#using-the-mpoutrankingdigraphs-module" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id416" role="doc-backlink"><span class="section-number">1.5.2.2. </span>Using the mpOutrankingDigraphs module</a><a class="headerlink" href="#using-the-mpoutrankingdigraphs-module" title="Link to this heading"></a></h4>
 <p>A refactored and streamlined multiprocessing <a class="reference internal" href="techDoc.html#module-mpOutrankingDigraphs" title="mpOutrankingDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mpOutrankingDigraphs</span></code></a> module for even faster computing bipolar outranking digraphs with up to several hundreds or thousands of decision actions has been added to the Digraph3 resources (see Lines 2-3 below).</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mpOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">MPBipolarOutrankingDigraph</span>
 <span class="hll"><span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">mpg</span> <span class="o">=</span> <span class="n">MPBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
@@ -8742,7 +8756,7 @@ fecop 75.78% success rate</p>
 <p>In Lines 7-8 above, we may for instance notice a considerably large positive performance difference when comparing alternatives ‘a002’ and ‘a004’ which results in a polarised <em>for certain valid</em> outranking situation: <img class="math" src="_images/math/a4a3e22647b37f88122f34450e585223989d23ed.png" alt="r(a_{002} \succsim a_{004}) = +13.00"/>. The converse situation is observed in Lines 11-12 where we may notice the corresponding considerably large negative performance difference leading this time to a polarised <em>for certain invalid</em> outranking situation: <img class="math" src="_images/math/786722952e014ff77e96a786a90fb4994257f2b9.png" alt="r(a_{004} \succsim a_{002}) = -13.00"/>.</p>
 </section>
 <section id="setting-the-threading-parameters">
-<h4><a class="toc-backref" href="#id416" role="doc-backlink"><span class="section-number">1.5.2.3. </span>Setting the Threading parameters</a><a class="headerlink" href="#setting-the-threading-parameters" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id417" role="doc-backlink"><span class="section-number">1.5.2.3. </span>Setting the Threading parameters</a><a class="headerlink" href="#setting-the-threading-parameters" title="Link to this heading"></a></h4>
 <p>Without specifying the number of cores (<em>nbrCores=None</em>) or the threading start method (<em>startMethod=None</em>), the <code class="xref py py-meth docutils literal notranslate"><span class="pre">cpu_count()</span></code> method from the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.14)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> module will be used to detect the number of available cores and the threading start method will be set by default to <em>spawn</em>.</p>
 <p>It is possible to use instead the <em>forkserver</em> or the more traditional Posix <em>fork</em> start method (default on Linux) <a class="footnote-reference brackets" href="#id252" id="id154" role="doc-noteref"><span class="fn-bracket">[</span>52<span class="fn-bracket">]</span></a>. Mind that the latter method, due to the very architecture of the Python interpreter C code, cannot be safe against specific dead locks leading to  hanging or freezing applications and zombie processes. <a class="footnote-reference brackets" href="#id251" id="id155" role="doc-noteref"><span class="fn-bracket">[</span>51<span class="fn-bracket">]</span></a></p>
 <p>As of Python3.14+, it is possible to run multiple isolated python interpreters in parallel. The <a class="reference internal" href="techDoc.html#mpOutrankingDigraphs.MPBipolarOutrankingDigraph" title="mpOutrankingDigraphs.MPBipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">MPBipolarOutrankingDigraph</span></code></a> constructor provides the ‘<em>MultipleInterpreters</em> = <em>True</em>’ setting for this purpose. The running interpreter minor version may be checked with ‘<em>sys.version_info[1] &gt;= 14</em>’.</p>
@@ -8773,18 +8787,18 @@ fecop 75.78% success rate</p>
 </section>
 </section>
 <section id="on-ranking-big-outranking-digraphs">
-<span id="hpc-tutorial-label"></span><h3><a class="toc-backref" href="#id411" role="doc-backlink"><span class="section-number">1.5.3. </span>On ranking big outranking digraphs</a><a class="headerlink" href="#on-ranking-big-outranking-digraphs" title="Link to this heading"></a></h3>
+<span id="hpc-tutorial-label"></span><h3><a class="toc-backref" href="#id412" role="doc-backlink"><span class="section-number">1.5.3. </span>On ranking big outranking digraphs</a><a class="headerlink" href="#on-ranking-big-outranking-digraphs" title="Link to this heading"></a></h3>
 <nav class="contents local" id="id156">
 <ul class="simple">
-<li><p><a class="reference internal" href="#c-compiled-python-modules" id="id417">C-compiled Python modules</a></p></li>
-<li><p><a class="reference internal" href="#big-data-performance-tableaux" id="id418">Big Data performance tableaux</a></p></li>
-<li><p><a class="reference internal" href="#c-implemented-integer-valued-outranking-digraphs" id="id419">C-implemented integer-valued outranking digraphs</a></p></li>
-<li><p><a class="reference internal" href="#the-sparse-outranking-digraph-implementation" id="id420">The sparse outranking digraph implementation</a></p></li>
-<li><p><a class="reference internal" href="#ranking-big-sets-of-decision-alternatives" id="id421">Ranking big sets of decision alternatives</a></p></li>
+<li><p><a class="reference internal" href="#c-compiled-python-modules" id="id418">C-compiled Python modules</a></p></li>
+<li><p><a class="reference internal" href="#big-data-performance-tableaux" id="id419">Big Data performance tableaux</a></p></li>
+<li><p><a class="reference internal" href="#c-implemented-integer-valued-outranking-digraphs" id="id420">C-implemented integer-valued outranking digraphs</a></p></li>
+<li><p><a class="reference internal" href="#the-sparse-outranking-digraph-implementation" id="id421">The sparse outranking digraph implementation</a></p></li>
+<li><p><a class="reference internal" href="#ranking-big-sets-of-decision-alternatives" id="id422">Ranking big sets of decision alternatives</a></p></li>
 </ul>
 </nav>
 <section id="c-compiled-python-modules">
-<h4><a class="toc-backref" href="#id417" role="doc-backlink"><span class="section-number">1.5.3.1. </span>C-compiled Python modules</a><a class="headerlink" href="#c-compiled-python-modules" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id418" role="doc-backlink"><span class="section-number">1.5.3.1. </span>C-compiled Python modules</a><a class="headerlink" href="#c-compiled-python-modules" title="Link to this heading"></a></h4>
 <p>The Digraph3 collection provides cythonized <a class="footnote-reference brackets" href="#id210" id="id157" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a>, i.e. C-compiled and optimised versions of the main python modules for tackling multiple criteria decision problems facing very large sets of decision alternatives ( &gt; 10000 ). Such problems appear usually with a combinatorial organisation of the potential decision alternatives, as is frequently the case in bioinformatics for instance. If HPC facilities with nodes supporting numerous cores (&gt; 20) and big RAM (&gt; 50GB) are available, ranking up to several millions of alternatives (see <a class="reference internal" href="#bis-2016" id="id158"><span>[BIS-2016]</span></a>) becomes effectively tractable.</p>
 <p>Five cythonized Digraph3 modules, prefixed with the letter <em>c</em> and taking a <em>pyx</em> extension, are provided with their corresponding setup tools in the <em>Digraph3/cython</em> directory, namely</p>
 <blockquote>
@@ -8799,7 +8813,7 @@ fecop 75.78% success rate</p>
 <p>Their automatic compilation and installation (<em>…Digraph3$ make installPip</em>), alongside the standard Digraph3 python3 modules, requires the <em>cython</em> compiler <a class="footnote-reference brackets" href="#id210" id="id159" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a> ( <em>…$ python3 m pip install cython wheel</em> ) and a C compiler ( <em>…$ sudo apt install gcc</em> ). Local <em>inplace</em> compilation and installation ( <em>…/Digraph3/cython$ make</em> ) is provided with a corresponding <em>makefile</em> in the <em>Digraph3/cython</em> directory.</p>
 </section>
 <section id="big-data-performance-tableaux">
-<h4><a class="toc-backref" href="#id418" role="doc-backlink"><span class="section-number">1.5.3.2. </span>Big Data performance tableaux</a><a class="headerlink" href="#big-data-performance-tableaux" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id419" role="doc-backlink"><span class="section-number">1.5.3.2. </span>Big Data performance tableaux</a><a class="headerlink" href="#big-data-performance-tableaux" title="Link to this heading"></a></h4>
 <p>In order to efficiently type the C variables, the <a class="reference internal" href="techDoc.html#module-cRandPerfTabs" title="cRandPerfTabs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cRandPerfTabs</span></code></a> module provides the usual random performance tableau models, but, with <strong>integer</strong> action keys, <strong>float</strong> performance evaluations, <strong>integer</strong> criteria weights and <strong>float</strong> discrimination thresholds. And, to limit as much as possible memory occupation of class instances, all the usual verbose comments are dropped from the description of the <em>actions</em> and <em>criteria</em> dictionaries.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="kn">import</span> <span class="n">cRandomPerformanceTableau</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">cRandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
@@ -8865,7 +8879,7 @@ fecop 75.78% success rate</p>
 </div>
 </section>
 <section id="c-implemented-integer-valued-outranking-digraphs">
-<h4><a class="toc-backref" href="#id419" role="doc-backlink"><span class="section-number">1.5.3.3. </span>C-implemented integer-valued outranking digraphs</a><a class="headerlink" href="#c-implemented-integer-valued-outranking-digraphs" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id420" role="doc-backlink"><span class="section-number">1.5.3.3. </span>C-implemented integer-valued outranking digraphs</a><a class="headerlink" href="#c-implemented-integer-valued-outranking-digraphs" title="Link to this heading"></a></h4>
 <p>The C compiled version of the bipolar-valued digraph models takes integer relation characteristic values.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="kn">import</span> <span class="n">cRandomPerformanceTableau</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">cRandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
@@ -8935,7 +8949,7 @@ fecop 75.78% success rate</p>
 <p>About 109MB for <em>g</em> and 114MB for <em>g1</em>. The standard <em>Decimal</em> valued <a class="reference internal" href="techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">BipolarOutrankingDigraph</span></code></a> instance <em>g1</em> thus adds nearly 10% to the memory occupation of the corresponding <a class="reference internal" href="techDoc.html#cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph" title="cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntegerBipolarOutrankingDigraph</span></code></a> <em>g</em> instance (see Line 3 and 5 above). 3/4 of this memory occupation is due to the <em>g.relation</em> (34%) and the <em>g.gamma</em> (45%) dictionaries. And these ratios quadratically grow with the digraph order. To limit the object sizes for really big outranking digraphs, we need to abandon the complete implementation of adjacency tables and gamma functions.</p>
 </section>
 <section id="the-sparse-outranking-digraph-implementation">
-<h4><a class="toc-backref" href="#id420" role="doc-backlink"><span class="section-number">1.5.3.4. </span>The sparse outranking digraph implementation</a><a class="headerlink" href="#the-sparse-outranking-digraph-implementation" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id421" role="doc-backlink"><span class="section-number">1.5.3.4. </span>The sparse outranking digraph implementation</a><a class="headerlink" href="#the-sparse-outranking-digraph-implementation" title="Link to this heading"></a></h4>
 <p>The idea is to first decompose the complete outranking relation into an ordered collection of equivalent quantile performance classes. Let us consider for this illustration a random performance tableau with 100 decision alternatives evaluated on 7 criteria.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="kn">import</span> <span class="n">cRandomPerformanceTableau</span>
 <span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">cRandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
@@ -9048,7 +9062,7 @@ fecop 75.78% success rate</p>
 </div>
 </section>
 <section id="ranking-big-sets-of-decision-alternatives">
-<h4><a class="toc-backref" href="#id421" role="doc-backlink"><span class="section-number">1.5.3.5. </span>Ranking big sets of decision alternatives</a><a class="headerlink" href="#ranking-big-sets-of-decision-alternatives" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id422" role="doc-backlink"><span class="section-number">1.5.3.5. </span>Ranking big sets of decision alternatives</a><a class="headerlink" href="#ranking-big-sets-of-decision-alternatives" title="Link to this heading"></a></h4>
 <p>We may now rank the complete set of 100 decision alternatives by locally ranking with the <em>Copeland</em> or the <em>NetFlows</em> rule, for instance, all these individual components.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sg</span><span class="o">.</span><span class="n">boostedRanking</span>
 <span class="linenos">2</span><span class="go"> [22, 53, 3, 34, 56, 62, 24, 44, 50, 93, 41, 63, 29, 58,</span>
@@ -9167,13 +9181,13 @@ fecop 75.78% success rate</p>
 <p>Following from the separability property of the <em>q</em>-tiles sorting of each action into each <em>q</em>-tiles class, the <em>q</em>-sorting algorithm may be safely split into as much threads as are multiple processing cores available in parallel. Furthermore, the ranking procedure being local to each diagonal component, these procedures may as well be safely processed in parallel threads on each component restricted outranking digraph. Below some examples on different types of computers.</p>
 <nav class="contents local" id="id160">
 <ul class="simple">
-<li><p><a class="reference internal" href="#on-a-common-2023-desktop-computer" id="id422">On a common 2023 desktop computer</a></p></li>
-<li><p><a class="reference internal" href="#on-the-hpc-platform-of-the-university-of-luxembourg-spring-2018" id="id423">On the HPC platform of the University of Luxembourg (Spring 2018)</a></p></li>
-<li><p><a class="reference internal" href="#on-the-meluxina-eurohpc-supercomputer-summer-2024-54" id="id424">On the MeluXina EuroHPC supercomputer (Summer 2024) </a></p></li>
+<li><p><a class="reference internal" href="#on-a-common-2023-desktop-computer" id="id423">On a common 2023 desktop computer</a></p></li>
+<li><p><a class="reference internal" href="#on-the-hpc-platform-of-the-university-of-luxembourg-spring-2018" id="id424">On the HPC platform of the University of Luxembourg (Spring 2018)</a></p></li>
+<li><p><a class="reference internal" href="#on-the-meluxina-eurohpc-supercomputer-summer-2024-54" id="id425">On the MeluXina EuroHPC supercomputer (Summer 2024) </a></p></li>
 </ul>
 </nav>
 <section id="on-a-common-2023-desktop-computer">
-<span id="hpc-commondesktop-tutorial-label"></span><h3><a class="toc-backref" href="#id422" role="doc-backlink"><span class="section-number">1.6.1. </span>On a common 2023 desktop computer</a><a class="headerlink" href="#on-a-common-2023-desktop-computer" title="Link to this heading"></a></h3>
+<span id="hpc-commondesktop-tutorial-label"></span><h3><a class="toc-backref" href="#id423" role="doc-backlink"><span class="section-number">1.6.1. </span>On a common 2023 desktop computer</a><a class="headerlink" href="#on-a-common-2023-desktop-computer" title="Link to this heading"></a></h3>
 <p>On a common 2023 Terra desktop computer <a class="footnote-reference brackets" href="#id256" id="id161" role="doc-noteref"><span class="fn-bracket">[</span>56<span class="fn-bracket">]</span></a>, equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor, 64.0 GiB of CPU memory and 762.2 GiB storage space, working under Ubuntu 23.10 we may rank a <a class="reference internal" href="techDoc.html#cRandPerfTabs.cRandom3ObjectivesPerformanceTableau" title="cRandPerfTabs.cRandom3ObjectivesPerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">cRandom3ObjectivesPerformanceTableau</span></code></a> instance of <strong>five hundred thousand</strong> multicriteria performance records in about 104 seconds with about 48 seconds for the quantiles sorting step and 55 seconds for the local components ranking step (see below Lines 42-).</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>../Digraph3/cython$<span class="w"> </span>python3.12
 <span class="linenos">2</span>Python<span class="w"> </span><span class="m">3</span>.12.0<span class="w"> </span><span class="o">(</span>main,<span class="w"> </span>Oct<span class="w">  </span><span class="m">4</span><span class="w"> </span><span class="m">2023</span>,<span class="w"> </span><span class="m">06</span>:27:34<span class="o">)</span><span class="w"> </span><span class="o">[</span>GCC<span class="w"> </span><span class="m">13</span>.2.0<span class="o">]</span><span class="w"> </span>on<span class="w"> </span>linux
@@ -9233,7 +9247,7 @@ fecop 75.78% success rate</p>
 <p>When ordering the 146579 components resulting from a 7-tiling sorting with the <em>optimal</em> quantiles ordering strategy, the order of a local component is limited to a maximal size of 115 actions which results in a total pairwise adjacency table fill rate of 0.002% (see Lines 29-33).</p>
 </section>
 <section id="on-the-hpc-platform-of-the-university-of-luxembourg-spring-2018">
-<span id="hpc-unilu-platform-tutorial-label"></span><h3><a class="toc-backref" href="#id423" role="doc-backlink"><span class="section-number">1.6.2. </span>On the HPC platform of the University of Luxembourg (Spring 2018)</a><a class="headerlink" href="#on-the-hpc-platform-of-the-university-of-luxembourg-spring-2018" title="Link to this heading"></a></h3>
+<span id="hpc-unilu-platform-tutorial-label"></span><h3><a class="toc-backref" href="#id424" role="doc-backlink"><span class="section-number">1.6.2. </span>On the HPC platform of the University of Luxembourg (Spring 2018)</a><a class="headerlink" href="#on-the-hpc-platform-of-the-university-of-luxembourg-spring-2018" title="Link to this heading"></a></h3>
 <p>Bigger performance tableaux may definitely be ranked with a larger <em>cpu_count()</em>. We were using therefore in 2018 the HPC Platform of the University of Luxembourg (<a class="reference external" href="https://hpc.uni.lu/">https://hpc.uni.lu/</a>). The following run times for very big quantiles ranking problems of several millions of multicriteria performance records could be achieved both:</p>
 <blockquote>
 <div><ul class="simple">
@@ -9410,7 +9424,7 @@ fecop 75.78% success rate</p>
 </div>
 </section>
 <section id="on-the-meluxina-eurohpc-supercomputer-summer-2024-54">
-<span id="hpc-meluxina-tutorial-label"></span><h3><a class="toc-backref" href="#id424" role="doc-backlink"><span class="section-number">1.6.3. </span>On the MeluXina EuroHPC supercomputer (Summer 2024) <a class="footnote-reference brackets" href="#id254" id="id166" role="doc-noteref"><span class="fn-bracket">[</span>54<span class="fn-bracket">]</span></a></a><a class="headerlink" href="#on-the-meluxina-eurohpc-supercomputer-summer-2024-54" title="Link to this heading"></a></h3>
+<span id="hpc-meluxina-tutorial-label"></span><h3><a class="toc-backref" href="#id425" role="doc-backlink"><span class="section-number">1.6.3. </span>On the MeluXina EuroHPC supercomputer (Summer 2024) <a class="footnote-reference brackets" href="#id254" id="id166" role="doc-noteref"><span class="fn-bracket">[</span>54<span class="fn-bracket">]</span></a></a><a class="headerlink" href="#on-the-meluxina-eurohpc-supercomputer-summer-2024-54" title="Link to this heading"></a></h3>
 <p>Summer 2024, the author was granted the opportunity to use HPC resources of the MeluXina EuroHPC supercomputer <a class="footnote-reference brackets" href="#id255" id="id167" role="doc-noteref"><span class="fn-bracket">[</span>55<span class="fn-bracket">]</span></a>  (<a class="reference external" href="https://www.luxprovide.lu/meluxina/">https://www.luxprovide.lu/meluxina/</a>). Special big memory computing nodes on this HPC platform offer a large RAM for particularly demanding workloads. Each such node is composed of 2 AMD Rome CPUs (64 core &#64; 2.6 GHz, 256HT cores total), has 4 TB of memory (4096 GB) and 1.92 TB of local storage.</p>
 <p>Following timings (see <a class="reference internal" href="#meluxina"><span class="std std-numref">Table 1.8</span></a>) could be achieved with a specially designed <a class="reference internal" href="techDoc.html#module-cQuantilesRankingDigraphs" title="cQuantilesRankingDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cQuantilesRankingDigraphs</span></code></a> module <a class="footnote-reference brackets" href="#id257" id="id168" role="doc-noteref"><span class="fn-bracket">[</span>57<span class="fn-bracket">]</span></a> when q-tiling and ranking multiple incommensurable performance records of 21 criteria assessing three decision objectives, namely economic, environmental and societal aspects ( see the <a class="reference internal" href="#three-objectives-performance-tableau-label"><span class="std std-ref">tutorial</span></a> on generating random three-objectives performance tableaux).</p>
 <table class="docutils align-default" id="meluxina">
@@ -9601,23 +9615,23 @@ fecop 75.78% success rate</p>
 <p>This last part of the tutorials introduces Python resources for working with undirected graphs.</p>
 <nav class="contents local" id="id171">
 <ul class="simple">
-<li><p><a class="reference internal" href="#working-with-the-graphs-module" id="id425">Working with the <a class="reference internal" href="techDoc.html#module-graphs" title="graphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">graphs</span></code></a> module</a></p></li>
-<li><p><a class="reference internal" href="#computing-the-non-isomorphic-miss-of-the-12-cycle-graph" id="id426">Computing the non isomorphic MISs of the 12-cycle graph</a></p></li>
-<li><p><a class="reference internal" href="#about-comparability-split-interval-and-permutation-graphs" id="id427">About comparability, split, interval and permutation graphs</a></p></li>
-<li><p><a class="reference internal" href="#on-tree-graphs-and-graph-forests" id="id428">On tree graphs and graph forests</a></p></li>
+<li><p><a class="reference internal" href="#working-with-the-graphs-module" id="id426">Working with the <a class="reference internal" href="techDoc.html#module-graphs" title="graphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">graphs</span></code></a> module</a></p></li>
+<li><p><a class="reference internal" href="#computing-the-non-isomorphic-miss-of-the-12-cycle-graph" id="id427">Computing the non isomorphic MISs of the 12-cycle graph</a></p></li>
+<li><p><a class="reference internal" href="#about-comparability-split-interval-and-permutation-graphs" id="id428">About comparability, split, interval and permutation graphs</a></p></li>
+<li><p><a class="reference internal" href="#on-tree-graphs-and-graph-forests" id="id429">On tree graphs and graph forests</a></p></li>
 </ul>
 </nav>
 <hr class="docutils" />
 <section id="working-with-the-graphs-module">
-<span id="graphs-tutorial-label"></span><h3><a class="toc-backref" href="#id425" role="doc-backlink"><span class="section-number">1.7.1. </span>Working with the <a class="reference internal" href="techDoc.html#module-graphs" title="graphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">graphs</span></code></a> module</a><a class="headerlink" href="#working-with-the-graphs-module" title="Link to this heading"></a></h3>
+<span id="graphs-tutorial-label"></span><h3><a class="toc-backref" href="#id426" role="doc-backlink"><span class="section-number">1.7.1. </span>Working with the <a class="reference internal" href="techDoc.html#module-graphs" title="graphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">graphs</span></code></a> module</a><a class="headerlink" href="#working-with-the-graphs-module" title="Link to this heading"></a></h3>
 <nav class="contents local" id="id172">
 <ul class="simple">
-<li><p><a class="reference internal" href="#structure-of-a-graph-object" id="id429">Structure of a <a class="reference internal" href="techDoc.html#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a> object</a></p></li>
-<li><p><a class="reference internal" href="#q-coloring-of-a-graph" id="id430">q-coloring of a graph</a></p></li>
-<li><p><a class="reference internal" href="#mis-and-clique-enumeration" id="id431">MIS and clique enumeration</a></p></li>
-<li><p><a class="reference internal" href="#line-graphs-and-maximal-matchings" id="id432">Line graphs and maximal matchings</a></p></li>
-<li><p><a class="reference internal" href="#grids-and-the-ising-model" id="id433">Grids and the Ising model</a></p></li>
-<li><p><a class="reference internal" href="#simulating-metropolis-random-walks" id="id434">Simulating Metropolis random walks</a></p></li>
+<li><p><a class="reference internal" href="#structure-of-a-graph-object" id="id430">Structure of a <a class="reference internal" href="techDoc.html#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a> object</a></p></li>
+<li><p><a class="reference internal" href="#q-coloring-of-a-graph" id="id431">q-coloring of a graph</a></p></li>
+<li><p><a class="reference internal" href="#mis-and-clique-enumeration" id="id432">MIS and clique enumeration</a></p></li>
+<li><p><a class="reference internal" href="#line-graphs-and-maximal-matchings" id="id433">Line graphs and maximal matchings</a></p></li>
+<li><p><a class="reference internal" href="#grids-and-the-ising-model" id="id434">Grids and the Ising model</a></p></li>
+<li><p><a class="reference internal" href="#simulating-metropolis-random-walks" id="id435">Simulating Metropolis random walks</a></p></li>
 </ul>
 </nav>
 <div class="admonition seealso">
@@ -9625,7 +9639,7 @@ fecop 75.78% success rate</p>
 <p>The technical documentation of the <a class="reference internal" href="techDoc.html#graphs-label"><span class="std std-ref">graphs module</span></a>.</p>
 </div>
 <section id="structure-of-a-graph-object">
-<h4><a class="toc-backref" href="#id429" role="doc-backlink"><span class="section-number">1.7.1.1. </span>Structure of a <a class="reference internal" href="techDoc.html#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a> object</a><a class="headerlink" href="#structure-of-a-graph-object" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id430" role="doc-backlink"><span class="section-number">1.7.1.1. </span>Structure of a <a class="reference internal" href="techDoc.html#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a> object</a><a class="headerlink" href="#structure-of-a-graph-object" title="Link to this heading"></a></h4>
 <p>In the <a class="reference internal" href="techDoc.html#module-graphs" title="graphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">graphs</span></code></a> module, the root <a class="reference internal" href="techDoc.html#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a> class provides a generic <strong>simple graph model</strong>, without loops and multiple links. A given object of this class consists in:</p>
 <ol class="arabic simple">
 <li><p>the graph <strong>vertices</strong> : a dictionary of vertices with ‘name’ and ‘shortName’ attributes,</p></li>
@@ -9747,7 +9761,7 @@ fecop 75.78% success rate</p>
 </div>
 </section>
 <section id="q-coloring-of-a-graph">
-<h4><a class="toc-backref" href="#id430" role="doc-backlink"><span class="section-number">1.7.1.2. </span>q-coloring of a graph</a><a class="headerlink" href="#q-coloring-of-a-graph" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id431" role="doc-backlink"><span class="section-number">1.7.1.2. </span>q-coloring of a graph</a><a class="headerlink" href="#q-coloring-of-a-graph" title="Link to this heading"></a></h4>
 <p>A 3-coloring of the tutorial graph <em>g</em> may for instance be computed and plotted with the <a class="reference internal" href="techDoc.html#graphs.Q_Coloring" title="graphs.Q_Coloring"><code class="xref py py-class docutils literal notranslate"><span class="pre">Q_Coloring</span></code></a> class as follows.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">Q_Coloring</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">qc</span> <span class="o">=</span> <span class="n">Q_Coloring</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
@@ -9800,7 +9814,7 @@ fecop 75.78% success rate</p>
 </figure>
 </section>
 <section id="mis-and-clique-enumeration">
-<h4><a class="toc-backref" href="#id431" role="doc-backlink"><span class="section-number">1.7.1.3. </span>MIS and clique enumeration</a><a class="headerlink" href="#mis-and-clique-enumeration" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id432" role="doc-backlink"><span class="section-number">1.7.1.3. </span>MIS and clique enumeration</a><a class="headerlink" href="#mis-and-clique-enumeration" title="Link to this heading"></a></h4>
 <p>2-colorings define independent sets of vertices that are maximal in cardinality; for short called a <strong>MIS</strong>. Computing such MISs in a given <a class="reference internal" href="techDoc.html#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a> instance may be achieved by the <code class="xref py py-meth docutils literal notranslate"><span class="pre">showMIS()</span></code> method.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s1">&#39;tutorialGraph&#39;</span><span class="p">)</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showMIS</span><span class="p">()</span>
@@ -9849,7 +9863,7 @@ fecop 75.78% success rate</p>
 </div>
 </section>
 <section id="line-graphs-and-maximal-matchings">
-<h4><a class="toc-backref" href="#id432" role="doc-backlink"><span class="section-number">1.7.1.4. </span>Line graphs and maximal matchings</a><a class="headerlink" href="#line-graphs-and-maximal-matchings" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id433" role="doc-backlink"><span class="section-number">1.7.1.4. </span>Line graphs and maximal matchings</a><a class="headerlink" href="#line-graphs-and-maximal-matchings" title="Link to this heading"></a></h4>
 <p>The module also provides a <a class="reference internal" href="techDoc.html#graphs.LineGraph" title="graphs.LineGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">LineGraph</span></code></a> constructor. A <strong>line graph</strong> represents the <strong>adjacencies between edges</strong> of the given graph instance. We may compute for instance the line graph of the 5-cycle graph.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">CycleGraph</span><span class="p">,</span> <span class="n">LineGraph</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">CycleGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
@@ -9935,7 +9949,7 @@ fecop 75.78% success rate</p>
 </figure>
 </section>
 <section id="grids-and-the-ising-model">
-<h4><a class="toc-backref" href="#id433" role="doc-backlink"><span class="section-number">1.7.1.5. </span>Grids and the Ising model</a><a class="headerlink" href="#grids-and-the-ising-model" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id434" role="doc-backlink"><span class="section-number">1.7.1.5. </span>Grids and the Ising model</a><a class="headerlink" href="#grids-and-the-ising-model" title="Link to this heading"></a></h4>
 <p>Special classes of graphs, like <em>n</em> x <em>m</em> <strong>rectangular</strong> or <strong>triangular grids</strong> (<a class="reference internal" href="techDoc.html#graphs.GridGraph" title="graphs.GridGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">GridGraph</span></code></a> and <a class="reference internal" href="techDoc.html#graphs.IsingModel" title="graphs.IsingModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">IsingModel</span></code></a>) are available in the <a class="reference internal" href="techDoc.html#module-graphs" title="graphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">graphs</span></code></a> module. For instance, we may use a Gibbs sampler again for simulating an <strong>Ising Model</strong> on such a grid.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">GridGraph</span><span class="p">,</span> <span class="n">IsingModel</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">GridGraph</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
@@ -9962,7 +9976,7 @@ fecop 75.78% success rate</p>
 </figure>
 </section>
 <section id="simulating-metropolis-random-walks">
-<h4><a class="toc-backref" href="#id434" role="doc-backlink"><span class="section-number">1.7.1.6. </span>Simulating Metropolis random walks</a><a class="headerlink" href="#simulating-metropolis-random-walks" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id435" role="doc-backlink"><span class="section-number">1.7.1.6. </span>Simulating Metropolis random walks</a><a class="headerlink" href="#simulating-metropolis-random-walks" title="Link to this heading"></a></h4>
 <p>Finally, we provide the <a class="reference internal" href="techDoc.html#graphs.MetropolisChain" title="graphs.MetropolisChain"><code class="xref py py-class docutils literal notranslate"><span class="pre">MetropolisChain</span></code></a> class, a specialization of the <a class="reference internal" href="techDoc.html#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a> class, for implementing a generic <strong>Metropolis MCMC</strong> (Monte Carlo Markov Chain) sampler for simulating random walks on a given graph following a given probability <em>probs</em> = {‘v1’: x, ‘v2’: y, …} for visiting each vertex (see Lines 14-22).</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">MetropolisChain</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">numberOfVertices</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
@@ -10020,17 +10034,17 @@ fecop 75.78% success rate</p>
 </section>
 </section>
 <section id="computing-the-non-isomorphic-miss-of-the-12-cycle-graph">
-<span id="isomorphicmis-tutorial-label"></span><h3><a class="toc-backref" href="#id426" role="doc-backlink"><span class="section-number">1.7.2. </span>Computing the non isomorphic MISs of the 12-cycle graph</a><a class="headerlink" href="#computing-the-non-isomorphic-miss-of-the-12-cycle-graph" title="Link to this heading"></a></h3>
+<span id="isomorphicmis-tutorial-label"></span><h3><a class="toc-backref" href="#id427" role="doc-backlink"><span class="section-number">1.7.2. </span>Computing the non isomorphic MISs of the 12-cycle graph</a><a class="headerlink" href="#computing-the-non-isomorphic-miss-of-the-12-cycle-graph" title="Link to this heading"></a></h3>
 <nav class="contents local" id="id176">
 <ul class="simple">
-<li><p><a class="reference internal" href="#id177" id="id435">Introduction</a></p></li>
-<li><p><a class="reference internal" href="#computing-the-maximal-independent-sets-miss" id="id436">Computing the maximal independent sets (MISs)</a></p></li>
-<li><p><a class="reference internal" href="#computing-the-automorphism-group" id="id437">Computing the automorphism group</a></p></li>
-<li><p><a class="reference internal" href="#computing-the-isomorphic-miss" id="id438">Computing the isomorphic MISs</a></p></li>
+<li><p><a class="reference internal" href="#id177" id="id436">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#computing-the-maximal-independent-sets-miss" id="id437">Computing the maximal independent sets (MISs)</a></p></li>
+<li><p><a class="reference internal" href="#computing-the-automorphism-group" id="id438">Computing the automorphism group</a></p></li>
+<li><p><a class="reference internal" href="#computing-the-isomorphic-miss" id="id439">Computing the isomorphic MISs</a></p></li>
 </ul>
 </nav>
 <section id="id177">
-<h4><a class="toc-backref" href="#id435" role="doc-backlink"><span class="section-number">1.7.2.1. </span>Introduction</a><a class="headerlink" href="#id177" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id436" role="doc-backlink"><span class="section-number">1.7.2.1. </span>Introduction</a><a class="headerlink" href="#id177" title="Link to this heading"></a></h4>
 <p>Due to the public success of our common 2008 publication with Jean-Luc Marichal <a class="reference internal" href="#isomis-08" id="id178"><span>[ISOMIS-08]</span></a> , we present in this tutorial an example Python session for computing the <strong>non isomorphic maximal independent sets</strong> (MISs) from the 12-cycle graph, i.e. a <a class="reference internal" href="techDoc.html#digraphs.CirculantDigraph" title="digraphs.CirculantDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">CirculantDigraph</span></code></a> class instance of order 12 and symmetric circulants 1 and -1.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">CirculantDigraph</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">c12</span> <span class="o">=</span> <span class="n">CirculantDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span><span class="n">circulants</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
@@ -10071,7 +10085,7 @@ fecop 75.78% success rate</p>
 </figure>
 </section>
 <section id="computing-the-maximal-independent-sets-miss">
-<h4><a class="toc-backref" href="#id436" role="doc-backlink"><span class="section-number">1.7.2.2. </span>Computing the maximal independent sets (MISs)</a><a class="headerlink" href="#computing-the-maximal-independent-sets-miss" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id437" role="doc-backlink"><span class="section-number">1.7.2.2. </span>Computing the maximal independent sets (MISs)</a><a class="headerlink" href="#computing-the-maximal-independent-sets-miss" title="Link to this heading"></a></h4>
 <p>A non isomorphic MIS corresponds in fact to a set of isomorphic MISs, i.e. an orbit of MISs under the automorphism group of the 12-cycle graph. We are now first computing all maximal independent sets that are detectable in the 12-cycle digraph with the <a class="reference internal" href="techDoc.html#digraphs.Digraph.showMIS" title="digraphs.Digraph.showMIS"><code class="xref py py-func docutils literal notranslate"><span class="pre">showMIS()</span></code></a> method.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">c12</span><span class="o">.</span><span class="n">showMIS</span><span class="p">(</span><span class="n">withListing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="linenos">2</span><span class="go">   *---  Maximal independent choices ---*</span>
@@ -10137,7 +10151,7 @@ fecop 75.78% success rate</p>
 </div>
 </section>
 <section id="computing-the-automorphism-group">
-<h4><a class="toc-backref" href="#id437" role="doc-backlink"><span class="section-number">1.7.2.3. </span>Computing the automorphism group</a><a class="headerlink" href="#computing-the-automorphism-group" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id438" role="doc-backlink"><span class="section-number">1.7.2.3. </span>Computing the automorphism group</a><a class="headerlink" href="#computing-the-automorphism-group" title="Link to this heading"></a></h4>
 <p>For computing the corresponding non isomorphic MISs, we actually need the automorphism group of the c12-cycle graph. The <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Digraph</span></code></a> class therefore provides the <a class="reference internal" href="techDoc.html#digraphs.Digraph.automorphismGenerators" title="digraphs.Digraph.automorphismGenerators"><code class="xref py py-func docutils literal notranslate"><span class="pre">automorphismGenerators()</span></code></a> method which adds automorphism group generators to a <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Digraph</span></code></a> class instance with the help of the external shell <em>dreadnaut</em> command from the <strong>nauty</strong> software package <a class="footnote-reference brackets" href="#id206" id="id180" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">c12</span><span class="o">.</span><span class="n">automorphismGenerators</span><span class="p">()</span>
 <span class="linenos"> 2</span><span class="go">   ...</span>
@@ -10155,7 +10169,7 @@ fecop 75.78% success rate</p>
 <p>The 12-cycle graph automorphism group is generated with both the permutations above and has group size 24.</p>
 </section>
 <section id="computing-the-isomorphic-miss">
-<h4><a class="toc-backref" href="#id438" role="doc-backlink"><span class="section-number">1.7.2.4. </span>Computing the isomorphic MISs</a><a class="headerlink" href="#computing-the-isomorphic-miss" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id439" role="doc-backlink"><span class="section-number">1.7.2.4. </span>Computing the isomorphic MISs</a><a class="headerlink" href="#computing-the-isomorphic-miss" title="Link to this heading"></a></h4>
 <p>The command <a class="reference internal" href="techDoc.html#digraphs.Digraph.showOrbits" title="digraphs.Digraph.showOrbits"><code class="xref py py-func docutils literal notranslate"><span class="pre">showOrbits()</span></code></a> renders now the labelled representatives of each of the four orbits of isomorphic MISs observed in the 12-cycle graph (see Lines 7-10).</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">c12</span><span class="o">.</span><span class="n">showOrbits</span><span class="p">(</span><span class="n">c12</span><span class="o">.</span><span class="n">misset</span><span class="p">,</span><span class="n">withListing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="linenos"> 2</span><span class="go">   ...</span>
@@ -10186,17 +10200,17 @@ fecop 75.78% success rate</p>
 </section>
 </section>
 <section id="about-comparability-split-interval-and-permutation-graphs">
-<span id="permutation-tutorial-label"></span><h3><a class="toc-backref" href="#id427" role="doc-backlink"><span class="section-number">1.7.3. </span>About comparability, split, interval and permutation graphs</a><a class="headerlink" href="#about-comparability-split-interval-and-permutation-graphs" title="Link to this heading"></a></h3>
+<span id="permutation-tutorial-label"></span><h3><a class="toc-backref" href="#id428" role="doc-backlink"><span class="section-number">1.7.3. </span>About comparability, split, interval and permutation graphs</a><a class="headerlink" href="#about-comparability-split-interval-and-permutation-graphs" title="Link to this heading"></a></h3>
 <nav class="contents local" id="id182">
 <ul class="simple">
-<li><p><a class="reference internal" href="#a-multiply-perfect-graph" id="id439">A multiply <em>perfect</em> graph</a></p></li>
-<li><p><a class="reference internal" href="#who-is-the-liar" id="id440">Who is the liar ?</a></p></li>
-<li><p><a class="reference internal" href="#generating-permutation-graphs" id="id441">Generating permutation graphs</a></p></li>
-<li><p><a class="reference internal" href="#recognizing-permutation-graphs" id="id442">Recognizing permutation graphs</a></p></li>
+<li><p><a class="reference internal" href="#a-multiply-perfect-graph" id="id440">A multiply <em>perfect</em> graph</a></p></li>
+<li><p><a class="reference internal" href="#who-is-the-liar" id="id441">Who is the liar ?</a></p></li>
+<li><p><a class="reference internal" href="#generating-permutation-graphs" id="id442">Generating permutation graphs</a></p></li>
+<li><p><a class="reference internal" href="#recognizing-permutation-graphs" id="id443">Recognizing permutation graphs</a></p></li>
 </ul>
 </nav>
 <section id="a-multiply-perfect-graph">
-<h4><a class="toc-backref" href="#id439" role="doc-backlink"><span class="section-number">1.7.3.1. </span>A multiply <em>perfect</em> graph</a><a class="headerlink" href="#a-multiply-perfect-graph" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id440" role="doc-backlink"><span class="section-number">1.7.3.1. </span>A multiply <em>perfect</em> graph</a><a class="headerlink" href="#a-multiply-perfect-graph" title="Link to this heading"></a></h4>
 <p>A graph <em>g</em> is called:</p>
 <blockquote>
 <div><ul class="simple">
@@ -10213,9 +10227,9 @@ fecop 75.78% success rate</p>
 <li><p><strong>Split graph</strong> when <em>g</em> and its dual <em>-g</em> are both <em>triangulated</em> graphs.</p></li>
 </ul>
 </div></blockquote>
-<p>All these four kinds of graphs are in fact <em>perfect</em> graphs. To illustrate these graph classes, we generate from 8 intervals, randomly chosen in the default integer range [0,10], a <a class="reference internal" href="techDoc.html#graphs.RandomIntervalIntersectionsGraph" title="graphs.RandomIntervalIntersectionsGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">RandomIntervalIntersectionsGraph</span></code></a> instance <em>g</em> (see <a class="reference internal" href="#multiplyperfectgraph"><span class="std std-numref">Listing 1.122</span></a> Line 2 below).</p>
+<p>All these four kinds of graphs are in fact <em>perfect</em> graphs. To illustrate these graph classes, we generate from 8 intervals, randomly chosen in the default integer range [0,10], a <a class="reference internal" href="techDoc.html#graphs.RandomIntervalIntersectionsGraph" title="graphs.RandomIntervalIntersectionsGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">RandomIntervalIntersectionsGraph</span></code></a> instance <em>g</em> (see <a class="reference internal" href="#multiplyperfectgraph"><span class="std std-numref">Listing 1.121</span></a> Line 2 below).</p>
 <div class="literal-block-wrapper docutils container" id="multiplyperfectgraph">
-<div class="code-block-caption"><span class="caption-number">Listing 1.122 </span><span class="caption-text">A multiply perfect random interval intersection graph</span><a class="headerlink" href="#multiplyperfectgraph" title="Link to this code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 1.121 </span><span class="caption-text">A multiply perfect random interval intersection graph</span><a class="headerlink" href="#multiplyperfectgraph" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">RandomIntervalIntersectionsGraph</span>
 <span class="hll"><span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomIntervalIntersectionsGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 </span><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span>
@@ -10234,9 +10248,9 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 </div>
-<p>With seed = 100, we obtain here an <em>interval</em> graph, in fact a <em>perfect</em> graph <em>g</em>, which is <strong>conjointly</strong> a <em>triangulated</em>, a <em>comparability</em>, a <em>split</em> and a <em>permutation</em> graph (see <a class="reference internal" href="#testingperfectgraph"><span class="std std-numref">Listing 1.123</span></a> Lines 6,10,14 ).</p>
+<p>With seed = 100, we obtain here an <em>interval</em> graph, in fact a <em>perfect</em> graph <em>g</em>, which is <strong>conjointly</strong> a <em>triangulated</em>, a <em>comparability</em>, a <em>split</em> and a <em>permutation</em> graph (see <a class="reference internal" href="#testingperfectgraph"><span class="std std-numref">Listing 1.122</span></a> Lines 6,10,14 ).</p>
 <div class="literal-block-wrapper docutils container" id="testingperfectgraph">
-<div class="code-block-caption"><span class="caption-number">Listing 1.123 </span><span class="caption-text">testing perfect graph categories</span><a class="headerlink" href="#testingperfectgraph" title="Link to this code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 1.122 </span><span class="caption-text">testing perfect graph categories</span><a class="headerlink" href="#testingperfectgraph" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">isPerfectGraph</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="linenos"> 2</span><span class="go"> Graph randIntervalIntersections is perfect !</span>
 <span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">isIntervalGraph</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -10282,7 +10296,7 @@ fecop 75.78% success rate</p>
 <p>are <em>independent</em> of one another (see <a class="reference internal" href="#gol-2004" id="id186"><span>[GOL-2004]</span></a> p. 275).</p>
 </section>
 <section id="who-is-the-liar">
-<h4><a class="toc-backref" href="#id440" role="doc-backlink"><span class="section-number">1.7.3.2. </span>Who is the liar ?</a><a class="headerlink" href="#who-is-the-liar" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id441" role="doc-backlink"><span class="section-number">1.7.3.2. </span>Who is the liar ?</a><a class="headerlink" href="#who-is-the-liar" title="Link to this heading"></a></h4>
 <p><em>Claude Berge</em>’s famous mystery story (see <a class="reference internal" href="#gol-2004" id="id187"><span>[GOL-2004]</span></a> p.20) may well illustrate the importance of being an <strong>interval graph</strong>.</p>
 <p>Suppose that the file ‘berge.py’ <a class="footnote-reference brackets" href="#id218" id="id188" role="doc-noteref"><span class="fn-bracket">[</span>18<span class="fn-bracket">]</span></a> contains the following <a class="reference internal" href="techDoc.html#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a> instance data:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">vertices</span> <span class="o">=</span> <span class="p">{</span>
@@ -10385,7 +10399,7 @@ fecop 75.78% success rate</p>
 </figure>
 </section>
 <section id="generating-permutation-graphs">
-<h4><a class="toc-backref" href="#id441" role="doc-backlink"><span class="section-number">1.7.3.3. </span>Generating permutation graphs</a><a class="headerlink" href="#generating-permutation-graphs" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id442" role="doc-backlink"><span class="section-number">1.7.3.3. </span>Generating permutation graphs</a><a class="headerlink" href="#generating-permutation-graphs" title="Link to this heading"></a></h4>
 <p>A graph is called a <strong>permutation</strong> or <em>inversion</em> graph if there exists a permutation of its list of vertices such that the graph is isomorphic to the inversions operated by the permutation in this list (see <a class="reference internal" href="#gol-2004" id="id189"><span>[GOL-2004]</span></a> Chapter 7, pp 157-170). This kind is also part of the class of perfect graphs.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">PermutationGraph</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">PermutationGraph</span><span class="p">(</span><span class="n">permutation</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
@@ -10490,7 +10504,7 @@ fecop 75.78% success rate</p>
 </div>
 </section>
 <section id="recognizing-permutation-graphs">
-<h4><a class="toc-backref" href="#id442" role="doc-backlink"><span class="section-number">1.7.3.4. </span>Recognizing permutation graphs</a><a class="headerlink" href="#recognizing-permutation-graphs" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id443" role="doc-backlink"><span class="section-number">1.7.3.4. </span>Recognizing permutation graphs</a><a class="headerlink" href="#recognizing-permutation-graphs" title="Link to this heading"></a></h4>
 <p>Now, a given graph <em>g</em> is a <strong>permutation</strong> graph <strong>if and only if</strong> both <em>g</em> <strong>and</strong> <em>-g</em> are <em>transitively orientable</em>. This  property gives a polynomial test procedure (in <img class="math" src="_images/math/174aef04544e022a085aab16ddeae821c5667e2b.png" alt="O(n^3)"/> due to the transitivity check) for recognizing permutation graphs.</p>
 <p>Let us consider, for instance, the following random graph of <em>order</em> 8 generated with an <em>edge probability</em> of 40% and a <em>random seed</em> equal to 4335.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">RandomGraph</span>
@@ -10592,7 +10606,7 @@ fecop 75.78% success rate</p>
 <p>As both graphs are indeed <em>transitively orientable</em> (see Lines 3 and 6 above), we may conclude that the given random graph <em>g</em> is actually a <em>permutation graph</em> instance. Yet, we still need to find now its corresponding <em>permutation</em>. We therefore implement a recipe given by Martin Golumbic <a class="reference internal" href="#gol-2004" id="id194"><span>[GOL-2004]</span></a> p.159.</p>
 <p>We will first <strong>fuse</strong> both <em>og</em> and <em>ogd</em> orientations above with an <strong>epistemic disjunction</strong> (see the <a class="reference internal" href="techDoc.html#digraphsTools.omax" title="digraphsTools.omax"><code class="xref py py-func docutils literal notranslate"><span class="pre">omax()</span></code></a> operator), hence, the partially determined orientations requested above.</p>
 <div class="literal-block-wrapper docutils container" id="fusingorientations">
-<div class="code-block-caption"><span class="caption-number">Listing 1.124 </span><span class="caption-text">Fusing graph orientations</span><a class="headerlink" href="#fusingorientations" title="Link to this code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 1.123 </span><span class="caption-text">Fusing graph orientations</span><a class="headerlink" href="#fusingorientations" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">FusionDigraph</span>
 <span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">f1</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">(</span><span class="n">og</span><span class="p">,</span><span class="n">ogd</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
 <span class="linenos">3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span> <span class="o">=</span> <span class="n">f1</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
@@ -10601,7 +10615,7 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 </div>
-<p>We obtain by the <em>Copeland</em> ranking rule (see tutorial on <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">ranking with incommensurable criteria</span></a> and the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeCopelandRanking" title="digraphs.Digraph.computeCopelandRanking"><code class="xref py py-func docutils literal notranslate"><span class="pre">computeCopelandRanking()</span></code></a> method) a linear ordering of the vertices (see <a class="reference internal" href="#fusingorientations"><span class="std std-numref">Listing 1.124</span></a> Line 5 above).</p>
+<p>We obtain by the <em>Copeland</em> ranking rule (see tutorial on <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">ranking with incommensurable criteria</span></a> and the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeCopelandRanking" title="digraphs.Digraph.computeCopelandRanking"><code class="xref py py-func docutils literal notranslate"><span class="pre">computeCopelandRanking()</span></code></a> method) a linear ordering of the vertices (see <a class="reference internal" href="#fusingorientations"><span class="std std-numref">Listing 1.123</span></a> Line 5 above).</p>
 <p>We reverse now the orientation of the edges in <em>og</em> (see <em>-og</em> in Line 1 below) in order to generate, again by <em>disjunctive fusion</em>, the <em>inversions</em> that are produced by the permutation we are looking for. Computing again a ranking with the <em>Copeland</em> rule, will show the correspondingly permuted list of vertices (see Line 4 below).</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">f2</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">((</span><span class="o">-</span><span class="n">og</span><span class="p">),</span><span class="n">ogd</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
 <span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span> <span class="o">=</span> <span class="n">f2</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
@@ -10659,18 +10673,18 @@ fecop 75.78% success rate</p>
 </section>
 </section>
 <section id="on-tree-graphs-and-graph-forests">
-<span id="trees-tutorial-label"></span><h3><a class="toc-backref" href="#id428" role="doc-backlink"><span class="section-number">1.7.4. </span>On tree graphs and graph forests</a><a class="headerlink" href="#on-tree-graphs-and-graph-forests" title="Link to this heading"></a></h3>
+<span id="trees-tutorial-label"></span><h3><a class="toc-backref" href="#id429" role="doc-backlink"><span class="section-number">1.7.4. </span>On tree graphs and graph forests</a><a class="headerlink" href="#on-tree-graphs-and-graph-forests" title="Link to this heading"></a></h3>
 <nav class="contents local" id="id196">
 <ul class="simple">
-<li><p><a class="reference internal" href="#generating-random-tree-graphs" id="id443">Generating random tree graphs</a></p></li>
-<li><p><a class="reference internal" href="#recognizing-tree-graphs" id="id444">Recognizing tree graphs</a></p></li>
-<li><p><a class="reference internal" href="#spanning-trees-and-forests" id="id445">Spanning trees and forests</a></p></li>
-<li><p><a class="reference internal" href="#maximum-determined-spanning-forests" id="id446">Maximum determined spanning forests</a></p></li>
+<li><p><a class="reference internal" href="#generating-random-tree-graphs" id="id444">Generating random tree graphs</a></p></li>
+<li><p><a class="reference internal" href="#recognizing-tree-graphs" id="id445">Recognizing tree graphs</a></p></li>
+<li><p><a class="reference internal" href="#spanning-trees-and-forests" id="id446">Spanning trees and forests</a></p></li>
+<li><p><a class="reference internal" href="#maximum-determined-spanning-forests" id="id447">Maximum determined spanning forests</a></p></li>
 </ul>
 </nav>
 <hr class="docutils" />
 <section id="generating-random-tree-graphs">
-<h4><a class="toc-backref" href="#id443" role="doc-backlink"><span class="section-number">1.7.4.1. </span>Generating random tree graphs</a><a class="headerlink" href="#generating-random-tree-graphs" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id444" role="doc-backlink"><span class="section-number">1.7.4.1. </span>Generating random tree graphs</a><a class="headerlink" href="#generating-random-tree-graphs" title="Link to this heading"></a></h4>
 <p>Using the <a class="reference internal" href="techDoc.html#graphs.RandomTree" title="graphs.RandomTree"><code class="xref py py-class docutils literal notranslate"><span class="pre">RandomTree</span></code></a> class, we may, for instance, generate a random tree graph with 9 vertices.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">RandomTree</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomTree</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
@@ -10741,7 +10755,7 @@ fecop 75.78% success rate</p>
 <p>Given a genuine graph, how can we recognize that it is in fact a tree instance ?</p>
 </section>
 <section id="recognizing-tree-graphs">
-<h4><a class="toc-backref" href="#id444" role="doc-backlink"><span class="section-number">1.7.4.2. </span>Recognizing tree graphs</a><a class="headerlink" href="#recognizing-tree-graphs" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id445" role="doc-backlink"><span class="section-number">1.7.4.2. </span>Recognizing tree graphs</a><a class="headerlink" href="#recognizing-tree-graphs" title="Link to this heading"></a></h4>
 <p>Given a graph <em>g</em> of order <em>n</em> and size <em>s</em>, the following 5 assertions <em>A1</em>, <em>A2</em>, <em>A3</em>, <em>A4</em> and <em>A5</em> are all equivalent (see <a class="reference internal" href="#bar-1991" id="id199"><span>[BAR-1991]</span></a>):</p>
 <blockquote>
 <div><ul class="simple">
@@ -10808,7 +10822,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 <p>Let us now turn our attention toward a major application of tree graphs, namely <em>spanning trees</em> and <em>forests</em> related to graph traversals.</p>
 </section>
 <section id="spanning-trees-and-forests">
-<h4><a class="toc-backref" href="#id445" role="doc-backlink"><span class="section-number">1.7.4.3. </span>Spanning trees and forests</a><a class="headerlink" href="#spanning-trees-and-forests" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id446" role="doc-backlink"><span class="section-number">1.7.4.3. </span>Spanning trees and forests</a><a class="headerlink" href="#spanning-trees-and-forests" title="Link to this heading"></a></h4>
 <p>With the <a class="reference internal" href="techDoc.html#graphs.RandomSpanningTree" title="graphs.RandomSpanningTree"><code class="xref py py-class docutils literal notranslate"><span class="pre">RandomSpanningTree</span></code></a> class we may generate, from a given <strong>connected</strong> graph <em>g</em> instance, <strong>uniform random</strong> instances of a <strong>spanning tree</strong> by using <em>Wilson</em>’s algorithm <a class="reference internal" href="#wil-1996" id="id200"><span>[WIL-1996]</span></a></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -10873,7 +10887,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 </figure>
 </section>
 <section id="maximum-determined-spanning-forests">
-<h4><a class="toc-backref" href="#id446" role="doc-backlink"><span class="section-number">1.7.4.4. </span>Maximum determined spanning forests</a><a class="headerlink" href="#maximum-determined-spanning-forests" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id447" role="doc-backlink"><span class="section-number">1.7.4.4. </span>Maximum determined spanning forests</a><a class="headerlink" href="#maximum-determined-spanning-forests" title="Link to this heading"></a></h4>
 <p>In case of valued graphs supporting weighted edges, we may finally construct a <strong>most determined</strong> spanning tree (or forest if not connected) using <em>Kruskal</em>’s <em>greedy</em> <strong>minimum-spanning-tree algorithm</strong> <a class="footnote-reference brackets" href="#id209" id="id202" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a> on the <em>dual</em> valuation of the graph <a class="reference internal" href="#kru-1956" id="id203"><span>[KRU-1956]</span></a>.</p>
 <p>We consider, for instance, a randomly valued graph with five vertices and seven edges bipolar-valued in [-1.0; 1.0].</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">RandomValuationGraph</span>
@@ -11363,7 +11377,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 </aside>
 <aside class="footnote brackets" id="id268" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id147">66</a><span class="fn-bracket">]</span></span>
-<p>The best <em>Copeland</em> initial matching is computed following a greedy <em>Copeland</em> scores ranked otential pairs list.</p>
+<p>The best <em>Copeland</em> initial matching is computed following a greedy matching fitness scores ranked potential pairs list.</p>
 </aside>
 </aside>
 </section>
@@ -11381,7 +11395,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jan 14, 2026.
+      <span class="lastupdated">Last updated on Jan 15, 2026.
       </span></p>
   </div>
 

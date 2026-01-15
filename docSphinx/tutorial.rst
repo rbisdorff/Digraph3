@@ -8406,7 +8406,7 @@ The :py:class:`pairings.FairnessEnhancedIntraGroupMatching` constructor may inde
    :emphasize-lines: 5,11,17-21,23
 
    >>> from pairings import FairnessEnhancedIntraGroupMatching
-   >>> fep = FairnessEnhancedIntraGroupMatching(bavp)
+   >>> fep = FairnessEnhancedIntraGroupMatching(bavp,Comments=True)
     ===>>> Enhancing left initial matching
      Initial left matching
      [['A', 'B'], ['C', 'D'], ['E', 'F'], ['G', 'H'], ['I', 'J']]
@@ -8429,16 +8429,22 @@ The :py:class:`pairings.FairnessEnhancedIntraGroupMatching` constructor may inde
      Average correlation: +0.920
      Total run time: 0.188 sec.
 
-In :numref:`classmates3` we may notice that the fairness enhancing procedure  starts by default from two initial pairing solutions, a right one and a left one (see Lines 5 and 11). Starting from the initial pairings, the solver tries to swap either the two exterior persons *p1* <-> *p4* and/or the interior persons *p2* <-> *p3* of two pairs [[*p1,p2*], [*p3,p4*]] in order to enhance the fairness of the so far obtained pairing. Here we recover in fact the same optimal fairest pairing solution as before in a global run time of less than 1/5th of a second.
+In :numref:`classmates3` we may notice that the fairness enhancing procedure  starts by default from two initial pairing solutions, a right one and a left one (see Lines 5 and 11). Starting from the initial pairings, the solver tries to swap either the two exterior persons *p1* <-> *p4* and/or the interior persons *p2* <-> *p3* of two potential student pairs [[*p1,p2*], [*p3,p4*]] in order to enhance the fairness of the so far obtained pairing. Here we recover in fact the same optimal fairest pairing solution as before in a global run time of less than 1/5th of a second.
 
-Instead of starting from the default initial right and left pairings, we may also start the fairness enhancing search from the best *Copeland* matching, i.e. an initial pairing where for each person we choose as potential partner a person that shows a high fairness enhancement potential.
+Guiding the choice of the initial matching
+``````````````````````````````````````````
+
+Instead of starting from the default initial right and left pairings, we may also start in :numref:`classmates4` below the fairness enhancing search from the best *Copeland* matching, i.e. an initial pairing where for each person we choose as potential partner a person that shows the highest possible fitness score with respect to her respective given individual pairing preferences. 
 
 .. code-block:: pycon
    :name: classmates4
    :linenos:
-   :caption: Fairness enhancing pairwise Copeland scores
+   :caption: Matching fitness scores
+   :emphasize-lines: 2,6,7,9,11,13,17
 
-   >>> fep.showCopelandScores()
+   >>> fec = FairnessEnhancedIntraGroupMatching(bavp,
+   ...                          initialMatching='bestCopeland')
+   >>> fec.showMatchingFitnessScores()
          | 'B' 'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J'	 
     -----|------------------------------------
      'A' |  +0 +16 -14 -10  -2 -14   0 +12  +2	 
@@ -8449,36 +8455,40 @@ Instead of starting from the default initial right and left pairings, we may als
      'F' |  	 	        +2 +16 -10  +2	 
      'G' |  	 	 	     0 +12 +16	 
      'H' |  	 	 	       -10  +2	 
-     'I' |  	 	 	 	    +2	 
+     'I' |  	 	 	 	    +2
+     Valuation range: [-18; 18]
+   >>> fec.copelandInitialMatching
+   {{'C', 'A'}, {'E', 'B'}, {'H', 'D'}, {'J', 'G'}, {'I', 'F'}}
 
-In :numref:`classmates4` above we see for instance confirmed that the fairest potenial partner for *Alice* is *Carol* with a *Copeland* score 0f +16. A same *Copeland* score of +16 is shown for matching *Dan* with *Henry* as well as *Gaby* with *Jane*. *Bob* and *Edward show a *Copeland* score of +12. Finally we are only left with *Felix* and *Isabel*. *Felix* approves *Isabel* but *Isabel* does only approve female partners; their *Copeland* score is hence negative (-10) [66]_.
+The pairwise fitness scores shown in Lines 6-14 above result from the sum of the *Copeland* ranking scores of the respective potential partners of both the matched persons. The fitness figures confirm for instance that the best fitting potential partner for *Alice* is *Carol* with a score of +16 (see Line 6). A same matching fitness score of +16 is shown for matching *Dan* with *Henry* as well as *Gaby* with *Jane* (see Lines 9 and 13). *Bob* and *Edward show a  matching fitness score of +12 (see Line 7). Finally we are only left with *Felix* and *Isabel*. *Felix* approves *Isabel* but *Isabel* does only approve female partners; their matching fitness score becomes hence negative (-10, see Line 11)) [66]_. In Line 17 is shown the resulting best fitting *Copeland* matching.
 
-In :numref:`classmates5` below we try to enhance the fairness of a matching solution by starting this time from this best *Copeland* pairing solution (see Line 2).
+Starting from this initial matching, we may now reach indeed the fairest possible pairing solution within two fairness enhancing steps by exchanging *Alice* with *Felix* and *Carol* with *Isabel*. 
 
-.. code-block:: pycon
-   :name: classmates5
-   :linenos:
-   :caption: Fairness enhanced solving of the pairing problem
-   :emphasize-lines: 2,5,7,10-16
-
-   >>> fep = FairnessEnhancedIntraGroupMatching(bavp,
-   ...                          initialMatching='bestCopeland')
-    initial best Copeland matching
-     *---- Initial matching ----*
-     [['C', 'A'], ['D', 'H'], ['G', 'J'], ['B', 'E'], ['F', 'I']]
-     Enhancing iteration :  1
-     Enhancing iteration :  2
-     ===>>> Best fairness enhanced matching
-     Matched pairs
-     {'A', 'I'}
-     {'B', 'E'}
+   >>> fec.showMatchingFairness()
+    Matched pairs
      {'C', 'F'}
-     {'D', 'H'}
-     {'G', 'J'}
-     Average correlation: +0.920
-     Total run time: 0.082 sec.
+     {'E', 'B'}
+     {'H', 'D'}
+     {'I', 'A'}
+     {'J', 'G'}
+    ----
+    Individual correlations:
+     'A': +1.000
+     'B': +1.000
+     'C': +1.000
+     'D': +1.000
+     'E': +1.000
+     'F': +1.000
+     'G': +0.200
+     'H': +1.000
+     'I': +1.000
+     'J': +1.000
+    -----
+     Average correlation : +0.920
+     Standard deviation  :  0.253
+     Total run time: 0.073 sec.
 
-We may reach the fairest possible pairing solution within two fairness enhancing steps by exchanging *Alice* with *Felix* and *Carol* with *Isabel* (see Lines 5, 10,12). Total run time is thus reduced to a tenth of a second (see Line 16). The previous brute force run time of about 4 seonds is eventually divided by 40 (see :numref:`classmates2` Line 15).
+Total run time is thus reduced to less than a tenth of a second (see Line 16). The previous brute force run time of about 4 seonds is eventually divided by more than :math:`4.0/0.073 \approx 54` (see :numref:`classmates2` Line 16).
 
 Back to :ref:`Content Table <Tutorial-label>`   
 
@@ -11569,7 +11579,7 @@ Appendices
 
 .. [65] An example of a borderless :py:class:`~randomDigraphs.RandomOutrankingValuationDigraph` instance may be found in the *examples* directory of the *Digraphs3* resources under the name *borderlessROV9S25.py*.
 
-.. [66] The best *Copeland* initial matching is computed following a greedy *Copeland* scores ranked otential pairs list.  
+.. [66] The best *Copeland* initial matching is computed following a greedy matching fitness scores ranked potential pairs list.  
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
