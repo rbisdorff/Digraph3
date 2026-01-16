@@ -339,7 +339,7 @@
 <dl class="field-list simple" id="tutorial-label">
 <dt class="field-odd">New<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p>A tutorial on <a class="reference internal" href="#roommatesmatching-tutorial-label"><span class="std std-ref">matching classmates into partner pairs</span></a></p></li>
+<li><p>A case study on <a class="reference internal" href="#roommatesmatching-tutorial-label"><span class="std std-ref">matching classmates into partner pairs</span></a></p></li>
 <li><p>A tutorial on <a class="reference internal" href="#partial-ranking-tutorial-label"><span class="std std-ref">extracting partial rankings</span></a> from a given outranking digraph</p></li>
 <li><p>The <em>Bachet</em> ranking rules are illustrated in the tutorial on <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">ranking with multiple incommensurable criteria</span></a></p></li>
 <li><p>A tutorial on <a class="reference internal" href="#hpc-ranking-tutorial-label"><span class="std std-ref">using the Digraph3 HPC resources</span></a> for ranking several millions of multicriteria performance records via sparse outranking digraphs</p></li>
@@ -5957,7 +5957,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </section>
 <section id="starting-the-fairness-enhancement-from-a-best-determined-copeland-matching">
 <h4><a class="toc-backref" href="#id378" role="doc-backlink"><span class="section-number">1.3.9.8. </span>Starting the fairness enhancement from a best determined Copeland matching</a><a class="headerlink" href="#starting-the-fairness-enhancement-from-a-best-determined-copeland-matching" title="Link to this heading"></a></h4>
-<p>The partner swapping strategy relies on the <em>Copeland</em> ranking scores of a potential pairing candidate for all persons in bothe groups. These scores are precomputed and stored in the <em>copelandScores</em> attribute of the <a class="reference internal" href="techDoc.html#pairings.FairnessEnhancedInterGroupMatching" title="pairings.FairnessEnhancedInterGroupMatching"><code class="xref py py-class docutils literal notranslate"><span class="pre">FairnessEnhancedInterGroupMatching</span></code></a> object. When we add, for a pair {<em>ai</em>, <em>bj</em>} both the <em>Copeland</em> ranking score of partner <em>bj</em> from the perspective of Person <em>ai</em> to the corresponding <em>Copeland</em> ranking score of partner <em>ai</em> from the perspective of Person <em>bj</em> to two times the observed minimal <em>Copeland</em> ranking score, we obtain a weakly determined complete bipartite graph object.</p>
+<p>The partner swapping strategy relies on the <em>Copeland</em> ranking scores of a potential pairing candidate for all persons in both groups. These scores are precomputed and stored in the <em>copelandScores</em> attribute of the <a class="reference internal" href="techDoc.html#pairings.FairnessEnhancedInterGroupMatching" title="pairings.FairnessEnhancedInterGroupMatching"><code class="xref py py-class docutils literal notranslate"><span class="pre">FairnessEnhancedInterGroupMatching</span></code></a> object. When we add, for a pair {<em>ai</em>, <em>bj</em>} both the <em>Copeland</em> ranking score of partner <em>bj</em> from the perspective of Person <em>ai</em> to the corresponding <em>Copeland</em> ranking score of partner <em>ai</em> from the perspective of Person <em>bj</em> to two times the observed minimal <em>Copeland</em> ranking score, we obtain a weakly determined complete bipartite graph object.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pairings</span> <span class="kn">import</span> <span class="n">BestCopelandInterGroupMatching</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bcop</span> <span class="o">=</span> <span class="n">BestCopelandInterGroupMatching</span><span class="p">(</span><span class="n">apA1</span><span class="p">,</span><span class="n">apB1</span><span class="p">)</span>
 <span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bcop</span><span class="o">.</span><span class="n">showEdgesCharacteristicValues</span><span class="p">()</span>
@@ -6405,6 +6405,10 @@ fecop 75.78% success rate</p>
 <p>These statistics were obtained by trying both the left and right initial matchings as well as the best determined <em>Copeland</em> matching as starting point for the fairness enhancing procedure and keeping eventually the best average correlation result. The overall ordinal correlation hence obtained is convincingly high with a mean of +0.823, coupled with a reasonable mean standard deviation of 0.361 over the 30 personal correlations. Run times depend essentially on the number of enhancing iterations. On average, about 24 partner swappings were sufficient for computing all three variants in less than 4 seconds. In slightly more than two third only of the random pairing problems (69.4%), starting the fairness enhancing procedure from the best determined <em>Copeland</em> matching leads indeed to the best overall ordinal correlation with the individual pairing preferences.</p>
 <p>When enhancing thus the fairness solely by starting from the best determined <em>Copeland</em> matching, we may solve with the <a class="reference internal" href="techDoc.html#pairings.FairnessEnhancedIntraGroupMatching" title="pairings.FairnessEnhancedIntraGroupMatching"><code class="xref py py-class docutils literal notranslate"><span class="pre">FairnessEnhancedIntraGroupMatching</span></code></a> solver in on average about 30 seconds an intragroup pairing problem of order 100 with random bipolar approval voting profiles and approval and disapproval probabilities of 10%. The average overall ordinal correlation we may obtain is about +0.800.</p>
 <p>Mind however that the higher the order of the pairing problem, the more likely gets the fact that we actually may miss the overall fairest pairing solution. Eventually, a good expertise in metaheuristics is needed in order to effectively solve big intragroup pairing problems (<em>Avis aux amateurs</em>).</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#roommatesmatching-tutorial-label"><span class="std std-ref">The case study on matching classmates into partner pairs</span></a></p>
+</div>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 <hr class="docutils" />
 </section>
@@ -8009,12 +8013,12 @@ fecop 75.78% success rate</p>
 </nav>
 <section id="a-classmates-matching-problem">
 <h4><a class="toc-backref" href="#id401" role="doc-backlink"><span class="section-number">1.4.4.1. </span>A classmates matching problem</a><a class="headerlink" href="#a-classmates-matching-problem" title="Link to this heading"></a></h4>
-<p>A class of ten university students has to be matched into partner pairs for a class activity. The students submitted the following approval-disapproval matching preferences.</p>
+<p>A class of ten university students has to be matched into partner pairs for a class activity. The students submitted the following approval-disapproval pairing preferences.</p>
 <blockquote>
 <div><table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Student</p></th>
-<th class="head" colspan="2"><p>Matching</p></th>
+<th class="head" colspan="2"><p>Pairing</p></th>
 </tr>
 <tr class="row-even"><th class="head"><p>Ids</p></th>
 <th class="head"><p>Approvals</p></th>
@@ -8065,7 +8069,7 @@ fecop 75.78% success rate</p>
 </tbody>
 </table>
 </div></blockquote>
-<p>The given matching preferences are gathered in a <a class="reference internal" href="techDoc.html#votingProfiles.BipolarApprovalVotingProfile" title="votingProfiles.BipolarApprovalVotingProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">BipolarApprovalVotingProfile</span></code></a> object stored under the name <em>classmates.py</em> in the <em>examples</em> directory of the <em>Digraph3</em> resources.</p>
+<p>The given pairing preferences are gathered in a <a class="reference internal" href="techDoc.html#votingProfiles.BipolarApprovalVotingProfile" title="votingProfiles.BipolarApprovalVotingProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">BipolarApprovalVotingProfile</span></code></a> object stored under the name <em>classmates.py</em> in the <em>examples</em> directory of the <em>Digraph3</em> resources.</p>
 <div class="literal-block-wrapper docutils container" id="classmates1">
 <div class="code-block-caption"><span class="caption-number">Listing 1.114 </span><span class="caption-text">Example of intragroup pairing preferences</span><a class="headerlink" href="#classmates1" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">votingProfiles</span> <span class="kn">import</span> <span class="n">BipolarApprovalVotingProfile</span>
@@ -8106,11 +8110,14 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 </div>
-<p>In <a class="reference internal" href="#classmates1"><span class="std std-numref">Listing 1.114</span></a> we may notice that matching <em>Alice</em> with <em>Carol</em> and <em>Bob</em> with <em>Edward</em> is evident as they both approve their reciprocal matches. <em>Gaby</em> however wants to be matched with <em>Edward</em> or <em>Henry</em>. Yet, both do not approve her as potential partner. Notice also that <em>Edward</em> wishes to be matched only with male partners and <em>Isabel</em> only with female ones. What is now a pairing solution which takes the fairest account of these individual approval and disapproval matching preferences.</p>
+<p>In <a class="reference internal" href="#classmates1"><span class="std std-numref">Listing 1.114</span></a> we may notice that pairing <em>Alice</em> with <em>Carol</em> and <em>Bob</em> with <em>Edward</em> is evident as they both approve their reciprocal matches. <em>Gaby</em> however wants to be paired with <em>Edward</em> or <em>Henry</em>. Yet, both do not approve her as potential partner. Notice also that <em>Edward</em> wishes to be paired only with male partners and <em>Isabel</em> only with female ones. What is now a pairing solution which takes the fairest account of these individual approval and disapproval pairing preferences.</p>
 </section>
 <section id="computing-a-fair-pairing-solution">
 <h4><a class="toc-backref" href="#id402" role="doc-backlink"><span class="section-number">1.4.4.2. </span>Computing a fair pairing solution</a><a class="headerlink" href="#computing-a-fair-pairing-solution" title="Link to this heading"></a></h4>
-<p>The <a class="reference internal" href="techDoc.html#module-pairings" title="pairings"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pairings</span></code></a> module provides the <a class="reference internal" href="techDoc.html#pairings.FairestIntraGroupPairing" title="pairings.FairestIntraGroupPairing"><code class="xref py py-class docutils literal notranslate"><span class="pre">FairestIntraGroupPairing</span></code></a> constructor for computing by brute force over all 9!! = 945 potential matchings the best correlated pairing solution with respect to the previously given <em>bavp</em> voting profile (see <a class="reference internal" href="#fair-intragroup-pairings-label"><span class="std std-ref">tutorial on computing fair intragroup pairings</span></a>).</p>
+<blockquote class="epigraph">
+<div><p>“<strong>Fairness</strong>: <em>impartial and just treatment or behaviour without favouritism or discrimination</em>” – Oxford Languages</p>
+</div></blockquote>
+<p>The <a class="reference internal" href="techDoc.html#module-pairings" title="pairings"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pairings</span></code></a> module provides the <a class="reference internal" href="techDoc.html#pairings.FairestIntraGroupPairing" title="pairings.FairestIntraGroupPairing"><code class="xref py py-class docutils literal notranslate"><span class="pre">FairestIntraGroupPairing</span></code></a> constructor for computing by brute force over all 9!! = 945 potential matchings the best correlated pairing solution with respect to the previously given <em>bavp</em> pairing approvals and disapprovals (see <a class="reference internal" href="#fair-intragroup-pairings-label"><span class="std std-ref">tutorial on computing fair intragroup pairings</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="classmates2">
 <div class="code-block-caption"><span class="caption-number">Listing 1.115 </span><span class="caption-text">Solving the intragroup pairing problem</span><a class="headerlink" href="#classmates2" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pairings</span> <span class="kn">import</span> <span class="n">FairestIntraGroupPairing</span>
@@ -8158,7 +8165,7 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 </div>
-<p>Looking in <a class="reference internal" href="#classmates2"><span class="std std-numref">Listing 1.115</span></a> at the fairest matching solution, we are lucky here as the pairing result is highly correlated with the matching preferences of the ten classmates (+0.920, see Line 41). All students, except <em>Gaby</em>, are in fact matched with an approved partner and no student is matched with a disapproved partner. We may illustrate in <a class="reference internal" href="#fairestintragrouppairing2"><span class="std std-numref">Fig. 1.71</span></a> the resulting fairest intragroup pairing solution with a graphviz drawing.</p>
+<p>Looking in <a class="reference internal" href="#classmates2"><span class="std std-numref">Listing 1.115</span></a> at the fairest pairing solution, we are lucky here as the pairing result is highly correlated with the pairing preferences of the ten classmates (+0.920, see Line 41). All students, except <em>Gaby</em>, are in fact paired with an approved partner and no student is paired with a disapproved partner. We may illustrate in <a class="reference internal" href="#fairestintragrouppairing2"><span class="std std-numref">Fig. 1.71</span></a> the resulting fairest intragroup pairing solution with a graphviz drawing.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fp</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;fairestIntraGroupPairing2&#39;</span><span class="p">)</span>
 <span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go"> Exporting to fairestIntraGroupPairing2.dot</span>
@@ -8172,11 +8179,11 @@ fecop 75.78% success rate</p>
 <p><span class="caption-number">Fig. 1.71 </span><span class="caption-text">Fairest intragroup pairing solution</span><a class="headerlink" href="#fairestintragrouppairing2" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>Notice that with such a tiny group, the brute force approach –testing all 945 potential matchings– takes only about four seconds (see Line 15 in <a class="reference internal" href="#classmates2"><span class="std std-numref">Listing 1.115</span></a>). We may nevertheless try to reduce this solving runtime figure by using a smart fairness enhancing solver.</p>
+<p>Notice that with such a tiny group, the brute force solving approach –testing all 945 potential matchings– takes only about four seconds (see Line 15 in <a class="reference internal" href="#classmates2"><span class="std std-numref">Listing 1.115</span></a>). We may nevertheless try to reduce this solving runtime figure by using a smart fairness enhancing solver.</p>
 </section>
 <section id="using-a-fairness-enhancing-solver">
 <h4><a class="toc-backref" href="#id403" role="doc-backlink"><span class="section-number">1.4.4.3. </span>Using a fairness enhancing solver</a><a class="headerlink" href="#using-a-fairness-enhancing-solver" title="Link to this heading"></a></h4>
-<p>The <a class="reference internal" href="techDoc.html#pairings.FairnessEnhancedIntraGroupMatching" title="pairings.FairnessEnhancedIntraGroupMatching"><code class="xref py py-class docutils literal notranslate"><span class="pre">pairings.FairnessEnhancedIntraGroupMatching</span></code></a> constructor may indeed reduce sometimes significantly the brute force run time, an essential feature when having to match larger groups of persons or items into pairs.</p>
+<p>The <a class="reference internal" href="techDoc.html#pairings.FairnessEnhancedIntraGroupMatching" title="pairings.FairnessEnhancedIntraGroupMatching"><code class="xref py py-class docutils literal notranslate"><span class="pre">FairnessEnhancedIntraGroupMatching</span></code></a> constructor, provided by the <a class="reference internal" href="techDoc.html#module-pairings" title="pairings"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pairings</span></code></a> module, may indeed reduce significantly the brute force solving run time, an essential feature when having to match larger groups of persons or items into pairs.</p>
 <div class="literal-block-wrapper docutils container" id="classmates3">
 <div class="code-block-caption"><span class="caption-number">Listing 1.116 </span><span class="caption-text">Fairness enhanced solving of the matching problem</span><a class="headerlink" href="#classmates3" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pairings</span> <span class="kn">import</span> <span class="n">FairnessEnhancedIntraGroupMatching</span>
@@ -8205,11 +8212,11 @@ fecop 75.78% success rate</p>
 </span></pre></div>
 </div>
 </div>
-<p>In <a class="reference internal" href="#classmates3"><span class="std std-numref">Listing 1.116</span></a> we may notice that the fairness enhancing procedure  starts by default from two initial matchings, a right one and a left one (see Lines 5 and 11). Starting from each initial matching, the solver tries to swap either the two exterior persons <em>p1</em> &lt;-&gt; <em>p4</em> and/or the interior persons <em>p2</em> &lt;-&gt; <em>p3</em> of two potential student pairs [[<em>p1,p2</em>], [<em>p3,p4</em>]] in order to enhance the fairness of the so far obtained matching solution. Starting from the right initial matching, we recover here the same optimal fairest matching as before in a solving run time of less than one fifth of a second (see Line 23).</p>
+<p>In <a class="reference internal" href="#classmates3"><span class="std std-numref">Listing 1.116</span></a> above we may notice that the fairness enhancing procedure  starts by default from two initial matchings, a right one and a left one (see Lines 5 and 11). Starting from each initial matching, the solver tries to swap either the two exterior persons <em>p1</em> &lt;-&gt; <em>p4</em> and/or the interior persons <em>p2</em> &lt;-&gt; <em>p3</em> of two potential student pairs [[<em>p1,p2</em>], [<em>p3,p4</em>]] in order to enhance the fairness of the so far obtained pairing solution. Starting from the right initial matching, we recover here the same optimal fairest pairing result as before in a solving run time of less than one fifth of a second (see Line 23).</p>
 </section>
 <section id="guiding-the-choice-of-the-initial-matching">
 <h4><a class="toc-backref" href="#id404" role="doc-backlink"><span class="section-number">1.4.4.4. </span>Guiding the choice of the initial matching</a><a class="headerlink" href="#guiding-the-choice-of-the-initial-matching" title="Link to this heading"></a></h4>
-<p>Instead of starting now from the default initial right and left matchings, we may also start in <a class="reference internal" href="#classmates4"><span class="std std-numref">Listing 1.117</span></a> below the fairness enhancing search from a best <em>Copeland</em> matching, i.e. an initial matching where each student is matched with a partner who shows the highest possible matching fitness score with respect to the given individual student’s matching preferences.</p>
+<p>Instead of starting now from the default initial right and left matchings, we may also start in <a class="reference internal" href="#classmates4"><span class="std std-numref">Listing 1.117</span></a> below the fairness enhancing search from a best <em>Copeland</em> matching, i.e. an initial matching where each student is paired with a partner who shows the highest possible matching fitness score with respect to the given individual student’s pairing preferences.</p>
 <div class="literal-block-wrapper docutils container" id="classmates4">
 <div class="code-block-caption"><span class="caption-number">Listing 1.117 </span><span class="caption-text">Matching fitness scores</span><a class="headerlink" href="#classmates4" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fec</span> <span class="o">=</span> <span class="n">FairnessEnhancedIntraGroupMatching</span><span class="p">(</span><span class="n">bavp</span><span class="p">,</span>
@@ -8230,38 +8237,42 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 </div>
-<p>The pairwise matching fitness scores shown above in Lines 6-14 result from the sum of the <em>Copeland</em> ranking scores of the respective potential partners of both the matched persons. The fitness figures confirm for instance that the best fitting potential partner for <em>Alice</em> is <em>Carol</em> with a score of +16 (see Line 6). A same matching fitness score of +16 is shown for matching <em>Dan</em> with <em>Henry</em> as well as <em>Gaby</em> with <em>Jane</em> (see Lines 9 and 13). <em>Bob</em> and <em>Edward show a matching fitness score of +12 (see Line 7). Finally we are only left with *Felix</em> and <em>Isabel</em>. <em>Felix</em> approves <em>Isabel</em> but <em>Isabel</em> does only approve female partners; their reciprocal matching fitness score is hence negative (-10, see Line 11)).  Below is shown the resulting best fitting <em>Copeland</em> matching <a class="footnote-reference brackets" href="#id268" id="id147" role="doc-noteref"><span class="fn-bracket">[</span>66<span class="fn-bracket">]</span></a>.</p>
+<p>The pairwise matching fitness scores shown above in Lines 6-14 result from the sum of the <em>Copeland</em> ranking scores of the respective potential partners of both the paired persons. The fitness figures confirm for instance that the best matching partner for <em>Alice</em> is <em>Carol</em> with a score of +16 (see Line 6). A same matching fitness score of +16 is shown for pairing <em>Dan</em> with <em>Henry</em> as well as <em>Gaby</em> with <em>Jane</em> (see Lines 9 and 13). <em>Bob</em> and <em>Edward show a matching fitness score of +12 (see Line 7). Finally we are only left with *Felix</em> and <em>Isabel</em>. <em>Felix</em> approves <em>Isabel</em> but <em>Isabel</em> does only approve female partners; their reciprocal matching fitness score is hence negative (-10, see Line 11)).  Below is shown the resulting best fitting <em>Copeland</em> matching <a class="footnote-reference brackets" href="#id268" id="id147" role="doc-noteref"><span class="fn-bracket">[</span>66<span class="fn-bracket">]</span></a>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fec</span><span class="o">.</span><span class="n">copelandInitialMatching</span>
 <span class="go">{{&#39;C&#39;, &#39;A&#39;}, {&#39;E&#39;, &#39;B&#39;}, {&#39;H&#39;, &#39;D&#39;}, {&#39;J&#39;, &#39;G&#39;}, {&#39;I&#39;, &#39;F&#39;}}</span>
 </pre></div>
 </div>
-<p>Starting from this initial matching, we may now reach indeed the fairest possible matching solution within two fairness enhancing steps by exchanging <em>Alice</em> with <em>Felix</em> and <em>Carol</em> with <em>Isabel</em>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fec</span><span class="o">.</span><span class="n">showMatchingFairness</span><span class="p">()</span>
-<span class="go"> Matched pairs</span>
-<span class="go">  {&#39;C&#39;, &#39;F&#39;}</span>
-<span class="go">  {&#39;E&#39;, &#39;B&#39;}</span>
-<span class="go">  {&#39;H&#39;, &#39;D&#39;}</span>
-<span class="go">  {&#39;I&#39;, &#39;A&#39;}</span>
-<span class="go">  {&#39;J&#39;, &#39;G&#39;}</span>
-<span class="go"> ----</span>
-<span class="go"> Individual correlations:</span>
-<span class="go">  &#39;A&#39;: +1.000</span>
-<span class="go">  &#39;B&#39;: +1.000</span>
-<span class="go">  &#39;C&#39;: +1.000</span>
-<span class="go">  &#39;D&#39;: +1.000</span>
-<span class="go">  &#39;E&#39;: +1.000</span>
-<span class="go">  &#39;F&#39;: +1.000</span>
-<span class="go">  &#39;G&#39;: +0.200</span>
-<span class="go">  &#39;H&#39;: +1.000</span>
-<span class="go">  &#39;I&#39;: +1.000</span>
-<span class="go">  &#39;J&#39;: +1.000</span>
-<span class="go"> -----</span>
-<span class="go">  Average correlation : +0.920</span>
-<span class="go">  Standard deviation  :  0.253</span>
-<span class="go">  Total run time      :  0.073 sec.</span>
-</pre></div>
+<p>Starting from this initial matching, we may now reach indeed the fairest possible pairing solution within two fairness enhancing steps by exchanging <em>Alice</em> with <em>Felix</em> and <em>Carol</em> with <em>Isabel</em>.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fec</span><span class="o">.</span><span class="n">showMatchingFairness</span><span class="p">()</span>
+<span class="linenos"> 2</span><span class="go"> Matched pairs</span>
+<span class="hll"><span class="linenos"> 3</span><span class="go">  {&#39;C&#39;, &#39;F&#39;}</span>
+</span><span class="linenos"> 4</span><span class="go">  {&#39;E&#39;, &#39;B&#39;}</span>
+<span class="linenos"> 5</span><span class="go">  {&#39;H&#39;, &#39;D&#39;}</span>
+<span class="hll"><span class="linenos"> 6</span><span class="go">  {&#39;I&#39;, &#39;A&#39;}</span>
+</span><span class="linenos"> 7</span><span class="go">  {&#39;J&#39;, &#39;G&#39;}</span>
+<span class="linenos"> 8</span><span class="go"> ----</span>
+<span class="linenos"> 9</span><span class="go"> Individual correlations:</span>
+<span class="linenos">10</span><span class="go">  &#39;A&#39;: +1.000</span>
+<span class="linenos">11</span><span class="go">  &#39;B&#39;: +1.000</span>
+<span class="linenos">12</span><span class="go">  &#39;C&#39;: +1.000</span>
+<span class="linenos">13</span><span class="go">  &#39;D&#39;: +1.000</span>
+<span class="linenos">14</span><span class="go">  &#39;E&#39;: +1.000</span>
+<span class="linenos">15</span><span class="go">  &#39;F&#39;: +1.000</span>
+<span class="linenos">16</span><span class="go">  &#39;G&#39;: +0.200</span>
+<span class="linenos">17</span><span class="go">  &#39;H&#39;: +1.000</span>
+<span class="linenos">18</span><span class="go">  &#39;I&#39;: +1.000</span>
+<span class="linenos">19</span><span class="go">  &#39;J&#39;: +1.000</span>
+<span class="linenos">20</span><span class="go"> -----</span>
+<span class="linenos">21</span><span class="go">  Average correlation : +0.920</span>
+<span class="linenos">22</span><span class="go">  Standard deviation  :  0.253</span>
+<span class="hll"><span class="linenos">23</span><span class="go">  Total run time      :  0.073 sec.</span>
+</span></pre></div>
 </div>
-<p>Total solver run time is now reduced to less than a one fourteenth of a second (see Line 16). The initial brute force solving run time of about 4 seonds is thus eventually divided by more than <img class="math" src="_images/math/60fab63ccca841be102cc416be541b3507f0b1e9.png" alt="4.0/0.073 \approx 54"/> (see <a class="reference internal" href="#classmates2"><span class="std std-numref">Listing 1.115</span></a> Line 16).</p>
+<p>Total solver run time is now reduced to less than one fourteenth of a second (0.073, see Line 23 above). The initial brute force solving run time of about 4.0 sec. is thus eventually divided by more than <img class="math" src="_images/math/60fab63ccca841be102cc416be541b3507f0b1e9.png" alt="4.0/0.073 \approx 54"/> (see <a class="reference internal" href="#classmates2"><span class="std std-numref">Listing 1.115</span></a> Line 16). Intragroup pairing problems of larger group sizes become so effectively solvable.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#fair-intragroup-pairings-label"><span class="std std-ref">The tutorial on computing fair intragroup pairings</span></a>.</p>
+</div>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 <hr class="docutils" />
 </section>

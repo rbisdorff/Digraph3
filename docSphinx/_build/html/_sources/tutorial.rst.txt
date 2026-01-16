@@ -43,7 +43,7 @@
 	  
    :New:
 
-      - A tutorial on :ref:`matching classmates into partner pairs <RoommatesMatching-Tutorial-label>`
+      - A case study on :ref:`matching classmates into partner pairs <RoommatesMatching-Tutorial-label>`
 	
       - A tutorial on :ref:`extracting partial rankings <Partial-Ranking-Tutorial-label>` from a given outranking digraph
       
@@ -6098,7 +6098,7 @@ The proportion of failures depends evidently on the difficulty and the order of 
 Starting the fairness enhancement from a best determined Copeland matching
 ``````````````````````````````````````````````````````````````````````````
 
-The partner swapping strategy relies on the *Copeland* ranking scores of a potential pairing candidate for all persons in bothe groups. These scores are precomputed and stored in the *copelandScores* attribute of the :py:class:`~pairings.FairnessEnhancedInterGroupMatching` object. When we add, for a pair {*ai*, *bj*} both the *Copeland* ranking score of partner *bj* from the perspective of Person *ai* to the corresponding *Copeland* ranking score of partner *ai* from the perspective of Person *bj* to two times the observed minimal *Copeland* ranking score, we obtain a weakly determined complete bipartite graph object.
+The partner swapping strategy relies on the *Copeland* ranking scores of a potential pairing candidate for all persons in both groups. These scores are precomputed and stored in the *copelandScores* attribute of the :py:class:`~pairings.FairnessEnhancedInterGroupMatching` object. When we add, for a pair {*ai*, *bj*} both the *Copeland* ranking score of partner *bj* from the perspective of Person *ai* to the corresponding *Copeland* ranking score of partner *ai* from the perspective of Person *bj* to two times the observed minimal *Copeland* ranking score, we obtain a weakly determined complete bipartite graph object.
 
 .. code-block:: pycon
    :linenos:
@@ -6576,6 +6576,8 @@ These statistics were obtained by trying both the left and right initial matchin
 When enhancing thus the fairness solely by starting from the best determined *Copeland* matching, we may solve with the :py:class:`~pairings.FairnessEnhancedIntraGroupMatching` solver in on average about 30 seconds an intragroup pairing problem of order 100 with random bipolar approval voting profiles and approval and disapproval probabilities of 10%. The average overall ordinal correlation we may obtain is about +0.800.
 
 Mind however that the higher the order of the pairing problem, the more likely gets the fact that we actually may miss the overall fairest pairing solution. Eventually, a good expertise in metaheuristics is needed in order to effectively solve big intragroup pairing problems (*Avis aux amateurs*).
+
+.. seealso:: :ref:`The case study on matching classmates into partner pairs <RoommatesMatching-Tutorial-label>`
 
 Back to :ref:`Content Table <Tutorial-label>`
 
@@ -8260,10 +8262,10 @@ Classmates matching: An *intragroup pairing* case study
 
 A classmates matching problem
 `````````````````````````````
-A class of ten university students has to be matched into partner pairs for a class activity. The students submitted the following approval-disapproval matching preferences.
+A class of ten university students has to be matched into partner pairs for a class activity. The students submitted the following approval-disapproval pairing preferences.
 
    ============  ============  ===============
-    Student              Matching            
+    Student               Pairing           
    ------------  -----------------------------
     Ids           Approvals     Disapprovals  
    ============  ============  ===============
@@ -8279,7 +8281,7 @@ A class of ten university students has to be matched into partner pairs for a cl
     J (Jane)      D, G          B, C, E      
    ============  ============  =============== 
 
-The given matching preferences are gathered in a :py:class:`~votingProfiles.BipolarApprovalVotingProfile` object stored under the name *classmates.py* in the *examples* directory of the *Digraph3* resources.
+The given pairing preferences are gathered in a :py:class:`~votingProfiles.BipolarApprovalVotingProfile` object stored under the name *classmates.py* in the *examples* directory of the *Digraph3* resources.
 
 .. code-block:: pycon
    :name: classmates1
@@ -8323,13 +8325,14 @@ The given matching preferences are gathered in a :py:class:`~votingProfiles.Bipo
     Approvals   : ['D', 'G']
     Disapprovals: ['B', 'C', 'E']
 
-In :numref:`classmates1` we may notice that matching *Alice* with *Carol* and *Bob* with *Edward* is evident as they both approve their reciprocal matches. *Gaby* however wants to be matched with *Edward* or *Henry*. Yet, both do not approve her as potential partner. Notice also that *Edward* wishes to be matched only with male partners and *Isabel* only with female ones. What is now a pairing solution which takes the fairest account of these individual approval and disapproval matching preferences.  
-
+In :numref:`classmates1` we may notice that pairing *Alice* with *Carol* and *Bob* with *Edward* is evident as they both approve their reciprocal matches. *Gaby* however wants to be paired with *Edward* or *Henry*. Yet, both do not approve her as potential partner. Notice also that *Edward* wishes to be paired only with male partners and *Isabel* only with female ones. What is now a pairing solution which takes the fairest account of these individual approval and disapproval pairing preferences.  
 
 Computing a fair pairing solution
 `````````````````````````````````
+.. epigraph::
+     "**Fairness**: *impartial and just treatment or behaviour without favouritism or discrimination*" -- Oxford Languages
 
-The :py:mod:`pairings` module provides the :py:class:`~pairings.FairestIntraGroupPairing` constructor for computing by brute force over all 9!! = 945 potential matchings the best correlated pairing solution with respect to the previously given *bavp* voting profile (see :ref:`tutorial on computing fair intragroup pairings <Fair-IntraGroup-Pairings-label>`).
+The :py:mod:`pairings` module provides the :py:class:`~pairings.FairestIntraGroupPairing` constructor for computing by brute force over all 9!! = 945 potential matchings the best correlated pairing solution with respect to the previously given *bavp* pairing approvals and disapprovals (see :ref:`tutorial on computing fair intragroup pairings <Fair-IntraGroup-Pairings-label>`).
 
 .. code-block:: pycon
    :name: classmates2
@@ -8380,7 +8383,7 @@ The :py:mod:`pairings` module provides the :py:class:`~pairings.FairestIntraGrou
      Average correlation : +0.920
      Standard deviation  :  0.253
 
-Looking in :numref:`classmates2` at the fairest matching solution, we are lucky here as the pairing result is highly correlated with the matching preferences of the ten classmates (+0.920, see Line 41). All students, except *Gaby*, are in fact matched with an approved partner and no student is matched with a disapproved partner. We may illustrate in :numref:`fairestIntraGroupPairing2` the resulting fairest intragroup pairing solution with a graphviz drawing.
+Looking in :numref:`classmates2` at the fairest pairing solution, we are lucky here as the pairing result is highly correlated with the pairing preferences of the ten classmates (+0.920, see Line 41). All students, except *Gaby*, are in fact paired with an approved partner and no student is paired with a disapproved partner. We may illustrate in :numref:`fairestIntraGroupPairing2` the resulting fairest intragroup pairing solution with a graphviz drawing.
 
    >>> fp.exportGraphViz('fairestIntraGroupPairing2')
     *---- exporting a dot file for GraphViz tools ---------*
@@ -8395,12 +8398,12 @@ Looking in :numref:`classmates2` at the fairest matching solution, we are lucky 
 
     Fairest intragroup pairing solution
 
-Notice that with such a tiny group, the brute force approach --testing all 945 potential matchings-- takes only about four seconds (see Line 15 in :numref:`classmates2`). We may nevertheless try to reduce this solving runtime figure by using a smart fairness enhancing solver.
+Notice that with such a tiny group, the brute force solving approach --testing all 945 potential matchings-- takes only about four seconds (see Line 15 in :numref:`classmates2`). We may nevertheless try to reduce this solving runtime figure by using a smart fairness enhancing solver.
 
 Using a fairness enhancing solver
 `````````````````````````````````
 
-The :py:class:`pairings.FairnessEnhancedIntraGroupMatching` constructor may indeed reduce sometimes significantly the brute force run time, an essential feature when having to match larger groups of persons or items into pairs.
+The :py:class:`~pairings.FairnessEnhancedIntraGroupMatching` constructor, provided by the :py:mod:`pairings` module, may indeed reduce significantly the brute force solving run time, an essential feature when having to match larger groups of persons or items into pairs.
 
 .. code-block:: pycon
    :name: classmates3
@@ -8432,12 +8435,12 @@ The :py:class:`pairings.FairnessEnhancedIntraGroupMatching` constructor may inde
      Average correlation: +0.920
      Total run time: 0.188 sec.
 
-In :numref:`classmates3` we may notice that the fairness enhancing procedure  starts by default from two initial matchings, a right one and a left one (see Lines 5 and 11). Starting from each initial matching, the solver tries to swap either the two exterior persons *p1* <-> *p4* and/or the interior persons *p2* <-> *p3* of two potential student pairs [[*p1,p2*], [*p3,p4*]] in order to enhance the fairness of the so far obtained matching solution. Starting from the right initial matching, we recover here the same optimal fairest matching as before in a solving run time of less than one fifth of a second (see Line 23).
+In :numref:`classmates3` above we may notice that the fairness enhancing procedure  starts by default from two initial matchings, a right one and a left one (see Lines 5 and 11). Starting from each initial matching, the solver tries to swap either the two exterior persons *p1* <-> *p4* and/or the interior persons *p2* <-> *p3* of two potential student pairs [[*p1,p2*], [*p3,p4*]] in order to enhance the fairness of the so far obtained pairing solution. Starting from the right initial matching, we recover here the same optimal fairest pairing result as before in a solving run time of less than one fifth of a second (see Line 23).
 
 Guiding the choice of the initial matching
 ``````````````````````````````````````````
 
-Instead of starting now from the default initial right and left matchings, we may also start in :numref:`classmates4` below the fairness enhancing search from a best *Copeland* matching, i.e. an initial matching where each student is matched with a partner who shows the highest possible matching fitness score with respect to the given individual student's matching preferences. 
+Instead of starting now from the default initial right and left matchings, we may also start in :numref:`classmates4` below the fairness enhancing search from a best *Copeland* matching, i.e. an initial matching where each student is paired with a partner who shows the highest possible matching fitness score with respect to the given individual student's pairing preferences. 
 
 .. code-block:: pycon
    :name: classmates4
@@ -8461,12 +8464,16 @@ Instead of starting now from the default initial right and left matchings, we ma
      'I' |  	 	 	 	    +2
      Valuation range: [-18; 18]
 
-The pairwise matching fitness scores shown above in Lines 6-14 result from the sum of the *Copeland* ranking scores of the respective potential partners of both the matched persons. The fitness figures confirm for instance that the best fitting potential partner for *Alice* is *Carol* with a score of +16 (see Line 6). A same matching fitness score of +16 is shown for matching *Dan* with *Henry* as well as *Gaby* with *Jane* (see Lines 9 and 13). *Bob* and *Edward show a matching fitness score of +12 (see Line 7). Finally we are only left with *Felix* and *Isabel*. *Felix* approves *Isabel* but *Isabel* does only approve female partners; their reciprocal matching fitness score is hence negative (-10, see Line 11)).  Below is shown the resulting best fitting *Copeland* matching [66]_.
+The pairwise matching fitness scores shown above in Lines 6-14 result from the sum of the *Copeland* ranking scores of the respective potential partners of both the paired persons. The fitness figures confirm for instance that the best matching partner for *Alice* is *Carol* with a score of +16 (see Line 6). A same matching fitness score of +16 is shown for pairing *Dan* with *Henry* as well as *Gaby* with *Jane* (see Lines 9 and 13). *Bob* and *Edward show a matching fitness score of +12 (see Line 7). Finally we are only left with *Felix* and *Isabel*. *Felix* approves *Isabel* but *Isabel* does only approve female partners; their reciprocal matching fitness score is hence negative (-10, see Line 11)).  Below is shown the resulting best fitting *Copeland* matching [66]_.
 
    >>> fec.copelandInitialMatching
    {{'C', 'A'}, {'E', 'B'}, {'H', 'D'}, {'J', 'G'}, {'I', 'F'}}
 
-Starting from this initial matching, we may now reach indeed the fairest possible matching solution within two fairness enhancing steps by exchanging *Alice* with *Felix* and *Carol* with *Isabel*. 
+Starting from this initial matching, we may now reach indeed the fairest possible pairing solution within two fairness enhancing steps by exchanging *Alice* with *Felix* and *Carol* with *Isabel*. 
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 3,6,23
 
    >>> fec.showMatchingFairness()
     Matched pairs
@@ -8492,7 +8499,9 @@ Starting from this initial matching, we may now reach indeed the fairest possibl
      Standard deviation  :  0.253
      Total run time      :  0.073 sec.
 
-Total solver run time is now reduced to less than a one fourteenth of a second (see Line 16). The initial brute force solving run time of about 4 seonds is thus eventually divided by more than :math:`4.0/0.073 \approx 54` (see :numref:`classmates2` Line 16).
+Total solver run time is now reduced to less than one fourteenth of a second (0.073, see Line 23 above). The initial brute force solving run time of about 4.0 sec. is thus eventually divided by more than :math:`4.0/0.073 \approx 54` (see :numref:`classmates2` Line 16). Intragroup pairing problems of larger group sizes become so effectively solvable.
+
+.. seealso:: :ref:`The tutorial on computing fair intragroup pairings <Fair-IntraGroup-Pairings-label>`.
 
 Back to :ref:`Content Table <Tutorial-label>`   
 
