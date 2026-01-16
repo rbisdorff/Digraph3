@@ -47,10 +47,9 @@ Parts of the documentation
 ..........................
 :New:
 
+   * A tutorial on :ref:`matching classmates into partner pairs <RoommatesMatching-Tutorial-label>`
    * :ref:`Applications of bipolar-valued base 3 encoded Bachet numbers <Bachet-Tutorial-label>`
    * A tutorial on :ref:`using the Digraph3 HPC resources <HPC-Ranking-Tutorial-label>` for ranking several millions of multicriteria performance records via big sparse outranking digraphs
-   *  A :py:mod:`pairings` module for solving pairing problems illustrated with two tutorials on computing **fair** :ref:`intergroup<Fair-InterGroup-Pairings-label>` and :ref:`intragroup<Fair-IntraGroup-Pairings-label>` pairing solutions
-
 
 #. `Tutorials <tutorial.html>`_
 

@@ -41,6 +41,18 @@
 
 .. only:: html
 	  
+   :New:
+
+      - A tutorial on :ref:`matching classmates into partner pairs <RoommatesMatching-Tutorial-label>`
+	
+      - A tutorial on :ref:`extracting partial rankings <Partial-Ranking-Tutorial-label>` from a given outranking digraph
+      
+      - The *Bachet* ranking rules are illustrated in the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`
+          
+      - A tutorial on :ref:`using the Digraph3 HPC resources <HPC-Ranking-Tutorial-label>` for ranking several millions of multicriteria performance records via sparse outranking digraphs
+	
+      - A tutorial on :ref:`using multiprocessing resources <Multiprocessing-Tutorial-label>` when tackling large performance tableaux with several hundreds of decision alternatives.
+
    Contents
    --------
 
@@ -96,17 +108,6 @@
 
    **Abstract**: The tutorials in this document describe the practical usage of our *Digraph3* Python3 software resources in the field of *Algorithmic Decision Theory* and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They mainly illustrate practical tools for a Master Course |location_link4| at the University of Luxembourg. The document contains first a set of tutorials introducing the main objects available in the Digraph3 collection of Python3 modules, like **bipolar-valued digraphs**, **outranking digraphs**, and **multicriteria performance tableaux**. The second and methodological set of tutorials is decision problem oriented and shows how to edit multicriteria performance tableaux, how to compute the potential **winner(s)** of an election, how to build a **best choice recommendation**, and how to **rate** or **linearly rank** with multiple incommensurable performance criteria. We finally discuss the **fair intergroup** and **intragroup pairing** problems. A third part presents three **evaluation** and **decision case studies**. A fourth and fifth part present tools for working with **big outranking digraphs**. The last part is devoted to **undirected graphs** with a tutorial on how to compute **non isomorphic maximal independent sets** (kernels) in the n-cycle graph. Special tutorials are finally introducing  **perfect** graphs, like *split*, *interval* and *permutation* graphs.
 
-   :New:
-
-      - A tutorial on :ref:`extracting partial rankings <Partial-Ranking-Tutorial-label>` from a given outranking digraph
-      
-      - The *Bachet* ranking rules are illustrated in the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`
-          
-      - A tutorial on :ref:`using the Digraph3 HPC resources <HPC-Ranking-Tutorial-label>` for ranking several millions of multicriteria performance records via sparse outranking digraphs
-	
-      - A tutorial on :ref:`using multiprocessing resources <Multiprocessing-Tutorial-label>` when tackling large performance tableaux with several hundreds of decision alternatives.
-
-      - Two tutorials on computing :ref:`fair intergroup<Fair-InterGroup-Pairings-label>` and :ref:`fair intragroup<Fair-IntraGroup-Pairings-label>` pairing solutions	      
 
 -------------------------------------
 
