@@ -8446,40 +8446,42 @@ Instead of starting now from the default initial right and left matchings, we ma
    :name: classmates4
    :linenos:
    :caption: Matching fitness scores
-   :emphasize-lines: 2,6,7,9,11,13
+   :emphasize-lines: 6-14
 
-   >>> fec = FairnessEnhancedIntraGroupMatching(bavp,
-   ...                          initialMatching='bestCopeland')
-   >>> fec.showMatchingFitnessScores()
+   >>> from pairings import BestCopelandIntraGroupMatching
+   >>> bcm = BestCopelandIntraGroupMatching(bavp)
+   >>> bcm.showMatchingFitnessScores()
          | 'B' 'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J'	 
     -----|------------------------------------
-     'A' |  +0 +16 -14 -10  -2 -14   0 +12  +2	 
-     'B' |     -12 -14 +12 -16	+2 -16 -10 -14	 
-     'C' |  	   -14 -10 +14 -14   0 +12 -14	 
-     'D' |  	       +12  -2 -14 +16 -10 +16	 
-     'E' |  	 	    -2 +16 -16 -10 -14	 
-     'F' |  	 	        +2 +16 -10  +2	 
-     'G' |  	 	 	     0 +12 +16	 
+     'A' | -16 +30 -16 -12 +12 -30  -2 +26  +0	 
+     'B' |     -12  +0 +26 -16 +16 -30 -24 -28	 
+     'C' |  	   -10	-6 +30 -26  +4	+0 -26	 
+     'D' |  	       +16  +2 -10 +34  -6 +20	 
+     'E' |  	 	   +10	+6  -4 -20 -24	 
+     'F' |  	 	 	+0 +30	+4 -14	 
+     'G' |  	 	 	   +16 +14 +18	 
      'H' |  	 	 	       -10  +2	 
-     'I' |  	 	 	 	    +2
-     Valuation range: [-18; 18]
+     'I' |  	 	 	 	   +14
+     Valuation domain: [-34, 34]
 
-The pairwise matching fitness scores shown above in Lines 6-14 result from the sum of the *Copeland* ranking scores of the respective potential partners of both the paired persons. The fitness figures confirm for instance that the best matching partner for *Alice* is *Carol* with a score of +16 (see Line 6). A same matching fitness score of +16 is shown for pairing *Dan* with *Henry* as well as *Gaby* with *Jane* (see Lines 9 and 13). *Bob* and *Edward show a matching fitness score of +12 (see Line 7). Finally we are only left with *Felix* and *Isabel*. *Felix* approves *Isabel* but *Isabel* does only approve female partners; their reciprocal matching fitness score is hence negative (-10, see Line 11)).  Below is shown the resulting best fitting *Copeland* matching [66]_.
+The pairwise matching fitness scores shown above in Lines 6-14 result from the sum of the *Copeland* ranking scores of the respective potential partners of both the paired persons. The fitness figures confirm for instance that the best matching fitness score of 34 is shown for pairing *Dan* and *Henry* (Line 9) followed by the best matching fitness score of 30 for pairing *Alice* is *Carol* (Line 6). A best matching fitness score of +26 than appears for pairing *Bob with *Edward* (Line 7). *Gaby* and *Jane* show a best matching fitness score of +18 (Line 12). Finally we are only left with *Felix* and *Isabel*. *Felix* approves *Isabel* but *Isabel* does only approve female partners; their reciprocal matching fitness score is eventually only +4 (Line 11)). Below is shown the resulting best fitting *Copeland* matching [66]_.
 
-   >>> fec.copelandInitialMatching
-   {{'C', 'A'}, {'E', 'B'}, {'H', 'D'}, {'J', 'G'}, {'I', 'F'}}
+   >>> bcm matching
+   {{'D', 'H'}, {'A', 'C'}, {'B', 'E'}, {'G', 'J'}, {'F', 'I'}}
 
-Starting from this initial matching, we may now reach indeed the fairest possible pairing solution within two fairness enhancing steps by exchanging *Alice* with *Felix* and *Carol* with *Isabel*. 
+Starting from this initial matching, we may now reach indeed the fairest possible pairing solution within one fairness enhancing steps by exchanging *Alice* with *Felix*. 
 
 .. code-block:: pycon
    :linenos:
    :emphasize-lines: 3,6,23
 
+   >>> fec = FairnessEnhancedIntraGroupMatching(bavp,
+   ...                  initialMaching=bcm.matching)
    >>> fec.showMatchingFairness()
     Matched pairs
+     {'B', 'E'}
      {'C', 'F'}
-     {'E', 'B'}
-     {'H', 'D'}
+     {'D', 'H'}
      {'I', 'A'}
      {'J', 'G'}
     ----
@@ -8497,9 +8499,9 @@ Starting from this initial matching, we may now reach indeed the fairest possibl
     -----
      Average correlation : +0.920
      Standard deviation  :  0.253
-     Total run time      :  0.073 sec.
+     Total run time      :  0.075 sec.
 
-Total solver run time is now reduced to less than one fourteenth of a second (0.073, see Line 23 above). The initial brute force solving run time of about 4.0 sec. is thus eventually divided by more than :math:`4.0/0.073 \approx 54` (see :numref:`classmates2` Line 16). Intragroup pairing problems of larger group sizes become so effectively solvable.
+Total solver run time is now reduced to less than a 13th of a second (0.075, see Line 23 above). The initial brute force solving run time of about 4.0 seconds is thus eventually divided by more than :math:`4.0/0.075 \approx 53` (see :numref:`classmates2` Line 16). Intragroup pairing problems of larger group sizes become so effectively solvable.
 
 .. seealso:: :ref:`The tutorial on computing fair intragroup pairings <Fair-IntraGroup-Pairings-label>`.
 

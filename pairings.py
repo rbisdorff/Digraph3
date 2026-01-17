@@ -2146,8 +2146,12 @@ class IntraGroupPairing(Graph):
         copelandScores = self.copelandScores
         copEdges = {}
         MaxScore = 0
-        for p1 in self.persons:
-            for p2 in self.persons:
+        vertices = [v for v in self.persons]
+        nv = len(vertices)
+        for i in range(nv):
+            p1 = vertices[i]
+            for j in range(i+1,nv):
+                p2 = vertices[j]
                 if p1 != p2:
                     edgeKey = frozenset([p1,p2])
                     copp1p2 = copelandScores[p1][p2]
@@ -2639,6 +2643,7 @@ class FairnessEnhancedIntraGroupMatching(IntraGroupPairing):
                 cop = BestCopelandIntraGroupMatching(self.vpA,Comments=False)
                 initialMatching = cop.matching
                 self.copelandInitialMatching = cop.matching
+                self.cop = cop
                 if Comments:
                     print('Best Copeland initial matching')
             elif type(initialMatching) == list or type(initialMatching) == frozenset:
@@ -3191,7 +3196,7 @@ class BestCopelandIntraGroupMatching(IntraGroupPairing):
         self.vpA = vpA
         # precomputing Copeland ranking scores
         copelandScores = {}
-        minScore = 0.0
+        maxScore = 0
         for i in range(order):
             pi = persons[i]
             copelandScores[pi] = {}
@@ -3206,23 +3211,25 @@ class BestCopelandIntraGroupMatching(IntraGroupPairing):
                 copelandScores[pj][pi] = self.computeCopelandScore(pj,pi)
                 score = copelandScores[pi][pj] + copelandScores[pj][pi]
                 if Debug:
-                    print(score)
-                if score < minScore:
-                    minScore = score
+                    print(pi,pj,copelandScores[pi][pj],copelandScores[pj][pi],score)
+                if abs(score) > maxScore:
+                    maxScore = abs(score)
+                    if Debug:
+                        print(pi,pj,maxScore)
                     
         self.copelandScores = copelandScores
         if Debug:
             print(copelandScores)
-            print('minScore:', minScore)
+            print('maxScore:', maxScore)
         t1 = time()
         self.runTimes['dataInput'] = t1 - t0
 
         #storing the Graph data
         t2 = time()
         self.vertices = vpA.voters
-        Min = Decimal('%d' % (2*minScore) )
+        Min = Decimal('%d' % (-maxScore) )
         Med = Decimal('0')
-        Max = Decimal('%d' % (2*abs(minScore)) )
+        Max = Decimal('%d' % (maxScore) )
         self.valuationDomain = {'min': Min,
                                 'med': Med,
                                 'max': Max}
@@ -3234,13 +3241,14 @@ class BestCopelandIntraGroupMatching(IntraGroupPairing):
             for j in range(i+1,n):
                 vj = verticesList[j]
                 edgeKey = frozenset([vi,vj])
-                edges[edgeKey] = abs(minScore) + copelandScores[vi][vj] \
+                edges[edgeKey] = copelandScores[vi][vj] \
                             + copelandScores[vj][vi]
         self.edges = edges
         self.gamma = self.gammaSets()
         if Debug:
             dself = self.graph2Digraph()
             dself.showRelationTable(ndigits=0)
+            self.showEdgesCharacteristicValues(ndigits=0)
         t3 = time()
         self.runTimes['CopelandGraph'] = t3 - t2
         
@@ -3284,6 +3292,43 @@ class BestCopelandIntraGroupMatching(IntraGroupPairing):
         t7 = time()
         self.runTimes['totalTime'] = t7 - t0
 
+    def showMatchingFitnessScores(self,edges=None,ndigits=0):
+        """
+        Prints the edge links of the graph
+        """
+        verticesKeys = [x for x in self.vertices]
+        if edges is None:
+            edges = self.edges
+
+        try:
+            IntegerValuation = self.valuationDomain['IntegerValuation']
+        except:
+            IntegerValuation = False
+
+        print('\t|', end=' ')
+        n = len(verticesKeys)
+        for i in range(1,n):
+            x = verticesKeys[i]
+            print("'"+x+"'\t", end=' ')
+        print('\n--------|--------------------')
+        for i in range(n-1):
+            x = verticesKeys[i]
+            print("  '"+x+"' | ", end=' ')
+            for j in range(1,n):
+                if j < (i+1):
+                    print('\t',end=' ')
+                else:
+                    y = verticesKeys[j]
+                    edgeKey = frozenset([x,y])
+                    if IntegerValuation:
+                        print('%+d\t' % (edges[edgeKey]), end=' ')
+                    else:
+                        formatString = '%%+2.%df\t' % ndigits
+                        print(formatString % (edges[edgeKey]), end=' ')
+            print('')
+        print('Valuation domain: [%d, %d]' % (self.valuationDomain['min'],
+                                            self.valuationDomain['max']) )
+
 
 #----------test pairings class ----------------
 if __name__ == "__main__":
@@ -3301,124 +3346,124 @@ if __name__ == "__main__":
 
     print('*-------- Testing classes and methods -------')
 
-    from time import time
-    from votingProfiles import *
-##            RandomLinearVotingProfile,\
-##            RandomBipolarApprovalVotingProfile,RandomVotingProfile
-    from random import randint
-    seed1 = randint(0,99)
-    seed2 = randint(100,199)
-##    seed1 = 1
-##    seed2 = 1616
-    order = 10
-    Comments = True
-    Debug = False
-
-    # intragroup experiments
-    vpG = RandomLinearVotingProfile(numberOfVoters=order,
-                                    numberOfCandidates=order,
-                                    votersIdPrefix='p',
-                                    IntraGroup=True,
-                                    #candidatesIdPrefix='b',
-##                                             approvalProbability=0.2,
-##                                             disapprovalProbability=0.2,
-                                             seed=seed1,Debug=False)
-##    vpG.showBipolarApprovals()
-##    t0 = time()
-    fp = FairestIntraGroupPairing(vpG,Comments=True,Debug=False,orderLimit=order)
-##    t1 =time()
-##    #print('fp total run time: %.3f sec.' % (t1-t0))
+##    from time import time
+##    from votingProfiles import *
+####            RandomLinearVotingProfile,\
+####            RandomBipolarApprovalVotingProfile,RandomVotingProfile
+##    from random import randint
+##    seed1 = randint(0,99)
+##    seed2 = randint(100,199)
+####    seed1 = 1
+####    seed2 = 1616
+##    order = 10
+##    Comments = True
+##    Debug = False
 ##
-##    cop = BestCopelandIntraGroupMatching(vpG,Comments=False,Debug=False)
-##    ecop = FairnessEnhancedIntraGroupMatching(vpG,initialMatching='bestCopeland',
-##                                              Comments=True,Debug=False)
-##    fegm = FairnessEnhancedIntraGroupMatching(vpG,initialMatching=fp.pairings[0][0],
-##                                              Comments=True,Debug=False)
-    fem = FairnessEnhancedIntraGroupMatching(vpG,initialMatching='bestCopeland',
-                                              Comments=False,Debug=False)
-##    
-##    print('==>> Copeland')
-##    cop.showMatchingFairness(WithIndividualCorrelations=True)
-##    print(cop.runTimes)
-##    print('==>> Fairness enhanced')
-##    fem.showMatchingFairness(WithIndividualCorrelations=True)
-##    print(fem.runTimes)
-##    print('==>> Copeland enhanced')
-##    ecop.showMatchingFairness(WithIndividualCorrelations=True)
-##    print(ecop.runTimes)
-##    print('==>> Fairest')
-##    fp.showMatchingFairness(WithIndividualCorrelations=True)
-##    print(fp.runTimes)
-
-    #intergroup experiments
-##    lvA = RandomBipolarApprovalVotingProfile(numberOfVoters=order,
+##    # intragroup experiments
+##    vpG = RandomLinearVotingProfile(numberOfVoters=order,
 ##                                    numberOfCandidates=order,
-##                                    votersIdPrefix='a',
-##                                             #IntraGroup=True,
-##                                    candidatesIdPrefix='b',
-##                                             approvalProbability=0.3,
-##                                             disapprovalProbability=0.3,
+##                                    votersIdPrefix='p',
+##                                    IntraGroup=True,
+##                                    #candidatesIdPrefix='b',
+####                                             approvalProbability=0.2,
+####                                             disapprovalProbability=0.2,
 ##                                             seed=seed1,Debug=False)
-##    lvB = RandomBipolarApprovalVotingProfile(numberOfVoters=order,
-##                                    numberOfCandidates=order,
-##                                    votersIdPrefix='b',
-##                                    #IntraGroup=False,
-##                                    candidatesIdPrefix='a',
-##                                             approvalProbability=0.3,
-##                                             disapprovalProbability=0.3,
-##                                             seed=seed2,Debug=False)
-####    lvA = RandomLinearVotingProfile(numberOfVoters=order,
-##                                    numberOfCandidates=order,
-##                                    votersIdPrefix='a',
-##                                    candidatesIdPrefix='b',
-##                                    PartialLinearBallots=False,
-##                                    lengthProbability=0.3,
-##                                    seed=seed1)
-##    lvB = RandomLinearVotingProfile(numberOfVoters=order,
-##                                    numberOfCandidates=order,
-##                                    votersIdPrefix='b',
-##                                    candidatesIdPrefix='a',
-##                                    PartialLinearBallots=False,
-##                                    lengthProbability=0.3,
-##                                    seed=seed2)
-##    t0 = time()
-##    fp = FairestInterGroupPairing(lvA,lvB,Comments=True,Debug=False,orderLimit=order)
-##    t1 =time()
-##    print('fp total run time: %.3f sec.' % (t1-t0))
-##
-##    igcg = BestCopelandInterGroupMatching(lvA,lvB,Comments=True,Debug=True)
-##    print('==>> Copeland')
-##    igcg.showMatchingFairness(WithIndividualCorrelations=True)
-##    print(igcg.runTimes)
+####    vpG.showBipolarApprovals()
+####    t0 = time()
+##    fp = FairestIntraGroupPairing(vpG,Comments=True,Debug=False,orderLimit=order)
+####    t1 =time()
+####    #print('fp total run time: %.3f sec.' % (t1-t0))
+####
+####    cop = BestCopelandIntraGroupMatching(vpG,Comments=False,Debug=False)
+####    ecop = FairnessEnhancedIntraGroupMatching(vpG,initialMatching='bestCopeland',
+####                                              Comments=True,Debug=False)
+####    fegm = FairnessEnhancedIntraGroupMatching(vpG,initialMatching=fp.pairings[0][0],
+####                                              Comments=True,Debug=False)
+##    fem = FairnessEnhancedIntraGroupMatching(vpG,initialMatching='bestCopeland',
+##                                              Comments=False,Debug=False)
+####    
+####    print('==>> Copeland')
+####    cop.showMatchingFairness(WithIndividualCorrelations=True)
+####    print(cop.runTimes)
+####    print('==>> Fairness enhanced')
+####    fem.showMatchingFairness(WithIndividualCorrelations=True)
+####    print(fem.runTimes)
+####    print('==>> Copeland enhanced')
+####    ecop.showMatchingFairness(WithIndividualCorrelations=True)
+####    print(ecop.runTimes)
 ####    print('==>> Fairest')
 ####    fp.showMatchingFairness(WithIndividualCorrelations=True)
+####    print(fp.runTimes)
 ##
-##    print('==>> Fairness random enhanced')    
-##    fem1 = FairnessEnhancedInterGroupMatching(lvA,lvB,
-##                                #initialMatching=fp.pairings[10][0],
-##                                initialMatching = 'random',
-##                                seed=1,
-##                                Comments=True,
-##                                Debug=False)
-##    fem1.showMatchingFairness(WithIndividualCorrelations=True)
-##    
-##    print(fem1.runTimes)
+##    #intergroup experiments
+####    lvA = RandomBipolarApprovalVotingProfile(numberOfVoters=order,
+####                                    numberOfCandidates=order,
+####                                    votersIdPrefix='a',
+####                                             #IntraGroup=True,
+####                                    candidatesIdPrefix='b',
+####                                             approvalProbability=0.3,
+####                                             disapprovalProbability=0.3,
+####                                             seed=seed1,Debug=False)
+####    lvB = RandomBipolarApprovalVotingProfile(numberOfVoters=order,
+####                                    numberOfCandidates=order,
+####                                    votersIdPrefix='b',
+####                                    #IntraGroup=False,
+####                                    candidatesIdPrefix='a',
+####                                             approvalProbability=0.3,
+####                                             disapprovalProbability=0.3,
+####                                             seed=seed2,Debug=False)
+######    lvA = RandomLinearVotingProfile(numberOfVoters=order,
+####                                    numberOfCandidates=order,
+####                                    votersIdPrefix='a',
+####                                    candidatesIdPrefix='b',
+####                                    PartialLinearBallots=False,
+####                                    lengthProbability=0.3,
+####                                    seed=seed1)
+####    lvB = RandomLinearVotingProfile(numberOfVoters=order,
+####                                    numberOfCandidates=order,
+####                                    votersIdPrefix='b',
+####                                    candidatesIdPrefix='a',
+####                                    PartialLinearBallots=False,
+####                                    lengthProbability=0.3,
+####                                    seed=seed2)
+####    t0 = time()
+####    fp = FairestInterGroupPairing(lvA,lvB,Comments=True,Debug=False,orderLimit=order)
+####    t1 =time()
+####    print('fp total run time: %.3f sec.' % (t1-t0))
+####
+####    igcg = BestCopelandInterGroupMatching(lvA,lvB,Comments=True,Debug=True)
+####    print('==>> Copeland')
+####    igcg.showMatchingFairness(WithIndividualCorrelations=True)
+####    print(igcg.runTimes)
+######    print('==>> Fairest')
+######    fp.showMatchingFairness(WithIndividualCorrelations=True)
+####
+####    print('==>> Fairness random enhanced')    
+####    fem1 = FairnessEnhancedInterGroupMatching(lvA,lvB,
+####                                #initialMatching=fp.pairings[10][0],
+####                                initialMatching = 'random',
+####                                seed=1,
+####                                Comments=True,
+####                                Debug=False)
+####    fem1.showMatchingFairness(WithIndividualCorrelations=True)
+####    
+####    print(fem1.runTimes)
+####
+####    print('==>> Fairness enhanced')
+####    fem2 = FairnessEnhancedInterGroupMatching(lvA,lvB,
+####                                initialMatching = fem1.matching,
+####                                seed=1,
+####                                Comments=True,
+####                                Debug=True)
+####    fem2.showMatchingFairness(WithIndividualCorrelations=True)
+####    print(fem2.runTimes)
 ##
-##    print('==>> Fairness enhanced')
-##    fem2 = FairnessEnhancedInterGroupMatching(lvA,lvB,
-##                                initialMatching = fem1.matching,
-##                                seed=1,
-##                                Comments=True,
-##                                Debug=True)
-##    fem2.showMatchingFairness(WithIndividualCorrelations=True)
-##    print(fem2.runTimes)
-
-##    print('==>> Fairest matching')
+####    print('==>> Fairest matching')
+####
+####    fp.showMatchingFairness(WithIndividualCorrelations=True)
+####    print(fp.runTimes)
 ##
-##    fp.showMatchingFairness(WithIndividualCorrelations=True)
-##    print(fp.runTimes)
-
-    print('seed1:',seed1, 'seed2:', seed2)
+##    print('seed1:',seed1, 'seed2:', seed2)
 
 ####    vpB.showBipolarApprovals()
 ##    order = 6
@@ -3460,6 +3505,11 @@ if __name__ == "__main__":
 ##                        Comments=Comments,Debug=False)
 ##    corropt, stdopt, groupOptScores = fp.computeIndividualCorrelations(fp.matching,Debug=True)
 ##    lvA.showBipolarApprovals()
+
+    from votingProfiles import *
+    bavp = BipolarApprovalVotingProfile('classmates')
+    from pairings import *
+    bcim = BestCopelandIntraGroupMatching(bavp,Comments=True)    
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')

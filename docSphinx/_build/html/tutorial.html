@@ -8219,56 +8219,58 @@ fecop 75.78% success rate</p>
 <p>Instead of starting now from the default initial right and left matchings, we may also start in <a class="reference internal" href="#classmates4"><span class="std std-numref">Listing 1.117</span></a> below the fairness enhancing search from a best <em>Copeland</em> matching, i.e. an initial matching where each student is paired with a partner who shows the highest possible matching fitness score with respect to the given individual student’s pairing preferences.</p>
 <div class="literal-block-wrapper docutils container" id="classmates4">
 <div class="code-block-caption"><span class="caption-number">Listing 1.117 </span><span class="caption-text">Matching fitness scores</span><a class="headerlink" href="#classmates4" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fec</span> <span class="o">=</span> <span class="n">FairnessEnhancedIntraGroupMatching</span><span class="p">(</span><span class="n">bavp</span><span class="p">,</span>
-<span class="hll"><span class="linenos"> 2</span><span class="gp">... </span>                         <span class="n">initialMatching</span><span class="o">=</span><span class="s1">&#39;bestCopeland&#39;</span><span class="p">)</span>
-</span><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fec</span><span class="o">.</span><span class="n">showMatchingFitnessScores</span><span class="p">()</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pairings</span> <span class="kn">import</span> <span class="n">BestCopelandIntraGroupMatching</span>
+<span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bcm</span> <span class="o">=</span> <span class="n">BestCopelandIntraGroupMatching</span><span class="p">(</span><span class="n">bavp</span><span class="p">)</span>
+<span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bcm</span><span class="o">.</span><span class="n">showMatchingFitnessScores</span><span class="p">()</span>
 <span class="linenos"> 4</span><span class="go">      | &#39;B&#39; &#39;C&#39; &#39;D&#39; &#39;E&#39; &#39;F&#39; &#39;G&#39; &#39;H&#39; &#39;I&#39; &#39;J&#39;</span>
 <span class="linenos"> 5</span><span class="go"> -----|------------------------------------</span>
-<span class="hll"><span class="linenos"> 6</span><span class="go">  &#39;A&#39; |  +0 +16 -14 -10  -2 -14   0 +12  +2</span>
-</span><span class="hll"><span class="linenos"> 7</span><span class="go">  &#39;B&#39; |     -12 -14 +12 -16  +2 -16 -10 -14</span>
-</span><span class="linenos"> 8</span><span class="go">  &#39;C&#39; |         -14 -10 +14 -14   0 +12 -14</span>
-<span class="hll"><span class="linenos"> 9</span><span class="go">  &#39;D&#39; |             +12  -2 -14 +16 -10 +16</span>
-</span><span class="linenos">10</span><span class="go">  &#39;E&#39; |                  -2 +16 -16 -10 -14</span>
-<span class="hll"><span class="linenos">11</span><span class="go">  &#39;F&#39; |                      +2 +16 -10  +2</span>
-</span><span class="linenos">12</span><span class="go">  &#39;G&#39; |                           0 +12 +16</span>
-<span class="hll"><span class="linenos">13</span><span class="go">  &#39;H&#39; |                             -10  +2</span>
-</span><span class="linenos">14</span><span class="go">  &#39;I&#39; |                                  +2</span>
-<span class="linenos">15</span><span class="go">  Valuation range: [-18; 18]</span>
+<span class="hll"><span class="linenos"> 6</span><span class="go">  &#39;A&#39; | -16 +30 -16 -12 +12 -30  -2 +26  +0</span>
+</span><span class="hll"><span class="linenos"> 7</span><span class="go">  &#39;B&#39; |     -12  +0 +26 -16 +16 -30 -24 -28</span>
+</span><span class="hll"><span class="linenos"> 8</span><span class="go">  &#39;C&#39; |         -10  -6 +30 -26  +4  +0 -26</span>
+</span><span class="hll"><span class="linenos"> 9</span><span class="go">  &#39;D&#39; |             +16  +2 -10 +34  -6 +20</span>
+</span><span class="hll"><span class="linenos">10</span><span class="go">  &#39;E&#39; |                 +10  +6  -4 -20 -24</span>
+</span><span class="hll"><span class="linenos">11</span><span class="go">  &#39;F&#39; |                      +0 +30  +4 -14</span>
+</span><span class="hll"><span class="linenos">12</span><span class="go">  &#39;G&#39; |                         +16 +14 +18</span>
+</span><span class="hll"><span class="linenos">13</span><span class="go">  &#39;H&#39; |                             -10  +2</span>
+</span><span class="hll"><span class="linenos">14</span><span class="go">  &#39;I&#39; |                                 +14</span>
+</span><span class="linenos">15</span><span class="go">  Valuation domain: [-34, 34]</span>
 </pre></div>
 </div>
 </div>
-<p>The pairwise matching fitness scores shown above in Lines 6-14 result from the sum of the <em>Copeland</em> ranking scores of the respective potential partners of both the paired persons. The fitness figures confirm for instance that the best matching partner for <em>Alice</em> is <em>Carol</em> with a score of +16 (see Line 6). A same matching fitness score of +16 is shown for pairing <em>Dan</em> with <em>Henry</em> as well as <em>Gaby</em> with <em>Jane</em> (see Lines 9 and 13). <em>Bob</em> and <em>Edward show a matching fitness score of +12 (see Line 7). Finally we are only left with *Felix</em> and <em>Isabel</em>. <em>Felix</em> approves <em>Isabel</em> but <em>Isabel</em> does only approve female partners; their reciprocal matching fitness score is hence negative (-10, see Line 11)).  Below is shown the resulting best fitting <em>Copeland</em> matching <a class="footnote-reference brackets" href="#id268" id="id147" role="doc-noteref"><span class="fn-bracket">[</span>66<span class="fn-bracket">]</span></a>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fec</span><span class="o">.</span><span class="n">copelandInitialMatching</span>
-<span class="go">{{&#39;C&#39;, &#39;A&#39;}, {&#39;E&#39;, &#39;B&#39;}, {&#39;H&#39;, &#39;D&#39;}, {&#39;J&#39;, &#39;G&#39;}, {&#39;I&#39;, &#39;F&#39;}}</span>
+<p>The pairwise matching fitness scores shown above in Lines 6-14 result from the sum of the <em>Copeland</em> ranking scores of the respective potential partners of both the paired persons. The fitness figures confirm for instance that the best matching fitness score of 34 is shown for pairing <em>Dan</em> and <em>Henry</em> (Line 9) followed by the best matching fitness score of 30 for pairing <em>Alice</em> is <em>Carol</em> (Line 6). A best matching fitness score of +26 than appears for pairing <em>Bob with *Edward</em> (Line 7). <em>Gaby</em> and <em>Jane</em> show a best matching fitness score of +18 (Line 12). Finally we are only left with <em>Felix</em> and <em>Isabel</em>. <em>Felix</em> approves <em>Isabel</em> but <em>Isabel</em> does only approve female partners; their reciprocal matching fitness score is eventually only +4 (Line 11)). Below is shown the resulting best fitting <em>Copeland</em> matching <a class="footnote-reference brackets" href="#id268" id="id147" role="doc-noteref"><span class="fn-bracket">[</span>66<span class="fn-bracket">]</span></a>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bcm</span> <span class="n">matching</span>
+<span class="go">{{&#39;D&#39;, &#39;H&#39;}, {&#39;A&#39;, &#39;C&#39;}, {&#39;B&#39;, &#39;E&#39;}, {&#39;G&#39;, &#39;J&#39;}, {&#39;F&#39;, &#39;I&#39;}}</span>
 </pre></div>
 </div>
-<p>Starting from this initial matching, we may now reach indeed the fairest possible pairing solution within two fairness enhancing steps by exchanging <em>Alice</em> with <em>Felix</em> and <em>Carol</em> with <em>Isabel</em>.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fec</span><span class="o">.</span><span class="n">showMatchingFairness</span><span class="p">()</span>
-<span class="linenos"> 2</span><span class="go"> Matched pairs</span>
-<span class="hll"><span class="linenos"> 3</span><span class="go">  {&#39;C&#39;, &#39;F&#39;}</span>
-</span><span class="linenos"> 4</span><span class="go">  {&#39;E&#39;, &#39;B&#39;}</span>
-<span class="linenos"> 5</span><span class="go">  {&#39;H&#39;, &#39;D&#39;}</span>
-<span class="hll"><span class="linenos"> 6</span><span class="go">  {&#39;I&#39;, &#39;A&#39;}</span>
-</span><span class="linenos"> 7</span><span class="go">  {&#39;J&#39;, &#39;G&#39;}</span>
-<span class="linenos"> 8</span><span class="go"> ----</span>
-<span class="linenos"> 9</span><span class="go"> Individual correlations:</span>
-<span class="linenos">10</span><span class="go">  &#39;A&#39;: +1.000</span>
-<span class="linenos">11</span><span class="go">  &#39;B&#39;: +1.000</span>
-<span class="linenos">12</span><span class="go">  &#39;C&#39;: +1.000</span>
-<span class="linenos">13</span><span class="go">  &#39;D&#39;: +1.000</span>
-<span class="linenos">14</span><span class="go">  &#39;E&#39;: +1.000</span>
-<span class="linenos">15</span><span class="go">  &#39;F&#39;: +1.000</span>
-<span class="linenos">16</span><span class="go">  &#39;G&#39;: +0.200</span>
-<span class="linenos">17</span><span class="go">  &#39;H&#39;: +1.000</span>
-<span class="linenos">18</span><span class="go">  &#39;I&#39;: +1.000</span>
-<span class="linenos">19</span><span class="go">  &#39;J&#39;: +1.000</span>
-<span class="linenos">20</span><span class="go"> -----</span>
-<span class="linenos">21</span><span class="go">  Average correlation : +0.920</span>
-<span class="linenos">22</span><span class="go">  Standard deviation  :  0.253</span>
-<span class="hll"><span class="linenos">23</span><span class="go">  Total run time      :  0.073 sec.</span>
-</span></pre></div>
+<p>Starting from this initial matching, we may now reach indeed the fairest possible pairing solution within one fairness enhancing steps by exchanging <em>Alice</em> with <em>Felix</em>.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fec</span> <span class="o">=</span> <span class="n">FairnessEnhancedIntraGroupMatching</span><span class="p">(</span><span class="n">bavp</span><span class="p">,</span>
+<span class="linenos"> 2</span><span class="gp">... </span>                 <span class="n">initialMaching</span><span class="o">=</span><span class="n">bcm</span><span class="o">.</span><span class="n">matching</span><span class="p">)</span>
+<span class="hll"><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fec</span><span class="o">.</span><span class="n">showMatchingFairness</span><span class="p">()</span>
+</span><span class="linenos"> 4</span><span class="go"> Matched pairs</span>
+<span class="linenos"> 5</span><span class="go">  {&#39;B&#39;, &#39;E&#39;}</span>
+<span class="hll"><span class="linenos"> 6</span><span class="go">  {&#39;C&#39;, &#39;F&#39;}</span>
+</span><span class="linenos"> 7</span><span class="go">  {&#39;D&#39;, &#39;H&#39;}</span>
+<span class="linenos"> 8</span><span class="go">  {&#39;I&#39;, &#39;A&#39;}</span>
+<span class="linenos"> 9</span><span class="go">  {&#39;J&#39;, &#39;G&#39;}</span>
+<span class="linenos">10</span><span class="go"> ----</span>
+<span class="linenos">11</span><span class="go"> Individual correlations:</span>
+<span class="linenos">12</span><span class="go">  &#39;A&#39;: +1.000</span>
+<span class="linenos">13</span><span class="go">  &#39;B&#39;: +1.000</span>
+<span class="linenos">14</span><span class="go">  &#39;C&#39;: +1.000</span>
+<span class="linenos">15</span><span class="go">  &#39;D&#39;: +1.000</span>
+<span class="linenos">16</span><span class="go">  &#39;E&#39;: +1.000</span>
+<span class="linenos">17</span><span class="go">  &#39;F&#39;: +1.000</span>
+<span class="linenos">18</span><span class="go">  &#39;G&#39;: +0.200</span>
+<span class="linenos">19</span><span class="go">  &#39;H&#39;: +1.000</span>
+<span class="linenos">20</span><span class="go">  &#39;I&#39;: +1.000</span>
+<span class="linenos">21</span><span class="go">  &#39;J&#39;: +1.000</span>
+<span class="linenos">22</span><span class="go"> -----</span>
+<span class="hll"><span class="linenos">23</span><span class="go">  Average correlation : +0.920</span>
+</span><span class="linenos">24</span><span class="go">  Standard deviation  :  0.253</span>
+<span class="linenos">25</span><span class="go">  Total run time      :  0.075 sec.</span>
+</pre></div>
 </div>
-<p>Total solver run time is now reduced to less than one fourteenth of a second (0.073, see Line 23 above). The initial brute force solving run time of about 4.0 sec. is thus eventually divided by more than <img class="math" src="_images/math/60fab63ccca841be102cc416be541b3507f0b1e9.png" alt="4.0/0.073 \approx 54"/> (see <a class="reference internal" href="#classmates2"><span class="std std-numref">Listing 1.115</span></a> Line 16). Intragroup pairing problems of larger group sizes become so effectively solvable.</p>
+<p>Total solver run time is now reduced to less than a 13th of a second (0.075, see Line 23 above). The initial brute force solving run time of about 4.0 seconds is thus eventually divided by more than <img class="math" src="_images/math/96f18547df5a8815cd8b526705b0a5001f214dfd.png" alt="4.0/0.075 \approx 53"/> (see <a class="reference internal" href="#classmates2"><span class="std std-numref">Listing 1.115</span></a> Line 16). Intragroup pairing problems of larger group sizes become so effectively solvable.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="#fair-intragroup-pairings-label"><span class="std std-ref">The tutorial on computing fair intragroup pairings</span></a>.</p>
@@ -11411,7 +11413,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jan 16, 2026.
+      <span class="lastupdated">Last updated on Jan 17, 2026.
       </span></p>
   </div>
 
