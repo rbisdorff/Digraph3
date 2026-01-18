@@ -3509,7 +3509,10 @@ if __name__ == "__main__":
     from votingProfiles import *
     bavp = BipolarApprovalVotingProfile('classmates')
     from pairings import *
-    bcim = BestCopelandIntraGroupMatching(bavp,Comments=True)    
+    from time import time
+    t0 = time()
+    bcim = BestCopelandIntraGroupMatching(bavp,Comments=False)
+    print(time() -t0)
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')

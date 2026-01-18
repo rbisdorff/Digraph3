@@ -8501,7 +8501,7 @@ Starting from this initial matching, we may now reach indeed the fairest possibl
      Standard deviation  :  0.253
      Total run time      :  0.075 sec.
 
-Total solver run time is now reduced to less than a 13th of a second (0.075, see Line 23 above). The initial brute force solving run time of about 4.0 seconds is thus eventually divided by more than :math:`4.0/0.075 \approx 53` (see :numref:`classmates2` Line 16). Intragroup pairing problems of larger group sizes become so effectively solvable.
+Total solver run time is now reduced to less than a 13th of a second (0.075, see Line 23 above). The initial brute force solving run time of about 4.0 seconds is thus eventually divided by more than :math:`4.0/0.075 \approx 53` (see :numref:`classmates2` Line 16). With a polynomial run time for computing a best *Copeland* initial matching, intragroup pairing problems of larger group sizes become so effectively solvable.
 
 .. seealso:: :ref:`The tutorial on computing fair intragroup pairings <Fair-IntraGroup-Pairings-label>`.
 
