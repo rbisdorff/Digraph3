@@ -8244,7 +8244,7 @@ fecop 75.78% success rate</p>
 </div>
 <p>Starting from this initial matching, we may now reach indeed the fairest possible pairing solution within one fairness enhancing steps by exchanging <em>Alice</em> with <em>Felix</em>.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fec</span> <span class="o">=</span> <span class="n">FairnessEnhancedIntraGroupMatching</span><span class="p">(</span><span class="n">bavp</span><span class="p">,</span>
-<span class="linenos"> 2</span><span class="gp">... </span>         <span class="n">initialMatching</span><span class="o">=</span><span class="n">bcm</span><span class="o">.</span><span class="n">matching</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos"> 2</span><span class="gp">... </span>         <span class="n">initialMatching</span><span class="o">=</span><span class="n">bcm</span><span class="o">.</span><span class="n">matching</span><span class="p">)</span>
 <span class="hll"><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fec</span><span class="o">.</span><span class="n">showMatchingFairness</span><span class="p">()</span>
 </span><span class="linenos"> 4</span><span class="go"> Matched pairs</span>
 <span class="linenos"> 5</span><span class="go">  {&#39;B&#39;, &#39;E&#39;}</span>

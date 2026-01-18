@@ -8476,7 +8476,7 @@ Starting from this initial matching, we may now reach indeed the fairest possibl
    :emphasize-lines: 3,6,23
 
    >>> fec = FairnessEnhancedIntraGroupMatching(bavp,
-   ...          initialMatching=bcm.matching,Comments=True)
+   ...          initialMatching=bcm.matching)
    >>> fec.showMatchingFairness()
     Matched pairs
      {'B', 'E'}

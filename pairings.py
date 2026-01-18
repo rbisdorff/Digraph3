@@ -2515,7 +2515,7 @@ class FairnessEnhancedIntraGroupMatching(IntraGroupPairing):
                 persons = [x for x in intraVp.voters]
                 random.shuffle(persons)
             if Debug:
-                print('Shauffled list of persons:',persons)
+                print('Shuffled list of persons:',persons)
             # left hand initial matching    
             if Comments or Debug:
                 print('===>>> Enhancing left initial matching')
@@ -2650,7 +2650,7 @@ class FairnessEnhancedIntraGroupMatching(IntraGroupPairing):
                 self.initialMatching = initialMatching
                 if Debug:
                     print('*---- Given Initial Matching ----*')
-                print(persons,initialMatching)
+                    print(persons,initialMatching)
             else:
                 print('Error !!: initialMatching = %s is not correctly given' % initialMatching )
                 print('Must be either None, "bestCopeland" or a given intragroup pairing solution')
@@ -2969,7 +2969,7 @@ class _IntraGroupCopelandMatching(IntraGroupPairing):
        
     See the :ref:`tutorial on computing fair intergroup pairings <Fair-InterGroup-Pairings-label>`.
     """
-    def __init__(self,vpA,Comments=True,Debug=True):
+    def __init__(self,vpA,Comments=True,Debug=False):
         
         from time import time
         from decimal import Decimal
@@ -3507,12 +3507,14 @@ if __name__ == "__main__":
 ##    lvA.showBipolarApprovals()
 
     from votingProfiles import *
+    from pairings import *
     bavp = BipolarApprovalVotingProfile('classmates')
     from pairings import *
     from time import time
     t0 = time()
     bcim = BestCopelandIntraGroupMatching(bavp,Comments=False)
     print(time() -t0)
+    fec = FairnessEnhancedIntraGroupMatching(bavp,initialMatching=bcim.matching)
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
