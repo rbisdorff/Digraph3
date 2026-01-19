@@ -1235,211 +1235,211 @@ class BestCopelandInterGroupMatching(InterGroupPairing):
 #----------
 
 
-class _InterGroupCopelandMatching(InterGroupPairing):
-    """
-    !!! Not a satisfactory determined perfect matching guaranteed !!!
-    
-    The class computes the individual Copeland ranking scored
-    based maximal matching resulting from the best determined spanning forest
-    of the bipartite Copeland scores graph.
-
-    *Parameters*:
-
-       * *vpA* : any VotingProfile instance
-       * *vpB* : reciprocal VotingProfile instance
-       
-    See the :ref:`tutorial on computing fair intergroup pairings <Fair-InterGroup-Pairings-label>`.
-    """
-    def __init__(self,vpA,vpB,Comments=False,Debug=False):
-        
-        from time import time
-        from decimal import Decimal
-        from copy import deepcopy
-        self.runTimes = {}
-        t0 = time()
-        # store input data
-        self.vpA = vpA
-        self.vpB = vpB
-        self.name = 'copelandMatching'
-        order = len(vpA.voters)
-        self.order = order
-        # precomputing Copeland ranking scores
-        copelandScores = {}
-        aKeys = [a for a in vpA.voters]
-        self.verticesKeysA = aKeys
-        bKeys = [b for b in vpB.voters]
-        self.verticesKeysB = bKeys
-        for i in range(order):
-            ai = aKeys[i]
-            bi = bKeys[i]
-            copelandScores[ai] = {}
-            copelandScores[bi] = {}
-            for j in range(order):
-                aj = aKeys[j]
-                bj = bKeys[j]
-                copelandScores[ai][bj] = Decimal()
-                copelandScores[bi][aj] = Decimal()
-        minScore = 0.0
-        for i in range(order):
-            ai = aKeys[i]
-            for j in range(order):
-                bj = bKeys[j]   
-                copelandScores[ai][bj] = self.computeCopelandScore(vpA,ai,bj)
-                if copelandScores[ai][bj] < minScore:
-                    minScore = copelandScores[ai][bj]
-        for j in range(order):
-            bj = bKeys[j]
-            for i in range(order):
-                ai = aKeys[i]   
-                copelandScores[bj][ai] = self.computeCopelandScore(vpB,bj,ai)                
-                if copelandScores[bj][ai] < minScore:
-                    minScore = copelandScores[bj][ai]
-        self.copelandScores = copelandScores
-        if Debug:
-            self.showCopelandRankingScores()
-        t1 = time()
-        self.runTimes['dataInput'] = t1 - t0
-
-        #storing the Graph data
-        t2 = time()
-        self.vertices = vpA.voters | vpB.voters
-        Min = Decimal('%d' % (4*minScore) )
-        Med = Decimal('0')
-        Max = Decimal('%d' % (4*abs(minScore)) )
-        self.valuationDomain = {'min': Min,
-                                'med': Med,
-                                'max': Max}
-        verticesList = [v for v in self.vertices]
-        n = len(verticesList)
-        edges = {}
-        for i in range(n):
-            vi = verticesList[i]
-            for j in range(i+1,n):
-                vj = verticesList[j]
-                edgeKey = frozenset({vi,vj})
-                edges[edgeKey] = Min
-        for i in range(order):
-            for j in range(order):
-                edgeKey = frozenset([aKeys[i],bKeys[j]])
-                edges[edgeKey] = (2*abs(minScore)) + self.copelandScores[aKeys[i]][bKeys[j]] \
-                            + self.copelandScores[bKeys[j]][aKeys[i]]            
-        self.edges = edges
-        self.gamma = self.gammaSets()
-        t3 = time()
-        self.runTimes['copelandGraph'] = t3 - t2
-        
-        # computing the best determined maximal matching
-        t4 = time()
-        from graphs import BestDeterminedSpanningForest
-        bsf = BestDeterminedSpanningForest(self)
-        if Debug:
-            bsf.exportGraphViz(WithSpanningTree=True,layout='circo')
-            dbsf = bsf.graph2Digraph()
-            dbsf.showRelationTable(ndigits=0)
-        matching = []
-        unPaired = []
-        gamma = bsf.gamma
-        sortedVerticesList = [(len(gamma[v]),v) for v in self.vertices]
-        sortedVerticesList.sort()
-        verticesList = [v[1] for v in sortedVerticesList]
-        if Debug:
-            print(verticesList)
-                        
-        while len(verticesList) > 0:
-            sortedVerticesList = [(len(gamma[v]),v) for v in verticesList]
-            sortedVerticesList.sort()
-            verticesList = [v[1] for v in sortedVerticesList]
-            for v1 in verticesList:
-                if Debug:
-                    print('==>>v1', v1, gamma[v1])
-                if len(gamma[v1]) == 1:
-                    v2 = gamma[v1].pop()
-                    if [v1,v2] not in matching and [v2,v1] not in matching:
-                        matching.append(frozenset({v1,v2}))
-                        if Debug:
-                            print(matching)
-                        verticesList.remove(v1)
-                        verticesList.remove(v2)
-                        gamma[v2] = set()
-                        if Debug:
-                            print(v1,gamma[v1],v2,gamma[v2])
-                    for v3 in verticesList:
-                        if Debug:
-                            print('v3',v3,gamma[v3])
-                        if v1 in gamma[v3]:
-                            gamma[v3].remove(v1)
-                        if v2 in gamma[v3]:
-                            gamma[v3].remove(v2)
-                        if Debug:
-                            print('v3',v3,gamma[v3])
-                elif len(gamma[v1]) == 0:
-                    verticesList.remove(v1)
-                    unPaired.append(v1)
-        if Comments:
-            print(len(matching),matching)
-            print('==>> unpaired:', unPaired)
-        if len(matching) < order:
-            remainingAKeys = [a for a in self.vpA.voters]
-            remainingBKeys = [b for b in self.vpB.voters]
-            for m in matching:
-                lm = list(m)
-                lm.sort()
-                remainingAKeys.remove(lm[0])
-                remainingBKeys.remove(lm[1])
-            if Debug:
-                print(remainingAKeys,remainingBKeys)
-            pairs = []
-            edges = self.edges
-            na = len(remainingAKeys)
-            for i in range(na):
-                for j in range(na):
-                    edgeKey = frozenset({remainingAKeys[i],
-                                         remainingBKeys[j]})
-                    pairs.append((edges[edgeKey],edgeKey))
-            pairs.sort(reverse=True)
-            if Debug:
-                print(pairs)
-            lmatching = [m for m in matching]
-            i = 0
-            na  = len(pairs)
-            while i < na:
-                keys = list(pairs[i][1])
-                if Debug:
-                    print(keys)
-                #keys.sort()
-                if (keys[0] in remainingAKeys and keys[1] in remainingBKeys):
-                    remainingAKeys.remove(keys[0])
-                    remainingBKeys.remove(keys[1])
-                    lmatching.append(pairs[i][1])
-                    #na -= 1
-                    i += 1
-                    if Debug:
-                        print(i,keys,remainingAKeys,remainingBKeys)
-                        print(lmatching)
-                elif (keys[1] in remainingAKeys and keys[0] in remainingBKeys):
-                    remainingAKeys.remove(keys[1])
-                    remainingBKeys.remove(keys[0])
-                    lmatching.append(pairs[i][1])
-                    #na -= 1
-                    i += 1
-                    if Debug:
-                        print(i,keys,remainingAKeys,remainingBKeys)
-                        print(lmatching)
-                else:
-                    i += 1
-                    
-                        
-            matching = lmatching
-            if Debug:
-                print(len(matching),matching)
-
-        
-        self.matching = matching
-        t5 = time()
-        self.runTimes['maximalMatching'] = t5 - t4
-        
-        t7 = time()
-        self.runTimes['totalTime'] = t7 - t0
+##class _InterGroupCopelandMatching(InterGroupPairing):
+##    """
+##    !!! Not a satisfactory determined perfect matching guaranteed !!!
+##    
+##    The class computes the individual Copeland ranking scored
+##    based maximal matching resulting from the best determined spanning forest
+##    of the bipartite Copeland scores graph.
+##
+##    *Parameters*:
+##
+##       * *vpA* : any VotingProfile instance
+##       * *vpB* : reciprocal VotingProfile instance
+##       
+##    See the :ref:`tutorial on computing fair intergroup pairings <Fair-InterGroup-Pairings-label>`.
+##    """
+##    def __init__(self,vpA,vpB,Comments=False,Debug=False):
+##        
+##        from time import time
+##        from decimal import Decimal
+##        from copy import deepcopy
+##        self.runTimes = {}
+##        t0 = time()
+##        # store input data
+##        self.vpA = vpA
+##        self.vpB = vpB
+##        self.name = 'copelandMatching'
+##        order = len(vpA.voters)
+##        self.order = order
+##        # precomputing Copeland ranking scores
+##        copelandScores = {}
+##        aKeys = [a for a in vpA.voters]
+##        self.verticesKeysA = aKeys
+##        bKeys = [b for b in vpB.voters]
+##        self.verticesKeysB = bKeys
+##        for i in range(order):
+##            ai = aKeys[i]
+##            bi = bKeys[i]
+##            copelandScores[ai] = {}
+##            copelandScores[bi] = {}
+##            for j in range(order):
+##                aj = aKeys[j]
+##                bj = bKeys[j]
+##                copelandScores[ai][bj] = Decimal()
+##                copelandScores[bi][aj] = Decimal()
+##        minScore = 0.0
+##        for i in range(order):
+##            ai = aKeys[i]
+##            for j in range(order):
+##                bj = bKeys[j]   
+##                copelandScores[ai][bj] = self.computeCopelandScore(vpA,ai,bj)
+##                if copelandScores[ai][bj] < minScore:
+##                    minScore = copelandScores[ai][bj]
+##        for j in range(order):
+##            bj = bKeys[j]
+##            for i in range(order):
+##                ai = aKeys[i]   
+##                copelandScores[bj][ai] = self.computeCopelandScore(vpB,bj,ai)                
+##                if copelandScores[bj][ai] < minScore:
+##                    minScore = copelandScores[bj][ai]
+##        self.copelandScores = copelandScores
+##        if Debug:
+##            self.showCopelandRankingScores()
+##        t1 = time()
+##        self.runTimes['dataInput'] = t1 - t0
+##
+##        #storing the Graph data
+##        t2 = time()
+##        self.vertices = vpA.voters | vpB.voters
+##        Min = Decimal('%d' % (4*minScore) )
+##        Med = Decimal('0')
+##        Max = Decimal('%d' % (4*abs(minScore)) )
+##        self.valuationDomain = {'min': Min,
+##                                'med': Med,
+##                                'max': Max}
+##        verticesList = [v for v in self.vertices]
+##        n = len(verticesList)
+##        edges = {}
+##        for i in range(n):
+##            vi = verticesList[i]
+##            for j in range(i+1,n):
+##                vj = verticesList[j]
+##                edgeKey = frozenset({vi,vj})
+##                edges[edgeKey] = Min
+##        for i in range(order):
+##            for j in range(order):
+##                edgeKey = frozenset([aKeys[i],bKeys[j]])
+##                edges[edgeKey] = (2*abs(minScore)) + self.copelandScores[aKeys[i]][bKeys[j]] \
+##                            + self.copelandScores[bKeys[j]][aKeys[i]]            
+##        self.edges = edges
+##        self.gamma = self.gammaSets()
+##        t3 = time()
+##        self.runTimes['copelandGraph'] = t3 - t2
+##        
+##        # computing the best determined maximal matching
+##        t4 = time()
+##        from graphs import BestDeterminedSpanningForest
+##        bsf = BestDeterminedSpanningForest(self)
+##        if Debug:
+##            bsf.exportGraphViz(WithSpanningTree=True,layout='circo')
+##            dbsf = bsf.graph2Digraph()
+##            dbsf.showRelationTable(ndigits=0)
+##        matching = []
+##        unPaired = []
+##        gamma = bsf.gamma
+##        sortedVerticesList = [(len(gamma[v]),v) for v in self.vertices]
+##        sortedVerticesList.sort()
+##        verticesList = [v[1] for v in sortedVerticesList]
+##        if Debug:
+##            print(verticesList)
+##                        
+##        while len(verticesList) > 0:
+##            sortedVerticesList = [(len(gamma[v]),v) for v in verticesList]
+##            sortedVerticesList.sort()
+##            verticesList = [v[1] for v in sortedVerticesList]
+##            for v1 in verticesList:
+##                if Debug:
+##                    print('==>>v1', v1, gamma[v1])
+##                if len(gamma[v1]) == 1:
+##                    v2 = gamma[v1].pop()
+##                    if [v1,v2] not in matching and [v2,v1] not in matching:
+##                        matching.append(frozenset({v1,v2}))
+##                        if Debug:
+##                            print(matching)
+##                        verticesList.remove(v1)
+##                        verticesList.remove(v2)
+##                        gamma[v2] = set()
+##                        if Debug:
+##                            print(v1,gamma[v1],v2,gamma[v2])
+##                    for v3 in verticesList:
+##                        if Debug:
+##                            print('v3',v3,gamma[v3])
+##                        if v1 in gamma[v3]:
+##                            gamma[v3].remove(v1)
+##                        if v2 in gamma[v3]:
+##                            gamma[v3].remove(v2)
+##                        if Debug:
+##                            print('v3',v3,gamma[v3])
+##                elif len(gamma[v1]) == 0:
+##                    verticesList.remove(v1)
+##                    unPaired.append(v1)
+##        if Comments:
+##            print(len(matching),matching)
+##            print('==>> unpaired:', unPaired)
+##        if len(matching) < order:
+##            remainingAKeys = [a for a in self.vpA.voters]
+##            remainingBKeys = [b for b in self.vpB.voters]
+##            for m in matching:
+##                lm = list(m)
+##                lm.sort()
+##                remainingAKeys.remove(lm[0])
+##                remainingBKeys.remove(lm[1])
+##            if Debug:
+##                print(remainingAKeys,remainingBKeys)
+##            pairs = []
+##            edges = self.edges
+##            na = len(remainingAKeys)
+##            for i in range(na):
+##                for j in range(na):
+##                    edgeKey = frozenset({remainingAKeys[i],
+##                                         remainingBKeys[j]})
+##                    pairs.append((edges[edgeKey],edgeKey))
+##            pairs.sort(reverse=True)
+##            if Debug:
+##                print(pairs)
+##            lmatching = [m for m in matching]
+##            i = 0
+##            na  = len(pairs)
+##            while i < na:
+##                keys = list(pairs[i][1])
+##                if Debug:
+##                    print(keys)
+##                #keys.sort()
+##                if (keys[0] in remainingAKeys and keys[1] in remainingBKeys):
+##                    remainingAKeys.remove(keys[0])
+##                    remainingBKeys.remove(keys[1])
+##                    lmatching.append(pairs[i][1])
+##                    #na -= 1
+##                    i += 1
+##                    if Debug:
+##                        print(i,keys,remainingAKeys,remainingBKeys)
+##                        print(lmatching)
+##                elif (keys[1] in remainingAKeys and keys[0] in remainingBKeys):
+##                    remainingAKeys.remove(keys[1])
+##                    remainingBKeys.remove(keys[0])
+##                    lmatching.append(pairs[i][1])
+##                    #na -= 1
+##                    i += 1
+##                    if Debug:
+##                        print(i,keys,remainingAKeys,remainingBKeys)
+##                        print(lmatching)
+##                else:
+##                    i += 1
+##                    
+##                        
+##            matching = lmatching
+##            if Debug:
+##                print(len(matching),matching)
+##
+##        
+##        self.matching = matching
+##        t5 = time()
+##        self.runTimes['maximalMatching'] = t5 - t4
+##        
+##        t7 = time()
+##        self.runTimes['totalTime'] = t7 - t0
 
 #----------
 
@@ -2955,204 +2955,204 @@ class FairestIntraGroupPairing(IntraGroupPairing):
 
 #---------------      
 
-class _IntraGroupCopelandMatching(IntraGroupPairing):
-    """
-    !!! Not a satisfactory determined perfect matching guaranteed !!!
-    
-    The class computes the individual Copeland ranking scores
-    based maximal matching resulting from the best determined spanning forest
-    of the bipartite Copeland scores graph.
-
-    *Parameters*:
-
-       * *vpA* : intragroup *VotingProfile* instance
-       
-    See the :ref:`tutorial on computing fair intergroup pairings <Fair-InterGroup-Pairings-label>`.
-    """
-    def __init__(self,vpA,Comments=True,Debug=False):
-        
-        from time import time
-        from decimal import Decimal
-        from copy import deepcopy
-        self.runTimes = {}
-        t0 = time()
-        # store input data
-        self.vpA = vpA        
-        self.name = 'copelandMatching'
-        if vpA is None:
-            print('!!! Error: a voting profile of even order is required')
-            return
-        else:
-            if vpA.IntraGroup:
-                persons = [x for x in vpA.voters]
-            else:
-                print('!!! Error: the voting profile is not IntraGroup as required')
-                return
-            order = len(persons)
-            if (order % 2) != 0:
-                print('!!! Error: the group size %d is not even' % order)
-                return
-            self.persons = persons 
-            self.order = order
-            self.vpA = vpA
-            # precomputing Copeland ranking scores
-            copelandScores = {}
-            minScore = 0.0
-            for i in range(order):
-                pi = persons[i]
-                copelandScores[pi] = {}
-                for j in range(order):
-                    pj = persons[j]
-                    copelandScores[pi][pj] = Decimal()
-            for i in range(order):
-                pi = persons[i]
-                for j in range(i+1,order):
-                    pj = persons[j]   
-                    copelandScores[pi][pj] = self.computeCopelandScore(pi,pj)
-                    copelandScores[pj][pi] = self.computeCopelandScore(pj,pi)
-                    score = copelandScores[pi][pj] + copelandScores[pj][pi]
-                    if Debug:
-                        print(score)
-                    if score < minScore:
-                        minScore = score
-                        
-            self.copelandScores = copelandScores
-            if Debug:
-                print(copelandScores)
-                print('minScore:', minScore)
-        t1 = time()
-        self.runTimes['dataInput'] = t1 - t0
-
-        #storing the Graph data
-        t2 = time()
-        self.vertices = vpA.voters
-        Min = Decimal('%d' % (2*minScore) )
-        Med = Decimal('0')
-        Max = Decimal('%d' % (2*abs(minScore)) )
-        self.valuationDomain = {'min': Min,
-                                'med': Med,
-                                'max': Max}
-        verticesList = [v for v in self.vertices]
-        n = len(verticesList)
-        edges = {}
-        for i in range(n):
-            vi = verticesList[i]
-            for j in range(i+1,n):
-                vj = verticesList[j]
-                edgeKey = frozenset([vi,vj])
-                edges[edgeKey] = abs(minScore) + copelandScores[vi][vj] \
-                            + copelandScores[vj][vi]
-         
-##        for i in range(order):
-##            for j in range(order):
-##                edgeKey = frozenset([aKeys[i],bKeys[j]])
-##                edges[edgeKey] = self.copelandScores[aKeys[i]][bKeys[j]] \
-##                            + self.copelandScores[bKeys[j]][aKeys[i]]            
-        self.edges = edges
-        self.gamma = self.gammaSets()
-        self.edges = edges
-        if Debug:
-            dself = self.graph2Digraph()
-            dself.showRelationTable(ndigits=0)
-        t3 = time()
-        self.runTimes['copelandGraph'] = t3 - t2
-        
-        # computing the best determined maximal matching
-        t4 = time()
-        from graphs import BestDeterminedSpanningForest
-        bsf = BestDeterminedSpanningForest(self)
-        if Debug:
-            bsf.exportGraphViz(WithSpanningTree=True,layout='circo')
-            dbsf = bsf.graph2Digraph()
-            dbsf.showRelationTable(ndigits=0)
-        matching = []
-        unPaired = []
-        gamma = bsf.gamma
-        sortedVerticesList = [(len(gamma[v]),v) for v in self.vertices]
-        sortedVerticesList.sort()
-        verticesList = [v[1] for v in sortedVerticesList]
-        if Debug:
-            print(verticesList)
-                        
-        while len(verticesList) > 0:
-            sortedVerticesList = [(len(gamma[v]),v) for v in verticesList]
-            sortedVerticesList.sort()
-            verticesList = [v[1] for v in sortedVerticesList]
-            for v1 in verticesList:
-                if Debug:
-                    print('==>>v1', v1, gamma[v1])
-                if len(gamma[v1]) == 1:
-                    v2 = gamma[v1].pop()
-                    if [v1,v2] not in matching and [v2,v1] not in matching:
-                        matching.append(frozenset({v1,v2}))
-                        if Debug:
-                            print(matching)
-                        verticesList.remove(v1)
-                        verticesList.remove(v2)
-                        gamma[v2] = set()
-                        if Debug:
-                            print(v1,gamma[v1],v2,gamma[v2])
-                    for v3 in verticesList:
-                        if Debug:
-                            print('v3',v3,gamma[v3])
-                        if v1 in gamma[v3]:
-                            gamma[v3].remove(v1)
-                        if v2 in gamma[v3]:
-                            gamma[v3].remove(v2)
-                        if Debug:
-                            print('v3',v3,gamma[v3])
-                elif len(gamma[v1]) == 0:
-                    verticesList.remove(v1)
-                    unPaired.append(v1)
-        if Comments:
-            print(len(matching),matching)
-            print('==>> unpaired:', unPaired)
-        if len(matching) < order:
-            #aKeys = [a for a in self.vpA.voters]
-            #bKeys = [b for b in self.vpB.voters]
-            remaining = [v for v in self.vertices]
-            for m in matching:
-                lm = list(m)
-                lm.sort()
-                remaining.remove(lm[0])
-                remaining.remove(lm[1])
-            if Debug:
-                print(remaining)
-            pairs = []
-            edges = self.edges
-            na = len(remaining)
-            for i in range(na):
-                for j in range(i+1,na):
-                    edgeKey = frozenset({remaining[i],remaining[j]})
-                    pairs.append((edges[edgeKey],edgeKey))
-            pairs.sort(reverse=True)
-            if Debug:
-                print(pairs)
-            lmatching = [m for m in matching]
-            i = 0
-            while na > 0:
-                keys = list(pairs[i][1])
-                if Debug:
-                    print(keys)
-                if keys[0] in remaining and keys[1] in remaining:
-                    remaining.remove(keys[0])
-                    remaining.remove(keys[1])
-                    lmatching.append(pairs[i][1])
-                    na -= 2
-                    i += 1
-                else:
-                    i += 1
-            matching = lmatching
-            if Debug:
-                print(len(matching),matching)
-
-        
-        self.matching = matching
-        t5 = time()
-        self.runTimes['maximalMatching'] = t5 - t4
-        
-        t7 = time()
-        self.runTimes['totalTime'] = t7 - t0
+##class _IntraGroupCopelandMatching(IntraGroupPairing):
+##    """
+##    !!! Not a satisfactory determined perfect matching guaranteed !!!
+##    
+##    The class computes the individual Copeland ranking scores
+##    based maximal matching resulting from the best determined spanning forest
+##    of the bipartite Copeland scores graph.
+##
+##    *Parameters*:
+##
+##       * *vpA* : intragroup *VotingProfile* instance
+##       
+##    See the :ref:`tutorial on computing fair intergroup pairings <Fair-InterGroup-Pairings-label>`.
+##    """
+##    def __init__(self,vpA,Comments=True,Debug=False):
+##        
+##        from time import time
+##        from decimal import Decimal
+##        from copy import deepcopy
+##        self.runTimes = {}
+##        t0 = time()
+##        # store input data
+##        self.vpA = vpA        
+##        self.name = 'copelandMatching'
+##        if vpA is None:
+##            print('!!! Error: a voting profile of even order is required')
+##            return
+##        else:
+##            if vpA.IntraGroup:
+##                persons = [x for x in vpA.voters]
+##            else:
+##                print('!!! Error: the voting profile is not IntraGroup as required')
+##                return
+##            order = len(persons)
+##            if (order % 2) != 0:
+##                print('!!! Error: the group size %d is not even' % order)
+##                return
+##            self.persons = persons 
+##            self.order = order
+##            self.vpA = vpA
+##            # precomputing Copeland ranking scores
+##            copelandScores = {}
+##            minScore = 0.0
+##            for i in range(order):
+##                pi = persons[i]
+##                copelandScores[pi] = {}
+##                for j in range(order):
+##                    pj = persons[j]
+##                    copelandScores[pi][pj] = Decimal()
+##            for i in range(order):
+##                pi = persons[i]
+##                for j in range(i+1,order):
+##                    pj = persons[j]   
+##                    copelandScores[pi][pj] = self.computeCopelandScore(pi,pj)
+##                    copelandScores[pj][pi] = self.computeCopelandScore(pj,pi)
+##                    score = copelandScores[pi][pj] + copelandScores[pj][pi]
+##                    if Debug:
+##                        print(score)
+##                    if score < minScore:
+##                        minScore = score
+##                        
+##            self.copelandScores = copelandScores
+##            if Debug:
+##                print(copelandScores)
+##                print('minScore:', minScore)
+##        t1 = time()
+##        self.runTimes['dataInput'] = t1 - t0
+##
+##        #storing the Graph data
+##        t2 = time()
+##        self.vertices = vpA.voters
+##        Min = Decimal('%d' % (2*minScore) )
+##        Med = Decimal('0')
+##        Max = Decimal('%d' % (2*abs(minScore)) )
+##        self.valuationDomain = {'min': Min,
+##                                'med': Med,
+##                                'max': Max}
+##        verticesList = [v for v in self.vertices]
+##        n = len(verticesList)
+##        edges = {}
+##        for i in range(n):
+##            vi = verticesList[i]
+##            for j in range(i+1,n):
+##                vj = verticesList[j]
+##                edgeKey = frozenset([vi,vj])
+##                edges[edgeKey] = abs(minScore) + copelandScores[vi][vj] \
+##                            + copelandScores[vj][vi]
+##         
+####        for i in range(order):
+####            for j in range(order):
+####                edgeKey = frozenset([aKeys[i],bKeys[j]])
+####                edges[edgeKey] = self.copelandScores[aKeys[i]][bKeys[j]] \
+####                            + self.copelandScores[bKeys[j]][aKeys[i]]            
+##        self.edges = edges
+##        self.gamma = self.gammaSets()
+##        self.edges = edges
+##        if Debug:
+##            dself = self.graph2Digraph()
+##            dself.showRelationTable(ndigits=0)
+##        t3 = time()
+##        self.runTimes['copelandGraph'] = t3 - t2
+##        
+##        # computing the best determined maximal matching
+##        t4 = time()
+##        from graphs import BestDeterminedSpanningForest
+##        bsf = BestDeterminedSpanningForest(self)
+##        if Debug:
+##            bsf.exportGraphViz(WithSpanningTree=True,layout='circo')
+##            dbsf = bsf.graph2Digraph()
+##            dbsf.showRelationTable(ndigits=0)
+##        matching = []
+##        unPaired = []
+##        gamma = bsf.gamma
+##        sortedVerticesList = [(len(gamma[v]),v) for v in self.vertices]
+##        sortedVerticesList.sort()
+##        verticesList = [v[1] for v in sortedVerticesList]
+##        if Debug:
+##            print(verticesList)
+##                        
+##        while len(verticesList) > 0:
+##            sortedVerticesList = [(len(gamma[v]),v) for v in verticesList]
+##            sortedVerticesList.sort()
+##            verticesList = [v[1] for v in sortedVerticesList]
+##            for v1 in verticesList:
+##                if Debug:
+##                    print('==>>v1', v1, gamma[v1])
+##                if len(gamma[v1]) == 1:
+##                    v2 = gamma[v1].pop()
+##                    if [v1,v2] not in matching and [v2,v1] not in matching:
+##                        matching.append(frozenset({v1,v2}))
+##                        if Debug:
+##                            print(matching)
+##                        verticesList.remove(v1)
+##                        verticesList.remove(v2)
+##                        gamma[v2] = set()
+##                        if Debug:
+##                            print(v1,gamma[v1],v2,gamma[v2])
+##                    for v3 in verticesList:
+##                        if Debug:
+##                            print('v3',v3,gamma[v3])
+##                        if v1 in gamma[v3]:
+##                            gamma[v3].remove(v1)
+##                        if v2 in gamma[v3]:
+##                            gamma[v3].remove(v2)
+##                        if Debug:
+##                            print('v3',v3,gamma[v3])
+##                elif len(gamma[v1]) == 0:
+##                    verticesList.remove(v1)
+##                    unPaired.append(v1)
+##        if Comments:
+##            print(len(matching),matching)
+##            print('==>> unpaired:', unPaired)
+##        if len(matching) < order:
+##            #aKeys = [a for a in self.vpA.voters]
+##            #bKeys = [b for b in self.vpB.voters]
+##            remaining = [v for v in self.vertices]
+##            for m in matching:
+##                lm = list(m)
+##                lm.sort()
+##                remaining.remove(lm[0])
+##                remaining.remove(lm[1])
+##            if Debug:
+##                print(remaining)
+##            pairs = []
+##            edges = self.edges
+##            na = len(remaining)
+##            for i in range(na):
+##                for j in range(i+1,na):
+##                    edgeKey = frozenset({remaining[i],remaining[j]})
+##                    pairs.append((edges[edgeKey],edgeKey))
+##            pairs.sort(reverse=True)
+##            if Debug:
+##                print(pairs)
+##            lmatching = [m for m in matching]
+##            i = 0
+##            while na > 0:
+##                keys = list(pairs[i][1])
+##                if Debug:
+##                    print(keys)
+##                if keys[0] in remaining and keys[1] in remaining:
+##                    remaining.remove(keys[0])
+##                    remaining.remove(keys[1])
+##                    lmatching.append(pairs[i][1])
+##                    na -= 2
+##                    i += 1
+##                else:
+##                    i += 1
+##            matching = lmatching
+##            if Debug:
+##                print(len(matching),matching)
+##
+##        
+##        self.matching = matching
+##        t5 = time()
+##        self.runTimes['maximalMatching'] = t5 - t4
+##        
+##        t7 = time()
+##        self.runTimes['totalTime'] = t7 - t0
 
 #------------
 

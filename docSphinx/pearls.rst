@@ -3049,7 +3049,6 @@ The Digraph3 :py:mod:`bachetNumbers` module provides with the :py:class:`~bachet
      Attributes     : ['vector']
    >>> print('\'%s\' (%d) + \'%s\' (%d) = \'%s\' (%d)'
    ...        % (n1, int(n1), n2, int(n2), n3, int(n3) ))
-    # int(n1) = n1.value()
      '+1-1-1' (5) + '+1+1+1' (13) = '+1-100' (18)
    >>> n4 = ~n1   # ~n1 = n1.reverse()
    >>> n5 = -n2
