@@ -8332,7 +8332,7 @@ Computing a fair pairing solution
 .. epigraph::
      "**Fairness**: *impartial and just treatment or behaviour without favouritism or discrimination*" -- Oxford Languages
 
-The :py:mod:`pairings` module provides the :py:class:`~pairings.FairestIntraGroupPairing` constructor for computing by brute force over all 9!! = 945 potential matchings the best correlated pairing solution with respect to the previously given *bavp* pairing approvals and disapprovals (see :ref:`tutorial on computing fair intragroup pairings <Fair-IntraGroup-Pairings-label>`).
+The :py:mod:`pairings` module provides the :py:class:`~pairings.FairestIntraGroupPairing` constructor for computing by brute force over all 9!! = 945 potential matchings the best ordinally correlated pairing solution with respect to the previously given *bavp* pairing approvals and disapprovals (see :ref:`tutorial on computing fair intragroup pairings <Fair-IntraGroup-Pairings-label>`).
 
 .. code-block:: pycon
    :name: classmates2

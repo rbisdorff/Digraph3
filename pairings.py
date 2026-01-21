@@ -175,6 +175,33 @@ class InterGroupPairing(BipartiteGraph):
                 print('%d'% (self.copelandScores[bj][ai]), end='\t')
             print()
 
+    def showBachetRankingScores(self):
+        """
+        Print the individual Copeland ranking scores
+        """
+        print('*---- Bachet ranking scores ----*')
+        aKeys = [x for x in self.vpA.voters]
+        bKeys = [x for x in self.vpB.voters]
+        print('group A',end=':\t')
+        for bj in bKeys:
+            print(bj,end='\t')
+        print()
+        for ai in aKeys:
+            print('    ',ai,end=':\t')
+            for bj in bKeys:
+                print('%d'% (self.bachetScores[ai][bj]), end='\t')
+            print()
+        print('----')
+        print('group B',end=':\t')
+        for ai in aKeys:
+            print(ai,end='\t')
+        print()
+        for bj in bKeys:
+            print('    ',bj,end=':\t')
+            for ai in aKeys:
+                print('%d'% (self.bachetScores[bj][ai]), end='\t')
+            print()
+
     def showMatchingFairness(self,matching=None,
                             WithGroupCorrelations=True,
                             WithIndividualCorrelations=True):
@@ -659,6 +686,24 @@ class InterGroupPairing(BipartiteGraph):
             score += ba[b][candidates[i]] - ba[candidates[i]][b]
         return score
 
+    def computeBachetScore(self,vpA,a,b):
+        """
+        Replacement for the linear voting profiles information
+        when searching for promising swapping candidates
+        """
+        from bachetNumbers import BachetInteger as BachetNumber
+        ba = vpA.ballot[a]
+        score = BachetNumber(0)
+        candidates = [b for b in vpA.candidates]
+        k = len(candidates)
+        vectorA = []
+        vectorB = []
+        for i in range(k):
+            vectorA.append(ba[b][candidates[i]])
+            vectorB.append(ba[candidates[i]][b])
+            score += (BachetNumber(vector=vectorA) - BachetNumber(vector=vectorB))
+        return score
+
     def enhanceMatchingGeneralFairness(self,matching,
                                        maxIterations=10,
                                        Comments=False,Debug=False):
@@ -1086,6 +1131,157 @@ class FairnessEnhancedInterGroupMatching(InterGroupPairing):
 
 #---------------      
 
+class BestBachetInterGroupMatching(InterGroupPairing):
+    """
+    The class computes the individual Bachet ranking scores and
+    constructs a best determined perfect intergroup matching
+    with a ranked pairs rule
+
+    *Parameters*:
+
+       * *vpA* : any VotingProfile instance
+       * *vpB* : reciprocal VotingProfile instance
+       
+    See the :ref:`tutorial on computing fair intergroup pairings <Fair-InterGroup-Pairings-label>`.
+    """
+    def __init__(self,vpA,vpB,Comments=False,Debug=False):
+        
+        from time import time
+        from decimal import Decimal
+        from copy import deepcopy
+        from bachetNumbers import BachetInteger as BachetNumber
+        self.runTimes = {}
+        t0 = time()
+        # store input data
+        self.vpA = vpA
+        self.vpB = vpB
+        order = len(vpA.voters)
+        self.order = 2 * order
+        # precomputing Copeland ranking scores
+        bachetScores = {}
+        aKeys = [a for a in vpA.voters]
+        self.verticesKeysA = aKeys
+        bKeys = [b for b in vpB.voters]
+        self.verticesKeysB = bKeys
+        for i in range(order):
+            ai = aKeys[i]
+            bi = bKeys[i]
+            bachetScores[ai] = {}
+            bachetScores[bi] = {}
+            for j in range(order):
+                aj = aKeys[j]
+                bj = bKeys[j]
+                bachetScores[ai][bj] = BachetNumber()
+                bachetScores[bi][aj] = BachetNumber()
+        minScore = Decimal('0.0')
+        for i in range(order):
+            ai = aKeys[i]
+            for j in range(order):
+                bj = bKeys[j]   
+                bachetScores[ai][bj] = self.computeBachetScore(vpA,ai,bj)
+                if bachetScores[ai][bj] < minScore:
+                    minScore = bachetScores[ai][bj]
+        for j in range(order):
+            bj = bKeys[j]
+            for i in range(order):
+                ai = aKeys[i]   
+                bachetScores[bj][ai] = self.computeBachetScore(vpB,bj,ai)                
+                if bachetScores[bj][ai] < minScore:
+                    minScore = bachetScores[bj][ai]
+        self.bachetScores = bachetScores
+        if Debug:
+            self.showBachetRankingScores()
+        t1 = time()
+        self.runTimes['dataInput'] = t1 - t0
+
+        #storing the Copeland graph data
+        t2 = time()
+        self.name = 'copelandMatching'
+        self.vertices = vpA.voters | vpB.voters
+        Min = Decimal('%d' % (BachetNumber(4)*minScore) )
+        Med = Decimal('0')
+        Max = Decimal('%d' % (BachetNumber(4)*abs(minScore)) )
+        self.valuationDomain = {'min': Min,
+                                'med': Med,
+                                'max': Max,
+                                'IntegerValuation' : True,
+                                }
+                                
+        verticesList = [v for v in self.vertices]
+        n = len(verticesList)
+        edges = {}
+        for i in range(n):
+            vi = verticesList[i]
+            for j in range(i+1,n):
+                vj = verticesList[j]
+                edgeKey = frozenset({vi,vj})
+                edges[edgeKey] = Min
+        for i in range(order):
+            for j in range(order):
+                edgeKey = frozenset([aKeys[i],bKeys[j]])
+                edges[edgeKey] = (BachetNumber(2)*abs(minScore)) + self.bachetScores[aKeys[i]][bKeys[j]] \
+                            + self.bachetScores[bKeys[j]][aKeys[i]]            
+        self.edges = edges
+        self.size = self.computeSize()
+        self.gamma = self.gammaSets()
+        t3 = time()
+        self.runTimes['bachetGraph'] = t3 - t2
+        
+        # computing the best determined maximal matching
+        t4 = time()
+        remainingAKeys = [a for a in self.vpA.voters]
+        remainingBKeys = [b for b in self.vpB.voters]
+        if Debug:
+            print(remainingAKeys,remainingBKeys)
+        pairs = []
+        edges = self.edges
+        na = len(remainingAKeys)
+        for i in range(na):
+            for j in range(na):
+                edgeKey = frozenset({remainingAKeys[i],
+                                     remainingBKeys[j]})
+                pairs.append((edges[edgeKey],edgeKey))
+        pairs.sort(reverse=True)
+        if Debug:
+            print(pairs)
+        lmatching = []
+        i = 0
+        na  = len(pairs)
+        while i < na:
+            keys = list(pairs[i][1])
+            if Debug:
+                print(keys)
+            if (keys[0] in remainingAKeys and keys[1] in remainingBKeys):
+                remainingAKeys.remove(keys[0])
+                remainingBKeys.remove(keys[1])
+                lmatching.append(pairs[i][1])
+                i += 1
+                if Debug:
+                    print(i,keys,remainingAKeys,remainingBKeys)
+                    print(lmatching)
+            elif (keys[1] in remainingAKeys and keys[0] in remainingBKeys):
+                remainingAKeys.remove(keys[1])
+                remainingBKeys.remove(keys[0])
+                lmatching.append(pairs[i][1])
+                i += 1
+                if Debug:
+                    print(i,keys,remainingAKeys,remainingBKeys)
+                    print(lmatching)
+            else:
+                i += 1
+                
+        if Debug:
+            print(len(lmatching),lmatching)
+
+        
+        self.matching = lmatching
+        t5 = time()
+        self.runTimes['maximalMatching'] = t5 - t4
+        
+        t7 = time()
+        self.runTimes['totalTime'] = t7 - t0
+
+#----------
 class BestCopelandInterGroupMatching(InterGroupPairing):
     """
     The class computes the individual Copeland ranking scores and
@@ -3346,18 +3542,18 @@ if __name__ == "__main__":
 
     print('*-------- Testing classes and methods -------')
 
-##    from time import time
-##    from votingProfiles import *
+    from time import time
+    from votingProfiles import *
 ####            RandomLinearVotingProfile,\
 ####            RandomBipolarApprovalVotingProfile,RandomVotingProfile
-##    from random import randint
-##    seed1 = randint(0,99)
-##    seed2 = randint(100,199)
-####    seed1 = 1
-####    seed2 = 1616
-##    order = 10
-##    Comments = True
-##    Debug = False
+    from random import randint
+    seed1 = randint(0,99)
+    seed2 = randint(100,199)
+##    seed1 = 1
+##    seed2 = 1616
+    order = 10
+    Comments = True
+    Debug = False
 ##
 ##    # intragroup experiments
 ##    vpG = RandomLinearVotingProfile(numberOfVoters=order,
@@ -3396,22 +3592,22 @@ if __name__ == "__main__":
 ####    print(fp.runTimes)
 ##
 ##    #intergroup experiments
-####    lvA = RandomBipolarApprovalVotingProfile(numberOfVoters=order,
-####                                    numberOfCandidates=order,
-####                                    votersIdPrefix='a',
-####                                             #IntraGroup=True,
-####                                    candidatesIdPrefix='b',
-####                                             approvalProbability=0.3,
-####                                             disapprovalProbability=0.3,
-####                                             seed=seed1,Debug=False)
-####    lvB = RandomBipolarApprovalVotingProfile(numberOfVoters=order,
-####                                    numberOfCandidates=order,
-####                                    votersIdPrefix='b',
-####                                    #IntraGroup=False,
-####                                    candidatesIdPrefix='a',
-####                                             approvalProbability=0.3,
-####                                             disapprovalProbability=0.3,
-####                                             seed=seed2,Debug=False)
+    lvA = RandomBipolarApprovalVotingProfile(numberOfVoters=order,
+                                    numberOfCandidates=order,
+                                    votersIdPrefix='a',
+                                             #IntraGroup=True,
+                                    candidatesIdPrefix='b',
+                                             approvalProbability=0.3,
+                                             disapprovalProbability=0.3,
+                                             seed=seed1,Debug=False)
+    lvB = RandomBipolarApprovalVotingProfile(numberOfVoters=order,
+                                    numberOfCandidates=order,
+                                    votersIdPrefix='b',
+                                    #IntraGroup=False,
+                                    candidatesIdPrefix='a',
+                                             approvalProbability=0.3,
+                                             disapprovalProbability=0.3,
+                                             seed=seed2,Debug=False)
 ######    lvA = RandomLinearVotingProfile(numberOfVoters=order,
 ####                                    numberOfCandidates=order,
 ####                                    votersIdPrefix='a',
@@ -3431,10 +3627,18 @@ if __name__ == "__main__":
 ####    t1 =time()
 ####    print('fp total run time: %.3f sec.' % (t1-t0))
 ####
-####    igcg = BestCopelandInterGroupMatching(lvA,lvB,Comments=True,Debug=True)
-####    print('==>> Copeland')
-####    igcg.showMatchingFairness(WithIndividualCorrelations=True)
-####    print(igcg.runTimes)
+    igcg = BestCopelandInterGroupMatching(lvA,lvB,Comments=Comments,Debug=Debug)
+    print('==>> Copeland')
+    igcg.showMatchingFairness(WithIndividualCorrelations=True)
+    print(igcg.runTimes)
+    igbg = BestBachetInterGroupMatching(lvA,lvB,Comments=Comments,Debug=Debug)
+    print('==>> Bachet')
+    igbg.showMatchingFairness(WithIndividualCorrelations=True)
+    print(igbg.runTimes)
+    from pairings import *
+    fpcg = FairnessEnhancedInterGroupMatching(lvA,lvB,initialMatching=igcg.matching,Comments=True)
+    fpbg = FairnessEnhancedInterGroupMatching(lvA,lvB,initialMatching=igbg.matching,Comments=True)
+    
 ######    print('==>> Fairest')
 ######    fp.showMatchingFairness(WithIndividualCorrelations=True)
 ####
@@ -3506,15 +3710,15 @@ if __name__ == "__main__":
 ##    corropt, stdopt, groupOptScores = fp.computeIndividualCorrelations(fp.matching,Debug=True)
 ##    lvA.showBipolarApprovals()
 
-    from votingProfiles import *
-    from pairings import *
-    bavp = BipolarApprovalVotingProfile('classmates')
-    from pairings import *
-    from time import time
-    t0 = time()
-    bcim = BestCopelandIntraGroupMatching(bavp,Comments=False)
-    print(time() -t0)
-    fec = FairnessEnhancedIntraGroupMatching(bavp,initialMatching=bcim.matching)
+##    from votingProfiles import *
+##    from pairings import *
+##    bavp = BipolarApprovalVotingProfile('classmates')
+##    from pairings import *
+##    from time import time
+##    t0 = time()
+##    bcim = BestCopelandIntraGroupMatching(bavp,Comments=False)
+##    print(time() -t0)
+##    fec = FairnessEnhancedIntraGroupMatching(bavp,initialMatching=bcim.matching)
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
