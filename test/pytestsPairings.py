@@ -108,7 +108,7 @@ def testFairnessEnhancedIntraGroupMatching():
                                              initialMatching=None,
                                              Comments=True,Debug=False)
 
-def testBestCopelandInterGroupMatching():
+def testBestCopelandBachetInterGroupMatching():
     from votingProfiles import RandomBipolarApprovalVotingProfile
     order = 6
     from random import randint
@@ -134,8 +134,11 @@ def testBestCopelandInterGroupMatching():
     cop = BestCopelandInterGroupMatching(vpA,vpB,
                                         Comments=True,Debug=False)
     cop.showMatchingFairness(WithIndividualCorrelations=True)
+    bac = BestBachetInterGroupMatching(vpA,vpB,
+                                        Comments=True,Debug=False)
+    bac.showMatchingFairness(WithIndividualCorrelations=True)
     
-def testBestCopelandIntraGroupMatching():
+def testBestCopelandBachetIntraGroupMatching():
     from votingProfiles import RandomBipolarApprovalVotingProfile
     from random import randint
     seed1 = randint(0,99)    
@@ -148,3 +151,6 @@ def testBestCopelandIntraGroupMatching():
     cop = BestCopelandIntraGroupMatching(vpG,
                                         Comments=True,Debug=False)
     cop.showMatchingFairness(WithIndividualCorrelations=True)
+    bac = BestBachetIntraGroupMatching(vpG,
+                                        Comments=True,Debug=False)
+    bac.showMatchingFairness(WithIndividualCorrelations=True)
