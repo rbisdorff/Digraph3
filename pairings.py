@@ -3382,7 +3382,7 @@ class BestCopelandIntraGroupMatching(IntraGroupPairing):
 
        * *vpA* : intragroup *VotingProfile* instance
        
-    See the :ref:`tutorial on computing fair intergroup pairings <Fair-InterGroup-Pairings-label>`.
+    See the :ref:`tutorial on computing fair intragroup pairings <Fair-IntraGroup-Pairings-label>`.
     """
     def __init__(self,vpA,Comments=False,Debug=False):
         
