@@ -107,6 +107,10 @@ def testFairnessEnhancedIntraGroupMatching():
     fgm = FairnessEnhancedIntraGroupMatching(intraVp=rigvp,seed=None,
                                              initialMatching=None,
                                              Comments=True,Debug=False)
+    fgm = FairnessEnhancedIntraGroupMatching(intraVp=rigvp,seed=None,
+                                             initialMatching=None,
+                                             fitnessScores='Bachet',
+                                             Comments=True,Debug=False)
 
 def testBestCopelandBachetInterGroupMatching():
     from votingProfiles import RandomBipolarApprovalVotingProfile

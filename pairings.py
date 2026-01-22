@@ -90,6 +90,11 @@ class InterGroupPairing(BipartiteGraph):
         except:
             pass
         try:
+            val = self.runTimes['bachetGraph']
+            reprString += 'Bachet graph       : %.5f\n' % val
+        except:
+            pass
+        try:
             val = self.runTimes['maximalMatching']
             reprString += 'Maximal matching   : %.5f\n' % val
         except:
@@ -2473,20 +2478,20 @@ class IntraGroupPairing(Graph):
                     pair2 = pairs[j]
                     #if (pair1,pair2) not in history:
                         #history.append((pair1,pair2))
-                    rankDifA1 = self.copelandScores[pair1[0]][pair2[1]] - \
-                                self.copelandScores[pair1[0]][pair1[1]]
-                    rankDifA2 = self.copelandScores[pair2[0]][pair1[1]] - \
-                                self.copelandScores[pair2[0]][pair2[1]]
+                    rankDifA1 = self.fitnessScores[pair1[0]][pair2[1]] - \
+                                self.fitnessScores[pair1[0]][pair1[1]]
+                    rankDifA2 = self.fitnessScores[pair2[0]][pair1[1]] - \
+                                self.fitnessScores[pair2[0]][pair2[1]]
 ##                    if Debug:
 ##                        print('rankDifferences A')
 ##                        print([pair1,pair2])
 ##                        print(pair1[0],pair2[1],pair1[1],rankDifA1)
 ##                        print(pair2[0],pair1[1],pair2[1],rankDifA2)
                     difGroupA = rankDifA1 + rankDifA2
-                    rankDifB1 = self.copelandScores[pair1[1]][pair2[0]] - \
-                                self.copelandScores[pair1[1]][pair1[0]]
-                    rankDifB2 = self.copelandScores[pair2[1]][pair1[0]] - \
-                                self.copelandScores[pair2[1]][pair2[0]]
+                    rankDifB1 = self.fitnessScores[pair1[1]][pair2[0]] - \
+                                self.fitnessScores[pair1[1]][pair1[0]]
+                    rankDifB2 = self.fitnessScores[pair2[1]][pair1[0]] - \
+                                self.fitnessScores[pair2[1]][pair2[0]]
 ##                    if Debug:
 ##                        print('rankDifferences B')
 ##                        print([pair1,pair2])      
@@ -2506,20 +2511,20 @@ class IntraGroupPairing(Graph):
                     if Debug:
                         print(tpair1,tpair2)
 ##                    if [pair1,pair2] not in history:
-                    rankDifA1 = self.copelandScores[tpair1[0]][tpair2[0]] - \
-                                self.copelandScores[tpair1[0]][tpair1[1]]
-                    rankDifA2 = self.copelandScores[tpair2[0]][tpair1[0]] - \
-                                self.copelandScores[tpair2[0]][tpair2[1]]
+                    rankDifA1 = self.fitnessScores[tpair1[0]][tpair2[0]] - \
+                                self.fitnessScores[tpair1[0]][tpair1[1]]
+                    rankDifA2 = self.fitnessScores[tpair2[0]][tpair1[0]] - \
+                                self.fitnessScores[tpair2[0]][tpair2[1]]
 ##                    if Debug:
 ##                        print('rankDifferences A')
 ##                        print([tpair1,tpair2])
 ##                        print(rankDifA1,tpair1[0],tpair2[0],tpair1[1])
 ##                        print(rankDifA2,tpair2[0],tpair1[0],tpair2[1])
                     difGroupA = rankDifA1 + rankDifA2
-                    rankDifB1 = self.copelandScores[tpair2[1]][tpair1[1]] - \
-                                self.copelandScores[tpair2[1]][tpair2[0]]
-                    rankDifB2 = self.copelandScores[tpair1[1]][tpair2[1]] - \
-                                self.copelandScores[tpair1[1]][tpair1[0]]
+                    rankDifB1 = self.fitnessScores[tpair2[1]][tpair1[1]] - \
+                                self.fitnessScores[tpair2[1]][tpair2[0]]
+                    rankDifB2 = self.fitnessScores[tpair1[1]][tpair2[1]] - \
+                                self.fitnessScores[tpair1[1]][tpair1[0]]
 ##                    if Debug:
 ##                        print('rankDifferences B')
 ##                        print([tpair1,tpair2])
@@ -2641,7 +2646,7 @@ class IntraGroupPairing(Graph):
 class FairnessEnhancedIntraGroupMatching(IntraGroupPairing):
     """
     Solver for computing fair IntraGroup pairings using a similar hill climbing heuristic as the
-    one for the intergroup pairing problem. The enhancing is guided by Copeland ranking scores.
+    one for the intergroup pairing problem. The enhancing is guided by fitness ranking scores.
 
     *Parameters*:   
         * *intraVp* : a IntraGroup voting profile instance with *2k* voters where the *2k-1* candidates of
@@ -2651,13 +2656,15 @@ class FairnessEnhancedIntraGroupMatching(IntraGroupPairing):
           If *None*, a right --[pi,pi+1] for i = 1..2k-1 step 3-- and a left --[pi,p-i] for i = 1..k-- initial matching will be used
           elif 'random' a random maximal matching will be used with given *seed*
           elif 'bestCopeland' the best Copeland matching will be used as initial matching
-
+        * *fitnessScores* : 'Bachet' | 'Copeland' (default)
+    
     See the :ref:`tutorial on computing fair intragroup pairings <Fair-IntraGroup-Pairings-label>`.
           
     """
     def __init__(self,intraVp=None,
                  maxIterations=None,
                  initialMatching=None,
+                 fitnessScores='Copeland',
                  _nbrOfSwappingRetrials=None,
                  #RandomInit=False,
                  seed=None,
@@ -2684,23 +2691,45 @@ class FairnessEnhancedIntraGroupMatching(IntraGroupPairing):
             self.persons = persons 
             self.order = order
             self.vpA = intraVp
-            # precomputing Copeland ranking scores
-            copelandScores = {}
-            for i in range(order):
-                pi = persons[i]
-                copelandScores[pi] = {}
-                for j in range(order):
-                    pj = persons[j]
-                    copelandScores[pi][pj] = Decimal()
-            for i in range(order):
-                pi = persons[i]
-                for j in range(i+1,order):
-                    pj = persons[j]   
-                    copelandScores[pi][pj] = self.computeCopelandScore(pi,pj)
-                    copelandScores[pj][pi] = self.computeCopelandScore(pj,pi)                
-            self.copelandScores = copelandScores
+            # precomputing ranking scores
+            if fitnessScores == 'Bachet':
+                from bachetNumbers import BachetInteger as BachetNumber
+                bachetScores = {}
+                for i in range(order):
+                    pi = persons[i]
+                    bachetScores[pi] = {}
+                    for j in range(order):
+                        pj = persons[j]
+                        bachetScores[pi][pj] = BachetNumber()
+                for i in range(order):
+                    pi = persons[i]
+                    for j in range(i+1,order):
+                        pj = persons[j]   
+                        bachetScores[pi][pj] = self.computeBachetScore(pi,pj)
+                        bachetScores[pj][pi] = self.computeBachetScore(pj,pi)                
+                self.fitnessScores = bachetScores
+                
+            elif fitnessScores == 'Copeland':
+                copelandScores = {}
+                for i in range(order):
+                    pi = persons[i]
+                    copelandScores[pi] = {}
+                    for j in range(order):
+                        pj = persons[j]
+                        copelandScores[pi][pj] = Decimal()
+                for i in range(order):
+                    pi = persons[i]
+                    for j in range(i+1,order):
+                        pj = persons[j]   
+                        copelandScores[pi][pj] = self.computeCopelandScore(pi,pj)
+                        copelandScores[pj][pi] = self.computeCopelandScore(pj,pi)                
+                self.fitnessScores = copelandScores
+                
+            else:
+                print('!! Error: wrong fitnessScores: %s' % fitnessScores)
+                return
             if Debug:
-                print(copelandScores)
+                print(self.fitnessScores)
         if initialMatching == 'random':
             RandomInit = True
             import random
@@ -3920,9 +3949,21 @@ if __name__ == "__main__":
     from pairings import *
     from time import time
     t0 = time()
+    bcim = BestCopelandIntraGroupMatching(bavp,Comments=False)
+    print(time() -t0)
+    t1 = time()
+    fec = FairnessEnhancedIntraGroupMatching(bavp,
+                                             initialMatching=bcim.matching,
+                                             fitnessScores='Copeland')
+    print(time()-t1)
+    t0 = time()
     bbim = BestBachetIntraGroupMatching(bavp,Comments=False)
     print(time() -t0)
-    fec = FairnessEnhancedIntraGroupMatching(bavp,initialMatching=bbim.matching)
+    t1 = time()
+    fec = FairnessEnhancedIntraGroupMatching(bavp,
+                                             initialMatching=bbim.matching,
+                                             fitnessScores='Bachet')
+    print(time()-t1)
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
