@@ -99,7 +99,7 @@ def testFairnessEnhancedPrerankedMatching():
 
 def testFairnessEnhancedIntraGroupMatching():
     from votingProfiles import RandomBipolarApprovalVotingProfile
-    rigvp = RandomBipolarApprovalVotingProfile(numberOfVoters=12,
+    rigvp = RandomBipolarApprovalVotingProfile(numberOfVoters=16,
                                                votersIdPrefix='p',
                                                IntraGroup=True,Debug=False)
     
@@ -108,7 +108,7 @@ def testFairnessEnhancedIntraGroupMatching():
                                              initialMatching=None,
                                              Comments=True,Debug=False)
     fgm = FairnessEnhancedIntraGroupMatching(intraVp=rigvp,seed=None,
-                                             initialMatching=None,
+                                             initialMatching='bestBachet',
                                              fitnessScores='Bachet',
                                              Comments=True,Debug=False)
 

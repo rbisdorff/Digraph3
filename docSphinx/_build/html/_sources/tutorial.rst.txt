@@ -8440,7 +8440,7 @@ In :numref:`classmates3` above we may notice that the fairness enhancing procedu
 Guiding the choice of the initial matching
 ``````````````````````````````````````````
 
-Instead of starting now from the default initial right and left matchings, we may also start in :numref:`classmates4` below the fairness enhancing search from a best *Copeland* matching, i.e. an initial matching where each student is paired with a partner who shows the highest possible matching fitness score with respect to the given individual student's pairing preferences. 
+Instead of starting now from the default initial right and left matchings, we may also start in :numref:`classmates4` below the fairness enhancing search from a best *Copeland* matching, i.e. an initial matching where each student is paired with a partner who shows the highest possible matching fitness score with respect to the given individual student's pairing preferences [67]_. 
 
 .. code-block:: pycon
    :name: classmates4
@@ -11594,7 +11594,9 @@ Appendices
 
 .. [65] An example of a borderless :py:class:`~randomDigraphs.RandomOutrankingValuationDigraph` instance may be found in the *examples* directory of the *Digraphs3* resources under the name *borderlessROV9S25.py*.
 
-.. [66] The best *Copeland* initial matching is computed following a matching fitness scores ranked potential pairs list.  
+.. [66] The best *Copeland* initial matching is computed following a matching fitness scores ranked potential pairs list.
+
+.. [67] The :py:class:`~pairings.FairnessEnhancedIntraGroupMatching` class provides also the opportunity to use *Bachet* ranking scores instead of the *Copeland* scores for guiding the fairness enhancing procedure.
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive

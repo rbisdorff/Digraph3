@@ -2891,6 +2891,14 @@ class FairnessEnhancedIntraGroupMatching(IntraGroupPairing):
                 self.cop = cop
                 if Comments:
                     print('Best Copeland initial matching')
+            elif initialMatching == 'bestBachet':
+                from pairings import BestBachetIntraGroupMatching
+                bbi = BestBachetIntraGroupMatching(self.vpA,Comments=False)
+                initialMatching = bbi.matching
+                self.bachetInitialMatching = bbi.matching
+                self.bbi = bbi
+                if Comments:
+                    print('Best Bachet initial matching')
             elif type(initialMatching) == list or type(initialMatching) == frozenset:
                 self.initialMatching = initialMatching
                 if Debug:
@@ -3960,7 +3968,7 @@ if __name__ == "__main__":
     bbim = BestBachetIntraGroupMatching(bavp,Comments=False)
     print(time() -t0)
     t1 = time()
-    fec = FairnessEnhancedIntraGroupMatching(bavp,
+    feb = FairnessEnhancedIntraGroupMatching(bavp,
                                              initialMatching=bbim.matching,
                                              fitnessScores='Bachet')
     print(time()-t1)
