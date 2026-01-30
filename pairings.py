@@ -691,7 +691,7 @@ class InterGroupPairing(BipartiteGraph):
             score += ba[b][candidates[i]] - ba[candidates[i]][b]
         return score
 
-    def computeBachetScore(self,vpA,a,b):
+    def computeBachetScore(self,vpA,a,b,Reversed=False):
         """
         Replacement for the linear voting profiles information
         when searching for promising swapping candidates
@@ -706,7 +706,12 @@ class InterGroupPairing(BipartiteGraph):
         for i in range(k):
             vectorA.append(ba[b][candidates[i]])
             vectorB.append(ba[candidates[i]][b])
-        score = (BachetNumber(vector=vectorA) - BachetNumber(vector=vectorB))
+            bna = BachetNumber(vector=vectorA)
+            bnb = BachetNumber(vector=vectorB)
+            if Reversed:
+                score = (~bna) - (~bnb)
+            else:
+                score = bna - bnb
         return score
 
     def enhanceMatchingGeneralFairness(self,matching,
@@ -752,15 +757,15 @@ class InterGroupPairing(BipartiteGraph):
                         print(i,j)                
                     pair2 = pairs[j]
                     if [pair1,pair2] not in history:
-                        rankDifA1 = self.copelandScores[pair1[0]][pair2[1]] - \
-                                    self.copelandScores[pair1[0]][pair1[1]]
-                        rankDifA2 = self.copelandScores[pair2[0]][pair1[1]] - \
-                                    self.copelandScores[pair2[0]][pair2[1]]
+                        rankDifA1 = self.fitnessScores[pair1[0]][pair2[1]] - \
+                                    self.fitnessScores[pair1[0]][pair1[1]]
+                        rankDifA2 = self.fitnessScores[pair2[0]][pair1[1]] - \
+                                    self.fitnessScores[pair2[0]][pair2[1]]
                         difGroupA = rankDifA1 + rankDifA2
-                        rankDifB1 = self.copelandScores[pair1[1]][pair2[0]] - \
-                                    self.copelandScores[pair1[1]][pair1[0]]
-                        rankDifB2 = self.copelandScores[pair2[1]][pair1[0]] - \
-                                    self.copelandScores[pair2[1]][pair2[0]]
+                        rankDifB1 = self.fitnessScores[pair1[1]][pair2[0]] - \
+                                    self.fitnessScores[pair1[1]][pair1[0]]
+                        rankDifB2 = self.fitnessScores[pair2[1]][pair1[0]] - \
+                                    self.fitnessScores[pair2[1]][pair2[0]]
                         difGroupB = rankDifB1 + rankDifB2
                         if difGroupA <= difGroupB:
                             # enhance group B correlations
@@ -854,6 +859,7 @@ class FairnessEnhancedInterGroupMatching(InterGroupPairing):
     """
     def __init__(self,vpA,vpB,
                  initialMatching=None,
+                 fitnessScores='Copeland',
                  #RandomInit=False,
                  seed=None,
                  maxIterations=None,
@@ -883,35 +889,90 @@ class FairnessEnhancedInterGroupMatching(InterGroupPairing):
         self.maxIterations = maxIterations
         if Comments:
             print('Initial matching:', initialMatching)
-        # precomputing Copeland ranking scores
-        copelandScores = {}
-        aKeys = [a for a in vpA.voters]
-        bKeys = [b for b in vpB.voters]
-        n = len(aKeys)
-        for i in range(n):
-            ai = aKeys[i]
-            bi = bKeys[i]
-            copelandScores[ai] = {}
-            copelandScores[bi] = {}
-            for j in range(n):
-                aj = aKeys[j]
-                bj = bKeys[j]
-                copelandScores[ai][bj] = Decimal()
-                copelandScores[bi][aj] = Decimal()
-        for i in range(n):
-            ai = aKeys[i]
-            for j in range(n):
-                bj = bKeys[j]   
-                copelandScores[ai][bj] = self.computeCopelandScore(vpA,ai,bj)               
-        for j in range(n):
-            bj = bKeys[j]
+        if fitnessScores == 'Copeland':
+            # precomputing Copeland ranking scores
+            copelandScores = {}
+            aKeys = [a for a in vpA.voters]
+            bKeys = [b for b in vpB.voters]
+            n = len(aKeys)
             for i in range(n):
-                ai = aKeys[i]   
-                copelandScores[bj][ai] = self.computeCopelandScore(vpB,bj,ai)                
-        self.copelandScores = copelandScores
-        if Debug:
-            self.showCopelandRankingScores()
- 
+                ai = aKeys[i]
+                bi = bKeys[i]
+                copelandScores[ai] = {}
+                copelandScores[bi] = {}
+                for j in range(n):
+                    aj = aKeys[j]
+                    bj = bKeys[j]
+                    copelandScores[ai][bj] = Decimal()
+                    copelandScores[bi][aj] = Decimal()
+            for i in range(n):
+                ai = aKeys[i]
+                for j in range(n):
+                    bj = bKeys[j]   
+                    copelandScores[ai][bj] = self.computeCopelandScore(vpA,ai,bj)               
+            for j in range(n):
+                bj = bKeys[j]
+                for i in range(n):
+                    ai = aKeys[i]   
+                    copelandScores[bj][ai] = self.computeCopelandScore(vpB,bj,ai)                
+            self.fitnessScores = copelandScores
+##            if Debug:
+##                self.showCopelandRankingScores()
+        elif fitnessScores == 'Bachet':
+             # precomputing Bachet ranking scores
+            from bachetNumbers import BachetInteger as BachetNumber
+            bachetScores = {}
+            aKeys = [a for a in vpA.voters]
+            bKeys = [b for b in vpB.voters]
+            n = len(aKeys)
+            for i in range(n):
+                ai = aKeys[i]
+                bi = bKeys[i]
+                bachetScores[ai] = {}
+                bachetScores[bi] = {}
+                for j in range(n):
+                    aj = aKeys[j]
+                    bj = bKeys[j]
+                    bachetScores[ai][bj] = BachetNumber()
+                    bachetScores[bi][aj] = BachetNumber()
+            for i in range(n):
+                ai = aKeys[i]
+                for j in range(n):
+                    bj = bKeys[j]   
+            for j in range(n):
+                bj = bKeys[j]
+                for i in range(n):
+                    ai = aKeys[i]   
+                    bachetScores[bj][ai] = self.computeBachetScore(vpB,bj,ai)                
+            self.fitnessScores = bachetScores
+        elif fitnessScores == 'BachetReversed':
+             # precomputing Bachet ranking scores
+            from bachetNumbers import BachetInteger as BachetNumber
+            bachetScores = {}
+            aKeys = [a for a in vpA.voters]
+            bKeys = [b for b in vpB.voters]
+            n = len(aKeys)
+            for i in range(n):
+                ai = aKeys[i]
+                bi = bKeys[i]
+                bachetScores[ai] = {}
+                bachetScores[bi] = {}
+                for j in range(n):
+                    aj = aKeys[j]
+                    bj = bKeys[j]
+                    bachetScores[ai][bj] = BachetNumber()
+                    bachetScores[bi][aj] = BachetNumber()
+            for i in range(n):
+                ai = aKeys[i]
+                for j in range(n):
+                    bj = bKeys[j]   
+            for j in range(n):
+                bj = bKeys[j]
+                for i in range(n):
+                    ai = aKeys[i]   
+                    bachetScores[bj][ai] = self.computeBachetScore(vpB,bj,ai,Reversed=True)                
+            self.fitnessScores = bachetScores
+            
         t1 = time()
         self.runTimes['dataInput'] = t1 - t0
         # test initialMatching
@@ -924,6 +985,58 @@ class FairnessEnhancedInterGroupMatching(InterGroupPairing):
             if Comments or Debug:
                 print('Best Copeland initial matching')
                 print(cop.matching)
+            fitness = self.computeIndividualCorrelations(initialMatching)
+            if fitness[1] == Decimal('1.0'):
+                if Comments or Debug:
+                    print('Storing given initial maximal fair matching')
+                self.initialMatching = initialMatching
+                self.matching = initialMatching
+                self.iterations = 0
+                self.history = []
+                self.maxCorr = fitness[1]
+                self.stDev = fitness[2]
+                self.groupAScores = fitness[4]
+                self.groupBScores = fitness[5]
+                self.runTimes['enhancing'] = time() - t2             
+            else:
+                em,it,history,fitnessG = self.enhanceMatchingGeneralFairness(
+                                        initialMatching,
+                                        maxIterations=maxIterations,
+                                        Comments=Comments,
+                                        Debug=Debug)
+                if fitness[1] >= fitnessG[1] and fitness[2] <= fitnessG[2]:
+                    if Comments or Debug:
+                        print('Storing given initial maximal fair matching')
+                    self.initialMatching = initialMatching
+                    self.matching = initialMatching
+                    self.iterations = 0
+                    self.history = []
+                    self.maxCorr = fitness[1]
+                    self.stDev = fitness[2]
+                    self.groupAScores = fitness[4]
+                    self.groupBScores = fitness[5]
+                    self.runTimes['enhancing'] = time() - t2
+                else:
+                    if Comments or Debug:
+                        print('Storing maximal fairness enhanced given matching')
+                    self.initialMatching = initialMatching
+                    self.matching = fitnessG[0]
+                    self.iterations = it
+                    self.history = history
+                    self.maxCorr = fitnessG[1]
+                    self.stDev = fitnessG[2]
+                    self.groupAScores = fitnessG[4]
+                    self.groupBScores = fitnessG[5]
+                    self.runTimes['enhancing'] = time() - t2
+                    
+        if initialMatching == 'bestBachet':
+            if Debug:
+                print(initialMatching)
+            bac = BestBachetInterGroupMatching(vpA,vpB)
+            initialMatching = bac.matching
+            if Comments or Debug:
+                print('Best Bachet initial matching')
+                print(bac.matching)
             fitness = self.computeIndividualCorrelations(initialMatching)
             if fitness[1] == Decimal('1.0'):
                 if Comments or Debug:
@@ -1149,7 +1262,7 @@ class BestBachetInterGroupMatching(InterGroupPairing):
        
     See the :ref:`tutorial on computing fair intergroup pairings <Fair-InterGroup-Pairings-label>`.
     """
-    def __init__(self,vpA,vpB,Comments=False,Debug=False):
+    def __init__(self,vpA,vpB,Reversed=False,Comments=False,Debug=False):
         
         from time import time
         from decimal import Decimal
@@ -1178,19 +1291,21 @@ class BestBachetInterGroupMatching(InterGroupPairing):
                 bj = bKeys[j]
                 bachetScores[ai][bj] = BachetNumber()
                 bachetScores[bi][aj] = BachetNumber()
-        minScore = Decimal('0.0')
+        minScore = BachetNumber(0)
         for i in range(order):
             ai = aKeys[i]
             for j in range(order):
                 bj = bKeys[j]   
-                bachetScores[ai][bj] = self.computeBachetScore(vpA,ai,bj)
+                bachetScores[ai][bj] = self.computeBachetScore(vpA,ai,bj,
+                                                               Reversed=Reversed)
                 if bachetScores[ai][bj] < minScore:
                     minScore = bachetScores[ai][bj]
         for j in range(order):
             bj = bKeys[j]
             for i in range(order):
                 ai = aKeys[i]   
-                bachetScores[bj][ai] = self.computeBachetScore(vpB,bj,ai)                
+                bachetScores[bj][ai] = self.computeBachetScore(vpB,bj,ai,
+                                                               Reversed=Reversed)                
                 if bachetScores[bj][ai] < minScore:
                     minScore = bachetScores[bj][ai]
         self.bachetScores = bachetScores
@@ -1203,9 +1318,9 @@ class BestBachetInterGroupMatching(InterGroupPairing):
         t2 = time()
         self.name = 'copelandMatching'
         self.vertices = vpA.voters | vpB.voters
-        Min = Decimal('%d' % (BachetNumber(4)*minScore) )
+        Min = Decimal('%d' % ( minScore ) )
         Med = Decimal('0')
-        Max = Decimal('%d' % (BachetNumber(4)*abs(minScore)) )
+        Max = Decimal('%d' % ( abs(minScore) ) )
         self.valuationDomain = {'min': Min,
                                 'med': Med,
                                 'max': Max,
@@ -1274,12 +1389,20 @@ class BestBachetInterGroupMatching(InterGroupPairing):
                     print(lmatching)
             else:
                 i += 1
-                
+            
         if Debug:
             print(len(lmatching),lmatching)
 
-        
-        self.matching = lmatching
+        fitness = self.computeIndividualCorrelations(lmatching)
+        if Reversed: # compare the average correlation figures
+            revSelf = BestBachetInterGroupMatching(vpA,vpB,Reversed=False)
+            revFitness = self.computeIndividualCorrelations(revSelf.matching)
+            if revFitness[1] < fitness[1]:
+                self.matching = lmatching
+            else:
+                self.matching = revFitness[0]
+        else:
+            self.matching = lmatching
         t5 = time()
         self.runTimes['maximalMatching'] = t5 - t4
         
@@ -3832,23 +3955,23 @@ if __name__ == "__main__":
 ####    fp.showMatchingFairness(WithIndividualCorrelations=True)
 ####    print(fp.runTimes)
 ##
-##    #intergroup experiments
-##    lvA = RandomBipolarApprovalVotingProfile(numberOfVoters=order,
-##                                    numberOfCandidates=order,
-##                                    votersIdPrefix='a',
-##                                             #IntraGroup=True,
-##                                    candidatesIdPrefix='b',
-##                                             approvalProbability=0.3,
-##                                             disapprovalProbability=0.3,
-##                                             seed=seed1,Debug=False)
-##    lvB = RandomBipolarApprovalVotingProfile(numberOfVoters=order,
-##                                    numberOfCandidates=order,
-##                                    votersIdPrefix='b',
-##                                    #IntraGroup=False,
-##                                    candidatesIdPrefix='a',
-##                                             approvalProbability=0.3,
-##                                             disapprovalProbability=0.3,
-##                                             seed=seed2,Debug=False)
+    #intergroup experiments
+    lvA = RandomBipolarApprovalVotingProfile(numberOfVoters=order,
+                                    numberOfCandidates=order,
+                                    votersIdPrefix='a',
+                                             #IntraGroup=True,
+                                    candidatesIdPrefix='b',
+                                             approvalProbability=0.3,
+                                             disapprovalProbability=0.3,
+                                             seed=seed1,Debug=False)
+    lvB = RandomBipolarApprovalVotingProfile(numberOfVoters=order,
+                                    numberOfCandidates=order,
+                                    votersIdPrefix='b',
+                                    #IntraGroup=False,
+                                    candidatesIdPrefix='a',
+                                             approvalProbability=0.3,
+                                             disapprovalProbability=0.3,
+                                             seed=seed2,Debug=False)
 ########    lvA = RandomLinearVotingProfile(numberOfVoters=order,
 ####                                    numberOfCandidates=order,
 ####                                    votersIdPrefix='a',
@@ -3872,10 +3995,14 @@ if __name__ == "__main__":
 ##    print('==>> Copeland')
 ##    igcg.showMatchingFairness(WithIndividualCorrelations=True)
 ##    print(igcg.runTimes)
-##    igbg = BestBachetInterGroupMatching(lvA,lvB,Comments=Comments,Debug=Debug)
-##    print('==>> Bachet')
-##    igbg.showMatchingFairness(WithIndividualCorrelations=True)
-##    print(igbg.runTimes)
+    igbg = BestBachetInterGroupMatching(lvA,lvB,Reversed=False,Comments=Comments,Debug=Debug)
+    print('==>> Bachet')
+    igbg.showMatchingFairness(WithIndividualCorrelations=True)
+    print(igbg.runTimes)
+    igbgr = BestBachetInterGroupMatching(lvA,lvB,Reversed=True,Comments=Comments,Debug=Debug)
+    print('==>> Bachet reversed')
+    igbgr.showMatchingFairness(WithIndividualCorrelations=True)
+    print(igbgr.runTimes)
 ##    from pairings import *
 ##    fpcg = FairnessEnhancedInterGroupMatching(lvA,lvB,initialMatching=igcg.matching,Comments=True)
 ##    fpbg = FairnessEnhancedInterGroupMatching(lvA,lvB,initialMatching=igbg.matching,Comments=True)
@@ -3951,27 +4078,27 @@ if __name__ == "__main__":
 ##    corropt, stdopt, groupOptScores = fp.computeIndividualCorrelations(fp.matching,Debug=True)
 ##    lvA.showBipolarApprovals()
 
-    from votingProfiles import *
-    from pairings import *
-    bavp = BipolarApprovalVotingProfile('classmates')
-    from pairings import *
-    from time import time
-    t0 = time()
-    bcim = BestCopelandIntraGroupMatching(bavp,Comments=False)
-    print(time() -t0)
-    t1 = time()
-    fec = FairnessEnhancedIntraGroupMatching(bavp,
-                                             initialMatching=bcim.matching,
-                                             fitnessScores='Copeland')
-    print(time()-t1)
-    t0 = time()
-    bbim = BestBachetIntraGroupMatching(bavp,Comments=False)
-    print(time() -t0)
-    t1 = time()
-    feb = FairnessEnhancedIntraGroupMatching(bavp,
-                                             initialMatching=bbim.matching,
-                                             fitnessScores='Bachet')
-    print(time()-t1)
+##    from votingProfiles import *
+##    from pairings import *
+##    bavp = BipolarApprovalVotingProfile('classmates')
+##    from pairings import *
+##    from time import time
+##    t0 = time()
+##    bcim = BestCopelandIntraGroupMatching(bavp,Comments=False)
+##    print(time() -t0)
+##    t1 = time()
+##    fec = FairnessEnhancedIntraGroupMatching(bavp,
+##                                             initialMatching=bcim.matching,
+##                                             fitnessScores='Copeland')
+##    print(time()-t1)
+##    t0 = time()
+##    bbim = BestBachetIntraGroupMatching(bavp,Comments=False)
+##    print(time() -t0)
+##    t1 = time()
+##    feb = FairnessEnhancedIntraGroupMatching(bavp,
+##                                             initialMatching=bbim.matching,
+##                                             fitnessScores='Bachet')
+##    print(time()-t1)
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
