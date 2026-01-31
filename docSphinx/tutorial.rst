@@ -6955,7 +6955,7 @@ In a similar way, we may compute a *partial ranking* of all the potential study 
      Epistemic determination    :  0.405
      Bipolar-valued equivalence : +0.323
 
-In :numref:`aliceRankingByChoosing`, we find confirmed that the *Köln Interpreter* studies appear always first-ranked (Lines 4-8) and all the *Interpreter* studies are preferrred to the *Translator* studies (Lines 11-12). The *Köln Translater* studies are the preferred one of all the *Translater* studies (Line 13). The *Foreign Correspondent* and the *Specialised Secretary* studies both appear last-ranked (Line 18). Notice by the way the high ordinal correlations of each one of the five *Bachet* rankings with the digraph *dg* (Lines 4-8). Their ranking consensus is hence also highly correlated with the given outranking digraph *dg* (+0.80) and supported by a criteria significance majority of 66% (Lines 21-23).
+In :numref:`aliceRankingByChoosing`, we find confirmed that the *Köln Interpreter* studies appear always first-ranked (Lines 4-8) and all the *Interpreter* studies are preferrred to the *Translator* studies (Lines 11-12). The *Köln Translater* studies are the preferred ones of all the *Translater* studies (Line 13). The *Foreign Correspondent* and the *Specialised Secretary* studies both appear last-ranked (Line 18). Notice by the way the high ordinal correlations of each one of the five *Bachet* rankings with the digraph *dg* (Lines 4-8). Their ranking consensus is hence also highly correlated with the given outranking digraph *dg* (+0.80) and supported by a criteria significance majority of 66% (Lines 21-23).
 
 .. code-block:: pycon
    :linenos:
@@ -8469,7 +8469,7 @@ The pairwise matching fitness scores shown above in Lines 6-14 result from the s
    >>> bcm.matching
    {{'D', 'H'}, {'A', 'C'}, {'B', 'E'}, {'G', 'J'}, {'F', 'I'}}
 
-Starting from this initial matching, we may now reach indeed the fairest possible pairing solution within one fairness enhancing steps by exchanging *Alice* with *Felix*. 
+Starting from this initial matching, we may now reach indeed the fairest possible pairing solution within one fairness enhancing step by exchanging *Alice* with *Felix*. 
 
 .. code-block:: pycon
    :linenos:
@@ -11596,7 +11596,7 @@ Appendices
 
 .. [66] The best *Copeland* initial matching is computed following a matching fitness scores ranked potential pairs list.
 
-.. [67] The :py:class:`~pairings.FairnessEnhancedIntraGroupMatching` class provides also the opportunity to use *Bachet* ranking scores instead of the *Copeland* scores for guiding the fairness enhancing procedure.
+.. [67] The :py:class:`~pairings.FairnessEnhancedIntraGroupMatching` class provides also the opportunity to use *Bachet* ranking scores instead of the *Copeland* scores for guiding the fairness enhancing procedure. Unfortunately, ongoing tests don't show any better results, on the contrary.
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
