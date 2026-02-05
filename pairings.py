@@ -1291,23 +1291,23 @@ class BestBachetInterGroupMatching(InterGroupPairing):
                 bj = bKeys[j]
                 bachetScores[ai][bj] = BachetNumber()
                 bachetScores[bi][aj] = BachetNumber()
-        minScore = BachetNumber(0)
+        maxScore = BachetNumber(0)
         for i in range(order):
             ai = aKeys[i]
             for j in range(order):
                 bj = bKeys[j]   
                 bachetScores[ai][bj] = self.computeBachetScore(vpA,ai,bj,
                                                                Reversed=Reversed)
-                if bachetScores[ai][bj] < minScore:
-                    minScore = bachetScores[ai][bj]
+                if abs(bachetScores[ai][bj]) > maxScore:
+                    maxScore = bachetScores[ai][bj]
         for j in range(order):
             bj = bKeys[j]
             for i in range(order):
                 ai = aKeys[i]   
                 bachetScores[bj][ai] = self.computeBachetScore(vpB,bj,ai,
                                                                Reversed=Reversed)                
-                if bachetScores[bj][ai] < minScore:
-                    minScore = bachetScores[bj][ai]
+                if abs(bachetScores[bj][ai]) > maxScore:
+                    maxScore = bachetScores[bj][ai]
         self.bachetScores = bachetScores
         if Debug:
             self.showBachetRankingScores()
@@ -1318,9 +1318,9 @@ class BestBachetInterGroupMatching(InterGroupPairing):
         t2 = time()
         self.name = 'copelandMatching'
         self.vertices = vpA.voters | vpB.voters
-        Min = Decimal('%d' % ( minScore ) )
+        Min = Decimal('%d' % ( int(maxScore) ) )
         Med = Decimal('0')
-        Max = Decimal('%d' % ( abs(minScore) ) )
+        Max = Decimal('%d' % ( abs(maxScore) ) )
         self.valuationDomain = {'min': Min,
                                 'med': Med,
                                 'max': Max,
@@ -1339,8 +1339,8 @@ class BestBachetInterGroupMatching(InterGroupPairing):
         for i in range(order):
             for j in range(order):
                 edgeKey = frozenset([aKeys[i],bKeys[j]])
-                edges[edgeKey] = (BachetNumber(2)*abs(minScore)) + self.bachetScores[aKeys[i]][bKeys[j]] \
-                            + self.bachetScores[bKeys[j]][aKeys[i]]            
+                edges[edgeKey] = int(self.bachetScores[aKeys[i]][bKeys[j]]) \
+                            + int(self.bachetScores[bKeys[j]][aKeys[i]])            
         self.edges = edges
         self.size = self.computeSize()
         self.gamma = self.gammaSets()
