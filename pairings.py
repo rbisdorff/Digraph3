@@ -698,7 +698,7 @@ class InterGroupPairing(BipartiteGraph):
         """
         from bachetNumbers import BachetInteger as BachetNumber
         ba = vpA.ballot[a]
-        score = BachetNumber(0)
+        #score = BachetNumber(0)
         candidates = [b for b in vpA.candidates]
         k = len(candidates)
         vectorA = []
@@ -706,12 +706,12 @@ class InterGroupPairing(BipartiteGraph):
         for i in range(k):
             vectorA.append(ba[b][candidates[i]])
             vectorB.append(ba[candidates[i]][b])
-            bna = BachetNumber(vector=vectorA)
-            bnb = BachetNumber(vector=vectorB)
-            if Reversed:
-                score = (~bna) - (~bnb)
-            else:
-                score = bna - bnb
+        bna = BachetNumber(vector=vectorA)
+        bnb = BachetNumber(vector=vectorB)
+        if Reversed:
+            score = (~bna) - (~bnb)
+        else:
+            score = bna - bnb
         return score
 
     def enhanceMatchingGeneralFairness(self,matching,
@@ -796,9 +796,7 @@ class InterGroupPairing(BipartiteGraph):
                     print(history)
                     print('!!!! Cycling :', [npair1,npair2])
                 Enhanced = False
-##            elif (enhanceFitness[0][0] >= 0) \
-##                    and (enhanceFitness[0][1] >= 0):
-            elif (enhanceFitness[0][0] >= 0):
+            elif (int(enhanceFitness[0][0]) >= 0):
                 if Comments:
                     print(pair1,npair1)
                     print(pair2,npair2)
@@ -840,6 +838,112 @@ class InterGroupPairing(BipartiteGraph):
         return nfg,t,history,fitness
 
 #------   specialized pairing classes -------
+
+class FairestBachetInterGroupMatching(InterGroupPairing):
+    """
+    Testing
+    """
+    def __init__(self,vpA,vpB,
+                 maxIterations=None,
+                 Comments=False,Debug=False):
+        from time import time
+        from decimal import Decimal
+        from copy import deepcopy
+        self.runTimes = {}
+        t0 = time()
+        # store input data
+        self.vpA = vpA
+        self.vpB = vpB
+        self.verticesKeysA = [x for x in vpA.voters]
+        self.verticesKeysB = [y for y in vpB.voters]
+        self.name = 'fairness-enhanced-matching'
+        k = len(vpA.voters)
+        self.order = 2 * k
+        if maxIterations is None:
+            maxIterations = self.order
+        self.maxIterations = maxIterations
+        bac = BestBachetInterGroupMatching(vpA,vpB)
+        self.bac = bac
+        initialMatching = bac.matching
+        self.fitnessScores = bac.bachetScores
+        if Comments or Debug:
+            print('Best Bachet initial matching')
+            print(bac.matching)
+        fitness = self.computeIndividualCorrelations(initialMatching)
+        #print(fitness)
+        t2 = time()
+        if fitness[1] == Decimal('1.0'):
+            if Comments or Debug:
+                print('Storing given initial maximal fair matching')
+            self.initialMatching = initialMatching
+            self.matching = initialMatching
+            self.iterations = 0
+            self.history = []
+            self.maxCorr = fitness[1]
+            self.stDev = fitness[2]
+            self.groupAScores = fitness[4]
+            self.groupBScores = fitness[5]
+            self.runTimes['enhancing'] = time() - t2             
+        else:
+            em,it,history,fitnessG = self.enhanceMatchingGeneralFairness(
+                                    initialMatching,
+                                    maxIterations=maxIterations,
+                                    Comments=Comments,
+                                    Debug=Debug)
+            #print(fitnessG)
+            if fitness[1] >= fitnessG[1] and fitness[2] <= fitnessG[2]:
+                if Comments or Debug:
+                    print('Storing given initial maximal fair matching')
+                self.initialMatching = initialMatching
+                self.matching = initialMatching
+                self.iterations = 0
+                self.history = []
+                self.maxCorr = fitness[1]
+                self.stDev = fitness[2]
+                self.groupAScores = fitness[4]
+                self.groupBScores = fitness[5]
+                self.runTimes['enhancing'] = time() - t2
+            else:
+                if Comments or Debug:
+                    print('Storing maximal fairness enhanced given matching')
+                self.initialMatching = initialMatching
+                self.matching = fitnessG[0]
+                self.iterations = it
+                self.history = history
+                self.maxCorr = fitnessG[1]
+                self.stDev = fitnessG[2]
+                self.groupAScores = fitnessG[4]
+                self.groupBScores = fitnessG[5]
+                self.runTimes['enhancing'] = time() - t2
+                           
+        #storing the Graph data
+        self.vertices = vpA.voters | vpB.voters
+        Min = Decimal('-1')
+        Med = Decimal('0')
+        Max = Decimal('1')
+        self.valuationDomain = {'min': Min,
+                                'med': Med,
+                                'max': Max}
+        verticesList = [v for v in self.vertices]
+        n = len(verticesList)
+        mt = []
+        for m in self.matching:
+            mt.append(frozenset(m))
+        edges = {}
+        for i in range(n):
+            vi = verticesList[i]
+            for j in range(i+1,n):
+                vj = verticesList[j]
+                edgeKey = frozenset({vi,vj})
+                if edgeKey in mt:
+                    edges[edgeKey] = Max
+                else:
+                    edges[edgeKey] = Min
+        self.edges = edges
+        self.size = self.computeSize()
+        self.gamma = self.gammaSets()
+        
+        self.runTimes['totalTime'] = time() - t0
 
 class FairnessEnhancedInterGroupMatching(InterGroupPairing):
     """
@@ -930,15 +1034,16 @@ class FairnessEnhancedInterGroupMatching(InterGroupPairing):
                 bi = bKeys[i]
                 bachetScores[ai] = {}
                 bachetScores[bi] = {}
-                for j in range(n):
-                    aj = aKeys[j]
-                    bj = bKeys[j]
-                    bachetScores[ai][bj] = BachetNumber()
-                    bachetScores[bi][aj] = BachetNumber()
+##                for j in range(n):
+##                    aj = aKeys[j]
+##                    bj = bKeys[j]
+##                    bachetScores[ai][bj] = BachetNumber()
+##                    bachetScores[bi][aj] = BachetNumber()
             for i in range(n):
                 ai = aKeys[i]
                 for j in range(n):
                     bj = bKeys[j]   
+                    bachetScores[ai][bj] = self.computeBachetScore(vpA,ai,bj)                
             for j in range(n):
                 bj = bKeys[j]
                 for i in range(n):
@@ -957,22 +1062,26 @@ class FairnessEnhancedInterGroupMatching(InterGroupPairing):
                 bi = bKeys[i]
                 bachetScores[ai] = {}
                 bachetScores[bi] = {}
-                for j in range(n):
-                    aj = aKeys[j]
-                    bj = bKeys[j]
-                    bachetScores[ai][bj] = BachetNumber()
-                    bachetScores[bi][aj] = BachetNumber()
+##                for j in range(n):
+##                    aj = aKeys[j]
+##                    bj = bKeys[j]
+##                    bachetScores[ai][bj] = BachetNumber()
+##                    bachetScores[bi][aj] = BachetNumber()
             for i in range(n):
                 ai = aKeys[i]
                 for j in range(n):
                     bj = bKeys[j]   
+                    bachetScores[ai][bj] = self.computeBachetScore(vpA,ai,bj,Reversed=True)                
             for j in range(n):
                 bj = bKeys[j]
                 for i in range(n):
                     ai = aKeys[i]   
                     bachetScores[bj][ai] = self.computeBachetScore(vpB,bj,ai,Reversed=True)                
             self.fitnessScores = bachetScores
-            
+        else:
+            # error wrong fitnessScores request
+            print('!!!Error: fitnessScores = %s is not provided. Only Copeland, Bachet and BachetREversed are provided.')
+            return
         t1 = time()
         self.runTimes['dataInput'] = t1 - t0
         # test initialMatching
@@ -1032,7 +1141,9 @@ class FairnessEnhancedInterGroupMatching(InterGroupPairing):
         if initialMatching == 'bestBachet':
             if Debug:
                 print(initialMatching)
-            bac = BestBachetInterGroupMatching(vpA,vpB)
+            bac = BestBachetInterGroupMatching(vpA,vpB,BestQualified=True)
+            self.fitnessScores = bac.bachetScores
+            self.Reversed = bac.Reversed
             initialMatching = bac.matching
             if Comments or Debug:
                 print('Best Bachet initial matching')
@@ -1083,7 +1194,11 @@ class FairnessEnhancedInterGroupMatching(InterGroupPairing):
                 
         # compute initial matching
         elif initialMatching is None or initialMatching == 'random':
-            
+##            try:
+##                print(self.fitnessScores)
+##            except:
+##                print('no finess scores yet computed !!!')
+##                self.fitnessScores = self.copelandScores
             initialMatchingL = set()
             initialMatchingR = set()
             aKeys = [a for a in vpA.voters]
@@ -1259,10 +1374,14 @@ class BestBachetInterGroupMatching(InterGroupPairing):
 
        * *vpA* : any VotingProfile instance
        * *vpB* : reciprocal VotingProfile instance
-       
+       * *BestQualified*: *False* | *True* (default). If *True*,
+         both the original and the reversed ordering of the actions will
+         be taken into account for computing the pairing fitness scores
+         and the best qualified Bachet intergroup matching result will eventually returned.
+    
     See the :ref:`tutorial on computing fair intergroup pairings <Fair-InterGroup-Pairings-label>`.
     """
-    def __init__(self,vpA,vpB,Reversed=False,Comments=False,Debug=False):
+    def __init__(self,vpA,vpB,BestQualified=True,Comments=False,Debug=False):
         
         from time import time
         from decimal import Decimal
@@ -1286,18 +1405,13 @@ class BestBachetInterGroupMatching(InterGroupPairing):
             bi = bKeys[i]
             bachetScores[ai] = {}
             bachetScores[bi] = {}
-            for j in range(order):
-                aj = aKeys[j]
-                bj = bKeys[j]
-                bachetScores[ai][bj] = BachetNumber()
-                bachetScores[bi][aj] = BachetNumber()
         maxScore = BachetNumber(0)
         for i in range(order):
             ai = aKeys[i]
             for j in range(order):
                 bj = bKeys[j]   
                 bachetScores[ai][bj] = self.computeBachetScore(vpA,ai,bj,
-                                                               Reversed=Reversed)
+                                                               Reversed=BestQualified)
                 if abs(bachetScores[ai][bj]) > maxScore:
                     maxScore = bachetScores[ai][bj]
         for j in range(order):
@@ -1305,7 +1419,7 @@ class BestBachetInterGroupMatching(InterGroupPairing):
             for i in range(order):
                 ai = aKeys[i]   
                 bachetScores[bj][ai] = self.computeBachetScore(vpB,bj,ai,
-                                                               Reversed=Reversed)                
+                                                               Reversed=BestQualified)                
                 if abs(bachetScores[bj][ai]) > maxScore:
                     maxScore = bachetScores[bj][ai]
         self.bachetScores = bachetScores
@@ -1314,13 +1428,13 @@ class BestBachetInterGroupMatching(InterGroupPairing):
         t1 = time()
         self.runTimes['dataInput'] = t1 - t0
 
-        #storing the Copeland graph data
+        #storing the Bachet graph data
         t2 = time()
-        self.name = 'copelandMatching'
+        self.name = 'bachetMatching'
         self.vertices = vpA.voters | vpB.voters
-        Min = Decimal('%d' % ( int(maxScore) ) )
+        Min = Decimal('%d' % ( -int(maxScore) ) )
         Med = Decimal('0')
-        Max = Decimal('%d' % ( abs(maxScore) ) )
+        Max = Decimal('%d' % ( maxScore ) )
         self.valuationDomain = {'min': Min,
                                 'med': Med,
                                 'max': Max,
@@ -1394,15 +1508,19 @@ class BestBachetInterGroupMatching(InterGroupPairing):
             print(len(lmatching),lmatching)
 
         fitness = self.computeIndividualCorrelations(lmatching)
-        if Reversed: # compare the average correlation figures
-            revSelf = BestBachetInterGroupMatching(vpA,vpB,Reversed=False)
+        if BestQualified: # compare the average correlation figures
+            revSelf = BestBachetInterGroupMatching(vpA,vpB,BestQualified=False)
             revFitness = self.computeIndividualCorrelations(revSelf.matching)
             if revFitness[1] < fitness[1]:
                 self.matching = lmatching
+                self.Reversed = True
             else:
                 self.matching = revFitness[0]
+                self.bachetScores = revSelf.bachetScores
+                self.Reversed = False
         else:
             self.matching = lmatching
+            self.Reversed = False
         t5 = time()
         self.runTimes['maximalMatching'] = t5 - t4
         
@@ -2470,7 +2588,7 @@ class IntraGroupPairing(Graph):
         vpA = self.vpA
         ba = self.vpA.ballot[a]
         #ba = ballot
-        score = BachetNumber(0)
+        #score = BachetNumber(0)
         candidates = [b for b in vpA.voters]
         n = len(candidates)
         vectorA = []
@@ -2478,7 +2596,7 @@ class IntraGroupPairing(Graph):
         for i in range(n):
             vectorA.append(ba[b][candidates[i]])
             vectorB.append(ba[candidates[i]][b])
-        score += BachetNumber(vector=vectorA) - BachetNumber(vector=vectorB)
+        score = BachetNumber(vector=vectorA) - BachetNumber(vector=vectorB)
         return score
 
     def showMatchingFitnessScores(self):
@@ -3995,20 +4113,24 @@ if __name__ == "__main__":
 ##    print('==>> Copeland')
 ##    igcg.showMatchingFairness(WithIndividualCorrelations=True)
 ##    print(igcg.runTimes)
-    igbg = BestBachetInterGroupMatching(lvA,lvB,Reversed=False,Comments=Comments,Debug=Debug)
-    print('==>> Bachet')
-    igbg.showMatchingFairness(WithIndividualCorrelations=True)
-    print(igbg.runTimes)
-    igbgr = BestBachetInterGroupMatching(lvA,lvB,Reversed=True,Comments=Comments,Debug=Debug)
-    print('==>> Bachet reversed')
-    igbgr.showMatchingFairness(WithIndividualCorrelations=True)
-    print(igbgr.runTimes)
-##    from pairings import *
-##    fpcg = FairnessEnhancedInterGroupMatching(lvA,lvB,initialMatching=igcg.matching,Comments=True)
-##    fpbg = FairnessEnhancedInterGroupMatching(lvA,lvB,initialMatching=igbg.matching,Comments=True)
-    
-######    print('==>> Fairest')
-######    fp.showMatchingFairness(WithIndividualCorrelations=True)
+##    igbg = BestBachetInterGroupMatching(lvA,lvB,Comments=Comments,Debug=Debug)
+##    print('==>> Bachet')
+##    igbg.showMatchingFairness(WithIndividualCorrelations=True)
+##    print(igbg.runTimes,igbg.Reversed)
+##    igbgr = BestBachetInterGroupMatching(lvA,lvB,BestQualified=False,Comments=Comments,Debug=Debug)
+##    print('==>> Bachet reversed')
+##    igbgr.showMatchingFairness(WithIndividualCorrelations=True)
+##    print(igbgr.runTimes,igbgr.Reversed)
+####    from pairings import *
+    fpcg = FairnessEnhancedInterGroupMatching(lvA,lvB,initialMatching=None,Comments=False)
+##    fpbg = FairnessEnhancedInterGroupMatching(lvA,lvB,initialMatching=igbg.matching,Comments=False)
+####    
+##    print('==>> no initial matching')
+    fpcg.showMatchingFairness(WithIndividualCorrelations=True)
+##    print('==>> best Bachet initial matching')
+##    fpbg.showMatchingFairness(WithIndividualCorrelations=True)
+    bbig = FairestBachetInterGroupMatching(lvA,lvB)
+    bbig.showMatchingFairness(WithIndividualCorrelations=True)
 ####
 ####    print('==>> Fairness random enhanced')    
 ####    fem1 = FairnessEnhancedInterGroupMatching(lvA,lvB,
