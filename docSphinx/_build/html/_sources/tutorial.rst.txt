@@ -80,7 +80,7 @@
        * :ref:`Alice’s best choice: A selection case study <Alice-Tutorial-label>`
        * :ref:`The best academic Computer Science Depts: A ranking case study <THERanking-Tutorial-label>`
        * :ref:`The best students, where do they study? A rating case study <RatingUniversities-Tutorial-label>`
-       * :ref:`How to fairly match classmates? A pairing case study <RoommatesMatching-Tutorial-label>`	 
+       * :ref:`How to fairly match classmates into partner pairs? An intragroup pairing case study <RoommatesMatching-Tutorial-label>`	 
        * :ref:`Exercises <Exercises-label>`
 
    * :ref:`Working with big outranking digraphs <BigDigraphs-Tutorial-label>`

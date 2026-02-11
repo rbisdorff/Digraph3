@@ -1432,9 +1432,9 @@ class BestBachetInterGroupMatching(InterGroupPairing):
         t2 = time()
         self.name = 'bachetMatching'
         self.vertices = vpA.voters | vpB.voters
-        Min = Decimal('%d' % ( -int(maxScore) ) )
+        Min = Decimal('%d' % ( -(2*int(maxScore)) ) )
         Med = Decimal('0')
-        Max = Decimal('%d' % ( maxScore ) )
+        Max = Decimal('%d' % ( 2*int(maxScore) ) )
         self.valuationDomain = {'min': Min,
                                 'med': Med,
                                 'max': Max,
