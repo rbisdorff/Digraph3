@@ -2041,6 +2041,7 @@ class FairestInterGroupPairing(InterGroupPairing):
         lbpg = LineGraph(bpg)
         lbpg.computeMIS()
         maximalMatchings = lbpg.misset
+        nm = len(maximalMatchings)
         t3 = time()
         runTimes['maximalMatching'] = t3 - t2
         if Comments:
@@ -2052,9 +2053,10 @@ class FairestInterGroupPairing(InterGroupPairing):
         pairings = []
         groupAScores = {}
         groupBScores = {}
-
+        ni = 1
         for matching in maximalMatchings:
-            
+            print('%d/%d' % (ni,nm) )
+            ni += 1
             # computing groupA's scores
             groupAScores = {}
             for m in groupA:
@@ -4033,7 +4035,7 @@ if __name__ == "__main__":
     seed2 = randint(100,199)
 ##    seed1 = 1
 ##    seed2 = 1616
-    order = 10
+    order = 5
     Comments = True
     Debug = False
 ##
@@ -4104,10 +4106,10 @@ if __name__ == "__main__":
 ####                                    PartialLinearBallots=False,
 ####                                    lengthProbability=0.3,
 ####                                    seed=seed2)
-####    t0 = time()
-####    fp = FairestInterGroupPairing(lvA,lvB,Comments=True,Debug=False,orderLimit=order)
-####    t1 =time()
-####    print('fp total run time: %.3f sec.' % (t1-t0))
+    t0 = time()
+    fp = FairestInterGroupPairing(lvA,lvB,Comments=True,Debug=False,orderLimit=order)
+    t1 =time()
+    print('fp total run time: %.3f sec.' % (t1-t0))
 ####
 ##    igcg = BestCopelandInterGroupMatching(lvA,lvB,Comments=Comments,Debug=Debug)
 ##    print('==>> Copeland')
@@ -4122,15 +4124,15 @@ if __name__ == "__main__":
 ##    igbgr.showMatchingFairness(WithIndividualCorrelations=True)
 ##    print(igbgr.runTimes,igbgr.Reversed)
 ####    from pairings import *
-    fpcg = FairnessEnhancedInterGroupMatching(lvA,lvB,initialMatching=None,Comments=False)
-##    fpbg = FairnessEnhancedInterGroupMatching(lvA,lvB,initialMatching=igbg.matching,Comments=False)
-####    
-##    print('==>> no initial matching')
-    fpcg.showMatchingFairness(WithIndividualCorrelations=True)
-##    print('==>> best Bachet initial matching')
-##    fpbg.showMatchingFairness(WithIndividualCorrelations=True)
-    bbig = FairestBachetInterGroupMatching(lvA,lvB)
-    bbig.showMatchingFairness(WithIndividualCorrelations=True)
+##    fpcg = FairnessEnhancedInterGroupMatching(lvA,lvB,initialMatching=None,Comments=False)
+####    fpbg = FairnessEnhancedInterGroupMatching(lvA,lvB,initialMatching=igbg.matching,Comments=False)
+######    
+####    print('==>> no initial matching')
+##    fpcg.showMatchingFairness(WithIndividualCorrelations=True)
+####    print('==>> best Bachet initial matching')
+####    fpbg.showMatchingFairness(WithIndividualCorrelations=True)
+##    bbig = FairestBachetInterGroupMatching(lvA,lvB)
+##    bbig.showMatchingFairness(WithIndividualCorrelations=True)
 ####
 ####    print('==>> Fairness random enhanced')    
 ####    fem1 = FairnessEnhancedInterGroupMatching(lvA,lvB,

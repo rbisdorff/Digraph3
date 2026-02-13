@@ -43,15 +43,17 @@
 	  
    :New:
 
+      - A case study on :ref:`fairly matching students and internships <InternshipsMatching-Tutorial-label>`
+
       - A case study on :ref:`matching classmates into partner pairs <RoommatesMatching-Tutorial-label>`
 	
       - A tutorial on :ref:`extracting partial rankings <Partial-Ranking-Tutorial-label>` from a given outranking digraph
       
       - The *Bachet* ranking rules are illustrated in the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`
           
-      - A tutorial on :ref:`using multiprocessing resources <Multiprocessing-Tutorial-label>` when tackling large performance tableaux with several hundreds of decision alternatives.
+..      - A tutorial on :ref:`using multiprocessing resources <Multiprocessing-Tutorial-label>` when tackling large performance tableaux with several hundreds of decision alternatives.
 
-      - A tutorial on :ref:`using the Digraph3 HPC resources <HPC-Ranking-Tutorial-label>` for ranking several millions of multicriteria performance records via sparse outranking digraphs
+..      - A tutorial on :ref:`using the Digraph3 HPC resources <HPC-Ranking-Tutorial-label>` for ranking several millions of multicriteria performance records via sparse outranking digraphs
 	
    Contents
    --------
@@ -80,6 +82,7 @@
        * :ref:`Alice’s best choice: A selection case study <Alice-Tutorial-label>`
        * :ref:`The best academic Computer Science Depts: A ranking case study <THERanking-Tutorial-label>`
        * :ref:`The best students, where do they study? A rating case study <RatingUniversities-Tutorial-label>`
+       * :ref:`How to solve a students-internships matching problem? <InternshipMatching-Tutorial-label>`
        * :ref:`How to fairly match classmates into partner pairs? An intragroup pairing case study <RoommatesMatching-Tutorial-label>`	 
        * :ref:`Exercises <Exercises-label>`
 
@@ -8506,6 +8509,197 @@ Total solver run time is now reduced to less than a 13th of a second (0.075, see
 .. seealso:: :ref:`The tutorial on computing fair intragroup pairings <Fair-IntraGroup-Pairings-label>`.
 
 Back to :ref:`Content Table <Tutorial-label>`   
+
+--------------
+
+.. _InternshipsMatching-Tutorial-label:
+
+
+Fairest internship matching: An *intergroup pairing* case study
+---------------------------------------------------------------
+
+
+.. contents:: 
+	:depth: 2
+	:local:
+
+A graduate internship matching problem
+``````````````````````````````````````
+A class of ten graduate students in their final medical science study year has to be matched with a set of ten internships offered by different organizations. The students submitted their individual preferences concerning the offered internships in the format of the following linear votings.
+
+   =========  ====================================================
+    Student    Matching          
+   ---------  ----------------------------------------------------
+    Ids        Preferences   
+   =========  ====================================================
+    s01	       [i07, i09, i10, i08, i06, i04, i01, i05, i02, i03]
+    s02	       [i05, i09, i03, i07, i06, i10, i01, i08, i02, i04]
+    s03	       [i08, i09, i07, i10, i06, i01, i03, i02, i04, i05]
+    s04	       [i08, i03, i09, i02, i05, i01, i06, i10, i04, i07]
+    s05	       [i03, i01, i05, i10, i07, i08, i02, i06, i04, i09]
+    s06	       [i04, i10, i05, i01, i03, i06, i08, i02, i09, i07]
+    s07	       [i01, i02, i06, i08, i05, i10, i03, i04, i07, i09]
+    s08	       [i07, i09, i03, i05, i04, i06, i02, i08, i01, i10]
+    s09	       [i03, i02, i08, i07, i05, i04, i01, i10, i09, i06]
+    s10	       [i02, i10, i05, i07, i03, i09, i04, i01, i08, i06]
+   =========  ====================================================
+   
+Students *s01* and *s08*, for instance, both mostly prefer internship *i07*, whereas students *s03* and *s04* both mostly prefer internship *i08*.
+
+The organizations offering the internship opportunities submitted likewise their reciprocal preferences in the format of the following linear votings.
+
+   ============  ====================================================
+    Internship    Matching          
+   ------------  ----------------------------------------------------
+    Ids           Preferences   
+   ============  ====================================================
+    i01	          [s06, s10, s04, s05, s07, s08, s03, s09, s02, s01]
+    i02	          [s09, s02, s05, s08, s07, s06, s04, s03, s01, s10]
+    i03	          [s06, s10, s02, s04, s03, s08, s07, s01, s05, s09]
+    i04	          [s04, s08, s01, s10, s06, s02, s05, s03, s09, s07]
+    i05	          [s01, s10, s04, s02, s08, s07, s05, s09, s03, s06]
+    i06	          [s01, s05, s07, s08, s02, s04, s03, s10, s06, s09]
+    i07	          [s01, s02, s06, s07, s05, s10, s03, s08, s04, s09]
+    i08	          [s05, s01, s07, s03, s02, s09, s04, s10, s06, s08]
+    i09	          [s06, s01, s02, s04, s09, s07, s03, s08, s05, s10]
+    i10	          [s02, s07, s04, s03, s01, s05, s10, s06, s09, s08]
+   ============  ====================================================
+
+The organizations offering for instance internships *i05*, *i06* and *i07* mostly prefer the same student *s01*, whereas the organizations offering internships *i01*, *i03* and *i09* mostly prefer student *s06*. These matching preferences are stored in the format of two reciprocal :py:class:`~votingProfiles.LinearVotingProfile` objects stored under the names *lvpStudents.py* and *lvpInternships.py* in the *examples* directory of the Digraph3 resources.
+
+How to compute now a matching of students and internships that takes fair account of these reciprocal matching preferences?
+
+Computing a fair matching
+`````````````````````````
+
+To find the optimal fairest matching would mean to test the fairness of each one of the *!10 = 3628800* potential matching solutions. This brute force approach is here not suitable. Considering indeed the order of the given pairing problem, it is recommended to use the :py:class:`~pairings.FairnessEnhancedInterGroupMatching` constructor which implements a fairness enhancing heuristic starting from any initial potential matching.
+
+If no initial matching is given, the fairness enhancing procedure starts from two initial matchings, a left one that matches *sn* with *in* for *n = 1* to *n = 10*, and a right one matching *sn* with *im* where *n = 1* to *n = 10* and *m = 11 - n*. The fairest pairing solution will eventually be returned.
+
+.. code-block:: pycon
+   :name: internships1
+   :linenos:
+   :caption: Fairness Enhanced Matching
+   :emphasize-lines: 5,7,8
+
+   >>> from votingProfiles import LinearVotingProfile
+   >>> lvpS = LinearVotingProfile('lvpStudents')
+   >>> lvpI = LinearVotingProfile('lvpInternships')
+   >>> from pairings import FairnessEnhancedInterGroupMatching
+   >>> fem = FairnessEnhancedInterGroupMatching(lvpS,lvpI)
+   >>> fem.matching
+    [['s01', 'i07'],['s02', 'i09'],['s03', 'i10'],['s04', 'i03'],['s05', 'i08'],
+     ['s06', 'i01'],['s07', 'i06'],['s08', 'i04'],['s09', 'i02'],['s10', 'i05']]
+
+In :numref:`internships1` above we may notice that student *s01* is matched with his/her first choice, whereas student *s05* is matched only with his/her fifth choice. We may inspect in :numref:`internships2` below the correlation quality of this fairness enhanced matching with respect to the individal students and internships matching preferences.
+
+.. code-block:: pycon
+   :name: internships2
+   :linenos:
+   :caption: Correlations with individual students and internships matching preferences
+   :emphasize-lines: 1,3,4,7,11,13,15,18,20
+
+   >>> fem.showMatchingFairness()
+    Students correlations:
+     's01': +1.000, 's02': +0.778, 's03': +0.333
+     's04': +0.778, 's05': -0.111, 's06': +0.333
+     's07': +0.556, 's08': +0.111, 's09': +0.778
+     's10': +0.556
+    Students average correlation (a) : 0.511
+    Students standard deviation      : 0.344
+    -----
+    Internshipy correlations:
+     'i01': +1.000, 'i02': +1.000, 'i03': +0.333
+     'i04': +0.778, 'i05': +0.778, 'i06': +0.556
+     'i07': +1.000, 'i08': +1.000, 'i09': +0.556
+     'i10': +0.333
+    Internships average correlation (b) : 0.733
+    Internshipy standard deviation      : 0.273
+    -----
+    Average correlation    : 0.622
+    Standard Deviation     : 0.323
+    Unfairness |(a) - (b)| : 0.222
+
+In :numref:`internships2` Line 3 above we see confirmed that student *s01* gets indeed his/her first choice. Notice also in Line 4 that student *s05* is the only one who shows a slightly negative correlation (-0.111). On average the students all together obtain a quite high correlation index of +0.511 (see Line 7).
+
+The internships are better served, as *i01*, *i02*, *07* and *i08* get their first choices and no internship shows a negative correlation with our fairness enhanced  matching (see Lines 11-14). The average correlation is hence high (+0.733 see Line 15). The correlation considering all students and internships together is quite high (+0.633), but the difference between the students and the internships average correlations leads to an unfairness index of +0.733 - 0.511 = 0.222. The actual pairing solution shows that the internships are clearly better served than the students.
+
+Starting the fairness enhancing heuristic with a best Copeland initial matching 
+```````````````````````````````````````````````````````````````````````````````
+
+In order to try to lower the unfairness of the pairing solution, it appears opportune to start the fairness enhancing heuristic from a given best *Copeland* initial matching, that is a matching assembled via a ranked pairs algorithm based on *Copeland* ranking scores of each individual match from both the student and the internship perspectives (see tutorial on :ref:`computing fair intergroup pairings <Fair-InterGroup-Pairings-label>`).
+
+The :py:class:`~pairings.BestCopelandInterGroupMatching` class provides a complete bipartite graph construction where the positive characteristic values of the edges represent a matching fitness score computed for each individual match (in :numref:`internships3` see Lines 4-15 below).
+
+.. code-block:: pycon
+   :name: internships3
+   :linenos:
+   :caption: Best Copeland initial matching
+   :emphasize-lines: 2,4-15,18-21
+
+   >>> from pairings import BestCopelandInterGroupMatching
+   >>> bcm = BestCopelandInterGroupMatching(lvpS,lvpI)
+   >>> bcm.showEdgesCharacteristicValues()
+           | 'i01' 'i02' 'i03' 'i04' 'i05' 'i06' 'i07' 'i08' 'i09' 'i10'	 
+    -------|--------------------
+     's01' |  +12    +8	   +8   +44   +44   +56	  +72	+56   +64   +48	 
+     's02' |  +16   +36	  +56   +16   +60   +40	  +56	+28   +60   +52	 
+     's03' |  +28   +16   +32   +12    +4   +32	  +40	+60   +44   +48	 
+     's04' |  +44   +36	  +56   +40   +48   +28	   +4   +48   +52   +36	 
+     's05' |  +56   +40	  +40	+16   +40   +40	  +40	+52    +4   +40	 
+     's06' |  +60   +24	  +56	+56   +28   +20	  +28	+16   +40   +40	 
+     's07' |  +56   +52	  +24	 +8   +36   +56	  +28	+52   +16   +48	 
+     's08' |  +20   +36	  +44	+52   +44   +40	  +44	 +8   +40    +0	 
+     's09' |  +20   +68	  +36	+20   +28    +0	  +24	+44   +24   +12	 
+     's10' |  +40   +36	  +52	+36   +60    +8	  +40	+12   +16   +44	 
+    Valuation domain: [-72;+72]
+   >>> bcm.matching
+   [['s01', 'i07'](72), ['s09', 'i02'](68), ['s02', 'i05'](60),
+    ['s03', 'i08'](60), ['s06', 'i01'](60), ['s04', 'i03'](56),
+    ['s07', 'i06'](56), ['s08', 'i04'](52), ['s10', 'i10'](44),
+    ['s05', 'i09'](+4)]
+
+In Lines 18-21 above we notice that the pair ['s01', 'i07'] shows the highest matching fitness score of 72, followed by the pair ['s09', 'i02'] with a fitness score of +68. Three further pairs show a fitness score of 60, and so on. The last remaining matched pair is ['s05', 'i09'] with a fitness score of only +4.
+
+This best *Copeland* initial matching will be submitted as initial matching to our fairness enhancing algorithm. The resulting fairest pairing solution is shown in :numref:`internships4` below.
+
+.. code-block:: pycon
+   :name: internships4
+   :linenos:
+   :caption: Best Copeland initial matching
+   :emphasize-lines: 2,4,5,8-11,13,16-20,23,25
+   
+   >>> fec = FairnessEnhancedInterGroupMatching(lvpS,lvpI,
+   ...                                  initialMatching=bcm.matching)
+   >>> fec.matching
+    [['s01', 'i07'],['s02', 'i09'],['s03', 'i08'],['s04', 'i03'],['s05', 'i10'],
+     ['s06', 'i01'],['s07', 'i06'],['s08', 'i04'],['s09', 'i02'],['s10', 'i05']]
+   >>> fec.showMatchingFairness()
+    Students correlations:
+     's01': +1.000, 's02': +0.778, 's03': +1.000
+     's04': +0.778, 's05': +0.333, 's06': +0.333
+     's07': +0.556, 's08': +0.111, 's09': +0.778
+     's10': +0.556
+     Students average correlation (a) : 0.622
+     Students standard deviation      : 0.297
+    -----
+    Internshipy correlations:
+     'i01': +1.000, 'i02': +1.000, 'i03': +0.333
+     'i04': +0.778, 'i05': +0.778, 'i06': +0.556
+     'i07': +1.000, 'i08': +0.333, 'i09': +0.556
+     'i10': -0.111
+    Internships average correlation (b) : 0.622
+    Internships standard deviation      : 0.364
+    -----
+    Average correlation    : 0.622
+    Standard Deviation     : 0.323
+    Unfairness |(a) - (b)| : 0.000
+
+We get now a same rather high average correlation index of +0.622 for all students and for all internships. No unfairness is observed with this pairing solution. Two students get their first choices and three students their second choices. No student gets a negative correlation. Whereas three insternships get their first choices and two their second choices. Internship *i10* gets however now a slightly negative correlation index as student *s05* is only its 6th choice.
+
+.. note::
+
+   Traditionnally, such intergroup pairing problems are solved by using variants of the *deferred acceptance* algorithm like the *Gale-Shapley* or the *Roth-Pearson* algorithms. The :py:mod:`pairings` module provides for this purpose the :py:class:`~pairings.FairestGaleShapleyMatching` constructor. The class computes both Gale-Shapley matchings – the students propose as well as the internships propose – and renders the fairest solution of both. With our given recirpocal matching preferences, the *Gale-Shapley* algorithm returns here the pairing solution already seen in :numref:`internships2` above. The fairest deferred acceptance solution is favoring the internships side (+0.733 versus +0.511) leading to an unfairness index of 0.222. Mind that deferred acceptance algorithms, by returning allways the best stable pairing solution for the proposing side and the least stable pairing solution for the other side, are essentially unfair intergroup pairing solvers and are no more recommended for any official usage. 
 
 --------------
 
