@@ -8572,7 +8572,7 @@ How to compute now a matching of students and internships that takes fair accoun
 Computing a fair matching
 `````````````````````````
 
-To find the optimal fairest matching would mean to test the fairness of each one of the *!10 = 3628800* potential matching solutions. This brute force approach is here not suitable. Considering indeed the order of the given pairing problem, it is recommended to use the :py:class:`~pairings.FairnessEnhancedInterGroupMatching` constructor which implements a fairness enhancing heuristic starting from any initial potential matching.
+To find the optimal fairest matching would mean to test the fairness of each one of the *10! = 3628800* potential matching solutions. This brute force approach is hence not tractable. Considering indeed the order of the given pairing problem, it is recommended to use the :py:class:`~pairings.FairnessEnhancedInterGroupMatching` constructor which implements a fairness enhancing heuristic starting from any initial potential matching.
 
 If no initial matching is given, the fairness enhancing procedure starts from two initial matchings, a left one that matches *sn* with *in* for *n = 1* to *n = 10*, and a right one matching *sn* with *im* where *n = 1* to *n = 10* and *m = 11 - n*. The fairest pairing solution will eventually be returned.
 
