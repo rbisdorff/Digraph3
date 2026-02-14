@@ -67,7 +67,7 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{December 15, 2025}
+\date{February 14, 2026}
 \release{3.14.2}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -1444,7 +1444,7 @@ To appreciate the apparent orientation of the standard and robust strict outrank
 \caption{Heat map of the random 3 objectives performance tableau ordered by the \sphinxstyleemphasis{NetFlows} ranking rule}\label{\detokenize{pearls:robustheatmap}}\end{figure}
 
 \sphinxAtStartPar
-As the inital prekernel is here validated at stability level +2, recommending alternatives \sphinxstyleemphasis{p4}, as well as \sphinxstyleemphasis{p2}, as potential first choices, appears well justified. Alternative \sphinxstyleemphasis{a4} represents indeed an overall \sphinxstyleemphasis{best compromise choice} between all decision objectives, whereas alternative \sphinxstyleemphasis{p2} gives an unanimous best choice with respect to two out of three decision objectives. Up to the decision maker to make his final choice.
+As the initial prekernel is here validated at stability level +2, recommending alternatives \sphinxstyleemphasis{p4}, as well as \sphinxstyleemphasis{p2}, as potential first choices, appears well justified. Alternative \sphinxstyleemphasis{a4} represents indeed an overall \sphinxstyleemphasis{best compromise choice} between all decision objectives, whereas alternative \sphinxstyleemphasis{p2} gives an unanimous best choice with respect to two out of three decision objectives. Up to the decision maker to make his final choice.
 
 \sphinxAtStartPar
 For concluding, let us mention that it is precisely again our bipolar\sphinxhyphen{}valued \sphinxstyleemphasis{logical characteristic framework} that provides us here with a \sphinxstylestrong{first order distributional dominance} test for effectively qualifying the stability level 2 \sphinxstyleemphasis{robustness} of an outranking digraph when facing performance tableaux with criteria of only ordinal\sphinxhyphen{}valued significance weights. A real world application of our stability analysis with such a kind of performance tableau may be consulted in \sphinxcite{pearls:bis-2015p}.
@@ -4320,7 +4320,6 @@ The Digraph3 \sphinxcode{\sphinxupquote{bachetNumbers}} module provides with the
 \PYG{g+go}{  Attributes     : [\PYGZsq{}vector\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{ (}\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s1}{) + }\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{ (}\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s1}{) = }\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s+se}{\PYGZbs{}\PYGZsq{}}\PYG{l+s+s1}{ (}\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s1}{)}\PYG{l+s+s1}{\PYGZsq{}}
 \PYG{g+gp}{... }       \PYG{o}{\PYGZpc{}} \PYG{p}{(}\PYG{n}{n1}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{n1}\PYG{p}{)}\PYG{p}{,} \PYG{n}{n2}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{n2}\PYG{p}{)}\PYG{p}{,} \PYG{n}{n3}\PYG{p}{,} \PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{n3}\PYG{p}{)} \PYG{p}{)}\PYG{p}{)}
-\PYG{g+go}{ \PYGZsh{} int(n1) = n1.value()}
 \PYG{g+go}{  \PYGZsq{}+1\PYGZhy{}1\PYGZhy{}1\PYGZsq{} (5) + \PYGZsq{}+1+1+1\PYGZsq{} (13) = \PYGZsq{}+1\PYGZhy{}100\PYGZsq{} (18)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{n4} \PYG{o}{=} \PYG{o}{\PYGZti{}}\PYG{n}{n1}   \PYG{c+c1}{\PYGZsh{} \PYGZti{}n1 = n1.reverse()}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{n5} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{n}{n2}
@@ -4529,7 +4528,7 @@ To prove the \sphinxstyleemphasis{Condorcet consistency} property of the orderin
 Our random outranking digraph \sphinxstyleemphasis{g}, generated above in \hyperref[\detokenize{pearls:examplesbachet}]{Listing \ref{\detokenize{pearls:examplesbachet}}} Line 4 is for instance not transitive. Its transitivity degree amounts to 0.833 (see below).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Transitivity degree: }\PYG{l+s+si}{\PYGZpc{}.4f}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{\PYGZpc{}} \PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeTransitivityDegree}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Transitivity degree: }\PYG{l+s+si}{\PYGZpc{}.4f}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{\PYGZpc{}} \PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeTransitivityDegree}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}\PYG{p}{)}
 \PYG{g+go}{ Transitivity degree: 0.8333}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pg}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{n}{ReflexiveTerms}\PYG{o}{=} \PYG{k+kc}{False}\PYG{p}{)}
 \PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -5018,14 +5017,14 @@ Notice however in \hyperref[\detokenize{pearls:smartbachet1}]{Listing \ref{\deto
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sba} \PYG{o}{=} \PYG{n}{BachetRanking}\PYG{p}{(}\PYG{n}{gcd}\PYG{p}{,}\PYG{n}{Polarised}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}\PYG{n}{sampleSize}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeRankingCorrelation}\PYG{p}{(}\PYG{n}{sba}\PYG{o}{.}\PYG{n}{bachetRanking}\PYG{p}{)}\PYG{p}{)}
 \PYG{g+go}{ Correlation indexes:}
-\PYG{g+go}{  Crisp ordinal correlation  : +0.744}
+\PYG{g+go}{  Crisp ordinal correlation  : +0.631}
 \PYG{g+go}{  Epistemic determination    :  0.409}
-\PYG{g+go}{  Bipolar\PYGZhy{}valued equivalence : +0.304}
+\PYG{g+go}{  Bipolar\PYGZhy{}valued equivalence : +0.258}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-As we observe only 11 intransitive triples in the codual outranking digraph \sphinxstyleemphasis{gcd} (see Line 4), the smart sampling leads eventually to a ranking result that is no more the optimal Kemeny ranking (+0.744 versus +0.758, see Line 9). The Condorcet consistency of the ranking of all the transitive triples is however still guaranteed.
+As we observe only 11 intransitive triples in the codual outranking digraph \sphinxstyleemphasis{gcd} (see Line 4), the smart sampling leads eventually to a ranking result that is no more the optimal Kemeny ranking (+0.631 versus +0.758, see Line 9). The Condorcet consistency of the ranking of all the transitive triples is however still guaranteed.
 
 
 \subsubsection{Revealing the transitive part of a bipolar\sphinxhyphen{}valued digraph}
@@ -5987,7 +5986,7 @@ Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std
 In bipolar\sphinxhyphen{}valued epistemic logic we assemble conjointly some evidence for a statement to be true and other evidence for the same statement to be false. First example is given by the statement \sphinxstyleemphasis{P}: ‘\sphinxstyleemphasis{this candidate should win the election}’. There are some voters who support its truthfulness and some voters who support, on the contrary its falseness. Yet, there may also be some voters who don’t give any opinion, they abstain from voting. What logical status should be given to the statement \sphinxstyleemphasis{P} ?
 
 \sphinxAtStartPar
-Following \sphinxstyleemphasis{Condorcet} \sphinxcite{pearls:con-1785p} we are going to balance the votes in favour against the votes in disfavour. As a result we obtain a bipolar\sphinxhyphen{}valued credibility which qualifies statement \sphinxstyleemphasis{P} as certainly true when all voters support its truth, more or less true when more voters support its truthfulness than its falseness, more or less false when more voters support its falseness than its truthfulness and certainly false if all the voters support its falseness. There may however appear a special case when the same number of voters support its truthfulness respectively its falseness, or all voters abstain from voting. In these cases, statement \sphinxstyleemphasis{P} becomes neither \sphinxstyleemphasis{true} nor \sphinxstyleemphasis{false}, but \sphinxstylestrong{indeterminate}. It is a \sphinxstyleemphasis{zero knowledge} situation.
+Following \sphinxstyleemphasis{Condorcet} \sphinxcite{pearls:con-1785p} we are going to balance the votes in favour against the votes in disfavour. As a result we obtain a bipolar\sphinxhyphen{}valued credibility which qualifies statement \sphinxstyleemphasis{P} as \sphinxstylestrong{certainly true} when all voters support its truth, \sphinxstylestrong{more or less true} when more voters support its truthfulness than its falseness, \sphinxstylestrong{more or less false} when more voters support its falseness than its truthfulness and \sphinxstylestrong{certainly false} when all the voters support its falseness. There may however appear a special case when the same number of voters support its truthfulness respectively its falseness, or all voters abstain from voting. In these cases, statement \sphinxstyleemphasis{P} becomes neither \sphinxstyleemphasis{true} nor \sphinxstyleemphasis{false}, but \sphinxstylestrong{indeterminate}. It is a \sphinxstyleemphasis{zero knowledge} situation.
 
 \sphinxAtStartPar
 First important consequence is that the logical status of any statement is considered to be indeterminate as long as no evidence is yet collected. Reconsidering for instance proposition \sphinxstyleemphasis{P}, its logical status is indeterminate as long as no voting has been organized. More important is furthermore the consequence that negating the truthfulness or falseness of a proposition does no more imply its falseness, repective its truthfulness, but its falseness \sphinxstylestrong{or} indeterminate state, respecively its truthfulness \sphinxstylestrong{or} indeterminate state. Double negation does no more automatically imply truthfulness.
@@ -5996,15 +5995,15 @@ First important consequence is that the logical status of any statement is consi
 \subsubsection{Bipolar\sphinxhyphen{}valued propositional calculus}
 \label{\detokenize{pearls:bipolar-valued-propositional-calculus}}
 \sphinxAtStartPar
-In order to formalize the previous intuitions, we are attaching to any logical proposition or stement \sphinxstyleemphasis{P} a characteristic function \sphinxstyleemphasis{r(P)} taking value in the decimal interval {[}\sphinxhyphen{}1.0;+1.0{]} with follolwing semantics:
+In order to formalize the previous intuitions, we are attaching to any logical proposition or statement \sphinxstyleemphasis{P} a characteristic function \sphinxstyleemphasis{r(P)} taking value in the decimal interval {[}\sphinxhyphen{}1.0;+1.0{]} with following semantics:
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\(0.0 < r(P) \le +1.0\) means statement \sphinxstyleemphasis{P} is \sphinxstylestrong{more true than false};
+\(0.0 < r(P) \le +1.0\) means statement \sphinxstyleemphasis{P} is \sphinxstylestrong{more or less true};
 
 \item {} 
 \sphinxAtStartPar
-\(-1.0 < r(P) < 0.0\) means statement \sphinxstyleemphasis{P} is \sphinxstylestrong{more false than true};
+\(-1.0 \ge r(P) < 0.0\) means statement \sphinxstyleemphasis{P} is \sphinxstylestrong{more or less false};
 
 \item {} 
 \sphinxAtStartPar
@@ -6013,10 +6012,10 @@ In order to formalize the previous intuitions, we are attaching to any logical p
 \end{itemize}
 
 \sphinxAtStartPar
-Negating a statement is hence operated by changing the sign of its characteristic function: \(r(\neg P) = -r(P)\). An important consequence appears. This \sphinxstylestrong{negation} \(\neg\) operation does not necessarily correspond to taking the complement logical value. Indeed, \sphinxstyleemphasis{not true} does now only imply \sphinxstyleemphasis{false or indeterminate} and \sphinxstyleemphasis{not false} does only imply \sphinxstyleemphasis{true or indeterminate}.
+Negating a statement is hence operated by changing the sign of its characteristic function: \(r(\neg P) = -r(P)\). An important consequence appears. This \sphinxstylestrong{negation} \(\neg\) operation does not necessarily correspond to taking the complement logical value. Indeed, \sphinxstyleemphasis{not true} does now only imply \sphinxstyleemphasis{false or indeterminate} and \sphinxstyleemphasis{not false} does only imply \sphinxstyleemphasis{true or indeterminate}. In fact, we are working in a balanced ternary logic with \sphinxstylestrong{negative} (false), \sphinxstylestrong{positive} (true) and \sphinxstylestrong{null} (indeterminate) characteristic values. A negative \sphinxstyleemphasis{affirmation} becomes here a positive \sphinxstyleemphasis{refutation} and vice versa \sphinxcite{pearls:bis-2004-3p}.
 
 \sphinxAtStartPar
-Let now \sphinxstyleemphasis{P} and \sphinxstyleemphasis{Q} be two propositions, logical \sphinxstylestrong{conjunction} \(\land\), \sphinxstylestrong{disjunction} \(\lor\) and \sphinxstylestrong{implication} \(\Rightarrow\) may be computed as follows:
+Let now \sphinxstyleemphasis{P} and \sphinxstyleemphasis{Q} be two bipolar\sphinxhyphen{}valued propositions, logical \sphinxstylestrong{conjunction} \(\land\), \sphinxstylestrong{disjunction} \(\lor\) and \sphinxstylestrong{implication} \(\Rightarrow\) may be computed as follows:
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
@@ -6033,10 +6032,7 @@ Let now \sphinxstyleemphasis{P} and \sphinxstyleemphasis{Q} be two propositions,
 \end{itemize}
 
 \sphinxAtStartPar
-It is worthwhile noticing that the bipolar\sphinxhyphen{}valued logical implication is not necessarily transitive. Suppose for instance that a majority of voters validate proposition \sphinxstyleemphasis{P} and another majority validates the second proposition \sphinxstyleemphasis{Q} and still another majority of voters validates indeed the third proposition \sphinxstyleemphasis{R}. There is no epistemic reason why the evidence concerning statements \(P \Rightarrow Q\) and \(Q \Rightarrow R\) should necessarily induce the evidence that \(P \Rightarrow R\).
-
-\sphinxAtStartPar
-In fact, we are working in a balanced ternary logic with negative (false), positive (true) and null (indeterminate) characteristic values. A negative affirmation becomes here a positive refutation and vice versa \sphinxcite{pearls:bis-2004-3p}.
+It is worthwhile noticing that the bipolar\sphinxhyphen{}valued logical implication is not necessarily transitive. Suppose for instance that a majority of voters validate proposition \(P \Rightarrow Q\) and another majority validates the proposition \(Q \Rightarrow R\). There is no epistemic reason why the separate evidences of both these statements should necessarily induce the evidence of \(P \Rightarrow R\).
 
 
 \subsubsection{Computational bipolar\sphinxhyphen{}valued set theory}
@@ -6059,10 +6055,13 @@ When  \(r(x \in X)\,=\, 0.0\), element \sphinxstyleemphasis{x} is neither includ
 \end{itemize}
 
 \sphinxAtStartPar
-For any potential element \sphinxstyleemphasis{z} not included in the support set \(E_X\), \(r(z \in X) \,=\, -1.0\). The empty bpv\sphinxhyphen{}set consists of an empty support set \(E_{\emptyset} \,=\, \emptyset\). For all potential element \sphinxstyleemphasis{x} if follows hence that \(r(x \in \emptyset) \,=\, -1.0\).
+We may distinguish three special bpv\sphinxhyphen{}sets: the \sphinxstylestrong{crisp} bpv\sphinxhyphen{}set \sphinxstyleemphasis{X} where all members of the support \(E_X\) are certainly members of \sphinxstyleemphasis{X}, the \sphinxstylestrong{relatively empty} bpv\sphinxhyphen{}set \sphinxstyleemphasis{X} where all members of its support \(E_X\) are certainly non\sphinxhyphen{}members of \sphinxstyleemphasis{X} and the special \sphinxstylestrong{indeterminate} case where all members of its support \(E_X\) are indeterminate members of \sphinxstyleemphasis{X}, i.e \(r(z \in X) \;=\; 0.0 , \; \forall \,z \in\, E_X\).
 
 \sphinxAtStartPar
-Let \sphinxstyleemphasis{X} and \sphinxstyleemphasis{Y} be two bpv\sphinxhyphen{}sets. The support for any set operation is the union of the support of the arguments. We define the classical \sphinxstylestrong{set union} \(\cup\) and \sphinxstylestrong{intersection} \(\cap\) as follows.
+Mind that for any potential element \sphinxstyleemphasis{z} not included in the support set \(E_X\), we consider its potential \sphinxstyleemphasis{X} membership characteristic \(r(z \in X)\) to be \sphinxhyphen{}1.0. The \sphinxstylestrong{absolute empty} bpv\sphinxhyphen{}set \(\emptyset\) consists hence of an empty support set \(E_{\emptyset} \,=\, \emptyset\). And, for any element \sphinxstyleemphasis{x} it follows that \(r(x \in \emptyset) \,=\, -1.0\).
+
+\sphinxAtStartPar
+Let \sphinxstyleemphasis{X} and \sphinxstyleemphasis{Y} be two bpv\sphinxhyphen{}sets. The support for logical bpv\sphinxhyphen{}set operations is the union of the support of the arguments. We define the classical \sphinxstylestrong{set union} \(\cup\) and \sphinxstylestrong{intersection} \(\cap\) as follows.
 
 \sphinxAtStartPar
 For all \(z \in E_{X \cup Y}\) the membership characteristic \(r\big(\,z \in (X \cup Y)\,\big)\; =\)
@@ -6082,7 +6081,7 @@ For all \(z \in E_{X \cup Y}\) the membership characteristic \(r\big(\,z \in (X 
 \end{itemize}
 
 \sphinxAtStartPar
-For every \(z \in E_{X \cup Y}\) the membership characteristic \(r\big(\,z \in (X \cap Y)\,\big)\; =\)
+For all \(z \in E_{X \cup Y}\) the membership characteristic \(r\big(\,z \in (X \cap Y)\,\big)\; =\)
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
@@ -6099,19 +6098,23 @@ The \sphinxstylestrong{set difference} between two bpv\sphinxhyphen{}sets \sphin
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\(-\min\big(\,r(z \in X),-r(z \in Y)\,\big)\) when both \(z \in E_X \land z \in E_Y\),
+\(\min\big(\,r(z \in X),-r(z \in Y)\,\big)\) when both \(z \in E_X \land z \in E_Y\);
 
 \item {} 
 \sphinxAtStartPar
-\(r(z \in X)\) otherwise.
+\(r(z \in X)\) when \(z \in E_X\);
+
+\item {} 
+\sphinxAtStartPar
+\(-1.0\) otherwise.
 
 \end{itemize}
 
 \sphinxAtStartPar
-The \sphinxstylestrong{symmetric difference} of bpv\sphinxhyphen{}sets \sphinxstyleemphasis{X} and \sphinxstyleemphasis{Y}, denoted \sphinxstyleemphasis{X\textasciicircum{}Y}, is the set difference of their union and intersection, \((X-Y) \; = \; (X \cup Y) \,-\, (X \cap Y)\) or the union of their reciprocal set differences \((Y-X) \;=\; (X - Y) \,\cup\, (Y - X)\).
+The \sphinxstylestrong{symmetric difference} of bpv\sphinxhyphen{}sets \sphinxstyleemphasis{X} and \sphinxstyleemphasis{Y}, denoted \sphinxstyleemphasis{X\textasciicircum{}Y}, is the set difference of their union and intersection, \((X \cup Y) \,-\, (X \cap Y)\) or the union of their reciprocal set differences \((X - Y) \,\cup\, (Y - X)\).
 
 \sphinxAtStartPar
-The \sphinxcode{\sphinxupquote{bipolarValuedSets}} Digraph3 module provides, with the \sphinxcode{\sphinxupquote{BpvSet}} class, a Python implementation of such bvp\sphinxhyphen{}sets. In \hyperref[\detokenize{pearls:bipolarvaluedsets1}]{Listing \ref{\detokenize{pearls:bipolarvaluedsets1}}} we use the \sphinxcode{\sphinxupquote{RandomBpvSet}} class for generating to random bpv\sphinxhyphen{}sets \sphinxstyleemphasis{X} and \sphinxstyleemphasis{Y} with a common support of three elements \sphinxstyleemphasis{s1}, \sphinxstyleemphasis{s2} and \sphinxstyleemphasis{s3}.
+The \sphinxcode{\sphinxupquote{bipolarValuedSets}} Digraph3 module provides, with the \sphinxcode{\sphinxupquote{BpvSet}} class, a Python implementation of such bpv\sphinxhyphen{}sets. In \hyperref[\detokenize{pearls:bipolarvaluedsets1}]{Listing \ref{\detokenize{pearls:bipolarvaluedsets1}}} we use the \sphinxcode{\sphinxupquote{RandomBpvSet}} class for generating two random bpv\sphinxhyphen{}sets \sphinxstyleemphasis{X} and \sphinxstyleemphasis{Y} with a common support of three elements \sphinxstyleemphasis{s1}, \sphinxstyleemphasis{s2} and \sphinxstyleemphasis{s3}.
 \sphinxSetupCaptionForVerbatim{Working with bipolar\sphinxhyphen{}valued sets I}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:bipolarvaluedsets1}}}
 \fvset{hllines={, 5, 6, 7, 8, 9, 13, 14, 15,}}%
@@ -6138,20 +6141,20 @@ The \sphinxcode{\sphinxupquote{bipolarValuedSets}} Digraph3 module provides, wit
 In \hyperref[\detokenize{pearls:bipolarvaluedsets2}]{Listing \ref{\detokenize{pearls:bipolarvaluedsets2}}} below we illustrate the bipolar\sphinxhyphen{}valued set \sphinxstylestrong{union} and \sphinxstylestrong{intersection}.
 \sphinxSetupCaptionForVerbatim{Working with bipolar\sphinxhyphen{}valued sets II}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:bipolarvaluedsets2}}}
-\fvset{hllines={, 3, 4, 5, 6, 7, 11, 12, 13, 14,}}%
+\fvset{hllines={, 3, 4, 5, 6, 7, 10, 11, 12, 13, 14,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{|}\PYG{n}{Y}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{\PYGZsh{} | is Python\PYGZsq{}s set union symbol}
-\PYG{g+go}{ s1:  +0.9100}
-\PYG{g+go}{ s2:  +0.9000}
-\PYG{g+go}{ s3:  +0.5300}
+\PYG{g+go}{ \PYGZsh{} Python\PYGZsq{}s set union symbol is |}
+\PYG{g+go}{ s1:  +0.9121}
+\PYG{g+go}{ s2:  +0.8957}
+\PYG{g+go}{ s3:  +0.5275}
 \PYG{g+go}{ s5:  +0.0000}
-\PYG{g+go}{ s4:  \PYGZhy{}0.4900}
+\PYG{g+go}{ s4:  \PYGZhy{}0.4899}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{\PYGZam{}}\PYG{n}{Y}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{\PYGZsh{} \PYGZam{} is Python\PYGZsq{}s set intersection symbol}
-\PYG{g+go}{ s2:  +0.6900}
-\PYG{g+go}{ s1:  \PYGZhy{}0.7300}
-\PYG{g+go}{ s3:  \PYGZhy{}0.8900}
+\PYG{g+go}{ \PYGZsh{} Python\PYGZsq{}s set intersection symbol is \PYGZam{}}
+\PYG{g+go}{ s2:  +0.6949}
+\PYG{g+go}{ s1:  \PYGZhy{}0.7313}
+\PYG{g+go}{ s3:  \PYGZhy{}0.8869}
 \PYG{g+go}{ s4:  \PYGZhy{}1.0000}
 \PYG{g+go}{ s5:  \PYGZhy{}1.0000}
 \end{sphinxVerbatim}
@@ -6161,38 +6164,63 @@ In \hyperref[\detokenize{pearls:bipolarvaluedsets2}]{Listing \ref{\detokenize{pe
 Finally, in \hyperref[\detokenize{pearls:bipolarvaluedsets3}]{Listing \ref{\detokenize{pearls:bipolarvaluedsets3}}} below we illustrate the bipolar\sphinxhyphen{}valued set \sphinxstylestrong{difference} and \sphinxstylestrong{symmetric difference}.
 \sphinxSetupCaptionForVerbatim{Working with bipolar\sphinxhyphen{}valued sets III}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:bipolarvaluedsets3}}}
-\fvset{hllines={, 3, 4, 5, 6, 7, 14, 15, 16, 17, 18, 19, 20, 21,}}%
+\fvset{hllines={, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 17, 18, 19, 20, 21,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{\PYGZhy{}}\PYG{n}{Y}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{\PYGZsh{} Python\PYGZsq{}s set difference is \PYGZhy{}}
-\PYG{g+go}{ s1:  +0.9100}
-\PYG{g+go}{ s2:  +0.9000}
+\PYG{g+go}{ \PYGZsh{} Python\PYGZsq{}s set difference is \PYGZhy{}}
+\PYG{g+go}{ s3:  +0.5275}
 \PYG{g+go}{ s5:  +0.0000}
-\PYG{g+go}{ s4:  \PYGZhy{}0.4900}
-\PYG{g+go}{ s3:  \PYGZhy{}0.5300}
+\PYG{g+go}{ s4:  \PYGZhy{}0.4899}
+\PYG{g+go}{ s2:  \PYGZhy{}0.8957}
+\PYG{g+go}{ s1:  \PYGZhy{}0.9121}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{Y}\PYG{o}{\PYGZhy{}}\PYG{n}{X}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ s3:  +0.8900}
-\PYG{g+go}{ s2:  +0.6900}
-\PYG{g+go}{ s1:  \PYGZhy{}0.7300}
+\PYG{g+go}{ s1:  +0.7313}
+\PYG{g+go}{ s2:  \PYGZhy{}0.6949}
+\PYG{g+go}{ s3:  \PYGZhy{}0.8869}
 \PYG{g+go}{ s4:  \PYGZhy{}1.0000}
 \PYG{g+go}{ s5:  \PYGZhy{}1.0000}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{Y}\PYG{o}{\PYGZca{}}\PYG{n}{X}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{\PYGZsh{} \PYGZca{} is Python\PYGZsq{}s symmetrix difference symbol}
+\PYG{g+go}{\PYGZsh{} Python\PYGZsq{}s symmetrix difference symbol is \PYGZca{}}
 \PYG{g+go}{\PYGZsh{} X\PYGZca{}Y = (X\PYGZhy{}Y)|(Y\PYGZhy{}X) or (X|Y)\PYGZhy{}(X\PYGZam{}Y)}
-\PYG{g+go}{ s1:  +0.9100}
-\PYG{g+go}{ s2:  +0.9000}
-\PYG{g+go}{ s3:  +0.8900}
+\PYG{g+go}{ s1:  +0.7313}
+\PYG{g+go}{ s3:  +0.5275}
 \PYG{g+go}{ s5:  +0.0000}
-\PYG{g+go}{ s5:  \PYGZhy{}4.9000}
+\PYG{g+go}{ s4:  \PYGZhy{}0.4899}
+\PYG{g+go}{ s2:  \PYGZhy{}0.6949}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-The \sphinxcode{\sphinxupquote{BvpSet}} class furthermore provides a \sphinxcode{\sphinxupquote{strip()}} method which removes potential non elements from the support of an bpv\sphinxhyphen{}set instance. A \sphinxcode{\sphinxupquote{polarise()}} method is also provided for setting all positive and negative membership credibilities to +1.0, respectively to \sphinxhyphen{}1.0 . In the limit case of no indetermined membership characteristics, we recover this way standard crisp sets and the previous set operations simply implement a Boolean algebra \sphinxcite{pearls:bis-2004-3p}.
+The \sphinxcode{\sphinxupquote{BpvSet}} class provides furthermore a \sphinxcode{\sphinxupquote{isSubset()}} method for computing the bipolar\sphinxhyphen{}valued subset statement and a \sphinxcode{\sphinxupquote{strip()}} method which removes potential non\sphinxhyphen{}elements from the support of a bpv\sphinxhyphen{}set.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{D} \PYG{o}{=} \PYG{n}{Y} \PYG{o}{\PYGZhy{}} \PYG{n}{X}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{D}\PYG{o}{.}\PYG{n}{isSubset}\PYG{p}{(}\PYG{n}{Y}\PYG{p}{)}
+\PYG{g+go}{ Decimal(\PYGZsq{}0.8869\PYGZsq{})}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{D1} \PYG{o}{=} \PYG{n}{D}\PYG{o}{.}\PYG{n}{strip}\PYG{p}{(}\PYG{n}{InSite}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{D1}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{ s1:  +0.7313}
+\PYG{g+go}{ s2:  \PYGZhy{}0.6949}
+\PYG{g+go}{ s3:  \PYGZhy{}0.8869}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Finally, a \sphinxcode{\sphinxupquote{polarise()}} method is provided for setting all positive and negative membership credibilities of a bpv\sphinxhyphen{}set to +1.0, respectively to \sphinxhyphen{}1.0 .
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{D2} \PYG{o}{=} \PYG{n}{D1}\PYG{o}{.}\PYG{n}{polarise}\PYG{p}{(}\PYG{n}{InSite}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{D2}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{ s1:  +1.0000}
+\PYG{g+go}{ s2:  \PYGZhy{}1.0000}
+\PYG{g+go}{ s3:  \PYGZhy{}1.0000}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+In the limit case of no indeterminate membership characteristics, we recover this way standard crisp sets and the previous set operations implement in fact a Boolean algebra \sphinxcite{pearls:bis-2004-3p}.
 
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
-The \sphinxstyleemphasis{relation} attribute of a bipolar\sphinxhyphen{}valued digraph is an example of a bpv\sphinxhyphen{}set where the support is given by the oriented tuples of the digraph’s nodes. The \sphinxstyleemphasis{edges} attribute of bipolar\sphinxhyphen{}valued graphs is a second example of a bpv\sphinxhyphen{}set, where the support is given by the non\sphinxhyphen{}oriented pairs of vertices.  Further evident examples of bpv\sphinxhyphen{}sets are the bipolar\sphinxhyphen{}valued prekernel membership charcateristic vectors from the \sphinxstyleemphasis{Rubis} best choice computation \sphinxcite{pearls:bis-2006-1p}. This is the topic of the next tutorial.
+The \sphinxstyleemphasis{relation} attribute of a bipolar\sphinxhyphen{}valued digraph is an example of a bpv\sphinxhyphen{}set where the support is given by the oriented pairs of the digraph’s nodes. The \sphinxstyleemphasis{edges} attribute of bipolar\sphinxhyphen{}valued graphs is a second example of a bpv\sphinxhyphen{}set, where the support is given by the non\sphinxhyphen{}oriented pairs of the graph’s vertices.  Further evident examples of bpv\sphinxhyphen{}sets are the bipolar\sphinxhyphen{}valued prekernel membership charcateristic vectors from the \sphinxstyleemphasis{Rubis} best choice computation \sphinxcite{pearls:bis-2006-1p}. This is the topic of the next tutorial.
 \end{sphinxadmonition}
 
 \sphinxAtStartPar

@@ -61,18 +61,18 @@
 \contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued epistemic logic}{119}{subsubsection*.127}%
 \contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued propositional calculus}{120}{subsubsection*.128}%
 \contentsline {subsubsection}{Computational bipolar\sphinxhyphen {}valued set theory}{120}{subsubsection*.129}%
-\contentsline {subsection}{\numberline {3.6}Bipolar\sphinxhyphen {}valued kernel membership characteristic vectors}{123}{subsection.3.6}%
-\contentsline {subsubsection}{Kernel equation systems}{123}{subsubsection*.133}%
-\contentsline {subsubsection}{Solving bipolar\sphinxhyphen {}valued kernel equation systems}{124}{subsubsection*.134}%
+\contentsline {subsection}{\numberline {3.6}Bipolar\sphinxhyphen {}valued kernel membership characteristic vectors}{124}{subsection.3.6}%
+\contentsline {subsubsection}{Kernel equation systems}{124}{subsubsection*.133}%
+\contentsline {subsubsection}{Solving bipolar\sphinxhyphen {}valued kernel equation systems}{125}{subsubsection*.134}%
 \contentsline {subsubsection}{Historical notes}{131}{subsubsection*.135}%
 \contentsline {subsection}{\numberline {3.7}On characterizing bipolar\sphinxhyphen {}valued outranking digraphs}{132}{subsection.3.7}%
-\contentsline {subsubsection}{Necessary properties of the outranking digraph}{132}{subsubsection*.140}%
+\contentsline {subsubsection}{Necessary properties of the outranking digraph}{133}{subsubsection*.140}%
 \contentsline {subsubsection}{Partial tournaments may be strict outranking digraphs}{134}{subsubsection*.142}%
 \contentsline {subsubsection}{Recognizing bipolar outranking valuations}{136}{subsubsection*.143}%
 \contentsline {subsubsection}{On generating random outranking valuations}{139}{subsubsection*.145}%
 \contentsline {subsection}{\numberline {3.8}Consensus quality of the bipolar\sphinxhyphen {}valued outranking relation}{140}{subsection.3.8}%
-\contentsline {subsubsection}{Circular performance tableaux}{140}{subsubsection*.149}%
-\contentsline {subsubsection}{A difficult decision problem}{142}{subsubsection*.150}%
+\contentsline {subsubsection}{Circular performance tableaux}{141}{subsubsection*.149}%
+\contentsline {subsubsection}{A difficult decision problem}{143}{subsubsection*.150}%
 \contentsline {subsubsection}{The central CONDORCET point of view}{144}{subsubsection*.151}%
 \contentsline {section}{\numberline {4}Appendix}{150}{section.4}%
 \contentsline {section}{References}{150}{section.4}%
