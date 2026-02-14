@@ -8567,7 +8567,7 @@ The organizations offering the internship opportunities submitted likewise their
 
 The organizations offering for instance internships *i05*, *i06* and *i07* mostly prefer the same student *s01*, whereas the organizations offering internships *i01*, *i03* and *i09* mostly prefer student *s06*. These matching preferences are stored in the format of two reciprocal :py:class:`~votingProfiles.LinearVotingProfile` objects stored under the names *lvpStudents.py* and *lvpInternships.py* in the *examples* directory of the Digraph3 resources.
 
-How to compute now a matching of students and internships that takes fair account of these reciprocal matching preferences?
+How to compute now a matching of students and internships that takes fair account of these reciprocal matching preferences? A fair pairing solution should show a high average overall correlation index with the given reciprocal linear voting profiles and an as small as possible difference between the average correlations of the students and of the internships matching preferences  
 
 Computing a fair matching
 `````````````````````````
@@ -8620,11 +8620,9 @@ In :numref:`internships1` above we may notice that student *s01* is matched with
 
 In :numref:`internships2` Line 3 above we see confirmed that student *s01* gets indeed his/her first choice. Notice also in Line 4 that student *s05* is the only one who shows a slightly negative correlation (-0.111). On average the students all together obtain a quite high correlation index of +0.511 (see Line 7).
 
-The internships are however better served, as *i01*, *i02*, *07* and *i08* get their first choices and no internship shows a negative correlation with our fairness enhanced  matching (see Lines 11-14). The average correlation is hence high (+0.733 see Line 15). The correlation considering all students and internships together is also quite high (+0.622), but the difference between the students and the internships average correlations leads to an unfairness index of +0.733 - 0.511 = 0.222. The Gale-Shapley pairing solution clearly better serves the internships than the students.
+The internships are however better served, as *i01*, *i02*, *07* and *i08* get their first choices and no internship shows a negative correlation with our fairness enhanced  matching (see Lines 11-14). The average correlation is hence higher (+0.733 see Line 15). The average correlation index considering all students and internships together is also quite high (+0.622), but the difference between the students and the internships average correlations leads to an unfairness index of +0.733 - 0.511 = 0.222. The *Gale-Shapley* pairing solution clearly better serves the internships than the students.
 
-Mind that *deferred acceptance* algorithms, by returning allways the best stable matching for the proposing side and the least stable matching for the other side, are essentially unfair intergroup pairing solvers and are hence not recommended for computing **fair** intergroup pairing solutions.
-
-Yet, finding the optimal fairest pairing solution in our case here would mean to test the fairness of each one of the *10! = 3628800* potential matching solutions. This brute force approach is not tractable.
+Mind that all *deferred acceptance* algorithms, by returning allways the best stable matching for the proposing side and the least stable matching for the other side, are indeed essentially unfair intergroup pairing solvers and are hence not recommended for computing **fair** pairing solutions. Yet, finding an optimal fairest pairing solution in our case here would mean to test the fairness of each one of the *10! = 3628800* potential matching solutions. This brute force approach is not tractable.
 
 Using a fairness enhancing heuristic
 ````````````````````````````````````
@@ -8646,7 +8644,7 @@ It is recommended to use the :py:class:`pairings.FairnessEnhancedInterGroupMatch
 
 In :numref:`internships3` Lines 5-6 we notice that we recover unfortunately the same pervious unfair *Gale-Shapley* matching.
 
-In order to try to lower the unfairness of the pairing solution, it appears opportune helping the fairness enhancing heuristic by providing a given best *Copeland* initial matching, that is a matching assembled via a ranked pairs algorithm based on *Copeland* ranking scores of each individual match from both the student and the internship perspectives. The :py:mod:`pairings` module provides therefore the :py:class:`~pairings.BestCopelandInterGroupMatching` class which constructs a complete bipartite graph where the characteristic values of the edges represent a matching fitness score computed for each individual match (in :numref:`internships4` see Lines 4-15 below).
+In order to try to lower the unfairness of the pairing solution, it appears opportune helping the fairness enhancing heuristic by providing a given best *Copeland* initial matching. This matching is assembled via a ranked pairs algorithm based on *Copeland* ranking scores of each individual match from both the student and the internship perspectives. The :py:mod:`pairings` module provides therefore the :py:class:`~pairings.BestCopelandInterGroupMatching` class which constructs a complete bipartite graph where the characteristic values of the edges represent a matching fitness score computed for each individual match (in :numref:`internships4` see Lines 4-15 below).
 
 .. code-block:: pycon
    :name: internships4
