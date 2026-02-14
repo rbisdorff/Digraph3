@@ -8572,26 +8572,24 @@ How to compute now a matching of students and internships that takes fair accoun
 Computing a fair matching
 `````````````````````````
 
-To find the optimal fairest matching would mean to test the fairness of each one of the *10! = 3628800* potential matching solutions. This brute force approach is hence not tractable. Considering indeed the order of the given pairing problem, it is recommended to use the :py:class:`~pairings.FairnessEnhancedInterGroupMatching` constructor which implements a fairness enhancing heuristic starting from any initial potential matching.
-
-If no initial matching is given, the fairness enhancing procedure starts from two initial matchings, a left one that matches *sn* with *in* for *n = 1* to *n = 10*, and a right one matching *sn* with *im* where *n = 1* to *n = 10* and *m = 11 - n*. The fairest pairing solution will eventually be returned.
+Traditionnally, such intergroup pairing problems are solved by using variants of the *deferred acceptance* algorithm like the *Gale-Shapley* or the *Roth-Peranson* algorithms [68]_. The :py:mod:`pairings` module provides for this purpose the :py:class:`~pairings.FairestGaleShapleyMatching` constructor computing both *Gale-Shapley* matchings – the students propose as well as the internships propose – and rendering the fairest solution of both (see tutorial on :ref:`computing fair intergroup pairings <Fair-InterGroup-Pairings-label>`).
 
 .. code-block:: pycon
    :name: internships1
    :linenos:
-   :caption: Fairness Enhanced Matching
+   :caption: Fairest Gale-Shapley Matching
    :emphasize-lines: 5,7,8
 
    >>> from votingProfiles import LinearVotingProfile
    >>> lvpS = LinearVotingProfile('lvpStudents')
    >>> lvpI = LinearVotingProfile('lvpInternships')
-   >>> from pairings import FairnessEnhancedInterGroupMatching
-   >>> fem = FairnessEnhancedInterGroupMatching(lvpS,lvpI)
-   >>> fem.matching
+   >>> from pairings import FairnestGaleShapleyMatching
+   >>> gsm = FairestGaleShapleyMatching(lvpS,lvpI)
+   >>> gsm.matching
     [['s01', 'i07'],['s02', 'i09'],['s03', 'i10'],['s04', 'i03'],['s05', 'i08'],
      ['s06', 'i01'],['s07', 'i06'],['s08', 'i04'],['s09', 'i02'],['s10', 'i05']]
 
-In :numref:`internships1` above we may notice that student *s01* is matched with his/her first choice, whereas student *s05* is matched only with his/her fifth choice. We may inspect in :numref:`internships2` below the correlation quality of this fairness enhanced matching with respect to the individal students and internships matching preferences.
+In :numref:`internships1` above we may notice that student *s01* is matched with his/her first choice, whereas student *s05* is matched only with his/her fifth choice. We may inspect in :numref:`internships2` below the correlation quality of this fairest *Gale-Shapley* matching with respect to the individal students and internships matching preferences.
 
 .. code-block:: pycon
    :name: internships2
@@ -8599,7 +8597,7 @@ In :numref:`internships1` above we may notice that student *s01* is matched with
    :caption: Correlations with individual students and internships matching preferences
    :emphasize-lines: 1,3,4,7,11,13,15,18,20
 
-   >>> fem.showMatchingFairness()
+   >>> gsm.showMatchingFairness()
     Students correlations:
      's01': +1.000, 's02': +0.778, 's03': +0.333
      's04': +0.778, 's05': -0.111, 's06': +0.333
@@ -8622,17 +8620,36 @@ In :numref:`internships1` above we may notice that student *s01* is matched with
 
 In :numref:`internships2` Line 3 above we see confirmed that student *s01* gets indeed his/her first choice. Notice also in Line 4 that student *s05* is the only one who shows a slightly negative correlation (-0.111). On average the students all together obtain a quite high correlation index of +0.511 (see Line 7).
 
-The internships are better served, as *i01*, *i02*, *07* and *i08* get their first choices and no internship shows a negative correlation with our fairness enhanced  matching (see Lines 11-14). The average correlation is hence high (+0.733 see Line 15). The correlation considering all students and internships together is quite high (+0.633), but the difference between the students and the internships average correlations leads to an unfairness index of +0.733 - 0.511 = 0.222. The actual pairing solution shows that the internships are clearly better served than the students.
+The internships are however better served, as *i01*, *i02*, *07* and *i08* get their first choices and no internship shows a negative correlation with our fairness enhanced  matching (see Lines 11-14). The average correlation is hence high (+0.733 see Line 15). The correlation considering all students and internships together is also quite high (+0.622), but the difference between the students and the internships average correlations leads to an unfairness index of +0.733 - 0.511 = 0.222. The Gale-Shapley pairing solution clearly better serves the internships than the students.
 
-Starting the fairness enhancing heuristic with a best Copeland initial matching 
-```````````````````````````````````````````````````````````````````````````````
+Mind that *deferred acceptance* algorithms, by returning allways the best stable matching for the proposing side and the least stable matching for the other side, are essentially unfair intergroup pairing solvers and are hence not recommended for computing **fair** intergroup pairing solutions.
 
-In order to try to lower the unfairness of the pairing solution, it appears opportune to start the fairness enhancing heuristic from a given best *Copeland* initial matching, that is a matching assembled via a ranked pairs algorithm based on *Copeland* ranking scores of each individual match from both the student and the internship perspectives (see tutorial on :ref:`computing fair intergroup pairings <Fair-InterGroup-Pairings-label>`).
+Yet, finding the optimal fairest pairing solution in our case here would mean to test the fairness of each one of the *10! = 3628800* potential matching solutions. This brute force approach is not tractable.
 
-The :py:class:`~pairings.BestCopelandInterGroupMatching` class provides a complete bipartite graph construction where the positive characteristic values of the edges represent a matching fitness score computed for each individual match (in :numref:`internships3` see Lines 4-15 below).
+Using a fairness enhancing heuristic
+````````````````````````````````````
+
+It is recommended to use the :py:class:`pairings.FairnessEnhancedInterGroupMatching` constructor which implements a fairness enhancing heuristic starting from any initial potential matching. If no initial matching is given, the fairness enhancing procedure starts from two initial matchings, a left one that matches *sn* with *in* for *n = 1* to *n = 10*, and a right one matching *sn* with *im* where *n = 1* to *n = 10* and *m = 11 - n*. The fairest pairing solution will eventually be returned (see tutorial on :ref:`computing fair intergroup pairings <Fair-InterGroup-Pairings-label>`).
 
 .. code-block:: pycon
    :name: internships3
+   :linenos:
+   :caption: Fairness enhanced intergroup matching
+   :emphasize-lines: 3,5,6
+
+   >>> from pairings import FairnessEnhancedInterGroupMatching
+   >>> fem = FairestEnhancedInterGroupMatching(lvpS,lvpI,
+   ...                                      initialMatching=None)
+   >>> fem.matching
+    [['s01', 'i07'],['s02', 'i09'],['s03', 'i10'],['s04', 'i03'],['s05', 'i08'],
+     ['s06', 'i01'],['s07', 'i06'],['s08', 'i04'],['s09', 'i02'],['s10', 'i05']]
+
+In :numref:`internships3` Lines 5-6 we notice that we recover unfortunately the same pervious unfair *Gale-Shapley* matching.
+
+In order to try to lower the unfairness of the pairing solution, it appears opportune helping the fairness enhancing heuristic by providing a given best *Copeland* initial matching, that is a matching assembled via a ranked pairs algorithm based on *Copeland* ranking scores of each individual match from both the student and the internship perspectives. The :py:mod:`pairings` module provides therefore the :py:class:`~pairings.BestCopelandInterGroupMatching` class which constructs a complete bipartite graph where the characteristic values of the edges represent a matching fitness score computed for each individual match (in :numref:`internships4` see Lines 4-15 below).
+
+.. code-block:: pycon
+   :name: internships4
    :linenos:
    :caption: Best Copeland initial matching
    :emphasize-lines: 2,4-15,18-21
@@ -8661,20 +8678,20 @@ The :py:class:`~pairings.BestCopelandInterGroupMatching` class provides a comple
 
 In Lines 18-21 above we notice that the pair ['s01', 'i07'] shows the highest matching fitness score of 72, followed by the pair ['s09', 'i02'] with a fitness score of +68. Three further pairs show a fitness score of 60, and so on. The last remaining matched pair is ['s05', 'i09'] with a fitness score of only +4.
 
-This best *Copeland* initial matching will be submitted as initial matching to our fairness enhancing algorithm. The resulting fairest pairing solution is shown in :numref:`internships4` below.
+This best *Copeland* initial matching will be submitted as initial matching to our fairness enhancing algorithm. The resulting fairest pairing solution is shown in :numref:`internships5` below.
 
 .. code-block:: pycon
-   :name: internships4
+   :name: internships5
    :linenos:
    :caption: Best Copeland initial matching
    :emphasize-lines: 2,4,5,8-11,13,16-20,23,25
    
-   >>> fec = FairnessEnhancedInterGroupMatching(lvpS,lvpI,
-   ...                                  initialMatching=bcm.matching)
-   >>> fec.matching
+   >>> fecop = FairnessEnhancedInterGroupMatching(lvpS,lvpI,
+   ...                        initialMatching=bcm.matching)
+   >>> fecop.matching
     [['s01', 'i07'],['s02', 'i09'],['s03', 'i08'],['s04', 'i03'],['s05', 'i10'],
      ['s06', 'i01'],['s07', 'i06'],['s08', 'i04'],['s09', 'i02'],['s10', 'i05']]
-   >>> fec.showMatchingFairness()
+   >>> fecop.showMatchingFairness()
     Students correlations:
      's01': +1.000, 's02': +0.778, 's03': +1.000
      's04': +0.778, 's05': +0.333, 's06': +0.333
@@ -8695,11 +8712,7 @@ This best *Copeland* initial matching will be submitted as initial matching to o
     Standard Deviation     : 0.323
     Unfairness |(a) - (b)| : 0.000
 
-We get now a same rather high average correlation index of +0.622 for all students and for all internships. No unfairness is observed with this pairing solution. Two students get their first choices and three students their second choices. No student gets a negative correlation. Whereas three insternships get their first choices and two their second choices. Internship *i10* gets however now a slightly negative correlation index as student *s05* is only its 6th choice.
-
-.. note::
-
-   Traditionnally, such intergroup pairing problems are solved by using variants of the *deferred acceptance* algorithm like the *Gale-Shapley* or the *Roth-Pearson* algorithms. The :py:mod:`pairings` module provides for this purpose the :py:class:`~pairings.FairestGaleShapleyMatching` constructor. The class computes both Gale-Shapley matchings – the students propose as well as the internships propose – and renders the fairest solution of both. With our given recirpocal matching preferences, the *Gale-Shapley* algorithm returns here the pairing solution already seen in :numref:`internships2` above. The fairest deferred acceptance solution is favoring the internships side (+0.733 versus +0.511) leading to an unfairness index of 0.222. Mind that deferred acceptance algorithms, by returning allways the best stable pairing solution for the proposing side and the least stable pairing solution for the other side, are essentially unfair intergroup pairing solvers and are no more recommended for any official usage. 
+We get now the same average correlation index of +0.622 for all students and for all internships. No unfairness anymore is observed with this pairing solution. Two students get their first choices and three students their second choices. No student gets a negative correlation. Whereas three insternships get their first choices and two their second choices. Internship *i10* gets however now a slightly negative correlation index as student *s05* is only its 6th choice.
 
 --------------
 
@@ -11790,7 +11803,9 @@ Appendices
 
 .. [66] The best *Copeland* initial matching is computed following a matching fitness scores ranked potential pairs list.
 
-.. [67] The :py:class:`~pairings.FairnessEnhancedIntraGroupMatching` class provides also the opportunity to use *Bachet* ranking scores instead of the *Copeland* scores for guiding the fairness enhancing procedure. Unfortunately, ongoing tests don't show any convincing better results. 
+.. [67] The :py:class:`~pairings.FairnessEnhancedIntraGroupMatching` class provides also the opportunity to use *Bachet* ranking scores instead of the *Copeland* scores for guiding the fairness enhancing procedure. Unfortunately, ongoing tests don't show any convincing better results.
+
+.. [68] See https://en.wikipedia.org/wiki/Gale%E2%80%93Shapley_algorithm
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
