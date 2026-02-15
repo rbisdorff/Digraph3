@@ -1674,6 +1674,12 @@ class BestCopelandInterGroupMatching(InterGroupPairing):
         t7 = time()
         self.runTimes['totalTime'] = t7 - t0
 
+    def showMatchingWithFitnessScores(self):
+        for e in self.matching:
+            pair = list(e)
+            pair.sort()
+            print('%s (%d)' %(pair, int(self.edges[e])) )
+
 #----------
 
 
@@ -4111,8 +4117,9 @@ if __name__ == "__main__":
     t1 =time()
     print('fp total run time: %.3f sec.' % (t1-t0))
 ####
-##    igcg = BestCopelandInterGroupMatching(lvA,lvB,Comments=Comments,Debug=Debug)
-##    print('==>> Copeland')
+    igcg = BestCopelandInterGroupMatching(lvA,lvB,Comments=Comments,Debug=Debug)
+    print('==>> Copeland')
+    igcg.showMatchingWithFitnessScores()
 ##    igcg.showMatchingFairness(WithIndividualCorrelations=True)
 ##    print(igcg.runTimes)
 ##    igbg = BestBachetInterGroupMatching(lvA,lvB,Comments=Comments,Debug=Debug)
