@@ -8711,9 +8711,9 @@ This *bcm.matching* is submitted as initial matching to our fairness enhancing a
 
 We get now the same average correlation index of +0.622 for all students and for all internships (see Lines 14 and 24). No unfairness anymore is observed with this pairing solution. Two students get their first choices and three students their second choices. No student gets a negative correlation (see Lines 10-13). Whereas three insternships get their first choices and two their second choices. Internship *i10* gets however now a slightly negative correlation index as student *s05* is only its 6th choice (see Lines 18-22).
 
-Contrary to *deferred accptance* algorithms, our fairness enhancing heuristic does not require complete linear voting profiles for computing a fair pairing result. Partial linear voting profiles or, even more realistic, bipolar approval-disapproval voting profiles may be taken into account.
+Contrary to *deferred acceptance* algorithms, our fairness enhancing heuristic does not require complete linear voting profiles for computing a fair pairing result. Partial linear voting profiles or, even more realistic, bipolar approval-disapproval voting profiles may be taken into account.
 
-An interesting exercice consists now in dividing the given complete linear voting profiles *lvpStudents.py* and *lvpInternships.py* into three parts: the four best-ranked options are considered to be approved and the three last-ranked are considered to be disapproved. What will become the fairest pairing solution considering these relaxed matching prefrences?
+An interesting exercice consists now in dividing the given complete linear voting profiles *lvpStudents.py* and *lvpInternships.py* into three parts: the four best-ranked options are considered to be approved and the three last-ranked are considered to be disapproved. What will become the fairest pairing solution considering these relaxed matching preferences?
 
 --------------
 
