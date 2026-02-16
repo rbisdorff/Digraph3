@@ -8529,16 +8529,16 @@ A class of ten graduate students in their final medical science study year has t
    ---------  ----------------------------------------------------
     Ids        Preferences   
    =========  ====================================================
-    s01	       [i07, i09, i10, i08, i06, i04, i01, i05, i02, i03]
-    s02	       [i05, i09, i03, i07, i06, i10, i01, i08, i02, i04]
-    s03	       [i08, i09, i07, i10, i06, i01, i03, i02, i04, i05]
-    s04	       [i08, i03, i09, i02, i05, i01, i06, i10, i04, i07]
-    s05	       [i03, i01, i05, i10, i07, i08, i02, i06, i04, i09]
-    s06	       [i04, i10, i05, i01, i03, i06, i08, i02, i09, i07]
-    s07	       [i01, i02, i06, i08, i05, i10, i03, i04, i07, i09]
-    s08	       [i07, i09, i03, i05, i04, i06, i02, i08, i01, i10]
-    s09	       [i03, i02, i08, i07, i05, i04, i01, i10, i09, i06]
-    s10	       [i02, i10, i05, i07, i03, i09, i04, i01, i08, i06]
+    's01'      [i07, i09, i10, i08, i06, i04, i01, i05, i02, i03]
+    's02'      [i05, i09, i03, i07, i06, i10, i01, i08, i02, i04]
+    's03'      [i08, i09, i07, i10, i06, i01, i03, i02, i04, i05]
+    's04'      [i08, i03, i09, i02, i05, i01, i06, i10, i04, i07]
+    's05'      [i03, i01, i05, i10, i07, i08, i02, i06, i04, i09]
+    's06'      [i04, i10, i05, i01, i03, i06, i08, i02, i09, i07]
+    's07'      [i01, i02, i06, i08, i05, i10, i03, i04, i07, i09]
+    's08'      [i07, i09, i03, i05, i04, i06, i02, i08, i01, i10]
+    's09'      [i03, i02, i08, i07, i05, i04, i01, i10, i09, i06]
+    's10'      [i02, i10, i05, i07, i03, i09, i04, i01, i08, i06]
    =========  ====================================================
    
 Students *s01* and *s08*, for instance, both mostly prefer internship *i07*, whereas students *s03* and *s04* both mostly prefer internship *i08*.
@@ -8550,16 +8550,16 @@ The organizations offering the internship opportunities submitted likewise their
    ------------  ----------------------------------------------------
     Ids           Preferences   
    ============  ====================================================
-    i01	          [s06, s10, s04, s05, s07, s08, s03, s09, s02, s01]
-    i02	          [s09, s02, s05, s08, s07, s06, s04, s03, s01, s10]
-    i03	          [s06, s10, s02, s04, s03, s08, s07, s01, s05, s09]
-    i04	          [s04, s08, s01, s10, s06, s02, s05, s03, s09, s07]
-    i05	          [s01, s10, s04, s02, s08, s07, s05, s09, s03, s06]
-    i06	          [s01, s05, s07, s08, s02, s04, s03, s10, s06, s09]
-    i07	          [s01, s02, s06, s07, s05, s10, s03, s08, s04, s09]
-    i08	          [s05, s01, s07, s03, s02, s09, s04, s10, s06, s08]
-    i09	          [s06, s01, s02, s04, s09, s07, s03, s08, s05, s10]
-    i10	          [s02, s07, s04, s03, s01, s05, s10, s06, s09, s08]
+    'i01'         [s06, s10, s04, s05, s07, s08, s03, s09, s02, s01]
+    'i02'         [s09, s02, s05, s08, s07, s06, s04, s03, s01, s10]
+    'i03'         [s06, s10, s02, s04, s03, s08, s07, s01, s05, s09]
+    'i04'         [s04, s08, s01, s10, s06, s02, s05, s03, s09, s07]
+    'i05'         [s01, s10, s04, s02, s08, s07, s05, s09, s03, s06]
+    'i06'         [s01, s05, s07, s08, s02, s04, s03, s10, s06, s09]
+    'i07'         [s01, s02, s06, s07, s05, s10, s03, s08, s04, s09]
+    'i08'         [s05, s01, s07, s03, s02, s09, s04, s10, s06, s08]
+    'i09'         [s06, s01, s02, s04, s09, s07, s03, s08, s05, s10]
+    'i10'         [s02, s07, s04, s03, s01, s05, s10, s06, s09, s08]
    ============  ====================================================
 
 The organizations offering for instance internships *i05*, *i06* and *i07* mostly prefer the same student *s01*, whereas the organizations offering internships *i01*, *i03* and *i09* mostly prefer student *s06*. These matching preferences are stored in the format of two reciprocal :py:class:`~votingProfiles.LinearVotingProfile` objects stored under the names *lvpStudents.py* and *lvpInternships.py* in the *examples* directory of the Digraph3 resources.
@@ -8713,7 +8713,92 @@ We get now the same average correlation index of +0.622 for all students and for
 
 Contrary to *deferred acceptance* algorithms, our fairness enhancing heuristic does not require complete linear voting profiles for computing a fair pairing result. Partial linear voting profiles or, even more realistic, bipolar approval-disapproval voting profiles may be taken into account.
 
-An interesting exercice consists now in dividing the given complete linear voting profiles *lvpStudents.py* and *lvpInternships.py* into three parts: the four best-ranked options are considered to be approved and the three last-ranked are considered to be disapproved. What will become the fairest pairing solution considering these relaxed matching preferences?
+Using bipolar approval-disapproval voting profiles
+``````````````````````````````````````````````````
+
+An interesting experiment consists now in dividing the given complete linear voting profiles *lvpStudents.py* and *lvpInternships.py* into three parts: the three best-ranked options are considered to be approved and the three last-ranked are considered to be disapproved.
+
+The :py:class:`~votingProfiles.LinearVotingProfile` class provides a special :py:class:`~votingProfiles.LinearVotingProfile.save2BipolarApprovalVotingProfile` mathod for extracting from a given complete linear voting profile a corresponding bipolar approval profile with two parameters for controlling the number of approved as well as the number of disapproved candidates. With the :py:class:`votingProfiles.BipolarApprovalVotingProfile` class we may reload these stored bipolar approval profiles (see :numref:`internships6` Line 2-4).
+
+.. code-block:: pycon
+   :name: internships6
+   :linenos:
+   :caption: Bipolar approval matching profiles 
+   :emphasize-lines: 2-4,8,18-19,30
+
+   >>> lvpS.save2BipolarApprovalProfile(fileName='bapStudents',
+   ...                           approvalIndex=2,disapprovalIndex=7)
+   >>> from votingProfiles import BipolarApprovalVotingProfile
+   >>> bapS = BipolarApprovalVotingProfile('bapStudents')
+   >>> bapS.showBipolarApprovals()
+    Bipolar approval ballots
+    ------------------------
+    's01': Approvals: ['i07','i09','i10'], Disapprovals: ['i05','i02','i03']
+    's02': Approvals: ['i05','i09','i03'], Disapprovals: ['i08','i02','i04']
+    's03': Approvals: ['i08','i09','i07'], Disapprovals: ['i02','i04','i05']
+    's04': Approvals: ['i08','i03','i09'], Disapprovals: ['i10','i04','i07']
+    's05': Approvals: ['i03','i01','i05'], Disapprovals: ['i06','i04','i09']
+    's06': Approvals: ['i04','i10','i05'], Disapprovals: ['i02','i09','i07']
+    's07': Approvals: ['i01','i02','i06'], Disapprovals: ['i04','i07','i09']
+    's08': Approvals: ['i07','i09','i03'], Disapprovals: ['i08','i01','i10']
+    's09': Approvals: ['i03','i02','i08'], Disapprovals: ['i10','i09','i06']
+    's10': Approvals: ['i02','i10','i05'], Disapprovals: ['i01','i08','i06']   
+   >>> lvpI.save2BipolarApprovalProfile(fileName='bapInternships',
+   ...                           approvalIndex=2,disapprovalIndex=7)
+   >>> bapI = BipolarApprovalVotingProfile('bapInternships')
+   >>> bapI.showBipolarApprovals()
+    Bipolar approval ballots
+    ------------------------
+    'i01': Approvals: ['s06','s10','s04'], Disapprovals: ['s09','s02','s01']
+    'i02': Approvals: ['s09','s02','s05'], Disapprovals: ['s03','s01','s10']
+    'i03': Approvals: ['s06','s10','s02'], Disapprovals: ['s01','s05','s09']
+    'i04': Approvals: ['s04','s08','s01'], Disapprovals: ['s03','s09','s07']
+    'i05': Approvals: ['s01','s10','s04'], Disapprovals: ['s09','s03','s06']
+    'i06': Approvals: ['s01','s05','s07'], Disapprovals: ['s10','s06','s09']
+    'i07': Approvals: ['s01','s02','s06'], Disapprovals: ['s08','s04','s09']
+    'i08': Approvals: ['s05','s01','s07'], Disapprovals: ['s10','s06','s08']
+    'i09': Approvals: ['s06','s01','s02'], Disapprovals: ['s08','s05','s10']
+    'i10': Approvals: ['s02','s07','s04'], Disapprovals: ['s06','s09','s08']
+
+In Line 8 above, we may notice for instance that student *s01* approves the internships *i07*, *i09* and *i10* and disapproves internships *i05*, *i02* and *i03*. Reciprocally, students *s01*, *s02* and *s06* are approved by internship *i07* whereas students *s08*, *s04* and *s09* are disapproved (see Line 30).
+
+In :numref:`internships7` we can now submit these reciprocal bipolar approval profiles *bapS* and *bapI* to our fairness enhancing heuristic and starting as before the fairness enhancing procedure from a best *Copeland* matching. 
+
+.. code-block:: pycon
+   :name: internships7
+   :linenos:
+   :caption: Resolving the intergroup group pairing problem 
+   :emphasize-lines: 1-3,5,7-8,15,22,25,27
+
+   >>> bcm = BestCopelandInterGroupMatching(bapS,bapI)
+   >>> fem = FairnessEnhancedInterGroupMatching(bapS,bapI,
+   ...                               initialMatching=bcm.matching)
+   >>> fem.iterations
+    7
+   >>> fem.matching
+    [['s01','i07'],['s02','i09'],['s03','i10'],['s04','i01'],['s05','i08'],
+     ['s06','i04'],['s07','i06'],['s08','i03'],['s09','i02'],['s10','i05']]
+   >>> fem.showMatchingFairness()
+    -----
+     Students correlations:
+      's01': +1.000, 's02': +1.000, 's03': +0.000, 's04': +0.000,
+      's05': +0.000, 's06': +1.000, 's07': +1.000, 's08': +1.000,
+      's09': +1.000, 's10': +1.000
+      Average correlation (a) : 0.700
+      Standard deviation      : 0.483
+    -----
+     Internships correlations:
+      'i01': +1.000, 'i02': +1.000, 'i03': +0.000, 'i04': +0.000,
+      'i05': +1.000, 'i06': +1.000, 'i07': +1.000, 'i08': +1.000,
+      'i09': +1.000, 'i10': +0.000
+      Average correlation (b) : 0.700
+      Standard deviation      : 0.483
+    -----
+     Average overall correlation : 0.700
+     Standard Deviation          : 0.470
+     Unfairness |(a) - (b)|      : 0.000
+
+Above we may notice that our fainess enhancing heuristic finds in 7 iterations a very fair pairing solution where both the students and the interships are equally served (see Lines 15, 22 and 27). Seven students and seven internships out of ten get proposed an approved match and no student or internship is proposed a disapproved match.
 
 --------------
 

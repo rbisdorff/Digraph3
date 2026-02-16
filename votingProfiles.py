@@ -556,7 +556,6 @@ class LinearVotingProfile(VotingProfile):
                  numberOfVoters=9):
         if fileVotingProfile is not None:
             fileName = fileVotingProfile + '.py'
-        ## else:
         ##     fileName = 'testapprovalvotingprofile.py'
             argDict = {}
             fi = open(fileName,'r')
@@ -599,12 +598,20 @@ class LinearVotingProfile(VotingProfile):
                 pass
             self.linearBallot = argDict['linearBallot']
             self.ballot = self.computeBallot()
+            self.sumWeights = 0.0
+            for v in self.voters:
+                self.sumWeights += self.voters[v]['weight']
         else:
-            print('!!! Error: The name of a stored linear voting profile is required !!!')
+            #print('!!! Error: The name of a stored linear voting profile is required !!!')
             return
-        self.sumWeights = 0.0
-        for v in self.voters:
-            self.sumWeights += self.voters[v]['weight']
+
+
+    def convert2BipolarApprovalVotingProfile(self,approvalIndex=1, diapprovalIndex=1):
+        """
+        Converts a linear voting profile into a bipolar approval-disapproval profile.
+        First approvalIndex ranked a re approved, last disapprovalIndex ranked are disapproved.
+        """
+        
 
     def computeBallot(self):
         """
@@ -628,6 +635,64 @@ class LinearVotingProfile(VotingProfile):
                     ballot[v][y][x] = Decimal("-1.0")
         self.ballot = ballot
         return ballot
+
+    def save2BipolarApprovalVotingProfile(self,fileName='tempBipolarApprovalprofile',
+                                          approvalIndex=0,disapprovalIndex=None,
+                                          Debug=True):
+        """
+        Convert a linear voting profile into a bipolar approval voting profile.
+        """
+        from decimal import Decimal
+        print('*--- Saving bipolar approval profile in file: <' + str(fileName) + '.py> ---*')
+        candidates = self.candidates
+        nc = len(candidates)
+        voters = self.voters
+        linearBallot = self.linearBallot
+        saveFileName = str(fileName)+str('.py')
+        if approvalIndex > nc-1:
+            print('Error: approvalIndex larger than number of candidates!!!')
+            approvalIndex = nc-1
+            disapprovalIndex = nc
+        elif approvalIndex < 0:
+            approvalIndex = 0
+        if disapprovalIndex is None or disapprovalIndex < 0:
+            disapprovalIndex = nc
+        if Debug:
+            print(nc,approvalIndex,disapprovalIndex)
+        fo = open(saveFileName, 'w')
+        fo.write('# Saved  bipolar approval voting profile: \n')
+        fo.write('from decimal import Decimal \n')
+        fo.write('from collections import OrderedDict \n')
+        fo.write('candidates = OrderedDict([\n')
+        for x in candidates:
+            try:
+                candidateName = candidates[x]['name']
+            except:
+                candidateName = x
+            #fo.write('\'' + str(x) + '\': {\'name\': \'' + str(x)+ '\'},\n')
+            fo.write('(\'%s\', {\'name\': \'%s\'}),\n' % (x,candidateName) )
+        fo.write('])\n')
+        fo.write('voters = OrderedDict([\n')
+        for v in voters:
+            fo.write('(\'' +str(v)+'\', {\n')
+            fo.write('\'weight\':'+str(voters[v]['weight'])+'}),\n')
+        fo.write('])\n')
+        fo.write('approvalBallot = {\n')
+        for v in linearBallot:
+            fo.write('\'' +str(v)+'\': {\n')
+            lvx = [x for x in linearBallot[v]]
+            nlvx = len(lvx)
+            for x in lvx:
+                if lvx.index(x) <= approvalIndex:
+                    fo.write( '\'%s\': Decimal(%d),\n' % (x,1) )
+                elif lvx.index(x) >= disapprovalIndex:
+                    fo.write( '\'%s\': Decimal(%d),\n' % (x,-1) )
+                else:
+                    fo.write( '\'%s\': Decimal(%d),\n' % (x,0) )               
+            fo.write( '},\n')
+        fo.write( '}\n')
+        fo.close()
+    
 
     def save(self,fileName='templinearprofile'):
         """
@@ -1354,7 +1419,10 @@ class BipolarApprovalVotingProfile(VotingProfile):
             self.approvalBallot = argDict['approvalBallot']
             #self.disapprovalBallot = argDict['disapprovalBallot']
             self.netApprovalScores = self.computeNetApprovalScores()
-            self.IntraGroup = argDict['IntraGroup']
+            try:
+                self.IntraGroup = argDict['IntraGroup']
+            except:
+                self.IntraGroup = False
             self.ballot = self.computeBallot()
         else:
             print('Error: a valid stored bipolar approval voting profile is required !')
@@ -2000,13 +2068,14 @@ if __name__ == "__main__":
 ##                                     seed=1)
 ##    pv.showPrerankedBallots()
     
-    # k = 7
-    # lvA = RandomLinearVotingProfile(numberOfVoters=k,numberOfCandidates=k,
-    #                                   votersIdPrefix='a',
-    #                                   candidatesIdPrefix='b',
-    #                                 PartialLinearBallots=True,
-    #                                 lengthProbability=0.5,
-    #                                 seed=50)
+    k = 7
+    lvA = RandomLinearVotingProfile(numberOfVoters=k,numberOfCandidates=k,
+                                      votersIdPrefix='a',
+                                      candidatesIdPrefix='b',
+                                    PartialLinearBallots=False,
+                                    lengthProbability=0.5,
+                                 seed=50)
+    lvA.save2BipolarApprovalVotingProfile(approvalIndex=2,disapprovalIndex=5)
 ##    lvB = RandomLinearVotingProfile(numberOfVoters=k,numberOfCandidates=k,
 ##                                      votersIdPrefix='b',
 ##                                    PartialLinearBallots=False,
@@ -2016,13 +2085,13 @@ if __name__ == "__main__":
 ##    lvB.showLinearBallots()
 ##    lvB.save('testpreorder')
     
-    v = RandomBipolarApprovalVotingProfile(numberOfVoters=1000,
-                                           numberOfCandidates=10,
-                                           approvalProbability=0.25,
-                                           disapprovalProbability=0.25,
-                                           seed=100,DivisivePolitics=True,
-                                           WithPolls=True,Debug=False)
-    print(v)
+##    v = RandomBipolarApprovalVotingProfile(numberOfVoters=1000,
+##                                           numberOfCandidates=10,
+##                                           approvalProbability=0.25,
+##                                           disapprovalProbability=0.25,
+##                                           seed=100,DivisivePolitics=True,
+##                                           WithPolls=True,Debug=False)
+##    print(v)
 ##    v.showApprovalResults()
 ##    v.showDisapprovalResults()
 ##    v.showNetApprovalScores()
@@ -2030,7 +2099,7 @@ if __name__ == "__main__":
 ##    v = BipolarApprovalVotingProfile('testAV')
 ##    print(v)
 ##    v.save2PerfTab('testODG')
-    v.showHTMLVotingHeatmap(rankingRule='NetFlows',Transposed=False,Threading=True)
+##    v.showHTMLVotingHeatmap(rankingRule='NetFlows',Transposed=False,Threading=True)
 ##    from outrankingDigraphs import BipolarOutrankingDigraph
 ##    g = BipolarOutrankingDigraph('testODG')
 ##    g.showHTMLPerformanceTableau(Transposed=True)

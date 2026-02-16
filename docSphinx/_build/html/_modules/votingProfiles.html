@@ -677,7 +677,6 @@
                  <span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">9</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">fileVotingProfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="n">fileVotingProfile</span> <span class="o">+</span> <span class="s1">&#39;.py&#39;</span>
-        <span class="c1">## else:</span>
         <span class="c1">##     fileName = &#39;testapprovalvotingprofile.py&#39;</span>
             <span class="n">argDict</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
@@ -720,12 +719,23 @@
                 <span class="k">pass</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">linearBallot</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;linearBallot&#39;</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ballot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeBallot</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sumWeights</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sumWeights</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;!!! Error: The name of a stored linear voting profile is required !!!&#39;</span><span class="p">)</span>
+            <span class="c1">#print(&#39;!!! Error: The name of a stored linear voting profile is required !!!&#39;)</span>
             <span class="k">return</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sumWeights</span> <span class="o">=</span> <span class="mf">0.0</span>
-        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">sumWeights</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="LinearVotingProfile.convert2BipolarApprovalVotingProfile">
+<a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.convert2BipolarApprovalVotingProfile">[docs]</a>
+    <span class="k">def</span> <span class="nf">convert2BipolarApprovalVotingProfile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">approvalIndex</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">diapprovalIndex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts a linear voting profile into a bipolar approval-disapproval profile.</span>
+<span class="sd">        First approvalIndex ranked a re approved, last disapprovalIndex ranked are disapproved.</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+        
 
 <div class="viewcode-block" id="LinearVotingProfile.computeBallot">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.computeBallot">[docs]</a>
@@ -752,6 +762,67 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ballot</span> <span class="o">=</span> <span class="n">ballot</span>
         <span class="k">return</span> <span class="n">ballot</span></div>
 
+
+<div class="viewcode-block" id="LinearVotingProfile.save2BipolarApprovalVotingProfile">
+<a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.save2BipolarApprovalVotingProfile">[docs]</a>
+    <span class="k">def</span> <span class="nf">save2BipolarApprovalVotingProfile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tempBipolarApprovalprofile&#39;</span><span class="p">,</span>
+                                          <span class="n">approvalIndex</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">disapprovalIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                          <span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert a linear voting profile into a bipolar approval voting profile.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*--- Saving bipolar approval profile in file: &lt;&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.py&gt; ---*&#39;</span><span class="p">)</span>
+        <span class="n">candidates</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span>
+        <span class="n">nc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">candidates</span><span class="p">)</span>
+        <span class="n">voters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span>
+        <span class="n">linearBallot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linearBallot</span>
+        <span class="n">saveFileName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;.py&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">approvalIndex</span> <span class="o">&gt;</span> <span class="n">nc</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: approvalIndex larger than number of candidates!!!&#39;</span><span class="p">)</span>
+            <span class="n">approvalIndex</span> <span class="o">=</span> <span class="n">nc</span><span class="o">-</span><span class="mi">1</span>
+            <span class="n">disapprovalIndex</span> <span class="o">=</span> <span class="n">nc</span>
+        <span class="k">elif</span> <span class="n">approvalIndex</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">approvalIndex</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">disapprovalIndex</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">disapprovalIndex</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">disapprovalIndex</span> <span class="o">=</span> <span class="n">nc</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">nc</span><span class="p">,</span><span class="n">approvalIndex</span><span class="p">,</span><span class="n">disapprovalIndex</span><span class="p">)</span>
+        <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">saveFileName</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;# Saved  bipolar approval voting profile: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;from decimal import Decimal </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;from collections import OrderedDict </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;candidates = OrderedDict([</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">candidateName</span> <span class="o">=</span> <span class="n">candidates</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">candidateName</span> <span class="o">=</span> <span class="n">x</span>
+            <span class="c1">#fo.write(&#39;\&#39;&#39; + str(x) + &#39;\&#39;: {\&#39;name\&#39;: \&#39;&#39; + str(x)+ &#39;\&#39;},\n&#39;)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;(</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">, {</span><span class="se">\&#39;</span><span class="s1">name</span><span class="se">\&#39;</span><span class="s1">: </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">}),</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">candidateName</span><span class="p">)</span> <span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;])</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;voters = OrderedDict([</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">voters</span><span class="p">:</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;(</span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">, {</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">weight</span><span class="se">\&#39;</span><span class="s1">:&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">voters</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;}),</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;])</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;approvalBallot = {</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">linearBallot</span><span class="p">:</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">: {</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">lvx</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">linearBallot</span><span class="p">[</span><span class="n">v</span><span class="p">]]</span>
+            <span class="n">nlvx</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lvx</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lvx</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">lvx</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">approvalIndex</span><span class="p">:</span>
+                    <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">: Decimal(</span><span class="si">%d</span><span class="s1">),</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span>
+                <span class="k">elif</span> <span class="n">lvx</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">disapprovalIndex</span><span class="p">:</span>
+                    <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">: Decimal(</span><span class="si">%d</span><span class="s1">),</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">: Decimal(</span><span class="si">%d</span><span class="s1">),</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="p">)</span>               
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="s1">&#39;},</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="s1">&#39;}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+    
 
 <div class="viewcode-block" id="LinearVotingProfile.save">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.save">[docs]</a>
@@ -1529,7 +1600,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">approvalBallot</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;approvalBallot&#39;</span><span class="p">]</span>
             <span class="c1">#self.disapprovalBallot = argDict[&#39;disapprovalBallot&#39;]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">netApprovalScores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeNetApprovalScores</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">IntraGroup</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;IntraGroup&#39;</span><span class="p">]</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">IntraGroup</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;IntraGroup&#39;</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">IntraGroup</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ballot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeBallot</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: a valid stored bipolar approval voting profile is required !&#39;</span><span class="p">)</span>
@@ -2215,13 +2289,14 @@
 <span class="c1">##                                     seed=1)</span>
 <span class="c1">##    pv.showPrerankedBallots()</span>
     
-    <span class="c1"># k = 7</span>
-    <span class="c1"># lvA = RandomLinearVotingProfile(numberOfVoters=k,numberOfCandidates=k,</span>
-    <span class="c1">#                                   votersIdPrefix=&#39;a&#39;,</span>
-    <span class="c1">#                                   candidatesIdPrefix=&#39;b&#39;,</span>
-    <span class="c1">#                                 PartialLinearBallots=True,</span>
-    <span class="c1">#                                 lengthProbability=0.5,</span>
-    <span class="c1">#                                 seed=50)</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">7</span>
+    <span class="n">lvA</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="n">k</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="n">k</span><span class="p">,</span>
+                                      <span class="n">votersIdPrefix</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span>
+                                      <span class="n">candidatesIdPrefix</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span>
+                                    <span class="n">PartialLinearBallots</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                    <span class="n">lengthProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                                 <span class="n">seed</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">lvA</span><span class="o">.</span><span class="n">save2BipolarApprovalVotingProfile</span><span class="p">(</span><span class="n">approvalIndex</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">disapprovalIndex</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="c1">##    lvB = RandomLinearVotingProfile(numberOfVoters=k,numberOfCandidates=k,</span>
 <span class="c1">##                                      votersIdPrefix=&#39;b&#39;,</span>
 <span class="c1">##                                    PartialLinearBallots=False,</span>
@@ -2231,13 +2306,13 @@
 <span class="c1">##    lvB.showLinearBallots()</span>
 <span class="c1">##    lvB.save(&#39;testpreorder&#39;)</span>
     
-    <span class="n">v</span> <span class="o">=</span> <span class="n">RandomBipolarApprovalVotingProfile</span><span class="p">(</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
-                                           <span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-                                           <span class="n">approvalProbability</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
-                                           <span class="n">disapprovalProbability</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
-                                           <span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">DivisivePolitics</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                           <span class="n">WithPolls</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="c1">##    v = RandomBipolarApprovalVotingProfile(numberOfVoters=1000,</span>
+<span class="c1">##                                           numberOfCandidates=10,</span>
+<span class="c1">##                                           approvalProbability=0.25,</span>
+<span class="c1">##                                           disapprovalProbability=0.25,</span>
+<span class="c1">##                                           seed=100,DivisivePolitics=True,</span>
+<span class="c1">##                                           WithPolls=True,Debug=False)</span>
+<span class="c1">##    print(v)</span>
 <span class="c1">##    v.showApprovalResults()</span>
 <span class="c1">##    v.showDisapprovalResults()</span>
 <span class="c1">##    v.showNetApprovalScores()</span>
@@ -2245,7 +2320,7 @@
 <span class="c1">##    v = BipolarApprovalVotingProfile(&#39;testAV&#39;)</span>
 <span class="c1">##    print(v)</span>
 <span class="c1">##    v.save2PerfTab(&#39;testODG&#39;)</span>
-    <span class="n">v</span><span class="o">.</span><span class="n">showHTMLVotingHeatmap</span><span class="p">(</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1">##    v.showHTMLVotingHeatmap(rankingRule=&#39;NetFlows&#39;,Transposed=False,Threading=True)</span>
 <span class="c1">##    from outrankingDigraphs import BipolarOutrankingDigraph</span>
 <span class="c1">##    g = BipolarOutrankingDigraph(&#39;testODG&#39;)</span>
 <span class="c1">##    g.showHTMLPerformanceTableau(Transposed=True)</span>
@@ -2278,7 +2353,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Feb 15, 2026.
+      <span class="lastupdated">Last updated on Feb 16, 2026.
       </span></p>
   </div>
 

@@ -768,7 +768,9 @@
 <li class="toctree-l4"><a class="reference internal" href="#votingProfiles.LinearVotingProfile.computeRankAnalysis"><code class="docutils literal notranslate"><span class="pre">LinearVotingProfile.computeRankAnalysis()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#votingProfiles.LinearVotingProfile.computeSimpleMajorityWinner"><code class="docutils literal notranslate"><span class="pre">LinearVotingProfile.computeSimpleMajorityWinner()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#votingProfiles.LinearVotingProfile.computeUninominalVotes"><code class="docutils literal notranslate"><span class="pre">LinearVotingProfile.computeUninominalVotes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#votingProfiles.LinearVotingProfile.convert2BipolarApprovalVotingProfile"><code class="docutils literal notranslate"><span class="pre">LinearVotingProfile.convert2BipolarApprovalVotingProfile()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#votingProfiles.LinearVotingProfile.save"><code class="docutils literal notranslate"><span class="pre">LinearVotingProfile.save()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#votingProfiles.LinearVotingProfile.save2BipolarApprovalVotingProfile"><code class="docutils literal notranslate"><span class="pre">LinearVotingProfile.save2BipolarApprovalVotingProfile()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#votingProfiles.LinearVotingProfile.save2PerfTab"><code class="docutils literal notranslate"><span class="pre">LinearVotingProfile.save2PerfTab()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#votingProfiles.LinearVotingProfile.showBordaRanking"><code class="docutils literal notranslate"><span class="pre">LinearVotingProfile.showBordaRanking()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#votingProfiles.LinearVotingProfile.showHTMLVotingHeatmap"><code class="docutils literal notranslate"><span class="pre">LinearVotingProfile.showHTMLVotingHeatmap()</span></code></a></li>
@@ -8670,6 +8672,13 @@ and restricted linear ballots</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="votingProfiles.LinearVotingProfile.convert2BipolarApprovalVotingProfile">
+<span class="sig-name descname"><span class="pre">convert2BipolarApprovalVotingProfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">approvalIndex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diapprovalIndex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile.convert2BipolarApprovalVotingProfile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile.convert2BipolarApprovalVotingProfile" title="Link to this definition"></a></dt>
+<dd><p>Converts a linear voting profile into a bipolar approval-disapproval profile.
+First approvalIndex ranked a re approved, last disapprovalIndex ranked are disapproved.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="votingProfiles.LinearVotingProfile.save">
 <span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'templinearprofile'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile.save" title="Link to this definition"></a></dt>
 <dd><p>Persistant storage of a linear voting profile.</p>
@@ -8677,6 +8686,12 @@ and restricted linear ballots</p>
 <dt>Parameter:</dt><dd><p>name of file (without &lt;.py&gt; extension!).</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="votingProfiles.LinearVotingProfile.save2BipolarApprovalVotingProfile">
+<span class="sig-name descname"><span class="pre">save2BipolarApprovalVotingProfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tempBipolarApprovalprofile'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approvalIndex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disapprovalIndex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile.save2BipolarApprovalVotingProfile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile.save2BipolarApprovalVotingProfile" title="Link to this definition"></a></dt>
+<dd><p>Convert a linear voting profile into a bipolar approval voting profile.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -15243,7 +15258,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Feb 15, 2026.
+      <span class="lastupdated">Last updated on Feb 16, 2026.
       </span></p>
   </div>
 
