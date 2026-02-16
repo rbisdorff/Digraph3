@@ -35,7 +35,7 @@
    :Url: https://rbisdorff.github.io/
    :Version: |version| (release: |release|)
    :PDF version: `5.9 MB <_static/digraph3Tutorial.pdf>`_ 
-   :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2025
+   :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2026
 
 .. _Tutorial-label:
 
@@ -8798,7 +8798,7 @@ In :numref:`internships7` we can now submit these reciprocal bipolar approval pr
      Standard Deviation          : 0.470
      Unfairness |(a) - (b)|      : 0.000
 
-Above we may notice that our fainess enhancing heuristic finds in 7 iterations a very fair pairing solution where both the students and the interships are equally served (see Lines 15, 22 and 27). Seven students and seven internships, each out of ten, get proposed an approved match and no student or internship is proposed a disapproved match.
+Above we may notice that our fainess enhancing heuristic finds in 7 iterations a very fair pairing solution where both the students and the internships are equally served (see Lines 15, 22 and 27). Seven students and seven internships, each out of ten, get proposed an approved match and no student or internship is proposed a disapproved match.
 
 --------------
 
