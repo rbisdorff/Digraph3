@@ -8582,9 +8582,9 @@ Traditionnally, such intergroup pairing problems are solved by using variants of
    >>> lvpI = LinearVotingProfile('lvpInternships')
    >>> from pairings import FairestGaleShapleyMatching
    >>> gsm = FairestGaleShapleyMatching(lvpS,lvpI)
-   >>> gsm.matching
-    [['s01', 'i07'],['s02', 'i09'],['s03', 'i10'],['s04', 'i03'],['s05', 'i08'],
-     ['s06', 'i01'],['s07', 'i06'],['s08', 'i04'],['s09', 'i02'],['s10', 'i05']]
+   >>> gsm.showPairing()
+    ['s01', 'i07'],['s02', 'i09'],['s03', 'i10'],['s04', 'i03'],['s05', 'i08'],
+    ['s06', 'i01'],['s07', 'i06'],['s08', 'i04'],['s09', 'i02'],['s10', 'i05']
 
 In :numref:`internships1` above we may notice that student *s01* is matched with his/her first choice, whereas student *s05* is matched only with his/her fifth choice. We may inspect in :numref:`internships2` below the correlation quality of this fairest *Gale-Shapley* matching with respect to the individal students and internships matching preferences.
 
@@ -8635,9 +8635,9 @@ It is recommended to use the :py:class:`pairings.FairnessEnhancedInterGroupMatch
    >>> from pairings import FairnessEnhancedInterGroupMatching
    >>> fem = FairnessEnhancedInterGroupMatching(lvpS,lvpI,
    ...                                      initialMatching=None)
-   >>> fem.matching
-    [['s01', 'i07'],['s02', 'i09'],['s03', 'i10'],['s04', 'i03'],['s05', 'i08'],
-     ['s06', 'i01'],['s07', 'i06'],['s08', 'i04'],['s09', 'i02'],['s10', 'i05']]
+   >>> fem.showPairing()
+    ['s01', 'i07'],['s02', 'i09'],['s03', 'i10'],['s04', 'i03'],['s05', 'i08'],
+    ['s06', 'i01'],['s07', 'i06'],['s08', 'i04'],['s09', 'i02'],['s10', 'i05']
 
 In :numref:`internships3` Lines 5-6 we notice that we recover unfortunately the same previous unfair *Gale-Shapley* matching.
 
@@ -8686,8 +8686,8 @@ This *bcm.matching* is submitted as initial matching to our fairness enhancing a
    >>> fecop.iterations
     4
    >>> fecop.matching
-    [['s01', 'i07'],['s02', 'i09'],['s03', 'i08'],['s04', 'i03'],['s05', 'i10'],
-     ['s06', 'i01'],['s07', 'i06'],['s08', 'i04'],['s09', 'i02'],['s10', 'i05']]
+    ['s01', 'i07'],['s02', 'i09'],['s03', 'i08'],['s04', 'i03'],['s05', 'i10'],
+    ['s06', 'i01'],['s07', 'i06'],['s08', 'i04'],['s09', 'i02'],['s10', 'i05']
    >>> fecop.showMatchingFairness()
     Students correlations:
      's01': +1.000, 's02': +0.778, 's03': +1.000
@@ -8775,9 +8775,9 @@ In :numref:`internships7` we can now submit these reciprocal bipolar approval pr
    ...                               initialMatching=bcm.matching)
    >>> fem.iterations
     7
-   >>> fem.matching
-    [['s01','i07'],['s02','i09'],['s03','i10'],['s04','i01'],['s05','i08'],
-     ['s06','i04'],['s07','i06'],['s08','i03'],['s09','i02'],['s10','i05']]
+   >>> fem.showParing()
+    ['s01','i07'],['s02','i09'],['s03','i10'],['s04','i01'],['s05','i08'],
+    ['s06','i04'],['s07','i06'],['s08','i03'],['s09','i02'],['s10','i05']
    >>> fem.showMatchingFairness()
     -----
      Students correlations:
@@ -8798,7 +8798,7 @@ In :numref:`internships7` we can now submit these reciprocal bipolar approval pr
      Standard Deviation          : 0.470
      Unfairness |(a) - (b)|      : 0.000
 
-Above we may notice that our fainess enhancing heuristic finds in 7 iterations a very fair pairing solution where both the students and the interships are equally served (see Lines 15, 22 and 27). Seven students and seven internships out of ten get proposed an approved match and no student or internship is proposed a disapproved match.
+Above we may notice that our fainess enhancing heuristic finds in 7 iterations a very fair pairing solution where both the students and the interships are equally served (see Lines 15, 22 and 27). Seven students and seven internships, each out of ten, get proposed an approved match and no student or internship is proposed a disapproved match.
 
 --------------
 

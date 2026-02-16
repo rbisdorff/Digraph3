@@ -11913,9 +11913,9 @@ See \sphinxurl{https://en.wikipedia.org/wiki/Gale\%E2\%80\%93Shapley\_algorithm}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lvpI} \PYG{o}{=} \PYG{n}{LinearVotingProfile}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{lvpInternships}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{pairings} \PYG{k+kn}{import} \PYG{n}{FairestGaleShapleyMatching}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gsm} \PYG{o}{=} \PYG{n}{FairestGaleShapleyMatching}\PYG{p}{(}\PYG{n}{lvpS}\PYG{p}{,}\PYG{n}{lvpI}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gsm}\PYG{o}{.}\PYG{n}{matching}
-\PYG{g+go}{ [[\PYGZsq{}s01\PYGZsq{}, \PYGZsq{}i07\PYGZsq{}],[\PYGZsq{}s02\PYGZsq{}, \PYGZsq{}i09\PYGZsq{}],[\PYGZsq{}s03\PYGZsq{}, \PYGZsq{}i10\PYGZsq{}],[\PYGZsq{}s04\PYGZsq{}, \PYGZsq{}i03\PYGZsq{}],[\PYGZsq{}s05\PYGZsq{}, \PYGZsq{}i08\PYGZsq{}],}
-\PYG{g+go}{  [\PYGZsq{}s06\PYGZsq{}, \PYGZsq{}i01\PYGZsq{}],[\PYGZsq{}s07\PYGZsq{}, \PYGZsq{}i06\PYGZsq{}],[\PYGZsq{}s08\PYGZsq{}, \PYGZsq{}i04\PYGZsq{}],[\PYGZsq{}s09\PYGZsq{}, \PYGZsq{}i02\PYGZsq{}],[\PYGZsq{}s10\PYGZsq{}, \PYGZsq{}i05\PYGZsq{}]]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gsm}\PYG{o}{.}\PYG{n}{showPairing}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{ [\PYGZsq{}s01\PYGZsq{}, \PYGZsq{}i07\PYGZsq{}],[\PYGZsq{}s02\PYGZsq{}, \PYGZsq{}i09\PYGZsq{}],[\PYGZsq{}s03\PYGZsq{}, \PYGZsq{}i10\PYGZsq{}],[\PYGZsq{}s04\PYGZsq{}, \PYGZsq{}i03\PYGZsq{}],[\PYGZsq{}s05\PYGZsq{}, \PYGZsq{}i08\PYGZsq{}],}
+\PYG{g+go}{ [\PYGZsq{}s06\PYGZsq{}, \PYGZsq{}i01\PYGZsq{}],[\PYGZsq{}s07\PYGZsq{}, \PYGZsq{}i06\PYGZsq{}],[\PYGZsq{}s08\PYGZsq{}, \PYGZsq{}i04\PYGZsq{}],[\PYGZsq{}s09\PYGZsq{}, \PYGZsq{}i02\PYGZsq{}],[\PYGZsq{}s10\PYGZsq{}, \PYGZsq{}i05\PYGZsq{}]}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
 
@@ -11969,9 +11969,9 @@ It is recommended to use the \sphinxcode{\sphinxupquote{pairings.FairnessEnhance
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{pairings} \PYG{k+kn}{import} \PYG{n}{FairnessEnhancedInterGroupMatching}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{fem} \PYG{o}{=} \PYG{n}{FairnessEnhancedInterGroupMatching}\PYG{p}{(}\PYG{n}{lvpS}\PYG{p}{,}\PYG{n}{lvpI}\PYG{p}{,}
 \PYG{g+gp}{... }                                     \PYG{n}{initialMatching}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{fem}\PYG{o}{.}\PYG{n}{matching}
-\PYG{g+go}{ [[\PYGZsq{}s01\PYGZsq{}, \PYGZsq{}i07\PYGZsq{}],[\PYGZsq{}s02\PYGZsq{}, \PYGZsq{}i09\PYGZsq{}],[\PYGZsq{}s03\PYGZsq{}, \PYGZsq{}i10\PYGZsq{}],[\PYGZsq{}s04\PYGZsq{}, \PYGZsq{}i03\PYGZsq{}],[\PYGZsq{}s05\PYGZsq{}, \PYGZsq{}i08\PYGZsq{}],}
-\PYG{g+go}{  [\PYGZsq{}s06\PYGZsq{}, \PYGZsq{}i01\PYGZsq{}],[\PYGZsq{}s07\PYGZsq{}, \PYGZsq{}i06\PYGZsq{}],[\PYGZsq{}s08\PYGZsq{}, \PYGZsq{}i04\PYGZsq{}],[\PYGZsq{}s09\PYGZsq{}, \PYGZsq{}i02\PYGZsq{}],[\PYGZsq{}s10\PYGZsq{}, \PYGZsq{}i05\PYGZsq{}]]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{fem}\PYG{o}{.}\PYG{n}{showPairing}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{ [\PYGZsq{}s01\PYGZsq{}, \PYGZsq{}i07\PYGZsq{}],[\PYGZsq{}s02\PYGZsq{}, \PYGZsq{}i09\PYGZsq{}],[\PYGZsq{}s03\PYGZsq{}, \PYGZsq{}i10\PYGZsq{}],[\PYGZsq{}s04\PYGZsq{}, \PYGZsq{}i03\PYGZsq{}],[\PYGZsq{}s05\PYGZsq{}, \PYGZsq{}i08\PYGZsq{}],}
+\PYG{g+go}{ [\PYGZsq{}s06\PYGZsq{}, \PYGZsq{}i01\PYGZsq{}],[\PYGZsq{}s07\PYGZsq{}, \PYGZsq{}i06\PYGZsq{}],[\PYGZsq{}s08\PYGZsq{}, \PYGZsq{}i04\PYGZsq{}],[\PYGZsq{}s09\PYGZsq{}, \PYGZsq{}i02\PYGZsq{}],[\PYGZsq{}s10\PYGZsq{}, \PYGZsq{}i05\PYGZsq{}]}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
 
@@ -12026,8 +12026,8 @@ This \sphinxstyleemphasis{bcm.matching} is submitted as initial matching to our 
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{fecop}\PYG{o}{.}\PYG{n}{iterations}
 \PYG{g+go}{ 4}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{fecop}\PYG{o}{.}\PYG{n}{matching}
-\PYG{g+go}{ [[\PYGZsq{}s01\PYGZsq{}, \PYGZsq{}i07\PYGZsq{}],[\PYGZsq{}s02\PYGZsq{}, \PYGZsq{}i09\PYGZsq{}],[\PYGZsq{}s03\PYGZsq{}, \PYGZsq{}i08\PYGZsq{}],[\PYGZsq{}s04\PYGZsq{}, \PYGZsq{}i03\PYGZsq{}],[\PYGZsq{}s05\PYGZsq{}, \PYGZsq{}i10\PYGZsq{}],}
-\PYG{g+go}{  [\PYGZsq{}s06\PYGZsq{}, \PYGZsq{}i01\PYGZsq{}],[\PYGZsq{}s07\PYGZsq{}, \PYGZsq{}i06\PYGZsq{}],[\PYGZsq{}s08\PYGZsq{}, \PYGZsq{}i04\PYGZsq{}],[\PYGZsq{}s09\PYGZsq{}, \PYGZsq{}i02\PYGZsq{}],[\PYGZsq{}s10\PYGZsq{}, \PYGZsq{}i05\PYGZsq{}]]}
+\PYG{g+go}{ [\PYGZsq{}s01\PYGZsq{}, \PYGZsq{}i07\PYGZsq{}],[\PYGZsq{}s02\PYGZsq{}, \PYGZsq{}i09\PYGZsq{}],[\PYGZsq{}s03\PYGZsq{}, \PYGZsq{}i08\PYGZsq{}],[\PYGZsq{}s04\PYGZsq{}, \PYGZsq{}i03\PYGZsq{}],[\PYGZsq{}s05\PYGZsq{}, \PYGZsq{}i10\PYGZsq{}],}
+\PYG{g+go}{ [\PYGZsq{}s06\PYGZsq{}, \PYGZsq{}i01\PYGZsq{}],[\PYGZsq{}s07\PYGZsq{}, \PYGZsq{}i06\PYGZsq{}],[\PYGZsq{}s08\PYGZsq{}, \PYGZsq{}i04\PYGZsq{}],[\PYGZsq{}s09\PYGZsq{}, \PYGZsq{}i02\PYGZsq{}],[\PYGZsq{}s10\PYGZsq{}, \PYGZsq{}i05\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{fecop}\PYG{o}{.}\PYG{n}{showMatchingFairness}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ Students correlations:}
 \PYG{g+go}{  \PYGZsq{}s01\PYGZsq{}: +1.000, \PYGZsq{}s02\PYGZsq{}: +0.778, \PYGZsq{}s03\PYGZsq{}: +1.000}
@@ -12119,9 +12119,9 @@ In \hyperref[\detokenize{tutorial:internships7}]{Listing \ref{\detokenize{tutori
 \PYG{g+gp}{... }                              \PYG{n}{initialMatching}\PYG{o}{=}\PYG{n}{bcm}\PYG{o}{.}\PYG{n}{matching}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{fem}\PYG{o}{.}\PYG{n}{iterations}
 \PYG{g+go}{ 7}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{fem}\PYG{o}{.}\PYG{n}{matching}
-\PYG{g+go}{ [[\PYGZsq{}s01\PYGZsq{},\PYGZsq{}i07\PYGZsq{}],[\PYGZsq{}s02\PYGZsq{},\PYGZsq{}i09\PYGZsq{}],[\PYGZsq{}s03\PYGZsq{},\PYGZsq{}i10\PYGZsq{}],[\PYGZsq{}s04\PYGZsq{},\PYGZsq{}i01\PYGZsq{}],[\PYGZsq{}s05\PYGZsq{},\PYGZsq{}i08\PYGZsq{}],}
-\PYG{g+go}{  [\PYGZsq{}s06\PYGZsq{},\PYGZsq{}i04\PYGZsq{}],[\PYGZsq{}s07\PYGZsq{},\PYGZsq{}i06\PYGZsq{}],[\PYGZsq{}s08\PYGZsq{},\PYGZsq{}i03\PYGZsq{}],[\PYGZsq{}s09\PYGZsq{},\PYGZsq{}i02\PYGZsq{}],[\PYGZsq{}s10\PYGZsq{},\PYGZsq{}i05\PYGZsq{}]]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{fem}\PYG{o}{.}\PYG{n}{showParing}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{ [\PYGZsq{}s01\PYGZsq{},\PYGZsq{}i07\PYGZsq{}],[\PYGZsq{}s02\PYGZsq{},\PYGZsq{}i09\PYGZsq{}],[\PYGZsq{}s03\PYGZsq{},\PYGZsq{}i10\PYGZsq{}],[\PYGZsq{}s04\PYGZsq{},\PYGZsq{}i01\PYGZsq{}],[\PYGZsq{}s05\PYGZsq{},\PYGZsq{}i08\PYGZsq{}],}
+\PYG{g+go}{ [\PYGZsq{}s06\PYGZsq{},\PYGZsq{}i04\PYGZsq{}],[\PYGZsq{}s07\PYGZsq{},\PYGZsq{}i06\PYGZsq{}],[\PYGZsq{}s08\PYGZsq{},\PYGZsq{}i03\PYGZsq{}],[\PYGZsq{}s09\PYGZsq{},\PYGZsq{}i02\PYGZsq{}],[\PYGZsq{}s10\PYGZsq{},\PYGZsq{}i05\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{fem}\PYG{o}{.}\PYG{n}{showMatchingFairness}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{g+go}{  Students correlations:}
@@ -12145,7 +12145,7 @@ In \hyperref[\detokenize{tutorial:internships7}]{Listing \ref{\detokenize{tutori
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-Above we may notice that our fainess enhancing heuristic finds in 7 iterations a very fair pairing solution where both the students and the interships are equally served (see Lines 15, 22 and 27). Seven students and seven internships out of ten get proposed an approved match and no student or internship is proposed a disapproved match.
+Above we may notice that our fainess enhancing heuristic finds in 7 iterations a very fair pairing solution where both the students and the interships are equally served (see Lines 15, 22 and 27). Seven students and seven internships, each out of ten, get proposed an approved match and no student or internship is proposed a disapproved match.
 
 
 \bigskip\hrule\bigskip

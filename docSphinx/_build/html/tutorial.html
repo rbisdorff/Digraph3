@@ -8403,9 +8403,9 @@ fecop 75.78% success rate</p>
 <span class="linenos">3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">lvpI</span> <span class="o">=</span> <span class="n">LinearVotingProfile</span><span class="p">(</span><span class="s1">&#39;lvpInternships&#39;</span><span class="p">)</span>
 <span class="linenos">4</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pairings</span> <span class="kn">import</span> <span class="n">FairestGaleShapleyMatching</span>
 <span class="hll"><span class="linenos">5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">gsm</span> <span class="o">=</span> <span class="n">FairestGaleShapleyMatching</span><span class="p">(</span><span class="n">lvpS</span><span class="p">,</span><span class="n">lvpI</span><span class="p">)</span>
-</span><span class="linenos">6</span><span class="gp">&gt;&gt;&gt; </span><span class="n">gsm</span><span class="o">.</span><span class="n">matching</span>
-<span class="hll"><span class="linenos">7</span><span class="go"> [[&#39;s01&#39;, &#39;i07&#39;],[&#39;s02&#39;, &#39;i09&#39;],[&#39;s03&#39;, &#39;i10&#39;],[&#39;s04&#39;, &#39;i03&#39;],[&#39;s05&#39;, &#39;i08&#39;],</span>
-</span><span class="hll"><span class="linenos">8</span><span class="go">  [&#39;s06&#39;, &#39;i01&#39;],[&#39;s07&#39;, &#39;i06&#39;],[&#39;s08&#39;, &#39;i04&#39;],[&#39;s09&#39;, &#39;i02&#39;],[&#39;s10&#39;, &#39;i05&#39;]]</span>
+</span><span class="linenos">6</span><span class="gp">&gt;&gt;&gt; </span><span class="n">gsm</span><span class="o">.</span><span class="n">showPairing</span><span class="p">()</span>
+<span class="hll"><span class="linenos">7</span><span class="go"> [&#39;s01&#39;, &#39;i07&#39;],[&#39;s02&#39;, &#39;i09&#39;],[&#39;s03&#39;, &#39;i10&#39;],[&#39;s04&#39;, &#39;i03&#39;],[&#39;s05&#39;, &#39;i08&#39;],</span>
+</span><span class="hll"><span class="linenos">8</span><span class="go"> [&#39;s06&#39;, &#39;i01&#39;],[&#39;s07&#39;, &#39;i06&#39;],[&#39;s08&#39;, &#39;i04&#39;],[&#39;s09&#39;, &#39;i02&#39;],[&#39;s10&#39;, &#39;i05&#39;]</span>
 </span></pre></div>
 </div>
 </div>
@@ -8447,9 +8447,9 @@ fecop 75.78% success rate</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pairings</span> <span class="kn">import</span> <span class="n">FairnessEnhancedInterGroupMatching</span>
 <span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fem</span> <span class="o">=</span> <span class="n">FairnessEnhancedInterGroupMatching</span><span class="p">(</span><span class="n">lvpS</span><span class="p">,</span><span class="n">lvpI</span><span class="p">,</span>
 <span class="hll"><span class="linenos">3</span><span class="gp">... </span>                                     <span class="n">initialMatching</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-</span><span class="linenos">4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fem</span><span class="o">.</span><span class="n">matching</span>
-<span class="hll"><span class="linenos">5</span><span class="go"> [[&#39;s01&#39;, &#39;i07&#39;],[&#39;s02&#39;, &#39;i09&#39;],[&#39;s03&#39;, &#39;i10&#39;],[&#39;s04&#39;, &#39;i03&#39;],[&#39;s05&#39;, &#39;i08&#39;],</span>
-</span><span class="hll"><span class="linenos">6</span><span class="go">  [&#39;s06&#39;, &#39;i01&#39;],[&#39;s07&#39;, &#39;i06&#39;],[&#39;s08&#39;, &#39;i04&#39;],[&#39;s09&#39;, &#39;i02&#39;],[&#39;s10&#39;, &#39;i05&#39;]]</span>
+</span><span class="linenos">4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fem</span><span class="o">.</span><span class="n">showPairing</span><span class="p">()</span>
+<span class="hll"><span class="linenos">5</span><span class="go"> [&#39;s01&#39;, &#39;i07&#39;],[&#39;s02&#39;, &#39;i09&#39;],[&#39;s03&#39;, &#39;i10&#39;],[&#39;s04&#39;, &#39;i03&#39;],[&#39;s05&#39;, &#39;i08&#39;],</span>
+</span><span class="hll"><span class="linenos">6</span><span class="go"> [&#39;s06&#39;, &#39;i01&#39;],[&#39;s07&#39;, &#39;i06&#39;],[&#39;s08&#39;, &#39;i04&#39;],[&#39;s09&#39;, &#39;i02&#39;],[&#39;s10&#39;, &#39;i05&#39;]</span>
 </span></pre></div>
 </div>
 </div>
@@ -8490,8 +8490,8 @@ fecop 75.78% success rate</p>
 </span><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fecop</span><span class="o">.</span><span class="n">iterations</span>
 <span class="linenos"> 4</span><span class="go"> 4</span>
 <span class="linenos"> 5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fecop</span><span class="o">.</span><span class="n">matching</span>
-<span class="hll"><span class="linenos"> 6</span><span class="go"> [[&#39;s01&#39;, &#39;i07&#39;],[&#39;s02&#39;, &#39;i09&#39;],[&#39;s03&#39;, &#39;i08&#39;],[&#39;s04&#39;, &#39;i03&#39;],[&#39;s05&#39;, &#39;i10&#39;],</span>
-</span><span class="hll"><span class="linenos"> 7</span><span class="go">  [&#39;s06&#39;, &#39;i01&#39;],[&#39;s07&#39;, &#39;i06&#39;],[&#39;s08&#39;, &#39;i04&#39;],[&#39;s09&#39;, &#39;i02&#39;],[&#39;s10&#39;, &#39;i05&#39;]]</span>
+<span class="hll"><span class="linenos"> 6</span><span class="go"> [&#39;s01&#39;, &#39;i07&#39;],[&#39;s02&#39;, &#39;i09&#39;],[&#39;s03&#39;, &#39;i08&#39;],[&#39;s04&#39;, &#39;i03&#39;],[&#39;s05&#39;, &#39;i10&#39;],</span>
+</span><span class="hll"><span class="linenos"> 7</span><span class="go"> [&#39;s06&#39;, &#39;i01&#39;],[&#39;s07&#39;, &#39;i06&#39;],[&#39;s08&#39;, &#39;i04&#39;],[&#39;s09&#39;, &#39;i02&#39;],[&#39;s10&#39;, &#39;i05&#39;]</span>
 </span><span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fecop</span><span class="o">.</span><span class="n">showMatchingFairness</span><span class="p">()</span>
 <span class="linenos"> 9</span><span class="go"> Students correlations:</span>
 <span class="hll"><span class="linenos">10</span><span class="go">  &#39;s01&#39;: +1.000, &#39;s02&#39;: +0.778, &#39;s03&#39;: +1.000</span>
@@ -8569,9 +8569,9 @@ fecop 75.78% success rate</p>
 </span><span class="hll"><span class="linenos"> 3</span><span class="gp">... </span>                              <span class="n">initialMatching</span><span class="o">=</span><span class="n">bcm</span><span class="o">.</span><span class="n">matching</span><span class="p">)</span>
 </span><span class="linenos"> 4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fem</span><span class="o">.</span><span class="n">iterations</span>
 <span class="hll"><span class="linenos"> 5</span><span class="go"> 7</span>
-</span><span class="linenos"> 6</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fem</span><span class="o">.</span><span class="n">matching</span>
-<span class="hll"><span class="linenos"> 7</span><span class="go"> [[&#39;s01&#39;,&#39;i07&#39;],[&#39;s02&#39;,&#39;i09&#39;],[&#39;s03&#39;,&#39;i10&#39;],[&#39;s04&#39;,&#39;i01&#39;],[&#39;s05&#39;,&#39;i08&#39;],</span>
-</span><span class="hll"><span class="linenos"> 8</span><span class="go">  [&#39;s06&#39;,&#39;i04&#39;],[&#39;s07&#39;,&#39;i06&#39;],[&#39;s08&#39;,&#39;i03&#39;],[&#39;s09&#39;,&#39;i02&#39;],[&#39;s10&#39;,&#39;i05&#39;]]</span>
+</span><span class="linenos"> 6</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fem</span><span class="o">.</span><span class="n">showParing</span><span class="p">()</span>
+<span class="hll"><span class="linenos"> 7</span><span class="go"> [&#39;s01&#39;,&#39;i07&#39;],[&#39;s02&#39;,&#39;i09&#39;],[&#39;s03&#39;,&#39;i10&#39;],[&#39;s04&#39;,&#39;i01&#39;],[&#39;s05&#39;,&#39;i08&#39;],</span>
+</span><span class="hll"><span class="linenos"> 8</span><span class="go"> [&#39;s06&#39;,&#39;i04&#39;],[&#39;s07&#39;,&#39;i06&#39;],[&#39;s08&#39;,&#39;i03&#39;],[&#39;s09&#39;,&#39;i02&#39;],[&#39;s10&#39;,&#39;i05&#39;]</span>
 </span><span class="linenos"> 9</span><span class="gp">&gt;&gt;&gt; </span><span class="n">fem</span><span class="o">.</span><span class="n">showMatchingFairness</span><span class="p">()</span>
 <span class="linenos">10</span><span class="go"> -----</span>
 <span class="linenos">11</span><span class="go">  Students correlations:</span>
@@ -8594,7 +8594,7 @@ fecop 75.78% success rate</p>
 </span></pre></div>
 </div>
 </div>
-<p>Above we may notice that our fainess enhancing heuristic finds in 7 iterations a very fair pairing solution where both the students and the interships are equally served (see Lines 15, 22 and 27). Seven students and seven internships out of ten get proposed an approved match and no student or internship is proposed a disapproved match.</p>
+<p>Above we may notice that our fainess enhancing heuristic finds in 7 iterations a very fair pairing solution where both the students and the interships are equally served (see Lines 15, 22 and 27). Seven students and seven internships, each out of ten, get proposed an approved match and no student or internship is proposed a disapproved match.</p>
 <hr class="docutils" />
 </section>
 </section>
