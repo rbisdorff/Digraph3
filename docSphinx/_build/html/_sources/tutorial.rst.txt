@@ -8446,7 +8446,7 @@ Instead of starting now from the default initial right and left matchings, we ma
    :name: classmates4
    :linenos:
    :caption: Matching fitness scores
-   :emphasize-lines: 6-14
+   :emphasize-lines: 6-14,18,19
 
    >>> from pairings import BestCopelandIntraGroupMatching
    >>> bcm = BestCopelandIntraGroupMatching(bavp)
@@ -8463,11 +8463,12 @@ Instead of starting now from the default initial right and left matchings, we ma
      'H' |  	 	 	       -10  +2	 
      'I' |  	 	 	 	   +14
      Valuation domain: [-34, 34]
+   >>> bcm.showMatchingWithFitnessScores()
+    Matched pairs
+    {'D', 'H'}(34), {'A', 'C'}(30), {'B', 'E'}(26),{'G', 'J'}(18),
+    {'F', 'I'}(4)
 
-The pairwise matching fitness scores shown above in Lines 6-14 result from the sum of the *Copeland* ranking scores of the respective potential partners of both the paired persons. The fitness figures confirm for instance that the best matching fitness score of 34 is shown for pairing *Dan* and *Henry* (Line 9) followed by the best matching fitness score of 30 for pairing *Alice* is *Carol* (Line 6). A best matching fitness score of +26 than appears for pairing *Bob with *Edward* (Line 7). *Gaby* and *Jane* show a best matching fitness score of +18 (Line 12). Finally we are only left with *Felix* and *Isabel*. *Felix* approves *Isabel* but *Isabel* does only approve female partners; their reciprocal matching fitness score is eventually only +4 (Line 11)). Below is shown the resulting best fitting *Copeland* matching [66]_.
-
-   >>> bcm.matching
-   {{'D', 'H'}, {'A', 'C'}, {'B', 'E'}, {'G', 'J'}, {'F', 'I'}}
+The pairwise matching fitness scores shown above in Lines 6-14 result from the sum of the *Copeland* ranking scores of the respective potential partners of both the paired persons. The fitness figures confirm for instance that the best matching fitness score of 34 is shown for pairing *Dan* and *Henry* (Line 9) followed by the best matching fitness score of 30 for pairing *Alice* is *Carol* (Line 6). A best matching fitness score of +26 than appears for pairing *Bob with *Edward* (Line 7). *Gaby* and *Jane* show a best matching fitness score of +18 (Line 12). Finally we are only left with *Felix* and *Isabel*. *Felix* approves *Isabel* but *Isabel* does only approve female partners; their reciprocal matching fitness score is eventually only +4 (Lines 11). In Lines 18-19 above is shown the resulting best fitting *Copeland* matching [66]_.
 
 Starting from this initial matching, we may now reach indeed the fairest possible pairing solution within one fairness enhancing step by exchanging *Alice* with *Felix*. 
 

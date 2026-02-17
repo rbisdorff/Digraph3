@@ -3798,6 +3798,19 @@ class BestCopelandIntraGroupMatching(IntraGroupPairing):
         t7 = time()
         self.runTimes['totalTime'] = t7 - t0
 
+    def showMatchingWithFitnessScores(self,matching=None):
+        """
+        shows the intragroup pairing solution when *matching is None*
+        """
+        print('Matched pairs')
+        pairs = []
+        aKeys = self.persons
+        if matching is None:
+            matching = self.matching
+        for m in matching:
+            pair = list(m)
+            print("{'%s', '%s'}(%d)" % (pair[0],pair[1],self.edges[m]))
+
     def showMatchingFitnessScores(self,edges=None,ndigits=0):
         """
         Prints the edge links of the graph
