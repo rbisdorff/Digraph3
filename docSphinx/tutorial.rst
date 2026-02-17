@@ -8563,7 +8563,7 @@ The organizations offering the internship opportunities submitted likewise their
     'i10'         [s02, s07, s04, s03, s01, s05, s10, s06, s09, s08]
    ============  ====================================================
 
-The organizations offering for instance internships *i05*, *i06* and *i07* mostly prefer the same student *s01*, whereas the organizations offering internships *i01*, *i03* and *i09* mostly prefer student *s06*. These matching preferences are stored in the format of two reciprocal :py:class:`~votingProfiles.LinearVotingProfile` objects stored under the names *lvpStudents.py* and *lvpInternships.py* in the *examples* directory of the Digraph3 resources.
+The organizations offering for instance internships *i05*, *i06* and *i07* mostly prefer the same student *s01*, whereas the organizations offering internships *i01*, *i03* and *i09* mostly prefer student *s06*. These matching preferences are stored in the format of two reciprocal :py:class:`~votingProfiles.LinearVotingProfile` objects under the names *lvpStudents.py* and *lvpInternships.py* in the *examples* directory of the Digraph3 resources.
 
 How to compute now a matching of students and internships that takes fair account of these reciprocal matching preferences? A fair pairing solution should show a high average overall correlation index with the given reciprocal linear voting profiles and an as small as possible difference between the average correlations of the students and of the internships matching preferences  
 
@@ -8776,7 +8776,7 @@ In :numref:`internships7` we can now submit these reciprocal bipolar approval pr
    ...                               initialMatching=bcm.matching)
    >>> fem.iterations
     7
-   >>> fem.showParing()
+   >>> fem.showPairing()
     ['s01','i07'],['s02','i09'],['s03','i10'],['s04','i01'],['s05','i08'],
     ['s06','i04'],['s07','i06'],['s08','i03'],['s09','i02'],['s10','i05']
    >>> fem.showMatchingFairness()
