@@ -2,7 +2,7 @@
 """
 Python3 implementation of solvers for fair inter- and intragroup pairing problems
 
-Copyright (C) 2023-2025 Raymond Bisdorff
+Copyright (C) 2023-2026 Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -1675,10 +1675,13 @@ class BestCopelandInterGroupMatching(InterGroupPairing):
         self.runTimes['totalTime'] = t7 - t0
 
     def showMatchingWithFitnessScores(self):
+        aKeys = [k for k in self.vpA.voters]
         for e in self.matching:
             pair = list(e)
-            pair.sort()
-            print('%s (%d)' %(pair, int(self.edges[e])) )
+            if pair[0] in aKeys:
+                print('%s (%d)' %([pair[0],pair[1]], int(self.edges[e])) )
+            else:
+                print('%s (%d)' %([pair[1],pair[0]], int(self.edges[e])) )
 
 #----------
 
@@ -2061,7 +2064,8 @@ class FairestInterGroupPairing(InterGroupPairing):
         groupBScores = {}
         ni = 1
         for matching in maximalMatchings:
-            print('%d/%d' % (ni,nm) )
+            if Comments:
+                print('%d/%d' % (ni,nm) )
             ni += 1
             # computing groupA's scores
             groupAScores = {}

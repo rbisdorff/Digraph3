@@ -17,8 +17,8 @@
          cautionBgColor={named}{LightCyan}}
 
 .. meta::
-   :description: Documentation of the Digraph3 collection of python3 modules for algorithmic decision theory
-   :keywords: Algorithmic Decision Theory, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Aid, Bipolar-valued Epistemic Logic
+   :description: Documentation of the Digraph3 collection of python3 modules for fair and accountable algorithmic decision theory
+   :keywords: Algorithmic Decision Theory, Fair and Accountable Algorithms, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Aid, Bipolar-valued Epistemic Logic
 
 .. _Advanced-Topics-label:
 
@@ -32,7 +32,7 @@ Pearls of bipolar-valued epistemic logic
    :Url: https://rbisdorff.github.io/
    :Version: |version| (release: |release|)
    :PDF version: `3.3 MB <_static/digraph3Pearls.pdf>`_
-   :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2025
+   :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2026
 
 .. _Pearls-label:	   
 

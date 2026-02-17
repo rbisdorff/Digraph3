@@ -1,6 +1,6 @@
 .. meta::
-   :description: Documentation of the Digraph3 collection of python3 modules for algorithmic decision theory
-   :keywords: Algorithmic Decision Theory, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Aid, Bipolar-valued Epistemic Logic
+   :description: Documentation of the Digraph3 collection of python3 modules for fair and accountable algorithmic decision theory
+   :keywords: Algorithmic Decision Theory, Fair and Accountable Algorithms, Outranking Digraphs, MIS and Kernels, Multiple Criteria Decision Aid, Bipolar-valued Epistemic Logic
 
 .. |location_link1| raw:: html
 
@@ -14,15 +14,15 @@
 
    <a href="http://hdl.handle.net/10993/37933" target="_blank">Algorithmic Decision Theory</a>
 
-Python resources for Algorithmic Decision Theory
-================================================
+Python resources for fair and accountable Algorithmic Decision Theory
+=====================================================================
 
 Wecome! This is the documentation for the **Digraph3** *Python* programming resources.
 
 :Author: Raymond Bisdorff, Emeritus Professor of Applied Mathematics and Computer Science, University of Luxembourg
 :Url: https://rbisdorff.github.io/
 :Version: |version| (release: |release|)
-:Copyright: R. Bisdorff |location_link3| 2013-2025
+:Copyright: R. Bisdorff |location_link3| 2013-2026
 
 .. image:: introDoc2.png
     :width: 500pt
@@ -47,7 +47,7 @@ Parts of the documentation
 ..........................
 :New:
    * A case study on :ref:`fairly matching students and internships <InternshipsMatching-Tutorial-label>`
-   * A case study about :ref:`matching classmates into partner pairs <RoommatesMatching-Tutorial-label>`
+   * A case study about :ref:`fairly matching classmates into partner pairs <RoommatesMatching-Tutorial-label>`
    * :ref:`Applications of bipolar-valued base 3 encoded Bachet numbers <Bachet-Tutorial-label>`
    * A tutorial on :ref:`using the Digraph3 HPC resources <HPC-Ranking-Tutorial-label>` for ranking several millions of multicriteria performance records via big sparse outranking digraphs
 
@@ -130,7 +130,7 @@ Introduction
      |    *our colleague and dear friend*
      |    *the late Prof.* Marc ROUBENS
 
-The *Digraph3 documentation*, available on the `Read The Docs <https://readthedocs.org/>`_ site: |location_link1|, describes the Python3 resources for implementing decision algorithms via **bipolar-valued outranking** digraphs [:raw-html:`<a class="reference internal" href="#Bisdorff-2022" id="id1"><span>1</span></a>`]. These computing resources are useful in the field of `Algorithmic Decision Theory <https://www.lamsade.dauphine.fr/~projet_cost/ALGORITHMIC_DECISION_THEORY/ALGORITHMIC_DECISION_THEORY.html>`_ and more specifically in the field of **Multiple-Criteria Decision Aiding** [:raw-html:`<a class="reference internal" href="#Bisdorff-2015" id="id2"><span>2</span></a>`]. They provide practical tools for a Master Course on |location_link4| taught at the University of Luxembourg.
+The *Digraph3 documentation*, available on the `Read The Docs <https://readthedocs.org/>`_ site: |location_link1|, describes the Python3 resources for implementing fair and accountable decision algorithms via **bipolar-valued outranking** digraphs [:raw-html:`<a class="reference internal" href="#Bisdorff-2022" id="id1"><span>1</span></a>`]. These computing resources are useful in the field of `Algorithmic Decision Theory <https://www.lamsade.dauphine.fr/~projet_cost/ALGORITHMIC_DECISION_THEORY/ALGORITHMIC_DECISION_THEORY.html>`_ and more specifically in the field of **Multiple-Criteria Decision Aiding** [:raw-html:`<a class="reference internal" href="#Bisdorff-2015" id="id2"><span>2</span></a>`]. They provide practical tools for a Master Course on |location_link4| taught at the University of Luxembourg.
       
 The documentation contains, first, a set of tutorials introducing the main objects like **digraphs**, **outranking digraphs** and **performance tableaux**. There is also a tutorial provided on **undirected graphs**. Some tutorials are problem oriented and show how to compute the **winner of an election**, how to build a **best choice recommendation**, or **how to linearly rank or rate** with multiple incommensurable performance criteria. The tutorial about **split**, **interval** and **permutation graphs** is inspired by *Martin Golumbic* 's book on *Algorithmic Graph Theory and Perfect Graphs* [:raw-html:`<a class="reference internal" href="#Golumbic-2004" id="id3"><span>3</span></a>`]. We also provide a tutorial on **tree graphs** and **spanning forests**. Recently added, the reader may find two tutorials on **fairly** solving **inter**-, respectively **intragroup pairing** problems. 
 

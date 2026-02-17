@@ -1,7 +1,7 @@
 
 .. meta::
-   :description: Documentation of the Digraph3 collection of python3 modules for algorithmic decision theory
-   :keywords: Algorithmic Decision Theory, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Aid, Bipolar-valued Epistemic Logic
+   :description: Documentation of the Digraph3 collection of python3 modules for fair and accountble algorithmic decision theory
+   :keywords: Algorithmic Decision Theory, Fair and Accountable Algorithms, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Aid, Bipolar-valued Epistemic Logic
 
 .. raw:: latex
 
