@@ -605,14 +605,6 @@ class LinearVotingProfile(VotingProfile):
             #print('!!! Error: The name of a stored linear voting profile is required !!!')
             return
 
-
-    def convert2BipolarApprovalVotingProfile(self,approvalIndex=1, diapprovalIndex=1):
-        """
-        Converts a linear voting profile into a bipolar approval-disapproval profile.
-        First approvalIndex ranked a re approved, last disapprovalIndex ranked are disapproved.
-        """
-        
-
     def computeBallot(self):
         """
         Computes a complete ballot from the linear Ballot.

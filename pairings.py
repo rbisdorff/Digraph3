@@ -1453,7 +1453,7 @@ class BestBachetInterGroupMatching(InterGroupPairing):
         for i in range(order):
             for j in range(order):
                 edgeKey = frozenset([aKeys[i],bKeys[j]])
-                edges[edgeKey] = int(self.bachetScores[aKeys[i]][bKeys[j]]) \
+                edges[edgeKey] = 2*Max + int(self.bachetScores[aKeys[i]][bKeys[j]]) \
                             + int(self.bachetScores[bKeys[j]][aKeys[i]])            
         self.edges = edges
         self.size = self.computeSize()
@@ -1526,6 +1526,15 @@ class BestBachetInterGroupMatching(InterGroupPairing):
         
         t7 = time()
         self.runTimes['totalTime'] = t7 - t0
+
+    def showMatchingWithFitnessScores(self):
+        aKeys = [k for k in self.vpA.voters]
+        for e in self.matching:
+            pair = list(e)
+            if pair[0] in aKeys:
+                print('%s (%d)' %([pair[0],pair[1]], int(self.edges[e])) )
+            else:
+                print('%s (%d)' %([pair[1],pair[0]], int(self.edges[e])) )
 
 #----------
 class BestCopelandInterGroupMatching(InterGroupPairing):

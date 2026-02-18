@@ -8642,39 +8642,31 @@ It is recommended to use the :py:class:`pairings.FairnessEnhancedInterGroupMatch
 
 In :numref:`internships3` Lines 5-6 we notice that we recover unfortunately the same previous unfair *Gale-Shapley* matching.
 
-In order to try to lower the unfairness of the pairing solution, it appears opportune helping the fairness enhancing heuristic by providing as initial matching a best *Copeland* matching. This matching is assembled via a ranked pairs algorithm based on The *Copeland* matching fitness scores from the student as well as   the internship perspective already used by the fairness enhancing procedure [69]_. The :py:mod:`pairings` module provides therefore the :py:class:`~pairings.BestCopelandInterGroupMatching` class which constructs a complete bipartite graph where the characteristic values of the edges represent such matching fitness scores computed for each individual match (in :numref:`internships4` see Lines 4-15 below).
+In order to try to lower the unfairness of the pairing solution, it appears opportune helping the fairness enhancing heuristic by providing as initial matching a best *Bachet* matching. This matching is assembled via a ranked pairs algorithm based on *Bachet* matching fitness scores from the student as well as from  the internship perspective [69]_. The :py:mod:`pairings` module provides therefore the :py:class:`~pairings.BestBachetInterGroupMatching` class which constructs a complete bipartite graph where the characteristic values of the edges represent such matching fitness scores computed for each individual match (in :numref:`internships4` see Lines 4-15 below).
 
 .. code-block:: pycon
    :name: internships4
    :linenos:
-   :caption: Best Copeland initial matching
-   :emphasize-lines: 2,4-15,18-21
+   :caption: Best Bachet initial matching
+   :emphasize-lines: 2
 
-   >>> from pairings import BestCopelandInterGroupMatching
-   >>> bcm = BestCopelandInterGroupMatching(lvpS,lvpI)
-   >>> bcm.showEdgesCharacteristicValues()
-           | 'i01' 'i02' 'i03' 'i04' 'i05' 'i06' 'i07' 'i08' 'i09' 'i10'	 
-    -------|--------------------
-     's01' |  +12    +8	   +8   +44   +44   +56	  +72	+56   +64   +48	 
-     's02' |  +16   +36	  +56   +16   +60   +40	  +56	+28   +60   +52	 
-     's03' |  +28   +16   +32   +12    +4   +32	  +40	+60   +44   +48	 
-     's04' |  +44   +36	  +56   +40   +48   +28	   +4   +48   +52   +36	 
-     's05' |  +56   +40	  +40	+16   +40   +40	  +40	+52    +4   +40	 
-     's06' |  +60   +24	  +56	+56   +28   +20	  +28	+16   +40   +40	 
-     's07' |  +56   +52	  +24	 +8   +36   +56	  +28	+52   +16   +48	 
-     's08' |  +20   +36	  +44	+52   +44   +40	  +44	 +8   +40    +0	 
-     's09' |  +20   +68	  +36	+20   +28    +0	  +24	+44   +24   +12	 
-     's10' |  +40   +36	  +52	+36   +60    +8	  +40	+12   +16   +44	 
-    Valuation domain: [-72;+72]
-   >>> bcm.showMatchingWithFitnessScores()
-    ['s01', 'i07'](72), ['s09', 'i02'](68), ['s02', 'i05'](60),
-    ['s03', 'i08'](60), ['s06', 'i01'](60), ['s04', 'i03'](56),
-    ['s07', 'i06'](56), ['s08', 'i04'](52), ['s10', 'i10'](44),
-    ['s05', 'i09'](+4)
+   >>> from pairings import BestBachetInterGroupMatching
+   >>> bbm = BestBachetInterGroupMatching(lvpS,lvpI)
+   >>> bbm.showMatchingWithFitnessScores()
+    ['s01', 'i07'] (352820)
+    ['s07', 'i06'] (351992)
+    ['s03', 'i08'] (346644)
+    ['s09', 'i02'] (341116)
+    ['s02', 'i09'] (339852)
+    ['s08', 'i04'] (320224)
+    ['s05', 'i10'] (311312)
+    ['s06', 'i01'] (274628)
+    ['s04', 'i03'] (265744)
+    ['s10', 'i05'] (236004)
 
-In Lines 18-21 above we notice that the pair ['s01', 'i07'] shows the highest matching fitness score of 72, followed by the pair ['s09', 'i02'] with a fitness score of +68. Three further pairs show a fitness score of 60, and so on. The last remaining matched pair is ['s05', 'i09'] with a fitness score of only +4.
+In Lines 18-21 above we notice that the pair ['s01', 'i07'] shows the highest matching fitness score of 352820, followed by the pair ['s09', 'i02'] with a fitness score of 351992. The pair ['s10', 'io5'] shows the least matching fitness score of 236004.  
 
-This *bcm.matching* is submitted as initial matching to our fairness enhancing algorithm (see :numref:`internships5` Line 2 below). After four enhancing iterations, the resulting fairest pairing solution is shown in Lines 4-5.
+This *bbm.matching* is submitted as initial matching to our fairness enhancing algorithm (see :numref:`internships5` Line 2 below). After four enhancing iterations, the resulting fairest pairing solution is shown in Lines 4-5.
 
 .. code-block:: pycon
    :name: internships5
@@ -8682,14 +8674,14 @@ This *bcm.matching* is submitted as initial matching to our fairness enhancing a
    :caption: Best Copeland initial matching
    :emphasize-lines: 2,6,7,10-12,14,18-22,25,27
    
-   >>> fecop = FairnessEnhancedInterGroupMatching(lvpS,lvpI,
-   ...                        initialMatching=bcm.matching)
-   >>> fecop.iterations
+   >>> febbm = FairnessEnhancedInterGroupMatching(lvpS,lvpI,
+   ...                        initialMatching=bbm.matching)
+   >>> febbm.iterations
     4
-   >>> fecop.matching
+   >>> febbm.matching
     ['s01', 'i07'],['s02', 'i09'],['s03', 'i08'],['s04', 'i03'],['s05', 'i10'],
     ['s06', 'i01'],['s07', 'i06'],['s08', 'i04'],['s09', 'i02'],['s10', 'i05']
-   >>> fecop.showMatchingFairness()
+   >>> febbm.showMatchingFairness()
     Students correlations:
      's01': +1.000, 's02': +0.778, 's03': +1.000
      's04': +0.778, 's05': +0.333, 's06': +0.333
@@ -8710,7 +8702,7 @@ This *bcm.matching* is submitted as initial matching to our fairness enhancing a
     Standard Deviation     : 0.323
     Unfairness |(a) - (b)| : 0.000
 
-We get now the same average correlation index of +0.622 for all students and for all internships (see Lines 14 and 24). No unfairness anymore is observed with this pairing solution. Two students get their first choices and three students their second choices. No student gets a negative correlation (see Lines 10-13). Whereas three insternships get their first choices and two their second choices. Internship *i10* gets however now a slightly negative correlation index as student *s05* is only its 6th choice (see Lines 18-22).
+We get now the same average correlation index of +0.622 for all students and for all internships (see Lines 14 and 24). No unfairness anymore is observed with this pairing solution. Two students get their first choices and three students their second choices. No student gets a negative correlation (see Lines 10-13). Whereas three internships get their first choices and two their second choices. Internship *i10* gets however now a slightly negative correlation index as student *s05* is only its 6th choice (see Lines 18-22).
 
 Contrary to *deferred acceptance* algorithms, our fairness enhancing heuristic does not require complete linear voting profiles for computing a fair pairing result. Partial linear voting profiles or bipolar approval-disapproval voting profiles may be taken more realistically into account.
 
@@ -8719,7 +8711,7 @@ Using bipolar approval-disapproval voting profiles
 
 An interesting experiment consists now in dividing the given complete linear voting profiles *lvpStudents.py* and *lvpInternships.py* into three parts: the three best-ranked options are considered to be approved and the three last-ranked are considered to be disapproved.
 
-The :py:class:`~votingProfiles.LinearVotingProfile` class provides a special :py:class:`~votingProfiles.LinearVotingProfile.save2BipolarApprovalVotingProfile` mathod for extracting from a given complete linear voting profile a corresponding bipolar approval profile with two parameters for controlling the number of approved as well as the number of disapproved candidates. With the :py:class:`votingProfiles.BipolarApprovalVotingProfile` class we may reload these stored bipolar approval profiles (see :numref:`internships6` Line 2-4).
+The :py:class:`~votingProfiles.LinearVotingProfile` class provides a special :py:class:`~votingProfiles.LinearVotingProfile.save2BipolarApprovalVotingProfile` mathod for extracting from a given complete linear voting profile a corresponding bipolar approval profile with two parameters for controlling the number of approved as well as the number of disapproved candidates. With the :py:class:`votingProfiles.BipolarApprovalVotingProfile` class we can reload these stored bipolar approval voting profiles (see :numref:`internships6` Line 2-4).
 
 .. code-block:: pycon
    :name: internships6
@@ -8727,7 +8719,7 @@ The :py:class:`~votingProfiles.LinearVotingProfile` class provides a special :py
    :caption: Bipolar approval matching profiles 
    :emphasize-lines: 2-4,8,18-19,30
 
-   >>> lvpS.save2BipolarApprovalProfile(fileName='bapStudents',
+   >>> lvpS.save2BipolarApprovalVotingProfile(fileName='bapStudents',
    ...                           approvalIndex=2,disapprovalIndex=7)
    >>> from votingProfiles import BipolarApprovalVotingProfile
    >>> bapS = BipolarApprovalVotingProfile('bapStudents')
@@ -8744,7 +8736,7 @@ The :py:class:`~votingProfiles.LinearVotingProfile` class provides a special :py
     's08': Approvals: ['i07','i09','i03'], Disapprovals: ['i08','i01','i10']
     's09': Approvals: ['i03','i02','i08'], Disapprovals: ['i10','i09','i06']
     's10': Approvals: ['i02','i10','i05'], Disapprovals: ['i01','i08','i06']   
-   >>> lvpI.save2BipolarApprovalProfile(fileName='bapInternships',
+   >>> lvpI.save2BipolarApprovalVotingProfile(fileName='bapInternships',
    ...                           approvalIndex=2,disapprovalIndex=7)
    >>> bapI = BipolarApprovalVotingProfile('bapInternships')
    >>> bapI.showBipolarApprovals()
@@ -8763,35 +8755,39 @@ The :py:class:`~votingProfiles.LinearVotingProfile` class provides a special :py
 
 In Line 8 above, we may notice for instance that student *s01* approves the internships *i07*, *i09* and *i10* and disapproves internships *i05*, *i02* and *i03*. Reciprocally, students *s01*, *s02* and *s06* are approved by internship *i07* whereas students *s08*, *s04* and *s09* are disapproved (see Line 30).
 
-In :numref:`internships7` we can now submit these reciprocal bipolar approval profiles *bapS* and *bapI* to our fairness enhancing heuristic and starting as before the fairness enhancing procedure from a best *Copeland* matching. 
+In :numref:`internships7` we can now submit these reciprocal bipolar approval voting profiles *bapS* and *bapI* to the :py:class:`~class:pairings.BestBachetInterGroupMatching` constructor. 
 
 .. code-block:: pycon
    :name: internships7
    :linenos:
    :caption: Resolving the intergroup group pairing problem 
-   :emphasize-lines: 1-3,5,7-8,15,22,25,27
+   :emphasize-lines: 3-12,19,26,29,31
 
-   >>> bcm = BestCopelandInterGroupMatching(bapS,bapI)
-   >>> fem = FairnessEnhancedInterGroupMatching(bapS,bapI,
-   ...                               initialMatching=bcm.matching)
-   >>> fem.iterations
-    7
-   >>> fem.showPairing()
-    ['s01','i07'],['s02','i09'],['s03','i10'],['s04','i01'],['s05','i08'],
-    ['s06','i04'],['s07','i06'],['s08','i03'],['s09','i02'],['s10','i05']
-   >>> fem.showMatchingFairness()
+   >>> bbm1 = BestBachetInterGroupMatching(bapS,bapI)
+   >>> bbm1.showMatchingWithFitnessScores()
+    ['s07', 'i06'] (351444)
+    ['s09', 'i02'] (335872)
+    ['s04', 'i09'] (320406)
+    ['s08', 'i04'] (319226)
+    ['s03', 'i08'] (318162)
+    ['s02', 'i03'] (300400)
+    ['s01', 'i07'] (299120)
+    ['s10', 'i05'] (274604)
+    ['s05', 'i10'] (265408)
+    ['s06', 'i01'] (229610)
+   >>> bbm1.showMatchingFairness()
     -----
      Students correlations:
-      's01': +1.000, 's02': +1.000, 's03': +0.000, 's04': +0.000,
-      's05': +0.000, 's06': +1.000, 's07': +1.000, 's08': +1.000,
+      's01': +1.000, 's02': +1.000, 's03': +1.000, 's04': +1.000,
+      's05': +0.000, 's06': +0.000, 's07': +1.000, 's08': +0.000,
       's09': +1.000, 's10': +1.000
       Average correlation (a) : 0.700
       Standard deviation      : 0.483
     -----
      Internships correlations:
-      'i01': +1.000, 'i02': +1.000, 'i03': +0.000, 'i04': +0.000,
-      'i05': +1.000, 'i06': +1.000, 'i07': +1.000, 'i08': +1.000,
-      'i09': +1.000, 'i10': +0.000
+      'i01': +1.000, 'i02': +1.000, 'i03': +0.000, 'i04': +1.000,
+      'i05': +1.000, 'i06': +1.000, 'i07': +1.000, 'i08': +0.000,
+      'i09': +0.000, 'i10': +0.000
       Average correlation (b) : 0.700
       Standard deviation      : 0.483
     -----
@@ -8799,7 +8795,12 @@ In :numref:`internships7` we can now submit these reciprocal bipolar approval pr
      Standard Deviation          : 0.470
      Unfairness |(a) - (b)|      : 0.000
 
-Above we may notice that our fainess enhancing heuristic finds in 7 iterations a very fair pairing solution where both the students and the internships are equally served (see Lines 15, 22 and 27). Seven students and seven internships, each out of ten, get proposed an approved match and no student or internship is proposed a disapproved match.
+Above we may notice that our best *Bachet* matching directly assembles an optimal fair pairing solution where both the students and the internships are equally served (see Lines 19,26,29, and 31). Hence, there is no need anymore for running any fairness enhancing heuristic using this optimal initial matching. Seven students and seven internships, each out of ten, get proposed approved matches and no student or internship is proposed any disapproved match.
+
+.. note::
+
+   It is essentially the better matching fitness discriminating power of the *Bachet* ranking scores that judiciously serve our ranked pairs based pairing construction without loosing the *Condorcet* consistency property of the simpler *Copeland* matching fitness scores. See also  :ref:`Applications of bipolar-valued base 3 encoded Bachet numbers <Bachet-Tutorial-label>`.
+
 
 --------------
 
@@ -11888,9 +11889,9 @@ Appendices
 
 .. [65] An example of a borderless :py:class:`~randomDigraphs.RandomOutrankingValuationDigraph` instance may be found in the *examples* directory of the *Digraphs3* resources under the name *borderlessROV9S25.py*.
 
-.. [66] The best *Copeland* initial matching is computed following a matching fitness scores ranked potential pairs list.
+.. [66] The best *Bachet* initial matching is computed following a matching fitness scores ranked potential pairs list.
 
-.. [67] The :py:class:`~pairings.FairnessEnhancedIntraGroupMatching` class provides also the opportunity to use *Bachet* ranking scores instead of the *Copeland* scores for guiding the fairness enhancing procedure. Unfortunately, ongoing tests don't show any convincing better results.
+.. [67] The :py:class:`~pairings.FairnessEnhancedIntraGroupMatching` class provides also the opportunity to use *Bachet* ranking scores instead of default *Copeland* scores for guiding the fairness enhancing procedure. The *Bachet* ranking rules are illustrated in the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`.
 
 .. [68] See https://en.wikipedia.org/wiki/Gale%E2%80%93Shapley_algorithm
 
