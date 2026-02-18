@@ -8440,7 +8440,7 @@ In :numref:`classmates3` above we may notice that the fairness enhancing procedu
 Guiding the choice of the initial matching
 ``````````````````````````````````````````
 
-Instead of starting now from the default initial right and left matchings, we may also start in :numref:`classmates4` below the fairness enhancing search from a best *Copeland* matching, i.e. an initial matching where each student is paired with a partner who shows the highest possible matching fitness score with respect to the given individual student's pairing preferences [67]_. 
+Instead of starting now from the default initial right and left matchings, we may also start in :numref:`classmates4` below the fairness enhancing search from a best *Copeland* matching, i.e. an initial matching where each student is paired with a partner who shows the highest possible matching fitness score with respect to the given individual student's pairing preferences. 
 
 .. code-block:: pycon
    :name: classmates4
@@ -8570,7 +8570,7 @@ How to compute now a matching of students and internships that takes fair accoun
 Computing a fair matching
 `````````````````````````
 
-Traditionnally, such intergroup pairing problems are solved by using variants of the *deferred acceptance* algorithm like the *Gale-Shapley* or the *Roth-Peranson* algorithms [68]_. The :py:mod:`pairings` module provides for this purpose the :py:class:`~pairings.FairestGaleShapleyMatching` constructor computing both *Gale-Shapley* matchings – the students propose as well as the internships propose – and rendering the fairest solution of both (see tutorial on :ref:`computing fair intergroup pairings <Fair-InterGroup-Pairings-label>`).
+Traditionnally, such intergroup pairing problems are solved by using variants of the *deferred acceptance* algorithm like the *Gale-Shapley* or the *Roth-Peranson* algorithms [67]_. The :py:mod:`pairings` module provides for this purpose the :py:class:`~pairings.FairestGaleShapleyMatching` constructor computing both *Gale-Shapley* matchings – the students propose as well as the internships propose – and rendering the fairest solution of both (see tutorial on :ref:`computing fair intergroup pairings <Fair-InterGroup-Pairings-label>`).
 
 .. code-block:: pycon
    :name: internships1
@@ -8642,7 +8642,7 @@ It is recommended to use the :py:class:`pairings.FairnessEnhancedInterGroupMatch
 
 In :numref:`internships3` Lines 5-6 we notice that we recover unfortunately the same previous unfair *Gale-Shapley* matching.
 
-In order to try to lower the unfairness of the pairing solution, it appears opportune helping the fairness enhancing heuristic by providing as initial matching a best *Bachet* matching. This matching is assembled via a ranked pairs algorithm based on *Bachet* matching fitness scores from the student as well as from  the internship perspective [69]_. The :py:mod:`pairings` module provides therefore the :py:class:`~pairings.BestBachetInterGroupMatching` class which constructs a complete bipartite graph where the characteristic values of the edges represent such matching fitness scores computed for each individual match (in :numref:`internships4` see Lines 4-15 below).
+In order to try to lower the unfairness of the pairing solution, it appears opportune helping the fairness enhancing heuristic by providing as initial matching a best *Bachet* matching. This matching is assembled via a ranked pairs algorithm based on *Bachet* matching fitness scores from the student as well as from  the internship perspective [68]_. The :py:mod:`pairings` module provides therefore the :py:class:`~pairings.BestBachetInterGroupMatching` class which constructs a complete bipartite graph where the characteristic values of the edges represent such matching fitness scores computed for each individual match (in :numref:`internships4` see Lines 4-15 below).
 
 .. code-block:: pycon
    :name: internships4
@@ -11891,11 +11891,9 @@ Appendices
 
 .. [66] The best *Bachet* initial matching is computed following a matching fitness scores ranked potential pairs list.
 
-.. [67] The :py:class:`~pairings.FairnessEnhancedIntraGroupMatching` class provides also the opportunity to use *Bachet* ranking scores instead of default *Copeland* scores for guiding the fairness enhancing procedure. The *Bachet* ranking rules are illustrated in the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`.
+.. [67] See https://en.wikipedia.org/wiki/Gale%E2%80%93Shapley_algorithm
 
-.. [68] See https://en.wikipedia.org/wiki/Gale%E2%80%93Shapley_algorithm
-
-.. [69] See :ref:`computing fair intergroup pairings <Fair-InterGroup-Pairings-label>`
+.. [68] See :ref:`computing fair intergroup pairings <Fair-InterGroup-Pairings-label>`
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
