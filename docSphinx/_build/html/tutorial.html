@@ -8460,17 +8460,17 @@ fecop 75.78% success rate</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pairings</span> <span class="kn">import</span> <span class="n">BestBachetInterGroupMatching</span>
 <span class="hll"><span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bbm</span> <span class="o">=</span> <span class="n">BestBachetInterGroupMatching</span><span class="p">(</span><span class="n">lvpS</span><span class="p">,</span><span class="n">lvpI</span><span class="p">)</span>
 </span><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bbm</span><span class="o">.</span><span class="n">showMatchingWithFitnessScores</span><span class="p">()</span>
-<span class="linenos"> 4</span><span class="go"> [&#39;s01&#39;, &#39;i07&#39;] (352820)</span>
-<span class="linenos"> 5</span><span class="go"> [&#39;s07&#39;, &#39;i06&#39;] (351992)</span>
-<span class="linenos"> 6</span><span class="go"> [&#39;s03&#39;, &#39;i08&#39;] (346644)</span>
+<span class="hll"><span class="linenos"> 4</span><span class="go"> [&#39;s01&#39;, &#39;i07&#39;] (352820)</span>
+</span><span class="hll"><span class="linenos"> 5</span><span class="go"> [&#39;s07&#39;, &#39;i06&#39;] (351992)</span>
+</span><span class="linenos"> 6</span><span class="go"> [&#39;s03&#39;, &#39;i08&#39;] (346644)</span>
 <span class="linenos"> 7</span><span class="go"> [&#39;s09&#39;, &#39;i02&#39;] (341116)</span>
 <span class="linenos"> 8</span><span class="go"> [&#39;s02&#39;, &#39;i09&#39;] (339852)</span>
 <span class="linenos"> 9</span><span class="go"> [&#39;s08&#39;, &#39;i04&#39;] (320224)</span>
 <span class="linenos">10</span><span class="go"> [&#39;s05&#39;, &#39;i10&#39;] (311312)</span>
 <span class="linenos">11</span><span class="go"> [&#39;s06&#39;, &#39;i01&#39;] (274628)</span>
 <span class="linenos">12</span><span class="go"> [&#39;s04&#39;, &#39;i03&#39;] (265744)</span>
-<span class="linenos">13</span><span class="go"> [&#39;s10&#39;, &#39;i05&#39;] (236004)</span>
-</pre></div>
+<span class="hll"><span class="linenos">13</span><span class="go"> [&#39;s10&#39;, &#39;i05&#39;] (236004)</span>
+</span></pre></div>
 </div>
 </div>
 <p>In Lines 18-21 above we notice that the pair [‘s01’, ‘i07’] shows the highest matching fitness score of 352820, followed by the pair [‘s09’, ‘i02’] with a fitness score of 351992. The pair [‘s10’, ‘io5’] shows the least matching fitness score of 236004.</p>
@@ -8481,7 +8481,7 @@ fecop 75.78% success rate</p>
 <span class="hll"><span class="linenos"> 2</span><span class="gp">... </span>                       <span class="n">initialMatching</span><span class="o">=</span><span class="n">bbm</span><span class="o">.</span><span class="n">matching</span><span class="p">)</span>
 </span><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">febbm</span><span class="o">.</span><span class="n">iterations</span>
 <span class="linenos"> 4</span><span class="go"> 4</span>
-<span class="linenos"> 5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">febbm</span><span class="o">.</span><span class="n">matching</span>
+<span class="linenos"> 5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">febbm</span><span class="o">.</span><span class="n">showPairing</span><span class="p">()</span>
 <span class="hll"><span class="linenos"> 6</span><span class="go"> [&#39;s01&#39;, &#39;i07&#39;],[&#39;s02&#39;, &#39;i09&#39;],[&#39;s03&#39;, &#39;i08&#39;],[&#39;s04&#39;, &#39;i03&#39;],[&#39;s05&#39;, &#39;i10&#39;],</span>
 </span><span class="hll"><span class="linenos"> 7</span><span class="go"> [&#39;s06&#39;, &#39;i01&#39;],[&#39;s07&#39;, &#39;i06&#39;],[&#39;s08&#39;, &#39;i04&#39;],[&#39;s09&#39;, &#39;i02&#39;],[&#39;s10&#39;, &#39;i05&#39;]</span>
 </span><span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="n">febbm</span><span class="o">.</span><span class="n">showMatchingFairness</span><span class="p">()</span>

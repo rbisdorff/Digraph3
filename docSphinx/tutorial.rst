@@ -8648,7 +8648,7 @@ In order to try to lower the unfairness of the pairing solution, it appears oppo
    :name: internships4
    :linenos:
    :caption: Best Bachet initial matching
-   :emphasize-lines: 2
+   :emphasize-lines: 2,4-5,13
 
    >>> from pairings import BestBachetInterGroupMatching
    >>> bbm = BestBachetInterGroupMatching(lvpS,lvpI)
@@ -8678,7 +8678,7 @@ This *bbm.matching* is submitted as initial matching to our fairness enhancing a
    ...                        initialMatching=bbm.matching)
    >>> febbm.iterations
     4
-   >>> febbm.matching
+   >>> febbm.showPairing()
     ['s01', 'i07'],['s02', 'i09'],['s03', 'i08'],['s04', 'i03'],['s05', 'i10'],
     ['s06', 'i01'],['s07', 'i06'],['s08', 'i04'],['s09', 'i02'],['s10', 'i05']
    >>> febbm.showMatchingFairness()

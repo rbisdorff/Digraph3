@@ -1529,12 +1529,17 @@ class BestBachetInterGroupMatching(InterGroupPairing):
 
     def showMatchingWithFitnessScores(self):
         aKeys = [k for k in self.vpA.voters]
+        matches = []
         for e in self.matching:
-            pair = list(e)
+            matches.append( (int(self.edges[e]),e) )
+        matches.sort(reverse=True)
+        for m in matches:
+            edgeKey = m[1]
+            pair = list(m[1])
             if pair[0] in aKeys:
-                print('%s (%d)' %([pair[0],pair[1]], int(self.edges[e])) )
+                print('%s (%d)' %([pair[0],pair[1]], int(self.edges[edgeKey])) )
             else:
-                print('%s (%d)' %([pair[1],pair[0]], int(self.edges[e])) )
+                print('%s (%d)' %([pair[1],pair[0]], int(self.edges[edgeKey])) )
 
 #----------
 class BestCopelandInterGroupMatching(InterGroupPairing):
