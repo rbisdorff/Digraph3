@@ -8801,6 +8801,7 @@ Above we may notice that our best *Bachet* matching directly assembles an optima
 
    It is essentially the better matching fitness discriminating power of the *Bachet* ranking scores that judiciously serve our ranked pairs based pairing construction without loosing the *Condorcet* consistency property of the simpler *Copeland* matching fitness scores. See also  :ref:`Applications of bipolar-valued base 3 encoded Bachet numbers <Bachet-Tutorial-label>`.
 
+Back to :ref:`Content Table <Tutorial-label>`
 
 --------------
 

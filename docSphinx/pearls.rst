@@ -3656,7 +3656,7 @@ Our initial Python implementation of the :py:class:`~bachetNumbers.BachetInteger
 
 The power of the **epistemic disjunctive fusion** operator, for instance, is indeed impressive. When two arguments prove the *Truthfulness* of a logical statement, their fusion will be **True**. When two arguments prove the **Falseness** of the statement, their fusion will be **False**, However, when they provide conjointly a proof of *Falseness* **and** a proof of *Truthfulness*, their fusion will be **indeterminate** (zero knowledge). It is worthwhile noticing again the essential computational role this indeterminate **zero** value is taking on in such a *Bachet* computer.
 
-Remarkable is even more the unexpected **Condorcet Consistency** of the *polarised* Bachet ranking scores which allows us to effectively reveal, with the :py:class:`~transitiveDigraphs.PartialBachetRanking` constructor, the transitive part of any given bipolar-valued digraph.    
+Remarkable is even more the unexpected **Condorcet Consistency** of the *polarised* Bachet ranking scores which allows us to effectively reveal, with the :py:class:`~transitiveDigraphs.PartialBachetRanking` constructor, the transitive part of any given bipolar-valued digraph. This consistency property, coupled with a higher discriminatory power than the classic *Copeland* ranking scores, makes the *Bachet* ranking scores very effective tool for solving inter- and intragroup pairing problems (see the tutorial on :ref:`fairly matching students and internships <InternshipsMatching-Tutorial-label>`).  
 
 ..............................................
 
