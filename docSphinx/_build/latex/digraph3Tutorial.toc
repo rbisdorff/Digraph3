@@ -116,56 +116,56 @@
 \contentsline {subsubsection}{Using a fairness enhancing solver}{239}{subsubsection*.255}%
 \contentsline {subsubsection}{Guiding the choice of the initial matching}{240}{subsubsection*.256}%
 \contentsline {subsection}{\numberline {3.5}Fairest internship matching: An \sphinxstyleemphasis {intergroup pairing} case study}{242}{subsection.3.5}%
-\contentsline {subsubsection}{A graduate internship matching problem}{242}{subsubsection*.263}%
-\contentsline {subsubsection}{Computing a fair matching}{243}{subsubsection*.264}%
-\contentsline {subsubsection}{Using a fairness enhancing heuristic}{245}{subsubsection*.266}%
-\contentsline {subsubsection}{Using bipolar approval\sphinxhyphen {}disapproval voting profiles}{247}{subsubsection*.268}%
+\contentsline {subsubsection}{A graduate internship matching problem}{242}{subsubsection*.262}%
+\contentsline {subsubsection}{Computing a fair matching}{243}{subsubsection*.263}%
+\contentsline {subsubsection}{Using a fairness enhancing heuristic}{245}{subsubsection*.265}%
+\contentsline {subsubsection}{Using bipolar approval\sphinxhyphen {}disapproval voting profiles}{247}{subsubsection*.267}%
 \contentsline {subsection}{\numberline {3.6}Exercises}{249}{subsection.3.6}%
-\contentsline {subsubsection}{Who will receive the best student award? (\S {})}{249}{subsubsection*.274}%
-\contentsline {subsubsection}{How to fairly rank movies (\S {})}{250}{subsubsection*.275}%
-\contentsline {subsubsection}{What is your best choice recommendation? (\S {})}{251}{subsubsection*.276}%
-\contentsline {subsubsection}{What is the best public policy? (\S {}\S {})}{253}{subsubsection*.278}%
-\contentsline {subsubsection}{A fair diploma validation decision (\S {}\S {}\S {})}{253}{subsubsection*.279}%
+\contentsline {subsubsection}{Who will receive the best student award? (\S {})}{249}{subsubsection*.273}%
+\contentsline {subsubsection}{How to fairly rank movies (\S {})}{250}{subsubsection*.274}%
+\contentsline {subsubsection}{What is your best choice recommendation? (\S {})}{251}{subsubsection*.275}%
+\contentsline {subsubsection}{What is the best public policy? (\S {}\S {})}{253}{subsubsection*.277}%
+\contentsline {subsubsection}{A fair diploma validation decision (\S {}\S {}\S {})}{253}{subsubsection*.278}%
 \contentsline {section}{\numberline {4}Working with big outranking digraphs}{254}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Sparse bipolar\sphinxhyphen {}valued outranking digraphs}{254}{subsection.4.1}%
-\contentsline {subsubsection}{The sparse pre\sphinxhyphen {}ranked outranking digraph model}{254}{subsubsection*.285}%
-\contentsline {subsubsection}{Ranking pre\sphinxhyphen {}ranked sparse outranking digraphs}{258}{subsubsection*.286}%
+\contentsline {subsubsection}{The sparse pre\sphinxhyphen {}ranked outranking digraph model}{254}{subsubsection*.284}%
+\contentsline {subsubsection}{Ranking pre\sphinxhyphen {}ranked sparse outranking digraphs}{258}{subsubsection*.285}%
 \contentsline {subsection}{\numberline {4.2}Using Digraph3 multiprocessing resources}{259}{subsection.4.2}%
-\contentsline {subsubsection}{Computing with multiple threads in parallel}{259}{subsubsection*.290}%
-\contentsline {subsubsection}{Using the mpOutrankingDigraphs module}{260}{subsubsection*.292}%
-\contentsline {subsubsection}{Setting the Threading parameters}{262}{subsubsection*.293}%
+\contentsline {subsubsection}{Computing with multiple threads in parallel}{259}{subsubsection*.289}%
+\contentsline {subsubsection}{Using the mpOutrankingDigraphs module}{260}{subsubsection*.291}%
+\contentsline {subsubsection}{Setting the Threading parameters}{262}{subsubsection*.292}%
 \contentsline {subsection}{\numberline {4.3}On ranking big outranking digraphs}{263}{subsection.4.3}%
-\contentsline {subsubsection}{C\sphinxhyphen {}compiled Python modules}{263}{subsubsection*.301}%
-\contentsline {subsubsection}{Big Data performance tableaux}{263}{subsubsection*.303}%
-\contentsline {subsubsection}{C\sphinxhyphen {}implemented integer\sphinxhyphen {}valued outranking digraphs}{265}{subsubsection*.304}%
-\contentsline {subsubsection}{The sparse outranking digraph implementation}{267}{subsubsection*.305}%
-\contentsline {subsubsection}{Ranking big sets of decision alternatives}{271}{subsubsection*.306}%
+\contentsline {subsubsection}{C\sphinxhyphen {}compiled Python modules}{263}{subsubsection*.300}%
+\contentsline {subsubsection}{Big Data performance tableaux}{263}{subsubsection*.302}%
+\contentsline {subsubsection}{C\sphinxhyphen {}implemented integer\sphinxhyphen {}valued outranking digraphs}{265}{subsubsection*.303}%
+\contentsline {subsubsection}{The sparse outranking digraph implementation}{267}{subsubsection*.304}%
+\contentsline {subsubsection}{Ranking big sets of decision alternatives}{271}{subsubsection*.305}%
 \contentsline {section}{\numberline {5}HPC\sphinxhyphen {}Ranking of Big Sparse Outranking Digraphs}{273}{section.5}%
 \contentsline {subsection}{\numberline {5.1}On a common 2023 desktop computer}{274}{subsection.5.1}%
 \contentsline {subsection}{\numberline {5.2}On the HPC platform of the University of Luxembourg (Spring 2018)}{275}{subsection.5.2}%
 \contentsline {subsection}{\numberline {5.3}On the MeluXina EuroHPC supercomputer (Summer 2024) }{281}{sphinxfootnotemark.24}%
 \contentsline {section}{\numberline {6}Moving on to undirected graphs}{283}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Working with the \sphinxstyleliteralintitle {\sphinxupquote {graphs}} module}{284}{subsection.6.1}%
-\contentsline {subsubsection}{Structure of a \sphinxstyleliteralintitle {\sphinxupquote {Graph}} object}{284}{subsubsection*.327}%
-\contentsline {subsubsection}{q\sphinxhyphen {}coloring of a graph}{287}{subsubsection*.328}%
-\contentsline {subsubsection}{MIS and clique enumeration}{289}{subsubsection*.329}%
-\contentsline {subsubsection}{Line graphs and maximal matchings}{290}{subsubsection*.330}%
-\contentsline {subsubsection}{Grids and the Ising model}{293}{subsubsection*.331}%
-\contentsline {subsubsection}{Simulating Metropolis random walks}{294}{subsubsection*.332}%
+\contentsline {subsubsection}{Structure of a \sphinxstyleliteralintitle {\sphinxupquote {Graph}} object}{284}{subsubsection*.326}%
+\contentsline {subsubsection}{q\sphinxhyphen {}coloring of a graph}{287}{subsubsection*.327}%
+\contentsline {subsubsection}{MIS and clique enumeration}{289}{subsubsection*.328}%
+\contentsline {subsubsection}{Line graphs and maximal matchings}{290}{subsubsection*.329}%
+\contentsline {subsubsection}{Grids and the Ising model}{293}{subsubsection*.330}%
+\contentsline {subsubsection}{Simulating Metropolis random walks}{294}{subsubsection*.331}%
 \contentsline {subsection}{\numberline {6.2}Computing the non isomorphic MISs of the 12\sphinxhyphen {}cycle graph}{296}{subsection.6.2}%
-\contentsline {subsubsection}{Introduction}{296}{subsubsection*.337}%
-\contentsline {subsubsection}{Computing the maximal independent sets (MISs)}{297}{subsubsection*.338}%
-\contentsline {subsubsection}{Computing the automorphism group}{299}{subsubsection*.340}%
-\contentsline {subsubsection}{Computing the isomorphic MISs}{299}{subsubsection*.342}%
+\contentsline {subsubsection}{Introduction}{296}{subsubsection*.336}%
+\contentsline {subsubsection}{Computing the maximal independent sets (MISs)}{297}{subsubsection*.337}%
+\contentsline {subsubsection}{Computing the automorphism group}{299}{subsubsection*.339}%
+\contentsline {subsubsection}{Computing the isomorphic MISs}{299}{subsubsection*.341}%
 \contentsline {subsection}{\numberline {6.3}About comparability, split, interval and permutation graphs}{301}{subsection.6.3}%
-\contentsline {subsubsection}{A multiply \sphinxstyleemphasis {perfect} graph}{301}{subsubsection*.347}%
-\contentsline {subsubsection}{Who is the liar ?}{303}{subsubsection*.348}%
-\contentsline {subsubsection}{Generating permutation graphs}{306}{subsubsection*.350}%
-\contentsline {subsubsection}{Recognizing permutation graphs}{309}{subsubsection*.351}%
+\contentsline {subsubsection}{A multiply \sphinxstyleemphasis {perfect} graph}{301}{subsubsection*.346}%
+\contentsline {subsubsection}{Who is the liar ?}{303}{subsubsection*.347}%
+\contentsline {subsubsection}{Generating permutation graphs}{306}{subsubsection*.349}%
+\contentsline {subsubsection}{Recognizing permutation graphs}{309}{subsubsection*.350}%
 \contentsline {subsection}{\numberline {6.4}On tree graphs and graph forests}{315}{subsection.6.4}%
-\contentsline {subsubsection}{Generating random tree graphs}{315}{subsubsection*.356}%
-\contentsline {subsubsection}{Recognizing tree graphs}{318}{subsubsection*.357}%
-\contentsline {subsubsection}{Spanning trees and forests}{320}{subsubsection*.358}%
-\contentsline {subsubsection}{Maximum determined spanning forests}{322}{subsubsection*.360}%
+\contentsline {subsubsection}{Generating random tree graphs}{315}{subsubsection*.355}%
+\contentsline {subsubsection}{Recognizing tree graphs}{318}{subsubsection*.356}%
+\contentsline {subsubsection}{Spanning trees and forests}{320}{subsubsection*.357}%
+\contentsline {subsubsection}{Maximum determined spanning forests}{322}{subsubsection*.359}%
 \contentsline {section}{\numberline {7}Appendices}{324}{section.7}%
 \contentsline {section}{References}{324}{section.7}%
