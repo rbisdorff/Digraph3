@@ -76,7 +76,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Digraph3'
-copyright = '2012-2025, Raymond Bisdorff'
+copyright = '2012-2026, Raymond Bisdorff'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -277,7 +277,7 @@ latex_elements = {
 
         \textbf{Raymond BISDORFF}
 
-        \small Luxembourg,  2020
+        \small Luxembourg,  2026
 
         \small  Last updated : \today
         
