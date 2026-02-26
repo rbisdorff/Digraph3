@@ -1127,6 +1127,177 @@ class IteratedCopelandRanking(LinearOrder):
             self.showRelationTable()
             print('Iterated Copelans ranking: ', self.iteratedCopelandRanking)
 
+class IteratedBachetRanking(LinearOrder):
+    """
+    instantiates the iterated Bachet ranking from
+    a given bipolar-valued Digraph instance
+    """
+    def __init__(self,other,CoDual=False,Valued=False,
+                 Comments=True,Debug=True):
+        """
+        constructor for generating a linear order
+        from a given other digraph following
+        the iterated Bachet ranking scores
+        """
+        from copy import copy, deepcopy
+        from collections import OrderedDict
+        from bachetNumbers import BachetInteger as BachetNumber
+        
+        # construct ranked pairs
+        if CoDual:
+            otherCoDual = CoDualDigraph(other)
+            relation = otherCoDual.relation
+            Max = otherCoDual.valuationdomain['max']
+            if Debug:
+                otherCoDual.showRelationTable()
+                print(otherCoDual.valuationdomain)
+        else:
+            relation = other.relation
+            Max = other.valuationdomain['max']
+            if Debug:
+                other.showRelationTable()
+                print(other.valuationdomain)
+                
+            
+        actions = [x for x in other.actions]
+        actions.sort()
+        n = len(actions)
+        
+        # instatiates a Digraph template
+        g = IndeterminateDigraph(order=n)
+        g.actions = actions
+        g.valuationdomain = {'min':Decimal('-1'),
+                             'med': Decimal('0'),
+                             'max': Decimal('1')}
+        g.relation = {}
+        for x in g.actions:
+            g.relation[x] = {}
+            for y in g.actions:
+                g.relation[x][y] = g.valuationdomain['med']
+
+        # construct ranking
+        actionsList = [x for x in g.actions]
+        c = PolarisedDigraph(other)
+
+        rank = OrderedDict()
+        order = OrderedDict()
+        k = 1
+        while actionsList != []:
+            kBachetScores = []
+            for x in actionsList:
+                ca = 0
+                khvector = []
+                kvvector = []
+                for y in actionsList:
+                    if x != y:
+                        khvector.append(c.relation[x][y])
+                        kvvector.append(c.relation[y][x])
+                        ca += 2
+                kxBachet = BachetNumber(vector=khvector) - BachetNumber(vector=kvvector)
+##            if Debug:
+##                print('k,ca', k,ca, int(k)                        
+##                if ca > 0:
+##                    kxnetFlows = kxnetFlows / Decimal(str(ca))
+##                if Debug:
+##                    print('k,x,kxnetFlows', k,x, kxnetFlows)
+##                knetFlows.append((kxnetFlows,x))
+                kBachetScores.append( (int(kxBachet),x) )
+            kBachetScores.sort()
+            if Comments:
+                print('k,kBachetScores, kBachetScores[-1][1]',k,
+                      kBachetScores,
+                      kBachetScores[-1][1])
+                                  
+            rank[kBachetScores[-1][1]] = {'rank':k,'kBachetScores':kBachetScores[-1][0]}
+            order[kBachetScores[0][1]] = {'order':k,'kBachetScores':kBachetScores[0][0]}
+            
+            actionsList.remove(kBachetScores[-1][1])
+            k += 1
+            if Debug:
+                print('actionsList', actionsList)
+        self.valuedRanks = rank
+        self.valuedOrdering = order
+                            
+        # construct ordering
+        actionsList = [x for x in g.actions]
+        order = OrderedDict()
+        k = 1
+        while actionsList != []:
+            kBachetScores = []
+            for x in actionsList:
+                ca = 0
+                khvector = []
+                kvvector = []
+                for y in actionsList:
+                    if x != y:
+                        khvector.append(c.relation[x][y])
+                        kvvector.append(c.relation[y][x])
+                        ca += 2
+                kxBachet = BachetNumber(vector=khvector) - BachetNumber(vector=kvvector)
+##                for y in actionsList:
+##                    if x != y:
+##                        kxnetFlows += c.relation[x][y] - c.relation[y][x]
+##                        ca += 2
+##                if Debug:
+##                    print('k,ca,kxnetFlows', k,ca, kxnetFlows)                        
+##                if ca > 0:
+##                    kxnetFlows = kxnetFlows / Decimal(str(ca))
+##                if Debug:
+##                    print('k,x,kxnetFlows', k,x, kxnetFlows)
+                kBachetScores.append( (int(kxBachet),x) )
+            kBachetScores.sort()
+            if Comments:
+                print('k,kBachetScores, kBachetScores[-1][1]',
+                      k,kBachetScores, kBachetScores[-1][1])
+            order[kBachetScores[0][1]] = {'order':k,'Bachet':kBachetScores[0][0]}
+            
+            actionsList.remove(kBachetScores[0][1])
+            k += 1
+            if Debug:
+                print('actionsList', actionsList)
+        self.valuedOrdering = order 
+        if Debug:
+            print(rank)
+            print(order)
+
+        iteratedBachetRanking = [x for x in rank]
+        self.iteratedBachetRanking = iteratedBachetRanking
+        iteratedBachetOrdering = [x for x in order]
+        self.iteratedBachetOrder = iteratedBachetOrdering
+        
+        if Debug:
+            print('Iterated Bachet ranks: ', iteratedBachetRanking)
+            print('Iterated Bachet ordering: ', iteratedBachetOrdering)
+
+##        if Valued:
+##            n = len(g.actions)
+##            for i in range(n):
+##                for j in range(i+1,n):
+##                    x = iteratedCopelandRanking[i]
+##                    y = iteratedCopelandRanking[j]
+##                    g.relation[x][y] = rank[x]['Copeland']
+##                    g.relation[y][x] = -rank[x]['Copeland']
+##        else:
+        n = len(g.actions)
+        for i in range(n):
+            for j in range(i+1,n):
+                x = iteratedBachetRanking[i]
+                y = iteratedBachetRanking[j]
+                g.relation[x][y] = g.valuationdomain['max']
+                g.relation[y][x] = g.valuationdomain['min']
+
+            
+        self.name = other.name + '_ranked'        
+        self.actions = copy(other.actions)
+        self.order = len(self.actions)
+        self.valuationdomain = copy(g.valuationdomain)
+        self.relation = copy(g.relation)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        if Debug:
+            self.showRelationTable()
+            print('Iterated Bachet ranking: ', self.iteratedBachetRanking)
+
 ##class _OutFlowsOrder(LinearOrder):
 ##    """
 ##    instantiates the out flows Order from
@@ -2723,19 +2894,19 @@ if __name__ == "__main__":
         print(nt)
         #g = RandomDigraph(order=7)
         revba1 = [x for x in reversed(g.actions)]
-        ba1 = BachetRanking(g,
-                            orderLimit=20,sampleSize=randomSize,
-                            Debug=False,
-                            actionsList=None,
-                            Polarised=Polarised,
-                            TriplesSorted=True,
-                            Randomized=False,
-                            CoDualTriples=True,
-                            seed=seed,
-                            Logging=False,
+        ba1 = IteratedBachetRanking(g,
+                            #orderLimit=20,sampleSize=randomSize,
+                            Debug=True,
+##                            actionsList=None,
+##                            Polarised=Polarised,
+##                            TriplesSorted=True,
+##                            Randomized=False,
+##                            CoDualTriples=True,
+##                            seed=seed,
+##                            Logging=False,
                             )
         #print(ba1)
-        corrba1 = g.computeRankingCorrelation(ba1.bachetRanking)
+        corrba1 = g.computeRankingCorrelation(ba1.iteratedBachetRanking)
         #print('Smart polarised Bachet Ranking')
         #print('bap',ba1.bachetRanking,corrba1)
         cop = CopelandRanking(g,Comments=False,Gamma=False)
