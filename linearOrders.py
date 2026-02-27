@@ -1132,8 +1132,8 @@ class IteratedBachetRanking(LinearOrder):
     instantiates the iterated Bachet ranking from
     a given bipolar-valued Digraph instance
     """
-    def __init__(self,other,CoDual=False,Valued=False,
-                 Comments=True,Debug=True):
+    def __init__(self,other,CoDual=False,
+                 Comments=False,Debug=False):
         """
         constructor for generating a linear order
         from a given other digraph following
@@ -1147,14 +1147,14 @@ class IteratedBachetRanking(LinearOrder):
         if CoDual:
             otherCoDual = CoDualDigraph(other)
             relation = otherCoDual.relation
-            Max = otherCoDual.valuationdomain['max']
-            if Debug:
+            #Max = otherCoDual.valuationdomain['max']
+            if Comments:
                 otherCoDual.showRelationTable()
                 print(otherCoDual.valuationdomain)
         else:
             relation = other.relation
-            Max = other.valuationdomain['max']
-            if Debug:
+            #Max = other.valuationdomain['max']
+            if Comments:
                 other.showRelationTable()
                 print(other.valuationdomain)
                 
@@ -1180,7 +1180,7 @@ class IteratedBachetRanking(LinearOrder):
         c = PolarisedDigraph(other)
 
         rank = OrderedDict()
-        order = OrderedDict()
+        #order = OrderedDict()
         k = 1
         while actionsList != []:
             kBachetScores = []
@@ -1209,14 +1209,14 @@ class IteratedBachetRanking(LinearOrder):
                       kBachetScores[-1][1])
                                   
             rank[kBachetScores[-1][1]] = {'rank':k,'kBachetScores':kBachetScores[-1][0]}
-            order[kBachetScores[0][1]] = {'order':k,'kBachetScores':kBachetScores[0][0]}
+            #order[kBachetScores[0][1]] = {'order':k,'kBachetScores':kBachetScores[0][0]}
             
             actionsList.remove(kBachetScores[-1][1])
             k += 1
             if Debug:
                 print('actionsList', actionsList)
         self.valuedRanks = rank
-        self.valuedOrdering = order
+        #self.valuedOrdering = order
                             
         # construct ordering
         actionsList = [x for x in g.actions]
@@ -1265,7 +1265,7 @@ class IteratedBachetRanking(LinearOrder):
         iteratedBachetOrdering = [x for x in order]
         self.iteratedBachetOrder = iteratedBachetOrdering
         
-        if Debug:
+        if Comments:
             print('Iterated Bachet ranks: ', iteratedBachetRanking)
             print('Iterated Bachet ordering: ', iteratedBachetOrdering)
 
@@ -2894,9 +2894,10 @@ if __name__ == "__main__":
         print(nt)
         #g = RandomDigraph(order=7)
         revba1 = [x for x in reversed(g.actions)]
-        ba1 = IteratedBachetRanking(g,
+        ba1 = IteratedBachetRanking(g,CoDual=False,
                             #orderLimit=20,sampleSize=randomSize,
-                            Debug=True,
+                            Debug=False,
+                                    Comments=True,
 ##                            actionsList=None,
 ##                            Polarised=Polarised,
 ##                            TriplesSorted=True,

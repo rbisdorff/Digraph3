@@ -1271,8 +1271,8 @@
 <span class="sd">    instantiates the iterated Bachet ranking from</span>
 <span class="sd">    a given bipolar-valued Digraph instance</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Valued</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                 <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructor for generating a linear order</span>
 <span class="sd">        from a given other digraph following</span>
@@ -1286,14 +1286,14 @@
         <span class="k">if</span> <span class="n">CoDual</span><span class="p">:</span>
             <span class="n">otherCoDual</span> <span class="o">=</span> <span class="n">CoDualDigraph</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
             <span class="n">relation</span> <span class="o">=</span> <span class="n">otherCoDual</span><span class="o">.</span><span class="n">relation</span>
-            <span class="n">Max</span> <span class="o">=</span> <span class="n">otherCoDual</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="c1">#Max = otherCoDual.valuationdomain[&#39;max&#39;]</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="n">otherCoDual</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">otherCoDual</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">relation</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">relation</span>
-            <span class="n">Max</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="c1">#Max = other.valuationdomain[&#39;max&#39;]</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="n">other</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
                 
@@ -1319,7 +1319,7 @@
         <span class="n">c</span> <span class="o">=</span> <span class="n">PolarisedDigraph</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
         <span class="n">rank</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
-        <span class="n">order</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="c1">#order = OrderedDict()</span>
         <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">while</span> <span class="n">actionsList</span> <span class="o">!=</span> <span class="p">[]:</span>
             <span class="n">kBachetScores</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1348,14 +1348,14 @@
                       <span class="n">kBachetScores</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
                                   
             <span class="n">rank</span><span class="p">[</span><span class="n">kBachetScores</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;rank&#39;</span><span class="p">:</span><span class="n">k</span><span class="p">,</span><span class="s1">&#39;kBachetScores&#39;</span><span class="p">:</span><span class="n">kBachetScores</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]}</span>
-            <span class="n">order</span><span class="p">[</span><span class="n">kBachetScores</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;order&#39;</span><span class="p">:</span><span class="n">k</span><span class="p">,</span><span class="s1">&#39;kBachetScores&#39;</span><span class="p">:</span><span class="n">kBachetScores</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]}</span>
+            <span class="c1">#order[kBachetScores[0][1]] = {&#39;order&#39;:k,&#39;kBachetScores&#39;:kBachetScores[0][0]}</span>
             
             <span class="n">actionsList</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">kBachetScores</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
             <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;actionsList&#39;</span><span class="p">,</span> <span class="n">actionsList</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valuedRanks</span> <span class="o">=</span> <span class="n">rank</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">valuedOrdering</span> <span class="o">=</span> <span class="n">order</span>
+        <span class="c1">#self.valuedOrdering = order</span>
                             
         <span class="c1"># construct ordering</span>
         <span class="n">actionsList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
@@ -1404,7 +1404,7 @@
         <span class="n">iteratedBachetOrdering</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">order</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">iteratedBachetOrder</span> <span class="o">=</span> <span class="n">iteratedBachetOrdering</span>
         
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iterated Bachet ranks: &#39;</span><span class="p">,</span> <span class="n">iteratedBachetRanking</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iterated Bachet ordering: &#39;</span><span class="p">,</span> <span class="n">iteratedBachetOrdering</span><span class="p">)</span>
 
@@ -3073,9 +3073,10 @@
         <span class="nb">print</span><span class="p">(</span><span class="n">nt</span><span class="p">)</span>
         <span class="c1">#g = RandomDigraph(order=7)</span>
         <span class="n">revba1</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">)]</span>
-        <span class="n">ba1</span> <span class="o">=</span> <span class="n">IteratedBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span>
+        <span class="n">ba1</span> <span class="o">=</span> <span class="n">IteratedBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                             <span class="c1">#orderLimit=20,sampleSize=randomSize,</span>
-                            <span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                            <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                    <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="c1">##                            actionsList=None,</span>
 <span class="c1">##                            Polarised=Polarised,</span>
 <span class="c1">##                            TriplesSorted=True,</span>
@@ -3196,7 +3197,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Feb 26, 2026.
+      <span class="lastupdated">Last updated on Feb 27, 2026.
       </span></p>
   </div>
 
