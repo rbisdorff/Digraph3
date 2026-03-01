@@ -1072,11 +1072,11 @@
 
         <span class="n">iteratedNetFlowsRanking</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rank</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">iteratedNetFlowsRanking</span> <span class="o">=</span> <span class="n">iteratedNetFlowsRanking</span>
-        <span class="n">iteratedNetFlowsOrdering</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">order</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">iteratedNetFlowsOrdering</span> <span class="o">=</span> <span class="n">iteratedNetFlowsOrdering</span>      
+        <span class="n">iteratedNetFlowsOrder</span><span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">order</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iteratedNetFlowsOrder</span> <span class="o">=</span> <span class="n">iteratedNetFlowsOrder</span>     
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iterated netflows ranks: &#39;</span><span class="p">,</span> <span class="n">iteratedNetFlowsRanking</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iterated netflows ordering: &#39;</span><span class="p">,</span> <span class="n">iteratedNetFlowsOrdering</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iterated netflows ranking: &#39;</span><span class="p">,</span> <span class="n">iteratedNetFlowsRanking</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iterated netflows order: &#39;</span><span class="p">,</span> <span class="n">iteratedNetFlowsOrder</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">Valued</span><span class="p">:</span>
             <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
@@ -1106,7 +1106,7 @@
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iterated NetFlows ranking : &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">iteratedNetFlowsRanking</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iterated NetFlows ordering: &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">iteratedNetFlowsOrdering</span><span class="p">)</span></div>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iterated NetFlows order: &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">iteratedNetFlowsOrder</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="IteratedCopelandRanking">
@@ -1227,12 +1227,12 @@
 
         <span class="n">iteratedCopelandRanking</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rank</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">iteratedCopelandRanking</span> <span class="o">=</span> <span class="n">iteratedCopelandRanking</span>
-        <span class="n">iteratedCopelandOrdering</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">order</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">iteratedCopelandOrder</span> <span class="o">=</span> <span class="n">iteratedCopelandOrdering</span>
+        <span class="n">iteratedCopelandOrder</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">order</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iteratedCopelandOrder</span> <span class="o">=</span> <span class="n">iteratedCopelandOrder</span>
         
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iterated Copeland ranks: &#39;</span><span class="p">,</span> <span class="n">iteratedCopelandRanking</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iterated Copeland ordering: &#39;</span><span class="p">,</span> <span class="n">iteratedCopelandOrdering</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iterated Copeland ordering: &#39;</span><span class="p">,</span> <span class="n">iteratedCopelandOrder</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">Valued</span><span class="p">:</span>
             <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
@@ -1261,17 +1261,17 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iterated Copelans ranking: &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">iteratedCopelandRanking</span><span class="p">)</span></div>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iterated Copeland ranking: &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">iteratedCopelandRanking</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="IteratedBachetRanking">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.IteratedBachetRanking">[docs]</a>
 <span class="k">class</span> <span class="nc">IteratedBachetRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    instantiates the iterated Bachet ranking from</span>
-<span class="sd">    a given bipolar-valued Digraph instance</span>
+<span class="sd">    instantiates the iterated Bachet ranking and order from</span>
+<span class="sd">    a given bipolar-valued Digraph instance.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Reversed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructor for generating a linear order</span>
@@ -1316,6 +1316,8 @@
 
         <span class="c1"># construct ranking</span>
         <span class="n">actionsList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">Reversed</span><span class="p">:</span>
+            <span class="n">actionsList</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">PolarisedDigraph</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
         <span class="n">rank</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
@@ -3197,7 +3199,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Feb 27, 2026.
+      <span class="lastupdated">Last updated on Mar 01, 2026.
       </span></p>
   </div>
 

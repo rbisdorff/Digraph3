@@ -939,11 +939,11 @@ class IteratedNetFlowsRanking(LinearOrder):
 
         iteratedNetFlowsRanking = [x for x in rank]
         self.iteratedNetFlowsRanking = iteratedNetFlowsRanking
-        iteratedNetFlowsOrdering = [x for x in order]
-        self.iteratedNetFlowsOrdering = iteratedNetFlowsOrdering      
+        iteratedNetFlowsOrder= [x for x in order]
+        self.iteratedNetFlowsOrder = iteratedNetFlowsOrder     
         if Debug:
-            print('Iterated netflows ranks: ', iteratedNetFlowsRanking)
-            print('Iterated netflows ordering: ', iteratedNetFlowsOrdering)
+            print('Iterated netflows ranking: ', iteratedNetFlowsRanking)
+            print('Iterated netflows order: ', iteratedNetFlowsOrder)
 
         if Valued:
             n = len(g.actions)
@@ -973,7 +973,7 @@ class IteratedNetFlowsRanking(LinearOrder):
         if Debug:
             self.showRelationTable()
             print('Iterated NetFlows ranking : ', self.iteratedNetFlowsRanking)
-            print('Iterated NetFlows ordering: ', self.iteratedNetFlowsOrdering)
+            print('Iterated NetFlows order: ', self.iteratedNetFlowsOrder)
 
 class IteratedCopelandRanking(LinearOrder):
     """
@@ -1091,12 +1091,12 @@ class IteratedCopelandRanking(LinearOrder):
 
         iteratedCopelandRanking = [x for x in rank]
         self.iteratedCopelandRanking = iteratedCopelandRanking
-        iteratedCopelandOrdering = [x for x in order]
-        self.iteratedCopelandOrder = iteratedCopelandOrdering
+        iteratedCopelandOrder = [x for x in order]
+        self.iteratedCopelandOrder = iteratedCopelandOrder
         
         if Debug:
             print('Iterated Copeland ranks: ', iteratedCopelandRanking)
-            print('Iterated Copeland ordering: ', iteratedCopelandOrdering)
+            print('Iterated Copeland ordering: ', iteratedCopelandOrder)
 
         if Valued:
             n = len(g.actions)
@@ -1125,14 +1125,14 @@ class IteratedCopelandRanking(LinearOrder):
         self.notGamma = self.notGammaSets()
         if Debug:
             self.showRelationTable()
-            print('Iterated Copelans ranking: ', self.iteratedCopelandRanking)
+            print('Iterated Copeland ranking: ', self.iteratedCopelandRanking)
 
 class IteratedBachetRanking(LinearOrder):
     """
-    instantiates the iterated Bachet ranking from
-    a given bipolar-valued Digraph instance
+    instantiates the iterated Bachet ranking and order from
+    a given bipolar-valued Digraph instance.
     """
-    def __init__(self,other,CoDual=False,
+    def __init__(self,other,CoDual=False,Reversed=False,
                  Comments=False,Debug=False):
         """
         constructor for generating a linear order
@@ -1177,6 +1177,8 @@ class IteratedBachetRanking(LinearOrder):
 
         # construct ranking
         actionsList = [x for x in g.actions]
+        if Reversed:
+            actionsList.reverse()
         c = PolarisedDigraph(other)
 
         rank = OrderedDict()

@@ -3929,8 +3929,6 @@ It is worthwhile noticing in :numref:`partialBachetval` that alternative *a1* ap
 
    Valued Bachet partial ranking result  	   
 
-Consensus quality of the partial Bachet rankings
-````````````````````````````````````````````````
 Let us now verify in :numref:`partialBachet7` below the consensus quality of the partial polarised *Bachet* ranking *pbr*.
 
 .. code-block:: pycon
@@ -3993,7 +3991,73 @@ We may redo in :numref:`partialBachet8` below the same computation for the parti
 
 The valued partial *Bachet* ranking pays a more accurate attention to the marginal criteria significance weights: 10/60 = 0.167 for the three  Costs criteria and 3/60 = 0.050 for the Benefit criteria. Criteria *c01* and *c03* for instance, with a significance of 0.167, are hence given more attention. The weighted mean marginal correlation appears slightly lower (+0.098 vs +0.108). The standard deviation being however lower (+0.204 vs +0.240), we obtain a slightly better overall fairness score (-0.107 vs -0.132, see Lines 19-21).    
 
-As shown above, *Bachet* ranking rules may effectively deliver new methods for constructing convincing partial rankings and, by the way, a tool for computing potential first or last choice recommendations. Actually the :ref:`initial and terminal prekernels <Bipolar-Valued-Kernels-Tutorial-label>` of such partial transitive digraphs. Mind however that the *Bachet* ranking rules can only handle small outranking digraphs ( < 50 ). For larger ( > 50 ) or big ( > 1000 ) outranking digraphs it is opportune to turn to order statistics and compute **weak rankings** --rankings with ties-- by sorting the multicriteria performance records into *relative* or *absolute* performance **quantile equivalence classes**.
+Consensus of iterated ranking-by-choosing and ordering-by-choosing
+``````````````````````````````````````````````````````````````````
+
+Noticing that *Bachet* ranking scores of an alternative x represents in fact a bipolar-valued characteristic of the assertion ‘alternative x is ranked first’, we may enhance *Kohler*'s iterating *ranking-by-choosing*, resp. *ordeing-by-choosing*, rule by replacing the min-max, respectively the max-min, strategy with an iterated respective *Bachet* ranking score.
+
+For a ranking (resp. an ordering) result, at step i (i goes from 1 to n) do the following:
+
+    Compute for each row of the bipolar-valued outranking relation table (see Listing 1.31) the corresponding Bachet ranking score;
+
+    Select the row where this score is maximal (resp. minimal); ties being resolved by lexicographic order;
+
+    Put the corresponding decision alternative at rank (resp. order) i;
+
+    Delete the corresponding row and column from the relation table and restart until the table is empty.
+
+In :numref:`partialIteratedBachet1` we may notice that the iterated *ranking-by-choosing* and its dual, the iterated *ordering-by-choosing* strategies do not usually deliver both the same ranking result.
+
+.. code-block:: pycon
+   :caption: iterated Bachet ranking and order
+   :name: partialIteratedBachet1
+   :emphasize-lines: 5,11,12
+
+   >>> from outrankingDigraphs import *
+   >>> t = RandomCBPerformanceTableau(numberOfActions=9,
+   ...                       numberOfCriteria=13,seed=1)
+   >>> g = BipolarOutrankingDigraph(t,Normalized=True)
+   >>> iba = IteratedBachetRanking(g)
+   >>> ranking1 = iba.iteratedBachetRanking
+   >>> ranking2 = copy(iba.iteratedBachetOrder)
+   >>> ranking2.reverse()
+   >>> ibaRankings = [ranking1,ranking2]
+   >>>  print(ibaRankings)
+    [['a3', 'a2', 'a5', 'a8', 'a1', 'a9', 'a7', 'a6', 'a4'],
+     ['a5', 'a3', 'a2', 'a8', 'a6', 'a7', 'a9', 'a4', 'a1']] 
+
+In :numref:`iBachetRanking` we discover actually the transitive part of the given random outranking digraph *g*. The head group contains alternatives *a2*, *a3* and *a5*. Alternative *a8* is consistently fourth-ranked, whereas alternative *a4* appears last-ranked. With such slightly diverging ranking-by-choosing and ordering-by-choosing results, it is useful to fuse now both, the iterated ranking-bychoosing and ordering-by-choosing results into a partial ranking consensus suported by a nearly 2/3rd significance majority, as shown in :numref:`partialIteratedBachet2` Line 5 below.
+
+.. code-block:: pycon
+   :caption: iterated Bachet ranking and order fusion
+   :name: partialIteratedBachet2
+   :emphasize-lines: 1,5
+
+   >>> pba = RankingsFusionDigraph(g,ibaRankings)
+   >>> corrpba = g.computeOrdinalCorrelation(pba)
+   >>> g.showCorrelation(corrpba)
+    Correlation indexes:
+     Crisp ordinal correlation  : +0.976
+     Epistemic determination    :  0.321
+     Bipolar-valued equivalence : +0.313
+   >>> pba.exportGraphViz('iBachetRanking')
+    *---- exporting a dot file for GraphViz tools ---------*
+     Exporting to BachetRanking.dot
+     0 subgraph { rank=same; a5; a3; }
+     1 subgraph { rank=same; a2; }
+     2 subgraph { rank=same; a8; }
+     3 subgraph { rank=same; a1; a6; a9; a7; }
+     4 subgraph { rank=same; a4; }
+     dot -Grankdir=TB -Tpng iBachetRanking.dot -o iBachetRanking.png
+
+.. Figure:: iBachetRanking.png
+   :name: iBachetRanking
+   :width: 200 px
+   :align: center
+
+   Iterated Bachet partial ranking result  	   
+
+As shown in :numref:`iBachetRanking` above, bipolar iterated ranking-by-choosing rules may hence effectively deliver a new method for constructing convincing partial rankings and, by the way, a tool for computing potential first or last choice recommendations. Actually the :ref:`initial and terminal prekernels <Bipolar-Valued-Kernels-Tutorial-label>` of such partial transitive digraphs. Mind however that the *Bachet* ranking rules can only handle small outranking digraphs ( < 50 ). For larger ( > 50 ) or big ( > 1000 ) outranking digraphs it is opportune to turn to order statistics and compute **weak rankings** --rankings with ties-- by sorting the multicriteria performance records into *relative* or *absolute* performance **quantile equivalence classes**.
 
 This order statistics based **rating** approach is presented in the following tutorials.  
 
