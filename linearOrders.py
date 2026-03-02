@@ -1132,7 +1132,9 @@ class IteratedBachetRanking(LinearOrder):
     instantiates the iterated Bachet ranking and order from
     a given bipolar-valued Digraph instance.
     """
-    def __init__(self,other,CoDual=False,Reversed=False,
+    def __init__(self,other,CoDual=False,Reversed=False,Valued=False,
+                 actionsList=None,
+                 randomActionsList=False,seed=None,
                  Comments=False,Debug=False):
         """
         constructor for generating a linear order
@@ -1159,8 +1161,11 @@ class IteratedBachetRanking(LinearOrder):
                 print(other.valuationdomain)
                 
             
-        actions = [x for x in other.actions]
-        actions.sort()
+        if actionsList is None:
+            actions = [x for x in other.actions]
+        else:
+            actions = actionsList
+        #actions.sort()
         n = len(actions)
         
         # instatiates a Digraph template
@@ -1177,9 +1182,16 @@ class IteratedBachetRanking(LinearOrder):
 
         # construct ranking
         actionsList = [x for x in g.actions]
+        if randomActionsList:
+            from random import shuffle, seed
+            seed = seed
+            shuffle(actionsList)
         if Reversed:
             actionsList.reverse()
-        c = PolarisedDigraph(other)
+        if Valued:
+            c = other
+        else:
+            c = PolarisedDigraph(other)
 
         rank = OrderedDict()
         #order = OrderedDict()
@@ -2897,6 +2909,8 @@ if __name__ == "__main__":
         #g = RandomDigraph(order=7)
         revba1 = [x for x in reversed(g.actions)]
         ba1 = IteratedBachetRanking(g,CoDual=False,
+                                    Reversed=False,
+                                    randomActionsList=True,seed=1,
                             #orderLimit=20,sampleSize=randomSize,
                             Debug=False,
                                     Comments=True,

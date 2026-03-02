@@ -3991,49 +3991,59 @@ We may redo in :numref:`partialBachet8` below the same computation for the parti
 
 The valued partial *Bachet* ranking pays a more accurate attention to the marginal criteria significance weights: 10/60 = 0.167 for the three  Costs criteria and 3/60 = 0.050 for the Benefit criteria. Criteria *c01* and *c03* for instance, with a significance of 0.167, are hence given more attention. The weighted mean marginal correlation appears slightly lower (+0.098 vs +0.108). The standard deviation being however lower (+0.204 vs +0.240), we obtain a slightly better overall fairness score (-0.107 vs -0.132, see Lines 19-21).    
 
-Consensus of iterated ranking-by-choosing and ordering-by-choosing
+Consensus of iterated ranking and ordering by choosing
 ``````````````````````````````````````````````````````````````````
 
-Noticing that *Bachet* ranking scores of an alternative x represents in fact a bipolar-valued characteristic of the assertion ‘alternative x is ranked first’, we may enhance *Kohler*'s iterating *ranking-by-choosing*, resp. *ordeing-by-choosing*, rule by replacing the min-max, respectively the max-min, strategy with an iterated respective *Bachet* ranking score.
+Noticing that the *Bachet* ranking score of an alternative x represent in fact a bipolar-valued characteristic of the assertion ‘alternative x is ranked first’, we may enhance *Kohler*'s iterating *ranking-by-choosing*, resp. *ordeing-by-choosing*, rule by replacing the *min-max*, respectively the *max-min*, strategy with an iterated respective *Bachet* ranking score [69]_.
 
-For a ranking (resp. an ordering) result, at step i (i goes from 1 to n) do the following:
+For a ranking (resp. an ordering) result, at step i (i goes from 1 to n), do the following:
 
-    Compute for each row of the bipolar-valued outranking relation table (see Listing 1.31) the corresponding Bachet ranking score;
+    (a) Compute for each row of the bipolar-valued outranking relation table the corresponding Bachet ranking score;
 
-    Select the row where this score is maximal (resp. minimal); ties being resolved by lexicographic order;
+    (b) Select the row where this score is maximal (resp. minimal); ties being resolved by lexicographic order;
 
-    Put the corresponding decision alternative at rank (resp. order) i;
+    (c) Put the corresponding decision alternative at rank (resp. order) i;
 
-    Delete the corresponding row and column from the relation table and restart until the table is empty.
+    (d) Delete the corresponding row and column from the relation table and restart from (a) until the table is empty.
 
-In :numref:`partialIteratedBachet1` we may notice that the iterated *ranking-by-choosing* and its dual, the iterated *ordering-by-choosing* strategies do not usually deliver both the same ranking result.
+The :py:mod:`~linearOrders.IteratedBachetRanking` constructor, provided by the :py:mod:`linearOrders` module, implements this algorithm and in :numref:`partialIteratedBachet1` Lines 12-13 below we may notice that the iterated *ranking-by-choosing* strategy and its dual, the iterated *ordering-by-choosing* strategy, do not usually deliver both quite the same ranking result.
 
 .. code-block:: pycon
    :caption: iterated Bachet ranking and order
    :name: partialIteratedBachet1
-   :emphasize-lines: 5,11,12
+   :emphasize-lines: 6,12,13
 
    >>> from outrankingDigraphs import *
    >>> t = RandomCBPerformanceTableau(numberOfActions=9,
    ...                       numberOfCriteria=13,seed=1)
    >>> g = BipolarOutrankingDigraph(t,Normalized=True)
+   >>> from linearOrders import IteratedBachetRanking
    >>> iba = IteratedBachetRanking(g)
    >>> ranking1 = iba.iteratedBachetRanking
    >>> ranking2 = copy(iba.iteratedBachetOrder)
    >>> ranking2.reverse()
    >>> ibaRankings = [ranking1,ranking2]
-   >>>  print(ibaRankings)
+   >>> print(ibaRankings)
     [['a3', 'a2', 'a5', 'a8', 'a1', 'a9', 'a7', 'a6', 'a4'],
      ['a5', 'a3', 'a2', 'a8', 'a6', 'a7', 'a9', 'a4', 'a1']] 
 
-In :numref:`iBachetRanking` we discover actually the transitive part of the given random outranking digraph *g*. The head group contains alternatives *a2*, *a3* and *a5*. Alternative *a8* is consistently fourth-ranked, whereas alternative *a4* appears last-ranked. With such slightly diverging ranking-by-choosing and ordering-by-choosing results, it is useful to fuse now both, the iterated ranking-bychoosing and ordering-by-choosing results into a partial ranking consensus suported by a nearly 2/3rd significance majority, as shown in :numref:`partialIteratedBachet2` Line 5 below.
+With such slightly diverging ranking-by-choosing and ordering-by-choosing results, it is useful to fuse now both, the iterated ranking-bychoosing and ordering-by-choosing results into a partial ranking consensus In :numref:`partialIteratedBachet2` below we may thus discover the actual transitive part of the given random outranking digraph *g* (see Lines 4-9). The head group contains alternatives *a3*, *a5* and *a2*. Alternative *a8* is consistently third-ranked, whereas alternatives *a1* and *a4* appear last-ranked. This partial ranking structure is highly correlated (+0.976) with the given outranking digraph *g* and supported by a nearly 2/3rd significance majority (see Lines 13 and 15 below).
 
 .. code-block:: pycon
    :caption: iterated Bachet ranking and order fusion
    :name: partialIteratedBachet2
-   :emphasize-lines: 1,5
+   :emphasize-lines: 2,4-9,13
 
+   >>> from transitiveDigraphs import RankingsFusionDigraph
    >>> pba = RankingsFusionDigraph(g,ibaRankings)
+   >>> pba.showTransitiveDigraph()
+    Ranking by recursively first and last choosing
+     1st ranked ['a3', 'a5']
+       2nd ranked ['a2']
+         3rd ranked ['a8']
+         3rd last ranked ['a8']
+       2nd last ranked ['a6', 'a7', 'a9']
+     1st last ranked ['a1', 'a4']
    >>> corrpba = g.computeOrdinalCorrelation(pba)
    >>> g.showCorrelation(corrpba)
     Correlation indexes:
@@ -4043,11 +4053,6 @@ In :numref:`iBachetRanking` we discover actually the transitive part of the give
    >>> pba.exportGraphViz('iBachetRanking')
     *---- exporting a dot file for GraphViz tools ---------*
      Exporting to BachetRanking.dot
-     0 subgraph { rank=same; a5; a3; }
-     1 subgraph { rank=same; a2; }
-     2 subgraph { rank=same; a8; }
-     3 subgraph { rank=same; a1; a6; a9; a7; }
-     4 subgraph { rank=same; a4; }
      dot -Grankdir=TB -Tpng iBachetRanking.dot -o iBachetRanking.png
 
 .. Figure:: iBachetRanking.png
@@ -4057,7 +4062,7 @@ In :numref:`iBachetRanking` we discover actually the transitive part of the give
 
    Iterated Bachet partial ranking result  	   
 
-As shown in :numref:`iBachetRanking` above, bipolar iterated ranking-by-choosing rules may hence effectively deliver a new method for constructing convincing partial rankings and, by the way, a tool for computing potential first or last choice recommendations. Actually the :ref:`initial and terminal prekernels <Bipolar-Valued-Kernels-Tutorial-label>` of such partial transitive digraphs. Mind however that the *Bachet* ranking rules can only handle small outranking digraphs ( < 50 ). For larger ( > 50 ) or big ( > 1000 ) outranking digraphs it is opportune to turn to order statistics and compute **weak rankings** --rankings with ties-- by sorting the multicriteria performance records into *relative* or *absolute* performance **quantile equivalence classes**.
+As shown in :numref:`iBachetRanking` above, bipolar iterated *Bachet* ranking-by-choosing rules may hence effectively deliver a new method for constructing convincing partial rankings and, by the way, a tool for computing potential first or last choice recommendations. Actually the :ref:`initial and terminal prekernels <Bipolar-Valued-Kernels-Tutorial-label>` of such partial transitive digraphs. Mind however that the *Bachet* ranking rules can only handle small outranking digraphs ( < 50 ). For larger ( > 50 ) or big ( > 1000 ) outranking digraphs it is opportune to turn to order statistics and compute **weak rankings** --rankings with ties-- by sorting the multicriteria performance records into *relative* or *absolute* performance **quantile equivalence classes**.
 
 This order statistics based **rating** approach is presented in the following tutorials.  
 
@@ -11959,6 +11964,8 @@ Appendices
 .. [67] See https://en.wikipedia.org/wiki/Gale%E2%80%93Shapley_algorithm
 
 .. [68] See :ref:`computing fair intergroup pairings <Fair-InterGroup-Pairings-label>`
+
+.. [69] See :ref:`Applications of bipolar-valued base 3 encoded Bachet numbers <Bachet-Tutorial-label>`
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
