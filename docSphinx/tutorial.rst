@@ -3994,11 +3994,11 @@ The valued partial *Bachet* ranking pays a more accurate attention to the margin
 Consensus of iterated ranking and ordering by choosing
 ``````````````````````````````````````````````````````````````````
 
-Noticing that the *Bachet* ranking score of an alternative x represent in fact a bipolar-valued characteristic of the assertion ‘alternative x is ranked first’, we may enhance *Kohler*'s iterating *ranking-by-choosing*, resp. *ordeing-by-choosing*, rule by replacing the *min-max*, respectively the *max-min*, strategy with an iterated respective *Bachet* ranking score [69]_.
+Noticing that the *Bachet* ranking score of an alternative x represent in fact a bipolar-valued characteristic of the assertion ‘alternative x is ranked first’, we may enhance *Kohler*'s iterating *ranking-by-choosing*, resp. *ordering-by-choosing*, rule by replacing the *min-max*, respectively the *max-min*, strategy with an iterated respective *Bachet* ranking score [69]_.
 
 For a ranking (resp. an ordering) result, at step i (i goes from 1 to n), do the following:
 
-    (a) Compute for each row of the bipolar-valued outranking relation table the corresponding Bachet ranking score;
+    (a) Compute for each row of the bipolar-valued outranking relation table the corresponding *Bachet* ranking score;
 
     (b) Select the row where this score is maximal (resp. minimal); ties being resolved by lexicographic order;
 
