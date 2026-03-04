@@ -8918,12 +8918,21 @@ class Digraph(object):
         """
         self.showBestChoiceRecommendation(**kwargs)
 
-    def showChoiceRecommendation(self, method='Bachet',
-                                       Polarised=True,
-                                       randomized=100,
-                                       maxNbrOfRankings=5,
-                                       seed=None,
-                                       ChoiceVector=False,
+    def showChoiceRecommendation(self,
+                                 # default method
+                                 method='Bachet',
+                                Polarised=True,
+                                randomized=100,
+                                maxNbrOfRankings=5,
+                                seed=None,
+                                 # Rubis
+                                ChoiceVector=False,
+                                 # iterated Bachet
+                                CoDual=False,
+                                Reversed=False,
+                                Valued=False,
+                                actionsList=None,
+                                randomActionsList=False,
                                        ):
         """
         Generic choice recommender method.
@@ -8956,6 +8965,16 @@ class Digraph(object):
                                        seed = seed,
                                        Comments=False,
                                        )
+        if method == 'IteratedBachet':
+            print('Iterated Bachet choice recommendation')
+            self.showIteratedBachetChoiceRecommendation(
+                                CoDual=CoDual,
+                                Reversed=Reversed,
+                                Valued=Valued,
+                                actionsList=actionsList,
+                                randomActionsList=randomActionsList,
+                                Comments=False,
+                                       )
         elif method == 'Rubis':
             print('Rubis choice recommendation')
             self.showFirstChoiceRecommendation(Verbose=False,
@@ -8964,7 +8983,7 @@ class Digraph(object):
                                           )
 
         else:
-            print('Error: method = "Bachet" or "Rubis"  not "%s"' % method) 
+            print('Error: method = "Bachet", "IteratedBachet" or "Rubis",  not "%s"' % method) 
                 
 
     def showBachetChoiceRecommendation(self,
@@ -9036,6 +9055,74 @@ class Digraph(object):
         print('Execution time: %.3f seconds' % (time() - t0))
         print('*****************************')
 
+    def showIteratedBachetChoiceRecommendation(self,
+                                CoDual=False,
+                                Reversed=False,
+                                Valued=False,
+                                actionsList=None,
+                                randomActionsList=False,seed=None,
+                                Comments=False,Debug=False):
+        """
+        Shows a choice recommendation from the consensus of iterated
+        Bachet ranking and order
+  
+        Usage example:
+        
+        >>> from outrankingDigraphs import *
+        >>> t = Random3ObjectivesPerformanceTableau(seed=5)
+        >>> g = BipolarOutrankingDigraph(t)
+        >>> g.showIteratedBachetChoiceRecommendation(Comments)
+         *---- Iterated Bachet Choice Recommendations ----*
+          Ranking by recursively first and last choosing
+           1st ranked ['p11', 'p19', 'p20']
+            2nd ranked ['p06', 'p13', 'p14']
+              3rd ranked ['p04', 'p05', 'p07', 'p18']
+                4th ranked ['p15']
+                4th last ranked ['p15']
+              3rd last ranked ['p08', 'p09', 'p10', 'p16']
+            2nd last ranked ['p01', 'p02', 'p12', 'p17']
+          1st last ranked ['p03']
+         Quality of partial Bachet ranking
+          Crisp ordinal correlation  : +0.954
+          Epistemic determination    : +0.383
+          Bipolar-valued equivalence : +0.365
+         Execution time: 0.673 seconds
+         *****************************
+
+        """
+        from copy import deepcopy
+        from time import time
+        from linearOrders import IteratedBachetRanking
+        from transitiveDigraphs import RankingsFusionDigraph
+        if Debug:
+            print('All comments !!!')
+            Comments = True
+        t0 = time()
+        n0 = self.order
+        g = deepcopy(self)
+        g.recodeValuation()
+        iba = IteratedBachetRanking(g,CoDual=CoDual,
+                                Reversed=Reversed,
+                                Valued=Valued,
+                                actionsList=actionsList,
+                                randomActionsList=randomActionsList,
+                                seed=seed,
+                                Comments=Comments,Debug=Debug)
+        ranking1 = iba.iteratedBachetRanking
+        ranking2 = deepcopy(iba.iteratedBachetOrder)
+        ranking2.reverse()
+        ibaRankings = [ranking1,ranking2]
+        piba = RankingsFusionDigraph(g,ibaRankings)
+        self.ibaRankings = ibaRankings
+        print('*---- Iterated Bachet Choice Recommendations ----*')
+        piba.showTransitiveDigraph()
+        print('Quality of partial iterated Bachet ranking')
+        corr = g.computeOrdinalCorrelation(piba)
+        print(' Crisp ordinal correlation  : %+.3f' % corr['correlation'])          
+        print(' Epistemic determination    : %+.3f' % corr['determination'])
+        print(' Bipolar-valued equivalence : %+.3f' % (corr['correlation']*corr['determination']) )
+        print('Execution time: %.3f seconds' % (time() - t0))
+        print('*****************************')
         
 #############
 
