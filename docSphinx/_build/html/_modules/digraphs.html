@@ -9576,8 +9576,7 @@
 <div class="viewcode-block" id="Digraph.showChoiceRecommendation">
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.showChoiceRecommendation">[docs]</a>
     <span class="k">def</span> <span class="nf">showChoiceRecommendation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                                 <span class="c1"># default method</span>
-                                 <span class="n">method</span><span class="o">=</span><span class="s1">&#39;Bachet&#39;</span><span class="p">,</span>
+                                <span class="n">method</span><span class="o">=</span><span class="s1">&#39;Bachet&#39;</span><span class="p">,</span>
                                 <span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                 <span class="n">randomized</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
                                 <span class="n">maxNbrOfRankings</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
@@ -9596,7 +9595,8 @@
 
 <span class="sd">        **Parameters**</span>
 <span class="sd">        </span>
-<span class="sd">        *method*: &#39;Bachet&#39; (default) | &#39;Rubis&#39;; the Bachet method is based on the conjoint</span>
+<span class="sd">        *method*: &#39;Bachet&#39; (default) | &#39;Rubis&#39; | &#39;IteratedBachet&#39; ;</span>
+<span class="sd">        the Bachet method is based on the conjoint</span>
 <span class="sd">        extracton of initial and terminal prekernels from the partial Bachet ranking,</span>
 <span class="sd">        whereas the Rubis method is based on the extraction of an initial and</span>
 <span class="sd">        terminal prekernels directly from the given outranking digraph.</span>

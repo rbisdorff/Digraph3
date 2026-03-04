@@ -8919,8 +8919,7 @@ class Digraph(object):
         self.showBestChoiceRecommendation(**kwargs)
 
     def showChoiceRecommendation(self,
-                                 # default method
-                                 method='Bachet',
+                                method='Bachet',
                                 Polarised=True,
                                 randomized=100,
                                 maxNbrOfRankings=5,
@@ -8939,7 +8938,8 @@ class Digraph(object):
 
         **Parameters**
         
-        *method*: 'Bachet' (default) | 'Rubis'; the Bachet method is based on the conjoint
+        *method*: 'Bachet' (default) | 'Rubis' | 'IteratedBachet' ;
+        the Bachet method is based on the conjoint
         extracton of initial and terminal prekernels from the partial Bachet ranking,
         whereas the Rubis method is based on the extraction of an initial and
         terminal prekernels directly from the given outranking digraph.

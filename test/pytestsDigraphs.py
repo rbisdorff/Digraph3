@@ -765,5 +765,15 @@ def testBachetChoiceRecommendation():
     print('Rubis first choice')
     g.showChoiceRecommendation(method='Rubis',ChoiceVector=False)
     
+def testChoiceRecommendation():
+    print('*-------- choice recommendations ----*')
+    from outrankingDigraphs import RandomBipolarOutrankingDigraph
+    g = RandomBipolarOutrankingDigraph(seed=1)
+    print('Polarised version')
+    g.showChoiceRecommendation(method='Bachet')
+    print('Valued version')
+    g.showChoiceRecommendation('IteratedBachet')
+    print('Rubis first choice')
+    g.showChoiceRecommendation('Rubis')
 
     
