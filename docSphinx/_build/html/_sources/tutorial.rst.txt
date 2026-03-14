@@ -47,7 +47,7 @@
 
       - A case study on :ref:`matching classmates into partner pairs <RoommatesMatching-Tutorial-label>`
 	
-      - A tutorial on :ref:`extracting partial rankings <Partial-Ranking-Tutorial-label>` from a given outranking digraph
+      - A tutorial on :ref:`partially ranking from multiple incommensurable performance criteria <Partial-Ranking-Tutorial-label>`
       
       - The *Bachet* ranking rules are illustrated in the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`
           
