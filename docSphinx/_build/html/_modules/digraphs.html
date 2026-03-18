@@ -3223,10 +3223,12 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; #triples x&gt;y&gt;z: </span><span class="si">%d</span><span class="s1">, #closed: </span><span class="si">%d</span><span class="s1">, #open: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span>\
                   <span class="p">(</span><span class="n">ntriples</span><span class="p">,</span><span class="n">nclosed</span><span class="p">,</span><span class="n">ntriples</span><span class="o">-</span><span class="n">nclosed</span><span class="p">)</span> <span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; (#closed/#triples) =  </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="p">)</span>
-        <span class="k">if</span> <span class="n">ReturnIntransitiveTriples</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">openTriples</span>
+        <span class="k">if</span> <span class="n">ReturnTransitiveTriples</span> <span class="ow">and</span> <span class="n">ReturnIntransitiveTriples</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">closedTriples</span><span class="p">,</span> <span class="n">openTriples</span>
         <span class="k">elif</span> <span class="n">ReturnTransitiveTriples</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">closedTriples</span>
+        <span class="k">elif</span> <span class="n">ReturnIntransitiveTriples</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">openTriples</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">res</span></div>
 

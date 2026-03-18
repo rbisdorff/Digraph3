@@ -2983,10 +2983,12 @@ class Digraph(object):
                 print(' #triples x>y>z: %d, #closed: %d, #open: %d' %\
                   (ntriples,nclosed,ntriples-nclosed) )
                 print(' (#closed/#triples) =  %.3f' %(res) )
-        if ReturnIntransitiveTriples:
-            return openTriples
+        if ReturnTransitiveTriples and ReturnIntransitiveTriples:
+            return closedTriples, openTriples
         elif ReturnTransitiveTriples:
             return closedTriples
+        elif ReturnIntransitiveTriples:
+            return openTriples
         else:
             return res
 
