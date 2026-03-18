@@ -2387,6 +2387,60 @@
 
          
 <span class="c1">#########</span>
+
+<div class="viewcode-block" id="TransitivePartDigraph">
+<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitivePartDigraph">[docs]</a>
+<span class="k">class</span> <span class="nc">TransitivePartDigraph</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Renders the transitive part of the Dual of a Digraph instance.</span>
+
+<span class="sd">    .. note::</span>
+
+<span class="sd">         - The non transitive triples and the reflexive links are all put to the median indeterminate characteristic value!</span>
+<span class="sd">         - The constructor makes a copy of the given Digraph instance!</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="c1">#newself = deepcopy(digraph)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;transitive_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_constructTransitiveRelation</span><span class="p">(</span><span class="n">digraph</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">actions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
+        <span class="c1">#self.closeTransitive()</span>
+        <span class="c1">#self = deepcopy(newself)</span>
+        
+
+    <span class="k">def</span> <span class="nf">_constructTransitiveRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the transitive part of the codual of digraph</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">actions</span>
+        <span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">digraph</span><span class="p">)</span>
+        <span class="n">relation</span> <span class="o">=</span> <span class="n">gcd</span><span class="o">.</span><span class="n">relation</span>
+        <span class="n">closedTriples</span> <span class="o">=</span> <span class="n">gcd</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">(</span><span class="n">ReturnTransitiveTriples</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">Med</span> <span class="o">=</span> <span class="n">gcd</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
+
+        <span class="n">relationOut</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+            <span class="n">relationOut</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+                <span class="n">relationOut</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
+
+        <span class="k">for</span> <span class="n">triple</span> <span class="ow">in</span> <span class="n">closedTriples</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">triple</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">triple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="n">triple</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">relationOut</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span>
+            <span class="n">relationOut</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">z</span><span class="p">]</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">z</span><span class="p">]</span>
+            <span class="n">relationOut</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">z</span><span class="p">]</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">z</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">relationOut</span></div>
+
+
 <span class="c1"># compatibility with obsolete weakOrders module</span>
 <span class="c1">#######################</span>
 
@@ -2448,7 +2502,7 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
 
-    <span class="n">pt</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">pt</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">pt</span><span class="p">)</span>
     <span class="n">pbr</span> <span class="o">=</span> <span class="n">PartialBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">pbr</span><span class="p">)</span>
@@ -2470,7 +2524,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Mar 04, 2026.
+      <span class="lastupdated">Last updated on Mar 18, 2026.
       </span></p>
   </div>
 

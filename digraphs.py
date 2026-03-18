@@ -2936,7 +2936,8 @@ class Digraph(object):
             return tres,wtres
 
     def computeTransitivityDegree(self,
-                InPercents=False,Comments=False,ReturnIntransitiveTriples=False):
+                InPercents=False,Comments=False,ReturnTransitiveTriples=False,
+                                  ReturnIntransitiveTriples=False):
         """
         Renders the transitivity degree (Decimal) of a digraph.
 
@@ -2950,7 +2951,8 @@ class Digraph(object):
         transRel = self.closeTransitive(InSite=False)
         ntriples = 0
         nclosed = 0
-        triples = []
+        closedTriples = []
+        openTriples = []
         for x in self.actions:
             for y in self.actions:
                 if x != y:
@@ -2961,8 +2963,9 @@ class Digraph(object):
                                 ntriples += 1
                                 if self.relation[x][z] > Med:
                                     nclosed += 1
+                                    closedTriples.append([x,y,z])
                                 else:
-                                    triples.append([x,y,z])
+                                    openTriples.append([x,y,z])
         if ntriples > 0:
             res = Decimal(str(nclosed))/Decimal(str(ntriples))
         else:
@@ -2981,7 +2984,9 @@ class Digraph(object):
                   (ntriples,nclosed,ntriples-nclosed) )
                 print(' (#closed/#triples) =  %.3f' %(res) )
         if ReturnIntransitiveTriples:
-            return triples
+            return openTriples
+        elif ReturnTransitiveTriples:
+            return closedTriples
         else:
             return res
 
@@ -8965,7 +8970,7 @@ class Digraph(object):
                                        seed = seed,
                                        Comments=False,
                                        )
-        if method == 'IteratedBachet':
+        elif method == 'IteratedBachet':
             print('Iterated Bachet choice recommendation')
             self.showIteratedBachetChoiceRecommendation(
                                 CoDual=CoDual,
@@ -13816,6 +13821,7 @@ class AsymmetricPartialDigraph(Digraph):
                     relationOut[a][b] = Med
         return relationOut
 
+
 class BipartitePartialDigraph(Digraph):
     """
     Renders the bipartite part of a Digraph instance.
@@ -15634,7 +15640,6 @@ if __name__ == "__main__":
     #rankings[3].reverse()
     #rankings[4].reverse()
     br1 = BalancedRankingsDigraph(g,rankings)
-     
 
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')

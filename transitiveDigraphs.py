@@ -2205,6 +2205,57 @@ class PartialBachetRanking(TransitiveDigraph):
                 print('graphViz tools not avalaible! Please check installation.')
          
 #########
+
+class TransitivePartDigraph(TransitiveDigraph):
+    """
+    Renders the transitive part of the Dual of a Digraph instance.
+
+    .. note::
+
+         - The non transitive triples and the reflexive links are all put to the median indeterminate characteristic value!
+         - The constructor makes a copy of the given Digraph instance!
+
+    """
+    def __init__(self,digraph):
+        from copy import deepcopy
+        #newself = deepcopy(digraph)
+        self.valuationdomain = deepcopy(digraph.valuationdomain)
+        self.name = 'transitive_' + str(digraph.name)
+        self.relation = self._constructTransitiveRelation(digraph)
+        self.actions = digraph.actions
+        self.order = len(self.actions)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        #self.closeTransitive()
+        #self = deepcopy(newself)
+        
+
+    def _constructTransitiveRelation(self,digraph):
+        """
+        Returns the transitive part of the codual of digraph
+        """
+        actions = digraph.actions
+        gcd = ~(-digraph)
+        relation = gcd.relation
+        closedTriples = gcd.computeTransitivityDegree(ReturnTransitiveTriples=True)
+        Med = gcd.valuationdomain['med']
+
+        relationOut = {}
+        for x in actions:
+            relationOut[x] = {}
+            for y in actions:
+                relationOut[x][y] = Med
+
+        for triple in closedTriples:
+            x = triple[0]
+            y = triple[1]
+            z = triple[2]
+            relationOut[x][y] = relation[x][y]
+            relationOut[x][z] = relation[x][z]
+            relationOut[y][z] = relation[y][z]
+
+        return relationOut
+
 # compatibility with obsolete weakOrders module
 #######################
 
@@ -2254,7 +2305,7 @@ if __name__ == "__main__":
     ****************************************************
     """)
 
-    pt = RandomCBPerformanceTableau(numberOfActions=50,numberOfCriteria=13,seed=100)
+    pt = RandomCBPerformanceTableau(numberOfActions=10,numberOfCriteria=13,seed=100)
     g = BipolarOutrankingDigraph(pt)
     pbr = PartialBachetRanking(g,randomized=200,seed=1,Polarised=True,Comments=False,Debug=False)
     print(pbr)
