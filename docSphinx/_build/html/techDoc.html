@@ -1584,7 +1584,7 @@ class;</p>
 <li><dl>
 <dt><a class="reference internal" href="#transitivedigraphs-label"><span class="std std-ref">transitiveDigraphs module</span></a></dt><dd><p>Additional tools for solving pre-ranking problems with abstract
 generic root <a class="reference external" href="techDoc.html#transitiveDigraphs.TransitiveDigraph">TransitiveDigraph</a> class.</p>
-<div class="graphviz"><object data="_images/inheritance-99b078af77f589cffc4cfa897da15aa55b03fa29.svg" type="image/svg+xml" class="inheritance graphviz">
+<div class="graphviz"><object data="_images/inheritance-49c1b79f0a4ede738d6ea863b9da5897ad2d1d91.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of transitiveDigraphs</p></object></div>
 </dd>
 </dl>
@@ -9521,7 +9521,7 @@ added by the class constructor.</p>
 <section id="transitivedigraphs-module">
 <span id="transitivedigraphs-label"></span><h2><a class="toc-backref" href="#id18" role="doc-backlink"><span class="section-number">2.16. </span>transitiveDigraphs module</a><a class="headerlink" href="#transitivedigraphs-module" title="Link to this heading"></a></h2>
 <p><strong>Inheritance Diagram</strong></p>
-<div class="graphviz"><object data="_images/inheritance-99b078af77f589cffc4cfa897da15aa55b03fa29.svg" type="image/svg+xml" class="inheritance graphviz">
+<div class="graphviz"><object data="_images/inheritance-49c1b79f0a4ede738d6ea863b9da5897ad2d1d91.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of transitiveDigraphs</p></object></div>
 <p id="module-transitiveDigraphs">Digraph3 module for working with transitive digraphs. 
 Copyright (C) 2006-2025  Raymond Bisdorff</p>
@@ -9916,12 +9916,13 @@ on each component.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="transitiveDigraphs.TransitivePartDigraph">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">transitiveDigraphs.</span></span><span class="sig-name descname"><span class="pre">TransitivePartDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">digraph</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#TransitivePartDigraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.TransitivePartDigraph" title="Link to this definition"></a></dt>
-<dd><p>Renders the transitive part of the Dual of a Digraph instance.</p>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">transitiveDigraphs.</span></span><span class="sig-name descname"><span class="pre">TransitivePartDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">digraph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CoDual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_Transitive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#TransitivePartDigraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.TransitivePartDigraph" title="Link to this definition"></a></dt>
+<dd><p>Renders by default the transitive triples part of a Digraph instance.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
-<li><p>The non transitive triples and the reflexive links are all put to the median indeterminate characteristic value!</p></li>
+<li><p>If CoDual == True (default), only the asymmetric transitive triples are kept</p></li>
+<li><p>If Transitive == True (defalt), the transitive triples are transitively closed</p></li>
 <li><p>The constructor makes a copy of the given Digraph instance!</p></li>
 </ul>
 </div>
@@ -15311,7 +15312,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Mar 18, 2026.
+      <span class="lastupdated">Last updated on Mar 20, 2026.
       </span></p>
   </div>
 

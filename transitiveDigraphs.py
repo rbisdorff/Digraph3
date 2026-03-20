@@ -2208,37 +2208,42 @@ class PartialBachetRanking(TransitiveDigraph):
 
 class TransitivePartDigraph(TransitiveDigraph):
     """
-    Renders the transitive part of the Dual of a Digraph instance.
+    Renders by default the transitive triples part of a Digraph instance.
 
     .. note::
 
-         - The non transitive triples and the reflexive links are all put to the median indeterminate characteristic value!
+         - If CoDual == True (default), only the asymmetric transitive triples are kept
+         - If Transitive == True (defalt), the transitive triples are transitively closed
          - The constructor makes a copy of the given Digraph instance!
 
     """
-    def __init__(self,digraph):
+    def __init__(self,digraph,CoDual=True,_Transitive=True):
         from copy import deepcopy
-        #newself = deepcopy(digraph)
-        self.valuationdomain = deepcopy(digraph.valuationdomain)
         self.name = 'transitive_' + str(digraph.name)
-        self.relation = self._constructTransitiveRelation(digraph)
-        self.actions = digraph.actions
+        self.valuationdomain = deepcopy(digraph.valuationdomain)
+        self.relation = self._constructTransitiveRelation(digraph,
+                                                      CoDual=CoDual)
+        self.actions = deepcopy(digraph.actions)
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
-        #self.closeTransitive()
+        if _Transitive and not self.isTransitive():
+            self.closeTransitive()
         #self = deepcopy(newself)
         
 
-    def _constructTransitiveRelation(self,digraph):
+    def _constructTransitiveRelation(self,digraph,CoDual):
         """
         Returns the transitive part of the codual of digraph
         """
         actions = digraph.actions
-        gcd = ~(-digraph)
-        relation = gcd.relation
-        closedTriples = gcd.computeTransitivityDegree(ReturnTransitiveTriples=True)
-        Med = gcd.valuationdomain['med']
+        if CoDual:
+            g = ~(-digraph)
+        else:
+            g = digraph
+        relation = g.relation
+        closedTriples = g.computeTransitivityDegree(ReturnTransitiveTriples=True)
+        Med = g.valuationdomain['med']
 
         relationOut = {}
         for x in actions:
@@ -2305,7 +2310,7 @@ if __name__ == "__main__":
     ****************************************************
     """)
 
-    pt = RandomCBPerformanceTableau(numberOfActions=10,numberOfCriteria=13,seed=100)
+    pt = RandomCBPerformanceTableau(numberOfActions=10,numberOfCriteria=13,seed=101)
     g = BipolarOutrankingDigraph(pt)
     pbr = PartialBachetRanking(g,randomized=200,seed=1,Polarised=True,Comments=False,Debug=False)
     print(pbr)
