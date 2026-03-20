@@ -2206,7 +2206,7 @@ class PartialBachetRanking(TransitiveDigraph):
          
 #########
 
-class TransitivePartDigraph(TransitiveDigraph):
+class TransitiveTriplesPartDigraph(TransitiveDigraph):
     """
     Renders by default the transitive triples part of a Digraph instance.
 
