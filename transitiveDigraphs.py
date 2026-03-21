@@ -2213,23 +2213,22 @@ class TransitiveTriplesPartDigraph(TransitiveDigraph):
     .. note::
 
          - If CoDual == True (default), only the asymmetric transitive triples are kept
-         - If Transitive == True (defalt), the transitive triples are transitively closed
+         - If _Transitive == True (default), the transitive triples are transitively closed
          - The constructor makes a copy of the given Digraph instance!
 
     """
     def __init__(self,digraph,CoDual=True,_Transitive=True):
         from copy import deepcopy
         self.name = 'transitive_' + str(digraph.name)
+        self.actions = deepcopy(digraph.actions)
+        self.order = len(self.actions)
         self.valuationdomain = deepcopy(digraph.valuationdomain)
         self.relation = self._constructTransitiveRelation(digraph,
                                                       CoDual=CoDual)
-        self.actions = deepcopy(digraph.actions)
-        self.order = len(self.actions)
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
         if _Transitive and not self.isTransitive():
             self.closeTransitive()
-        #self = deepcopy(newself)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
         
 
     def _constructTransitiveRelation(self,digraph,CoDual):
