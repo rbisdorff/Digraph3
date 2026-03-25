@@ -3990,10 +3990,9 @@ We may redo in :numref:`partialBachet8` below the same computation for the parti
      Partial ranking fairness (a)-(b)      : -0.107
 
 The valued partial *Bachet* ranking pays a more accurate attention to the marginal criteria significance weights: 10/60 = 0.167 for the three  Costs criteria and 3/60 = 0.050 for the Benefit criteria. Criteria *c01* and *c03* for instance, with a significance of 0.167, are hence given more attention. The weighted mean marginal correlation appears slightly lower (+0.098 vs +0.108). The standard deviation being however lower (+0.204 vs +0.240), we obtain a slightly better overall fairness score (-0.107 vs -0.132, see Lines 19-21).    
-
-Consensus of iterated ranking and ordering by choosing
-``````````````````````````````````````````````````````````````````
-
+ 
+Consensus of iterated Bachet ranking and ordering by choosing
+`````````````````````````````````````````````````````````````
 Noticing that the *Bachet* ranking score of an alternative x represent in fact a bipolar-valued characteristic of the assertion ‘alternative x is ranked first’, we may enhance *Kohler*'s iterating *ranking-by-choosing*, resp. *ordering-by-choosing*, rule by replacing the *min-max*, respectively the *max-min*, strategy with an iterated respective *Bachet* ranking score [69]_.
 
 For a ranking (resp. an ordering) result, at step i (i goes from 1 to n), do the following:
@@ -4027,7 +4026,7 @@ The :py:mod:`~linearOrders.IteratedBachetRanking` constructor, provided by the :
     [['a3', 'a2', 'a5', 'a8', 'a1', 'a9', 'a7', 'a6', 'a4'],
      ['a5', 'a3', 'a2', 'a8', 'a6', 'a7', 'a9', 'a4', 'a1']] 
 
-With such slightly diverging ranking-by-choosing and ordering-by-choosing results, it is useful to fuse now both, the iterated ranking-bychoosing and ordering-by-choosing results into a partial ranking consensus In :numref:`partialIteratedBachet2` below we may thus discover the actual transitive part of the given random outranking digraph *g* (see Lines 5-10). The head group contains alternatives *a3*, *a5* and *a2*. Alternative *a8* is consistently third-ranked, whereas alternatives *a1* and *a4* appear last-ranked. This partial ranking structure is highly correlated (+0.976) with the given outranking digraph *g* and supported by a nearly 2/3rd significance majority (see Lines 14 and 16 below).
+With such slightly diverging ranking-by-choosing and ordering-by-choosing results, it is useful to fuse now both, the iterated ranking-bychoosing and ordering-by-choosing results into a partial ranking consensus In :numref:`partialIteratedBachet2` below we may thus discover the actual transitive part of the given random outranking digraph *g* (see Lines 5-10). The head group contains alternatives *a3*, *a5* and *a2*. Alternative *a8* is consistently third-ranked, whereas alternatives *a1* and *a4* appear last-ranked. 
 
 .. code-block:: pycon
    :caption: iterated Bachet ranking and order fusion
@@ -4062,7 +4061,68 @@ With such slightly diverging ranking-by-choosing and ordering-by-choosing result
 
    Iterated Bachet partial ranking result  	   
 
-As shown in :numref:`iBachetRanking` above, bipolar iterated *Bachet* ranking-by-choosing rules may hence effectively deliver a new method for constructing convincing partial rankings and, by the way, a tool for computing potential first or last choice recommendations, actually the :ref:`initial and terminal prekernels <Bipolar-Valued-Kernels-Tutorial-label>` of such partial transitive digraphs. Mind however that the *Bachet* ranking rules can only handle small outranking digraphs ( < 50 ). For larger ( > 50 ) or big ( > 1000 ) outranking digraphs it is opportune to turn to order statistics and compute **weak rankings** --rankings with ties-- by sorting the multicriteria performance records into *relative* or *absolute* performance **quantile equivalence classes**.
+This partial ranking structure, illustrated in :numref:`iBachetRanking` is highly correlated (+0.976) with the given outranking digraph *g* and supported by a nearly 2/3rd significance majority (see Lines 14 and 16 below).
+
+Extracting the transitive tiples part of the outranking digraph
+```````````````````````````````````````````````````````````````
+The transitive closure of the transitive triples part of the strict outranking digraph delivers also a partial ranking. The :py:mod:`transitiveDigraphs` module provides therefore the :py:class:`~transitiveDigraphs.TransitiveTriplesPartDigraph` class as shown in :numref:`transitiveTriples1` Lines 6 and 7 below.
+
+.. code-block:: pycon
+   :caption: Transitve triples part of the ranking digraph
+   :name: transitiveTriples1
+   :emphasize-lines: 6-7,9-16
+
+   >>> from outrankingDigraphs import *
+   >>> t = RandomCBPerformanceTableau(numberOfActions=9,
+   ...                       numberOfCriteria=13,seed=200)
+   >>> og = BipolarOutrankingDigraph(t)
+   >>> from transitiveDigraphs import TransitiveTriplesPartDigraph
+   >>> trog = TransitiveTriplesPartDigraph(og,CoDual=True)
+   >>> trog.showTransitiveDigraph()
+    Ranking by recursively first and last choosing
+     1st ranked ['a5']
+       2nd ranked ['a1']
+         3rd ranked ['a6']
+           4th ranked ['a7']
+           4th last ranked ['a7']
+         3rd last ranked ['a8']
+       2nd last ranked ['a9']
+     1st last ranked ['a2', 'a3', 'a4']
+
+With the :py:meth:`~transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph` method we may again illustrate in Lines 9 to 16 above the resulting partial ranking of the given strict outranking digraph. 
+
+Remarquable is here the fact that this partial ranking does by the way confirm our *Rubis* first choice recommendation as shown below in :numref:`transitiveTriples2` Lines 7 and 15. Alternative *a8*, being incomparable to all other alternatives, represents indeed an ambiguous first or last choice.
+
+.. code-block:: pycon
+   :caption: Rubis choice recommendation
+   :name: transitiveTriples2
+   :emphasize-lines: 1,7,13,15
+
+   >>> og.showChoiceRecommendation('Rubis')
+    Rubis choice recommendation
+    ***********************
+    First choice recommendation(s) (BCR)  
+    Credibility domain: [-1.00,1.00]
+    === >> potential first choice(s)
+    * choice              : ['a5', 'a8']
+      independence        : 0.03
+      dominance           : 0.03
+      absorbency          : -0.32
+      covering (%)        : 50.00
+      determinateness (%) : 51.66
+      - most credible action(s) = { 'a5': 0.03, 'a8': 0.03  }
+    === >> potential last choice(s) 
+    * choice              : ['a2', 'a3', 'a4', 'a8']
+      independence        : 0.00
+      dominance           : -0.35
+      absorbency          : 0.10
+      covered (%)         : 50.00
+      determinateness (%) : 50.00
+      - most credible action(s) = { }
+
+As shown above, bipolar ranking-by-choosing rules operated on transtive parts of the outranking digraph may effectively deliver a new method for constructing convincing partial rankings and, by the way, a tool for computing potential first or last choice recommendations, actually the :ref:`initial and terminal prekernels <Bipolar-Valued-Kernels-Tutorial-label>` of such partial transitive digraphs.
+
+Mind however that all these bipolar ranking-by-chosing rules can in principle handle only small outranking digraphs ( order < 100 ). For larger ( order > 100 ) or big ( order > 1000 ) outranking digraphs it is opportune to turn to order statistics and compute **weak rankings** --rankings with ties-- by sorting the multicriteria performance records into *relative* or *absolute* performance **quantile equivalence classes**.
 
 This order statistics based **rating** approach is presented in the following tutorials.  
 
