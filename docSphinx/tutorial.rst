@@ -3700,7 +3700,7 @@ On partially ranking outranking digraphs
 	:depth: 2
 	:local:
 
-In this section, instead of computing linear rankings or orders, we illustrate two algorithmic strategies for computing *partial rankings* --partially determined transitive asymmetrical relations-- from a given outranking digraph.
+In this section, instead of computing linear rankings or orders, we illustrate algorithmic strategies for computing *partial rankings* --partially determined transitive asymmetrical relations-- from a given outranking digraph.
 
 Computing a ranking consensus from several linear rankings
 ``````````````````````````````````````````````````````````
@@ -4026,7 +4026,7 @@ The :py:mod:`~linearOrders.IteratedBachetRanking` constructor, provided by the :
     [['a3', 'a2', 'a5', 'a8', 'a1', 'a9', 'a7', 'a6', 'a4'],
      ['a5', 'a3', 'a2', 'a8', 'a6', 'a7', 'a9', 'a4', 'a1']] 
 
-With such slightly diverging ranking-by-choosing and ordering-by-choosing results, it is useful to fuse now both, the iterated ranking-bychoosing and ordering-by-choosing results into a partial ranking consensus In :numref:`partialIteratedBachet2` below we may thus discover the actual transitive part of the given random outranking digraph *g* (see Lines 5-10). The head group contains alternatives *a3*, *a5* and *a2*. Alternative *a8* is consistently third-ranked, whereas alternatives *a1* and *a4* appear last-ranked. 
+With such slightly diverging ranking-by-choosing and ordering-by-choosing results, it is useful to fuse now both, the iterated ranking-bychoosing and ordering-by-choosing results into a partial ranking consensus. In :numref:`partialIteratedBachet2` below we may thus discover the actual transitive part of the given random outranking digraph *g* (see Lines 5-10). The head group contains alternatives *a3*, *a5* and *a2*. Alternative *a8* is consistently third-ranked, whereas alternatives *a1* and *a4* appear last-ranked. 
 
 .. code-block:: pycon
    :caption: iterated Bachet ranking and order fusion
