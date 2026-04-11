@@ -5051,7 +5051,6 @@ Many more tools for exploiting voting results are available like the browser hea
    :name: votingHeatmap
    :caption: Example linear voting heatmap
    :emphasize-lines: 2
-
    :linenos:
 
    >>> v.showHTMLVotingHeatmap(rankingRule='NetFlows',
