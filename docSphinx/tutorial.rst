@@ -1003,7 +1003,7 @@ Working with the :py:mod:`outrankingDigraphs` module
 	:depth: 2
 	:local:
 
-**Abstract**: In this chapter, we introduce the main formal object of this book, namely the bipolar-valued outranking digraph. With a randomly generated multiple-criteria performance tableau, we construct the corresponding bipolar-valued outranking relation from pairwise comparisons. The resulting bipolar-valued outranking characteristics may be recoded. Finally, the codual outranking digraph gives us the associated strict outranking relation.
+**Abstract**: In this chapter, we introduce the main formal object of the Digraph3 resources, namely the bipolar-valued outranking digraph. With a randomly generated multiple-criteria performance tableau, we construct the corresponding bipolar-valued outranking relation from pairwise comparisons. The resulting bipolar-valued outranking characteristics may be recoded. Finally, the codual outranking digraph gives us the associated strict outranking relation.
 
 .. only:: html
 
