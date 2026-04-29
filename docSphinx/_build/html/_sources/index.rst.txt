@@ -50,6 +50,9 @@ Parts of the documentation
    * A case study about :ref:`fairly matching classmates into partner pairs <RoommatesMatching-Tutorial-label>`
    * A tutorial on :ref:`partially ranking from multiple incommensurable performance criteria <Partial-Ranking-Tutorial-label>`
    * :ref:`Applications of bipolar-valued base 3 encoded Bachet numbers <Bachet-Tutorial-label>`
+   * :ref:`Working with big outranking digraphs <BigDigraphs-Tutorial-label>` and :ref:`using the Digraph3 HPC resources <HPC-Ranking-Tutorial-label>`
+     
+..
    * A tutorial on :ref:`using the Digraph3 HPC resources <HPC-Ranking-Tutorial-label>` for ranking several millions of multicriteria performance records via big sparse outranking digraphs
 
 #. `Tutorials <tutorial.html>`_
