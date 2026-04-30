@@ -1620,7 +1620,7 @@ It is interesting to notice in :numref:`strictBestChoice` (Line 6) that the **fi
    Best office choice recommendation from strict outranking digraph
 
 To comprehend the indeterminate situation of location *G*, let us now compare the performances of alternatives *D* and *G* in a
-pairwise perspective (see below). With the given preference discrimination thresholds, we notice that alternative *G* is actually **certainly** *at least as good as* alternative *D*:  :math:`r(G \succsim D) = +145/145 = +1.0` and alternative *D* is also positively, but less credibly, *at least as good as* alternative *G*:  :math:`r(D \succsim G) = +36/145 = +0.25` (see Line 14 below).
+pairwise perspective (see below). With the given preference discrimination thresholds, we notice that alternative *G* is actually **utterly** *at least as good as* alternative *D*:  :math:`r(G \succsim D) = +145/145 = +1.0` and alternative *D* is also positively, but less credibly, *at least as good as* alternative *G*:  :math:`r(D \succsim G) = +36/145 = +0.25` (see Line 14 below).
 
 .. code-block:: pycon
    :linenos:
