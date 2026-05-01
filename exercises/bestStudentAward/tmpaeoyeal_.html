@@ -1,0 +1,29 @@
+<!DOCTYPE html><html><head>
+<title>Digraph3 performance heat map</title>
+<style type="text/css">
+td {text-align: center;}
+td.na {color: rgb(192,192,192);}
+</style>
+</head>
+<body>
+<h2>Heatmap of Performance Tableau 'studentgrades'</h2>
+<table style="background-color:"#FFFFFF";" border="1">
+<tr bgcolor="#CCFFFF"><th>criteria</th><th>C3</th><th>C5</th><th>C4</th><th>C1</th><th>C2</th></tr>
+<tr><th bgcolor="#CCFFFF">weights</th><td align="center">+4.00</td><td align="center">+4.00</td><td align="center">+2.00</td><td align="center">+2.00</td><td align="center">+3.00</td></tr>
+<tr><th bgcolor="#CCFFFF">tau<sup>(*)</sup></th><td align="center">+1.00</td><td align="center">+0.83</td><td align="center">+0.00</td><td align="center">-0.33</td><td align="center">-0.33</td></tr>
+<tr><th bgcolor="#FFFFFF">C</th><td bgcolor="#D9EF8B" align="right"> 14.00</td><td bgcolor="#D9EF8B" align="right"> 14.00</td><td bgcolor="#FFFFBF" align="right"> 12.00</td><td bgcolor="#FEE08B" align="right"> 8.00</td><td bgcolor="#FFFFBF" align="right"> 11.00</td></tr>
+<tr><th bgcolor="#FFFFFF">B</th><td bgcolor="#FFFFBF" align="right"> 13.00</td><td bgcolor="#FFFFBF" align="right"> 13.00</td><td bgcolor="#FFFFBF" align="right"> 10.00</td><td bgcolor="#FFFFBF" align="right"> 12.00</td><td bgcolor="#FEE08B" align="right"> 9.00</td></tr>
+<tr><th bgcolor="#FFFFFF">D</th><td bgcolor="#FFFFBF" align="right"> 12.00</td><td bgcolor="#FFFFBF" align="right"> 13.00</td><td bgcolor="#FEE08B" align="right"> 8.00</td><td bgcolor="#D9EF8B" align="right"> 15.00</td><td bgcolor="#FFFFBF" align="right"> 10.00</td></tr>
+<tr><th bgcolor="#FFFFFF">A</th><td bgcolor="#FEE08B" align="right"> 9.00</td><td bgcolor="#FEE08B" align="right"> 11.00</td><td bgcolor="#D9EF8B" align="right"> 15.00</td><td bgcolor="#FFFFBF" align="right"> 11.00</td><td bgcolor="#D9EF8B" align="right"> 13.00</td></tr>
+</table>
+<i>Color legend: </i>
+<table style="background-color:"#FFFFFF";" border="1">
+<tr bgcolor="#CCFFFF"><th>quantile</th><td bgcolor="#FEE08B">&nbsp;33.33&#037;</td><td bgcolor="#FFFFBF">&nbsp;66.66&#037;</td><td bgcolor="#D9EF8B">&nbsp;100.00&#037;</td></tr>
+</table>
+<b>(*) tau:</b> <i>Ordinal (Kendall) correlation between</i><br><i>marginal criterion and global ranking relation</i><br/>
+<i>Outranking model</i>: <b>standard</b>, <i>Ranking rule</i>: <b>NetFlows</b><br/>
+<i>Ordinal (Kendall) correlation between</i><br/><i>global ranking and global outranking relation:</i> <b>+0.919</b><br/>
+<i>Mean marginal correlation (a)               :</i> <b>+0.378</b><br/>
+<i>Standard marginal correlation deviation (b) :</i> <b>+0.588</b><br/>
+<i>Ranking fairness (a) - (b)                  :</i> <b>-0.211</b><br/>
+</body></html>

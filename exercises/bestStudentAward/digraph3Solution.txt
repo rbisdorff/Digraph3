@@ -1,0 +1,105 @@
+################################
+# Digraph3 Exercise 1.4.6.1
+# RB (C) 2022-2026
+##################################
+>>> from outrankingDigraphs import *
+>>> t = RandomPerformanceTableau(numberOfActions=4,numberOfCriteria=5)
+>>> t.save('studentgrades')
+    *--- Saving random performance tableau in file: <studentGrades.py> ---*
+# edit this file in accordance with the exercise's description
+# reload the edited prformance tableau
+>>> t = PerformanceTableau('studentGrades')
+# verifying the correctness of the data edited
+>>> t.showPerformanceTableau()
+    *----  performance tableau -----*
+    Criteria |  'C1'   'C2'   'C3'   'C4'   'C5'   
+    Actions  |    2      3      4      2      4    
+    ---------|-----------------------------------------
+       'A'   |  11.00   13.00   9.00   15.00   11.00  
+       'B'   |  12.00   9.00   13.00   10.00   13.00  
+       'C'   |  8.00   11.00   14.00   12.00   14.00  
+       'D'   |  15.00   10.00   12.00   8.00   13.00  
+>>> t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=3)
+# see image <studentGradesHeatmap.png>
+>>> g = BipolarOutrankingDigraph(t)
+>>> g.showHTMLRelationMap(rankingRule='NetFlows')
+# see image <studentOutrankingRelation.png>
+# the outranking appears to be transitive
+>>> g.isTransitive()
+    True
+# show the Bachet choice recommendation
+>>> g.showChoiceRecommendation(method='Bachet')
+    Bachet choice recommendation
+    *---- Bachet Choice Recommendations ----*
+    Ranking by recursively first and last choosing
+     1st ranked ['C']
+       2nd ranked ['B', 'D']
+       2nd last ranked ['B', 'D']
+     1st last ranked ['A']
+    Quality of partial Bachet ranking
+     Crisp ordinal correlation  : +1.000
+     Epistemic determination    : +0.367
+     Bipolar-valued equivalence : +0.367
+    Execution time: 0.171 seconds
+# show the Rubis best Choice Recommendation
+>>> g.showChoiceRecommendation(method='Rubis')
+    Rubis choice recommendation
+    First choice recommendation(s) (BCR) 
+    Credibility domain: [-1.00,1.00]
+     === >> potential first choice(s)
+    * choice              : ['C']
+      independence        : 1.00
+      dominance           : 0.07
+      absorbency          : -0.73
+      covering (%)        : 100.00
+      determinateness (%) : 53.34
+      - most credible action(s) = { 'C': 0.07, }
+     === >> potential last choice(s) 
+    * choice              : ['A']
+      independence        : 1.00
+      dominance           : -0.33
+      absorbency          : 0.07
+      covered (%)         : 100.00
+      determinateness (%) : 53.34
+      - most credible action(s) = { 'A': 0.07, }
+    Execution time: 0.018 seconds
+# graphviz plot of the strict outranking relation
+>>> (~(-g)).exportGraphViz('studentGradesDrawing',
+...                        firstChoice=['C'],lastChoice=['A'])
+    *---- exporting a dot file for GraphViz tools ---------*
+    Exporting to studentGradesDrawing.dot
+    dot -Grankdir=BT -Tpng studentGradesDrawing.dot -o studentGradesDrawing.png 
+# use larger performance sidcrimination thresholds
+>>> t1 = PerformanceTableau('studentGradesLargerThresholds')
+>>> g1 = BipolarOutrankingDigraph(t1)
+>>> g1.showChoiceRecommendation('Bachet')
+    Bachet choice recommendation
+    *---- Bachet Choice Recommendations ----*
+    Ranking by recursively first and last choosing
+     1st ranked ['B', 'C', 'D']
+     1st last ranked ['A']
+    Quality of partial Bachet ranking
+     Crisp ordinal correlation  : +1.000
+     Epistemic determination    : +0.100
+     Bipolar-valued equivalence : +0.100
+    Execution time: 0.171 seconds
+>>> g1.showChoiceRecommendation('Rubis')
+    Rubis choice recommendation
+    First choice recommendation(s) (BCR)   
+    Credibility domain: [-1.00,1.00]
+    === >> potential first choice(s)
+    * choice              : ['B', 'C', 'D']
+      independence        : 0.20
+      dominance           : 0.33
+      absorbency          : -0.07
+      covering (%)        : 100.00
+      determinateness (%) : 61.67
+    - most credible action(s) = { 'B': 0.33, 'D': 0.20, 'C': 0.20, }
+    === >> potential last choice(s) 
+    * choice              : ['A']
+      independence        : 1.00
+      dominance           : -0.33
+      absorbency          : 0.07
+      covered (%)         : 100.00
+      determinateness (%) : 53.34
+    - most credible action(s) = { 'A': 0.07, }
