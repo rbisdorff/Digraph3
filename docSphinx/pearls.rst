@@ -2444,7 +2444,7 @@ The best suited multipartisan presidential candidate should as a consequence pre
     A Agueb-Porterie    -22.16         28.39      50.56         21.05          
    ================== ============== ========== ============= ============
 
-Without surprise, it is again *Christaine Taubira* who shows the highest net approval score (+66.11%), followed by *Yannick Jadot* (+46.04%). Notice that both *Ch Marchandise* (-14.28%) and *A Agueb-Porterie* (-22.16%) are positively disapproved as potential multipartisan presidential candidates.
+Without surprise, it is again *Christiane Taubira* who shows the highest net approval score (+66.11%), followed by *Yannick Jadot* (+46.04%). Notice that both *Ch Marchandise* (-14.28%) and *A Agueb-Porterie* (-22.16%) are positively disapproved as potential multipartisan presidential candidates.
 
 It is furthermore remarkable that both the approval votes and the the disapproval votes model the same linear ranking of the seven candidates. 
 
