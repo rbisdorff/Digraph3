@@ -1102,12 +1102,11 @@ Enhancing social choice procedures
 
 *Condorcet*'s critical perspective on the simple plurality voting rule
 ``````````````````````````````````````````````````````````````````````
+In his seminal 1785 critical perspective on simple plurality voting rules for solving social choice problems, *Condorcet* developed several case studies for supporting his analysis ([CON-1785p]_ P. xlvij). 
 
 .. contents::
    :depth: 1
    :local:
-
-In his seminal 1785 critical perspective on simple plurality voting rules for solving social choice problems, *Condorcet* developed several case studies for supporting his analysis. A first case concerns the decision to be taken by a Committee on two motions ([CON-1785p]_ P. xlvij). 
 
 Bipolar approval voting of motions
 ..................................
