@@ -1090,6 +1090,10 @@ Back to :ref:`Content Table <Pearls-label>`
 Enhancing social choice procedures
 ----------------------------------
 
+.. epigraph::
+   
+   "*In order to meet both essential conditions for making* [social] *choices --the probability to obtain a decision & the one that the decision may be correct-- it is required* [...], *in case of decisions on complicated questions, to thouroughly develop the system of simple propositions that make them up, that every potential opinion is well explained, that the opinion of each voter is collected on each one of the propositions that make up each question & not only on the global result*."  -- J.-A. N. Condorcet (1785) [12]_
+
 .. contents:: 
    :depth: 1
    :local:
@@ -1098,9 +1102,6 @@ Enhancing social choice procedures
 
 *Condorcet*'s critical perspective on the simple plurality voting rule
 ``````````````````````````````````````````````````````````````````````
-.. epigraph::
-   
-   "*In order to meet both essential conditions for making* [social] *choices --the probability to obtain a decision & the one that the decision may be correct-- it is required* [...], *in case of decisions on complicated questions, to thouroughly develop the system of simple propositions that make them up, that every potential opinion is well explained, that the opinion of each voter is collected on each one of the propositions that make up each question & not only on the global result*."  -- J.-A. N. Condorcet (1785) [12]_
 
 .. contents::
    :depth: 1
