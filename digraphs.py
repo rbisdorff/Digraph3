@@ -9628,10 +9628,13 @@ class Digraph(object):
         else:
             return goodChoiceVector        
 
-    def computeKernelVector(self,kernel,Initial=True,Comments=False):
+    def computeKernelVector(self,kernel,Initial=True,
+                            Comments=False,Iterations=False):
         """
         | Computing Characteristic values for dominant pre-kernels
         | using the von Neumann dual fixpoint equation
+        | If Iterations == True, returns the tuple 
+        |             (kernel vector, nbrOfIterations)
         """
         import copy
         from operator import itemgetter
@@ -9697,6 +9700,8 @@ class Digraph(object):
                 print('Choice vector for terminal pre-kernel: %s' % str(ker))
             for i,item in enumerate(choiceVector):
                 print('%s: %+.2f' % (item[1],item[0]) )
+        elif Iterations:
+            return choiceVector,it
         else:
             return choiceVector        
 
