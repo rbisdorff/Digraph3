@@ -13,7 +13,7 @@
 \contentsline {subsubsection}{Characterising unopposed multiobjective outranking situations}{23}{subsubsection*.24}%
 \contentsline {subsubsection}{Computing unopposed multiobjective choice recommendations}{26}{subsubsection*.25}%
 \contentsline {section}{\numberline {2}Enhancing social choice procedures}{27}{section.2}%
-\contentsline {subsection}{\numberline {2.1}\sphinxstyleemphasis {Condorcet}’s critical perspective on the simple plurality voting rule}{27}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.1}\sphinxstyleemphasis {Condorcet}’s critical perspective on the simple plurality voting rule}{28}{subsection.2.1}%
 \contentsline {subsubsection}{Bipolar approval voting of motions}{28}{subsubsection*.35}%
 \contentsline {subsubsection}{Who wins the election?}{30}{subsubsection*.36}%
 \contentsline {subsubsection}{Resolving circular social preferences}{32}{subsubsection*.37}%
