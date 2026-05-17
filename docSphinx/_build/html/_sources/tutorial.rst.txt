@@ -245,7 +245,7 @@ All :py:class:`~digraphs.Digraph` objects contain at least the following attribu
 0. A **name** attribute, holding usually the actual name of the stored instance that was used to create the instance; 
 1. A ordered dictionary of digraph nodes called **actions** (decision alternatives) with at least a 'name' attribute;
 2. An **order** attribute containing the number of graph nodes (length of the actions dictionary) automatically added by the object constructor;
-3. A logical characteristic **valuationdomain** dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true);
+3. A logical characteristic **valuationdomain** dictionary with three decimal entries: the minimum ( Decimal('-1.0') ), means certainly false), the median ( Decimal('0.0') ), means missing information) and the maximum characteristic value ( Decimal('+1.0') ), means certainly true);
 4. A double dictionary called **relation** and indexed by an oriented pair of actions (nodes) and carrying a decimal characteristic value in the range of the previous valuation domain;
 5. Its associated **gamma** attribute, a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor;
 6. Its associated **notGamma** attribute, a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor.
@@ -10755,7 +10755,7 @@ Computing the non isomorphic MISs of the 12-cycle graph
 Introduction
 ````````````
 
-Due to the public success of our common 2008 publication with Jean-Luc Marichal [ISOMIS-08]_ , we present in this tutorial an example Python session for computing the **non isomorphic maximal independent sets** (MISs) from the 12-cycle graph, i.e. a :py:class:`~digraphs.CirculantDigraph` class instance of order 12 and symmetric circulants 1 and -1.
+Following the public success of our common 2008 publication with Jean-Luc Marichal [ISOMIS-08]_ , we present in this tutorial an example Python session for computing the **non isomorphic maximal independent sets** (MISs) from the 12-cycle graph, i.e. a :py:class:`~digraphs.CirculantDigraph` class instance of order 12 and symmetric circulants 1 and -1.
 
 .. code-block:: pycon
    :linenos:
