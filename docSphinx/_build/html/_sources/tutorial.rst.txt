@@ -234,11 +234,7 @@ For exploring the classes and methods provided by the *Digraph3* modules (see th
 
 In :numref:`digraphs` we import, for instance, from the :py:mod:`randomDigraphs` module the :py:class:`~randomDigraphs.RandomDigraph` class in order to generate a random *digraph* object *dg* of order 5 - number of nodes called (decision) *actions* - and arc probability of 50%. We may directly inspect the content of python object *dg* (Line 3).
 
-..
-
-   .. note::
-
-      For convenience of redoing the computations, all python code-blocks show in the upper right corner a specific **copy button** which allows to both copy *only* code lines, i.e. lines starting with '>>>' or '...', and stripping the console prompts. The copied code lines may hence be right away *pasted* into a Python console session. As of Python 3.13.+ it is necessary to switch in the python terminal console with the F3 function key into a console "*paste mode*" which allows pasting blocks of code. Press F3 key again to return to the regular prompt (see Python 3.13.+ Interactive Mode documentation).
+.. note:: For convenience of redoing the computations, all python code-blocks show in the upper right corner a specific **copy button** which allows to both copy *only* code lines, i.e. lines starting with '>>>' or '...', and stripping the console prompts. The copied code lines may hence be right away *pasted* into a Python console session.
 
 
 *Digraph* object structure
