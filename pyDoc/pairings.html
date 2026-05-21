@@ -7,11 +7,11 @@
 
 <table class="heading">
 <tr class="heading-text decor">
-<td class="title">&nbsp;<br><strong class="title">pairings</strong> (version $Revision: Python 3.11)</td>
+<td class="title">&nbsp;<br><strong class="title">pairings</strong> (version $Revision: Python 3.13.13)</td>
 <td class="extra"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/GitHub/Digraph3/pyDoc/pairings.py">/home/bisdorff/Documents/GitHub/Digraph3/pyDoc/pairings.py</a></td></tr></table>
     <p><span class="code">Python3&nbsp;implementation&nbsp;of&nbsp;solvers&nbsp;for&nbsp;fair&nbsp;inter-&nbsp;and&nbsp;intragroup&nbsp;pairing&nbsp;problems<br>
 &nbsp;<br>
-Copyright&nbsp;(C)&nbsp;2023&nbsp;Raymond&nbsp;Bisdorff<br>
+Copyright&nbsp;(C)&nbsp;2023-2026&nbsp;Raymond&nbsp;Bisdorff<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify<br>
 &nbsp;&nbsp;&nbsp;&nbsp;it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by<br>
@@ -39,7 +39,9 @@ Copyright&nbsp;(C)&nbsp;2023&nbsp;Raymond&nbsp;Bisdorff<br>
 <dt class="heading-text"><a href="pairings.html#InterGroupPairing">InterGroupPairing</a>
 </dt><dd>
 <dl>
-<dt class="heading-text"><a href="pairings.html#BestCopelandInterGroupMatching">BestCopelandInterGroupMatching</a>
+<dt class="heading-text"><a href="pairings.html#BestBachetInterGroupMatching">BestBachetInterGroupMatching</a>
+</dt><dt class="heading-text"><a href="pairings.html#BestCopelandInterGroupMatching">BestCopelandInterGroupMatching</a>
+</dt><dt class="heading-text"><a href="pairings.html#FairestBachetInterGroupMatching">FairestBachetInterGroupMatching</a>
 </dt><dt class="heading-text"><a href="pairings.html#FairestGaleShapleyMatching">FairestGaleShapleyMatching</a>
 </dt><dt class="heading-text"><a href="pairings.html#FairestInterGroupPairing">FairestInterGroupPairing</a>
 </dt><dt class="heading-text"><a href="pairings.html#FairnessEnhancedInterGroupMatching">FairnessEnhancedInterGroupMatching</a>
@@ -53,7 +55,8 @@ Copyright&nbsp;(C)&nbsp;2023&nbsp;Raymond&nbsp;Bisdorff<br>
 <dt class="heading-text"><a href="pairings.html#IntraGroupPairing">IntraGroupPairing</a>
 </dt><dd>
 <dl>
-<dt class="heading-text"><a href="pairings.html#BestCopelandIntraGroupMatching">BestCopelandIntraGroupMatching</a>
+<dt class="heading-text"><a href="pairings.html#BestBachetIntraGroupMatching">BestBachetIntraGroupMatching</a>
+</dt><dt class="heading-text"><a href="pairings.html#BestCopelandIntraGroupMatching">BestCopelandIntraGroupMatching</a>
 </dt><dt class="heading-text"><a href="pairings.html#FairestIntraGroupPairing">FairestIntraGroupPairing</a>
 </dt><dt class="heading-text"><a href="pairings.html#FairnessEnhancedIntraGroupMatching">FairnessEnhancedIntraGroupMatching</a>
 </dt></dl>
@@ -62,6 +65,662 @@ Copyright&nbsp;(C)&nbsp;2023&nbsp;Raymond&nbsp;Bisdorff<br>
 </dd>
 </dl>
  <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="BestBachetInterGroupMatching">class <strong>BestBachetInterGroupMatching</strong></a>(<a href="pairings.html#InterGroupPairing">InterGroupPairing</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#BestBachetInterGroupMatching">BestBachetInterGroupMatching</a>(vpA,&nbsp;vpB,&nbsp;BestQualified=True,&nbsp;Comments=False,&nbsp;Debug=False)<br>
+&nbsp;<br>
+The&nbsp;class&nbsp;computes&nbsp;the&nbsp;individual&nbsp;Bachet&nbsp;ranking&nbsp;scores&nbsp;and<br>
+constructs&nbsp;a&nbsp;best&nbsp;determined&nbsp;perfect&nbsp;intergroup&nbsp;matching<br>
+with&nbsp;a&nbsp;ranked&nbsp;pairs&nbsp;rule<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;*vpA*&nbsp;:&nbsp;any&nbsp;VotingProfile&nbsp;instance<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;*vpB*&nbsp;:&nbsp;reciprocal&nbsp;VotingProfile&nbsp;instance<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;*BestQualified*:&nbsp;*False*&nbsp;|&nbsp;*True*&nbsp;(default).&nbsp;If&nbsp;*True*,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;both&nbsp;the&nbsp;original&nbsp;and&nbsp;the&nbsp;reversed&nbsp;ordering&nbsp;of&nbsp;the&nbsp;actions&nbsp;will<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;taken&nbsp;into&nbsp;account&nbsp;for&nbsp;computing&nbsp;the&nbsp;pairing&nbsp;fitness&nbsp;scores<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;the&nbsp;best&nbsp;qualified&nbsp;Bachet&nbsp;intergroup&nbsp;matching&nbsp;result&nbsp;will&nbsp;eventually&nbsp;returned.<br>
+&nbsp;<br>
+See&nbsp;the&nbsp;:ref:`tutorial&nbsp;on&nbsp;computing&nbsp;fair&nbsp;intergroup&nbsp;pairings&nbsp;&lt;Fair-InterGroup-Pairings-label&gt;`.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="pairings.html#BestBachetInterGroupMatching">BestBachetInterGroupMatching</a></dd>
+<dd><a href="pairings.html#InterGroupPairing">InterGroupPairing</a></dd>
+<dd><a href="graphs.html#BipartiteGraph">graphs.BipartiteGraph</a></dd>
+<dd><a href="graphs.html#Graph">graphs.Graph</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="BestBachetInterGroupMatching-__init__"><strong>__init__</strong></a>(self, vpA, vpB, BestQualified=True, Comments=False, Debug=False)</dt><dd><span class="code">Abstract&nbsp;class&nbsp;entry</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-showMatchingWithFitnessScores"><strong>showMatchingWithFitnessScores</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="pairings.html#InterGroupPairing">InterGroupPairing</a>:<br>
+<dl><dt><a name="BestBachetInterGroupMatching-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><span class="code">Default&nbsp;description&nbsp;for&nbsp;FairPairing&nbsp;instances.</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-computeBachetScore"><strong>computeBachetScore</strong></a>(self, vpA, a, b, Reversed=False)</dt><dd><span class="code">Replacement&nbsp;for&nbsp;the&nbsp;linear&nbsp;voting&nbsp;profiles&nbsp;information<br>
+when&nbsp;searching&nbsp;for&nbsp;promising&nbsp;swapping&nbsp;candidates</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-computeCopelandScore"><strong>computeCopelandScore</strong></a>(self, vpA, a, b)</dt><dd><span class="code">Replacement&nbsp;for&nbsp;the&nbsp;linear&nbsp;voting&nbsp;profiles&nbsp;information<br>
+when&nbsp;searching&nbsp;for&nbsp;promising&nbsp;swapping&nbsp;candidates</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-computeGaleShapleyMatching"><strong>computeGaleShapleyMatching</strong></a>(self, Reverse=False)</dt><dd><span class="code">Documentation:<br>
+<a href="https://en.wikipedia.org/wiki/Gale%E2%80%93Shapley_algorithm">https://en.wikipedia.org/wiki/Gale%E2%80%93Shapley_algorithm</a><br>
+Our&nbsp;implementation&nbsp;is&nbsp;inspired&nbsp;by<br>
+<a href="https://johnlekberg.com/blog/2020-08-22-stable-matching.html">https://johnlekberg.com/blog/2020-08-22-stable-matching.html</a><br>
+&nbsp;<br>
+When&nbsp;*Reverse==False*,&nbsp;group&nbsp;*A*&nbsp;is&nbsp;proposing.<br>
+Otherwise,&nbsp;group&nbsp;*B*&nbsp;is&nbsp;proposing</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-computeIndividualCorrelations"><strong>computeIndividualCorrelations</strong></a>(self, matching, Debug=False)</dt><dd><span class="code">Individual&nbsp;correlations&nbsp;for&nbsp;groups&nbsp;A&nbsp;and&nbsp;B<br>
+returns&nbsp;a&nbsp;tuple&nbsp;called&nbsp;fitness&nbsp;with&nbsp;following&nbsp;content<br>
+fitness=(matching,avgCorr,stdCorr,avgCorr-stdCorr,<br>
+groupAScores,groupBScores,<br>
+abs(avgCorrA-avgCorrB))</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-computePermutation"><strong>computePermutation</strong></a>(self, matching)</dt><dd><span class="code">Renders&nbsp;the&nbsp;matching's&nbsp;permutation&nbsp;of&nbsp;*A*&nbsp;and&nbsp;*B*&nbsp;indexes.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;The&nbsp;prefix&nbsp;of&nbsp;group&nbsp;*A*&nbsp;voters&nbsp;must&nbsp;preceed&nbsp;the&nbsp;prefix&nbsp;of&nbsp;the&nbsp;group&nbsp;*B*&nbsp;voters&nbsp;in&nbsp;alphabetic&nbsp;order</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-computePermutationGraph"><strong>computePermutationGraph</strong></a>(self, matching)</dt><dd><span class="code">Renders&nbsp;the&nbsp;permutation&nbsp;graph&nbsp;of&nbsp;the&nbsp;matching</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-enhanceMatchingGeneralFairness"><strong>enhanceMatchingGeneralFairness</strong></a>(self, matching, maxIterations=10, Comments=False, Debug=False)</dt><dd><span class="code">Enahance&nbsp;fairness&nbsp;of&nbsp;a&nbsp;given&nbsp;matching&nbsp;using&nbsp;any&nbsp;reciprocal&nbsp;voting&nbsp;profiles</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-enhanceMatchingLVFairness"><strong>enhanceMatchingLVFairness</strong></a>(self, matching, Reversed=False, maxIterations=10, Comments=False, Debug=False)</dt><dd><span class="code">Enhance&nbsp;fairness&nbsp;of&nbsp;given&nbsp;matching&nbsp;by&nbsp;using&nbsp;reciprocal&nbsp;linear&nbsp;voting&nbsp;profiles</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-exportPairingGraphViz"><strong>exportPairingGraphViz</strong></a>(self, fileName=None, Comments=True, graphType='png', graphSize='7,7', matching=None, edgeColor='blue', bgcolor='cornsilk', lineWidth=1)</dt><dd><span class="code">Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;bipartite&nbsp;graph&nbsp;drawing&nbsp;filtering.</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-isStableMatching"><strong>isStableMatching</strong></a>(self, matching, Comments=True, Debug=False)</dt><dd><span class="code">Test&nbsp;for&nbsp;the&nbsp;existance&nbsp;of&nbsp;matching&nbsp;instabilities.<br>
+Our&nbsp;implementation&nbsp;is&nbsp;inspired&nbsp;by<br>
+<a href="https://johnlekberg.com/blog/2020-08-22-stable-matching.html">https://johnlekberg.com/blog/2020-08-22-stable-matching.html</a></span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-showBachetRankingScores"><strong>showBachetRankingScores</strong></a>(self)</dt><dd><span class="code">Print&nbsp;the&nbsp;individual&nbsp;Copeland&nbsp;ranking&nbsp;scores</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-showCopelandRankingScores"><strong>showCopelandRankingScores</strong></a>(self)</dt><dd><span class="code">Print&nbsp;the&nbsp;individual&nbsp;Copeland&nbsp;ranking&nbsp;scores</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-showMatchingFairness"><strong>showMatchingFairness</strong></a>(self, matching=None, WithGroupCorrelations=True, WithIndividualCorrelations=True)</dt></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-showPairing"><strong>showPairing</strong></a>(self, matching=None)</dt></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#BipartiteGraph">graphs.BipartiteGraph</a>:<br>
+<dl><dt><a name="BestBachetInterGroupMatching-computeBestDeterminedMaximalMatching"><strong>computeBestDeterminedMaximalMatching</strong></a>(self, Comments=True, Debug=True)</dt><dd><span class="code">Using&nbsp;the&nbsp;ranked&nbsp;pairs&nbsp;rule&nbsp;for&nbsp;assembling&nbsp;a&nbsp;best&nbsp;determined&nbsp;maximal&nbsp;matching</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, Comments=True, graphType='png', graphSize='7,7', edgeColor='blue', bgcolor='cornsilk', lineWidth=1, Debug=True)</dt><dd><span class="code">Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;bipartite&nbsp;graph&nbsp;drawing&nbsp;filtering.</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-showEdgesCharacteristicValues"><strong>showEdgesCharacteristicValues</strong></a>(self, ndigits=2)</dt><dd><span class="code">Prints&nbsp;the&nbsp;edge&nbsp;links&nbsp;of&nbsp;the&nbsp;bipartite&nbsp;graph&nbsp;instance</span></dd></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#Graph">graphs.Graph</a>:<br>
+<dl><dt><a name="BestBachetInterGroupMatching-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><span class="code">Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;instances.<br>
+Returns&nbsp;a&nbsp;DualGraph&nbsp;instance&nbsp;of&nbsp;self.</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-breadthFirstSearch"><strong>breadthFirstSearch</strong></a>(self, s, alphabeticOrder=True, Warnings=True, Debug=False)</dt><dd><span class="code">Breadth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;vertice&nbsp;keys&nbsp;in<br>
+increasing&nbsp;distance&nbsp;from&nbsp;the&nbsp;origin&nbsp;*s*.&nbsp;Ties&nbsp;in&nbsp;the&nbsp;distances<br>
+are&nbsp;resolved&nbsp;by&nbsp;alphabetic&nbsp;ordering&nbsp;of&nbsp;the&nbsp;vertice&nbsp;keys.<br>
+&nbsp;<br>
+A&nbsp;warning&nbsp;is&nbsp;issued&nbsp;when&nbsp;the&nbsp;graph&nbsp;is&nbsp;not&nbsp;connected&nbsp;and&nbsp;the&nbsp;resulting<br>
+search&nbsp;does&nbsp;not&nbsp;cover&nbsp;the&nbsp;whole&nbsp;set&nbsp;of&nbsp;graph&nbsp;vertices.&nbsp;<br>
+&nbsp;<br>
+Source:&nbsp;Cormen,&nbsp;Leiserson,&nbsp;Rivest&nbsp;&amp;&nbsp;Stein,&nbsp;*Introduction&nbsp;to&nbsp;Algorithms*&nbsp;2d&nbsp;Ed.,&nbsp;MIT&nbsp;Press&nbsp;2001.</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Cycle3=False, Comments=False, Debug=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="graphs.html#Graph">Graph</a><br>
+intance.&nbsp;Inspired&nbsp;from&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo&nbsp;&amp;&nbsp;Jradi,<br>
+Algorithmica&nbsp;2015.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By&nbsp;default,&nbsp;a&nbsp;chordless&nbsp;cycle&nbsp;must&nbsp;have&nbsp;at&nbsp;least&nbsp;length&nbsp;4.If&nbsp;the&nbsp;Cycle3&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;True,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;cyclicly&nbsp;closed&nbsp;triplets&nbsp;will&nbsp;be&nbsp;inserted&nbsp;as&nbsp;3-cycles&nbsp;in&nbsp;the&nbsp;result.</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><span class="code">Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Computes&nbsp;the&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets&nbsp;in&nbsp;the&nbsp;dual&nbsp;of&nbsp;self.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>cliques</strong>.</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><span class="code">Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
+Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-computeDiameter"><strong>computeDiameter</strong></a>(self, Oriented=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;diameter&nbsp;(maximal&nbsp;neighbourhood&nbsp;depth)&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;diameter&nbsp;of&nbsp;a&nbsp;disconnected&nbsp;graph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;*infinite*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(results&nbsp;in&nbsp;a&nbsp;value&nbsp;-1)&nbsp;!</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-computeGirth"><strong>computeGirth</strong></a>(self, girthType='any', Comments=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;*girth*&nbsp;of&nbsp;self,&nbsp;i.e.&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;shortest&nbsp;chordless&nbsp;cycle&nbsp;in&nbsp;the&nbsp;graph.<br>
+&nbsp;<br>
+*Parameter*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*girthType*&nbsp;=&nbsp;"any"&nbsp;(default)&nbsp;|&nbsp;"odd"&nbsp;|&nbsp;"even"</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-computeGraphCentres"><strong>computeGraphCentres</strong></a>(self)</dt><dd><span class="code">Renders&nbsp;the&nbsp;vertices&nbsp;of&nbsp;minimal&nbsp;Neighborhood&nbsp;depth.</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-computeMIS"><strong>computeMIS</strong></a>(self, Comments=False)</dt><dd><span class="code">Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>misset</strong>&nbsp;!</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-computeMaximumMatching"><strong>computeMaximumMatching</strong></a>(self, Comments=False)</dt><dd><span class="code">Renders&nbsp;a&nbsp;maximum&nbsp;matching&nbsp;in&nbsp;*self*&nbsp;by&nbsp;computing<br>
+a&nbsp;maximum&nbsp;MIS&nbsp;of&nbsp;the&nbsp;line&nbsp;graph&nbsp;of&nbsp;*self*.</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Comments=False, Debug=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-computeOrientedDigraph"><strong>computeOrientedDigraph</strong></a>(self, PartiallyDetermined=False)</dt><dd><span class="code">Renders&nbsp;a&nbsp;digraph&nbsp;where&nbsp;each&nbsp;edge&nbsp;of&nbsp;the&nbsp;permutation&nbsp;graph&nbsp;*self*<br>
+is&nbsp;converted&nbsp;into&nbsp;an&nbsp;arc&nbsp;oriented&nbsp;in&nbsp;increasing&nbsp;order&nbsp;of&nbsp;the&nbsp;adjacent&nbsp;vertices'&nbsp;numbers.<br>
+If&nbsp;self&nbsp;is&nbsp;a&nbsp;PermutationGraph&nbsp;instance,&nbsp;the&nbsp;orientation&nbsp;will&nbsp;be&nbsp;transitive.<br>
+&nbsp;<br>
+The&nbsp;parameter&nbsp;*PartiallyDetermined*:&nbsp;{True|False&nbsp;by&nbsp;default],&nbsp;converts&nbsp;if&nbsp;*True*&nbsp;all&nbsp;absent<br>
+edges&nbsp;of&nbsp;the&nbsp;graph&nbsp;into&nbsp;indeterminate&nbsp;symmetric&nbsp;relations&nbsp;in&nbsp;the&nbsp;resulting&nbsp;digraph.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;graphs&nbsp;import&nbsp;RandomGraph<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;RandomGraph(order=6,seed=101)<br>
+&gt;&gt;&gt;&nbsp;dg&nbsp;=&nbsp;g.<a href="#BestBachetInterGroupMatching-computeOrientedDigraph">computeOrientedDigraph</a>()<br>
+&gt;&gt;&gt;&nbsp;dg<br>
+*-------&nbsp;Digraph&nbsp;instance&nbsp;description&nbsp;------*<br>
+Instance&nbsp;class&nbsp;&nbsp;&nbsp;:&nbsp;Digraph<br>
+Instance&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;oriented_randomGraph<br>
+Digraph&nbsp;Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;6<br>
+Digraph&nbsp;Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;5<br>
+Valuation&nbsp;domain&nbsp;:&nbsp;[-1.00;&nbsp;1.00]<br>
+Determinateness&nbsp;&nbsp;:&nbsp;100.000<br>
+Attributes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['name','order','actions','valuationdomain',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'relation',&nbsp;'gamma',&nbsp;'notGamma',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'size',&nbsp;'transitivityDegree']<br>
+&gt;&gt;&gt;&nbsp;dg.transitivityDegree<br>
+Decimal('0.7142857142857142857142857143')</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><span class="code">Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
+(result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-computeTransitivelyOrientedDigraph"><strong>computeTransitivelyOrientedDigraph</strong></a>(self, PartiallyDetermined=False, Debug=False)</dt><dd><span class="code">Renders&nbsp;a&nbsp;digraph&nbsp;where&nbsp;each&nbsp;edge&nbsp;of&nbsp;the&nbsp;permutation&nbsp;graph&nbsp;*self*<br>
+is&nbsp;converted&nbsp;into&nbsp;an&nbsp;arc&nbsp;oriented&nbsp;in&nbsp;increasing&nbsp;order&nbsp;of&nbsp;the&nbsp;ranks&nbsp;of&nbsp;implication&nbsp;classes<br>
+detected&nbsp;with&nbsp;the&nbsp;:py:func:`digraphs.Digraph.isComparabilityGraph`&nbsp;test&nbsp;and&nbsp;stored&nbsp;in&nbsp;self.<strong>edgeOrientations</strong>.<br>
+&nbsp;<br>
+The&nbsp;parameter&nbsp;*PartiallyDetermined*:&nbsp;{True|False&nbsp;(by&nbsp;default),&nbsp;converts&nbsp;if&nbsp;*True*&nbsp;all&nbsp;absent<br>
+edges&nbsp;of&nbsp;the&nbsp;graph&nbsp;into&nbsp;indeterminate&nbsp;symmetric&nbsp;relations&nbsp;in&nbsp;the&nbsp;resulting&nbsp;digraph.<br>
+Verifies&nbsp;if&nbsp;the&nbsp;graph&nbsp;instance&nbsp;is&nbsp;a&nbsp;comparability&nbsp;graph.<br>
+&nbsp;<br>
+*Source*:&nbsp;M.&nbsp;Ch.&nbsp;Golumbic&nbsp;(2004)&nbsp;Algorithmic&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;Thery&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
+Annals&nbsp;of&nbsp;Discrete&nbsp;Mathematics&nbsp;57,&nbsp;Elsevier,&nbsp;p.&nbsp;129-132.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;graphs&nbsp;import&nbsp;RandomGraph<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;RandomGraph(order=6,edgeProbability=0.5,seed=100)<br>
+&gt;&gt;&gt;&nbsp;og&nbsp;=&nbsp;g.<a href="#BestBachetInterGroupMatching-computeTransitivelyOrientedDigraph">computeTransitivelyOrientedDigraph</a>()<br>
+&gt;&gt;&gt;&nbsp;if&nbsp;og&nbsp;is&nbsp;not&nbsp;None:<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(og)<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('Transitivity&nbsp;degree:&nbsp;%.3f'&nbsp;%&nbsp;og.transitivityDegree)<br>
+&nbsp;*-------&nbsp;Digraph&nbsp;instance&nbsp;description&nbsp;------*<br>
+&nbsp;&nbsp;Instance&nbsp;class&nbsp;&nbsp;&nbsp;:&nbsp;TransitiveDigraph<br>
+&nbsp;&nbsp;Instance&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;trans_oriented_randomGraph<br>
+&nbsp;&nbsp;Digraph&nbsp;Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;6<br>
+&nbsp;&nbsp;Digraph&nbsp;Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+&nbsp;&nbsp;Valuation&nbsp;domain&nbsp;:&nbsp;[-1.00&nbsp;-&nbsp;1.00]<br>
+&nbsp;&nbsp;Determinateness&nbsp;&nbsp;:&nbsp;46.667<br>
+&nbsp;&nbsp;Attributes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['name',&nbsp;'order',&nbsp;'actions',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'valuationdomain',&nbsp;'relation',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'gamma',&nbsp;'notGamma',&nbsp;'size',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'transitivityDegree']<br>
+&nbsp;Transitivity&nbsp;degree:&nbsp;1.000<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;gd&nbsp;=&nbsp;-g<br>
+&gt;&gt;&gt;&nbsp;ogd&nbsp;=&nbsp;gd.<a href="#BestBachetInterGroupMatching-computeTransitivelyOrientedDigraph">computeTransitivelyOrientedDigraph</a>()<br>
+&gt;&gt;&gt;&nbsp;if&nbsp;ogd&nbsp;is&nbsp;not&nbsp;None:<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(ogd)<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('Dual&nbsp;transitivity&nbsp;degree:&nbsp;%.3f'&nbsp;%&nbsp;ogd.transitivityDegree)<br>
+&nbsp;*-------&nbsp;Digraph&nbsp;instance&nbsp;description&nbsp;------*<br>
+&nbsp;&nbsp;Instance&nbsp;class&nbsp;&nbsp;&nbsp;:&nbsp;TransitiveOrder<br>
+&nbsp;&nbsp;Instance&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;trans_oriented_dual_randomGraph<br>
+&nbsp;&nbsp;Digraph&nbsp;Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;6<br>
+&nbsp;Digraph&nbsp;Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;8<br>
+&nbsp;Valuation&nbsp;domain&nbsp;:&nbsp;[-1.00&nbsp;-&nbsp;1.00]<br>
+&nbsp;Determinateness&nbsp;&nbsp;:&nbsp;53.333<br>
+&nbsp;Attributes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['name',&nbsp;'order',&nbsp;'actions',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'valuationdomain',&nbsp;'relation',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'gamma',&nbsp;'notGamma',&nbsp;'size',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'transitivityDegree']<br>
+Dual&nbsp;transitivity&nbsp;degree:&nbsp;1.000</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><span class="code">Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-exportEdgeOrientationsGraphViz"><strong>exportEdgeOrientationsGraphViz</strong></a>(self, fileName=None, verticesSubset=None, Comments=True, graphType='png', graphSize='7,7', layout=None, arcColor='black', lineWidth=1, palette=1, bgcolor='cornsilk', Debug=False)</dt><dd><span class="code">Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;oriented&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;graphs&nbsp;import&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;RandomGraph(order=6,seed=100)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;if&nbsp;g.<a href="#BestBachetInterGroupMatching-isComparabilityGraph">isComparabilityGraph</a>():<br>
+&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g.<a href="#BestBachetInterGroupMatching-exportEdgeOrientationsGraphViz">exportEdgeOrientationsGraphViz</a>('orientedGraph')<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;orientedGraph.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;Random&nbsp;graph<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-exportPermutationGraphViz"><strong>exportPermutationGraphViz</strong></a>(self, fileName=None, permutation=None, Comments=True, WithEdgeColoring=True, hspace=100, vspace=70, graphType='png', graphSize='7,7', arcColor='black', bgcolor='cornsilk', lineWidth=1)</dt><dd><span class="code">Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;permutation&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Horizontal&nbsp;(default=100)&nbsp;and&nbsp;vertical&nbsp;(default=75)&nbsp;spaces&nbsp;betwen&nbsp;the&nbsp;vertices'<br>
+positions&nbsp;may&nbsp;be&nbsp;explicitely&nbsp;given&nbsp;in&nbsp;*hspace*&nbsp;and&nbsp;*vspace*&nbsp;parameters.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;no&nbsp;*permutation*&nbsp;is&nbsp;provided,&nbsp;it&nbsp;is&nbsp;supposed&nbsp;to&nbsp;exist&nbsp;a&nbsp;self.<strong>permutation</strong>&nbsp;attribute.</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><span class="code">renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-generateIndependent"><strong>generateIndependent</strong></a>(self, U)</dt><dd><span class="code">Generator&nbsp;for&nbsp;all&nbsp;independent&nbsp;vertices&nbsp;sets<br>
+with&nbsp;neighborhoods&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self._singletons().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[independent&nbsp;set,&nbsp;covered&nbsp;set,&nbsp;all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set)].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;independent&nbsp;set&nbsp;==&nbsp;(all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set),&nbsp;the&nbsp;given&nbsp;independent&nbsp;set&nbsp;is&nbsp;maximal&nbsp;!</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><span class="code">Converts&nbsp;a&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;object&nbsp;into&nbsp;a&nbsp;symmetric&nbsp;Digraph&nbsp;object.</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-isComparabilityGraph"><strong>isComparabilityGraph</strong></a>(self, Debug=False)</dt><dd><span class="code">Verifies&nbsp;if&nbsp;the&nbsp;graph&nbsp;instance&nbsp;is&nbsp;a&nbsp;comparability&nbsp;graph.<br>
+If&nbsp;yes,&nbsp;a&nbsp;tranditive&nbsp;orientation&nbsp;of&nbsp;the&nbsp;edges&nbsp;is&nbsp;stored&nbsp;<br>
+in&nbsp;self.<strong>edgeOrientations</strong>.&nbsp;<br>
+&nbsp;<br>
+*Source*:&nbsp;M.&nbsp;Ch.&nbsp;Golumbic&nbsp;(2004)&nbsp;Algorithmic&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;Thery&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
+Annals&nbsp;of&nbsp;Discrete&nbsp;Mathematics&nbsp;57,&nbsp;Elsevier,&nbsp;p.&nbsp;129-132.</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><span class="code">Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-isIntervalGraph"><strong>isIntervalGraph</strong></a>(self, Comments=False)</dt><dd><span class="code">Checks&nbsp;whether&nbsp;the&nbsp;graph&nbsp;self&nbsp;is&nbsp;triangulated&nbsp;and<br>
+its&nbsp;dual&nbsp;is&nbsp;a&nbsp;comparability&nbsp;graph.<br>
+&nbsp;<br>
+*Source*:&nbsp;M.&nbsp;Ch.&nbsp;Golumbic&nbsp;(2004)&nbsp;Algorithmic&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;Thery&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
+Annals&nbsp;of&nbsp;Discrete&nbsp;Mathematics&nbsp;57,&nbsp;Elsevier,&nbsp;p.&nbsp;16.</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-isPerfectGraph"><strong>isPerfectGraph</strong></a>(self, Comments=False, Debug=False)</dt><dd><span class="code">A&nbsp;graph&nbsp;*g*&nbsp;is&nbsp;perfect&nbsp;when&nbsp;neither&nbsp;*g*,&nbsp;nor&nbsp;*-g*,&nbsp;contain&nbsp;any&nbsp;chordless<br>
+cycle&nbsp;of&nbsp;odd&nbsp;length.</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-isPermutationGraph"><strong>isPermutationGraph</strong></a>(self, Comments=False)</dt><dd><span class="code">Checks&nbsp;whether&nbsp;the&nbsp;graph&nbsp;self&nbsp;and<br>
+its&nbsp;dual&nbsp;are&nbsp;comparability&nbsp;graphs.<br>
+&nbsp;<br>
+*Source*:&nbsp;M.&nbsp;Ch.&nbsp;Golumbic&nbsp;(2004)&nbsp;Algorithmic&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;Thery&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
+Annals&nbsp;of&nbsp;Discrete&nbsp;Mathematics&nbsp;57,&nbsp;Elsevier,&nbsp;p.&nbsp;16.</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-isSplitGraph"><strong>isSplitGraph</strong></a>(self, Comments=False)</dt><dd><span class="code">Checks&nbsp;whether&nbsp;the&nbsp;graph&nbsp;'&nbsp;*self*&nbsp;'&nbsp;and&nbsp;its&nbsp;dual&nbsp;'&nbsp;*-self*&nbsp;'&nbsp;are<br>
+triangulated&nbsp;graphs</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-isTree"><strong>isTree</strong></a>(self)</dt><dd><span class="code">Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
+edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-isTriangulated"><strong>isTriangulated</strong></a>(self)</dt><dd><span class="code">Checks&nbsp;if&nbsp;a&nbsp;graph&nbsp;contains&nbsp;no&nbsp;chordless&nbsp;cycle&nbsp;of<br>
+length&nbsp;greater&nbsp;or&nbsp;equal&nbsp;to&nbsp;4.</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><span class="code">Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;random&nbsp;order&nbsp;of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;resulting&nbsp;spanning&nbsp;tree&nbsp;(or&nbsp;forest)&nbsp;is&nbsp;by&nbsp;far&nbsp;not&nbsp;uniformly&nbsp;selected<br>
+&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;all&nbsp;possible&nbsp;trees.&nbsp;Spanning&nbsp;stars&nbsp;will&nbsp;indeed&nbsp;be&nbsp;much&nbsp;less<br>
+&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;selected&nbsp;then&nbsp;streight&nbsp;walks&nbsp;!</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, ndigits=2, Debug=False)</dt><dd><span class="code">Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
+to&nbsp;the&nbsp;parameters&nbsp;given.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;values&nbsp;gives&nbsp;a&nbsp;normalized&nbsp;valuation&nbsp;domain</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><span class="code">Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-setEdgeValue"><strong>setEdgeValue</strong></a>(self, edge, value, Comments=False)</dt><dd><span class="code">Wrapper&nbsp;for&nbsp;updating&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;of&nbsp;a&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;instance.<br>
+The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
+edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
+The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-showMore"><strong>showMore</strong></a>(self)</dt><dd><span class="code">Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;instances.</span></dd></dl>
+
+<dl><dt><a name="BestBachetInterGroupMatching-showShort"><strong>showShort</strong></a>(self)</dt><dd><span class="code">Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;instances.</span></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="graphs.html#Graph">graphs.Graph</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="BestBachetIntraGroupMatching">class <strong>BestBachetIntraGroupMatching</strong></a>(<a href="pairings.html#IntraGroupPairing">IntraGroupPairing</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#BestBachetIntraGroupMatching">BestBachetIntraGroupMatching</a>(vpA,&nbsp;Comments=False,&nbsp;Debug=False)<br>
+&nbsp;<br>
+The&nbsp;class&nbsp;computes&nbsp;the&nbsp;individual&nbsp;Bachet&nbsp;ranking&nbsp;scores&nbsp;and<br>
+construct&nbsp;the&nbsp;best&nbsp;determined&nbsp;perfect&nbsp;matching&nbsp;with&nbsp;a&nbsp;ranked&nbsp;pairs&nbsp;rule<br>
+from&nbsp;the&nbsp;reciprocal&nbsp;Bachet&nbsp;ranking&nbsp;scores&nbsp;graph&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;*&nbsp;*vpA*&nbsp;:&nbsp;intragroup&nbsp;*VotingProfile*&nbsp;instance<br>
+&nbsp;&nbsp;&nbsp;<br>
+See&nbsp;the&nbsp;:ref:`tutorial&nbsp;on&nbsp;computing&nbsp;fair&nbsp;intragroup&nbsp;pairings&nbsp;&lt;Fair-IntraGroup-Pairings-label&gt;`.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="pairings.html#BestBachetIntraGroupMatching">BestBachetIntraGroupMatching</a></dd>
+<dd><a href="pairings.html#IntraGroupPairing">IntraGroupPairing</a></dd>
+<dd><a href="graphs.html#Graph">graphs.Graph</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="BestBachetIntraGroupMatching-__init__"><strong>__init__</strong></a>(self, vpA, Comments=False, Debug=False)</dt><dd><span class="code">Constructor&nbsp;for&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;objects.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-showMatchingFitnessScores"><strong>showMatchingFitnessScores</strong></a>(self, edges=None, ndigits=0)</dt><dd><span class="code">Prints&nbsp;the&nbsp;edge&nbsp;links&nbsp;of&nbsp;the&nbsp;graph</span></dd></dl>
+
+<hr>
+Methods inherited from <a href="pairings.html#IntraGroupPairing">IntraGroupPairing</a>:<br>
+<dl><dt><a name="BestBachetIntraGroupMatching-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><span class="code">Default&nbsp;description&nbsp;for&nbsp;FairPairing&nbsp;instances.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-computeBachetScore"><strong>computeBachetScore</strong></a>(self, a, b)</dt><dd><span class="code">Computes&nbsp;fitness&nbsp;of&nbsp;swapping&nbsp;candidates</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-computeCopelandScore"><strong>computeCopelandScore</strong></a>(self, a, b)</dt><dd><span class="code">Computes&nbsp;fitness&nbsp;of&nbsp;swapping&nbsp;candidates</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-computeIndividualCorrelations"><strong>computeIndividualCorrelations</strong></a>(self, matching=None, Debug=False)</dt><dd><span class="code">Individual&nbsp;correlations&nbsp;for&nbsp;intragroup&nbsp;pairing&nbsp;solution<br>
+returns&nbsp;a&nbsp;tuple&nbsp;called&nbsp;fitness&nbsp;with&nbsp;following&nbsp;content<br>
+avgCorr,stdCorr,&nbsp;groupScores</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-enhanceMatchingFairness"><strong>enhanceMatchingFairness</strong></a>(self, matching, Comments=False, Debug=False)</dt><dd><span class="code">Heuristic&nbsp;for&nbsp;fairness&nbsp;enhancing&nbsp;of&nbsp;given&nbsp;matching</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-exportPairingGraphViz"><strong>exportPairingGraphViz</strong></a>(self, fileName=None, Comments=True, graphType='png', graphSize='7,7', matching=None, edgeColor='blue', bgcolor='cornsilk', lineWidth=2)</dt><dd><span class="code">Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;pairing&nbsp;graph&nbsp;drawing&nbsp;filtering.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-showEdgesCharacteristicValues"><strong>showEdgesCharacteristicValues</strong></a>(self, edges=None, ndigits=2)</dt><dd><span class="code">Prints&nbsp;the&nbsp;edge&nbsp;links&nbsp;of&nbsp;the&nbsp;bipartite&nbsp;graph&nbsp;instance</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-showMatchingFairness"><strong>showMatchingFairness</strong></a>(self, matching=None, WithIndividualCorrelations=True)</dt><dd><span class="code">Shows&nbsp;the&nbsp;intragroup&nbsp;faines&nbsp;of&nbsp;a&nbsp;given&nbsp;matching.<br>
+When&nbsp;*matching&nbsp;is&nbsp;None*&nbsp;the&nbsp;fairest&nbsp;matching&nbsp;of&nbsp;the&nbsp;class&nbsp;is&nbsp;used</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-showPairing"><strong>showPairing</strong></a>(self, matching=None)</dt><dd><span class="code">shows&nbsp;the&nbsp;intragroup&nbsp;pairing&nbsp;solution&nbsp;when&nbsp;*matching&nbsp;is&nbsp;None*</span></dd></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#Graph">graphs.Graph</a>:<br>
+<dl><dt><a name="BestBachetIntraGroupMatching-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><span class="code">Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;instances.<br>
+Returns&nbsp;a&nbsp;DualGraph&nbsp;instance&nbsp;of&nbsp;self.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-breadthFirstSearch"><strong>breadthFirstSearch</strong></a>(self, s, alphabeticOrder=True, Warnings=True, Debug=False)</dt><dd><span class="code">Breadth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;vertice&nbsp;keys&nbsp;in<br>
+increasing&nbsp;distance&nbsp;from&nbsp;the&nbsp;origin&nbsp;*s*.&nbsp;Ties&nbsp;in&nbsp;the&nbsp;distances<br>
+are&nbsp;resolved&nbsp;by&nbsp;alphabetic&nbsp;ordering&nbsp;of&nbsp;the&nbsp;vertice&nbsp;keys.<br>
+&nbsp;<br>
+A&nbsp;warning&nbsp;is&nbsp;issued&nbsp;when&nbsp;the&nbsp;graph&nbsp;is&nbsp;not&nbsp;connected&nbsp;and&nbsp;the&nbsp;resulting<br>
+search&nbsp;does&nbsp;not&nbsp;cover&nbsp;the&nbsp;whole&nbsp;set&nbsp;of&nbsp;graph&nbsp;vertices.&nbsp;<br>
+&nbsp;<br>
+Source:&nbsp;Cormen,&nbsp;Leiserson,&nbsp;Rivest&nbsp;&amp;&nbsp;Stein,&nbsp;*Introduction&nbsp;to&nbsp;Algorithms*&nbsp;2d&nbsp;Ed.,&nbsp;MIT&nbsp;Press&nbsp;2001.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Cycle3=False, Comments=False, Debug=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="graphs.html#Graph">Graph</a><br>
+intance.&nbsp;Inspired&nbsp;from&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo&nbsp;&amp;&nbsp;Jradi,<br>
+Algorithmica&nbsp;2015.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By&nbsp;default,&nbsp;a&nbsp;chordless&nbsp;cycle&nbsp;must&nbsp;have&nbsp;at&nbsp;least&nbsp;length&nbsp;4.If&nbsp;the&nbsp;Cycle3&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;True,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;cyclicly&nbsp;closed&nbsp;triplets&nbsp;will&nbsp;be&nbsp;inserted&nbsp;as&nbsp;3-cycles&nbsp;in&nbsp;the&nbsp;result.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><span class="code">Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Computes&nbsp;the&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets&nbsp;in&nbsp;the&nbsp;dual&nbsp;of&nbsp;self.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>cliques</strong>.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><span class="code">Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
+Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-computeDiameter"><strong>computeDiameter</strong></a>(self, Oriented=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;diameter&nbsp;(maximal&nbsp;neighbourhood&nbsp;depth)&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;diameter&nbsp;of&nbsp;a&nbsp;disconnected&nbsp;graph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;*infinite*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(results&nbsp;in&nbsp;a&nbsp;value&nbsp;-1)&nbsp;!</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-computeGirth"><strong>computeGirth</strong></a>(self, girthType='any', Comments=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;*girth*&nbsp;of&nbsp;self,&nbsp;i.e.&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;shortest&nbsp;chordless&nbsp;cycle&nbsp;in&nbsp;the&nbsp;graph.<br>
+&nbsp;<br>
+*Parameter*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*girthType*&nbsp;=&nbsp;"any"&nbsp;(default)&nbsp;|&nbsp;"odd"&nbsp;|&nbsp;"even"</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-computeGraphCentres"><strong>computeGraphCentres</strong></a>(self)</dt><dd><span class="code">Renders&nbsp;the&nbsp;vertices&nbsp;of&nbsp;minimal&nbsp;Neighborhood&nbsp;depth.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-computeMIS"><strong>computeMIS</strong></a>(self, Comments=False)</dt><dd><span class="code">Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>misset</strong>&nbsp;!</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-computeMaximumMatching"><strong>computeMaximumMatching</strong></a>(self, Comments=False)</dt><dd><span class="code">Renders&nbsp;a&nbsp;maximum&nbsp;matching&nbsp;in&nbsp;*self*&nbsp;by&nbsp;computing<br>
+a&nbsp;maximum&nbsp;MIS&nbsp;of&nbsp;the&nbsp;line&nbsp;graph&nbsp;of&nbsp;*self*.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Comments=False, Debug=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-computeOrientedDigraph"><strong>computeOrientedDigraph</strong></a>(self, PartiallyDetermined=False)</dt><dd><span class="code">Renders&nbsp;a&nbsp;digraph&nbsp;where&nbsp;each&nbsp;edge&nbsp;of&nbsp;the&nbsp;permutation&nbsp;graph&nbsp;*self*<br>
+is&nbsp;converted&nbsp;into&nbsp;an&nbsp;arc&nbsp;oriented&nbsp;in&nbsp;increasing&nbsp;order&nbsp;of&nbsp;the&nbsp;adjacent&nbsp;vertices'&nbsp;numbers.<br>
+If&nbsp;self&nbsp;is&nbsp;a&nbsp;PermutationGraph&nbsp;instance,&nbsp;the&nbsp;orientation&nbsp;will&nbsp;be&nbsp;transitive.<br>
+&nbsp;<br>
+The&nbsp;parameter&nbsp;*PartiallyDetermined*:&nbsp;{True|False&nbsp;by&nbsp;default],&nbsp;converts&nbsp;if&nbsp;*True*&nbsp;all&nbsp;absent<br>
+edges&nbsp;of&nbsp;the&nbsp;graph&nbsp;into&nbsp;indeterminate&nbsp;symmetric&nbsp;relations&nbsp;in&nbsp;the&nbsp;resulting&nbsp;digraph.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;graphs&nbsp;import&nbsp;RandomGraph<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;RandomGraph(order=6,seed=101)<br>
+&gt;&gt;&gt;&nbsp;dg&nbsp;=&nbsp;g.<a href="#BestBachetIntraGroupMatching-computeOrientedDigraph">computeOrientedDigraph</a>()<br>
+&gt;&gt;&gt;&nbsp;dg<br>
+*-------&nbsp;Digraph&nbsp;instance&nbsp;description&nbsp;------*<br>
+Instance&nbsp;class&nbsp;&nbsp;&nbsp;:&nbsp;Digraph<br>
+Instance&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;oriented_randomGraph<br>
+Digraph&nbsp;Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;6<br>
+Digraph&nbsp;Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;5<br>
+Valuation&nbsp;domain&nbsp;:&nbsp;[-1.00;&nbsp;1.00]<br>
+Determinateness&nbsp;&nbsp;:&nbsp;100.000<br>
+Attributes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['name','order','actions','valuationdomain',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'relation',&nbsp;'gamma',&nbsp;'notGamma',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'size',&nbsp;'transitivityDegree']<br>
+&gt;&gt;&gt;&nbsp;dg.transitivityDegree<br>
+Decimal('0.7142857142857142857142857143')</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-computePermutation"><strong>computePermutation</strong></a>(self, seq1=None, seq2=None, Comments=True)</dt><dd><span class="code">Tests&nbsp;whether&nbsp;the&nbsp;graph&nbsp;instance&nbsp;*self*&nbsp;is&nbsp;a&nbsp;permutation&nbsp;graph<br>
+and&nbsp;renders,&nbsp;in&nbsp;case&nbsp;the&nbsp;test&nbsp;is&nbsp;positive,<br>
+the&nbsp;corresponding&nbsp;permutation.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><span class="code">Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
+(result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-computeTransitivelyOrientedDigraph"><strong>computeTransitivelyOrientedDigraph</strong></a>(self, PartiallyDetermined=False, Debug=False)</dt><dd><span class="code">Renders&nbsp;a&nbsp;digraph&nbsp;where&nbsp;each&nbsp;edge&nbsp;of&nbsp;the&nbsp;permutation&nbsp;graph&nbsp;*self*<br>
+is&nbsp;converted&nbsp;into&nbsp;an&nbsp;arc&nbsp;oriented&nbsp;in&nbsp;increasing&nbsp;order&nbsp;of&nbsp;the&nbsp;ranks&nbsp;of&nbsp;implication&nbsp;classes<br>
+detected&nbsp;with&nbsp;the&nbsp;:py:func:`digraphs.Digraph.isComparabilityGraph`&nbsp;test&nbsp;and&nbsp;stored&nbsp;in&nbsp;self.<strong>edgeOrientations</strong>.<br>
+&nbsp;<br>
+The&nbsp;parameter&nbsp;*PartiallyDetermined*:&nbsp;{True|False&nbsp;(by&nbsp;default),&nbsp;converts&nbsp;if&nbsp;*True*&nbsp;all&nbsp;absent<br>
+edges&nbsp;of&nbsp;the&nbsp;graph&nbsp;into&nbsp;indeterminate&nbsp;symmetric&nbsp;relations&nbsp;in&nbsp;the&nbsp;resulting&nbsp;digraph.<br>
+Verifies&nbsp;if&nbsp;the&nbsp;graph&nbsp;instance&nbsp;is&nbsp;a&nbsp;comparability&nbsp;graph.<br>
+&nbsp;<br>
+*Source*:&nbsp;M.&nbsp;Ch.&nbsp;Golumbic&nbsp;(2004)&nbsp;Algorithmic&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;Thery&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
+Annals&nbsp;of&nbsp;Discrete&nbsp;Mathematics&nbsp;57,&nbsp;Elsevier,&nbsp;p.&nbsp;129-132.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;graphs&nbsp;import&nbsp;RandomGraph<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;RandomGraph(order=6,edgeProbability=0.5,seed=100)<br>
+&gt;&gt;&gt;&nbsp;og&nbsp;=&nbsp;g.<a href="#BestBachetIntraGroupMatching-computeTransitivelyOrientedDigraph">computeTransitivelyOrientedDigraph</a>()<br>
+&gt;&gt;&gt;&nbsp;if&nbsp;og&nbsp;is&nbsp;not&nbsp;None:<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(og)<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('Transitivity&nbsp;degree:&nbsp;%.3f'&nbsp;%&nbsp;og.transitivityDegree)<br>
+&nbsp;*-------&nbsp;Digraph&nbsp;instance&nbsp;description&nbsp;------*<br>
+&nbsp;&nbsp;Instance&nbsp;class&nbsp;&nbsp;&nbsp;:&nbsp;TransitiveDigraph<br>
+&nbsp;&nbsp;Instance&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;trans_oriented_randomGraph<br>
+&nbsp;&nbsp;Digraph&nbsp;Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;6<br>
+&nbsp;&nbsp;Digraph&nbsp;Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+&nbsp;&nbsp;Valuation&nbsp;domain&nbsp;:&nbsp;[-1.00&nbsp;-&nbsp;1.00]<br>
+&nbsp;&nbsp;Determinateness&nbsp;&nbsp;:&nbsp;46.667<br>
+&nbsp;&nbsp;Attributes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['name',&nbsp;'order',&nbsp;'actions',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'valuationdomain',&nbsp;'relation',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'gamma',&nbsp;'notGamma',&nbsp;'size',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'transitivityDegree']<br>
+&nbsp;Transitivity&nbsp;degree:&nbsp;1.000<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;gd&nbsp;=&nbsp;-g<br>
+&gt;&gt;&gt;&nbsp;ogd&nbsp;=&nbsp;gd.<a href="#BestBachetIntraGroupMatching-computeTransitivelyOrientedDigraph">computeTransitivelyOrientedDigraph</a>()<br>
+&gt;&gt;&gt;&nbsp;if&nbsp;ogd&nbsp;is&nbsp;not&nbsp;None:<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(ogd)<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('Dual&nbsp;transitivity&nbsp;degree:&nbsp;%.3f'&nbsp;%&nbsp;ogd.transitivityDegree)<br>
+&nbsp;*-------&nbsp;Digraph&nbsp;instance&nbsp;description&nbsp;------*<br>
+&nbsp;&nbsp;Instance&nbsp;class&nbsp;&nbsp;&nbsp;:&nbsp;TransitiveOrder<br>
+&nbsp;&nbsp;Instance&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;trans_oriented_dual_randomGraph<br>
+&nbsp;&nbsp;Digraph&nbsp;Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;6<br>
+&nbsp;Digraph&nbsp;Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;8<br>
+&nbsp;Valuation&nbsp;domain&nbsp;:&nbsp;[-1.00&nbsp;-&nbsp;1.00]<br>
+&nbsp;Determinateness&nbsp;&nbsp;:&nbsp;53.333<br>
+&nbsp;Attributes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['name',&nbsp;'order',&nbsp;'actions',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'valuationdomain',&nbsp;'relation',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'gamma',&nbsp;'notGamma',&nbsp;'size',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'transitivityDegree']<br>
+Dual&nbsp;transitivity&nbsp;degree:&nbsp;1.000</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><span class="code">Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-exportEdgeOrientationsGraphViz"><strong>exportEdgeOrientationsGraphViz</strong></a>(self, fileName=None, verticesSubset=None, Comments=True, graphType='png', graphSize='7,7', layout=None, arcColor='black', lineWidth=1, palette=1, bgcolor='cornsilk', Debug=False)</dt><dd><span class="code">Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;oriented&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;graphs&nbsp;import&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;RandomGraph(order=6,seed=100)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;if&nbsp;g.<a href="#BestBachetIntraGroupMatching-isComparabilityGraph">isComparabilityGraph</a>():<br>
+&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g.<a href="#BestBachetIntraGroupMatching-exportEdgeOrientationsGraphViz">exportEdgeOrientationsGraphViz</a>('orientedGraph')<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;orientedGraph.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;Random&nbsp;graph<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, verticesSubset=None, Comments=True, graphType='png', graphSize='7,7', WithSpanningTree=False, WithVertexColoring=False, matching=None, layout=None, arcColor='black', bgcolor='cornsilk', lineWidth=1)</dt><dd><span class="code">Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="graphs.html#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.3)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#BestBachetIntraGroupMatching-exportGraphViz">exportGraphViz</a>('randomGraph')<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;randomGraph.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;Random&nbsp;graph<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-exportPermutationGraphViz"><strong>exportPermutationGraphViz</strong></a>(self, fileName=None, permutation=None, Comments=True, WithEdgeColoring=True, hspace=100, vspace=70, graphType='png', graphSize='7,7', arcColor='black', bgcolor='cornsilk', lineWidth=1)</dt><dd><span class="code">Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;permutation&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Horizontal&nbsp;(default=100)&nbsp;and&nbsp;vertical&nbsp;(default=75)&nbsp;spaces&nbsp;betwen&nbsp;the&nbsp;vertices'<br>
+positions&nbsp;may&nbsp;be&nbsp;explicitely&nbsp;given&nbsp;in&nbsp;*hspace*&nbsp;and&nbsp;*vspace*&nbsp;parameters.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;no&nbsp;*permutation*&nbsp;is&nbsp;provided,&nbsp;it&nbsp;is&nbsp;supposed&nbsp;to&nbsp;exist&nbsp;a&nbsp;self.<strong>permutation</strong>&nbsp;attribute.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><span class="code">renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-generateIndependent"><strong>generateIndependent</strong></a>(self, U)</dt><dd><span class="code">Generator&nbsp;for&nbsp;all&nbsp;independent&nbsp;vertices&nbsp;sets<br>
+with&nbsp;neighborhoods&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self._singletons().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[independent&nbsp;set,&nbsp;covered&nbsp;set,&nbsp;all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set)].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;independent&nbsp;set&nbsp;==&nbsp;(all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set),&nbsp;the&nbsp;given&nbsp;independent&nbsp;set&nbsp;is&nbsp;maximal&nbsp;!</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><span class="code">Converts&nbsp;a&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;object&nbsp;into&nbsp;a&nbsp;symmetric&nbsp;Digraph&nbsp;object.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-isComparabilityGraph"><strong>isComparabilityGraph</strong></a>(self, Debug=False)</dt><dd><span class="code">Verifies&nbsp;if&nbsp;the&nbsp;graph&nbsp;instance&nbsp;is&nbsp;a&nbsp;comparability&nbsp;graph.<br>
+If&nbsp;yes,&nbsp;a&nbsp;tranditive&nbsp;orientation&nbsp;of&nbsp;the&nbsp;edges&nbsp;is&nbsp;stored&nbsp;<br>
+in&nbsp;self.<strong>edgeOrientations</strong>.&nbsp;<br>
+&nbsp;<br>
+*Source*:&nbsp;M.&nbsp;Ch.&nbsp;Golumbic&nbsp;(2004)&nbsp;Algorithmic&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;Thery&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
+Annals&nbsp;of&nbsp;Discrete&nbsp;Mathematics&nbsp;57,&nbsp;Elsevier,&nbsp;p.&nbsp;129-132.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><span class="code">Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-isIntervalGraph"><strong>isIntervalGraph</strong></a>(self, Comments=False)</dt><dd><span class="code">Checks&nbsp;whether&nbsp;the&nbsp;graph&nbsp;self&nbsp;is&nbsp;triangulated&nbsp;and<br>
+its&nbsp;dual&nbsp;is&nbsp;a&nbsp;comparability&nbsp;graph.<br>
+&nbsp;<br>
+*Source*:&nbsp;M.&nbsp;Ch.&nbsp;Golumbic&nbsp;(2004)&nbsp;Algorithmic&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;Thery&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
+Annals&nbsp;of&nbsp;Discrete&nbsp;Mathematics&nbsp;57,&nbsp;Elsevier,&nbsp;p.&nbsp;16.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-isPerfectGraph"><strong>isPerfectGraph</strong></a>(self, Comments=False, Debug=False)</dt><dd><span class="code">A&nbsp;graph&nbsp;*g*&nbsp;is&nbsp;perfect&nbsp;when&nbsp;neither&nbsp;*g*,&nbsp;nor&nbsp;*-g*,&nbsp;contain&nbsp;any&nbsp;chordless<br>
+cycle&nbsp;of&nbsp;odd&nbsp;length.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-isPermutationGraph"><strong>isPermutationGraph</strong></a>(self, Comments=False)</dt><dd><span class="code">Checks&nbsp;whether&nbsp;the&nbsp;graph&nbsp;self&nbsp;and<br>
+its&nbsp;dual&nbsp;are&nbsp;comparability&nbsp;graphs.<br>
+&nbsp;<br>
+*Source*:&nbsp;M.&nbsp;Ch.&nbsp;Golumbic&nbsp;(2004)&nbsp;Algorithmic&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;Thery&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
+Annals&nbsp;of&nbsp;Discrete&nbsp;Mathematics&nbsp;57,&nbsp;Elsevier,&nbsp;p.&nbsp;16.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-isSplitGraph"><strong>isSplitGraph</strong></a>(self, Comments=False)</dt><dd><span class="code">Checks&nbsp;whether&nbsp;the&nbsp;graph&nbsp;'&nbsp;*self*&nbsp;'&nbsp;and&nbsp;its&nbsp;dual&nbsp;'&nbsp;*-self*&nbsp;'&nbsp;are<br>
+triangulated&nbsp;graphs</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-isTree"><strong>isTree</strong></a>(self)</dt><dd><span class="code">Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
+edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-isTriangulated"><strong>isTriangulated</strong></a>(self)</dt><dd><span class="code">Checks&nbsp;if&nbsp;a&nbsp;graph&nbsp;contains&nbsp;no&nbsp;chordless&nbsp;cycle&nbsp;of<br>
+length&nbsp;greater&nbsp;or&nbsp;equal&nbsp;to&nbsp;4.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><span class="code">Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;random&nbsp;order&nbsp;of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;resulting&nbsp;spanning&nbsp;tree&nbsp;(or&nbsp;forest)&nbsp;is&nbsp;by&nbsp;far&nbsp;not&nbsp;uniformly&nbsp;selected<br>
+&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;all&nbsp;possible&nbsp;trees.&nbsp;Spanning&nbsp;stars&nbsp;will&nbsp;indeed&nbsp;be&nbsp;much&nbsp;less<br>
+&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;selected&nbsp;then&nbsp;streight&nbsp;walks&nbsp;!</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, ndigits=2, Debug=False)</dt><dd><span class="code">Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
+to&nbsp;the&nbsp;parameters&nbsp;given.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;values&nbsp;gives&nbsp;a&nbsp;normalized&nbsp;valuation&nbsp;domain</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><span class="code">Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-setEdgeValue"><strong>setEdgeValue</strong></a>(self, edge, value, Comments=False)</dt><dd><span class="code">Wrapper&nbsp;for&nbsp;updating&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;of&nbsp;a&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;instance.<br>
+The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
+edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
+The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-showMore"><strong>showMore</strong></a>(self)</dt><dd><span class="code">Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;instances.</span></dd></dl>
+
+<dl><dt><a name="BestBachetIntraGroupMatching-showShort"><strong>showShort</strong></a>(self)</dt><dd><span class="code">Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;instances.</span></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="graphs.html#Graph">graphs.Graph</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table> <p>
 <table class="section">
 <tr class="decor title-decor heading-text">
 <td class="section-title" colspan=3>&nbsp;<br><a name="BestCopelandInterGroupMatching">class <strong>BestCopelandInterGroupMatching</strong></a>(<a href="pairings.html#InterGroupPairing">InterGroupPairing</a>)</td></tr>
@@ -91,9 +750,14 @@ See&nbsp;the&nbsp;:ref:`tutorial&nbsp;on&nbsp;computing&nbsp;fair&nbsp;intergrou
 Methods defined here:<br>
 <dl><dt><a name="BestCopelandInterGroupMatching-__init__"><strong>__init__</strong></a>(self, vpA, vpB, Comments=False, Debug=False)</dt><dd><span class="code">Abstract&nbsp;class&nbsp;entry</span></dd></dl>
 
+<dl><dt><a name="BestCopelandInterGroupMatching-showMatchingWithFitnessScores"><strong>showMatchingWithFitnessScores</strong></a>(self)</dt></dl>
+
 <hr>
 Methods inherited from <a href="pairings.html#InterGroupPairing">InterGroupPairing</a>:<br>
 <dl><dt><a name="BestCopelandInterGroupMatching-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><span class="code">Default&nbsp;description&nbsp;for&nbsp;FairPairing&nbsp;instances.</span></dd></dl>
+
+<dl><dt><a name="BestCopelandInterGroupMatching-computeBachetScore"><strong>computeBachetScore</strong></a>(self, vpA, a, b, Reversed=False)</dt><dd><span class="code">Replacement&nbsp;for&nbsp;the&nbsp;linear&nbsp;voting&nbsp;profiles&nbsp;information<br>
+when&nbsp;searching&nbsp;for&nbsp;promising&nbsp;swapping&nbsp;candidates</span></dd></dl>
 
 <dl><dt><a name="BestCopelandInterGroupMatching-computeCopelandScore"><strong>computeCopelandScore</strong></a>(self, vpA, a, b)</dt><dd><span class="code">Replacement&nbsp;for&nbsp;the&nbsp;linear&nbsp;voting&nbsp;profiles&nbsp;information<br>
 when&nbsp;searching&nbsp;for&nbsp;promising&nbsp;swapping&nbsp;candidates</span></dd></dl>
@@ -127,6 +791,8 @@ abs(avgCorrA-avgCorrB))</span></dd></dl>
 <dl><dt><a name="BestCopelandInterGroupMatching-isStableMatching"><strong>isStableMatching</strong></a>(self, matching, Comments=True, Debug=False)</dt><dd><span class="code">Test&nbsp;for&nbsp;the&nbsp;existance&nbsp;of&nbsp;matching&nbsp;instabilities.<br>
 Our&nbsp;implementation&nbsp;is&nbsp;inspired&nbsp;by<br>
 <a href="https://johnlekberg.com/blog/2020-08-22-stable-matching.html">https://johnlekberg.com/blog/2020-08-22-stable-matching.html</a></span></dd></dl>
+
+<dl><dt><a name="BestCopelandInterGroupMatching-showBachetRankingScores"><strong>showBachetRankingScores</strong></a>(self)</dt><dd><span class="code">Print&nbsp;the&nbsp;individual&nbsp;Copeland&nbsp;ranking&nbsp;scores</span></dd></dl>
 
 <dl><dt><a name="BestCopelandInterGroupMatching-showCopelandRankingScores"><strong>showCopelandRankingScores</strong></a>(self)</dt><dd><span class="code">Print&nbsp;the&nbsp;individual&nbsp;Copeland&nbsp;ranking&nbsp;scores</span></dd></dl>
 
@@ -385,10 +1051,10 @@ The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&n
 <hr>
 Data descriptors inherited from <a href="graphs.html#Graph">graphs.Graph</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
-<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</span></dd>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
 </dl>
 <dl><dt><strong>__weakref__</strong></dt>
-<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</span></dd>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
 </dl>
 </td></tr></table> <p>
 <table class="section">
@@ -406,7 +1072,7 @@ from&nbsp;the&nbsp;reciprocal&nbsp;Copeland&nbsp;ranking&nbsp;scores&nbsp;graph&
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;*&nbsp;*vpA*&nbsp;:&nbsp;intragroup&nbsp;*VotingProfile*&nbsp;instance<br>
 &nbsp;&nbsp;&nbsp;<br>
-See&nbsp;the&nbsp;:ref:`tutorial&nbsp;on&nbsp;computing&nbsp;fair&nbsp;intergroup&nbsp;pairings&nbsp;&lt;Fair-InterGroup-Pairings-label&gt;`.<br>&nbsp;</span></td></tr>
+See&nbsp;the&nbsp;:ref:`tutorial&nbsp;on&nbsp;computing&nbsp;fair&nbsp;intragroup&nbsp;pairings&nbsp;&lt;Fair-IntraGroup-Pairings-label&gt;`.<br>&nbsp;</span></td></tr>
 <tr><td>&nbsp;</td>
 <td class="singlecolumn"><dl><dt>Method resolution order:</dt>
 <dd><a href="pairings.html#BestCopelandIntraGroupMatching">BestCopelandIntraGroupMatching</a></dd>
@@ -418,9 +1084,15 @@ See&nbsp;the&nbsp;:ref:`tutorial&nbsp;on&nbsp;computing&nbsp;fair&nbsp;intergrou
 Methods defined here:<br>
 <dl><dt><a name="BestCopelandIntraGroupMatching-__init__"><strong>__init__</strong></a>(self, vpA, Comments=False, Debug=False)</dt><dd><span class="code">Constructor&nbsp;for&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;objects.</span></dd></dl>
 
+<dl><dt><a name="BestCopelandIntraGroupMatching-showMatchingFitnessScores"><strong>showMatchingFitnessScores</strong></a>(self, edges=None, ndigits=0)</dt><dd><span class="code">Prints&nbsp;the&nbsp;edge&nbsp;links&nbsp;of&nbsp;the&nbsp;graph</span></dd></dl>
+
+<dl><dt><a name="BestCopelandIntraGroupMatching-showMatchingWithFitnessScores"><strong>showMatchingWithFitnessScores</strong></a>(self, matching=None)</dt><dd><span class="code">shows&nbsp;the&nbsp;intragroup&nbsp;pairing&nbsp;solution&nbsp;when&nbsp;*matching&nbsp;is&nbsp;None*</span></dd></dl>
+
 <hr>
 Methods inherited from <a href="pairings.html#IntraGroupPairing">IntraGroupPairing</a>:<br>
 <dl><dt><a name="BestCopelandIntraGroupMatching-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><span class="code">Default&nbsp;description&nbsp;for&nbsp;FairPairing&nbsp;instances.</span></dd></dl>
+
+<dl><dt><a name="BestCopelandIntraGroupMatching-computeBachetScore"><strong>computeBachetScore</strong></a>(self, a, b)</dt><dd><span class="code">Computes&nbsp;fitness&nbsp;of&nbsp;swapping&nbsp;candidates</span></dd></dl>
 
 <dl><dt><a name="BestCopelandIntraGroupMatching-computeCopelandScore"><strong>computeCopelandScore</strong></a>(self, a, b)</dt><dd><span class="code">Computes&nbsp;fitness&nbsp;of&nbsp;swapping&nbsp;candidates</span></dd></dl>
 
@@ -431,6 +1103,8 @@ avgCorr,stdCorr,&nbsp;groupScores</span></dd></dl>
 <dl><dt><a name="BestCopelandIntraGroupMatching-enhanceMatchingFairness"><strong>enhanceMatchingFairness</strong></a>(self, matching, Comments=False, Debug=False)</dt><dd><span class="code">Heuristic&nbsp;for&nbsp;fairness&nbsp;enhancing&nbsp;of&nbsp;given&nbsp;matching</span></dd></dl>
 
 <dl><dt><a name="BestCopelandIntraGroupMatching-exportPairingGraphViz"><strong>exportPairingGraphViz</strong></a>(self, fileName=None, Comments=True, graphType='png', graphSize='7,7', matching=None, edgeColor='blue', bgcolor='cornsilk', lineWidth=2)</dt><dd><span class="code">Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;pairing&nbsp;graph&nbsp;drawing&nbsp;filtering.</span></dd></dl>
+
+<dl><dt><a name="BestCopelandIntraGroupMatching-showEdgesCharacteristicValues"><strong>showEdgesCharacteristicValues</strong></a>(self, edges=None, ndigits=2)</dt><dd><span class="code">Prints&nbsp;the&nbsp;edge&nbsp;links&nbsp;of&nbsp;the&nbsp;bipartite&nbsp;graph&nbsp;instance</span></dd></dl>
 
 <dl><dt><a name="BestCopelandIntraGroupMatching-showMatchingFairness"><strong>showMatchingFairness</strong></a>(self, matching=None, WithIndividualCorrelations=True)</dt><dd><span class="code">Shows&nbsp;the&nbsp;intragroup&nbsp;faines&nbsp;of&nbsp;a&nbsp;given&nbsp;matching.<br>
 When&nbsp;*matching&nbsp;is&nbsp;None*&nbsp;the&nbsp;fairest&nbsp;matching&nbsp;of&nbsp;the&nbsp;class&nbsp;is&nbsp;used</span></dd></dl>
@@ -686,8 +1360,6 @@ The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&n
 
 <dl><dt><a name="BestCopelandIntraGroupMatching-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
 
-<dl><dt><a name="BestCopelandIntraGroupMatching-showEdgesCharacteristicValues"><strong>showEdgesCharacteristicValues</strong></a>(self, ndigits=2)</dt><dd><span class="code">Prints&nbsp;the&nbsp;edge&nbsp;links&nbsp;of&nbsp;the&nbsp;bipartite&nbsp;graph&nbsp;instance</span></dd></dl>
-
 <dl><dt><a name="BestCopelandIntraGroupMatching-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
 
 <dl><dt><a name="BestCopelandIntraGroupMatching-showMore"><strong>showMore</strong></a>(self)</dt><dd><span class="code">Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;instances.</span></dd></dl>
@@ -697,10 +1369,335 @@ The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&n
 <hr>
 Data descriptors inherited from <a href="graphs.html#Graph">graphs.Graph</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
-<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</span></dd>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
 </dl>
 <dl><dt><strong>__weakref__</strong></dt>
-<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</span></dd>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="FairestBachetInterGroupMatching">class <strong>FairestBachetInterGroupMatching</strong></a>(<a href="pairings.html#InterGroupPairing">InterGroupPairing</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#FairestBachetInterGroupMatching">FairestBachetInterGroupMatching</a>(vpA,&nbsp;vpB,&nbsp;maxIterations=None,&nbsp;Comments=False,&nbsp;Debug=False)<br>
+&nbsp;<br>
+Testing<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="pairings.html#FairestBachetInterGroupMatching">FairestBachetInterGroupMatching</a></dd>
+<dd><a href="pairings.html#InterGroupPairing">InterGroupPairing</a></dd>
+<dd><a href="graphs.html#BipartiteGraph">graphs.BipartiteGraph</a></dd>
+<dd><a href="graphs.html#Graph">graphs.Graph</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="FairestBachetInterGroupMatching-__init__"><strong>__init__</strong></a>(self, vpA, vpB, maxIterations=None, Comments=False, Debug=False)</dt><dd><span class="code">Abstract&nbsp;class&nbsp;entry</span></dd></dl>
+
+<hr>
+Methods inherited from <a href="pairings.html#InterGroupPairing">InterGroupPairing</a>:<br>
+<dl><dt><a name="FairestBachetInterGroupMatching-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><span class="code">Default&nbsp;description&nbsp;for&nbsp;FairPairing&nbsp;instances.</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-computeBachetScore"><strong>computeBachetScore</strong></a>(self, vpA, a, b, Reversed=False)</dt><dd><span class="code">Replacement&nbsp;for&nbsp;the&nbsp;linear&nbsp;voting&nbsp;profiles&nbsp;information<br>
+when&nbsp;searching&nbsp;for&nbsp;promising&nbsp;swapping&nbsp;candidates</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-computeCopelandScore"><strong>computeCopelandScore</strong></a>(self, vpA, a, b)</dt><dd><span class="code">Replacement&nbsp;for&nbsp;the&nbsp;linear&nbsp;voting&nbsp;profiles&nbsp;information<br>
+when&nbsp;searching&nbsp;for&nbsp;promising&nbsp;swapping&nbsp;candidates</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-computeGaleShapleyMatching"><strong>computeGaleShapleyMatching</strong></a>(self, Reverse=False)</dt><dd><span class="code">Documentation:<br>
+<a href="https://en.wikipedia.org/wiki/Gale%E2%80%93Shapley_algorithm">https://en.wikipedia.org/wiki/Gale%E2%80%93Shapley_algorithm</a><br>
+Our&nbsp;implementation&nbsp;is&nbsp;inspired&nbsp;by<br>
+<a href="https://johnlekberg.com/blog/2020-08-22-stable-matching.html">https://johnlekberg.com/blog/2020-08-22-stable-matching.html</a><br>
+&nbsp;<br>
+When&nbsp;*Reverse==False*,&nbsp;group&nbsp;*A*&nbsp;is&nbsp;proposing.<br>
+Otherwise,&nbsp;group&nbsp;*B*&nbsp;is&nbsp;proposing</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-computeIndividualCorrelations"><strong>computeIndividualCorrelations</strong></a>(self, matching, Debug=False)</dt><dd><span class="code">Individual&nbsp;correlations&nbsp;for&nbsp;groups&nbsp;A&nbsp;and&nbsp;B<br>
+returns&nbsp;a&nbsp;tuple&nbsp;called&nbsp;fitness&nbsp;with&nbsp;following&nbsp;content<br>
+fitness=(matching,avgCorr,stdCorr,avgCorr-stdCorr,<br>
+groupAScores,groupBScores,<br>
+abs(avgCorrA-avgCorrB))</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-computePermutation"><strong>computePermutation</strong></a>(self, matching)</dt><dd><span class="code">Renders&nbsp;the&nbsp;matching's&nbsp;permutation&nbsp;of&nbsp;*A*&nbsp;and&nbsp;*B*&nbsp;indexes.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;The&nbsp;prefix&nbsp;of&nbsp;group&nbsp;*A*&nbsp;voters&nbsp;must&nbsp;preceed&nbsp;the&nbsp;prefix&nbsp;of&nbsp;the&nbsp;group&nbsp;*B*&nbsp;voters&nbsp;in&nbsp;alphabetic&nbsp;order</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-computePermutationGraph"><strong>computePermutationGraph</strong></a>(self, matching)</dt><dd><span class="code">Renders&nbsp;the&nbsp;permutation&nbsp;graph&nbsp;of&nbsp;the&nbsp;matching</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-enhanceMatchingGeneralFairness"><strong>enhanceMatchingGeneralFairness</strong></a>(self, matching, maxIterations=10, Comments=False, Debug=False)</dt><dd><span class="code">Enahance&nbsp;fairness&nbsp;of&nbsp;a&nbsp;given&nbsp;matching&nbsp;using&nbsp;any&nbsp;reciprocal&nbsp;voting&nbsp;profiles</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-enhanceMatchingLVFairness"><strong>enhanceMatchingLVFairness</strong></a>(self, matching, Reversed=False, maxIterations=10, Comments=False, Debug=False)</dt><dd><span class="code">Enhance&nbsp;fairness&nbsp;of&nbsp;given&nbsp;matching&nbsp;by&nbsp;using&nbsp;reciprocal&nbsp;linear&nbsp;voting&nbsp;profiles</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-exportPairingGraphViz"><strong>exportPairingGraphViz</strong></a>(self, fileName=None, Comments=True, graphType='png', graphSize='7,7', matching=None, edgeColor='blue', bgcolor='cornsilk', lineWidth=1)</dt><dd><span class="code">Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;bipartite&nbsp;graph&nbsp;drawing&nbsp;filtering.</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-isStableMatching"><strong>isStableMatching</strong></a>(self, matching, Comments=True, Debug=False)</dt><dd><span class="code">Test&nbsp;for&nbsp;the&nbsp;existance&nbsp;of&nbsp;matching&nbsp;instabilities.<br>
+Our&nbsp;implementation&nbsp;is&nbsp;inspired&nbsp;by<br>
+<a href="https://johnlekberg.com/blog/2020-08-22-stable-matching.html">https://johnlekberg.com/blog/2020-08-22-stable-matching.html</a></span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-showBachetRankingScores"><strong>showBachetRankingScores</strong></a>(self)</dt><dd><span class="code">Print&nbsp;the&nbsp;individual&nbsp;Copeland&nbsp;ranking&nbsp;scores</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-showCopelandRankingScores"><strong>showCopelandRankingScores</strong></a>(self)</dt><dd><span class="code">Print&nbsp;the&nbsp;individual&nbsp;Copeland&nbsp;ranking&nbsp;scores</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-showMatchingFairness"><strong>showMatchingFairness</strong></a>(self, matching=None, WithGroupCorrelations=True, WithIndividualCorrelations=True)</dt></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-showPairing"><strong>showPairing</strong></a>(self, matching=None)</dt></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#BipartiteGraph">graphs.BipartiteGraph</a>:<br>
+<dl><dt><a name="FairestBachetInterGroupMatching-computeBestDeterminedMaximalMatching"><strong>computeBestDeterminedMaximalMatching</strong></a>(self, Comments=True, Debug=True)</dt><dd><span class="code">Using&nbsp;the&nbsp;ranked&nbsp;pairs&nbsp;rule&nbsp;for&nbsp;assembling&nbsp;a&nbsp;best&nbsp;determined&nbsp;maximal&nbsp;matching</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, Comments=True, graphType='png', graphSize='7,7', edgeColor='blue', bgcolor='cornsilk', lineWidth=1, Debug=True)</dt><dd><span class="code">Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;bipartite&nbsp;graph&nbsp;drawing&nbsp;filtering.</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-showEdgesCharacteristicValues"><strong>showEdgesCharacteristicValues</strong></a>(self, ndigits=2)</dt><dd><span class="code">Prints&nbsp;the&nbsp;edge&nbsp;links&nbsp;of&nbsp;the&nbsp;bipartite&nbsp;graph&nbsp;instance</span></dd></dl>
+
+<hr>
+Methods inherited from <a href="graphs.html#Graph">graphs.Graph</a>:<br>
+<dl><dt><a name="FairestBachetInterGroupMatching-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><span class="code">Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;instances.<br>
+Returns&nbsp;a&nbsp;DualGraph&nbsp;instance&nbsp;of&nbsp;self.</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-breadthFirstSearch"><strong>breadthFirstSearch</strong></a>(self, s, alphabeticOrder=True, Warnings=True, Debug=False)</dt><dd><span class="code">Breadth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;vertice&nbsp;keys&nbsp;in<br>
+increasing&nbsp;distance&nbsp;from&nbsp;the&nbsp;origin&nbsp;*s*.&nbsp;Ties&nbsp;in&nbsp;the&nbsp;distances<br>
+are&nbsp;resolved&nbsp;by&nbsp;alphabetic&nbsp;ordering&nbsp;of&nbsp;the&nbsp;vertice&nbsp;keys.<br>
+&nbsp;<br>
+A&nbsp;warning&nbsp;is&nbsp;issued&nbsp;when&nbsp;the&nbsp;graph&nbsp;is&nbsp;not&nbsp;connected&nbsp;and&nbsp;the&nbsp;resulting<br>
+search&nbsp;does&nbsp;not&nbsp;cover&nbsp;the&nbsp;whole&nbsp;set&nbsp;of&nbsp;graph&nbsp;vertices.&nbsp;<br>
+&nbsp;<br>
+Source:&nbsp;Cormen,&nbsp;Leiserson,&nbsp;Rivest&nbsp;&amp;&nbsp;Stein,&nbsp;*Introduction&nbsp;to&nbsp;Algorithms*&nbsp;2d&nbsp;Ed.,&nbsp;MIT&nbsp;Press&nbsp;2001.</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-computeChordlessCycles"><strong>computeChordlessCycles</strong></a>(self, Cycle3=False, Comments=False, Debug=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;cycles&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="graphs.html#Graph">Graph</a><br>
+intance.&nbsp;Inspired&nbsp;from&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo&nbsp;&amp;&nbsp;Jradi,<br>
+Algorithmica&nbsp;2015.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By&nbsp;default,&nbsp;a&nbsp;chordless&nbsp;cycle&nbsp;must&nbsp;have&nbsp;at&nbsp;least&nbsp;length&nbsp;4.If&nbsp;the&nbsp;Cycle3&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;True,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;cyclicly&nbsp;closed&nbsp;triplets&nbsp;will&nbsp;be&nbsp;inserted&nbsp;as&nbsp;3-cycles&nbsp;in&nbsp;the&nbsp;result.</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-computeCliques"><strong>computeCliques</strong></a>(self, Comments=False)</dt><dd><span class="code">Computes&nbsp;all&nbsp;cliques,&nbsp;ie&nbsp;maximal&nbsp;complete&nbsp;subgraphs&nbsp;in&nbsp;self:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Computes&nbsp;the&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets&nbsp;in&nbsp;the&nbsp;dual&nbsp;of&nbsp;self.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>cliques</strong>.</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-computeComponents"><strong>computeComponents</strong></a>(self)</dt><dd><span class="code">Computes&nbsp;the&nbsp;connected&nbsp;components&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance.<br>
+Returns&nbsp;a&nbsp;partition&nbsp;of&nbsp;the&nbsp;vertices&nbsp;as&nbsp;a&nbsp;list</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-computeDegreeDistribution"><strong>computeDegreeDistribution</strong></a>(self, Comments=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;vertex&nbsp;degrees.</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-computeDiameter"><strong>computeDiameter</strong></a>(self, Oriented=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;diameter&nbsp;(maximal&nbsp;neighbourhood&nbsp;depth)&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;diameter&nbsp;of&nbsp;a&nbsp;disconnected&nbsp;graph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;*infinite*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(results&nbsp;in&nbsp;a&nbsp;value&nbsp;-1)&nbsp;!</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-computeGirth"><strong>computeGirth</strong></a>(self, girthType='any', Comments=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;*girth*&nbsp;of&nbsp;self,&nbsp;i.e.&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;shortest&nbsp;chordless&nbsp;cycle&nbsp;in&nbsp;the&nbsp;graph.<br>
+&nbsp;<br>
+*Parameter*:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*girthType*&nbsp;=&nbsp;"any"&nbsp;(default)&nbsp;|&nbsp;"odd"&nbsp;|&nbsp;"even"</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-computeGraphCentres"><strong>computeGraphCentres</strong></a>(self)</dt><dd><span class="code">Renders&nbsp;the&nbsp;vertices&nbsp;of&nbsp;minimal&nbsp;Neighborhood&nbsp;depth.</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-computeMIS"><strong>computeMIS</strong></a>(self, Comments=False)</dt><dd><span class="code">Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;vertex&nbsp;sets:<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>misset</strong>&nbsp;!</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-computeMaximumMatching"><strong>computeMaximumMatching</strong></a>(self, Comments=False)</dt><dd><span class="code">Renders&nbsp;a&nbsp;maximum&nbsp;matching&nbsp;in&nbsp;*self*&nbsp;by&nbsp;computing<br>
+a&nbsp;maximum&nbsp;MIS&nbsp;of&nbsp;the&nbsp;line&nbsp;graph&nbsp;of&nbsp;*self*.</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-computeNeighbourhoodDepth"><strong>computeNeighbourhoodDepth</strong></a>(self, vertex, Debug=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-computeNeighbourhoodDepthDistribution"><strong>computeNeighbourhoodDepthDistribution</strong></a>(self, Comments=False, Debug=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-computeOrientedDigraph"><strong>computeOrientedDigraph</strong></a>(self, PartiallyDetermined=False)</dt><dd><span class="code">Renders&nbsp;a&nbsp;digraph&nbsp;where&nbsp;each&nbsp;edge&nbsp;of&nbsp;the&nbsp;permutation&nbsp;graph&nbsp;*self*<br>
+is&nbsp;converted&nbsp;into&nbsp;an&nbsp;arc&nbsp;oriented&nbsp;in&nbsp;increasing&nbsp;order&nbsp;of&nbsp;the&nbsp;adjacent&nbsp;vertices'&nbsp;numbers.<br>
+If&nbsp;self&nbsp;is&nbsp;a&nbsp;PermutationGraph&nbsp;instance,&nbsp;the&nbsp;orientation&nbsp;will&nbsp;be&nbsp;transitive.<br>
+&nbsp;<br>
+The&nbsp;parameter&nbsp;*PartiallyDetermined*:&nbsp;{True|False&nbsp;by&nbsp;default],&nbsp;converts&nbsp;if&nbsp;*True*&nbsp;all&nbsp;absent<br>
+edges&nbsp;of&nbsp;the&nbsp;graph&nbsp;into&nbsp;indeterminate&nbsp;symmetric&nbsp;relations&nbsp;in&nbsp;the&nbsp;resulting&nbsp;digraph.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;graphs&nbsp;import&nbsp;RandomGraph<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;RandomGraph(order=6,seed=101)<br>
+&gt;&gt;&gt;&nbsp;dg&nbsp;=&nbsp;g.<a href="#FairestBachetInterGroupMatching-computeOrientedDigraph">computeOrientedDigraph</a>()<br>
+&gt;&gt;&gt;&nbsp;dg<br>
+*-------&nbsp;Digraph&nbsp;instance&nbsp;description&nbsp;------*<br>
+Instance&nbsp;class&nbsp;&nbsp;&nbsp;:&nbsp;Digraph<br>
+Instance&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;oriented_randomGraph<br>
+Digraph&nbsp;Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;6<br>
+Digraph&nbsp;Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;5<br>
+Valuation&nbsp;domain&nbsp;:&nbsp;[-1.00;&nbsp;1.00]<br>
+Determinateness&nbsp;&nbsp;:&nbsp;100.000<br>
+Attributes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['name','order','actions','valuationdomain',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'relation',&nbsp;'gamma',&nbsp;'notGamma',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'size',&nbsp;'transitivityDegree']<br>
+&gt;&gt;&gt;&nbsp;dg.transitivityDegree<br>
+Decimal('0.7142857142857142857142857143')</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><span class="code">Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;positively&nbsp;characterised&nbsp;edges&nbsp;of&nbsp;this&nbsp;graph&nbsp;instance<br>
+(result&nbsp;is&nbsp;stored&nbsp;in&nbsp;self.<strong>size</strong>).</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-computeTransitivelyOrientedDigraph"><strong>computeTransitivelyOrientedDigraph</strong></a>(self, PartiallyDetermined=False, Debug=False)</dt><dd><span class="code">Renders&nbsp;a&nbsp;digraph&nbsp;where&nbsp;each&nbsp;edge&nbsp;of&nbsp;the&nbsp;permutation&nbsp;graph&nbsp;*self*<br>
+is&nbsp;converted&nbsp;into&nbsp;an&nbsp;arc&nbsp;oriented&nbsp;in&nbsp;increasing&nbsp;order&nbsp;of&nbsp;the&nbsp;ranks&nbsp;of&nbsp;implication&nbsp;classes<br>
+detected&nbsp;with&nbsp;the&nbsp;:py:func:`digraphs.Digraph.isComparabilityGraph`&nbsp;test&nbsp;and&nbsp;stored&nbsp;in&nbsp;self.<strong>edgeOrientations</strong>.<br>
+&nbsp;<br>
+The&nbsp;parameter&nbsp;*PartiallyDetermined*:&nbsp;{True|False&nbsp;(by&nbsp;default),&nbsp;converts&nbsp;if&nbsp;*True*&nbsp;all&nbsp;absent<br>
+edges&nbsp;of&nbsp;the&nbsp;graph&nbsp;into&nbsp;indeterminate&nbsp;symmetric&nbsp;relations&nbsp;in&nbsp;the&nbsp;resulting&nbsp;digraph.<br>
+Verifies&nbsp;if&nbsp;the&nbsp;graph&nbsp;instance&nbsp;is&nbsp;a&nbsp;comparability&nbsp;graph.<br>
+&nbsp;<br>
+*Source*:&nbsp;M.&nbsp;Ch.&nbsp;Golumbic&nbsp;(2004)&nbsp;Algorithmic&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;Thery&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
+Annals&nbsp;of&nbsp;Discrete&nbsp;Mathematics&nbsp;57,&nbsp;Elsevier,&nbsp;p.&nbsp;129-132.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;graphs&nbsp;import&nbsp;RandomGraph<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;RandomGraph(order=6,edgeProbability=0.5,seed=100)<br>
+&gt;&gt;&gt;&nbsp;og&nbsp;=&nbsp;g.<a href="#FairestBachetInterGroupMatching-computeTransitivelyOrientedDigraph">computeTransitivelyOrientedDigraph</a>()<br>
+&gt;&gt;&gt;&nbsp;if&nbsp;og&nbsp;is&nbsp;not&nbsp;None:<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(og)<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('Transitivity&nbsp;degree:&nbsp;%.3f'&nbsp;%&nbsp;og.transitivityDegree)<br>
+&nbsp;*-------&nbsp;Digraph&nbsp;instance&nbsp;description&nbsp;------*<br>
+&nbsp;&nbsp;Instance&nbsp;class&nbsp;&nbsp;&nbsp;:&nbsp;TransitiveDigraph<br>
+&nbsp;&nbsp;Instance&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;trans_oriented_randomGraph<br>
+&nbsp;&nbsp;Digraph&nbsp;Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;6<br>
+&nbsp;&nbsp;Digraph&nbsp;Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+&nbsp;&nbsp;Valuation&nbsp;domain&nbsp;:&nbsp;[-1.00&nbsp;-&nbsp;1.00]<br>
+&nbsp;&nbsp;Determinateness&nbsp;&nbsp;:&nbsp;46.667<br>
+&nbsp;&nbsp;Attributes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['name',&nbsp;'order',&nbsp;'actions',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'valuationdomain',&nbsp;'relation',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'gamma',&nbsp;'notGamma',&nbsp;'size',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'transitivityDegree']<br>
+&nbsp;Transitivity&nbsp;degree:&nbsp;1.000<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;gd&nbsp;=&nbsp;-g<br>
+&gt;&gt;&gt;&nbsp;ogd&nbsp;=&nbsp;gd.<a href="#FairestBachetInterGroupMatching-computeTransitivelyOrientedDigraph">computeTransitivelyOrientedDigraph</a>()<br>
+&gt;&gt;&gt;&nbsp;if&nbsp;ogd&nbsp;is&nbsp;not&nbsp;None:<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(ogd)<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('Dual&nbsp;transitivity&nbsp;degree:&nbsp;%.3f'&nbsp;%&nbsp;ogd.transitivityDegree)<br>
+&nbsp;*-------&nbsp;Digraph&nbsp;instance&nbsp;description&nbsp;------*<br>
+&nbsp;&nbsp;Instance&nbsp;class&nbsp;&nbsp;&nbsp;:&nbsp;TransitiveOrder<br>
+&nbsp;&nbsp;Instance&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;trans_oriented_dual_randomGraph<br>
+&nbsp;&nbsp;Digraph&nbsp;Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;6<br>
+&nbsp;Digraph&nbsp;Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;8<br>
+&nbsp;Valuation&nbsp;domain&nbsp;:&nbsp;[-1.00&nbsp;-&nbsp;1.00]<br>
+&nbsp;Determinateness&nbsp;&nbsp;:&nbsp;53.333<br>
+&nbsp;Attributes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['name',&nbsp;'order',&nbsp;'actions',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'valuationdomain',&nbsp;'relation',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'gamma',&nbsp;'notGamma',&nbsp;'size',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'transitivityDegree']<br>
+Dual&nbsp;transitivity&nbsp;degree:&nbsp;1.000</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-depthFirstSearch"><strong>depthFirstSearch</strong></a>(self, Debug=False)</dt><dd><span class="code">Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;lexicographical&nbsp;order<br>
+of&nbsp;the&nbsp;vertex&nbsp;keys.</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-exportEdgeOrientationsGraphViz"><strong>exportEdgeOrientationsGraphViz</strong></a>(self, fileName=None, verticesSubset=None, Comments=True, graphType='png', graphSize='7,7', layout=None, arcColor='black', lineWidth=1, palette=1, bgcolor='cornsilk', Debug=False)</dt><dd><span class="code">Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;oriented&nbsp;graph&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;graphs&nbsp;import&nbsp;*<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;RandomGraph(order=6,seed=100)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;if&nbsp;g.<a href="#FairestBachetInterGroupMatching-isComparabilityGraph">isComparabilityGraph</a>():<br>
+&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g.<a href="#FairestBachetInterGroupMatching-exportEdgeOrientationsGraphViz">exportEdgeOrientationsGraphViz</a>('orientedGraph')<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;orientedGraph.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;Random&nbsp;graph<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;300&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-exportPermutationGraphViz"><strong>exportPermutationGraphViz</strong></a>(self, fileName=None, permutation=None, Comments=True, WithEdgeColoring=True, hspace=100, vspace=70, graphType='png', graphSize='7,7', arcColor='black', bgcolor='cornsilk', lineWidth=1)</dt><dd><span class="code">Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;permutation&nbsp;drawing&nbsp;filtering.<br>
+&nbsp;<br>
+Horizontal&nbsp;(default=100)&nbsp;and&nbsp;vertical&nbsp;(default=75)&nbsp;spaces&nbsp;betwen&nbsp;the&nbsp;vertices'<br>
+positions&nbsp;may&nbsp;be&nbsp;explicitely&nbsp;given&nbsp;in&nbsp;*hspace*&nbsp;and&nbsp;*vspace*&nbsp;parameters.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;no&nbsp;*permutation*&nbsp;is&nbsp;provided,&nbsp;it&nbsp;is&nbsp;supposed&nbsp;to&nbsp;exist&nbsp;a&nbsp;self.<strong>permutation</strong>&nbsp;attribute.</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-gammaSets"><strong>gammaSets</strong></a>(self, Debug=False)</dt><dd><span class="code">renders&nbsp;the&nbsp;gamma&nbsp;function&nbsp;as&nbsp;dictionary</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-generateIndependent"><strong>generateIndependent</strong></a>(self, U)</dt><dd><span class="code">Generator&nbsp;for&nbsp;all&nbsp;independent&nbsp;vertices&nbsp;sets<br>
+with&nbsp;neighborhoods&nbsp;of&nbsp;a&nbsp;graph&nbsp;instance:<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self._singletons().<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[independent&nbsp;set,&nbsp;covered&nbsp;set,&nbsp;all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set)].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;independent&nbsp;set&nbsp;==&nbsp;(all&nbsp;vertices&nbsp;-&nbsp;covered&nbsp;set),&nbsp;the&nbsp;given&nbsp;independent&nbsp;set&nbsp;is&nbsp;maximal&nbsp;!</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-graph2Digraph"><strong>graph2Digraph</strong></a>(self)</dt><dd><span class="code">Converts&nbsp;a&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;object&nbsp;into&nbsp;a&nbsp;symmetric&nbsp;Digraph&nbsp;object.</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-isComparabilityGraph"><strong>isComparabilityGraph</strong></a>(self, Debug=False)</dt><dd><span class="code">Verifies&nbsp;if&nbsp;the&nbsp;graph&nbsp;instance&nbsp;is&nbsp;a&nbsp;comparability&nbsp;graph.<br>
+If&nbsp;yes,&nbsp;a&nbsp;tranditive&nbsp;orientation&nbsp;of&nbsp;the&nbsp;edges&nbsp;is&nbsp;stored&nbsp;<br>
+in&nbsp;self.<strong>edgeOrientations</strong>.&nbsp;<br>
+&nbsp;<br>
+*Source*:&nbsp;M.&nbsp;Ch.&nbsp;Golumbic&nbsp;(2004)&nbsp;Algorithmic&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;Thery&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
+Annals&nbsp;of&nbsp;Discrete&nbsp;Mathematics&nbsp;57,&nbsp;Elsevier,&nbsp;p.&nbsp;129-132.</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-isConnected"><strong>isConnected</strong></a>(self)</dt><dd><span class="code">Cheks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;connected&nbsp;graph&nbsp;instance.</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-isIntervalGraph"><strong>isIntervalGraph</strong></a>(self, Comments=False)</dt><dd><span class="code">Checks&nbsp;whether&nbsp;the&nbsp;graph&nbsp;self&nbsp;is&nbsp;triangulated&nbsp;and<br>
+its&nbsp;dual&nbsp;is&nbsp;a&nbsp;comparability&nbsp;graph.<br>
+&nbsp;<br>
+*Source*:&nbsp;M.&nbsp;Ch.&nbsp;Golumbic&nbsp;(2004)&nbsp;Algorithmic&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;Thery&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
+Annals&nbsp;of&nbsp;Discrete&nbsp;Mathematics&nbsp;57,&nbsp;Elsevier,&nbsp;p.&nbsp;16.</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-isPerfectGraph"><strong>isPerfectGraph</strong></a>(self, Comments=False, Debug=False)</dt><dd><span class="code">A&nbsp;graph&nbsp;*g*&nbsp;is&nbsp;perfect&nbsp;when&nbsp;neither&nbsp;*g*,&nbsp;nor&nbsp;*-g*,&nbsp;contain&nbsp;any&nbsp;chordless<br>
+cycle&nbsp;of&nbsp;odd&nbsp;length.</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-isPermutationGraph"><strong>isPermutationGraph</strong></a>(self, Comments=False)</dt><dd><span class="code">Checks&nbsp;whether&nbsp;the&nbsp;graph&nbsp;self&nbsp;and<br>
+its&nbsp;dual&nbsp;are&nbsp;comparability&nbsp;graphs.<br>
+&nbsp;<br>
+*Source*:&nbsp;M.&nbsp;Ch.&nbsp;Golumbic&nbsp;(2004)&nbsp;Algorithmic&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;Thery&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
+Annals&nbsp;of&nbsp;Discrete&nbsp;Mathematics&nbsp;57,&nbsp;Elsevier,&nbsp;p.&nbsp;16.</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-isSplitGraph"><strong>isSplitGraph</strong></a>(self, Comments=False)</dt><dd><span class="code">Checks&nbsp;whether&nbsp;the&nbsp;graph&nbsp;'&nbsp;*self*&nbsp;'&nbsp;and&nbsp;its&nbsp;dual&nbsp;'&nbsp;*-self*&nbsp;'&nbsp;are<br>
+triangulated&nbsp;graphs</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-isTree"><strong>isTree</strong></a>(self)</dt><dd><span class="code">Checks&nbsp;if&nbsp;self&nbsp;is&nbsp;a&nbsp;tree&nbsp;by&nbsp;verifing&nbsp;the&nbsp;required&nbsp;number&nbsp;of<br>
+edges:&nbsp;order-1;&nbsp;and&nbsp;the&nbsp;existence&nbsp;of&nbsp;leaves.</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-isTriangulated"><strong>isTriangulated</strong></a>(self)</dt><dd><span class="code">Checks&nbsp;if&nbsp;a&nbsp;graph&nbsp;contains&nbsp;no&nbsp;chordless&nbsp;cycle&nbsp;of<br>
+length&nbsp;greater&nbsp;or&nbsp;equal&nbsp;to&nbsp;4.</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-randomDepthFirstSearch"><strong>randomDepthFirstSearch</strong></a>(self, seed=None, Debug=False)</dt><dd><span class="code">Depth&nbsp;first&nbsp;search&nbsp;through&nbsp;a&nbsp;graph&nbsp;in&nbsp;random&nbsp;order&nbsp;of&nbsp;the&nbsp;vertex&nbsp;keys.<br>
+&nbsp;<br>
+..&nbsp;Note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;resulting&nbsp;spanning&nbsp;tree&nbsp;(or&nbsp;forest)&nbsp;is&nbsp;by&nbsp;far&nbsp;not&nbsp;uniformly&nbsp;selected<br>
+&nbsp;&nbsp;&nbsp;&nbsp;among&nbsp;all&nbsp;possible&nbsp;trees.&nbsp;Spanning&nbsp;stars&nbsp;will&nbsp;indeed&nbsp;be&nbsp;much&nbsp;less<br>
+&nbsp;&nbsp;&nbsp;&nbsp;probably&nbsp;selected&nbsp;then&nbsp;streight&nbsp;walks&nbsp;!</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1, newMax=1, ndigits=2, Debug=False)</dt><dd><span class="code">Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
+to&nbsp;the&nbsp;parameters&nbsp;given.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;values&nbsp;gives&nbsp;a&nbsp;normalized&nbsp;valuation&nbsp;domain</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-save"><strong>save</strong></a>(self, fileName='tempGraph', Debug=False)</dt><dd><span class="code">Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;python&nbsp;source&nbsp;code&nbsp;file.</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-setEdgeValue"><strong>setEdgeValue</strong></a>(self, edge, value, Comments=False)</dt><dd><span class="code">Wrapper&nbsp;for&nbsp;updating&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;of&nbsp;a&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;instance.<br>
+The&nbsp;egde&nbsp;parameter&nbsp;consists&nbsp;in&nbsp;a&nbsp;pair&nbsp;of&nbsp;vertices;<br>
+edge&nbsp;=&nbsp;('v1','v2')&nbsp;for&nbsp;instance.<br>
+The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&nbsp;the&nbsp;valuation&nbsp;domain.</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-showMore"><strong>showMore</strong></a>(self)</dt><dd><span class="code">Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;instances.</span></dd></dl>
+
+<dl><dt><a name="FairestBachetInterGroupMatching-showShort"><strong>showShort</strong></a>(self)</dt><dd><span class="code">Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;instances.</span></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="graphs.html#Graph">graphs.Graph</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
 </dl>
 </td></tr></table> <p>
 <table class="section">
@@ -735,6 +1732,9 @@ Methods defined here:<br>
 Methods inherited from <a href="pairings.html#InterGroupPairing">InterGroupPairing</a>:<br>
 <dl><dt><a name="FairestGaleShapleyMatching-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><span class="code">Default&nbsp;description&nbsp;for&nbsp;FairPairing&nbsp;instances.</span></dd></dl>
 
+<dl><dt><a name="FairestGaleShapleyMatching-computeBachetScore"><strong>computeBachetScore</strong></a>(self, vpA, a, b, Reversed=False)</dt><dd><span class="code">Replacement&nbsp;for&nbsp;the&nbsp;linear&nbsp;voting&nbsp;profiles&nbsp;information<br>
+when&nbsp;searching&nbsp;for&nbsp;promising&nbsp;swapping&nbsp;candidates</span></dd></dl>
+
 <dl><dt><a name="FairestGaleShapleyMatching-computeCopelandScore"><strong>computeCopelandScore</strong></a>(self, vpA, a, b)</dt><dd><span class="code">Replacement&nbsp;for&nbsp;the&nbsp;linear&nbsp;voting&nbsp;profiles&nbsp;information<br>
 when&nbsp;searching&nbsp;for&nbsp;promising&nbsp;swapping&nbsp;candidates</span></dd></dl>
 
@@ -767,6 +1767,8 @@ abs(avgCorrA-avgCorrB))</span></dd></dl>
 <dl><dt><a name="FairestGaleShapleyMatching-isStableMatching"><strong>isStableMatching</strong></a>(self, matching, Comments=True, Debug=False)</dt><dd><span class="code">Test&nbsp;for&nbsp;the&nbsp;existance&nbsp;of&nbsp;matching&nbsp;instabilities.<br>
 Our&nbsp;implementation&nbsp;is&nbsp;inspired&nbsp;by<br>
 <a href="https://johnlekberg.com/blog/2020-08-22-stable-matching.html">https://johnlekberg.com/blog/2020-08-22-stable-matching.html</a></span></dd></dl>
+
+<dl><dt><a name="FairestGaleShapleyMatching-showBachetRankingScores"><strong>showBachetRankingScores</strong></a>(self)</dt><dd><span class="code">Print&nbsp;the&nbsp;individual&nbsp;Copeland&nbsp;ranking&nbsp;scores</span></dd></dl>
 
 <dl><dt><a name="FairestGaleShapleyMatching-showCopelandRankingScores"><strong>showCopelandRankingScores</strong></a>(self)</dt><dd><span class="code">Print&nbsp;the&nbsp;individual&nbsp;Copeland&nbsp;ranking&nbsp;scores</span></dd></dl>
 
@@ -1025,10 +2027,10 @@ The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&n
 <hr>
 Data descriptors inherited from <a href="graphs.html#Graph">graphs.Graph</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
-<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</span></dd>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
 </dl>
 <dl><dt><strong>__weakref__</strong></dt>
-<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</span></dd>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
 </dl>
 </td></tr></table> <p>
 <table class="section">
@@ -1074,6 +2076,9 @@ the&nbsp;individual&nbsp;pairing&nbsp;preferences.</span></dd></dl>
 Methods inherited from <a href="pairings.html#InterGroupPairing">InterGroupPairing</a>:<br>
 <dl><dt><a name="FairestInterGroupPairing-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><span class="code">Default&nbsp;description&nbsp;for&nbsp;FairPairing&nbsp;instances.</span></dd></dl>
 
+<dl><dt><a name="FairestInterGroupPairing-computeBachetScore"><strong>computeBachetScore</strong></a>(self, vpA, a, b, Reversed=False)</dt><dd><span class="code">Replacement&nbsp;for&nbsp;the&nbsp;linear&nbsp;voting&nbsp;profiles&nbsp;information<br>
+when&nbsp;searching&nbsp;for&nbsp;promising&nbsp;swapping&nbsp;candidates</span></dd></dl>
+
 <dl><dt><a name="FairestInterGroupPairing-computeCopelandScore"><strong>computeCopelandScore</strong></a>(self, vpA, a, b)</dt><dd><span class="code">Replacement&nbsp;for&nbsp;the&nbsp;linear&nbsp;voting&nbsp;profiles&nbsp;information<br>
 when&nbsp;searching&nbsp;for&nbsp;promising&nbsp;swapping&nbsp;candidates</span></dd></dl>
 
@@ -1106,6 +2111,8 @@ abs(avgCorrA-avgCorrB))</span></dd></dl>
 <dl><dt><a name="FairestInterGroupPairing-isStableMatching"><strong>isStableMatching</strong></a>(self, matching, Comments=True, Debug=False)</dt><dd><span class="code">Test&nbsp;for&nbsp;the&nbsp;existance&nbsp;of&nbsp;matching&nbsp;instabilities.<br>
 Our&nbsp;implementation&nbsp;is&nbsp;inspired&nbsp;by<br>
 <a href="https://johnlekberg.com/blog/2020-08-22-stable-matching.html">https://johnlekberg.com/blog/2020-08-22-stable-matching.html</a></span></dd></dl>
+
+<dl><dt><a name="FairestInterGroupPairing-showBachetRankingScores"><strong>showBachetRankingScores</strong></a>(self)</dt><dd><span class="code">Print&nbsp;the&nbsp;individual&nbsp;Copeland&nbsp;ranking&nbsp;scores</span></dd></dl>
 
 <dl><dt><a name="FairestInterGroupPairing-showCopelandRankingScores"><strong>showCopelandRankingScores</strong></a>(self)</dt><dd><span class="code">Print&nbsp;the&nbsp;individual&nbsp;Copeland&nbsp;ranking&nbsp;scores</span></dd></dl>
 
@@ -1364,10 +2371,10 @@ The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&n
 <hr>
 Data descriptors inherited from <a href="graphs.html#Graph">graphs.Graph</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
-<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</span></dd>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
 </dl>
 <dl><dt><strong>__weakref__</strong></dt>
-<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</span></dd>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
 </dl>
 </td></tr></table> <p>
 <table class="section">
@@ -1405,6 +2412,8 @@ fairness&nbsp;ranked&nbsp;self.<strong>pairings</strong>&nbsp;list.</span></dd><
 Methods inherited from <a href="pairings.html#IntraGroupPairing">IntraGroupPairing</a>:<br>
 <dl><dt><a name="FairestIntraGroupPairing-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><span class="code">Default&nbsp;description&nbsp;for&nbsp;FairPairing&nbsp;instances.</span></dd></dl>
 
+<dl><dt><a name="FairestIntraGroupPairing-computeBachetScore"><strong>computeBachetScore</strong></a>(self, a, b)</dt><dd><span class="code">Computes&nbsp;fitness&nbsp;of&nbsp;swapping&nbsp;candidates</span></dd></dl>
+
 <dl><dt><a name="FairestIntraGroupPairing-computeCopelandScore"><strong>computeCopelandScore</strong></a>(self, a, b)</dt><dd><span class="code">Computes&nbsp;fitness&nbsp;of&nbsp;swapping&nbsp;candidates</span></dd></dl>
 
 <dl><dt><a name="FairestIntraGroupPairing-computeIndividualCorrelations"><strong>computeIndividualCorrelations</strong></a>(self, matching=None, Debug=False)</dt><dd><span class="code">Individual&nbsp;correlations&nbsp;for&nbsp;intragroup&nbsp;pairing&nbsp;solution<br>
@@ -1415,8 +2424,12 @@ avgCorr,stdCorr,&nbsp;groupScores</span></dd></dl>
 
 <dl><dt><a name="FairestIntraGroupPairing-exportPairingGraphViz"><strong>exportPairingGraphViz</strong></a>(self, fileName=None, Comments=True, graphType='png', graphSize='7,7', matching=None, edgeColor='blue', bgcolor='cornsilk', lineWidth=2)</dt><dd><span class="code">Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;pairing&nbsp;graph&nbsp;drawing&nbsp;filtering.</span></dd></dl>
 
+<dl><dt><a name="FairestIntraGroupPairing-showEdgesCharacteristicValues"><strong>showEdgesCharacteristicValues</strong></a>(self, edges=None, ndigits=2)</dt><dd><span class="code">Prints&nbsp;the&nbsp;edge&nbsp;links&nbsp;of&nbsp;the&nbsp;bipartite&nbsp;graph&nbsp;instance</span></dd></dl>
+
 <dl><dt><a name="FairestIntraGroupPairing-showMatchingFairness"><strong>showMatchingFairness</strong></a>(self, matching=None, WithIndividualCorrelations=True)</dt><dd><span class="code">Shows&nbsp;the&nbsp;intragroup&nbsp;faines&nbsp;of&nbsp;a&nbsp;given&nbsp;matching.<br>
 When&nbsp;*matching&nbsp;is&nbsp;None*&nbsp;the&nbsp;fairest&nbsp;matching&nbsp;of&nbsp;the&nbsp;class&nbsp;is&nbsp;used</span></dd></dl>
+
+<dl><dt><a name="FairestIntraGroupPairing-showMatchingFitnessScores"><strong>showMatchingFitnessScores</strong></a>(self)</dt></dl>
 
 <dl><dt><a name="FairestIntraGroupPairing-showPairing"><strong>showPairing</strong></a>(self, matching=None)</dt><dd><span class="code">shows&nbsp;the&nbsp;intragroup&nbsp;pairing&nbsp;solution&nbsp;when&nbsp;*matching&nbsp;is&nbsp;None*</span></dd></dl>
 
@@ -1669,8 +2682,6 @@ The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&n
 
 <dl><dt><a name="FairestIntraGroupPairing-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
 
-<dl><dt><a name="FairestIntraGroupPairing-showEdgesCharacteristicValues"><strong>showEdgesCharacteristicValues</strong></a>(self, ndigits=2)</dt><dd><span class="code">Prints&nbsp;the&nbsp;edge&nbsp;links&nbsp;of&nbsp;the&nbsp;bipartite&nbsp;graph&nbsp;instance</span></dd></dl>
-
 <dl><dt><a name="FairestIntraGroupPairing-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
 
 <dl><dt><a name="FairestIntraGroupPairing-showMore"><strong>showMore</strong></a>(self)</dt><dd><span class="code">Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;instances.</span></dd></dl>
@@ -1680,10 +2691,10 @@ The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&n
 <hr>
 Data descriptors inherited from <a href="graphs.html#Graph">graphs.Graph</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
-<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</span></dd>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
 </dl>
 <dl><dt><strong>__weakref__</strong></dt>
-<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</span></dd>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
 </dl>
 </td></tr></table> <p>
 <table class="section">
@@ -1691,7 +2702,7 @@ Data descriptors inherited from <a href="graphs.html#Graph">graphs.Graph</a>:<br
 <td class="section-title" colspan=3>&nbsp;<br><a name="FairnessEnhancedInterGroupMatching">class <strong>FairnessEnhancedInterGroupMatching</strong></a>(<a href="pairings.html#InterGroupPairing">InterGroupPairing</a>)</td></tr>
     
 <tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
-<td class="decor title-decor" colspan=2><span class="code"><a href="#FairnessEnhancedInterGroupMatching">FairnessEnhancedInterGroupMatching</a>(vpA,&nbsp;vpB,&nbsp;initialMatching=None,&nbsp;seed=None,&nbsp;maxIterations=None,&nbsp;Comments=False,&nbsp;Debug=False)<br>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#FairnessEnhancedInterGroupMatching">FairnessEnhancedInterGroupMatching</a>(vpA,&nbsp;vpB,&nbsp;initialMatching=None,&nbsp;fitnessScores='Copeland',&nbsp;seed=None,&nbsp;maxIterations=None,&nbsp;Comments=False,&nbsp;Debug=False)<br>
 &nbsp;<br>
 The&nbsp;class&nbsp;enhances&nbsp;the&nbsp;fairness&nbsp;of&nbsp;a&nbsp;given&nbsp;matching.<br>
 &nbsp;<br>
@@ -1716,11 +2727,14 @@ See&nbsp;the&nbsp;:ref:`tutorial&nbsp;on&nbsp;computing&nbsp;fair&nbsp;intergrou
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="FairnessEnhancedInterGroupMatching-__init__"><strong>__init__</strong></a>(self, vpA, vpB, initialMatching=None, seed=None, maxIterations=None, Comments=False, Debug=False)</dt><dd><span class="code">Abstract&nbsp;class&nbsp;entry</span></dd></dl>
+<dl><dt><a name="FairnessEnhancedInterGroupMatching-__init__"><strong>__init__</strong></a>(self, vpA, vpB, initialMatching=None, fitnessScores='Copeland', seed=None, maxIterations=None, Comments=False, Debug=False)</dt><dd><span class="code">Abstract&nbsp;class&nbsp;entry</span></dd></dl>
 
 <hr>
 Methods inherited from <a href="pairings.html#InterGroupPairing">InterGroupPairing</a>:<br>
 <dl><dt><a name="FairnessEnhancedInterGroupMatching-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><span class="code">Default&nbsp;description&nbsp;for&nbsp;FairPairing&nbsp;instances.</span></dd></dl>
+
+<dl><dt><a name="FairnessEnhancedInterGroupMatching-computeBachetScore"><strong>computeBachetScore</strong></a>(self, vpA, a, b, Reversed=False)</dt><dd><span class="code">Replacement&nbsp;for&nbsp;the&nbsp;linear&nbsp;voting&nbsp;profiles&nbsp;information<br>
+when&nbsp;searching&nbsp;for&nbsp;promising&nbsp;swapping&nbsp;candidates</span></dd></dl>
 
 <dl><dt><a name="FairnessEnhancedInterGroupMatching-computeCopelandScore"><strong>computeCopelandScore</strong></a>(self, vpA, a, b)</dt><dd><span class="code">Replacement&nbsp;for&nbsp;the&nbsp;linear&nbsp;voting&nbsp;profiles&nbsp;information<br>
 when&nbsp;searching&nbsp;for&nbsp;promising&nbsp;swapping&nbsp;candidates</span></dd></dl>
@@ -1754,6 +2768,8 @@ abs(avgCorrA-avgCorrB))</span></dd></dl>
 <dl><dt><a name="FairnessEnhancedInterGroupMatching-isStableMatching"><strong>isStableMatching</strong></a>(self, matching, Comments=True, Debug=False)</dt><dd><span class="code">Test&nbsp;for&nbsp;the&nbsp;existance&nbsp;of&nbsp;matching&nbsp;instabilities.<br>
 Our&nbsp;implementation&nbsp;is&nbsp;inspired&nbsp;by<br>
 <a href="https://johnlekberg.com/blog/2020-08-22-stable-matching.html">https://johnlekberg.com/blog/2020-08-22-stable-matching.html</a></span></dd></dl>
+
+<dl><dt><a name="FairnessEnhancedInterGroupMatching-showBachetRankingScores"><strong>showBachetRankingScores</strong></a>(self)</dt><dd><span class="code">Print&nbsp;the&nbsp;individual&nbsp;Copeland&nbsp;ranking&nbsp;scores</span></dd></dl>
 
 <dl><dt><a name="FairnessEnhancedInterGroupMatching-showCopelandRankingScores"><strong>showCopelandRankingScores</strong></a>(self)</dt><dd><span class="code">Print&nbsp;the&nbsp;individual&nbsp;Copeland&nbsp;ranking&nbsp;scores</span></dd></dl>
 
@@ -2012,10 +3028,10 @@ The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&n
 <hr>
 Data descriptors inherited from <a href="graphs.html#Graph">graphs.Graph</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
-<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</span></dd>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
 </dl>
 <dl><dt><strong>__weakref__</strong></dt>
-<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</span></dd>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
 </dl>
 </td></tr></table> <p>
 <table class="section">
@@ -2023,18 +3039,20 @@ Data descriptors inherited from <a href="graphs.html#Graph">graphs.Graph</a>:<br
 <td class="section-title" colspan=3>&nbsp;<br><a name="FairnessEnhancedIntraGroupMatching">class <strong>FairnessEnhancedIntraGroupMatching</strong></a>(<a href="pairings.html#IntraGroupPairing">IntraGroupPairing</a>)</td></tr>
     
 <tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
-<td class="decor title-decor" colspan=2><span class="code"><a href="#FairnessEnhancedIntraGroupMatching">FairnessEnhancedIntraGroupMatching</a>(intraVp=None,&nbsp;maxIterations=None,&nbsp;initialMatching=None,&nbsp;_nbrOfSwappingRetrials=None,&nbsp;seed=None,&nbsp;Comments=True,&nbsp;Debug=False)<br>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#FairnessEnhancedIntraGroupMatching">FairnessEnhancedIntraGroupMatching</a>(intraVp=None,&nbsp;maxIterations=None,&nbsp;initialMatching=None,&nbsp;fitnessScores='Copeland',&nbsp;_nbrOfSwappingRetrials=None,&nbsp;seed=None,&nbsp;Comments=False,&nbsp;Debug=False)<br>
 &nbsp;<br>
 Solver&nbsp;for&nbsp;computing&nbsp;fair&nbsp;IntraGroup&nbsp;pairings&nbsp;using&nbsp;a&nbsp;similar&nbsp;hill&nbsp;climbing&nbsp;heuristic&nbsp;as&nbsp;the<br>
-one&nbsp;for&nbsp;the&nbsp;intergroup&nbsp;pairing&nbsp;problem.&nbsp;The&nbsp;enhancing&nbsp;is&nbsp;guided&nbsp;by&nbsp;Copeland&nbsp;ranking&nbsp;scores.<br>
+one&nbsp;for&nbsp;the&nbsp;intergroup&nbsp;pairing&nbsp;problem.&nbsp;The&nbsp;enhancing&nbsp;is&nbsp;guided&nbsp;by&nbsp;fitness&nbsp;ranking&nbsp;scores.<br>
 &nbsp;<br>
 *Parameters*:&nbsp;&nbsp;&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*intraVp*&nbsp;:&nbsp;a&nbsp;IntraGroup&nbsp;voting&nbsp;profile&nbsp;instance&nbsp;with&nbsp;*2k*&nbsp;voters&nbsp;where&nbsp;the&nbsp;*2k-1*&nbsp;candidates&nbsp;of<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;each&nbsp;person&nbsp;are&nbsp;the&nbsp;other&nbsp;persons<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*initialMatching*&nbsp;:&nbsp;the&nbsp;matching&nbsp;from&nbsp;which&nbsp;the&nbsp;fairness&nbsp;enhancing&nbsp;algorithm&nbsp;is&nbsp;starting<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*initialMatching*&nbsp;:&nbsp;None&nbsp;(default)&nbsp;|&nbsp;'random'&nbsp;|&nbsp;'bestCopeland'&nbsp;the&nbsp;matching&nbsp;from&nbsp;which<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;fairness&nbsp;enhancing&nbsp;algorithm&nbsp;is&nbsp;starting.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;*None*,&nbsp;a&nbsp;right&nbsp;--[pi,pi+1]&nbsp;for&nbsp;i&nbsp;=&nbsp;1..2k-1&nbsp;step&nbsp;3--&nbsp;and&nbsp;a&nbsp;left&nbsp;--[pi,p-i]&nbsp;for&nbsp;i&nbsp;=&nbsp;1..k--&nbsp;initial&nbsp;matching&nbsp;will&nbsp;be&nbsp;used<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elif&nbsp;'random'&nbsp;a&nbsp;random&nbsp;maximal&nbsp;matching&nbsp;will&nbsp;be&nbsp;used&nbsp;with&nbsp;given&nbsp;*seed*<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elif&nbsp;'bestCopeland'&nbsp;the&nbsp;best&nbsp;Copeland&nbsp;matching&nbsp;will&nbsp;be&nbsp;used&nbsp;as&nbsp;initial&nbsp;matching<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*fitnessScores*&nbsp;:&nbsp;'Bachet'&nbsp;|&nbsp;'Copeland'&nbsp;(default)<br>
 &nbsp;<br>
 See&nbsp;the&nbsp;:ref:`tutorial&nbsp;on&nbsp;computing&nbsp;fair&nbsp;intragroup&nbsp;pairings&nbsp;&lt;Fair-IntraGroup-Pairings-label&gt;`.<br>&nbsp;</span></td></tr>
 <tr><td>&nbsp;</td>
@@ -2046,11 +3064,13 @@ See&nbsp;the&nbsp;:ref:`tutorial&nbsp;on&nbsp;computing&nbsp;fair&nbsp;intragrou
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="FairnessEnhancedIntraGroupMatching-__init__"><strong>__init__</strong></a>(self, intraVp=None, maxIterations=None, initialMatching=None, _nbrOfSwappingRetrials=None, seed=None, Comments=True, Debug=False)</dt><dd><span class="code">Constructor&nbsp;for&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;objects.</span></dd></dl>
+<dl><dt><a name="FairnessEnhancedIntraGroupMatching-__init__"><strong>__init__</strong></a>(self, intraVp=None, maxIterations=None, initialMatching=None, fitnessScores='Copeland', _nbrOfSwappingRetrials=None, seed=None, Comments=False, Debug=False)</dt><dd><span class="code">Constructor&nbsp;for&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;objects.</span></dd></dl>
 
 <hr>
 Methods inherited from <a href="pairings.html#IntraGroupPairing">IntraGroupPairing</a>:<br>
 <dl><dt><a name="FairnessEnhancedIntraGroupMatching-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><span class="code">Default&nbsp;description&nbsp;for&nbsp;FairPairing&nbsp;instances.</span></dd></dl>
+
+<dl><dt><a name="FairnessEnhancedIntraGroupMatching-computeBachetScore"><strong>computeBachetScore</strong></a>(self, a, b)</dt><dd><span class="code">Computes&nbsp;fitness&nbsp;of&nbsp;swapping&nbsp;candidates</span></dd></dl>
 
 <dl><dt><a name="FairnessEnhancedIntraGroupMatching-computeCopelandScore"><strong>computeCopelandScore</strong></a>(self, a, b)</dt><dd><span class="code">Computes&nbsp;fitness&nbsp;of&nbsp;swapping&nbsp;candidates</span></dd></dl>
 
@@ -2062,8 +3082,12 @@ avgCorr,stdCorr,&nbsp;groupScores</span></dd></dl>
 
 <dl><dt><a name="FairnessEnhancedIntraGroupMatching-exportPairingGraphViz"><strong>exportPairingGraphViz</strong></a>(self, fileName=None, Comments=True, graphType='png', graphSize='7,7', matching=None, edgeColor='blue', bgcolor='cornsilk', lineWidth=2)</dt><dd><span class="code">Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;pairing&nbsp;graph&nbsp;drawing&nbsp;filtering.</span></dd></dl>
 
+<dl><dt><a name="FairnessEnhancedIntraGroupMatching-showEdgesCharacteristicValues"><strong>showEdgesCharacteristicValues</strong></a>(self, edges=None, ndigits=2)</dt><dd><span class="code">Prints&nbsp;the&nbsp;edge&nbsp;links&nbsp;of&nbsp;the&nbsp;bipartite&nbsp;graph&nbsp;instance</span></dd></dl>
+
 <dl><dt><a name="FairnessEnhancedIntraGroupMatching-showMatchingFairness"><strong>showMatchingFairness</strong></a>(self, matching=None, WithIndividualCorrelations=True)</dt><dd><span class="code">Shows&nbsp;the&nbsp;intragroup&nbsp;faines&nbsp;of&nbsp;a&nbsp;given&nbsp;matching.<br>
 When&nbsp;*matching&nbsp;is&nbsp;None*&nbsp;the&nbsp;fairest&nbsp;matching&nbsp;of&nbsp;the&nbsp;class&nbsp;is&nbsp;used</span></dd></dl>
+
+<dl><dt><a name="FairnessEnhancedIntraGroupMatching-showMatchingFitnessScores"><strong>showMatchingFitnessScores</strong></a>(self)</dt></dl>
 
 <dl><dt><a name="FairnessEnhancedIntraGroupMatching-showPairing"><strong>showPairing</strong></a>(self, matching=None)</dt><dd><span class="code">shows&nbsp;the&nbsp;intragroup&nbsp;pairing&nbsp;solution&nbsp;when&nbsp;*matching&nbsp;is&nbsp;None*</span></dd></dl>
 
@@ -2316,8 +3340,6 @@ The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&n
 
 <dl><dt><a name="FairnessEnhancedIntraGroupMatching-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
 
-<dl><dt><a name="FairnessEnhancedIntraGroupMatching-showEdgesCharacteristicValues"><strong>showEdgesCharacteristicValues</strong></a>(self, ndigits=2)</dt><dd><span class="code">Prints&nbsp;the&nbsp;edge&nbsp;links&nbsp;of&nbsp;the&nbsp;bipartite&nbsp;graph&nbsp;instance</span></dd></dl>
-
 <dl><dt><a name="FairnessEnhancedIntraGroupMatching-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
 
 <dl><dt><a name="FairnessEnhancedIntraGroupMatching-showMore"><strong>showMore</strong></a>(self)</dt><dd><span class="code">Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;instances.</span></dd></dl>
@@ -2327,10 +3349,10 @@ The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&n
 <hr>
 Data descriptors inherited from <a href="graphs.html#Graph">graphs.Graph</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
-<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</span></dd>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
 </dl>
 <dl><dt><strong>__weakref__</strong></dt>
-<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</span></dd>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
 </dl>
 </td></tr></table> <p>
 <table class="section">
@@ -2351,6 +3373,9 @@ Methods defined here:<br>
 <dl><dt><a name="InterGroupPairing-__init__"><strong>__init__</strong></a>(self)</dt><dd><span class="code">Abstract&nbsp;class&nbsp;entry</span></dd></dl>
 
 <dl><dt><a name="InterGroupPairing-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><span class="code">Default&nbsp;description&nbsp;for&nbsp;FairPairing&nbsp;instances.</span></dd></dl>
+
+<dl><dt><a name="InterGroupPairing-computeBachetScore"><strong>computeBachetScore</strong></a>(self, vpA, a, b, Reversed=False)</dt><dd><span class="code">Replacement&nbsp;for&nbsp;the&nbsp;linear&nbsp;voting&nbsp;profiles&nbsp;information<br>
+when&nbsp;searching&nbsp;for&nbsp;promising&nbsp;swapping&nbsp;candidates</span></dd></dl>
 
 <dl><dt><a name="InterGroupPairing-computeCopelandScore"><strong>computeCopelandScore</strong></a>(self, vpA, a, b)</dt><dd><span class="code">Replacement&nbsp;for&nbsp;the&nbsp;linear&nbsp;voting&nbsp;profiles&nbsp;information<br>
 when&nbsp;searching&nbsp;for&nbsp;promising&nbsp;swapping&nbsp;candidates</span></dd></dl>
@@ -2384,6 +3409,8 @@ abs(avgCorrA-avgCorrB))</span></dd></dl>
 <dl><dt><a name="InterGroupPairing-isStableMatching"><strong>isStableMatching</strong></a>(self, matching, Comments=True, Debug=False)</dt><dd><span class="code">Test&nbsp;for&nbsp;the&nbsp;existance&nbsp;of&nbsp;matching&nbsp;instabilities.<br>
 Our&nbsp;implementation&nbsp;is&nbsp;inspired&nbsp;by<br>
 <a href="https://johnlekberg.com/blog/2020-08-22-stable-matching.html">https://johnlekberg.com/blog/2020-08-22-stable-matching.html</a></span></dd></dl>
+
+<dl><dt><a name="InterGroupPairing-showBachetRankingScores"><strong>showBachetRankingScores</strong></a>(self)</dt><dd><span class="code">Print&nbsp;the&nbsp;individual&nbsp;Copeland&nbsp;ranking&nbsp;scores</span></dd></dl>
 
 <dl><dt><a name="InterGroupPairing-showCopelandRankingScores"><strong>showCopelandRankingScores</strong></a>(self)</dt><dd><span class="code">Print&nbsp;the&nbsp;individual&nbsp;Copeland&nbsp;ranking&nbsp;scores</span></dd></dl>
 
@@ -2642,10 +3669,10 @@ The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&n
 <hr>
 Data descriptors inherited from <a href="graphs.html#Graph">graphs.Graph</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
-<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</span></dd>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
 </dl>
 <dl><dt><strong>__weakref__</strong></dt>
-<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</span></dd>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
 </dl>
 </td></tr></table> <p>
 <table class="section">
@@ -2666,6 +3693,8 @@ Methods defined here:<br>
 
 <dl><dt><a name="IntraGroupPairing-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><span class="code">Default&nbsp;description&nbsp;for&nbsp;FairPairing&nbsp;instances.</span></dd></dl>
 
+<dl><dt><a name="IntraGroupPairing-computeBachetScore"><strong>computeBachetScore</strong></a>(self, a, b)</dt><dd><span class="code">Computes&nbsp;fitness&nbsp;of&nbsp;swapping&nbsp;candidates</span></dd></dl>
+
 <dl><dt><a name="IntraGroupPairing-computeCopelandScore"><strong>computeCopelandScore</strong></a>(self, a, b)</dt><dd><span class="code">Computes&nbsp;fitness&nbsp;of&nbsp;swapping&nbsp;candidates</span></dd></dl>
 
 <dl><dt><a name="IntraGroupPairing-computeIndividualCorrelations"><strong>computeIndividualCorrelations</strong></a>(self, matching=None, Debug=False)</dt><dd><span class="code">Individual&nbsp;correlations&nbsp;for&nbsp;intragroup&nbsp;pairing&nbsp;solution<br>
@@ -2676,8 +3705,12 @@ avgCorr,stdCorr,&nbsp;groupScores</span></dd></dl>
 
 <dl><dt><a name="IntraGroupPairing-exportPairingGraphViz"><strong>exportPairingGraphViz</strong></a>(self, fileName=None, Comments=True, graphType='png', graphSize='7,7', matching=None, edgeColor='blue', bgcolor='cornsilk', lineWidth=2)</dt><dd><span class="code">Exports&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;pairing&nbsp;graph&nbsp;drawing&nbsp;filtering.</span></dd></dl>
 
+<dl><dt><a name="IntraGroupPairing-showEdgesCharacteristicValues"><strong>showEdgesCharacteristicValues</strong></a>(self, edges=None, ndigits=2)</dt><dd><span class="code">Prints&nbsp;the&nbsp;edge&nbsp;links&nbsp;of&nbsp;the&nbsp;bipartite&nbsp;graph&nbsp;instance</span></dd></dl>
+
 <dl><dt><a name="IntraGroupPairing-showMatchingFairness"><strong>showMatchingFairness</strong></a>(self, matching=None, WithIndividualCorrelations=True)</dt><dd><span class="code">Shows&nbsp;the&nbsp;intragroup&nbsp;faines&nbsp;of&nbsp;a&nbsp;given&nbsp;matching.<br>
 When&nbsp;*matching&nbsp;is&nbsp;None*&nbsp;the&nbsp;fairest&nbsp;matching&nbsp;of&nbsp;the&nbsp;class&nbsp;is&nbsp;used</span></dd></dl>
+
+<dl><dt><a name="IntraGroupPairing-showMatchingFitnessScores"><strong>showMatchingFitnessScores</strong></a>(self)</dt></dl>
 
 <dl><dt><a name="IntraGroupPairing-showPairing"><strong>showPairing</strong></a>(self, matching=None)</dt><dd><span class="code">shows&nbsp;the&nbsp;intragroup&nbsp;pairing&nbsp;solution&nbsp;when&nbsp;*matching&nbsp;is&nbsp;None*</span></dd></dl>
 
@@ -2930,8 +3963,6 @@ The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&n
 
 <dl><dt><a name="IntraGroupPairing-showCliques"><strong>showCliques</strong></a>(self)</dt></dl>
 
-<dl><dt><a name="IntraGroupPairing-showEdgesCharacteristicValues"><strong>showEdgesCharacteristicValues</strong></a>(self, ndigits=2)</dt><dd><span class="code">Prints&nbsp;the&nbsp;edge&nbsp;links&nbsp;of&nbsp;the&nbsp;bipartite&nbsp;graph&nbsp;instance</span></dd></dl>
-
 <dl><dt><a name="IntraGroupPairing-showMIS"><strong>showMIS</strong></a>(self)</dt></dl>
 
 <dl><dt><a name="IntraGroupPairing-showMore"><strong>showMore</strong></a>(self)</dt><dd><span class="code">Generic&nbsp;show&nbsp;method&nbsp;for&nbsp;<a href="graphs.html#Graph">Graph</a>&nbsp;instances.</span></dd></dl>
@@ -2941,10 +3972,10 @@ The&nbsp;new&nbsp;value&nbsp;must&nbsp;be&nbsp;in&nbsp;the&nbsp;limits&nbsp;of&n
 <hr>
 Data descriptors inherited from <a href="graphs.html#Graph">graphs.Graph</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
-<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</span></dd>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
 </dl>
 <dl><dt><strong>__weakref__</strong></dt>
-<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</span></dd>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
 </dl>
 </td></tr></table></td></tr></table>
 </body></html>

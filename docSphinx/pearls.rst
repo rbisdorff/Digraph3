@@ -4895,12 +4895,10 @@ In our present Python3.12+ implementation, such a tiny problem is solved in less
 
 This nowadays available computational efficiency confers the bipolar-valued kernel concept a methodological premium for solving first or last choice decision problems on the basis of the bipolar-valued outranking digraph. But it also opens new opportunities for verifying and implementing kernel extraction algorithms for more graph theoretical purposes. New results, like enumerating the non isomorphic maximal independent sets --the kernels-- of known difficult graph instances like the *n*-cycle, could be obtained [ISO-2008p]_.
 
+.. note:: 
+   It is worthwhile noticing again the essential computational role, the logical **indeterminate value 0.0** is playing in this double fixpoint algorithm. To implement such kind of algorithms without a logical **neutral term** would be like implementing numerical algorithms without a possible usage of the number 0. Infinitely many trivial *impossibility theorems* and *dubious logical results* come up.
 
-
-.. note::
-
-   It is worthwhile noticing again the essential computational role, the logical **indeterminate value 0.0** is playing in this double fixpoint algorithm. To implement such kind of algorithms without a logical **neutral term** would be like implementing numerical algorithms without a possible usage of the number 0. Infinitely many trivial *impossibility theorems* and *dubious logical results* come up. 
-
+   Readers, aware of quantum algorithms, and more specifically of *Grover*'s quantum search algorithm [Gro-1996]_, may finally recognize a family resemblance with our double fixpoint kernel vector extraction. Indeed, the outranking digraph construction, leading to the majority margins of criteria significance, is similar to **quantum superposition**, not on the complex *Bloch* sphere, but on the normalized decimal [-1.0; +1.0] chracateristic domain. The coduality principle and the strong completeness of the outranking characteristic values induce furthermore some kind of **entanglement**. When reading a negative outranking characteristic, the converse outranking characteristic is necessarily positive. And, the bipolar-valued kernel equation corresponds in fact to a kind of anti-eigen equation which can be solved in *Grover*'s algorithm style with a small polynomial number of rotations, i.e. double fixpoint computations. So there is no need in these discrete quantum-like computations for complicated cryogenic and fault tolerant qubits [27]_.
 
 Back to :ref:`Content Table <Pearls-label>`
 
@@ -5666,6 +5664,8 @@ Appendix
 
 .. [KNU-1997] Knuth, Donald (1997), "The art of Computer Programming Third Edition". Vol. 2. Addison-Wesley. pp. 207-208. ISBN 0-201-89684-2.
 
+.. [Gro-1996] Grover, Lov K. (1996), "A fast quantum mechanical algorithm for database search". Proceedings of the twenty-eighth annual ACM symposium on Theory of computing - STOC '96. Philadelphia, Pennsylvania, USA: Association for Computing Machinery. pp. 212–219.
+
 .. only:: html
 
     Endnotes
@@ -5716,6 +5716,8 @@ Appendix
 .. [25] https://en.wikipedia.org/wiki/Balanced_ternary
 
 .. [26] *Balanced ternary optical* HPC designs have recently gained in China a lot of attention [JIN-2003]_. Compared to classical HPC or 'dreamed' quantum computers, balanced ternary based optical computer systems provide indeed many technical and computational advantages. Much less electrical energy required, no water cooling, millions of optical trits may be easily assembled, faithful ultra high speed read and write access, etc.
+
+.. [27] https://en.wikipedia.org/wiki/Grover%27s_algorithm
 
 .. raw:: latex
 

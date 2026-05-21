@@ -20,7 +20,7 @@ of&nbsp;the&nbsp;MP&nbsp;optimised&nbsp;:py:class:`~sortingDigraphs.QuantilesSor
 :py:class:`~sortingDigraphs.LearnedQuantilesRatingDigraph`&nbsp;classes&nbsp;from&nbsp;the<br>
 :py:mod:`sortingDigraphs`&nbsp;module.<br>
 &nbsp;<br>
-Copyright&nbsp;(C)&nbsp;2016-2023&nbsp;&nbsp;Raymond&nbsp;Bisdorff.<br>
+Copyright&nbsp;(C)&nbsp;2016-2025&nbsp;&nbsp;Raymond&nbsp;Bisdorff.<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify<br>
 &nbsp;&nbsp;&nbsp;&nbsp;it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by<br>
@@ -354,6 +354,8 @@ on&nbsp;criterion&nbsp;c.</span></dd></dl>
 (positive&nbsp;chaacteristics,&nbsp;negative&nbsp;characteristics)<br>
 per&nbsp;actions&nbsp;pair.</span></dd></dl>
 
+<dl><dt><a name="RatingByLearnedQuantilesDigraph-computePartialOutrankingConsensusQuality"><strong>computePartialOutrankingConsensusQuality</strong></a>(self, Sorted=True, ValuedCorrelation=True, Threading=False, nbrCores=None, Comments=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;marginal&nbsp;criteria&nbsp;correlations&nbsp;with&nbsp;a&nbsp;partial&nbsp;ranking&nbsp;relation&nbsp;with&nbsp;summary.</span></dd></dl>
+
 <dl><dt><a name="RatingByLearnedQuantilesDigraph-computeQuantileSortRelation"><strong>computeQuantileSortRelation</strong></a>(self, Debug=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
 the&nbsp;self&nbsp;quantile&nbsp;sorting&nbsp;result.</span></dd></dl>
 
@@ -459,7 +461,8 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;self.<a href="#RatingByLearnedQuantilesDigraph-MISgen">MISgen</a>(self.<strong>actions</strong>.copy(),set())</span></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;self.<a href="#RatingByLearnedQuantilesDigraph-MISgen">MISgen</a>(set(self.<strong>actions</strong>),frozenset()),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(see&nbsp;self.<a href="#RatingByLearnedQuantilesDigraph-showMIS">showMIS</a>()&nbsp;method)</span></dd></dl>
 
 <dl><dt><a name="RatingByLearnedQuantilesDigraph-__invert__"><strong>__invert__</strong></a>(self)</dt><dd><span class="code">Make&nbsp;the&nbsp;inverting&nbsp;operator&nbsp;~self&nbsp;available&nbsp;for&nbsp;Digraph&nbsp;instances.&nbsp;<br>
 &nbsp;<br>
@@ -705,6 +708,8 @@ using&nbsp;the&nbsp;Pirlot&nbsp;fixpoint&nbsp;algorithm.</span></dd></dl>
 
 <dl><dt><a name="RatingByLearnedQuantilesDigraph-computeIncomparabilityDegree"><strong>computeIncomparabilityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;incomparability&nbsp;degree&nbsp;(Decimal),&nbsp;i.e.&nbsp;the&nbsp;relative&nbsp;number&nbsp;of&nbsp;symmetric&nbsp;indeterminate&nbsp;relations&nbsp;of&nbsp;the&nbsp;irreflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</span></dd></dl>
 
+<dl><dt><a name="RatingByLearnedQuantilesDigraph-computeIntransitiveTriples"><strong>computeIntransitiveTriples</strong></a>(self, Comments=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;intransitive&nbsp;triples&nbsp;detected&nbsp;in&nbsp;self.</span></dd></dl>
+
 <dl><dt><a name="RatingByLearnedQuantilesDigraph-computeKemenyIndex"><strong>computeKemenyIndex</strong></a>(self, otherRelation)</dt><dd><span class="code">renders&nbsp;the&nbsp;Kemeny&nbsp;index&nbsp;of&nbsp;the&nbsp;self.<strong>relation</strong><br>
 compared&nbsp;with&nbsp;a&nbsp;given&nbsp;crisp&nbsp;valued&nbsp;relation&nbsp;of&nbsp;a&nbsp;compatible<br>
 other&nbsp;digraph&nbsp;(same&nbsp;nodes&nbsp;or&nbsp;actions).</span></dd></dl>
@@ -718,8 +723,10 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</span></dd></dl>
 
-<dl><dt><a name="RatingByLearnedQuantilesDigraph-computeKernelVector"><strong>computeKernelVector</strong></a>(self, kernel, Initial=True, Comments=False)</dt><dd><span class="code">|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
-|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixpoint&nbsp;equation</span></dd></dl>
+<dl><dt><a name="RatingByLearnedQuantilesDigraph-computeKernelVector"><strong>computeKernelVector</strong></a>(self, kernel, Initial=True, Comments=False, Iterations=False)</dt><dd><span class="code">|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
+|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixpoint&nbsp;equation<br>
+|&nbsp;If&nbsp;Iterations&nbsp;==&nbsp;True,&nbsp;returns&nbsp;the&nbsp;tuple&nbsp;<br>
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(kernel&nbsp;vector,&nbsp;nbrOfIterations)</span></dd></dl>
 
 <dl><dt><a name="RatingByLearnedQuantilesDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><span class="code">Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</span></dd></dl>
 
@@ -921,7 +928,7 @@ the&nbsp;following&nbsp;type&nbsp;of&nbsp;links:<br>
 gt&nbsp;'&gt;',&nbsp;eq&nbsp;'=',&nbsp;lt&nbsp;'&lt;',&nbsp;incomp&nbsp;'&lt;&gt;',<br>
 leq&nbsp;'&lt;=',&nbsp;geq&nbsp;'&gt;=',&nbsp;indeterm&nbsp;'?'</span></dd></dl>
 
-<dl><dt><a name="RatingByLearnedQuantilesDigraph-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, Comments=False, _OldCoca=False, BrokenCocs=True, Threading=False, nbrOfCPUs=1)</dt><dd><span class="code">Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
+<dl><dt><a name="RatingByLearnedQuantilesDigraph-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, Comments=False, _OldCoca=False, BrokenCocs=True)</dt><dd><span class="code">Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
 self.<strong>strictBadChoices</strong>,&nbsp;self.<strong>nonRobustChoices</strong>.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
@@ -954,7 +961,7 @@ Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</span></dd></dl>
 
 <dl><dt><a name="RatingByLearnedQuantilesDigraph-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><span class="code">Mimetic&nbsp;Wrapper&nbsp;of&nbsp;the&nbsp;<a href="#RatingByLearnedQuantilesDigraph-topologicalSort">topologicalSort</a>()&nbsp;method.</span></dd></dl>
 
-<dl><dt><a name="RatingByLearnedQuantilesDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+<dl><dt><a name="RatingByLearnedQuantilesDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False, ReturnTransitiveTriples=False, ReturnIntransitiveTriples=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
 &nbsp;<br>
 ..&nbsp;note::&nbsp;<br>
 &nbsp;<br>
@@ -987,6 +994,27 @@ are&nbsp;set&nbsp;to&nbsp;the&nbsp;indeterminate&nbsp;value.</span></dd></dl>
 <dl><dt><a name="RatingByLearnedQuantilesDigraph-computeWeakCondorcetLosers"><strong>computeWeakCondorcetLosers</strong></a>(self)</dt><dd><span class="code">Wrapper&nbsp;for&nbsp;<a href="#RatingByLearnedQuantilesDigraph-weakCondorcetLosers">weakCondorcetLosers</a>().</span></dd></dl>
 
 <dl><dt><a name="RatingByLearnedQuantilesDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><span class="code">Wrapper&nbsp;for&nbsp;<a href="#RatingByLearnedQuantilesDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</span></dd></dl>
+
+<dl><dt><a name="RatingByLearnedQuantilesDigraph-computeWeakTransitivityDegree"><strong>computeWeakTransitivityDegree</strong></a>(self, InPercents=False, Comments=False, ReturnWeakIntransitiveTriples=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;strict&nbsp;and&nbsp;the&nbsp;weak&nbsp;transitivity&nbsp;degrees&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph,&nbsp;i.e.&nbsp;the&nbsp;ratio&nbsp;of&nbsp;the&nbsp;number&nbsp;of&nbsp;closed&nbsp;x&gt;z&nbsp;&nbsp;,&nbsp;respt.&nbsp;weakly-closed&nbsp;(x&gt;z&nbsp;and&nbsp;x&lt;&gt;y)&nbsp;triples&nbsp;over&nbsp;the&nbsp;number&nbsp;of&nbsp;x&gt;y&gt;z&nbsp;triples&nbsp;of&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;the&nbsp;digraph.<br>
+&nbsp;<br>
+With&nbsp;*ReturnWeakIntransitiveTriples=True*&nbsp;returns&nbsp;a&nbsp;tuple&nbsp;with&nbsp;a&nbsp;list&nbsp;of&nbsp;intransitive&nbsp;triples&nbsp;and&nbsp;a&nbsp;list&nbsp;of&nbsp;weakly&nbsp;intransitive&nbsp;triples.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Digraphs&nbsp;without&nbsp;connected&nbsp;triples,&nbsp;like&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;weakly&nbsp;transitive.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a><br>
+&gt;&gt;&gt;&nbsp;from&nbsp;randomDigraphs&nbsp;import&nbsp;RandomCBPerformanceTableau<br>
+&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;RandomCBPerformanceTableau(<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weightDistribution="equiobjectives",<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numberOfActions=10,numberOfCriteria=11,<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;missingDataProbability=0.05,seed=2)<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#RatingByLearnedQuantilesDigraph-computeWeakTransitivityDegree">computeWeakTransitivityDegree</a>(Comments=True)<br>
+&nbsp;Transitivity&nbsp;degree&nbsp;of&nbsp;digraph&nbsp;&lt;rel_randomCBperftab&gt;:<br>
+&nbsp;#triples&nbsp;x&gt;y&gt;z:&nbsp;720,&nbsp;#closed:&nbsp;400,&nbsp;#weakly-closed:&nbsp;80,#open:&nbsp;240<br>
+&nbsp;(#closed/#triples)&nbsp;=&nbsp;&nbsp;0.556<br>
+&nbsp;(#weakly-closed/#triples)&nbsp;=&nbsp;&nbsp;0.667</span></dd></dl>
 
 <dl><dt><a name="RatingByLearnedQuantilesDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><span class="code">Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</span></dd></dl>
@@ -1162,6 +1190,20 @@ relation[x][y]&nbsp;+&nbsp;relation[y][x)[y]&nbsp;&gt;=&nbsp;0.0<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;reflexive&nbsp;links&nbsp;are&nbsp;ignored&nbsp;and&nbsp;the&nbsp;valuation&nbsp;must&nbsp;be&nbsp;bipolar&nbsp;!!</span></dd></dl>
 
+<dl><dt><a name="RatingByLearnedQuantilesDigraph-isStronglyAsymmetric"><strong>isStronglyAsymmetric</strong></a>(self, Debug=False)</dt><dd><span class="code">checks&nbsp;the&nbsp;strong&nbsp;assymetric&nbsp;property&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
+for&nbsp;r(x&gt;y)&nbsp;+&nbsp;r(y&gt;x)&nbsp;&lt;=&nbsp;Med&nbsp;!<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;reflexive&nbsp;links&nbsp;are&nbsp;ignored&nbsp;!!</span></dd></dl>
+
+<dl><dt><a name="RatingByLearnedQuantilesDigraph-isStronglyComplete"><strong>isStronglyComplete</strong></a>(self, Debug=False)</dt><dd><span class="code">checks&nbsp;the&nbsp;strongly&nbsp;completeness&nbsp;property&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
+for&nbsp;r(x&gt;=y)&nbsp;+&nbsp;r(y&gt;=x)&nbsp;&gt;=&nbsp;Med&nbsp;!<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;reflexive&nbsp;links&nbsp;are&nbsp;ignored&nbsp;!!</span></dd></dl>
+
 <dl><dt><a name="RatingByLearnedQuantilesDigraph-isSymmetric"><strong>isSymmetric</strong></a>(self, Comments=False)</dt><dd><span class="code">True&nbsp;if&nbsp;symmetry&nbsp;degree&nbsp;==&nbsp;1.0.</span></dd></dl>
 
 <dl><dt><a name="RatingByLearnedQuantilesDigraph-isTransitive"><strong>isTransitive</strong></a>(self, Comments=False)</dt><dd><span class="code">True&nbsp;if&nbsp;transitivity&nbsp;degree&nbsp;==&nbsp;1.0.</span></dd></dl>
@@ -1264,13 +1306,39 @@ Renders&nbsp;the&nbsp;sharpest&nbsp;of&nbsp;two&nbsp;characteristic&nbsp;vectors
 
 <dl><dt><a name="RatingByLearnedQuantilesDigraph-showAutomorphismGenerators"><strong>showAutomorphismGenerators</strong></a>(self)</dt><dd><span class="code">Renders&nbsp;the&nbsp;generators&nbsp;of&nbsp;the&nbsp;automorphism&nbsp;group.</span></dd></dl>
 
+<dl><dt><a name="RatingByLearnedQuantilesDigraph-showBachetChoiceRecommendation"><strong>showBachetChoiceRecommendation</strong></a>(self, Polarised=True, randomized=100, maxNbrOfRankings=5, seed=None, Comments=False, CoDual=True, Debug=False)</dt><dd><span class="code">Shows&nbsp;a&nbsp;choice&nbsp;recommendation&nbsp;from&nbsp;the&nbsp;partial&nbsp;transitive&nbsp;Bachet&nbsp;ranking.<br>
+&nbsp;<br>
+Usage&nbsp;example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
+&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#RatingByLearnedQuantilesDigraph-showBachetChoiceRecommendation">showBachetChoiceRecommendation</a>(randomized=100,<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maxNbrOfRankings=5,seed=1)<br>
+&nbsp;*----&nbsp;Bachet&nbsp;Choice&nbsp;Recommendations&nbsp;----*<br>
+&nbsp;&nbsp;Ranking&nbsp;by&nbsp;recursively&nbsp;first&nbsp;and&nbsp;last&nbsp;choosing<br>
+&nbsp;&nbsp;&nbsp;1st&nbsp;ranked&nbsp;['p11',&nbsp;'p19',&nbsp;'p20']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2nd&nbsp;ranked&nbsp;['p06',&nbsp;'p13',&nbsp;'p14']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3rd&nbsp;ranked&nbsp;['p04',&nbsp;'p05',&nbsp;'p07',&nbsp;'p18']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4th&nbsp;ranked&nbsp;['p15']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4th&nbsp;last&nbsp;ranked&nbsp;['p15']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3rd&nbsp;last&nbsp;ranked&nbsp;['p08',&nbsp;'p09',&nbsp;'p10',&nbsp;'p16']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2nd&nbsp;last&nbsp;ranked&nbsp;['p01',&nbsp;'p02',&nbsp;'p12',&nbsp;'p17']<br>
+&nbsp;&nbsp;1st&nbsp;last&nbsp;ranked&nbsp;['p03']<br>
+&nbsp;Quality&nbsp;of&nbsp;partial&nbsp;Bachet&nbsp;ranking<br>
+&nbsp;&nbsp;Crisp&nbsp;ordinal&nbsp;correlation&nbsp;&nbsp;:&nbsp;+0.954<br>
+&nbsp;&nbsp;Epistemic&nbsp;determination&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;+0.383<br>
+&nbsp;&nbsp;Bipolar-valued&nbsp;equivalence&nbsp;:&nbsp;+0.365<br>
+&nbsp;Execution&nbsp;time:&nbsp;0.673&nbsp;seconds<br>
+&nbsp;*****************************</span></dd></dl>
+
 <dl><dt><a name="RatingByLearnedQuantilesDigraph-showBadChoices"><strong>showBadChoices</strong></a>(self, Recompute=True)</dt><dd><span class="code">Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;bad&nbsp;choices.</span></dd></dl>
 
-<dl><dt><a name="RatingByLearnedQuantilesDigraph-showBestChoiceRecommendation"><strong>showBestChoiceRecommendation</strong></a>(self, Verbose=False, Comments=True, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True)</dt><dd><span class="code">Shows&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
+<dl><dt><a name="RatingByLearnedQuantilesDigraph-showBestChoiceRecommendation"><strong>showBestChoiceRecommendation</strong></a>(self, Verbose=False, Comments=True, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True)</dt><dd><span class="code">Shows&nbsp;a&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Computes&nbsp;by&nbsp;default&nbsp;the&nbsp;Rubis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;on&nbsp;the&nbsp;corresponding&nbsp;strict&nbsp;(codual)&nbsp;outranking&nbsp;digraph.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Computes&nbsp;by&nbsp;default&nbsp;a&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;on&nbsp;the&nbsp;corresponding&nbsp;strict&nbsp;(codual)&nbsp;outranking&nbsp;digraph.<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;By&nbsp;default,&nbsp;with&nbsp;BrokenCocs=True,&nbsp;we&nbsp;brake&nbsp;all&nbsp;chordless&nbsp;circuits&nbsp;at&nbsp;their&nbsp;weakest&nbsp;determined&nbsp;(&nbsp;abs(r(x&gt;y))&nbsp;+&nbsp;abs(r(y&gt;x))&nbsp;)&nbsp;link.<br>
 &nbsp;<br>
@@ -1288,7 +1356,7 @@ Usage&nbsp;example:<br>
 &gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
 &gt;&gt;&gt;&nbsp;g.<a href="#RatingByLearnedQuantilesDigraph-showBestChoiceRecommendation">showBestChoiceRecommendation</a>()<br>
 ***********************<br>
-RuBis&nbsp;Best&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
+Best&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
 (in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;determinateness)&nbsp;&nbsp;&nbsp;<br>
 Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;first&nbsp;choices<br>
@@ -1310,6 +1378,27 @@ Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 Execution&nbsp;time:&nbsp;0.024&nbsp;seconds<br>
 *****************************</span></dd></dl>
 
+<dl><dt><a name="RatingByLearnedQuantilesDigraph-showChoiceRecommendation"><strong>showChoiceRecommendation</strong></a>(self, method='Bachet', Polarised=True, randomized=100, maxNbrOfRankings=5, seed=None, ChoiceVector=False, CoDual=False, Reversed=False, Valued=False, actionsList=None, randomActionsList=False)</dt><dd><span class="code">Generic&nbsp;choice&nbsp;recommender&nbsp;method.<br>
+&nbsp;<br>
+**Parameters**<br>
+&nbsp;<br>
+*method*:&nbsp;'Bachet'&nbsp;(default)&nbsp;|&nbsp;'Rubis'&nbsp;|&nbsp;'IteratedBachet'&nbsp;;<br>
+the&nbsp;Bachet&nbsp;method&nbsp;is&nbsp;based&nbsp;on&nbsp;the&nbsp;conjoint<br>
+extracton&nbsp;of&nbsp;initial&nbsp;and&nbsp;terminal&nbsp;prekernels&nbsp;from&nbsp;the&nbsp;partial&nbsp;Bachet&nbsp;ranking,<br>
+whereas&nbsp;the&nbsp;Rubis&nbsp;method&nbsp;is&nbsp;based&nbsp;on&nbsp;the&nbsp;extraction&nbsp;of&nbsp;an&nbsp;initial&nbsp;and<br>
+terminal&nbsp;prekernels&nbsp;directly&nbsp;from&nbsp;the&nbsp;given&nbsp;outranking&nbsp;digraph.<br>
+&nbsp;<br>
+*Polarised*:&nbsp;*True*&nbsp;(by&nbsp;default)&nbsp;|&nbsp;False;&nbsp;Bachet&nbsp;parameter<br>
+&nbsp;<br>
+*randomized*:&nbsp;positive&nbsp;integer&nbsp;(100&nbsp;by&nbsp;default);&nbsp;Bachet&nbsp;Parameter<br>
+&nbsp;<br>
+*maxNbrOfRankings*:&nbsp;positive&nbsp;integer&nbsp;&gt;&nbsp;0&nbsp;(5&nbsp;by&nbsp;default);&nbsp;Bachet&nbsp;parameter<br>
+&nbsp;<br>
+*seed*:&nbsp;Bachet&nbsp;parameter&nbsp;for&nbsp;making&nbsp;the&nbsp;randomization&nbsp;reproducible<br>
+&nbsp;<br>
+*ChoiceVector*:&nbsp;Rubis&nbsp;parameter&nbsp;for&nbsp;showing&nbsp;complete&nbsp;prekernel<br>
+characteristic&nbsp;vectors.</span></dd></dl>
+
 <dl><dt><a name="RatingByLearnedQuantilesDigraph-showChoiceVector"><strong>showChoiceVector</strong></a>(self, ch, choiceType='good', ChoiceVector=True)</dt><dd><span class="code">Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</span></dd></dl>
 
 <dl><dt><a name="RatingByLearnedQuantilesDigraph-showChordlessCircuits"><strong>showChordlessCircuits</strong></a>(self, Recompute=False)</dt><dd><span class="code">Show&nbsp;method&nbsp;for&nbsp;chordless&nbsp;circuits&nbsp;observed&nbsp;in&nbsp;a&nbsp;Digraph&nbsp;instance.<br>
@@ -1320,11 +1409,11 @@ If&nbsp;previous&nbsp;computation&nbsp;is&nbsp;required,&nbsp;stores&nbsp;the&nb
 
 <dl><dt><a name="RatingByLearnedQuantilesDigraph-showCorrelation"><strong>showCorrelation</strong></a>(self, corr=None, ndigits=3)</dt><dd><span class="code">Renders&nbsp;the&nbsp;valued&nbsp;ordinal&nbsp;correlation&nbsp;index,&nbsp;the&nbsp;crisp&nbsp;Kendall&nbsp;tau&nbsp;index&nbsp;and&nbsp;their&nbsp;epistemic&nbsp;determination&nbsp;degree.</span></dd></dl>
 
-<dl><dt><a name="RatingByLearnedQuantilesDigraph-showFirstChoiceRecommendation"><strong>showFirstChoiceRecommendation</strong></a>(self, Verbose=False, Comments=True, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True)</dt><dd><span class="code">Shows&nbsp;the&nbsp;RuBis&nbsp;first&nbsp;choice&nbsp;recommendation.<br>
+<dl><dt><a name="RatingByLearnedQuantilesDigraph-showFirstChoiceRecommendation"><strong>showFirstChoiceRecommendation</strong></a>(self, Verbose=False, Comments=True, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True)</dt><dd><span class="code">Shows&nbsp;a&nbsp;first&nbsp;choice&nbsp;recommendation.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Computes&nbsp;by&nbsp;default&nbsp;the&nbsp;Rubis&nbsp;first&nbsp;choice&nbsp;recommendation&nbsp;on&nbsp;the&nbsp;corresponding&nbsp;strict&nbsp;(codual)&nbsp;outranking&nbsp;digraph.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Computes&nbsp;by&nbsp;default&nbsp;a&nbsp;first-choice&nbsp;recommendation&nbsp;on&nbsp;the&nbsp;corresponding&nbsp;strict&nbsp;(codual)&nbsp;outranking&nbsp;digraph.<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;By&nbsp;default,&nbsp;with&nbsp;BrokenCocs=True,&nbsp;we&nbsp;brake&nbsp;all&nbsp;chordless&nbsp;circuits&nbsp;at&nbsp;their&nbsp;weakest&nbsp;determined&nbsp;(&nbsp;abs(r(x&gt;y))&nbsp;+&nbsp;abs(r(y&gt;x))&nbsp;)&nbsp;link.<br>
 &nbsp;<br>
@@ -1342,7 +1431,7 @@ Usage&nbsp;example:<br>
 &gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
 &gt;&gt;&gt;&nbsp;g.<a href="#RatingByLearnedQuantilesDigraph-showFirstChoiceRecommendation">showFirstChoiceRecommendation</a>()<br>
 ***********************<br>
-RuBis&nbsp;First&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
+First&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
 (in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;determinateness)&nbsp;&nbsp;&nbsp;<br>
 Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;first&nbsp;choices<br>
@@ -1414,6 +1503,32 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</span></dd></dl>
 
 <dl><dt><a name="RatingByLearnedQuantilesDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, relation=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False, htmlFileName=None, fromIndex=None, toIndex=None)</dt><dd><span class="code">Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</span></dd></dl>
+
+<dl><dt><a name="RatingByLearnedQuantilesDigraph-showIteratedBachetChoiceRecommendation"><strong>showIteratedBachetChoiceRecommendation</strong></a>(self, CoDual=False, Reversed=False, Valued=False, actionsList=None, randomActionsList=False, seed=None, Comments=False, Debug=False)</dt><dd><span class="code">Shows&nbsp;a&nbsp;choice&nbsp;recommendation&nbsp;from&nbsp;the&nbsp;consensus&nbsp;of&nbsp;iterated<br>
+Bachet&nbsp;ranking&nbsp;and&nbsp;order<br>
+&nbsp;<br>
+Usage&nbsp;example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
+&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#RatingByLearnedQuantilesDigraph-showIteratedBachetChoiceRecommendation">showIteratedBachetChoiceRecommendation</a>(Comments)<br>
+&nbsp;*----&nbsp;Iterated&nbsp;Bachet&nbsp;Choice&nbsp;Recommendations&nbsp;----*<br>
+&nbsp;&nbsp;Ranking&nbsp;by&nbsp;recursively&nbsp;first&nbsp;and&nbsp;last&nbsp;choosing<br>
+&nbsp;&nbsp;&nbsp;1st&nbsp;ranked&nbsp;['p11',&nbsp;'p19',&nbsp;'p20']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2nd&nbsp;ranked&nbsp;['p06',&nbsp;'p13',&nbsp;'p14']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3rd&nbsp;ranked&nbsp;['p04',&nbsp;'p05',&nbsp;'p07',&nbsp;'p18']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4th&nbsp;ranked&nbsp;['p15']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4th&nbsp;last&nbsp;ranked&nbsp;['p15']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3rd&nbsp;last&nbsp;ranked&nbsp;['p08',&nbsp;'p09',&nbsp;'p10',&nbsp;'p16']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2nd&nbsp;last&nbsp;ranked&nbsp;['p01',&nbsp;'p02',&nbsp;'p12',&nbsp;'p17']<br>
+&nbsp;&nbsp;1st&nbsp;last&nbsp;ranked&nbsp;['p03']<br>
+&nbsp;Quality&nbsp;of&nbsp;partial&nbsp;Bachet&nbsp;ranking<br>
+&nbsp;&nbsp;Crisp&nbsp;ordinal&nbsp;correlation&nbsp;&nbsp;:&nbsp;+0.954<br>
+&nbsp;&nbsp;Epistemic&nbsp;determination&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;+0.383<br>
+&nbsp;&nbsp;Bipolar-valued&nbsp;equivalence&nbsp;:&nbsp;+0.365<br>
+&nbsp;Execution&nbsp;time:&nbsp;0.673&nbsp;seconds<br>
+&nbsp;*****************************</span></dd></dl>
 
 <dl><dt><a name="RatingByLearnedQuantilesDigraph-showMIS"><strong>showMIS</strong></a>(self, withListing=True)</dt><dd><span class="code">Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;choices:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>misset</strong>.</span></dd></dl>
@@ -1615,10 +1730,10 @@ the&nbsp;bipolar&nbsp;valuation&nbsp;of&nbsp;a&nbsp;digraph.</span></dd></dl>
 <hr>
 Data descriptors inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
-<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</span></dd>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
 </dl>
 <dl><dt><strong>__weakref__</strong></dt>
-<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</span></dd>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
 </dl>
 <hr>
 Methods inherited from <a href="performanceQuantiles.html#PerformanceQuantiles">performanceQuantiles.PerformanceQuantiles</a>:<br>
@@ -2061,6 +2176,8 @@ on&nbsp;criterion&nbsp;c.</span></dd></dl>
 (positive&nbsp;chaacteristics,&nbsp;negative&nbsp;characteristics)<br>
 per&nbsp;actions&nbsp;pair.</span></dd></dl>
 
+<dl><dt><a name="RatingByRelativeQuantilesDigraph-computePartialOutrankingConsensusQuality"><strong>computePartialOutrankingConsensusQuality</strong></a>(self, Sorted=True, ValuedCorrelation=True, Threading=False, nbrCores=None, Comments=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;marginal&nbsp;criteria&nbsp;correlations&nbsp;with&nbsp;a&nbsp;partial&nbsp;ranking&nbsp;relation&nbsp;with&nbsp;summary.</span></dd></dl>
+
 <dl><dt><a name="RatingByRelativeQuantilesDigraph-computeQuantileSortRelation"><strong>computeQuantileSortRelation</strong></a>(self, Debug=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
 the&nbsp;self&nbsp;quantile&nbsp;sorting&nbsp;result.</span></dd></dl>
 
@@ -2166,7 +2283,8 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;self.<a href="#RatingByRelativeQuantilesDigraph-MISgen">MISgen</a>(self.<strong>actions</strong>.copy(),set())</span></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;self.<a href="#RatingByRelativeQuantilesDigraph-MISgen">MISgen</a>(set(self.<strong>actions</strong>),frozenset()),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(see&nbsp;self.<a href="#RatingByRelativeQuantilesDigraph-showMIS">showMIS</a>()&nbsp;method)</span></dd></dl>
 
 <dl><dt><a name="RatingByRelativeQuantilesDigraph-__invert__"><strong>__invert__</strong></a>(self)</dt><dd><span class="code">Make&nbsp;the&nbsp;inverting&nbsp;operator&nbsp;~self&nbsp;available&nbsp;for&nbsp;Digraph&nbsp;instances.&nbsp;<br>
 &nbsp;<br>
@@ -2412,6 +2530,8 @@ using&nbsp;the&nbsp;Pirlot&nbsp;fixpoint&nbsp;algorithm.</span></dd></dl>
 
 <dl><dt><a name="RatingByRelativeQuantilesDigraph-computeIncomparabilityDegree"><strong>computeIncomparabilityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;incomparability&nbsp;degree&nbsp;(Decimal),&nbsp;i.e.&nbsp;the&nbsp;relative&nbsp;number&nbsp;of&nbsp;symmetric&nbsp;indeterminate&nbsp;relations&nbsp;of&nbsp;the&nbsp;irreflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</span></dd></dl>
 
+<dl><dt><a name="RatingByRelativeQuantilesDigraph-computeIntransitiveTriples"><strong>computeIntransitiveTriples</strong></a>(self, Comments=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;intransitive&nbsp;triples&nbsp;detected&nbsp;in&nbsp;self.</span></dd></dl>
+
 <dl><dt><a name="RatingByRelativeQuantilesDigraph-computeKemenyIndex"><strong>computeKemenyIndex</strong></a>(self, otherRelation)</dt><dd><span class="code">renders&nbsp;the&nbsp;Kemeny&nbsp;index&nbsp;of&nbsp;the&nbsp;self.<strong>relation</strong><br>
 compared&nbsp;with&nbsp;a&nbsp;given&nbsp;crisp&nbsp;valued&nbsp;relation&nbsp;of&nbsp;a&nbsp;compatible<br>
 other&nbsp;digraph&nbsp;(same&nbsp;nodes&nbsp;or&nbsp;actions).</span></dd></dl>
@@ -2425,8 +2545,10 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</span></dd></dl>
 
-<dl><dt><a name="RatingByRelativeQuantilesDigraph-computeKernelVector"><strong>computeKernelVector</strong></a>(self, kernel, Initial=True, Comments=False)</dt><dd><span class="code">|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
-|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixpoint&nbsp;equation</span></dd></dl>
+<dl><dt><a name="RatingByRelativeQuantilesDigraph-computeKernelVector"><strong>computeKernelVector</strong></a>(self, kernel, Initial=True, Comments=False, Iterations=False)</dt><dd><span class="code">|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
+|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixpoint&nbsp;equation<br>
+|&nbsp;If&nbsp;Iterations&nbsp;==&nbsp;True,&nbsp;returns&nbsp;the&nbsp;tuple&nbsp;<br>
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(kernel&nbsp;vector,&nbsp;nbrOfIterations)</span></dd></dl>
 
 <dl><dt><a name="RatingByRelativeQuantilesDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><span class="code">Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</span></dd></dl>
 
@@ -2628,7 +2750,7 @@ the&nbsp;following&nbsp;type&nbsp;of&nbsp;links:<br>
 gt&nbsp;'&gt;',&nbsp;eq&nbsp;'=',&nbsp;lt&nbsp;'&lt;',&nbsp;incomp&nbsp;'&lt;&gt;',<br>
 leq&nbsp;'&lt;=',&nbsp;geq&nbsp;'&gt;=',&nbsp;indeterm&nbsp;'?'</span></dd></dl>
 
-<dl><dt><a name="RatingByRelativeQuantilesDigraph-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, Comments=False, _OldCoca=False, BrokenCocs=True, Threading=False, nbrOfCPUs=1)</dt><dd><span class="code">Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
+<dl><dt><a name="RatingByRelativeQuantilesDigraph-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, Comments=False, _OldCoca=False, BrokenCocs=True)</dt><dd><span class="code">Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
 self.<strong>strictBadChoices</strong>,&nbsp;self.<strong>nonRobustChoices</strong>.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
@@ -2661,7 +2783,7 @@ Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</span></dd></dl>
 
 <dl><dt><a name="RatingByRelativeQuantilesDigraph-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><span class="code">Mimetic&nbsp;Wrapper&nbsp;of&nbsp;the&nbsp;<a href="#RatingByRelativeQuantilesDigraph-topologicalSort">topologicalSort</a>()&nbsp;method.</span></dd></dl>
 
-<dl><dt><a name="RatingByRelativeQuantilesDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+<dl><dt><a name="RatingByRelativeQuantilesDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False, ReturnTransitiveTriples=False, ReturnIntransitiveTriples=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
 &nbsp;<br>
 ..&nbsp;note::&nbsp;<br>
 &nbsp;<br>
@@ -2694,6 +2816,27 @@ are&nbsp;set&nbsp;to&nbsp;the&nbsp;indeterminate&nbsp;value.</span></dd></dl>
 <dl><dt><a name="RatingByRelativeQuantilesDigraph-computeWeakCondorcetLosers"><strong>computeWeakCondorcetLosers</strong></a>(self)</dt><dd><span class="code">Wrapper&nbsp;for&nbsp;<a href="#RatingByRelativeQuantilesDigraph-weakCondorcetLosers">weakCondorcetLosers</a>().</span></dd></dl>
 
 <dl><dt><a name="RatingByRelativeQuantilesDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><span class="code">Wrapper&nbsp;for&nbsp;<a href="#RatingByRelativeQuantilesDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</span></dd></dl>
+
+<dl><dt><a name="RatingByRelativeQuantilesDigraph-computeWeakTransitivityDegree"><strong>computeWeakTransitivityDegree</strong></a>(self, InPercents=False, Comments=False, ReturnWeakIntransitiveTriples=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;strict&nbsp;and&nbsp;the&nbsp;weak&nbsp;transitivity&nbsp;degrees&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph,&nbsp;i.e.&nbsp;the&nbsp;ratio&nbsp;of&nbsp;the&nbsp;number&nbsp;of&nbsp;closed&nbsp;x&gt;z&nbsp;&nbsp;,&nbsp;respt.&nbsp;weakly-closed&nbsp;(x&gt;z&nbsp;and&nbsp;x&lt;&gt;y)&nbsp;triples&nbsp;over&nbsp;the&nbsp;number&nbsp;of&nbsp;x&gt;y&gt;z&nbsp;triples&nbsp;of&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;the&nbsp;digraph.<br>
+&nbsp;<br>
+With&nbsp;*ReturnWeakIntransitiveTriples=True*&nbsp;returns&nbsp;a&nbsp;tuple&nbsp;with&nbsp;a&nbsp;list&nbsp;of&nbsp;intransitive&nbsp;triples&nbsp;and&nbsp;a&nbsp;list&nbsp;of&nbsp;weakly&nbsp;intransitive&nbsp;triples.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Digraphs&nbsp;without&nbsp;connected&nbsp;triples,&nbsp;like&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;weakly&nbsp;transitive.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a><br>
+&gt;&gt;&gt;&nbsp;from&nbsp;randomDigraphs&nbsp;import&nbsp;RandomCBPerformanceTableau<br>
+&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;RandomCBPerformanceTableau(<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weightDistribution="equiobjectives",<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numberOfActions=10,numberOfCriteria=11,<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;missingDataProbability=0.05,seed=2)<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#RatingByRelativeQuantilesDigraph-computeWeakTransitivityDegree">computeWeakTransitivityDegree</a>(Comments=True)<br>
+&nbsp;Transitivity&nbsp;degree&nbsp;of&nbsp;digraph&nbsp;&lt;rel_randomCBperftab&gt;:<br>
+&nbsp;#triples&nbsp;x&gt;y&gt;z:&nbsp;720,&nbsp;#closed:&nbsp;400,&nbsp;#weakly-closed:&nbsp;80,#open:&nbsp;240<br>
+&nbsp;(#closed/#triples)&nbsp;=&nbsp;&nbsp;0.556<br>
+&nbsp;(#weakly-closed/#triples)&nbsp;=&nbsp;&nbsp;0.667</span></dd></dl>
 
 <dl><dt><a name="RatingByRelativeQuantilesDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><span class="code">Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</span></dd></dl>
@@ -2869,6 +3012,20 @@ relation[x][y]&nbsp;+&nbsp;relation[y][x)[y]&nbsp;&gt;=&nbsp;0.0<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;reflexive&nbsp;links&nbsp;are&nbsp;ignored&nbsp;and&nbsp;the&nbsp;valuation&nbsp;must&nbsp;be&nbsp;bipolar&nbsp;!!</span></dd></dl>
 
+<dl><dt><a name="RatingByRelativeQuantilesDigraph-isStronglyAsymmetric"><strong>isStronglyAsymmetric</strong></a>(self, Debug=False)</dt><dd><span class="code">checks&nbsp;the&nbsp;strong&nbsp;assymetric&nbsp;property&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
+for&nbsp;r(x&gt;y)&nbsp;+&nbsp;r(y&gt;x)&nbsp;&lt;=&nbsp;Med&nbsp;!<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;reflexive&nbsp;links&nbsp;are&nbsp;ignored&nbsp;!!</span></dd></dl>
+
+<dl><dt><a name="RatingByRelativeQuantilesDigraph-isStronglyComplete"><strong>isStronglyComplete</strong></a>(self, Debug=False)</dt><dd><span class="code">checks&nbsp;the&nbsp;strongly&nbsp;completeness&nbsp;property&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
+for&nbsp;r(x&gt;=y)&nbsp;+&nbsp;r(y&gt;=x)&nbsp;&gt;=&nbsp;Med&nbsp;!<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;reflexive&nbsp;links&nbsp;are&nbsp;ignored&nbsp;!!</span></dd></dl>
+
 <dl><dt><a name="RatingByRelativeQuantilesDigraph-isSymmetric"><strong>isSymmetric</strong></a>(self, Comments=False)</dt><dd><span class="code">True&nbsp;if&nbsp;symmetry&nbsp;degree&nbsp;==&nbsp;1.0.</span></dd></dl>
 
 <dl><dt><a name="RatingByRelativeQuantilesDigraph-isTransitive"><strong>isTransitive</strong></a>(self, Comments=False)</dt><dd><span class="code">True&nbsp;if&nbsp;transitivity&nbsp;degree&nbsp;==&nbsp;1.0.</span></dd></dl>
@@ -2971,13 +3128,39 @@ Renders&nbsp;the&nbsp;sharpest&nbsp;of&nbsp;two&nbsp;characteristic&nbsp;vectors
 
 <dl><dt><a name="RatingByRelativeQuantilesDigraph-showAutomorphismGenerators"><strong>showAutomorphismGenerators</strong></a>(self)</dt><dd><span class="code">Renders&nbsp;the&nbsp;generators&nbsp;of&nbsp;the&nbsp;automorphism&nbsp;group.</span></dd></dl>
 
+<dl><dt><a name="RatingByRelativeQuantilesDigraph-showBachetChoiceRecommendation"><strong>showBachetChoiceRecommendation</strong></a>(self, Polarised=True, randomized=100, maxNbrOfRankings=5, seed=None, Comments=False, CoDual=True, Debug=False)</dt><dd><span class="code">Shows&nbsp;a&nbsp;choice&nbsp;recommendation&nbsp;from&nbsp;the&nbsp;partial&nbsp;transitive&nbsp;Bachet&nbsp;ranking.<br>
+&nbsp;<br>
+Usage&nbsp;example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
+&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#RatingByRelativeQuantilesDigraph-showBachetChoiceRecommendation">showBachetChoiceRecommendation</a>(randomized=100,<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maxNbrOfRankings=5,seed=1)<br>
+&nbsp;*----&nbsp;Bachet&nbsp;Choice&nbsp;Recommendations&nbsp;----*<br>
+&nbsp;&nbsp;Ranking&nbsp;by&nbsp;recursively&nbsp;first&nbsp;and&nbsp;last&nbsp;choosing<br>
+&nbsp;&nbsp;&nbsp;1st&nbsp;ranked&nbsp;['p11',&nbsp;'p19',&nbsp;'p20']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2nd&nbsp;ranked&nbsp;['p06',&nbsp;'p13',&nbsp;'p14']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3rd&nbsp;ranked&nbsp;['p04',&nbsp;'p05',&nbsp;'p07',&nbsp;'p18']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4th&nbsp;ranked&nbsp;['p15']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4th&nbsp;last&nbsp;ranked&nbsp;['p15']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3rd&nbsp;last&nbsp;ranked&nbsp;['p08',&nbsp;'p09',&nbsp;'p10',&nbsp;'p16']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2nd&nbsp;last&nbsp;ranked&nbsp;['p01',&nbsp;'p02',&nbsp;'p12',&nbsp;'p17']<br>
+&nbsp;&nbsp;1st&nbsp;last&nbsp;ranked&nbsp;['p03']<br>
+&nbsp;Quality&nbsp;of&nbsp;partial&nbsp;Bachet&nbsp;ranking<br>
+&nbsp;&nbsp;Crisp&nbsp;ordinal&nbsp;correlation&nbsp;&nbsp;:&nbsp;+0.954<br>
+&nbsp;&nbsp;Epistemic&nbsp;determination&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;+0.383<br>
+&nbsp;&nbsp;Bipolar-valued&nbsp;equivalence&nbsp;:&nbsp;+0.365<br>
+&nbsp;Execution&nbsp;time:&nbsp;0.673&nbsp;seconds<br>
+&nbsp;*****************************</span></dd></dl>
+
 <dl><dt><a name="RatingByRelativeQuantilesDigraph-showBadChoices"><strong>showBadChoices</strong></a>(self, Recompute=True)</dt><dd><span class="code">Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;bad&nbsp;choices.</span></dd></dl>
 
-<dl><dt><a name="RatingByRelativeQuantilesDigraph-showBestChoiceRecommendation"><strong>showBestChoiceRecommendation</strong></a>(self, Verbose=False, Comments=True, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True)</dt><dd><span class="code">Shows&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
+<dl><dt><a name="RatingByRelativeQuantilesDigraph-showBestChoiceRecommendation"><strong>showBestChoiceRecommendation</strong></a>(self, Verbose=False, Comments=True, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True)</dt><dd><span class="code">Shows&nbsp;a&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Computes&nbsp;by&nbsp;default&nbsp;the&nbsp;Rubis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;on&nbsp;the&nbsp;corresponding&nbsp;strict&nbsp;(codual)&nbsp;outranking&nbsp;digraph.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Computes&nbsp;by&nbsp;default&nbsp;a&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;on&nbsp;the&nbsp;corresponding&nbsp;strict&nbsp;(codual)&nbsp;outranking&nbsp;digraph.<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;By&nbsp;default,&nbsp;with&nbsp;BrokenCocs=True,&nbsp;we&nbsp;brake&nbsp;all&nbsp;chordless&nbsp;circuits&nbsp;at&nbsp;their&nbsp;weakest&nbsp;determined&nbsp;(&nbsp;abs(r(x&gt;y))&nbsp;+&nbsp;abs(r(y&gt;x))&nbsp;)&nbsp;link.<br>
 &nbsp;<br>
@@ -2995,7 +3178,7 @@ Usage&nbsp;example:<br>
 &gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
 &gt;&gt;&gt;&nbsp;g.<a href="#RatingByRelativeQuantilesDigraph-showBestChoiceRecommendation">showBestChoiceRecommendation</a>()<br>
 ***********************<br>
-RuBis&nbsp;Best&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
+Best&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
 (in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;determinateness)&nbsp;&nbsp;&nbsp;<br>
 Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;first&nbsp;choices<br>
@@ -3017,6 +3200,27 @@ Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 Execution&nbsp;time:&nbsp;0.024&nbsp;seconds<br>
 *****************************</span></dd></dl>
 
+<dl><dt><a name="RatingByRelativeQuantilesDigraph-showChoiceRecommendation"><strong>showChoiceRecommendation</strong></a>(self, method='Bachet', Polarised=True, randomized=100, maxNbrOfRankings=5, seed=None, ChoiceVector=False, CoDual=False, Reversed=False, Valued=False, actionsList=None, randomActionsList=False)</dt><dd><span class="code">Generic&nbsp;choice&nbsp;recommender&nbsp;method.<br>
+&nbsp;<br>
+**Parameters**<br>
+&nbsp;<br>
+*method*:&nbsp;'Bachet'&nbsp;(default)&nbsp;|&nbsp;'Rubis'&nbsp;|&nbsp;'IteratedBachet'&nbsp;;<br>
+the&nbsp;Bachet&nbsp;method&nbsp;is&nbsp;based&nbsp;on&nbsp;the&nbsp;conjoint<br>
+extracton&nbsp;of&nbsp;initial&nbsp;and&nbsp;terminal&nbsp;prekernels&nbsp;from&nbsp;the&nbsp;partial&nbsp;Bachet&nbsp;ranking,<br>
+whereas&nbsp;the&nbsp;Rubis&nbsp;method&nbsp;is&nbsp;based&nbsp;on&nbsp;the&nbsp;extraction&nbsp;of&nbsp;an&nbsp;initial&nbsp;and<br>
+terminal&nbsp;prekernels&nbsp;directly&nbsp;from&nbsp;the&nbsp;given&nbsp;outranking&nbsp;digraph.<br>
+&nbsp;<br>
+*Polarised*:&nbsp;*True*&nbsp;(by&nbsp;default)&nbsp;|&nbsp;False;&nbsp;Bachet&nbsp;parameter<br>
+&nbsp;<br>
+*randomized*:&nbsp;positive&nbsp;integer&nbsp;(100&nbsp;by&nbsp;default);&nbsp;Bachet&nbsp;Parameter<br>
+&nbsp;<br>
+*maxNbrOfRankings*:&nbsp;positive&nbsp;integer&nbsp;&gt;&nbsp;0&nbsp;(5&nbsp;by&nbsp;default);&nbsp;Bachet&nbsp;parameter<br>
+&nbsp;<br>
+*seed*:&nbsp;Bachet&nbsp;parameter&nbsp;for&nbsp;making&nbsp;the&nbsp;randomization&nbsp;reproducible<br>
+&nbsp;<br>
+*ChoiceVector*:&nbsp;Rubis&nbsp;parameter&nbsp;for&nbsp;showing&nbsp;complete&nbsp;prekernel<br>
+characteristic&nbsp;vectors.</span></dd></dl>
+
 <dl><dt><a name="RatingByRelativeQuantilesDigraph-showChoiceVector"><strong>showChoiceVector</strong></a>(self, ch, choiceType='good', ChoiceVector=True)</dt><dd><span class="code">Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</span></dd></dl>
 
 <dl><dt><a name="RatingByRelativeQuantilesDigraph-showChordlessCircuits"><strong>showChordlessCircuits</strong></a>(self, Recompute=False)</dt><dd><span class="code">Show&nbsp;method&nbsp;for&nbsp;chordless&nbsp;circuits&nbsp;observed&nbsp;in&nbsp;a&nbsp;Digraph&nbsp;instance.<br>
@@ -3027,11 +3231,11 @@ If&nbsp;previous&nbsp;computation&nbsp;is&nbsp;required,&nbsp;stores&nbsp;the&nb
 
 <dl><dt><a name="RatingByRelativeQuantilesDigraph-showCorrelation"><strong>showCorrelation</strong></a>(self, corr=None, ndigits=3)</dt><dd><span class="code">Renders&nbsp;the&nbsp;valued&nbsp;ordinal&nbsp;correlation&nbsp;index,&nbsp;the&nbsp;crisp&nbsp;Kendall&nbsp;tau&nbsp;index&nbsp;and&nbsp;their&nbsp;epistemic&nbsp;determination&nbsp;degree.</span></dd></dl>
 
-<dl><dt><a name="RatingByRelativeQuantilesDigraph-showFirstChoiceRecommendation"><strong>showFirstChoiceRecommendation</strong></a>(self, Verbose=False, Comments=True, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True)</dt><dd><span class="code">Shows&nbsp;the&nbsp;RuBis&nbsp;first&nbsp;choice&nbsp;recommendation.<br>
+<dl><dt><a name="RatingByRelativeQuantilesDigraph-showFirstChoiceRecommendation"><strong>showFirstChoiceRecommendation</strong></a>(self, Verbose=False, Comments=True, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True)</dt><dd><span class="code">Shows&nbsp;a&nbsp;first&nbsp;choice&nbsp;recommendation.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Computes&nbsp;by&nbsp;default&nbsp;the&nbsp;Rubis&nbsp;first&nbsp;choice&nbsp;recommendation&nbsp;on&nbsp;the&nbsp;corresponding&nbsp;strict&nbsp;(codual)&nbsp;outranking&nbsp;digraph.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Computes&nbsp;by&nbsp;default&nbsp;a&nbsp;first-choice&nbsp;recommendation&nbsp;on&nbsp;the&nbsp;corresponding&nbsp;strict&nbsp;(codual)&nbsp;outranking&nbsp;digraph.<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;By&nbsp;default,&nbsp;with&nbsp;BrokenCocs=True,&nbsp;we&nbsp;brake&nbsp;all&nbsp;chordless&nbsp;circuits&nbsp;at&nbsp;their&nbsp;weakest&nbsp;determined&nbsp;(&nbsp;abs(r(x&gt;y))&nbsp;+&nbsp;abs(r(y&gt;x))&nbsp;)&nbsp;link.<br>
 &nbsp;<br>
@@ -3049,7 +3253,7 @@ Usage&nbsp;example:<br>
 &gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
 &gt;&gt;&gt;&nbsp;g.<a href="#RatingByRelativeQuantilesDigraph-showFirstChoiceRecommendation">showFirstChoiceRecommendation</a>()<br>
 ***********************<br>
-RuBis&nbsp;First&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
+First&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
 (in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;determinateness)&nbsp;&nbsp;&nbsp;<br>
 Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;first&nbsp;choices<br>
@@ -3121,6 +3325,32 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</span></dd></dl>
 
 <dl><dt><a name="RatingByRelativeQuantilesDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, relation=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False, htmlFileName=None, fromIndex=None, toIndex=None)</dt><dd><span class="code">Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</span></dd></dl>
+
+<dl><dt><a name="RatingByRelativeQuantilesDigraph-showIteratedBachetChoiceRecommendation"><strong>showIteratedBachetChoiceRecommendation</strong></a>(self, CoDual=False, Reversed=False, Valued=False, actionsList=None, randomActionsList=False, seed=None, Comments=False, Debug=False)</dt><dd><span class="code">Shows&nbsp;a&nbsp;choice&nbsp;recommendation&nbsp;from&nbsp;the&nbsp;consensus&nbsp;of&nbsp;iterated<br>
+Bachet&nbsp;ranking&nbsp;and&nbsp;order<br>
+&nbsp;<br>
+Usage&nbsp;example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
+&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#RatingByRelativeQuantilesDigraph-showIteratedBachetChoiceRecommendation">showIteratedBachetChoiceRecommendation</a>(Comments)<br>
+&nbsp;*----&nbsp;Iterated&nbsp;Bachet&nbsp;Choice&nbsp;Recommendations&nbsp;----*<br>
+&nbsp;&nbsp;Ranking&nbsp;by&nbsp;recursively&nbsp;first&nbsp;and&nbsp;last&nbsp;choosing<br>
+&nbsp;&nbsp;&nbsp;1st&nbsp;ranked&nbsp;['p11',&nbsp;'p19',&nbsp;'p20']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2nd&nbsp;ranked&nbsp;['p06',&nbsp;'p13',&nbsp;'p14']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3rd&nbsp;ranked&nbsp;['p04',&nbsp;'p05',&nbsp;'p07',&nbsp;'p18']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4th&nbsp;ranked&nbsp;['p15']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4th&nbsp;last&nbsp;ranked&nbsp;['p15']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3rd&nbsp;last&nbsp;ranked&nbsp;['p08',&nbsp;'p09',&nbsp;'p10',&nbsp;'p16']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2nd&nbsp;last&nbsp;ranked&nbsp;['p01',&nbsp;'p02',&nbsp;'p12',&nbsp;'p17']<br>
+&nbsp;&nbsp;1st&nbsp;last&nbsp;ranked&nbsp;['p03']<br>
+&nbsp;Quality&nbsp;of&nbsp;partial&nbsp;Bachet&nbsp;ranking<br>
+&nbsp;&nbsp;Crisp&nbsp;ordinal&nbsp;correlation&nbsp;&nbsp;:&nbsp;+0.954<br>
+&nbsp;&nbsp;Epistemic&nbsp;determination&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;+0.383<br>
+&nbsp;&nbsp;Bipolar-valued&nbsp;equivalence&nbsp;:&nbsp;+0.365<br>
+&nbsp;Execution&nbsp;time:&nbsp;0.673&nbsp;seconds<br>
+&nbsp;*****************************</span></dd></dl>
 
 <dl><dt><a name="RatingByRelativeQuantilesDigraph-showMIS"><strong>showMIS</strong></a>(self, withListing=True)</dt><dd><span class="code">Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;choices:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>misset</strong>.</span></dd></dl>
@@ -3322,10 +3552,10 @@ the&nbsp;bipolar&nbsp;valuation&nbsp;of&nbsp;a&nbsp;digraph.</span></dd></dl>
 <hr>
 Data descriptors inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
-<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</span></dd>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
 </dl>
 <dl><dt><strong>__weakref__</strong></dt>
-<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</span></dd>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
 </dl>
 <hr>
 Methods inherited from <a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>:<br>
@@ -3679,6 +3909,8 @@ on&nbsp;criterion&nbsp;c.</span></dd></dl>
 (positive&nbsp;chaacteristics,&nbsp;negative&nbsp;characteristics)<br>
 per&nbsp;actions&nbsp;pair.</span></dd></dl>
 
+<dl><dt><a name="RatingDigraph-computePartialOutrankingConsensusQuality"><strong>computePartialOutrankingConsensusQuality</strong></a>(self, Sorted=True, ValuedCorrelation=True, Threading=False, nbrCores=None, Comments=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;marginal&nbsp;criteria&nbsp;correlations&nbsp;with&nbsp;a&nbsp;partial&nbsp;ranking&nbsp;relation&nbsp;with&nbsp;summary.</span></dd></dl>
+
 <dl><dt><a name="RatingDigraph-computeQuantileSortRelation"><strong>computeQuantileSortRelation</strong></a>(self, Debug=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
 the&nbsp;self&nbsp;quantile&nbsp;sorting&nbsp;result.</span></dd></dl>
 
@@ -3784,7 +4016,8 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;self.<a href="#RatingDigraph-MISgen">MISgen</a>(self.<strong>actions</strong>.copy(),set())</span></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;self.<a href="#RatingDigraph-MISgen">MISgen</a>(set(self.<strong>actions</strong>),frozenset()),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(see&nbsp;self.<a href="#RatingDigraph-showMIS">showMIS</a>()&nbsp;method)</span></dd></dl>
 
 <dl><dt><a name="RatingDigraph-__invert__"><strong>__invert__</strong></a>(self)</dt><dd><span class="code">Make&nbsp;the&nbsp;inverting&nbsp;operator&nbsp;~self&nbsp;available&nbsp;for&nbsp;Digraph&nbsp;instances.&nbsp;<br>
 &nbsp;<br>
@@ -4030,6 +4263,8 @@ using&nbsp;the&nbsp;Pirlot&nbsp;fixpoint&nbsp;algorithm.</span></dd></dl>
 
 <dl><dt><a name="RatingDigraph-computeIncomparabilityDegree"><strong>computeIncomparabilityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;incomparability&nbsp;degree&nbsp;(Decimal),&nbsp;i.e.&nbsp;the&nbsp;relative&nbsp;number&nbsp;of&nbsp;symmetric&nbsp;indeterminate&nbsp;relations&nbsp;of&nbsp;the&nbsp;irreflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</span></dd></dl>
 
+<dl><dt><a name="RatingDigraph-computeIntransitiveTriples"><strong>computeIntransitiveTriples</strong></a>(self, Comments=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;intransitive&nbsp;triples&nbsp;detected&nbsp;in&nbsp;self.</span></dd></dl>
+
 <dl><dt><a name="RatingDigraph-computeKemenyIndex"><strong>computeKemenyIndex</strong></a>(self, otherRelation)</dt><dd><span class="code">renders&nbsp;the&nbsp;Kemeny&nbsp;index&nbsp;of&nbsp;the&nbsp;self.<strong>relation</strong><br>
 compared&nbsp;with&nbsp;a&nbsp;given&nbsp;crisp&nbsp;valued&nbsp;relation&nbsp;of&nbsp;a&nbsp;compatible<br>
 other&nbsp;digraph&nbsp;(same&nbsp;nodes&nbsp;or&nbsp;actions).</span></dd></dl>
@@ -4043,8 +4278,10 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</span></dd></dl>
 
-<dl><dt><a name="RatingDigraph-computeKernelVector"><strong>computeKernelVector</strong></a>(self, kernel, Initial=True, Comments=False)</dt><dd><span class="code">|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
-|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixpoint&nbsp;equation</span></dd></dl>
+<dl><dt><a name="RatingDigraph-computeKernelVector"><strong>computeKernelVector</strong></a>(self, kernel, Initial=True, Comments=False, Iterations=False)</dt><dd><span class="code">|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
+|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixpoint&nbsp;equation<br>
+|&nbsp;If&nbsp;Iterations&nbsp;==&nbsp;True,&nbsp;returns&nbsp;the&nbsp;tuple&nbsp;<br>
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(kernel&nbsp;vector,&nbsp;nbrOfIterations)</span></dd></dl>
 
 <dl><dt><a name="RatingDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><span class="code">Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</span></dd></dl>
 
@@ -4246,7 +4483,7 @@ the&nbsp;following&nbsp;type&nbsp;of&nbsp;links:<br>
 gt&nbsp;'&gt;',&nbsp;eq&nbsp;'=',&nbsp;lt&nbsp;'&lt;',&nbsp;incomp&nbsp;'&lt;&gt;',<br>
 leq&nbsp;'&lt;=',&nbsp;geq&nbsp;'&gt;=',&nbsp;indeterm&nbsp;'?'</span></dd></dl>
 
-<dl><dt><a name="RatingDigraph-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, Comments=False, _OldCoca=False, BrokenCocs=True, Threading=False, nbrOfCPUs=1)</dt><dd><span class="code">Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
+<dl><dt><a name="RatingDigraph-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, Comments=False, _OldCoca=False, BrokenCocs=True)</dt><dd><span class="code">Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
 self.<strong>strictBadChoices</strong>,&nbsp;self.<strong>nonRobustChoices</strong>.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
@@ -4279,7 +4516,7 @@ Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</span></dd></dl>
 
 <dl><dt><a name="RatingDigraph-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><span class="code">Mimetic&nbsp;Wrapper&nbsp;of&nbsp;the&nbsp;<a href="#RatingDigraph-topologicalSort">topologicalSort</a>()&nbsp;method.</span></dd></dl>
 
-<dl><dt><a name="RatingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+<dl><dt><a name="RatingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False, ReturnTransitiveTriples=False, ReturnIntransitiveTriples=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
 &nbsp;<br>
 ..&nbsp;note::&nbsp;<br>
 &nbsp;<br>
@@ -4312,6 +4549,27 @@ are&nbsp;set&nbsp;to&nbsp;the&nbsp;indeterminate&nbsp;value.</span></dd></dl>
 <dl><dt><a name="RatingDigraph-computeWeakCondorcetLosers"><strong>computeWeakCondorcetLosers</strong></a>(self)</dt><dd><span class="code">Wrapper&nbsp;for&nbsp;<a href="#RatingDigraph-weakCondorcetLosers">weakCondorcetLosers</a>().</span></dd></dl>
 
 <dl><dt><a name="RatingDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><span class="code">Wrapper&nbsp;for&nbsp;<a href="#RatingDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</span></dd></dl>
+
+<dl><dt><a name="RatingDigraph-computeWeakTransitivityDegree"><strong>computeWeakTransitivityDegree</strong></a>(self, InPercents=False, Comments=False, ReturnWeakIntransitiveTriples=False)</dt><dd><span class="code">Renders&nbsp;the&nbsp;strict&nbsp;and&nbsp;the&nbsp;weak&nbsp;transitivity&nbsp;degrees&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph,&nbsp;i.e.&nbsp;the&nbsp;ratio&nbsp;of&nbsp;the&nbsp;number&nbsp;of&nbsp;closed&nbsp;x&gt;z&nbsp;&nbsp;,&nbsp;respt.&nbsp;weakly-closed&nbsp;(x&gt;z&nbsp;and&nbsp;x&lt;&gt;y)&nbsp;triples&nbsp;over&nbsp;the&nbsp;number&nbsp;of&nbsp;x&gt;y&gt;z&nbsp;triples&nbsp;of&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;the&nbsp;digraph.<br>
+&nbsp;<br>
+With&nbsp;*ReturnWeakIntransitiveTriples=True*&nbsp;returns&nbsp;a&nbsp;tuple&nbsp;with&nbsp;a&nbsp;list&nbsp;of&nbsp;intransitive&nbsp;triples&nbsp;and&nbsp;a&nbsp;list&nbsp;of&nbsp;weakly&nbsp;intransitive&nbsp;triples.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Digraphs&nbsp;without&nbsp;connected&nbsp;triples,&nbsp;like&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;weakly&nbsp;transitive.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a><br>
+&gt;&gt;&gt;&nbsp;from&nbsp;randomDigraphs&nbsp;import&nbsp;RandomCBPerformanceTableau<br>
+&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;RandomCBPerformanceTableau(<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weightDistribution="equiobjectives",<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numberOfActions=10,numberOfCriteria=11,<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;missingDataProbability=0.05,seed=2)<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#RatingDigraph-computeWeakTransitivityDegree">computeWeakTransitivityDegree</a>(Comments=True)<br>
+&nbsp;Transitivity&nbsp;degree&nbsp;of&nbsp;digraph&nbsp;&lt;rel_randomCBperftab&gt;:<br>
+&nbsp;#triples&nbsp;x&gt;y&gt;z:&nbsp;720,&nbsp;#closed:&nbsp;400,&nbsp;#weakly-closed:&nbsp;80,#open:&nbsp;240<br>
+&nbsp;(#closed/#triples)&nbsp;=&nbsp;&nbsp;0.556<br>
+&nbsp;(#weakly-closed/#triples)&nbsp;=&nbsp;&nbsp;0.667</span></dd></dl>
 
 <dl><dt><a name="RatingDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><span class="code">Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</span></dd></dl>
@@ -4487,6 +4745,20 @@ relation[x][y]&nbsp;+&nbsp;relation[y][x)[y]&nbsp;&gt;=&nbsp;0.0<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;reflexive&nbsp;links&nbsp;are&nbsp;ignored&nbsp;and&nbsp;the&nbsp;valuation&nbsp;must&nbsp;be&nbsp;bipolar&nbsp;!!</span></dd></dl>
 
+<dl><dt><a name="RatingDigraph-isStronglyAsymmetric"><strong>isStronglyAsymmetric</strong></a>(self, Debug=False)</dt><dd><span class="code">checks&nbsp;the&nbsp;strong&nbsp;assymetric&nbsp;property&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
+for&nbsp;r(x&gt;y)&nbsp;+&nbsp;r(y&gt;x)&nbsp;&lt;=&nbsp;Med&nbsp;!<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;reflexive&nbsp;links&nbsp;are&nbsp;ignored&nbsp;!!</span></dd></dl>
+
+<dl><dt><a name="RatingDigraph-isStronglyComplete"><strong>isStronglyComplete</strong></a>(self, Debug=False)</dt><dd><span class="code">checks&nbsp;the&nbsp;strongly&nbsp;completeness&nbsp;property&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
+for&nbsp;r(x&gt;=y)&nbsp;+&nbsp;r(y&gt;=x)&nbsp;&gt;=&nbsp;Med&nbsp;!<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;reflexive&nbsp;links&nbsp;are&nbsp;ignored&nbsp;!!</span></dd></dl>
+
 <dl><dt><a name="RatingDigraph-isSymmetric"><strong>isSymmetric</strong></a>(self, Comments=False)</dt><dd><span class="code">True&nbsp;if&nbsp;symmetry&nbsp;degree&nbsp;==&nbsp;1.0.</span></dd></dl>
 
 <dl><dt><a name="RatingDigraph-isTransitive"><strong>isTransitive</strong></a>(self, Comments=False)</dt><dd><span class="code">True&nbsp;if&nbsp;transitivity&nbsp;degree&nbsp;==&nbsp;1.0.</span></dd></dl>
@@ -4589,13 +4861,39 @@ Renders&nbsp;the&nbsp;sharpest&nbsp;of&nbsp;two&nbsp;characteristic&nbsp;vectors
 
 <dl><dt><a name="RatingDigraph-showAutomorphismGenerators"><strong>showAutomorphismGenerators</strong></a>(self)</dt><dd><span class="code">Renders&nbsp;the&nbsp;generators&nbsp;of&nbsp;the&nbsp;automorphism&nbsp;group.</span></dd></dl>
 
+<dl><dt><a name="RatingDigraph-showBachetChoiceRecommendation"><strong>showBachetChoiceRecommendation</strong></a>(self, Polarised=True, randomized=100, maxNbrOfRankings=5, seed=None, Comments=False, CoDual=True, Debug=False)</dt><dd><span class="code">Shows&nbsp;a&nbsp;choice&nbsp;recommendation&nbsp;from&nbsp;the&nbsp;partial&nbsp;transitive&nbsp;Bachet&nbsp;ranking.<br>
+&nbsp;<br>
+Usage&nbsp;example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
+&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#RatingDigraph-showBachetChoiceRecommendation">showBachetChoiceRecommendation</a>(randomized=100,<br>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maxNbrOfRankings=5,seed=1)<br>
+&nbsp;*----&nbsp;Bachet&nbsp;Choice&nbsp;Recommendations&nbsp;----*<br>
+&nbsp;&nbsp;Ranking&nbsp;by&nbsp;recursively&nbsp;first&nbsp;and&nbsp;last&nbsp;choosing<br>
+&nbsp;&nbsp;&nbsp;1st&nbsp;ranked&nbsp;['p11',&nbsp;'p19',&nbsp;'p20']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2nd&nbsp;ranked&nbsp;['p06',&nbsp;'p13',&nbsp;'p14']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3rd&nbsp;ranked&nbsp;['p04',&nbsp;'p05',&nbsp;'p07',&nbsp;'p18']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4th&nbsp;ranked&nbsp;['p15']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4th&nbsp;last&nbsp;ranked&nbsp;['p15']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3rd&nbsp;last&nbsp;ranked&nbsp;['p08',&nbsp;'p09',&nbsp;'p10',&nbsp;'p16']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2nd&nbsp;last&nbsp;ranked&nbsp;['p01',&nbsp;'p02',&nbsp;'p12',&nbsp;'p17']<br>
+&nbsp;&nbsp;1st&nbsp;last&nbsp;ranked&nbsp;['p03']<br>
+&nbsp;Quality&nbsp;of&nbsp;partial&nbsp;Bachet&nbsp;ranking<br>
+&nbsp;&nbsp;Crisp&nbsp;ordinal&nbsp;correlation&nbsp;&nbsp;:&nbsp;+0.954<br>
+&nbsp;&nbsp;Epistemic&nbsp;determination&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;+0.383<br>
+&nbsp;&nbsp;Bipolar-valued&nbsp;equivalence&nbsp;:&nbsp;+0.365<br>
+&nbsp;Execution&nbsp;time:&nbsp;0.673&nbsp;seconds<br>
+&nbsp;*****************************</span></dd></dl>
+
 <dl><dt><a name="RatingDigraph-showBadChoices"><strong>showBadChoices</strong></a>(self, Recompute=True)</dt><dd><span class="code">Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;bad&nbsp;choices.</span></dd></dl>
 
-<dl><dt><a name="RatingDigraph-showBestChoiceRecommendation"><strong>showBestChoiceRecommendation</strong></a>(self, Verbose=False, Comments=True, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True)</dt><dd><span class="code">Shows&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
+<dl><dt><a name="RatingDigraph-showBestChoiceRecommendation"><strong>showBestChoiceRecommendation</strong></a>(self, Verbose=False, Comments=True, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True)</dt><dd><span class="code">Shows&nbsp;a&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Computes&nbsp;by&nbsp;default&nbsp;the&nbsp;Rubis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;on&nbsp;the&nbsp;corresponding&nbsp;strict&nbsp;(codual)&nbsp;outranking&nbsp;digraph.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Computes&nbsp;by&nbsp;default&nbsp;a&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;on&nbsp;the&nbsp;corresponding&nbsp;strict&nbsp;(codual)&nbsp;outranking&nbsp;digraph.<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;By&nbsp;default,&nbsp;with&nbsp;BrokenCocs=True,&nbsp;we&nbsp;brake&nbsp;all&nbsp;chordless&nbsp;circuits&nbsp;at&nbsp;their&nbsp;weakest&nbsp;determined&nbsp;(&nbsp;abs(r(x&gt;y))&nbsp;+&nbsp;abs(r(y&gt;x))&nbsp;)&nbsp;link.<br>
 &nbsp;<br>
@@ -4613,7 +4911,7 @@ Usage&nbsp;example:<br>
 &gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
 &gt;&gt;&gt;&nbsp;g.<a href="#RatingDigraph-showBestChoiceRecommendation">showBestChoiceRecommendation</a>()<br>
 ***********************<br>
-RuBis&nbsp;Best&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
+Best&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
 (in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;determinateness)&nbsp;&nbsp;&nbsp;<br>
 Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;first&nbsp;choices<br>
@@ -4635,6 +4933,27 @@ Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 Execution&nbsp;time:&nbsp;0.024&nbsp;seconds<br>
 *****************************</span></dd></dl>
 
+<dl><dt><a name="RatingDigraph-showChoiceRecommendation"><strong>showChoiceRecommendation</strong></a>(self, method='Bachet', Polarised=True, randomized=100, maxNbrOfRankings=5, seed=None, ChoiceVector=False, CoDual=False, Reversed=False, Valued=False, actionsList=None, randomActionsList=False)</dt><dd><span class="code">Generic&nbsp;choice&nbsp;recommender&nbsp;method.<br>
+&nbsp;<br>
+**Parameters**<br>
+&nbsp;<br>
+*method*:&nbsp;'Bachet'&nbsp;(default)&nbsp;|&nbsp;'Rubis'&nbsp;|&nbsp;'IteratedBachet'&nbsp;;<br>
+the&nbsp;Bachet&nbsp;method&nbsp;is&nbsp;based&nbsp;on&nbsp;the&nbsp;conjoint<br>
+extracton&nbsp;of&nbsp;initial&nbsp;and&nbsp;terminal&nbsp;prekernels&nbsp;from&nbsp;the&nbsp;partial&nbsp;Bachet&nbsp;ranking,<br>
+whereas&nbsp;the&nbsp;Rubis&nbsp;method&nbsp;is&nbsp;based&nbsp;on&nbsp;the&nbsp;extraction&nbsp;of&nbsp;an&nbsp;initial&nbsp;and<br>
+terminal&nbsp;prekernels&nbsp;directly&nbsp;from&nbsp;the&nbsp;given&nbsp;outranking&nbsp;digraph.<br>
+&nbsp;<br>
+*Polarised*:&nbsp;*True*&nbsp;(by&nbsp;default)&nbsp;|&nbsp;False;&nbsp;Bachet&nbsp;parameter<br>
+&nbsp;<br>
+*randomized*:&nbsp;positive&nbsp;integer&nbsp;(100&nbsp;by&nbsp;default);&nbsp;Bachet&nbsp;Parameter<br>
+&nbsp;<br>
+*maxNbrOfRankings*:&nbsp;positive&nbsp;integer&nbsp;&gt;&nbsp;0&nbsp;(5&nbsp;by&nbsp;default);&nbsp;Bachet&nbsp;parameter<br>
+&nbsp;<br>
+*seed*:&nbsp;Bachet&nbsp;parameter&nbsp;for&nbsp;making&nbsp;the&nbsp;randomization&nbsp;reproducible<br>
+&nbsp;<br>
+*ChoiceVector*:&nbsp;Rubis&nbsp;parameter&nbsp;for&nbsp;showing&nbsp;complete&nbsp;prekernel<br>
+characteristic&nbsp;vectors.</span></dd></dl>
+
 <dl><dt><a name="RatingDigraph-showChoiceVector"><strong>showChoiceVector</strong></a>(self, ch, choiceType='good', ChoiceVector=True)</dt><dd><span class="code">Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</span></dd></dl>
 
 <dl><dt><a name="RatingDigraph-showChordlessCircuits"><strong>showChordlessCircuits</strong></a>(self, Recompute=False)</dt><dd><span class="code">Show&nbsp;method&nbsp;for&nbsp;chordless&nbsp;circuits&nbsp;observed&nbsp;in&nbsp;a&nbsp;Digraph&nbsp;instance.<br>
@@ -4645,11 +4964,11 @@ If&nbsp;previous&nbsp;computation&nbsp;is&nbsp;required,&nbsp;stores&nbsp;the&nb
 
 <dl><dt><a name="RatingDigraph-showCorrelation"><strong>showCorrelation</strong></a>(self, corr=None, ndigits=3)</dt><dd><span class="code">Renders&nbsp;the&nbsp;valued&nbsp;ordinal&nbsp;correlation&nbsp;index,&nbsp;the&nbsp;crisp&nbsp;Kendall&nbsp;tau&nbsp;index&nbsp;and&nbsp;their&nbsp;epistemic&nbsp;determination&nbsp;degree.</span></dd></dl>
 
-<dl><dt><a name="RatingDigraph-showFirstChoiceRecommendation"><strong>showFirstChoiceRecommendation</strong></a>(self, Verbose=False, Comments=True, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True)</dt><dd><span class="code">Shows&nbsp;the&nbsp;RuBis&nbsp;first&nbsp;choice&nbsp;recommendation.<br>
+<dl><dt><a name="RatingDigraph-showFirstChoiceRecommendation"><strong>showFirstChoiceRecommendation</strong></a>(self, Verbose=False, Comments=True, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True)</dt><dd><span class="code">Shows&nbsp;a&nbsp;first&nbsp;choice&nbsp;recommendation.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Computes&nbsp;by&nbsp;default&nbsp;the&nbsp;Rubis&nbsp;first&nbsp;choice&nbsp;recommendation&nbsp;on&nbsp;the&nbsp;corresponding&nbsp;strict&nbsp;(codual)&nbsp;outranking&nbsp;digraph.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Computes&nbsp;by&nbsp;default&nbsp;a&nbsp;first-choice&nbsp;recommendation&nbsp;on&nbsp;the&nbsp;corresponding&nbsp;strict&nbsp;(codual)&nbsp;outranking&nbsp;digraph.<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;By&nbsp;default,&nbsp;with&nbsp;BrokenCocs=True,&nbsp;we&nbsp;brake&nbsp;all&nbsp;chordless&nbsp;circuits&nbsp;at&nbsp;their&nbsp;weakest&nbsp;determined&nbsp;(&nbsp;abs(r(x&gt;y))&nbsp;+&nbsp;abs(r(y&gt;x))&nbsp;)&nbsp;link.<br>
 &nbsp;<br>
@@ -4667,7 +4986,7 @@ Usage&nbsp;example:<br>
 &gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
 &gt;&gt;&gt;&nbsp;g.<a href="#RatingDigraph-showFirstChoiceRecommendation">showFirstChoiceRecommendation</a>()<br>
 ***********************<br>
-RuBis&nbsp;First&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
+First&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
 (in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;determinateness)&nbsp;&nbsp;&nbsp;<br>
 Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;first&nbsp;choices<br>
@@ -4739,6 +5058,32 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</span></dd></dl>
 
 <dl><dt><a name="RatingDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, relation=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False, htmlFileName=None, fromIndex=None, toIndex=None)</dt><dd><span class="code">Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</span></dd></dl>
+
+<dl><dt><a name="RatingDigraph-showIteratedBachetChoiceRecommendation"><strong>showIteratedBachetChoiceRecommendation</strong></a>(self, CoDual=False, Reversed=False, Valued=False, actionsList=None, randomActionsList=False, seed=None, Comments=False, Debug=False)</dt><dd><span class="code">Shows&nbsp;a&nbsp;choice&nbsp;recommendation&nbsp;from&nbsp;the&nbsp;consensus&nbsp;of&nbsp;iterated<br>
+Bachet&nbsp;ranking&nbsp;and&nbsp;order<br>
+&nbsp;<br>
+Usage&nbsp;example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
+&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#RatingDigraph-showIteratedBachetChoiceRecommendation">showIteratedBachetChoiceRecommendation</a>(Comments)<br>
+&nbsp;*----&nbsp;Iterated&nbsp;Bachet&nbsp;Choice&nbsp;Recommendations&nbsp;----*<br>
+&nbsp;&nbsp;Ranking&nbsp;by&nbsp;recursively&nbsp;first&nbsp;and&nbsp;last&nbsp;choosing<br>
+&nbsp;&nbsp;&nbsp;1st&nbsp;ranked&nbsp;['p11',&nbsp;'p19',&nbsp;'p20']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2nd&nbsp;ranked&nbsp;['p06',&nbsp;'p13',&nbsp;'p14']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3rd&nbsp;ranked&nbsp;['p04',&nbsp;'p05',&nbsp;'p07',&nbsp;'p18']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4th&nbsp;ranked&nbsp;['p15']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4th&nbsp;last&nbsp;ranked&nbsp;['p15']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3rd&nbsp;last&nbsp;ranked&nbsp;['p08',&nbsp;'p09',&nbsp;'p10',&nbsp;'p16']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2nd&nbsp;last&nbsp;ranked&nbsp;['p01',&nbsp;'p02',&nbsp;'p12',&nbsp;'p17']<br>
+&nbsp;&nbsp;1st&nbsp;last&nbsp;ranked&nbsp;['p03']<br>
+&nbsp;Quality&nbsp;of&nbsp;partial&nbsp;Bachet&nbsp;ranking<br>
+&nbsp;&nbsp;Crisp&nbsp;ordinal&nbsp;correlation&nbsp;&nbsp;:&nbsp;+0.954<br>
+&nbsp;&nbsp;Epistemic&nbsp;determination&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;+0.383<br>
+&nbsp;&nbsp;Bipolar-valued&nbsp;equivalence&nbsp;:&nbsp;+0.365<br>
+&nbsp;Execution&nbsp;time:&nbsp;0.673&nbsp;seconds<br>
+&nbsp;*****************************</span></dd></dl>
 
 <dl><dt><a name="RatingDigraph-showMIS"><strong>showMIS</strong></a>(self, withListing=True)</dt><dd><span class="code">Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;choices:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>misset</strong>.</span></dd></dl>
@@ -4940,10 +5285,10 @@ the&nbsp;bipolar&nbsp;valuation&nbsp;of&nbsp;a&nbsp;digraph.</span></dd></dl>
 <hr>
 Data descriptors inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
-<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</span></dd>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
 </dl>
 <dl><dt><strong>__weakref__</strong></dt>
-<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</span></dd>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
 </dl>
 <hr>
 Methods inherited from <a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>:<br>
