@@ -4761,8 +4761,8 @@ Back to :ref:`Content Table <Tutorial-label>`
 
 .. _LinearVoting-Tutorial-label:
 
-Computing the winner of a ranked voting election :py:mod:`votingProfiles` module
---------------------------------------------------------------------------------
+Computing the winner of a ranked voting election
+------------------------------------------------
 
 Ranked voting is an efficient voting system that strongly inhibits evil war-like election campaigns by automatically making highly divisive candidates unfit for winning any election. Only multi-partisan popular candidates have, with such a ranked voting procedure, a positive chance to eventually win an election.
 
