@@ -691,8 +691,6 @@ class NetFlowsRanking(LinearOrder):
         tnf = time()
         incnetFlows = []
         decnetFlows = []
-##        if Bachet:
-##            from bachetNumbers import BachetInteger as BachetNumber
         if other.valuationdomain['med'] == Med:
             if Debug:
                 print('standard')
@@ -712,21 +710,6 @@ class NetFlowsRanking(LinearOrder):
             otherMin = other.valuationdomain['min']
             
             for x in actions:
-##                if Bachet:
-##                    #print('to be implemented')
-##                    vecx = [otherRelation[x][y] for y in actions if y != x]
-##                    vecy = [otherRelation[y][x] for y in actions if y != x]
-##                    if Debug:
-##                        print(vecx,vecy)
-##                    bx = BachetNumber(vector=vecx)
-##                    by = BachetNumber(vector=vecy)
-##                    try:
-##                        incxnetFlows = bx.decimalValue - by.decimalValue
-##                        decxnetFlows = by.decimalValue - bx.decimalValue
-##                    except:
-##                        incxnetFlows = bx - by
-##                        decxnetFlows = by - bx                        
-##                else:
                 incxnetFlows = sum((otherRelation[x][y] +\
                                     (otherMax - otherRelation[y][x] + otherMin))\
                                      for y in actions)
@@ -1143,7 +1126,7 @@ class IteratedBachetRanking(LinearOrder):
         """
         from copy import copy, deepcopy
         from collections import OrderedDict
-        from bachetNumbers import BachetInteger as BachetNumber
+        from bachetNumbers import BachetInteger as BN
         
         # construct ranked pairs
         if CoDual:
@@ -1207,7 +1190,7 @@ class IteratedBachetRanking(LinearOrder):
                         khvector.append(c.relation[x][y])
                         kvvector.append(c.relation[y][x])
                         ca += 2
-                kxBachet = BachetNumber(vector=khvector) - BachetNumber(vector=kvvector)
+                kxBachet = BN(vector=khvector) - BN(vector=kvvector)
 ##            if Debug:
 ##                print('k,ca', k,ca, int(k)                        
 ##                if ca > 0:
@@ -1247,7 +1230,7 @@ class IteratedBachetRanking(LinearOrder):
                         khvector.append(c.relation[x][y])
                         kvvector.append(c.relation[y][x])
                         ca += 2
-                kxBachet = BachetNumber(vector=khvector) - BachetNumber(vector=kvvector)
+                kxBachet = BN(vector=khvector) - BN(vector=kvvector)
 ##                for y in actionsList:
 ##                    if x != y:
 ##                        kxnetFlows += c.relation[x][y] - c.relation[y][x]
@@ -1493,7 +1476,7 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
         from collections import OrderedDict
         from time import time
         from operator import itemgetter
-        from bachetNumbers import BachetInteger as BachetNumber
+        from bachetNumbers import BachetInteger as BN
         from copy import deepcopy
         from decimal import Decimal
         if Debug:
@@ -1630,8 +1613,8 @@ class PolarisedBachetRanking(LinearOrder,_BachetRanking):
                 vecy = [int(cRelation[y][x]) for y in actionsList if y != x]
                 if Debug:
                     print(vecx,vecy)
-                bx = BachetNumber(vector=vecx)
-                by = BachetNumber(vector=vecy)
+                bx = BN(vector=vecx)
+                by = BN(vector=vecy)
                 bScore = bx + (-by)
                 incBachetScores.append((bScore,x))
                 decBachetScores.append((bScore,x))
@@ -2016,7 +1999,7 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
         from decimal import Decimal
         from time import time
         from operator import itemgetter
-        from bachetNumbers import BachetInteger as BachetNumber
+        from bachetNumbers import BachetInteger as BN
         from copy import deepcopy
         if Debug:
             Comments=True
@@ -2152,8 +2135,8 @@ class ValuedBachetRanking(LinearOrder,_BachetRanking):
                 vecy = [cRelation[y][x] for y in actionsList if y != x]
                 if Debug:
                     print(vecx,vecy)
-                bx = BachetNumber(vector=vecx)
-                by = BachetNumber(vector=vecy)
+                bx = BN(vector=vecx)
+                by = BN(vector=vecy)
                 bScore = bx + (-by)
                 incBachetScores.append((bScore,x))
                 decBachetScores.append((bScore,x))

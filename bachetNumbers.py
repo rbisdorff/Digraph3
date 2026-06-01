@@ -550,7 +550,7 @@ class BachetVector(BachetNumber):
         
     def __divmod__(self,other, /):
         """
-        Return BachetNumber(q),BachetNumber(r) where q,r = divmod(int(self),int(other))
+        Return BachetInteger(q),BachetInteger(r) where q,r = divmod(int(self),int(other))
         """
         q,r = self._vdivmod(other)
         return q,r
@@ -761,10 +761,10 @@ if __name__ == '__main__':
     """)
 
     ######  scratch pad for testing the module components
-    from bachetNumbers import BachetVector as BachetNumber
+    from bachetNumbers import BachetVector as BN
     print('*-----Computing with BachetInteger numbers----------*') 
-    n1 = BachetNumber(12)
-    n2 = BachetNumber(154)
+    n1 = BN(12)
+    n2 = BN(154)
     n3 = n1 + n2
     n4 = n1 * n2
     print('\'%s\' (%d) + \'%s\' (%d) = \'%s\' (%d)' % (n1, int(n1), n2, int(n2), n3, int(n3) ))
@@ -774,10 +774,10 @@ if __name__ == '__main__':
     n6 = -n1
     print('\'%s\' (%d) + \'%s\' (%d) = \'%s\' (%d)' % ( n5, int(n5), n6, int(n6),
                                                        (n5 + n6), int(n5+n6) ))
-    from bachetNumbers import BachetVector as BachetNumber
+    from bachetNumbers import BachetVector as BN
     print('*-----Computing with BachetVector numbers----------*') 
-    n1 = BachetNumber(12)
-    n2 = BachetNumber(154)
+    n1 = BN(12)
+    n2 = BN(154)
     n3 = n1 + n2
     n4 = n1 * n2
     print('\'%s\' (%d) + \'%s\' (%d) = \'%s\' (%d)' % (n1, int(n1), n2, int(n2), n3, int(n3) ))
@@ -792,7 +792,7 @@ if __name__ == '__main__':
     print('Timings: int(Bachet), Bachet.vector and inbuilt integers')
     from random import shuffle
     from time import time
-
+    from bachetNumbers import *
     bi = BachetInteger(0)
     t0 = time()
     for s in range(10000,20000):

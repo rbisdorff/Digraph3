@@ -696,9 +696,8 @@ class InterGroupPairing(BipartiteGraph):
         Replacement for the linear voting profiles information
         when searching for promising swapping candidates
         """
-        from bachetNumbers import BachetInteger as BachetNumber
+        from bachetNumbers import BachetInteger as BN
         ba = vpA.ballot[a]
-        #score = BachetNumber(0)
         candidates = [b for b in vpA.candidates]
         k = len(candidates)
         vectorA = []
@@ -706,8 +705,8 @@ class InterGroupPairing(BipartiteGraph):
         for i in range(k):
             vectorA.append(ba[b][candidates[i]])
             vectorB.append(ba[candidates[i]][b])
-        bna = BachetNumber(vector=vectorA)
-        bnb = BachetNumber(vector=vectorB)
+        bna = BN(vector=vectorA)
+        bnb = BN(vector=vectorB)
         if Reversed:
             score = (~bna) - (~bnb)
         else:
@@ -1023,8 +1022,7 @@ class FairnessEnhancedInterGroupMatching(InterGroupPairing):
 ##            if Debug:
 ##                self.showCopelandRankingScores()
         elif fitnessScores == 'Bachet':
-             # precomputing Bachet ranking scores
-            from bachetNumbers import BachetInteger as BachetNumber
+            # precomputing Bachet ranking scores
             bachetScores = {}
             aKeys = [a for a in vpA.voters]
             bKeys = [b for b in vpB.voters]
@@ -1034,11 +1032,6 @@ class FairnessEnhancedInterGroupMatching(InterGroupPairing):
                 bi = bKeys[i]
                 bachetScores[ai] = {}
                 bachetScores[bi] = {}
-##                for j in range(n):
-##                    aj = aKeys[j]
-##                    bj = bKeys[j]
-##                    bachetScores[ai][bj] = BachetNumber()
-##                    bachetScores[bi][aj] = BachetNumber()
             for i in range(n):
                 ai = aKeys[i]
                 for j in range(n):
@@ -1051,8 +1044,7 @@ class FairnessEnhancedInterGroupMatching(InterGroupPairing):
                     bachetScores[bj][ai] = self.computeBachetScore(vpB,bj,ai)                
             self.fitnessScores = bachetScores
         elif fitnessScores == 'BachetReversed':
-             # precomputing Bachet ranking scores
-            from bachetNumbers import BachetInteger as BachetNumber
+            ## precomputing Bachet ranking scores
             bachetScores = {}
             aKeys = [a for a in vpA.voters]
             bKeys = [b for b in vpB.voters]
@@ -1062,11 +1054,6 @@ class FairnessEnhancedInterGroupMatching(InterGroupPairing):
                 bi = bKeys[i]
                 bachetScores[ai] = {}
                 bachetScores[bi] = {}
-##                for j in range(n):
-##                    aj = aKeys[j]
-##                    bj = bKeys[j]
-##                    bachetScores[ai][bj] = BachetNumber()
-##                    bachetScores[bi][aj] = BachetNumber()
             for i in range(n):
                 ai = aKeys[i]
                 for j in range(n):
@@ -1386,7 +1373,7 @@ class BestBachetInterGroupMatching(InterGroupPairing):
         from time import time
         from decimal import Decimal
         from copy import deepcopy
-        from bachetNumbers import BachetInteger as BachetNumber
+        from bachetNumbers import BachetInteger as BN
         self.runTimes = {}
         t0 = time()
         # store input data
@@ -1405,7 +1392,7 @@ class BestBachetInterGroupMatching(InterGroupPairing):
             bi = bKeys[i]
             bachetScores[ai] = {}
             bachetScores[bi] = {}
-        maxScore = BachetNumber(0)
+        maxScore = BN(0)
         for i in range(order):
             ai = aKeys[i]
             for j in range(order):
@@ -2610,11 +2597,9 @@ class IntraGroupPairing(Graph):
         Computes fitness of swapping candidates
         """
         from decimal import Decimal
-        from bachetNumbers import BachetInteger as BachetNumber
+        from bachetNumbers import BachetInteger as BN
         vpA = self.vpA
         ba = self.vpA.ballot[a]
-        #ba = ballot
-        #score = BachetNumber(0)
         candidates = [b for b in vpA.voters]
         n = len(candidates)
         vectorA = []
@@ -2622,7 +2607,7 @@ class IntraGroupPairing(Graph):
         for i in range(n):
             vectorA.append(ba[b][candidates[i]])
             vectorB.append(ba[candidates[i]][b])
-        score = BachetNumber(vector=vectorA) - BachetNumber(vector=vectorB)
+        score = BN(vector=vectorA) - BN(vector=vectorB)
         return score
 
     def showMatchingFitnessScores(self):
@@ -2960,14 +2945,14 @@ class FairnessEnhancedIntraGroupMatching(IntraGroupPairing):
             self.vpA = intraVp
             # precomputing ranking scores
             if fitnessScores == 'Bachet':
-                from bachetNumbers import BachetInteger as BachetNumber
+                from bachetNumbers import BachetInteger as BN
                 bachetScores = {}
                 for i in range(order):
                     pi = persons[i]
                     bachetScores[pi] = {}
                     for j in range(order):
                         pj = persons[j]
-                        bachetScores[pi][pj] = BachetNumber()
+                        bachetScores[pi][pj] = BN()
                 for i in range(order):
                     pi = persons[i]
                     for j in range(i+1,order):
@@ -3880,7 +3865,7 @@ class BestBachetIntraGroupMatching(IntraGroupPairing):
         from time import time
         from decimal import Decimal
         from copy import deepcopy
-        from bachetNumbers import BachetInteger as BachetNumber
+        from bachetNumbers import BachetInteger as BN
         self.runTimes = {}
         t0 = time()
         # store input data
@@ -3904,13 +3889,13 @@ class BestBachetIntraGroupMatching(IntraGroupPairing):
         self.vpA = vpA
         # precomputing Copeland ranking scores
         bachetScores = {}
-        maxScore = BachetNumber(0)
+        maxScore = BN(0)
         for i in range(order):
             pi = persons[i]
             bachetScores[pi] = {}
             for j in range(order):
                 pj = persons[j]
-                bachetScores[pi][pj] = BachetNumber()
+                bachetScores[pi][pj] = BN()
         for i in range(order):
             pi = persons[i]
             for j in range(i+1,order):
@@ -3936,7 +3921,7 @@ class BestBachetIntraGroupMatching(IntraGroupPairing):
         t2 = time()
         self.vertices = vpA.voters
         Min = -maxScore
-        Med = BachetNumber(0)
+        Med = BN(0)
         Max = maxScore
         self.valuationDomain = {'min': Min,
                                 'med': Med,

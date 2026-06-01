@@ -3018,8 +3018,8 @@ The Digraph3 :py:mod:`bachetNumbers` module provides with the :py:class:`~bachet
    :emphasize-lines: 2,6,11,15,20,31-34,37
    :linenos:
     
-   >>> from bachetNumbers import BachetInteger as BachetNumber
-   >>> n1 = BachetNumber(5)
+   >>> from bachetNumbers import BachetInteger
+   >>> n1 = BachetInteger(5)
    >>> n1
      *------- Bachet number description ------*
      Instance class : BachetInteger
@@ -3028,7 +3028,7 @@ The Digraph3 :py:mod:`bachetNumbers` module provides with the :py:class:`~bachet
      Length         : 3
      Value          : 5
      Attributes     : ['vector']  
-   >>> n2 = BachetNumber(vector=[1,1,1])
+   >>> n2 = BachetInteger(vector=[1,1,1])
    >>> n2
      *------- Bachet number description ------*
      Instance class : BachetInteger
@@ -3056,20 +3056,20 @@ The Digraph3 :py:mod:`bachetNumbers` module provides with the :py:class:`~bachet
    ...       % ( n4, int(n4), n5, int(n5), n6, int(n6) ) )
      '-1-1+1' (-11) + '-1-1-1' (-13) = '-10+10' (-24)
 
-Examples of Bachet numbers
-..........................
+Examples of Bachet integers
+...........................
 
-Examples of such *sbits* encoded *Bachet* numbers are immediately provided by the rows and columns of the *self.relation* attribute of a polarised outranking digraph instance (see :numref:`examplesBachet` Lines 4-6  and 12-15 below). 
+Examples of such *sbits* encoded *Bachet* integers are immediately provided by the rows and columns of the *self.relation* attribute of a polarised outranking digraph instance (see :numref:`examplesBachet` Lines 4-6  and 12-15 below). 
 
 .. code-block:: pycon
-   :caption: Examples of sbits encoded numbers
+   :caption: Examples of sbits encoded integers
    :name: examplesBachet
    :emphasize-lines: 4-6,12-19,16-27,30
    :linenos:
 
    >>> from outrankingDigraphs import *
    >>> from linearOrders import *
-   >>> from bachetNumbers import BachetInteger as BachetNumber
+   >>> from bachetNumbers import BachetInteger
    >>> g = RandomBipolarOutrankingDigraph(numberOfActions=4,seed=1)
    >>> pg = PolarisedDigraph(g,level=g.valuationdomain['med'],
    ...                      StrictCut=True,KeepValues=False)
@@ -3082,23 +3082,23 @@ Examples of such *sbits* encoded *Bachet* numbers are immediately provided by th
        'a2' |   1    -	 -1   -1	 
        'a3' |   1    1	  -   -1	 
        'a4' |   1    1	  1    -	 
-   >>> ra1 = BachetNumber(vector=[0,1,-1])
-   >>> ra2 = BachetNumber(vector=[1,-1,-1])
-   >>> ra3 = BachetNumber(vector=[1,1,-1])
-   >>> ra4 = BachetNumber(vector=[1,1,1])
+   >>> ra1 = BachetInteger(vector=[0,1,-1])
+   >>> ra2 = BachetInteger(vector=[1,-1,-1])
+   >>> ra3 = BachetInteger(vector=[1,1,-1])
+   >>> ra4 = BachetInteger(vector=[1,1,1])
    >>> print( int(ra1), int(ra2), int(ra3), int(ra4) )
      2 5 11 13
-   >>> ca1 = BachetNumber(vector=[1,1,1])
-   >>> ca2 = BachetNumber(vector=[0,1,1])
-   >>> ca3 = BachetNumber(vector=[1,-1,1])
-   >>> ca4 = BachetNumber(vector=[-1,-1,-1])
+   >>> ca1 = BachetInteger(vector=[1,1,1])
+   >>> ca2 = BachetInteger(vector=[0,1,1])
+   >>> ca3 = BachetInteger(vector=[1,-1,1])
+   >>> ca4 = BachetInteger(vector=[-1,-1,-1])
    >>> print(int(ca1), int(ca2), int(ca3), int(ca4) )
      13 4 7 -13
    >>> print( int(ra1-ca1), int(ra2-ca2),
    ...        int(ra3-ca3), int(ra4-ca4) )
      -11 1 4 26
 
-The *Bachet* numbers, instantiated by the row vectors without reflexive terms  and the column vectors without reflexive terms of the digraph's *self.relation* attribute, model in fact respectively an **outrankingness** measure *rx* and an **outrankedness** measure *cx* (see Lines 16-27).
+The *Bachet* integers, instantiated by the row vectors without reflexive terms  and the column vectors without reflexive terms of the digraph's *self.relation* attribute, model in fact respectively an **outrankingness** measure *rx* and an **outrankedness** measure *cx* (see Lines 16-27).
 
 The sum *rx + (-cx)* of both the **outrankingness** and the **negated outrankedness** measures renders now per decision action *x* a potential ranking score, similar to *Copeland* or *NetFlows* ranking scores [21]_.
 
@@ -3137,23 +3137,23 @@ If we reverse however the given ordering of the *actions* dictionary, we may obt
       'a2' |  -1   -1    -    1	 
       'a1' |  -1    1    0    -	 
      Valuation domain: [-1;+1]
-   >>> ra4 = BachetNumber(vector=[1,1,1])
-   >>> ra3 = BachetNumber(vector=[-1,1,1])
-   >>> ra2 = BachetNumber(vector=[-1,-1,1])
-   >>> ra1 = BachetNumber(vector=[-1,1,0])
+   >>> ra4 = BachetInteger(vector=[1,1,1])
+   >>> ra3 = BachetInteger(vector=[-1,1,1])
+   >>> ra2 = BachetInteger(vector=[-1,-1,1])
+   >>> ra1 = BachetInteger(vector=[-1,1,0])
    >>> print( int(ra1), int(ra2), int(ra3), int(ra4) )
     -6 -11 -5 13
-   >>> ca4 = BachetNumber(vector=[-1,-1,-1])
-   >>> ca3 = BachetNumber(vector=[1,-1,1])
-   >>> ca2 = BachetNumber(vector=[1,1,0])
-   >>> ca1 = BachetNumber(vector=[1,1,1])
+   >>> ca4 = BachetInteger(vector=[-1,-1,-1])
+   >>> ca3 = BachetInteger(vector=[1,-1,1])
+   >>> ca2 = BachetInteger(vector=[1,1,0])
+   >>> ca1 = BachetInteger(vector=[1,1,1])
    >>> print( int(ca1), int(ca2), int(ca3), int(ca4) )
     13 12 7 -13
    >>> print( int(ra4-ca4), int(ra3-ca3),
    ...        int(ra2-ca2), int(ra1-ca1) )
     26 -12 -23 -19
 
-With the reversed *Bachet* numbers we obtain the ranking 'a4' (26) > 'a3' (-12) > 'a1' (-19) > 'a2' (-23). This ranking result is less well correlated (+0.526) with the given outranking digraph, yet corresponds in fact to the actual *Copeland* ranking.
+With the reversed *Bachet* integers we obtain the ranking 'a4' (26) > 'a3' (-12) > 'a1' (-19) > 'a2' (-23). This ranking result is less well correlated (+0.526) with the given outranking digraph, yet corresponds in fact to the actual *Copeland* ranking.
 
 .. code-block:: pycon
    :linenos:
@@ -3410,8 +3410,9 @@ Mind however that the *Bachet* ranking rule, even of comparable complexity :math
 
 .. code-block:: pycon
 
+   >>> from bachetNumbers import BachetInteger		
    >>> v = [1 for i in range(50)]
-   >>> n = BachetNumber(vector=v)
+   >>> n = BachetInteger(vector=v)
    >>> int(n)
     358948993845926294385124
 
