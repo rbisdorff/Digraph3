@@ -70,7 +70,7 @@
        * :ref:`Partially ranking with multiple incommensurable criteria <Partial-Ranking-Tutorial-label>`
        * :ref:`Rating into relative performance quantiles <QuantilesRating-Tutorial-label>`
        * :ref:`Rating-by-ranking with learned performance quantile limits <LearnedRating-Tutorial-label>`
-       * :ref:`Computing the winner of an election <LinearVoting-Tutorial-label>`
+       * :ref:`Computing the winner of a ranked voting election <LinearVoting-Tutorial-label>`
        * :ref:`Computing fair intergroup pairings <Fair-InterGroup-Pairings-label>`
        * :ref:`Computing fair intragroup pairings <Fair-IntraGroup-Pairings-label>`
    
@@ -4761,8 +4761,10 @@ Back to :ref:`Content Table <Tutorial-label>`
 
 .. _LinearVoting-Tutorial-label:
 
-Computing the winner of an election with the :py:mod:`votingProfiles` module
-----------------------------------------------------------------------------
+Computing the winner of a ranked voting election :py:mod:`votingProfiles` module
+--------------------------------------------------------------------------------
+
+Ranked voting is an efficient voting system that strongly inhibits evil war-like election campaigns by automatically making highly divisive candidates unfit for winning any election. Only multi-partisan popular candidates have, with such a ranked voting procedure, a positive chance to eventually win an election.
 
 .. contents:: 
 	:depth: 2
@@ -4771,7 +4773,7 @@ Computing the winner of an election with the :py:mod:`votingProfiles` module
 Linear voting profiles
 ``````````````````````
 
-The :py:mod:`votingProfiles` module provides resources for handling election results [ADT-L2]_, like the :py:class:`~votingProfiles.LinearVotingProfile` class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two ordered dictionaries, one for the voters and another one for the candidates. The linear ballots are stored in a standard dictionary.
+The :py:mod:`votingProfiles` module provides resources for handling ranked voting election results [ADT-L2]_, like the :py:class:`~votingProfiles.LinearVotingProfile` class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two ordered dictionaries, one for the voters and another one for the candidates. The linear ballots are stored in a standard dictionary.
 
 .. code-block:: python
    :linenos:
