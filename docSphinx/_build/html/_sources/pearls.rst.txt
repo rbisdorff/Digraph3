@@ -4414,16 +4414,16 @@ Let now *P* and *Q* be two bipolar-valued propositions, logical **conjunction** 
 
 It is worthwhile noticing that the bipolar-valued logical implication is not necessarily transitive. Suppose for instance that a majority of voters validate proposition :math:`P \Rightarrow Q` and another majority validates the proposition :math:`Q \Rightarrow R`. There is no epistemic reason why the separate evidences of both these statements should necessarily induce the evidence of :math:`P \Rightarrow R`.
 
-.. Epistemic fusion of propositional evidences
-.. ...........................................
+Epistemic fusion of propositional evidences
+.. ........................................
 
-.. Let proposition *P* stating again what candidate should be winning the election. Suppose furthermore that the assembly of voters is split into two groups and let the result be characterised by two characteristic functions
+Let proposition *P* stating again what candidate should be winning the election. Suppose furthermore that the assembly of voters is split into two groups and let the result be characterised by two characteristic functions
 
       :math:`r_1(P) \in [-1.0;+1.0]`,
 
       :math:`r_2(P) \in [-1.0;+1.0]`.
 
-.. We may aggregate these characteristic functions with the help of a **disjunctive fusion** operator :math:`\oplus`.
+We may aggregate these characteristic functions with the help of a **disjunctive fusion** operator :math:`\oplus`.
 
    - :math:`r(P) \;=\: r_1(P) \,\oplus\, r_2(P) \;=`
 
@@ -4433,9 +4433,9 @@ It is worthwhile noticing that the bipolar-valued logical implication is not nec
 
       :math:`\hspace{10mm} \; \; 0.0` otherwise.
 
-.. Mind that the :math:`\oplus` operator, like a mean or average, is not associative when multiple characteristic functions must be fused together. In this case, all positive and negative terms get separately fused and their respective final results get again submitted to the :math:`\oplus` operator.
+Mind that the :math:`\oplus` operator, like a mean or average, is not associative when multiple characteristic functions must be fused together. In this case, all positive and negative terms get separately fused and their respective final results get again submitted to the :math:`\oplus` operator.
 
-.. As a consequence, when there exist conjointly positive and negative epistemic evidences for a statement, the proposition always get an *indeterminate* status. This way all tautologies and antologies of a classical propositional calculus like the Boolean algebra remain effectively valid when only working with fully determined statements.
+As a consequence, when there exist conjointly positive and negative epistemic evidences for a statement, the proposition always get an *indeterminate* status. This way all tautologies and antologies of a classical propositional calculus like the Boolean algebra remain effectively valid when only working with fully determined statements.
 
 Computational bipolar-valued set theory
 .......................................
@@ -4518,7 +4518,7 @@ In :numref:`bipolarValuedSets2` below we illustrate the bipolar-valued set **uni
     s4:  -1.0000
     s5:  -1.0000
 
-Finally, in :numref:`bipolarValuedSets3` below we illustrate the bipolar-valued set **difference** and **symmetric difference**. 
+In :numref:`bipolarValuedSets3` below we illustrate the bipolar-valued set **difference** and **symmetric difference**. 
 
 .. code-block:: pycon
    :caption: Working with bipolar-valued sets III
@@ -4547,7 +4547,7 @@ Finally, in :numref:`bipolarValuedSets3` below we illustrate the bipolar-valued 
     s5:  +0.0000
     s4:  -0.4899
     s2:  -0.6949
- 
+
 The :py:class:`~bipolarValuedSets.BpvSet` class provides furthermore a :py:meth:`~bipolarValuedSets.BpvSet.isSubset` method for computing the bipolar-valued subset statement and a :py:meth:`~bipolarValuedSets.BpvSet.strip` method which removes potential non-elements from the support of a bpv-set.
 
    >>> D = Y - X
@@ -4568,6 +4568,47 @@ Finally, a :py:meth:`~bipolarValuedSets.BpvSet.polarise` method is provided for 
     s3:  -1.0000
 
 In the limit case of no indeterminate membership characteristics, we recover this way standard crisp sets and the previous set operations implement in fact a Boolean algebra [BIS-2004_3p]_. 
+
+The commutative epistemic fusion ring
+.....................................
+
+The **disjunctive and conjunctive epistemic fusions** of bpv-sets *X* and *Y*, denoted :math:`X \oplus Y` respectively :math:`X \ominus Y`, give the bpv-set defined as follows.
+
+For all :math:`z \in E_{X \oplus Y}` the membership characteristic :math:`r\big(\,z \in (X \oplus Y)\,\big)\; =`
+
+    - :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*, and :math:`r(z \in X) \geqslant 0.0` and :math:`r(z \in Y) \geqslant 0.0`, or
+    - :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*, and :math:`r(z \in X) \leqslant 0.0` and :math:`r(z \in Y) \leqslant 0.0`,
+    - :math:`0.0` otherwise.
+
+For all :math:`z \in E_{X \ominus Y}` the membership characteristic :math:`r\big(\,z \in (X \ominus Y)\,\big)\; =`
+
+    - :math:`\in\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*, and :math:`r(z \in X) \geqslant 0.0` and :math:`r(z \in Y) \geqslant 0.0`, or
+    - :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*, and :math:`r(z \in X) \leqslant 0.0` and :math:`r(z \in Y) \leqslant 0.0`,
+    - :math:`0.0` otherwise.
+
+In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunctive fusion operators.
+
+.. code-block:: pycon
+   :caption: Working with bipolar-valued sets IV
+   :name: bipolarValuedSets4
+   :linenos:
+   :emphasize-lines: 3-7,10-14
+ 
+   >>> (X.oplus(Y)).showMembershipCharacteristics()
+    # disjunctive epistemic fusion -
+     s2:  +0.8957
+     s1:  +0.0000
+     s3:  +0.0000
+     s5:  +0.0000
+     s4:  -0.4899
+   >>> (X.ominus(Y)).showMembershipCharacteristics()
+    # conjunctive epistemic fusion -  
+     s2:  +0.6949
+     s1:  +0.0000
+     s3:  +0.0000
+     s5:  +0.0000
+     s4:  -0.4899
+
 
 .. note::
 

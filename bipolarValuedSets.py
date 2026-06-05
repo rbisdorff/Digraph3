@@ -387,6 +387,98 @@ class BpvSet(object):
         diff.cardinality = diff.computeCardinality()
         return diff
 
+    def oplus(self,other,/):
+        """
+        Returns the disjunctive fusion of self and other
+        """
+        from copy import deepcopy
+        from bipolarValuedSets import BpvSet
+        newSelf = deepcopy(self)
+        newSelf.recodeValuation()
+        newOther = deepcopy(other)
+        newOther.recodeValuation()
+        fusion = BpvSet()
+        fusion.name = self.name+'Oplus'+other.name
+
+        # union of the supports
+        for it in newSelf.support:
+            #print(it)
+            if it not in fusion.support:
+                fusion.support[it] = newSelf.support[it]
+        for it in newOther.support:
+            #print(it)
+            if it not in fusion.support:
+                fusion.support[it] = newOther.support[it]
+
+        membership = {}
+        Min = fusion.valuationDomain['min']
+        Med = fusion.valuationDomain['med']
+        Max = fusion.valuationDomain['max']
+        for it in fusion.support:
+            try:
+                if newSelf.membership[it] <= Med and newOther.membership[it] <= Med:
+                    membership[it] = min(newSelf.membership[it],newOther.membership[it])
+                elif newSelf.membership[it] >= Med and newOther.membership[it] >= Med:
+                    membership[it] = max(newSelf.membership[it],newOther.membership[it])
+                else:
+                    membership[it] = Med                  
+            except:
+                try:
+                    membership[it] = newSelf.membership[it]
+                except:
+                    membership[it] = Min
+        fusion.ndigits = min(newSelf.ndigits, newOther.ndigits)
+        fusion.membership = membership
+        fusion.determinateness = fusion.computeDeterminateness()
+        fusion.cardinality = fusion.computeCardinality()
+        return fusion
+
+    def ominus(self,other,/):
+        """
+        Returns the disjunctive fusion of self and other
+        """
+        from copy import deepcopy
+        from bipolarValuedSets import BpvSet
+        newSelf = deepcopy(self)
+        newSelf.recodeValuation()
+        newOther = deepcopy(other)
+        newOther.recodeValuation()
+        fusion = BpvSet()
+        fusion.name = self.name+'Oplus'+other.name
+
+        # union of the supports
+        for it in newSelf.support:
+            #print(it)
+            if it not in fusion.support:
+                fusion.support[it] = newSelf.support[it]
+        for it in newOther.support:
+            #print(it)
+            if it not in fusion.support:
+                fusion.support[it] = newOther.support[it]
+
+        membership = {}
+        Min = fusion.valuationDomain['min']
+        Med = fusion.valuationDomain['med']
+        Max = fusion.valuationDomain['max']
+        for it in fusion.support:
+            try:
+                if newSelf.membership[it] <= Med and newOther.membership[it] <= Med:
+                    membership[it] = max(newSelf.membership[it],newOther.membership[it])
+                elif newSelf.membership[it] >= Med and newOther.membership[it] >= Med:
+                    membership[it] = min(newSelf.membership[it],newOther.membership[it])
+                else:
+                    membership[it] = Med                  
+            except:
+                try:
+                    membership[it] = newSelf.membership[it]
+                except:
+                    membership[it] = Min
+        fusion.ndigits = min(newSelf.ndigits, newOther.ndigits)
+        fusion.membership = membership
+        fusion.determinateness = fusion.computeDeterminateness()
+        fusion.cardinality = fusion.computeCardinality()
+        return fusion
+
     def __neg__(self,/):
         """
         Return -self
@@ -606,4 +698,13 @@ if __name__ == "__main__":
     D = Y - X
     E = D.strip(InSite=False)
     D.strip()
-    
+    Op = X.oplus(Y)
+    Op.showMembershipCharacteristics()
+    Om = X.ominus(Y)
+    Om.showMembershipCharacteristics()
+    M = RandomBpvSet(undeterminateness=1.0,elementNamePrefix='s')
+    Oxmp = X.oplus(M)
+    Oxmp.showMembershipCharacteristics()
+    Oxmm = X.ominus(M)
+    Oxmm.showMembershipCharacteristics()
+

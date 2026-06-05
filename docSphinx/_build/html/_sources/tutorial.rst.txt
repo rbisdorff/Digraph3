@@ -4841,7 +4841,7 @@ Editing of the linear voting profile may be achieved by storing the data in a fi
 Computing the winner
 ````````````````````
 
-We may easily compute **uni-nominal votes**, i.e. how many times a candidate was ranked first, and see who is consequently the **simple majority** winner(s) in this election.
+We may easily compute **uni-nominal votes**, i.e. how many times a candidate was ranked first, and see who is consequently the **simple plurality** winner(s) in this election.
 
 .. code-block:: pycon
    :linenos:
