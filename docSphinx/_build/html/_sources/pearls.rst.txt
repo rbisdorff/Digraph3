@@ -4569,10 +4569,10 @@ Finally, a :py:meth:`~bipolarValuedSets.BpvSet.polarise` method is provided for 
 
 In the limit case of no indeterminate membership characteristics, we recover this way standard crisp sets and the previous set operations implement in fact a Boolean algebra [BIS-2004_3p]_. 
 
-The commutative epistemic fusion ring
-.....................................
+The ordered commutative epistemic fusion ring
+.............................................
 
-The **disjunctive and conjunctive epistemic fusions** of bpv-sets *X* and *Y*, denoted :math:`X \oplus Y` respectively :math:`X \ominus Y`, give the bpv-set defined as follows.
+The **disjunctive and conjunctive epistemic fusions** of two bpv-sets *X* and *Y*, denoted :math:`X \oplus Y` respectively :math:`X \ominus Y`, give the bpv-set defined as follows.
 
 For all :math:`z \in E_{X \oplus Y}` the membership characteristic :math:`r\big(\,z \in (X \oplus Y)\,\big)\; =`
 
@@ -4608,6 +4608,18 @@ In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunct
      s3:  +0.0000
      s5:  +0.0000
      s4:  -0.4899
+
+Due to the commutativity of the numerical binary *max* and *min* operators, both :math:`\oplus` and :math:`\ominus` are **cummutative**.
+
+Let :math:`\mathcal{S}(X)` denote the set of all possible bpv-sets that may be defined on a given finite set *X* of dimension *n*. Let :math:`\bf{0} \in \mathcal{S}(X)`  denote the completely indeterminate bpv-set, :math:`\bf{+1} \in \mathcal{S}(X)` the crisp completely +1.0 determined full bvp-set, and :math:`\bf{-1} \in \mathcal{S}(X)` the completely -1.0 determined empty bvp-set. It is worthwhile noticing that bpv-set :math:`\bf{0}` is the **neutral** element and bpv-set :math:`\bf{+1}` is the **absorbent** element of the :math:`\oplus` operator. Similarly, bpv-set :math:`\bf{+1}` is the **neutral** element and bpv-set :math:`\bf{0}` is the **absorbent** element of the :math:`\ominus` operator.
+
+To every bpv-set :math:`\mathcal{X} \in \mathcal{S}(X)` we may associate its negated --dual--  bpv-set :math:`-\mathcal{X}` such that :math:`\mathcal{X} \oplus -\mathcal{X} \;=\; \bf{0}`. 
+
+The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(X)` a partial **sharpness** ordering denoted :math:`\succcurlyeq` and defined as follows. Let :math:`\mathcal{Y}` and :math:`\mathcal{Z}` be two bpv-sets in :math:`\mathcal{S}(X)`. We say that :math:`\mathcal{Y} \,\succcurlyeq\, \mathcal{Z}` when for all :math:`x \in X` either :math:`\mathcal{Y}(x) \geqslant \mathcal{Z}(x) \geqslant 0` or, :math:`\mathcal{Y}(x) \leqslant \mathcal{Z}(x) \leqslant 0`. Minimal sharp appears to be the bpv-set :math:`\bf{0}`. Maximal sharp become all math:`2^n` completely determined subsets of the support set *X*.
+
+Moreother :math:`\mathcal{Y} \,\succcurlyeq\, \mathcal{Z} \;\Leftrightarrow\; \big( \mathcal{Y} \oplus \mathcal{Z} \,\succcurlyeq\, \mathcal{Y}\,\big) \; \land \; \big(\mathcal{Y} \oplus \mathcal{Z} \,\succcurlyeq\, \mathcal{Z}\,\big)`.
+
+
 
 
 .. note::

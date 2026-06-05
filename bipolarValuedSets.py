@@ -686,7 +686,8 @@ if __name__ == "__main__":
                       Debug=False)
     
     #X.showMembershipCharacteristics(Normalized=False)
-    X.showMembershipCharacteristics()
+    X.showMe
+    mbershipCharacteristics()
     Y = RandomBpvSet(numberOfElements=3,elementNamePrefix='s',
                       undeterminateness=0.1,
                       valuationRange=(-1,1),
