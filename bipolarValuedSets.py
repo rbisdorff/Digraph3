@@ -330,10 +330,10 @@ class BpvSet(object):
             if it not in newOther.support:
                 newOther.support[it] = newSelf.support[it]
                 newOther.membership[it] = Med
-        for it in newOther.support:
-            if it not in newSelf.support:
-                newSelf.support[it] = newOther.support[it]
-                newSelf.membership[it] = Med
+##        for it in newOther.support:
+##            if it not in newSelf.support:
+##                newSelf.support[it] = newOther.support[it]
+##                newSelf.membership[it] = Med
 
         IsSharper = True
         for it in newSelf.support:
