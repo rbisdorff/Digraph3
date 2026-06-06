@@ -4389,7 +4389,7 @@ Computing with bipolar-valued sets
 Bipolar-valued epistemic logic
 ..............................
 
-In bipolar-valued epistemic logic we assemble conjointly some evidence for a statement to be true and other evidence for the same statement to be false. First example is given by the statement *P*: '*this candidate should win the election*'. There are some voters who support its truthfulness and some voters who support, on the contrary its falseness. Yet, there may also be some voters who don't give any opinion, they abstain from voting. What logical status should be given to the statement *P* ?
+In bipolar-valued epistemic logic we balance or **superpose** like in quantum theory, some epistemic evidences for a propositional statement to be true against other evidences for the same statement to be false. First example is given by the statement *P*: '*this candidate should win the election*'. There are some voters who support its truthfulness and some voters who support, on the contrary its falseness. Yet, there may also be some voters who don't give any opinion, they abstain from voting. What logical status should be given to the statement *P* ?
 
 Following *Condorcet* [CON-1785p]_ we are going to balance the votes in favour against the votes in disfavour. As a result we obtain a bipolar-valued credibility which qualifies statement *P* as **utterly true** when all voters support its truth, **more or less true** when more voters support its truthfulness than its falseness, **more or less false** when more voters support its falseness than its truthfulness and **utterly false** when all the voters support its falseness. There may however appear a special case when the same number of voters support its truthfulness respectively its falseness, or all voters abstain from voting. In these cases, statement *P* becomes neither *true* nor *false*, but **indeterminate**. It is a *zero knowledge* situation.
 
@@ -4415,7 +4415,7 @@ Let now *P* and *Q* be two bipolar-valued propositions, logical **conjunction** 
 It is worthwhile noticing that the bipolar-valued logical implication is not necessarily transitive. Suppose for instance that a majority of voters validate proposition :math:`P \Rightarrow Q` and another majority validates the proposition :math:`Q \Rightarrow R`. There is no epistemic reason why the separate evidences of both these statements should necessarily induce the evidence of :math:`P \Rightarrow R`.
 
 Epistemic fusion of propositional evidences
-.. ........................................
+...........................................
 
 Let proposition *P* stating again what candidate should be winning the election. Suppose furthermore that the assembly of voters is split into two groups and let the result be characterised by two characteristic functions
 
@@ -4431,16 +4431,16 @@ We may aggregate these characteristic functions with the help of a **disjunctive
 
      :math:`\hspace{10mm} \; \; \min\big(r_1(P),r_2(P)\big)` when :math:`r_1(P) \leq 0.0 \; \land \; r_2(P) \leq 0.0`;
 
-      :math:`\hspace{10mm} \; \; 0.0` otherwise.
+     :math:`\hspace{10mm} \; \; 0.0` otherwise.
 
 Mind that the :math:`\oplus` operator, like a mean or average, is not associative when multiple characteristic functions must be fused together. In this case, all positive and negative terms get separately fused and their respective final results get again submitted to the :math:`\oplus` operator.
 
-As a consequence, when there exist conjointly positive and negative epistemic evidences for a statement, the proposition always get an *indeterminate* status. This way all tautologies and antologies of a classical propositional calculus like the Boolean algebra remain effectively valid when only working with fully determined statements.
+As a consequence, when there exist conjointly positive and negative epistemic evidences for a statement, the proposition always gets an *indeterminate* status. This way all tautologies and antologies of a classical propositional calculus like the Boolean algebra remain effectively valid when only working with fully determined statements.
 
 Computational bipolar-valued set theory
 .......................................
 
-A bipolar-valued set *X*, a **bpv-set** for short, consists of a support set :math:`E_X` of potential elements and a dictionary providing for every element :math:`x \in E_X` a bipolar-valued membership characteristic function :math:`r(x \in X)` taking values in the decimal interval [-1.0;+1.0]:
+A bipolar-valued set *X*, a **bpv-set** for short, consists of a **support set** :math:`E_X` of potential elements and a **membership dictionary** providing for every element :math:`x \in E_X` a bipolar-valued membership characteristic function :math:`r(x \in X)` taking values in the decimal interval [-1.0;+1.0]:
 
     - Element *x* is more or less included in the set *X* when :math:`r(x \in X) \,>\, 0.0`;
     - Element *x* is more or less excluded from the set *X* when :math:`r(x \in X) \,<\, 0.0`;
@@ -4569,10 +4569,10 @@ Finally, a :py:meth:`~bipolarValuedSets.BpvSet.polarise` method is provided for 
 
 In the limit case of no indeterminate membership characteristics, we recover this way standard crisp sets and the previous set operations implement in fact a Boolean algebra [BIS-2004_3p]_. 
 
-The ordered commutative epistemic fusion ring
-.............................................
+The partially ordered commutative epistemic fusion ring
+.......................................................
 
-The **disjunctive and conjunctive epistemic fusions** of two bpv-sets *X* and *Y*, denoted :math:`X \oplus Y` respectively :math:`X \ominus Y`, give the bpv-set defined as follows.
+The disjunctive and conjunctive epistemic fusions of two bpv-sets *X* and *Y*, denoted :math:`X \oplus Y` respectively :math:`X \ominus Y`, give the bpv-sets defined as follows.
 
 For all :math:`z \in E_{X \oplus Y}` the membership characteristic :math:`r\big(\,z \in (X \oplus Y)\,\big)\; =`
 
@@ -4609,18 +4609,15 @@ In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunct
      s5:  +0.0000
      s4:  -0.4899
 
-Due to the commutativity of the numerical binary *max* and *min* operators, both :math:`\oplus` and :math:`\ominus` are **cummutative**.
+Due to the commutativity of the numerical binary *max* and *min* operators, both :math:`\oplus` and :math:`\ominus` are **cummutative**. Mind however, that similarly to a mean or average operator, both epistemic fusion operators are not associative.
 
-Let :math:`\mathcal{S}(X)` denote the set of all possible bpv-sets that may be defined on a given finite set *X* of dimension *n*. Let :math:`\bf{0} \in \mathcal{S}(X)`  denote the completely indeterminate bpv-set, :math:`\bf{+1} \in \mathcal{S}(X)` the crisp completely +1.0 determined full bvp-set, and :math:`\bf{-1} \in \mathcal{S}(X)` the completely -1.0 determined empty bvp-set. It is worthwhile noticing that bpv-set :math:`\bf{0}` is the **neutral** element and bpv-set :math:`\bf{+1}` is the **absorbent** element of the :math:`\oplus` operator. Similarly, bpv-set :math:`\bf{+1}` is the **neutral** element and bpv-set :math:`\bf{0}` is the **absorbent** element of the :math:`\ominus` operator.
+Let :math:`\mathcal{S}(A)` denote the set of all possible bpv-sets that may be defined on a given finite set *A* of dimension *n*. Let :math:`\bf{0} \in \mathcal{S}(A)`  denote the completely indeterminate bpv-set, :math:`\bf{+1} \in \mathcal{S}(A)` the crisp completely +1.0 determined full bvp-set, and :math:`\bf{-1} \in \mathcal{S}(A)` the completely -1.0 determined empty bvp-set. It is worthwhile noticing that bpv-set :math:`\bf{0}` is the **neutral** element and bpv-set :math:`\bf{+1}` is the **absorbent** element of the :math:`\oplus` operator. Similarly, bpv-set :math:`\bf{+1}` is the **neutral** element and bpv-set :math:`\bf{0}` is the **absorbent** element of the :math:`\ominus` operator.
 
-To every bpv-set :math:`\mathcal{X} \in \mathcal{S}(X)` we may associate its negated --dual--  bpv-set :math:`-\mathcal{X}` such that :math:`\mathcal{X} \oplus -\mathcal{X} \;=\; \bf{0}`. 
+To every bpv-set :math:`X \in \mathcal{S}(A)` we may associate its negated --dual--  bpv-set :math:`-X` such that :math:`X \oplus -X \;=\; X \ominus -X \;=\; \bf{0}` . 
 
-The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(X)` a partial **sharpness** ordering denoted :math:`\succcurlyeq` and defined as follows. Let :math:`\mathcal{Y}` and :math:`\mathcal{Z}` be two bpv-sets in :math:`\mathcal{S}(X)`. We say that :math:`\mathcal{Y} \,\succcurlyeq\, \mathcal{Z}` when for all :math:`x \in X` either :math:`\mathcal{Y}(x) \geqslant \mathcal{Z}(x) \geqslant 0` or, :math:`\mathcal{Y}(x) \leqslant \mathcal{Z}(x) \leqslant 0`. Minimal sharp appears to be the bpv-set :math:`\bf{0}`. Maximal sharp become all math:`2^n` completely determined subsets of the support set *X*.
+The disjunctive epistemic fusion operator induces furthermore on :math:`\mathcal{S}(A)` a partial **sharpness** ordering denoted :math:`\succcurlyeq` and defined as follows. Let *X* and *Y* be two bpv-sets in :math:`\mathcal{S}(A)`. We say that :math:`X \,\succcurlyeq\, Y` when :math:`\forall a \in A` either :math:`r(a \in X) \leqslant r(a \in Y) \leqslant 0.0` or, :math:`0.0 \leqslant r(a \in Y) \leqslant r(a \in X`. Minimal sharp is the bpv-set :math:`\bf{0}`. Maximal sharp are all math:`2^n` completely determined subsets of the support set *X*.
 
-Moreother :math:`\mathcal{Y} \,\succcurlyeq\, \mathcal{Z} \;\Leftrightarrow\; \big( \mathcal{Y} \oplus \mathcal{Z} \,\succcurlyeq\, \mathcal{Y}\,\big) \; \land \; \big(\mathcal{Y} \oplus \mathcal{Z} \,\succcurlyeq\, \mathcal{Z}\,\big)`.
-
-
-
+Moreother :math:`X \,\succcurlyeq\, Y \;\Leftrightarrow\; \big( X \oplus Y \,\succcurlyeq\, X \,\big) \; \land \; \big( X \oplus Y \,\succcurlyeq\, Y \,\big)`.
 
 .. note::
 
@@ -4949,10 +4946,10 @@ In our present Python3.12+ implementation, such a tiny problem is solved in less
 
 This nowadays available computational efficiency confers the bipolar-valued kernel concept a methodological premium for solving first or last choice decision problems on the basis of the bipolar-valued outranking digraph. But it also opens new opportunities for verifying and implementing kernel extraction algorithms for more graph theoretical purposes. New results, like enumerating the non isomorphic maximal independent sets --the kernels-- of known difficult graph instances like the *n*-cycle, could be obtained [ISO-2008p]_.
 
-.. note:: 
-   It is worthwhile noticing again the essential computational role, the logical **indeterminate value 0.0** is playing in this double fixpoint algorithm. To implement such kind of algorithms without a logical **neutral term** would be like implementing numerical algorithms without a possible usage of the number 0. Infinitely many trivial *impossibility theorems* and *dubious logical results* come up.
+It is worthwhile noticing again the essential computational role, the logical **indeterminate value 0.0** is playing in this double fixpoint algorithm. To implement such kind of algorithms without a logical **neutral term** would be like implementing numerical algorithms without a possible usage of the number 0. Infinitely many trivial *impossibility theorems* and *dubious logical results* come up.
 
-   Readers, aware of quantum algorithms, and more specifically of *Grover*'s quantum search algorithm [Gro-1996]_, may finally recognize a family resemblance with our double fixpoint kernel vector extraction. Indeed, the outranking digraph construction, leading to the majority margins of criteria significance, is similar to **quantum superposition**, not on the complex *Bloch* sphere, but on the normalized decimal [-1.0; +1.0] chracateristic domain. The coduality principle and the strong completeness of the outranking characteristic values induce furthermore some kind of **entanglement**. When reading a negative outranking characteristic, the converse outranking characteristic is necessarily positive. And, the bipolar-valued kernel equation corresponds in fact to a kind of anti-eigen equation which can be solved in *Grover*'s algorithm style with a small polynomial number of rotations, i.e. double fixpoint computations. So there is no need in these discrete quantum-like computations for complicated cryogenic and fault tolerant qubits [27]_.
+.. note:: 
+   Readers, aware of quantum algorithms, and more specifically of *Grover*'s quantum search algorithm [Gro-1996]_, may finally recognize a family resemblance with our double fixpoint kernel vector extraction. Indeed, the outranking digraph construction, leading to the majority margins of criteria significance, is similar to **quantum superposition**, not on the complex *Bloch* sphere, but on the normalized decimal [-1.0; +1.0] characteristic domain. The coduality principle and the strong completeness of the outranking characteristic values induce furthermore some kind of **quantum entanglement**. When reading a negative outranking characteristic value, the converse outranking characteristic value, wherever stored in this universe, is instantly known to be positive. And, the double of a bipolar-valued kernel equation corresponds in fact to a kind of *eigen* equation which can be solved in *Grover*'s algorithm style with a small polynomial number of **eigen rotations**, i.e. double fixpoint computations. So there is no need in our bipolar-valued logical computations for complicated cryogenic and fault tolerant qubits [27]_.
 
 Back to :ref:`Content Table <Pearls-label>`
 
