@@ -4617,7 +4617,7 @@ To every bpv-set :math:`X \in \mathcal{S}(A)` we may associate its negated --dua
 
 The disjunctive epistemic fusion operator induces furthermore on :math:`\mathcal{S}(A)` a partial **sharpness** ordering denoted :math:`\succcurlyeq` and defined as follows. Let *X* and *Y* be two bpv-sets in :math:`\mathcal{S}(A)`. We say that :math:`X \,\succcurlyeq\, Y` when :math:`\forall a \in A` either :math:`r(a \in X) \leqslant r(a \in Y) \leqslant 0.0` or, :math:`0.0 \leqslant r(a \in Y) \leqslant r(a \in X`. Minimal sharp is the bpv-set :math:`\bf{0}`. Maximal sharp are all math:`2^n` completely determined subsets of the support set *X*.
 
-Moreother :math:`X \,\succcurlyeq\, Y \;\Leftrightarrow\; \big( X \oplus Y \,\succcurlyeq\, X \,\big) \; \land \; \big( X \oplus Y \,\succcurlyeq\, Y \,\big)`.
+.. Moreother :math:`X \,\succcurlyeq\, Y \;\Leftrightarrow\; \big( X \oplus Y \,\succcurlyeq\, X \,\big) \; \land \; \big( X \oplus Y \,\succcurlyeq\, Y \,\big)`.
 
 .. note::
 

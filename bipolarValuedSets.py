@@ -315,6 +315,49 @@ class BpvSet(object):
         else:
             return False
 
+    def isSharper(self,other,Debug=False):
+        """
+        Returns the Bolean value of the test
+        """
+        from copy import deepcopy
+        newSelf = deepcopy(self)
+        newSelf.recodeValuation()
+        newOther = deepcopy(other)
+        newOther.recodeValuation()
+        
+        Med = newSelf.valuationDomain['med']
+        for it in newSelf.support:
+            if it not in newOther.support:
+                newOther.support[it] = newSelf.support[it]
+                newOther.membership[it] = Med
+        for it in newOther.support:
+            if it not in newSelf.support:
+                newSelf.support[it] = newOther.support[it]
+                newSelf.membership[it] = Med
+
+        IsSharper = True
+        for it in newSelf.support:
+            if Debug:
+                    print(it,newSelf.membership[it],newOther.membership[it])
+            if (newSelf.membership[it] > newOther.membership[it]) and \
+                   (newSelf.membership[it] <= Med):
+                IsSharper = False
+                break
+            elif (newSelf.membership[it] < newOther.membership[it]) and \
+                   (newSelf.membership[it] >= Med):
+                IsSharper = False
+                break
+            elif(newSelf.membership[it] < Med) and \
+                   (newOther.membership[it] > Med):
+                IsSharper = False
+                break
+            elif(newSelf.membership[it] > Med) and \
+                   (newOther.membership[it] < Med):
+                IsSharper = False
+                break
+                
+        return IsSharper
+
     def isSubset(self,other,/):
         """
         Return the bipolar-valued credibility that self is a bpv-subset of other
@@ -686,9 +729,8 @@ if __name__ == "__main__":
                       Debug=False)
     
     #X.showMembershipCharacteristics(Normalized=False)
-    X.showMe
-    mbershipCharacteristics()
-    Y = RandomBpvSet(numberOfElements=3,elementNamePrefix='s',
+    X.showMembershipCharacteristics()
+    Y = RandomBpvSet(numberOfElements=5,elementNamePrefix='s',
                       undeterminateness=0.1,
                       valuationRange=(-1,1),
                       seed=2,ndigits=4,
