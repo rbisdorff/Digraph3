@@ -4612,7 +4612,7 @@ In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunct
 
 Due to the commutativity of the numerical binary *max* and *min* operators, both :math:`\oplus` and :math:`\otimes` operators are **cummutative**. Mind however, that similarly to a mean or average operator, both epistemic fusion operators are not associative.
 
-Let :math:`\mathcal{S}(A)` denote the set of all possible bpv-sets that may be defined on a given finite set *A* of dimension *n*. Let :math:`\bf{0} \in \mathcal{S}(A)`  denote the completely indeterminate bpv-set, i.e :math:`r(a \in \bf{0}) \;=\; 0.0 , \; \forall \,a \in\, A`. It is worthwhile noticing that bpv-set :math:`\bf{0}` is the **neutral** element of the :math:`\oplus` operator. Similarly, bpv-set :math:`\bf{0}` is the **absorbent** element of the :math:`\otimes` operator. For any bpv-subset of *A*, the corresponding polarised --fully determined-- crisp subset is the **absorbent** element of the :math:`\oplus` and the neutral element of the :math:`\otimes` operator.
+Let :math:`\mathcal{S}(A)` denote the set of all possible bpv-sets that may be defined on a given finite set *A* of dimension *n*. Let :math:`\bf{0} \in \mathcal{S}(A)`  denote the completely indeterminate bpv-set, i.e :math:`r(a \in \bf{0}) \;=\; 0.0 , \; \forall \,a \in\, A`. It is worthwhile noticing that bpv-set :math:`\bf{0}` is the **neutral** element of the :math:`\oplus` operator. Similarly, bpv-set :math:`\bf{0}` is the **absorbent** element of the :math:`\otimes` operator. For any bpv-subset of *A*, the corresponding polarised --fully determined-- crisp subset is the **absorbent** element of the :math:`\oplus` and the **neutral** element of the :math:`\otimes` operator.
 
 .. code-block:: pycon
    :caption: Neutral and absorbent bpv-sets
@@ -4693,7 +4693,7 @@ The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a pa
 
 .. note::
 
-   The *relation* attribute of a bipolar-valued digraph is an example of a bpv-set where the support is given by the oriented pairs of the digraph's nodes. The *edges* attribute of bipolar-valued graphs is a second example of a bpv-set, where the support is given by the non-oriented pairs of the graph's vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership charcateristic vectors from the *Rubis* best choice computation [BIS-2006_1p]_. This is the topic of the next tutorial.
+   The *relation* attribute of a bipolar-valued digraph is an example of a bpv-set where the support is given by the oriented pairs of the digraph's nodes. The *edges* attribute of bipolar-valued graphs is a second example of a bpv-set, where the support is given by the non-oriented pairs of the graph's vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership characteristic vectors from the *Rubis* best choice computation [BIS-2006_1p]_. This is the topic of the next tutorial.
 
 Back to :ref:`Content Table <Pearls-label>`
 
