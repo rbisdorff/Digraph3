@@ -315,7 +315,7 @@ class BpvSet(object):
         else:
             return False
 
-    def isSharper(self,other,Debug=False):
+    def isSharper(self,other,Comments=False):
         """
         Returns the Bolean value of the test
         """
@@ -330,14 +330,10 @@ class BpvSet(object):
             if it not in newOther.support:
                 newOther.support[it] = newSelf.support[it]
                 newOther.membership[it] = Med
-##        for it in newOther.support:
-##            if it not in newSelf.support:
-##                newSelf.support[it] = newOther.support[it]
-##                newSelf.membership[it] = Med
 
         IsSharper = True
         for it in newSelf.support:
-            if Debug:
+            if Comments:
                     print(it,newSelf.membership[it],newOther.membership[it])
             if (newSelf.membership[it] > newOther.membership[it]) and \
                    (newSelf.membership[it] <= Med):
@@ -347,14 +343,6 @@ class BpvSet(object):
                    (newSelf.membership[it] >= Med):
                 IsSharper = False
                 break
-##            elif(newSelf.membership[it] < Med) and \
-##                   (newOther.membership[it] > Med):
-##                IsSharper = False
-##                break
-##            elif(newSelf.membership[it] > Med) and \
-##                   (newOther.membership[it] < Med):
-##                IsSharper = False
-##                break
                 
         return IsSharper
 
@@ -476,7 +464,7 @@ class BpvSet(object):
         fusion.cardinality = fusion.computeCardinality()
         return fusion
 
-    def ominus(self,other,/):
+    def otimes(self,other,/):
         """
         Returns the disjunctive fusion of self and other
         """
@@ -743,11 +731,11 @@ if __name__ == "__main__":
     D.strip()
     Op = X.oplus(Y)
     Op.showMembershipCharacteristics()
-    Om = X.ominus(Y)
+    Om = X.otimes(Y)
     Om.showMembershipCharacteristics()
     M = RandomBpvSet(undeterminateness=1.0,elementNamePrefix='s')
     Oxmp = X.oplus(M)
     Oxmp.showMembershipCharacteristics()
-    Oxmm = X.ominus(M)
+    Oxmm = X.otimes(M)
     Oxmm.showMembershipCharacteristics()
 

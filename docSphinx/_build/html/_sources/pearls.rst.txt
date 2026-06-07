@@ -40,6 +40,7 @@ Pearls of bipolar-valued epistemic logic
    
    :New:
 
+      * :ref:`Computational bipolar-valued set theory <Bipolar-Valued-Sets-Tutorial-label>`
       * :ref:`Applications of bipolar-valued base 3 encoded Bachet numbers <Bachet-Tutorial-label>`	 
       *	:ref:`Condorcet's 1785 critical perspective on the simple plurality voting rule <Condorcet-Tutorial-label>`
       * :ref:`On characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>`     
@@ -1977,7 +1978,7 @@ The approval votes of each voter define now on the set of eligible candidates th
 
 For voter *v001*, for instance, the best approved candidate *a12* is strictly preferred to candidates: *a01*, *a02*, *a03*, *a05*, *a06*, *a07*, *a08*, *a11*, *a14* and *15*. No candidate is preferred to *a12* and the comparison with *a04*, *a09*, *a10* and *a13* is not communicated, hence indeterminate. Mind by the way that the reflexive comparison of *a12* with itself is, as usual, is ignored, i.e. indeterminate. Each voter *v* defines thus a partially determined transitive strict preference relation denoted :math:`\succ_v` on the eligible candidates.
 
-For each pair of eligible candidates, we aggregate the previous individual voter's preferences into a truth characteristic of the statement: candidate *x* is *better approved than* candidate *y*, denoted :math:`r(x \succ y)`
+For each pair of eligible candidates, we superpose the previous individual voter's preferences into a truth characteristic of the statement: candidate *x* is *better approved than* candidate *y*, denoted :math:`r(x \succ y)`
 
 :math:`r(x \succ y)\;=\; \sum_v \big(\,r(x \succ_v y)\, \big)`.
 
@@ -4423,7 +4424,7 @@ Let proposition *P* stating again what candidate should be winning the election.
 
       :math:`r_2(P) \in [-1.0;+1.0]`.
 
-We may aggregate these characteristic functions with the help of a **disjunctive fusion** operator :math:`\oplus`.
+We may superpose these characteristic functions with the help of a **disjunctive fusion** operator :math:`\oplus`.
 
    - :math:`r(P) \;=\: r_1(P) \,\oplus\, r_2(P) \;=`
 
@@ -4572,7 +4573,7 @@ In the limit case of no indeterminate membership characteristics, we recover thi
 The partially ordered commutative epistemic fusion ring
 .......................................................
 
-The disjunctive and conjunctive epistemic fusions of two bpv-sets *X* and *Y*, denoted :math:`X \oplus Y` respectively :math:`X \ominus Y`, give the bpv-sets defined as follows.
+The disjunctive and conjunctive epistemic fusions of two bpv-sets *X* and *Y*, denoted :math:`X \oplus Y` respectively :math:`X \otimes Y`, give the bpv-sets defined as follows.
 
 For all :math:`z \in E_{X \oplus Y}` the membership characteristic :math:`r\big(\,z \in (X \oplus Y)\,\big)\; =`
 
@@ -4580,7 +4581,7 @@ For all :math:`z \in E_{X \oplus Y}` the membership characteristic :math:`r\big(
     - :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*, and :math:`r(z \in X) \leqslant 0.0` and :math:`r(z \in Y) \leqslant 0.0`,
     - :math:`0.0` otherwise.
 
-For all :math:`z \in E_{X \ominus Y}` the membership characteristic :math:`r\big(\,z \in (X \ominus Y)\,\big)\; =`
+For all :math:`z \in E_{X \otimes Y}` the membership characteristic :math:`r\big(\,z \in (X \otimes Y)\,\big)\; =`
 
     - :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*, and :math:`r(z \in X) \geqslant 0.0` and :math:`r(z \in Y) \geqslant 0.0`, or
     - :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*, and :math:`r(z \in X) \leqslant 0.0` and :math:`r(z \in Y) \leqslant 0.0`,
@@ -4601,7 +4602,7 @@ In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunct
      s3:  +0.0000
      s5:  +0.0000
      s4:  -0.4899
-   >>> (X.ominus(Y)).showMembershipCharacteristics()
+   >>> (X.otimes(Y)).showMembershipCharacteristics()
     # conjunctive epistemic fusion -  
      s2:  +0.6949
      s1:  +0.0000
@@ -4609,13 +4610,66 @@ In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunct
      s5:  +0.0000
      s4:  -0.4899
 
-Due to the commutativity of the numerical binary *max* and *min* operators, both :math:`\oplus` and :math:`\ominus` are **cummutative**. Mind however, that similarly to a mean or average operator, both epistemic fusion operators are not associative.
+Due to the commutativity of the numerical binary *max* and *min* operators, both :math:`\oplus` and :math:`\otimes` operators are **cummutative**. Mind however, that similarly to a mean or average operator, both epistemic fusion operators are not associative.
 
-Let :math:`\mathcal{S}(A)` denote the set of all possible bpv-sets that may be defined on a given finite set *A* of dimension *n*. Let :math:`\bf{0} \in \mathcal{S}(A)`  denote the completely indeterminate bpv-set, i.e :math:`r(a \in \bf{0}) \;=\; 0.0 , \; \forall \,a \in\, A`. It is worthwhile noticing that bpv-set :math:`\bf{0}` is the **neutral** element of the :math:`\oplus` operator. Similarly, bpv-set :math:`\bf{0}` is the **absorbent** element of the :math:`\ominus` operator. For any bpv-subset of *A*, the corresponding crisp --fully determined-- subset is the **absorbent** element of the the :math:`\oplus` operator and the **neutral** element of the :math:`\ominus` operator.  
+Let :math:`\mathcal{S}(A)` denote the set of all possible bpv-sets that may be defined on a given finite set *A* of dimension *n*. Let :math:`\bf{0} \in \mathcal{S}(A)`  denote the completely indeterminate bpv-set, i.e :math:`r(a \in \bf{0}) \;=\; 0.0 , \; \forall \,a \in\, A`. It is worthwhile noticing that bpv-set :math:`\bf{0}` is the **neutral** element of the :math:`\oplus` operator. Similarly, bpv-set :math:`\bf{0}` is the **absorbent** element of the :math:`\otimes` operator. For any bpv-subset of *A*, the corresponding crisp --fully determined-- subset is the **absorbent** element of the the :math:`\oplus` operator and the **neutral** element of the :math:`\otimes` operator.
 
-To every bpv-set :math:`X \in \mathcal{S}(A)` we may associate its negated --dual--  bpv-set :math:`-X` such that :math:`X \oplus -X \;=\; X \ominus -X \;=\; \bf{0}` . 
+.. code-block:: pycon
+   :caption: Working with bipolar-valued sets V
+   :name: bipolarValuedSets5
+   :linenos:
+   :emphasize-lines: 3-7,9-13
 
-The disjunctive epistemic fusion operator induces furthermore on :math:`\mathcal{S}(A)` a partial **sharpness** ordering denoted :math:`\succcurlyeq` and defined as follows. Let *X* and *Y* be two bpv-sets in :math:`\mathcal{S}(A)`. We say that :math:`X \,\succcurlyeq\, Y` when :math:`\forall a \in A` either :math:`r(a \in X) \leqslant r(a \in Y) \leqslant 0.0` or, :math:`0.0 \leqslant r(a \in Y) \leqslant r(a \in X`. Minimal sharp is the bpv-set :math:`\bf{0}`. Maximal sharp are all :math:`2^n` completely determined --crisp-- subsets of the support set *A*.
+   >>> O = RandomBpvSet(undeterminateness=1.0,elementNamePrefix='s')
+   >>> (X.oplus(O)).showMembershipCharacteristics()
+    s2:  +0.6949
+    s3:  +0.5275
+    s5:  +0.0000
+    s4:  -0.4899
+    s1:  -0.7313
+   >>> (X.otimes(O)).showMembershipCharacteristics()
+    s1:  +0.0000
+    s2:  +0.0000
+    s3:  +0.0000
+    s4:  +0.0000
+    s5:  +0.0000
+
+To every bpv-set :math:`X \in \mathcal{S}(A)` we may associate its negated --dual--  bpv-set :math:`-X` such that :math:`X \oplus -X \;=\; X \otimes -X \;=\; \bf{0}` . 
+
+.. code-block:: pycon
+   :caption: Working with bipolar-valued sets VI
+   :name: bipolarValuedSets6
+   :linenos:
+   :emphasize-lines: 2-6,8-12
+
+   >>> (X.oplus(-X)).showMembershipCharacteristics()
+    s1:  +0.0000
+    s2:  +0.0000
+    s3:  +0.0000
+    s4:  +0.0000
+    s5:  +0.0000
+   >>> (X.otimes(-X)).showMembershipCharacteristics()
+    s1:  +0.0000
+    s2:  +0.0000
+    s3:  +0.0000
+    s4:  +0.0000
+    s5:  +0.0000
+
+The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a partial **sharpness** ordering denoted :math:`\succcurlyeq` and defined as follows. Let *X* and *Y* be two bpv-sets in :math:`\mathcal{S}(A)`. We say that :math:`X \,\succcurlyeq\, Y` when :math:`\forall a \in A` either :math:`r(a \in X) \leqslant r(a \in Y) \leqslant 0.0` or, :math:`0.0 \leqslant r(a \in Y) \leqslant r(a \in X`. Minimal sharp is the bpv-set :math:`\bf{0}`. Maximal sharp are all :math:`2^n` completely determined --crisp-- subsets of the support set *A*.
+
+.. code-block:: pycon
+   :caption: Working with bipolar-valued sets VII
+   :name: bipolarValuedSets7
+   :linenos:
+   :emphasize-lines: 2-6
+
+   >>> (X.isSharper(O,Comments=True)
+     s1 -0.7313 0.0000
+     s2  0.6949 0.0000
+     s3  0.5275 0.0000
+     s4 -0.4899 0.0000
+     s5  0.0000 0.0000
+    True
 
 .. note::
 
