@@ -46,6 +46,7 @@ Wecome! This is the documentation for the **Digraph3** *Python* programming reso
 Parts of the documentation
 ..........................
 :New:
+   * :ref:`Introducing computational bipolar-valued set theory <Bipolar-Valued-Sets-Tutorial-label>`
    * A case study on :ref:`fairly matching students and internships <InternshipsMatching-Tutorial-label>`
    * A case study about :ref:`fairly matching classmates into partner pairs <RoommatesMatching-Tutorial-label>`
    * A tutorial on :ref:`partially ranking from multiple incommensurable performance criteria <Partial-Ranking-Tutorial-label>`

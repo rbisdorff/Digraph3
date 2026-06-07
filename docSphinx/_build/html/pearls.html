@@ -226,7 +226,7 @@
 <dl class="field-list simple" id="pearls-label">
 <dt class="field-odd">New<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="#bipolar-valued-sets-tutorial-label"><span class="std std-ref">Computational bipolar-valued set theory</span></a></p></li>
+<li><p><a class="reference internal" href="#bipolar-valued-sets-tutorial-label"><span class="std std-ref">Introducing computational bipolar-valued set theory</span></a></p></li>
 <li><p><a class="reference internal" href="#bachet-tutorial-label"><span class="std std-ref">Applications of bipolar-valued base 3 encoded Bachet numbers</span></a></p></li>
 <li><p><a class="reference internal" href="#condorcet-tutorial-label"><span class="std std-ref">Condorcet’s 1785 critical perspective on the simple plurality voting rule</span></a></p></li>
 <li><p><a class="reference internal" href="#sufficiency-tutorial-label"><span class="std std-ref">On characterizing bipolar-valued outranking digraphs</span></a></p></li>
@@ -4258,8 +4258,8 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>In order to formalize the previous intuitions, we are attaching to any logical proposition or statement <em>P</em> a characteristic function <em>r(P)</em> taking value in the decimal interval [-1.0;+1.0] with following semantics:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><img class="math" src="_images/math/67de7be8892b7576cc030813f4ed43d8072bc249.png" alt="0.0 &lt; r(P) \le +1.0"/> means statement <em>P</em> is <strong>more or less true</strong>;</p></li>
-<li><p><img class="math" src="_images/math/ba439d737d6cc1ff7654446316d6b9119d1b5038.png" alt="-1.0 \ge r(P) &lt; 0.0"/> means statement <em>P</em> is <strong>more or less false</strong>;</p></li>
+<li><p><img class="math" src="_images/math/c2fa2b4fd46dcdfbb1051cd4470e0bb8cf6438b9.png" alt="0.0 &lt; r(P) \leqslant +1.0"/> means statement <em>P</em> is <strong>more or less true</strong>;</p></li>
+<li><p><img class="math" src="_images/math/2580513102b62172fa9a583ce07f9beda00f12d9.png" alt="-1.0 \geqslant r(P) &lt; 0.0"/> means statement <em>P</em> is <strong>more or less false</strong>;</p></li>
 <li><p><img class="math" src="_images/math/4b9ffb1630863f647d6607f6e0c53ab2f24f2feb.png" alt="r(P) = 0.0"/> means statement <em>P</em> is <strong>indeterminate</strong>.</p></li>
 </ul>
 </div></blockquote>
@@ -4333,7 +4333,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>The <strong>symmetric difference</strong> of bpv-sets <em>X</em> and <em>Y</em>, denoted <em>X^Y</em>, is the set difference of their union and intersection, <img class="math" src="_images/math/e30f09e33648a3099522b73e8dccac121e0e1d0b.png" alt="(X \cup Y) \,-\, (X \cap Y)"/> or the union of their reciprocal set differences <img class="math" src="_images/math/ba6561f2c4a3e81972555f5080f4ad1f30a6a057.png" alt="(X - Y) \,\cup\, (Y - X)"/>.</p>
 <p>The <a class="reference internal" href="techDoc.html#module-bipolarValuedSets" title="bipolarValuedSets"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bipolarValuedSets</span></code></a> Digraph3 module provides, with the <a class="reference internal" href="techDoc.html#bipolarValuedSets.BpvSet" title="bipolarValuedSets.BpvSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">BpvSet</span></code></a> class, a Python implementation of such bpv-sets. In <a class="reference internal" href="#bipolarvaluedsets1"><span class="std std-numref">Listing 3.56</span></a> we use the <a class="reference internal" href="techDoc.html#bipolarValuedSets.RandomBpvSet" title="bipolarValuedSets.RandomBpvSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">RandomBpvSet</span></code></a> class for generating two random bpv-sets <em>X</em> and <em>Y</em> with a common support of three elements <em>s1</em>, <em>s2</em> and <em>s3</em>.</p>
 <div class="literal-block-wrapper docutils container" id="bipolarvaluedsets1">
-<div class="code-block-caption"><span class="caption-number">Listing 3.56 </span><span class="caption-text">Working with bipolar-valued sets I</span><a class="headerlink" href="#bipolarvaluedsets1" title="Link to this code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.56 </span><span class="caption-text">Generating random bpv-sets</span><a class="headerlink" href="#bipolarvaluedsets1" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bipolarValuedSets</span> <span class="kn">import</span> <span class="n">RandomBpvSet</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">RandomBpvSet</span><span class="p">(</span><span class="n">numberOfElements</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">elementNamePrefix</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span>
 <span class="linenos"> 3</span><span class="gp">... </span>    <span class="n">undeterminateness</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">valuationRange</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -4354,7 +4354,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </div>
 <p>In <a class="reference internal" href="#bipolarvaluedsets2"><span class="std std-numref">Listing 3.57</span></a> below we illustrate the bipolar-valued set <strong>union</strong> and <strong>intersection</strong>.</p>
 <div class="literal-block-wrapper docutils container" id="bipolarvaluedsets2">
-<div class="code-block-caption"><span class="caption-number">Listing 3.57 </span><span class="caption-text">Working with bipolar-valued sets II</span><a class="headerlink" href="#bipolarvaluedsets2" title="Link to this code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.57 </span><span class="caption-text">Set union and intersection of bpv-sets</span><a class="headerlink" href="#bipolarvaluedsets2" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">|</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
 <span class="linenos"> 2</span><span class="go"> # Python&#39;s set union symbol is |</span>
 <span class="hll"><span class="linenos"> 3</span><span class="go"> s1:  +0.9121</span>
@@ -4374,7 +4374,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </div>
 <p>In <a class="reference internal" href="#bipolarvaluedsets3"><span class="std std-numref">Listing 3.58</span></a> below we illustrate the bipolar-valued set <strong>difference</strong> and <strong>symmetric difference</strong>.</p>
 <div class="literal-block-wrapper docutils container" id="bipolarvaluedsets3">
-<div class="code-block-caption"><span class="caption-number">Listing 3.58 </span><span class="caption-text">Working with bipolar-valued sets III</span><a class="headerlink" href="#bipolarvaluedsets3" title="Link to this code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.58 </span><span class="caption-text">Difference and symmetric differences of bpv-sets</span><a class="headerlink" href="#bipolarvaluedsets3" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">-</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
 <span class="linenos"> 2</span><span class="go"> # Python&#39;s set difference is -</span>
 <span class="hll"><span class="linenos"> 3</span><span class="go"> s3:  +0.5275</span>
@@ -4441,7 +4441,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </div></blockquote>
 <p>In <a class="reference internal" href="#bipolarvaluedsets4"><span class="std std-numref">Listing 3.59</span></a> below we illustrate the disjunctive and conjunctive fusion operators.</p>
 <div class="literal-block-wrapper docutils container" id="bipolarvaluedsets4">
-<div class="code-block-caption"><span class="caption-number">Listing 3.59 </span><span class="caption-text">Working with bipolar-valued sets IV</span><a class="headerlink" href="#bipolarvaluedsets4" title="Link to this code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.59 </span><span class="caption-text">Disjunctive and conjunctive fusion of bpv-sets</span><a class="headerlink" href="#bipolarvaluedsets4" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">oplus</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
 <span class="linenos"> 2</span><span class="go"> # disjunctive epistemic fusion -</span>
 <span class="hll"><span class="linenos"> 3</span><span class="go">  s2:  +0.8957</span>
@@ -4460,28 +4460,41 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </div>
 </div>
 <p>Due to the commutativity of the numerical binary <em>max</em> and <em>min</em> operators, both <img class="math" src="_images/math/2db0a4269b9c3cbe81b65f5b18ec9a4f1e2246ca.png" alt="\oplus"/> and <img class="math" src="_images/math/d8313fbdd7297ad6fb4978808ee6ee23af70bf20.png" alt="\otimes"/> operators are <strong>cummutative</strong>. Mind however, that similarly to a mean or average operator, both epistemic fusion operators are not associative.</p>
-<p>Let <img class="math" src="_images/math/670c1a35fcd5cab5e00e9981d740edc44b3b0564.png" alt="\mathcal{S}(A)"/> denote the set of all possible bpv-sets that may be defined on a given finite set <em>A</em> of dimension <em>n</em>. Let <img class="math" src="_images/math/d2a7a9134ffce7190d7bdf8f97da83114ae3575d.png" alt="\bf{0} \in \mathcal{S}(A)"/>  denote the completely indeterminate bpv-set, i.e <img class="math" src="_images/math/e2030ac3f8bc140abe7943ebaa04eb469d93f77a.png" alt="r(a \in \bf{0}) \;=\; 0.0 , \; \forall \,a \in\, A"/>. It is worthwhile noticing that bpv-set <img class="math" src="_images/math/9f6c3c1fccc6aedeaba5d79feb369ec59a1114dd.png" alt="\bf{0}"/> is the <strong>neutral</strong> element of the <img class="math" src="_images/math/2db0a4269b9c3cbe81b65f5b18ec9a4f1e2246ca.png" alt="\oplus"/> operator. Similarly, bpv-set <img class="math" src="_images/math/9f6c3c1fccc6aedeaba5d79feb369ec59a1114dd.png" alt="\bf{0}"/> is the <strong>absorbent</strong> element of the <img class="math" src="_images/math/d8313fbdd7297ad6fb4978808ee6ee23af70bf20.png" alt="\otimes"/> operator. For any bpv-subset of <em>A</em>, the corresponding crisp –fully determined– subset is the <strong>absorbent</strong> element of the the <img class="math" src="_images/math/2db0a4269b9c3cbe81b65f5b18ec9a4f1e2246ca.png" alt="\oplus"/> operator and the <strong>neutral</strong> element of the <img class="math" src="_images/math/d8313fbdd7297ad6fb4978808ee6ee23af70bf20.png" alt="\otimes"/> operator.</p>
+<p>Let <img class="math" src="_images/math/670c1a35fcd5cab5e00e9981d740edc44b3b0564.png" alt="\mathcal{S}(A)"/> denote the set of all possible bpv-sets that may be defined on a given finite set <em>A</em> of dimension <em>n</em>. Let <img class="math" src="_images/math/d2a7a9134ffce7190d7bdf8f97da83114ae3575d.png" alt="\bf{0} \in \mathcal{S}(A)"/>  denote the completely indeterminate bpv-set, i.e <img class="math" src="_images/math/e2030ac3f8bc140abe7943ebaa04eb469d93f77a.png" alt="r(a \in \bf{0}) \;=\; 0.0 , \; \forall \,a \in\, A"/>. It is worthwhile noticing that bpv-set <img class="math" src="_images/math/9f6c3c1fccc6aedeaba5d79feb369ec59a1114dd.png" alt="\bf{0}"/> is the <strong>neutral</strong> element of the <img class="math" src="_images/math/2db0a4269b9c3cbe81b65f5b18ec9a4f1e2246ca.png" alt="\oplus"/> operator. Similarly, bpv-set <img class="math" src="_images/math/9f6c3c1fccc6aedeaba5d79feb369ec59a1114dd.png" alt="\bf{0}"/> is the <strong>absorbent</strong> element of the <img class="math" src="_images/math/d8313fbdd7297ad6fb4978808ee6ee23af70bf20.png" alt="\otimes"/> operator. For any bpv-subset of <em>A</em>, the corresponding polarised –fully determined– crisp subset is the <strong>absorbent</strong> element of the <img class="math" src="_images/math/2db0a4269b9c3cbe81b65f5b18ec9a4f1e2246ca.png" alt="\oplus"/> and the neutral element of the <img class="math" src="_images/math/d8313fbdd7297ad6fb4978808ee6ee23af70bf20.png" alt="\otimes"/> operator.</p>
 <div class="literal-block-wrapper docutils container" id="bipolarvaluedsets5">
-<div class="code-block-caption"><span class="caption-number">Listing 3.60 </span><span class="caption-text">Working with bipolar-valued sets V</span><a class="headerlink" href="#bipolarvaluedsets5" title="Link to this code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.60 </span><span class="caption-text">Neutral and absorbent bpv-sets</span><a class="headerlink" href="#bipolarvaluedsets5" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">O</span> <span class="o">=</span> <span class="n">RandomBpvSet</span><span class="p">(</span><span class="n">undeterminateness</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">elementNamePrefix</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
-<span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">oplus</span><span class="p">(</span><span class="n">O</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="hll"><span class="linenos"> 3</span><span class="go"> s2:  +0.6949</span>
-</span><span class="hll"><span class="linenos"> 4</span><span class="go"> s3:  +0.5275</span>
-</span><span class="hll"><span class="linenos"> 5</span><span class="go"> s5:  +0.0000</span>
-</span><span class="hll"><span class="linenos"> 6</span><span class="go"> s4:  -0.4899</span>
-</span><span class="hll"><span class="linenos"> 7</span><span class="go"> s1:  -0.7313</span>
-</span><span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">otimes</span><span class="p">(</span><span class="n">O</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="hll"><span class="linenos"> 9</span><span class="go"> s1:  +0.0000</span>
-</span><span class="hll"><span class="linenos">10</span><span class="go"> s2:  +0.0000</span>
-</span><span class="hll"><span class="linenos">11</span><span class="go"> s3:  +0.0000</span>
-</span><span class="hll"><span class="linenos">12</span><span class="go"> s4:  +0.0000</span>
-</span><span class="hll"><span class="linenos">13</span><span class="go"> s5:  +0.0000</span>
+<span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Xp</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">polarise</span><span class="p">(</span><span class="n">inSite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">oplus</span><span class="p">(</span><span class="n">O</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="hll"><span class="linenos"> 4</span><span class="go"> s2:  +0.6949</span>
+</span><span class="hll"><span class="linenos"> 5</span><span class="go"> s3:  +0.5275</span>
+</span><span class="hll"><span class="linenos"> 6</span><span class="go"> s5:  +0.0000</span>
+</span><span class="hll"><span class="linenos"> 7</span><span class="go"> s4:  -0.4899</span>
+</span><span class="hll"><span class="linenos"> 8</span><span class="go"> s1:  -0.7313</span>
+</span><span class="linenos"> 9</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">oplus</span><span class="p">(</span><span class="n">Xp</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="hll"><span class="linenos">10</span><span class="go"> s2:  +1.0000</span>
+</span><span class="hll"><span class="linenos">11</span><span class="go"> s3:  +1.0000</span>
+</span><span class="hll"><span class="linenos">12</span><span class="go"> s5:  +0.0000</span>
+</span><span class="hll"><span class="linenos">13</span><span class="go"> s4:  -1.0000</span>
+</span><span class="hll"><span class="linenos">14</span><span class="go"> s1:  -1.0000</span>
+</span><span class="linenos">15</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">otimes</span><span class="p">(</span><span class="n">O</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="hll"><span class="linenos">16</span><span class="go"> s1:  +0.0000</span>
+</span><span class="hll"><span class="linenos">17</span><span class="go"> s2:  +0.0000</span>
+</span><span class="hll"><span class="linenos">18</span><span class="go"> s3:  +0.0000</span>
+</span><span class="hll"><span class="linenos">19</span><span class="go"> s4:  +0.0000</span>
+</span><span class="hll"><span class="linenos">20</span><span class="go"> s5:  +0.0000</span>
+</span><span class="linenos">21</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">otimes</span><span class="p">(</span><span class="n">Xp</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="hll"><span class="linenos">22</span><span class="go"> s2:  +0.6949</span>
+</span><span class="hll"><span class="linenos">23</span><span class="go"> s3:  +0.5275</span>
+</span><span class="hll"><span class="linenos">24</span><span class="go"> s5:  +0.0000</span>
+</span><span class="hll"><span class="linenos">25</span><span class="go"> s4:  -0.4899</span>
+</span><span class="hll"><span class="linenos">26</span><span class="go"> s1:  -0.7313</span>
 </span></pre></div>
 </div>
 </div>
 <p>To every bpv-set <img class="math" src="_images/math/8b44e6fe18081bc764ac2d6a94235eff5bf8f22b.png" alt="X \in \mathcal{S}(A)"/> we may associate its negated –dual–  bpv-set <img class="math" src="_images/math/4c0c5bbe753ecd1ad28d5855a89f1a5d3a1a3640.png" alt="-X"/> such that <img class="math" src="_images/math/87f8541bb2019f44a5b8ac69e89278e3cca89a92.png" alt="X \oplus -X \;=\; X \otimes -X \;=\; \bf{0}"/> .</p>
 <div class="literal-block-wrapper docutils container" id="bipolarvaluedsets6">
-<div class="code-block-caption"><span class="caption-number">Listing 3.61 </span><span class="caption-text">Working with bipolar-valued sets VI</span><a class="headerlink" href="#bipolarvaluedsets6" title="Link to this code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.61 </span><span class="caption-text">Dual bvp-sets</span><a class="headerlink" href="#bipolarvaluedsets6" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">oplus</span><span class="p">(</span><span class="o">-</span><span class="n">X</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
 <span class="hll"><span class="linenos"> 2</span><span class="go"> s1:  +0.0000</span>
 </span><span class="hll"><span class="linenos"> 3</span><span class="go"> s2:  +0.0000</span>
@@ -4499,15 +4512,22 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </div>
 <p>The epistemic fusion operators induce furthermore on <img class="math" src="_images/math/670c1a35fcd5cab5e00e9981d740edc44b3b0564.png" alt="\mathcal{S}(A)"/> a partial <strong>sharpness</strong> ordering denoted <img class="math" src="_images/math/1f95145b8303d83bb9146359c3b22883ed793600.png" alt="\succcurlyeq"/> and defined as follows. Let <em>X</em> and <em>Y</em> be two bpv-sets in <img class="math" src="_images/math/670c1a35fcd5cab5e00e9981d740edc44b3b0564.png" alt="\mathcal{S}(A)"/>. We say that <img class="math" src="_images/math/c8ac5824dd1122607d82adbdeb4346bb3ab221d1.png" alt="X \,\succcurlyeq\, Y"/> when <img class="math" src="_images/math/7448ed6f0dee63db6f3a5586cc9e6a6e1118be0c.png" alt="\forall a \in A"/> either <img class="math" src="_images/math/b72fade6bf04630d72fdc5582dd7d1abf458634f.png" alt="r(a \in X) \leqslant r(a \in Y) \leqslant 0.0"/> or, <img class="math" src="_images/math/cb509f5250894ab5bb09e806c318326985a3d126.png" alt="0.0 \leqslant r(a \in Y) \leqslant r(a \in X"/>. Minimal sharp is the bpv-set <img class="math" src="_images/math/9f6c3c1fccc6aedeaba5d79feb369ec59a1114dd.png" alt="\bf{0}"/>. Maximal sharp are all <img class="math" src="_images/math/d76f16a00dc1dd4eb18ca913e933b14079c81f2b.png" alt="2^n"/> completely determined –crisp– subsets of the support set <em>A</em>.</p>
 <div class="literal-block-wrapper docutils container" id="bipolarvaluedsets7">
-<div class="code-block-caption"><span class="caption-number">Listing 3.62 </span><span class="caption-text">Working with bipolar-valued sets VII</span><a class="headerlink" href="#bipolarvaluedsets7" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">isSharper</span><span class="p">(</span><span class="n">O</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="hll"><span class="linenos">2</span><span class="go">  s1 -0.7313 0.0000</span>
-</span><span class="hll"><span class="linenos">3</span><span class="go">  s2  0.6949 0.0000</span>
-</span><span class="hll"><span class="linenos">4</span><span class="go">  s3  0.5275 0.0000</span>
-</span><span class="hll"><span class="linenos">5</span><span class="go">  s4 -0.4899 0.0000</span>
-</span><span class="hll"><span class="linenos">6</span><span class="go">  s5  0.0000 0.0000</span>
-</span><span class="linenos">7</span><span class="go"> True</span>
-</pre></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.62 </span><span class="caption-text">The sharpness ordering of bpv-sets</span><a class="headerlink" href="#bipolarvaluedsets7" title="Link to this code"></a></div>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">isSharper</span><span class="p">(</span><span class="n">O</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span class="linenos"> 2</span><span class="go">  s1 -0.7313  0.0000</span>
+<span class="linenos"> 3</span><span class="go">  s2  0.6949  0.0000</span>
+<span class="linenos"> 4</span><span class="go">  s3  0.5275  0.0000</span>
+<span class="linenos"> 5</span><span class="go">  s4 -0.4899  0.0000</span>
+<span class="linenos"> 6</span><span class="go">  s5  0.0000  0.0000</span>
+<span class="hll"><span class="linenos"> 7</span><span class="go"> True</span>
+</span><span class="hll"><span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Xp</span><span class="o">.</span><span class="n">isSharper</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span class="linenos"> 9</span><span class="go">  s1 -1.0000 -0.7313</span>
+<span class="linenos">10</span><span class="go">  s2  1.0000  0.6949</span>
+<span class="linenos">11</span><span class="go">  s3  1.0000  0.5275</span>
+<span class="linenos">12</span><span class="go">  s4 -1.0000 -0.4899</span>
+<span class="linenos">13</span><span class="go">  s5  0.0000  0.0000</span>
+<span class="hll"><span class="linenos">14</span><span class="go"> True</span>
+</span></pre></div>
 </div>
 </div>
 <div class="admonition note">

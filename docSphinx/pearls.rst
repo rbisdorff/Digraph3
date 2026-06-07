@@ -40,7 +40,7 @@ Pearls of bipolar-valued epistemic logic
    
    :New:
 
-      * :ref:`Computational bipolar-valued set theory <Bipolar-Valued-Sets-Tutorial-label>`
+      * :ref:`Introducing computational bipolar-valued set theory <Bipolar-Valued-Sets-Tutorial-label>`
       * :ref:`Applications of bipolar-valued base 3 encoded Bachet numbers <Bachet-Tutorial-label>`	 
       *	:ref:`Condorcet's 1785 critical perspective on the simple plurality voting rule <Condorcet-Tutorial-label>`
       * :ref:`On characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>`     
@@ -4401,8 +4401,8 @@ Bipolar-valued propositional calculus
 
 In order to formalize the previous intuitions, we are attaching to any logical proposition or statement *P* a characteristic function *r(P)* taking value in the decimal interval [-1.0;+1.0] with following semantics:
 
-  - :math:`0.0 < r(P) \le +1.0` means statement *P* is **more or less true**;
-  - :math:`-1.0 \ge r(P) < 0.0` means statement *P* is **more or less false**;
+  - :math:`0.0 < r(P) \leqslant +1.0` means statement *P* is **more or less true**;
+  - :math:`-1.0 \geqslant r(P) < 0.0` means statement *P* is **more or less false**;
   - :math:`r(P) = 0.0` means statement *P* is **indeterminate**.
   
 Negating a statement is hence operated by changing the sign of its characteristic function: :math:`r(\neg P) = -r(P)`. An important consequence appears. This **negation** :math:`\neg` operation does not necessarily correspond to taking the complement logical value. Indeed, *not true* does now only imply *false or indeterminate* and *not false* does only imply *true or indeterminate*. In fact, we are working in a balanced ternary logic with **negative** (false), **positive** (true) and **null** (indeterminate) characteristic values. A negative *affirmation* becomes here a positive *refutation* and vice versa [BIS-2004_3p]_. 
@@ -4475,7 +4475,7 @@ The **symmetric difference** of bpv-sets *X* and *Y*, denoted *X^Y*, is the set 
 The :py:mod:`bipolarValuedSets` Digraph3 module provides, with the :py:class:`~bipolarValuedSets.BpvSet` class, a Python implementation of such bpv-sets. In :numref:`bipolarValuedSets1` we use the :py:class:`~bipolarValuedSets.RandomBpvSet` class for generating two random bpv-sets *X* and *Y* with a common support of three elements *s1*, *s2* and *s3*. 
 
 .. code-block:: pycon
-   :caption: Working with bipolar-valued sets I
+   :caption: Generating random bpv-sets
    :name: bipolarValuedSets1
    :linenos:
    :emphasize-lines: 5-9,13-
@@ -4499,7 +4499,7 @@ The :py:mod:`bipolarValuedSets` Digraph3 module provides, with the :py:class:`~b
 In :numref:`bipolarValuedSets2` below we illustrate the bipolar-valued set **union** and **intersection**.
 
 .. code-block:: pycon
-   :caption: Working with bipolar-valued sets II
+   :caption: Set union and intersection of bpv-sets
    :name: bipolarValuedSets2
    :linenos:
    :emphasize-lines: 3-7,10-
@@ -4522,7 +4522,7 @@ In :numref:`bipolarValuedSets2` below we illustrate the bipolar-valued set **uni
 In :numref:`bipolarValuedSets3` below we illustrate the bipolar-valued set **difference** and **symmetric difference**. 
 
 .. code-block:: pycon
-   :caption: Working with bipolar-valued sets III
+   :caption: Difference and symmetric differences of bpv-sets
    :name: bipolarValuedSets3
    :linenos:
    :emphasize-lines: 3-7,9-13,17-
@@ -4590,7 +4590,7 @@ For all :math:`z \in E_{X \otimes Y}` the membership characteristic :math:`r\big
 In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunctive fusion operators.
 
 .. code-block:: pycon
-   :caption: Working with bipolar-valued sets IV
+   :caption: Disjunctive and conjunctive fusion of bpv-sets
    :name: bipolarValuedSets4
    :linenos:
    :emphasize-lines: 3-7,10-14
@@ -4612,32 +4612,45 @@ In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunct
 
 Due to the commutativity of the numerical binary *max* and *min* operators, both :math:`\oplus` and :math:`\otimes` operators are **cummutative**. Mind however, that similarly to a mean or average operator, both epistemic fusion operators are not associative.
 
-Let :math:`\mathcal{S}(A)` denote the set of all possible bpv-sets that may be defined on a given finite set *A* of dimension *n*. Let :math:`\bf{0} \in \mathcal{S}(A)`  denote the completely indeterminate bpv-set, i.e :math:`r(a \in \bf{0}) \;=\; 0.0 , \; \forall \,a \in\, A`. It is worthwhile noticing that bpv-set :math:`\bf{0}` is the **neutral** element of the :math:`\oplus` operator. Similarly, bpv-set :math:`\bf{0}` is the **absorbent** element of the :math:`\otimes` operator. For any bpv-subset of *A*, the corresponding crisp --fully determined-- subset is the **absorbent** element of the the :math:`\oplus` operator and the **neutral** element of the :math:`\otimes` operator.
+Let :math:`\mathcal{S}(A)` denote the set of all possible bpv-sets that may be defined on a given finite set *A* of dimension *n*. Let :math:`\bf{0} \in \mathcal{S}(A)`  denote the completely indeterminate bpv-set, i.e :math:`r(a \in \bf{0}) \;=\; 0.0 , \; \forall \,a \in\, A`. It is worthwhile noticing that bpv-set :math:`\bf{0}` is the **neutral** element of the :math:`\oplus` operator. Similarly, bpv-set :math:`\bf{0}` is the **absorbent** element of the :math:`\otimes` operator. For any bpv-subset of *A*, the corresponding polarised --fully determined-- crisp subset is the **absorbent** element of the :math:`\oplus` and the neutral element of the :math:`\otimes` operator.
 
 .. code-block:: pycon
-   :caption: Working with bipolar-valued sets V
+   :caption: Neutral and absorbent bpv-sets
    :name: bipolarValuedSets5
    :linenos:
-   :emphasize-lines: 3-7,9-13
+   :emphasize-lines: 4-8,10-14,16-20,22-26
 
    >>> O = RandomBpvSet(undeterminateness=1.0,elementNamePrefix='s')
+   >>> Xp = X.polarise(inSite=False)
    >>> (X.oplus(O)).showMembershipCharacteristics()
     s2:  +0.6949
     s3:  +0.5275
     s5:  +0.0000
     s4:  -0.4899
     s1:  -0.7313
+   >>> (X.oplus(Xp)).showMembershipCharacteristics()
+    s2:  +1.0000
+    s3:  +1.0000
+    s5:  +0.0000
+    s4:  -1.0000
+    s1:  -1.0000
    >>> (X.otimes(O)).showMembershipCharacteristics()
     s1:  +0.0000
     s2:  +0.0000
     s3:  +0.0000
     s4:  +0.0000
     s5:  +0.0000
+   >>> (X.otimes(Xp)).showMembershipCharacteristics()
+    s2:  +0.6949
+    s3:  +0.5275
+    s5:  +0.0000
+    s4:  -0.4899
+    s1:  -0.7313
 
 To every bpv-set :math:`X \in \mathcal{S}(A)` we may associate its negated --dual--  bpv-set :math:`-X` such that :math:`X \oplus -X \;=\; X \otimes -X \;=\; \bf{0}` . 
 
 .. code-block:: pycon
-   :caption: Working with bipolar-valued sets VI
+   :caption: Dual bvp-sets
    :name: bipolarValuedSets6
    :linenos:
    :emphasize-lines: 2-6,8-12
@@ -4658,17 +4671,24 @@ To every bpv-set :math:`X \in \mathcal{S}(A)` we may associate its negated --dua
 The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a partial **sharpness** ordering denoted :math:`\succcurlyeq` and defined as follows. Let *X* and *Y* be two bpv-sets in :math:`\mathcal{S}(A)`. We say that :math:`X \,\succcurlyeq\, Y` when :math:`\forall a \in A` either :math:`r(a \in X) \leqslant r(a \in Y) \leqslant 0.0` or, :math:`0.0 \leqslant r(a \in Y) \leqslant r(a \in X`. Minimal sharp is the bpv-set :math:`\bf{0}`. Maximal sharp are all :math:`2^n` completely determined --crisp-- subsets of the support set *A*.
 
 .. code-block:: pycon
-   :caption: Working with bipolar-valued sets VII
+   :caption: The sharpness ordering of bpv-sets
    :name: bipolarValuedSets7
    :linenos:
-   :emphasize-lines: 2-6
+   :emphasize-lines: 1,7,8,14
 
    >>> (X.isSharper(O,Comments=True)
-     s1 -0.7313 0.0000
-     s2  0.6949 0.0000
-     s3  0.5275 0.0000
-     s4 -0.4899 0.0000
-     s5  0.0000 0.0000
+     s1 -0.7313  0.0000
+     s2  0.6949  0.0000
+     s3  0.5275  0.0000
+     s4 -0.4899  0.0000
+     s5  0.0000  0.0000
+    True
+   >>> Xp.isSharper(X,Comments=True)
+     s1 -1.0000 -0.7313
+     s2  1.0000  0.6949
+     s3  1.0000  0.5275
+     s4 -1.0000 -0.4899
+     s5  0.0000  0.0000
     True
 
 .. note::
