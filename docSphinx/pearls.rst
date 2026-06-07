@@ -4582,7 +4582,7 @@ For all :math:`z \in E_{X \oplus Y}` the membership characteristic :math:`r\big(
 
 For all :math:`z \in E_{X \ominus Y}` the membership characteristic :math:`r\big(\,z \in (X \ominus Y)\,\big)\; =`
 
-    - :math:`\in\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*, and :math:`r(z \in X) \geqslant 0.0` and :math:`r(z \in Y) \geqslant 0.0`, or
+    - :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*, and :math:`r(z \in X) \geqslant 0.0` and :math:`r(z \in Y) \geqslant 0.0`, or
     - :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*, and :math:`r(z \in X) \leqslant 0.0` and :math:`r(z \in Y) \leqslant 0.0`,
     - :math:`0.0` otherwise.
 
@@ -4611,7 +4611,7 @@ In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunct
 
 Due to the commutativity of the numerical binary *max* and *min* operators, both :math:`\oplus` and :math:`\ominus` are **cummutative**. Mind however, that similarly to a mean or average operator, both epistemic fusion operators are not associative.
 
-Let :math:`\mathcal{S}(A)` denote the set of all possible bpv-sets that may be defined on a given finite set *A* of dimension *n*. Let :math:`\bf{0} \in \mathcal{S}(A)`  denote the completely indeterminate bpv-set, :math:`\bf{+1} \in \mathcal{S}(A)` the crisp completely +1.0 determined full bvp-set, and :math:`\bf{-1} \in \mathcal{S}(A)` the completely -1.0 determined empty bvp-set. It is worthwhile noticing that bpv-set :math:`\bf{0}` is the **neutral** element of the :math:`\oplus` operator. Similarly, bpv-set :math:`\bf{0}` is the **absorbent** element of the :math:`\ominus` operator.
+Let :math:`\mathcal{S}(A)` denote the set of all possible bpv-sets that may be defined on a given finite set *A* of dimension *n*. Let :math:`\bf{0} \in \mathcal{S}(A)`  denote the completely indeterminate bpv-set, i.e :math:`r(a \in \bf{0}) \;=\; 0.0 , \; \forall \,a \in\, A`. It is worthwhile noticing that bpv-set :math:`\bf{0}` is the **neutral** element of the :math:`\oplus` operator. Similarly, bpv-set :math:`\bf{0}` is the **absorbent** element of the :math:`\ominus` operator. For any bpv-subset of *A*, the corresponding crisp --fully determined-- subset is the **absorbent** element of the the :math:`\oplus` operator and the **neutral** element of the math:`\ominus` operator.  
 
 To every bpv-set :math:`X \in \mathcal{S}(A)` we may associate its negated --dual--  bpv-set :math:`-X` such that :math:`X \oplus -X \;=\; X \ominus -X \;=\; \bf{0}` . 
 
