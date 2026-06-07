@@ -347,14 +347,14 @@ class BpvSet(object):
                    (newSelf.membership[it] >= Med):
                 IsSharper = False
                 break
-            elif(newSelf.membership[it] < Med) and \
-                   (newOther.membership[it] > Med):
-                IsSharper = False
-                break
-            elif(newSelf.membership[it] > Med) and \
-                   (newOther.membership[it] < Med):
-                IsSharper = False
-                break
+##            elif(newSelf.membership[it] < Med) and \
+##                   (newOther.membership[it] > Med):
+##                IsSharper = False
+##                break
+##            elif(newSelf.membership[it] > Med) and \
+##                   (newOther.membership[it] < Med):
+##                IsSharper = False
+##                break
                 
         return IsSharper
 
