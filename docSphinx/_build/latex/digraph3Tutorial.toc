@@ -74,18 +74,18 @@
 \contentsline {subsubsection}{Introduction}{120}{subsubsection*.151}%
 \contentsline {subsubsection}{Incremental learning of historical performance quantiles}{121}{subsubsection*.152}%
 \contentsline {subsubsection}{Rating\sphinxhyphen {}by\sphinxhyphen {}ranking new performances with quantile norms}{124}{subsubsection*.153}%
-\contentsline {subsection}{\numberline {2.8}Computing the winner of an election with the \sphinxstyleliteralintitle {\sphinxupquote {votingProfiles}} module}{132}{subsection.2.8}%
-\contentsline {subsubsection}{Linear voting profiles}{132}{subsubsection*.159}%
+\contentsline {subsection}{\numberline {2.8}Computing the winner of a ranked voting election}{132}{subsection.2.8}%
+\contentsline {subsubsection}{Linear voting profiles}{133}{subsubsection*.159}%
 \contentsline {subsubsection}{Computing the winner}{134}{subsubsection*.160}%
 \contentsline {subsubsection}{The \sphinxstyleemphasis {Condorcet} winner}{135}{subsubsection*.161}%
 \contentsline {subsubsection}{Cyclic social preferences}{137}{subsubsection*.163}%
-\contentsline {subsubsection}{On generating realistic random linear voting profiles}{139}{subsubsection*.164}%
+\contentsline {subsubsection}{On generating realistic random linear voting profiles}{140}{subsubsection*.164}%
 \contentsline {subsection}{\numberline {2.9}On computing fair intergroup pairings}{144}{subsection.2.9}%
 \contentsline {subsubsection}{The fair intergroup pairing problem}{144}{subsubsection*.175}%
 \contentsline {subsubsection}{Generating the set of potential maximal matchings}{146}{subsubsection*.177}%
-\contentsline {subsubsection}{Measuring the fitness of a matching from a personal perspective}{147}{subsubsection*.178}%
+\contentsline {subsubsection}{Measuring the fitness of a matching from a personal perspective}{148}{subsubsection*.178}%
 \contentsline {subsubsection}{Computing the fairest intergroup pairing}{148}{subsubsection*.179}%
-\contentsline {subsubsection}{Fair versus stable pairings}{152}{subsubsection*.181}%
+\contentsline {subsubsection}{Fair versus stable pairings}{153}{subsubsection*.181}%
 \contentsline {subsubsection}{Relaxing the requirement for complete linear voting profiles}{165}{subsubsection*.184}%
 \contentsline {subsubsection}{Using Copeland scores for guiding the fairness enhancement}{168}{subsubsection*.185}%
 \contentsline {subsubsection}{Starting the fairness enhancement from a best determined Copeland matching}{170}{subsubsection*.186}%

@@ -67,7 +67,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{May 17, 2026}
+\date{June 09, 2026}
 \release{3.14.5}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -1601,7 +1601,7 @@ This is the methodological part of the tutorials.
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id334}}{\hyperref[\detokenize{tutorial:computing-the-winner-of-an-election-with-the-votingprofiles-module}]{\sphinxcrossref{Computing the winner of an election with the \sphinxcode{\sphinxupquote{votingProfiles}} module}}} (\autopageref*{\detokenize{tutorial:computing-the-winner-of-an-election-with-the-votingprofiles-module}})
+\phantomsection\label{\detokenize{tutorial:id334}}{\hyperref[\detokenize{tutorial:computing-the-winner-of-a-ranked-voting-election}]{\sphinxcrossref{Computing the winner of a ranked voting election}}} (\autopageref*{\detokenize{tutorial:computing-the-winner-of-a-ranked-voting-election}})
 
 \item {} 
 \sphinxAtStartPar
@@ -3750,7 +3750,7 @@ weighted courses.
 
 \sphinxAtStartPar
 In order to study aggregation of election results (see the tutorial on
-{\hyperref[\detokenize{tutorial:linearvoting-tutorial-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Computing the winner of an election with the votingProfiles module}}}}} (\autopageref*{\detokenize{tutorial:linearvoting-tutorial-label}})) in the context
+{\hyperref[\detokenize{tutorial:linearvoting-tutorial-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Computing the winner of a ranked voting election}}}}} (\autopageref*{\detokenize{tutorial:linearvoting-tutorial-label}})) in the context
 of bipolar\sphinxhyphen{}valued outranking digraphs, we provide furthermore a
 specific performance tableau model called \sphinxstylestrong{RandomRankPerformanceTableau}
 which provides ranks (linearly ordered performances without ties) of a given number of election candidates (decision actions) for a given number of weighted voters (performance criteria).
@@ -6749,8 +6749,11 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 
-\subsection{Computing the winner of an election with the \sphinxstyleliteralintitle{\sphinxupquote{votingProfiles}} module}
-\label{\detokenize{tutorial:computing-the-winner-of-an-election-with-the-votingprofiles-module}}\label{\detokenize{tutorial:linearvoting-tutorial-label}}
+\subsection{Computing the winner of a ranked voting election}
+\label{\detokenize{tutorial:computing-the-winner-of-a-ranked-voting-election}}\label{\detokenize{tutorial:linearvoting-tutorial-label}}
+\sphinxAtStartPar
+Ranked voting is an efficient voting system that strongly inhibits evil war\sphinxhyphen{}like election campaigns by automatically making highly divisive candidates unfit for winning any election. Only multi\sphinxhyphen{}partisan popular candidates have, with such a ranked voting procedure, a positive chance to eventually win an election.
+
 \begin{sphinxcontents}
 \begin{itemize}
 \item {} 
@@ -6780,7 +6783,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \subsubsection{Linear voting profiles}
 \label{\detokenize{tutorial:linear-voting-profiles}}
 \sphinxAtStartPar
-The \sphinxcode{\sphinxupquote{votingProfiles}} module provides resources for handling election results \sphinxcite{tutorial:adt-l2}, like the \sphinxcode{\sphinxupquote{LinearVotingProfile}} class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two ordered dictionaries, one for the voters and another one for the candidates. The linear ballots are stored in a standard dictionary.
+The \sphinxcode{\sphinxupquote{votingProfiles}} module provides resources for handling ranked voting election results \sphinxcite{tutorial:adt-l2}, like the \sphinxcode{\sphinxupquote{LinearVotingProfile}} class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two ordered dictionaries, one for the voters and another one for the candidates. The linear ballots are stored in a standard dictionary.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
  \PYG{n}{candidates} \PYG{o}{=} \PYG{n}{OrderedDict}\PYG{p}{(}\PYG{p}{[}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{)}\PYG{p}{,} \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{)}\PYG{p}{,} \PYG{o}{.}\PYG{o}{.}\PYG{o}{.}\PYG{p}{\PYGZcb{}}
@@ -6849,7 +6852,7 @@ Editing of the linear voting profile may be achieved by storing the data in a fi
 \subsubsection{Computing the winner}
 \label{\detokenize{tutorial:computing-the-winner}}
 \sphinxAtStartPar
-We may easily compute \sphinxstylestrong{uni\sphinxhyphen{}nominal votes}, i.e. how many times a candidate was ranked first, and see who is consequently the \sphinxstylestrong{simple majority} winner(s) in this election.
+We may easily compute \sphinxstylestrong{uni\sphinxhyphen{}nominal votes}, i.e. how many times a candidate was ranked first, and see who is consequently the \sphinxstylestrong{simple plurality} winner(s) in this election.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{v}\PYG{o}{.}\PYG{n}{computeUninominalVotes}\PYG{p}{(}\PYG{p}{)}
@@ -15071,7 +15074,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \subsubsection{Introduction}
 \label{\detokenize{tutorial:id182}}
 \sphinxAtStartPar
-Due to the public success of our common 2008 publication with Jean\sphinxhyphen{}Luc Marichal \sphinxcite{tutorial:isomis-08} , we present in this tutorial an example Python session for computing the \sphinxstylestrong{non isomorphic maximal independent sets} (MISs) from the 12\sphinxhyphen{}cycle graph, i.e. a \sphinxcode{\sphinxupquote{CirculantDigraph}} class instance of order 12 and symmetric circulants 1 and \sphinxhyphen{}1.
+Following the public success of our common 2008 publication with Jean\sphinxhyphen{}Luc Marichal \sphinxcite{tutorial:isomis-08} , we present in this tutorial an example Python session for computing the \sphinxstylestrong{non isomorphic maximal independent sets} (MISs) from the 12\sphinxhyphen{}cycle graph, i.e. a \sphinxcode{\sphinxupquote{CirculantDigraph}} class instance of order 12 and symmetric circulants 1 and \sphinxhyphen{}1.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{CirculantDigraph}

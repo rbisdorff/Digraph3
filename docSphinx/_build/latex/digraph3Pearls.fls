@@ -686,6 +686,10 @@ INPUT ./outrankingResult.png
 INPUT ./outrankingResult.png
 INPUT ./outrankingResult.png
 INPUT ./outrankingResult.png
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx8.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx6.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx5.tfm
 INPUT ./k1restricted.png
 INPUT ./k1restricted.png
 INPUT ./k1restricted.png
@@ -712,6 +716,8 @@ INPUT ./bestWorstOrientation.png
 INPUT ./bestWorstOrientation.png
 INPUT ./bestWorstOrientation.png
 INPUT ./bestWorstOrientation.png
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx7.tfm
 INPUT ./Bouyssou4Orig.png
 INPUT ./Bouyssou4Orig.png
 INPUT ./Bouyssou4Orig.png
@@ -824,6 +830,7 @@ INPUT /home/bisdorff/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200
 INPUT /home/bisdorff/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2488.600pk
 INPUT /home/bisdorff/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecxc1728.600pk
 INPUT /home/bisdorff/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb
