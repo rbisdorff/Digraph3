@@ -61,9 +61,9 @@
 \contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued epistemic logic}{119}{subsubsection*.129}%
 \contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued propositional calculus}{120}{subsubsection*.130}%
 \contentsline {subsubsection}{Superposition of elementary epistemic situations}{121}{subsubsection*.131}%
-\contentsline {subsubsection}{Computational bipolar\sphinxhyphen {}valued set theory}{121}{subsubsection*.132}%
+\contentsline {subsubsection}{Computational bipolar\sphinxhyphen {}valued set theory}{122}{subsubsection*.132}%
 \contentsline {subsubsection}{The partially ordered commutative epistemic fusion ring}{125}{subsubsection*.133}%
-\contentsline {subsection}{\numberline {3.6}Bipolar\sphinxhyphen {}valued kernel membership characteristic vectors}{127}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.6}Bipolar\sphinxhyphen {}valued kernel membership characteristic vectors}{128}{subsection.3.6}%
 \contentsline {subsubsection}{Kernel equation systems}{128}{subsubsection*.137}%
 \contentsline {subsubsection}{Solving bipolar\sphinxhyphen {}valued kernel equation systems}{129}{subsubsection*.138}%
 \contentsline {subsubsection}{Historical notes}{135}{subsubsection*.139}%

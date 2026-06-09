@@ -6041,14 +6041,21 @@ This way all tautologies and antologies of a classical propositional calculus li
 Partly determined characteristic values appear now when balancing positive epistemic evidences against negative epistemic evidences. A first example is given by the normalized majority margins obtained from a ranked voting election. For each pair (\sphinxstyleemphasis{x}, \sphinxstyleemphasis{y}) of eligible candidates, we balance the number of times a voter ranks \sphinxstyleemphasis{x} before \sphinxstyleemphasis{y} against the number of times a voter ranks \sphinxstyleemphasis{y} before \sphinxstyleemphasis{x}.  A positive majority margin thus warrants that candidate \sphinxstyleemphasis{x} is more or less preferred to candidate \sphinxstyleemphasis{y}, a negative majority margin warrants that candidate \sphinxstyleemphasis{x} is not more or less prefered to candidate \sphinxstyleemphasis{y}. A second example is given by the characteristic values of a normalized outranking relation when no considerable performance differences are taken into account. Yet another example is given by normalized \sphinxstyleemphasis{Copeland} or \sphinxstyleemphasis{NetFlows} ranking scores of a decision alternative \sphinxstyleemphasis{x}. These scores characterise the statement that an alternative is first ranked by balancing the number of outranked against the number of outranking alternatives. In all these cases, we observe \sphinxstylestrong{compensatory superpositions} of elementary epistemic situations.
 
 \sphinxAtStartPar
-But we may also operate \sphinxstylestrong{non compensatory superpositions} of elemetary epistemic situations. This is the case when taking into account considerable performance differences via the disjunctive fusion operator. Let proposition \sphinxstyleemphasis{P} stating that alternative \sphinxstyleemphasis{x} is ‘\sphinxstyleemphasis{performing at least as well}’ as alternative \sphinxstyleemphasis{y}. Let proposition \sphinxstyleemphasis{Q} furthermore stating that alternative \sphinxstyleemphasis{x} is showing on a performance criterion a considerable less performance than alternative \sphinxstyleemphasis{y} . Let \(r(P) \in [-1.0;+1.0]\) and \(r(Q) \in [-1.0;+1.0]\) denote their bipolar\sphinxhyphen{}valued characteristic values.
+But we may also operate \sphinxstylestrong{non compensatory superpositions} of elemetary epistemic situations. This is the case when taking into account considerable performance differences via the disjunctive fusion operator. Let proposition \sphinxstyleemphasis{P} stating that alternative \sphinxstyleemphasis{x} is ‘\sphinxstyleemphasis{performing at least as well}’ as alternative \sphinxstyleemphasis{y}. Let proposition \sphinxstyleemphasis{Q} furthermore stating that alternative \sphinxstyleemphasis{x} is showing on a performance criterion a considerable less performance than alternative \sphinxstyleemphasis{y} . Let \(r(P) \in [-1.0;+1.0]\) and \(r(Q) \in \{\,-1.0,\,0.0,\,+1.0\,\}\) denote their bipolar\sphinxhyphen{}valued characteristic values.
 
-\sphinxAtStartPar
-We may superpose these characteristic values with the help of the \sphinxstylestrong{disjunctive fusion} operator, denoted \(\oplus\).
-|   \(r\big(\,P\,\oplus\,Q\,\big) \;=\)
-|    \(\max\big(r(P),r(Q)\big)\) when \(r(P) \geq 0.0 \; \land \; r(Q) \geq 0.0\);
-|    \(\min\big(r(P),r(Q)\big)\) when \(r(P) \leq 0.0 \; \land \; r(Q) \leq 0.0\);
-|    \(0.0\) otherwise.
+\begin{DUlineblock}{0em}
+\item[] We may superpose these characteristic values with the help of the \sphinxstylestrong{disjunctive fusion} operator, denoted \(\oplus\).
+\item[]
+\begin{DUlineblock}{\DUlineblockindent}
+\item[] \(r\big(\,P\,\oplus\,Q\,\big) \;=\)
+\item[]
+\begin{DUlineblock}{\DUlineblockindent}
+\item[] \(\max\big(r(P),r(Q)\big)\) when \(r(P) \geq 0.0 \; \land \; r(Q) \geq 0.0\);
+\item[] \(\min\big(r(P),r(Q)\big)\) when \(r(P) \leq 0.0 \; \land \; r(Q) \leq 0.0\);
+\item[] \(0.0\) otherwise.
+\end{DUlineblock}
+\end{DUlineblock}
+\end{DUlineblock}
 
 \sphinxAtStartPar
 Mind that the \(\oplus\) operator, like a mean or average, is not associative when multiple characteristic functions must be fused together. In this case, all positive and negative terms get separately fused and their respective final results get again submitted to the \(\oplus\) operator.
@@ -6231,8 +6238,16 @@ The disjunctive and conjunctive epistemic fusions of two bpv\sphinxhyphen{}sets 
 \item[] For all \(z \in E_{X \oplus Y}\) the membership characteristic \(r\big(\,z \in (X \oplus Y)\,\big)\; =\)
 \item[]
 \begin{DUlineblock}{\DUlineblockindent}
-\item[] \(\max\big(\,r(z \in X),r(z \in Y)\, \big)\) when both \sphinxstyleemphasis{z} in \sphinxstyleemphasis{X} and \sphinxstyleemphasis{z} in \sphinxstyleemphasis{Y}, and \(r(z \in X) \geqslant 0.0\) and \(r(z \in Y) \geqslant 0.0\), or
-\item[] \(\min\big(\,r(z \in X),r(z \in Y)\, \big)\) when both \sphinxstyleemphasis{z} in \sphinxstyleemphasis{X} and \sphinxstyleemphasis{z} in \sphinxstyleemphasis{Y}, and \(r(z \in X) \leqslant 0.0\) and \(r(z \in Y) \leqslant 0.0\),
+\item[] \(\max\big(\,r(z \in X),r(z \in Y)\, \big)\) when both \sphinxstyleemphasis{z} in \sphinxstyleemphasis{X} and \sphinxstyleemphasis{z} in \sphinxstyleemphasis{Y}
+\item[]
+\begin{DUlineblock}{\DUlineblockindent}
+\item[] and \(r(z \in X) \geqslant 0.0\) and \(r(z \in Y) \geqslant 0.0\); or
+\end{DUlineblock}
+\item[] \(\min\big(\,r(z \in X),r(z \in Y)\, \big)\) when both \sphinxstyleemphasis{z} in \sphinxstyleemphasis{X} and \sphinxstyleemphasis{z} in \sphinxstyleemphasis{Y},
+\item[]
+\begin{DUlineblock}{\DUlineblockindent}
+\item[] and \(r(z \in X) \leqslant 0.0\) and \(r(z \in Y) \leqslant 0.0\);
+\end{DUlineblock}
 \item[] \(0.0\) otherwise.
 \end{DUlineblock}
 \end{DUlineblock}
@@ -6241,8 +6256,16 @@ The disjunctive and conjunctive epistemic fusions of two bpv\sphinxhyphen{}sets 
 \item[] For all \(z \in E_{X \otimes Y}\) the membership characteristic \(r\big(\,z \in (X \otimes Y)\,\big)\; =\)
 \item[]
 \begin{DUlineblock}{\DUlineblockindent}
-\item[] \(\min\big(\,r(z \in X),r(z \in Y)\, \big)\) when both \sphinxstyleemphasis{z} in \sphinxstyleemphasis{X} and \sphinxstyleemphasis{z} in \sphinxstyleemphasis{Y}, and \(r(z \in X) \geqslant 0.0\) and \(r(z \in Y) \geqslant 0.0\), or
-\item[] \(\max\big(\,r(z \in X),r(z \in Y)\, \big)\) when both \sphinxstyleemphasis{z} in \sphinxstyleemphasis{X} and \sphinxstyleemphasis{z} in \sphinxstyleemphasis{Y}, and \(r(z \in X) \leqslant 0.0\) and \(r(z \in Y) \leqslant 0.0\),
+\item[] \(\min\big(\,r(z \in X),r(z \in Y)\, \big)\) when both \sphinxstyleemphasis{z} in \sphinxstyleemphasis{X} and \sphinxstyleemphasis{z} in \sphinxstyleemphasis{Y},
+\item[]
+\begin{DUlineblock}{\DUlineblockindent}
+\item[] and \(r(z \in X) \geqslant 0.0\) and \(r(z \in Y) \geqslant 0.0\); or
+\end{DUlineblock}
+\item[] \(\max\big(\,r(z \in X),r(z \in Y)\, \big)\) when both \sphinxstyleemphasis{z} in \sphinxstyleemphasis{X} and \sphinxstyleemphasis{z} in \sphinxstyleemphasis{Y},
+\item[]
+\begin{DUlineblock}{\DUlineblockindent}
+\item[] and \(r(z \in X) \leqslant 0.0\) and \(r(z \in Y) \leqslant 0.0\);
+\end{DUlineblock}
 \item[] \(0.0\) otherwise.
 \end{DUlineblock}
 \end{DUlineblock}

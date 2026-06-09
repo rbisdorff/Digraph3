@@ -4422,13 +4422,13 @@ Superposition of elementary epistemic situations
 
 Partly determined characteristic values appear now when balancing positive epistemic evidences against negative epistemic evidences. A first example is given by the normalized majority margins obtained from a ranked voting election. For each pair (*x*, *y*) of eligible candidates, we balance the number of times a voter ranks *x* before *y* against the number of times a voter ranks *y* before *x*.  A positive majority margin thus warrants that candidate *x* is more or less preferred to candidate *y*, a negative majority margin warrants that candidate *x* is not more or less prefered to candidate *y*. A second example is given by the characteristic values of a normalized outranking relation when no considerable performance differences are taken into account. Yet another example is given by normalized *Copeland* or *NetFlows* ranking scores of a decision alternative *x*. These scores characterise the statement that an alternative is first ranked by balancing the number of outranked against the number of outranking alternatives. In all these cases, we observe **compensatory superpositions** of elementary epistemic situations.
 
-But we may also operate **non compensatory superpositions** of elemetary epistemic situations. This is the case when taking into account considerable performance differences via the disjunctive fusion operator. Let proposition *P* stating that alternative *x* is '*performing at least as well*' as alternative *y*. Let proposition *Q* furthermore stating that alternative *x* is showing on a performance criterion a considerable less performance than alternative *y* . Let :math:`r(P) \in [-1.0;+1.0]` and :math:`r(Q) \in [-1.0;+1.0]` denote their bipolar-valued characteristic values.
+But we may also operate **non compensatory superpositions** of elemetary epistemic situations. This is the case when taking into account considerable performance differences via the disjunctive fusion operator. Let proposition *P* stating that alternative *x* is '*performing at least as well*' as alternative *y*. Let proposition *Q* furthermore stating that alternative *x* is showing on a performance criterion a considerable less performance than alternative *y* . Let :math:`r(P) \in [-1.0;+1.0]` and :math:`r(Q) \in \{\,-1.0,\,0.0,\,+1.0\,\}` denote their bipolar-valued characteristic values.
 
-We may superpose these characteristic values with the help of the **disjunctive fusion** operator, denoted :math:`\oplus`.
+| We may superpose these characteristic values with the help of the **disjunctive fusion** operator, denoted :math:`\oplus`.
 |   :math:`r\big(\,P\,\oplus\,Q\,\big) \;=`
-|    :math:`\max\big(r(P),r(Q)\big)` when :math:`r(P) \geq 0.0 \; \land \; r(Q) \geq 0.0`;
-|    :math:`\min\big(r(P),r(Q)\big)` when :math:`r(P) \leq 0.0 \; \land \; r(Q) \leq 0.0`;
-|    :math:`0.0` otherwise.
+|        :math:`\max\big(r(P),r(Q)\big)` when :math:`r(P) \geq 0.0 \; \land \; r(Q) \geq 0.0`;
+|        :math:`\min\big(r(P),r(Q)\big)` when :math:`r(P) \leq 0.0 \; \land \; r(Q) \leq 0.0`;
+|        :math:`0.0` otherwise.
 
 Mind that the :math:`\oplus` operator, like a mean or average, is not associative when multiple characteristic functions must be fused together. In this case, all positive and negative terms get separately fused and their respective final results get again submitted to the :math:`\oplus` operator.
 
