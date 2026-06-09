@@ -4572,13 +4572,17 @@ The partially ordered commutative epistemic fusion ring
 The disjunctive and conjunctive epistemic fusions of two bpv-sets *X* and *Y*, denoted :math:`X \oplus Y` respectively :math:`X \otimes Y`, give the bpv-sets defined as follows.
 
 | For all :math:`z \in E_{X \oplus Y}` the membership characteristic :math:`r\big(\,z \in (X \oplus Y)\,\big)\; =`
-|    :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*, and :math:`r(z \in X) \geqslant 0.0` and :math:`r(z \in Y) \geqslant 0.0`, or
-|    :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*, and :math:`r(z \in X) \leqslant 0.0` and :math:`r(z \in Y) \leqslant 0.0`,
+|    :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*
+|         and :math:`r(z \in X) \geqslant 0.0` and :math:`r(z \in Y) \geqslant 0.0`; or
+|    :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*,
+|         and :math:`r(z \in X) \leqslant 0.0` and :math:`r(z \in Y) \leqslant 0.0`;
 |    :math:`0.0` otherwise.
 
 | For all :math:`z \in E_{X \otimes Y}` the membership characteristic :math:`r\big(\,z \in (X \otimes Y)\,\big)\; =`
-|    :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*, and :math:`r(z \in X) \geqslant 0.0` and :math:`r(z \in Y) \geqslant 0.0`, or
-|    :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*, and :math:`r(z \in X) \leqslant 0.0` and :math:`r(z \in Y) \leqslant 0.0`,
+|    :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*,
+|         and :math:`r(z \in X) \geqslant 0.0` and :math:`r(z \in Y) \geqslant 0.0`; or
+|    :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*,
+|         and :math:`r(z \in X) \leqslant 0.0` and :math:`r(z \in Y) \leqslant 0.0`;
 |    :math:`0.0` otherwise.
 
 In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunctive fusion operators.
