@@ -140,7 +140,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#computing-with-bipolar-valued-sets">3.3.5. Computing with bipolar-valued sets</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#bipolar-valued-epistemic-logic">3.3.5.1. Bipolar-valued epistemic logic</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bipolar-valued-propositional-calculus">3.3.5.2. Bipolar-valued propositional calculus</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#epistemic-fusion-of-propositional-evidences">3.3.5.3. Epistemic fusion of propositional evidences</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#superposition-of-elementary-epistemic-situations">3.3.5.3. Superposition of elementary epistemic situations</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#computational-bipolar-valued-set-theory">3.3.5.4. Computational bipolar-valued set theory</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#the-partially-ordered-commutative-epistemic-fusion-ring">3.3.5.5. The partially ordered commutative epistemic fusion ring</a></li>
 </ul>
@@ -4242,7 +4242,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <ul class="simple">
 <li><p><a class="reference internal" href="#bipolar-valued-epistemic-logic" id="id179">Bipolar-valued epistemic logic</a></p></li>
 <li><p><a class="reference internal" href="#bipolar-valued-propositional-calculus" id="id180">Bipolar-valued propositional calculus</a></p></li>
-<li><p><a class="reference internal" href="#epistemic-fusion-of-propositional-evidences" id="id181">Epistemic fusion of propositional evidences</a></p></li>
+<li><p><a class="reference internal" href="#superposition-of-elementary-epistemic-situations" id="id181">Superposition of elementary epistemic situations</a></p></li>
 <li><p><a class="reference internal" href="#computational-bipolar-valued-set-theory" id="id182">Computational bipolar-valued set theory</a></p></li>
 <li><p><a class="reference internal" href="#the-partially-ordered-commutative-epistemic-fusion-ring" id="id183">The partially ordered commutative epistemic fusion ring</a></p></li>
 </ul>
@@ -4258,12 +4258,14 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>In order to formalize the previous intuitions, we are attaching to any logical proposition or statement <em>P</em> a characteristic function <em>r(P)</em> taking value in the decimal interval [-1.0;+1.0] with following semantics:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><img class="math" src="_images/math/c2fa2b4fd46dcdfbb1051cd4470e0bb8cf6438b9.png" alt="0.0 &lt; r(P) \leqslant +1.0"/> means statement <em>P</em> is <strong>more or less true</strong>;</p></li>
-<li><p><img class="math" src="_images/math/2580513102b62172fa9a583ce07f9beda00f12d9.png" alt="-1.0 \geqslant r(P) &lt; 0.0"/> means statement <em>P</em> is <strong>more or less false</strong>;</p></li>
+<li><p><img class="math" src="_images/math/32721715ede1aa1c060f82cb8bec20ad9e80b08c.png" alt="r(P) = +1.0"/> means statement <em>P</em> is <strong>for sure true</strong>;</p></li>
+<li><p><img class="math" src="_images/math/5a09c2c881764e5c17b64c7d21e3479ccafe62a9.png" alt="0.0 &lt; r(P) &lt; +1.0"/> means statement <em>P</em> is <strong>more or less true</strong>;</p></li>
 <li><p><img class="math" src="_images/math/4b9ffb1630863f647d6607f6e0c53ab2f24f2feb.png" alt="r(P) = 0.0"/> means statement <em>P</em> is <strong>indeterminate</strong>.</p></li>
+<li><p><img class="math" src="_images/math/acc59803e9c968d6ce96b07d49882e6aae8458e3.png" alt="-1.0 &lt; r(P) &lt; 0.0"/> means statement <em>P</em> is <strong>more or less false</strong>;</p></li>
+<li><p><img class="math" src="_images/math/15c986a5769260f0d7bb9ae481fc1a78153c5ec2.png" alt="r(P) = -1.0"/> means statement <em>P</em> is <strong>for sure false</strong>;</p></li>
 </ul>
 </div></blockquote>
-<p>Negating a statement is hence operated by changing the sign of its characteristic function: <img class="math" src="_images/math/8b7f6ee17b1124fe6385af0d2878e8411f472026.png" alt="r(\neg P) = -r(P)"/>. An important consequence appears. This <strong>negation</strong> <img class="math" src="_images/math/c9223c455a541292838065c77ca76042c2c38315.png" alt="\neg"/> operation does not necessarily correspond to taking the complement logical value. Indeed, <em>not true</em> does now only imply <em>false or indeterminate</em> and <em>not false</em> does only imply <em>true or indeterminate</em>. In fact, we are working in a balanced ternary logic with <strong>negative</strong> (false), <strong>positive</strong> (true) and <strong>null</strong> (indeterminate) characteristic values. A negative <em>affirmation</em> becomes here a positive <em>refutation</em> and vice versa <a class="reference internal" href="#bis-2004-3p" id="id57"><span>[BIS-2004_3p]</span></a>.</p>
+<p>Negating a statement is operated by changing the sign of its characteristic function: <img class="math" src="_images/math/8b7f6ee17b1124fe6385af0d2878e8411f472026.png" alt="r(\neg P) = -r(P)"/>. An important consequence appears. This <strong>negation</strong> <img class="math" src="_images/math/c9223c455a541292838065c77ca76042c2c38315.png" alt="\neg"/> operation does not necessarily correspond to taking the logical complement value. Indeed, <em>not true</em> does now only imply <em>false or indeterminate</em> and <em>not false</em> does only imply <em>true or indeterminate</em>. In fact, we are working in a balanced ternary logic with <strong>negative</strong> (false), <strong>positive</strong> (true) and <strong>null</strong> (indeterminate) characteristic values. A negative <em>affirmation</em> becomes here a positive <em>refutation</em> and vice versa <a class="reference internal" href="#bis-2004-3p" id="id57"><span>[BIS-2004_3p]</span></a>.</p>
 <p>Let now <em>P</em> and <em>Q</em> be two bipolar-valued propositions, logical <strong>conjunction</strong> <img class="math" src="_images/math/e24aec858112a75c8ebaf9d12ea9b94ac472851a.png" alt="\land"/>, <strong>disjunction</strong> <img class="math" src="_images/math/d032498313a62c6a0f3bbc4dd919b7bd46c18ccd.png" alt="\lor"/> and <strong>implication</strong> <img class="math" src="_images/math/d1a55bc0d5f4b30060db724826d79f376a4cd4d4.png" alt="\Rightarrow"/> may be computed as follows:</p>
 <blockquote>
 <div><ul class="simple">
@@ -4273,26 +4275,24 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </ul>
 </div></blockquote>
 <p>It is worthwhile noticing that the bipolar-valued logical implication is not necessarily transitive. Suppose for instance that a majority of voters validate proposition <img class="math" src="_images/math/9f5b951dadbe665bd362753b81e16733e6035aa1.png" alt="P \Rightarrow Q"/> and another majority validates the proposition <img class="math" src="_images/math/eb545466078a526aa0c45a32bfc80b8301369ee6.png" alt="Q \Rightarrow R"/>. There is no epistemic reason why the separate evidences of both these statements should necessarily induce the evidence of <img class="math" src="_images/math/7c315114670549905f9d4eb21f5a07526b0c5174.png" alt="P \Rightarrow R"/>.</p>
+<p>This way all tautologies and antologies of a classical propositional calculus like the Boolean algebra remain effectively valid when only working with fully determined +1.0 and -1.0 characteristic values.</p>
 </section>
-<section id="epistemic-fusion-of-propositional-evidences">
-<h4><a class="toc-backref" href="#id181" role="doc-backlink"><span class="section-number">3.3.5.3. </span>Epistemic fusion of propositional evidences</a><a class="headerlink" href="#epistemic-fusion-of-propositional-evidences" title="Link to this heading"></a></h4>
-<p>Let proposition <em>P</em> stating again what candidate should be winning the election. Suppose furthermore that the assembly of voters is split into two groups and let the result be characterised by two characteristic functions</p>
+<section id="superposition-of-elementary-epistemic-situations">
+<h4><a class="toc-backref" href="#id181" role="doc-backlink"><span class="section-number">3.3.5.3. </span>Superposition of elementary epistemic situations</a><a class="headerlink" href="#superposition-of-elementary-epistemic-situations" title="Link to this heading"></a></h4>
+<p>Partly determined characteristic values appear now when balancing positive epistemic evidences against negative epistemic evidences. A first example is given by the normalized majority margins obtained from a ranked voting election. For each pair (<em>x</em>, <em>y</em>) of eligible candidates, we balance the number of times a voter ranks <em>x</em> before <em>y</em> against the number of times a voter ranks <em>y</em> before <em>x</em>.  A positive majority margin thus warrants that candidate <em>x</em> is more or less preferred to candidate <em>y</em>, a negative majority margin warrants that candidate <em>x</em> is not more or less prefered to candidate <em>y</em>. A second example is given by the characteristic values of a normalized outranking relation when no considerable performance differences are taken into account. Yet another example is given by normalized <em>Copeland</em> or <em>NetFlows</em> ranking scores of a decision alternative <em>x</em>. These scores characterise the statement that this alternative is first ranked by balancing the number of dominated against the number of absorbed alternatives. In all these cases, we observe <strong>compensatory superpositions</strong> of elementary epistemic situations.</p>
+<p>But we may also operate <strong>non compensatory superpositions</strong> of elemetary epistemic situations. This is the case when taking for instance into account considerable performance differences via the disjunctive fusion operator. Let proposition <em>P</em> stating that alternative <em>x</em> is ‘<em>performing at least as well</em>’ as alternative <em>y</em>. Let proposition <em>Q</em> furthermore stating that alternative <em>x</em> is showing on a performance criterion a considerably less performance than alternative <em>y</em> . Let <img class="math" src="_images/math/f5df03d0bfb38f95e0e106e9e20fc5d5c7ad1ba4.png" alt="r(P) \in [-1.0;+1.0]"/> and <img class="math" src="_images/math/2ae477af8b439a2f8c522097df305965f195b5a5.png" alt="r(Q) \in [-1.0;+1.0]"/> denote their bipolar-valued characteristic values.</p>
+<p>We may superpose these characteristic values with the help of the <strong>disjunctive fusion</strong> operator, denoted <img class="math" src="_images/math/2db0a4269b9c3cbe81b65f5b18ec9a4f1e2246ca.png" alt="\oplus"/>.</p>
 <blockquote>
-<div><p><img class="math" src="_images/math/9fc53b86faf90ae13caca0fcfbb14d2b85c625cf.png" alt="r_1(P) \in [-1.0;+1.0]"/>,</p>
-<p><img class="math" src="_images/math/54326560633db14c566d47390ca61c37019958dc.png" alt="r_2(P) \in [-1.0;+1.0]"/>.</p>
+<div><p><img class="math" src="_images/math/8c3a807cb4da86b03b830fdfd49449fbf2b4528a.png" alt="r\big(\,P\,\oplus\,Q\,\big) \;="/></p>
+<blockquote>
+<div><p><img class="math" src="_images/math/f456b8953c73d0996f8a2df41069af593caadf77.png" alt="\max\big(r(P),r(Q)\big)"/>  when <img class="math" src="_images/math/3a9017e767a54a46af650e537bdc0eb5b25e1ba1.png" alt="r(P) \geq 0.0 \; \land \; r(Q) \geq 0.0"/>;</p>
+<p><img class="math" src="_images/math/0406b545eb30f2bd9444c453fd144cd2c719e24a.png" alt="\min\big(r(P),r(Q)\big)"/> when <img class="math" src="_images/math/8e92aeb78766b85ea52c50aaf3947af0ffcffc36.png" alt="r(P) \leq 0.0 \; \land \; r(Q) \leq 0.0"/>;</p>
+<p><img class="math" src="_images/math/1eb0514994edf71549d3baf4fbfa79d643bca95e.png" alt="0.0"/> otherwise.</p>
 </div></blockquote>
-<p>We may superpose these characteristic functions with the help of a <strong>disjunctive fusion</strong> operator <img class="math" src="_images/math/2db0a4269b9c3cbe81b65f5b18ec9a4f1e2246ca.png" alt="\oplus"/>.</p>
-<blockquote>
-<div><ul>
-<li><p><img class="math" src="_images/math/95df2ccc94872d45c3c7ad247feb5804a7d79005.png" alt="r(P) \;=\: r_1(P) \,\oplus\, r_2(P) \;="/></p>
-<p><img class="math" src="_images/math/e0748c2b6c667ad905f78d922356467ecd986b89.png" alt="\hspace{10mm} \max\big(r_1(P),r_2(P)\big)"/>  when <img class="math" src="_images/math/a970061e6b6272cb794ceebd75104d75badf4b5b.png" alt="r_1(P) \geq 0.0 \; \land \; r_2(P) \geq 0.0"/>;</p>
-<p><img class="math" src="_images/math/a8801af99621167a09cfeb64a4cf8362f7fbfef0.png" alt="\hspace{10mm} \; \; \min\big(r_1(P),r_2(P)\big)"/> when <img class="math" src="_images/math/1c03c694449e2993ebdf7cd369d6d5893cac9924.png" alt="r_1(P) \leq 0.0 \; \land \; r_2(P) \leq 0.0"/>;</p>
-<p><img class="math" src="_images/math/66dc12e6428e6002e75d3b13b28ef42028afe63e.png" alt="\hspace{10mm} \; \; 0.0"/> otherwise.</p>
-</li>
-</ul>
 </div></blockquote>
 <p>Mind that the <img class="math" src="_images/math/2db0a4269b9c3cbe81b65f5b18ec9a4f1e2246ca.png" alt="\oplus"/> operator, like a mean or average, is not associative when multiple characteristic functions must be fused together. In this case, all positive and negative terms get separately fused and their respective final results get again submitted to the <img class="math" src="_images/math/2db0a4269b9c3cbe81b65f5b18ec9a4f1e2246ca.png" alt="\oplus"/> operator.</p>
-<p>As a consequence, when there exist conjointly positive and negative epistemic evidences for a statement, the proposition always gets an <em>indeterminate</em> status. This way all tautologies and antologies of a classical propositional calculus like the Boolean algebra remain effectively valid when only working with fully determined statements.</p>
+<p>As a consequence, when there exist conjointly positive and negative epistemic evidences for a statement, the truthfulness or falseness of their disjunctive epistemic fusion always becomes <em>indeterminate</em>.</p>
+<p>Lest us now apply this bipolar-valued logical characteritic calculus to elementary set theory.</p>
 </section>
 <section id="computational-bipolar-valued-set-theory">
 <h4><a class="toc-backref" href="#id182" role="doc-backlink"><span class="section-number">3.3.5.4. </span>Computational bipolar-valued set theory</a><a class="headerlink" href="#computational-bipolar-valued-set-theory" title="Link to this heading"></a></h4>
@@ -4309,26 +4309,20 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>Let <em>X</em> and <em>Y</em> be two bpv-sets. The support for logical bpv-set operations is the union of the support of the arguments. We define the classical <strong>set union</strong> <img class="math" src="_images/math/64bb6f03c6784a295e36ef26a393eb8a960ddcf7.png" alt="\cup"/> and <strong>intersection</strong> <img class="math" src="_images/math/dc4690ad5e9a41a5da9188f0d69a1242daed46e9.png" alt="\cap"/> as follows.</p>
 <p>For all <img class="math" src="_images/math/2f85bc4c834f81d3d8587c571049602d7d40d148.png" alt="z \in E_{X \cup Y}"/> the membership characteristic <img class="math" src="_images/math/9e441cca04cc8f2d18e79525ab8d4a9a737d80cb.png" alt="r\big(\,z \in (X \cup Y)\,\big)\; ="/></p>
 <blockquote>
-<div><ul class="simple">
-<li><p><img class="math" src="_images/math/4379581c39bfc2839188591b35ab81a71bd1be50.png" alt="\max\big(\,r(z \in X),r(z \in Y)\, \big)"/> when both <em>z</em> in <em>X</em> and <em>z</em> in <em>Y</em>; otherwise</p></li>
-<li><p><img class="math" src="_images/math/5d8b976e2862b5d489aab1cf78235c34e79fe930.png" alt="r(z \in X)"/> when <img class="math" src="_images/math/68c861c2626b82613d8050dbbf65726c0c9ac611.png" alt="z \in X"/>, and</p></li>
-<li><p><img class="math" src="_images/math/c17438c3d2249ac66c65164a5aa74088b7be8237.png" alt="r(z \in Y)"/> when <img class="math" src="_images/math/287b5b676378ceac03ca8c1becee5471b6966c68.png" alt="z \in Y"/>.</p></li>
-</ul>
+<div><p><img class="math" src="_images/math/4379581c39bfc2839188591b35ab81a71bd1be50.png" alt="\max\big(\,r(z \in X),r(z \in Y)\, \big)"/> when both <em>z</em> in <em>X</em> and <em>z</em> in <em>Y</em>; otherwise</p>
+<p><img class="math" src="_images/math/5d8b976e2862b5d489aab1cf78235c34e79fe930.png" alt="r(z \in X)"/> when <img class="math" src="_images/math/68c861c2626b82613d8050dbbf65726c0c9ac611.png" alt="z \in X"/>, and</p>
+<p><img class="math" src="_images/math/c17438c3d2249ac66c65164a5aa74088b7be8237.png" alt="r(z \in Y)"/> when <img class="math" src="_images/math/287b5b676378ceac03ca8c1becee5471b6966c68.png" alt="z \in Y"/>.</p>
 </div></blockquote>
 <p>For all <img class="math" src="_images/math/2f85bc4c834f81d3d8587c571049602d7d40d148.png" alt="z \in E_{X \cup Y}"/> the membership characteristic <img class="math" src="_images/math/b2f27984aa652bd8c546623dbf9a3d37fa42167f.png" alt="r\big(\,z \in (X \cap Y)\,\big)\; ="/></p>
 <blockquote>
-<div><ul class="simple">
-<li><p><img class="math" src="_images/math/bff5a84a92e64a8ffd8940cc127a72f82caa7fa7.png" alt="\min\big(\,r(z \in X),r(z \in Y)\, \big)"/> when both <em>z</em> in <em>X</em> and <em>z</em> in <em>Y</em>;</p></li>
-<li><p><img class="math" src="_images/math/26f3fc3c1a88f417dfecaccadb181c5941ec0f10.png" alt="-1.0"/> otherwise.</p></li>
-</ul>
+<div><p><img class="math" src="_images/math/bff5a84a92e64a8ffd8940cc127a72f82caa7fa7.png" alt="\min\big(\,r(z \in X),r(z \in Y)\, \big)"/> when both <em>z</em> in <em>X</em> and <em>z</em> in <em>Y</em>;</p>
+<p><img class="math" src="_images/math/26f3fc3c1a88f417dfecaccadb181c5941ec0f10.png" alt="-1.0"/> otherwise.</p>
 </div></blockquote>
 <p>The <strong>set difference</strong> between two bpv-sets <em>X</em> and <em>Y</em>, denoted <em>X-Y</em>, is the bpv-set of all members of <em>X</em> that are not members of <em>Y</em>. For all <img class="math" src="_images/math/2f85bc4c834f81d3d8587c571049602d7d40d148.png" alt="z \in E_{X \cup Y}"/>, the membership characteristic <img class="math" src="_images/math/d2058492186a1abdb5f19208f3b169796ea32056.png" alt="r\big(\,z \in (X - Y)\, \big)\; ="/></p>
 <blockquote>
-<div><ul class="simple">
-<li><p><img class="math" src="_images/math/1db00e26adb44dbc002c6570f8155708514d1b3a.png" alt="\min\big(\,r(z \in X),-r(z \in Y)\,\big)"/> when both <img class="math" src="_images/math/40c91cd6e1c263e01923d79bca868b1d54ae940b.png" alt="z \in E_X \land z \in E_Y"/>;</p></li>
-<li><p><img class="math" src="_images/math/5d8b976e2862b5d489aab1cf78235c34e79fe930.png" alt="r(z \in X)"/> when <img class="math" src="_images/math/b8a589c015e6f7ed0ba616bba1d61094547bbb15.png" alt="z \in E_X"/>;</p></li>
-<li><p><img class="math" src="_images/math/26f3fc3c1a88f417dfecaccadb181c5941ec0f10.png" alt="-1.0"/> otherwise.</p></li>
-</ul>
+<div><p><img class="math" src="_images/math/1db00e26adb44dbc002c6570f8155708514d1b3a.png" alt="\min\big(\,r(z \in X),-r(z \in Y)\,\big)"/> when both <img class="math" src="_images/math/40c91cd6e1c263e01923d79bca868b1d54ae940b.png" alt="z \in E_X \land z \in E_Y"/>;</p>
+<p><img class="math" src="_images/math/5d8b976e2862b5d489aab1cf78235c34e79fe930.png" alt="r(z \in X)"/> when <img class="math" src="_images/math/b8a589c015e6f7ed0ba616bba1d61094547bbb15.png" alt="z \in E_X"/>;</p>
+<p><img class="math" src="_images/math/26f3fc3c1a88f417dfecaccadb181c5941ec0f10.png" alt="-1.0"/> otherwise.</p>
 </div></blockquote>
 <p>The <strong>symmetric difference</strong> of bpv-sets <em>X</em> and <em>Y</em>, denoted <em>X^Y</em>, is the set difference of their union and intersection, <img class="math" src="_images/math/e30f09e33648a3099522b73e8dccac121e0e1d0b.png" alt="(X \cup Y) \,-\, (X \cap Y)"/> or the union of their reciprocal set differences <img class="math" src="_images/math/ba6561f2c4a3e81972555f5080f4ad1f30a6a057.png" alt="(X - Y) \,\cup\, (Y - X)"/>.</p>
 <p>The <a class="reference internal" href="techDoc.html#module-bipolarValuedSets" title="bipolarValuedSets"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bipolarValuedSets</span></code></a> Digraph3 module provides, with the <a class="reference internal" href="techDoc.html#bipolarValuedSets.BpvSet" title="bipolarValuedSets.BpvSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">BpvSet</span></code></a> class, a Python implementation of such bpv-sets. In <a class="reference internal" href="#bipolarvaluedsets1"><span class="std std-numref">Listing 3.56</span></a> we use the <a class="reference internal" href="techDoc.html#bipolarValuedSets.RandomBpvSet" title="bipolarValuedSets.RandomBpvSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">RandomBpvSet</span></code></a> class for generating two random bpv-sets <em>X</em> and <em>Y</em> with a common support of three elements <em>s1</em>, <em>s2</em> and <em>s3</em>.</p>
@@ -4425,19 +4419,15 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>The disjunctive and conjunctive epistemic fusions of two bpv-sets <em>X</em> and <em>Y</em>, denoted <img class="math" src="_images/math/99c58bc04b076fdf6db5f290e0e02e513f9867bc.png" alt="X \oplus Y"/> respectively <img class="math" src="_images/math/ee395f3b9cc9e96660b798c76813a3337ee18037.png" alt="X \otimes Y"/>, give the bpv-sets defined as follows.</p>
 <p>For all <img class="math" src="_images/math/abfcd739eadc42fcaef1611a14f05b2a3ddc2282.png" alt="z \in E_{X \oplus Y}"/> the membership characteristic <img class="math" src="_images/math/cb7c587186bd1180a36cb61d8b4596fd3d3f2677.png" alt="r\big(\,z \in (X \oplus Y)\,\big)\; ="/></p>
 <blockquote>
-<div><ul class="simple">
-<li><p><img class="math" src="_images/math/4379581c39bfc2839188591b35ab81a71bd1be50.png" alt="\max\big(\,r(z \in X),r(z \in Y)\, \big)"/> when both <em>z</em> in <em>X</em> and <em>z</em> in <em>Y</em>, and <img class="math" src="_images/math/cf41a2c61a5ad7d188ae0fa9b9927fd717ea56b3.png" alt="r(z \in X) \geqslant 0.0"/> and <img class="math" src="_images/math/2ee88291c932b936944296d8db6a79fff9af804b.png" alt="r(z \in Y) \geqslant 0.0"/>, or</p></li>
-<li><p><img class="math" src="_images/math/bff5a84a92e64a8ffd8940cc127a72f82caa7fa7.png" alt="\min\big(\,r(z \in X),r(z \in Y)\, \big)"/> when both <em>z</em> in <em>X</em> and <em>z</em> in <em>Y</em>, and <img class="math" src="_images/math/3b5ab2c15d6dd56906de9160729b45d9ee40f4c8.png" alt="r(z \in X) \leqslant 0.0"/> and <img class="math" src="_images/math/72cd0c653b8b5957377805cdf288c9ab6f1e6be1.png" alt="r(z \in Y) \leqslant 0.0"/>,</p></li>
-<li><p><img class="math" src="_images/math/1eb0514994edf71549d3baf4fbfa79d643bca95e.png" alt="0.0"/> otherwise.</p></li>
-</ul>
+<div><p><img class="math" src="_images/math/4379581c39bfc2839188591b35ab81a71bd1be50.png" alt="\max\big(\,r(z \in X),r(z \in Y)\, \big)"/> when both <em>z</em> in <em>X</em> and <em>z</em> in <em>Y</em>, and <img class="math" src="_images/math/cf41a2c61a5ad7d188ae0fa9b9927fd717ea56b3.png" alt="r(z \in X) \geqslant 0.0"/> and <img class="math" src="_images/math/2ee88291c932b936944296d8db6a79fff9af804b.png" alt="r(z \in Y) \geqslant 0.0"/>, or</p>
+<p><img class="math" src="_images/math/bff5a84a92e64a8ffd8940cc127a72f82caa7fa7.png" alt="\min\big(\,r(z \in X),r(z \in Y)\, \big)"/> when both <em>z</em> in <em>X</em> and <em>z</em> in <em>Y</em>, and <img class="math" src="_images/math/3b5ab2c15d6dd56906de9160729b45d9ee40f4c8.png" alt="r(z \in X) \leqslant 0.0"/> and <img class="math" src="_images/math/72cd0c653b8b5957377805cdf288c9ab6f1e6be1.png" alt="r(z \in Y) \leqslant 0.0"/>,</p>
+<p><img class="math" src="_images/math/1eb0514994edf71549d3baf4fbfa79d643bca95e.png" alt="0.0"/> otherwise.</p>
 </div></blockquote>
 <p>For all <img class="math" src="_images/math/d7de098c88cb5a3f98601105edf9d17915a26499.png" alt="z \in E_{X \otimes Y}"/> the membership characteristic <img class="math" src="_images/math/490eba2a0da52b432916b11072bcd8460f6f0acb.png" alt="r\big(\,z \in (X \otimes Y)\,\big)\; ="/></p>
 <blockquote>
-<div><ul class="simple">
-<li><p><img class="math" src="_images/math/bff5a84a92e64a8ffd8940cc127a72f82caa7fa7.png" alt="\min\big(\,r(z \in X),r(z \in Y)\, \big)"/> when both <em>z</em> in <em>X</em> and <em>z</em> in <em>Y</em>, and <img class="math" src="_images/math/cf41a2c61a5ad7d188ae0fa9b9927fd717ea56b3.png" alt="r(z \in X) \geqslant 0.0"/> and <img class="math" src="_images/math/2ee88291c932b936944296d8db6a79fff9af804b.png" alt="r(z \in Y) \geqslant 0.0"/>, or</p></li>
-<li><p><img class="math" src="_images/math/4379581c39bfc2839188591b35ab81a71bd1be50.png" alt="\max\big(\,r(z \in X),r(z \in Y)\, \big)"/> when both <em>z</em> in <em>X</em> and <em>z</em> in <em>Y</em>, and <img class="math" src="_images/math/3b5ab2c15d6dd56906de9160729b45d9ee40f4c8.png" alt="r(z \in X) \leqslant 0.0"/> and <img class="math" src="_images/math/72cd0c653b8b5957377805cdf288c9ab6f1e6be1.png" alt="r(z \in Y) \leqslant 0.0"/>,</p></li>
-<li><p><img class="math" src="_images/math/1eb0514994edf71549d3baf4fbfa79d643bca95e.png" alt="0.0"/> otherwise.</p></li>
-</ul>
+<div><p><img class="math" src="_images/math/bff5a84a92e64a8ffd8940cc127a72f82caa7fa7.png" alt="\min\big(\,r(z \in X),r(z \in Y)\, \big)"/> when both <em>z</em> in <em>X</em> and <em>z</em> in <em>Y</em>, and <img class="math" src="_images/math/cf41a2c61a5ad7d188ae0fa9b9927fd717ea56b3.png" alt="r(z \in X) \geqslant 0.0"/> and <img class="math" src="_images/math/2ee88291c932b936944296d8db6a79fff9af804b.png" alt="r(z \in Y) \geqslant 0.0"/>, or</p>
+<p><img class="math" src="_images/math/4379581c39bfc2839188591b35ab81a71bd1be50.png" alt="\max\big(\,r(z \in X),r(z \in Y)\, \big)"/> when both <em>z</em> in <em>X</em> and <em>z</em> in <em>Y</em>, and <img class="math" src="_images/math/3b5ab2c15d6dd56906de9160729b45d9ee40f4c8.png" alt="r(z \in X) \leqslant 0.0"/> and <img class="math" src="_images/math/72cd0c653b8b5957377805cdf288c9ab6f1e6be1.png" alt="r(z \in Y) \leqslant 0.0"/>,</p>
+<p><img class="math" src="_images/math/1eb0514994edf71549d3baf4fbfa79d643bca95e.png" alt="0.0"/> otherwise.</p>
 </div></blockquote>
 <p>In <a class="reference internal" href="#bipolarvaluedsets4"><span class="std std-numref">Listing 3.59</span></a> below we illustrate the disjunctive and conjunctive fusion operators.</p>
 <div class="literal-block-wrapper docutils container" id="bipolarvaluedsets4">
@@ -5665,7 +5655,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jun 08, 2026.
+      <span class="lastupdated">Last updated on Jun 09, 2026.
       </span></p>
   </div>
 

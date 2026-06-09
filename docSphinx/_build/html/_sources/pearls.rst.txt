@@ -4401,11 +4401,13 @@ Bipolar-valued propositional calculus
 
 In order to formalize the previous intuitions, we are attaching to any logical proposition or statement *P* a characteristic function *r(P)* taking value in the decimal interval [-1.0;+1.0] with following semantics:
 
-  - :math:`0.0 < r(P) \leqslant +1.0` means statement *P* is **more or less true**;
-  - :math:`-1.0 \geqslant r(P) < 0.0` means statement *P* is **more or less false**;
+  - :math:`r(P) = +1.0` means statement *P* is **for sure true**;
+  - :math:`0.0 < r(P) < +1.0` means statement *P* is **more or less true**;
   - :math:`r(P) = 0.0` means statement *P* is **indeterminate**.
+  - :math:`-1.0 < r(P) < 0.0` means statement *P* is **more or less false**;
+  - :math:`r(P) = -1.0` means statement *P* is **for sure false**;
   
-Negating a statement is hence operated by changing the sign of its characteristic function: :math:`r(\neg P) = -r(P)`. An important consequence appears. This **negation** :math:`\neg` operation does not necessarily correspond to taking the complement logical value. Indeed, *not true* does now only imply *false or indeterminate* and *not false* does only imply *true or indeterminate*. In fact, we are working in a balanced ternary logic with **negative** (false), **positive** (true) and **null** (indeterminate) characteristic values. A negative *affirmation* becomes here a positive *refutation* and vice versa [BIS-2004_3p]_. 
+Negating a statement is operated by changing the sign of its characteristic function: :math:`r(\neg P) = -r(P)`. An important consequence appears. This **negation** :math:`\neg` operation does not necessarily correspond to taking the logical complement value. Indeed, *not true* does now only imply *false or indeterminate* and *not false* does only imply *true or indeterminate*. In fact, we are working in a balanced ternary logic with **negative** (false), **positive** (true) and **null** (indeterminate) characteristic values. A negative *affirmation* becomes here a positive *refutation* and vice versa [BIS-2004_3p]_. 
 
 Let now *P* and *Q* be two bipolar-valued propositions, logical **conjunction** :math:`\land`, **disjunction** :math:`\lor` and **implication** :math:`\Rightarrow` may be computed as follows:
 
@@ -4415,28 +4417,30 @@ Let now *P* and *Q* be two bipolar-valued propositions, logical **conjunction** 
 
 It is worthwhile noticing that the bipolar-valued logical implication is not necessarily transitive. Suppose for instance that a majority of voters validate proposition :math:`P \Rightarrow Q` and another majority validates the proposition :math:`Q \Rightarrow R`. There is no epistemic reason why the separate evidences of both these statements should necessarily induce the evidence of :math:`P \Rightarrow R`.
 
-Epistemic fusion of propositional evidences
-...........................................
+This way all tautologies and antologies of a classical propositional calculus like the Boolean algebra remain effectively valid when only working with fully determined +1.0 and -1.0 characteristic values.
 
-Let proposition *P* stating again what candidate should be winning the election. Suppose furthermore that the assembly of voters is split into two groups and let the result be characterised by two characteristic functions
+Superposition of elementary epistemic situations
+................................................
 
-      :math:`r_1(P) \in [-1.0;+1.0]`,
+Partly determined characteristic values appear now when balancing positive epistemic evidences against negative epistemic evidences. A first example is given by the normalized majority margins obtained from a ranked voting election. For each pair (*x*, *y*) of eligible candidates, we balance the number of times a voter ranks *x* before *y* against the number of times a voter ranks *y* before *x*.  A positive majority margin thus warrants that candidate *x* is more or less preferred to candidate *y*, a negative majority margin warrants that candidate *x* is not more or less prefered to candidate *y*. A second example is given by the characteristic values of a normalized outranking relation when no considerable performance differences are taken into account. Yet another example is given by normalized *Copeland* or *NetFlows* ranking scores of a decision alternative *x*. These scores characterise the statement that this alternative is first ranked by balancing the number of dominated against the number of absorbed alternatives. In all these cases, we observe **compensatory superpositions** of elementary epistemic situations.
 
-      :math:`r_2(P) \in [-1.0;+1.0]`.
+But we may also operate **non compensatory superpositions** of elemetary epistemic situations. This is the case when taking for instance into account considerable performance differences via the disjunctive fusion operator. Let proposition *P* stating that alternative *x* is '*performing at least as well*' as alternative *y*. Let proposition *Q* furthermore stating that alternative *x* is showing on a performance criterion a considerably less performance than alternative *y* . Let :math:`r(P) \in [-1.0;+1.0]` and :math:`r(Q) \in [-1.0;+1.0]` denote their bipolar-valued characteristic values.
 
-We may superpose these characteristic functions with the help of a **disjunctive fusion** operator :math:`\oplus`.
+We may superpose these characteristic values with the help of the **disjunctive fusion** operator, denoted :math:`\oplus`.
 
-   - :math:`r(P) \;=\: r_1(P) \,\oplus\, r_2(P) \;=`
+   :math:`r\big(\,P\,\oplus\,Q\,\big) \;=`
 
-     :math:`\hspace{10mm} \max\big(r_1(P),r_2(P)\big)`  when :math:`r_1(P) \geq 0.0 \; \land \; r_2(P) \geq 0.0`;
+       :math:`\max\big(r(P),r(Q)\big)`  when :math:`r(P) \geq 0.0 \; \land \; r(Q) \geq 0.0`;
 
-     :math:`\hspace{10mm} \; \; \min\big(r_1(P),r_2(P)\big)` when :math:`r_1(P) \leq 0.0 \; \land \; r_2(P) \leq 0.0`;
+       :math:`\min\big(r(P),r(Q)\big)` when :math:`r(P) \leq 0.0 \; \land \; r(Q) \leq 0.0`;
 
-     :math:`\hspace{10mm} \; \; 0.0` otherwise.
+       :math:`0.0` otherwise.
 
 Mind that the :math:`\oplus` operator, like a mean or average, is not associative when multiple characteristic functions must be fused together. In this case, all positive and negative terms get separately fused and their respective final results get again submitted to the :math:`\oplus` operator.
 
-As a consequence, when there exist conjointly positive and negative epistemic evidences for a statement, the proposition always gets an *indeterminate* status. This way all tautologies and antologies of a classical propositional calculus like the Boolean algebra remain effectively valid when only working with fully determined statements.
+As a consequence, when there exist conjointly positive and negative epistemic evidences for a statement, the truthfulness or falseness of their disjunctive epistemic fusion always becomes *indeterminate*.
+
+Lest us now apply this bipolar-valued logical characteritic calculus to elementary set theory. 
 
 Computational bipolar-valued set theory
 .......................................
@@ -4444,7 +4448,9 @@ Computational bipolar-valued set theory
 A bipolar-valued set *X*, a **bpv-set** for short, consists of a **support set** :math:`E_X` of potential elements and a **membership dictionary** providing for every element :math:`x \in E_X` a bipolar-valued membership characteristic function :math:`r(x \in X)` taking values in the decimal interval [-1.0;+1.0]:
 
     - Element *x* is more or less included in the set *X* when :math:`r(x \in X) \,>\, 0.0`;
+      
     - Element *x* is more or less excluded from the set *X* when :math:`r(x \in X) \,<\, 0.0`;
+      
     - When  :math:`r(x \in X)\,=\, 0.0`, element *x* is neither included nor excluded from set *X*.
 
 We may distinguish three special bpv-sets: the **crisp** bpv-set *X* where all members of the support :math:`E_X` are certainly members of *X*, the **relatively empty** bpv-set *X* where all members of its support :math:`E_X` are certainly non-members of *X* and the special **indeterminate** case where all members of its support :math:`E_X` are indeterminate members of *X*, i.e :math:`r(z \in X) \;=\; 0.0 , \; \forall \,z \in\, E_X`.
@@ -4455,20 +4461,25 @@ Let *X* and *Y* be two bpv-sets. The support for logical bpv-set operations is t
 
 For all :math:`z \in E_{X \cup Y}` the membership characteristic :math:`r\big(\,z \in (X \cup Y)\,\big)\; =`
 
-    - :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*; otherwise
-    - :math:`r(z \in X)` when :math:`z \in X`, and
-    - :math:`r(z \in Y)` when :math:`z \in Y`.
+    :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*; otherwise
+
+    :math:`r(z \in X)` when :math:`z \in X`, and
+
+    :math:`r(z \in Y)` when :math:`z \in Y`.
 
 For all :math:`z \in E_{X \cup Y}` the membership characteristic :math:`r\big(\,z \in (X \cap Y)\,\big)\; =` 
 
-    - :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*;
-    - :math:`-1.0` otherwise.
+    :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*;
+
+    :math:`-1.0` otherwise.
 
 The **set difference** between two bpv-sets *X* and *Y*, denoted *X-Y*, is the bpv-set of all members of *X* that are not members of *Y*. For all :math:`z \in E_{X \cup Y}`, the membership characteristic :math:`r\big(\,z \in (X - Y)\, \big)\; =` 
 
-    - :math:`\min\big(\,r(z \in X),-r(z \in Y)\,\big)` when both :math:`z \in E_X \land z \in E_Y`;
-    - :math:`r(z \in X)` when :math:`z \in E_X`;
-    - :math:`-1.0` otherwise.
+    :math:`\min\big(\,r(z \in X),-r(z \in Y)\,\big)` when both :math:`z \in E_X \land z \in E_Y`;
+
+    :math:`r(z \in X)` when :math:`z \in E_X`;
+
+    :math:`-1.0` otherwise.
 
 The **symmetric difference** of bpv-sets *X* and *Y*, denoted *X^Y*, is the set difference of their union and intersection, :math:`(X \cup Y) \,-\, (X \cap Y)` or the union of their reciprocal set differences :math:`(X - Y) \,\cup\, (Y - X)`.
 
@@ -4577,15 +4588,19 @@ The disjunctive and conjunctive epistemic fusions of two bpv-sets *X* and *Y*, d
 
 For all :math:`z \in E_{X \oplus Y}` the membership characteristic :math:`r\big(\,z \in (X \oplus Y)\,\big)\; =`
 
-    - :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*, and :math:`r(z \in X) \geqslant 0.0` and :math:`r(z \in Y) \geqslant 0.0`, or
-    - :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*, and :math:`r(z \in X) \leqslant 0.0` and :math:`r(z \in Y) \leqslant 0.0`,
-    - :math:`0.0` otherwise.
+    :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*, and :math:`r(z \in X) \geqslant 0.0` and :math:`r(z \in Y) \geqslant 0.0`, or
+
+    :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*, and :math:`r(z \in X) \leqslant 0.0` and :math:`r(z \in Y) \leqslant 0.0`,
+
+    :math:`0.0` otherwise.
 
 For all :math:`z \in E_{X \otimes Y}` the membership characteristic :math:`r\big(\,z \in (X \otimes Y)\,\big)\; =`
 
-    - :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*, and :math:`r(z \in X) \geqslant 0.0` and :math:`r(z \in Y) \geqslant 0.0`, or
-    - :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*, and :math:`r(z \in X) \leqslant 0.0` and :math:`r(z \in Y) \leqslant 0.0`,
-    - :math:`0.0` otherwise.
+    :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*, and :math:`r(z \in X) \geqslant 0.0` and :math:`r(z \in Y) \geqslant 0.0`, or
+
+    :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*, and :math:`r(z \in X) \leqslant 0.0` and :math:`r(z \in Y) \leqslant 0.0`,
+
+    :math:`0.0` otherwise.
 
 In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunctive fusion operators.
 
