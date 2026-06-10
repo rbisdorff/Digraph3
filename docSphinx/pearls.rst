@@ -31,7 +31,7 @@ Pearls of bipolar-valued epistemic logic
    :Author: Raymond Bisdorff, Emeritus Professor of Applied Mathematics and Computer Science, University of Luxembourg
    :Url: https://rbisdorff.github.io/
    :Version: |version| (release: |release|)
-   :PDF version: `3.3 MB <_static/digraph3Pearls.pdf>`_
+   :PDF version: `3.6 MB <_static/digraph3Pearls.pdf>`_
    :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2026
 
 .. _Pearls-label:	   
@@ -4399,7 +4399,7 @@ First important consequence is that the logical status of any statement is consi
 Bipolar-valued propositional calculus
 .....................................
 
-| In order to formalize the previous intuitions, we are attaching to any logical  proposition or statement *P* a characteristic function *r(P)* taking value in| the decimal interval [-1.0;+1.0] with following semantics:
+| In order to formalize the previous intuitions, we are attaching to any logical  proposition or statement *P* a characteristic function *r(P)* taking value in the decimal interval [-1.0;+1.0] with following semantics:
 |    :math:`r(P) = +1.0` means statement *P* is **for sure true**;
 |    :math:`0.0 < r(P) < +1.0` means statement *P* is **more or less true**;
 |    :math:`r(P) = 0.0` means statement *P* is **indeterminate**;
