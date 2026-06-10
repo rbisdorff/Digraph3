@@ -31,7 +31,7 @@ Pearls of bipolar-valued epistemic logic
    :Author: Raymond Bisdorff, Emeritus Professor of Applied Mathematics and Computer Science, University of Luxembourg
    :Url: https://rbisdorff.github.io/
    :Version: |version| (release: |release|)
-   :PDF version: `3.3 MB <_static/digraph3Pearls.pdf>`_
+   :PDF version: `3.6 MB <_static/digraph3Pearls.pdf>`_
    :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2026
 
 .. _Pearls-label:	   
@@ -708,7 +708,7 @@ In both cases, choosing significance weights that are just compatible with the g
 Computing the stability denotation of outranking situations
 ...........................................................
 
-Stability levels 4 and 3 are easy to detect, the case given. Detecting a stability level 2 is far less obvious.  Now, it is precisely again the bipolar-valued epistemic characteristic domain that will give us a way to implement an effective test for stability level +2 and -2 (see [BIS-2004_1p]_, [BIS-2004_2p]_). 
+Stability levels 4 and 3 are easy to detect, the case given. Detecting a stability level 2 is far less obvious.  Now, it is precisely again the bipolar-valued epistemic characteristic domain that will give us a way to implement an effective test for stability level +2 and -2 (see [BIS-2004-1p]_, [BIS-2004-2p]_). 
 
 Let us consider the significance equivalence classes we observe in the given weights preorder. Here we observe three classes: 6, 8, and 12, in increasing order (see :numref:`weightsPreorder`). In the pairwise comparisons shown above these equivalence classes may appear positively or negatively, besides the indeterminate significance of value *0*. We thus get the following ordered bipolar list of significance weights:
 
@@ -734,7 +734,7 @@ Let use denote *-q* and *-Q* the reversed versions of the *q* and the *Q* lists.
 *-Q[i]*   2   5   6   7   9   9   9
 =======  ===  ==  ==  ==  ==  ==  == 
 
-Now, a pairwise outranking situation will be qualified at stability level +2, i.e. positively validated with any significance weights that are compatible with the given weights preorder, when for all *i*, we observe *Q[i]* <= *-Q[i]* and there exists one *i* such that *Q[i]* < *-Q[i]*. Similarly, a pairwise outranked situation will be qualified at stability level -2, when for all *i*, we observe *Q[i]* >= *-Q[i]* and there exists one *i* such that *Q[i]* > *-Q[i]* (see [BIS-2004_2p]_).
+Now, a pairwise outranking situation will be qualified at stability level +2, i.e. positively validated with any significance weights that are compatible with the given weights preorder, when for all *i*, we observe *Q[i]* <= *-Q[i]* and there exists one *i* such that *Q[i]* < *-Q[i]*. Similarly, a pairwise outranked situation will be qualified at stability level -2, when for all *i*, we observe *Q[i]* >= *-Q[i]* and there exists one *i* such that *Q[i]* > *-Q[i]* (see [BIS-2004-2p]_).
 
 We may verify, for instance, that the outranking situation observed between *a2* and *a1* does indeed verify this *first order distributional dominance* condition.
 
@@ -3863,7 +3863,7 @@ In an oriented graph context, the internal stability condition of the kernel con
 
 A both *internally* **and** *dominant*, resp. *absorbent stable* choice is called a *dominant* or **initial**, resp. an *absorbent* or **terminal** kernel. From a topological perspective, the initial kernel concept looks from the outside of the digraph into its interior, whereas the terminal kernel looks from the interior of a digraph toward its outside. From an algebraic perspective, the initial kernel is a *prefix* operand, and the terminal kernel is a *postfix* operand in the kernel equation systems (see `Digraph3 advanced topic on bipolar-valued kernel membership characteristics <./pearls.html#bipolar-valued-kernel-membership-characteristic-vectors>`_).
 
-Furthermore, as the kernel concept involves conjointly a **positive logical refutation** (the *internal stability*) and a **positive logical affirmation** (the *external stability*), it appeared rather quickly necessary in our operational developments to adopt a bipolar characteristic [-1,1] valuation domain, modelling *negation* by change of numerical sign and including explicitly a third **median** logical value (0) expressing logical **indeterminateness** (neither positive, nor negative, see [BIS-2000]_ and [BIS-2004a]_).
+Furthermore, as the kernel concept involves conjointly a **positive logical refutation** (the *internal stability*) and a **positive logical affirmation** (the *external stability*), it appeared rather quickly necessary in our operational developments to adopt a bipolar characteristic [-1,1] valuation domain, modelling *negation* by change of numerical sign and including explicitly a third **median** logical value (0) expressing logical **indeterminateness** (neither positive, nor negative, see [BIS-2000p]_ and [BIS-2004-1p]_).
 
 In such a  bipolar-valued context, we call **prekernel** a choice which is **externally stable** and for which the **internal stability** condition is **valid or indeterminate**. We say that the independence condition is in this case only **weakly** validated. Notice that all kernels are hence prekernels, but not vice-versa.
 
@@ -4285,7 +4285,7 @@ In the resulting linear ranking (see :numref:`outrankingResult`), action 'a4' is
 Tractability
 ............
 
-Finally, let us give some hints on the **tractability** of kernel computations. Detecting all (pre)kernels in a digraph is a famously NP-hard computational problem. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraph may get hard already for tiny sparse digraphs of order *n* > 20 (see [BIS-2006b]_). Indeed, the worst case is given by an empty or indeterminate digraph where the set of all potential independent choices to check is in fact the power set of the vertices.
+Finally, let us give some hints on the **tractability** of kernel computations. Detecting all (pre)kernels in a digraph is a famously NP-hard computational problem. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraph may get hard already for tiny sparse digraphs of order *n* > 20 (see [BIS-2006-2p]_). Indeed, the worst case is given by an empty or indeterminate digraph where the set of all potential independent choices to check is in fact the power set of the vertices.
 
 .. code-block:: pycon
    :linenos:
@@ -4301,7 +4301,7 @@ Finally, let us give some hints on the **tractability** of kernel computations. 
    >>> 2**20
     1048576
 
-Now, there exist more efficient specialized algorithms for directly enumerating MISs and dominant or absorbent kernels contained in specific digraph models without visiting all independent choices (see [BIS-2006b]_). Alain Hertz provided kindly such a MISs enumeration algorithm for the Digraph3 project (see :py:func:`~digraphs.Digraph.showMIS_AH`). When the number of independent choices is big compared to the actual number of MISs, like in very sparse or empty digraphs, the performance difference may be dramatic (see Line 7 above and Line 15 below).
+Now, there exist more efficient specialized algorithms for directly enumerating MISs and dominant or absorbent kernels contained in specific digraph models without visiting all independent choices (see [BIS-2006-2p]_). Alain Hertz provided kindly such a MISs enumeration algorithm for the Digraph3 project (see :py:func:`~digraphs.Digraph.showMIS_AH`). When the number of independent choices is big compared to the actual number of MISs, like in very sparse or empty digraphs, the performance difference may be dramatic (see Line 7 above and Line 15 below).
 
 .. code-block:: pycon
    :linenos:
@@ -4350,7 +4350,7 @@ For more or less dense strict outranking digraphs of modest order, as facing usu
                     Sx = [(Sxchoice,Sxgamdom,Sxgamabs,Sxindep)]
                     yield Sx
 
-And, checking maximality of independent choices via the external stability conditions during their enumeration (see :py:func:`~digraphs.Digraph.computePreKernels` below) provides the effective advantage of computing all initial **and** terminal prekernels in a single loop (see Line 10 and [BIS-2006b]_).
+And, checking maximality of independent choices via the external stability conditions during their enumeration (see :py:func:`~digraphs.Digraph.computePreKernels` below) provides the effective advantage of computing all initial **and** terminal prekernels in a single loop (see Line 10 and [BIS-2006-2p]_).
 
 .. code-block:: python
    :linenos:
@@ -4422,17 +4422,16 @@ Superposition of elementary epistemic situations
 
 Partly determined characteristic values appear now when balancing positive epistemic evidences against negative epistemic evidences. A first example is given by the normalized majority margins obtained from a ranked voting election. For each pair (*x*, *y*) of eligible candidates, we balance the number of times a voter ranks *x* before *y* against the number of times a voter ranks *y* before *x*.  A positive majority margin thus warrants that candidate *x* is more or less preferred to candidate *y*, a negative majority margin warrants that candidate *x* is not more or less prefered to candidate *y*. A second example is given by the characteristic values of a normalized outranking relation when no considerable performance differences are taken into account. Yet another example is given by normalized *Copeland* or *NetFlows* ranking scores of a decision alternative *x*. These scores characterise the statement that an alternative is first ranked by balancing the number of outranked against the number of outranking alternatives. In all these cases, we observe **compensatory superpositions** of elementary epistemic situations.
 
-But we may also operate **non compensatory superpositions** of elemetary epistemic situations. This is the case when taking into account considerable performance differences via the disjunctive fusion operator. Let proposition *P* stating that alternative *x* is '*performing at least as well*' as alternative *y*. Let proposition *Q* furthermore stating that alternative *x* is showing on a performance criterion a considerable less performance than alternative *y* . Let :math:`r(P) \in [-1.0;+1.0]` and :math:`r(Q) \in \{\,-1.0,\,0.0,\,+1.0\,\}` denote their bipolar-valued characteristic values.
+But we may also operate **non compensatory superpositions** of elemetary epistemic situations. This is the case when superposing, for instance with the disjunctive :math:`oplus` fusion operator, elementary bipolar-valued characteristic values. Let :math:`r(P)` et :math:`r(Q)` be the bipolar-valued characteristic values of two proposition *P* et *Q*. We may superpose these characteristic values as follows:
 
-| We may superpose these characteristic values with the help of the **disjunctive fusion** operator, denoted :math:`\oplus`.
 |   :math:`r\big(\,P\,\oplus\,Q\,\big) \;=`
 |        :math:`\max\big(r(P),r(Q)\big)` when :math:`r(P) \geq 0.0 \; \land \; r(Q) \geq 0.0`;
 |        :math:`\min\big(r(P),r(Q)\big)` when :math:`r(P) \leq 0.0 \; \land \; r(Q) \leq 0.0`;
 |        :math:`0.0` otherwise.
 
-Mind that the :math:`\oplus` operator, like a mean or average, is not associative when multiple characteristic functions must be fused together. In this case, all positive and negative terms get separately fused and their respective final results get again submitted to the :math:`\oplus` operator.
+Mind that the disjunctive, as well as the conjunctive epistemic fusion operator, like mean or average operators, are not associative when multiple characteristic values must be fused together. In this case, all positive and negative terms get separately fused and their respective final results get again submitted to the fusion operator.
 
-As a consequence, when there exist conjointly positive and negative epistemic evidences for a statement, the truthfulness or falseness of their disjunctive epistemic fusion always becomes *indeterminate*.
+As a consequence, when there exist conjointly positive and negative epistemic evidences for a statement, the truthfulness or falseness of their epistemic fusion always becomes *indeterminate*.
 
 Lest us now apply this bipolar-valued logical characteritic calculus to elementary set theory. 
 
@@ -4691,7 +4690,7 @@ The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a pa
 
 .. note::
 
-   The *relation* attribute of a bipolar-valued digraph is an example of a bpv-set where the support is given by the oriented pairs of the digraph's nodes. The *edges* attribute of bipolar-valued graphs is a second example of a bpv-set, where the support is given by the non-oriented pairs of the graph's vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership characteristic vectors from the *Rubis* best choice computation [BIS-2006_1p]_. This is the topic of the next tutorial.
+   The *relation* attribute of a bipolar-valued digraph is an example of a bpv-set where the support is given by the oriented pairs of the digraph's nodes. The *edges* attribute of bipolar-valued graphs is a second example of a bpv-set, where the support is given by the non-oriented pairs of the graph's vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership characteristic vectors from the *Rubis* best choice computation [BIS-2006-1p]_. This is the topic of the next tutorial.
 
 Back to :ref:`Content Table <Pearls-label>`
 
@@ -4756,7 +4755,7 @@ Let us verify this result on a tiny random digraph.
 
 It is easy to verify that the characteristic vector [-1, -1, +1] satisfies the initial kernel equation system; *a3* gives an *initial* kernel. Similarly, the characteristic vector [-1, +1, -1] verifies indeed the terminal kernel equation system and hence *a2* gives a *terminal* kernel.
 
-We succeeded now in generalizing kernel equation systems to genuine bipolar-valued digraphs ([BIS-2006_1p]_). The constructive proof, found by *Marc Pirlot*, is based on the following *fixpoint equation* that may be used for computing bipolar-valued kernel membership vectors,
+We succeeded now in generalizing kernel equation systems to genuine bipolar-valued digraphs ([BIS-2006-1p]_). The constructive proof, found by *Marc Pirlot*, is based on the following *fixpoint equation* that may be used for computing bipolar-valued kernel membership vectors,
 
      :math:`T(Y) \; := \; -(Y \circ R) = Y,`
 
@@ -4769,7 +4768,7 @@ Solving bipolar-valued kernel equation systems
 
 will admit a stable high and a stable low fixpoint solution that converge both to *Yk* ([SCH-1985p]_).
 
-Inspired by this crisp double fixpoint equation, we observed that for a given bipolar-valued digraph *G(X,R)*, each of its dominant or absorbent prekernels *Ki* in *X* determines an induced **partial graph** *G(X,R/Ki)* which is *acyclyc* and admits *Ki* as unique kernel (see [BIS-2006_2p]_).
+Inspired by this crisp double fixpoint equation, we observed that for a given bipolar-valued digraph *G(X,R)*, each of its dominant or absorbent prekernels *Ki* in *X* determines an induced **partial graph** *G(X,R/Ki)* which is *acyclyc* and admits *Ki* as unique kernel (see [BIS-2006-2p]_).
 
 Following the *von Neumann* fixpoint algorithm, a similar bipolar-valued extended double fixpoint algorithm, applied to *G(X,R/Ki)*, allows to compute hence the associated bipolar-valued kernel characteristic vectors *Yi* in polynomial complexity.
 
@@ -5736,13 +5735,13 @@ Appendix
 
 .. [MEY-2008] Meyer P., Marichal J.-L. and Bisdorff R. (2008). Disagregation of bipolar-valued outranking relations. In Modelling, Computation and Optimization in Information Systems and Management Sciences, H. A. Le Thi, P. Bouvry, and D. Pham (eds), Springer CCIS 14 204-213, ISBN 978-3-540-87476-8 (`preliminary version PDF file 129.9Kb <http://hdl.handle.net/10993/14485>`_
 
-.. [BIS-2006_1p] Bisdorff R., Pirlot M. and Roubens M. (2006). "Choices and kernels from bipolar valued digraphs". *European Journal of Operational Research*, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version `PDF file 257.3Kb <http://hdl.handle.net/10993/23720>`_).
+.. [BIS-2006-1p] Bisdorff R., Pirlot M. and Roubens M. (2006). "Choices and kernels from bipolar valued digraphs". *European Journal of Operational Research*, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version `PDF file 257.3Kb <http://hdl.handle.net/10993/23720>`_).
 
-.. [BIS-2006_2p] Bisdorff R. (2006). "On enumerating the kernels in a bipolar-valued digraph". *Annales du Lamsade* 6, Octobre 2006, pp. 1 - 38. Université Paris-Dauphine. ISSN 1762-455X (downloadable version `PDF file 532.2 Kb <http://hdl.handle.net/10993/38741>`_).
+.. [BIS-2006-2p] Bisdorff R. (2006). "On enumerating the kernels in a bipolar-valued digraph". *Annales du Lamsade* 6, Octobre 2006, pp. 1 - 38. Université Paris-Dauphine. ISSN 1762-455X (downloadable version `PDF file 532.2 Kb <http://hdl.handle.net/10993/38741>`_).
 
-.. [BIS-2004_1p] Bisdorff R. (2004). "Concordant Outranking with multiple criteria of ordinal significance". 4OR, *Quarterly Journal of the Belgian, French and Italian Operations Research Societies*, Springer-Verlag, Issue: Volume 2, Number 4, December 2004, Pages: 293 - 308. [ISSN: 1619-4500 (Paper) 1614-2411 (Online)] Electronic version: DOI: 10.1007/s10288-004-0053-7 (downloadable preliminary version `PDF file 137.1Kb <http://hdl.handle.net/10993/23721>`_)
+.. [BIS-2004-1p] Bisdorff R. (2004). "Concordant Outranking with multiple criteria of ordinal significance". 4OR, *Quarterly Journal of the Belgian, French and Italian Operations Research Societies*, Springer-Verlag, Issue: Volume 2, Number 4, December 2004, Pages: 293 - 308. [ISSN: 1619-4500 (Paper) 1614-2411 (Online)] Electronic version: DOI: 10.1007/s10288-004-0053-7 (downloadable preliminary version `PDF file 137.1Kb <http://hdl.handle.net/10993/23721>`_)
 
-.. [BIS-2004_2p] Bisdorff R. (2004). Preference aggregation with multiple criteria of ordinal significance. In: D. Bouyssou, M. Janowitz, F. Roberts, and A. Tsouki´s (eds.), Annales du LAMSADE, 3, Octobre 2004, Université Paris-Dauphine, pp. 25-44 [ISSN 1762-455X] (downloadable `PDF file 167.6Kb <http://hdl.handle.net/10993/42420>`_).
+.. [BIS-2004-2p] Bisdorff R. (2004). Preference aggregation with multiple criteria of ordinal significance. In: D. Bouyssou, M. Janowitz, F. Roberts, and A. Tsouki´s (eds.), Annales du LAMSADE, 3, Octobre 2004, Université Paris-Dauphine, pp. 25-44 [ISSN 1762-455X] (downloadable `PDF file 167.6Kb <http://hdl.handle.net/10993/42420>`_).
 
 .. [BIS-2004_3p] Bisdorff R. (2004), On a natural fuzzification of Boolean logic, in Erich Peter Klement and Endre Pap (editors), Proceedings of the 25th Linz Seminar on Fuzzy Set Theory, Mathematics of Fuzzy Systems. Bildungszentrum St. Magdalena, Linz (Austria), February 2004. pp. 20-26 (downloadable `PDF file 136.6Kb <./_static/Linz2004.pdf>`_)
 
@@ -5766,6 +5765,8 @@ Appendix
 .. [BIS-1997p] Bisdorff R. (1997). "On computing kernels on l-valued simple graphs*. In:
   *Proceedings of EUFIT'97, 5th European Congress on Fuzzy and Intelligent
   Technologies*, Aachen, September 8-11, 1997}, pp 97--103.
+
+.. [BIS-2000p] Bisdorff R. (2000), "Logical foundation of fuzzy preferential systems with application to the ELECTRE decision aid methods", *Computers and Operations Research*, 27:673-687 (downloadable version `PDF file 159.1Kb <http://hdl.handle.net/10993/23724>`_).
 
 .. [BAR-1980p] Barbut M. (1980), "Médianes, Condorcet et Kendall". *Mathématiques et Sciences Humaines*, 69:9–13.	       
 

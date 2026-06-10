@@ -5445,7 +5445,7 @@ An \sphinxstylestrong{absorbent} stability condition, where each non selected no
 A both \sphinxstyleemphasis{internally} \sphinxstylestrong{and} \sphinxstyleemphasis{dominant}, resp. \sphinxstyleemphasis{absorbent stable} choice is called a \sphinxstyleemphasis{dominant} or \sphinxstylestrong{initial}, resp. an \sphinxstyleemphasis{absorbent} or \sphinxstylestrong{terminal} kernel. From a topological perspective, the initial kernel concept looks from the outside of the digraph into its interior, whereas the terminal kernel looks from the interior of a digraph toward its outside. From an algebraic perspective, the initial kernel is a \sphinxstyleemphasis{prefix} operand, and the terminal kernel is a \sphinxstyleemphasis{postfix} operand in the kernel equation systems (see \sphinxhref{./pearls.html\#bipolar-valued-kernel-membership-characteristic-vectors}{Digraph3 advanced topic on bipolar\sphinxhyphen{}valued kernel membership characteristics}).
 
 \sphinxAtStartPar
-Furthermore, as the kernel concept involves conjointly a \sphinxstylestrong{positive logical refutation} (the \sphinxstyleemphasis{internal stability}) and a \sphinxstylestrong{positive logical affirmation} (the \sphinxstyleemphasis{external stability}), it appeared rather quickly necessary in our operational developments to adopt a bipolar characteristic {[}\sphinxhyphen{}1,1{]} valuation domain, modelling \sphinxstyleemphasis{negation} by change of numerical sign and including explicitly a third \sphinxstylestrong{median} logical value (0) expressing logical \sphinxstylestrong{indeterminateness} (neither positive, nor negative, see \sphinxcite{tutorial:bis-2000} and \sphinxcite{tutorial:bis-2004a}).
+Furthermore, as the kernel concept involves conjointly a \sphinxstylestrong{positive logical refutation} (the \sphinxstyleemphasis{internal stability}) and a \sphinxstylestrong{positive logical affirmation} (the \sphinxstyleemphasis{external stability}), it appeared rather quickly necessary in our operational developments to adopt a bipolar characteristic {[}\sphinxhyphen{}1,1{]} valuation domain, modelling \sphinxstyleemphasis{negation} by change of numerical sign and including explicitly a third \sphinxstylestrong{median} logical value (0) expressing logical \sphinxstylestrong{indeterminateness} (neither positive, nor negative, see \sphinxcite{pearls:bis-2000p} and \sphinxcite{pearls:bis-2004-1p}).
 
 \sphinxAtStartPar
 In such a  bipolar\sphinxhyphen{}valued context, we call \sphinxstylestrong{prekernel} a choice which is \sphinxstylestrong{externally stable} and for which the \sphinxstylestrong{internal stability} condition is \sphinxstylestrong{valid or indeterminate}. We say that the independence condition is in this case only \sphinxstylestrong{weakly} validated. Notice that all kernels are hence prekernels, but not vice\sphinxhyphen{}versa.
@@ -5866,7 +5866,7 @@ In the resulting linear ranking (see \hyperref[\detokenize{pearls:outrankingresu
 \subsubsection{Tractability}
 \label{\detokenize{pearls:tractability}}
 \sphinxAtStartPar
-Finally, let us give some hints on the \sphinxstylestrong{tractability} of kernel computations. Detecting all (pre)kernels in a digraph is a famously NP\sphinxhyphen{}hard computational problem. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraph may get hard already for tiny sparse digraphs of order \sphinxstyleemphasis{n} \textgreater{} 20 (see \sphinxcite{tutorial:bis-2006b}). Indeed, the worst case is given by an empty or indeterminate digraph where the set of all potential independent choices to check is in fact the power set of the vertices.
+Finally, let us give some hints on the \sphinxstylestrong{tractability} of kernel computations. Detecting all (pre)kernels in a digraph is a famously NP\sphinxhyphen{}hard computational problem. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraph may get hard already for tiny sparse digraphs of order \sphinxstyleemphasis{n} \textgreater{} 20 (see \sphinxcite{pearls:bis-2006-2p}). Indeed, the worst case is given by an empty or indeterminate digraph where the set of all potential independent choices to check is in fact the power set of the vertices.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{EmptyDigraph}
@@ -5882,7 +5882,7 @@ Finally, let us give some hints on the \sphinxstylestrong{tractability} of kerne
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
-Now, there exist more efficient specialized algorithms for directly enumerating MISs and dominant or absorbent kernels contained in specific digraph models without visiting all independent choices (see \sphinxcite{tutorial:bis-2006b}). Alain Hertz provided kindly such a MISs enumeration algorithm for the Digraph3 project (see \sphinxcode{\sphinxupquote{showMIS\_AH()}}). When the number of independent choices is big compared to the actual number of MISs, like in very sparse or empty digraphs, the performance difference may be dramatic (see Line 7 above and Line 15 below).
+Now, there exist more efficient specialized algorithms for directly enumerating MISs and dominant or absorbent kernels contained in specific digraph models without visiting all independent choices (see \sphinxcite{pearls:bis-2006-2p}). Alain Hertz provided kindly such a MISs enumeration algorithm for the Digraph3 project (see \sphinxcode{\sphinxupquote{showMIS\_AH()}}). When the number of independent choices is big compared to the actual number of MISs, like in very sparse or empty digraphs, the performance difference may be dramatic (see Line 7 above and Line 15 below).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{e}\PYG{o}{.}\PYG{n}{showMIS\PYGZus{}AH}\PYG{p}{(}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} by visiting only maximal independent choices}
@@ -5931,7 +5931,7 @@ For more or less dense strict outranking digraphs of modest order, as facing usu
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
-And, checking maximality of independent choices via the external stability conditions during their enumeration (see \sphinxcode{\sphinxupquote{computePreKernels()}} below) provides the effective advantage of computing all initial \sphinxstylestrong{and} terminal prekernels in a single loop (see Line 10 and \sphinxcite{tutorial:bis-2006b}).
+And, checking maximality of independent choices via the external stability conditions during their enumeration (see \sphinxcode{\sphinxupquote{computePreKernels()}} below) provides the effective advantage of computing all initial \sphinxstylestrong{and} terminal prekernels in a single loop (see Line 10 and \sphinxcite{pearls:bis-2006-2p}).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
  \PYG{k}{def} \PYG{n+nf}{computePreKernels}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
@@ -6041,12 +6041,9 @@ This way all tautologies and antologies of a classical propositional calculus li
 Partly determined characteristic values appear now when balancing positive epistemic evidences against negative epistemic evidences. A first example is given by the normalized majority margins obtained from a ranked voting election. For each pair (\sphinxstyleemphasis{x}, \sphinxstyleemphasis{y}) of eligible candidates, we balance the number of times a voter ranks \sphinxstyleemphasis{x} before \sphinxstyleemphasis{y} against the number of times a voter ranks \sphinxstyleemphasis{y} before \sphinxstyleemphasis{x}.  A positive majority margin thus warrants that candidate \sphinxstyleemphasis{x} is more or less preferred to candidate \sphinxstyleemphasis{y}, a negative majority margin warrants that candidate \sphinxstyleemphasis{x} is not more or less prefered to candidate \sphinxstyleemphasis{y}. A second example is given by the characteristic values of a normalized outranking relation when no considerable performance differences are taken into account. Yet another example is given by normalized \sphinxstyleemphasis{Copeland} or \sphinxstyleemphasis{NetFlows} ranking scores of a decision alternative \sphinxstyleemphasis{x}. These scores characterise the statement that an alternative is first ranked by balancing the number of outranked against the number of outranking alternatives. In all these cases, we observe \sphinxstylestrong{compensatory superpositions} of elementary epistemic situations.
 
 \sphinxAtStartPar
-But we may also operate \sphinxstylestrong{non compensatory superpositions} of elemetary epistemic situations. This is the case when taking into account considerable performance differences via the disjunctive fusion operator. Let proposition \sphinxstyleemphasis{P} stating that alternative \sphinxstyleemphasis{x} is ‘\sphinxstyleemphasis{performing at least as well}’ as alternative \sphinxstyleemphasis{y}. Let proposition \sphinxstyleemphasis{Q} furthermore stating that alternative \sphinxstyleemphasis{x} is showing on a performance criterion a considerable less performance than alternative \sphinxstyleemphasis{y} . Let \(r(P) \in [-1.0;+1.0]\) and \(r(Q) \in \{\,-1.0,\,0.0,\,+1.0\,\}\) denote their bipolar\sphinxhyphen{}valued characteristic values.
+But we may also operate \sphinxstylestrong{non compensatory superpositions} of elemetary epistemic situations. This is the case when superposing, for instance with the disjunctive \(oplus\) fusion operator, elementary bipolar\sphinxhyphen{}valued characteristic values. Let \(r(P)\) et \(r(Q)\) be the bipolar\sphinxhyphen{}valued characteristic values of two proposition \sphinxstyleemphasis{P} et \sphinxstyleemphasis{Q}. We may superpose these characteristic values as follows:
 
 \begin{DUlineblock}{0em}
-\item[] We may superpose these characteristic values with the help of the \sphinxstylestrong{disjunctive fusion} operator, denoted \(\oplus\).
-\item[]
-\begin{DUlineblock}{\DUlineblockindent}
 \item[] \(r\big(\,P\,\oplus\,Q\,\big) \;=\)
 \item[]
 \begin{DUlineblock}{\DUlineblockindent}
@@ -6055,13 +6052,12 @@ But we may also operate \sphinxstylestrong{non compensatory superpositions} of e
 \item[] \(0.0\) otherwise.
 \end{DUlineblock}
 \end{DUlineblock}
-\end{DUlineblock}
 
 \sphinxAtStartPar
-Mind that the \(\oplus\) operator, like a mean or average, is not associative when multiple characteristic functions must be fused together. In this case, all positive and negative terms get separately fused and their respective final results get again submitted to the \(\oplus\) operator.
+Mind that the disjunctive, as well as the conjunctive epistemic fusion operator, like mean or average operators, are not associative when multiple characteristic values must be fused together. In this case, all positive and negative terms get separately fused and their respective final results get again submitted to the fusion operator.
 
 \sphinxAtStartPar
-As a consequence, when there exist conjointly positive and negative epistemic evidences for a statement, the truthfulness or falseness of their disjunctive epistemic fusion always becomes \sphinxstyleemphasis{indeterminate}.
+As a consequence, when there exist conjointly positive and negative epistemic evidences for a statement, the truthfulness or falseness of their epistemic fusion always becomes \sphinxstyleemphasis{indeterminate}.
 
 \sphinxAtStartPar
 Lest us now apply this bipolar\sphinxhyphen{}valued logical characteritic calculus to elementary set theory.
@@ -7605,16 +7601,16 @@ Bisdorff R., Meyer P. and Roubens M.(2008) “RUBIS: a bipolar\sphinxhyphen{}val
 \bibitem[MEY\sphinxhyphen{}2008]{pearls:mey-2008}
 \sphinxAtStartPar
 Meyer P., Marichal J.\sphinxhyphen{}L. and Bisdorff R. (2008). Disagregation of bipolar\sphinxhyphen{}valued outranking relations. In Modelling, Computation and Optimization in Information Systems and Management Sciences, H. A. Le Thi, P. Bouvry, and D. Pham (eds), Springer CCIS 14 204\sphinxhyphen{}213, ISBN 978\sphinxhyphen{}3\sphinxhyphen{}540\sphinxhyphen{}87476\sphinxhyphen{}8 (\sphinxhref{http://hdl.handle.net/10993/14485}{preliminary version PDF file 129.9Kb} (http://hdl.handle.net/10993/14485)
-\bibitem[BIS\sphinxhyphen{}2006\_1p]{pearls:bis-2006-1p}
+\bibitem[BIS\sphinxhyphen{}2006\sphinxhyphen{}1p]{pearls:bis-2006-1p}
 \sphinxAtStartPar
 Bisdorff R., Pirlot M. and Roubens M. (2006). “Choices and kernels from bipolar valued digraphs”. \sphinxstyleemphasis{European Journal of Operational Research}, 175 (2006) 155\sphinxhyphen{}170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version \sphinxhref{http://hdl.handle.net/10993/23720}{PDF file 257.3Kb} (http://hdl.handle.net/10993/23720)).
-\bibitem[BIS\sphinxhyphen{}2006\_2p]{pearls:bis-2006-2p}
+\bibitem[BIS\sphinxhyphen{}2006\sphinxhyphen{}2p]{pearls:bis-2006-2p}
 \sphinxAtStartPar
 Bisdorff R. (2006). “On enumerating the kernels in a bipolar\sphinxhyphen{}valued digraph”. \sphinxstyleemphasis{Annales du Lamsade} 6, Octobre 2006, pp. 1 \sphinxhyphen{} 38. Université Paris\sphinxhyphen{}Dauphine. ISSN 1762\sphinxhyphen{}455X (downloadable version \sphinxhref{http://hdl.handle.net/10993/38741}{PDF file 532.2 Kb} (http://hdl.handle.net/10993/38741)).
-\bibitem[BIS\sphinxhyphen{}2004\_1p]{pearls:bis-2004-1p}
+\bibitem[BIS\sphinxhyphen{}2004\sphinxhyphen{}1p]{pearls:bis-2004-1p}
 \sphinxAtStartPar
 Bisdorff R. (2004). “Concordant Outranking with multiple criteria of ordinal significance”. 4OR, \sphinxstyleemphasis{Quarterly Journal of the Belgian, French and Italian Operations Research Societies}, Springer\sphinxhyphen{}Verlag, Issue: Volume 2, Number 4, December 2004, Pages: 293 \sphinxhyphen{} 308. {[}ISSN: 1619\sphinxhyphen{}4500 (Paper) 1614\sphinxhyphen{}2411 (Online){]} Electronic version: DOI: 10.1007/s10288\sphinxhyphen{}004\sphinxhyphen{}0053\sphinxhyphen{}7 (downloadable preliminary version \sphinxhref{http://hdl.handle.net/10993/23721}{PDF file 137.1Kb} (http://hdl.handle.net/10993/23721))
-\bibitem[BIS\sphinxhyphen{}2004\_2p]{pearls:bis-2004-2p}
+\bibitem[BIS\sphinxhyphen{}2004\sphinxhyphen{}2p]{pearls:bis-2004-2p}
 \sphinxAtStartPar
 Bisdorff R. (2004). Preference aggregation with multiple criteria of ordinal significance. In: D. Bouyssou, M. Janowitz, F. Roberts, and A. Tsouki´s (eds.), Annales du LAMSADE, 3, Octobre 2004, Université Paris\sphinxhyphen{}Dauphine, pp. 25\sphinxhyphen{}44 {[}ISSN 1762\sphinxhyphen{}455X{]} (downloadable \sphinxhref{http://hdl.handle.net/10993/42420}{PDF file 167.6Kb} (http://hdl.handle.net/10993/42420)).
 \bibitem[BIS\sphinxhyphen{}2004\_3p]{pearls:bis-2004-3p}
@@ -7648,6 +7644,9 @@ de Louvain, \sphinxurl{http://hdl.handle.net/10993/46933}
 Bisdorff R. (1997). “On computing kernels on l\sphinxhyphen{}valued simple graphs*. In:
 \sphinxstyleemphasis{Proceedings of EUFIT’97, 5th European Congress on Fuzzy and Intelligent
 Technologies}, Aachen, September 8\sphinxhyphen{}11, 1997\}, pp 97\textendash{}103.
+\bibitem[BIS\sphinxhyphen{}2000p]{pearls:bis-2000p}
+\sphinxAtStartPar
+Bisdorff R. (2000), “Logical foundation of fuzzy preferential systems with application to the ELECTRE decision aid methods”, \sphinxstyleemphasis{Computers and Operations Research}, 27:673\sphinxhyphen{}687 (downloadable version \sphinxhref{http://hdl.handle.net/10993/23724}{PDF file 159.1Kb} (http://hdl.handle.net/10993/23724)).
 \bibitem[BAR\sphinxhyphen{}1980p]{pearls:bar-1980p}
 \sphinxAtStartPar
 Barbut M. (1980), “Médianes, Condorcet et Kendall”. \sphinxstyleemphasis{Mathématiques et Sciences Humaines}, 69:9\textendash{}13.
