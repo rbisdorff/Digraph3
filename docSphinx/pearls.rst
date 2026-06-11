@@ -4415,7 +4415,7 @@ Negating a statement is operated by changing the sign of its characteristic func
 
 It is worthwhile noticing that the bipolar-valued logical implication is not necessarily transitive. Suppose for instance that a majority of voters validate proposition :math:`P \Rightarrow Q` and another majority validates the proposition :math:`Q \Rightarrow R`. There is no epistemic reason why the separate evidences of both these statements should necessarily induce the evidence of :math:`P \Rightarrow R`.
 
-This way all tautologies and antologies of a classical propositional calculus like the Boolean algebra remain effectively valid when only working with fully determined +1.0 and -1.0 characteristic values.
+This way all tautologies and antologies of a classical propositional calculus like a Boolean algebra remain effectively valid when only working with fully determined +1.0 and -1.0 characteristic values.
 
 Superposition of elementary epistemic situations
 ................................................
@@ -4569,7 +4569,7 @@ Finally, a :py:meth:`~bipolarValuedSets.BpvSet.polarise` method is provided for 
     s2:  -1.0000
     s3:  -1.0000
 
-In the limit case of no indeterminate membership characteristics, we recover this way standard crisp sets and the previous set operations implement in fact a classic Boolean algebra [BIS-2004_3p]_. 
+In the limit case of no indeterminate membership characteristics, we recover this way standard crisp sets and the previous set operations implement in fact a classical Boolean algebra [BIS-2004_3p]_. 
 
 The partially ordered commutative epistemic fusion ring
 .......................................................
