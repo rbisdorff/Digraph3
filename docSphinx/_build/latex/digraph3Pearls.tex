@@ -6016,7 +6016,7 @@ First important consequence is that the logical status of any statement is consi
 \end{DUlineblock}
 
 \sphinxAtStartPar
-Negating a statement is operated by changing the sign of its characteristic function: \(r(\neg P) = -r(P)\). An important consequence appears. This \sphinxstylestrong{negation} \(\neg\) operation does not correspond to taking the logical complement value. Indeed, the complement of \sphinxstyleemphasis{not true} is here \sphinxstyleemphasis{false or indeterminate} and the complement of \sphinxstyleemphasis{not false} is \sphinxstyleemphasis{true or indeterminate}. In fact, we are working in a balanced ternary logic with \sphinxstylestrong{negative} (false), \sphinxstylestrong{positive} (true) and \sphinxstylestrong{null} (indeterminate) characteristic values. A negative \sphinxstyleemphasis{affirmation} becomes hence a positive \sphinxstyleemphasis{refutation} and vice versa \sphinxcite{pearls:bis-2004-3p}.
+Negating a statement is operated by changing the sign of its characteristic function: \(-r(P) = r(\neg P)\). A negative \sphinxstyleemphasis{affirmation} becomes hence a positive \sphinxstyleemphasis{refutation} and vice versa \sphinxcite{pearls:bis-2004-3p}. An important consequence appears. This \sphinxstylestrong{negation} \(\neg\) operation does not correspond to taking the logical complement value. Indeed, the complement of \sphinxstyleemphasis{not true} is here \sphinxstyleemphasis{false or indeterminate} and the complement of \sphinxstyleemphasis{not false} is \sphinxstyleemphasis{true or indeterminate}. In fact, we are working in a balanced ternary logic with \sphinxstylestrong{negative} (false), \sphinxstylestrong{positive} (true) and \sphinxstylestrong{null} (indeterminate) characteristic values.
 
 \begin{DUlineblock}{0em}
 \item[] Let now \sphinxstyleemphasis{P} and \sphinxstyleemphasis{Q} be two bipolar\sphinxhyphen{}valued propositions, logical \sphinxstylestrong{conjunction} \(\land\), \sphinxstylestrong{disjunction} \(\lor\) and \sphinxstylestrong{implication} \(\Rightarrow\) may be computed as follows:
@@ -6041,7 +6041,7 @@ This way all tautologies and antologies of a classical propositional calculus li
 Partly determined characteristic values appear now when balancing positive epistemic evidences against negative epistemic evidences. A first example is given by the normalized majority margins obtained from a ranked voting election. For each pair (\sphinxstyleemphasis{x}, \sphinxstyleemphasis{y}) of eligible candidates, we balance the number of times a voter ranks \sphinxstyleemphasis{x} before \sphinxstyleemphasis{y} against the number of times a voter ranks \sphinxstyleemphasis{y} before \sphinxstyleemphasis{x}.  A positive majority margin thus warrants that candidate \sphinxstyleemphasis{x} is more or less preferred to candidate \sphinxstyleemphasis{y}, a negative majority margin warrants that candidate \sphinxstyleemphasis{x} is not more or less prefered to candidate \sphinxstyleemphasis{y}. A second example is given by the characteristic values of a normalized outranking relation when no considerable performance differences are taken into account. Yet another example is given by normalized \sphinxstyleemphasis{Copeland} or \sphinxstyleemphasis{NetFlows} ranking scores of a decision alternative \sphinxstyleemphasis{x}. These scores characterise the statement that an alternative is first ranked by balancing the number of outranked against the number of outranking alternatives. In all these cases, we observe \sphinxstylestrong{compensatory superpositions} of elementary epistemic situations.
 
 \sphinxAtStartPar
-But we may also operate \sphinxstylestrong{non compensatory superpositions} of elemetary epistemic situations. This is the case when superposing, for instance with the disjunctive \(oplus\) fusion operator, elementary bipolar\sphinxhyphen{}valued characteristic values. Let \(r(P)\) et \(r(Q)\) be the bipolar\sphinxhyphen{}valued characteristic values of two proposition \sphinxstyleemphasis{P} et \sphinxstyleemphasis{Q}. We may superpose these characteristic values as follows:
+But we may also operate \sphinxstylestrong{non compensatory superpositions} of elemetary epistemic situations. This is the case when superposing elementary bipolar\sphinxhyphen{}valued characteristic values for instance with the disjunctive epistemic fusion operator, denoted \(\oplus\) . Let \(r(P)\) et \(r(Q)\) be the characteristics of two bipolar\sphinxhyphen{}valued propositions \sphinxstyleemphasis{P} et \sphinxstyleemphasis{Q}. We may superpose these characteristics as follows:
 
 \begin{DUlineblock}{0em}
 \item[] \(r\big(\,P\,\oplus\,Q\,\big) \;=\)
@@ -6054,10 +6054,7 @@ But we may also operate \sphinxstylestrong{non compensatory superpositions} of e
 \end{DUlineblock}
 
 \sphinxAtStartPar
-Mind that the disjunctive, as well as the conjunctive epistemic fusion operator, like mean or average operators, are not associative when multiple characteristic values must be fused together. In this case, all positive and negative terms get separately fused and their respective final results get again submitted to the fusion operator.
-
-\sphinxAtStartPar
-As a consequence, when there exist conjointly positive and negative epistemic evidences for a statement, the truthfulness or falseness of their epistemic fusion always becomes \sphinxstyleemphasis{indeterminate}.
+Mind that the disjunctive, as well as the conjunctive epistemic fusion operator, like a mean or an average operator, are not associative when multiple characteristic values must be fused together. In this case, all positive and negative terms get separately fused and their respective final results get again submitted to the fusion operator. As a consequence, when there exist conjointly positive and negative epistemic evidences for a statement, the truthfulness or falseness of their epistemic fusion always becomes \sphinxstylestrong{indeterminate}.
 
 \sphinxAtStartPar
 Lest us now apply this bipolar\sphinxhyphen{}valued logical characteritic calculus to elementary set theory.
@@ -6199,7 +6196,8 @@ In \hyperref[\detokenize{pearls:bipolarvaluedsets3}]{Listing \ref{\detokenize{pe
 \sphinxAtStartPar
 The \sphinxcode{\sphinxupquote{BpvSet}} class provides furthermore a \sphinxcode{\sphinxupquote{isSubset()}} method for computing the bipolar\sphinxhyphen{}valued subset statement and a \sphinxcode{\sphinxupquote{strip()}} method which removes potential non\sphinxhyphen{}elements from the support of a bpv\sphinxhyphen{}set.
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\fvset{hllines={, 2, 4,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{D} \PYG{o}{=} \PYG{n}{Y} \PYG{o}{\PYGZhy{}} \PYG{n}{X}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{D}\PYG{o}{.}\PYG{n}{isSubset}\PYG{p}{(}\PYG{n}{Y}\PYG{p}{)}
 \PYG{g+go}{ Decimal(\PYGZsq{}0.8869\PYGZsq{})}
@@ -6209,20 +6207,23 @@ The \sphinxcode{\sphinxupquote{BpvSet}} class provides furthermore a \sphinxcode
 \PYG{g+go}{ s2:  \PYGZhy{}0.6949}
 \PYG{g+go}{ s3:  \PYGZhy{}0.8869}
 \end{sphinxVerbatim}
+\sphinxresetverbatimhllines
 
 \sphinxAtStartPar
 Finally, a \sphinxcode{\sphinxupquote{polarise()}} method is provided for setting all positive and negative membership credibilities of a bpv\sphinxhyphen{}set to +1.0, respectively to \sphinxhyphen{}1.0 .
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\fvset{hllines={, 1,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{D2} \PYG{o}{=} \PYG{n}{D1}\PYG{o}{.}\PYG{n}{polarise}\PYG{p}{(}\PYG{n}{InSite}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{D2}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ s1:  +1.0000}
 \PYG{g+go}{ s2:  \PYGZhy{}1.0000}
 \PYG{g+go}{ s3:  \PYGZhy{}1.0000}
 \end{sphinxVerbatim}
+\sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-In the limit case of no indeterminate membership characteristics, we recover this way standard crisp sets and the previous set operations implement in fact a Boolean algebra \sphinxcite{pearls:bis-2004-3p}.
+In the limit case of no indeterminate membership characteristics, we recover this way standard crisp sets and the previous set operations implement in fact a classic Boolean algebra \sphinxcite{pearls:bis-2004-3p}.
 
 
 \subsubsection{The partially ordered commutative epistemic fusion ring}

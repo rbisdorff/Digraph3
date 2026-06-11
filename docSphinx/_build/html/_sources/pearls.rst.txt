@@ -4406,7 +4406,7 @@ Bipolar-valued propositional calculus
 |    :math:`-1.0 < r(P) < 0.0` means statement *P* is **more or less false**;
 |    :math:`r(P) = -1.0` means statement *P* is **for sure false**.
   
-Negating a statement is operated by changing the sign of its characteristic function: :math:`r(\neg P) = -r(P)`. An important consequence appears. This **negation** :math:`\neg` operation does not correspond to taking the logical complement value. Indeed, the complement of *not true* is here *false or indeterminate* and the complement of *not false* is *true or indeterminate*. In fact, we are working in a balanced ternary logic with **negative** (false), **positive** (true) and **null** (indeterminate) characteristic values. A negative *affirmation* becomes hence a positive *refutation* and vice versa [BIS-2004_3p]_. 
+Negating a statement is operated by changing the sign of its characteristic function: :math:`-r(P) = r(\neg P)`. A negative *affirmation* becomes hence a positive *refutation* and vice versa [BIS-2004_3p]_. An important consequence appears. This **negation** :math:`\neg` operation does not correspond to taking the logical complement value. Indeed, the complement of *not true* is here *false or indeterminate* and the complement of *not false* is *true or indeterminate*. In fact, we are working in a balanced ternary logic with **negative** (false), **positive** (true) and **null** (indeterminate) characteristic values.  
 
 | Let now *P* and *Q* be two bipolar-valued propositions, logical **conjunction** :math:`\land`, **disjunction** :math:`\lor` and **implication** :math:`\Rightarrow` may be computed as follows:
 |    :math:`r(P \land Q) \,=\, \min\big(r(P),r(Q)\big)`;
@@ -4422,16 +4422,14 @@ Superposition of elementary epistemic situations
 
 Partly determined characteristic values appear now when balancing positive epistemic evidences against negative epistemic evidences. A first example is given by the normalized majority margins obtained from a ranked voting election. For each pair (*x*, *y*) of eligible candidates, we balance the number of times a voter ranks *x* before *y* against the number of times a voter ranks *y* before *x*.  A positive majority margin thus warrants that candidate *x* is more or less preferred to candidate *y*, a negative majority margin warrants that candidate *x* is not more or less prefered to candidate *y*. A second example is given by the characteristic values of a normalized outranking relation when no considerable performance differences are taken into account. Yet another example is given by normalized *Copeland* or *NetFlows* ranking scores of a decision alternative *x*. These scores characterise the statement that an alternative is first ranked by balancing the number of outranked against the number of outranking alternatives. In all these cases, we observe **compensatory superpositions** of elementary epistemic situations.
 
-But we may also operate **non compensatory superpositions** of elemetary epistemic situations. This is the case when superposing, for instance with the disjunctive :math:`oplus` fusion operator, elementary bipolar-valued characteristic values. Let :math:`r(P)` et :math:`r(Q)` be the bipolar-valued characteristic values of two proposition *P* et *Q*. We may superpose these characteristic values as follows:
+But we may also operate **non compensatory superpositions** of elemetary epistemic situations. This is the case when superposing elementary bipolar-valued characteristic values for instance with the disjunctive epistemic fusion operator, denoted :math:`\oplus` . Let :math:`r(P)` et :math:`r(Q)` be the characteristics of two bipolar-valued propositions *P* et *Q*. We may superpose these characteristics as follows:
 
 |   :math:`r\big(\,P\,\oplus\,Q\,\big) \;=`
 |        :math:`\max\big(r(P),r(Q)\big)` when :math:`r(P) \geq 0.0 \; \land \; r(Q) \geq 0.0`;
 |        :math:`\min\big(r(P),r(Q)\big)` when :math:`r(P) \leq 0.0 \; \land \; r(Q) \leq 0.0`;
 |        :math:`0.0` otherwise.
 
-Mind that the disjunctive, as well as the conjunctive epistemic fusion operator, like mean or average operators, are not associative when multiple characteristic values must be fused together. In this case, all positive and negative terms get separately fused and their respective final results get again submitted to the fusion operator.
-
-As a consequence, when there exist conjointly positive and negative epistemic evidences for a statement, the truthfulness or falseness of their epistemic fusion always becomes *indeterminate*.
+Mind that the disjunctive, as well as the conjunctive epistemic fusion operator, like a mean or an average operator, are not associative when multiple characteristic values must be fused together. In this case, all positive and negative terms get separately fused and their respective final results get again submitted to the fusion operator. As a consequence, when there exist conjointly positive and negative epistemic evidences for a statement, the truthfulness or falseness of their epistemic fusion always becomes **indeterminate**.
 
 Lest us now apply this bipolar-valued logical characteritic calculus to elementary set theory. 
 
@@ -4546,6 +4544,10 @@ In :numref:`bipolarValuedSets3` below we illustrate the bipolar-valued set **dif
 
 The :py:class:`~bipolarValuedSets.BpvSet` class provides furthermore a :py:meth:`~bipolarValuedSets.BpvSet.isSubset` method for computing the bipolar-valued subset statement and a :py:meth:`~bipolarValuedSets.BpvSet.strip` method which removes potential non-elements from the support of a bpv-set.
 
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 2,4
+
    >>> D = Y - X
    >>> D.isSubset(Y)
     Decimal('0.8869')
@@ -4557,13 +4559,17 @@ The :py:class:`~bipolarValuedSets.BpvSet` class provides furthermore a :py:meth:
 
 Finally, a :py:meth:`~bipolarValuedSets.BpvSet.polarise` method is provided for setting all positive and negative membership credibilities of a bpv-set to +1.0, respectively to -1.0 .
 
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 1
+
    >>> D2 = D1.polarise(InSite=False)
    >>> D2.showMembershipCharacteristics()
     s1:  +1.0000
     s2:  -1.0000
     s3:  -1.0000
 
-In the limit case of no indeterminate membership characteristics, we recover this way standard crisp sets and the previous set operations implement in fact a Boolean algebra [BIS-2004_3p]_. 
+In the limit case of no indeterminate membership characteristics, we recover this way standard crisp sets and the previous set operations implement in fact a classic Boolean algebra [BIS-2004_3p]_. 
 
 The partially ordered commutative epistemic fusion ring
 .......................................................
