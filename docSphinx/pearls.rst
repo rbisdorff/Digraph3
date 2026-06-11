@@ -4406,7 +4406,7 @@ Bipolar-valued propositional calculus
 |    :math:`-1.0 < r(P) < 0.0` means statement *P* is **more or less false**;
 |    :math:`r(P) = -1.0` means statement *P* is **for sure false**.
   
-Negating a statement is operated by changing the sign of its characteristic function: :math:`r(\neg P) = -r(P)`. An important consequence appears. This **negation** :math:`\neg` operation does not necessarily correspond to taking the logical complement value. Indeed, *not true* does now only imply *false or indeterminate* and *not false* does only imply *true or indeterminate*. In fact, we are working in a balanced ternary logic with **negative** (false), **positive** (true) and **null** (indeterminate) characteristic values. A negative *affirmation* becomes here a positive *refutation* and vice versa [BIS-2004_3p]_. 
+Negating a statement is operated by changing the sign of its characteristic function: :math:`r(\neg P) = -r(P)`. An important consequence appears. This **negation** :math:`\neg` operation does not correspond to taking the logical complement value. Indeed, the complement of *not true* is here *false or indeterminate* and the complement of *not false* is *true or indeterminate*. In fact, we are working in a balanced ternary logic with **negative** (false), **positive** (true) and **null** (indeterminate) characteristic values. A negative *affirmation* becomes hence a positive *refutation* and vice versa [BIS-2004_3p]_. 
 
 | Let now *P* and *Q* be two bipolar-valued propositions, logical **conjunction** :math:`\land`, **disjunction** :math:`\lor` and **implication** :math:`\Rightarrow` may be computed as follows:
 |    :math:`r(P \land Q) \,=\, \min\big(r(P),r(Q)\big)`;
