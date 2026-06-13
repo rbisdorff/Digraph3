@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.5.23)  11 JUN 2026 15:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.5.23)  13 JUN 2026 11:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1270,57 +1270,57 @@ Package pdftex.def Info: bestWorstOrientation.png  used on input line 6711.
 (pdftex.def)             Requested size: 225.84229pt x 237.053pt.
  [133 <./k2restricted.png>] [134] [135]
 [136]
-<Bouyssou4Orig.png, id=1756, 225.84375pt x 295.85532pt>
+<Bouyssou4Orig.png, id=1757, 225.84375pt x 295.85532pt>
 File: Bouyssou4Orig.png Graphic file (type png)
 <use Bouyssou4Orig.png>
 Package pdftex.def Info: Bouyssou4Orig.png  used on input line 6861.
 (pdftex.def)             Requested size: 150.56152pt x 197.24692pt.
  [137 <./Bouyssou4Orig.png>] [138]
-<randomPartialTournament.png, id=1781, 225.84375pt x 377.15906pt>
+<randomPartialTournament.png, id=1783, 225.84375pt x 377.15906pt>
 File: randomPartialTournament.png Graphic file (type png)
 <use randomPartialTournament.png>
 Package pdftex.def Info: randomPartialTournament.png  used on input line 6935.
 (pdftex.def)             Requested size: 150.56152pt x 251.45218pt.
  [139 <./randomPartialTournament.png>]
 [140] [141] [142] [143] [144] [145]
-<rel_circular-5-PT.png, id=1863, 225.84375pt x 377.15906pt>
+<rel_circular-5-PT.png, id=1865, 225.84375pt x 377.15906pt>
 File: rel_circular-5-PT.png Graphic file (type png)
 <use rel_circular-5-PT.png>
 Package pdftex.def Info: rel_circular-5-PT.png  used on input line 7272.
 (pdftex.def)             Requested size: 150.56152pt x 251.45218pt.
  [146 <./rel_circular-5-PT.png>]
-<rel_circular-5-PT_wk.png, id=1876, 261.22594pt x 86.57344pt>
+<rel_circular-5-PT_wk.png, id=1878, 261.22594pt x 86.57344pt>
 File: rel_circular-5-PT_wk.png Graphic file (type png)
 <use rel_circular-5-PT_wk.png>
 Package pdftex.def Info: rel_circular-5-PT_wk.png  used on input line 7361.
 (pdftex.def)             Requested size: 225.84229pt x 74.84799pt.
  [147]
-<circularHeatmap.png, id=1884, 461.47406pt x 226.59656pt>
+<circularHeatmap.png, id=1886, 461.47406pt x 226.59656pt>
 File: circularHeatmap.png Graphic file (type png)
 <use circularHeatmap.png>
 Package pdftex.def Info: circularHeatmap.png  used on input line 7377.
 (pdftex.def)             Requested size: 301.12305pt x 147.85997pt.
 
 [148 <./rel_circular-5-PT_wk.png> <./circularHeatmap.png>]
-<correlation3Dplot.png, id=1900, 361.35pt x 361.35pt>
+<correlation3Dplot.png, id=1902, 361.35pt x 361.35pt>
 File: correlation3Dplot.png Graphic file (type png)
 <use correlation3Dplot.png>
 Package pdftex.def Info: correlation3Dplot.png  used on input line 7441.
 (pdftex.def)             Requested size: 301.12305pt x 301.12242pt.
  [149] [150 <./correlation3Dplot.png (PNG copy)>]
-<correlation3Dplot-3Obj.png, id=1914, 671.50874pt x 468.24937pt>
+<correlation3Dplot-3Obj.png, id=1916, 671.50874pt x 468.24937pt>
 File: correlation3Dplot-3Obj.png Graphic file (type png)
 <use correlation3Dplot-3Obj.png>
 Package pdftex.def Info: correlation3Dplot-3Obj.png  used on input line 7494.
 (pdftex.def)             Requested size: 414.04419pt x 288.71829pt.
  [151 <./correlation3Dplot-3Obj.png>]
-<criteriaCorrelationTable.png, id=1923, 612.78937pt x 340.27126pt>
+<criteriaCorrelationTable.png, id=1925, 612.78937pt x 340.27126pt>
 File: criteriaCorrelationTable.png Graphic file (type png)
 <use criteriaCorrelationTable.png>
 Package pdftex.def Info: criteriaCorrelationTable.png  used on input line 7512.
 
 (pdftex.def)             Requested size: 376.40381pt x 209.00856pt.
-<dendogram.png, id=1928, 555.57562pt x 441.14813pt>
+<dendogram.png, id=1930, 555.57562pt x 441.14813pt>
 File: dendogram.png Graphic file (type png)
 <use dendogram.png>
 Package pdftex.def Info: dendogram.png  used on input line 7531.
@@ -1420,10 +1420,10 @@ sfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols
 /msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/
 msbm10.pfb>
-Output written on digraph3Pearls.pdf (158 pages, 3640757 bytes).
+Output written on digraph3Pearls.pdf (158 pages, 3641154 bytes).
 PDF statistics:
- 3159 PDF objects out of 3580 (max. 8388607)
- 1947 compressed objects within 20 object streams
+ 3162 PDF objects out of 3580 (max. 8388607)
+ 1949 compressed objects within 20 object streams
  541 named destinations out of 1000 (max. 500000)
  898 words of extra memory for PDF output out of 10000 (max. 10000000)
 

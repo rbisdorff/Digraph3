@@ -245,7 +245,7 @@ All :py:class:`~digraphs.Digraph` objects contain at least the following attribu
 0. A **name** attribute, holding usually the actual name of the stored instance that was used to create the instance; 
 1. A ordered dictionary of digraph nodes called **actions** (decision alternatives) with at least a 'name' attribute;
 2. An **order** attribute containing the number of graph nodes (length of the actions dictionary) automatically added by the object constructor;
-3. A logical characteristic **valuationdomain** dictionary with three decimal entries: the minimum ( Decimal('-1.0') ), means certainly false), the median ( Decimal('0.0') ), means missing information) and the maximum characteristic value ( Decimal('+1.0') ), means certainly true);
+3. A logical characteristic **valuationdomain** dictionary with three decimal entries: the minimum ( Decimal('-1.0'), means certainly false), the median ( Decimal('0.0'), means missing information) and the maximum characteristic value ( Decimal('+1.0'), means certainly true);
 4. A double dictionary called **relation** and indexed by an oriented pair of actions (nodes) and carrying a decimal characteristic value in the range of the previous valuation domain;
 5. Its associated **gamma** attribute, a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor;
 6. Its associated **notGamma** attribute, a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor.
