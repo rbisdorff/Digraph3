@@ -3,7 +3,7 @@
 """
 Python3+ implementation of the bipolarValuedSets module.
 
-Copyright (C) 2025  Raymond Bisdorff
+Copyright (C) 2025-2026  Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,10 +19,80 @@ Copyright (C) 2025  Raymond Bisdorff
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+    .. code-block:: pycon
+
+       >>> from bipolarValuedSets import RandomBpvSet
+       >>> X = RandomBpvSet(numberOfElements=5,elementNamePrefix='s',
+       ...     undeterminateness=0.1,valuationRange=(-1, 1),ndigits=4,seed=1)
+       >>> X.showMembershipCharacteristics()
+        s2:  +0.6949
+        s3:  +0.5275
+        s5:  +0.0000
+        s4:  -0.4899
+        s1:  -0.7313
+       >>> Y = RandomBpvSet(numberOfElements=3,elementNamePrefix='s',
+       ...    undeterminateness=0.1,valuationRange=(-1, 1),ndigits=4,seed=2)
+       >>> Y.showMembershipCharacteristics()
+        s1:  +0.9121
+        s2:  +0.8957
+        s3:  -0.8869
+       >>> (X|Y).showMembershipCharacteristics()
+        # Python's set union symbol is |
+        s1:  +0.9121
+        s2:  +0.8957
+        s3:  +0.5275
+        s5:  +0.0000
+        s4:  -0.4899
+       >>> (X&Y).showMembershipCharacteristics()
+        # Python's set intersection symbol is &
+        s2:  +0.6949
+        s1:  -0.7313
+        s3:  -0.8869
+        s4:  -1.0000
+        s5:  -1.0000
+       >>> (X-Y).showMembershipCharacteristics()
+        # Python's set difference is -
+        s3:  +0.5275
+        s5:  +0.0000
+        s4:  -0.4899
+        s2:  -0.8957
+        s1:  -0.9121
+       >>> (Y-X).showMembershipCharacteristics()
+        s1:  +0.7313
+        s2:  -0.6949
+        s3:  -0.8869
+        s4:  -1.0000
+        s5:  -1.0000
+       >>> (Y^X).showMembershipCharacteristics() 
+       # Python's symmetrix difference symbol is ^
+       # X^Y = (X-Y)|(Y-X) or (X|Y)-(X&Y)
+        s1:  +0.7313
+        s3:  +0.5275
+        s5:  +0.0000
+        s4:  -0.4899
+        s2:  -0.6949
+       >>> D = Y - X
+       >>> D.isSubset(Y)
+        Decimal('0.8869')
+       >>> D1 = D.strip(InSite=False)
+       >>> D1.showMembershipCharacteristics()
+        s1:  +0.7313
+        s2:  -0.6949
+        s3:  -0.8869
+       >>> D2 = D1.polarise(InSite=False)
+       >>> D2.showMembershipCharacteristics()
+        s1:  +1.0000
+        s2:  -1.0000
+        s3:  -1.0000
+
+
+    See :ref:`Introducing computational bipolar-valued set theory
+    <Bipolar-Valued-Sets-Tutorial-label>`
+
 """
 #######################
 
-__version__ = "Branch: Python3.14.2$"
+__version__ = "Branch: Python3.14.5$"
 from collections import OrderedDict
 from decimal import Decimal
 

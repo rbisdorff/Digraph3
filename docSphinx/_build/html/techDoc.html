@@ -12839,7 +12839,7 @@ Euler’s number of coprime elements a in Zn.</p>
 <section id="module-bipolarValuedSets">
 <span id="bipolarvaluedsets-module"></span><span id="bipolarvaluedsets-label"></span><h2><a class="toc-backref" href="#id25" role="doc-backlink"><span class="section-number">2.23. </span>bipolarValuedSets module</a><a class="headerlink" href="#module-bipolarValuedSets" title="Link to this heading"></a></h2>
 <p>Python3+ implementation of the bipolarValuedSets module.</p>
-<p>Copyright (C) 2025  Raymond Bisdorff</p>
+<p>Copyright (C) 2025-2026  Raymond Bisdorff</p>
 <blockquote>
 <div><p>This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -12852,6 +12852,72 @@ GNU General Public License for more details.</p>
 <p>You should have received a copy of the GNU General Public License along
 with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bipolarValuedSets</span> <span class="kn">import</span> <span class="n">RandomBpvSet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">RandomBpvSet</span><span class="p">(</span><span class="n">numberOfElements</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">elementNamePrefix</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">undeterminateness</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">valuationRange</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="go"> s2:  +0.6949</span>
+<span class="go"> s3:  +0.5275</span>
+<span class="go"> s5:  +0.0000</span>
+<span class="go"> s4:  -0.4899</span>
+<span class="go"> s1:  -0.7313</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="n">RandomBpvSet</span><span class="p">(</span><span class="n">numberOfElements</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">elementNamePrefix</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span>
+<span class="gp">... </span>   <span class="n">undeterminateness</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">valuationRange</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="go"> s1:  +0.9121</span>
+<span class="go"> s2:  +0.8957</span>
+<span class="go"> s3:  -0.8869</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">|</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="go"> # Python&#39;s set union symbol is |</span>
+<span class="go"> s1:  +0.9121</span>
+<span class="go"> s2:  +0.8957</span>
+<span class="go"> s3:  +0.5275</span>
+<span class="go"> s5:  +0.0000</span>
+<span class="go"> s4:  -0.4899</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">&amp;</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="go"> # Python&#39;s set intersection symbol is &amp;</span>
+<span class="go"> s2:  +0.6949</span>
+<span class="go"> s1:  -0.7313</span>
+<span class="go"> s3:  -0.8869</span>
+<span class="go"> s4:  -1.0000</span>
+<span class="go"> s5:  -1.0000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">-</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="go"> # Python&#39;s set difference is -</span>
+<span class="go"> s3:  +0.5275</span>
+<span class="go"> s5:  +0.0000</span>
+<span class="go"> s4:  -0.4899</span>
+<span class="go"> s2:  -0.8957</span>
+<span class="go"> s1:  -0.9121</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Y</span><span class="o">-</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="go"> s1:  +0.7313</span>
+<span class="go"> s2:  -0.6949</span>
+<span class="go"> s3:  -0.8869</span>
+<span class="go"> s4:  -1.0000</span>
+<span class="go"> s5:  -1.0000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Y</span><span class="o">^</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span> 
+<span class="go"># Python&#39;s symmetrix difference symbol is ^</span>
+<span class="go"># X^Y = (X-Y)|(Y-X) or (X|Y)-(X&amp;Y)</span>
+<span class="go"> s1:  +0.7313</span>
+<span class="go"> s3:  +0.5275</span>
+<span class="go"> s5:  +0.0000</span>
+<span class="go"> s4:  -0.4899</span>
+<span class="go"> s2:  -0.6949</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D</span> <span class="o">=</span> <span class="n">Y</span> <span class="o">-</span> <span class="n">X</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D</span><span class="o">.</span><span class="n">isSubset</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+<span class="go"> Decimal(&#39;0.8869&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D1</span> <span class="o">=</span> <span class="n">D</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="n">InSite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D1</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="go"> s1:  +0.7313</span>
+<span class="go"> s2:  -0.6949</span>
+<span class="go"> s3:  -0.8869</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D2</span> <span class="o">=</span> <span class="n">D1</span><span class="o">.</span><span class="n">polarise</span><span class="p">(</span><span class="n">InSite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D2</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="go"> s1:  +1.0000</span>
+<span class="go"> s2:  -1.0000</span>
+<span class="go"> s3:  -1.0000</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="pearls.html#bipolar-valued-sets-tutorial-label"><span class="std std-ref">Introducing computational bipolar-valued set theory</span></a></p>
 </div></blockquote>
 <dl class="py class">
 <dt class="sig sig-object py" id="bipolarValuedSets.BpvSet">
@@ -15337,7 +15403,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jun 07, 2026.
+      <span class="lastupdated">Last updated on Jun 13, 2026.
       </span></p>
   </div>
 
