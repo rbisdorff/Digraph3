@@ -3005,7 +3005,7 @@ Back to :ref:`Content Table <Tutorial-label>`
 
 .. _Ranking-Tutorial-label:
 
-Lineraly ranking with multiple incommensurable criteria
+Linearly ranking with multiple incommensurable criteria
 -------------------------------------------------------
    
 .. contents:: 

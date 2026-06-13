@@ -118,7 +118,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#random-linearly-ranked-performance-tableaux">1.3.3.6. Random linearly ranked performance tableaux</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#lineraly-ranking-with-multiple-incommensurable-criteria">1.3.4. Lineraly ranking with multiple incommensurable criteria</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#linearly-ranking-with-multiple-incommensurable-criteria">1.3.4. Linearly ranking with multiple incommensurable criteria</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#the-ranking-problem">1.3.4.1. The ranking problem</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#the-copeland-ranking">1.3.4.2. The <em>Copeland</em> ranking</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#the-polarised-bachet-ranking">1.3.4.3. The polarised <em>Bachet</em> ranking</a></li>
@@ -1453,7 +1453,7 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 <li><p><a class="reference internal" href="#computing-a-best-choice-recommendation" id="id327">Computing a best choice recommendation</a></p></li>
 <li><p><a class="reference internal" href="#how-to-create-a-new-performance-tableau-instance" id="id328">How to create a new performance tableau instance</a></p></li>
 <li><p><a class="reference internal" href="#generating-random-performance-tableaux-with-the-randperftabs-module" id="id329">Generating random performance tableaux with the <code class="xref py py-mod docutils literal notranslate"><span class="pre">randPerfTabs</span></code> module</a></p></li>
-<li><p><a class="reference internal" href="#lineraly-ranking-with-multiple-incommensurable-criteria" id="id330">Lineraly ranking with multiple incommensurable criteria</a></p></li>
+<li><p><a class="reference internal" href="#linearly-ranking-with-multiple-incommensurable-criteria" id="id330">Linearly ranking with multiple incommensurable criteria</a></p></li>
 <li><p><a class="reference internal" href="#on-partially-ranking-outranking-digraphs" id="id331">On partially ranking outranking digraphs</a></p></li>
 <li><p><a class="reference internal" href="#rating-into-relative-performance-quantiles" id="id332">Rating into relative performance quantiles</a></p></li>
 <li><p><a class="reference internal" href="#rating-with-learned-performance-quantile-norms" id="id333">Rating with learned performance quantile norms</a></p></li>
@@ -3243,8 +3243,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <hr class="docutils" />
 </section>
 </section>
-<section id="lineraly-ranking-with-multiple-incommensurable-criteria">
-<span id="ranking-tutorial-label"></span><h3><a class="toc-backref" href="#id330" role="doc-backlink"><span class="section-number">1.3.4. </span>Lineraly ranking with multiple incommensurable criteria</a><a class="headerlink" href="#lineraly-ranking-with-multiple-incommensurable-criteria" title="Link to this heading"></a></h3>
+<section id="linearly-ranking-with-multiple-incommensurable-criteria">
+<span id="ranking-tutorial-label"></span><h3><a class="toc-backref" href="#id330" role="doc-backlink"><span class="section-number">1.3.4. </span>Linearly ranking with multiple incommensurable criteria</a><a class="headerlink" href="#linearly-ranking-with-multiple-incommensurable-criteria" title="Link to this heading"></a></h3>
 <nav class="contents local" id="id59">
 <ul class="simple">
 <li><p><a class="reference internal" href="#the-ranking-problem" id="id357">The ranking problem</a></p></li>
@@ -5096,7 +5096,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p><span class="caption-number">Fig. 1.38 </span><span class="caption-text">Visualizing a linear voting profile in a heatmap format</span><a class="headerlink" href="#cyclicvoting" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>Notice that the importance weights of the voters are <em>negative</em>, which means that the preference direction of the criteria (in this case the individual voters) is <em>decreasing</em>, i.e. goes from lowest (best) rank to highest (worst) rank. Notice also, that the compromise <em>NetFlows</em> ranking <em>[a4,a5,a2,a1,a3]</em>, shown in this heatmap (see <a class="reference internal" href="#cyclicvoting"><span class="std std-numref">Fig. 1.38</span></a>) results in an optimal <em>ordinal correlation</em> index of +0.778 with the pairwise majority voting margins (see the Adavanced topic on  <a class="reference internal" href="pearls.html#ordinalcorrelation-tutorial-label"><span class="std std-ref">Ordinal Correlation equals Relational Equivalence</span></a> and <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Lineraly ranking with multiple incommensurable criteria</span></a>). The number of voters is usually much larger than the number of candidates. In that case, it is better to generate a transposed <em>voters X candidates</em> view (see <a class="reference internal" href="#votingheatmap"><span class="std std-numref">Listing 1.84</span></a> Line 2)</p>
+<p>Notice that the importance weights of the voters are <em>negative</em>, which means that the preference direction of the criteria (in this case the individual voters) is <em>decreasing</em>, i.e. goes from lowest (best) rank to highest (worst) rank. Notice also, that the compromise <em>NetFlows</em> ranking <em>[a4,a5,a2,a1,a3]</em>, shown in this heatmap (see <a class="reference internal" href="#cyclicvoting"><span class="std std-numref">Fig. 1.38</span></a>) results in an optimal <em>ordinal correlation</em> index of +0.778 with the pairwise majority voting margins (see the Adavanced topic on  <a class="reference internal" href="pearls.html#ordinalcorrelation-tutorial-label"><span class="std std-ref">Ordinal Correlation equals Relational Equivalence</span></a> and <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Linearly ranking with multiple incommensurable criteria</span></a>). The number of voters is usually much larger than the number of candidates. In that case, it is better to generate a transposed <em>voters X candidates</em> view (see <a class="reference internal" href="#votingheatmap"><span class="std std-numref">Listing 1.84</span></a> Line 2)</p>
 </section>
 <section id="on-generating-realistic-random-linear-voting-profiles">
 <h4><a class="toc-backref" href="#id380" role="doc-backlink"><span class="section-number">1.3.8.5. </span>On generating realistic random linear voting profiles</a><a class="headerlink" href="#on-generating-realistic-random-linear-voting-profiles" title="Link to this heading"></a></h4>

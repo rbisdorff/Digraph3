@@ -51,7 +51,7 @@
 \contentsline {subsubsection}{Random three objectives performance tableaux}{74}{subsubsection*.109}%
 \contentsline {subsubsection}{Random academic performance tableaux}{78}{subsubsection*.110}%
 \contentsline {subsubsection}{Random linearly ranked performance tableaux}{82}{subsubsection*.111}%
-\contentsline {subsection}{\numberline {2.4}Lineraly ranking with multiple incommensurable criteria}{82}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.4}Linearly ranking with multiple incommensurable criteria}{82}{subsection.2.4}%
 \contentsline {subsubsection}{The ranking problem}{83}{subsubsection*.121}%
 \contentsline {subsubsection}{The \sphinxstyleemphasis {Copeland} ranking}{86}{subsubsection*.122}%
 \contentsline {subsubsection}{The polarised \sphinxstyleemphasis {Bachet} ranking}{89}{subsubsection*.124}%
