@@ -15702,7 +15702,7 @@ if __name__ == "__main__":
     from decimal import Decimal, getcontext
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
                                  numberOfActions=10,numberOfCriteria=13,
-                                             missingDataProbability=0.05,seed=5)
+                                             missingDataProbability=0.05,seed=7)
                           
     #t = CircularPerformanceTableau()
     #print(getcontext().prec)
