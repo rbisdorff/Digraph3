@@ -8939,6 +8939,8 @@ class Digraph(object):
                                 Valued=False,
                                 actionsList=None,
                                 randomActionsList=False,
+                                 # Fusion
+                                BrokenCocs=True,
                                        ):
         """
         Generic choice recommender method.
@@ -8988,6 +8990,22 @@ class Digraph(object):
                                           Comments=True,
                                           ChoiceVector=ChoiceVector,
                                           )
+        elif method == 'Fusion':
+            from bipolarValuedSets import BpvSet
+            print('Conjunctive epistemic fusion')
+            if BrokenCocs:
+                gb = BrokenCocsDigraph(self)
+            else:
+                gb = self
+            initialVector = gb.computeFusionKernelsVector(Terminal=False,Debug=False)
+            terminalVector = gb.computeFusionKernelsVector(Terminal=True,Debug=False)
+            for x in self.actions:
+                print(x,'i',initialVector.membership[x])
+                print(x,'t',terminalVector.membership[x])
+            
+            resVector = initialVector.oplus(-terminalVector)
+            for x in resVector.support:
+                print(x,resVector.membership[x])
 
         else:
             print('Error: method = "Bachet", "IteratedBachet" or "Rubis",  not "%s"' % method) 
@@ -9564,6 +9582,7 @@ class Digraph(object):
 
     def computeFusionKernelsVector(digraph,CoDual=True,Terminal=False,Debug=True):
         from copy import deepcopy
+        from bipolarValuedSets import BpvSet
         if CoDual:
             g = ~(-digraph)
         else:
@@ -9615,8 +9634,12 @@ class Digraph(object):
             nl = len(kerVec)
             for i in range(nl):
                 print(kerVec[i])
-            
-        return kerVec
+        res = BpvSet()
+        res.support = deepcopy(digraph.actions)
+        res.membership = {}
+        for x in res.support:
+            res.membership[x] = resvec[x]
+        return res
    
     def computeGoodChoiceVector(self,ker,Comments=False):
         """
@@ -15679,29 +15702,32 @@ if __name__ == "__main__":
     from decimal import Decimal, getcontext
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
                                  numberOfActions=10,numberOfCriteria=13,
-                                             missingDataProbability=0.05,seed=4)
+                                             missingDataProbability=0.05,seed=5)
                           
     #t = CircularPerformanceTableau()
     #print(getcontext().prec)
     g = BipolarOutrankingDigraph(t,Threading=False,startMethod='spawn')
     print(g)
-    print('polarised Bachet BCR')
-    g.showBachetChoiceRecommendation(Comments=True,seed=2)
-    print('valued Bachet BCR')
-    g.showBachetChoiceRecommendation(Comments=True,seed=2,Polarised=False)
+##    print('polarised Bachet BCR')
+##    g.showBachetChoiceRecommendation(Comments=True,seed=2)
+##    print('valued Bachet BCR')
+##    g.showBachetChoiceRecommendation(Comments=True,seed=2,Polarised=False)
     print('Rubis BCR')
     g.showFirstChoiceRecommendation(Comments=True)
+    g.showChoiceRecommendation('Fusion')
+    g.showChoiceRecommendation('Fusion',BrokenCocs=False)
+    
 
-    from transitiveDigraphs import *
-    pbr = PartialBachetRanking(g)
-    rankings = [r[1] for r in pbr.bachetRankings]
-    br = BalancedRankingsDigraph(g,rankings)
-    rankings[0].reverse()
-    rankings[1].reverse()
-    #rankings[2].reverse()
-    #rankings[3].reverse()
-    #rankings[4].reverse()
-    br1 = BalancedRankingsDigraph(g,rankings)
+##    from transitiveDigraphs import *
+##    pbr = PartialBachetRanking(g)
+##    rankings = [r[1] for r in pbr.bachetRankings]
+##    br = BalancedRankingsDigraph(g,rankings)
+##    rankings[0].reverse()
+##    rankings[1].reverse()
+##    #rankings[2].reverse()
+##    #rankings[3].reverse()
+##    #rankings[4].reverse()
+##    br1 = BalancedRankingsDigraph(g,rankings)
 
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')

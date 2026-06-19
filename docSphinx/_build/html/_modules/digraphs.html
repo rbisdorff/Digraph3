@@ -9596,6 +9596,8 @@
                                 <span class="n">Valued</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                 <span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                 <span class="n">randomActionsList</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                 <span class="c1"># Fusion</span>
+                                <span class="n">BrokenCocs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                        <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generic choice recommender method.</span>
@@ -9645,6 +9647,22 @@
                                           <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                           <span class="n">ChoiceVector</span><span class="o">=</span><span class="n">ChoiceVector</span><span class="p">,</span>
                                           <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;Fusion&#39;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">bipolarValuedSets</span> <span class="kn">import</span> <span class="n">BpvSet</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Conjunctive epistemic fusion&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">BrokenCocs</span><span class="p">:</span>
+                <span class="n">gb</span> <span class="o">=</span> <span class="n">BrokenCocsDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">gb</span> <span class="o">=</span> <span class="bp">self</span>
+            <span class="n">initialVector</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">computeFusionKernelsVector</span><span class="p">(</span><span class="n">Terminal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">terminalVector</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">computeFusionKernelsVector</span><span class="p">(</span><span class="n">Terminal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="s1">&#39;i&#39;</span><span class="p">,</span><span class="n">initialVector</span><span class="o">.</span><span class="n">membership</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="n">terminalVector</span><span class="o">.</span><span class="n">membership</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+            
+            <span class="n">resVector</span> <span class="o">=</span> <span class="n">initialVector</span><span class="o">.</span><span class="n">oplus</span><span class="p">(</span><span class="o">-</span><span class="n">terminalVector</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">resVector</span><span class="o">.</span><span class="n">support</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">resVector</span><span class="o">.</span><span class="n">membership</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
 
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: method = &quot;Bachet&quot;, &quot;IteratedBachet&quot; or &quot;Rubis&quot;,  not &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="n">method</span><span class="p">)</span> </div>
@@ -10234,6 +10252,7 @@
 
     <span class="k">def</span> <span class="nf">computeFusionKernelsVector</span><span class="p">(</span><span class="n">digraph</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Terminal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">bipolarValuedSets</span> <span class="kn">import</span> <span class="n">BpvSet</span>
         <span class="k">if</span> <span class="n">CoDual</span><span class="p">:</span>
             <span class="n">g</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">digraph</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -10285,8 +10304,12 @@
             <span class="n">nl</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">kerVec</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nl</span><span class="p">):</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">kerVec</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            
-        <span class="k">return</span> <span class="n">kerVec</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">BpvSet</span><span class="p">()</span>
+        <span class="n">res</span><span class="o">.</span><span class="n">support</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
+        <span class="n">res</span><span class="o">.</span><span class="n">membership</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">support</span><span class="p">:</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">membership</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">resvec</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">res</span>
    
 <div class="viewcode-block" id="Digraph.computeGoodChoiceVector">
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeGoodChoiceVector">[docs]</a>
@@ -16623,29 +16646,32 @@
     <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">getcontext</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">weightDistribution</span><span class="o">=</span><span class="s2">&quot;equiobjectives&quot;</span><span class="p">,</span>
                                  <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
-                                             <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+                                             <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
                           
     <span class="c1">#t = CircularPerformanceTableau()</span>
     <span class="c1">#print(getcontext().prec)</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">startMethod</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;polarised Bachet BCR&#39;</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">showBachetChoiceRecommendation</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;valued Bachet BCR&#39;</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">showBachetChoiceRecommendation</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1">##    print(&#39;polarised Bachet BCR&#39;)</span>
+<span class="c1">##    g.showBachetChoiceRecommendation(Comments=True,seed=2)</span>
+<span class="c1">##    print(&#39;valued Bachet BCR&#39;)</span>
+<span class="c1">##    g.showBachetChoiceRecommendation(Comments=True,seed=2,Polarised=False)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Rubis BCR&#39;</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">showFirstChoiceRecommendation</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;Fusion&#39;</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;Fusion&#39;</span><span class="p">,</span><span class="n">BrokenCocs</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    
 
-    <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
-    <span class="n">pbr</span> <span class="o">=</span> <span class="n">PartialBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-    <span class="n">rankings</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">pbr</span><span class="o">.</span><span class="n">bachetRankings</span><span class="p">]</span>
-    <span class="n">br</span> <span class="o">=</span> <span class="n">BalancedRankingsDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">rankings</span><span class="p">)</span>
-    <span class="n">rankings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
-    <span class="n">rankings</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
-    <span class="c1">#rankings[2].reverse()</span>
-    <span class="c1">#rankings[3].reverse()</span>
-    <span class="c1">#rankings[4].reverse()</span>
-    <span class="n">br1</span> <span class="o">=</span> <span class="n">BalancedRankingsDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">rankings</span><span class="p">)</span>
+<span class="c1">##    from transitiveDigraphs import *</span>
+<span class="c1">##    pbr = PartialBachetRanking(g)</span>
+<span class="c1">##    rankings = [r[1] for r in pbr.bachetRankings]</span>
+<span class="c1">##    br = BalancedRankingsDigraph(g,rankings)</span>
+<span class="c1">##    rankings[0].reverse()</span>
+<span class="c1">##    rankings[1].reverse()</span>
+<span class="c1">##    #rankings[2].reverse()</span>
+<span class="c1">##    #rankings[3].reverse()</span>
+<span class="c1">##    #rankings[4].reverse()</span>
+<span class="c1">##    br1 = BalancedRankingsDigraph(g,rankings)</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
