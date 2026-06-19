@@ -9561,8 +9561,63 @@ class Digraph(object):
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
-    
 
+    def computeFusionKernelsVector(digraph,CoDual=True,Terminal=False,Debug=True):
+        from copy import deepcopy
+        if CoDual:
+            g = ~(-digraph)
+        else:
+            g = deepcopy(digraph)
+        Med = g.valuationdomain['med']
+        Max = g.valuationdomain['max']
+        Min = g.valuationdomain['min']
+        if Terminal:
+            g = ConverseDigraph(g)
+        res = {}
+        for x in g.actions:
+            posx = []
+            negx = []
+            nulx = []
+            for y in g.actions:
+                if x != y:
+                    matxy = g.relation[x][y]
+                    if matxy > Med:
+                        posx.append(matxy)
+                    elif matxy < Med:
+                        negx.append(matxy)
+                    else:
+                        nulx.append(matxy)
+            res[x] = {'pos':posx,'neg':negx,'nul':nulx}
+        resvec = {}
+        for x in res:
+            #print(x, res[x])
+            pl = len(res[x]['pos'])
+            nl = len(res[x]['neg'])
+            if pl > 0 and nl == 0:
+                minx = Max
+                for v in res[x]['pos']:
+                    minx = min(minx,v)
+                resvec[x] = minx
+            elif nl > 0 and pl == 0:
+                maxx = Min
+                for v in res[x]['neg']:
+                    maxx = max(maxx,v)
+                resvec[x] = maxx
+            else:
+                resvec[x] = Med
+        kerVec = []
+        for x in resvec:
+            kerVec.append((resvec[x],x))
+            if Debug:
+                print(x,res[x])
+        kerVec.sort(reverse=True)
+        if Debug:
+            nl = len(kerVec)
+            for i in range(nl):
+                print(kerVec[i])
+            
+        return kerVec
+   
     def computeGoodChoiceVector(self,ker,Comments=False):
         """
         | Computing Characteristic values for dominant pre-kernels
