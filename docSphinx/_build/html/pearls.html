@@ -4509,9 +4509,9 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </section>
 <section id="computing-the-bpv-set-of-weak-condorcet-winners">
 <h4><a class="toc-backref" href="#id184" role="doc-backlink"><span class="section-number">3.3.5.6. </span>Computing the bpv-set of weak Condorcet winners</a><a class="headerlink" href="#computing-the-bpv-set-of-weak-condorcet-winners" title="Link to this heading"></a></h4>
-<p>As shown in <a class="reference internal" href="#condorcetwinners1"><span class="std std-numref">Listing 3.63</span></a> below, the epistemic fusion ring operators may for instance be used for computing the bpv-set of weak Condorcet winners of an outranking digraph. The <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Digraph</span></code></a> class provides therefore the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeBpvCondorcetWinners" title="digraphs.Digraph.computeBpvCondorcetWinners"><code class="xref py py-meth docutils literal notranslate"><span class="pre">computeBpvCondorcetWinners()</span></code></a> method (see Line 6).</p>
+<p>The relation of a given outranking digraph is an evident example of a bpv-set. And, as shown in <a class="reference internal" href="#condorcetwinners1"><span class="std std-numref">Listing 3.63</span></a> below, the epistemic fusion ring operators may for instance be used for computing the bpv-set of <em>weak Condorcet winners</em> of any given outranking digraph. The <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Digraph</span></code></a> class provides therefore the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeBpvCondorcetWinners" title="digraphs.Digraph.computeBpvCondorcetWinners"><code class="xref py py-meth docutils literal notranslate"><span class="pre">computeBpvCondorcetWinners()</span></code></a> method (see Line 6).</p>
 <div class="literal-block-wrapper docutils container" id="condorcetwinners1">
-<div class="code-block-caption"><span class="caption-number">Listing 3.63 </span><span class="caption-text">Computing the bpv-set of the Condorcet winner(s)</span><a class="headerlink" href="#condorcetwinners1" title="Link to this code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.63 </span><span class="caption-text">Computing the bpv-set of the weak Condorcet winner(s)</span><a class="headerlink" href="#condorcetwinners1" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">weightDistribution</span><span class="o">=</span><span class="s2">&quot;equiobjectives&quot;</span><span class="p">,</span>
 <span class="linenos"> 3</span><span class="gp">... </span>                               <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
@@ -4520,23 +4520,22 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="hll"><span class="linenos"> 6</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bpvWinners</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">()</span>
 </span><span class="linenos"> 7</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bpvWinners</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
 <span class="linenos"> 8</span><span class="go"> Bipolar-valued weak Condorcet winners set</span>
-<span class="hll"><span class="linenos"> 9</span><span class="go">  a6c:  +0.2045</span>
-</span><span class="hll"><span class="linenos">10</span><span class="go">  a8c:  +0.0227</span>
-</span><span class="linenos">11</span><span class="go">  a2n:  +0.0000</span>
-<span class="linenos">12</span><span class="go">  a3a:  +0.0000</span>
-<span class="linenos">13</span><span class="go">  a4n:  +0.0000</span>
-<span class="linenos">14</span><span class="go">  a5n:  +0.0000</span>
-<span class="linenos">15</span><span class="go">  a7n:  +0.0000</span>
-<span class="linenos">16</span><span class="go">  a9c:  +0.0000</span>
-<span class="hll"><span class="linenos">17</span><span class="go">  a1c:  -0.0227</span>
-</span><span class="linenos">18</span><span class="go"> Valuation domain: [-1.00;+1.00]</span>
-</pre></div>
+<span class="hll"><span class="linenos"> 9</span><span class="go">  a7a:  +0.2045</span>
+</span><span class="hll"><span class="linenos">10</span><span class="go">  a3n:  +0.0227</span>
+</span><span class="linenos">11</span><span class="go">  a1c:  +0.0000</span>
+<span class="linenos">12</span><span class="go">  a2c:  +0.0000</span>
+<span class="linenos">13</span><span class="go">  a4a:  +0.0000</span>
+<span class="linenos">14</span><span class="go">  a5c:  +0.0000</span>
+<span class="linenos">15</span><span class="go">  a8n:  +0.0000</span>
+<span class="hll"><span class="linenos">16</span><span class="go">  a6a:  -0.0682</span>
+</span><span class="hll"><span class="linenos">17</span><span class="go">  a9c:  -0.1364</span>
+</span></pre></div>
 </div>
 </div>
-<p>In the given random outranking digraph both alternatives <em>a8</em> and <em>a6</em> are positive weak Condorcet winners, whereas alternative <em>a1</em> is a negative weak Condorcet winner, that is a positve weak Condorcet loser (see Lines 9-10 and 17 above).</p>
+<p>In the given random outranking digraph both alternatives <em>a7</em> and <em>a3</em> are positive weak Condorcet winners, whereas alternatives <em>a9</em> and <em>a6</em> are negative weak Condorcet winners, that is a positve weak Condorcet losers (see Lines 9-10 and 16-17 above).</p>
 <p>The individual bipolar-valued credibilities to ‘<em>be a weak Condorcet winner</em>’ are computed as follows. For each individual alternative <em>x</em>, the conjunctive epistemic <img class="math" src="_images/math/d8313fbdd7297ad6fb4978808ee6ee23af70bf20.png" alt="\otimes"/> fusion of the <em>outranking</em> credibility <em>R(x,y)</em> for all <img class="math" src="_images/math/c95b2e911e03ebb3fe78e3fa976938ac3a71d13c.png" alt="y \neq x"/> measures indeed the more or less <em>outranking power</em> of <em>x</em> and the conjunctive epistemic <img class="math" src="_images/math/d8313fbdd7297ad6fb4978808ee6ee23af70bf20.png" alt="\otimes"/> fusion of the <em>not outranked</em> credibility <em>-R(y,x)</em>  for all <img class="math" src="_images/math/c95b2e911e03ebb3fe78e3fa976938ac3a71d13c.png" alt="y \neq x"/> measures the more or less <em>not outranked condition</em> of <em>x</em>. A disjunctive epistemic <img class="math" src="_images/math/2db0a4269b9c3cbe81b65f5b18ec9a4f1e2246ca.png" alt="\oplus"/> fusion of both these measures delivers the final result. It is worthwhile noticing that the dual of this result gives by the way the bpv-set of the corresponding weak Condorcet losers.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">(</span>
-<span class="gp">... </span>      <span class="p">[</span><span class="s1">&#39;a6&#39;</span><span class="p">,</span><span class="s1">&#39;a8&#39;</span><span class="p">,</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span><span class="s1">&#39;a3&#39;</span><span class="p">,</span><span class="s1">&#39;a4&#39;</span><span class="p">,</span><span class="s1">&#39;a5&#39;</span><span class="p">,</span><span class="s1">&#39;a7&#39;</span><span class="p">,</span><span class="s1">&#39;a9&#39;</span><span class="p">,</span><span class="s1">&#39;a1&#39;</span><span class="p">])</span>
+<span class="gp">... </span>           <span class="p">[</span><span class="s1">&#39;a7&#39;</span><span class="p">,</span><span class="s1">&#39;a3&#39;</span><span class="p">,</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span><span class="s1">&#39;a4&#39;</span><span class="p">,</span><span class="s1">&#39;a5&#39;</span><span class="p">,</span><span class="s1">&#39;a8&#39;</span><span class="p">,</span><span class="s1">&#39;a6&#39;</span><span class="p">,</span><span class="s1">&#39;a9&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <figure class="align-center" id="condorcetwinners2">
@@ -4545,7 +4544,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p><span class="caption-number">Fig. 3.38 </span><span class="caption-text">A random outranking relation table</span><a class="headerlink" href="#condorcetwinners2" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>In <a class="reference internal" href="#condorcetwinners2"><span class="std std-numref">Fig. 3.38</span></a> we see confirmed in the outranking relation table that alternatives <em>a8</em> and <em>a6</em> are <em>more or less outranking</em> all the other alternatives whereas alternative <em>a1</em> is <em>more or less outranked</em> by all the other alternatives.</p>
+<p>In <a class="reference internal" href="#condorcetwinners2"><span class="std std-numref">Fig. 3.38</span></a> we see confirmed in the outranking relation table that alternatives <em>a7</em> and <em>a3</em> are <em>more or less outranking</em> all the other alternatives whereas alternatives <em>a9</em> and <em>a6</em> are <em>more or less outranked</em> by all the other alternatives.</p>
 <p>When the given digraph shows strict chordless outranking circuits it may be the case that no Condorcet winners or losers can be detected, the resulting bvp-set is empty. Breaking however all chordless circuits at their weakest link transforms the strict outranking digraph in an acyclic digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the acyclic digraph. The <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeBpvCondorcetWinners" title="digraphs.Digraph.computeBpvCondorcetWinners"><code class="xref py py-meth docutils literal notranslate"><span class="pre">computeBpvCondorcetWinners()</span></code></a> method operates therefore by default on the acyclic strict version of a given outranking digraph.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
