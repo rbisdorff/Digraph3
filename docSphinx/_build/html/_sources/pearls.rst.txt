@@ -4726,9 +4726,10 @@ As shown in :numref:`CondorcetWinners1` below, the epistemic fusion ring operato
 
 In the given random outranking digraph both alternatives *a8* and *a6* are positive weak Condorcet winners, whereas alternative *a1* is a negative weak Condorcet winner, that is a positve weak Condorcet loser (see Lines 9-10 and 17 above).
 
+The individual bipolar-valued credibilities to '*be a weak Condorcet winner*' are computed as follows. For each individual alternative *x*, the conjunctive epistemic :math:`\otimes` fusion of the *outranking* credibility *R(x,y)* for all :math:`y \neq x` measures indeed the more or less *outranking power* of *x* and the conjunctive epistemic :math:`\otimes` fusion of the *not outranked* credibility *-R(y,x)*  for all :math:`y \neq x` measures the more or less *not outranked condition* of *x*. A disjunctive epistemic :math:`\oplus` fusion of both these measures delivers the final result. It is worthwhile noticing that the dual of this result gives by the way the bpv-set of the corresponding weak Condorcet losers.
+
    >>> g.showHTMLRelationTable(
    ...       ['a6','a8','a2','a3','a4','a5','a7','a9','a1'])
-
 
 .. figure:: condorcetWinners.png
    :name: condorcetWinners2
@@ -4738,9 +4739,10 @@ In the given random outranking digraph both alternatives *a8* and *a6* are posit
 
    A random outranking relation table
 
-In :numref:`condorcetWinners2` we see confirmed in the outranking relation table that alternatives *a8* and *a6* are *more or less outranking* all the other alternatives and alternative *a1* is *more or less outranked* by all the other alternatives.
+In :numref:`condorcetWinners2` we see confirmed in the outranking relation table that alternatives *a8* and *a6* are *more or less outranking* all the other alternatives whereas alternative *a1* is *more or less outranked* by all the other alternatives.
 
-The individual bipolar-valued credibility to '*be a weak Condorcet winner*' is computed as follows. For each individual alternative *x*, the conjunctive epistemic :math:`\otimes` fusion of the *outranking* credibility *R(x,y)* for all :math:`y \neq x` measures indeed the more or less *outranking power* of *x* and the conjunctive epistemic :math:`\otimes` fusion of the *not outranked* credibility *-R(y,x)*  for all :math:`y \neq x` measures the more or less *not outranked condition* of *x*. A disjunctive epistemic :math:`\oplus` fusion of both these measures delivers the final result. It is worthwhile noticing that the dual of this result gives by the way the bpv-set of the corresponding weak Condorcet losers.
+
+When the given digraph shows strict chordless outranking circuits it may be the case that no Condorcet winners or losers can be detected, the resulting bvp-set is empty. Breaking however all chordless circuits at their weakest link transforms the strict outranking digraph in an acyclic digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the acyclic digraph. The :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method operates therefore by default on the acyclic strict version of a given outranking digraph.  
 
 .. note:: The *edges* attribute of bipolar-valued graphs is also a bpv-set, where the support is given by the non-oriented pairs of the graph's vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership characteristic vectors from the *Rubis* best choice computation [BIS-2006-1p]_. This is the topic of the next tutorial.
 
