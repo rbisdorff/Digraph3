@@ -136,6 +136,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeBadPirlotChoices"><code class="docutils literal notranslate"><span class="pre">Digraph.computeBadPirlotChoices()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeBestChoiceRecommendation"><code class="docutils literal notranslate"><span class="pre">Digraph.computeBestChoiceRecommendation()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeBipolarCorrelation"><code class="docutils literal notranslate"><span class="pre">Digraph.computeBipolarCorrelation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeBpvCondorcetWinners"><code class="docutils literal notranslate"><span class="pre">Digraph.computeBpvCondorcetWinners()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeChordlessCircuits"><code class="docutils literal notranslate"><span class="pre">Digraph.computeChordlessCircuits()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeChordlessCircuitsMP"><code class="docutils literal notranslate"><span class="pre">Digraph.computeChordlessCircuitsMP()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeCoSize"><code class="docutils literal notranslate"><span class="pre">Digraph.computeCoSize()</span></code></a></li>
@@ -2245,6 +2246,12 @@ self.worstChoice = self.worstChoiceData[5]</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="digraphs.Digraph.computeBpvCondorcetWinners">
+<span class="sig-name descname"><span class="pre">computeBpvCondorcetWinners</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">CoDual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Terminal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BrokenCocs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeBpvCondorcetWinners"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeBpvCondorcetWinners" title="Link to this definition"></a></dt>
+<dd><p>Returns the bpvSet of the Condorcet Winner(s)</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="digraphs.Digraph.computeChordlessCircuits">
 <span class="sig-name descname"><span class="pre">computeChordlessCircuits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Odd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeChordlessCircuits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeChordlessCircuits" title="Link to this definition"></a></dt>
 <dd><p>Renders the set of all chordless circuits detected in a digraph.
@@ -3648,11 +3655,13 @@ we brake the circuits on their weakest arc.</p>
 <span class="sig-name descname"><span class="pre">showChoiceRecommendation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Bachet'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Polarised</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxNbrOfRankings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ChoiceVector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CoDual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Reversed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Valued</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actionsList</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomActionsList</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BrokenCocs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showChoiceRecommendation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.showChoiceRecommendation" title="Link to this definition"></a></dt>
 <dd><p>Generic choice recommender method.</p>
 <p><strong>Parameters</strong></p>
-<p><em>method</em>: ‘Bachet’ (default) | ‘Rubis’ | ‘IteratedBachet’ ;
+<p><em>method</em>: ‘Bachet’ (default) | ‘Rubis’ | ‘IteratedBachet’ | ‘CondorcetWinners’;
 the Bachet method is based on the conjoint
 extracton of initial and terminal prekernels from the partial Bachet ranking,
 whereas the Rubis method is based on the extraction of an initial and
-terminal prekernels directly from the given outranking digraph.</p>
+terminal prekernels directly from the given outranking digraph.
+The Condorcet winners method return the bpv-sets of the weak Condorcet winners by
+default computed on the codual and broken Cocs instance.</p>
 <p><em>Polarised</em>: <em>True</em> (by default) | False; Bachet parameter</p>
 <p><em>randomized</em>: positive integer (100 by default); Bachet Parameter</p>
 <p><em>maxNbrOfRankings</em>: positive integer &gt; 0 (5 by default); Bachet parameter</p>
@@ -15364,7 +15373,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jun 19, 2026.
+      <span class="lastupdated">Last updated on Jun 21, 2026.
       </span></p>
   </div>
 

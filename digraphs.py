@@ -8939,7 +8939,7 @@ class Digraph(object):
                                 Valued=False,
                                 actionsList=None,
                                 randomActionsList=False,
-                                 # Fusion
+                                 # CondorcetWinners
                                 BrokenCocs=True,
                                        ):
         """
@@ -8947,11 +8947,13 @@ class Digraph(object):
 
         **Parameters**
         
-        *method*: 'Bachet' (default) | 'Rubis' | 'IteratedBachet' ;
+        *method*: 'Bachet' (default) | 'Rubis' | 'IteratedBachet' | 'CondorcetWinners';
         the Bachet method is based on the conjoint
         extracton of initial and terminal prekernels from the partial Bachet ranking,
         whereas the Rubis method is based on the extraction of an initial and
         terminal prekernels directly from the given outranking digraph.
+        The Condorcet winners method return the bpv-sets of the weak Condorcet winners by
+        default computed on the codual and broken Cocs instance.
 
         *Polarised*: *True* (by default) | False; Bachet parameter
 
@@ -8990,27 +8992,56 @@ class Digraph(object):
                                           Comments=True,
                                           ChoiceVector=ChoiceVector,
                                           )
-        elif method == 'Fusion':
-            from bipolarValuedSets import BpvSet
-            print('Conjunctive epistemic fusion')
-            if BrokenCocs:
-                gb = BrokenCocsDigraph(self)
-            else:
-                gb = self
-            initialVector = gb.computeFusionKernelsVector(Terminal=False,Debug=False)
-            terminalVector = gb.computeFusionKernelsVector(Terminal=True,Debug=False)
+        elif method == 'CondorcetWinners':
+            print('bipolar-valued Condorcet winners set')
+            resVec = self.computeBpvCondorcetWinners(CoDual=CoDual)
+            resVec.showMembershipCharacteristics()
+##            from bipolarValuedSets import BpvSet
+##            print('Conjunctive epistemic fusion')
+##            if BrokenCocs:
+##                gb = BrokenCocsDigraph(self)
+##            else:
+##                gb = self
+##            initialVector = gb.computeFusionKernelsVector(Terminal=False,Debug=False)
+##            terminalVector = gb.computeFusionKernelsVector(Terminal=True,Debug=False)
+##            for x in self.actions:
+##                print(x,'i',initialVector.membership[x])
+##                print(x,'t',terminalVector.membership[x])
+##            
+##            resVector = initialVector.oplus(-terminalVector)
+##            for x in resVector.support:
+##                print(x,resVector.membership[x])
+
+        else:
+            print('Error: method = "Bachet", "IteratedBachet", "Rubis" or "CondorcetWinners",  not "%s"' % method) 
+                
+    def computeBpvCondorcetWinners(self,CoDual=True,
+                                   Terminal=False,
+                                   Comments=False,
+                                   BrokenCocs=True):
+        """
+        Returns the bpvSet of the Condorcet Winner(s)
+        """
+        from bipolarValuedSets import BpvSet
+        from copy import deepcopy
+        g = deepcopy(self)
+        if CoDual:
+            g = ~(-g)
+        if BrokenCocs:
+            gb = BrokenCocsDigraph(g)
+        else:
+            gb = g
+        initialVector = gb.computeFusionKernelsVector(Terminal=False,Debug=False)
+        terminalVector = gb.computeFusionKernelsVector(Terminal=True,Debug=False)
+        if Comments:
             for x in self.actions:
                 print(x,'i',initialVector.membership[x])
                 print(x,'t',terminalVector.membership[x])
-            
-            resVector = initialVector.oplus(-terminalVector)
-            for x in resVector.support:
-                print(x,resVector.membership[x])
-
-        else:
-            print('Error: method = "Bachet", "IteratedBachet" or "Rubis",  not "%s"' % method) 
-                
-
+        resVector = initialVector.oplus(-terminalVector)
+        if Comments:
+            resVector.showMembershipCharacteristics()
+        return resVector
+                                   
     def showBachetChoiceRecommendation(self,
                                        Polarised=True,
                                        randomized=100,
@@ -9580,7 +9611,7 @@ class Digraph(object):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def computeFusionKernelsVector(digraph,CoDual=True,Terminal=False,Debug=True):
+    def computeFusionKernelsVector(digraph,CoDual=True,Terminal=False,Debug=False):
         from copy import deepcopy
         from bipolarValuedSets import BpvSet
         if CoDual:
@@ -15701,8 +15732,8 @@ if __name__ == "__main__":
     from randomDigraphs import *
     from decimal import Decimal, getcontext
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=10,numberOfCriteria=13,
-                                             missingDataProbability=0.05,seed=7)
+                                 numberOfActions=9,numberOfCriteria=13,
+                                 missingDataProbability=0.05,seed=70)
                           
     #t = CircularPerformanceTableau()
     #print(getcontext().prec)
@@ -15714,8 +15745,15 @@ if __name__ == "__main__":
 ##    g.showBachetChoiceRecommendation(Comments=True,seed=2,Polarised=False)
     print('Rubis BCR')
     g.showFirstChoiceRecommendation(Comments=True)
-    g.showChoiceRecommendation('Fusion')
-    g.showChoiceRecommendation('Fusion',BrokenCocs=False)
+
+    bpvWinners = g.computeBpvCondorcetWinners()
+    bpvWinners.showMembershipCharacteristics()
+    bpvWinners = g.computeBpvCondorcetWinners(CoDual=False)
+    bpvWinners.showMembershipCharacteristics()
+    bpvWinners = g.computeBpvCondorcetWinners(BrokenCocs=True)
+    bpvWinners.showMembershipCharacteristics()
+    g.showChoiceRecommendation('CondorcetWinners')
+##    g.showChoiceRecommendation('Fusion',BrokenCocs=False)
     
 
 ##    from transitiveDigraphs import *

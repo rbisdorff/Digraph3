@@ -4694,9 +4694,52 @@ The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a pa
      s5  0.0000  0.0000
     True
 
-.. note::
+Computing the bpv-set of weak Condorcet winners
+...............................................
 
-   The *relation* attribute of a bipolar-valued digraph is an example of a bpv-set where the support is given by the oriented pairs of the digraph's nodes. The *edges* attribute of bipolar-valued graphs is a second example of a bpv-set, where the support is given by the non-oriented pairs of the graph's vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership characteristic vectors from the *Rubis* best choice computation [BIS-2006-1p]_. This is the topic of the next tutorial.
+The epistemic fusion operators may be used, for instance, for computing the bpv-set of the weak Condorcet winners of an outranking digraph as shown in :numref:`CondorcetWinners1` below.
+
+.. code-block:: pycon
+   :caption: Computing the bpv-set of the Condorcet winner(s)
+   :name: CondorcetWinners1
+   :linenos:
+   :emphasize-lines: 6,9-17
+
+   >>> from outrankingDigraphs import *
+   >>> t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+   ...                                numberOfActions=9,numberOfCriteria=13,
+   ...                                missingDataProbability=0.05,seed=700)
+   >>> g = BipolarOutrankingDigraph(t)
+   >>> bpvWinners = g.computeBpvCondorcetWinners()
+   >>> bpvWinners.showMembershipCharacteristics()
+    Bipolar-valued weak Condorcet winners set
+     a6c:  +0.2045
+     a8c:  +0.0227
+     a2n:  +0.0000
+     a3a:  +0.0000
+     a4n:  +0.0000
+     a5n:  +0.0000
+     a7n:  +0.0000
+     a9c:  +0.0000
+     a1c:  -0.0227
+    Valuation domain: [-1.00;+1.00]
+   >>> g.showHTMLRelationTable(
+   ...       ['a6','a8','a2','a3','a4','a5','a7','a9','a1'])
+
+
+.. figure:: condorcetWinners.png
+   :name: condorcetWinners2
+   :width: 300 px
+   :align: center
+   :alt: A random outranking relation table
+
+   A random outranking relation table
+
+In :numref:`condorcetWinners2` we see confirmed that alternatives *a8* and *a6* are *more or less outranking* all the other alternatives and alternative *a1* is indeed *more or less outranked* by all the other alternatives. The individual bipolar-valued credibility to '*be a weak Condorcet winner*' is computed as follows.
+
+For each individual alternative *x*, the conjunctive epistemic fusion of the outranking credibility *R(x,y)* for all :math:`y \neq x` measures indeed the more or less outranking power of *x* and the conjunctive epistemic fusion of the not outranked credibility *R(y,x)*  for all :math:`y \neq x` measures the more or less outranked condition of *x*. A disjunctive epistemic fusion of these measures gives the final result. It is worthwhile noticing that the dual of this result gives by the way the bpv-set of the weak Condorcet losers.
+
+.. note:: The *edges* attribute of bipolar-valued graphs is also a bpv-set, where the support is given by the non-oriented pairs of the graph's vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership characteristic vectors from the *Rubis* best choice computation [BIS-2006-1p]_. This is the topic of the next tutorial.
 
 Back to :ref:`Content Table <Pearls-label>`
 
