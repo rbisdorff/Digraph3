@@ -9012,33 +9012,17 @@ class Digraph(object):
             for i in range(nr):
                 if res[i][0] < Med:
                     print("\'%s\': %.2f" % (res[i][1],res[i][0]))            
-                          
-##            resVec.showMembershipCharacteristics()
-##            from bipolarValuedSets import BpvSet
-##            print('Conjunctive epistemic fusion')
-##            if BrokenCocs:
-##                gb = BrokenCocsDigraph(self)
-##            else:
-##                gb = self
-##            initialVector = gb.computeFusionKernelsVector(Terminal=False,Debug=False)
-##            terminalVector = gb.computeFusionKernelsVector(Terminal=True,Debug=False)
-##            for x in self.actions:
-##                print(x,'i',initialVector.membership[x])
-##                print(x,'t',terminalVector.membership[x])
-##            
-##            resVector = initialVector.oplus(-terminalVector)
-##            for x in resVector.support:
-##                print(x,resVector.membership[x])
-
+            
         else:
             print('Error: method = "Bachet", "IteratedBachet", "Rubis" or "CondorcetWinners",  not "%s"' % method) 
                 
     def computeBpvCondorcetWinners(self,CoDual=True,
-                                   Terminal=False,
+                                   BrokenCocs=True,
                                    Comments=False,
-                                   BrokenCocs=True):
+                                   ):
         """
-        Returns the bpvSet of the Condorcet Winner(s)
+        Returns by default the bpvSet of the Condorcet winner(s) of a
+        codual and acyclic (BrokenCocs=True) digraph.
         """
         from bipolarValuedSets import BpvSet
         from copy import deepcopy

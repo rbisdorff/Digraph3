@@ -9669,24 +9669,7 @@
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Med</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s2">: </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>            
-                          
-<span class="c1">##            resVec.showMembershipCharacteristics()</span>
-<span class="c1">##            from bipolarValuedSets import BpvSet</span>
-<span class="c1">##            print(&#39;Conjunctive epistemic fusion&#39;)</span>
-<span class="c1">##            if BrokenCocs:</span>
-<span class="c1">##                gb = BrokenCocsDigraph(self)</span>
-<span class="c1">##            else:</span>
-<span class="c1">##                gb = self</span>
-<span class="c1">##            initialVector = gb.computeFusionKernelsVector(Terminal=False,Debug=False)</span>
-<span class="c1">##            terminalVector = gb.computeFusionKernelsVector(Terminal=True,Debug=False)</span>
-<span class="c1">##            for x in self.actions:</span>
-<span class="c1">##                print(x,&#39;i&#39;,initialVector.membership[x])</span>
-<span class="c1">##                print(x,&#39;t&#39;,terminalVector.membership[x])</span>
-<span class="c1">##            </span>
-<span class="c1">##            resVector = initialVector.oplus(-terminalVector)</span>
-<span class="c1">##            for x in resVector.support:</span>
-<span class="c1">##                print(x,resVector.membership[x])</span>
-
+            
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: method = &quot;Bachet&quot;, &quot;IteratedBachet&quot;, &quot;Rubis&quot; or &quot;CondorcetWinners&quot;,  not &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="n">method</span><span class="p">)</span> </div>
 
@@ -9694,11 +9677,12 @@
 <div class="viewcode-block" id="Digraph.computeBpvCondorcetWinners">
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeBpvCondorcetWinners">[docs]</a>
     <span class="k">def</span> <span class="nf">computeBpvCondorcetWinners</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                   <span class="n">Terminal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                   <span class="n">BrokenCocs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                    <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                   <span class="n">BrokenCocs</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                                   <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the bpvSet of the Condorcet Winner(s)</span>
+<span class="sd">        Returns by default the bpvSet of the Condorcet winner(s) of a</span>
+<span class="sd">        codual and acyclic (BrokenCocs=True) digraph.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">bipolarValuedSets</span> <span class="kn">import</span> <span class="n">BpvSet</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
