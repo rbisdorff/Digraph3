@@ -775,5 +775,7 @@ def testChoiceRecommendation():
     g.showChoiceRecommendation('IteratedBachet')
     print('Rubis first choice')
     g.showChoiceRecommendation('Rubis')
+    print('Weak Condorcet winners')
+    g.showChoiceRecommendation('CondorcetWinners')
 
     

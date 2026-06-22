@@ -8994,8 +8994,26 @@ class Digraph(object):
                                           )
         elif method == 'CondorcetWinners':
             print('bipolar-valued Condorcet winners set')
-            resVec = self.computeBpvCondorcetWinners(CoDual=CoDual)
-            resVec.showMembershipCharacteristics()
+            resVec = self.computeBpvCondorcetWinners()
+            res = []
+            for x in resVec.support:
+                res.append((resVec.membership[x],x))
+            res.sort(reverse=True)
+            nr = len(res)
+            Med = self.valuationdomain['med']
+            ##print(resVec)
+            print('First choice')
+            for i in range(nr):
+                if res[i][0] > Med:
+                    print("\'%s\': %+.2f"% (res[i][1],res[i][0]))
+                else:
+                    break
+            print('Last choice')
+            for i in range(nr):
+                if res[i][0] < Med:
+                    print("\'%s\': %.2f" % (res[i][1],res[i][0]))            
+                          
+##            resVec.showMembershipCharacteristics()
 ##            from bipolarValuedSets import BpvSet
 ##            print('Conjunctive epistemic fusion')
 ##            if BrokenCocs:
