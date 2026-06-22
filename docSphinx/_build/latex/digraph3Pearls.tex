@@ -67,7 +67,7 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{June 13, 2026}
+\date{June 22, 2026}
 \release{3.14.5}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -5985,6 +5985,10 @@ Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std
 \sphinxAtStartPar
 \phantomsection\label{\detokenize{pearls:id183}}{\hyperref[\detokenize{pearls:the-partially-ordered-commutative-epistemic-fusion-ring}]{\sphinxcrossref{The partially ordered commutative epistemic fusion ring}}} (\autopageref*{\detokenize{pearls:the-partially-ordered-commutative-epistemic-fusion-ring}})
 
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{pearls:id184}}{\hyperref[\detokenize{pearls:computing-the-bpv-set-of-weak-condorcet-winners}]{\sphinxcrossref{Computing the bpv\sphinxhyphen{}set of weak Condorcet winners}}} (\autopageref*{\detokenize{pearls:computing-the-bpv-set-of-weak-condorcet-winners}})
+
 \end{itemize}
 \end{sphinxcontents}
 
@@ -6372,9 +6376,86 @@ The epistemic fusion operators induce furthermore on \(\mathcal{S}(A)\) a partia
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
 
+
+\subsubsection{Computing the bpv\sphinxhyphen{}set of weak Condorcet winners}
+\label{\detokenize{pearls:computing-the-bpv-set-of-weak-condorcet-winners}}
+\sphinxAtStartPar
+The relation of a given outranking digraph is an evident example of a bpv\sphinxhyphen{}set. And, as shown in \hyperref[\detokenize{pearls:condorcetwinners1}]{Listing \ref{\detokenize{pearls:condorcetwinners1}}} below, the epistemic fusion ring operators may for instance be used for computing the bpv\sphinxhyphen{}set of \sphinxstyleemphasis{weak Condorcet winners} of any given outranking digraph. The \sphinxcode{\sphinxupquote{Digraph}} class provides therefore the \sphinxcode{\sphinxupquote{computeBpvCondorcetWinners()}} method (see Line 6).
+\sphinxSetupCaptionForVerbatim{Computing the bpv\sphinxhyphen{}set of the weak Condorcet winner(s)}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:condorcetwinners1}}}
+\fvset{hllines={, 6, 9, 10, 16, 17,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{o}{*}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{RandomCBPerformanceTableau}\PYG{p}{(}\PYG{n}{weightDistribution}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{equiobjectives}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
+\PYG{g+gp}{... }                               \PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{numberOfCriteria}\PYG{o}{=}\PYG{l+m+mi}{13}\PYG{p}{,}
+\PYG{g+gp}{... }                               \PYG{n}{missingDataProbability}\PYG{o}{=}\PYG{l+m+mf}{0.05}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{700}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bpvWinners} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeBpvCondorcetWinners}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bpvWinners}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{ Bipolar\PYGZhy{}valued weak Condorcet winners set}
+\PYG{g+go}{  a7a:  +0.2045}
+\PYG{g+go}{  a3n:  +0.0227}
+\PYG{g+go}{  a1c:  +0.0000}
+\PYG{g+go}{  a2c:  +0.0000}
+\PYG{g+go}{  a4a:  +0.0000}
+\PYG{g+go}{  a5c:  +0.0000}
+\PYG{g+go}{  a8n:  +0.0000}
+\PYG{g+go}{  a6a:  \PYGZhy{}0.0682}
+\PYG{g+go}{  a9c:  \PYGZhy{}0.1364}
+\end{sphinxVerbatim}
+\sphinxresetverbatimhllines
+
+\sphinxAtStartPar
+In the given random outranking digraph both alternatives \sphinxstyleemphasis{a7} and \sphinxstyleemphasis{a3} are positive weak Condorcet winners, whereas alternatives \sphinxstyleemphasis{a9} and \sphinxstyleemphasis{a6} are negative weak Condorcet winners, that is a positve weak Condorcet losers (see Lines 9\sphinxhyphen{}10 and 16\sphinxhyphen{}17 above).
+
+\sphinxAtStartPar
+The individual bipolar\sphinxhyphen{}valued credibilities to ‘\sphinxstyleemphasis{be a weak Condorcet winner}’ are computed as follows. For each individual alternative \sphinxstyleemphasis{x}, the conjunctive epistemic \(\otimes\) fusion of the \sphinxstyleemphasis{outranking} credibility \sphinxstyleemphasis{R(x,y)} for all \(y \neq x\) measures indeed the more or less \sphinxstyleemphasis{outranking power} of \sphinxstyleemphasis{x} and the conjunctive epistemic \(\otimes\) fusion of the \sphinxstyleemphasis{not outranked} credibility \sphinxstyleemphasis{\sphinxhyphen{}R(y,x)}  for all \(y \neq x\) measures the more or less \sphinxstyleemphasis{not outranked condition} of \sphinxstyleemphasis{x}. A disjunctive epistemic \(\oplus\) fusion of both these measures delivers the final result. It is worthwhile noticing that the dual of this result gives by the way the bpv\sphinxhyphen{}set of the corresponding weak Condorcet losers.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showHTMLRelationTable}\PYG{p}{(}
+\PYG{g+gp}{... }           \PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a7}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a8}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a6}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a9}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{figure}[H]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{condorcetWinners}.png}
+\caption{A random outranking relation table}\label{\detokenize{pearls:condorcetwinners2}}\end{figure}
+
+\sphinxAtStartPar
+In \hyperref[\detokenize{pearls:condorcetwinners2}]{Fig.\@ \ref{\detokenize{pearls:condorcetwinners2}}} we see confirmed in the outranking relation table that alternatives \sphinxstyleemphasis{a7} and \sphinxstyleemphasis{a3} are \sphinxstyleemphasis{more or less outranking} all the other alternatives whereas alternatives \sphinxstyleemphasis{a9} and \sphinxstyleemphasis{a6} are \sphinxstyleemphasis{more or less outranked} by all the other alternatives.
+
+\sphinxAtStartPar
+When the given digraph shows strict chordless outranking circuits it may be the case that no Condorcet winners or losers can be detected, the resulting bvp\sphinxhyphen{}set is empty. Breaking however all chordless circuits at their weakest link transforms the strict outranking digraph in an acyclic digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the acyclic digraph. The \sphinxcode{\sphinxupquote{computeBpvCondorcetWinners()}} method operates therefore by default on the acyclic strict version of a given outranking digraph.
+
+\sphinxAtStartPar
+Weak Condorcet winners and losers give suitable first and last choice recommendations. The \sphinxcode{\sphinxupquote{showChoiceRecommendation()}} method accepts the ‘\sphinxstyleemphasis{CondortWinners}’ argument for showing indeed positive Condorcet winners as first choice and positive Condorcet losers as last choice recommendation (see \hyperref[\detokenize{pearls:condorcetwinners3}]{Listing \ref{\detokenize{pearls:condorcetwinners3}}} below).
+\sphinxSetupCaptionForVerbatim{Showing first and last choice recommendations from Condorcet winners bpv\sphinxhyphen{}set}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:condorcetwinners3}}}
+\fvset{hllines={, 1, 5, 6, 9, 10,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showChoiceRecommendation}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{CondorcetWinners}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+go}{ First and last choice recommendations}
+\PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{  First choice (Condorcet winners)}
+\PYG{g+go}{   \PYGZsq{}a7\PYGZsq{}: +0.20 (60.22\PYGZpc{})}
+\PYG{g+go}{   \PYGZsq{}a3\PYGZsq{}: +0.02 (51.13\PYGZpc{})}
+\PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{  Last choice (Condorcet losers)}
+\PYG{g+go}{   \PYGZsq{}a9\PYGZsq{}: +0.14 (56.82\PYGZpc{})}
+\PYG{g+go}{   \PYGZsq{}a6\PYGZsq{}: +0.07 (53.41\PYGZpc{})}
+\PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{ Criteria significance majority in brakets}
+\end{sphinxVerbatim}
+\sphinxresetverbatimhllines
+
+\sphinxAtStartPar
+The criteria significance majority for each choice is indicated in Brakets (see Lines 5\sphinxhyphen{}6,9\sphinxhyphen{}10).
+
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
-The \sphinxstyleemphasis{relation} attribute of a bipolar\sphinxhyphen{}valued digraph is an example of a bpv\sphinxhyphen{}set where the support is given by the oriented pairs of the digraph’s nodes. The \sphinxstyleemphasis{edges} attribute of bipolar\sphinxhyphen{}valued graphs is a second example of a bpv\sphinxhyphen{}set, where the support is given by the non\sphinxhyphen{}oriented pairs of the graph’s vertices.  Further evident examples of bpv\sphinxhyphen{}sets are the bipolar\sphinxhyphen{}valued prekernel membership characteristic vectors from the \sphinxstyleemphasis{Rubis} best choice computation \sphinxcite{pearls:bis-2006-1p}. This is the topic of the next tutorial.
+The \sphinxstyleemphasis{edges} attribute of bipolar\sphinxhyphen{}valued graphs is also a bpv\sphinxhyphen{}set, where the support is given by the non\sphinxhyphen{}oriented pairs of the graph’s vertices.  Further evident examples of bpv\sphinxhyphen{}sets are the bipolar\sphinxhyphen{}valued prekernel membership characteristic vectors from the \sphinxstyleemphasis{Rubis} best choice computation \sphinxcite{pearls:bis-2006-1p}. This is the topic of the next tutorial.
 \end{sphinxadmonition}
 
 \sphinxAtStartPar
@@ -6391,15 +6472,15 @@ Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id184}}{\hyperref[\detokenize{pearls:kernel-equation-systems}]{\sphinxcrossref{Kernel equation systems}}} (\autopageref*{\detokenize{pearls:kernel-equation-systems}})
+\phantomsection\label{\detokenize{pearls:id185}}{\hyperref[\detokenize{pearls:kernel-equation-systems}]{\sphinxcrossref{Kernel equation systems}}} (\autopageref*{\detokenize{pearls:kernel-equation-systems}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id185}}{\hyperref[\detokenize{pearls:solving-bipolar-valued-kernel-equation-systems}]{\sphinxcrossref{Solving bipolar\sphinxhyphen{}valued kernel equation systems}}} (\autopageref*{\detokenize{pearls:solving-bipolar-valued-kernel-equation-systems}})
+\phantomsection\label{\detokenize{pearls:id186}}{\hyperref[\detokenize{pearls:solving-bipolar-valued-kernel-equation-systems}]{\sphinxcrossref{Solving bipolar\sphinxhyphen{}valued kernel equation systems}}} (\autopageref*{\detokenize{pearls:solving-bipolar-valued-kernel-equation-systems}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id186}}{\hyperref[\detokenize{pearls:historical-notes}]{\sphinxcrossref{Historical notes}}} (\autopageref*{\detokenize{pearls:historical-notes}})
+\phantomsection\label{\detokenize{pearls:id187}}{\hyperref[\detokenize{pearls:historical-notes}]{\sphinxcrossref{Historical notes}}} (\autopageref*{\detokenize{pearls:historical-notes}})
 
 \end{itemize}
 \end{sphinxcontents}
@@ -6807,19 +6888,19 @@ Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id187}}{\hyperref[\detokenize{pearls:necessary-properties-of-the-outranking-digraph}]{\sphinxcrossref{Necessary properties of the outranking digraph}}} (\autopageref*{\detokenize{pearls:necessary-properties-of-the-outranking-digraph}})
+\phantomsection\label{\detokenize{pearls:id188}}{\hyperref[\detokenize{pearls:necessary-properties-of-the-outranking-digraph}]{\sphinxcrossref{Necessary properties of the outranking digraph}}} (\autopageref*{\detokenize{pearls:necessary-properties-of-the-outranking-digraph}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id188}}{\hyperref[\detokenize{pearls:partial-tournaments-may-be-strict-outranking-digraphs}]{\sphinxcrossref{Partial tournaments may be strict outranking digraphs}}} (\autopageref*{\detokenize{pearls:partial-tournaments-may-be-strict-outranking-digraphs}})
+\phantomsection\label{\detokenize{pearls:id189}}{\hyperref[\detokenize{pearls:partial-tournaments-may-be-strict-outranking-digraphs}]{\sphinxcrossref{Partial tournaments may be strict outranking digraphs}}} (\autopageref*{\detokenize{pearls:partial-tournaments-may-be-strict-outranking-digraphs}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id189}}{\hyperref[\detokenize{pearls:recognizing-bipolar-outranking-valuations}]{\sphinxcrossref{Recognizing bipolar outranking valuations}}} (\autopageref*{\detokenize{pearls:recognizing-bipolar-outranking-valuations}})
+\phantomsection\label{\detokenize{pearls:id190}}{\hyperref[\detokenize{pearls:recognizing-bipolar-outranking-valuations}]{\sphinxcrossref{Recognizing bipolar outranking valuations}}} (\autopageref*{\detokenize{pearls:recognizing-bipolar-outranking-valuations}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id190}}{\hyperref[\detokenize{pearls:on-generating-random-outranking-valuations}]{\sphinxcrossref{On generating random outranking valuations}}} (\autopageref*{\detokenize{pearls:on-generating-random-outranking-valuations}})
+\phantomsection\label{\detokenize{pearls:id191}}{\hyperref[\detokenize{pearls:on-generating-random-outranking-valuations}]{\sphinxcrossref{On generating random outranking valuations}}} (\autopageref*{\detokenize{pearls:on-generating-random-outranking-valuations}})
 
 \end{itemize}
 \end{sphinxcontents}
@@ -7194,15 +7275,15 @@ Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id191}}{\hyperref[\detokenize{pearls:circular-performance-tableaux}]{\sphinxcrossref{Circular performance tableaux}}} (\autopageref*{\detokenize{pearls:circular-performance-tableaux}})
+\phantomsection\label{\detokenize{pearls:id192}}{\hyperref[\detokenize{pearls:circular-performance-tableaux}]{\sphinxcrossref{Circular performance tableaux}}} (\autopageref*{\detokenize{pearls:circular-performance-tableaux}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id192}}{\hyperref[\detokenize{pearls:a-difficult-decision-problem}]{\sphinxcrossref{A difficult decision problem}}} (\autopageref*{\detokenize{pearls:a-difficult-decision-problem}})
+\phantomsection\label{\detokenize{pearls:id193}}{\hyperref[\detokenize{pearls:a-difficult-decision-problem}]{\sphinxcrossref{A difficult decision problem}}} (\autopageref*{\detokenize{pearls:a-difficult-decision-problem}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id193}}{\hyperref[\detokenize{pearls:the-central-condorcet-point-of-view}]{\sphinxcrossref{The central CONDORCET point of view}}} (\autopageref*{\detokenize{pearls:the-central-condorcet-point-of-view}})
+\phantomsection\label{\detokenize{pearls:id194}}{\hyperref[\detokenize{pearls:the-central-condorcet-point-of-view}]{\sphinxcrossref{The central CONDORCET point of view}}} (\autopageref*{\detokenize{pearls:the-central-condorcet-point-of-view}})
 
 \end{itemize}
 \end{sphinxcontents}

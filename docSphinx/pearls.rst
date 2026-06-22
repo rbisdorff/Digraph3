@@ -4740,7 +4740,30 @@ The individual bipolar-valued credibilities to '*be a weak Condorcet winner*' ar
 
 In :numref:`condorcetWinners2` we see confirmed in the outranking relation table that alternatives *a7* and *a3* are *more or less outranking* all the other alternatives whereas alternatives *a9* and *a6* are *more or less outranked* by all the other alternatives.
 
-When the given digraph shows strict chordless outranking circuits it may be the case that no Condorcet winners or losers can be detected, the resulting bvp-set is empty. Breaking however all chordless circuits at their weakest link transforms the strict outranking digraph in an acyclic digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the acyclic digraph. The :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method operates therefore by default on the acyclic strict version of a given outranking digraph.
+When the given digraph shows strict chordless outranking circuits it may be the case that no Condorcet winners or losers can be detected, the resulting bvp-set is empty. Breaking however all chordless circuits at their weakest link transforms the strict outranking digraph in an acyclic digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the acyclic digraph. The :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method operates therefore by default on the acyclic strict version of a given outranking digraph. 
+
+Weak Condorcet winners and losers give suitable first and last choice recommendations. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts the '*CondortWinners*' argument for showing indeed positive Condorcet winners as first choice and positive Condorcet losers as last choice recommendation (see :numref:`CondorcetWinners3` below).
+
+.. code-block:: pycon
+   :caption: Showing first and last choice recommendations from Condorcet winners bpv-set
+   :name: CondorcetWinners3
+   :linenos:
+   :emphasize-lines: 1,5-6,9-10
+
+   >>> g.showChoiceRecommendation('CondorcetWinners')
+    First and last choice recommendations
+    -------------------------------------
+     First choice (Condorcet winners)
+      'a7': +0.20 (60.22%)
+      'a3': +0.02 (51.13%)
+    -------------------------------------
+     Last choice (Condorcet losers)
+      'a9': +0.14 (56.82%)
+      'a6': +0.07 (53.41%)
+    -------------------------------------
+    Criteria significance majority in brakets
+
+The criteria significance majority for each choice is indicated in Brakets (see Lines 5-6,9-10).
 
 .. note:: The *edges* attribute of bipolar-valued graphs is also a bpv-set, where the support is given by the non-oriented pairs of the graph's vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership characteristic vectors from the *Rubis* best choice computation [BIS-2006-1p]_. This is the topic of the next tutorial.
 

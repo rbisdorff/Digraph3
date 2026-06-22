@@ -58,23 +58,24 @@
 \contentsline {subsubsection}{Computing first and last choice recommendations}{112}{subsubsection*.122}%
 \contentsline {subsubsection}{Tractability}{117}{subsubsection*.123}%
 \contentsline {subsection}{\numberline {3.5}Computing with bipolar\sphinxhyphen {}valued sets}{119}{subsection.3.5}%
-\contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued epistemic logic}{119}{subsubsection*.129}%
-\contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued propositional calculus}{120}{subsubsection*.130}%
-\contentsline {subsubsection}{Superposition of elementary epistemic situations}{121}{subsubsection*.131}%
-\contentsline {subsubsection}{Computational bipolar\sphinxhyphen {}valued set theory}{121}{subsubsection*.132}%
-\contentsline {subsubsection}{The partially ordered commutative epistemic fusion ring}{125}{subsubsection*.133}%
-\contentsline {subsection}{\numberline {3.6}Bipolar\sphinxhyphen {}valued kernel membership characteristic vectors}{127}{subsection.3.6}%
-\contentsline {subsubsection}{Kernel equation systems}{128}{subsubsection*.137}%
-\contentsline {subsubsection}{Solving bipolar\sphinxhyphen {}valued kernel equation systems}{129}{subsubsection*.138}%
-\contentsline {subsubsection}{Historical notes}{135}{subsubsection*.139}%
-\contentsline {subsection}{\numberline {3.7}On characterizing bipolar\sphinxhyphen {}valued outranking digraphs}{137}{subsection.3.7}%
-\contentsline {subsubsection}{Necessary properties of the outranking digraph}{137}{subsubsection*.145}%
-\contentsline {subsubsection}{Partial tournaments may be strict outranking digraphs}{139}{subsubsection*.147}%
-\contentsline {subsubsection}{Recognizing bipolar outranking valuations}{140}{subsubsection*.148}%
-\contentsline {subsubsection}{On generating random outranking valuations}{144}{subsubsection*.150}%
-\contentsline {subsection}{\numberline {3.8}Consensus quality of the bipolar\sphinxhyphen {}valued outranking relation}{144}{subsection.3.8}%
-\contentsline {subsubsection}{Circular performance tableaux}{145}{subsubsection*.154}%
-\contentsline {subsubsection}{A difficult decision problem}{147}{subsubsection*.155}%
-\contentsline {subsubsection}{The central CONDORCET point of view}{148}{subsubsection*.156}%
-\contentsline {section}{\numberline {4}Appendix}{154}{section.4}%
-\contentsline {section}{References}{154}{section.4}%
+\contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued epistemic logic}{119}{subsubsection*.130}%
+\contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued propositional calculus}{120}{subsubsection*.131}%
+\contentsline {subsubsection}{Superposition of elementary epistemic situations}{121}{subsubsection*.132}%
+\contentsline {subsubsection}{Computational bipolar\sphinxhyphen {}valued set theory}{121}{subsubsection*.133}%
+\contentsline {subsubsection}{The partially ordered commutative epistemic fusion ring}{125}{subsubsection*.134}%
+\contentsline {subsubsection}{Computing the bpv\sphinxhyphen {}set of weak Condorcet winners}{127}{subsubsection*.135}%
+\contentsline {subsection}{\numberline {3.6}Bipolar\sphinxhyphen {}valued kernel membership characteristic vectors}{129}{subsection.3.6}%
+\contentsline {subsubsection}{Kernel equation systems}{130}{subsubsection*.139}%
+\contentsline {subsubsection}{Solving bipolar\sphinxhyphen {}valued kernel equation systems}{131}{subsubsection*.140}%
+\contentsline {subsubsection}{Historical notes}{137}{subsubsection*.141}%
+\contentsline {subsection}{\numberline {3.7}On characterizing bipolar\sphinxhyphen {}valued outranking digraphs}{139}{subsection.3.7}%
+\contentsline {subsubsection}{Necessary properties of the outranking digraph}{139}{subsubsection*.147}%
+\contentsline {subsubsection}{Partial tournaments may be strict outranking digraphs}{141}{subsubsection*.149}%
+\contentsline {subsubsection}{Recognizing bipolar outranking valuations}{142}{subsubsection*.150}%
+\contentsline {subsubsection}{On generating random outranking valuations}{146}{subsubsection*.152}%
+\contentsline {subsection}{\numberline {3.8}Consensus quality of the bipolar\sphinxhyphen {}valued outranking relation}{146}{subsection.3.8}%
+\contentsline {subsubsection}{Circular performance tableaux}{147}{subsubsection*.156}%
+\contentsline {subsubsection}{A difficult decision problem}{149}{subsubsection*.157}%
+\contentsline {subsubsection}{The central CONDORCET point of view}{150}{subsubsection*.158}%
+\contentsline {section}{\numberline {4}Appendix}{156}{section.4}%
+\contentsline {section}{References}{156}{section.4}%

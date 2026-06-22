@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.5.23)  13 JUN 2026 14:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.1.8)  22 JUN 2026 12:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -128,7 +128,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 Package: babel 2024/01/07 v24.1 The Babel package
 \babel@savecnt=\count273
 \U@D=\dimen150
-\l@unhyphenated=\language5
+\l@unhyphenated=\language16
 
 (/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
 \bbl@readstream=\read2
@@ -175,7 +175,7 @@ Package: fncychap 2007/07/30 v1.34 LaTeX package (Revised chapters)
 \c@AlphaCnt=\count275
 \c@AlphaDecCnt=\count276
 ) (./sphinx.sty
-Package: sphinx 2024/11/23 v8.2.0 Sphinx LaTeX package (sphinx-doc)
+Package: sphinx 2024/10/11 v8.1.1 Sphinx LaTeX package (sphinx-doc)
 
 (/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
 Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
@@ -568,7 +568,7 @@ Package: titlesec 2023/10/27 v2.16 Sectioning titles
 (./sphinxlatexstyletext.sty
 Package: sphinxlatexstyletext 2024/07/28 v8.1.0 text styling
 ) (./sphinxlatexobjects.sty
-Package: sphinxlatexobjects 2025/02/11 documentation environments
+Package: sphinxlatexobjects 2023/07/23 documentation environments
 \sphinxsignaturesep=\skip84
 \sphinxsignaturelistskip=\skip85
 \py@argswidth=\skip86
@@ -1912,12 +1912,12 @@ Package rerunfilecheck Info: File `digraph3Tutorial.out' has not changed.
 (rerunfilecheck)             Checksum: BE8CD4A2C398D1BED7A4C2FCE6CD1A87;43634.
  ) 
 Here is how much of TeX's memory you used:
- 19939 strings out of 476182
- 350292 string characters out of 5795595
+ 19941 strings out of 476033
+ 350316 string characters out of 5790557
  2189975 words of memory out of 5000000
- 40317 multiletter control sequences out of 15000+600000
+ 40349 multiletter control sequences out of 15000+600000
  589134 words of font info for 108 fonts, out of 8000000 for 9000
- 15 hyphenation exceptions out of 8191
+ 60 hyphenation exceptions out of 8191
  72i,14n,85p,2106b,2138s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </home/bisdorff/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcss1200.
 600pk> </home/bisdorff/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1
@@ -1960,9 +1960,9 @@ e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on digraph3Tutorial.pdf (331 pages, 6709461 bytes).
+Output written on digraph3Tutorial.pdf (331 pages, 6708905 bytes).
 PDF statistics:
- 5586 PDF objects out of 6186 (max. 8388607)
+ 5584 PDF objects out of 6186 (max. 8388607)
  3947 compressed objects within 40 object streams
  1183 named destinations out of 1200 (max. 500000)
  1914 words of extra memory for PDF output out of 10000 (max. 10000000)

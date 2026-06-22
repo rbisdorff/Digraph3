@@ -8993,7 +8993,8 @@ class Digraph(object):
                                           ChoiceVector=ChoiceVector,
                                           )
         elif method == 'CondorcetWinners':
-            print('bipolar-valued Condorcet winners set')
+            print('\nFirst and last choice recommendations')
+            print('-------------------------------------')
             resVec = self.computeBpvCondorcetWinners()
             res = []
             for x in resVec.support:
@@ -9002,17 +9003,24 @@ class Digraph(object):
             nr = len(res)
             Med = self.valuationdomain['med']
             ##print(resVec)
-            print('First choice')
+            print('First choice (Condorcet winners)')
             for i in range(nr):
                 if res[i][0] > Med:
-                    print("\'%s\': %+.2f"% (res[i][1],res[i][0]))
+                    print("\'%s\': %+.2f (%.2f%%)"% (res[i][1], res[i][0],
+                                                ( (float(res[i][0])+1.0)/2.0 * 100.0) ) )
                 else:
                     break
-            print('Last choice')
-            for i in range(nr):
+            print('-------------------------------------')
+            print('Last choice (Condorcet losers)')
+            for i in range(nr-1,0,-1):
                 if res[i][0] < Med:
-                    print("\'%s\': %.2f" % (res[i][1],res[i][0]))            
-            
+                    val = float(res[i][0])*(-1.0)
+                    print("\'%s\': %+.2f (%.2f%%)"% ( res[i][1], val,
+                                                ( (val+1.0)/2.0 * 100.0) ) )
+                else:
+                    break
+            print('-------------------------------------')
+            print('Criteria significance majority in brakets' )
         else:
             print('Error: method = "Bachet", "IteratedBachet", "Rubis" or "CondorcetWinners",  not "%s"' % method) 
                 
@@ -15735,7 +15743,7 @@ if __name__ == "__main__":
     from decimal import Decimal, getcontext
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
                                  numberOfActions=9,numberOfCriteria=13,
-                                 missingDataProbability=0.05,seed=70)
+                                 missingDataProbability=0.05,seed=700)
                           
     #t = CircularPerformanceTableau()
     #print(getcontext().prec)
