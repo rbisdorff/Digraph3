@@ -4723,7 +4723,7 @@ The relation of a given outranking digraph is an evident example of a bpv-set. A
      a6a:  -0.0682
      a9c:  -0.1364
 
-In the given random outranking digraph both alternatives *a7* and *a3* are positive weak Condorcet winners, whereas alternatives *a9* and *a6* are negative weak Condorcet winners, that is a positve weak Condorcet losers (see Lines 9-10 and 16-17 above).
+In the given random outranking digraph both alternatives *a7* and *a3* are positive weak Condorcet winners, whereas alternatives *a9* and *a6* are negative weak Condorcet winners, that is a positive weak Condorcet losers (see Lines 9-10 and 16-17 above).
 
 The individual bipolar-valued credibilities to '*be a weak Condorcet winner*' are computed as follows. For each individual alternative *x*, the conjunctive epistemic :math:`\otimes` fusion of the *outranking* credibility *R(x,y)* for all :math:`y \neq x` measures indeed the more or less *outranking power* of *x* and the conjunctive epistemic :math:`\otimes` fusion of the *not outranked* credibility *-R(y,x)*  for all :math:`y \neq x` measures the more or less *not outranked condition* of *x*. A disjunctive epistemic :math:`\oplus` fusion of both these measures delivers the final result. It is worthwhile noticing that the dual of this result gives by the way the bpv-set of the corresponding weak Condorcet losers.
 
@@ -4740,7 +4740,7 @@ The individual bipolar-valued credibilities to '*be a weak Condorcet winner*' ar
 
 In :numref:`condorcetWinners2` we see confirmed in the outranking relation table that alternatives *a7* and *a3* are *more or less outranking* all the other alternatives whereas alternatives *a9* and *a6* are *more or less outranked* by all the other alternatives.
 
-When the given digraph shows strict chordless outranking circuits it may be the case that no Condorcet winners or losers can be detected, the resulting bvp-set is empty. Breaking however all chordless circuits at their weakest link transforms the strict outranking digraph in an acyclic digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the acyclic digraph. The :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method operates therefore by default on the acyclic strict version of a given outranking digraph. 
+When the given digraph shows strict chordless outranking circuits it may be the case that no Condorcet winners or losers can be detected, the resulting bvp-set being empty. Breaking however all chordless circuits at their weakest link transforms the strict outranking digraph in an acyclic digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the acyclic digraph. The :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method operates therefore by default on the acyclic strict version of a given outranking digraph. 
 
 Weak Condorcet winners and losers give suitable first and last choice recommendations. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts the '*CondortWinners*' argument for showing indeed positive Condorcet winners as first choice and positive Condorcet losers as last choice recommendation (see :numref:`CondorcetWinners3` below).
 

@@ -9041,8 +9041,8 @@ class Digraph(object):
             gb = BrokenCocsDigraph(g)
         else:
             gb = g
-        initialVector = gb.computeFusionKernelsVector(Terminal=False,Debug=False)
-        terminalVector = gb.computeFusionKernelsVector(Terminal=True,Debug=False)
+        initialVector = gb.computeConjunctiveEpistemicFusion(Terminal=False,Debug=False)
+        terminalVector = gb.computeConjunctiveEpistemicFusion(Terminal=True,Debug=False)
         if Comments:
             for x in self.actions:
                 print(x,'i',initialVector.membership[x])
@@ -9621,13 +9621,18 @@ class Digraph(object):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def computeFusionKernelsVector(digraph,CoDual=True,Terminal=False,Debug=False):
+    def computeConjunctiveEpistemicFusion(digraph,Terminal=False,Debug=False):
+        """
+        Computes the conjunctive epistemic fusion of
+        rows (Terminal=True) or columns (Terminal=False)
+        of the digraph's relation attribute.
+        """
         from copy import deepcopy
         from bipolarValuedSets import BpvSet
-        if CoDual:
-            g = ~(-digraph)
-        else:
-            g = deepcopy(digraph)
+##        if CoDual:
+##            g = ~(-digraph)
+##        else:
+        g = deepcopy(digraph)
         Med = g.valuationdomain['med']
         Max = g.valuationdomain['max']
         Min = g.valuationdomain['min']
