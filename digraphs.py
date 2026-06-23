@@ -8993,8 +8993,10 @@ class Digraph(object):
                                           ChoiceVector=ChoiceVector,
                                           )
         elif method == 'CondorcetWinners':
+            from time import time
             print('\nFirst and last choice recommendations')
             print('-------------------------------------')
+            t0 = time()
             resVec = self.computeBpvCondorcetWinners()
             res = []
             for x in resVec.support:
@@ -9021,9 +9023,11 @@ class Digraph(object):
                     break
             print('-------------------------------------')
             print('Criteria significance majority in brakets' )
+            print('Execution time: %.3f sec.' % (time() - t0) )            
         else:
             print('Error: method = "Bachet", "IteratedBachet", "Rubis" or "CondorcetWinners",  not "%s"' % method) 
-                
+        print('*************************************************')
+                 
     def computeBpvCondorcetWinners(self,CoDual=True,
                                    BrokenCocs=True,
                                    Comments=False,
