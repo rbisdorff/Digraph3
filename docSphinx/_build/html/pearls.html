@@ -4509,33 +4509,32 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </section>
 <section id="computing-the-bpv-set-of-weak-condorcet-winners">
 <h4><a class="toc-backref" href="#id184" role="doc-backlink"><span class="section-number">3.3.5.6. </span>Computing the bpv-set of weak Condorcet winners</a><a class="headerlink" href="#computing-the-bpv-set-of-weak-condorcet-winners" title="Link to this heading"></a></h4>
-<p>The relation of a given outranking digraph <img class="math" src="_images/math/8fefdd03b16090f18d6f4be27fa80854c6750296.png" alt="G(X,R)"/> is an evident example of a bpv-set. And, as shown in <a class="reference internal" href="#condorcetwinners1"><span class="std std-numref">Listing 3.63</span></a> below, the epistemic fusion ring operators may for instance be used for computing the bpv-set of <em>weak Condorcet winners</em> of such a digraph <em>G</em>. The <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Digraph</span></code></a> class provides therefore the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeBpvCondorcetWinners" title="digraphs.Digraph.computeBpvCondorcetWinners"><code class="xref py py-meth docutils literal notranslate"><span class="pre">computeBpvCondorcetWinners()</span></code></a> method (see Line 6).</p>
+<p>The relation of a given outranking digraph <img class="math" src="_images/math/8fefdd03b16090f18d6f4be27fa80854c6750296.png" alt="G(X,R)"/> is an evident example of a bpv-set. And, as shown in <a class="reference internal" href="#condorcetwinners1"><span class="std std-numref">Listing 3.63</span></a> below, the epistemic fusion ring operators may for instance be used for computing the bpv-set of <em>weak Condorcet winners</em> of such a digraph <em>G</em>. The <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Digraph</span></code></a> class provides therefore the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeBpvCondorcetWinners" title="digraphs.Digraph.computeBpvCondorcetWinners"><code class="xref py py-meth docutils literal notranslate"><span class="pre">computeBpvCondorcetWinners()</span></code></a> method (see Line 5).</p>
 <div class="literal-block-wrapper docutils container" id="condorcetwinners1">
 <div class="code-block-caption"><span class="caption-number">Listing 3.63 </span><span class="caption-text">Computing the bpv-set of the weak Condorcet winner(s)</span><a class="headerlink" href="#condorcetwinners1" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">weightDistribution</span><span class="o">=</span><span class="s2">&quot;equiobjectives&quot;</span><span class="p">,</span>
-<span class="linenos"> 3</span><span class="gp">... </span>                               <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
-<span class="linenos"> 4</span><span class="gp">... </span>                               <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">700</span><span class="p">)</span>
-<span class="linenos"> 5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-<span class="hll"><span class="linenos"> 6</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bpvWinners</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">()</span>
-</span><span class="linenos"> 7</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bpvWinners</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="linenos"> 8</span><span class="go"> Bipolar-valued weak Condorcet winners set</span>
-<span class="hll"><span class="linenos"> 9</span><span class="go">  a7a:  +0.2045</span>
-</span><span class="hll"><span class="linenos">10</span><span class="go">  a3n:  +0.0227</span>
-</span><span class="linenos">11</span><span class="go">  a1c:  +0.0000</span>
-<span class="linenos">12</span><span class="go">  a2c:  +0.0000</span>
-<span class="linenos">13</span><span class="go">  a4a:  +0.0000</span>
-<span class="linenos">14</span><span class="go">  a5c:  +0.0000</span>
-<span class="linenos">15</span><span class="go">  a8n:  +0.0000</span>
-<span class="hll"><span class="linenos">16</span><span class="go">  a6a:  -0.0682</span>
-</span><span class="hll"><span class="linenos">17</span><span class="go">  a9c:  -0.1364</span>
+<span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span>
+<span class="linenos"> 3</span><span class="gp">... </span>          <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos"> 4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="hll"><span class="linenos"> 5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bpvWinners</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">()</span>
+</span><span class="linenos"> 6</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bpvWinners</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="linenos"> 7</span><span class="go"> Bipolar-valued weak Condorcet winners set</span>
+<span class="hll"><span class="linenos"> 8</span><span class="go">  p2:  +0.2222</span>
+</span><span class="hll"><span class="linenos"> 9</span><span class="go">  p6:  +0.1944</span>
+</span><span class="hll"><span class="linenos">10</span><span class="go">  p5:  +0.0278</span>
+</span><span class="linenos">11</span><span class="go">  p3:  +0.0000</span>
+<span class="linenos">12</span><span class="go">  p4:  +0.0000</span>
+<span class="linenos">13</span><span class="go">  p9:  +0.0000</span>
+<span class="hll"><span class="linenos">14</span><span class="go">  p1:  -0.1389</span>
+</span><span class="hll"><span class="linenos">15</span><span class="go">  p7:  -0.1389</span>
+</span><span class="hll"><span class="linenos">16</span><span class="go">  p8:  -0.1667</span>
 </span></pre></div>
 </div>
 </div>
-<p>In the given random outranking digraph <img class="math" src="_images/math/8fefdd03b16090f18d6f4be27fa80854c6750296.png" alt="G(X,R)"/> both alternatives <em>a7</em> and <em>a3</em> are positive weak Condorcet winners, whereas alternatives <em>a9</em> and <em>a6</em> are negative weak Condorcet winners, that is a positive weak Condorcet losers (see Lines 9-10 and 16-17 above).</p>
+<p>In the given random outranking digraph <img class="math" src="_images/math/8fefdd03b16090f18d6f4be27fa80854c6750296.png" alt="G(X,R)"/> three alternatives, <em>p2</em>, <em>p6</em> and <em>p5</em> are positive weak Condorcet winners, whereas alternatives <em>p1</em>, <em>p7</em> and <em>p8</em> are negative weak Condorcet winners, that is a positive weak Condorcet losers (see Lines 8-10 and 14-16 above).</p>
 <p>The individual bipolar-valued credibilities to ‘<em>be a weak Condorcet winner</em>’ are computed as follows. For each individual alternative <em>x in X</em>, the conjunctive epistemic <img class="math" src="_images/math/d8313fbdd7297ad6fb4978808ee6ee23af70bf20.png" alt="\otimes"/> fusion of the <em>outranking</em> credibility <em>R(x,y)</em> for all <img class="math" src="_images/math/c95b2e911e03ebb3fe78e3fa976938ac3a71d13c.png" alt="y \neq x"/> in <em>X</em> measures indeed the more or less <em>outranking power</em> of <em>x</em> and the conjunctive epistemic <img class="math" src="_images/math/d8313fbdd7297ad6fb4978808ee6ee23af70bf20.png" alt="\otimes"/> fusion of the <em>not outranked</em> credibility <em>-R(y,x)</em>  for all <img class="math" src="_images/math/c95b2e911e03ebb3fe78e3fa976938ac3a71d13c.png" alt="y \neq x"/> in <em>X</em> measures the more or less <em>not outranked condition</em> of <em>x</em>. A disjunctive epistemic <img class="math" src="_images/math/2db0a4269b9c3cbe81b65f5b18ec9a4f1e2246ca.png" alt="\oplus"/> fusion of both these measures delivers eventually the result. It is worthwhile noticing that the dual of this result gives by the way the bpv-set of the corresponding weak Condorcet losers.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">(</span>
-<span class="gp">... </span>           <span class="p">[</span><span class="s1">&#39;a7&#39;</span><span class="p">,</span><span class="s1">&#39;a3&#39;</span><span class="p">,</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span><span class="s1">&#39;a4&#39;</span><span class="p">,</span><span class="s1">&#39;a5&#39;</span><span class="p">,</span><span class="s1">&#39;a8&#39;</span><span class="p">,</span><span class="s1">&#39;a6&#39;</span><span class="p">,</span><span class="s1">&#39;a9&#39;</span><span class="p">])</span>
+<span class="gp">... </span>           <span class="p">[</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span><span class="s1">&#39;a6&#39;</span><span class="p">,</span><span class="s1">&#39;a5&#39;</span><span class="p">,</span><span class="s1">&#39;a3&#39;</span><span class="p">,</span><span class="s1">&#39;a4&#39;</span><span class="p">,</span><span class="s1">&#39;a9&#39;</span><span class="p">,</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span><span class="s1">&#39;a7&#39;</span><span class="p">,</span><span class="s1">&#39;a8&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 <figure class="align-center" id="condorcetwinners2">
@@ -4544,7 +4543,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p><span class="caption-number">Fig. 3.38 </span><span class="caption-text">A random outranking relation table</span><a class="headerlink" href="#condorcetwinners2" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>In <a class="reference internal" href="#condorcetwinners2"><span class="std std-numref">Fig. 3.38</span></a> we see confirmed in the outranking relation table of <img class="math" src="_images/math/8fefdd03b16090f18d6f4be27fa80854c6750296.png" alt="G(X,R)"/> that alternatives <em>a7</em> and <em>a3</em> are <em>more or less outranking</em> all the other alternatives whereas alternatives <em>a9</em> and <em>a6</em> are <em>more or less outranked</em> by all the other alternatives.</p>
+<p>In <a class="reference internal" href="#condorcetwinners2"><span class="std std-numref">Fig. 3.38</span></a> we see confirmed in the outranking relation table of <img class="math" src="_images/math/8fefdd03b16090f18d6f4be27fa80854c6750296.png" alt="G(X,R)"/> that alternatives <em>p2</em>, <em>p6</em> and <em>p5</em> are <em>more or less outranking</em> all the other alternatives whereas alternatives <em>p1</em>, <em>p7</em> and <em>p8</em> are <em>more or less outranked</em> by all the other alternatives.</p>
 <p>When a given digraph shows strict chordless outranking circuits it may however be the case that no Condorcet winners and/or losers can be detected, the resulting bvp-set not containing any positive and/or negative credibilities. Breaking in such a case all chordless outranking circuits at their weakest link transforms the strict outranking digraph in an acyclic digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the acyclic digraph. The <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeBpvCondorcetWinners" title="digraphs.Digraph.computeBpvCondorcetWinners"><code class="xref py py-meth docutils literal notranslate"><span class="pre">computeBpvCondorcetWinners()</span></code></a> method operates therefore by default on the acyclic strict version of a given outranking digraph.</p>
 <p>Now, weak Condorcet winners and losers give suitable first and last choice recommendations. The <a class="reference internal" href="techDoc.html#digraphs.Digraph.showChoiceRecommendation" title="digraphs.Digraph.showChoiceRecommendation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">showChoiceRecommendation()</span></code></a> method accepts therefore the ‘<em>CondortWinners</em>’ argument for showing indeed positive Condorcet winners as first choice and positive Condorcet losers as last choice recommendation as shown in <a class="reference internal" href="#condorcetwinners3"><span class="std std-numref">Listing 3.64</span></a> below.</p>
 <div class="literal-block-wrapper docutils container" id="condorcetwinners3">
@@ -4553,18 +4552,33 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </span><span class="linenos"> 2</span><span class="go"> First and last choice recommendations</span>
 <span class="linenos"> 3</span><span class="go"> -------------------------------------</span>
 <span class="linenos"> 4</span><span class="go">  First choice (Condorcet winners)</span>
-<span class="hll"><span class="linenos"> 5</span><span class="go">   &#39;a7&#39;: +0.20 (60.22%)</span>
-</span><span class="hll"><span class="linenos"> 6</span><span class="go">   &#39;a3&#39;: +0.02 (51.13%)</span>
-</span><span class="linenos"> 7</span><span class="go"> -------------------------------------</span>
-<span class="linenos"> 8</span><span class="go">  Last choice (Condorcet losers)</span>
-<span class="hll"><span class="linenos"> 9</span><span class="go">   &#39;a9&#39;: +0.14 (56.82%)</span>
-</span><span class="hll"><span class="linenos">10</span><span class="go">   &#39;a6&#39;: +0.07 (53.41%)</span>
-</span><span class="linenos">11</span><span class="go"> -------------------------------------</span>
-<span class="linenos">12</span><span class="go"> Criteria significance majority in brakets</span>
+<span class="hll"><span class="linenos"> 5</span><span class="go">   &#39;p2&#39;: +0.22 (61.11%)</span>
+</span><span class="hll"><span class="linenos"> 6</span><span class="go">   &#39;p6&#39;: +0.19 (59.72%)</span>
+</span><span class="hll"><span class="linenos"> 7</span><span class="go">   &#39;p5&#39;: +0.03 (51.39%)</span>
+</span><span class="linenos"> 8</span><span class="go"> -------------------------------------</span>
+<span class="linenos"> 9</span><span class="go">  Last choice (Condorcet losers)</span>
+<span class="hll"><span class="linenos">10</span><span class="go">   &#39;p8&#39;: +0.17 (58.34%)</span>
+</span><span class="hll"><span class="linenos">11</span><span class="go">   &#39;p1&#39;: +0.14 (56.95%)</span>
+</span><span class="hll"><span class="linenos">12</span><span class="go">   &#39;p7&#39;: +0.14 (56.95%)</span>
+</span><span class="linenos">13</span><span class="go">  -------------------------------------</span>
+<span class="linenos">14</span><span class="go"> Criteria significance majority in brakets</span>
+<span class="linenos">15</span><span class="go"> Execution time: 0.086 sec.</span>
+<span class="linenos">16</span><span class="go"> *****************************************</span>
 </pre></div>
 </div>
 </div>
-<p>The criteria significance majorities for each choice are indicated in brakets (see Lines 5-6,9-10).</p>
+<p>The criteria significance majorities for each choice are indicated in brakets (see Lines 5-7,10-12).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">al</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;p2&#39;</span><span class="p">,</span><span class="s1">&#39;p6&#39;</span><span class="p">,</span><span class="s1">&#39;p5&#39;</span><span class="p">,</span><span class="s1">&#39;p3&#39;</span><span class="p">,</span><span class="s1">&#39;p4&#39;</span><span class="p">,</span><span class="s1">&#39;p9&#39;</span><span class="p">,</span><span class="s1">&#39;p1&#39;</span><span class="p">,</span><span class="s1">&#39;p7&#39;</span><span class="p">,</span><span class="s1">&#39;p8&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">al</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-center" id="condorcetwinnersheatmap">
+<a class="reference internal image-reference" href="_images/condorcetWinnersHeatmap.png"><img alt="Verifying the quality of the Condorcet winners computation" src="_images/condorcetWinnersHeatmap.png" style="width: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 3.39 </span><span class="caption-text">Performance heatmap of the bipolar-valued Condorcet winners and losers</span><a class="headerlink" href="#condorcetwinnersheatmap" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>In <a class="reference internal" href="#condorcetwinnersheatmap"><span class="std std-numref">Fig. 3.39</span></a> we may verify the criteria significance majorities computed with the help of the epistemic fusion operators for each alternative.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The <em>edges</em> attribute of bipolar-valued graphs is also a bpv-set, where the support is given by the non-oriented pairs of the graph’s vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership characteristic vectors from the <em>Rubis</em> best choice computation <a class="reference internal" href="#bis-2006-1p" id="id59"><span>[BIS-2006-1p]</span></a>. This is the topic of the next tutorial.</p>
@@ -4722,7 +4736,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <figure class="align-center" id="id119">
 <a class="reference internal image-reference" href="_images/k1restricted.png"><img alt="Kernel restricted adjacency table" src="_images/k1restricted.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.39 </span><span class="caption-text">Initial kernel [<em>a1</em>, <em>a2</em>, <em>a4</em>] restricted adjacency table</span><a class="headerlink" href="#id119" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 3.40 </span><span class="caption-text">Initial kernel [<em>a1</em>, <em>a2</em>, <em>a4</em>] restricted adjacency table</span><a class="headerlink" href="#id119" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>We first notice that this initial prekernel is indeed only <em>weakly independent</em>: The outranking situation between <em>a4</em> and <em>a1</em> appears <em>indeterminate</em>. The corresponding initial prekernel membership characteristic vector may be computed with the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeKernelVector" title="digraphs.Digraph.computeKernelVector"><code class="xref py py-func docutils literal notranslate"><span class="pre">computeKernelVector()</span></code></a> method.</p>
@@ -4766,7 +4780,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <figure class="align-center" id="id120">
 <a class="reference internal image-reference" href="_images/k2restricted.png"><img alt="Kernel restricted adjacency table" src="_images/k2restricted.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.40 </span><span class="caption-text">Terminal kernel [‘a3’,’a7’] restricted adjacency table</span><a class="headerlink" href="#id120" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 3.41 </span><span class="caption-text">Terminal kernel [‘a3’,’a7’] restricted adjacency table</span><a class="headerlink" href="#id120" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>Again, we notice that this terminal prekernel is indeed only weakly independent. The corresponding bipolar-valued characteristic vector <em>Y2</em> may be computed as follows.</p>
@@ -4797,7 +4811,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <figure class="align-center" id="id121">
 <a class="reference internal image-reference" href="_images/bestWorstOrientation.png"><img alt="The random outranking digraph oriented by its initial and terminal prekernels" src="_images/bestWorstOrientation.png" style="width: 300px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.41 </span><span class="caption-text">The strict outranking digraph oriented by the positive members of its initial and terminal prekernels</span><a class="headerlink" href="#id121" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 3.42 </span><span class="caption-text">The strict outranking digraph oriented by the positive members of its initial and terminal prekernels</span><a class="headerlink" href="#id121" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>it becomes obvious why alternative <em>a1</em> is <strong>neither included nor excluded</strong> from the initial prekernel. Same observation is applicable to alternative <em>a3</em> which can <strong>neither be included nor excluded</strong> from the terminal prekernel. It may even happen, in case of more indeterminate outranking situations, that no alternative  is positively included or excluded from a weakly independent prekernel; the corresponding bipolar-valued membership characteristic vector being completely indeterminate (see for instance the tutorial on <a class="reference internal" href="tutorial.html#rubis-tutorial-label"><span class="std std-ref">Computing a Best Choice Recommendation</span></a>).</p>
@@ -4883,10 +4897,10 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <figure class="align-center" id="bouyssou4orig">
 <a class="reference internal image-reference" href="_images/Bouyssou4Orig.png"><img alt="Partial tournament" src="_images/Bouyssou4Orig.png" style="width: 200px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.42 </span><span class="caption-text">A partial tournament</span><a class="headerlink" href="#bouyssou4orig" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 3.43 </span><span class="caption-text">A partial tournament</span><a class="headerlink" href="#bouyssou4orig" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>In <a class="reference internal" href="#bouyssou4orig"><span class="std std-numref">Fig. 3.42</span></a>, only the transitive closure between alternatives <em>a</em> and <em>d</em> is missing. Otherwise, the relation would be modelling a linear ranking from <em>a</em> to <em>d</em>. If this relation is actually supposed to model a <em>strict</em> outranking relation then both alternatives <em>a</em> and <em>d</em> positively outrank each other. Is it possible to build a corresponding valid performance tableau which supports epistemically this partial tournament?</p>
+<p>In <a class="reference internal" href="#bouyssou4orig"><span class="std std-numref">Fig. 3.43</span></a>, only the transitive closure between alternatives <em>a</em> and <em>d</em> is missing. Otherwise, the relation would be modelling a linear ranking from <em>a</em> to <em>d</em>. If this relation is actually supposed to model a <em>strict</em> outranking relation then both alternatives <em>a</em> and <em>d</em> positively outrank each other. Is it possible to build a corresponding valid performance tableau which supports epistemically this partial tournament?</p>
 <p>It is indeed possible to define such a performance tableau by, first, using a single criterion <em>g1</em> of significance weight 2 modelling the apparent linear ranking: <em>a</em> &gt; <em>b</em> &gt; <em>c</em> &gt; <em>d</em>. We can, secondly, add a criterion <em>g2</em> of significance weight 3 modelling exclusively the missing “<em>as well evaluated as</em>” situation between <em>a</em> and <em>d</em>. Both criteria admit without loss of genericity a performance measurement scale of 0 to 100 points with an indifference discrimination threshold of 2.5 and preference discrimination threshold of 5 points. No considerable performance difference discrimination is needed in this example.</p>
 <div class="literal-block-wrapper docutils container" id="bouyssou4origpt">
 <div class="code-block-caption"><span class="caption-number">Listing 3.68 </span><span class="caption-text">A potential performance tableau</span><a class="headerlink" href="#bouyssou4origpt" title="Link to this code"></a></div>
@@ -4946,10 +4960,10 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <figure class="align-center" id="randompartialtournament">
 <a class="reference internal image-reference" href="_images/randomPartialTournament.png"><img alt="Random partial tournament of order 5" src="_images/randomPartialTournament.png" style="width: 200px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.43 </span><span class="caption-text">A random partial tournament of order 5</span><a class="headerlink" href="#randompartialtournament" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 3.44 </span><span class="caption-text">A random partial tournament of order 5</span><a class="headerlink" href="#randompartialtournament" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>The crisp partial tournament <em>rpt</em> shown in <a class="reference internal" href="#randompartialtournament"><span class="std std-numref">Fig. 3.43</span></a> corresponds to the potential strict outranking digraph one may obtain with the following multicriteria performance records measured on 10 criteria admitting a 0-100 scale with a 2.5pts indifference and a 5pts preference discrimination thresholds.</p>
+<p>The crisp partial tournament <em>rpt</em> shown in <a class="reference internal" href="#randompartialtournament"><span class="std std-numref">Fig. 3.44</span></a> corresponds to the potential strict outranking digraph one may obtain with the following multicriteria performance records measured on 10 criteria admitting a 0-100 scale with a 2.5pts indifference and a 5pts preference discrimination thresholds.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="go"> *----  performance tableau -----*</span>
 <span class="linenos"> 2</span><span class="go"> criteria | weights | &#39;a1&#39;  &#39;a2&#39;  &#39;a3&#39;  &#39;a4&#39;  &#39;a5&#39;</span>
 <span class="linenos"> 3</span><span class="go"> ---------|---------------------------------------</span>
@@ -4977,7 +4991,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="linenos">9</span><span class="go"> Valuation domain: [-1.000; 1.000]</span>
 </pre></div>
 </div>
-<p>And we recover here exactly the random partial tournament shown in <a class="reference internal" href="#randompartialtournament"><span class="std std-numref">Fig. 3.43</span></a>.</p>
+<p>And we recover here exactly the random partial tournament shown in <a class="reference internal" href="#randompartialtournament"><span class="std std-numref">Fig. 3.44</span></a>.</p>
 <p>To all partial tournament we may hence associate a multicriteria performance tableau, making it hence the instance of a potential bipolar-valued strict outranking digraph. Yet, we have not taken care of reproducing the precise characteristic valuation of a given partial tournament. Is it as well possible to always associate a valid performance tableau which produces a strict outranking digraph with exactly the given characteristic valuation?</p>
 </section>
 <section id="recognizing-bipolar-outranking-valuations">
@@ -5186,10 +5200,10 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <figure class="align-center" id="rel-circular-5-pt">
 <a class="reference internal image-reference" href="_images/rel_circular-5-PT.png"><img alt="Outrankig digraph of circular performance tableau" src="_images/rel_circular-5-PT.png" style="width: 200px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.44 </span><span class="caption-text">Outranking digraph of circular performance tableau of order 5</span><a class="headerlink" href="#rel-circular-5-pt" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 3.45 </span><span class="caption-text">Outranking digraph of circular performance tableau of order 5</span><a class="headerlink" href="#rel-circular-5-pt" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>In <a class="reference internal" href="#rel-circular-5-pt"><span class="std std-numref">Fig. 3.44</span></a> we notice that the outranking digraph models in fact a complete and regular tournament. Each alternative is outranking, respectively outranked by two other alternatives. The outranking relation is not transitive -half of the transitivity arcs are missing- and we observe five equally credible outranking circuits.</p>
+<p>In <a class="reference internal" href="#rel-circular-5-pt"><span class="std std-numref">Fig. 3.45</span></a> we notice that the outranking digraph models in fact a complete and regular tournament. Each alternative is outranking, respectively outranked by two other alternatives. The outranking relation is not transitive -half of the transitivity arcs are missing- and we observe five equally credible outranking circuits.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bodg</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span>
 <span class="hll"><span class="linenos"> 2</span><span class="go"> Decimal(&#39;0.5&#39;)</span>
 </span><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bodg</span><span class="o">.</span><span class="n">computeChordlessCircuits</span><span class="p">()</span>
@@ -5231,7 +5245,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="linenos">9</span><span class="go">  [&#39;a1&#39;, &#39;a2&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a5&#39;]</span>
 </pre></div>
 </div>
-<p>Yet, when inspecting in <a class="reference internal" href="#rel-circular-5-pt"><span class="std std-numref">Fig. 3.44</span></a> the outranking relation, we may notice that, when ignoring for a moment the upward arcs, an apparent downward ranking [‘a5’, ‘a4’, ‘a3’, ‘a2’, ‘a1’] comes into view. We can try to recover this ranking with the help of the <em>Kemeny</em> ranking rule.</p>
+<p>Yet, when inspecting in <a class="reference internal" href="#rel-circular-5-pt"><span class="std std-numref">Fig. 3.45</span></a> the outranking relation, we may notice that, when ignoring for a moment the upward arcs, an apparent downward ranking [‘a5’, ‘a4’, ‘a3’, ‘a2’, ‘a1’] comes into view. We can try to recover this ranking with the help of the <em>Kemeny</em> ranking rule.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ke</span> <span class="o">=</span> <span class="n">KemenyRanking</span><span class="p">(</span><span class="n">bodg</span><span class="p">)</span>
 <span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ke</span><span class="o">.</span><span class="n">maximalRankings</span>
 <span class="linenos">3</span><span class="go"> [[&#39;a5&#39;, &#39;a4&#39;, &#39;a3&#39;, &#39;a2&#39;, &#39;a1&#39;],</span>
@@ -5242,7 +5256,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </pre></div>
 </div>
 <p>The <em>Kemeny</em> rule delivers indeed five optimal rankings which appear to be the circular versions of the apparent downward ranking [‘a5’, ‘a4’, ‘a3’, ‘a2’, ‘a1’].</p>
-<p>The epistemic disjunctive fusion of these five circular rankings gives again an empty relation (see <a class="reference internal" href="#rel-circular-5-pt-wk"><span class="std std-numref">Fig. 3.45</span></a> below).</p>
+<p>The epistemic disjunctive fusion of these five circular rankings gives again an empty relation (see <a class="reference internal" href="#rel-circular-5-pt-wk"><span class="std std-numref">Fig. 3.46</span></a> below).</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="n">RankingsFusionDigraph</span>
 <span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">wke</span> <span class="o">=</span> <span class="n">RankingsFusionDigraph</span><span class="p">(</span><span class="n">bodg</span><span class="p">,</span><span class="n">ke</span><span class="o">.</span><span class="n">maximalRankings</span><span class="p">)</span>
 <span class="linenos">3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">wke</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
@@ -5251,10 +5265,10 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <figure class="align-center" id="rel-circular-5-pt-wk">
 <a class="reference internal image-reference" href="_images/rel_circular-5-PT_wk.png"><img alt="Epistemic fusion of optimal Kemeny rankings" src="_images/rel_circular-5-PT_wk.png" style="width: 300px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.45 </span><span class="caption-text">Epistemic fusion of the five optimal Kemeny rankings</span><a class="headerlink" href="#rel-circular-5-pt-wk" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 3.46 </span><span class="caption-text">Epistemic fusion of the five optimal Kemeny rankings</span><a class="headerlink" href="#rel-circular-5-pt-wk" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>All ranking rules based on the bipolar-valued outranking digraph apparently deliver the same result: no effective ranking is possible. When the criteria are supposed to be equally significant, each decision alternative is indeed equally well performing from a multicriteria point of view (see <a class="reference internal" href="#circularheatmap"><span class="std std-numref">Fig. 3.46</span></a>).</p>
+<p>All ranking rules based on the bipolar-valued outranking digraph apparently deliver the same result: no effective ranking is possible. When the criteria are supposed to be equally significant, each decision alternative is indeed equally well performing from a multicriteria point of view (see <a class="reference internal" href="#circularheatmap"><span class="std std-numref">Fig. 3.47</span></a>).</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cpt5</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="linenos">2</span><span class="gp">... </span>                        <span class="n">rankingRule</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
 <span class="linenos">3</span><span class="gp">... </span>       <span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;The circular performance tableau&#39;</span><span class="p">)</span>
@@ -5263,10 +5277,10 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <figure class="align-center" id="circularheatmap">
 <a class="reference internal image-reference" href="_images/circularHeatmap.png"><img alt="Heatmap of circular performance tableau" src="_images/circularHeatmap.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.46 </span><span class="caption-text">The heatmap of the circular performance tableau</span><a class="headerlink" href="#circularheatmap" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 3.47 </span><span class="caption-text">The heatmap of the circular performance tableau</span><a class="headerlink" href="#circularheatmap" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>The pairwise outranking relation shown in <a class="reference internal" href="#rel-circular-5-pt"><span class="std std-numref">Fig. 3.44</span></a> does hence represent a <em>faithful consensus</em> of the preference modelled by each one of the five performance criteria. We can inspect the actual quality of this consensus with the help of the bipolar-valued equivalence index (see the <a class="reference internal" href="#ordinalcorrelation-tutorial-label"><span class="std std-ref">advanced topic on the ordinal correlation between bipolar-valued digraphs</span></a>).</p>
+<p>The pairwise outranking relation shown in <a class="reference internal" href="#rel-circular-5-pt"><span class="std std-numref">Fig. 3.45</span></a> does hence represent a <em>faithful consensus</em> of the preference modelled by each one of the five performance criteria. We can inspect the actual quality of this consensus with the help of the bipolar-valued equivalence index (see the <a class="reference internal" href="#ordinalcorrelation-tutorial-label"><span class="std std-ref">advanced topic on the ordinal correlation between bipolar-valued digraphs</span></a>).</p>
 </section>
 <section id="the-central-condorcet-point-of-view">
 <h4><a class="toc-backref" href="#id194" role="doc-backlink"><span class="section-number">3.3.8.3. </span>The central CONDORCET point of view</a><a class="headerlink" href="#the-central-condorcet-point-of-view" title="Link to this heading"></a></h4>
@@ -5313,10 +5327,10 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <figure class="align-center" id="correlation3dplot">
 <a class="reference internal image-reference" href="_images/correlation3Dplot.png"><img alt="3D plot of the principal components" src="_images/correlation3Dplot.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.47 </span><span class="caption-text">The 3D plot of the principal components of the correlation matrix</span><a class="headerlink" href="#correlation3dplot" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 3.48 </span><span class="caption-text">The 3D plot of the principal components of the correlation matrix</span><a class="headerlink" href="#correlation3dplot" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>In <a class="reference internal" href="#correlation3dplot"><span class="std std-numref">Fig. 3.47</span></a> , the median outranking relation <strong>m</strong> is indeed situated exactly in the middle of the regular pentagon of the marginal criteria.</p>
+<p>In <a class="reference internal" href="#correlation3dplot"><span class="std std-numref">Fig. 3.48</span></a> , the median outranking relation <strong>m</strong> is indeed situated exactly in the middle of the regular pentagon of the marginal criteria.</p>
 <p>What happens now when we observe imprecise performance evaluations, considerable performance differences, unequal criteria significance weights and missing evaluations? Let us therefore redo the same computations, but with a corresponding random 3-Objectives performance tableau.</p>
 <div class="literal-block-wrapper docutils container" id="obj-outrankingconsensus">
 <div class="code-block-caption"><span class="caption-number">Listing 3.75 </span><span class="caption-text">Outranking consensus quality with 3-objectives tableaux</span><a class="headerlink" href="#obj-outrankingconsensus" title="Link to this code"></a></div>
@@ -5360,10 +5374,10 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <figure class="align-center" id="correlation3dplot-3obj">
 <a class="reference internal image-reference" href="_images/correlation3Dplot-3Obj.png"><img alt="3D plot of the principal components" src="_images/correlation3Dplot-3Obj.png" style="width: 550px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.48 </span><span class="caption-text">The 3D plot of the principal components of the 3-Objectives correlation matrix</span><a class="headerlink" href="#correlation3dplot-3obj" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 3.49 </span><span class="caption-text">The 3D plot of the principal components of the 3-Objectives correlation matrix</span><a class="headerlink" href="#correlation3dplot-3obj" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>The global outranking relation <em>m</em> remains well situated in the weighted center of the eleven marginal criteria outranking relations. The global outranking relation ‘m’ is indeed mostly correlated with criteria: ‘ec04’ (+0.333), ‘ec06’ (+0.295), ‘en03’ (+0.243) and ‘ec01’ (+0.232) (see <a class="reference internal" href="#criteriacorrelationtable"><span class="std std-numref">Fig. 3.49</span></a>).</p>
+<p>The global outranking relation <em>m</em> remains well situated in the weighted center of the eleven marginal criteria outranking relations. The global outranking relation ‘m’ is indeed mostly correlated with criteria: ‘ec04’ (+0.333), ‘ec06’ (+0.295), ‘en03’ (+0.243) and ‘ec01’ (+0.232) (see <a class="reference internal" href="#criteriacorrelationtable"><span class="std std-numref">Fig. 3.50</span></a>).</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">criteriaList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">cc3Obj</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
 <span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">criteriaList</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
 <span class="linenos">3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cc3Obj</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">(</span><span class="n">actionsList</span><span class="o">=</span><span class="n">criteriaList</span><span class="p">,</span>
@@ -5374,7 +5388,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <figure class="align-center" id="criteriacorrelationtable">
 <a class="reference internal image-reference" href="_images/criteriaCorrelationTable.png"><img alt="Alphabetically ordered criteria correlation table" src="_images/criteriaCorrelationTable.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.49 </span><span class="caption-text">Bipolar-valued relational equivalence table with included global outranking relation ‘m’</span><a class="headerlink" href="#criteriacorrelationtable" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 3.50 </span><span class="caption-text">Bipolar-valued relational equivalence table with included global outranking relation ‘m’</span><a class="headerlink" href="#criteriacorrelationtable" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>Let us conclude by showing in <a class="reference internal" href="#r-session"><span class="std std-numref">Listing 3.76</span></a> how to draw with the <em>R</em> statistics software the dendogram of a hierarchical clustering of the previous relational equivalence table. We use therefore the criteria correlation digraph <em>cc3Obj</em>  saved in <em>CSV</em> format (see <a class="reference internal" href="#obj-outrankingconsensus"><span class="std std-numref">Listing 3.75</span></a> Line 32).</p>
@@ -5391,10 +5405,10 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <figure class="align-center" id="dendogram">
 <a class="reference internal image-reference" href="_images/dendogram.png"><img alt="hierarchical clustering of the criteria correlation table" src="_images/dendogram.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.50 </span><span class="caption-text">Hierarchical clustering of the criteria correlation table</span><a class="headerlink" href="#dendogram" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 3.51 </span><span class="caption-text">Hierarchical clustering of the criteria correlation table</span><a class="headerlink" href="#dendogram" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p><a class="reference internal" href="#dendogram"><span class="std std-numref">Fig. 3.50</span></a> confirms the actual relational equivalence structure of the marginal criteria outrankings and the global outranking relation. Environmental and economic criteria (left in <a class="reference internal" href="#correlation3dplot-3obj"><span class="std std-numref">Fig. 3.48</span></a>) are opposite to the societal criteria (right in <a class="reference internal" href="#correlation3dplot-3obj"><span class="std std-numref">Fig. 3.48</span></a>). This opposition results in fact from the random generator profile of the given seven decision alternatives as shown in <a class="reference internal" href="#actionprofiles"><span class="std std-numref">Listing 3.77</span></a> below <a class="footnote-reference brackets" href="#id94" id="id85" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a>.</p>
+<p><a class="reference internal" href="#dendogram"><span class="std std-numref">Fig. 3.51</span></a> confirms the actual relational equivalence structure of the marginal criteria outrankings and the global outranking relation. Environmental and economic criteria (left in <a class="reference internal" href="#correlation3dplot-3obj"><span class="std std-numref">Fig. 3.49</span></a>) are opposite to the societal criteria (right in <a class="reference internal" href="#correlation3dplot-3obj"><span class="std std-numref">Fig. 3.49</span></a>). This opposition results in fact from the random generator profile of the given seven decision alternatives as shown in <a class="reference internal" href="#actionprofiles"><span class="std std-numref">Listing 3.77</span></a> below <a class="footnote-reference brackets" href="#id94" id="id85" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="actionprofiles">
 <div class="code-block-caption"><span class="caption-number">Listing 3.77 </span><span class="caption-text">Random generator profile of the decision alternatives</span><a class="headerlink" href="#actionprofiles" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">pt3Obj</span><span class="o">.</span><span class="n">showActions</span><span class="p">()</span>
@@ -5694,7 +5708,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jun 23, 2026.
+      <span class="lastupdated">Last updated on Jun 24, 2026.
       </span></p>
   </div>
 
