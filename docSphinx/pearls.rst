@@ -4722,7 +4722,7 @@ The relation of a given outranking digraph :math:`G(X,R)` is an evident example 
      p7:  -0.1389
      p8:  -0.1667
 
-In the given random outranking digraph :math:`G(X,R)` three alternatives, *p2*, *p6* and *p5* are positive weak Condorcet winners, whereas alternatives *p1*, *p7* and *p8* are negative weak Condorcet winners, that is a positive weak Condorcet losers (see Lines 8-10 and 14-16 above).
+In the given random 3-objectives outranking digraph :math:`G(X,R)`, concerning the performances of 9 public policies with respect to 13 performance criteria, three alternatives, *p2*, *p6* and *p5* are positive weak Condorcet winners, whereas alternatives *p1*, *p7* and *p8* are negative weak Condorcet winners, that is a positive weak Condorcet losers (see Lines 8-10 and 14-16 above).
 
 The individual bipolar-valued credibilities to '*be a weak Condorcet winner*' are computed as follows. For each individual alternative *x in X*, the conjunctive epistemic :math:`\otimes` fusion of the *outranking* credibility *R(x,y)* for all :math:`y \neq x` in *X* measures indeed the more or less *outranking power* of *x* and the conjunctive epistemic :math:`\otimes` fusion of the *not outranked* credibility *-R(y,x)*  for all :math:`y \neq x` in *X* measures the more or less *not outranked condition* of *x*. A disjunctive epistemic :math:`\oplus` fusion of both these measures delivers eventually the result. It is worthwhile noticing that the dual of this result gives by the way the bpv-set of the corresponding weak Condorcet losers.
 
@@ -4773,13 +4773,13 @@ The criteria significance majorities for each choice are indicated in brakets (s
 
 .. figure:: condorcetWinnersHeatmap.png
    :name: condorcetWinnersHeatmap
-   :width: 400 px
+   :width: 500 px
    :align: center
    :alt: Verifying the quality of the Condorcet winners computation
 
    Performance heatmap of the bipolar-valued Condorcet winners and losers
 
-In :numref:`condorcetWinnersHeatmap` we may verify the criteria significance majorities computed with the help of the epistemic fusion operators for each alternative. A result that gets confirmed with the 'Rubis' choice recommendation shown in :numref:`CondorcetWinners4`.
+In :numref:`condorcetWinnersHeatmap` we may verify the criteria significance majorities computed with the help of the epistemic fusion operators for each alternative. A result that gets confirmed with the 'Rubis' choice recommendation shown in :numref:`CondorcetWinners4` below.
 
 .. code-block:: pycon
    :caption: Showing the choice recommendations from the Rubis method
@@ -4809,10 +4809,8 @@ In :numref:`condorcetWinnersHeatmap` we may verify the criteria significance maj
 	 determinateness (%) : 50.00
 	 - most credible action(s) = { }
 
+First and last choice recommendation perfectly correspond to the weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1`.
 
-Execution time: 0.015 seconds
-*****************************
-   
 .. note:: The *edges* attribute of bipolar-valued graphs is also a bpv-set, where the support is given by the non-oriented pairs of the graph's vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership characteristic vectors from the *Rubis* best choice computation [BIS-2006-1p]_. This is the topic of the next tutorial.
 
 Back to :ref:`Content Table <Pearls-label>`
