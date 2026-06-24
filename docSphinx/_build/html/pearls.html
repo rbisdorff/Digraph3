@@ -4561,13 +4561,13 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </span><span class="hll"><span class="linenos">11</span><span class="go">   &#39;p1&#39;: +0.14 (56.95%)</span>
 </span><span class="hll"><span class="linenos">12</span><span class="go">   &#39;p7&#39;: +0.14 (56.95%)</span>
 </span><span class="linenos">13</span><span class="go">  -------------------------------------</span>
-<span class="linenos">14</span><span class="go"> Criteria significance majority in brakets</span>
-<span class="linenos">15</span><span class="go"> Execution time: 0.086 sec.</span>
-<span class="linenos">16</span><span class="go"> *****************************************</span>
+<span class="linenos">14</span><span class="go"> Execution time: 0.086 sec.</span>
+<span class="linenos">15</span><span class="go"> *****************************************</span>
 </pre></div>
 </div>
 </div>
 <p>The criteria significance majorities for each choice are indicated in brakets (see Lines 5-7,10-12).</p>
+<p>In the performance heatmap shown in <a class="reference internal" href="#condorcetwinnersheatmap"><span class="std std-numref">Fig. 3.39</span></a> we may verify the criteria significance majorities computed with the help of the epistemic fusion operators for each alternative.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">al</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;p2&#39;</span><span class="p">,</span><span class="s1">&#39;p6&#39;</span><span class="p">,</span><span class="s1">&#39;p5&#39;</span><span class="p">,</span><span class="s1">&#39;p3&#39;</span><span class="p">,</span><span class="s1">&#39;p4&#39;</span><span class="p">,</span><span class="s1">&#39;p9&#39;</span><span class="p">,</span><span class="s1">&#39;p1&#39;</span><span class="p">,</span><span class="s1">&#39;p7&#39;</span><span class="p">,</span><span class="s1">&#39;p8&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">al</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
@@ -4578,7 +4578,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p><span class="caption-number">Fig. 3.39 </span><span class="caption-text">Performance heatmap of the bipolar-valued Condorcet winners and losers</span><a class="headerlink" href="#condorcetwinnersheatmap" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>In <a class="reference internal" href="#condorcetwinnersheatmap"><span class="std std-numref">Fig. 3.39</span></a> we may verify the criteria significance majorities computed with the help of the epistemic fusion operators for each alternative. A result that gets confirmed with the ‘Rubis’ choice recommendation shown in <a class="reference internal" href="#condorcetwinners4"><span class="std std-numref">Listing 3.65</span></a> below.</p>
+<p>A result that gets confirmed with the ‘Rubis’ choice recommendation shown in <a class="reference internal" href="#condorcetwinners4"><span class="std std-numref">Listing 3.65</span></a> below.</p>
 <div class="literal-block-wrapper docutils container" id="condorcetwinners4">
 <div class="code-block-caption"><span class="caption-number">Listing 3.65 </span><span class="caption-text">Showing the choice recommendations from the Rubis method</span><a class="headerlink" href="#condorcetwinners4" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;Rubis&#39;</span><span class="p">)</span>

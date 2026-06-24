@@ -4762,11 +4762,12 @@ Now, weak Condorcet winners and losers give suitable first and last choice recom
       'p1': +0.14 (56.95%)
       'p7': +0.14 (56.95%)
      -------------------------------------
-    Criteria significance majority in brakets
     Execution time: 0.086 sec.
     *****************************************
 
 The criteria significance majorities for each choice are indicated in brakets (see Lines 5-7,10-12).
+
+In the performance heatmap shown in :numref:`condorcetWinnersHeatmap` we may verify the criteria significance majorities computed with the help of the epistemic fusion operators for each alternative.
 
 >>> al = ['p2','p6','p5','p3','p4','p9','p1','p7','p8']
 >>> g.showHTMLPerformanceHeatmap(al,Correlations=True,colorLevels=5)
@@ -4779,7 +4780,7 @@ The criteria significance majorities for each choice are indicated in brakets (s
 
    Performance heatmap of the bipolar-valued Condorcet winners and losers
 
-In :numref:`condorcetWinnersHeatmap` we may verify the criteria significance majorities computed with the help of the epistemic fusion operators for each alternative. A result that gets confirmed with the 'Rubis' choice recommendation shown in :numref:`CondorcetWinners4` below.
+A result that gets confirmed with the 'Rubis' choice recommendation shown in :numref:`CondorcetWinners4` below.
 
 .. code-block:: pycon
    :caption: Showing the choice recommendations from the Rubis method
