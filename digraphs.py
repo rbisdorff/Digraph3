@@ -9023,7 +9023,46 @@ class Digraph(object):
                     break
             print('-------------------------------------')
             print('Criteria significance majority in brakets' )
-            print('Execution time: %.3f sec.' % (time() - t0) )            
+            print('Execution time: %.3f sec.' % (time() - t0) )
+
+        elif method == 'IteratedCondorcetWinners':
+            print('\n******************************************')
+            print('Iterated weak Condorcet winners and losers')
+            print('!!!! Under development !!!!\n')
+            from time import time
+            from outrankingDigraphs import BipolarOutrankingDigraph
+            print('First and last choice recommendations')
+            print('-------------------------------------')
+            t0 = time()
+            Med = self.valuationdomain['med']
+            choiceVectors = []
+            al = [x for x in self.actions]
+            nl = len(al)
+            alrecur = [x for x in self.actions]
+            print(al)
+            j=0
+            while alrecur != [] and j < nl:
+                #nl = len(al)
+                #print(j,al,nl)
+                g = BipolarOutrankingDigraph(self,actionsSubset = alrecur) 
+                resVec = self.computeBpvCondorcetWinners()
+                resVec.showMembershipCharacteristics()
+                choiceVectors.append(resVec)
+                #print(resVec.support)
+                alrecur = []
+                #print(j, alrecur)
+                nl = len(alrecur)
+                for i in range(nl):
+                    x = alrecur[i]
+                    print(x)
+                    if resVec.membership[x] == Med:
+                #       or resVec.membership[x] < Med:
+                        alrecur.append(x)
+                print(j,alrecur)
+                nl = alrecur
+                j += 1
+            print(choiceVectors)
+
         else:
             print('Error: method = "Bachet", "IteratedBachet", "Rubis" or "CondorcetWinners",  not "%s"' % method) 
         print('*************************************************')
@@ -15758,33 +15797,9 @@ if __name__ == "__main__":
     #print(getcontext().prec)
     g = BipolarOutrankingDigraph(t,Threading=False,startMethod='spawn')
     print(g)
-##    print('polarised Bachet BCR')
-##    g.showBachetChoiceRecommendation(Comments=True,seed=2)
-##    print('valued Bachet BCR')
-##    g.showBachetChoiceRecommendation(Comments=True,seed=2,Polarised=False)
     print('Rubis BCR')
     g.showFirstChoiceRecommendation(Comments=True)
-
-    bpvWinners = g.computeBpvCondorcetWinners()
-    bpvWinners.showMembershipCharacteristics()
-    bpvWinners = g.computeBpvCondorcetWinners(CoDual=False)
-    bpvWinners.showMembershipCharacteristics()
-    bpvWinners = g.computeBpvCondorcetWinners(BrokenCocs=True)
-    bpvWinners.showMembershipCharacteristics()
-    g.showChoiceRecommendation('CondorcetWinners')
-##    g.showChoiceRecommendation('Fusion',BrokenCocs=False)
-    
-
-##    from transitiveDigraphs import *
-##    pbr = PartialBachetRanking(g)
-##    rankings = [r[1] for r in pbr.bachetRankings]
-##    br = BalancedRankingsDigraph(g,rankings)
-##    rankings[0].reverse()
-##    rankings[1].reverse()
-##    #rankings[2].reverse()
-##    #rankings[3].reverse()
-##    #rankings[4].reverse()
-##    br1 = BalancedRankingsDigraph(g,rankings)
+    g.showChoiceRecommendation('IteratedCondorcetWinners')
 
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
