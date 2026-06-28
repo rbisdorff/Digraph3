@@ -9030,39 +9030,50 @@ class Digraph(object):
             print('Iterated weak Condorcet winners and losers')
             print('!!!! Under development !!!!\n')
             from time import time
-            from outrankingDigraphs import BipolarOutrankingDigraph
-            print('First and last choice recommendations')
-            print('-------------------------------------')
+            from copy import deepcopy
+            g = deepcopy(self)
+            #from outrankingDigraphs import BipolarOutrankingDigraph
+            print('Iterated first and last choice recommendations')
+            print('----------------------------------------------')
             t0 = time()
-            Med = self.valuationdomain['med']
+            Med = g.valuationdomain['med']
             choiceVectors = []
-            al = [x for x in self.actions]
-            nl = len(al)
-            alrecur = [x for x in self.actions]
-            print(al)
+            remainingActions = [x for x in g.actions]
+            nl = len(remainingActions)
+            Recursion = True
             j=0
-            while alrecur != [] and j < nl:
-                #nl = len(al)
-                #print(j,al,nl)
-                g = BipolarOutrankingDigraph(self,actionsSubset = alrecur) 
-                resVec = self.computeBpvCondorcetWinners()
-                resVec.showMembershipCharacteristics()
+            while nl > 2 and Recursion:
+                g.actions = {}
+                for x in remainingActions:
+                    g.actions[x] = deepcopy(self.actions[x])
+                #g.actions = remainingActions
+                resVec = g.computeBpvCondorcetWinners()
+                #resVec.showMembershipCharacteristics()
                 choiceVectors.append(resVec)
-                #print(resVec.support)
-                alrecur = []
-                #print(j, alrecur)
-                nl = len(alrecur)
+                Recursion = False
+                removed = []
                 for i in range(nl):
-                    x = alrecur[i]
-                    print(x)
-                    if resVec.membership[x] == Med:
-                #       or resVec.membership[x] < Med:
-                        alrecur.append(x)
-                print(j,alrecur)
-                nl = alrecur
+                    x = remainingActions[i]
+                    #print(j,x)
+                    if resVec.membership[x] > Med:
+                        removed.append(x)
+                        Recursion = True
+                    elif resVec.membership[x] < Med:
+                        removed.append(x)
+                        Recursion = True
+                if Recursion:
+                    for y in removed:
+                        remainingActions.remove(y)
+                nl = len(remainingActions)
                 j += 1
-            print(choiceVectors)
-
+                r = 1
+            for rv in choiceVectors:
+                for x in rv.support:
+                    if rv.membership[x] > Med:
+                        print('%d-choice:' % (r) ,x,rv.membership[x])
+                    elif rv.membership[x] < Med:
+                        print('%d-reject:' % (r) ,x,rv.membership[x])
+                r += 1
         else:
             print('Error: method = "Bachet", "IteratedBachet", "Rubis" or "CondorcetWinners",  not "%s"' % method) 
         print('*************************************************')
@@ -15789,9 +15800,9 @@ if __name__ == "__main__":
     from outrankingDigraphs import *
     from randomDigraphs import *
     from decimal import Decimal, getcontext
-    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=9,numberOfCriteria=13,
-                                 missingDataProbability=0.05,seed=700)
+    t = Random3ObjectivesPerformanceTableau(weightDistribution="equiobjectives",
+                                 numberOfActions=20,numberOfCriteria=13,
+                                 missingDataProbability=0.05,seed=70)
                           
     #t = CircularPerformanceTableau()
     #print(getcontext().prec)
