@@ -9042,7 +9042,7 @@ class Digraph(object):
             nl = len(remainingActions)
             Recursion = True
             j=0
-            while nl > 2 and Recursion:
+            while nl > 0 and Recursion:
                 g.actions = {}
                 for x in remainingActions:
                     g.actions[x] = deepcopy(self.actions[x])
@@ -9067,13 +9067,30 @@ class Digraph(object):
                 nl = len(remainingActions)
                 j += 1
                 r = 1
+            result = []
             for rv in choiceVectors:
+                rvres = []
                 for x in rv.support:
-                    if rv.membership[x] > Med:
-                        print('%d-choice:' % (r) ,x,rv.membership[x])
-                    elif rv.membership[x] < Med:
-                        print('%d-reject:' % (r) ,x,rv.membership[x])
+                    rvres.append((rv.membership[x],x,r))
+                    rvres.sort(reverse=True)
+                result = result + rvres
                 r += 1
+            nr = len(result)
+            for k in range(nr):
+                if result[k][0] > Med:
+                    print("%s %d-choice: \'%s\' (%+.3f)" % ((result[k][2]*'  '),result[k][2],result[k][1],result[k][0]) )
+            for x in remainingActions:
+                print("%s undeterminate choice: \'%s\' (%+.3f)" % (('     '),x,0.0) )
+            for k in range(nr-1,0,-1):
+                if result[k][0] < Med:
+                    print("%s %d-reject: \'%s\' (%+.3f)" % ((result[k][2]*'  '),result[k][2],result[k][1],result[k][0]) )
+                           
+                # for x in rv.support:
+                #     if rv.membership[x] > Med:
+                #         print('%d-choice:' % (r) ,x,rv.membership[x])
+                #     elif rv.membership[x] < Med:
+                #         print('%d-reject:' % (r) ,x,rv.membership[x])
+                # r += 1
         else:
             print('Error: method = "Bachet", "IteratedBachet", "Rubis" or "CondorcetWinners",  not "%s"' % method) 
         print('*************************************************')
@@ -15802,7 +15819,7 @@ if __name__ == "__main__":
     from decimal import Decimal, getcontext
     t = Random3ObjectivesPerformanceTableau(weightDistribution="equiobjectives",
                                  numberOfActions=20,numberOfCriteria=13,
-                                 missingDataProbability=0.05,seed=70)
+                                            missingDataProbability=0.05,seed=700)
                           
     #t = CircularPerformanceTableau()
     #print(getcontext().prec)
@@ -15811,6 +15828,7 @@ if __name__ == "__main__":
     print('Rubis BCR')
     g.showFirstChoiceRecommendation(Comments=True)
     g.showChoiceRecommendation('IteratedCondorcetWinners')
+    g.showChoiceRecommendation('Bachet')
 
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
