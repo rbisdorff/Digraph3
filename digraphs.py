@@ -9076,14 +9076,16 @@ class Digraph(object):
                 result = result + rvres
                 r += 1
             nr = len(result)
+            maxsp = ' ' 
             for k in range(nr):
                 if result[k][0] > Med:
                     print("%s %d-choice: \'%s\' (%+.3f)" % ((result[k][2]*'  '),result[k][2],result[k][1],result[k][0]) )
+                    maxsp = result[k][2]*'  '
             for x in remainingActions:
-                print("%s undeterminate choice: \'%s\' (%+.3f)" % (('     '),x,0.0) )
+                print("%s undeterminate choice: \'%s\' (%+.3f)" % ((maxsp + '  '),x,0.0) )
             for k in range(nr-1,0,-1):
                 if result[k][0] < Med:
-                    print("%s %d-reject: \'%s\' (%+.3f)" % ((result[k][2]*'  '),result[k][2],result[k][1],result[k][0]) )
+                    print("%s %d-reject: \'%s\' (%+.3f)" % ((result[k][2]*'  '),result[k][2],result[k][1],(-result[k][0])) )
                            
                 # for x in rv.support:
                 #     if rv.membership[x] > Med:
