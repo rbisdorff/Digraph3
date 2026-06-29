@@ -23,7 +23,7 @@ Copyright (C) 2025-2026  Raymond Bisdorff
 
        >>> from bipolarValuedSets import RandomBpvSet
        >>> X = RandomBpvSet(numberOfElements=5,elementNamePrefix='s',
-       ...     undeterminateness=0.1,valuationRange=(-1, 1),ndigits=4,seed=1)
+       ...     indeterminateness=0.1,valuationRange=(-1, 1),ndigits=4,seed=1)
        >>> X.showMembershipCharacteristics()
         s2:  +0.6949
         s3:  +0.5275
@@ -31,7 +31,7 @@ Copyright (C) 2025-2026  Raymond Bisdorff
         s4:  -0.4899
         s1:  -0.7313
        >>> Y = RandomBpvSet(numberOfElements=3,elementNamePrefix='s',
-       ...    undeterminateness=0.1,valuationRange=(-1, 1),ndigits=4,seed=2)
+       ...    indeterminateness=0.1,valuationRange=(-1, 1),ndigits=4,seed=2)
        >>> Y.showMembershipCharacteristics()
         s1:  +0.9121
         s2:  +0.8957
@@ -703,11 +703,11 @@ class BpvSet(object):
 
 class RandomBpvSet(BpvSet):
     """
-    *undeterminateness* parameter (in float % [0.0,1.0], default=0.1)
+    *indeterminateness* parameter (in float % [0.0,1.0], default=0.1)
     """
     def __init__(self,numberOfElements=5,
                  elementNamePrefix='x',
-                 undeterminateness=0.1,
+                 indeterminateness=0.1,
                  valuationRange=(-1,1),
                  ndigits = 4,
                  seed=None,
@@ -749,7 +749,7 @@ class RandomBpvSet(BpvSet):
             membership[it] = Decimal(formatString % u) * Max
             if Debug:
                 print(it,u,membership[it])
-            if u > -undeterminateness and u < undeterminateness:
+            if u > -indeterminateness and u < indeterminateness:
                 membership[it] = Med
                 if Debug:
                     print(it,u,membership[it])
@@ -781,7 +781,7 @@ if __name__ == "__main__":
     print('*-------- Testing classes and methods -------')
 
     X = RandomBpvSet(numberOfElements=5,elementNamePrefix='s',
-                      undeterminateness=0.1,
+                      indeterminateness=0.1,
                       valuationRange=(-1,1),ndigits=4,
                       seed=1,
                       Debug=False)
@@ -789,7 +789,7 @@ if __name__ == "__main__":
     #X.showMembershipCharacteristics(Normalized=False)
     X.showMembershipCharacteristics()
     Y = RandomBpvSet(numberOfElements=5,elementNamePrefix='s',
-                      undeterminateness=0.1,
+                      indeterminateness=0.1,
                       valuationRange=(-1,1),
                       seed=2,ndigits=4,
                       Debug=False)
@@ -803,7 +803,7 @@ if __name__ == "__main__":
     Op.showMembershipCharacteristics()
     Om = X.otimes(Y)
     Om.showMembershipCharacteristics()
-    M = RandomBpvSet(undeterminateness=1.0,elementNamePrefix='s')
+    M = RandomBpvSet(indeterminateness=1.0,elementNamePrefix='s')
     Oxmp = X.oplus(M)
     Oxmp.showMembershipCharacteristics()
     Oxmm = X.otimes(M)

@@ -4475,7 +4475,7 @@ The :py:mod:`bipolarValuedSets` Digraph3 module provides, with the :py:class:`~b
 
    >>> from bipolarValuedSets import RandomBpvSet
    >>> X = RandomBpvSet(numberOfElements=5,elementNamePrefix='s',
-   ...     undeterminateness=0.1,valuationRange=(-1, 1),ndigits=4,seed=1)
+   ...     indeterminateness=0.1,valuationRange=(-1, 1),ndigits=4,seed=1)
    >>> X.showMembershipCharacteristics()
     s2:  +0.6949
     s3:  +0.5275
@@ -4483,7 +4483,7 @@ The :py:mod:`bipolarValuedSets` Digraph3 module provides, with the :py:class:`~b
     s4:  -0.4899
     s1:  -0.7313
    >>> Y = RandomBpvSet(numberOfElements=3,elementNamePrefix='s',
-   ...    undeterminateness=0.1,valuationRange=(-1, 1),ndigits=4,seed=2)
+   ...    indeterminateness=0.1,valuationRange=(-1, 1),ndigits=4,seed=2)
    >>> Y.showMembershipCharacteristics()
     s1:  +0.9121
     s2:  +0.8957
@@ -4623,7 +4623,7 @@ Let :math:`\mathcal{S}(A)` denote the set of all possible bpv-sets that may be d
    :linenos:
    :emphasize-lines: 4-8,10-14,16-20,22-26
 
-   >>> O = RandomBpvSet(undeterminateness=1.0,elementNamePrefix='s')
+   >>> O = RandomBpvSet(indeterminateness=1.0,elementNamePrefix='s')
    >>> Xp = X.polarise(inSite=False)
    >>> (X.oplus(O)).showMembershipCharacteristics()
     s2:  +0.6949

@@ -777,5 +777,7 @@ def testChoiceRecommendation():
     g.showChoiceRecommendation('Rubis')
     print('Weak Condorcet winners')
     g.showChoiceRecommendation('CondorcetWinners')
-
+    print('Iterated Weak Condorcet winners')
+    ranking = g.showChoiceRecommendation('IteratedCondorcetWinners',ReturnRanking=True)
+    g.showHTMLPerformanceHeatmap(actionsList=ranking,Correlations=True)
     

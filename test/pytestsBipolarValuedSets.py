@@ -9,14 +9,14 @@ from bipolarValuedSets import *
 def testBpvSet():
     print('==>> Testing bipolar valued sets implementation')
     X = RandomBpvSet(numberOfElements=3,elementNamePrefix='s',
-                      undeterminateness=0.2,
+                      indeterminateness=0.2,
                       valuationRange=(-10,10),
                       seed=1000,
                       Debug=False)
     
     X.showMembershipCharacteristics(Normalized=True,ndigits=2)
     Y = RandomBpvSet(numberOfElements=5,elementNamePrefix='s',
-                      undeterminateness=0.2,
+                      indeterminateness=0.2,
                       valuationRange=(-10,10),
                       seed=2000,
                       Debug=False)
@@ -50,7 +50,7 @@ def testBpvSet():
     Op.showMembershipCharacteristics()
     Om = X.otimes(Y)
     Om.showMembershipCharacteristics()
-    M = RandomBpvSet(undeterminateness=1.0,elementNamePrefix='s')
+    M = RandomBpvSet(indeterminateness=1.0,elementNamePrefix='s')
     Oxmp = X.oplus(M)
     Oxmp.showMembershipCharacteristics()
     Oxmm = X.otimes(M)

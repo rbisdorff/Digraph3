@@ -8947,7 +8947,7 @@ class Digraph(object):
 
         **Parameters**
         
-        *method*: 'Bachet' (default) | 'Rubis' | 'IteratedBachet' | 'CondorcetWinners';
+        *method*: 'Bachet' (default) | 'Rubis' | 'IteratedBachet' | 'CondorcetWinners' | 'IteratedCondorcetWinners';
         the Bachet method is based on the conjoint
         extracton of initial and terminal prekernels from the partial Bachet ranking,
         whereas the Rubis method is based on the extraction of an initial and
@@ -8965,6 +8965,9 @@ class Digraph(object):
 
         *ChoiceVector*: Rubis parameter for showing complete prekernel
         characteristic vectors.
+
+        *ReturnRanking*: IteratedCondorcetWinners parameter for returning a linear ranking
+        induced by the iterated extraction of Condorcet winners bvp-sets.
         
         """
         if method == 'Bachet':
@@ -9028,15 +9031,12 @@ class Digraph(object):
         elif method == 'IteratedCondorcetWinners':
             print('\n******************************************')
             print('Iterated weak Condorcet winners and losers')
-            # print('!!!! Under development !!!!\n')
             from time import time
             from copy import deepcopy
             g = deepcopy(self)
-            # print('Iterated first and last choice recommendations')
             print('------------------------------------------')
             t0 = time()
             Med = g.valuationdomain['med']
-            choiceVectors = []
             remainingActions = [x for x in g.actions]
             posRanking = []
             negRanking = []
@@ -9047,16 +9047,12 @@ class Digraph(object):
                 g.actions = {}
                 for x in remainingActions:
                     g.actions[x] = deepcopy(self.actions[x])
-                #g.actions = remainingActions
                 resVec = g.computeBpvCondorcetWinners()
-                #resVec.showMembershipCharacteristics()
-                choiceVectors.append(resVec)
                 Recursion = False
                 posremoved = []
                 negremoved = []
                 for i in range(nl):
                     x = remainingActions[i]
-                    #print(j,x)
                     if resVec.membership[x] > Med:
                         posremoved.append((resVec.membership[x],x,j))
                         Recursion = True
@@ -9075,16 +9071,7 @@ class Digraph(object):
                 negRanking = negremoved + negRanking
                 j += 1
                 r = 1
-            # result = []
-            # for rv in choiceVectors:
-            #    rvres = []
-            #    for x in rv.support:
-            #        rvres.append((rv.membership[x],x,r))
-            #        rvres.sort(reverse=True)
-            #    result = result + rvres
-            #    r += 1
-
-            # nr = len(result)
+            # print out the choice recommendations  
             maxsp = ' ' 
             for ch in posRanking:
                 if ch[0] > Med:
@@ -9099,7 +9086,7 @@ class Digraph(object):
 
                     maxsp = ch[2]*'  '
             for x in remainingActions:
-                print("%s undeterminate: \'%s\' (%+.3f)" % ((maxsp + '  '),x,0.0) )
+                print("%s indeterminate: \'%s\' (%+.3f)" % ((maxsp + '  '),x,0.0) )
             for ch in negRanking:
                 if ch[0] < Med:
                     if ch[2] == 1:
@@ -9110,17 +9097,10 @@ class Digraph(object):
                         print("%s %drd-reject: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],(-ch[0])) )
                     else:
                         print("%s %dth-reject: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],(-ch[0])) )
-            
-                           
-                # for x in rv.support:
-                #     if rv.membership[x] > Med:
-                #         print('%d-choice:' % (r) ,x,rv.membership[x])
-                #     elif rv.membership[x] < Med:
-                #         print('%d-reject:' % (r) ,x,rv.membership[x])
-                # r += 1
-            print('-------------------------------------')
+            print('-----------------------------------------')
             print('Criteria significance majority in brakets' )
             print('Execution time: %.3f sec.' % (time() - t0) )
+            print('*****************************************')
 
             if ReturnRanking:
                 ranking = []
@@ -9130,8 +9110,7 @@ class Digraph(object):
                     ranking.append(x)
                 for ch in negRanking:
                     ranking.append(ch[1])
-            return ranking
-
+                return ranking
         else:
             print('Error: method = "Bachet", "IteratedBachet", "Rubis" or "CondorcetWinners",  not "%s"' % method) 
         print('*************************************************')
@@ -14374,7 +14353,7 @@ class _CoceDigraph(Digraph):
 
     .. note::
 
-        The method is only experimental and may easily lead to very sparse outranking digraphs with loads of undeterminate arcs.
+        The method is only experimental and may easily lead to very sparse outranking digraphs with loads of indeterminate arcs.
         It is recommended to use instead the :py:class:`digraphs.BrokenCocsDigraph` class.
         
     Parameters:

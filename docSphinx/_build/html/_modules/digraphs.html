@@ -9604,7 +9604,7 @@
 
 <span class="sd">        **Parameters**</span>
 <span class="sd">        </span>
-<span class="sd">        *method*: &#39;Bachet&#39; (default) | &#39;Rubis&#39; | &#39;IteratedBachet&#39; | &#39;CondorcetWinners&#39;;</span>
+<span class="sd">        *method*: &#39;Bachet&#39; (default) | &#39;Rubis&#39; | &#39;IteratedBachet&#39; | &#39;CondorcetWinners&#39; | &#39;IteratedCondorcetWinners&#39;;</span>
 <span class="sd">        the Bachet method is based on the conjoint</span>
 <span class="sd">        extracton of initial and terminal prekernels from the partial Bachet ranking,</span>
 <span class="sd">        whereas the Rubis method is based on the extraction of an initial and</span>
@@ -9622,6 +9622,9 @@
 
 <span class="sd">        *ChoiceVector*: Rubis parameter for showing complete prekernel</span>
 <span class="sd">        characteristic vectors.</span>
+
+<span class="sd">        *ReturnRanking*: IteratedCondorcetWinners parameter for returning a linear ranking</span>
+<span class="sd">        induced by the iterated extraction of Condorcet winners bvp-sets.</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;Bachet&#39;</span><span class="p">:</span>
@@ -9685,15 +9688,12 @@
         <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;IteratedCondorcetWinners&#39;</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">******************************************&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iterated weak Condorcet winners and losers&#39;</span><span class="p">)</span>
-            <span class="c1"># print(&#39;!!!! Under development !!!!\n&#39;)</span>
             <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
             <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-            <span class="c1"># print(&#39;Iterated first and last choice recommendations&#39;)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------------------------------------------&#39;</span><span class="p">)</span>
             <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
             <span class="n">Med</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
-            <span class="n">choiceVectors</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">remainingActions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
             <span class="n">posRanking</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">negRanking</span> <span class="o">=</span> <span class="p">[]</span>
@@ -9704,16 +9704,12 @@
                 <span class="n">g</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="p">{}</span>
                 <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">remainingActions</span><span class="p">:</span>
                     <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
-                <span class="c1">#g.actions = remainingActions</span>
                 <span class="n">resVec</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">()</span>
-                <span class="c1">#resVec.showMembershipCharacteristics()</span>
-                <span class="n">choiceVectors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">resVec</span><span class="p">)</span>
                 <span class="n">Recursion</span> <span class="o">=</span> <span class="kc">False</span>
                 <span class="n">posremoved</span> <span class="o">=</span> <span class="p">[]</span>
                 <span class="n">negremoved</span> <span class="o">=</span> <span class="p">[]</span>
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nl</span><span class="p">):</span>
                     <span class="n">x</span> <span class="o">=</span> <span class="n">remainingActions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-                    <span class="c1">#print(j,x)</span>
                     <span class="k">if</span> <span class="n">resVec</span><span class="o">.</span><span class="n">membership</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
                         <span class="n">posremoved</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">resVec</span><span class="o">.</span><span class="n">membership</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">x</span><span class="p">,</span><span class="n">j</span><span class="p">))</span>
                         <span class="n">Recursion</span> <span class="o">=</span> <span class="kc">True</span>
@@ -9732,16 +9728,7 @@
                 <span class="n">negRanking</span> <span class="o">=</span> <span class="n">negremoved</span> <span class="o">+</span> <span class="n">negRanking</span>
                 <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="n">r</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="c1"># result = []</span>
-            <span class="c1"># for rv in choiceVectors:</span>
-            <span class="c1">#    rvres = []</span>
-            <span class="c1">#    for x in rv.support:</span>
-            <span class="c1">#        rvres.append((rv.membership[x],x,r))</span>
-            <span class="c1">#        rvres.sort(reverse=True)</span>
-            <span class="c1">#    result = result + rvres</span>
-            <span class="c1">#    r += 1</span>
-
-            <span class="c1"># nr = len(result)</span>
+            <span class="c1"># print out the choice recommendations  </span>
             <span class="n">maxsp</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span> 
             <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">posRanking</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">ch</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
@@ -9756,7 +9743,7 @@
 
                     <span class="n">maxsp</span> <span class="o">=</span> <span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="s1">&#39;  &#39;</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">remainingActions</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> undeterminate: </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s2"> (</span><span class="si">%+.3f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">((</span><span class="n">maxsp</span> <span class="o">+</span> <span class="s1">&#39;  &#39;</span><span class="p">),</span><span class="n">x</span><span class="p">,</span><span class="mf">0.0</span><span class="p">)</span> <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> indeterminate: </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s2"> (</span><span class="si">%+.3f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">((</span><span class="n">maxsp</span> <span class="o">+</span> <span class="s1">&#39;  &#39;</span><span class="p">),</span><span class="n">x</span><span class="p">,</span><span class="mf">0.0</span><span class="p">)</span> <span class="p">)</span>
             <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">negRanking</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">ch</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Med</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -9767,17 +9754,10 @@
                         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%d</span><span class="s2">rd-reject: </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s2"> (</span><span class="si">%+.3f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">((</span><span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="s1">&#39;  &#39;</span><span class="p">),</span><span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">ch</span><span class="p">[</span><span class="mi">1</span><span class="p">],(</span><span class="o">-</span><span class="n">ch</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%d</span><span class="s2">th-reject: </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s2"> (</span><span class="si">%+.3f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">((</span><span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="s1">&#39;  &#39;</span><span class="p">),</span><span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">ch</span><span class="p">[</span><span class="mi">1</span><span class="p">],(</span><span class="o">-</span><span class="n">ch</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="p">)</span>
-            
-                           
-                <span class="c1"># for x in rv.support:</span>
-                <span class="c1">#     if rv.membership[x] &gt; Med:</span>
-                <span class="c1">#         print(&#39;%d-choice:&#39; % (r) ,x,rv.membership[x])</span>
-                <span class="c1">#     elif rv.membership[x] &lt; Med:</span>
-                <span class="c1">#         print(&#39;%d-reject:&#39; % (r) ,x,rv.membership[x])</span>
-                <span class="c1"># r += 1</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-------------------------------------&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-----------------------------------------&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Criteria significance majority in brakets&#39;</span> <span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Execution time: </span><span class="si">%.3f</span><span class="s1"> sec.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span> <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*****************************************&#39;</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">ReturnRanking</span><span class="p">:</span>
                 <span class="n">ranking</span> <span class="o">=</span> <span class="p">[]</span>
@@ -9787,8 +9767,7 @@
                     <span class="n">ranking</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">negRanking</span><span class="p">:</span>
                     <span class="n">ranking</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-            <span class="k">return</span> <span class="n">ranking</span>
-
+                <span class="k">return</span> <span class="n">ranking</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: method = &quot;Bachet&quot;, &quot;IteratedBachet&quot;, &quot;Rubis&quot; or &quot;CondorcetWinners&quot;,  not &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="n">method</span><span class="p">)</span> 
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************************&#39;</span><span class="p">)</span></div>
@@ -15255,7 +15234,7 @@
 
 <span class="sd">    .. note::</span>
 
-<span class="sd">        The method is only experimental and may easily lead to very sparse outranking digraphs with loads of undeterminate arcs.</span>
+<span class="sd">        The method is only experimental and may easily lead to very sparse outranking digraphs with loads of indeterminate arcs.</span>
 <span class="sd">        It is recommended to use instead the :py:class:`digraphs.BrokenCocsDigraph` class.</span>
 <span class="sd">        </span>
 <span class="sd">    Parameters:</span>
