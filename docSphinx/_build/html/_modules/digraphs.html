@@ -9596,9 +9596,9 @@
                                 <span class="n">Valued</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                 <span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                 <span class="n">randomActionsList</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                 <span class="c1"># CondorcetWinners</span>
-                                <span class="n">BrokenCocs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                       <span class="p">):</span>
+                                 <span class="c1"># IteratedCondorcetWinners</span>
+                                <span class="n">ReturnRanking</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                 <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generic choice recommender method.</span>
 
@@ -9685,20 +9685,21 @@
         <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;IteratedCondorcetWinners&#39;</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">******************************************&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iterated weak Condorcet winners and losers&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;!!!! Under development !!!!</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="c1"># print(&#39;!!!! Under development !!!!\n&#39;)</span>
             <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
             <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-            <span class="c1">#from outrankingDigraphs import BipolarOutrankingDigraph</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iterated first and last choice recommendations&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;----------------------------------------------&#39;</span><span class="p">)</span>
+            <span class="c1"># print(&#39;Iterated first and last choice recommendations&#39;)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------------------------------------------&#39;</span><span class="p">)</span>
             <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
             <span class="n">Med</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
             <span class="n">choiceVectors</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">remainingActions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
+            <span class="n">posRanking</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">negRanking</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">nl</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">remainingActions</span><span class="p">)</span>
             <span class="n">Recursion</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="n">j</span><span class="o">=</span><span class="mi">0</span>
+            <span class="n">j</span><span class="o">=</span><span class="mi">1</span>
             <span class="k">while</span> <span class="n">nl</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">Recursion</span><span class="p">:</span>
                 <span class="n">g</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="p">{}</span>
                 <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">remainingActions</span><span class="p">:</span>
@@ -9708,41 +9709,65 @@
                 <span class="c1">#resVec.showMembershipCharacteristics()</span>
                 <span class="n">choiceVectors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">resVec</span><span class="p">)</span>
                 <span class="n">Recursion</span> <span class="o">=</span> <span class="kc">False</span>
-                <span class="n">removed</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">posremoved</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">negremoved</span> <span class="o">=</span> <span class="p">[]</span>
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nl</span><span class="p">):</span>
                     <span class="n">x</span> <span class="o">=</span> <span class="n">remainingActions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
                     <span class="c1">#print(j,x)</span>
                     <span class="k">if</span> <span class="n">resVec</span><span class="o">.</span><span class="n">membership</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
-                        <span class="n">removed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                        <span class="n">posremoved</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">resVec</span><span class="o">.</span><span class="n">membership</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">x</span><span class="p">,</span><span class="n">j</span><span class="p">))</span>
                         <span class="n">Recursion</span> <span class="o">=</span> <span class="kc">True</span>
                     <span class="k">elif</span> <span class="n">resVec</span><span class="o">.</span><span class="n">membership</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Med</span><span class="p">:</span>
-                        <span class="n">removed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                        <span class="n">negremoved</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">resVec</span><span class="o">.</span><span class="n">membership</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">x</span><span class="p">,</span><span class="n">j</span><span class="p">))</span>
                         <span class="n">Recursion</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="k">if</span> <span class="n">Recursion</span><span class="p">:</span>
-                    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">removed</span><span class="p">:</span>
-                        <span class="n">remainingActions</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">posremoved</span><span class="p">:</span>
+                        <span class="n">remainingActions</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">negremoved</span><span class="p">:</span>
+                        <span class="n">remainingActions</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
                 <span class="n">nl</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">remainingActions</span><span class="p">)</span>
+                <span class="n">posremoved</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">negremoved</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">posRanking</span> <span class="o">=</span> <span class="n">posRanking</span> <span class="o">+</span> <span class="n">posremoved</span>
+                <span class="n">negRanking</span> <span class="o">=</span> <span class="n">negremoved</span> <span class="o">+</span> <span class="n">negRanking</span>
                 <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="n">r</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">rv</span> <span class="ow">in</span> <span class="n">choiceVectors</span><span class="p">:</span>
-                <span class="n">rvres</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rv</span><span class="o">.</span><span class="n">support</span><span class="p">:</span>
-                    <span class="n">rvres</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">rv</span><span class="o">.</span><span class="n">membership</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">x</span><span class="p">,</span><span class="n">r</span><span class="p">))</span>
-                    <span class="n">rvres</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                <span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">+</span> <span class="n">rvres</span>
-                <span class="n">r</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">nr</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            <span class="c1"># result = []</span>
+            <span class="c1"># for rv in choiceVectors:</span>
+            <span class="c1">#    rvres = []</span>
+            <span class="c1">#    for x in rv.support:</span>
+            <span class="c1">#        rvres.append((rv.membership[x],x,r))</span>
+            <span class="c1">#        rvres.sort(reverse=True)</span>
+            <span class="c1">#    result = result + rvres</span>
+            <span class="c1">#    r += 1</span>
+
+            <span class="c1"># nr = len(result)</span>
             <span class="n">maxsp</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span> 
-            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%d</span><span class="s2">-choice: </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s2"> (</span><span class="si">%+.3f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">((</span><span class="n">result</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="s1">&#39;  &#39;</span><span class="p">),</span><span class="n">result</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span><span class="n">result</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">result</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="p">)</span>
-                    <span class="n">maxsp</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="s1">&#39;  &#39;</span>
+            <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">posRanking</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">ch</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%d</span><span class="s2">rst-choice: </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s2"> (</span><span class="si">%+.3f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">((</span><span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="s1">&#39;  &#39;</span><span class="p">),</span><span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">ch</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">ch</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">)</span>
+                    <span class="k">elif</span> <span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%d</span><span class="s2">nd-choice: </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s2"> (</span><span class="si">%+.3f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">((</span><span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="s1">&#39;  &#39;</span><span class="p">),</span><span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">ch</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">ch</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">)</span>
+                    <span class="k">elif</span> <span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%d</span><span class="s2">rd-choice: </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s2"> (</span><span class="si">%+.3f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">((</span><span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="s1">&#39;  &#39;</span><span class="p">),</span><span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">ch</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">ch</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%d</span><span class="s2">th-choice: </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s2"> (</span><span class="si">%+.3f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">((</span><span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="s1">&#39;  &#39;</span><span class="p">),</span><span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">ch</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">ch</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">)</span>
+
+                    <span class="n">maxsp</span> <span class="o">=</span> <span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="s1">&#39;  &#39;</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">remainingActions</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> undeterminate choice: </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s2"> (</span><span class="si">%+.3f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">((</span><span class="n">maxsp</span> <span class="o">+</span> <span class="s1">&#39;  &#39;</span><span class="p">),</span><span class="n">x</span><span class="p">,</span><span class="mf">0.0</span><span class="p">)</span> <span class="p">)</span>
-            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Med</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%d</span><span class="s2">-reject: </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s2"> (</span><span class="si">%+.3f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">((</span><span class="n">result</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="s1">&#39;  &#39;</span><span class="p">),</span><span class="n">result</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span><span class="n">result</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">1</span><span class="p">],(</span><span class="o">-</span><span class="n">result</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span> <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> undeterminate: </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s2"> (</span><span class="si">%+.3f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">((</span><span class="n">maxsp</span> <span class="o">+</span> <span class="s1">&#39;  &#39;</span><span class="p">),</span><span class="n">x</span><span class="p">,</span><span class="mf">0.0</span><span class="p">)</span> <span class="p">)</span>
+            <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">negRanking</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">ch</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Med</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%d</span><span class="s2">rst-reject: </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s2"> (</span><span class="si">%+.3f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">((</span><span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="s1">&#39;  &#39;</span><span class="p">),</span><span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">ch</span><span class="p">[</span><span class="mi">1</span><span class="p">],(</span><span class="o">-</span><span class="n">ch</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="p">)</span>
+                    <span class="k">elif</span> <span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%d</span><span class="s2">nd-reject: </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s2"> (</span><span class="si">%+.3f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">((</span><span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="s1">&#39;  &#39;</span><span class="p">),</span><span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">ch</span><span class="p">[</span><span class="mi">1</span><span class="p">],(</span><span class="o">-</span><span class="n">ch</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="p">)</span>
+                    <span class="k">elif</span> <span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%d</span><span class="s2">rd-reject: </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s2"> (</span><span class="si">%+.3f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">((</span><span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="s1">&#39;  &#39;</span><span class="p">),</span><span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">ch</span><span class="p">[</span><span class="mi">1</span><span class="p">],(</span><span class="o">-</span><span class="n">ch</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%d</span><span class="s2">th-reject: </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s2"> (</span><span class="si">%+.3f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">((</span><span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="s1">&#39;  &#39;</span><span class="p">),</span><span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">ch</span><span class="p">[</span><span class="mi">1</span><span class="p">],(</span><span class="o">-</span><span class="n">ch</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="p">)</span>
+            
                            
                 <span class="c1"># for x in rv.support:</span>
                 <span class="c1">#     if rv.membership[x] &gt; Med:</span>
@@ -9750,6 +9775,20 @@
                 <span class="c1">#     elif rv.membership[x] &lt; Med:</span>
                 <span class="c1">#         print(&#39;%d-reject:&#39; % (r) ,x,rv.membership[x])</span>
                 <span class="c1"># r += 1</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-------------------------------------&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Criteria significance majority in brakets&#39;</span> <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Execution time: </span><span class="si">%.3f</span><span class="s1"> sec.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span> <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">ReturnRanking</span><span class="p">:</span>
+                <span class="n">ranking</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">posRanking</span><span class="p">:</span>
+                    <span class="n">ranking</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">remainingActions</span><span class="p">:</span>
+                    <span class="n">ranking</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">negRanking</span><span class="p">:</span>
+                    <span class="n">ranking</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">ranking</span>
+
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: method = &quot;Bachet&quot;, &quot;IteratedBachet&quot;, &quot;Rubis&quot; or &quot;CondorcetWinners&quot;,  not &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="n">method</span><span class="p">)</span> 
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************************&#39;</span><span class="p">)</span></div>
@@ -16770,8 +16809,8 @@
     <span class="kn">from</span> <span class="nn">randomDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
     <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">getcontext</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">weightDistribution</span><span class="o">=</span><span class="s2">&quot;equiobjectives&quot;</span><span class="p">,</span>
-                                 <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
-                                            <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">700</span><span class="p">)</span>
+                                 <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
+                                            <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
                           
     <span class="c1">#t = CircularPerformanceTableau()</span>
     <span class="c1">#print(getcontext().prec)</span>
@@ -16779,9 +16818,9 @@
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Rubis BCR&#39;</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">showFirstChoiceRecommendation</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;IteratedCondorcetWinners&#39;</span><span class="p">)</span>
+    <span class="n">ranking</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;IteratedCondorcetWinners&#39;</span><span class="p">,</span><span class="n">ReturnRanking</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;Bachet&#39;</span><span class="p">)</span>
-
+    <span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">actionsList</span><span class="o">=</span><span class="n">ranking</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enjoy !&#39;</span><span class="p">)</span>
@@ -16806,7 +16845,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jun 28, 2026.
+      <span class="lastupdated">Last updated on Jun 29, 2026.
       </span></p>
   </div>
 

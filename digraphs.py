@@ -8939,9 +8939,9 @@ class Digraph(object):
                                 Valued=False,
                                 actionsList=None,
                                 randomActionsList=False,
-                                 # CondorcetWinners
-                                BrokenCocs=True,
-                                       ):
+                                 # IteratedCondorcetWinners
+                                ReturnRanking=False,
+                                 ):
         """
         Generic choice recommender method.
 
@@ -9028,20 +9028,21 @@ class Digraph(object):
         elif method == 'IteratedCondorcetWinners':
             print('\n******************************************')
             print('Iterated weak Condorcet winners and losers')
-            print('!!!! Under development !!!!\n')
+            # print('!!!! Under development !!!!\n')
             from time import time
             from copy import deepcopy
             g = deepcopy(self)
-            #from outrankingDigraphs import BipolarOutrankingDigraph
-            print('Iterated first and last choice recommendations')
-            print('----------------------------------------------')
+            # print('Iterated first and last choice recommendations')
+            print('------------------------------------------')
             t0 = time()
             Med = g.valuationdomain['med']
             choiceVectors = []
             remainingActions = [x for x in g.actions]
+            posRanking = []
+            negRanking = []
             nl = len(remainingActions)
             Recursion = True
-            j=0
+            j=1
             while nl > 0 and Recursion:
                 g.actions = {}
                 for x in remainingActions:
@@ -9051,41 +9052,65 @@ class Digraph(object):
                 #resVec.showMembershipCharacteristics()
                 choiceVectors.append(resVec)
                 Recursion = False
-                removed = []
+                posremoved = []
+                negremoved = []
                 for i in range(nl):
                     x = remainingActions[i]
                     #print(j,x)
                     if resVec.membership[x] > Med:
-                        removed.append(x)
+                        posremoved.append((resVec.membership[x],x,j))
                         Recursion = True
                     elif resVec.membership[x] < Med:
-                        removed.append(x)
+                        negremoved.append((resVec.membership[x],x,j))
                         Recursion = True
                 if Recursion:
-                    for y in removed:
-                        remainingActions.remove(y)
+                    for y in posremoved:
+                        remainingActions.remove(y[1])
+                    for y in negremoved:
+                        remainingActions.remove(y[1])
                 nl = len(remainingActions)
+                posremoved.sort(reverse=True)
+                negremoved.sort(reverse=True)
+                posRanking = posRanking + posremoved
+                negRanking = negremoved + negRanking
                 j += 1
                 r = 1
-            result = []
-            for rv in choiceVectors:
-                rvres = []
-                for x in rv.support:
-                    rvres.append((rv.membership[x],x,r))
-                    rvres.sort(reverse=True)
-                result = result + rvres
-                r += 1
-            nr = len(result)
+            # result = []
+            # for rv in choiceVectors:
+            #    rvres = []
+            #    for x in rv.support:
+            #        rvres.append((rv.membership[x],x,r))
+            #        rvres.sort(reverse=True)
+            #    result = result + rvres
+            #    r += 1
+
+            # nr = len(result)
             maxsp = ' ' 
-            for k in range(nr):
-                if result[k][0] > Med:
-                    print("%s %d-choice: \'%s\' (%+.3f)" % ((result[k][2]*'  '),result[k][2],result[k][1],result[k][0]) )
-                    maxsp = result[k][2]*'  '
+            for ch in posRanking:
+                if ch[0] > Med:
+                    if ch[2] == 1:
+                        print("%s %drst-choice: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],ch[0]) )
+                    elif ch[2] == 2:
+                        print("%s %dnd-choice: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],ch[0]) )
+                    elif ch[2] == 3:
+                        print("%s %drd-choice: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],ch[0]) )
+                    else:
+                        print("%s %dth-choice: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],ch[0]) )
+
+                    maxsp = ch[2]*'  '
             for x in remainingActions:
-                print("%s undeterminate choice: \'%s\' (%+.3f)" % ((maxsp + '  '),x,0.0) )
-            for k in range(nr-1,0,-1):
-                if result[k][0] < Med:
-                    print("%s %d-reject: \'%s\' (%+.3f)" % ((result[k][2]*'  '),result[k][2],result[k][1],(-result[k][0])) )
+                print("%s undeterminate: \'%s\' (%+.3f)" % ((maxsp + '  '),x,0.0) )
+            for ch in negRanking:
+                if ch[0] < Med:
+                    if ch[2] == 1:
+                        print("%s %drst-reject: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],(-ch[0])) )
+                    elif ch[2] == 2:
+                        print("%s %dnd-reject: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],(-ch[0])) )
+                    elif ch[2] == 3:
+                        print("%s %drd-reject: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],(-ch[0])) )
+                    else:
+                        print("%s %dth-reject: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],(-ch[0])) )
+            
                            
                 # for x in rv.support:
                 #     if rv.membership[x] > Med:
@@ -9093,6 +9118,20 @@ class Digraph(object):
                 #     elif rv.membership[x] < Med:
                 #         print('%d-reject:' % (r) ,x,rv.membership[x])
                 # r += 1
+            print('-------------------------------------')
+            print('Criteria significance majority in brakets' )
+            print('Execution time: %.3f sec.' % (time() - t0) )
+
+            if ReturnRanking:
+                ranking = []
+                for ch in posRanking:
+                    ranking.append(ch[1])
+                for x in remainingActions:
+                    ranking.append(x)
+                for ch in negRanking:
+                    ranking.append(ch[1])
+            return ranking
+
         else:
             print('Error: method = "Bachet", "IteratedBachet", "Rubis" or "CondorcetWinners",  not "%s"' % method) 
         print('*************************************************')
@@ -15820,8 +15859,8 @@ if __name__ == "__main__":
     from randomDigraphs import *
     from decimal import Decimal, getcontext
     t = Random3ObjectivesPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=20,numberOfCriteria=13,
-                                            missingDataProbability=0.05,seed=700)
+                                 numberOfActions=15,numberOfCriteria=13,
+                                            missingDataProbability=0.05,seed=7)
                           
     #t = CircularPerformanceTableau()
     #print(getcontext().prec)
@@ -15829,9 +15868,9 @@ if __name__ == "__main__":
     print(g)
     print('Rubis BCR')
     g.showFirstChoiceRecommendation(Comments=True)
-    g.showChoiceRecommendation('IteratedCondorcetWinners')
+    ranking = g.showChoiceRecommendation('IteratedCondorcetWinners',ReturnRanking=True)
     g.showChoiceRecommendation('Bachet')
-
+    g.showHTMLPerformanceHeatmap(actionsList=ranking,Correlations=True)
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
