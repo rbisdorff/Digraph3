@@ -4545,37 +4545,41 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </figure>
 <p>In <a class="reference internal" href="#condorcetwinners2"><span class="std std-numref">Fig. 3.38</span></a> we see confirmed in the outranking relation table of <img class="math" src="_images/math/8fefdd03b16090f18d6f4be27fa80854c6750296.png" alt="G(X,R)"/> that alternatives <em>p2</em>, <em>p6</em> and <em>p5</em> are <em>more or less outranking</em> all the other alternatives whereas alternatives <em>p1</em>, <em>p7</em> and <em>p8</em> are <em>more or less outranked</em> by all the other alternatives.</p>
 <p>When a given digraph shows strict chordless outranking circuits it may however be the case that no Condorcet winners and/or losers can be detected, the resulting bvp-set not containing any positive and/or negative credibilities. Breaking in such a case all chordless outranking circuits at their weakest link transforms the strict outranking digraph in an acyclic digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the acyclic digraph. The <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeBpvCondorcetWinners" title="digraphs.Digraph.computeBpvCondorcetWinners"><code class="xref py py-meth docutils literal notranslate"><span class="pre">computeBpvCondorcetWinners()</span></code></a> method operates therefore by default on the acyclic strict version of a given outranking digraph.</p>
-<p>Now, weak Condorcet winners and losers give suitable first and last choice recommendations. The <a class="reference internal" href="techDoc.html#digraphs.Digraph.showChoiceRecommendation" title="digraphs.Digraph.showChoiceRecommendation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">showChoiceRecommendation()</span></code></a> method accepts therefore the ‘<em>CondortWinners</em>’ argument for showing indeed positive Condorcet winners as first choice and positive Condorcet losers as last choice recommendation as shown in <a class="reference internal" href="#condorcetwinners3"><span class="std std-numref">Listing 3.64</span></a> below.</p>
+<p>Now, weak Condorcet winners and losers give suitable first and last choice recommendations. The <a class="reference internal" href="techDoc.html#digraphs.Digraph.showChoiceRecommendation" title="digraphs.Digraph.showChoiceRecommendation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">showChoiceRecommendation()</span></code></a> method accepts therefore the ‘<em>IteratedCondortWinners</em>’ argument for showing recursively positive Condorcet winners as first choice and positive Condorcet losers as last choice recommendation as shown in <a class="reference internal" href="#condorcetwinners3"><span class="std std-numref">Listing 3.64</span></a> below.</p>
 <div class="literal-block-wrapper docutils container" id="condorcetwinners3">
-<div class="code-block-caption"><span class="caption-number">Listing 3.64 </span><span class="caption-text">Showing first and last choice recommendations from Condorcet winners bpv-set</span><a class="headerlink" href="#condorcetwinners3" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;CondorcetWinners&#39;</span><span class="p">)</span>
-</span><span class="linenos"> 2</span><span class="go"> First and last choice recommendations</span>
-<span class="linenos"> 3</span><span class="go"> -------------------------------------</span>
-<span class="linenos"> 4</span><span class="go">  First choice (Condorcet winners)</span>
-<span class="hll"><span class="linenos"> 5</span><span class="go">   &#39;p2&#39;: +0.22 (61.11%)</span>
-</span><span class="hll"><span class="linenos"> 6</span><span class="go">   &#39;p6&#39;: +0.19 (59.72%)</span>
-</span><span class="hll"><span class="linenos"> 7</span><span class="go">   &#39;p5&#39;: +0.03 (51.39%)</span>
-</span><span class="linenos"> 8</span><span class="go"> -------------------------------------</span>
-<span class="linenos"> 9</span><span class="go">  Last choice (Condorcet losers)</span>
-<span class="hll"><span class="linenos">10</span><span class="go">   &#39;p8&#39;: +0.17 (58.34%)</span>
-</span><span class="hll"><span class="linenos">11</span><span class="go">   &#39;p1&#39;: +0.14 (56.95%)</span>
-</span><span class="hll"><span class="linenos">12</span><span class="go">   &#39;p7&#39;: +0.14 (56.95%)</span>
-</span><span class="linenos">13</span><span class="go">  -------------------------------------</span>
-<span class="linenos">14</span><span class="go"> Execution time: 0.086 sec.</span>
-<span class="linenos">15</span><span class="go"> *****************************************</span>
-</pre></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.64 </span><span class="caption-text">Showing first and last choice recommendations from recursively iterated Condorcet winners bpv-sets</span><a class="headerlink" href="#condorcetwinners3" title="Link to this code"></a></div>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ranking</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;IteratedCondorcetWinners&#39;</span><span class="p">,</span>
+</span><span class="hll"><span class="linenos"> 2</span><span class="gp">... </span>                                      <span class="n">ReturnRanking</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span class="linenos"> 3</span><span class="go"> ******************************************</span>
+<span class="linenos"> 4</span><span class="go"> Iterated weak Condorcet winners and losers</span>
+<span class="linenos"> 5</span><span class="go"> ------------------------------------------</span>
+<span class="hll"><span class="linenos"> 6</span><span class="go">  1rst-choice: &#39;p2&#39; (+0.222)</span>
+</span><span class="hll"><span class="linenos"> 7</span><span class="go">  1rst-choice: &#39;p6&#39; (+0.194)</span>
+</span><span class="hll"><span class="linenos"> 8</span><span class="go">  1rst-choice: &#39;p5&#39; (+0.028)</span>
+</span><span class="hll"><span class="linenos"> 9</span><span class="go">    2nd-choice: &#39;p4&#39; (+1.000)</span>
+</span><span class="hll"><span class="linenos">10</span><span class="go">    2nd-choice: &#39;p9&#39; (+0.528)</span>
+</span><span class="hll"><span class="linenos">11</span><span class="go">    2nd-reject: &#39;p3&#39; (+0.528)</span>
+</span><span class="hll"><span class="linenos">12</span><span class="go">  1rst-reject: &#39;p7&#39; (+0.139)</span>
+</span><span class="hll"><span class="linenos">13</span><span class="go">  1rst-reject: &#39;p1&#39; (+0.139)</span>
+</span><span class="hll"><span class="linenos">14</span><span class="go">  1rst-reject: &#39;p8&#39; (+0.167)</span>
+</span><span class="linenos">15</span><span class="go"> -----------------------------------------</span>
+<span class="linenos">16</span><span class="go"> Criteria significance majority in brakets</span>
+<span class="linenos">17</span><span class="go"> Execution time: 0.026 sec.</span>
+<span class="linenos">18</span><span class="go"> *****************************************</span>
+<span class="linenos">19</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ranking</span>
+<span class="hll"><span class="linenos">20</span><span class="go"> [&#39;p2&#39;,&#39;p6&#39;,&#39;p5&#39;,&#39;p4&#39;,&#39;p9&#39;,&#39;p3&#39;,&#39;p7&#39;,&#39;p1&#39;,&#39;p8&#39;]</span>
+</span></pre></div>
 </div>
 </div>
-<p>The criteria significance majorities for each choice are indicated in brakets (see Lines 5-7,10-12).</p>
-<p>In the performance heatmap shown in <a class="reference internal" href="#condorcetwinnersheatmap"><span class="std std-numref">Fig. 3.39</span></a> we may verify the criteria significance majorities computed with the help of the epistemic fusion operators for each alternative.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">al</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;p2&#39;</span><span class="p">,</span><span class="s1">&#39;p6&#39;</span><span class="p">,</span><span class="s1">&#39;p5&#39;</span><span class="p">,</span><span class="s1">&#39;p3&#39;</span><span class="p">,</span><span class="s1">&#39;p4&#39;</span><span class="p">,</span><span class="s1">&#39;p9&#39;</span><span class="p">,</span><span class="s1">&#39;p1&#39;</span><span class="p">,</span><span class="s1">&#39;p7&#39;</span><span class="p">,</span><span class="s1">&#39;p8&#39;</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">al</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<p>The criteria significance majorities for each choice are indicated in brakets (see Lines 6-14). The <em>ReturnRanking</em> parameter provides the resulting linear ranking of the decision alternatives.</p>
+<p>In the performance heatmap shown in <a class="reference internal" href="#condorcetwinnersheatmap"><span class="std std-numref">Fig. 3.39</span></a> using the previously returned ranking, we may verify the criteria significance majorities computed with the help of the epistemic fusion operators for each alternative.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">ranking</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 <figure class="align-center" id="condorcetwinnersheatmap">
-<a class="reference internal image-reference" href="_images/condorcetWinnersHeatmap.png"><img alt="Verifying the quality of the Condorcet winners computation" src="_images/condorcetWinnersHeatmap.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/condorcetWinnersHeatmap.png"><img alt="Verifying the quality of the Condorcet winners and loosers recommendation" src="_images/condorcetWinnersHeatmap.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.39 </span><span class="caption-text">Performance heatmap of the bipolar-valued Condorcet winners and losers</span><a class="headerlink" href="#condorcetwinnersheatmap" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 3.39 </span><span class="caption-text">Performance heatmap ranked by iterated bipolar-valued Condorcet winners and losers</span><a class="headerlink" href="#condorcetwinnersheatmap" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>A result that gets confirmed with the ‘Rubis’ choice recommendation shown in <a class="reference internal" href="#condorcetwinners4"><span class="std std-numref">Listing 3.65</span></a> below.</p>
@@ -5735,7 +5739,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jun 29, 2026.
+      <span class="lastupdated">Last updated on Jun 30, 2026.
       </span></p>
   </div>
 

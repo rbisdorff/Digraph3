@@ -4741,44 +4741,48 @@ In :numref:`condorcetWinners2` we see confirmed in the outranking relation table
 
 When a given digraph shows strict chordless outranking circuits it may however be the case that no Condorcet winners and/or losers can be detected, the resulting bvp-set not containing any positive and/or negative credibilities. Breaking in such a case all chordless outranking circuits at their weakest link transforms the strict outranking digraph in an acyclic digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the acyclic digraph. The :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method operates therefore by default on the acyclic strict version of a given outranking digraph. 
 
-Now, weak Condorcet winners and losers give suitable first and last choice recommendations. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts therefore the '*CondortWinners*' argument for showing indeed positive Condorcet winners as first choice and positive Condorcet losers as last choice recommendation as shown in :numref:`CondorcetWinners3` below.
+Now, weak Condorcet winners and losers give suitable first and last choice recommendations. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts therefore the '*IteratedCondortWinners*' argument for showing recursively positive Condorcet winners as first choice and positive Condorcet losers as last choice recommendation as shown in :numref:`CondorcetWinners3` below.
 
 .. code-block:: pycon
-   :caption: Showing first and last choice recommendations from Condorcet winners bpv-set
+   :caption: Showing first and last choice recommendations from recursively iterated Condorcet winners bpv-sets
    :name: CondorcetWinners3
    :linenos:
-   :emphasize-lines: 1,5-7,10-12
+   :emphasize-lines: 1-2,6-14,20
 
-   >>> g.showChoiceRecommendation('CondorcetWinners')
-    First and last choice recommendations
-    -------------------------------------
-     First choice (Condorcet winners)
-      'p2': +0.22 (61.11%)
-      'p6': +0.19 (59.72%)
-      'p5': +0.03 (51.39%)
-    -------------------------------------
-     Last choice (Condorcet losers)
-      'p8': +0.17 (58.34%)
-      'p1': +0.14 (56.95%)
-      'p7': +0.14 (56.95%)
-     -------------------------------------
-    Execution time: 0.086 sec.
+   >>> ranking = g.showChoiceRecommendation('IteratedCondorcetWinners',
+   ...                                       ReturnRanking=True)
+    ******************************************
+    Iterated weak Condorcet winners and losers
+    ------------------------------------------
+     1rst-choice: 'p2' (+0.222)
+     1rst-choice: 'p6' (+0.194)
+     1rst-choice: 'p5' (+0.028)
+       2nd-choice: 'p4' (+1.000)
+       2nd-choice: 'p9' (+0.528)
+       2nd-reject: 'p3' (+0.528)
+     1rst-reject: 'p7' (+0.139)
+     1rst-reject: 'p1' (+0.139)
+     1rst-reject: 'p8' (+0.167)
+    -----------------------------------------
+    Criteria significance majority in brakets
+    Execution time: 0.026 sec.
     *****************************************
+   >>> ranking
+    ['p2','p6','p5','p4','p9','p3','p7','p1','p8']
 
-The criteria significance majorities for each choice are indicated in brakets (see Lines 5-7,10-12).
+The criteria significance majorities for each choice are indicated in brakets (see Lines 6-14). The *ReturnRanking* parameter provides the resulting linear ranking of the decision alternatives.
 
-In the performance heatmap shown in :numref:`condorcetWinnersHeatmap` we may verify the criteria significance majorities computed with the help of the epistemic fusion operators for each alternative.
+In the performance heatmap shown in :numref:`condorcetWinnersHeatmap` using the previously returned ranking, we may verify the criteria significance majorities computed with the help of the epistemic fusion operators for each alternative.
 
->>> al = ['p2','p6','p5','p3','p4','p9','p1','p7','p8']
->>> g.showHTMLPerformanceHeatmap(al,Correlations=True,colorLevels=5)
+>>> g.showHTMLPerformanceHeatmap(ranking,Correlations=True,colorLevels=5)
 
 .. figure:: condorcetWinnersHeatmap.png
    :name: condorcetWinnersHeatmap
    :width: 500 px
    :align: center
-   :alt: Verifying the quality of the Condorcet winners computation
+   :alt: Verifying the quality of the Condorcet winners and loosers recommendation
 
-   Performance heatmap of the bipolar-valued Condorcet winners and losers
+   Performance heatmap ranked by iterated bipolar-valued Condorcet winners and losers
 
 A result that gets confirmed with the 'Rubis' choice recommendation shown in :numref:`CondorcetWinners4` below.
 
