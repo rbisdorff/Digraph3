@@ -8941,6 +8941,7 @@ class Digraph(object):
                                 randomActionsList=False,
                                  # IteratedCondorcetWinners
                                 ReturnRanking=False,
+                                 Show=True, 
                                  ):
         """
         Generic choice recommender method.
@@ -9029,12 +9030,13 @@ class Digraph(object):
             print('Execution time: %.3f sec.' % (time() - t0) )
 
         elif method == 'IteratedCondorcetWinners':
-            print('\n******************************************')
-            print('Iterated weak Condorcet winners and losers')
+            if Show:
+                print('\n******************************************')
+                print('Iterated weak Condorcet winners and losers')
+                print('------------------------------------------')
             from time import time
             from copy import deepcopy
             g = deepcopy(self)
-            print('------------------------------------------')
             t0 = time()
             Med = g.valuationdomain['med']
             remainingActions = [x for x in g.actions]
@@ -9071,36 +9073,37 @@ class Digraph(object):
                 negRanking = negremoved + negRanking
                 j += 1
                 r = 1
-            # print out the choice recommendations  
-            maxsp = ' ' 
-            for ch in posRanking:
-                if ch[0] > Med:
-                    if ch[2] == 1:
-                        print("%s %drst-choice: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],ch[0]) )
-                    elif ch[2] == 2:
-                        print("%s %dnd-choice: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],ch[0]) )
-                    elif ch[2] == 3:
-                        print("%s %drd-choice: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],ch[0]) )
-                    else:
-                        print("%s %dth-choice: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],ch[0]) )
+            # print out the choice recommendations
+            if Show:
+                maxsp = ' ' 
+                for ch in posRanking:
+                    if ch[0] > Med:
+                        if ch[2] == 1:
+                            print("%s %drst-choice: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],ch[0]) )
+                        elif ch[2] == 2:
+                            print("%s %dnd-choice: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],ch[0]) )
+                        elif ch[2] == 3:
+                            print("%s %drd-choice: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],ch[0]) )
+                        else:
+                            print("%s %dth-choice: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],ch[0]) )
 
-                    maxsp = ch[2]*'  '
-            for x in remainingActions:
-                print("%s indeterminate: \'%s\' (%+.3f)" % ((maxsp + '  '),x,0.0) )
-            for ch in negRanking:
-                if ch[0] < Med:
-                    if ch[2] == 1:
-                        print("%s %drst-reject: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],(-ch[0])) )
-                    elif ch[2] == 2:
-                        print("%s %dnd-reject: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],(-ch[0])) )
-                    elif ch[2] == 3:
-                        print("%s %drd-reject: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],(-ch[0])) )
-                    else:
-                        print("%s %dth-reject: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],(-ch[0])) )
-            print('-----------------------------------------')
-            print('Criteria significance majority in brakets' )
-            print('Execution time: %.3f sec.' % (time() - t0) )
-            print('*****************************************')
+                maxsp = ch[2]*'  '
+                for x in remainingActions:
+                    print("%s indeterminate: \'%s\' (%+.3f)" % ((maxsp + '  '),x,0.0) )
+                for ch in negRanking:
+                    if ch[0] < Med:
+                        if ch[2] == 1:
+                            print("%s %drst-reject: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],(-ch[0])) )
+                        elif ch[2] == 2:
+                            print("%s %dnd-reject: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],(-ch[0])) )
+                        elif ch[2] == 3:
+                            print("%s %drd-reject: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],(-ch[0])) )
+                        else:
+                            print("%s %dth-reject: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],(-ch[0])) )
+                print('-----------------------------------------')
+                print('Criteria significance majority in brakets' )
+                print('Execution time: %.3f sec.' % (time() - t0) )
+                print('*****************************************')
 
             if ReturnRanking:
                 ranking = []

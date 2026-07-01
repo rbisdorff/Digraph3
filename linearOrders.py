@@ -1295,105 +1295,35 @@ class IteratedBachetRanking(LinearOrder):
             self.showRelationTable()
             print('Iterated Bachet ranking: ', self.iteratedBachetRanking)
 
-##class _OutFlowsOrder(LinearOrder):
-##    """
-##    instantiates the out flows Order from
-##    a given bipolar-valued Digraph instance
-##    """
-##    def __init__(self,other,coDual=False,Debug=False):
-##        """
-##        constructor for generating a linear order
-##        from a given other digraph following
-##        the out flows ordering rule
-##        """
-##
-##        #from copy import deepcopy
-##        from linearOrders import _OutFlowsOrder
-##        from collections import OrderedDict
-##        from time import time
-##        from operator import itemgetter
-##
-##        #timings
-##        tt = time()
-##        runTimes = OrderedDict()
-##        # prepare local variables
-##        if coDual:
-##            otherCoDual = CoDualDigraph(other)
-##            otherRelation = otherCoDual.relation
-####            if Debug:
-####                otherCoDual.showRelationTable()
-####                print(otherCoDual.valuationdomain)
-##        else:
-##            otherRelation = other.relation
-##        n = len(other.actions)
-##        actions = other.actions
-##        selfRelation = {}
-##        Min = Decimal('-1.0')
-##        Med = Decimal('0.0')
-##        Max = Decimal('1.0')
-##        valuationdomain = {'min': Min,
-##                           'med': Med,
-##                           'max': Max}
-##        runTimes['prepareLocals'] = time()-tt
-##        
-##        # compute net flows
-##        tnf = time()
-##        outFlows = []
-##        if other.valuationdomain['med'] == Med:
-##            for x in actions:
-##                xoutFlows = sum((otherRelation[x][y])\
-##                                 for y in actions)
-##                outFlows.append((xoutFlows,x))
-##        else:
-##            otherMax = other.valuationdomain['max']
-##            otherMin = other.valuationdomain['min']
-##            
-##            for x in actions:
-##                xoutFlows = sum((otherRelation[x][y])\
-##                                 for y in actions)
-##                outFlows.append((xoutFlows,x))
-##        # reversed sorting with keeping the actions initial ordering
-##        # in case of ties
-##        outFlows.sort(reverse=True,key=itemgetter(0))
-##        self.outFlows = outFlows
-####        if Debug:
-####            print(outFlows)
-##
-##        outFlowsRanking = [x[1] for x in outFlows]
-##        self.outFlowsRanking = outFlowsRanking
-##        outFlowsOrder = list(reversed(outFlowsRanking))
-##        self.outFlowsOrder = outFlowsOrder
-####        if Debug:
-####            print(self.outFlowsRanking)
-####            print(self.outFlowsOrder)
-##        runTimes['outFlows'] = time() - tnf
-##
-##        # init relation
-##        tr = time()
-##        for i in range(n):
-##            x = outFlowsRanking[i]
-##            selfRelation[x] = {}
-##            for j in range(n):
-##                y = outFlowsRanking[j]
-##                if i < j:
-##                    selfRelation[x][y] = Max
-##                else:
-##                    selfRelation[x][y] = Min
-##        runTimes['relation'] = time() - tr      
-####        if Debug:
-####            print(selfRelation) 
-##        self.name = other.name + '_ranked'        
-##        self.actions = actions
-##        self.order = n
-##        self.valuationdomain = valuationdomain
-##        self.relation = selfRelation
-##        self.gamma = self.gammaSets()
-##        self.notGamma = self.notGammaSets()
-##        runTimes['totalTime'] = time() - tt
-##        self.runTimes = runTimes
-####        if Debug:
-####            self.showRelationTable()
-####            self.showOrdering()
+#------------
+class IteratedBpvCondorcetWinnersRanking(Digraph):
+    """
+    Computes the linear ranking or order obtained from the
+    iterated bpv-sets of weak Condorcet winners and losers.
+    """
+    def __init__(self,other,Debug=False):
+        from copy import copy, deepcopy
+        from collections import OrderedDict
+        ranking = other.showChoiceRecommendation('IteratedCondorcetWinners',Show=False,ReturnRanking=True)
+        self.name = other.name + '_ranked'
+        self.condorcetRanking = ranking
+        self.condorcetOrder = [x for x in reversed(ranking)]
+        if Debug:
+            print(self.condorcetRanking)
+            print(self.condorcetOrder)
+        self.valuationdomain = copy(other.valuationdomain)
+        self.actions = copy(other.actions)
+        self.order = len(self.actions)
+        preRanking = []
+        for x in ranking:
+            preRanking.append([x])
+        if Debug:
+            print(preRanking)
+        self.relation = other.computePreRankingRelation(preRanking)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        if Debug:
+            self.showHTMLRelationTable(actionsList=ranking)
 
 #------------
 
@@ -2867,12 +2797,12 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
     Threading = False
-    res = open('test9CBPolRd50500Ctr.csv','w')
+    #res = open('test9CBPolRd50500Ctr.csv','w')
     #res = open('tes.csv','w')
-    res.write('"seed","nt","baptft","bapttt","bapfft","bapfff","cop","nf","ke"\n')
+    #res.write('"seed","nt","baptft","bapttt","bapfft","bapfff","cop","nf","ke"\n')
     sampleSize = 1
-    randomSize = 50
-    Polarised=True
+    #randomSize = 50
+    #Polarised=True
     #t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
     for sample in range(sampleSize):
         t0 = time()
@@ -2884,19 +2814,23 @@ if __name__ == "__main__":
         #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
         #t = PerformanceTableau('testLin')
         t = RandomCBPerformanceTableau(numberOfActions=9,
-                                       numberOfCriteria=13,seed=seed)
+                                        numberOfCriteria=13,seed=seed)
+        print(t)
         g = BipolarOutrankingDigraph(t)
-        triples = g.computeIntransitiveTriples()
-        nt = len(triples)
-        print(nt)
-        #g = RandomDigraph(order=7)
-        revba1 = [x for x in reversed(g.actions)]
-        ba1 = IteratedBachetRanking(g,CoDual=False,
-                                    Reversed=False,
-                                    randomActionsList=True,seed=1,
-                            #orderLimit=20,sampleSize=randomSize,
-                            Debug=False,
-                                    Comments=True,
+        print(g)
+        cr = IteratedBpvCondorcetWinnersRanking(g,Debug=True)
+        #print(cr)
+        # triples = g.computeIntransitiveTriples()
+        # nt = len(triples)
+        # print(nt)
+        # #g = RandomDigraph(order=7)
+        # revba1 = [x for x in reversed(g.actions)]
+        # ba1 = IteratedBachetRanking(g,CoDual=False,
+        #                             Reversed=False,
+        #                             randomActionsList=True,seed=1,
+        #                             #orderLimit=20,sampleSize=randomSize,
+        #                     Debug=False,
+        #                             Comments=True,
 ##                            actionsList=None,
 ##                            Polarised=Polarised,
 ##                            TriplesSorted=True,
@@ -2904,13 +2838,13 @@ if __name__ == "__main__":
 ##                            CoDualTriples=True,
 ##                            seed=seed,
 ##                            Logging=False,
-                            )
+##                            )
         #print(ba1)
-        corrba1 = g.computeRankingCorrelation(ba1.iteratedBachetRanking)
+        #corrba1 = g.computeRankingCorrelation(ba1.iteratedBachetRanking)
         #print('Smart polarised Bachet Ranking')
         #print('bap',ba1.bachetRanking,corrba1)
-        cop = CopelandRanking(g,Comments=False,Gamma=False)
-        corrcop = g.computeRankingCorrelation(cop.copelandRanking)
+        #cop = CopelandRanking(g,Comments=False,Gamma=False)
+        #corrcop = g.computeRankingCorrelation(cop.copelandRanking)
         #print('cop',cop.copelandRanking,corrcop)
 ##        wcop1 = _WeightedCopelandRanking(g,Comments=False,Debug=False)
 ##        print(wcop1.copelandRanking)
@@ -2922,11 +2856,11 @@ if __name__ == "__main__":
 ##        print(wcop2.copelandRanking)
 ##        corrwcop2 = g.computeRankingCorrelation(wcop2.copelandRanking)
 ##        print('wcop2',wcop2.copelandRanking,corrwcop2)
-        nf = NetFlowsRanking(g)
-        corrnf = g.computeRankingCorrelation(nf.netFlowsRanking)
+        #nf = NetFlowsRanking(g)
+        #corrnf = g.computeRankingCorrelation(nf.netFlowsRanking)
         #print('nf',nf.netFlowsRanking,corrnf)
-        ke = KemenyRanking(g,orderLimit=11)
-        corrke = g.computeRankingCorrelation(ke.kemenyRanking)
+        #ke = KemenyRanking(g,orderLimit=11)
+        #corrke = g.computeRankingCorrelation(ke.kemenyRanking)
         #print('ke',ke.kemenyRanking,corrke)
 ##        randomActions = [x for x in g.actions]
 ##        #print(randomActions)
@@ -2941,31 +2875,31 @@ if __name__ == "__main__":
 ##                            #actionsList=g.actions,
 ##                            )
         #print(ba2)
-        ba2 = BachetRanking(g,Debug=False,
-                            sampleSize=randomSize,
-                            Polarised=Polarised,
-                            TriplesSorted=True,
-                            Randomized=True,
-                            CoDualTriples=True,
-                            seed=seed)
-        corrba2 = g.computeRankingCorrelation(ba2.bachetRanking)
-        ba3 = BachetRanking(g,Debug=False,
-                            sampleSize=randomSize,
-                            Polarised=Polarised,
-                            TriplesSorted=False,
-                            Randomized=False,
-                            CoDualTriples=True,
-                            seed=seed)
-        corrba3 = g.computeRankingCorrelation(ba3.bachetRanking)
-        ba4 = BachetRanking(g,Debug=False,
-                            sampleSize=randomSize,
-                            Polarised=Polarised,
-                            TriplesSorted=False,
-                            Randomized=False,
-                            CoDualTriples=False,
-                            seed=seed)
-        print('run time:', time() -t0)
-        corrba4 = g.computeRankingCorrelation(ba4.bachetRanking)
+        # ba2 = BachetRanking(g,Debug=False,
+        #                     sampleSize=randomSize,
+        #                     Polarised=Polarised,
+        #                     TriplesSorted=True,
+        #                     Randomized=True,
+        #                     CoDualTriples=True,
+        #                     seed=seed)
+        # corrba2 = g.computeRankingCorrelation(ba2.bachetRanking)
+        # ba3 = BachetRanking(g,Debug=False,
+        #                     sampleSize=randomSize,
+        #                     Polarised=Polarised,
+        #                     TriplesSorted=False,
+        #                     Randomized=False,
+        #                     CoDualTriples=True,
+        #                     seed=seed)
+        # corrba3 = g.computeRankingCorrelation(ba3.bachetRanking)
+        # ba4 = BachetRanking(g,Debug=False,
+        #                     sampleSize=randomSize,
+        #                     Polarised=Polarised,
+        #                     TriplesSorted=False,
+        #                     Randomized=False,
+        #                     CoDualTriples=False,
+        #                     seed=seed)
+        # print('run time:', time() -t0)
+        # corrba4 = g.computeRankingCorrelation(ba4.bachetRanking)
         #print('Smart valued Bachet Ranking')
         #print('bav',ba2.bachetRanking,corrba2)
 ##        ba3 = ValuedBachetRanking(g,Comments=False,BestQualified=False,
@@ -2978,23 +2912,23 @@ if __name__ == "__main__":
         #print('banp',banp.correlation)
         #banv = ReflexiveBachetRanking(g,Polarised=False,Debug=False)
         #print('banv',banv.correlation)
-        print('%d,%d,%.4f,%.4f,%.4f,%.4f,%.4f,%.4f,%.4f\n' % (seed,nt,
-                                            corrba1['correlation'],
-                                            corrba2['correlation'],
-                                            corrba3['correlation'],
-                                               corrba4['correlation'],
-                                               corrcop['correlation'],
-                                               corrnf['correlation'],
-                                               corrke['correlation']) )
-        res.write('%d,%d,%.4f,%.4f,%.4f,%.4f,%.4f,%.4f,%.4f\n' % (seed,nt,
-                                            corrba1['correlation'],
-                                            corrba2['correlation'],
-                                            corrba3['correlation'],
-                                            corrba4['correlation'],
-                                            corrcop['correlation'],
-                                            corrnf['correlation'],
-                                            corrke['correlation']) )
-    res.close()
+    #     print('%d,%d,%.4f,%.4f,%.4f,%.4f,%.4f,%.4f,%.4f\n' % (seed,nt,
+    #                                         corrba1['correlation'],
+    #                                         corrba2['correlation'],
+    #                                         corrba3['correlation'],
+    #                                            corrba4['correlation'],
+    #                                            corrcop['correlation'],
+    #                                            corrnf['correlation'],
+    #                                            corrke['correlation']) )
+    #     res.write('%d,%d,%.4f,%.4f,%.4f,%.4f,%.4f,%.4f,%.4f\n' % (seed,nt,
+    #                                         corrba1['correlation'],
+    #                                         corrba2['correlation'],
+    #                                         corrba3['correlation'],
+    #                                         corrba4['correlation'],
+    #                                         corrcop['correlation'],
+    #                                         corrnf['correlation'],
+    #                                         corrke['correlation']) )
+    # res.close()
     
      
     print('*------------------*')
