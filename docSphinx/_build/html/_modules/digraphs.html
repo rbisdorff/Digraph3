@@ -10398,6 +10398,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
         <span class="kn">from</span> <span class="nn">bipolarValuedSets</span> <span class="kn">import</span> <span class="n">BpvSet</span>
+        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">scoredTuplesSort</span>
 <span class="c1">##        if CoDual:</span>
 <span class="c1">##            g = ~(-digraph)</span>
 <span class="c1">##        else:</span>
@@ -10444,7 +10445,8 @@
             <span class="n">kerVec</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">resvec</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">x</span><span class="p">))</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">res</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
-        <span class="n">kerVec</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1">#kerVec.sort(reverse=True)</span>
+        <span class="n">scoredTuplesSort</span><span class="p">(</span><span class="n">kerVec</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="n">nl</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">kerVec</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nl</span><span class="p">):</span>

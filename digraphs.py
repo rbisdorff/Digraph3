@@ -9723,6 +9723,7 @@ class Digraph(object):
         """
         from copy import deepcopy
         from bipolarValuedSets import BpvSet
+        from digraphsTools import scoredTuplesSort
 ##        if CoDual:
 ##            g = ~(-digraph)
 ##        else:
@@ -9769,7 +9770,8 @@ class Digraph(object):
             kerVec.append((resvec[x],x))
             if Debug:
                 print(x,res[x])
-        kerVec.sort(reverse=True)
+        #kerVec.sort(reverse=True)
+        scoredTuplesSort(kerVec,reverse=True)
         if Debug:
             nl = len(kerVec)
             for i in range(nl):

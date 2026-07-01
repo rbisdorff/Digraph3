@@ -4747,10 +4747,9 @@ Now, weak Condorcet winners and losers give suitable first and last choice recom
    :caption: Showing first and last choice recommendations from recursively iterated Condorcet winners bpv-sets
    :name: CondorcetWinners3
    :linenos:
-   :emphasize-lines: 1-2,6-14,20
+   :emphasize-lines: 1-2,6-14,19,21
 
-   >>> ranking = g.showChoiceRecommendation('IteratedCondorcetWinners',
-   ...                                       ReturnRanking=True)
+   >>> g.showChoiceRecommendation('IteratedCondorcetWinners')
     ******************************************
     Iterated weak Condorcet winners and losers
     ------------------------------------------
@@ -4767,14 +4766,16 @@ Now, weak Condorcet winners and losers give suitable first and last choice recom
     Criteria significance majority in brakets
     Execution time: 0.026 sec.
     *****************************************
-   >>> ranking
+   >>> from linearOrders import IteratedBpvCondorcetWinnersRanking
+   >>> cr = IteratedBpvCondorcetWinnersRanking(g)
+   >>> cr.condorcetRanking
     ['p2','p6','p5','p4','p9','p3','p7','p1','p8']
 
-The criteria significance majorities for each choice are indicated in brakets (see Lines 6-14). The *ReturnRanking* parameter provides the resulting linear ranking of the decision alternatives.
+The criteria significance majorities for each choice are indicated in brakets (see Lines 6-14). The choice recommendation makes apparent a linear ranking which may be computed with the :py:class:`linearOrders.IteratedBpvCondorcetWinnersRanking` class (see Lines 19 and 21).
 
-In the performance heatmap shown in :numref:`condorcetWinnersHeatmap` using the previously returned ranking, we may verify the criteria significance majorities computed with the help of the epistemic fusion operators for each alternative.
+In the performance heatmap shown in :numref:`condorcetWinnersHeatmap` using the previous *cr.condorcetRanking*, we may verify the quality of this ranking.
 
->>> g.showHTMLPerformanceHeatmap(ranking,Correlations=True,colorLevels=5)
+>>> g.showHTMLPerformanceHeatmap(cr.condorcetRanking,Correlations=True,colorLevels=5)
 
 .. figure:: condorcetWinnersHeatmap.png
    :name: condorcetWinnersHeatmap
