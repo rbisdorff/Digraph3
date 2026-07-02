@@ -4613,7 +4613,7 @@ In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunct
      s5:  +0.0000
      s4:  -0.4899
 
-Due to the commutativity of the numerical binary *max* and *min* operators, both :math:`\oplus` and :math:`\otimes` operators are **cummutative**. Mind however, that similarly to a mean or average operator, both epistemic fusion operators are not associative and, hence, not distributive one against the other.
+Due to the commutativity of the numerical binary *max* and *min* operators, both :math:`\oplus` and :math:`\otimes` operators are **cummutative**. Mind however, that similarly to a mean or average operator, both epistemic fusion operators are not associative and, hence, not distributive one against the other. In order to render results univocal, all positive and negative arguments are considered separately and both intermediate results are further processed as two single arguments.  
 
 Let :math:`\mathcal{S}(A)` denote the set of all possible bpv-sets that may be defined on a given finite set *A* of dimension *n*. Let :math:`\bf{0} \in \mathcal{S}(A)`  denote the completely indeterminate bpv-set, i.e :math:`r(a \in \bf{0}) \;=\; 0.0 , \; \forall \,a \in\, A`. It is worthwhile noticing that bpv-set :math:`\bf{0}` is the **neutral** element of the :math:`\oplus` operator. Similarly, bpv-set :math:`\bf{0}` is the **absorbent** element of the :math:`\otimes` operator. For any bpv-subset of *A*, the corresponding polarised --fully determined-- crisp subset is the **absorbent** element of the :math:`\oplus` and the **neutral** element of the :math:`\otimes` operator.
 
