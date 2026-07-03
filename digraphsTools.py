@@ -396,20 +396,34 @@ def omin(Med,L, Debug=False):
     np = len(termsPlus)
     nm = len(termsMinus)
     nn = len(termsNull)
-    if np > 0:
-        if nm > 0:
-            return Med
-        elif nn > 0:
-            return Med
-        else:
-            return min(termsPlus)
-    elif nm > 0:
-        if nn > 0:
-            return Med
-        else:
-            return max(termsMinus)
+    if np > 0 and nm == 0:
+##        if nm > 0:
+##            return Med
+##        elif nn > 0:
+##            return Med
+##        else:
+        return min(termsPlus)
+    elif nm > 0 and np == 0:
+##        if nn > 0:
+##            return Med
+##        else:
+        return max(termsMinus)
     else:
         return Med
+##    if np > 0:
+##        if nm > 0:
+##            return Med
+##        elif nn > 0:
+##            return Med
+##        else:
+##            return min(termsPlus)
+##    elif nm > 0:
+##        if nn > 0:
+##            return Med
+##        else:
+##            return max(termsMinus)
+##    else:
+##        return Med
 
 # generate all subsets of a given set E
 # Discrete Mathematics BINFO 1 course Lesson 2-sets

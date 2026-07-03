@@ -499,21 +499,35 @@
     <span class="n">np</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">termsPlus</span><span class="p">)</span>
     <span class="n">nm</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">termsMinus</span><span class="p">)</span>
     <span class="n">nn</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">termsNull</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">np</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">nm</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">Med</span>
-        <span class="k">elif</span> <span class="n">nn</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">Med</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">termsPlus</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">nm</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">nn</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">Med</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">termsMinus</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">nm</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="c1">##        if nm &gt; 0:</span>
+<span class="c1">##            return Med</span>
+<span class="c1">##        elif nn &gt; 0:</span>
+<span class="c1">##            return Med</span>
+<span class="c1">##        else:</span>
+        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">termsPlus</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">nm</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">np</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="c1">##        if nn &gt; 0:</span>
+<span class="c1">##            return Med</span>
+<span class="c1">##        else:</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">termsMinus</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Med</span></div>
 
+<span class="c1">##    if np &gt; 0:</span>
+<span class="c1">##        if nm &gt; 0:</span>
+<span class="c1">##            return Med</span>
+<span class="c1">##        elif nn &gt; 0:</span>
+<span class="c1">##            return Med</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            return min(termsPlus)</span>
+<span class="c1">##    elif nm &gt; 0:</span>
+<span class="c1">##        if nn &gt; 0:</span>
+<span class="c1">##            return Med</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            return max(termsMinus)</span>
+<span class="c1">##    else:</span>
+<span class="c1">##        return Med</span>
 
 <span class="c1"># generate all subsets of a given set E</span>
 <span class="c1"># Discrete Mathematics BINFO 1 course Lesson 2-sets</span>
@@ -1110,7 +1124,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jul 01, 2026.
+      <span class="lastupdated">Last updated on Jul 03, 2026.
       </span></p>
   </div>
 

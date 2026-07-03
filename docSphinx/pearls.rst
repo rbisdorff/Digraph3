@@ -4624,7 +4624,7 @@ Let :math:`\mathcal{S}(A)` denote the set of all possible bpv-sets that may be d
    :emphasize-lines: 4-8,10-14,16-20,22-26
 
    >>> O = RandomBpvSet(indeterminateness=1.0,elementNamePrefix='s')
-   >>> Xp = X.polarise(inSite=False)
+   >>> Xp = X.polarise(InSite=False)
    >>> (X.oplus(O)).showMembershipCharacteristics()
     s2:  +0.6949
     s3:  +0.5275
@@ -4727,7 +4727,7 @@ In the given random 3-objectives outranking digraph :math:`G(X,R)`, concerning t
 The individual bipolar-valued credibilities to '*be a weak Condorcet winner*' are computed as follows. For each individual alternative *x in X*, the conjunctive epistemic :math:`\otimes` fusion of the *outranking* credibility *R(x,y)* for all :math:`y \neq x` in *X* measures indeed the more or less *outranking power* of *x* and the conjunctive epistemic :math:`\otimes` fusion of the *not outranked* credibility *-R(y,x)*  for all :math:`y \neq x` in *X* measures the more or less *not outranked condition* of *x*. A disjunctive epistemic :math:`\oplus` fusion of both these measures delivers eventually the result. It is worthwhile noticing that the dual of this result gives by the way the bpv-set of the corresponding weak Condorcet losers.
 
    >>> g.showHTMLRelationTable(
-   ...            ['a2','a6','a5','a3','a4','a9','a1','a7','a8'])
+   ...            ['p2','p6','p5','p3','p4','p9','p1','p7','p8'])
 
 .. figure:: condorcetWinners.png
    :name: condorcetWinners2
