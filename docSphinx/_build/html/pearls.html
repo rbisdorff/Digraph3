@@ -4519,15 +4519,15 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="hll"><span class="linenos"> 5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bpvWinners</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">()</span>
 </span><span class="linenos"> 6</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bpvWinners</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
 <span class="linenos"> 7</span><span class="go"> Bipolar-valued weak Condorcet winners set</span>
-<span class="hll"><span class="linenos"> 8</span><span class="go">  p2:  +0.2222</span>
-</span><span class="hll"><span class="linenos"> 9</span><span class="go">  p6:  +0.1944</span>
-</span><span class="hll"><span class="linenos">10</span><span class="go">  p5:  +0.0278</span>
-</span><span class="linenos">11</span><span class="go">  p3:  +0.0000</span>
-<span class="linenos">12</span><span class="go">  p4:  +0.0000</span>
-<span class="linenos">13</span><span class="go">  p9:  +0.0000</span>
-<span class="hll"><span class="linenos">14</span><span class="go">  p1:  -0.1389</span>
-</span><span class="hll"><span class="linenos">15</span><span class="go">  p7:  -0.1389</span>
-</span><span class="hll"><span class="linenos">16</span><span class="go">  p8:  -0.1667</span>
+<span class="hll"><span class="linenos"> 8</span><span class="go">  p2:  +0.22</span>
+</span><span class="hll"><span class="linenos"> 9</span><span class="go">  p6:  +0.19</span>
+</span><span class="hll"><span class="linenos">10</span><span class="go">  p5:  +0.03</span>
+</span><span class="linenos">11</span><span class="go">  p3:  +0.00</span>
+<span class="linenos">12</span><span class="go">  p4:  +0.00</span>
+<span class="linenos">13</span><span class="go">  p9:  +0.00</span>
+<span class="hll"><span class="linenos">14</span><span class="go">  p1:  -0.14</span>
+</span><span class="hll"><span class="linenos">15</span><span class="go">  p7:  -0.14</span>
+</span><span class="hll"><span class="linenos">16</span><span class="go">  p8:  -0.17</span>
 </span></pre></div>
 </div>
 </div>
@@ -4540,27 +4540,27 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <figure class="align-center" id="condorcetwinners2">
 <a class="reference internal image-reference" href="_images/condorcetWinners.png"><img alt="A random outranking relation table" src="_images/condorcetWinners.png" style="width: 300px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.38 </span><span class="caption-text">A random outranking relation table</span><a class="headerlink" href="#condorcetwinners2" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 3.38 </span><span class="caption-text">A random strict outranking relation table</span><a class="headerlink" href="#condorcetwinners2" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>In <a class="reference internal" href="#condorcetwinners2"><span class="std std-numref">Fig. 3.38</span></a> we see confirmed in the outranking relation table of <img class="math" src="_images/math/8fefdd03b16090f18d6f4be27fa80854c6750296.png" alt="G(X,R)"/> that alternatives <em>p2</em>, <em>p6</em> and <em>p5</em> are <em>weakly more or less outranking</em> all the other alternatives whereas alternatives <em>p1</em>, <em>p7</em> and <em>p8</em> are <em>weakly more or less outranked</em> by all the other alternatives.</p>
+<p>In <a class="reference internal" href="#condorcetwinners2"><span class="std std-numref">Fig. 3.38</span></a> we see confirmed in the strict outranking relation table of <img class="math" src="_images/math/8fefdd03b16090f18d6f4be27fa80854c6750296.png" alt="G(X,R)"/> that alternatives <em>p2</em>, <em>p6</em> and <em>p5</em> are <em>weakly more or less outranking</em> or <em>not more or less outranked</em> by all the other alternatives whereas alternatives <em>p1</em>, <em>p7</em> and <em>p8</em> are <em>weakly more or less outranked</em> by all the other alternatives.</p>
 <p>When a given digraph shows strict chordless outranking circuits it may however be the case that no Condorcet winners and/or losers can be detected, the resulting bvp-set not containing any positive and/or negative credibilities. Breaking in such a case all chordless outranking circuits at their weakest link transforms the strict outranking digraph in an acyclic digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the acyclic digraph. The <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeBpvCondorcetWinners" title="digraphs.Digraph.computeBpvCondorcetWinners"><code class="xref py py-meth docutils literal notranslate"><span class="pre">computeBpvCondorcetWinners()</span></code></a> method operates therefore by default on the acyclic strict version of a given outranking digraph.</p>
-<p>Now, weak Condorcet winners and losers give suitable first and last choice recommendations. The <a class="reference internal" href="techDoc.html#digraphs.Digraph.showChoiceRecommendation" title="digraphs.Digraph.showChoiceRecommendation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">showChoiceRecommendation()</span></code></a> method accepts therefore the ‘<em>IteratedCondortWinners</em>’ argument for showing recursively positive Condorcet winners as first choice and positive Condorcet losers as last choice recommendation as shown in <a class="reference internal" href="#condorcetwinners3"><span class="std std-numref">Listing 3.64</span></a> below.</p>
+<p>Now, weak Condorcet winners and losers give suitable first and last choice recommendations. The <a class="reference internal" href="techDoc.html#digraphs.Digraph.showChoiceRecommendation" title="digraphs.Digraph.showChoiceRecommendation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">showChoiceRecommendation()</span></code></a> method accepts therefore the ‘<em>IteratedCondortWinners</em>’ argument for showing recursively positive weak Condorcet winners as first choice and positive weak Condorcet losers as last choice recommendation as shown in <a class="reference internal" href="#condorcetwinners3"><span class="std std-numref">Listing 3.64</span></a> below.</p>
 <div class="literal-block-wrapper docutils container" id="condorcetwinners3">
-<div class="code-block-caption"><span class="caption-number">Listing 3.64 </span><span class="caption-text">Showing first and last choice recommendations from recursively iterated Condorcet winners bpv-sets</span><a class="headerlink" href="#condorcetwinners3" title="Link to this code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.64 </span><span class="caption-text">Showing first and last choice recommendations from recursively iterated weak Condorcet winners bpv-sets</span><a class="headerlink" href="#condorcetwinners3" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;IteratedCondorcetWinners&#39;</span><span class="p">)</span>
 </span><span class="hll"><span class="linenos"> 2</span><span class="go"> ******************************************</span>
 </span><span class="linenos"> 3</span><span class="go"> Iterated weak Condorcet winners and losers</span>
 <span class="linenos"> 4</span><span class="go"> ------------------------------------------</span>
-<span class="linenos"> 5</span><span class="go">  1rst-choice: &#39;p2&#39; (+0.222)</span>
-<span class="hll"><span class="linenos"> 6</span><span class="go">  1rst-choice: &#39;p6&#39; (+0.194)</span>
-</span><span class="hll"><span class="linenos"> 7</span><span class="go">  1rst-choice: &#39;p5&#39; (+0.028)</span>
-</span><span class="hll"><span class="linenos"> 8</span><span class="go">    2nd-choice: &#39;p4&#39; (+1.000)</span>
-</span><span class="hll"><span class="linenos"> 9</span><span class="go">    2nd-choice: &#39;p9&#39; (+0.528)</span>
-</span><span class="hll"><span class="linenos">10</span><span class="go">    2nd-reject: &#39;p3&#39; (+0.528)</span>
-</span><span class="hll"><span class="linenos">11</span><span class="go">  1rst-reject: &#39;p7&#39; (+0.139)</span>
-</span><span class="hll"><span class="linenos">12</span><span class="go">  1rst-reject: &#39;p1&#39; (+0.139)</span>
-</span><span class="hll"><span class="linenos">13</span><span class="go">  1rst-reject: &#39;p8&#39; (+0.167)</span>
+<span class="linenos"> 5</span><span class="go">  1rst-choice: &#39;p2&#39; (+0.22)</span>
+<span class="hll"><span class="linenos"> 6</span><span class="go">  1rst-choice: &#39;p6&#39; (+0.19)</span>
+</span><span class="hll"><span class="linenos"> 7</span><span class="go">  1rst-choice: &#39;p5&#39; (+0.03)</span>
+</span><span class="hll"><span class="linenos"> 8</span><span class="go">    2nd-choice: &#39;p4&#39; (+1.00)</span>
+</span><span class="hll"><span class="linenos"> 9</span><span class="go">    2nd-choice: &#39;p9&#39; (+0.53)</span>
+</span><span class="hll"><span class="linenos">10</span><span class="go">    2nd-reject: &#39;p3&#39; (+0.53)</span>
+</span><span class="hll"><span class="linenos">11</span><span class="go">  1rst-reject: &#39;p7&#39; (+0.14)</span>
+</span><span class="hll"><span class="linenos">12</span><span class="go">  1rst-reject: &#39;p1&#39; (+0.14)</span>
+</span><span class="hll"><span class="linenos">13</span><span class="go">  1rst-reject: &#39;p8&#39; (+0.17)</span>
 </span><span class="hll"><span class="linenos">14</span><span class="go"> -----------------------------------------</span>
 </span><span class="linenos">15</span><span class="go"> Criteria significance majority in brakets</span>
 <span class="linenos">16</span><span class="go"> Execution time: 0.026 sec.</span>
@@ -4613,7 +4613,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>First and last choice recommendation perfectly correspond to the weak Condorcet winners and loosers as computed before in <a class="reference internal" href="#condorcetwinners1"><span class="std std-numref">Listing 3.63</span></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The <em>edges</em> attribute of bipolar-valued graphs is also a bpv-set, where the support is given by the non-oriented pairs of the graph’s vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership characteristic vectors from the <em>Rubis</em> best choice computation <a class="reference internal" href="#bis-2006-1p" id="id60"><span>[BIS-2006-1p]</span></a>. This is the topic of the next tutorial.</p>
+<p>The <em>edges</em> attribute of a bipolar-valued graph is also a bpv-set, where the support is given by the non-oriented pairs of the graph’s vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership characteristic vectors from the <em>Rubis</em> best choice computation <a class="reference internal" href="#bis-2006-1p" id="id60"><span>[BIS-2006-1p]</span></a>. This is the topic of the next tutorial.</p>
 </div>
 <p>Back to <a class="reference internal" href="#pearls-label"><span class="std std-ref">Content Table</span></a></p>
 <hr class="docutils" />

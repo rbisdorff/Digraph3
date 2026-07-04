@@ -4712,15 +4712,15 @@ The relation of a given outranking digraph :math:`G(X,R)` is an evident example 
    >>> bpvWinners = g.computeBpvCondorcetWinners()
    >>> bpvWinners.showMembershipCharacteristics()
     Bipolar-valued weak Condorcet winners set
-     p2:  +0.2222
-     p6:  +0.1944
-     p5:  +0.0278
-     p3:  +0.0000
-     p4:  +0.0000
-     p9:  +0.0000
-     p1:  -0.1389
-     p7:  -0.1389
-     p8:  -0.1667
+     p2:  +0.22
+     p6:  +0.19
+     p5:  +0.03
+     p3:  +0.00
+     p4:  +0.00
+     p9:  +0.00
+     p1:  -0.14
+     p7:  -0.14
+     p8:  -0.17
 
 In the given random 3-objectives outranking digraph :math:`G(X,R)`, concerning the performances of 9 public policies with respect to 13 performance criteria, three alternatives, *p2*, *p6* and *p5* are positive weak Condorcet winners, whereas alternatives *p1*, *p7* and *p8* are negative weak Condorcet winners, that is a positive weak Condorcet losers (see Lines 8-10 and 14-16 above).
 
@@ -4735,16 +4735,16 @@ The individual bipolar-valued credibilities to '*be a weak Condorcet winner*' ar
    :align: center
    :alt: A random outranking relation table
 
-   A random outranking relation table
+   A random strict outranking relation table
 
-In :numref:`condorcetWinners2` we see confirmed in the outranking relation table of :math:`G(X,R)` that alternatives *p2*, *p6* and *p5* are *weakly more or less outranking* all the other alternatives whereas alternatives *p1*, *p7* and *p8* are *weakly more or less outranked* by all the other alternatives.
+In :numref:`condorcetWinners2` we see confirmed in the strict outranking relation table of :math:`G(X,R)` that alternatives *p2*, *p6* and *p5* are *weakly more or less outranking* or *not more or less outranked* by all the other alternatives whereas alternatives *p1*, *p7* and *p8* are *weakly more or less outranked* by all the other alternatives.
 
 When a given digraph shows strict chordless outranking circuits it may however be the case that no Condorcet winners and/or losers can be detected, the resulting bvp-set not containing any positive and/or negative credibilities. Breaking in such a case all chordless outranking circuits at their weakest link transforms the strict outranking digraph in an acyclic digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the acyclic digraph. The :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method operates therefore by default on the acyclic strict version of a given outranking digraph. 
 
-Now, weak Condorcet winners and losers give suitable first and last choice recommendations. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts therefore the '*IteratedCondortWinners*' argument for showing recursively positive Condorcet winners as first choice and positive Condorcet losers as last choice recommendation as shown in :numref:`CondorcetWinners3` below.
+Now, weak Condorcet winners and losers give suitable first and last choice recommendations. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts therefore the '*IteratedCondortWinners*' argument for showing recursively positive weak Condorcet winners as first choice and positive weak Condorcet losers as last choice recommendation as shown in :numref:`CondorcetWinners3` below.
 
 .. code-block:: pycon
-   :caption: Showing first and last choice recommendations from recursively iterated Condorcet winners bpv-sets
+   :caption: Showing first and last choice recommendations from recursively iterated weak Condorcet winners bpv-sets
    :name: CondorcetWinners3
    :linenos:
    :emphasize-lines: 1-2,6-14,19,21
@@ -4753,15 +4753,15 @@ Now, weak Condorcet winners and losers give suitable first and last choice recom
     ******************************************
     Iterated weak Condorcet winners and losers
     ------------------------------------------
-     1rst-choice: 'p2' (+0.222)
-     1rst-choice: 'p6' (+0.194)
-     1rst-choice: 'p5' (+0.028)
-       2nd-choice: 'p4' (+1.000)
-       2nd-choice: 'p9' (+0.528)
-       2nd-reject: 'p3' (+0.528)
-     1rst-reject: 'p7' (+0.139)
-     1rst-reject: 'p1' (+0.139)
-     1rst-reject: 'p8' (+0.167)
+     1rst-choice: 'p2' (+0.22)
+     1rst-choice: 'p6' (+0.19)
+     1rst-choice: 'p5' (+0.03)
+       2nd-choice: 'p4' (+1.00)
+       2nd-choice: 'p9' (+0.53)
+       2nd-reject: 'p3' (+0.53)
+     1rst-reject: 'p7' (+0.14)
+     1rst-reject: 'p1' (+0.14)
+     1rst-reject: 'p8' (+0.17)
     -----------------------------------------
     Criteria significance majority in brakets
     Execution time: 0.026 sec.
@@ -4817,7 +4817,7 @@ A result that gets confirmed with the 'Rubis' choice recommendation shown in :nu
 
 First and last choice recommendation perfectly correspond to the weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1`.
 
-.. note:: The *edges* attribute of bipolar-valued graphs is also a bpv-set, where the support is given by the non-oriented pairs of the graph's vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership characteristic vectors from the *Rubis* best choice computation [BIS-2006-1p]_. This is the topic of the next tutorial.
+.. note:: The *edges* attribute of a bipolar-valued graph is also a bpv-set, where the support is given by the non-oriented pairs of the graph's vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership characteristic vectors from the *Rubis* best choice computation [BIS-2006-1p]_. This is the topic of the next tutorial.
 
 Back to :ref:`Content Table <Pearls-label>`
 
