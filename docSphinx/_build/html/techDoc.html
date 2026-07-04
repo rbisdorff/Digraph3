@@ -1203,6 +1203,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.strip"><code class="docutils literal notranslate"><span class="pre">BpvSet.strip()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.union"><code class="docutils literal notranslate"><span class="pre">BpvSet.union()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.update"><code class="docutils literal notranslate"><span class="pre">BpvSet.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bipolarValuedSets.BpvSet.wotimes"><code class="docutils literal notranslate"><span class="pre">BpvSet.wotimes()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#bipolarValuedSets.RandomBpvSet"><code class="docutils literal notranslate"><span class="pre">RandomBpvSet</span></code></a></li>
@@ -12965,7 +12966,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <dl class="py method">
 <dt class="sig sig-object py" id="bipolarValuedSets.BpvSet.otimes">
 <span class="sig-name descname"><span class="pre">otimes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bipolarValuedSets.html#BpvSet.otimes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bipolarValuedSets.BpvSet.otimes" title="Link to this definition"></a></dt>
-<dd><p>Returns the disjunctive fusion of self and other</p>
+<dd><p>Returns the conjunctive fusion of self and other</p>
 </dd></dl>
 
 <dl class="py method">
@@ -13021,6 +13022,13 @@ If Strict is True, cutLevel is stripped !</p>
 <dt class="sig sig-object py" id="bipolarValuedSets.BpvSet.update">
 <span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bipolarValuedSets.html#BpvSet.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bipolarValuedSets.BpvSet.update" title="Link to this definition"></a></dt>
 <dd><p>Return the union of X and Y</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bipolarValuedSets.BpvSet.wotimes">
+<span class="sig-name descname"><span class="pre">wotimes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bipolarValuedSets.html#BpvSet.wotimes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bipolarValuedSets.BpvSet.wotimes" title="Link to this definition"></a></dt>
+<dd><p>Returns the weak conjunctive fusion of self and other
+by ignoring the indeterminate terms</p>
 </dd></dl>
 
 </dd></dl>
@@ -15393,7 +15401,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jul 03, 2026.
+      <span class="lastupdated">Last updated on Jul 04, 2026.
       </span></p>
   </div>
 

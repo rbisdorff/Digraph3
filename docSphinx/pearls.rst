@@ -4724,10 +4724,10 @@ The relation of a given outranking digraph :math:`G(X,R)` is an evident example 
 
 In the given random 3-objectives outranking digraph :math:`G(X,R)`, concerning the performances of 9 public policies with respect to 13 performance criteria, three alternatives, *p2*, *p6* and *p5* are positive weak Condorcet winners, whereas alternatives *p1*, *p7* and *p8* are negative weak Condorcet winners, that is a positive weak Condorcet losers (see Lines 8-10 and 14-16 above).
 
-The individual bipolar-valued credibilities to '*be a weak Condorcet winner*' are computed as follows. For each individual alternative *x in X*, the conjunctive epistemic :math:`\otimes` fusion of the *outranking* credibility *R(x,y)* for all :math:`y \neq x` in *X* measures indeed the more or less *outranking power* of *x* and the conjunctive epistemic :math:`\otimes` fusion of the *not outranked* credibility *-R(y,x)*  for all :math:`y \neq x` in *X* measures the more or less *not outranked condition* of *x*. A disjunctive epistemic :math:`\oplus` fusion of both these measures delivers eventually the result. It is worthwhile noticing that the dual of this result gives by the way the bpv-set of the corresponding weak Condorcet losers.
+The individual bipolar-valued credibilities to '*be a weak Condorcet winner*' are computed as follows. For each individual alternative *x in X*, the weak conjunctive epistemic :py:meth:`bipolarValuedSets.BpvSet.wotimes` fusion of the *outranking* credibility *R(x,y)* for all :math:`y \neq x` in *X* measures indeed the more or less *weak outranking power* of *x* and the weak conjunctive epistemic *wotimes* fusion of the *not outranked* credibility *-R(y,x)*  for all :math:`y \neq x` in *X* measures the more or less *weakly not outranked condition* of *x* [28]_. A disjunctive epistemic :math:`\oplus` fusion of both these measures delivers eventually the result. It is worthwhile noticing that the dual of this result gives by the way the bpv-set of the corresponding weak Condorcet losers.
 
-   >>> g.showHTMLRelationTable(
-   ...            ['p2','p6','p5','p3','p4','p9','p1','p7','p8'])
+   >>> (~(-g)).showHTMLRelationTable(
+   ...    actionsList=['p2','p6','p5','p3','p4','p9','p1','p7','p8'])
 
 .. figure:: condorcetWinners.png
    :name: condorcetWinners2
@@ -4737,7 +4737,7 @@ The individual bipolar-valued credibilities to '*be a weak Condorcet winner*' ar
 
    A random outranking relation table
 
-In :numref:`condorcetWinners2` we see confirmed in the outranking relation table of :math:`G(X,R)` that alternatives *p2*, *p6* and *p5* are *more or less outranking* all the other alternatives whereas alternatives *p1*, *p7* and *p8* are *more or less outranked* by all the other alternatives.
+In :numref:`condorcetWinners2` we see confirmed in the outranking relation table of :math:`G(X,R)` that alternatives *p2*, *p6* and *p5* are *weakly more or less outranking* all the other alternatives whereas alternatives *p1*, *p7* and *p8* are *weakly more or less outranked* by all the other alternatives.
 
 When a given digraph shows strict chordless outranking circuits it may however be the case that no Condorcet winners and/or losers can be detected, the resulting bvp-set not containing any positive and/or negative credibilities. Breaking in such a case all chordless outranking circuits at their weakest link transforms the strict outranking digraph in an acyclic digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the acyclic digraph. The :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method operates therefore by default on the acyclic strict version of a given outranking digraph. 
 
@@ -5967,6 +5967,8 @@ Appendix
 .. [26] *Balanced ternary optical* HPC designs have recently gained in China a lot of attention [JIN-2003]_. Compared to classical HPC or 'dreamed' quantum computers, balanced ternary based optical computer systems provide indeed many technical and computational advantages. Much less electrical energy required, no water cooling, millions of optical trits may be easily assembled, faithful ultra high speed read and write access, etc.
 
 .. [27] https://en.wikipedia.org/wiki/Grover%27s_algorithm
+
+.. [28] The weak conjunctive epistemic fusion operator ignores the indeterminate terms. The empty bvp-set becomes here a neutral argument.
 
 .. raw:: latex
 

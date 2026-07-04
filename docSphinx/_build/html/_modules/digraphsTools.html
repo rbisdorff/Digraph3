@@ -499,35 +499,21 @@
     <span class="n">np</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">termsPlus</span><span class="p">)</span>
     <span class="n">nm</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">termsMinus</span><span class="p">)</span>
     <span class="n">nn</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">termsNull</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">np</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">nm</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="c1">##        if nm &gt; 0:</span>
-<span class="c1">##            return Med</span>
-<span class="c1">##        elif nn &gt; 0:</span>
-<span class="c1">##            return Med</span>
-<span class="c1">##        else:</span>
-        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">termsPlus</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">nm</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">np</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="c1">##        if nn &gt; 0:</span>
-<span class="c1">##            return Med</span>
-<span class="c1">##        else:</span>
-        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">termsMinus</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">nm</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Med</span>
+        <span class="k">elif</span> <span class="n">nn</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Med</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">termsPlus</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">nm</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">nn</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Med</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">termsMinus</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Med</span></div>
 
-<span class="c1">##    if np &gt; 0:</span>
-<span class="c1">##        if nm &gt; 0:</span>
-<span class="c1">##            return Med</span>
-<span class="c1">##        elif nn &gt; 0:</span>
-<span class="c1">##            return Med</span>
-<span class="c1">##        else:</span>
-<span class="c1">##            return min(termsPlus)</span>
-<span class="c1">##    elif nm &gt; 0:</span>
-<span class="c1">##        if nn &gt; 0:</span>
-<span class="c1">##            return Med</span>
-<span class="c1">##        else:</span>
-<span class="c1">##            return max(termsMinus)</span>
-<span class="c1">##    else:</span>
-<span class="c1">##        return Med</span>
 
 <span class="c1"># generate all subsets of a given set E</span>
 <span class="c1"># Discrete Mathematics BINFO 1 course Lesson 2-sets</span>
@@ -1057,14 +1043,14 @@
     <span class="c1">#     print(&#39;group&#39;,i+1, splitIndex[i])</span>
     <span class="c1">#     #for j in range(splitIndex[i][0],splitIndex[i][1]):</span>
     <span class="c1">#     #    print(j)</span>
-    <span class="n">indexList</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>
-    <span class="n">q</span> <span class="o">=</span> <span class="mi">12</span>
-    <span class="n">splitIndex</span> <span class="o">=</span> <span class="n">qtilingIndexList</span><span class="p">(</span><span class="n">indexList</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">splitIndex</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">splitIndex</span><span class="p">)):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">splitIndex</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-        <span class="c1">#for j in range(splitIndex[i][0],splitIndex[i][1]):</span>
-        <span class="c1">#    print(j)</span>
+<span class="c1">##    indexList = range(100000)</span>
+<span class="c1">##    q = 12</span>
+<span class="c1">##    splitIndex = qtilingIndexList(indexList,q,Comments=True)</span>
+<span class="c1">##    print(splitIndex)</span>
+<span class="c1">##    for i in range(len(splitIndex)):</span>
+<span class="c1">##        print(&#39;group&#39;,i+1, splitIndex[i])</span>
+<span class="c1">##        #for j in range(splitIndex[i][0],splitIndex[i][1]):</span>
+<span class="c1">##        #    print(j)</span>
 
 
 <span class="c1">##    seqA = generateRandomSequence(10)</span>
@@ -1090,23 +1076,23 @@
     <span class="c1"># print(l)</span>
     <span class="c1"># scoredTuplesSort(l,reverse=True)</span>
     <span class="c1"># print(l)</span>
-<span class="c1">##    from randomDigraphs import *</span>
-<span class="c1">##    g1 = RandomValuationDigraph(order=5,seed=1)</span>
-<span class="c1">##    g2 = RandomValuationDigraph(order=5,seed=2)</span>
-<span class="c1">##    g3 = RandomValuationDigraph(order=5,seed=3)</span>
-<span class="c1">##    from digraphs import FusionLDigraph</span>
-<span class="c1">##    #fga = FusionLDigraph([g1,g2,g3],weights=None,operator=&#39;o-average&#39;)</span>
-<span class="c1">##    g1.showRelationTable()</span>
-<span class="c1">##    g2.showRelationTable()</span>
-<span class="c1">##    g3.showRelationTable()</span>
-<span class="c1">##    fga = FusionLDigraph([g1,g2,g3],weights=None,operator=&#39;o-max&#39;)</span>
-<span class="c1">##    fga.showRelationTable()</span>
-<span class="c1">##    fga = FusionLDigraph([g1,g2,g3],weights=None,operator=&#39;o-min&#39;)</span>
-<span class="c1">##    fga.showRelationTable()</span>
-<span class="c1">##    fga = FusionLDigraph([g1,g2,g3],weights=None,operator=&#39;o-average&#39;)</span>
-<span class="c1">##    fga.showRelationTable()</span>
-<span class="c1">##    fga = FusionLDigraph([g1,g2,g3],weights=[1,2,3],operator=&#39;o-average&#39;)</span>
-<span class="c1">##    fga.showRelationTable()</span>
+    <span class="kn">from</span> <span class="nn">randomDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="n">g1</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">g2</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">g3</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">FusionLDigraph</span>
+    <span class="c1">#fga = FusionLDigraph([g1,g2,g3],weights=None,operator=&#39;o-average&#39;)</span>
+    <span class="n">g1</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+    <span class="n">g2</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+    <span class="n">g3</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+    <span class="n">fga</span> <span class="o">=</span> <span class="n">FusionLDigraph</span><span class="p">([</span><span class="n">g1</span><span class="p">,</span><span class="n">g2</span><span class="p">,</span><span class="n">g3</span><span class="p">],</span><span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
+    <span class="n">fga</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+    <span class="n">fga</span> <span class="o">=</span> <span class="n">FusionLDigraph</span><span class="p">([</span><span class="n">g1</span><span class="p">,</span><span class="n">g2</span><span class="p">,</span><span class="n">g3</span><span class="p">],</span><span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s1">&#39;o-min&#39;</span><span class="p">)</span>
+    <span class="n">fga</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+    <span class="n">fga</span> <span class="o">=</span> <span class="n">FusionLDigraph</span><span class="p">([</span><span class="n">g1</span><span class="p">,</span><span class="n">g2</span><span class="p">,</span><span class="n">g3</span><span class="p">],</span><span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s1">&#39;o-average&#39;</span><span class="p">)</span>
+    <span class="n">fga</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+    <span class="n">fga</span> <span class="o">=</span> <span class="n">FusionLDigraph</span><span class="p">([</span><span class="n">g1</span><span class="p">,</span><span class="n">g2</span><span class="p">,</span><span class="n">g3</span><span class="p">],</span><span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span><span class="n">operator</span><span class="o">=</span><span class="s1">&#39;o-average&#39;</span><span class="p">)</span>
+    <span class="n">fga</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
 
              
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
@@ -1124,7 +1110,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jul 03, 2026.
+      <span class="lastupdated">Last updated on Jul 04, 2026.
       </span></p>
   </div>
 

@@ -396,34 +396,20 @@ def omin(Med,L, Debug=False):
     np = len(termsPlus)
     nm = len(termsMinus)
     nn = len(termsNull)
-    if np > 0 and nm == 0:
-##        if nm > 0:
-##            return Med
-##        elif nn > 0:
-##            return Med
-##        else:
-        return min(termsPlus)
-    elif nm > 0 and np == 0:
-##        if nn > 0:
-##            return Med
-##        else:
-        return max(termsMinus)
+    if np > 0:
+        if nm > 0:
+            return Med
+        elif nn > 0:
+            return Med
+        else:
+            return min(termsPlus)
+    elif nm > 0:
+        if nn > 0:
+            return Med
+        else:
+            return max(termsMinus)
     else:
         return Med
-##    if np > 0:
-##        if nm > 0:
-##            return Med
-##        elif nn > 0:
-##            return Med
-##        else:
-##            return min(termsPlus)
-##    elif nm > 0:
-##        if nn > 0:
-##            return Med
-##        else:
-##            return max(termsMinus)
-##    else:
-##        return Med
 
 # generate all subsets of a given set E
 # Discrete Mathematics BINFO 1 course Lesson 2-sets
@@ -923,14 +909,14 @@ if __name__ == '__main__':
     #     print('group',i+1, splitIndex[i])
     #     #for j in range(splitIndex[i][0],splitIndex[i][1]):
     #     #    print(j)
-    indexList = range(100000)
-    q = 12
-    splitIndex = qtilingIndexList(indexList,q,Comments=True)
-    print(splitIndex)
-    for i in range(len(splitIndex)):
-        print('group',i+1, splitIndex[i])
-        #for j in range(splitIndex[i][0],splitIndex[i][1]):
-        #    print(j)
+##    indexList = range(100000)
+##    q = 12
+##    splitIndex = qtilingIndexList(indexList,q,Comments=True)
+##    print(splitIndex)
+##    for i in range(len(splitIndex)):
+##        print('group',i+1, splitIndex[i])
+##        #for j in range(splitIndex[i][0],splitIndex[i][1]):
+##        #    print(j)
 
 
 ##    seqA = generateRandomSequence(10)
@@ -956,23 +942,23 @@ if __name__ == '__main__':
     # print(l)
     # scoredTuplesSort(l,reverse=True)
     # print(l)
-##    from randomDigraphs import *
-##    g1 = RandomValuationDigraph(order=5,seed=1)
-##    g2 = RandomValuationDigraph(order=5,seed=2)
-##    g3 = RandomValuationDigraph(order=5,seed=3)
-##    from digraphs import FusionLDigraph
-##    #fga = FusionLDigraph([g1,g2,g3],weights=None,operator='o-average')
-##    g1.showRelationTable()
-##    g2.showRelationTable()
-##    g3.showRelationTable()
-##    fga = FusionLDigraph([g1,g2,g3],weights=None,operator='o-max')
-##    fga.showRelationTable()
-##    fga = FusionLDigraph([g1,g2,g3],weights=None,operator='o-min')
-##    fga.showRelationTable()
-##    fga = FusionLDigraph([g1,g2,g3],weights=None,operator='o-average')
-##    fga.showRelationTable()
-##    fga = FusionLDigraph([g1,g2,g3],weights=[1,2,3],operator='o-average')
-##    fga.showRelationTable()
+    from randomDigraphs import *
+    g1 = RandomValuationDigraph(order=5,seed=1)
+    g2 = RandomValuationDigraph(order=5,seed=2)
+    g3 = RandomValuationDigraph(order=5,seed=3)
+    from digraphs import FusionLDigraph
+    #fga = FusionLDigraph([g1,g2,g3],weights=None,operator='o-average')
+    g1.showRelationTable()
+    g2.showRelationTable()
+    g3.showRelationTable()
+    fga = FusionLDigraph([g1,g2,g3],weights=None,operator='o-max')
+    fga.showRelationTable()
+    fga = FusionLDigraph([g1,g2,g3],weights=None,operator='o-min')
+    fga.showRelationTable()
+    fga = FusionLDigraph([g1,g2,g3],weights=None,operator='o-average')
+    fga.showRelationTable()
+    fga = FusionLDigraph([g1,g2,g3],weights=[1,2,3],operator='o-average')
+    fga.showRelationTable()
 
              
     print('*------------------*')
