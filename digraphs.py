@@ -8941,7 +8941,8 @@ class Digraph(object):
                                 randomActionsList=False,
                                  # IteratedCondorcetWinners
                                 ReturnRanking=False,
-                                 Show=True, 
+                                 Show=True,
+                                 Average=False,
                                  ):
         """
         Generic choice recommender method.
@@ -9001,7 +9002,7 @@ class Digraph(object):
             print('\nFirst and last choice recommendations')
             print('-------------------------------------')
             t0 = time()
-            resVec = self.computeBpvCondorcetWinners()
+            resVec = self.computeBpvCondorcetWinners(Average=Average)
             res = []
             for x in resVec.support:
                 res.append((resVec.membership[x],x))
@@ -9049,7 +9050,7 @@ class Digraph(object):
                 g.actions = {}
                 for x in remainingActions:
                     g.actions[x] = deepcopy(self.actions[x])
-                resVec = g.computeBpvCondorcetWinners()
+                resVec = g.computeBpvCondorcetWinners(Average=Average)
                 Recursion = False
                 posremoved = []
                 negremoved = []
@@ -9087,7 +9088,7 @@ class Digraph(object):
                         else:
                             print("%s %dth-choice: \'%s\' (%+.3f)" % ((ch[2]*'  '),ch[2],ch[1],ch[0]) )
 
-                maxsp = ch[2]*'  '
+                    maxsp = ch[2]*'  '
                 for x in remainingActions:
                     print("%s indeterminate: \'%s\' (%+.3f)" % ((maxsp + '  '),x,0.0) )
                 for ch in negRanking:
@@ -9120,6 +9121,7 @@ class Digraph(object):
                  
     def computeBpvCondorcetWinners(self,CoDual=True,
                                    BrokenCocs=True,
+                                   Average=False,
                                    Comments=False,
                                    ):
         """
@@ -9135,8 +9137,10 @@ class Digraph(object):
             gb = BrokenCocsDigraph(g)
         else:
             gb = g
-        initialVector = gb.computeConjunctiveEpistemicFusion(Terminal=False,Debug=False)
-        terminalVector = gb.computeConjunctiveEpistemicFusion(Terminal=True,Debug=False)
+        initialVector = gb.computeConjunctiveEpistemicFusion(Terminal=False,
+                                                             Average=Average,Debug=False)
+        terminalVector = gb.computeConjunctiveEpistemicFusion(Terminal=True,
+                                                              Average=Average,Debug=False)
         if Comments:
             for x in self.actions:
                 print(x,'i',initialVector.membership[x])
@@ -9715,7 +9719,8 @@ class Digraph(object):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def computeConjunctiveEpistemicFusion(digraph,Terminal=False,Debug=False):
+    def computeConjunctiveEpistemicFusion(digraph,Terminal=False,
+                                          Average=False,Debug=False):
         """
         Computes the conjunctive epistemic fusion of
         rows (Terminal=True) or columns (Terminal=False)
@@ -9724,6 +9729,7 @@ class Digraph(object):
         from copy import deepcopy
         from bipolarValuedSets import BpvSet
         from digraphsTools import scoredTuplesSort
+        from decimal import Decimal
 ##        if CoDual:
 ##            g = ~(-digraph)
 ##        else:
@@ -9749,22 +9755,57 @@ class Digraph(object):
                         nulx.append(matxy)
             res[x] = {'pos':posx,'neg':negx,'nul':nulx}
         resvec = {}
-        for x in res:
-            #print(x, res[x])
-            pl = len(res[x]['pos'])
-            nl = len(res[x]['neg'])
-            if pl > 0 and nl == 0:
-                minx = Max
-                for v in res[x]['pos']:
-                    minx = min(minx,v)
-                resvec[x] = minx
-            elif nl > 0 and pl == 0:
-                maxx = Min
-                for v in res[x]['neg']:
-                    maxx = max(maxx,v)
-                resvec[x] = maxx
-            else:
-                resvec[x] = Med
+        n = len(g.actions) -1
+        if Average:
+            for x in res:
+                pl = len(res[x]['pos'])
+                nl = len(res[x]['neg'])
+                if pl > 0 and nl == 0:
+                    sumx = Decimal()
+                    for val in res[x]['pos']:
+                        sumx += val
+                    resvec[x] = sumx/Decimal(n)
+                elif nl > 0 and pl == 0:
+                    sumx = Decimal()
+                    for val in res[x]['neg']:
+                        sumx += val
+                    resvec[x] = sumx/Decimal(n)
+                else:
+                    resvec[x] = Med
+        else:
+##            for x in res:
+##                pl = len(res[x]['pos'])
+##                nl = len(res[x]['neg'])
+##                nn = len(res[x]['nul'])
+##                if pl > 0:
+##                    minx = Max
+##                    for v in res[x]['pos']:
+##                        minx = min(minx,v)
+##                else:
+##                    minx = Med
+##                if nl > 0:
+##                    maxx = Min
+##                    for v in res[x]['neg']:
+##                        maxx = max(maxx,v)
+##                else:
+##                    maxx = Med
+##                resvec[x] = min(minx,maxx)
+            for x in res:
+                #print(x, res[x])
+                pl = len(res[x]['pos'])
+                nl = len(res[x]['neg'])
+                if pl > 0 and nl == 0:
+                    minx = Max
+                    for v in res[x]['pos']:
+                        minx = min(minx,v)
+                    resvec[x] = minx
+                elif nl > 0 and pl == 0:
+                    maxx = Min
+                    for v in res[x]['neg']:
+                        maxx = max(maxx,v)
+                    resvec[x] = maxx
+                else:
+                    resvec[x] = Med
         kerVec = []
         for x in resvec:
             kerVec.append((resvec[x],x))

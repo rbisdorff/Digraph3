@@ -1443,10 +1443,11 @@
 <span class="sd">    Computes the linear ranking or order obtained from the</span>
 <span class="sd">    iterated bpv-sets of weak Condorcet winners and losers.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Average</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
         <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-        <span class="n">ranking</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;IteratedCondorcetWinners&#39;</span><span class="p">,</span><span class="n">Show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ReturnRanking</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">ranking</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;IteratedCondorcetWinners&#39;</span><span class="p">,</span><span class="n">Show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                                 <span class="n">Average</span><span class="o">=</span><span class="n">Average</span><span class="p">,</span><span class="n">ReturnRanking</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_ranked&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">condorcetRanking</span> <span class="o">=</span> <span class="n">ranking</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">condorcetOrder</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">ranking</span><span class="p">)]</span>
@@ -3000,8 +3001,9 @@
         <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-        <span class="n">cr</span> <span class="o">=</span> <span class="n">IteratedBpvCondorcetWinnersRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="c1">#print(cr)</span>
+        <span class="n">cr</span> <span class="o">=</span> <span class="n">IteratedBpvCondorcetWinnersRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Average</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="n">cr</span><span class="p">)</span>
         <span class="c1"># triples = g.computeIntransitiveTriples()</span>
         <span class="c1"># nt = len(triples)</span>
         <span class="c1"># print(nt)</span>
@@ -3133,7 +3135,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jul 04, 2026.
+      <span class="lastupdated">Last updated on Jul 05, 2026.
       </span></p>
   </div>
 
