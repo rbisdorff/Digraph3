@@ -4697,7 +4697,7 @@ The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a pa
 Computing the bpv-set of weak Condorcet winners
 ...............................................
 
-The relation of a given outranking digraph :math:`G(X,R)` is an evident example of a bpv-set. And, as shown in :numref:`CondorcetWinners1` below, the epistemic fusion ring operators may for instance be used for computing the bpv-set of *weak Condorcet winners* of such a digraph *G*. The :py:class:`~digraphs.Digraph` class provides therefore the :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method (see Line 5).  
+The relation attribute of a given outranking digraph :math:`G(X,R)` is an evident example of a bpv-set. And, as shown in :numref:`CondorcetWinners1` below, the epistemic fusion ring operators may for instance be used for computing the bpv-set of *Condorcet winners* and *Condorcet losers* of such a digraph *G*. The :py:class:`~digraphs.Digraph` class provides therefore the :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method (see Line 5).  
 
 .. code-block:: pycon
    :caption: Computing the bpv-set of the weak Condorcet winner(s)
@@ -4722,9 +4722,9 @@ The relation of a given outranking digraph :math:`G(X,R)` is an evident example 
      p7:  -0.14
      p8:  -0.17
 
-In the given random 3-objectives outranking digraph :math:`G(X,R)`, concerning the performances of 9 public policies with respect to 13 performance criteria, three alternatives, *p2*, *p6* and *p5* are positive weak Condorcet winners, whereas alternatives *p1*, *p7* and *p8* are negative weak Condorcet winners, that is a positive weak Condorcet losers (see Lines 8-10 and 14-16 above).
+In the codual of the given random 3-objectives outranking digraph :math:`G(X,R)`, concerning the performances of 9 public policies with respect to 13 performance criteria, three alternatives, *p2*, *p6* and *p5* are positive weak Condorcet winners, whereas alternatives *p1*, *p7* and *p8* are negative weak Condorcet winners, that is a positive weak Condorcet losers (see Lines 8-10 and 14-16 above).
 
-The individual bipolar-valued credibilities to '*be a weak Condorcet winner*' are computed as follows. For each individual alternative *x in X*, the weak conjunctive epistemic :py:meth:`bipolarValuedSets.BpvSet.wotimes` fusion of the *outranking* credibility *R(x,y)* for all :math:`y \neq x` in *X* measures indeed the more or less *weak outranking power* of *x* and the weak conjunctive epistemic *wotimes* fusion of the *not outranked* credibility *-R(y,x)*  for all :math:`y \neq x` in *X* measures the more or less *weakly not outranked condition* of *x* [28]_. A disjunctive epistemic :math:`\oplus` fusion of both these measures delivers eventually the result. It is worthwhile noticing that the dual of this result gives by the way the bpv-set of the corresponding weak Condorcet losers.
+The individual bipolar-valued credibilities to '*be a weak Condorcet winner*' are computed as follows. For each individual alternative *x in X*, the weak conjunctive epistemic :py:meth:`bipolarValuedSets.BpvSet.wotimes` fusion of the *strict outranking* credibility *R(x,y)* for all :math:`y \neq x` in *X* measures indeed the more or less *outranking power* of *x* and the weak conjunctive epistemic *wotimes* fusion of the *not strict outranked* credibility *-R(y,x)*  for all :math:`y \neq x` in *X* measures the more or less *not outranked condition* of *x* [28]_. A disjunctive epistemic :math:`\oplus` fusion of both these measures delivers eventually the result. It is worthwhile noticing that the dual of this result gives by the way the bpv-set of the corresponding weak Condorcet losers.
 
    >>> (~(-g)).showHTMLRelationTable(
    ...    actionsList=['p2','p6','p5','p3','p4','p9','p1','p7','p8'])
@@ -4739,9 +4739,9 @@ The individual bipolar-valued credibilities to '*be a weak Condorcet winner*' ar
 
 In :numref:`condorcetWinners2` we see confirmed in the strict outranking relation table of :math:`G(X,R)` that alternatives *p2*, *p6* and *p5* are *weakly more or less outranking* or *not more or less outranked* by all the other alternatives whereas alternatives *p1*, *p7* and *p8* are *weakly more or less outranked* by all the other alternatives.
 
-When a given digraph shows strict chordless outranking circuits it may however be the case that no Condorcet winners and/or losers can be detected, the resulting bvp-set not containing any positive and/or negative credibilities. Breaking in such a case all chordless outranking circuits at their weakest link transforms the strict outranking digraph in an acyclic digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the acyclic digraph. The :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method operates therefore by default on the acyclic strict version of a given outranking digraph. 
+When a given digraph shows strict chordless outranking circuits it may however be the case that no Condorcet winners and/or losers can be detected, the resulting bvp-set does not contain any positive and/or negative credibilities. Breaking in such a case all chordless strict outranking circuits at their weakest link transforms the strict outranking digraph in an acyclic digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the acyclic digraph.
 
-Now, weak Condorcet winners and losers give suitable first and last choice recommendations. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts therefore the '*IteratedCondortWinners*' argument for showing recursively positive weak Condorcet winners as first choice and positive weak Condorcet losers as last choice recommendation as shown in :numref:`CondorcetWinners3` below.
+Now, weak Condorcet winners and losers, like prekernels, give suitable first and last choice recommendations. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts therefore the '*IteratedCondortWinners*' argument for showing recursively positive weak Condorcet winners as first choice and positive weak Condorcet losers as last choice recommendation as shown in :numref:`CondorcetWinners3` below.
 
 .. code-block:: pycon
    :caption: Showing first and last choice recommendations from recursively iterated weak Condorcet winners bpv-sets
@@ -4781,7 +4781,7 @@ In the performance heatmap shown in :numref:`condorcetWinnersHeatmap` using the 
    :name: condorcetWinnersHeatmap
    :width: 500 px
    :align: center
-   :alt: Verifying the quality of the Condorcet winners and loosers recommendation
+   :alt: Verifying the quality of the Condorcet winners and losers recommendation
 
    Performance heatmap ranked by iterated bipolar-valued Condorcet winners and losers
 
@@ -4815,7 +4815,7 @@ A result that gets confirmed with the 'Rubis' choice recommendation shown in :nu
 	 determinateness (%) : 50.00
 	 - most credible action(s) = { }
 
-First and last choice recommendation perfectly correspond to the weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1`.
+Initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1`.
 
 .. note:: The *edges* attribute of a bipolar-valued graph is also a bpv-set, where the support is given by the non-oriented pairs of the graph's vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership characteristic vectors from the *Rubis* best choice computation [BIS-2006-1p]_. This is the topic of the next tutorial.
 
