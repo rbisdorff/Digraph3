@@ -4619,7 +4619,7 @@ In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunct
 
 Due to the commutativity of the numerical binary *max* and *min* operators, both :math:`\oplus` and :math:`\ominus` operators are **cummutative**. Mind however, that similarly to a mean or average operator, both epistemic fusion operators are not associative. In order to render results univocal, all positive and negative arguments are considered separately and both intermediate results are further processed as two single arguments.  
 
-Let :math:`\mathcal{S}(A)` denote the set of all possible bpv-sets that may be defined on a given finite set *A* of dimension *n*. Let :math:`\bf{0} \in \mathcal{S}(A)`  denote the completely indeterminate bpv-set, i.e :math:`r(a \in \bf{0}) \;=\; 0.0 , \; \forall \,a \in\, A`. It is worthwhile noticing that bpv-set :math:`\bf{0}` is the **neutral** element of the :math:`\oplus` and the :math:`\ominus` operator. For any bpv-subset of *A*, the corresponding polarised --fully determined-- crisp subset is the **absorbent** element of the :math:`\oplus` and a **neutral** element of the :math:`\ominus` operator. Similarly, for any bpv-subset of *A*, the corresponding minimally determined bpv-subset is a *neutral* elemnet of the :math:`\oplus` operator an **absorbent** element of the :math:`\ominus` operator.
+Let :math:`\mathcal{S}(A)` denote the set of all possible bpv-sets that may be defined on a given finite set *A* of dimension *n*. Let :math:`\bf{0} \in \mathcal{S}(A)`  denote the completely indeterminate bpv-set, i.e :math:`r(a \in \bf{0}) \;=\; 0.0 , \; \forall \,a \in\, A`. It is worthwhile noticing that bpv-set :math:`\bf{0}` is the **neutral** element of the :math:`\oplus` and the :math:`\ominus` operator. For any bpv-subset of *A*, the corresponding polarised --fully determined-- crisp subset is the **absorbent** element of the :math:`\oplus` and a **neutral** element of the :math:`\ominus` operator. Similarly, for any bpv-subset of *A*, the corresponding minimally determined bpv-subset is a **neutral** element of the :math:`\oplus` operator an **absorbent** element of the :math:`\ominus` operator.
 
 .. code-block:: pycon
    :caption: Neutral and absorbent bpv-sets
@@ -4701,7 +4701,7 @@ The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a pa
 Computing the bpv-set of weak Condorcet winners
 ...............................................
 
-The relation attribute of a given outranking digraph :math:`G(X,R)` is an evident example of a bpv-set. And, as shown in :numref:`CondorcetWinners1` below, the epistemic fusion ring operators may for instance be used for computing the bpv-set of *weak Condorcet winners* of such a digraph *G*. The :py:class:`~digraphs.Digraph` class provides therefore the :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method (see Line 5).  
+The relation attribute of a given outranking digraph :math:`G(X,R)` is an evident example of a bpv-set. And, the epistemic fusion ring operators may for instance be used for computing the bpv-set of *weak Condorcet winners* [28]_ of such a digraph *G*. The :py:class:`~digraphs.Digraph` class provides therefore the :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method as shown in :numref:`CondorcetWinners1` Line 5.  
 
 .. code-block:: pycon
    :caption: Computing the bpv-set of the weak Condorcet winner(s)
@@ -4728,7 +4728,7 @@ The relation attribute of a given outranking digraph :math:`G(X,R)` is an eviden
 
 In the codual of the given random 3-objectives outranking digraph :math:`G(X,R)`, concerning the performances of 9 public policies with respect to 13 performance criteria, three alternatives, *p2*, *p6* and *p5* are positive weak Condorcet winners, whereas alternatives *p1*, *p7* and *p8* are negative weak Condorcet winners, that is a positive weak Condorcet losers (see Lines 8-10 and 14-16 above).
 
-The individual bipolar-valued credibilities to '*be a weak Condorcet winner*' are computed as follows. For each individual alternative *x in X*, the conjunctive epistemic :math:`\ominus` fusion of the *strict outranking* credibility *R(x,y)* for all :math:`y \neq x` in *X* measures indeed the more or less *outranking power* of *x* and the same conjunctive epistemic :math:`\ominus` fusion of the *not strict outranked* credibility *-R(y,x)*  for all :math:`y \neq x` in *X* measures the more or less *not outranked condition* of *x* [28]_. A disjunctive epistemic :math:`\oplus` fusion of both these measures delivers eventually the result. It is worthwhile noticing that the dual of this result gives by the way the bpv-set of the corresponding weak Condorcet losers.
+The individual bipolar-valued credibilities to '*be a weak Condorcet winner*' are computed as follows. For each individual alternative *x in X*, the conjunctive epistemic :math:`\ominus` fusion of the *strict outranking* credibility *R(x,y)* for all :math:`y \neq x` in *X* measures indeed the more or less *outranking power* of *x* and the same conjunctive epistemic :math:`\ominus` fusion of the *not strict outranked* credibility *-R(y,x)*  for all :math:`y \neq x` in *X* measures the more or less *not outranked condition* of *x*. A disjunctive epistemic :math:`\oplus` fusion of both these measures delivers eventually the result. It is worthwhile noticing that the dual of this result gives by the way the bpv-set of the corresponding weak Condorcet losers.
 
    >>> (~(-g)).showHTMLRelationTable(
    ...    actionsList=['p2','p6','p5','p3','p4','p9','p1','p7','p8'])
@@ -4779,7 +4779,8 @@ The criteria significance majorities for each choice are indicated in brakets (s
 
 In the performance heatmap shown in :numref:`condorcetWinnersHeatmap` using the previous *cr.condorcetRanking*, we may verify the quality of this ranking.
 
->>> g.showHTMLPerformanceHeatmap(cr.condorcetRanking,Correlations=True,colorLevels=5)
+>>> g.showHTMLPerformanceHeatmap(cr.condorcetRanking,
+...                              Correlations=True,colorLevels=5)
 
 .. figure:: condorcetWinnersHeatmap.png
    :name: condorcetWinnersHeatmap
@@ -4789,7 +4790,7 @@ In the performance heatmap shown in :numref:`condorcetWinnersHeatmap` using the 
 
    Performance heatmap ranked by iterated bipolar-valued Condorcet winners and losers
 
-A result that gets confirmed with the 'Rubis' choice recommendation shown in :numref:`CondorcetWinners4` below.
+A result that gets confirmed with the '*Rubis*' choice recommendation shown in :numref:`CondorcetWinners4` below.
 
 .. code-block:: pycon
    :caption: Showing the choice recommendations from the Rubis method
@@ -4819,7 +4820,7 @@ A result that gets confirmed with the 'Rubis' choice recommendation shown in :nu
 	 determinateness (%) : 50.00
 	 - most credible action(s) = { }
 
-Initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`.
+With the given strict outranking digrapg, initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Prekernels and Condorcet winners and losers generally only overlap one another.
 
 .. note:: The *edges* attribute of a bipolar-valued graph is also a bpv-set, where the support is given by the non-oriented pairs of the graph's vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership characteristic vectors from the *Rubis* best choice computation [BIS-2006-1p]_. This is the topic of the next tutorial.
 
@@ -5972,7 +5973,7 @@ Appendix
 
 .. [27] https://en.wikipedia.org/wiki/Grover%27s_algorithm
 
-.. [28] The weak conjunctive epistemic fusion operator ignores the indeterminate terms. The empty bvp-set becomes here a neutral argument.
+.. [28] A **weak** Condorcet winner outranks at least one action and is incomparable to the not outranked actions. A **weak** Condorcet loser is outranked by at least one action and is incomparable to the remaining actions.   
 
 .. raw:: latex
 
