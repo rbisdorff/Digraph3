@@ -15892,7 +15892,7 @@ if __name__ == "__main__":
     g = BipolarOutrankingDigraph(t,Threading=False,startMethod='spawn')
     print(g)
     print('Rubis BCR')
-    g.showFirstChoiceRecommendation(Comments=True)
+    g.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True)
     ranking = g.showChoiceRecommendation('IteratedCondorcetWinners',ReturnRanking=True)
     g.showChoiceRecommendation('Bachet')
     g.showHTMLPerformanceHeatmap(actionsList=ranking,Correlations=True)

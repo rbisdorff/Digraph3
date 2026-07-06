@@ -534,53 +534,53 @@ class BpvSet(object):
         fusion.cardinality = fusion.computeCardinality()
         return fusion
 
-    def otimes(self,other,/):
-        """
-        Returns the conjunctive fusion of self and other
-        """
-        from copy import deepcopy
-        from bipolarValuedSets import BpvSet
-        newSelf = deepcopy(self)
-        newSelf.recodeValuation()
-        newOther = deepcopy(other)
-        newOther.recodeValuation()
-        fusion = BpvSet()
-        fusion.name = self.name+'Oplus'+other.name
+##    def otimes(self,other,/):
+##        """
+##        Returns the conjunctive fusion of self and other
+##        """
+##        from copy import deepcopy
+##        from bipolarValuedSets import BpvSet
+##        newSelf = deepcopy(self)
+##        newSelf.recodeValuation()
+##        newOther = deepcopy(other)
+##        newOther.recodeValuation()
+##        fusion = BpvSet()
+##        fusion.name = self.name+'Oplus'+other.name
+##
+##        # union of the supports
+##        for it in newSelf.support:
+##            #print(it)
+##            if it not in fusion.support:
+##                fusion.support[it] = newSelf.support[it]
+##        for it in newOther.support:
+##            #print(it)
+##            if it not in fusion.support:
+##                fusion.support[it] = newOther.support[it]
+##
+##        membership = {}
+##        Min = fusion.valuationDomain['min']
+##        Med = fusion.valuationDomain['med']
+##        Max = fusion.valuationDomain['max']
+##        for it in fusion.support:
+##            try:
+##                if newSelf.membership[it] <= Med and newOther.membership[it] <= Med:
+##                    membership[it] = max(newSelf.membership[it],newOther.membership[it])
+##                elif newSelf.membership[it] >= Med and newOther.membership[it] >= Med:
+##                    membership[it] = min(newSelf.membership[it],newOther.membership[it])
+##                else:
+##                    membership[it] = Med                  
+##            except:
+##                try:
+##                    membership[it] = newSelf.membership[it]
+##                except:
+##                    membership[it] = Min
+##        fusion.ndigits = min(newSelf.ndigits, newOther.ndigits)
+##        fusion.membership = membership
+##        fusion.determinateness = fusion.computeDeterminateness()
+##        fusion.cardinality = fusion.computeCardinality()
+##        return fusion
 
-        # union of the supports
-        for it in newSelf.support:
-            #print(it)
-            if it not in fusion.support:
-                fusion.support[it] = newSelf.support[it]
-        for it in newOther.support:
-            #print(it)
-            if it not in fusion.support:
-                fusion.support[it] = newOther.support[it]
-
-        membership = {}
-        Min = fusion.valuationDomain['min']
-        Med = fusion.valuationDomain['med']
-        Max = fusion.valuationDomain['max']
-        for it in fusion.support:
-            try:
-                if newSelf.membership[it] <= Med and newOther.membership[it] <= Med:
-                    membership[it] = max(newSelf.membership[it],newOther.membership[it])
-                elif newSelf.membership[it] >= Med and newOther.membership[it] >= Med:
-                    membership[it] = min(newSelf.membership[it],newOther.membership[it])
-                else:
-                    membership[it] = Med                  
-            except:
-                try:
-                    membership[it] = newSelf.membership[it]
-                except:
-                    membership[it] = Min
-        fusion.ndigits = min(newSelf.ndigits, newOther.ndigits)
-        fusion.membership = membership
-        fusion.determinateness = fusion.computeDeterminateness()
-        fusion.cardinality = fusion.computeCardinality()
-        return fusion
-
-    def wotimes(self,other,/):
+    def ominus(self,other,/):
         """
         Returns the weak conjunctive fusion of self and other
         by ignoring the indeterminate terms
@@ -705,7 +705,7 @@ class BpvSet(object):
             new.determinateness = new.computeDeterminateness()
             return new
                 
-    def polarise(self,cutLevel=None,Strict=True,InSite=True):
+    def polarise(self,cutLevel=None,Strict=True,MinimalValues=False,InSite=True):
         """
         Polarize self at cutLevel. If None, cutLevel is 0.0.
         If Strict is True, all valuations > cutLevel are set to +1.0 and
@@ -852,11 +852,11 @@ if __name__ == "__main__":
     D.strip()
     Op = X.oplus(Y)
     Op.showMembershipCharacteristics()
-    Om = X.wotimes(Y)
+    Om = X.ominus(Y)
     Om.showMembershipCharacteristics()
     M = RandomBpvSet(indeterminateness=1.0,elementNamePrefix='s')
     Oxmp = X.oplus(M)
     Oxmp.showMembershipCharacteristics()
-    Oxmm = X.wotimes(M)
+    Oxmm = X.ominus(M)
     Oxmm.showMembershipCharacteristics()
 

@@ -4574,7 +4574,7 @@ In the limit case of no indeterminate membership characteristics, we recover thi
 The partially ordered commutative epistemic fusion ring
 .......................................................
 
-The disjunctive and conjunctive epistemic fusions of two bpv-sets *X* and *Y*, denoted :math:`X \oplus Y` respectively :math:`X \otimes Y`, give the bpv-sets defined as follows.
+The disjunctive and conjunctive epistemic fusions of two bpv-sets *X* and *Y*, denoted :math:`X \oplus Y`, respectively :math:`X \ominus Y`, give the bpv-sets defined as follows.
 
 | For all :math:`z \in E_{X \oplus Y}` the membership characteristic :math:`r\big(\,z \in (X \oplus Y)\,\big)\; =`
 |    :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*
@@ -4583,11 +4583,15 @@ The disjunctive and conjunctive epistemic fusions of two bpv-sets *X* and *Y*, d
 |         and :math:`r(z \in X) \leqslant 0.0` and :math:`r(z \in Y) \leqslant 0.0`;
 |    :math:`0.0` otherwise.
 
-| For all :math:`z \in E_{X \otimes Y}` the membership characteristic :math:`r\big(\,z \in (X \otimes Y)\,\big)\; =`
+| For all :math:`z \in E_{X \ominus Y}` the membership characteristic :math:`r\big(\,z \in (X \ominus Y)\,\big)\; =`
 |    :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*,
-|         and :math:`r(z \in X) \geqslant 0.0` and :math:`r(z \in Y) \geqslant 0.0`; or
+|         and :math:`r(z \in X) > 0.0` and :math:`r(z \in Y) > 0.0`; or
 |    :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*,
-|         and :math:`r(z \in X) \leqslant 0.0` and :math:`r(z \in Y) \leqslant 0.0`;
+|         and :math:`r(z \in X) > 0.0` and :math:`r(z \in Y) > 0.0`; or
+|    :math:`r(z \in X)` when both *z* in *X* and *z* in *Y*,
+|         and :math:`r(z \in X) \neq 0.0` and :math:`r(z \in Y) = 0.0`; or
+|    :math:`r(z \in Y)` when both *z* in *X* and *z* in *Y*,
+|         and :math:`r(z \in X) == 0.0` and :math:`r(z \in Y) \neq 0.0`;
 |    :math:`0.0` otherwise.
 
 In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunctive fusion operators.
@@ -4605,7 +4609,7 @@ In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunct
      s3:  +0.0000
      s5:  +0.0000
      s4:  -0.4899
-   >>> (X.otimes(Y)).showMembershipCharacteristics()
+   >>> (X.ominus(Y)).showMembershipCharacteristics()
     # conjunctive epistemic fusion -  
      s2:  +0.6949
      s1:  +0.0000
@@ -4613,9 +4617,9 @@ In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunct
      s5:  +0.0000
      s4:  -0.4899
 
-Due to the commutativity of the numerical binary *max* and *min* operators, both :math:`\oplus` and :math:`\otimes` operators are **cummutative**. Mind however, that similarly to a mean or average operator, both epistemic fusion operators are not associative and, hence, not distributive one against the other. In order to render results univocal, all positive and negative arguments are considered separately and both intermediate results are further processed as two single arguments.  
+Due to the commutativity of the numerical binary *max* and *min* operators, both :math:`\oplus` and :math:`\ominus` operators are **cummutative**. Mind however, that similarly to a mean or average operator, both epistemic fusion operators are not associative. In order to render results univocal, all positive and negative arguments are considered separately and both intermediate results are further processed as two single arguments.  
 
-Let :math:`\mathcal{S}(A)` denote the set of all possible bpv-sets that may be defined on a given finite set *A* of dimension *n*. Let :math:`\bf{0} \in \mathcal{S}(A)`  denote the completely indeterminate bpv-set, i.e :math:`r(a \in \bf{0}) \;=\; 0.0 , \; \forall \,a \in\, A`. It is worthwhile noticing that bpv-set :math:`\bf{0}` is the **neutral** element of the :math:`\oplus` operator. Similarly, bpv-set :math:`\bf{0}` is the **absorbent** element of the :math:`\otimes` operator. For any bpv-subset of *A*, the corresponding polarised --fully determined-- crisp subset is the **absorbent** element of the :math:`\oplus` and the **neutral** element of the :math:`\otimes` operator.
+Let :math:`\mathcal{S}(A)` denote the set of all possible bpv-sets that may be defined on a given finite set *A* of dimension *n*. Let :math:`\bf{0} \in \mathcal{S}(A)`  denote the completely indeterminate bpv-set, i.e :math:`r(a \in \bf{0}) \;=\; 0.0 , \; \forall \,a \in\, A`. It is worthwhile noticing that bpv-set :math:`\bf{0}` is the **neutral** element of the :math:`\oplus` and the :math:`\ominus` operator. For any bpv-subset of *A*, the corresponding polarised --fully determined-- crisp subset is the **absorbent** element of the :math:`\oplus` and a **neutral** element of the :math:`\ominus` operator. Similarly, for any bpv-subset of *A*, the corresponding minimally determined bpv-subset is a *neutral* elemnet of the :math:`\oplus` operator an **absorbent** element of the :math:`\ominus` operator.
 
 .. code-block:: pycon
    :caption: Neutral and absorbent bpv-sets
@@ -4637,20 +4641,20 @@ Let :math:`\mathcal{S}(A)` denote the set of all possible bpv-sets that may be d
     s5:  +0.0000
     s4:  -1.0000
     s1:  -1.0000
-   >>> (X.otimes(O)).showMembershipCharacteristics()
-    s1:  +0.0000
-    s2:  +0.0000
-    s3:  +0.0000
-    s4:  +0.0000
+   >>> (X.ominus(O)).showMembershipCharacteristics()
+    s2:  +0.6949
+    s3:  +0.5275
     s5:  +0.0000
-   >>> (X.otimes(Xp)).showMembershipCharacteristics()
+    s4:  -0.4899
+    s1:  -0.7313
+   >>> (X.ominus(Xp)).showMembershipCharacteristics()
     s2:  +0.6949
     s3:  +0.5275
     s5:  +0.0000
     s4:  -0.4899
     s1:  -0.7313
 
-To every bpv-set :math:`X \in \mathcal{S}(A)` we may associate its negated --dual--  bpv-set :math:`-X` such that :math:`X \oplus -X \;=\; X \otimes -X \;=\; \bf{0}` . 
+To every bpv-set :math:`X \in \mathcal{S}(A)` we may associate its negated --dual--  bpv-set :math:`-X` such that :math:`X \oplus -X \;=\; X \ominus -X \;=\; \bf{0}` . 
 
 .. code-block:: pycon
    :caption: Dual bvp-sets
@@ -4664,7 +4668,7 @@ To every bpv-set :math:`X \in \mathcal{S}(A)` we may associate its negated --dua
     s3:  +0.0000
     s4:  +0.0000
     s5:  +0.0000
-   >>> (X.otimes(-X)).showMembershipCharacteristics()
+   >>> (X.ominus(-X)).showMembershipCharacteristics()
     s1:  +0.0000
     s2:  +0.0000
     s3:  +0.0000
@@ -4697,7 +4701,7 @@ The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a pa
 Computing the bpv-set of weak Condorcet winners
 ...............................................
 
-The relation attribute of a given outranking digraph :math:`G(X,R)` is an evident example of a bpv-set. And, as shown in :numref:`CondorcetWinners1` below, the epistemic fusion ring operators may for instance be used for computing the bpv-set of *Condorcet winners* and *Condorcet losers* of such a digraph *G*. The :py:class:`~digraphs.Digraph` class provides therefore the :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method (see Line 5).  
+The relation attribute of a given outranking digraph :math:`G(X,R)` is an evident example of a bpv-set. And, as shown in :numref:`CondorcetWinners1` below, the epistemic fusion ring operators may for instance be used for computing the bpv-set of *weak Condorcet winners* of such a digraph *G*. The :py:class:`~digraphs.Digraph` class provides therefore the :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method (see Line 5).  
 
 .. code-block:: pycon
    :caption: Computing the bpv-set of the weak Condorcet winner(s)
@@ -4724,7 +4728,7 @@ The relation attribute of a given outranking digraph :math:`G(X,R)` is an eviden
 
 In the codual of the given random 3-objectives outranking digraph :math:`G(X,R)`, concerning the performances of 9 public policies with respect to 13 performance criteria, three alternatives, *p2*, *p6* and *p5* are positive weak Condorcet winners, whereas alternatives *p1*, *p7* and *p8* are negative weak Condorcet winners, that is a positive weak Condorcet losers (see Lines 8-10 and 14-16 above).
 
-The individual bipolar-valued credibilities to '*be a weak Condorcet winner*' are computed as follows. For each individual alternative *x in X*, the weak conjunctive epistemic :py:meth:`bipolarValuedSets.BpvSet.wotimes` fusion of the *strict outranking* credibility *R(x,y)* for all :math:`y \neq x` in *X* measures indeed the more or less *outranking power* of *x* and the weak conjunctive epistemic *wotimes* fusion of the *not strict outranked* credibility *-R(y,x)*  for all :math:`y \neq x` in *X* measures the more or less *not outranked condition* of *x* [28]_. A disjunctive epistemic :math:`\oplus` fusion of both these measures delivers eventually the result. It is worthwhile noticing that the dual of this result gives by the way the bpv-set of the corresponding weak Condorcet losers.
+The individual bipolar-valued credibilities to '*be a weak Condorcet winner*' are computed as follows. For each individual alternative *x in X*, the conjunctive epistemic :math:`\ominus` fusion of the *strict outranking* credibility *R(x,y)* for all :math:`y \neq x` in *X* measures indeed the more or less *outranking power* of *x* and the same conjunctive epistemic :math:`\ominus` fusion of the *not strict outranked* credibility *-R(y,x)*  for all :math:`y \neq x` in *X* measures the more or less *not outranked condition* of *x* [28]_. A disjunctive epistemic :math:`\oplus` fusion of both these measures delivers eventually the result. It is worthwhile noticing that the dual of this result gives by the way the bpv-set of the corresponding weak Condorcet losers.
 
    >>> (~(-g)).showHTMLRelationTable(
    ...    actionsList=['p2','p6','p5','p3','p4','p9','p1','p7','p8'])
@@ -4741,7 +4745,7 @@ In :numref:`condorcetWinners2` we see confirmed in the strict outranking relatio
 
 When a given digraph shows strict chordless outranking circuits it may however be the case that no Condorcet winners and/or losers can be detected, the resulting bvp-set does not contain any positive and/or negative credibilities. Breaking in such a case all chordless strict outranking circuits at their weakest link transforms the strict outranking digraph in an acyclic digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the acyclic digraph.
 
-Now, weak Condorcet winners and losers, like prekernels, give suitable first and last choice recommendations. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts therefore the '*IteratedCondortWinners*' argument for showing recursively positive weak Condorcet winners as first choice and positive weak Condorcet losers as last choice recommendation as shown in :numref:`CondorcetWinners3` below.
+Now, weak Condorcet winners and losers, like initial and terminal prekernels, give suitable first and last choice recommendations. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts therefore the '*IteratedCondortWinners*' argument for showing recursively positive weak Condorcet winners as first choice and positive weak Condorcet losers as last choice recommendation as shown in :numref:`CondorcetWinners3` below.
 
 .. code-block:: pycon
    :caption: Showing first and last choice recommendations from recursively iterated weak Condorcet winners bpv-sets
@@ -4815,7 +4819,7 @@ A result that gets confirmed with the 'Rubis' choice recommendation shown in :nu
 	 determinateness (%) : 50.00
 	 - most credible action(s) = { }
 
-Initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1`.
+Initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`.
 
 .. note:: The *edges* attribute of a bipolar-valued graph is also a bpv-set, where the support is given by the non-oriented pairs of the graph's vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership characteristic vectors from the *Rubis* best choice computation [BIS-2006-1p]_. This is the topic of the next tutorial.
 
