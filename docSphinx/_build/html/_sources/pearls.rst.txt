@@ -4675,7 +4675,7 @@ To every bpv-set :math:`X \in \mathcal{S}(A)` we may associate its negated --dua
     s4:  +0.0000
     s5:  +0.0000
 
-The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a partial **sharpness** ordering denoted :math:`\succcurlyeq` and defined as follows. Let *X* and *Y* be two bpv-sets in :math:`\mathcal{S}(A)`. We say that :math:`X \,\succcurlyeq\, Y` when :math:`\forall a \in A` either :math:`r(a \in X) \leqslant r(a \in Y) \leqslant 0.0` or, :math:`0.0 \leqslant r(a \in Y) \leqslant r(a \in X`. It follows that :math:`\big(X \oplus Y \,=\, X\big) \;\Leftrightarrow\; X \,\succcurlyeq\, Y` and :math:`\big(X \ominus Y \,=\, Y\big) \;\Leftrightarrow\; X \,\succcurlyeq\, Y`. Minimal sharp is the bpv-set :math:`\bf{0}`. Maximal sharp are all :math:`2^n` completely determined --crisp-- subsets of the support set *A*. 
+The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a partial **sharpness** ordering denoted :math:`\succcurlyeq` and defined as follows. Let *X* and *Y* be two bpv-sets in :math:`\mathcal{S}(A)`. We say that :math:`X \,\succcurlyeq\, Y` when :math:`\forall a \in A` either :math:`r(a \in X) \leqslant r(a \in Y) \leqslant 0.0` or, :math:`0.0 \leqslant r(a \in Y) \leqslant r(a \in X`. It follows that :math:`\big(X \oplus Y \,=\, X\big) \;\Leftrightarrow\; X \,\succcurlyeq\, Y`. Minimal sharp is the bpv-set :math:`\bf{0}`. Maximal sharp are all :math:`2^n` completely determined --crisp-- subsets of the support set *A*. 
 
 .. code-block:: pycon
    :caption: The sharpness ordering of bpv-sets
