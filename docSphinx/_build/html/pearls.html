@@ -8,7 +8,7 @@
 <meta content="Algorithmic Decision Theory, Fair and Accountable Algorithms, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Support, Bipolar-valued Epistemic Logic" name="keywords" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>3. Pearls of bipolar-valued epistemic logic &mdash; Digraph3 3.14.5 documentation</title>
+  <title>3. Pearls of bipolar-valued epistemic logic &mdash; Digraph3 3.14.6 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
@@ -17,7 +17,7 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=bcfd2f37"></script>
+      <script src="_static/documentation_options.js?v=8b05a55d"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="_static/clipboard.min.js?v=a7894cd8"></script>
@@ -142,7 +142,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#bipolar-valued-propositional-calculus">3.3.5.2. Bipolar-valued propositional calculus</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#superposition-of-elementary-epistemic-situations">3.3.5.3. Superposition of elementary epistemic situations</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#computational-bipolar-valued-set-theory">3.3.5.4. Computational bipolar-valued set theory</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#the-partially-ordered-commutative-epistemic-fusion-ring">3.3.5.5. The partially ordered commutative epistemic fusion ring</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-partially-ordered-commutative-epistemic-fusion-algebra">3.3.5.5. The partially ordered commutative epistemic fusion algebra</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#computing-the-bpv-set-of-weak-condorcet-winners">3.3.5.6. Computing the bpv-set of weak Condorcet winners</a></li>
 </ul>
 </li>
@@ -215,7 +215,7 @@
 <dd class="field-even"><p><a class="reference external" href="https://rbisdorff.github.io/">https://rbisdorff.github.io/</a></p>
 </dd>
 <dt class="field-odd">Version<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Python 3.14 (release: 3.14.5)</p>
+<dd class="field-odd"><p>Python 3.14 (release: 3.14.6)</p>
 </dd>
 <dt class="field-even">PDF version<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="_static/digraph3Pearls.pdf">3.6 MB</a></p>
@@ -4208,7 +4208,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <li><p><a class="reference internal" href="#bipolar-valued-propositional-calculus" id="id182">Bipolar-valued propositional calculus</a></p></li>
 <li><p><a class="reference internal" href="#superposition-of-elementary-epistemic-situations" id="id183">Superposition of elementary epistemic situations</a></p></li>
 <li><p><a class="reference internal" href="#computational-bipolar-valued-set-theory" id="id184">Computational bipolar-valued set theory</a></p></li>
-<li><p><a class="reference internal" href="#the-partially-ordered-commutative-epistemic-fusion-ring" id="id185">The partially ordered commutative epistemic fusion ring</a></p></li>
+<li><p><a class="reference internal" href="#the-partially-ordered-commutative-epistemic-fusion-algebra" id="id185">The partially ordered commutative epistemic fusion algebra</a></p></li>
 <li><p><a class="reference internal" href="#computing-the-bpv-set-of-weak-condorcet-winners" id="id186">Computing the bpv-set of weak Condorcet winners</a></p></li>
 </ul>
 </nav>
@@ -4384,8 +4384,8 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </div>
 <p>In the limit case of no indeterminate membership characteristics, we recover this way standard crisp sets and the previous set operations implement in fact a classical Boolean algebra <a class="reference internal" href="#bis-2004-3p" id="id58"><span>[BIS-2004_3p]</span></a>.</p>
 </section>
-<section id="the-partially-ordered-commutative-epistemic-fusion-ring">
-<h4><a class="toc-backref" href="#id185" role="doc-backlink"><span class="section-number">3.3.5.5. </span>The partially ordered commutative epistemic fusion ring</a><a class="headerlink" href="#the-partially-ordered-commutative-epistemic-fusion-ring" title="Link to this heading"></a></h4>
+<section id="the-partially-ordered-commutative-epistemic-fusion-algebra">
+<h4><a class="toc-backref" href="#id185" role="doc-backlink"><span class="section-number">3.3.5.5. </span>The partially ordered commutative epistemic fusion algebra</a><a class="headerlink" href="#the-partially-ordered-commutative-epistemic-fusion-algebra" title="Link to this heading"></a></h4>
 <p>The disjunctive and conjunctive epistemic fusions of two bpv-sets <em>X</em> and <em>Y</em>, denoted <img class="math" src="_images/math/99c58bc04b076fdf6db5f290e0e02e513f9867bc.png" alt="X \oplus Y"/>, respectively <img class="math" src="_images/math/6ab6b02a7eca2e9eb1e3c455333531f8388d1d25.png" alt="X \ominus Y"/>, give the bpv-sets defined as follows.</p>
 <div class="line-block">
 <div class="line">For all <img class="math" src="_images/math/abfcd739eadc42fcaef1611a14f05b2a3ddc2282.png" alt="z \in E_{X \oplus Y}"/> the membership characteristic <img class="math" src="_images/math/cb7c587186bd1180a36cb61d8b4596fd3d3f2677.png" alt="r\big(\,z \in (X \oplus Y)\,\big)\; ="/></div>

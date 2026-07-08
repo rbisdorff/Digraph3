@@ -4571,8 +4571,8 @@ Finally, a :py:meth:`~bipolarValuedSets.BpvSet.polarise` method is provided for 
 
 In the limit case of no indeterminate membership characteristics, we recover this way standard crisp sets and the previous set operations implement in fact a classical Boolean algebra [BIS-2004_3p]_. 
 
-The partially ordered commutative epistemic fusion ring
-.......................................................
+The partially ordered commutative epistemic fusion algebra
+..........................................................
 
 The disjunctive and conjunctive epistemic fusions of two bpv-sets *X* and *Y*, denoted :math:`X \oplus Y`, respectively :math:`X \ominus Y`, give the bpv-sets defined as follows.
 

@@ -48,12 +48,12 @@ def testBpvSet():
     X.showMembershipCharacteristics()
     Op = X.oplus(Y)
     Op.showMembershipCharacteristics()
-    Om = X.otimes(Y)
+    Om = X.ominus(Y)
     Om.showMembershipCharacteristics()
     M = RandomBpvSet(indeterminateness=1.0,elementNamePrefix='s')
     Oxmp = X.oplus(M)
     Oxmp.showMembershipCharacteristics()
-    Oxmm = X.otimes(M)
+    Oxmm = X.ominus(M)
     Oxmm.showMembershipCharacteristics()
 
     
