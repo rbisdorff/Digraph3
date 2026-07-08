@@ -142,7 +142,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#bipolar-valued-propositional-calculus">3.3.5.2. Bipolar-valued propositional calculus</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#superposition-of-elementary-epistemic-situations">3.3.5.3. Superposition of elementary epistemic situations</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#computational-bipolar-valued-set-theory">3.3.5.4. Computational bipolar-valued set theory</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#the-partially-ordered-commutative-epistemic-fusion-algebra">3.3.5.5. The partially ordered commutative epistemic fusion algebra</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-partially-ordered-commutative-epistemic-fusion-ring">3.3.5.5. The partially ordered commutative epistemic fusion ring</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#computing-the-bpv-set-of-weak-condorcet-winners">3.3.5.6. Computing the bpv-set of weak Condorcet winners</a></li>
 </ul>
 </li>
@@ -4208,7 +4208,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <li><p><a class="reference internal" href="#bipolar-valued-propositional-calculus" id="id182">Bipolar-valued propositional calculus</a></p></li>
 <li><p><a class="reference internal" href="#superposition-of-elementary-epistemic-situations" id="id183">Superposition of elementary epistemic situations</a></p></li>
 <li><p><a class="reference internal" href="#computational-bipolar-valued-set-theory" id="id184">Computational bipolar-valued set theory</a></p></li>
-<li><p><a class="reference internal" href="#the-partially-ordered-commutative-epistemic-fusion-algebra" id="id185">The partially ordered commutative epistemic fusion algebra</a></p></li>
+<li><p><a class="reference internal" href="#the-partially-ordered-commutative-epistemic-fusion-ring" id="id185">The partially ordered commutative epistemic fusion ring</a></p></li>
 <li><p><a class="reference internal" href="#computing-the-bpv-set-of-weak-condorcet-winners" id="id186">Computing the bpv-set of weak Condorcet winners</a></p></li>
 </ul>
 </nav>
@@ -4298,68 +4298,42 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>The <a class="reference internal" href="techDoc.html#module-bipolarValuedSets" title="bipolarValuedSets"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bipolarValuedSets</span></code></a> Digraph3 module provides, with the <a class="reference internal" href="techDoc.html#bipolarValuedSets.BpvSet" title="bipolarValuedSets.BpvSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">BpvSet</span></code></a> class, a Python implementation of such bpv-sets. In <a class="reference internal" href="#bipolarvaluedsets1"><span class="std std-numref">Listing 3.56</span></a> we use the <a class="reference internal" href="techDoc.html#bipolarValuedSets.RandomBpvSet" title="bipolarValuedSets.RandomBpvSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">RandomBpvSet</span></code></a> class for generating two random bpv-sets <em>X</em> and <em>Y</em> with a common support of three elements <em>s1</em>, <em>s2</em> and <em>s3</em>.</p>
 <div class="literal-block-wrapper docutils container" id="bipolarvaluedsets1">
 <div class="code-block-caption"><span class="caption-number">Listing 3.56 </span><span class="caption-text">Generating random bpv-sets</span><a class="headerlink" href="#bipolarvaluedsets1" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bipolarValuedSets</span> <span class="kn">import</span> <span class="n">RandomBpvSet</span>
-<span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">RandomBpvSet</span><span class="p">(</span><span class="n">numberOfElements</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">elementNamePrefix</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span>
-<span class="linenos"> 3</span><span class="gp">... </span>    <span class="n">indeterminateness</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">valuationRange</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="linenos"> 4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="hll"><span class="linenos"> 5</span><span class="go"> s2:  +0.6949</span>
-</span><span class="hll"><span class="linenos"> 6</span><span class="go"> s3:  +0.5275</span>
-</span><span class="hll"><span class="linenos"> 7</span><span class="go"> s5:  +0.0000</span>
-</span><span class="hll"><span class="linenos"> 8</span><span class="go"> s4:  -0.4899</span>
-</span><span class="hll"><span class="linenos"> 9</span><span class="go"> s1:  -0.7313</span>
-</span><span class="linenos">10</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="n">RandomBpvSet</span><span class="p">(</span><span class="n">numberOfElements</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">elementNamePrefix</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span>
-<span class="linenos">11</span><span class="gp">... </span>   <span class="n">indeterminateness</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">valuationRange</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="linenos">12</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="hll"><span class="linenos">13</span><span class="go"> s1:  +0.9121</span>
-</span><span class="hll"><span class="linenos">14</span><span class="go"> s2:  +0.8957</span>
-</span><span class="hll"><span class="linenos">15</span><span class="go"> s3:  -0.8869</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bipolarValuedSets</span> <span class="kn">import</span> <span class="n">RandomBpvSet</span>
+<span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">RandomBpvSet</span><span class="p">(</span><span class="n">numberOfElements</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">elementNamePrefix</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span>
+<span class="linenos">3</span><span class="gp">... </span>    <span class="n">indeterminateness</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">valuationRange</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="hll"><span class="linenos">5</span><span class="go"> s2:+0.6949, s3:+0.5275, s5:+0.0000, s4:-0.4899, s1:-0.7313</span>
+</span><span class="linenos">6</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="n">RandomBpvSet</span><span class="p">(</span><span class="n">numberOfElements</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">elementNamePrefix</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span>
+<span class="linenos">7</span><span class="gp">... </span>   <span class="n">indeterminateness</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">valuationRange</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="linenos">8</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="hll"><span class="linenos">9</span><span class="go"> s1:  +0.9121, s2:+0.8957, s3:-0.8869</span>
 </span></pre></div>
 </div>
 </div>
 <p>In <a class="reference internal" href="#bipolarvaluedsets2"><span class="std std-numref">Listing 3.57</span></a> below we illustrate the bipolar-valued set <strong>union</strong> and <strong>intersection</strong>.</p>
 <div class="literal-block-wrapper docutils container" id="bipolarvaluedsets2">
 <div class="code-block-caption"><span class="caption-number">Listing 3.57 </span><span class="caption-text">Set union and intersection of bpv-sets</span><a class="headerlink" href="#bipolarvaluedsets2" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">|</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="linenos"> 2</span><span class="go"> # Python&#39;s set union symbol is |</span>
-<span class="hll"><span class="linenos"> 3</span><span class="go"> s1:  +0.9121</span>
-</span><span class="hll"><span class="linenos"> 4</span><span class="go"> s2:  +0.8957</span>
-</span><span class="hll"><span class="linenos"> 5</span><span class="go"> s3:  +0.5275</span>
-</span><span class="hll"><span class="linenos"> 6</span><span class="go"> s5:  +0.0000</span>
-</span><span class="hll"><span class="linenos"> 7</span><span class="go"> s4:  -0.4899</span>
-</span><span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">&amp;</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="linenos"> 9</span><span class="go"> # Python&#39;s set intersection symbol is &amp;</span>
-<span class="hll"><span class="linenos">10</span><span class="go"> s2:  +0.6949</span>
-</span><span class="hll"><span class="linenos">11</span><span class="go"> s1:  -0.7313</span>
-</span><span class="hll"><span class="linenos">12</span><span class="go"> s3:  -0.8869</span>
-</span><span class="hll"><span class="linenos">13</span><span class="go"> s4:  -1.0000</span>
-</span><span class="hll"><span class="linenos">14</span><span class="go"> s5:  -1.0000</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">|</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="linenos">2</span><span class="go"> # Python&#39;s set union symbol is |</span>
+<span class="hll"><span class="linenos">3</span><span class="go"> s1:+0.9121, s2:+0.8957, s3:+0.5275, s5:+0.0000, s4:-0.4899</span>
+</span><span class="linenos">4</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">&amp;</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="linenos">5</span><span class="go"> # Python&#39;s set intersection symbol is &amp;</span>
+<span class="hll"><span class="linenos">6</span><span class="go"> s2:+0.6949, s1:-0.7313 s3:-0.8869, s4:-1.0000, s5:-1.0000</span>
 </span></pre></div>
 </div>
 </div>
 <p>In <a class="reference internal" href="#bipolarvaluedsets3"><span class="std std-numref">Listing 3.58</span></a> below we illustrate the bipolar-valued set <strong>difference</strong> and <strong>symmetric difference</strong>.</p>
 <div class="literal-block-wrapper docutils container" id="bipolarvaluedsets3">
 <div class="code-block-caption"><span class="caption-number">Listing 3.58 </span><span class="caption-text">Difference and symmetric differences of bpv-sets</span><a class="headerlink" href="#bipolarvaluedsets3" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">-</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="linenos"> 2</span><span class="go"> # Python&#39;s set difference is -</span>
-<span class="hll"><span class="linenos"> 3</span><span class="go"> s3:  +0.5275</span>
-</span><span class="hll"><span class="linenos"> 4</span><span class="go"> s5:  +0.0000</span>
-</span><span class="hll"><span class="linenos"> 5</span><span class="go"> s4:  -0.4899</span>
-</span><span class="hll"><span class="linenos"> 6</span><span class="go"> s2:  -0.8957</span>
-</span><span class="hll"><span class="linenos"> 7</span><span class="go"> s1:  -0.9121</span>
-</span><span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Y</span><span class="o">-</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="hll"><span class="linenos"> 9</span><span class="go"> s1:  +0.7313</span>
-</span><span class="hll"><span class="linenos">10</span><span class="go"> s2:  -0.6949</span>
-</span><span class="hll"><span class="linenos">11</span><span class="go"> s3:  -0.8869</span>
-</span><span class="hll"><span class="linenos">12</span><span class="go"> s4:  -1.0000</span>
-</span><span class="hll"><span class="linenos">13</span><span class="go"> s5:  -1.0000</span>
-</span><span class="linenos">14</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Y</span><span class="o">^</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="linenos">15</span><span class="go"># Python&#39;s symmetrix difference symbol is ^</span>
-<span class="linenos">16</span><span class="go"># X^Y = (X-Y)|(Y-X) or (X|Y)-(X&amp;Y)</span>
-<span class="hll"><span class="linenos">17</span><span class="go"> s1:  +0.7313</span>
-</span><span class="hll"><span class="linenos">18</span><span class="go"> s3:  +0.5275</span>
-</span><span class="hll"><span class="linenos">19</span><span class="go"> s5:  +0.0000</span>
-</span><span class="hll"><span class="linenos">20</span><span class="go"> s4:  -0.4899</span>
-</span><span class="hll"><span class="linenos">21</span><span class="go"> s2:  -0.6949</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">-</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="linenos">2</span><span class="go"> # Python&#39;s set difference is -</span>
+<span class="hll"><span class="linenos">3</span><span class="go"> s3:+0.5275, s5:+0.0000, s4:-0.4899 s2:-0.8957, s1:-0.9121</span>
+</span><span class="linenos">4</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Y</span><span class="o">-</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="hll"><span class="linenos">5</span><span class="go"> s1:+0.7313, s2:-0.6949, s3:-0.8869, s4:-1.0000, s5:-1.0000</span>
+</span><span class="linenos">6</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Y</span><span class="o">^</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="linenos">7</span><span class="go"> # Python&#39;s symmetrix difference symbol is ^</span>
+<span class="linenos">8</span><span class="go"> # X^Y = (X-Y)|(Y-X) or (X|Y)-(X&amp;Y)</span>
+<span class="hll"><span class="linenos">9</span><span class="go"> s1:+0.7313, s3:+0.5275, s5:+0.0000, s4:-0.4899, s2:-0.6949</span>
 </span></pre></div>
 </div>
 </div>
@@ -4367,25 +4341,21 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">D</span> <span class="o">=</span> <span class="n">Y</span> <span class="o">-</span> <span class="n">X</span>
 <span class="hll"><span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">D</span><span class="o">.</span><span class="n">isSubset</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
 </span><span class="linenos">3</span><span class="go"> Decimal(&#39;0.8869&#39;)</span>
-<span class="hll"><span class="linenos">4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">D1</span> <span class="o">=</span> <span class="n">D</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="n">InSite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span class="linenos">5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">D1</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="linenos">6</span><span class="go"> s1:  +0.7313</span>
-<span class="linenos">7</span><span class="go"> s2:  -0.6949</span>
-<span class="linenos">8</span><span class="go"> s3:  -0.8869</span>
+<span class="linenos">4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">D1</span> <span class="o">=</span> <span class="n">D</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="n">InSite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="hll"><span class="linenos">5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">D1</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+</span><span class="linenos">6</span><span class="go"> s1:+0.7313, s2:-0.6949, s3:-0.8869</span>
 </pre></div>
 </div>
 <p>Finally, a <a class="reference internal" href="techDoc.html#bipolarValuedSets.BpvSet.polarise" title="bipolarValuedSets.BpvSet.polarise"><code class="xref py py-meth docutils literal notranslate"><span class="pre">polarise()</span></code></a> method is provided for setting all positive and negative membership credibilities of a bpv-set to +1.0, respectively to -1.0 .</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">D2</span> <span class="o">=</span> <span class="n">D1</span><span class="o">.</span><span class="n">polarise</span><span class="p">(</span><span class="n">InSite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </span><span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">D2</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="linenos">3</span><span class="go"> s1:  +1.0000</span>
-<span class="linenos">4</span><span class="go"> s2:  -1.0000</span>
-<span class="linenos">5</span><span class="go"> s3:  -1.0000</span>
+<span class="linenos">3</span><span class="go"> s1:+1.0000, s2:-1.0000, s3:-1.0000</span>
 </pre></div>
 </div>
 <p>In the limit case of no indeterminate membership characteristics, we recover this way standard crisp sets and the previous set operations implement in fact a classical Boolean algebra <a class="reference internal" href="#bis-2004-3p" id="id58"><span>[BIS-2004_3p]</span></a>.</p>
 </section>
-<section id="the-partially-ordered-commutative-epistemic-fusion-algebra">
-<h4><a class="toc-backref" href="#id185" role="doc-backlink"><span class="section-number">3.3.5.5. </span>The partially ordered commutative epistemic fusion algebra</a><a class="headerlink" href="#the-partially-ordered-commutative-epistemic-fusion-algebra" title="Link to this heading"></a></h4>
+<section id="the-partially-ordered-commutative-epistemic-fusion-ring">
+<h4><a class="toc-backref" href="#id185" role="doc-backlink"><span class="section-number">3.3.5.5. </span>The partially ordered commutative epistemic fusion ring</a><a class="headerlink" href="#the-partially-ordered-commutative-epistemic-fusion-ring" title="Link to this heading"></a></h4>
 <p>The disjunctive and conjunctive epistemic fusions of two bpv-sets <em>X</em> and <em>Y</em>, denoted <img class="math" src="_images/math/99c58bc04b076fdf6db5f290e0e02e513f9867bc.png" alt="X \oplus Y"/>, respectively <img class="math" src="_images/math/6ab6b02a7eca2e9eb1e3c455333531f8388d1d25.png" alt="X \ominus Y"/>, give the bpv-sets defined as follows.</p>
 <div class="line-block">
 <div class="line">For all <img class="math" src="_images/math/abfcd739eadc42fcaef1611a14f05b2a3ddc2282.png" alt="z \in E_{X \oplus Y}"/> the membership characteristic <img class="math" src="_images/math/cb7c587186bd1180a36cb61d8b4596fd3d3f2677.png" alt="r\big(\,z \in (X \oplus Y)\,\big)\; ="/></div>
@@ -4426,71 +4396,45 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>In <a class="reference internal" href="#bipolarvaluedsets4"><span class="std std-numref">Listing 3.59</span></a> below we illustrate the disjunctive and conjunctive fusion operators.</p>
 <div class="literal-block-wrapper docutils container" id="bipolarvaluedsets4">
 <div class="code-block-caption"><span class="caption-number">Listing 3.59 </span><span class="caption-text">Disjunctive and conjunctive fusion of bpv-sets</span><a class="headerlink" href="#bipolarvaluedsets4" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">oplus</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="linenos"> 2</span><span class="go"> # disjunctive epistemic fusion -</span>
-<span class="hll"><span class="linenos"> 3</span><span class="go">  s2:  +0.8957</span>
-</span><span class="hll"><span class="linenos"> 4</span><span class="go">  s1:  +0.0000</span>
-</span><span class="hll"><span class="linenos"> 5</span><span class="go">  s3:  +0.0000</span>
-</span><span class="hll"><span class="linenos"> 6</span><span class="go">  s5:  +0.0000</span>
-</span><span class="hll"><span class="linenos"> 7</span><span class="go">  s4:  -0.4899</span>
-</span><span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">ominus</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="linenos"> 9</span><span class="go"> # conjunctive epistemic fusion -</span>
-<span class="hll"><span class="linenos">10</span><span class="go">  s2:  +0.6949</span>
-</span><span class="hll"><span class="linenos">11</span><span class="go">  s1:  +0.0000</span>
-</span><span class="hll"><span class="linenos">12</span><span class="go">  s3:  +0.0000</span>
-</span><span class="hll"><span class="linenos">13</span><span class="go">  s5:  +0.0000</span>
-</span><span class="hll"><span class="linenos">14</span><span class="go">  s4:  -0.4899</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">oplus</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="linenos">2</span><span class="go"> # disjunctive epistemic fusion -</span>
+<span class="hll"><span class="linenos">3</span><span class="go">  s2:+0.8957, s2:+0.6710, s1:+0.0000, s3:+0.0000, s4:-0.8303</span>
+</span><span class="linenos">4</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">ominus</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="linenos">5</span><span class="go"> # conjunctive epistemic fusion -</span>
+<span class="hll"><span class="linenos">6</span><span class="go">  s2:+0.6949, s5:+0.6710, s1:+0.0000, s3:+0.0000, s4:-0.4899</span>
 </span></pre></div>
 </div>
 </div>
 <p>Due to the commutativity of the numerical binary <em>max</em> and <em>min</em> operators, both <img class="math" src="_images/math/2db0a4269b9c3cbe81b65f5b18ec9a4f1e2246ca.png" alt="\oplus"/> and <img class="math" src="_images/math/4f5aa827e0fff977f87dc10e4106c2a0144ebabb.png" alt="\ominus"/> operators are <strong>cummutative</strong>. Mind however, that similarly to a mean or average operator, both epistemic fusion operators are not associative. In order to render results univocal, all positive and negative arguments are considered separately and both intermediate results are further processed as two single arguments.</p>
-<p>Let <img class="math" src="_images/math/670c1a35fcd5cab5e00e9981d740edc44b3b0564.png" alt="\mathcal{S}(A)"/> denote the set of all possible bpv-sets that may be defined on a given finite set <em>A</em> of dimension <em>n</em>. Let <img class="math" src="_images/math/d2a7a9134ffce7190d7bdf8f97da83114ae3575d.png" alt="\bf{0} \in \mathcal{S}(A)"/>  denote the completely indeterminate bpv-set, i.e <img class="math" src="_images/math/e2030ac3f8bc140abe7943ebaa04eb469d93f77a.png" alt="r(a \in \bf{0}) \;=\; 0.0 , \; \forall \,a \in\, A"/>. It is worthwhile noticing that bpv-set <img class="math" src="_images/math/9f6c3c1fccc6aedeaba5d79feb369ec59a1114dd.png" alt="\bf{0}"/> is the <strong>neutral</strong> element of the <img class="math" src="_images/math/2db0a4269b9c3cbe81b65f5b18ec9a4f1e2246ca.png" alt="\oplus"/> and the <img class="math" src="_images/math/4f5aa827e0fff977f87dc10e4106c2a0144ebabb.png" alt="\ominus"/> operator. For any bpv-subset of <em>A</em>, the corresponding polarised –fully determined– crisp subset is the <strong>absorbent</strong> element of the <img class="math" src="_images/math/2db0a4269b9c3cbe81b65f5b18ec9a4f1e2246ca.png" alt="\oplus"/> and a <strong>neutral</strong> element of the <img class="math" src="_images/math/4f5aa827e0fff977f87dc10e4106c2a0144ebabb.png" alt="\ominus"/> operator.</p>
+<p>Let <img class="math" src="_images/math/670c1a35fcd5cab5e00e9981d740edc44b3b0564.png" alt="\mathcal{S}(A)"/> denote the set of all possible bpv-sets that may be defined on a given finite set <em>A</em> of dimension <em>n</em>. Let <img class="math" src="_images/math/d2a7a9134ffce7190d7bdf8f97da83114ae3575d.png" alt="\bf{0} \in \mathcal{S}(A)"/>  denote the completely indeterminate bpv-set, i.e <img class="math" src="_images/math/e2030ac3f8bc140abe7943ebaa04eb469d93f77a.png" alt="r(a \in \bf{0}) \;=\; 0.0 , \; \forall \,a \in\, A"/>. It is worthwhile noticing that bpv-set <img class="math" src="_images/math/9f6c3c1fccc6aedeaba5d79feb369ec59a1114dd.png" alt="\bf{0}"/> is a <strong>neutral</strong> element of the <img class="math" src="_images/math/2db0a4269b9c3cbe81b65f5b18ec9a4f1e2246ca.png" alt="\oplus"/> and the <img class="math" src="_images/math/4f5aa827e0fff977f87dc10e4106c2a0144ebabb.png" alt="\ominus"/> operator. For any bpv-subset of <em>A</em>, the corresponding polarised –fully determined– crisp subset is an <strong>absorbent</strong> element of the <img class="math" src="_images/math/2db0a4269b9c3cbe81b65f5b18ec9a4f1e2246ca.png" alt="\oplus"/> and a <strong>neutral</strong> element of the <img class="math" src="_images/math/4f5aa827e0fff977f87dc10e4106c2a0144ebabb.png" alt="\ominus"/> operator. And, the minimal precision valued polarised bpv-set is a <strong>neutral</strong> element of the <img class="math" src="_images/math/2db0a4269b9c3cbe81b65f5b18ec9a4f1e2246ca.png" alt="\oplus"/> operator and an <strong>absorbent</strong> element of the <img class="math" src="_images/math/4f5aa827e0fff977f87dc10e4106c2a0144ebabb.png" alt="\ominus"/> operator.</p>
 <div class="literal-block-wrapper docutils container" id="bipolarvaluedsets5">
 <div class="code-block-caption"><span class="caption-number">Listing 3.60 </span><span class="caption-text">Neutral and absorbent bpv-sets</span><a class="headerlink" href="#bipolarvaluedsets5" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">O</span> <span class="o">=</span> <span class="n">RandomBpvSet</span><span class="p">(</span><span class="n">indeterminateness</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">elementNamePrefix</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
-<span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Xp</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">polarise</span><span class="p">(</span><span class="n">InSite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">oplus</span><span class="p">(</span><span class="n">O</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="hll"><span class="linenos"> 4</span><span class="go"> s2:  +0.6949</span>
-</span><span class="hll"><span class="linenos"> 5</span><span class="go"> s3:  +0.5275</span>
-</span><span class="hll"><span class="linenos"> 6</span><span class="go"> s5:  +0.0000</span>
-</span><span class="hll"><span class="linenos"> 7</span><span class="go"> s4:  -0.4899</span>
-</span><span class="hll"><span class="linenos"> 8</span><span class="go"> s1:  -0.7313</span>
-</span><span class="linenos"> 9</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">oplus</span><span class="p">(</span><span class="n">Xp</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="hll"><span class="linenos">10</span><span class="go"> s2:  +1.0000</span>
-</span><span class="hll"><span class="linenos">11</span><span class="go"> s3:  +1.0000</span>
-</span><span class="hll"><span class="linenos">12</span><span class="go"> s5:  +0.0000</span>
-</span><span class="hll"><span class="linenos">13</span><span class="go"> s4:  -1.0000</span>
-</span><span class="hll"><span class="linenos">14</span><span class="go"> s1:  -1.0000</span>
-</span><span class="linenos">15</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">ominus</span><span class="p">(</span><span class="n">O</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="hll"><span class="linenos">16</span><span class="go"> s2:  +0.6949</span>
-</span><span class="hll"><span class="linenos">17</span><span class="go"> s3:  +0.5275</span>
-</span><span class="hll"><span class="linenos">18</span><span class="go"> s5:  +0.0000</span>
-</span><span class="hll"><span class="linenos">19</span><span class="go"> s4:  -0.4899</span>
-</span><span class="hll"><span class="linenos">20</span><span class="go"> s1:  -0.7313</span>
-</span><span class="linenos">21</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">ominus</span><span class="p">(</span><span class="n">Xp</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="hll"><span class="linenos">22</span><span class="go"> s2:  +0.6949</span>
-</span><span class="hll"><span class="linenos">23</span><span class="go"> s3:  +0.5275</span>
-</span><span class="hll"><span class="linenos">24</span><span class="go"> s5:  +0.0000</span>
-</span><span class="hll"><span class="linenos">25</span><span class="go"> s4:  -0.4899</span>
-</span><span class="hll"><span class="linenos">26</span><span class="go"> s1:  -0.7313</span>
+<span class="hll"><span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Xp</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">polarise</span><span class="p">(</span><span class="n">InSite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Xm</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">polarise</span><span class="p">(</span><span class="n">MinimalValues</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">InSite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span class="linenos"> 4</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">oplus</span><span class="p">(</span><span class="n">O</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="hll"><span class="linenos"> 5</span><span class="go"> s2:+0.6949, s3:+0.5275, s5:+0.0000, s4:-0.4899, s1:-0.7313</span>
+</span><span class="linenos"> 6</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">oplus</span><span class="p">(</span><span class="n">Xp</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="hll"><span class="linenos"> 7</span><span class="go"> s2:+1.0000, s3:+1.0000, s5:+0.0000, s4:-1.0000, s1:-1.0000</span>
+</span><span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">oplus</span><span class="p">(</span><span class="n">Xm</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="hll"><span class="linenos"> 9</span><span class="go"> s2:+0.6949, s3:+0.5275, s5:+0.0000, s4:-0.4899, s1:-0.7313</span>
+</span><span class="linenos">10</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">ominus</span><span class="p">(</span><span class="n">O</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="hll"><span class="linenos">11</span><span class="go"> s2:+0.6949, s3:+0.5275, s5:+0.0000, s4:-0.4899, s1:-0.7313</span>
+</span><span class="linenos">12</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">ominus</span><span class="p">(</span><span class="n">Xp</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="hll"><span class="linenos">13</span><span class="go"> s2:+0.6949, s3:+0.5275, s5:+0.0000, s4:-0.4899, s1:-0.7313</span>
+</span><span class="linenos">14</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">ominus</span><span class="p">(</span><span class="n">Xm</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="hll"><span class="linenos">15</span><span class="go"> s2:+0.0001, s3:+0.0001, s5:+0.0000, s4:-0.0001, s1:-0.0001</span>
 </span></pre></div>
 </div>
 </div>
+<p>Remarkable is the fact that a 0.0 chracterisic value does not count as minimal positive and maximal negative value. Its epistemic value is in fact <strong>indeterminate</strong>, i.e. it may be any possible value from -1.0 to +1.0.</p>
 <p>To every bpv-set <img class="math" src="_images/math/8b44e6fe18081bc764ac2d6a94235eff5bf8f22b.png" alt="X \in \mathcal{S}(A)"/> we may associate its negated –dual–  bpv-set <img class="math" src="_images/math/4c0c5bbe753ecd1ad28d5855a89f1a5d3a1a3640.png" alt="-X"/> such that <img class="math" src="_images/math/74a5fdb6923b243f6729bce87a5d25a76c8abf19.png" alt="X \oplus -X \;=\; X \ominus -X \;=\; \bf{0}"/> .</p>
 <div class="literal-block-wrapper docutils container" id="bipolarvaluedsets6">
 <div class="code-block-caption"><span class="caption-number">Listing 3.61 </span><span class="caption-text">Dual bvp-sets</span><a class="headerlink" href="#bipolarvaluedsets6" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">oplus</span><span class="p">(</span><span class="o">-</span><span class="n">X</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="hll"><span class="linenos"> 2</span><span class="go"> s1:  +0.0000</span>
-</span><span class="hll"><span class="linenos"> 3</span><span class="go"> s2:  +0.0000</span>
-</span><span class="hll"><span class="linenos"> 4</span><span class="go"> s3:  +0.0000</span>
-</span><span class="hll"><span class="linenos"> 5</span><span class="go"> s4:  +0.0000</span>
-</span><span class="hll"><span class="linenos"> 6</span><span class="go"> s5:  +0.0000</span>
-</span><span class="linenos"> 7</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">ominus</span><span class="p">(</span><span class="o">-</span><span class="n">X</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="hll"><span class="linenos"> 8</span><span class="go"> s1:  +0.0000</span>
-</span><span class="hll"><span class="linenos"> 9</span><span class="go"> s2:  +0.0000</span>
-</span><span class="hll"><span class="linenos">10</span><span class="go"> s3:  +0.0000</span>
-</span><span class="hll"><span class="linenos">11</span><span class="go"> s4:  +0.0000</span>
-</span><span class="hll"><span class="linenos">12</span><span class="go"> s5:  +0.0000</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">oplus</span><span class="p">(</span><span class="o">-</span><span class="n">X</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="hll"><span class="linenos">2</span><span class="go"> s1:+0.0000, s2:+0.0000, s3:+0.0000, s4:+0.0000, s5:+0.0000</span>
+</span><span class="linenos">3</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">ominus</span><span class="p">(</span><span class="o">-</span><span class="n">X</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="hll"><span class="linenos">4</span><span class="go"> s1:+0.0000, s2:+0.0000, s3:+0.0000, s4:+0.0000, s5:+0.0000</span>
 </span></pre></div>
 </div>
 </div>

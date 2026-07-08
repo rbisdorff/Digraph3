@@ -4471,23 +4471,17 @@ The :py:mod:`bipolarValuedSets` Digraph3 module provides, with the :py:class:`~b
    :caption: Generating random bpv-sets
    :name: bipolarValuedSets1
    :linenos:
-   :emphasize-lines: 5-9,13-
+   :emphasize-lines: 5,9
 
    >>> from bipolarValuedSets import RandomBpvSet
    >>> X = RandomBpvSet(numberOfElements=5,elementNamePrefix='s',
    ...     indeterminateness=0.1,valuationRange=(-1, 1),ndigits=4,seed=1)
    >>> X.showMembershipCharacteristics()
-    s2:  +0.6949
-    s3:  +0.5275
-    s5:  +0.0000
-    s4:  -0.4899
-    s1:  -0.7313
+    s2:+0.6949, s3:+0.5275, s5:+0.0000, s4:-0.4899, s1:-0.7313
    >>> Y = RandomBpvSet(numberOfElements=3,elementNamePrefix='s',
    ...    indeterminateness=0.1,valuationRange=(-1, 1),ndigits=4,seed=2)
    >>> Y.showMembershipCharacteristics()
-    s1:  +0.9121
-    s2:  +0.8957
-    s3:  -0.8869
+    s1:  +0.9121, s2:+0.8957, s3:-0.8869
 
 In :numref:`bipolarValuedSets2` below we illustrate the bipolar-valued set **union** and **intersection**.
 
@@ -4495,22 +4489,14 @@ In :numref:`bipolarValuedSets2` below we illustrate the bipolar-valued set **uni
    :caption: Set union and intersection of bpv-sets
    :name: bipolarValuedSets2
    :linenos:
-   :emphasize-lines: 3-7,10-
+   :emphasize-lines: 3,6
 
    >>> (X|Y).showMembershipCharacteristics()
     # Python's set union symbol is |
-    s1:  +0.9121
-    s2:  +0.8957
-    s3:  +0.5275
-    s5:  +0.0000
-    s4:  -0.4899
+    s1:+0.9121, s2:+0.8957, s3:+0.5275, s5:+0.0000, s4:-0.4899
    >>> (X&Y).showMembershipCharacteristics()
     # Python's set intersection symbol is &
-    s2:  +0.6949
-    s1:  -0.7313
-    s3:  -0.8869
-    s4:  -1.0000
-    s5:  -1.0000
+    s2:+0.6949, s1:-0.7313 s3:-0.8869, s4:-1.0000, s5:-1.0000
 
 In :numref:`bipolarValuedSets3` below we illustrate the bipolar-valued set **difference** and **symmetric difference**. 
 
@@ -4518,44 +4504,30 @@ In :numref:`bipolarValuedSets3` below we illustrate the bipolar-valued set **dif
    :caption: Difference and symmetric differences of bpv-sets
    :name: bipolarValuedSets3
    :linenos:
-   :emphasize-lines: 3-7,9-13,17-
+   :emphasize-lines: 3,5,9
  
    >>> (X-Y).showMembershipCharacteristics()
     # Python's set difference is -
-    s3:  +0.5275
-    s5:  +0.0000
-    s4:  -0.4899
-    s2:  -0.8957
-    s1:  -0.9121
+    s3:+0.5275, s5:+0.0000, s4:-0.4899 s2:-0.8957, s1:-0.9121
    >>> (Y-X).showMembershipCharacteristics()
-    s1:  +0.7313
-    s2:  -0.6949
-    s3:  -0.8869
-    s4:  -1.0000
-    s5:  -1.0000
+    s1:+0.7313, s2:-0.6949, s3:-0.8869, s4:-1.0000, s5:-1.0000
    >>> (Y^X).showMembershipCharacteristics() 
-   # Python's symmetrix difference symbol is ^
-   # X^Y = (X-Y)|(Y-X) or (X|Y)-(X&Y)
-    s1:  +0.7313
-    s3:  +0.5275
-    s5:  +0.0000
-    s4:  -0.4899
-    s2:  -0.6949
+    # Python's symmetrix difference symbol is ^
+    # X^Y = (X-Y)|(Y-X) or (X|Y)-(X&Y)
+    s1:+0.7313, s3:+0.5275, s5:+0.0000, s4:-0.4899, s2:-0.6949
 
 The :py:class:`~bipolarValuedSets.BpvSet` class provides furthermore a :py:meth:`~bipolarValuedSets.BpvSet.isSubset` method for computing the bipolar-valued subset statement and a :py:meth:`~bipolarValuedSets.BpvSet.strip` method which removes potential non-elements from the support of a bpv-set.
 
 .. code-block:: pycon
    :linenos:
-   :emphasize-lines: 2,4
+   :emphasize-lines: 2,5
 
    >>> D = Y - X
    >>> D.isSubset(Y)
     Decimal('0.8869')
    >>> D1 = D.strip(InSite=False)
    >>> D1.showMembershipCharacteristics()
-    s1:  +0.7313
-    s2:  -0.6949
-    s3:  -0.8869
+    s1:+0.7313, s2:-0.6949, s3:-0.8869
 
 Finally, a :py:meth:`~bipolarValuedSets.BpvSet.polarise` method is provided for setting all positive and negative membership credibilities of a bpv-set to +1.0, respectively to -1.0 .
 
@@ -4565,14 +4537,12 @@ Finally, a :py:meth:`~bipolarValuedSets.BpvSet.polarise` method is provided for 
 
    >>> D2 = D1.polarise(InSite=False)
    >>> D2.showMembershipCharacteristics()
-    s1:  +1.0000
-    s2:  -1.0000
-    s3:  -1.0000
+    s1:+1.0000, s2:-1.0000, s3:-1.0000
 
 In the limit case of no indeterminate membership characteristics, we recover this way standard crisp sets and the previous set operations implement in fact a classical Boolean algebra [BIS-2004_3p]_. 
 
-The partially ordered commutative epistemic fusion algebra
-..........................................................
+The partially ordered commutative epistemic fusion ring
+.......................................................
 
 The disjunctive and conjunctive epistemic fusions of two bpv-sets *X* and *Y*, denoted :math:`X \oplus Y`, respectively :math:`X \ominus Y`, give the bpv-sets defined as follows.
 
@@ -4600,59 +4570,42 @@ In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunct
    :caption: Disjunctive and conjunctive fusion of bpv-sets
    :name: bipolarValuedSets4
    :linenos:
-   :emphasize-lines: 3-7,10-14
+   :emphasize-lines: 3,6
  
    >>> (X.oplus(Y)).showMembershipCharacteristics()
     # disjunctive epistemic fusion -
-     s2:  +0.8957
-     s1:  +0.0000
-     s3:  +0.0000
-     s5:  +0.0000
-     s4:  -0.4899
+     s2:+0.8957, s2:+0.6710, s1:+0.0000, s3:+0.0000, s4:-0.8303
    >>> (X.ominus(Y)).showMembershipCharacteristics()
     # conjunctive epistemic fusion -  
-     s2:  +0.6949
-     s1:  +0.0000
-     s3:  +0.0000
-     s5:  +0.0000
-     s4:  -0.4899
+     s2:+0.6949, s5:+0.6710, s1:+0.0000, s3:+0.0000, s4:-0.4899
 
 Due to the commutativity of the numerical binary *max* and *min* operators, both :math:`\oplus` and :math:`\ominus` operators are **cummutative**. Mind however, that similarly to a mean or average operator, both epistemic fusion operators are not associative. In order to render results univocal, all positive and negative arguments are considered separately and both intermediate results are further processed as two single arguments.  
 
-Let :math:`\mathcal{S}(A)` denote the set of all possible bpv-sets that may be defined on a given finite set *A* of dimension *n*. Let :math:`\bf{0} \in \mathcal{S}(A)`  denote the completely indeterminate bpv-set, i.e :math:`r(a \in \bf{0}) \;=\; 0.0 , \; \forall \,a \in\, A`. It is worthwhile noticing that bpv-set :math:`\bf{0}` is the **neutral** element of the :math:`\oplus` and the :math:`\ominus` operator. For any bpv-subset of *A*, the corresponding polarised --fully determined-- crisp subset is the **absorbent** element of the :math:`\oplus` and a **neutral** element of the :math:`\ominus` operator.
+Let :math:`\mathcal{S}(A)` denote the set of all possible bpv-sets that may be defined on a given finite set *A* of dimension *n*. Let :math:`\bf{0} \in \mathcal{S}(A)`  denote the completely indeterminate bpv-set, i.e :math:`r(a \in \bf{0}) \;=\; 0.0 , \; \forall \,a \in\, A`. It is worthwhile noticing that bpv-set :math:`\bf{0}` is a **neutral** element of the :math:`\oplus` and the :math:`\ominus` operator. For any bpv-subset of *A*, the corresponding polarised --fully determined-- crisp subset is an **absorbent** element of the :math:`\oplus` and a **neutral** element of the :math:`\ominus` operator. And, the minimal precision valued polarised bpv-set is a **neutral** element of the :math:`\oplus` operator and an **absorbent** element of the :math:`\ominus` operator.
 
 .. code-block:: pycon
    :caption: Neutral and absorbent bpv-sets
    :name: bipolarValuedSets5
    :linenos:
-   :emphasize-lines: 4-8,10-14,16-20,22-26
+   :emphasize-lines: 2-3,5,7,9,11,13,15
 
    >>> O = RandomBpvSet(indeterminateness=1.0,elementNamePrefix='s')
    >>> Xp = X.polarise(InSite=False)
+   >>> Xm = X.polarise(MinimalValues=True,InSite=False)
    >>> (X.oplus(O)).showMembershipCharacteristics()
-    s2:  +0.6949
-    s3:  +0.5275
-    s5:  +0.0000
-    s4:  -0.4899
-    s1:  -0.7313
+    s2:+0.6949, s3:+0.5275, s5:+0.0000, s4:-0.4899, s1:-0.7313
    >>> (X.oplus(Xp)).showMembershipCharacteristics()
-    s2:  +1.0000
-    s3:  +1.0000
-    s5:  +0.0000
-    s4:  -1.0000
-    s1:  -1.0000
+    s2:+1.0000, s3:+1.0000, s5:+0.0000, s4:-1.0000, s1:-1.0000
+   >>> (X.oplus(Xm)).showMembershipCharacteristics()
+    s2:+0.6949, s3:+0.5275, s5:+0.0000, s4:-0.4899, s1:-0.7313
    >>> (X.ominus(O)).showMembershipCharacteristics()
-    s2:  +0.6949
-    s3:  +0.5275
-    s5:  +0.0000
-    s4:  -0.4899
-    s1:  -0.7313
+    s2:+0.6949, s3:+0.5275, s5:+0.0000, s4:-0.4899, s1:-0.7313
    >>> (X.ominus(Xp)).showMembershipCharacteristics()
-    s2:  +0.6949
-    s3:  +0.5275
-    s5:  +0.0000
-    s4:  -0.4899
-    s1:  -0.7313
+    s2:+0.6949, s3:+0.5275, s5:+0.0000, s4:-0.4899, s1:-0.7313
+   >>> (X.ominus(Xm)).showMembershipCharacteristics()
+    s2:+0.0001, s3:+0.0001, s5:+0.0000, s4:-0.0001, s1:-0.0001
+
+Remarkable is the fact that a 0.0 chracterisic value does not count as minimal positive and maximal negative value. Its epistemic value is in fact **indeterminate**, i.e. it may be any possible value from -1.0 to +1.0.
 
 To every bpv-set :math:`X \in \mathcal{S}(A)` we may associate its negated --dual--  bpv-set :math:`-X` such that :math:`X \oplus -X \;=\; X \ominus -X \;=\; \bf{0}` . 
 
@@ -4660,20 +4613,12 @@ To every bpv-set :math:`X \in \mathcal{S}(A)` we may associate its negated --dua
    :caption: Dual bvp-sets
    :name: bipolarValuedSets6
    :linenos:
-   :emphasize-lines: 2-6,8-12
+   :emphasize-lines: 2,4
 
    >>> (X.oplus(-X)).showMembershipCharacteristics()
-    s1:  +0.0000
-    s2:  +0.0000
-    s3:  +0.0000
-    s4:  +0.0000
-    s5:  +0.0000
+    s1:+0.0000, s2:+0.0000, s3:+0.0000, s4:+0.0000, s5:+0.0000
    >>> (X.ominus(-X)).showMembershipCharacteristics()
-    s1:  +0.0000
-    s2:  +0.0000
-    s3:  +0.0000
-    s4:  +0.0000
-    s5:  +0.0000
+    s1:+0.0000, s2:+0.0000, s3:+0.0000, s4:+0.0000, s5:+0.0000
 
 The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a partial **sharpness** ordering denoted :math:`\succcurlyeq` and defined as follows. Let *X* and *Y* be two bpv-sets in :math:`\mathcal{S}(A)`. We say that :math:`X \,\succcurlyeq\, Y` when :math:`\forall a \in A` either :math:`r(a \in X) \leqslant r(a \in Y) \leqslant 0.0` or, :math:`0.0 \leqslant r(a \in Y) \leqslant r(a \in X`. It follows that :math:`\big(X \oplus Y \,=\, X\big) \;\Leftrightarrow\; X \,\succcurlyeq\, Y`. Minimal sharp is the bpv-set :math:`\bf{0}`. Maximal sharp are all :math:`2^n` completely determined --crisp-- subsets of the support set *A*. 
 

@@ -127,7 +127,7 @@ class BpvSet(object):
             self.name = 'emptyBvpSet'
             self.support = {}
             self.ndigits = 4
-            self.valuationDomain = {'min':Decimal(-1),'med':Decimal(0),'max':Decimal(1)}
+            self.valuationDomain = {'min':Decimal(-1),'med':Decimal(0),'max':Decimal(1),'precision':Decimal('0.0001')}
             self.membership = {}
             self.cardinality = 0
             self.determinateness = Decimal('0')
@@ -719,11 +719,18 @@ class BpvSet(object):
         new = BpvSet()
         new.name = self.name
         new.valuationDomain = self.valuationDomain
-        Min = new.valuationDomain['min']
-        Med = new.valuationDomain['med']
-        Max = new.valuationDomain['max']
-        new.support = self.support
-        membership = self.membership
+        if MinimalValues:
+            Min = -new.valuationDomain['precision']
+            Med = new.valuationDomain['med']
+            Max = new.valuationDomain['precision']
+            new.support = self.support
+            membership = self.membership
+        else:
+            Min = new.valuationDomain['min']
+            Med = new.valuationDomain['med']
+            Max = new.valuationDomain['max']
+            new.support = self.support
+            membership = self.membership
         for it in new.support:
             if Strict:
                 if membership[it] > cutLevel:
@@ -761,6 +768,7 @@ class RandomBpvSet(BpvSet):
                  indeterminateness=0.1,
                  valuationRange=(-1,1),
                  ndigits = 4,
+                 precision = '0.0001',
                  seed=None,
                  Debug=False):
         # store arguments
@@ -783,10 +791,10 @@ class RandomBpvSet(BpvSet):
                               'comment': 'RandomBpvset() generated.' }
         self.support = support
         # setting valuation domain
-        
         valuationDomain = {'min': Decimal(str(valuationRange[0])),
                            'med': Decimal(0),
-                           'max': Decimal(str(valuationRange[1]))}
+                           'max': Decimal(str(valuationRange[1])),
+                           'precision': Decimal(precision)}
         Max = valuationDomain['max']
         Med = valuationDomain['med']
         Min = valuationDomain['min']
