@@ -4431,7 +4431,7 @@ But we may also operate **non compensatory superpositions** of epistemic situati
 
 Mind that the disjunctive, as well as the conjunctive epistemic fusion operator, like a mean or an average operator, are not associative when multiple characteristic values must be fused together. In this case, all positive and negative terms get separately fused and their respective final results get again submitted to the fusion operator. As a consequence, when there exist conjointly positive and negative epistemic evidences for a statement, the truthfulness or falseness of their epistemic fusion always becomes **indeterminate**.
 
-Lest us now apply this bipolar-valued logical characteritic calculus to elementary set theory. 
+Lest us now apply this bipolar-valued logical characteristic calculus to elementary set theory. 
 
 Computational bipolar-valued set theory
 .......................................
