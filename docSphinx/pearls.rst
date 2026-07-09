@@ -2930,7 +2930,7 @@ The first 3 principal axes support together about 70% of the total inertia. Most
 Exploring the *better rated*  and the *as well as rated* opinions
 .................................................................
 
-In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asymmetrical and symmetrical parts of the '*at least as well rated as*' opinions (see the tutorial on :ref:`Manipulating Digraph objects <Digraphs-Tutorial-label>`).
+In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asymmetric and symmetrical parts of the '*at least as well rated as*' opinions (see the tutorial on :ref:`Manipulating Digraph objects <Digraphs-Tutorial-label>`).
 
 Let us first have a look at the pairwise asymmetrical part, namely the '*better rated than*' and '*less well rated than*' opinions of the movie critics. 
 
@@ -3501,7 +3501,7 @@ As we observe only 11 intransitive triples in the codual outranking digraph *gcd
 Revealing the transitive part of a bipolar-valued digraph
 .........................................................
 
-As we have noticed before, the randomized versions of the :py:class:`~linearOrders.PolarisedBachetRanking` and the :py:class:`~linearOrders.ValuedBachetRanking` constructors potentially produce multiple ranking results of unequal correlation quality, yet respecting --due to the Condorcet consistency property-- all more or less the transitive part of the given digraph. If we collect now a small subset of the best correlated rankings, we can use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class for constructing, by epistemic disjunctive fusion of these selected rankings, a partial *Bachet* ranking result --a transitive asymmetrical digraph with indeterminate reflexive relations-- showing actually the potential transitive part of a given polarised outranking digraph. 
+As we have noticed before, the randomized versions of the :py:class:`~linearOrders.PolarisedBachetRanking` and the :py:class:`~linearOrders.ValuedBachetRanking` constructors potentially produce multiple ranking results of unequal correlation quality, yet respecting --due to the Condorcet consistency property-- all more or less the transitive part of the given digraph. If we collect now a small subset of the best correlated rankings, we can use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class for constructing, by epistemic disjunctive fusion of these selected rankings, a partial *Bachet* ranking result --a transitive asymmetric digraph with indeterminate reflexive relations-- showing actually the potential transitive part of a given polarised outranking digraph. 
 
 To explore this remarkable opportunity, a new :py:class:`~transitiveDigraphs.PartialBachetRanking` class is provided by the :py:mod:`transitiveDigraphs` module. To illustrate its usefulness, let us reconsider the example outranking digraph *g* of :numref:`optimisingBachet`. 
 
@@ -3646,7 +3646,7 @@ In :numref:`bachetBCR1` we see confirmed that alternative *a2* positively outran
 
 Most credible first choice appears indeed to be alternative *a2* with a convincing 71% majority of criteria significance, followed by alternatives *a4* and *a6* with a 58% majority of criteria significance (Line 14). Most credible recommended last choice appears to be  alternative *a1* with a 59% majority of criteria significance (Line 22). Notice the ambiguous recommendation of alternative *a4* as potential *first* **and** *last* choice. This explains its appearance in the midfield of the best correlated Bachet ranking here (see :numref:`BachetBCR9` Line 2).
 
-As the *Bachet* choice recommendation is based on a partial transitive asymmetrical digraph, actually highly correlated with the given outranking digraph *g* (+0.821), a unique initial and a unique terminal prekernel always exist (see :numref:`BachetBCR0` Lines 7 and 10). Both these properties confer the *Bachet choice recommendation algorithm* a computational advantage over the *Rubis* first choice recommendation algorithm based on initial and terminal prekernels directly extracted from the given strict outranking digraph where we, first, must arbitrarily break, the case given, all chordless outranking circuits (see [BIS-2008p]_).
+As the *Bachet* choice recommendation is based on a partial transitive asymmetric digraph, actually highly correlated with the given outranking digraph *g* (+0.821), a unique initial and a unique terminal prekernel always exist (see :numref:`BachetBCR0` Lines 7 and 10). Both these properties confer the *Bachet choice recommendation algorithm* a computational advantage over the *Rubis* first choice recommendation algorithm based on initial and terminal prekernels directly extracted from the given strict outranking digraph where we, first, must arbitrarily break, the case given, all chordless outranking circuits (see [BIS-2008p]_).
 
 Computing initial and terminal *prekernels* in digraphs is the subject of the next Section.
 
@@ -4040,7 +4040,7 @@ It immediately follows that weak chordless circuits are part of the class of dig
 Kernels in lateralized digraphs
 ...............................
 
-Humans do live in an apparent physical space of plain transitive **lateral orientation**, fully empowered in finite geometrical 3D models with **linear orders**, where first, resp. last ranked, nodes deliver unique initial, resp. terminal, kernels. Similarly, in finite **preorders**, the first, resp. last, equivalence classes deliver the unique initial, resp. unique terminal, kernels. More generally, in finite **partial orders**, i.e. asymmetrical and transitive digraphs, topological sort algorithms will easily reveal on the first, resp. last, level all unique initial, resp. terminal, kernels.
+Humans do live in an apparent physical space of plain transitive **lateral orientation**, fully empowered in finite geometrical 3D models with **linear orders**, where first, resp. last ranked, nodes deliver unique initial, resp. terminal, kernels. Similarly, in finite **preorders**, the first, resp. last, equivalence classes deliver the unique initial, resp. unique terminal, kernels. More generally, in finite **partial orders**, i.e. asymmetric and transitive digraphs, topological sort algorithms will easily reveal on the first, resp. last, level all unique initial, resp. terminal, kernels.
 
 In genuine random digraphs, however, we may need to check for each of its MISs, whether *one*, *both*, or *none* of the lateralized external stability conditions may be satisfied. Consider, for instance, the following random digraph instance of order 7 and generated with an arc probability of 30%. 
 
@@ -4688,7 +4688,7 @@ The individual bipolar-valued credibilities to '*be a weak Condorcet winner*' ar
 
 In :numref:`condorcetWinners2` we see confirmed in the strict outranking relation table of :math:`G(X,R)` that alternatives *p2*, *p6* and *p5* are *weakly more or less outranking* or *not more or less outranked* by all the other alternatives whereas alternatives *p1*, *p7* and *p8* are *weakly more or less outranked* by all the other alternatives.
 
-When a given digraph shows strict chordless outranking circuits it may however be the case that no Condorcet winners and/or losers can be detected, the resulting bvp-set does not contain any positive and/or negative credibilities. Breaking in such a case all chordless strict outranking circuits at their weakest link transforms the strict outranking digraph in an acyclic digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the acyclic digraph.
+When a given digraph shows strict chordless outranking circuits it may however be the case that no Condorcet winners and/or losers can be detected, the resulting bvp-set does not contain any positive and/or negative credibilities. Breaking in such a case all chordless strict outranking circuits at their weakest link transforms the strict outranking digraph in an acyclic asymmetric digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the digraph.
 
 Now, weak Condorcet winners and losers, like initial and terminal prekernels, give suitable first and last choice recommendations. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts therefore the '*IteratedCondortWinners*' argument for showing recursively positive weak Condorcet winners as first choice and positive weak Condorcet losers as last choice recommendation as shown in :numref:`CondorcetWinners3` below.
 
@@ -4765,7 +4765,7 @@ A result that gets confirmed with the '*Rubis*' choice recommendation shown in :
 	 determinateness (%) : 50.00
 	 - most credible action(s) = { }
 
-With the given strict outranking digrapg, initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Prekernels and Condorcet winners and losers generally only overlap one another.
+With the given strict outranking digraph, initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Prekernels and Condorcet winners and losers generally only overlap one another.
 
 .. note:: The *edges* attribute of a bipolar-valued graph is also a bpv-set, where the support is given by the non-oriented pairs of the graph's vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership characteristic vectors from the *Rubis* best choice computation [BIS-2006-1p]_. This is the topic of the next tutorial.
 
@@ -5121,7 +5121,7 @@ Bipolar-valued outranking digraphs verify two necessary properties [BIS-2013p]_:
 	     
     2) The construction of the outranking relation verifies the coduality principle. For all pairs (*x*, *y*) of decision actions, :math:`r(x \not\succsim y) \;=\; r(y \succnsim x)`.
 
-Now, the codual of complete digraphs correspond to the class of asymmetrical digraphs i.e. *partial tournaments*. If, on the one limit, all outranking relations are symmetric, the partial tournament will be empty. On the other hand, if the outranking relation models a linear ranking, the tournament will be complete and transitive.
+Now, the codual of complete digraphs correspond to the class of asymmetric digraphs i.e. *partial tournaments*. If, on the one limit, all outranking relations are symmetric, the partial tournament will be empty. On the other hand, if the outranking relation models a linear ranking, the tournament will be complete and transitive.
 
 Let us consider for instance such a partial tournament [6]_.
 
@@ -5226,7 +5226,7 @@ The crisp partial tournament *rpt* shown in :numref:`randomPartialTournament` co
       'g09'  |   1.0   |  NA    NA    50    NA    50
       'g10'  |   1.0   |  NA    NA    NA    40    60
 
-Each one of the ten performance criteria independently models, with a majority margin of 1/10 = 0.10,  one of the 10 links between the five nodes of the tournament *rpt*.  Criterion *g01* models for instance the asymmetrical link between *a1* and *a2* (Line 4), criterion *g9* models the symmetric link between *a3* and *a5* (Line 12) and so on. The bipolar-valued strict outranking relation we obtain with this performance tableau is the following::
+Each one of the ten performance criteria independently models, with a majority margin of 1/10 = 0.10,  one of the 10 links between the five nodes of the tournament *rpt*.  Criterion *g01* models for instance the asymmetric link between *a1* and *a2* (Line 4), criterion *g9* models the symmetric link between *a3* and *a5* (Line 12) and so on. The bipolar-valued strict outranking relation we obtain with this performance tableau is the following::
 
     * ---- Relation Table -----
        r  |  'a1'   'a2'   'a3'   'a4'   'a5'   

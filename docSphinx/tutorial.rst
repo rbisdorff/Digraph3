@@ -3696,7 +3696,7 @@ On partially ranking outranking digraphs
 	:depth: 2
 	:local:
 
-In this section, instead of computing linear rankings or orders, we illustrate algorithmic strategies for computing *partial rankings* --partially determined transitive asymmetrical relations-- from a given outranking digraph.
+In this section, instead of computing linear rankings or orders, we illustrate algorithmic strategies for computing *partial rankings* --partially determined transitive asymmetric relations-- from a given outranking digraph.
 
 Computing a ranking consensus from several linear rankings
 ``````````````````````````````````````````````````````````
@@ -3746,7 +3746,7 @@ To compare for instance the four rankings we have previously obtained with *rank
    >>> rfdg.isTransitive()
     True
 
-By :ref:`epistemic disjunctive fusion <Epistemic-Fusion-label>` of the four *rankings*, the :py:class:`~transitiveDigraphs.RankingsFusionDigraph` constructor computes a transitive asymmetrical partial digraph (see :numref:`RankingConsensus`  Lines 33-34). Notice in Lines 16-19 the unstable ranks of alternative *a1* (rank 2,5,6 and 7) which induce contradictory ranking results leadind to many incomparability situations. Ranking and ordering of partial relations do not give now the same result when such incomparabilities do appear.
+By :ref:`epistemic disjunctive fusion <Epistemic-Fusion-label>` of the four *rankings*, the :py:class:`~transitiveDigraphs.RankingsFusionDigraph` constructor computes a transitive asymmetric partial digraph (see :numref:`RankingConsensus`  Lines 33-34). Notice in Lines 16-19 the unstable ranks of alternative *a1* (rank 2,5,6 and 7) which induce contradictory ranking results leadind to many incomparability situations. Ranking and ordering of partial relations do not give now the same result when such incomparabilities do appear.
 
 The generic :py:class:`~transitiveDigraphs.TransitiveDigraph` class provides therefore a :py:meth:`~transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph` method which recursively extracts conjointly first and last choices --:ref:`initial and terminal kernels <Bipolar-Valued-Kernels-Tutorial-label>`-- as shown in :numref:`RankingConsensus1` Lines 2-6 below. 
 

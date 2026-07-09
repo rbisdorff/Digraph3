@@ -3813,7 +3813,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <li><p><a class="reference internal" href="#extracting-the-transitive-tiples-part-of-the-outranking-digraph" id="id369">Extracting the transitive tiples part of the outranking digraph</a></p></li>
 </ul>
 </nav>
-<p>In this section, instead of computing linear rankings or orders, we illustrate algorithmic strategies for computing <em>partial rankings</em> –partially determined transitive asymmetrical relations– from a given outranking digraph.</p>
+<p>In this section, instead of computing linear rankings or orders, we illustrate algorithmic strategies for computing <em>partial rankings</em> –partially determined transitive asymmetric relations– from a given outranking digraph.</p>
 <section id="computing-a-ranking-consensus-from-several-linear-rankings">
 <h4><a class="toc-backref" href="#id366" role="doc-backlink"><span class="section-number">1.3.5.1. </span>Computing a ranking consensus from several linear rankings</a><a class="headerlink" href="#computing-a-ranking-consensus-from-several-linear-rankings" title="Link to this heading"></a></h4>
 <blockquote class="epigraph">
@@ -3859,7 +3859,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </span></pre></div>
 </div>
 </div>
-<p>By <a class="reference internal" href="#epistemic-fusion-label"><span class="std std-ref">epistemic disjunctive fusion</span></a> of the four <em>rankings</em>, the <a class="reference internal" href="techDoc.html#transitiveDigraphs.RankingsFusionDigraph" title="transitiveDigraphs.RankingsFusionDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">RankingsFusionDigraph</span></code></a> constructor computes a transitive asymmetrical partial digraph (see <a class="reference internal" href="#rankingconsensus"><span class="std std-numref">Listing 1.50</span></a>  Lines 33-34). Notice in Lines 16-19 the unstable ranks of alternative <em>a1</em> (rank 2,5,6 and 7) which induce contradictory ranking results leadind to many incomparability situations. Ranking and ordering of partial relations do not give now the same result when such incomparabilities do appear.</p>
+<p>By <a class="reference internal" href="#epistemic-fusion-label"><span class="std std-ref">epistemic disjunctive fusion</span></a> of the four <em>rankings</em>, the <a class="reference internal" href="techDoc.html#transitiveDigraphs.RankingsFusionDigraph" title="transitiveDigraphs.RankingsFusionDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">RankingsFusionDigraph</span></code></a> constructor computes a transitive asymmetric partial digraph (see <a class="reference internal" href="#rankingconsensus"><span class="std std-numref">Listing 1.50</span></a>  Lines 33-34). Notice in Lines 16-19 the unstable ranks of alternative <em>a1</em> (rank 2,5,6 and 7) which induce contradictory ranking results leadind to many incomparability situations. Ranking and ordering of partial relations do not give now the same result when such incomparabilities do appear.</p>
 <p>The generic <a class="reference internal" href="techDoc.html#transitiveDigraphs.TransitiveDigraph" title="transitiveDigraphs.TransitiveDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">TransitiveDigraph</span></code></a> class provides therefore a <a class="reference internal" href="techDoc.html#transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph" title="transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph"><code class="xref py py-meth docutils literal notranslate"><span class="pre">showTransitiveDigraph()</span></code></a> method which recursively extracts conjointly first and last choices –<a class="reference internal" href="pearls.html#bipolar-valued-kernels-tutorial-label"><span class="std std-ref">initial and terminal kernels</span></a>– as shown in <a class="reference internal" href="#rankingconsensus1"><span class="std std-numref">Listing 1.51</span></a> Lines 2-6 below.</p>
 <div class="literal-block-wrapper docutils container" id="rankingconsensus1">
 <div class="code-block-caption"><span class="caption-number">Listing 1.51 </span><span class="caption-text">Inspecting a partial ranking</span><a class="headerlink" href="#rankingconsensus1" title="Link to this code"></a></div>
@@ -11760,7 +11760,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jul 08, 2026.
+      <span class="lastupdated">Last updated on Jul 09, 2026.
       </span></p>
   </div>
 
