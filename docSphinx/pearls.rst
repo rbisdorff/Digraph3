@@ -4557,7 +4557,7 @@ The disjunctive and conjunctive epistemic fusions of two bpv-sets *X* and *Y*, d
 |    :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*,
 |         and :math:`r(z \in X) > 0.0` and :math:`r(z \in Y) > 0.0`; or
 |    :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*,
-|         and :math:`r(z \in X) > 0.0` and :math:`r(z \in Y) > 0.0`; or
+|         and :math:`r(z \in X) < 0.0` and :math:`r(z \in Y) < 0.0`; or
 |    :math:`r(z \in X)` when both *z* in *X* and *z* in *Y*,
 |         and :math:`r(z \in X) \neq 0.0` and :math:`r(z \in Y) = 0.0`; or
 |    :math:`r(z \in Y)` when both *z* in *X* and *z* in *Y*,
@@ -4605,7 +4605,7 @@ Let :math:`\mathcal{S}(A)` denote the set of all possible bpv-sets that may be d
    >>> (X.ominus(Xm)).showMembershipCharacteristics()
     s2:+0.0001, s3:+0.0001, s5:+0.0000, s4:-0.0001, s1:-0.0001
 
-Remarkable is the fact that a 0.0 chracterisic value does not count as minimal positive and maximal negative value. Its epistemic value is in fact **indeterminate**, i.e. it may be any possible value from -1.0 to +1.0.
+Remarkable is the fact that a 0.0 characterisic value does not count as minimal positive and maximal negative value. Its epistemic value is in fact **indeterminate**, i.e. it may be any possible value from -1.0 to +1.0.
 
 To every bpv-set :math:`X \in \mathcal{S}(A)` we may associate its negated --dual--  bpv-set :math:`-X` such that :math:`X \oplus -X \;=\; X \ominus -X \;=\; \bf{0}` . 
 
