@@ -4767,7 +4767,13 @@ A result that gets confirmed with the '*Rubis*' choice recommendation shown in :
 
 With the given strict outranking digraph, initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Prekernels and Condorcet winners and losers generally only overlap one another.
 
-.. note:: The *edges* attribute of a bipolar-valued graph is also a bpv-set, where the support is given by the non-oriented pairs of the graph's vertices.  Further evident examples of bpv-sets are the bipolar-valued prekernel membership characteristic vectors from the *Rubis* best choice computation [BIS-2006-1p]_. This is the topic of the next tutorial.
+.. note::
+   
+   The *disjunctive* epistemic fusion operator :math:`\oplus` was from the beginning of our bipolar-valued computations a very convincing operator, used for instance for computing a ranking consensus. This was however strangely not the case with the *conjunctive* epistemic fusion operator :math:`\ominus`. The latter results were too often becoming indeterminate for being useful and convincing.
+
+   The fact that 0.0 values are as such *neutral* for a *max* operator on positive terms and *neutral* for a *min* operator on negative terms did hide the condition that both epistemic fusion operators, :math:`\oplus` as well as :math:`\ominus`, need to verify this **neutrality**. For the epistemic fusion operators the characteristic valuation domain appears split into three disjoint parts: the right open interval [-max criteria significance; -0.0..[, the indeterminate 0.0 value, and the left open interval ]+0.0..; max criteria significance]. Same hiding is in action when computing bipolar-valued outranking characteristic values. The 0.0 value is pers se *neutral* for any adding and subtracting of individual criterion significances.
+
+   This conceptual clarification enhances the computational power of our bipolar-valued epistemic logic. We may now with the epistemic fusion operators compute for instance the initial and terminal bipolar-valued prekernels of a given outranking digraph in an :math:`\mathcal{O}(n^2)` complexity without having to first find their polarised crisp correspondents and without having furthermore to solve the corresponding double fixpoint equation system. This is the topic of the next section.
 
 Back to :ref:`Content Table <Pearls-label>`
 
