@@ -531,7 +531,7 @@ class RankingsFusionDigraph(TransitiveDigraph):
     *Parameters*:
     
         * other = either a Digraph or a PerformanceTableau object;
-        * fusionOperator = 'o-max' (default) | 'o-min' : Disjunctive, resp. conjuntive epistemic fusion.
+        * fusionOperator = '0-max' (default) | 'o-min' : Disjunctive, resp. conjuntive epistemic fusion.
 
     Example application:
 

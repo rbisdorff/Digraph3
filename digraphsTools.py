@@ -322,7 +322,7 @@ def symmetricAverage(Med,L,weights=None,Debug=False):
     else:
         return Med
 
-#epistemic or symmetric disjunction operator
+#epistemic disjunctive operator
 def omax(Med,L, Debug=False):
     """
     Epistemic **disjunction** for bipolar outranking characteristics
@@ -361,14 +361,14 @@ def omax(Med,L, Debug=False):
     else:
         return Med
 
-# epistemic or symmetric conjunction operator
+# epistemic conjunctive operator
 def omin(Med,L, Debug=False):
     """
     Epistemic **conjunction** of a list L of bipolar outranking characteristics.
     Med is the given valuation domain median.
 
-    With **positive or zero** arguments, omin operates a **min**,
-    with **negative or zero** arguments, a **max**.
+    With **positive* arguments, omin operates a **min**,
+    with **negative** arguments, a **max**.
 
     The mixture of both **positive and negative** arguments results
     in an **indeterminate** value.
@@ -381,33 +381,23 @@ def omin(Med,L, Debug=False):
     terms = list(L)
     termsPlus = []
     termsMinus = []
-    termsNull = []
     for i in range(len(terms)):
         if terms[i] > Med:
             termsPlus.append(terms[i])
         elif terms[i] < Med:
             termsMinus.append(terms[i])
-        else:
-            termsNull.append(terms[i])
 ##    if Debug:
 ##        print('terms', terms)
 ##        print('termsPlus',termsPlus)
-##        print('termsMinus', termsMinus)
     np = len(termsPlus)
     nm = len(termsMinus)
-    nn = len(termsNull)
     if np > 0:
         if nm > 0:
-            return Med
-        elif nn > 0:
             return Med
         else:
             return min(termsPlus)
     elif nm > 0:
-        if nn > 0:
-            return Med
-        else:
-            return max(termsMinus)
+        return max(termsMinus)
     else:
         return Med
 
@@ -951,10 +941,13 @@ if __name__ == '__main__':
     g1.showRelationTable()
     g2.showRelationTable()
     g3.showRelationTable()
+    print('omax')
     fga = FusionLDigraph([g1,g2,g3],weights=None,operator='o-max')
     fga.showRelationTable()
+    print('omin')
     fga = FusionLDigraph([g1,g2,g3],weights=None,operator='o-min')
     fga.showRelationTable()
+    print('oaverage')
     fga = FusionLDigraph([g1,g2,g3],weights=None,operator='o-average')
     fga.showRelationTable()
     fga = FusionLDigraph([g1,g2,g3],weights=[1,2,3],operator='o-average')

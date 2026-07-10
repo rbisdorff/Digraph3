@@ -9861,7 +9861,7 @@ disjunctive or conjunctive fusion (omax|omin operator) of a list of rankings.</p
 <blockquote>
 <div><ul class="simple">
 <li><p>other = either a Digraph or a PerformanceTableau object;</p></li>
-<li><p>fusionOperator = ‘o-max’ (default) | ‘o-min’ : Disjunctive, resp. conjuntive epistemic fusion.</p></li>
+<li><p>fusionOperator = ‘0-max’ (default) | ‘o-min’ : Disjunctive, resp. conjuntive epistemic fusion.</p></li>
 </ul>
 </div></blockquote>
 <p>Example application:</p>
@@ -12307,8 +12307,8 @@ and operate omax on the two assembled arguments.</p>
 <span class="sig-prename descclassname"><span class="pre">digraphsTools.</span></span><span class="sig-name descname"><span class="pre">omin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Med</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#omin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphsTools.omin" title="Link to this definition"></a></dt>
 <dd><p>Epistemic <strong>conjunction</strong> of a list L of bipolar outranking characteristics.
 Med is the given valuation domain median.</p>
-<p>With <strong>positive or zero</strong> arguments, omin operates a <strong>min</strong>,
-with <strong>negative or zero</strong> arguments, a <strong>max</strong>.</p>
+<p>With <strong>positive* arguments, omin operates a **min</strong>,
+with <strong>negative</strong> arguments, a <strong>max</strong>.</p>
 <p>The mixture of both <strong>positive and negative</strong> arguments results
 in an <strong>indeterminate</strong> value.</p>
 <p>Likewise to a mean, the <em>omin</em> operator is not associative.
@@ -13028,7 +13028,7 @@ If Strict is True, cutLevel is stripped !</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="bipolarValuedSets.RandomBpvSet">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bipolarValuedSets.</span></span><span class="sig-name descname"><span class="pre">RandomBpvSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numberOfElements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elementNamePrefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'x'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indeterminateness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valuationRange</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(-1,</span> <span class="pre">1)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndigits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bipolarValuedSets.html#RandomBpvSet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bipolarValuedSets.RandomBpvSet" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">bipolarValuedSets.</span></span><span class="sig-name descname"><span class="pre">RandomBpvSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numberOfElements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elementNamePrefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'x'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indeterminateness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valuationRange</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(-1,</span> <span class="pre">1)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndigits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0.0001'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bipolarValuedSets.html#RandomBpvSet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bipolarValuedSets.RandomBpvSet" title="Link to this definition"></a></dt>
 <dd><p><em>indeterminateness</em> parameter (in float % [0.0,1.0], default=0.1)</p>
 </dd></dl>
 
@@ -15394,7 +15394,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jul 08, 2026.
+      <span class="lastupdated">Last updated on Jul 10, 2026.
       </span></p>
   </div>
 
