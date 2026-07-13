@@ -4541,8 +4541,8 @@ Finally, a :py:meth:`~bipolarValuedSets.BpvSet.polarise` method is provided for 
 
 In the limit case of no indeterminate membership characteristics, we recover this way standard crisp sets and the previous set operations implement in fact a classical Boolean algebra [BIS-2004_3p]_. 
 
-The partially ordered commutative epistemic fusion ring
-.......................................................
+The partially ordered commutative epistemic fusion algebra
+..........................................................
 
 The disjunctive and conjunctive epistemic fusions of two bpv-sets *X* and *Y*, denoted :math:`X $ \textcircled{ $\vee$ } $ Y`, respectively :math:`X $ \textcircled{ $\wedge$ } $ Y`, give the bpv-sets defined as follows.
 
@@ -4579,7 +4579,7 @@ In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunct
     # conjunctive epistemic fusion -  
      s2:+0.6949, s5:+0.6710, s1:+0.0000, s3:+0.0000, s4:-0.4899
 
-Due to the commutativity of the numerical binary *max* and *min* operators, both :math:`$ \textcircled{ $\vee$ } $` and :math:`$ \textcircled{ $\wedge$ } $` operators are **cummutative**. Mind however, that similarly to a mean or average operator, both epistemic fusion operators are not associative. In order to render results univocal, all positive and negative arguments are considered separately and both intermediate results are further processed as two single arguments.  
+Due to the commutativity and idempotency of the numerical binary *max* and *min* operators, both :math:`$ \textcircled{ $\vee$ } $` and :math:`$ \textcircled{ $\wedge$ } $` operators are **cummutative** and **idempotent**. Mind however, that similarly to a mean or average operator, both epistemic fusion operators are not associative. In order to render results univocal, all positive and negative arguments are considered separately and both intermediate results are further processed as two single arguments.  
 
 Let :math:`\mathcal{S}(A)` denote the set of all possible bpv-sets that may be defined on a given finite set *A* of dimension *n*. Let :math:`\bf{0} \in \mathcal{S}(A)`  denote the completely indeterminate bpv-set, i.e :math:`r(a \in \bf{0}) \;=\; 0.0 , \; \forall \,a \in\, A`. It is worthwhile noticing that bpv-set :math:`\bf{0}` is a **neutral** element of the :math:`$ \textcircled{ $\vee$ } $` and the :math:`$ \textcircled{ $\wedge$ } $` operator. For any bpv-subset of *A*, the corresponding polarised --fully determined-- crisp subset is an **absorbent** element of the :math:`$ \textcircled{ $\vee$ } $` and a **neutral** element of the :math:`$ \textcircled{ $\wedge$ } $` operator. And, the minimal precision valued polarised bpv-set is a **neutral** element of the :math:`$ \textcircled{ $\vee$ } $` operator and an **absorbent** element of the :math:`$ \textcircled{ $\wedge$ } $` operator.
 
@@ -4646,7 +4646,7 @@ The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a pa
 Computing the bpv-set of weak Condorcet winners
 ...............................................
 
-The relation attribute of a given outranking digraph :math:`G(X,R)` is an evident example of a bpv-set. And, the epistemic fusion ring operators may for instance be used for computing the bpv-set of *weak Condorcet winners* [28]_ of such a digraph *G*. The :py:class:`~digraphs.Digraph` class provides therefore the :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method as shown in :numref:`CondorcetWinners1` Line 5.  
+The relation attribute of a given outranking digraph :math:`G(X,R)` is an evident example of a bpv-set. And, the epistemic fusion operators may for instance be used for computing the bpv-set of *weak Condorcet winners and losers* [28]_ of such a digraph *G*. The :py:class:`~digraphs.Digraph` class provides therefore the :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method as shown in :numref:`CondorcetWinners1` Line 5.  
 
 .. code-block:: pycon
    :caption: Computing the bpv-set of the weak Condorcet winner(s)
@@ -4773,7 +4773,7 @@ With the given strict outranking digraph, initial and terminal prekernels recomm
 
    The fact that 0.0 values are as such *neutral* for a *max* operator on positive terms and *neutral* for a *min* operator on negative terms did hide the condition that both epistemic fusion operators, :math:`$ \textcircled{ $\vee$ } $` as well as :math:`$ \textcircled{ $\wedge$ } $`, need to verify the **neutrality** of the indeterminate characteristic value. For the epistemic fusion operators the characteristic valuation domain appears indeed split into three disjoint parts: the right open interval [-max criteria significance; -0.0..[, the neutral indeterminate 0.0 value, and the left open interval ]+0.0..; max criteria significance]. Same hiding is in action when computing bipolar-valued outranking characteristic values. The indeterminate 0.0 value is pers se *neutral* for any adding and subtracting of individual criterion significances.
 
-   This recent conceptual clarification enhances the computational power of our bipolar-valued epistemic logic. With the epistemic fusion operators we may now compute for instance the initial and terminal bipolar-valued prekernels of a given outranking digraph in an :math:`\mathcal{O}(n^2)` complexity without having to first find their polarised crisp correspondents and without having furthermore to solve the corresponding double fixpoint kernel equation systems. This is the topic of the next section.
+   This recent conceptual clarification enhances the computational power of our bipolar-valued epistemic logic. With the epistemic fusion operators we may now compute for instance initial and terminal bipolar-valued prekernels of a given outranking digraph in an :math:`\mathcal{O}(n^2)` complexity without having to first find their polarised crisp correspondents and without having furthermore to solve the corresponding double fixpoint kernel equation systems. This is the topic of the next section.
 
 Back to :ref:`Content Table <Pearls-label>`
 
