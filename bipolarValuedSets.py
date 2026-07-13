@@ -488,7 +488,7 @@ class BpvSet(object):
         diff.cardinality = diff.computeCardinality()
         return diff
 
-    def oplus(self,other,/):
+    def ovee(self,other,/):
         """
         Returns the disjunctive fusion of self and other
         """
@@ -580,7 +580,7 @@ class BpvSet(object):
 ##        fusion.cardinality = fusion.computeCardinality()
 ##        return fusion
 
-    def ominus(self,other,/):
+    def owedge(self,other,/):
         """
         Returns the weak conjunctive fusion of self and other
         by ignoring the indeterminate terms
@@ -858,13 +858,13 @@ if __name__ == "__main__":
     D = Y - X
     E = D.strip(InSite=False)
     D.strip()
-    Op = X.oplus(Y)
+    Op = X.vee(Y)
     Op.showMembershipCharacteristics()
-    Om = X.ominus(Y)
+    Om = X.wedge(Y)
     Om.showMembershipCharacteristics()
     M = RandomBpvSet(indeterminateness=1.0,elementNamePrefix='s')
-    Oxmp = X.oplus(M)
+    Oxmp = X.ovee(M)
     Oxmp.showMembershipCharacteristics()
-    Oxmm = X.ominus(M)
+    Oxmm = X.owedge(M)
     Oxmm.showMembershipCharacteristics()
 
