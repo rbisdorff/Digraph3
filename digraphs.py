@@ -9887,8 +9887,9 @@ class Digraph(object):
             for i,item in enumerate(goodChoiceVector):
                 print('%s: %+.2f' % (item[1],item[0]) )
         else:
-            return goodChoiceVector        
+            return goodChoiceVector
 
+    
     def computeKernelVector(self,kernel,Initial=True,
                             Comments=False,Iterations=False):
         """
@@ -15884,18 +15885,18 @@ if __name__ == "__main__":
     from randomDigraphs import *
     from decimal import Decimal, getcontext
     t = Random3ObjectivesPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=15,numberOfCriteria=13,
+                                 numberOfActions=5,numberOfCriteria=13,
                                             missingDataProbability=0.05,seed=7)
                           
     #t = CircularPerformanceTableau()
     #print(getcontext().prec)
     g = BipolarOutrankingDigraph(t,Threading=False,startMethod='spawn')
     print(g)
-    print('Rubis BCR')
-    g.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True)
-    ranking = g.showChoiceRecommendation('IteratedCondorcetWinners',ReturnRanking=True)
-    g.showChoiceRecommendation('Bachet')
-    g.showHTMLPerformanceHeatmap(actionsList=ranking,Correlations=True)
+    # print('Rubis BCR')
+    # g.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True)
+    # ranking = g.showChoiceRecommendation('IteratedCondorcetWinners',ReturnRanking=True)
+    g.showChoiceRecommendation('Rubis',ChoiceVector=True)
+    # g.showHTMLPerformanceHeatmap(actionsList=ranking,Correlations=True)
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
