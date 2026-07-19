@@ -4605,7 +4605,7 @@ Let :math:`\mathcal{S}(A)` denote the set of all possible bpv-sets that may be d
    >>> (X.owedge(Xm)).showMembershipCharacteristics()
     s2:+0.0001, s3:+0.0001, s5:+0.0000, s4:-0.0001, s1:-0.0001
 
-Remarkable is the fact that a 0.0 characterisic value does not count as minimal positive and maximal negative value. Its epistemic value is in fact **indeterminate**, i.e. it may be any possible value from -1.0 to +1.0.
+Remarkable is the fact that a 0.0 characteristic value does not count as minimal positive and maximal negative value. Its epistemic value is in fact **indeterminate**, i.e. it may be any possible value from -1.0 to +1.0.
 
 To every bpv-set :math:`X \in \mathcal{S}(A)` we may associate its negated --dual--  bpv-set :math:`-X` such that :math:`X  $ \textcircled{ $\vee$ } $ -X \;=\; X $ \textcircled{ $\wedge$ } $ -X \;=\; \bf{0}` . 
 
@@ -4765,7 +4765,7 @@ A result that gets confirmed with the '*Rubis*' choice recommendation shown in :
 	 determinateness (%) : 50.00
 	 - most credible action(s) = { }
 
-With the given strict outranking digraph, initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Prekernels and Condorcet winners and losers generally only overlap one another.
+With the given strict outranking digraph, initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Prekernels and Condorcet winners or not losers generally only overlap one another.
 
 .. note::
    
@@ -4773,7 +4773,7 @@ With the given strict outranking digraph, initial and terminal prekernels recomm
 
    The fact that 0.0 values are as such *neutral* for a *max* operator on positive terms and *neutral* for a *min* operator on negative terms did hide the condition that both epistemic fusion operators, :math:`$ \textcircled{ $\vee$ } $` as well as :math:`$ \textcircled{ $\wedge$ } $`, need to verify the **neutrality** of the indeterminate characteristic value. For the epistemic fusion operators the characteristic valuation domain appears indeed split into three disjoint parts: the right open interval [-max criteria significance; -0.0..[, the neutral indeterminate 0.0 value, and the left open interval ]+0.0..; max criteria significance]. Same hiding is in action when computing bipolar-valued outranking characteristic values. The indeterminate 0.0 value is pers se *neutral* for any adding and subtracting of individual criterion significances.
 
-   This recent conceptual clarification enhances the computational power of our bipolar-valued epistemic logic. With the epistemic fusion operators we may now compute for instance initial and terminal bipolar-valued prekernels of a given outranking digraph in an :math:`\mathcal{O}(n^2)` complexity without having to first find their polarised crisp correspondents and without having furthermore to solve the corresponding double fixpoint kernel equation systems. Yet, this is the actual topic of the next section.
+   This recent conceptual clarification enhances the computational power of our bipolar-valued epistemic logic. With the epistemic fusion operators we may now compute for instance bipolar-valued choice recommendations of a given strict outranking digraph in an :math:`\mathcal{O}(n^2)` complexity without having to first find its polarised crisp kernels (a not polynomial problem in general) and without having furthermore to solve the corresponding double fixpoint kernel equation systems. Yet, this is the actual topic of the next section.
 
 Back to :ref:`Content Table <Pearls-label>`
 

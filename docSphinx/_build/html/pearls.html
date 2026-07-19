@@ -4427,7 +4427,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </span></pre></div>
 </div>
 </div>
-<p>Remarkable is the fact that a 0.0 characterisic value does not count as minimal positive and maximal negative value. Its epistemic value is in fact <strong>indeterminate</strong>, i.e. it may be any possible value from -1.0 to +1.0.</p>
+<p>Remarkable is the fact that a 0.0 characteristic value does not count as minimal positive and maximal negative value. Its epistemic value is in fact <strong>indeterminate</strong>, i.e. it may be any possible value from -1.0 to +1.0.</p>
 <p>To every bpv-set <img class="math" src="_images/math/8b44e6fe18081bc764ac2d6a94235eff5bf8f22b.png" alt="X \in \mathcal{S}(A)"/> we may associate its negated –dual–  bpv-set <img class="math" src="_images/math/4c0c5bbe753ecd1ad28d5855a89f1a5d3a1a3640.png" alt="-X"/> such that <img class="math" src="_images/math/4160db68846565a5b0a193bbc248f9f5d78e159f.png" alt="X  $ \textcircled{ $\vee$ } $ -X \;=\; X $ \textcircled{ $\wedge$ } $ -X \;=\; \bf{0}"/> .</p>
 <div class="literal-block-wrapper docutils container" id="bipolarvaluedsets6">
 <div class="code-block-caption"><span class="caption-number">Listing 3.61 </span><span class="caption-text">Dual bvp-sets</span><a class="headerlink" href="#bipolarvaluedsets6" title="Link to this code"></a></div>
@@ -4563,12 +4563,12 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </pre></div>
 </div>
 </div>
-<p>With the given strict outranking digraph, initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in <a class="reference internal" href="#condorcetwinners1"><span class="std std-numref">Listing 3.63</span></a> and shown in <a class="reference internal" href="#condorcetwinners2"><span class="std std-numref">Fig. 3.38</span></a>. But this is only an anecdotic correspondence. Prekernels and Condorcet winners and losers generally only overlap one another.</p>
+<p>With the given strict outranking digraph, initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in <a class="reference internal" href="#condorcetwinners1"><span class="std std-numref">Listing 3.63</span></a> and shown in <a class="reference internal" href="#condorcetwinners2"><span class="std std-numref">Fig. 3.38</span></a>. But this is only an anecdotic correspondence. Prekernels and Condorcet winners or not losers generally only overlap one another.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The <em>disjunctive</em> epistemic fusion <img class="math" src="_images/math/c35880bb61a50836c0322189d8021e78531973a0.png" alt="$ \textcircled{ $\vee$ } $"/> operator was from the beginning of our bipolar-valued computations a very convincing operator, used for instance for computing a ranking consensus. This was however strangely not the case with the <em>conjunctive</em> epistemic fusion <img class="math" src="_images/math/990bb11d5c548efbd95eedd9656226913dd6a8c1.png" alt="$ \textcircled{ $\wedge$ } $"/> operator. The latter results were too often becoming indeterminate for being useful and convincing.</p>
 <p>The fact that 0.0 values are as such <em>neutral</em> for a <em>max</em> operator on positive terms and <em>neutral</em> for a <em>min</em> operator on negative terms did hide the condition that both epistemic fusion operators, <img class="math" src="_images/math/c35880bb61a50836c0322189d8021e78531973a0.png" alt="$ \textcircled{ $\vee$ } $"/> as well as <img class="math" src="_images/math/990bb11d5c548efbd95eedd9656226913dd6a8c1.png" alt="$ \textcircled{ $\wedge$ } $"/>, need to verify the <strong>neutrality</strong> of the indeterminate characteristic value. For the epistemic fusion operators the characteristic valuation domain appears indeed split into three disjoint parts: the right open interval [-max criteria significance; -0.0..[, the neutral indeterminate 0.0 value, and the left open interval ]+0.0..; max criteria significance]. Same hiding is in action when computing bipolar-valued outranking characteristic values. The indeterminate 0.0 value is pers se <em>neutral</em> for any adding and subtracting of individual criterion significances.</p>
-<p>This recent conceptual clarification enhances the computational power of our bipolar-valued epistemic logic. With the epistemic fusion operators we may now compute for instance initial and terminal bipolar-valued prekernels of a given outranking digraph in an <img class="math" src="_images/math/0d46836ff354f180306676ded9ebb233e0b01f5b.png" alt="\mathcal{O}(n^2)"/> complexity without having to first find their polarised crisp correspondents and without having furthermore to solve the corresponding double fixpoint kernel equation systems. Yet, this is the actual topic of the next section.</p>
+<p>This recent conceptual clarification enhances the computational power of our bipolar-valued epistemic logic. With the epistemic fusion operators we may now compute for instance bipolar-valued choice recommendations of a given strict outranking digraph in an <img class="math" src="_images/math/0d46836ff354f180306676ded9ebb233e0b01f5b.png" alt="\mathcal{O}(n^2)"/> complexity without having to first find its polarised crisp kernels (a not polynomial problem in general) and without having furthermore to solve the corresponding double fixpoint kernel equation systems. Yet, this is the actual topic of the next section.</p>
 </div>
 <p>Back to <a class="reference internal" href="#pearls-label"><span class="std std-ref">Content Table</span></a></p>
 <hr class="docutils" />
@@ -5698,7 +5698,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jul 18, 2026.
+      <span class="lastupdated">Last updated on Jul 19, 2026.
       </span></p>
   </div>
 
