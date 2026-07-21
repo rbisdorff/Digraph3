@@ -639,7 +639,7 @@ class RandomFixedSizeDigraph(Digraph):
         # check feasability
         r = (order * order) - order
         if size > r :
-            print('Graph not feasable (1) !!')
+            print('Graph not feasible (1) !!')
         else:
             self.name = 'randomFixedSize'
             self.order = order
@@ -691,7 +691,7 @@ class RandomFixedDegreeSequenceDigraph(Digraph):
         # check feasability
         degree = max(degreeSequence)
         if degree >= order:
-            print('!!! Graph not feasable (1) !!!')
+            print('!!! Graph not feasible (1) !!!')
             print('Maximum degree > order !!!')
             self=None
         else:
@@ -700,7 +700,7 @@ class RandomFixedDegreeSequenceDigraph(Digraph):
                 sumdegrees += degreeSequence[i]
             r = sumdegrees % 2
             if r == 1:
-                print('!!! Graph not feasable (1) !!!')
+                print('!!! Graph not feasible (1) !!!')
                 print('Odd sum of degrees : ',sumdegrees,'!!')
             else:
                 self.name = 'randomFixedDegreeSequence'
@@ -724,9 +724,9 @@ class RandomFixedDegreeSequenceDigraph(Digraph):
                     for y in actions.keys():
                         rx[y] = Min
                 # create a random pairing
-                feasable = 0
+                feasible = 0
                 s = 0
-                while feasable == 0 and s < 100:
+                while feasible == 0 and s < 100:
                     s += 1
                     edges = []
                     cells = []
@@ -752,13 +752,13 @@ class RandomFixedDegreeSequenceDigraph(Digraph):
                         for c in cells:
                             if degreeseq[c[0]] == 0:
                                 cells.remove(c)
-                    feasable = 1
+                    feasible = 1
                     for x in actions.keys():
                         if degreeseq[x] != 0:
-                            feasable = 0
+                            feasible = 0
                             break
-                if feasable == 0:
-                    print('Graph not feasable (2) !!')
+                if feasible == 0:
+                    print('Graph not feasible (2) !!')
                 else:
                     for edge in edges:
                         relation[edge[0]][edge[1]] = Max
@@ -783,7 +783,7 @@ class RandomRegularDigraph(Digraph):
         # check feasability
         r = (order * degree) % 2
         if degree >= order or r == 1:
-            print('Graph not feasable (1) !!')
+            print('Graph not feasible (1) !!')
         else:
             self.name = 'randomRegular'
             self.order = order
@@ -798,9 +798,9 @@ class RandomRegularDigraph(Digraph):
                                     'med':Decimal('0.0'),
                                     'max':Decimal('1.0')}
             # create a random pairing
-            feasable = 0
+            feasible = 0
             s = 0
-            while feasable == 0 and s < 100:
+            while feasible == 0 and s < 100:
                 s += 1
                 edges = []
                 cells = []
@@ -824,13 +824,13 @@ class RandomRegularDigraph(Digraph):
                     for c in cells:
                         if degreeseq[c[0]] == 0:
                             cells.remove(c)
-                feasable = 1
+                feasible = 1
                 for x in actions:
                     if degreeseq[x] != 0:
-                        feasable = 0
+                        feasible = 0
                         break
-            if feasable == 0:
-                print('Graph not feasable (2) !!')
+            if feasible == 0:
+                print('Graph not feasible (2) !!')
             else:
                 relation = {}
                 for x in actions.keys():

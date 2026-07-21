@@ -9805,7 +9805,7 @@
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="s1">&#39;i&#39;</span><span class="p">,</span><span class="n">initialVector</span><span class="o">.</span><span class="n">membership</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="n">terminalVector</span><span class="o">.</span><span class="n">membership</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
-        <span class="n">resVector</span> <span class="o">=</span> <span class="n">initialVector</span><span class="o">.</span><span class="n">oplus</span><span class="p">(</span><span class="o">-</span><span class="n">terminalVector</span><span class="p">)</span>
+        <span class="n">resVector</span> <span class="o">=</span> <span class="n">initialVector</span><span class="o">.</span><span class="n">ovee</span><span class="p">(</span><span class="o">-</span><span class="n">terminalVector</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="n">resVector</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">resVector</span></div>
@@ -10565,9 +10565,10 @@
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">goodChoiceVector</span><span class="p">):</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%+.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">goodChoiceVector</span>        </div>
+            <span class="k">return</span> <span class="n">goodChoiceVector</span></div>
 
 
+    
 <div class="viewcode-block" id="Digraph.computeKernelVector">
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeKernelVector">[docs]</a>
     <span class="k">def</span> <span class="nf">computeKernelVector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">kernel</span><span class="p">,</span><span class="n">Initial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -16834,18 +16835,18 @@
     <span class="kn">from</span> <span class="nn">randomDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
     <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">getcontext</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">weightDistribution</span><span class="o">=</span><span class="s2">&quot;equiobjectives&quot;</span><span class="p">,</span>
-                                 <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
+                                 <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
                                             <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
                           
     <span class="c1">#t = CircularPerformanceTableau()</span>
     <span class="c1">#print(getcontext().prec)</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">startMethod</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Rubis BCR&#39;</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">showFirstChoiceRecommendation</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ChoiceVector</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">ranking</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;IteratedCondorcetWinners&#39;</span><span class="p">,</span><span class="n">ReturnRanking</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;Bachet&#39;</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">actionsList</span><span class="o">=</span><span class="n">ranking</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># print(&#39;Rubis BCR&#39;)</span>
+    <span class="c1"># g.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True)</span>
+    <span class="c1"># ranking = g.showChoiceRecommendation(&#39;IteratedCondorcetWinners&#39;,ReturnRanking=True)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;Rubis&#39;</span><span class="p">,</span><span class="n">ChoiceVector</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># g.showHTMLPerformanceHeatmap(actionsList=ranking,Correlations=True)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enjoy !&#39;</span><span class="p">)</span>
@@ -16870,7 +16871,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jul 13, 2026.
+      <span class="lastupdated">Last updated on Jul 21, 2026.
       </span></p>
   </div>
 

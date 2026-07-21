@@ -121,13 +121,17 @@ class BpvSet(object):
         reprString += 'Attributes          : %s\n' % list(self.__dict__.keys())
         return reprString
 
-    def __init__(self,fileName=None):
+    def __init__(self,fileName=None,ndigits=4):
         from decimal import Decimal
         if fileName is None:
             self.name = 'emptyBvpSet'
             self.support = {}
-            self.ndigits = 4
-            self.valuationDomain = {'min':Decimal(-1),'med':Decimal(0),'max':Decimal(1),'precision':Decimal('0.0001')}
+            self.ndigits = ndigits
+            precision = '0.' + ((ndigits-1)*'0') + '1'
+            self.valuationDomain = {'min':Decimal(-1),
+                                    'med':Decimal(0),
+                                    'max':Decimal(1),
+                                    'precision':Decimal(precision)}
             self.membership = {}
             self.cardinality = 0
             self.determinateness = Decimal('0')
@@ -198,6 +202,10 @@ class BpvSet(object):
             print(oldMin, oldMed, oldMax, oldAmplitude)
         if ndigits is None:
             ndigits = self.ndigits
+            precision = '0.' + ((ndigits-1)*'0') + '1'
+            #precision = self.valuationDomain['precision']
+        else:
+            precision = '0.' + ((ndigits-1)*'0') + '1'
         formatString = '%%2.%df' % ndigits
         newMin = Decimal(formatString % newMin)
         newMax = Decimal(formatString % newMax)
@@ -213,7 +221,10 @@ class BpvSet(object):
             newMembership[it] = Decimal(formatString % (
                 newMin + ((oldMembership[it] - oldMin)/oldAmplitude) * newAmplitude))
        # update valuation domain
-        self.valuationDomain = { 'min':newMin, 'max':newMax, 'med':newMed }
+        self.valuationDomain = { 'min':newMin,
+                                 'max':newMax,
+                                 'med':newMed,
+                                 'precision':Decimal(precision)}
         if ndigits == 0:
             self.valuationDomain['hasIntegerValuation'] = True
         else:
@@ -299,6 +310,7 @@ class BpvSet(object):
         """
         from copy import deepcopy
         from bipolarValuedSets import BpvSet
+        from decimal import Decimal
         newSelf = deepcopy(self)
         newSelf.recodeValuation()
         newOther = deepcopy(other)
@@ -324,6 +336,8 @@ class BpvSet(object):
             except:
                 membership[it] = Min
         inter.ndigits = max(newSelf.ndigits, newOther.ndigits)
+        precision = '0.' + ((inter.ndigits-1)*'0') + '1'
+        inter.valuationDomain['precision'] = Decimal(precision)
         inter.membership = membership
         inter.determinateness = inter.computeDeterminateness()
         inter.cardinality = inter.computeCardinality()
@@ -369,6 +383,8 @@ class BpvSet(object):
                 except:
                     membership[it] = newOther.membership[it]
         union.ndigits = max(newSelf.ndigits, newOther.ndigits)
+        precision = '0.' + ((union.ndigits-1)*'0') + '1'
+        union.valuationDomain['precision'] = Decimal(precision)
         union.membership = membership
         union.determinateness = union.computeDeterminateness()
         union.cardinality = union.computeCardinality()
@@ -483,6 +499,8 @@ class BpvSet(object):
                 except:
                     membership[it] = Min
         diff.ndigits = min(newSelf.ndigits, newOther.ndigits)
+        precision = '0.' + ((diff.ndigits-1)*'0') + '1'
+        diff.valuationDomain['precision'] = Decimal(precision)
         diff.membership = membership
         diff.determinateness = diff.computeDeterminateness()
         diff.cardinality = diff.computeCardinality()
@@ -529,6 +547,8 @@ class BpvSet(object):
                 except:
                     membership[it] = Min
         fusion.ndigits = min(newSelf.ndigits, newOther.ndigits)
+        precision = '0.' + ((fusion.ndigits-1)*'0') + '1'
+        fusion.valuationDomain['precision'] = Decimal(precision)
         fusion.membership = membership
         fusion.determinateness = fusion.computeDeterminateness()
         fusion.cardinality = fusion.computeCardinality()
@@ -580,6 +600,8 @@ class BpvSet(object):
                 except:
                     membership[it] = Min
         fusion.ndigits = min(newSelf.ndigits, newOther.ndigits)
+        precision = '0.' + ((fusion.ndigits-1)*'0') + '1'
+        fusion.valuationDomain['precision'] = Decimal(precision)
         fusion.membership = membership
         fusion.determinateness = fusion.computeDeterminateness()
         fusion.cardinality = fusion.computeCardinality()
@@ -722,7 +744,7 @@ class RandomBpvSet(BpvSet):
                  indeterminateness=0.1,
                  valuationRange=(-1,1),
                  ndigits = 4,
-                 precision = '0.0001',
+                 #precision = '0.0001',
                  seed=None,
                  Debug=False):
         # store arguments
@@ -745,6 +767,7 @@ class RandomBpvSet(BpvSet):
                               'comment': 'RandomBpvset() generated.' }
         self.support = support
         # setting valuation domain
+        precision = '0.' + ((ndigits-1)*'0') + '1'
         valuationDomain = {'min': Decimal(str(valuationRange[0])),
                            'med': Decimal(0),
                            'max': Decimal(str(valuationRange[1])),
@@ -812,9 +835,9 @@ if __name__ == "__main__":
     D = Y - X
     E = D.strip(InSite=False)
     D.strip()
-    Op = X.vee(Y)
+    Op = X.ovee(Y)
     Op.showMembershipCharacteristics()
-    Om = X.wedge(Y)
+    Om = X.owedge(Y)
     Om.showMembershipCharacteristics()
     M = RandomBpvSet(indeterminateness=1.0,elementNamePrefix='s')
     Oxmp = X.ovee(M)
