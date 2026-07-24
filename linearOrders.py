@@ -1301,7 +1301,7 @@ class IteratedBpvCondorcetWinnersRanking(LinearOrder):
     Computes the linear ranking or order obtained from the
     iterated bpv-sets of weak Condorcet winners and losers.
     """
-    def __init__(self,other,Average=True,Debug=False):
+    def __init__(self,other,Average=False,Debug=False):
         from copy import copy, deepcopy
         from collections import OrderedDict
         ranking = other.showChoiceRecommendation('IteratedCondorcetWinners',Show=False,
