@@ -4718,7 +4718,7 @@ Now, weak Condorcet winners and losers, like initial and terminal prekernels, gi
    >>> from linearOrders import IteratedBpvCondorcetWinnersRanking
    >>> cr = IteratedBpvCondorcetWinnersRanking(g)
    >>> cr.condorcetRanking
-    ['p2','p6','p5','p4','p9','p3','p7','p1','p8']
+    ['p2','p6','p5','p4','p9','p3','p1','p7','p8']
 
 The criteria significance majorities for each choice are indicated in brakets (see Lines 6-14). The choice recommendation makes apparent a linear ranking which may be computed with the :py:class:`linearOrders.IteratedBpvCondorcetWinnersRanking` class (see Lines 19 and 21).
 
