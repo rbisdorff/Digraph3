@@ -8999,6 +8999,7 @@ class Digraph(object):
                                           )
         elif method == 'CondorcetWinners':
             from time import time
+            from digraphsTools import scoredTuplesSort
             print('\nFirst and last choice recommendations')
             print('-------------------------------------')
             t0 = time()
@@ -9006,7 +9007,8 @@ class Digraph(object):
             res = []
             for x in resVec.support:
                 res.append((resVec.membership[x],x))
-            res.sort(reverse=True)
+            #res.sort(reverse=True)
+            scoredTuplesSort(res,reverse=True)
             nr = len(res)
             Med = self.valuationdomain['med']
             ##print(resVec)
@@ -9037,6 +9039,7 @@ class Digraph(object):
                 print('------------------------------------------')
             from time import time
             from copy import deepcopy
+            from digraphsTools import scoredTuplesSort
             g = deepcopy(self)
             t0 = time()
             Med = g.valuationdomain['med']
@@ -9068,8 +9071,10 @@ class Digraph(object):
                     for y in negremoved:
                         remainingActions.remove(y[1])
                 nl = len(remainingActions)
-                posremoved.sort(reverse=True)
-                negremoved.sort(reverse=True)
+                #posremoved.sort(reverse=True)
+                #negremoved.sort(reverse=True)
+                scoredTuplesSort(posremoved,reverse=True)
+                scoredTuplesSort(negremoved,reverse=True)
                 posRanking = posRanking + posremoved
                 negRanking = negremoved + negRanking
                 j += 1
