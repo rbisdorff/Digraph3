@@ -1296,7 +1296,7 @@ class IteratedBachetRanking(LinearOrder):
             print('Iterated Bachet ranking: ', self.iteratedBachetRanking)
 
 #------------
-class IteratedBpvCondorcetWinnersRanking(Digraph):
+class IteratedBpvCondorcetWinnersRanking(LinearOrder):
     """
     Computes the linear ranking or order obtained from the
     iterated bpv-sets of weak Condorcet winners and losers.

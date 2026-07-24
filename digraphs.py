@@ -9773,23 +9773,6 @@ class Digraph(object):
                 else:
                     resvec[x] = Med
         else:
-##            for x in res:
-##                pl = len(res[x]['pos'])
-##                nl = len(res[x]['neg'])
-##                nn = len(res[x]['nul'])
-##                if pl > 0:
-##                    minx = Max
-##                    for v in res[x]['pos']:
-##                        minx = min(minx,v)
-##                else:
-##                    minx = Med
-##                if nl > 0:
-##                    maxx = Min
-##                    for v in res[x]['neg']:
-##                        maxx = max(maxx,v)
-##                else:
-##                    maxx = Med
-##                resvec[x] = min(minx,maxx)
             for x in res:
                 #print(x, res[x])
                 pl = len(res[x]['pos'])
@@ -9807,7 +9790,7 @@ class Digraph(object):
                 else:
                     resvec[x] = Med
         kerVec = []
-        for x in resvec:
+        for x in g.actions:
             kerVec.append((resvec[x],x))
             if Debug:
                 print(x,res[x])
