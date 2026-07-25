@@ -15872,12 +15872,12 @@ if __name__ == "__main__":
     from outrankingDigraphs import *
     from randomDigraphs import *
     from decimal import Decimal, getcontext
-##    t = Random3ObjectivesPerformanceTableau(weightDistribution="equiobjectives",
-##                                 numberOfActions=11,numberOfCriteria=13,
-##                                            missingDataProbability=0.05,seed=8)
-##                          
+    t = Random3ObjectivesPerformanceTableau(weightDistribution="equiobjectives",
+                                 numberOfActions=11,numberOfCriteria=13,
+                                            missingDataProbability=0.05,seed=8)
+                          
     #t = CircularPerformanceTableau()
-    t = PerformanceTableau('officeChoice')
+    #t = PerformanceTableau('officeChoice')
     #print(getcontext().prec)
     g = BipolarOutrankingDigraph(t,Threading=False,startMethod='spawn')
     print(g)

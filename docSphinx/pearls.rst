@@ -4708,8 +4708,8 @@ Now, weak Condorcet winners and losers, like initial and terminal prekernels, gi
        2nd-choice: 'p4' (+1.00)
        2nd-choice: 'p9' (+0.53)
        2nd-reject: 'p3' (+0.53)
-     1rst-reject: 'p7' (+0.14)
      1rst-reject: 'p1' (+0.14)
+     1rst-reject: 'p7' (+0.14)
      1rst-reject: 'p8' (+0.17)
     -----------------------------------------
     Criteria significance majority in brakets
@@ -4771,9 +4771,9 @@ With the given strict outranking digraph, initial and terminal prekernels recomm
    
    The *disjunctive* epistemic fusion :math:`$ \textcircled{ $\vee$ } $` operator was from the beginning of our bipolar-valued computations a very convincing operator, used for instance for computing a ranking consensus. This was however strangely not the case with the simply inverted max <-> min *conjunctive* epistemic fusion operator. The latter results were too often becoming indeterminate for being useful and convincing.
 
-   The fact that 0.0 values are as such *neutral* for a *max* operator on positive terms and *neutral* for a *min* operator on negative terms did in fact hide the condition that both epistemic fusion operators, :math:`$ \textcircled{ $\vee$ } $` as well as :math:`$ \textcircled{ $\wedge$ } $`, need to verify the **neutrality** of the indeterminate characteristic value. For the epistemic fusion operators the characteristic valuation domain appears indeed split into three disjoint parts: the right open negative interval [-max criteria significance; -0.0..[, the neutral indeterminate 0.0 value, and the left open positive interval ]+0.0..; max criteria significance]. Same hiding is in action when computing bipolar-valued outranking characteristic values. The indeterminate 0.0 value is pers se *neutral* for any adding and subtracting of individual criterion significances.
+   The fact that 0.0 values are as such *neutral* for a *max* operator on positive terms and *neutral* for a *min* operator on negative terms did in fact hide the condition that both epistemic fusion operators, :math:`$ \textcircled{ $\wedge$ } $` as well as :math:`$ \textcircled{ $\vee$ } $`, need to verify the **neutrality** of the indeterminate characteristic value. For the epistemic fusion operators the characteristic valuation domain appears indeed split into three disjoint parts: the right open negative interval [-max criteria significance; -0.0..[, the neutral indeterminate 0.0 value, and the left open positive interval ]+0.0..; max criteria significance]. Same hiding is in action when computing bipolar-valued outranking characteristic values. The indeterminate 0.0 value is pers se *neutral* for any adding and subtracting of individual criterion significances.
 
-   This recent conceptual clarification enhances the computational power of our bipolar-valued epistemic logic. With the correct implementation of the epistemic fusion operators we may now compute for instance bipolar-valued first and last choice recommendations of a given strict outranking digraph in an :math:`\mathcal{O}(n^2)` complexity without having to first find its polarised crisp initial and terminal prekernels (a not polynomial problem in general) and without having furthermore to solve the corresponding double fixpoint kernel equation systems.
+   This recent conceptual clarification enhances a lot the computational power of our bipolar-valued epistemic logic. With the correct implementation of the epistemic fusion operators we may now compute for instance bipolar-valued first and last choice recommendations of a given strict outranking digraph in an :math:`\mathcal{O}(n^2)` complexity without having to first find its polarised crisp initial and terminal prekernels (a not polynomial problem in general) and without having furthermore to solve the corresponding double fixpoint kernel equation systems.
 
    Yet, this is the actual topic of the next section.
 
