@@ -4544,24 +4544,24 @@ In the limit case of no indeterminate membership characteristics, we recover thi
 The partially ordered commutative epistemic fusion algebra
 ..........................................................
 
-The disjunctive and conjunctive epistemic fusions of two bpv-sets *X* and *Y*, denoted :math:`X $ \textcircled{ $\vee$ } $ Y`, respectively :math:`X $ \textcircled{ $\wedge$ } $ Y`, give the bpv-sets defined as follows.
+The disjunctive and conjunctive epistemic fusions of two bpv-sets *X* and *Y*, defined on a same finite support set *E* and denoted :math:`X $ \textcircled{ $\vee$ } $ Y`, respectively :math:`X $ \textcircled{ $\wedge$ } $ Y`, give the bpv-sets defined as follows.
 
-| For all *z* in the support of :math:`X  $ \textcircled{ $\vee$ } $ Y` the membership characteristic :math:`r\big(\,z \in (X  $ \textcircled{ $\vee$ } $ Y)\,\big)\; =`
-|    :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*
-|         and :math:`r(z \in X) \geqslant 0.0` and :math:`r(z \in Y) \geqslant 0.0`; or
-|    :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*,
-|         and :math:`r(z \in X) \leqslant 0.0` and :math:`r(z \in Y) \leqslant 0.0`;
+| For all *z* in *E* the membership characteristic :math:`r\big(\,z \in (X  $ \textcircled{ $\vee$ } $ Y)\,\big)\; =`
+|    :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when
+|          :math:`r(z \in X) \geqslant 0.0` and :math:`r(z \in Y) \geqslant 0.0`; or
+|    :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when 
+|          :math:`r(z \in X) \leqslant 0.0` and :math:`r(z \in Y) \leqslant 0.0`;
 |    :math:`0.0` otherwise.
 
-| For all *z* in the support of :math:`X $ \textcircled{ $\wedge$ } $ Y` the membership characteristic :math:`r\big(\,z \in (X $ \textcircled{ $\wedge$ } $ Y)\,\big)\; =`
-|    :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*,
-|         and :math:`r(z \in X) > 0.0` and :math:`r(z \in Y) > 0.0`; or
-|    :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when both *z* in *X* and *z* in *Y*,
-|         and :math:`r(z \in X) < 0.0` and :math:`r(z \in Y) < 0.0`; or
-|    :math:`r(z \in X)` when both *z* in *X* and *z* in *Y*,
-|         and :math:`r(z \in X) \neq 0.0` and :math:`r(z \in Y) = 0.0`; or
-|    :math:`r(z \in Y)` when both *z* in *X* and *z* in *Y*,
-|         and :math:`r(z \in X) == 0.0` and :math:`r(z \in Y) \neq 0.0`;
+| For all *z* in *E* the membership characteristic :math:`r\big(\,z \in (X $ \textcircled{ $\wedge$ } $ Y)\,\big)\; =`
+|    :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when
+|          :math:`r(z \in X) > 0.0` and :math:`r(z \in Y) > 0.0`; or
+|    :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when 
+|          :math:`r(z \in X) < 0.0` and :math:`r(z \in Y) < 0.0`; or
+|    :math:`r(z \in X)` when
+|          :math:`r(z \in X) \neq 0.0` and :math:`r(z \in Y) = 0.0`; or
+|    :math:`r(z \in Y)` when
+|          :math:`r(z \in X) == 0.0` and :math:`r(z \in Y) \neq 0.0`;
 |    :math:`0.0` otherwise.
 
 In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunctive fusion operators.
@@ -4620,7 +4620,7 @@ To every bpv-set :math:`X \in \mathcal{S}(A)` we may associate its negated --dua
    >>> (X.owedge(-X)).showMembershipCharacteristics()
     s1:+0.0000, s2:+0.0000, s3:+0.0000, s4:+0.0000, s5:+0.0000
 
-The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a partial **sharpness** ordering denoted :math:`\succcurlyeq` and defined as follows. Let *X* and *Y* be two bpv-sets in :math:`\mathcal{S}(A)`. We say that :math:`X \,\succcurlyeq\, Y` when :math:`\forall a \in A` either :math:`r(a \in X) \leqslant r(a \in Y) \leqslant 0.0` or, :math:`0.0 \leqslant r(a \in Y) \leqslant r(a \in X`. If *X* and *Y* are bpv-sets of a same crisp subset, it follows for instance that :math:`(X  $ \textcircled{ $\vee$ } $ Y) \,\succcurlyeq\,(X $ \textcircled{ $\wedge$ } $ Y)`. Minimal sharp is the bpv-set :math:`\bf{0}`. Maximal sharp are all :math:`2^n` completely determined --crisp-- subsets of the support set *A*. 
+The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a partial **sharpness** ordering denoted :math:`\succcurlyeq` and defined as follows. Let *X* and *Y* be two bpv-sets in :math:`\mathcal{S}(A)`. We say that :math:`X \,\succcurlyeq\, Y` when :math:`\forall a \in A` either :math:`r(a \in X) \leqslant r(a \in Y) \leqslant 0.0` or, :math:`0.0 \leqslant r(a \in Y) \leqslant r(a \in X)`. If *X* and *Y* are bpv-sets of a same crisp subset, it follows for instance that :math:`(X  $ \textcircled{ $\vee$ } $ Y) \,\succcurlyeq\,(X $ \textcircled{ $\wedge$ } $ Y)`. Minimal sharp is the bpv-set :math:`\bf{0}`. Maximal sharp are all :math:`2^n` completely determined --crisp-- subsets of the support set *A*. 
 
 .. code-block:: pycon
    :caption: The sharpness ordering of bpv-sets
