@@ -710,6 +710,9 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 bipolarValuedSets module
 ------------------------
 
+.. inheritance-diagram:: bipolarValuedSets
+   :parts: 1
+
 .. automodule:: bipolarValuedSets
    :member-order: alphabetical
    :no-inherited-members:
