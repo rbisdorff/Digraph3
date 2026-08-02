@@ -17,6 +17,8 @@ Technical Reference of the Digraph3 modules
 
    :New:
 
+        - A :py:mod:`bipolarValuedSets` module for computational bipolar-valued set theory
+	  
         - A :py:mod:`bachetNumbers` module for computing with bipolar-valued base 3 encoded Bachet numbers
 	  
         - A :py:class:`~transitiveDigraphs.PartialBachetRanking` class for generating highly correlated **partial rankings** from a given outranking digraph instance.	
