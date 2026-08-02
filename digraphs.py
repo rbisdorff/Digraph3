@@ -8969,7 +8969,7 @@ class Digraph(object):
         characteristic vectors.
 
         *ReturnRanking*: IteratedCondorcetWinners parameter for returning a linear ranking
-        induced by the iterated extraction of Condorcet winners bvp-sets.
+        induced by the iterated extraction of Condorcet winners bpv-sets.
         
         """
         if method == 'Bachet':

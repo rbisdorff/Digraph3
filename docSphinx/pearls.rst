@@ -4610,7 +4610,7 @@ Remarkable is the fact that a 0.0 characteristic value does not count as minimal
 To every bpv-set :math:`X \in \mathcal{S}(A)` we may associate its negated --dual--  bpv-set :math:`-X` such that :math:`X  $ \textcircled{ $\vee$ } $ -X \;=\; X $ \textcircled{ $\wedge$ } $ -X \;=\; \bf{0}` . 
 
 .. code-block:: pycon
-   :caption: Dual bvp-sets
+   :caption: Dual bpv-sets
    :name: bipolarValuedSets6
    :linenos:
    :emphasize-lines: 2,4
@@ -4686,9 +4686,9 @@ The individual bipolar-valued credibilities to '*be a weak Condorcet winner*' ar
 
    A random strict outranking relation table
 
-In :numref:`condorcetWinners2` we see confirmed in the strict outranking relation table of :math:`G(X,R)` that alternatives *p2*, *p6* and *p5* are *weakly more or less outranking* or *not more or less outranked* by all the other alternatives whereas alternatives *p1*, *p7* and *p8* are *weakly more or less outranked* by all the other alternatives.
+In :numref:`condorcetWinners2` we see confirmed in the strict outranking relation table of :math:`G(X,R)` that alternative *p2* is a Condorcet winner and alternatives *p6* and *p5* are *not more or less outranked* by all the other alternatives whereas alternatives *p1*, *p7* and *p8* are *weakly more or less outranked* by all the other alternatives.
 
-When a given digraph shows strict chordless outranking circuits it may however be the case that no Condorcet winners and/or losers can be detected, the resulting bvp-set does not contain any positive and/or negative credibilities. Breaking in such a case all chordless strict outranking circuits at their weakest link transforms the strict outranking digraph in an acyclic asymmetric digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the digraph.
+When a given digraph shows strict chordless outranking circuits it may however be the case that no Condorcet winners and/or losers can be detected, the resulting bpv-set does not contain any positive and/or negative credibilities. Breaking in such a case all chordless strict outranking circuits at their weakest link transforms the strict outranking digraph in an acyclic asymmetric digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the digraph.
 
 Now, weak Condorcet winners and losers, like initial and terminal prekernels, give suitable first and last choice recommendations. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts therefore the '*IteratedCondortWinners*' argument for showing recursively positive weak Condorcet winners as first choice and positive weak Condorcet losers as last choice recommendation as shown in :numref:`CondorcetWinners3` below.
 

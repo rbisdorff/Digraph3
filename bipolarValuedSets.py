@@ -124,7 +124,7 @@ class BpvSet(object):
     def __init__(self,fileName=None,ndigits=4):
         from decimal import Decimal
         if fileName is None:
-            self.name = 'emptyBvpSet'
+            self.name = 'emptyBpvSet'
             self.support = {}
             self.ndigits = ndigits
             precision = '0.' + ((ndigits-1)*'0') + '1'
@@ -262,9 +262,9 @@ class BpvSet(object):
 
     def save(self,fileName='tempBpvSet'):
         """
-        Permanent storage of a BvpSet instance
+        Permanent storage of a BpvSet instance
         """
-        print('*--- Saving bvp-set in file: <' + fileName + '.py> ---*')
+        print('*--- Saving bpv-set in file: <' + fileName + '.py> ---*')
         support = self.support
         membership = self.membership
         Min = self.valuationDomain['min']
@@ -272,7 +272,7 @@ class BpvSet(object):
         Max = self.valuationDomain['max']
         fileNameExt = str(fileName)+str('.py')
         fo = open(fileNameExt, 'w')
-        fo.write('# Saved BvpSet instance\n')
+        fo.write('# Saved BpvSet instance\n')
         fo.write('from collections import OrderedDict\n')
         fo.write('from decimal import Decimal\n')
         
