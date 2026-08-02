@@ -5174,7 +5174,7 @@ It is indeed possible to define such a performance tableau by, first, using a si
      'd' | +0.20  -0.40  -0.40  +1.00  
     Valuation domain: [-1.000; 1.000]
 
-In :numref:`Bouyssou4OrigPT` Lines 9-12 we notice that criterion *g1* models with a majority margin of 2/5 = 0.40 the requested linear ranking and criterion *g2* warrants with a majority margin of 1/5 = 0.20 that *d* is "*at least as well evaluated as*" *d* (see Lines 18 and 21) leading to the necessary reciprocal outranking situations between *a* and *d*.
+In :numref:`Bouyssou4OrigPT` Lines 9-12 we notice that criterion *g1* models with a majority margin of 2/5 = 0.40 the requested linear ranking and criterion *g2* warrants with a majority margin of 1/5 = 0.20 that *d* is "*at least as well evaluated as*" *a* (see Lines 18 and 21) leading to the necessary reciprocal outranking situations between *a* and *d*.
 
 It becomes apparent with the partial tournament example here that, when the number of criteria is not constrained, we may model in this way compatible pairwise outranking situations independently one of the other.
 
