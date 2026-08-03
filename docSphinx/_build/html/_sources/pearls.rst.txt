@@ -4765,7 +4765,7 @@ A result that gets confirmed with the '*Rubis*' choice recommendation shown in :
 	 determinateness (%) : 50.00
 	 - most credible action(s) = { }
 
-With the given strict outranking digraph, initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and strict outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers similarly are weakly independent yet only weakly outranking or outranked choices.
+With the given strict outranking digraph, initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are similarly  weakly independent yet only weakly outranking resp. outranked choices. In, for instance, the office location problem discussed in the tutorials part, location 'A', being incomparable to all other locations, is included in the initial and in the terminal prekernel, but it is neither a part of the Condorcet winners nor a part of the Condorcet losers [29]_.
 
 .. note::
    
@@ -5926,7 +5926,9 @@ Appendix
 
 .. [27] https://en.wikipedia.org/wiki/Grover%27s_algorithm
 
-.. [28] A **weak** Condorcet winner outranks at least one action and is incomparable to the not outranked actions. A **weak** Condorcet loser is outranked by at least one action and is incomparable to the remaining actions.   
+.. [28] A **weak** Condorcet winner outranks at least one action and is incomparable to the not outranked actions. A **weak** Condorcet loser is outranked by at least one action and is incomparable to the remaining actions.
+
+.. [29] See :ref:`Rubis-Tutorial-label`
 
 .. raw:: latex
 
