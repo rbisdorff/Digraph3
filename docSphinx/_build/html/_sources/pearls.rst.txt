@@ -4643,8 +4643,8 @@ The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a pa
      s5  0.0000  0.0000
     True
 
-Computing the bpv-set of weak Condorcet winners
-...............................................
+Computing the bpv-set of weak Condorcet winners and loosers
+...........................................................
 
 The relation attribute of a given outranking digraph :math:`G(X,R)` is an evident example of a bpv-set. And, the epistemic fusion operators may for instance be used for computing the bpv-set of *weak Condorcet winners and losers* of such a digraph *G* [28]_. The :py:class:`~digraphs.Digraph` class provides therefore the :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method as shown in :numref:`CondorcetWinners1` Line 5.  
 
@@ -4690,52 +4690,32 @@ In :numref:`condorcetWinners2` we see confirmed in the strict outranking relatio
 
 When a given digraph shows strict chordless outranking circuits it may however be the case that no Condorcet winners and/or losers can be detected, the resulting bpv-set does not contain any positive and/or negative credibilities. Breaking in such a case all chordless strict outranking circuits at their weakest link transforms the strict outranking digraph in an acyclic asymmetric digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the digraph.
 
-Now, weak Condorcet winners and losers, like initial and terminal prekernels, give suitable first and last choice recommendations. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts therefore the '*IteratedCondortWinners*' argument for showing recursively positive weak Condorcet winners as first choice and positive weak Condorcet losers as last choice recommendation as shown in :numref:`CondorcetWinners3` below.
+Now, weak Condorcet winners and losers, like initial and terminal prekernels, give suitable first and last choice recommendations. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts therefore the '*CondorcetWinners*' argument for showing positive weak Condorcet winners as first choice and positive weak Condorcet losers as last choice recommendation as shown in :numref:`CondorcetWinners3` below.
 
 .. code-block:: pycon
-   :caption: Showing first and last choice recommendations from recursively iterated weak Condorcet winners bpv-sets
+   :caption: Showing first and last choice recommendations from weak Condorcet winners bpv-sets
    :name: CondorcetWinners3
    :linenos:
-   :emphasize-lines: 1-2,6-14,19,21
+   :emphasize-lines: 1,5-7,10-12
 
-   >>> g.showChoiceRecommendation('IteratedCondorcetWinners')
-    ******************************************
-    Iterated weak Condorcet winners and losers
-    ------------------------------------------
-     1rst-choice: 'p2' (+0.22)
-     1rst-choice: 'p6' (+0.19)
-     1rst-choice: 'p5' (+0.03)
-       2nd-choice: 'p4' (+1.00)
-       2nd-choice: 'p9' (+0.53)
-       2nd-reject: 'p3' (+0.53)
-     1rst-reject: 'p1' (+0.14)
-     1rst-reject: 'p7' (+0.14)
-     1rst-reject: 'p8' (+0.17)
-    -----------------------------------------
-    Criteria significance majority in brakets
-    Execution time: 0.026 sec.
-    *****************************************
-   >>> from linearOrders import IteratedBpvCondorcetWinnersRanking
-   >>> cr = IteratedBpvCondorcetWinnersRanking(g)
-   >>> cr.condorcetRanking
-    ['p2','p6','p5','p4','p9','p3','p1','p7','p8']
+   >>> g.showChoiceRecommendation('CondorcetWinners')
+    First and last choice recommendations
+    -------------------------------------
+     First choice (Condorcet winners)
+      'p2': +0.22 (61.11%)
+      'p6': +0.19 (59.72%)
+      'p5': +0.03 (51.39%)
+    -------------------------------------
+     Last choice (Condorcet losers)
+      'p8': +0.17 (58.34%)
+      'p7': +0.14 (56.95%)
+      'p1': +0.14 (56.95%)
+    -------------------------------------
+     Criteria significance majority in brakets
+     Execution time: 0.017 sec.
+    ***********************************************
 
-The criteria significance majorities for each choice are indicated in brakets (see Lines 6-14). The choice recommendation makes apparent a linear ranking which may be computed with the :py:class:`linearOrders.IteratedBpvCondorcetWinnersRanking` class (see Lines 19 and 21).
-
-In the performance heatmap shown in :numref:`condorcetWinnersHeatmap` using the previous *cr.condorcetRanking*, we may verify the quality of this ranking.
-
->>> g.showHTMLPerformanceHeatmap(cr.condorcetRanking,
-...                              Correlations=True,colorLevels=5)
-
-.. figure:: condorcetWinnersHeatmap.png
-   :name: condorcetWinnersHeatmap
-   :width: 500 px
-   :align: center
-   :alt: Verifying the quality of the Condorcet winners and losers recommendation
-
-   Performance heatmap ranked by iterated bipolar-valued Condorcet winners and losers
-
-A result that gets confirmed with the '*Rubis*' choice recommendation shown in :numref:`CondorcetWinners4` below.
+The criteria significance majorities for each choice are indicated in brakets (see Lines 5-12). A result that gets confirmed with the '*Rubis*' choice recommendation shown in :numref:`CondorcetWinners4` below.
 
 .. code-block:: pycon
    :caption: Showing the choice recommendations from the Rubis method
@@ -4766,6 +4746,55 @@ A result that gets confirmed with the '*Rubis*' choice recommendation shown in :
 	 - most credible action(s) = { }
 
 With the given strict outranking digraph, initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and strictly outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are weakly outranking resp. weakly outranked choices. In, for instance, the office location problem discussed in the tutorials part, location 'A', being incomparable to all other locations, is included in the initial and in the terminal prekernel, but it is neither part of the Condorcet winners nor part of the Condorcet losers [29]_.
+
+Ranking-by-choosing with bpv-set of weak Condorcet winners and loosers
+......................................................................
+
+In a ranking-by-choosing strategy, we may recursively extract bpv-sets of weak Condorcet winners and loosers as shown in :numref:`CondorcetWinners5` below. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts therefore the '*IteratedCondorcetWinners*' argument
+
+.. code-block:: pycon
+   :caption: Showing first and last choice recommendations from recursively extracted weak Condorcet winners and loosers bpv-sets
+   :name: CondorcetWinners5
+   :linenos:
+   :emphasize-lines: 1,7,13,15,19,21
+
+   >>> g.showChoiceRecommendation('IteratedCondorcetWinners')
+    ******************************************
+     Iterated weak Condorcet winners and losers
+     ------------------------------------------
+      1rst-choice: 'p2' (+0.222)
+      1rst-choice: 'p6' (+0.194)
+      1rst-choice: 'p5' (+0.028)
+        2nd-choice: 'p4' (+1.000)
+        2nd-choice: 'p9' (+0.528)
+        2nd-reject: 'p3' (+0.528)
+      1rst-reject: 'p1' (+0.139)
+      1rst-reject: 'p7' (+0.139)
+      1rst-reject: 'p8' (+0.167)
+     -----------------------------------------
+     Criteria significance majority in brakets
+     Execution time: 0.022 sec.
+    *****************************************   
+   >>> from linearOrders import IteratedBpvCondorcetWinnersRanking
+   >>> cr = IteratedBpvCondorcetWinnersRanking(g)
+   >>> cr.condorcetRanking
+    ['p2','p6','p5','p4','p9','p3','p1','p7','p8']
+
+This choice recommendation makes apparent a linear ranking which may be computed with the :py:class:`linearOrders.IteratedBpvCondorcetWinnersRanking` class (see Lines 19 and 21).
+
+In the performance heatmap shown in :numref:`condorcetWinnersHeatmap` using the previous *cr.condorcetRanking*, we may verify the quality of this ranking.
+
+>>> g.showHTMLPerformanceHeatmap(cr.condorcetRanking,
+...                              Correlations=True,colorLevels=5)
+
+.. figure:: condorcetWinnersHeatmap.png
+   :name: condorcetWinnersHeatmap
+   :width: 500 px
+   :align: center
+   :alt: Verifying the quality of the Condorcet winners and losers recommendation
+
+   Performance heatmap ranked by iterated bipolar-valued Condorcet winners and losers
+
 
 .. note::
    
