@@ -4671,7 +4671,7 @@ The relation attribute of a given outranking digraph :math:`G(X,R)` is an eviden
      p7:  -0.14
      p8:  -0.17
 
-In the codual of the given random 3-objectives outranking digraph :math:`G(X,R)`, concerning the performances of 9 public policies with respect to 13 performance criteria, three alternatives, *p2*, *p6* and *p5* are positive weak Condorcet winners, whereas alternatives *p1*, *p7* and *p8* are negative weak Condorcet winners, that is positive weak Condorcet losers (see Lines 8-10 and 14-16 above).
+In the given random 3-objectives outranking digraph :math:`G(X,R)`, concerning the performances of 9 public policies with respect to 13 performance criteria, three alternatives, *p2*, *p6* and *p5* are positive weak Condorcet winners, whereas alternatives *p1*, *p7* and *p8* are negative weak Condorcet winners, that is positive weak Condorcet losers (see Lines 8-10 and 14-16 above).
 
 The individual bipolar-valued credibilities to '**be a weak Condorcet winner**' are computed as follows. For each individual alternative *x in X*, the conjunctive epistemic :math:`$ \textcircled{ $\wedge$ } $` fusion of the *outranking* credibility *R(x,y)* for all :math:`y \neq x` in *X* measures indeed the more or less **outranking power** of *x* and the same conjunctive epistemic :math:`$ \textcircled{ $\wedge$ } $` fusion of the *not outranked* credibility *-R(y,x)*  for all :math:`y \neq x` in *X* measures the more or less **not outrankedness** of *x*. A disjunctive epistemic :math:`$ \textcircled{ $\vee$ } $` fusion of both these measures delivers eventually the corresponding bpv-set. It is worthwhile noticing that the *dual* of this bpv-set gives by the way the bpv-set of the corresponding weak Condorcet losers. The computation of the bpv-set '*to be a weak Condorcet winner*' is hence *codual invariant*.
 
@@ -4684,16 +4684,16 @@ The individual bipolar-valued credibilities to '**be a weak Condorcet winner**' 
    :align: center
    :alt: A random outranking relation table
 
-   A random strict outranking relation table
+   A random outranking relation table
 
-In :numref:`condorcetWinners2` we see confirmed in the strict outranking relation table of :math:`G(X,R)` that alternative *p2* is a Condorcet winner and alternatives *p6* and *p5* are *weak Condorcet winners* whereas alternatives *p1*, *p7* and *p8* are *weak Condorcet losers*.
+In :numref:`condorcetWinners2` we see confirmed in the outranking relation table of :math:`G(X,R)` that alternative *p2* is a Condorcet winner and alternatives *p6* and *p5* are *weak Condorcet winners* whereas alternatives *p1*, *p7* and *p8* are *weak Condorcet losers*.
 
-When a given digraph shows strict chordless outranking circuits it may however be the case that no Condorcet winners and/or losers can be detected, the resulting bpv-set does not contain any positive and/or negative credibilities. Breaking in such a case all chordless strict outranking circuits at their weakest link transforms the strict outranking digraph in an acyclic asymmetric digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the digraph.
+When a given digraph shows strict chordless outranking circuits it may however be the case that no weak Condorcet winners and/or losers can be detected, the resulting bpv-set does not contain any positive and/or negative credibilities. Breaking in such a case all chordless strict outranking circuits at their weakest link transforms the strict outranking digraph in an acyclic asymmetric digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the digraph.
 
 Now, weak Condorcet winners and losers, like initial and terminal prekernels, give suitable first and last choice recommendations. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts therefore the '*CondorcetWinners*' argument for showing positive weak Condorcet winners as first choice and positive weak Condorcet losers as last choice recommendation as shown in :numref:`CondorcetWinners3` below.
 
 .. code-block:: pycon
-   :caption: Showing first and last choice recommendations from weak Condorcet winners bpv-sets
+   :caption: Showing first and last choice recommendations from weak Condorcet winners bpv-set
    :name: CondorcetWinners3
    :linenos:
    :emphasize-lines: 1,5-7,10-12
