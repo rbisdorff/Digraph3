@@ -1540,13 +1540,15 @@ The five *pragmatic principles* for computing such a *best choice recommendation
 
 Let *X* be the set of potential decision alternatives. Let *Y* be a non empty subset of *X*, called a *choice* in the strict outranking digraph :math:`G(X,r(\succnsim))`. We can now qualify a BCR *Y* in following terms:
 
-    - *Y* is called strictly *outranking* (resp. *outranked*) when for all not selected alternative *x* there exists an alternative *y* in *X* retained such that :math:`r(y \succnsim x) > 0.0` (resp. :math:`r(x \succnsim y) > 0.0`). Such a choice verifies the external stability (principle **P1**).
+    - *Y* is called strictly *outranking* (resp. *outranked*) when for all not selected alternative *x* there exists an alternative *y* in *X* retained such that :math:`r(y \succnsim x) > 0.0` (resp. :math:`r(x \succnsim y) > 0.0`). Such a choice verifies the external stability (principle **P1** and **P2**).
       
     - *Y* is called *weakly independent* when for all *x* not equal *y* in *Y* we observe :math:`r(x \succnsim y) \leq 0.0`. Such a choice verifies the internal stability (principle **P3**).
       
-    - *Y* is conjointly a strictly *outranking* (resp. *outranked*) **and** *weakly independent* choice. Such a choice is called an *initial* (resp. *terminal*) *prekernel* (see the tutorial on :ref:`computing digraph kernels <Kernel-Tutorial-label>`). The initial prekernel now verifies principles **P1**, **P2**, **P3** and **P4**.
+    - *Y* is conjointly a strictly *outranking* (resp. *outranked*) **and** *weakly independent* choice. Such a choice is called an *initial* (resp. *terminal*) *prekernel* (see the tutorial on :ref:`computing digraph kernels <Kernel-Tutorial-label>`). The initial prekernel now verifies principles **P1**, **P2** and **P3**.
+
+    - In order to satisfy principle **P4**, we eliminate from a potential initial prekernel all those actions that are also member of a terminal prekernel. They give in fact **ambiguous** *first* as well as *last* choice recommendations. 
       
-    - To finally verify principle **P5**, we recommend among all potential initial prekernels, a \*most determined* one, i.e. a strictly *outranking* and *weakly independent* choice supported by the highest criteria significance. And in this most determined initial prekernel we eventually retain the alternative(s) that are included with highest criteria significance (see the tutorial on :ref:`Computing bipolar-valued kernel membership characteristic vectors <Bipolar-Valued-Kernels-Tutorial-label>`).
+    - To finally verify principle **P5**, we recommend among all potential initial prekernels, a \*most determined* one, i.e. a strictly *outranking* and *weakly independent* choice supported by the highest criteria significance. And in this most determined initial prekernel we eventually retain the alternative(s) that are included with highest criteria significance support (see the tutorial on :ref:`Computing bipolar-valued kernel membership characteristic vectors <Bipolar-Valued-Kernels-Tutorial-label>`).
 
 Mind that a given strict outranking digraph may not always admit prekernels. This is the case when the digraph contains chordless circuits of odd length. Luckily, our strict outranking digraph *gcd* here does not show any chordless outranking circuits; a fact we can check with the :py:meth:`~digraphs.Digraph.showChordlessCircuits` method.
 
@@ -1563,7 +1565,7 @@ We are ready now for building a first choice recommendation.
 Computing the first choice recommendation
 `````````````````````````````````````````
 
-Following the previously stated pragmatic principles, potential first choice recommendations are determined by the initial prekernels --*weakly independent* and *strictly outranking* choices-- of the strict outranking digraph (see the tutorial on :ref:`computing digraph kernels <Kernel-Tutorial-label>`). Any detected chordless odd outranking circuits are by default broken up (see [BIS-2008]_).
+Following the previously stated pragmatic principles, potential first choice recommendations are determined by the initial and terminal prekernels --*weakly independent* and *strictly outranking* resp. *strictly outranked* choices-- of the strict outranking digraph (see the tutorial on :ref:`computing digraph kernels <Kernel-Tutorial-label>`). Any detected chordless odd outranking circuits are by default broken up (see [BIS-2008]_).
 
 .. code-block:: pycon
    :name: strictBestChoice

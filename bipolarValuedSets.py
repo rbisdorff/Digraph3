@@ -178,12 +178,16 @@ class BpvSet(object):
         print('Valuation domain: [%+.2f;%+.2f]' % (
             valuationDomain['min'],valuationDomain['max'] ))            
 
-    def showPositiveElements(self,/):
+    def showPositiveElements(self,Compute=False):
         """
-        Return the stricly positive members of the set
+        Prints the stricly positive members of the set. With Compute==True
+        return the set of weak CondorcetWinners.
         """
         Sp = self.strip(InSite=False,cutLevel=self.valuationDomain['med'])
         Sp.showMembershipCharacteristics()
+        if Compute:
+            cw = [x for x in Sp.support]
+            return cw
         
     def recodeValuation(self,newMin=-1,newMax=1,ndigits=None,Debug=False):
         """
