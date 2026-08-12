@@ -1486,7 +1486,7 @@ For computing such a bipolar-valued outranking digraph from the given performanc
 
    The office choice outranking digraph  
 
-In :numref:`officeChoiceOutranking` we may notice that Alternative *D* is **positively outranking** all other potential office locations. *D* is hence a *Condorcet winner*. Yet, alternatives *A* (the most expensive) and *C* (the cheapest) are *not* outranked by any other locations; they are in fact **weak** *Condorcet winners*.
+In the relation table shown :numref:`officeChoiceOutranking` we may notice rowwise that alternative *D* is **positively outranking** all other potential office locations. *D* is hence a *Condorcet winner*. Yet, alternatives *A* (the most expensive) and *C* (the cheapest) are also outranking or incomparable with all other locations; they are in fact **weak** *Condorcet winners*. Similarly, columnwise we may notice that alternative '*F* is **positively outranked by** all the other locations. *F* is hence a *Condorcet loser*. It is worthwhile noticing furthermore that alternative *A* is positively outranked or incomparable with all the other locations. *A* is hence conjointly a *weak Condorcet winner* **and** a *weak Condorcet loser*. 
 
 .. code-block:: pycon
    :linenos:
@@ -1495,6 +1495,10 @@ In :numref:`officeChoiceOutranking` we may notice that Alternative *D* is **posi
     ['D']
    >>> g.computeWeakCondorcetWinners()
     ['A', 'C', 'D']
+   >>> g.computeCondorcetLosers()
+    ['F']
+   >>> g.computeWeakCondorcetLosers()
+    ['A', 'F']
 
 For two locations *x* and *y*, the situation "*x* strictly outranks *y*", denoted :math:`(x \succnsim y)`, is given when *x* outranks *y* and *y* does not outrank *y*. From theory, we know that outranking digraphs are *strongly complete*, i.e. for all *x* and *y* in *X*, :math:`r(x \succsim y) + r(y \succsim x) \geq 0.0`. And they verify the *coduality principle*: :math:`r(x \not\succsim y) = r(y \succnsim x)` (see :ref:`On characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>` and [BIS-2013]_).
 
@@ -1540,11 +1544,11 @@ The five *pragmatic principles* for computing such a *best choice recommendation
 
 Let *X* be the set of potential decision alternatives. Let *Y* be a non empty subset of *X*, called a *choice* in the strict outranking digraph :math:`G(X,r(\succnsim))`. We can now qualify a BCR *Y* in following terms:
 
-    - *Y* is called strictly *outranking* (resp. *outranked*) when for all not selected alternative *x* there exists an alternative *y* in *X* retained such that :math:`r(y \succnsim x) > 0.0` (resp. :math:`r(x \succnsim y) > 0.0`). Such a choice verifies the external stability (principle **P1** and **P2**).
+    - *Y* is called strictly *outranking* (resp. *outranked*) when for all not selected alternative *x* there exists an alternative *y* in *X* retained such that :math:`r(y \succnsim x) > 0.0` (resp. :math:`r(x \succnsim y) > 0.0`). Such a choice verifies the external stability (principle **P1**).
       
     - *Y* is called *weakly independent* when for all *x* not equal *y* in *Y* we observe :math:`r(x \succnsim y) \leq 0.0`. Such a choice verifies the internal stability (principle **P3**).
       
-    - *Y* is conjointly a strictly *outranking* (resp. *outranked*) **and** *weakly independent* choice. Such a choice is called an *initial* (resp. *terminal*) *prekernel* (see the tutorial on :ref:`computing digraph kernels <Kernel-Tutorial-label>`). The initial prekernel now verifies principles **P1**, **P2** and **P3**.
+    - *Y* is conjointly a strictly *outranking* (resp. *outranked*) **and** *weakly independent* choice. Such a choice is called an *initial* (resp. *terminal*) *prekernel* (see the tutorial on :ref:`computing digraph kernels <Kernel-Tutorial-label>`). The initial prekernel is minimal in cardinality and verifies now principles **P1**, **P2** and **P3**.
 
     - In order to satisfy principle **P4**, we eliminate from a potential initial prekernel all those actions that are also member of a terminal prekernel. They give in fact **ambiguous** *first* as well as *last* choice recommendations. 
       
