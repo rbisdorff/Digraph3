@@ -1665,7 +1665,7 @@ Yet, we must as well notice that the cheapest alternative *C* is in fact **stric
 Following pragmatic principle **P3** --the required internal stability stating that a BCR should not contain a sub-recommendation-- alternative *G* is hence dropped from our first-ranked list of alternatives. Yet, the credibility level of this outranking situation is not very high: 15/145 = 0.104 (55.2% significance majority).
 
 Robustness of the outranking digraph
-....................................
+````````````````````````````````````
 
 Considering a potential imprecise knowledge of the different criteria significance weights, it appears opportune to compute in :numref:`confidentOfficeChoice` below a 90% confident outranking digraph (see the advanced topic on :ref:`computing confident outrankings with uncertain criteria significance weights <Bipolar-Valued-Likelihood-Tutorial-label>`).
 
@@ -1992,12 +1992,15 @@ The digraph put forward by *Bouyssou* in the October 2005 discussion is not stro
 
 Only after 2013, when the strong completeness and the coduality properties of the outranking digraph were discovered, became it obvious that the initial prekernels of the strict outranking digraph, coupled with the solution of the corresponding kernel equation system, could in fact deliver convincing best choice recommendations (see [BIS-2013]_). Yet, *Bouyssou* and the critical audience of the 2005 seminar would be satisfied to see their doubts somehow confirmed by the solution of the office location choice problem shown previously. Indeed, the initial prekernel {*A*, *C*, *D*} of the corresponding strict outranking digraph does not retain location *G* --as it is actually strictly outranked by location *C* -- and proposes solely location *D* as credible best choice candidate. This latter location appears however certainly outranked by location *G*. Keeping location *G* in an indeterminate situation with being or not being a potential best choice candidate in the solution of the corresponding kernel equation system shows that the resulting bipolar-valued choice vector may be an essential complement of information. Showing solely an initial prekernel appears hence not necessarily sufficient for determining the actual best choice alternative(s). Similarly, questioning the confidence of outranking statements showing, the case given, weak positive credibilities, may result in a more convincing first-choice recommendation.
 
-But it is the new :ref:`Bachet partial ranking rule <Partial-Ranking-Tutorial-label>` that allows nowadays to compute a partial transitive tournament, very close in a bipolar-valued  ordinal correlation sense to the actual transitive part of the given strict outranking digraph, that definitely supports our kernels based recommending approach. The unique initial and terminal kernels of such a transitive asymmetric digraph, easily found via a topological sort algorithm, may indeed deliver more effectively convincing first and/or last choice recommendations.
+A major computational breakthrough could be recently achieved by correcting the implementation of the conjunctive epistemic fusion operator. It is now possible to compute bipolar-valued sets of *weak Condorcet winners* in :math:`\mathcal{O}(n^2)` complexity which avoids the strong absorbance property of the zero valued indeterminate characteristic value when computing the Rubis best choice recommendation.
+
+But it is eventually also the new :ref:`Bachet partial ranking rule <Partial-Ranking-Tutorial-label>` that allows nowadays to compute a partial transitive tournament, very close in a bipolar-valued  ordinal correlation sense to the actual transitive part of the given strict outranking digraph, that definitely supports our kernels based recommending approach. The unique initial and terminal kernels of such a transitive asymmetric digraph, easily found via a topological sort algorithm, may indeed deliver more effectively convincing first and/or last choice recommendations.
 
 .. seealso::
 
-   - :ref:`Alice’s best choice: A selection case study <Alice-Tutorial-label>`  
-   - Lecture 7 notes from the MICS Algorithmic Decision Theory course: [ADT-L7]_.
+   - :ref:`On computing bipolar-valued sets <Bipolar-Valued-Sets-Tutorial-label>`
+   - :ref:`Bachet partial ranking rule <Partial-Ranking-Tutorial-label>`
+   - :ref:`Alice’s best choice: A selection case study <Alice-Tutorial-label>`
 
 Back to :ref:`Content Table <Tutorial-label>`
 
