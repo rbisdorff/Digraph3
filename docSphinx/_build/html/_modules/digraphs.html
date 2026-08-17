@@ -2742,7 +2742,7 @@
     <span class="k">def</span> <span class="nf">weakCondorcetLosers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the set of decision actions x such that</span>
-<span class="sd">        self.relation[x][y] &lt;= self.valuationdomain[&#39;med&#39;]</span>
+<span class="sd">        self.relation[y][x] &gt;= self.valuationdomain[&#39;med&#39;]</span>
 <span class="sd">        for all y != x.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="o">~</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">weakCondorcetWinners</span><span class="p">()</span></div>
@@ -2819,7 +2819,7 @@
     <span class="k">def</span> <span class="nf">condorcetLosers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the set of decision actions x such that</span>
-<span class="sd">        self.relation[x][y] &lt; self.valuationdomain[&#39;med&#39;]</span>
+<span class="sd">        self.relation[y][x] &gt; self.valuationdomain[&#39;med&#39;]</span>
 <span class="sd">        for all y != x.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="o">~</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">condorcetWinners</span><span class="p">()</span></div>

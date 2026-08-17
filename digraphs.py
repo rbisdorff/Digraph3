@@ -2544,7 +2544,7 @@ class Digraph(object):
     def weakCondorcetLosers(self):
         """
         Renders the set of decision actions x such that
-        self.relation[x][y] <= self.valuationdomain['med']
+        self.relation[y][x] >= self.valuationdomain['med']
         for all y != x.
         """
         return (~self).weakCondorcetWinners()
@@ -2609,7 +2609,7 @@ class Digraph(object):
     def condorcetLosers(self):
         """
         Renders the set of decision actions x such that
-        self.relation[x][y] < self.valuationdomain['med']
+        self.relation[y][x] > self.valuationdomain['med']
         for all y != x.
         """
         return (~self).condorcetWinners()

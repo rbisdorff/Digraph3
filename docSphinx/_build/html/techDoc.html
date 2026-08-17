@@ -3012,7 +3012,7 @@ Fills self.newmisset, self.upmis, self.downmis.</p>
 <dt class="sig sig-object py" id="digraphs.Digraph.condorcetLosers">
 <span class="sig-name descname"><span class="pre">condorcetLosers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.condorcetLosers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.condorcetLosers" title="Link to this definition"></a></dt>
 <dd><p>Renders the set of decision actions x such that
-self.relation[x][y] &lt; self.valuationdomain[‘med’]
+self.relation[y][x] &gt; self.valuationdomain[‘med’]
 for all y != x.</p>
 </dd></dl>
 
@@ -4155,7 +4155,7 @@ Annals Of Discrete Mathematics 57 2nd Ed. , Elsevier 2004, Algorithm 2.4 p.44.</
 <dt class="sig sig-object py" id="digraphs.Digraph.weakCondorcetLosers">
 <span class="sig-name descname"><span class="pre">weakCondorcetLosers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.weakCondorcetLosers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.weakCondorcetLosers" title="Link to this definition"></a></dt>
 <dd><p>Renders the set of decision actions x such that
-self.relation[x][y] &lt;= self.valuationdomain[‘med’]
+self.relation[y][x] &gt;= self.valuationdomain[‘med’]
 for all y != x.</p>
 </dd></dl>
 
