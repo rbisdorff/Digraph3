@@ -2547,25 +2547,26 @@ class Digraph(object):
         self.relation[x][y] <= self.valuationdomain['med']
         for all y != x.
         """
+        return (~self).weakCondorcetWinners()
         #actions = self.actions
-        relation = self.relation
-        Med = self.valuationdomain['med']
-        wCL = []
-        for x,rx in relation.items():
-            #rx = relation[x]
-            Loser = True
-            for y,rxy in rx.items():
-                if x != y:
-                    if rx[y] > Med:
-                        Loser = False
-                        break
-            if Loser:
-                wCL.append(x)
-        try:
-            wCL.sort()
-        except:
-            pass
-        return wCL
+        # relation = self.relation
+        # Med = self.valuationdomain['med']
+        # wCL = []
+        # for x,rx in relation.items():
+        #     #rx = relation[x]
+        #     Loser = True
+        #     for y,rxy in rx.items():
+        #         if x != y:
+        #             if rx[y] > Med:
+        #                 Loser = False
+        #                 break
+        #     if Loser:
+        #         wCL.append(x)
+        # try:
+        #     wCL.sort()
+        # except:
+        #     pass
+        # return wCL
 
     def computeCondorcetWinners(self):
         """
@@ -2611,25 +2612,26 @@ class Digraph(object):
         self.relation[x][y] < self.valuationdomain['med']
         for all y != x.
         """
+        return (~self).condorcetWinners()
         #actions = self.actions
-        relation = self.relation
-        Med = self.valuationdomain['med']
-        CL = []
-        for x,rx in relation.items():
-            #rx = relation[x]
-            Loser = True
-            for y,rxy in rx.items():
-                if x != y:
-                    if rxy >= Med:
-                        Loser = False
-                        break
-            if Loser:
-                CL.append(x)
-        try:
-            CL.sort()
-        except:
-            pass
-        return CL
+        # relation = self.relation
+        # Med = self.valuationdomain['med']
+        # CL = []
+        # for x,rx in relation.items():
+        #     #rx = relation[x]
+        #     Loser = True
+        #     for y,rxy in rx.items():
+        #         if x != y:
+        #             if rxy >= Med:
+        #                 Loser = False
+        #                 break
+        #     if Loser:
+        #         CL.append(x)
+        # try:
+        #     CL.sort()
+        # except:
+        #     pass
+        # return CL
 
     def forcedBestSingleChoice(self):
         """
@@ -15891,7 +15893,8 @@ if __name__ == "__main__":
     from linearOrders import IteratedBpvCondorcetWinnersRanking
     cwr = IteratedBpvCondorcetWinnersRanking(g)
     print(cwr.condorcetRanking)
-    
+    print(g.computeWeakCondorcetWinners())
+    print(g.computeWeakCondorcetLosers())
     # g.showHTMLPerformanceHeatmap(actionsList=ranking,Correlations=True)
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')

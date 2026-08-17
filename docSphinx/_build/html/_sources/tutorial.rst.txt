@@ -1395,7 +1395,7 @@ We may inspect the performance tableau data with the computing resources provide
 .. code-block:: pycon
    :linenos:
 
-   >>> from perfTabs import PerformanceTableau
+   >>> from outrankingDigraphs import *
    >>> t = PerformanceTableau('officeChoice')
    >>> t
     *------- PerformanceTableau instance description ------*
@@ -1475,7 +1475,6 @@ For computing such a bipolar-valued outranking digraph from the given performanc
 .. code-block:: pycon
    :linenos:
 
-   >>> from outrankingDigraphs import BipolarOutrankingDigraph
    >>> g = BipolarOutrankingDigraph(t)
    >>> g.showHTMLRelationTable()
 
@@ -1486,7 +1485,7 @@ For computing such a bipolar-valued outranking digraph from the given performanc
 
    The office choice outranking digraph  
 
-In the relation table shown :numref:`officeChoiceOutranking` we may notice rowwise that alternative *D* is **positively outranking** all other potential office locations. *D* is hence a *Condorcet winner*. Yet, alternatives *A* (the most expensive) and *C* (the cheapest) are also outranking or incomparable with all other locations; they are in fact **weak** *Condorcet winners*. Similarly, columnwise we may notice that alternatives '*A* and *F* are outranked by or incomparable to all the other locations. They are hence **weak** *Condorcet losers*. It is worthwhile noticing furthermore that alternative *A* is hence conjointly a *weak Condorcet winner* **and** a *weak Condorcet loser*. 
+In the relation table shown :numref:`officeChoiceOutranking` we may notice rowwise that alternative *D* is **positively outranking** all other potential office locations. *D* is hence a *Condorcet winner*. Yet, alternatives *A* (the most expensive) and *C* (the cheapest) are also outranking or incomparable with all other locations; they are in fact **weak** *Condorcet winners*. Similarly, columnwise, we may notice that alternatives *A* and *F* are also positively outranked or incomparable to all the other locations. They are hence **weak** *Condorcet losers*. It is worthwhile noticing furthermore that alternative *A* is in fact conjointly a *weak Condorcet winner* **and** a *weak Condorcet loser*. 
 
 .. code-block:: pycon
    :linenos:
@@ -1571,7 +1570,7 @@ Following the previously stated pragmatic principles, potential first choice rec
 
 .. code-block:: pycon
    :name: strictBestChoice
-   :caption: Computing the first choice recommendation
+   :caption: Computing the Rubis first choice recommendation
    :linenos:
    :emphasize-lines: 1,6,12-14,16
 
@@ -1600,7 +1599,7 @@ Following the previously stated pragmatic principles, potential first choice rec
 	                          'C': 0.00, 'D': 0.00, 'E': 0.00,
 				  'G': 0.00, }
 				  
-It is interesting to notice in :numref:`strictBestChoice` (Line 6) that the **Rubis first choice recommendation** consists actually in the set of weak Condorcet winners: 'A', 'C' and 'D'. In the corresponding characteristic vector (see Lines 12-14), representing the bipolar credibility degree with which each alternative may indeed be considered a first choice candidate (see [BIS-2006a]_, [BIS-2006b]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an *indeterminate* situation. They **may be or not be** potential first choice candidates besides *D*. Notice furthermore that location *G* is not included in the initial prekernel, yet, shows nevertheless an indeterminate situation with respect to *being or not being* a potential first choice candidate. Alternatives *B*, *E* and *F* are *negatively* included, i.e. *positively excluded* from this first choice recommendation. We may furthermore notice in Line 16 that both alternatives *A* and *F* are reported as potential *strict outranked* choices, hence as potential **last choice candidates** . The ambiguous first-ranked and last-ranked position of alternative *A* indicates its global incomparability status as shown in :numref:`bestOfficeChoice`.
+It is interesting to notice in :numref:`strictBestChoice` (Line 6) that the **Rubis first choice recommendation** consists actually in the set of weak Condorcet winners: 'A', 'C' and 'D' and the set of weak ndorcet losers: 'A' and 'F'. In the corresponding characteristic vector (see Lines 12-14), representing the bipolar credibility degree with which each alternative may indeed be considered a first choice candidate (see [BIS-2006a]_, [BIS-2006b]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an *indeterminate* situation. They **may be or not be** potential first choice candidates besides *D*. Notice furthermore that location *G* is not included in the initial prekernel, yet, shows nevertheless an indeterminate situation with respect to *being or not being* a potential first choice candidate. Alternatives *B*, *E* and *F* are *negatively* included, i.e. *positively excluded* from this first choice recommendation. We may furthermore notice in Line 16 that both alternatives *A* and *F* are reported as potential *strict outranked* choices, hence as potential **last choice candidates** . The ambiguous first-ranked and last-ranked position of alternative *A* indicates its global incomparability status as shown in :numref:`bestOfficeChoice`.
 
 .. code-block:: pycon
    :linenos:
@@ -1716,13 +1715,13 @@ The :py:class:`~outrankingDigraphs.ConfidentBipolarOutrankingDigraph` class cons
 Computing the bipolar-valued set of weak Condorcet winners
 ``````````````````````````````````````````````````````````
 
-It may be opportune to compute the bipolar-valued set of weak Condorcet winners and losers on the 90% confident outranking digraph. The :py:mod:`digraphs` module provides therefore the :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method (see the advanced topic on :ref:`Bipolar-Valued-Sets-Tutorial-label`).
+It may be opportune to compute the bipolar-valued set of weak Condorcet winners or losers on the 90% confident outranking digraph. The :py:mod:`digraphs` module provides therefore the :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method (see the advanced topic on :ref:`Bipolar-Valued-Sets-Tutorial-label`).
 
 .. code-block:: pycon
    :linenos:
    :name: confidentOfficeChoice1
    :emphasize-lines: 1,3-9
-   :caption: Computing the bpv-set of weak Condorcet winners and losers
+   :caption: Computing the bpv-set of weak Condorcet winners or losers
 
    >>> wcw = cg.computeBpvCondorcetWinners()
    >>> wcw.showMembershipCharacteristics(ndigits=2)
@@ -1735,7 +1734,7 @@ It may be opportune to compute the bipolar-valued set of weak Condorcet winners 
     F (Fen):  -1.00
    Valuation domain: [-1.00;+1.00]
 
-In :numref:`confidentOfficeChoice1` Lines 3-9, the positive locations give suitable *first choice* candidates and the negative locations give similarly *last* *choice* Candidates. To show the corresponding first and last choices recommendation, the :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method provides the '*IteratedCondorcetWinners*' argument.
+In :numref:`confidentOfficeChoice1` Lines 3-9, the positive locations give suitable *first choice* candidates and the negative locations give similarly *last* *choice* candidates. To show the corresponding first and last choices recommendation, the :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method provides the '*IteratedCondorcetWinners*' argument.
 
 .. code-block:: pycon
    :linenos:
@@ -1745,8 +1744,8 @@ In :numref:`confidentOfficeChoice1` Lines 3-9, the positive locations give suita
 
    >>> cg.showChoiceRecommendation('IteratedCondorcetWinners')
     ******************************************
-    Iterated weak Condorcet winners and losers
-    ------------------------------------------
+    Iterated weak Condorcet winners or losers
+    -----------------------------------------
       1rst-choice: 'G' (+0.545)
       1rst-choice: 'C' (+0.462)
       1rst-choice: 'D' (+0.248)
@@ -1759,7 +1758,7 @@ In :numref:`confidentOfficeChoice1` Lines 3-9, the positive locations give suita
      Execution time: 0.012 sec.
     *****************************************
 
-Remarquable is in :numref:`confidentOfficeChoice2` the fact that in the 90% confident outranking digraph, location *G* gives now the most credible first choice candidate. Location *F* stays the most credible last choice candidate (see Lines 5 and 11). Locations *A* and *E* are now correctly flagged as being indeterminate choice candidates (see Line 8-9).
+Remarquable in :numref:`confidentOfficeChoice2` is the fact that, in the 90% confident outranking digraph, location *G* gives now the most credible first choice candidate. Location *F* stays the most credible last choice candidate (see Lines 5 and 11). Locations *A* and *E* are now correctly flagged as being indeterminate choice candidates (see Line 8-9).
 
 To get a further interesting insight in the overall outranking situation, we finally make usage of the new :py:class:`~transitiveDigraphs.PartialBachetRanking` class imported from the :py:mod:`transitiveDigraphs` module, for computing a **partial ranking** of all the potential office locations (see the advanced topic on :ref:`partially ranking strategies <Partial-Ranking-Tutorial-label>`).
 
@@ -1823,7 +1822,7 @@ In :numref:`BachetRanking0` Line 2, we operate the :ref:`epistemic disjunctive f
      Standard deviation (b)                 : +0.476
      Partial ranking fairness (a)-(b)       : +0.002
 
-The partial *Bachet* ranking is a 100% consistent with the *Proximity* criterion, 85% consistent with *Visibility* and 75% consistent with the *Costs* criterion. These three criteria are the most significant ones (see Lines 5 aand 7). The least considered criteria are the *Standing* and even more the *Comfort* criterion. The partial *Bachet* ranking is indeed  only 35% consistent with the *Standing* and only 15% consistent with the latter one (see Lines 10-11). The mean weighted marginal ordinal correlation index (+0.478, Line 13) over all the criteria shows eventually a partial ranking consensus supported by a nearly 75% significance majority.   
+The partial *Bachet* ranking is 100% consistent with the *Proximity* criterion, 85% consistent with *Visibility* and 75% consistent with the *Costs* criterion. These three criteria are the most significant ones (see Lines 5 aand 7). The least considered criteria are the *Standing* and even more the *Comfort* criterion. The partial *Bachet* ranking is indeed  only 35% consistent with the *Standing* and only 15% consistent with the latter one (see Lines 10-11). The mean weighted marginal ordinal correlation index (+0.478, Line 13) over all the criteria shows eventually a partial ranking consensus supported by a nearly 75% significance majority.   
 
 We may finally use the best, with the outranking digraph *g* correlated (+0.816), *Bachet* ranking ['G', 'D', 'A', 'C', 'B', 'E', 'F']  for showing in :numref:`rankedOfficeChoiceHeatmap` a from best to worst ranked performance heatmap of all the potential office locations.
 
@@ -1847,7 +1846,7 @@ The :py:class:`digraphs.Digraph` class now readily provides the :py:meth:`~digra
    :linenos:
    :emphasize-lines: 1,9,13
 
-   >>> g.showBachetChoiceRecommendation(randomized=200,seed=4)
+   >>> g.showChoiceRecommendation('Bachet',randomized=200,seed=4)
     *---- Bachet Choice Recommendations ----*
     Ranking by recursively first and last choosing
      1st ranked ['A', 'C', 'D', 'G']
@@ -1992,7 +1991,7 @@ The digraph put forward by *Bouyssou* in the October 2005 discussion is not stro
 
 Only after 2013, when the strong completeness and the coduality properties of the outranking digraph were discovered, became it obvious that the initial prekernels of the strict outranking digraph, coupled with the solution of the corresponding kernel equation system, could in fact deliver convincing best choice recommendations (see [BIS-2013]_). Yet, *Bouyssou* and the critical audience of the 2005 seminar would be satisfied to see their doubts somehow confirmed by the solution of the office location choice problem shown previously. Indeed, the initial prekernel {*A*, *C*, *D*} of the corresponding strict outranking digraph does not retain location *G* --as it is actually strictly outranked by location *C* -- and proposes solely location *D* as credible best choice candidate. This latter location appears however certainly outranked by location *G*. Keeping location *G* in an indeterminate situation with being or not being a potential best choice candidate in the solution of the corresponding kernel equation system shows that the resulting bipolar-valued choice vector may be an essential complement of information. Showing solely an initial prekernel appears hence not necessarily sufficient for determining the actual best choice alternative(s). Similarly, questioning the confidence of outranking statements showing, the case given, weak positive credibilities, may result in a more convincing first-choice recommendation.
 
-A major computational breakthrough could be recently achieved by correcting the implementation of the conjunctive epistemic fusion operator. It is now possible to compute bipolar-valued sets of *weak Condorcet winners* in :math:`\mathcal{O}(n^2)` complexity which avoids the strong absorbance property of the zero valued indeterminate characteristic value when computing the Rubis best choice recommendation.
+A major computational breakthrough could be recently achieved by reviewing the implementation of the conjunctive epistemic fusion operator. It is now possible to compute bipolar-valued sets of *weak Condorcet winners or losers* in :math:`\mathcal{O}(n^2)` complexity which avoids the strong absorbance property of the zero valued indeterminate characteristic value when computing the Rubis best choice recommendation.
 
 But it is eventually also the new :ref:`Bachet partial ranking rule <Partial-Ranking-Tutorial-label>` that allows nowadays to compute a partial transitive tournament, very close in a bipolar-valued  ordinal correlation sense to the actual transitive part of the given strict outranking digraph, that definitely supports our kernels based recommending approach. The unique initial and terminal kernels of such a transitive asymmetric digraph, easily found via a topological sort algorithm, may indeed deliver more effectively convincing first and/or last choice recommendations.
 
