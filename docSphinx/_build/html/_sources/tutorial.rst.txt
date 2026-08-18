@@ -4971,7 +4971,7 @@ In our randomly generated election results, we are lucky: the instant runoff win
 The *Condorcet* winner
 ``````````````````````
 
-For instance, candidate *a1* is ranked four times before and once behind candidate *a2*. Hence the corresponding **majority margin** *M(a1,a2)* is 4 - 1 = +3. These *majority margins* define on the set of candidates what we call the **majority margins digraph**. The :py:class:`~votingProfiles.MajorityMarginsDigraph` class (a specialization of the :py:class:`~digraphs.Digraph` class) is available for handling such kind of digraphs.
+For instance, candidate *c1* is ranked ten times before and seven times behind candidate *c2*. Hence the corresponding **majority margin** *M(c1,c2)* is 10 - 7 = 3. These *majority margins* define on the set of candidates what we call the **majority margins digraph**. The :py:class:`~votingProfiles.MajorityMarginsDigraph` class (a specialization of the :py:class:`~digraphs.Digraph` class) is available for handling such kind of digraphs.
 
 .. code-block:: pycon
    :name: condorcetDigraph
@@ -5007,7 +5007,7 @@ For instance, candidate *a1* is ranked four times before and once behind candida
         'c1'    |    0     3     -1	 
         'c2'    |   -3     0     -5	 
         'c3'    |    1     5      0	 
-    Valuation domain: [-15;+15]
+    Valuation domain: [-17;+17]
 
 Notice that in the case of linear voting profiles, majority margins always verify a zero sum property: *M(x,y)* + *M(y,x)* = 0 for all candidates *x* and *y* (see :numref:`condorcetDigraph` Lines 26-28). This is not true in general for arbitrary voting profiles. The *majority margins* digraph of linear voting profiles defines in fact a *weak tournament* and belongs, hence, to the class of *self-codual* bipolar-valued digraphs ([13]_).
     
@@ -5036,7 +5036,7 @@ By seeing the majority margins like a *bipolar-valued characteristic function* o
 
    Visualizing an election result
 
-In :numref:`tutorialLinearBallots` we notice that the *majority margins* digraph from our example linear voting profile gives a linear order of the candidates: ['c3', 'c1', 'c2], the same actually as given by the *Borda* scores (see :numref:`BordaScores`). This is by far not given in general. Usually, when aggregating linear ballots, there appear cyclic social preferences.
+In :numref:`tutorialLinearBallots` we notice that the *majority margins* digraph from our example linear voting profile gives a *linear order* of the candidates: ['c3', 'c1', 'c2], the same actually as given by the *Borda* scores (see :numref:`BordaScores`). Yet, this is by far not generally the case. Usually, when aggregating linear ballots, there appear **cyclic** social preferences.
 
 Cyclic social preferences
 `````````````````````````
