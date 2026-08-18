@@ -4837,13 +4837,13 @@ The :py:mod:`votingProfiles` module provides resources for handling ranked votin
 .. code-block:: python
    :linenos:
 
-    candidates = OrderedDict([('a1',...), ('a2',...), ('a3', ...), ...}
+    candidates = OrderedDict([('c1',...), ('c2',...), ('c3', ...), ...}
     voters = OrderedDict([('v1',{'weight':10}), ('v2',{'weight':3}), ...}
     ## each voter specifies a linearly ranked list of candidates
     ## from the best to the worst (without ties
     linearBallot = {
-    'v1' : ['a2','a3','a1', ...],
-    'v2' : ['a1','a2','a3', ...],
+    'v1' : ['c2','c3','c1', ...],
+    'v2' : ['c1','c2','c3', ...],
     ...
     }
 
@@ -4857,22 +4857,16 @@ The module provides a :py:class:`~votingProfiles.RandomLinearVotingProfile` clas
 
    >>> from votingProfiles import RandomLinearVotingProfile
    >>> v = RandomLinearVotingProfile(numberOfVoters=5,
-   ...                               numberOfCandidates=3,
-   ...                               RandomWeights=True)
-   
+   ...                   numberOfCandidates=3,
+   ...                   RandomWeights=True,seed=5)
    >>> v.candidates
-    OrderedDict([ ('a1',{'name':'a1}), ('a2',{'name':'a2'}),
-                  ('a3',{'name':'a3'}) ])
+    OrderedDict([ ('c1',{'name':'c1}), ('c2',{'name':'c2'}),
+                  ('c3',{'name':'c3'}) ])
    >>> v.voters
-    OrderedDict([('v1',{'weight': 2}), ('v2':{'weight': 3}), 
-     ('v3',{'weight': 1}), ('v4':{'weight': 5}), 
-     ('v5',{'weight': 4})])
-   >>> v.linearBallot
-    {'v1': ['a1', 'a2', 'a3',],
-     'v2': ['a3', 'a2', 'a1',],
-     'v3': ['a1', 'a3', 'a2',],
-     'v4': ['a1', 'a3', 'a2',],
-     'v5': ['a2', 'a3', 'a1',]} 
+    OrderedDict(
+    [('v1',{'weight': 5}), ('v2':{'weight': 3}), 
+     ('v3',{'weight': 3}), ('v4':{'weight': 5}), 
+     ('v5',{'weight': 1})])
 
 Notice that in this random example, the five voters are weighted (see :numref:`randomProfile1` Lines 10-12). Their linear ballots can be viewed with the :py:func:`~votingProfiles.LinearVotingProfile.showLinearBallots` method.
 
@@ -4880,13 +4874,13 @@ Notice that in this random example, the five voters are weighted (see :numref:`r
    :linenos:
 
    >>> v.showLinearBallots()
-    voters(weight)	 candidates rankings
-    v1(2): 	 ['a2', 'a1', 'a3']
-    v2(3): 	 ['a3', 'a1', 'a2']
-    v3(1): 	 ['a1', 'a3', 'a2']
-    v4(5): 	 ['a1', 'a2', 'a3']
-    v5(4): 	 ['a3', 'a1', 'a2']
-    # voters: 15
+    voters(weight) candidates rankings
+     v1(5):	 ['c3', 'c1', 'c2']
+     v2(3):	 ['c2', 'c1', 'c3']
+     v3(3):	 ['c2', 'c3', 'c1']
+     v4(5):	 ['c1', 'c3', 'c2']
+     v5(1):	 ['c3', 'c2', 'c1']
+    # voters:  17
 
 Editing of the linear voting profile may be achieved by storing the data in a file, edit it, and reload it again.
 
@@ -4906,34 +4900,37 @@ We may easily compute **uni-nominal votes**, i.e. how many times a candidate was
    :linenos:
 
    >>> v.computeUninominalVotes()
-    {'a2': 2, 'a1': 6, 'a3': 7}
+    {'c1': 5, 'c2': 6, 'c3': 6}
    >>> v.computeSimpleMajorityWinner()
-    ['a3']
+    ['c2','c3']
 
-As we observe no absolute majority (8/15) of votes for any of the three candidate, we may look for the **instant runoff** winner instead (see [ADT-L2]_).
+As we observe no absolute majority (9/17) of votes for any of the three candidate, we may look for the **instant runoff** winner instead (see [ADT-L2]_).
 
 .. code-block:: pycon
    :name: instantRunOff
    :caption: Example Instant Run Off Winner
 
    >>> v.computeInstantRunoffWinner(Comments=True)
-    Half of the Votes =  7.50
+    Total number of votes =  17.000
+    Half of the Votes =  8.50
     ==> stage =  1
-	remaining candidates ['a1', 'a2', 'a3']
-	uninominal votes {'a1': 6, 'a2': 2, 'a3': 7}
-	minimal number of votes =  2
-	maximal number of votes =  7
-	candidate to remove =  a2
-	remaining candidates =  ['a1', 'a3']
+       remaining candidates ['c1', 'c2', 'c3']
+       uninominal votes {'c1': Decimal('5'),
+                         'c2': Decimal('6'),
+			 'c3': Decimal('6')}
+       minimal number of votes =  5
+       maximal number of votes =  6
+       candidate to remove =  c1
+       remaining candidates =  ['c2', 'c3']
     ==> stage =  2
-	remaining candidates ['a1', 'a3']
-	uninominal votes {'a1': 8, 'a3': 7}
-	minimal number of votes =  7
-	maximal number of votes =  8
-	candidate a1 obtains an absolute majority
-    Instant run off winner: ['a1']
+       remaining candidates ['c2', 'c3']
+       uninominal votes {'c2': Decimal('6'), 'c3': Decimal('11')}
+       minimal number of votes =  6
+       maximal number of votes =  11
+       candidate c3 obtains an absolute majority
+    ['c3']
 
-In stage 1, no candidate obtains an absolute majority of votes. Candidate *a2* obtains the minimal number of votes (2/15) and is, hence, eliminated. In stage 2, candidate *a1* obtains an absolute majority of the votes (8/15) and is eventually elected (see :numref:`instantRunOff`).
+In stage 1, no candidate obtains an absolute majority of votes. Candidate *c1* obtains the minimal number of votes (5/17) and is, hence, eliminated. In stage 2, candidate *c3* obtains an absolute majority of the votes (11/17) and is eventually elected (see :numref:`instantRunOff`).
 
 We may also follow the *Chevalier de Borda*'s advice and, after a **rank analysis** of the linear ballots, compute the **Borda score** -the average rank- of each candidate and hence determine the *Borda* **winner(s)**.
 
@@ -4942,17 +4939,18 @@ We may also follow the *Chevalier de Borda*'s advice and, after a **rank analysi
    :caption: Example of *Borda* rank scores
    :linenos:
 
-   >>> v.computeRankAnalysis()
-    {'a2': [2, 5, 8], 'a1': [6, 9, 0], 'a3': [7, 1, 7]}
-   >>> v.computeBordaScores()
-    OrderedDict([
-      ('a1', {'BordaScore': 24, 'averageBordaScore': 1.6}),
-      ('a3', {'BordaScore': 30, 'averageBordaScore': 2.0}),
-      ('a2', {'BordaScore': 36, 'averageBordaScore': 2.4}) ])
-   >>> v.computeBordaWinners()
-    ['a1']
+>>> v.computeRankAnalysis()
+ {'c1': [5, 8, 4],
+  'c2': [6, 1, 10],
+  'c3': [6, 8, 3]}
+>>> v.computeBordaScores()
+ OrderedDict({'c3': {'BordaScore': 31, 'averageBordaScore': 1.82},
+              'c1': {'BordaScore': 33, 'averageBordaScore': 1.94},
+	      'c2': {'BordaScore': 38, 'averageBordaScore': 2.24}})
+>>> v.computeBordaWinners()
+['c3']
 
-Candidate *a1* obtains the minimal *Borda* score, followed by candidate *a3* and finally candidate *a2* (see :numref:`BordaScores`). The corresponding *Borda* **rank analysis table** may be printed out with a corresponding :py:meth:`~votingProfiles.LinearVotingProfile.show` command.
+Candidate *c3* obtains the minimal *Borda* score, followed by candidate *c1* and finally candidate *c2* (see :numref:`BordaScores`). The corresponding *Borda* **rank analysis table** may be printed out with a corresponding :py:meth:`~votingProfiles.LinearVotingProfile.show` command.
 
 .. code-block:: pycon
    :name: rankAnalysis
@@ -4961,14 +4959,14 @@ Candidate *a1* obtains the minimal *Borda* score, followed by candidate *a3* and
 
    >>> v.showRankAnalysisTable()
     *----  Borda rank analysis tableau -----*
-    candi- | alternative-to-rank |     Borda
+    candi- | alternative-to-rank |      Borda
     dates  |   1     2     3     | score  average
-    -------|-------------------------------------
-     'a1'  |   6     9     0     | 24/15   1.60
-     'a3'  |   7     1     7     | 30/15   2.00
-     'a2'  |   2     5     8     | 36/15   2.40
+    -------|------------------------------------
+      'c3' |   6     8     3     |  31     1.82
+      'c1' |   5     8     4     |  33     1.94
+      'c2' |   6     1    10     |  38     2.24
 
-In our randomly generated election results, we are lucky: The instant runoff winner and the *Borda* winner both are candidate *a1* (see :numref:`instantRunOff` and :numref:`rankAnalysis`). However, we could also follow the *Marquis de Condorcet*'s advice, and compute the **majority margins** obtained by voting for each individual pair of candidates.
+In our randomly generated election results, we are lucky: the instant runoff winner and the *Borda* winner both are candidate *c3* (see :numref:`instantRunOff` and :numref:`rankAnalysis`). However, we could also follow the *Marquis de Condorcet*'s advice, and compute the **majority margins** obtained by voting for each individual pair of candidates.
 
 The *Condorcet* winner
 ``````````````````````
@@ -4989,8 +4987,8 @@ For instance, candidate *a1* is ranked four times before and once behind candida
     Instance name       : rel_randomLinearVotingProfile1
     Digraph Order       : 3
     Digraph Size        : 3
-    Valuation domain    : [-15.00;15.00]
-    Determinateness (%) : 64.44
+    Valuation domain    : [-17.00;17.00]
+    Determinateness (%) : 58.82
     Attributes          : ['name', 'actions', 'voters',
                            'ballot', 'valuationdomain',
 			   'relation', 'order',
@@ -4999,27 +4997,27 @@ For instance, candidate *a1* is ranked four times before and once behind candida
     *----- show detail -------------*
     Digraph          : rel_randLinearVotingProfile1
     *---- Actions ----*
-    ['a1', 'a2', 'a3']
+    ['c1', 'c2', 'c3']
     *---- Characteristic valuation domain ----*
-    {'max': Decimal('15.0'), 'med': Decimal('0'),
-     'min': Decimal('-15.0'), 'hasIntegerValuation': True}
+    {'max': Decimal('17.0'), 'med': Decimal('0'),
+     'min': Decimal('-17.0'), 'hasIntegerValuation': True}
     * ---- majority margins -----
-       M(x,y)   |  'a1'	  'a2'  'a3'	  
+       M(x,y)   |  'c1'	  'c2'  'c3'	  
       ----------|-------------------
-        'a1'    |    0     11     1	 
-        'a2'    |  -11      0    -1	 
-        'a3'    |   -1      1     0	 
+        'c1'    |    0     3     -1	 
+        'c2'    |   -3     0     -5	 
+        'c3'    |    1     5      0	 
     Valuation domain: [-15;+15]
 
 Notice that in the case of linear voting profiles, majority margins always verify a zero sum property: *M(x,y)* + *M(y,x)* = 0 for all candidates *x* and *y* (see :numref:`condorcetDigraph` Lines 26-28). This is not true in general for arbitrary voting profiles. The *majority margins* digraph of linear voting profiles defines in fact a *weak tournament* and belongs, hence, to the class of *self-codual* bipolar-valued digraphs ([13]_).
     
-Now, a candidate *x*, showing a positive majority margin *M(x,y)*, is beating candidate *y*  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in her row in the *majority margins* digraph relation table, beats all other candidates with absolute majority of votes. *Condorcet* recommends to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate *a1* who is hence the **Condorcet winner** (see :numref:`condorcetDigraph` Line 26).
+Now, a candidate *x*, showing a positive majority margin *M(x,y)*, is beating candidate *y*  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in her row in the *majority margins* digraph relation table, beats all other candidates with absolute majority of votes. *Condorcet* recommends to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate *c3* who is hence the **Condorcet winner** (see :numref:`condorcetDigraph` Line 26).
 
 .. code-block:: pycon
    :linenos:
 
    >>> cdg.computeCondorcetWinners()
-    ['a1']  
+    ['c3']  
     
 By seeing the majority margins like a *bipolar-valued characteristic function* of a global preference relation defined on the set of candidates, we may use all operational resources of the generic :py:class:`~digraphs.Digraph` class (see :ref:`Digraphs-Tutorial-label`), and especially its :py:meth:`~digraphs.Digraph.exportGraphViz` method [1]_, for visualizing an election result.
 
@@ -5033,12 +5031,12 @@ By seeing the majority margins like a *bipolar-valued characteristic function* o
 
 .. Figure:: tutorialLinearBallots.png
    :name: tutorialLinearBallots
-   :width: 300 px
+   :width: 200 px
    :align: center
 
    Visualizing an election result
 
-In :numref:`tutorialLinearBallots` we notice that the *majority margins* digraph from our example linear voting profile gives a linear order of the candidates: ['a1', 'a3', 'a2], the same actually as given by the *Borda* scores (see :numref:`BordaScores`). This is by far not given in general. Usually, when aggregating linear ballots, there appear cyclic social preferences.
+In :numref:`tutorialLinearBallots` we notice that the *majority margins* digraph from our example linear voting profile gives a linear order of the candidates: ['c3', 'c1', 'c2], the same actually as given by the *Borda* scores (see :numref:`BordaScores`). This is by far not given in general. Usually, when aggregating linear ballots, there appear cyclic social preferences.
 
 Cyclic social preferences
 `````````````````````````
