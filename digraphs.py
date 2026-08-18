@@ -2507,13 +2507,21 @@ class Digraph(object):
         """
         Wrapper for weakCondorcetWinners().
         """
-        return self.weakCondorcetWinners()
+        res1 = set(self.weakCondorcetWinners())
+        res2 = set((~self).weakCondorcetLosers())
+        res = list(res1 | res2)
+        res.sort()
+        return res
 
     def computeWeakCondorcetLosers(self):
         """
         Wrapper for weakCondorcetLosers().
         """
-        return self.weakCondorcetLosers()
+        res1 = set(self.weakCondorcetLosers())
+        res2 = set((~self).weakCondorcetWinners())
+        res = list(res1 | res2)
+        res.sort()
+        return res
 
     def weakCondorcetWinners(self):
         """
@@ -2572,13 +2580,23 @@ class Digraph(object):
         """
         Wrapper for condorcetWinners().
         """
-        return self.condorcetWinners()
+        res1 = set(self.condorcetWinners())
+        res2 = set((~self).condorcetLosers())
+        res = list(res1 | res2)
+        res.sort()
+        return res
+        #return self.condorcetWinners()
 
     def computeCondorcetLosers(self):
         """
         Wrapper for condorcetLosers().
         """
-        return self.condorcetLosers()
+        res1 = set(self.condorcetLosers())
+        res2 = set((~self).condorcetWinners())
+        res = list(res1 | res2)
+        res.sort()
+        return res
+        #return self.condorcetLosers()
 
     def condorcetWinners(self):
         """
@@ -15893,6 +15911,8 @@ if __name__ == "__main__":
     from linearOrders import IteratedBpvCondorcetWinnersRanking
     cwr = IteratedBpvCondorcetWinnersRanking(g)
     print(cwr.condorcetRanking)
+    print(g.computeCondorcetWinners())
+    print(g.computeCondorcetLosers())
     print(g.computeWeakCondorcetWinners())
     print(g.computeWeakCondorcetLosers())
     # g.showHTMLPerformanceHeatmap(actionsList=ranking,Correlations=True)
