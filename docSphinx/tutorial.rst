@@ -5269,6 +5269,11 @@ Remarkable about both these *ranking-by-choosing* or *ordering-by-rejecting* res
 
    Mind that the specific *ranking-by-choosing* procedure, we use here on the *majority margins* digraph, operates the selection procedure by extracting at each step *initial* and *terminal* kernels, i.e. NP-hard operational problems (see tutorial :ref:`on computing kernels <Kernel-Tutorial-label>` and [BIS-1999]_); A technique that does not allow in general to tackle voting profiles with much more than 30 candidates. The tutorial on :ref:`ranking <Ranking-Tutorial-label>` provides more adequate and efficient techniques for ranking from pairwise majority margins when a larger number of potential candidates is given.  
 
+.. seealso::
+
+   :ref:`Enhancing social choice procedures <Enhancing-Social-Choice-label>`
+
+
 
 Back to :ref:`Content Table <Tutorial-label>`
 
