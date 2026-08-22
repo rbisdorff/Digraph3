@@ -4380,8 +4380,8 @@ Back to :ref:`Content Table <Pearls-label>`
 
 .. _Bipolar-Valued-Sets-Tutorial-label:
 
-Computing with bipolar-valued sets
-``````````````````````````````````
+Computational bipolar-valued epistemic logic
+````````````````````````````````````````````
 
 .. contents:: 
 	:depth: 1
@@ -4673,7 +4673,7 @@ The relation attribute of a given outranking digraph :math:`G(X,R)` is an eviden
 
 In the given random 3-objectives outranking digraph :math:`G(X,R)`, concerning the performances of 9 public policies with respect to 13 performance criteria, three alternatives, *p2*, *p6* and *p5* are positive weak Condorcet winners, whereas alternatives *p1*, *p7* and *p8* are negative weak Condorcet winners, that is positive weak Condorcet losers (see Lines 8-10 and 14-16 above).
 
-The individual bipolar-valued credibilities to '**be a weak Condorcet winner**' are computed as follows. For each individual alternative *x in X*, the conjunctive epistemic :math:`$ \textcircled{ $\wedge$ } $` fusion of the *outranking* credibility *R(x,y)* for all :math:`y \neq x` in *X* measures indeed the more or less **outranking power** of *x* and the same conjunctive epistemic :math:`$ \textcircled{ $\wedge$ } $` fusion of the *not outranked* credibility *-R(y,x)*  for all :math:`y \neq x` in *X* measures the more or less **not outrankedness** of *x*. A disjunctive epistemic :math:`$ \textcircled{ $\vee$ } $` fusion of both these measures delivers eventually the corresponding bpv-set. It is worthwhile noticing that the *dual* of this bpv-set gives by the way the bpv-set of the corresponding weak Condorcet losers.
+The individual bipolar-valued credibilities to '**be a weak Condorcet winner**' are computed as follows. For each individual alternative *x in X*, the conjunctive epistemic :math:`$ \textcircled{ $\wedge$ } $` fusion of the *outranking* credibility :math:`r(x \succsim y)` for all :math:`y \neq x` in *X* measures indeed the more or less **outranking power** of *x* and the same conjunctive epistemic :math:`$ \textcircled{ $\wedge$ } $` fusion of the *not outranked* credibility :math:`-r(y \succsim x)`  for all :math:`y \neq x` in *X* measures the more or less **not outrankedness** of *x*. A disjunctive epistemic :math:`$ \textcircled{ $\vee$ } $` fusion of both these measures delivers eventually the corresponding bpv-set. It is worthwhile noticing that the *dual* of this bpv-set gives by the way the bpv-set of the corresponding weak Condorcet losers.
 
    >>> g.showHTMLRelationTable(
    ...    actionsList=['p2','p6','p5','p3','p4','p9','p1','p7','p8'])
@@ -4688,7 +4688,7 @@ The individual bipolar-valued credibilities to '**be a weak Condorcet winner**' 
 
 In :numref:`condorcetWinners2` we see confirmed in the outranking relation table of :math:`G(X,R)` that alternative *p2* is a Condorcet winner and alternatives *p6* and *p5* are *weak Condorcet winners* whereas alternatives *p1*, *p7* and *p8* are *weak Condorcet losers*.
 
-When a given digraph shows strict chordless outranking circuits it may however be the case that no weak Condorcet winners and/or losers can be detected, the resulting bpv-set does not contain any positive and/or negative credibilities. Breaking in such a case all chordless strict outranking circuits at their weakest link transforms the strict outranking digraph in an acyclic asymmetric digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the digraph.
+When a given digraph shows chordless outranking circuits it may however be the case that no weak Condorcet winners and/or losers can be detected, the resulting bpv-set does not contain any positive and/or negative credibilities. Breaking in such a case all chordless outranking circuits at their weakest link transforms the outranking digraph in an acyclic asymmetric digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the digraph.
 
 Now, weak Condorcet winners and losers, like initial and terminal prekernels, give suitable first and last choice recommendations. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts therefore the '*CondorcetWinners*' argument for showing positive weak Condorcet winners as first choice and positive weak Condorcet losers as last choice recommendation as shown in :numref:`CondorcetWinners3` below.
 
@@ -4745,7 +4745,7 @@ The criteria significance majorities for each choice are indicated in brakets (s
 	 determinateness (%) : 50.00
 	 - most credible action(s) = { }
 
-With the given strict outranking digraph, initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and strictly outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are weakly outranking resp. weakly outranked choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location 'A', being incomparable to all other locations, is included in the initial and in the terminal prekernel, but it is neither part of the Condorcet winners nor part of the Condorcet losers [29]_.
+With the given outranking digraph, initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and *strictly* outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are *weakly* outranking resp. *weakly* outranked choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location 'A', being incomparable to all other locations, is included in the initial and in the terminal prekernel, but it is neither part of the weak Condorcet winners nor part of the weak Condorcet losers [29]_.
 
 Ranking-by-choosing with bpv-sets of weak Condorcet winners and loosers
 .......................................................................

@@ -539,10 +539,14 @@ class BpvSet(object):
         Max = fusion.valuationDomain['max']
         for it in fusion.support:
             try:
-                if newSelf.membership[it] <= Med and newOther.membership[it] <= Med:
-                    membership[it] = min(newSelf.membership[it],newOther.membership[it])
-                elif newSelf.membership[it] >= Med and newOther.membership[it] >= Med:
+                if newSelf.membership[it] > Med and newOther.membership[it] > Med:
                     membership[it] = max(newSelf.membership[it],newOther.membership[it])
+                elif newSelf.membership[it] < Med and newOther.membership[it] < Med:
+                    membership[it] = min(newSelf.membership[it],newOther.membership[it])
+                elif newOther.membership[it] == Med:
+                    membership[it] = newSelf.membership[it]
+                elif newSelf.membership[it] == Med:
+                    membership[it] = newOther.membership[it]         
                 else:
                     membership[it] = Med                  
             except:
@@ -550,6 +554,19 @@ class BpvSet(object):
                     membership[it] = newSelf.membership[it]
                 except:
                     membership[it] = Min
+##        for it in fusion.support:
+##            try:
+##                if newSelf.membership[it] <= Med and newOther.membership[it] <= Med:
+##                    membership[it] = min(newSelf.membership[it],newOther.membership[it])
+##                elif newSelf.membership[it] >= Med and newOther.membership[it] >= Med:
+##                    membership[it] = max(newSelf.membership[it],newOther.membership[it])
+##                else:
+##                    membership[it] = Med                  
+##            except:
+##                try:
+##                    membership[it] = newSelf.membership[it]
+##                except:
+##                    membership[it] = Min
         fusion.ndigits = min(newSelf.ndigits, newOther.ndigits)
         precision = '0.' + ((fusion.ndigits-1)*'0') + '1'
         fusion.valuationDomain['precision'] = Decimal(precision)
