@@ -9148,6 +9148,7 @@ class Digraph(object):
                                    BrokenCocs=True,
                                    Average=False,
                                    Comments=False,
+                                   Debug=False,
                                    ):
         """
         Returns by default the bpvSet of the Condorcet winner(s) of a
@@ -9166,7 +9167,7 @@ class Digraph(object):
                                                              Average=Average,Debug=False)
         terminalVector = gb.computeConjunctiveEpistemicFusion(Terminal=True,
                                                               Average=Average,Debug=False)
-        if Comments:
+        if Debug:
             for x in self.actions:
                 print(x,'i',initialVector.membership[x])
                 print(x,'t',terminalVector.membership[x])
