@@ -67,7 +67,7 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{August 20, 2026}
+\date{August 24, 2026}
 \release{3.14.7}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -3627,7 +3627,7 @@ Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id162}}{\hyperref[\detokenize{pearls:computing-with-bipolar-valued-sets}]{\sphinxcrossref{Computing with bipolar\sphinxhyphen{}valued sets}}} (\autopageref*{\detokenize{pearls:computing-with-bipolar-valued-sets}})
+\phantomsection\label{\detokenize{pearls:id162}}{\hyperref[\detokenize{pearls:computational-bipolar-valued-epistemic-logic}]{\sphinxcrossref{Computational bipolar\sphinxhyphen{}valued epistemic logic}}} (\autopageref*{\detokenize{pearls:computational-bipolar-valued-epistemic-logic}})
 
 \item {} 
 \sphinxAtStartPar
@@ -5961,8 +5961,8 @@ Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std
 
 
 
-\subsection{Computing with bipolar\sphinxhyphen{}valued sets}
-\label{\detokenize{pearls:computing-with-bipolar-valued-sets}}\label{\detokenize{pearls:bipolar-valued-sets-tutorial-label}}
+\subsection{Computational bipolar\sphinxhyphen{}valued epistemic logic}
+\label{\detokenize{pearls:computational-bipolar-valued-epistemic-logic}}\label{\detokenize{pearls:bipolar-valued-sets-tutorial-label}}
 \begin{sphinxcontents}
 \begin{itemize}
 \item {} 
@@ -6340,7 +6340,7 @@ The epistemic fusion operators induce furthermore on \(\mathcal{S}(A)\) a partia
 \subsubsection{Computing the bpv\sphinxhyphen{}set of weak Condorcet winners and loosers}
 \label{\detokenize{pearls:computing-the-bpv-set-of-weak-condorcet-winners-and-loosers}}
 \sphinxAtStartPar
-The relation attribute of a given outranking digraph \(G(X,R)\) is an evident example of a bpv\sphinxhyphen{}set. And, the epistemic fusion operators may for instance be used for computing the bpv\sphinxhyphen{}set of \sphinxstyleemphasis{weak Condorcet winners and losers} of such a digraph \sphinxstyleemphasis{G} %
+The relation attribute of a given outranking digraph \(G(X,R)\) is an evident example of a bpv\sphinxhyphen{}set. And, the conjunctive epistemic fusion operator may for instance be used for computing the bpv\sphinxhyphen{}set of \sphinxstyleemphasis{non ambiguous weak Condorcet winners and losers} of such a digraph \sphinxstyleemphasis{G} %
 \begin{footnote}[28]\sphinxAtStartFootnote
 A \sphinxstylestrong{weak} Condorcet winner outranks at least one action and is incomparable to the not outranked actions. A \sphinxstylestrong{weak} Condorcet loser is outranked by at least one action and is incomparable to the remaining actions.
 %
@@ -6372,7 +6372,7 @@ A \sphinxstylestrong{weak} Condorcet winner outranks at least one action and is 
 In the given random 3\sphinxhyphen{}objectives outranking digraph \(G(X,R)\), concerning the performances of 9 public policies with respect to 13 performance criteria, three alternatives, \sphinxstyleemphasis{p2}, \sphinxstyleemphasis{p6} and \sphinxstyleemphasis{p5} are positive weak Condorcet winners, whereas alternatives \sphinxstyleemphasis{p1}, \sphinxstyleemphasis{p7} and \sphinxstyleemphasis{p8} are negative weak Condorcet winners, that is positive weak Condorcet losers (see Lines 8\sphinxhyphen{}10 and 14\sphinxhyphen{}16 above).
 
 \sphinxAtStartPar
-The individual bipolar\sphinxhyphen{}valued credibilities to ‘\sphinxstylestrong{be a weak Condorcet winner}’ are computed as follows. For each individual alternative \sphinxstyleemphasis{x in X}, the conjunctive epistemic \($ \textcircled{ $\wedge$ } $\) fusion of the \sphinxstyleemphasis{outranking} credibility \sphinxstyleemphasis{R(x,y)} for all \(y \neq x\) in \sphinxstyleemphasis{X} measures indeed the more or less \sphinxstylestrong{outranking power} of \sphinxstyleemphasis{x} and the same conjunctive epistemic \($ \textcircled{ $\wedge$ } $\) fusion of the \sphinxstyleemphasis{not outranked} credibility \sphinxstyleemphasis{\sphinxhyphen{}R(y,x)}  for all \(y \neq x\) in \sphinxstyleemphasis{X} measures the more or less \sphinxstylestrong{not outrankedness} of \sphinxstyleemphasis{x}. A disjunctive epistemic \($ \textcircled{ $\vee$ } $\) fusion of both these measures delivers eventually the corresponding bpv\sphinxhyphen{}set. It is worthwhile noticing that the \sphinxstyleemphasis{dual} of this bpv\sphinxhyphen{}set gives by the way the bpv\sphinxhyphen{}set of the corresponding weak Condorcet losers. The computation of the bpv\sphinxhyphen{}set ‘\sphinxstyleemphasis{to be a weak Condorcet winner}’ is hence \sphinxstyleemphasis{codual invariant}.
+The individual bipolar\sphinxhyphen{}valued credibilities to ‘\sphinxstylestrong{be a non ambiguous weak Condorcet winner}’ are computed as follows. For each individual alternative \sphinxstyleemphasis{x in X}, the conjunctive epistemic \($ \textcircled{ $\wedge$ } $\) fusion of the \sphinxstyleemphasis{outranking} credibility \(r(x \succsim y)\) for all \(y \neq x\) in \sphinxstyleemphasis{X} measures indeed the more or less \sphinxstylestrong{outranking power} of \sphinxstyleemphasis{x} and the same conjunctive epistemic \($ \textcircled{ $\wedge$ } $\) fusion of the \sphinxstyleemphasis{not outranked} credibility \(-r(y \succsim x)\)  for all \(y \neq x\) in \sphinxstyleemphasis{X} measures the more or less \sphinxstylestrong{not outrankedness} of \sphinxstyleemphasis{x}. A disjunctive epistemic \($ \textcircled{ $\vee$ } $\) fusion of both these measures delivers eventually the corresponding bpv\sphinxhyphen{}set. It is worthwhile noticing that the \sphinxstyleemphasis{dual} of this bpv\sphinxhyphen{}set gives by the way the bpv\sphinxhyphen{}set of the corresponding non ambiguous weak Condorcet losers.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showHTMLRelationTable}\PYG{p}{(}
@@ -6390,7 +6390,7 @@ The individual bipolar\sphinxhyphen{}valued credibilities to ‘\sphinxstylestro
 In \hyperref[\detokenize{pearls:condorcetwinners2}]{Fig.\@ \ref{\detokenize{pearls:condorcetwinners2}}} we see confirmed in the outranking relation table of \(G(X,R)\) that alternative \sphinxstyleemphasis{p2} is a Condorcet winner and alternatives \sphinxstyleemphasis{p6} and \sphinxstyleemphasis{p5} are \sphinxstyleemphasis{weak Condorcet winners} whereas alternatives \sphinxstyleemphasis{p1}, \sphinxstyleemphasis{p7} and \sphinxstyleemphasis{p8} are \sphinxstyleemphasis{weak Condorcet losers}.
 
 \sphinxAtStartPar
-When a given digraph shows strict chordless outranking circuits it may however be the case that no weak Condorcet winners and/or losers can be detected, the resulting bpv\sphinxhyphen{}set does not contain any positive and/or negative credibilities. Breaking in such a case all chordless strict outranking circuits at their weakest link transforms the strict outranking digraph in an acyclic asymmetric digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the digraph.
+When a given digraph shows chordless outranking circuits it may however be the case that no weak Condorcet winners and/or losers can be detected, the resulting bpv\sphinxhyphen{}set does not contain any positive and/or negative credibilities. Breaking in such a case all chordless outranking circuits at their weakest link transforms the outranking digraph in an acyclic asymmetric digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the digraph.
 
 \sphinxAtStartPar
 Now, weak Condorcet winners and losers, like initial and terminal prekernels, give suitable first and last choice recommendations. The \sphinxcode{\sphinxupquote{showChoiceRecommendation()}} method accepts therefore the ‘\sphinxstyleemphasis{CondorcetWinners}’ argument for showing positive weak Condorcet winners as first choice and positive weak Condorcet losers as last choice recommendation as shown in \hyperref[\detokenize{pearls:condorcetwinners3}]{Listing \ref{\detokenize{pearls:condorcetwinners3}}} below.
@@ -6448,7 +6448,7 @@ The criteria significance majorities for each choice are indicated in brakets (s
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-With the given strict outranking digraph, initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in \hyperref[\detokenize{pearls:condorcetwinners1}]{Listing \ref{\detokenize{pearls:condorcetwinners1}}} and shown in \hyperref[\detokenize{pearls:condorcetwinners2}]{Fig.\@ \ref{\detokenize{pearls:condorcetwinners2}}}. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and strictly outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are weakly outranking resp. weakly outranked choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location ‘A’, being incomparable to all other locations, is included in the initial and in the terminal prekernel, but it is neither part of the Condorcet winners nor part of the Condorcet losers %
+With the given outranking digraph, initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in \hyperref[\detokenize{pearls:condorcetwinners1}]{Listing \ref{\detokenize{pearls:condorcetwinners1}}} and shown in \hyperref[\detokenize{pearls:condorcetwinners2}]{Fig.\@ \ref{\detokenize{pearls:condorcetwinners2}}}. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and \sphinxstyleemphasis{strictly} outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are non ambiguous \sphinxstyleemphasis{weakly} outranking resp. \sphinxstyleemphasis{weakly} outranked choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location ‘A’, being incomparable to all other locations, is included in the initial and in the terminal prekernel. Hence location \sphinxstyleemphasis{A} is an ambiguous first choice recommendation and it is hence neither part of the non ambiguous weak Condorcet winners and loses %
 \begin{footnote}[29]\sphinxAtStartFootnote
 See \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{Rubis\sphinxhyphen{}Tutorial\sphinxhyphen{}label}}}
 %
@@ -6513,7 +6513,7 @@ The \sphinxstyleemphasis{disjunctive} epistemic fusion \($ \textcircled{ $\vee$ 
 The fact that 0.0 values are as such \sphinxstyleemphasis{neutral} for a \sphinxstyleemphasis{max} operator on positive terms and \sphinxstyleemphasis{neutral} for a \sphinxstyleemphasis{min} operator on negative terms did in fact hide the condition that \sphinxstylestrong{both} epistemic fusion operators, \($ \textcircled{ $\wedge$ } $\) as well as \($ \textcircled{ $\vee$ } $\), need to verify the \sphinxstylestrong{neutrality} of the indeterminate characteristic value. For the epistemic fusion operators the characteristic valuation domain appears indeed split into three disjoint parts: the right open negative interval {[}\sphinxhyphen{}max criteria significance; \sphinxhyphen{}0.0..{[}, the neutral indeterminate 0.0 value, and the left open positive interval {]}+0.0..; max criteria significance{]}. Same hiding is in action when computing bipolar\sphinxhyphen{}valued outranking characteristic values. The indeterminate 0.0 value is pers se \sphinxstyleemphasis{neutral} for any adding and subtracting of individual criterion significances.
 
 \sphinxAtStartPar
-This recent conceptual clarification enhances a lot the computational power of our bipolar\sphinxhyphen{}valued epistemic logic. With the correct implementation of the epistemic fusion operators we may now compute for instance bipolar\sphinxhyphen{}valued first and last choice recommendations of a given strict outranking digraph in an \(\mathcal{O}(n^2)\) complexity without having to first find its polarised crisp initial and terminal prekernels (a not polynomial problem in general) and without having furthermore to solve the corresponding double fixpoint kernel equation systems %
+This recent conceptual clarification enhances a lot the computational power of our bipolar\sphinxhyphen{}valued epistemic logic. With the correct implementation of the epistemic fusion operators we may now compute for instance bipolar\sphinxhyphen{}valued non ambiguous first and last choice recommendations of a given strict outranking digraph in an \(\mathcal{O}(n^2)\) complexity without having to first find its polarised crisp initial and terminal prekernels (a not polynomial problem in general) and without having furthermore to solve the corresponding double fixpoint kernel equation systems %
 \begin{footnote}[30]\sphinxAtStartFootnote
 See \sphinxcode{\sphinxupquote{computeBpvCondorcetWinners()}} method.
 %

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.1.8)  20 AUG 2026 10:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.1.8)  24 AUG 2026 11:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1378,11 +1378,11 @@ L3 programming layer <2024-01-22>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `digraph3Pearls.out' has not changed.
-(rerunfilecheck)             Checksum: DC2EC59351CF8CBE262C19E21A05FBA2;23535.
+(rerunfilecheck)             Checksum: 86C526E79522BF8E07920274F53C7847;23585.
  ) 
 Here is how much of TeX's memory you used:
  18380 strings out of 476033
- 318238 string characters out of 5790557
+ 318248 string characters out of 5790557
  2096975 words of memory out of 5000000
  39419 multiletter control sequences out of 15000+600000
  587230 words of font info for 99 fonts, out of 8000000 for 9000
@@ -1430,9 +1430,9 @@ c/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
 nts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/sym
 bols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symb
 ols/msbm10.pfb>
-Output written on digraph3Pearls.pdf (163 pages, 3884958 bytes).
+Output written on digraph3Pearls.pdf (163 pages, 3885446 bytes).
 PDF statistics:
- 3245 PDF objects out of 3580 (max. 8388607)
+ 3246 PDF objects out of 3580 (max. 8388607)
  2014 compressed objects within 21 object streams
  562 named destinations out of 1000 (max. 500000)
  924 words of extra memory for PDF output out of 10000 (max. 10000000)

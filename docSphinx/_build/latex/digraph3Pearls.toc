@@ -57,7 +57,7 @@
 \contentsline {subsubsection}{Kernels in lateralized digraphs}{109}{subsubsection*.121}%
 \contentsline {subsubsection}{Computing first and last choice recommendations}{112}{subsubsection*.122}%
 \contentsline {subsubsection}{Tractability}{117}{subsubsection*.123}%
-\contentsline {subsection}{\numberline {3.5}Computing with bipolar\sphinxhyphen {}valued sets}{119}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.5}Computational bipolar\sphinxhyphen {}valued epistemic logic}{119}{subsection.3.5}%
 \contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued epistemic logic}{119}{subsubsection*.131}%
 \contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued propositional calculus}{120}{subsubsection*.132}%
 \contentsline {subsubsection}{Superposition of elementary epistemic situations}{121}{subsubsection*.133}%
