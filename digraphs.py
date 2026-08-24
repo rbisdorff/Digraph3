@@ -9171,7 +9171,7 @@ class Digraph(object):
             for x in self.actions:
                 print(x,'i',initialVector.membership[x])
                 print(x,'t',terminalVector.membership[x])
-        resVector = initialVector.owedge(-terminalVector)
+        resVector = initialVector.ovee(-terminalVector)
         if Comments:
             resVector.showMembershipCharacteristics()
         return resVector
