@@ -67,7 +67,7 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{August 24, 2026}
+\date{August 25, 2026}
 \release{3.14.7}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -6207,28 +6207,38 @@ In the limit case of no indeterminate membership characteristics, we recover thi
 \subsubsection{The partially ordered commutative epistemic fusion algebra}
 \label{\detokenize{pearls:the-partially-ordered-commutative-epistemic-fusion-algebra}}
 \sphinxAtStartPar
-The disjunctive and conjunctive epistemic fusions of two bpv\sphinxhyphen{}sets \sphinxstyleemphasis{X} and \sphinxstyleemphasis{Y}, defined on a same finite support set \sphinxstyleemphasis{E} and denoted \(X $ \textcircled{ $\vee$ } $ Y\), respectively \(X $ \textcircled{ $\wedge$ } $ Y\), give the bpv\sphinxhyphen{}sets defined as follows.
+The disjunctive and conjunctive epistemic fusions of two bpv\sphinxhyphen{}sets \sphinxstyleemphasis{X} and \sphinxstyleemphasis{Y}, defined on a same finite support set \sphinxstyleemphasis{E} and denoted \(X $ \textcircled{$\vee$} $ Y\), respectively \(X $ \textcircled{$\wedge$} $ Y\), give the bpv\sphinxhyphen{}sets defined as follows.
 
 \begin{DUlineblock}{0em}
-\item[] For all \sphinxstyleemphasis{z} in \sphinxstyleemphasis{E} the membership characteristic \(r\big(\,z \in (X  $ \textcircled{ $\vee$ } $ Y)\,\big)\; =\)
+\item[] For all \sphinxstyleemphasis{z} in \sphinxstyleemphasis{E} the membership characteristic \(r\big(\,z \in (X  $ \textcircled{$\vee$} $ Y)\,\big)\; =\)
 \item[]
 \begin{DUlineblock}{\DUlineblockindent}
 \item[] \(\max\big(\,r(z \in X),r(z \in Y)\, \big)\) when
 \item[]
 \begin{DUlineblock}{\DUlineblockindent}
-\item[] \(r(z \in X) \geqslant 0.0\) and \(r(z \in Y) \geqslant 0.0\); or
+\item[] \(r(z \in X) > 0.0\) and \(r(z \in Y) > 0.0\); or
 \end{DUlineblock}
 \item[] \(\min\big(\,r(z \in X),r(z \in Y)\, \big)\) when
 \item[]
 \begin{DUlineblock}{\DUlineblockindent}
-\item[] \(r(z \in X) \leqslant 0.0\) and \(r(z \in Y) \leqslant 0.0\);
+\item[] \(r(z \in X) < 0.0\) and \(r(z \in Y) < 0.0\)
+\end{DUlineblock}
+\item[] \(r(z \in X)\) when
+\item[]
+\begin{DUlineblock}{\DUlineblockindent}
+\item[] \(r(z \in X) \neq 0.0\) and \(r(z \in Y) = 0.0\); or
+\end{DUlineblock}
+\item[] \(r(z \in Y)\) when
+\item[]
+\begin{DUlineblock}{\DUlineblockindent}
+\item[] \(r(z \in X) = 0.0\) and \(r(z \in Y) \neq 0.0\);;
 \end{DUlineblock}
 \item[] \(0.0\) otherwise.
 \end{DUlineblock}
 \end{DUlineblock}
 
 \begin{DUlineblock}{0em}
-\item[] For all \sphinxstyleemphasis{z} in \sphinxstyleemphasis{E} the membership characteristic \(r\big(\,z \in (X $ \textcircled{ $\wedge$ } $ Y)\,\big)\; =\)
+\item[] For all \sphinxstyleemphasis{z} in \sphinxstyleemphasis{E} the membership characteristic \(r\big(\,z \in (X $ \textcircled{$\wedge$} $ Y)\,\big)\; =\)
 \item[]
 \begin{DUlineblock}{\DUlineblockindent}
 \item[] \(\min\big(\,r(z \in X),r(z \in Y)\, \big)\) when
@@ -6249,7 +6259,7 @@ The disjunctive and conjunctive epistemic fusions of two bpv\sphinxhyphen{}sets 
 \item[] \(r(z \in Y)\) when
 \item[]
 \begin{DUlineblock}{\DUlineblockindent}
-\item[] \(r(z \in X) == 0.0\) and \(r(z \in Y) \neq 0.0\);
+\item[] \(r(z \in X) = 0.0\) and \(r(z \in Y) \neq 0.0\);
 \end{DUlineblock}
 \item[] \(0.0\) otherwise.
 \end{DUlineblock}
@@ -6271,10 +6281,10 @@ In \hyperref[\detokenize{pearls:bipolarvaluedsets4}]{Listing \ref{\detokenize{pe
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-Due to the commutativity and idempotency of the numerical binary \sphinxstyleemphasis{max} and \sphinxstyleemphasis{min} operators, both \($ \textcircled{ $\vee$ } $\) and \($ \textcircled{ $\wedge$ } $\) operators are \sphinxstylestrong{cummutative} and \sphinxstylestrong{idempotent}. Mind however, that similarly to a mean or average operator, both epistemic fusion operators are not associative. In order to render results univocal, all positive and negative arguments are considered separately and both intermediate results are further processed as two single arguments.
+Due to the commutativity and idempotency of the numerical binary \sphinxstyleemphasis{max} and \sphinxstyleemphasis{min} operators, both \($ \textcircled{$\vee$} $\) and \($ \textcircled{$\wedge$} $\) operators are \sphinxstylestrong{commutative} and \sphinxstylestrong{idempotent}. Mind however, that similarly to a mean or average operator, both epistemic fusion operators are not associative. In order to render results univocal, all positive and negative arguments are considered separately and both intermediate results are further processed as two single arguments.
 
 \sphinxAtStartPar
-Let \(\mathcal{S}(A)\) denote the set of all possible bpv\sphinxhyphen{}sets that may be defined on a given finite set \sphinxstyleemphasis{A} of dimension \sphinxstyleemphasis{n}. Let \(\bf{0} \in \mathcal{S}(A)\)  denote the completely indeterminate bpv\sphinxhyphen{}set, i.e \(r(a \in \bf{0}) \;=\; 0.0 , \; \forall \,a \in\, A\). It is worthwhile noticing that bpv\sphinxhyphen{}set \(\bf{0}\) is a \sphinxstylestrong{neutral} element of the \($ \textcircled{ $\vee$ } $\) and the \($ \textcircled{ $\wedge$ } $\) operator. For any bpv\sphinxhyphen{}subset of \sphinxstyleemphasis{A}, the corresponding polarised \textendash{}fully determined\textendash{} crisp subset is an \sphinxstylestrong{absorbent} element of the \($ \textcircled{ $\vee$ } $\) and a \sphinxstylestrong{neutral} element of the \($ \textcircled{ $\wedge$ } $\) operator. And, the minimal precision valued polarised bpv\sphinxhyphen{}set is a \sphinxstylestrong{neutral} element of the \($ \textcircled{ $\vee$ } $\) operator and an \sphinxstylestrong{absorbent} element of the \($ \textcircled{ $\wedge$ } $\) operator.
+Let \(\mathcal{S}(A)\) denote the set of all possible bpv\sphinxhyphen{}sets that may be defined on a given finite set \sphinxstyleemphasis{A} of dimension \sphinxstyleemphasis{n}. Let \(\bf{0} \in \mathcal{S}(A)\)  denote the completely indeterminate bpv\sphinxhyphen{}set, i.e \(r(a \in \bf{0}) \;=\; 0.0 , \; \forall \,a \in\, A\). It is worthwhile noticing that bpv\sphinxhyphen{}set \(\bf{0}\) is a \sphinxstylestrong{neutral} element of the \($ \textcircled{$\vee$} $\) and the \($ \textcircled{$\wedge$} $\) operator. For any bpv\sphinxhyphen{}subset of \sphinxstyleemphasis{A}, the corresponding polarised \textendash{}fully determined\textendash{} crisp subset is an \sphinxstylestrong{absorbent} element of the \($ \textcircled{$\vee$} $\) and a \sphinxstylestrong{neutral} element of the \($ \textcircled{$\wedge$} $\) operator. And, the minimal precision valued polarised bpv\sphinxhyphen{}set is a \sphinxstylestrong{neutral} element of the \($ \textcircled{$\vee$} $\) operator and an \sphinxstylestrong{absorbent} element of the \($ \textcircled{$\wedge$} $\) operator.
 \sphinxSetupCaptionForVerbatim{Neutral and absorbent bpv\sphinxhyphen{}sets}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:bipolarvaluedsets5}}}
 \fvset{hllines={, 2, 3, 5, 7, 9, 11, 13, 15,}}%
@@ -6301,7 +6311,7 @@ Let \(\mathcal{S}(A)\) denote the set of all possible bpv\sphinxhyphen{}sets tha
 Remarkable is the fact that a 0.0 characteristic value does not count as minimal positive and maximal negative value. Its epistemic value is in fact \sphinxstylestrong{indeterminate}, i.e. it may be any possible value from \sphinxhyphen{}1.0 to +1.0.
 
 \sphinxAtStartPar
-To every bpv\sphinxhyphen{}set \(X \in \mathcal{S}(A)\) we may associate its negated \textendash{}dual\textendash{}  bpv\sphinxhyphen{}set \(-X\) such that \(X  $ \textcircled{ $\vee$ } $ -X \;=\; X $ \textcircled{ $\wedge$ } $ -X \;=\; \bf{0}\) .
+To every bpv\sphinxhyphen{}set \(X \in \mathcal{S}(A)\) we may associate its negated \textendash{}dual\textendash{}  bpv\sphinxhyphen{}set \(-X\) such that \(X  $ \textcircled{$\vee$} $ -X \;=\; X $ \textcircled{$\wedge$} $ -X \;=\; \bf{0}\) .
 \sphinxSetupCaptionForVerbatim{Dual bpv\sphinxhyphen{}sets}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:bipolarvaluedsets6}}}
 \fvset{hllines={, 2, 4,}}%
@@ -6314,7 +6324,7 @@ To every bpv\sphinxhyphen{}set \(X \in \mathcal{S}(A)\) we may associate its neg
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-The epistemic fusion operators induce furthermore on \(\mathcal{S}(A)\) a partial \sphinxstylestrong{sharpness} ordering denoted \(\succcurlyeq\) and defined as follows. Let \sphinxstyleemphasis{X} and \sphinxstyleemphasis{Y} be two bpv\sphinxhyphen{}sets in \(\mathcal{S}(A)\). We say that \(X \,\succcurlyeq\, Y\) when \(\forall a \in A\) either \(r(a \in X) \leqslant r(a \in Y) \leqslant 0.0\) or, \(0.0 \leqslant r(a \in Y) \leqslant r(a \in X)\). If \sphinxstyleemphasis{X} and \sphinxstyleemphasis{Y} are bpv\sphinxhyphen{}sets of a same crisp subset, it follows for instance that \((X  $ \textcircled{ $\vee$ } $ Y) \,\succcurlyeq\,(X $ \textcircled{ $\wedge$ } $ Y)\). Minimal sharp is the bpv\sphinxhyphen{}set \(\bf{0}\). Maximal sharp are all \(2^n\) completely determined \textendash{}crisp\textendash{} subsets of the support set \sphinxstyleemphasis{A}.
+The epistemic fusion operators induce furthermore on \(\mathcal{S}(A)\) a partial \sphinxstylestrong{sharpness} ordering denoted \(\succcurlyeq\) and defined as follows. Let \sphinxstyleemphasis{X} and \sphinxstyleemphasis{Y} be two bpv\sphinxhyphen{}sets in \(\mathcal{S}(A)\). We say that \(X \,\succcurlyeq\, Y\) when \(\forall a \in A\) either \(r(a \in X) \leqslant r(a \in Y) \leqslant 0.0\) or, \(0.0 \leqslant r(a \in Y) \leqslant r(a \in X)\). If \sphinxstyleemphasis{X} and \sphinxstyleemphasis{Y} are bpv\sphinxhyphen{}sets of a same crisp subset, it follows for instance that \((X  $ \textcircled{$\vee$} $ Y) \,\succcurlyeq\,(X $ \textcircled{$\wedge$} $ Y)\). Minimal sharp is the bpv\sphinxhyphen{}set \(\bf{0}\). Maximal sharp are all \(2^n\) completely determined \textendash{}crisp\textendash{} subsets of the support set \sphinxstyleemphasis{A}.
 \sphinxSetupCaptionForVerbatim{The sharpness ordering of bpv\sphinxhyphen{}sets}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:bipolarvaluedsets7}}}
 \fvset{hllines={, 1, 7, 8, 14,}}%
@@ -6372,7 +6382,7 @@ A \sphinxstylestrong{weak} Condorcet winner outranks at least one action and is 
 In the given random 3\sphinxhyphen{}objectives outranking digraph \(G(X,R)\), concerning the performances of 9 public policies with respect to 13 performance criteria, three alternatives, \sphinxstyleemphasis{p2}, \sphinxstyleemphasis{p6} and \sphinxstyleemphasis{p5} are positive weak Condorcet winners, whereas alternatives \sphinxstyleemphasis{p1}, \sphinxstyleemphasis{p7} and \sphinxstyleemphasis{p8} are negative weak Condorcet winners, that is positive weak Condorcet losers (see Lines 8\sphinxhyphen{}10 and 14\sphinxhyphen{}16 above).
 
 \sphinxAtStartPar
-The individual bipolar\sphinxhyphen{}valued credibilities to ‘\sphinxstylestrong{be a non ambiguous weak Condorcet winner}’ are computed as follows. For each individual alternative \sphinxstyleemphasis{x in X}, the conjunctive epistemic \($ \textcircled{ $\wedge$ } $\) fusion of the \sphinxstyleemphasis{outranking} credibility \(r(x \succsim y)\) for all \(y \neq x\) in \sphinxstyleemphasis{X} measures indeed the more or less \sphinxstylestrong{outranking power} of \sphinxstyleemphasis{x} and the same conjunctive epistemic \($ \textcircled{ $\wedge$ } $\) fusion of the \sphinxstyleemphasis{not outranked} credibility \(-r(y \succsim x)\)  for all \(y \neq x\) in \sphinxstyleemphasis{X} measures the more or less \sphinxstylestrong{not outrankedness} of \sphinxstyleemphasis{x}. A disjunctive epistemic \($ \textcircled{ $\vee$ } $\) fusion of both these measures delivers eventually the corresponding bpv\sphinxhyphen{}set. It is worthwhile noticing that the \sphinxstyleemphasis{dual} of this bpv\sphinxhyphen{}set gives by the way the bpv\sphinxhyphen{}set of the corresponding non ambiguous weak Condorcet losers.
+The individual bipolar\sphinxhyphen{}valued credibilities to ‘\sphinxstylestrong{be a non ambiguous weak Condorcet winner}’ are computed as follows. For each individual alternative \sphinxstyleemphasis{x in X}, the conjunctive epistemic \($ \textcircled{$\wedge$} $\) fusion of the \sphinxstyleemphasis{outranking} credibility \(r(x \succsim y)\) for all \(y \neq x\) in \sphinxstyleemphasis{X} measures indeed the more or less \sphinxstylestrong{outranking power} of \sphinxstyleemphasis{x} and the same conjunctive epistemic \($ \textcircled{$\wedge$} $\) fusion of the \sphinxstyleemphasis{not outranked} credibility \(-r(y \succsim x)\)  for all \(y \neq x\) in \sphinxstyleemphasis{X} measures the more or less \sphinxstylestrong{not outrankedness} of \sphinxstyleemphasis{x}. A disjunctive epistemic \($ \textcircled{$\vee$} $\) fusion of both these measures delivers eventually the corresponding bpv\sphinxhyphen{}set. It is worthwhile noticing that the \sphinxstyleemphasis{dual} of this bpv\sphinxhyphen{}set gives by the way the bpv\sphinxhyphen{}set of the corresponding non ambiguous weak Condorcet losers.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showHTMLRelationTable}\PYG{p}{(}
@@ -6448,7 +6458,7 @@ The criteria significance majorities for each choice are indicated in brakets (s
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-With the given outranking digraph, initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in \hyperref[\detokenize{pearls:condorcetwinners1}]{Listing \ref{\detokenize{pearls:condorcetwinners1}}} and shown in \hyperref[\detokenize{pearls:condorcetwinners2}]{Fig.\@ \ref{\detokenize{pearls:condorcetwinners2}}}. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and \sphinxstyleemphasis{strictly} outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are non ambiguous \sphinxstyleemphasis{weakly} outranking resp. \sphinxstyleemphasis{weakly} outranked choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location ‘A’, being incomparable to all other locations, is included in the initial and in the terminal prekernel. Hence location \sphinxstyleemphasis{A} is an ambiguous first choice recommendation and it is hence neither part of the non ambiguous weak Condorcet winners and loses %
+With the given outranking digraph, initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in \hyperref[\detokenize{pearls:condorcetwinners1}]{Listing \ref{\detokenize{pearls:condorcetwinners1}}} and shown in \hyperref[\detokenize{pearls:condorcetwinners2}]{Fig.\@ \ref{\detokenize{pearls:condorcetwinners2}}}. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and \sphinxstyleemphasis{strictly} outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are non ambiguous \sphinxstyleemphasis{weakly} outranking resp. \sphinxstyleemphasis{weakly} outranked choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location ‘A’, being incomparable to all other locations, is included in both the initial and the terminal prekernel. Location \sphinxstyleemphasis{A} is hence an ambiguous first and last choice recommendation and is therefore neither part of the non ambiguous weak Condorcet winners, nor of the non ambiguous weak Condorcet losers %
 \begin{footnote}[29]\sphinxAtStartFootnote
 See \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{Rubis\sphinxhyphen{}Tutorial\sphinxhyphen{}label}}}
 %
@@ -6507,10 +6517,10 @@ In the performance heatmap shown in \hyperref[\detokenize{pearls:condorcetwinner
 
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
-The \sphinxstyleemphasis{disjunctive} epistemic fusion \($ \textcircled{ $\vee$ } $\) operator was from the beginning of our bipolar\sphinxhyphen{}valued computations a very convincing operator, used for instance for computing a ranking consensus. This was however strangely not the case with the simply inverted max \textless{}\sphinxhyphen{}\textgreater{} min \sphinxstyleemphasis{conjunctive} epistemic fusion operator. The latter results were too often becoming indeterminate for being useful and convincing.
+The \sphinxstyleemphasis{disjunctive} epistemic fusion \($ \textcircled{$\vee$} $\) operator was from the beginning of our bipolar\sphinxhyphen{}valued computations a very convincing operator, used for instance for computing a ranking consensus. This was however strangely not the case with the simply inverted max \textless{}\sphinxhyphen{}\textgreater{} min \sphinxstyleemphasis{conjunctive} epistemic fusion operator. The latter results were too often becoming indeterminate for being useful and convincing.
 
 \sphinxAtStartPar
-The fact that 0.0 values are as such \sphinxstyleemphasis{neutral} for a \sphinxstyleemphasis{max} operator on positive terms and \sphinxstyleemphasis{neutral} for a \sphinxstyleemphasis{min} operator on negative terms did in fact hide the condition that \sphinxstylestrong{both} epistemic fusion operators, \($ \textcircled{ $\wedge$ } $\) as well as \($ \textcircled{ $\vee$ } $\), need to verify the \sphinxstylestrong{neutrality} of the indeterminate characteristic value. For the epistemic fusion operators the characteristic valuation domain appears indeed split into three disjoint parts: the right open negative interval {[}\sphinxhyphen{}max criteria significance; \sphinxhyphen{}0.0..{[}, the neutral indeterminate 0.0 value, and the left open positive interval {]}+0.0..; max criteria significance{]}. Same hiding is in action when computing bipolar\sphinxhyphen{}valued outranking characteristic values. The indeterminate 0.0 value is pers se \sphinxstyleemphasis{neutral} for any adding and subtracting of individual criterion significances.
+The fact that 0.0 values are as such \sphinxstyleemphasis{neutral} for a \sphinxstyleemphasis{max} operator on positive terms and \sphinxstyleemphasis{neutral} for a \sphinxstyleemphasis{min} operator on negative terms did in fact hide the condition that \sphinxstylestrong{both} epistemic fusion operators, \($ \textcircled{$\wedge$} $\) as well as \($ \textcircled{$\vee$} $\), need to verify the \sphinxstylestrong{neutrality} of the indeterminate characteristic value. For the epistemic fusion operators the characteristic valuation domain appears indeed split into three disjoint parts: the right open negative interval {[}\sphinxhyphen{}max criteria significance; \sphinxhyphen{}0.0..{[}, the neutral indeterminate 0.0 value, and the left open positive interval {]}+0.0..; max criteria significance{]}. Same hiding is in action when computing bipolar\sphinxhyphen{}valued outranking characteristic values. The indeterminate 0.0 value is pers se \sphinxstyleemphasis{neutral} for any adding and subtracting of individual criterion significances.
 
 \sphinxAtStartPar
 This recent conceptual clarification enhances a lot the computational power of our bipolar\sphinxhyphen{}valued epistemic logic. With the correct implementation of the epistemic fusion operators we may now compute for instance bipolar\sphinxhyphen{}valued non ambiguous first and last choice recommendations of a given strict outranking digraph in an \(\mathcal{O}(n^2)\) complexity without having to first find its polarised crisp initial and terminal prekernels (a not polynomial problem in general) and without having furthermore to solve the corresponding double fixpoint kernel equation systems %

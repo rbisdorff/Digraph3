@@ -1585,7 +1585,7 @@ Following the previously stated pragmatic principles, potential first choice rec
       absorbency          : 0.00
       covering (%)        : 41.67
       determinateness (%) : 50.59
-      - characteristic vector = { 'D': 0.02, 'A': 0.00, 'C': 0.00,
+      - characteristic vector = { 'D': 0.02, 'A':  0.00, 'C':  0.00,
 	                          'G': 0.00, 'B': -0.02, 'E': -0.02,
 				  'F': -0.02, }
     === >> potential last choice(s) 
@@ -1599,7 +1599,7 @@ Following the previously stated pragmatic principles, potential first choice rec
 	                          'C': 0.00, 'D': 0.00, 'E': 0.00,
 				  'G': 0.00, }
 				  
-It is interesting to notice in :numref:`strictBestChoice` (Line 6) that the **Rubis first choice recommendation** consists actually in the set of weak Condorcet winners: 'A', 'C' and 'D' and the set of weak ndorcet losers: 'A' and 'F'. In the corresponding characteristic vector (see Lines 12-14), representing the bipolar credibility degree with which each alternative may indeed be considered a first choice candidate (see [BIS-2006a]_, [BIS-2006b]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an *indeterminate* situation. They **may be or not be** potential first choice candidates besides *D*. Notice furthermore that location *G* is not included in the initial prekernel, yet, shows nevertheless an indeterminate situation with respect to *being or not being* a potential first choice candidate. Alternatives *B*, *E* and *F* are *negatively* included, i.e. *positively excluded* from this first choice recommendation. We may furthermore notice in Line 16 that both alternatives *A* and *F* are reported as potential *strict outranked* choices, hence as potential **last choice candidates** . The ambiguous first-ranked and last-ranked position of alternative *A* indicates its global incomparability status as shown in :numref:`bestOfficeChoice`.
+It is interesting to notice in :numref:`strictBestChoice` (Line 6) that the **Rubis first choice recommendation** consists actually in the set of weak Condorcet winners: 'A', 'C' and 'D' and the set of weak Condorcet losers: 'A' and 'F'. In the corresponding characteristic vector (see Lines 12-14), representing the bipolar credibility degree with which each alternative may indeed be considered a first choice candidate (see [BIS-2006a]_, [BIS-2006b]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an *indeterminate* situation. They **may be or not be** potential first choice candidates besides *D*. Notice furthermore that location *G* is not included in the initial prekernel, yet, shows nevertheless an indeterminate situation with respect to *being or not being* a potential first choice candidate. Alternatives *B*, *E* and *F* are *negatively* included, i.e. *positively excluded* from this first choice recommendation. We may furthermore notice in Line 16 that both alternatives *A* and *F* are reported as potential *strict outranked* choices, hence as potential **last choice candidates** . The ambiguous first-ranked and last-ranked position of alternative *A* indicates its global incomparability status as shown in :numref:`bestOfficeChoice`.
 
 .. code-block:: pycon
    :linenos:
