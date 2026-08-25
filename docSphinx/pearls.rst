@@ -4554,7 +4554,7 @@ The disjunctive and conjunctive epistemic fusions of two bpv-sets *X* and *Y*, d
 |    :math:`r(z \in X)` when
 |          :math:`r(z \in X) \neq 0.0` and :math:`r(z \in Y) = 0.0`; or
 |    :math:`r(z \in Y)` when
-|          :math:`r(z \in X) == 0.0` and :math:`r(z \in Y) \neq 0.0`;;
+|          :math:`r(z \in X) = 0.0` and :math:`r(z \in Y) \neq 0.0`;;
 |    :math:`0.0` otherwise.
 
 | For all *z* in *E* the membership characteristic :math:`r\big(\,z \in (X $ \textcircled{$\wedge$} $ Y)\,\big)\; =`
@@ -4565,7 +4565,7 @@ The disjunctive and conjunctive epistemic fusions of two bpv-sets *X* and *Y*, d
 |    :math:`r(z \in X)` when
 |          :math:`r(z \in X) \neq 0.0` and :math:`r(z \in Y) = 0.0`; or
 |    :math:`r(z \in Y)` when
-|          :math:`r(z \in X) == 0.0` and :math:`r(z \in Y) \neq 0.0`;
+|          :math:`r(z \in X) = 0.0` and :math:`r(z \in Y) \neq 0.0`;
 |    :math:`0.0` otherwise.
 
 In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunctive fusion operators.
@@ -4749,7 +4749,7 @@ The criteria significance majorities for each choice are indicated in brakets (s
 	 determinateness (%) : 50.00
 	 - most credible action(s) = { }
 
-With the given outranking digraph, initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and *strictly* outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are non ambiguous *weakly* outranking resp. *weakly* outranked choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location 'A', being incomparable to all other locations, is included in the initial and in the terminal prekernel. Hence location *A* is an ambiguous first choice recommendation and it is hence neither part of the non ambiguous weak Condorcet winners and losers [29]_.
+With the given outranking digraph, initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and *strictly* outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are non ambiguous *weakly* outranking resp. *weakly* outranked choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location 'A', being incomparable to all other locations, is included in both the initial and the terminal prekernel. Location *A* is hence an ambiguous first and last choice recommendation and is therefore neither part of the non ambiguous weak Condorcet winners, nor of the non ambiguous weak Condorcet losers [29]_.
 
 Ranking-by-choosing with bpv-sets of weak Condorcet winners and loosers
 .......................................................................
