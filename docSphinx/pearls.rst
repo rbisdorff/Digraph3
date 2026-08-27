@@ -4554,7 +4554,7 @@ The disjunctive and conjunctive epistemic fusions of two bpv-sets *X* and *Y*, d
 |    :math:`r(z \in X)` when
 |          :math:`r(z \in X) \neq 0.0` and :math:`r(z \in Y) = 0.0`; or
 |    :math:`r(z \in Y)` when
-|          :math:`r(z \in X) = 0.0` and :math:`r(z \in Y) \neq 0.0`;;
+|          :math:`r(z \in X) = 0.0` and :math:`r(z \in Y) \neq 0.0`;
 |    :math:`0.0` otherwise.
 
 | For all *z* in *E* the membership characteristic :math:`r\big(\,z \in (X $ \textcircled{$\wedge$} $ Y)\,\big)\; =`
