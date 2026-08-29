@@ -26,7 +26,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="2. Technical Reference of the Digraph3 modules" href="techDoc.html" />
-    <link rel="prev" title="Python resources for fair and accountable Algorithmic Decision Theory" href="index.html" /> 
+    <link rel="prev" title="Python resources for fair and justifiable Algorithmic Decision Theory" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -319,7 +319,7 @@
       <li class="breadcrumb-item active"><span class="section-number">1. </span>Digraph3 Tutorials</li>
 
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
-        <a href="index.html" class="btn btn-neutral float-left" title="Python resources for fair and accountable Algorithmic Decision Theory" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Python resources for fair and justifiable Algorithmic Decision Theory" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="techDoc.html" class="btn btn-neutral float-right" title="2. Technical Reference of the Digraph3 modules" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
@@ -3623,7 +3623,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <figure class="align-center" id="tutorialkemeny">
 <a class="reference internal image-reference" href="_images/tutorialKemeny.png"><img alt="_images/tutorialKemeny.png" src="_images/tutorialKemeny.png" style="width: 175pt;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.26 </span><span class="caption-text">Epistemic disjunctive fusion of optimal <em>Kemeny</em> rankings</span><a class="headerlink" href="#tutorialkemeny" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 1.26 </span><span class="caption-text">Disjunctive epistemic fusion of optimal <em>Kemeny</em> rankings</span><a class="headerlink" href="#tutorialkemeny" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>It is interesting to notice in <a class="reference internal" href="#tutorialkemeny"><span class="std std-numref">Fig. 1.26</span></a> and <a class="reference internal" href="#optimalkemeny"><span class="std std-numref">Listing 1.44</span></a>, that both <em>Kemeny</em> rankings only differ in their respective positioning of alternative <em>a8</em>; either before or after alternatives <em>a9</em>, <em>a4</em> and <em>a1</em>.</p>
@@ -3912,7 +3912,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </span></pre></div>
 </div>
 </div>
-<p>By <a class="reference internal" href="#epistemic-fusion-label"><span class="std std-ref">epistemic disjunctive fusion</span></a> of the four <em>rankings</em>, the <a class="reference internal" href="techDoc.html#transitiveDigraphs.RankingsFusionDigraph" title="transitiveDigraphs.RankingsFusionDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">RankingsFusionDigraph</span></code></a> constructor computes a transitive asymmetric partial digraph (see <a class="reference internal" href="#rankingconsensus"><span class="std std-numref">Listing 1.52</span></a>  Lines 33-34). Notice in Lines 16-19 the unstable ranks of alternative <em>a1</em> (rank 2,5,6 and 7) which induce contradictory ranking results leadind to many incomparability situations. Ranking and ordering of partial relations do not give now the same result when such incomparabilities do appear.</p>
+<p>By <a class="reference internal" href="#epistemic-fusion-label"><span class="std std-ref">disjunctive epistemic fusion</span></a> of the four <em>rankings</em>, the <a class="reference internal" href="techDoc.html#transitiveDigraphs.RankingsFusionDigraph" title="transitiveDigraphs.RankingsFusionDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">RankingsFusionDigraph</span></code></a> constructor computes a transitive asymmetric partial digraph (see <a class="reference internal" href="#rankingconsensus"><span class="std std-numref">Listing 1.52</span></a>  Lines 33-34). Notice in Lines 16-19 the unstable ranks of alternative <em>a1</em> (rank 2,5,6 and 7) which induce contradictory ranking results leadind to many incomparability situations. Ranking and ordering of partial relations do not give now the same result when such incomparabilities do appear.</p>
 <p>The generic <a class="reference internal" href="techDoc.html#transitiveDigraphs.TransitiveDigraph" title="transitiveDigraphs.TransitiveDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">TransitiveDigraph</span></code></a> class provides therefore a <a class="reference internal" href="techDoc.html#transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph" title="transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph"><code class="xref py py-meth docutils literal notranslate"><span class="pre">showTransitiveDigraph()</span></code></a> method which recursively extracts conjointly first and last choices –<a class="reference internal" href="pearls.html#bipolar-valued-kernels-tutorial-label"><span class="std std-ref">initial and terminal kernels</span></a>– as shown in <a class="reference internal" href="#rankingconsensus1"><span class="std std-numref">Listing 1.53</span></a> Lines 2-6 below.</p>
 <div class="literal-block-wrapper docutils container" id="rankingconsensus1">
 <div class="code-block-caption"><span class="caption-number">Listing 1.53 </span><span class="caption-text">Inspecting a partial ranking</span><a class="headerlink" href="#rankingconsensus1" title="Link to this code"></a></div>
@@ -11810,7 +11810,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="Python resources for fair and accountable Algorithmic Decision Theory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Python resources for fair and justifiable Algorithmic Decision Theory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="techDoc.html" class="btn btn-neutral float-right" title="2. Technical Reference of the Digraph3 modules" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
@@ -11818,7 +11818,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Aug 25, 2026.
+      <span class="lastupdated">Last updated on Aug 29, 2026.
       </span></p>
   </div>
 

@@ -3501,7 +3501,7 @@ As we observe only 11 intransitive triples in the codual outranking digraph *gcd
 Revealing the transitive part of a bipolar-valued digraph
 .........................................................
 
-As we have noticed before, the randomized versions of the :py:class:`~linearOrders.PolarisedBachetRanking` and the :py:class:`~linearOrders.ValuedBachetRanking` constructors potentially produce multiple ranking results of unequal correlation quality, yet respecting --due to the Condorcet consistency property-- all more or less the transitive part of the given digraph. If we collect now a small subset of the best correlated rankings, we can use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class for constructing, by epistemic disjunctive fusion of these selected rankings, a partial *Bachet* ranking result --a transitive asymmetric digraph with indeterminate reflexive relations-- showing actually the potential transitive part of a given polarised outranking digraph. 
+As we have noticed before, the randomized versions of the :py:class:`~linearOrders.PolarisedBachetRanking` and the :py:class:`~linearOrders.ValuedBachetRanking` constructors potentially produce multiple ranking results of unequal correlation quality, yet respecting --due to the Condorcet consistency property-- all more or less the transitive part of the given digraph. If we collect now a small subset of the best correlated rankings, we can use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class for constructing, by disjunctive epistemic fusion of these selected rankings, a partial *Bachet* ranking result --a transitive asymmetric digraph with indeterminate reflexive relations-- showing actually the potential transitive part of a given polarised outranking digraph. 
 
 To explore this remarkable opportunity, a new :py:class:`~transitiveDigraphs.PartialBachetRanking` class is provided by the :py:mod:`transitiveDigraphs` module. To illustrate its usefulness, let us reconsider the example outranking digraph *g* of :numref:`optimisingBachet`. 
 
@@ -3655,7 +3655,7 @@ Notes
 
 Our initial Python implementation of the :py:class:`~bachetNumbers.BachetInteger` class dates from 2012 when preparing the lectures of a first Semester course on *Discrete Mathematics* for computer scientists. But, it is only in Spring 2025 that we realized how remarkably well *Bachet*'s signed bits weighing design is adapted to our bipolar-valued epistemic logic approach. The *Bachet* ranking rules illustrate here convincingly the benefit one may indeed obtain when computing, not in a binary {0,1} bit world, like today all bit-wise computing devices, but instead in a bipolar-valued {-1,0,+1} world with **balanced ternary Bachet computers** [26]_.
 
-The power of the **epistemic disjunctive fusion** operator, for instance, is indeed impressive. When two arguments prove the *Truthfulness* of a logical statement, their fusion will be **True**. When two arguments prove the **Falseness** of the statement, their fusion will be **False**, However, when they provide conjointly a proof of *Falseness* **and** a proof of *Truthfulness*, their fusion will be **indeterminate** (zero knowledge). It is worthwhile noticing again the essential computational role this indeterminate **zero** value is taking on in such a *Bachet* computer.
+The power of the **disjunctive epistemic fusion** operator, for instance, is indeed impressive. When two arguments prove the *Truthfulness* of a logical statement, their fusion will be **True**. When two arguments prove the **Falseness** of the statement, their fusion will be **False**, However, when they provide conjointly a proof of *Falseness* **and** a proof of *Truthfulness*, their fusion will be **indeterminate** (zero knowledge). It is worthwhile noticing again the essential computational role this indeterminate **zero** value is taking on in such a *Bachet* computer.
 
 Remarkable is even more the unexpected **Condorcet Consistency** of the *polarised* Bachet ranking scores which allows us to effectively reveal, with the :py:class:`~transitiveDigraphs.PartialBachetRanking` constructor, the transitive part of any given bipolar-valued digraph. This consistency property, coupled with a higher discriminatory power than the classic *Copeland* ranking scores, makes the usage of *Bachet* ranking scores very effective for solving inter- and intragroup pairing problems (see the :py:mod:`pairings` module).  
 
@@ -4422,9 +4422,9 @@ Superposition of elementary epistemic situations
 
 Partly determined characteristic values appear now when balancing positive epistemic evidences against negative epistemic evidences. A first example is given by the normalized majority margins obtained from a ranked voting election. For each pair (*x*, *y*) of eligible candidates, we balance the number of times a voter ranks *x* before *y* against the number of times a voter ranks *y* before *x*.  A positive majority margin thus warrants that candidate *x* is more or less preferred to candidate *y*, a negative majority margin warrants that candidate *x* is not more or less prefered to candidate *y*. A second example is given by the characteristic values of a normalized outranking relation when no considerable performance differences are taken into account. Yet another example is given by normalized *Copeland* or *NetFlows* ranking scores of a decision alternative *x*. These scores characterise the statement that an alternative is first ranked by balancing the number of outranked against the number of outranking alternatives. In all these cases, we observe **compensatory superpositions** of elementary epistemic situations.
 
-But we may also operate **non compensatory superpositions** of epistemic situations. This is the case when superposing bipolar-valued characteristic values for instance with the disjunctive epistemic fusion operator, denoted :math:`X $ \textcircled{ $\vee$ } $Y`. Let :math:`r(P)` et :math:`r(Q)` be the characteristic values of two bipolar-valued propositions *P* et *Q*. We may superpose these characteristics as follows:
+But we may also operate **non compensatory superpositions** of epistemic situations. This is the case when superposing bipolar-valued characteristic values for instance with the disjunctive epistemic fusion operator, denoted :math:`X $ \textcircled{$\vee$} $Y`. Let :math:`r(P)` et :math:`r(Q)` be the characteristic values of two bipolar-valued propositions *P* et *Q*. We may superpose these characteristics as follows:
 
-|   :math:`r\big(\,P\,$ \textcircled{ $\vee$ }$\,Q\,\big) \;=`
+|   :math:`r\big(\,P\,$ \textcircled{$\vee$}$\,Q\,\big) \;=`
 |        :math:`\max\big(r(P),r(Q)\big)` when :math:`r(P) \geq 0.0 \; \land \; r(Q) \geq 0.0`;
 |        :math:`\min\big(r(P),r(Q)\big)` when :math:`r(P) \leq 0.0 \; \land \; r(Q) \leq 0.0`;
 |        :math:`0.0` otherwise.
@@ -4650,7 +4650,7 @@ The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a pa
 Computing the bpv-set of weak Condorcet winners and loosers
 ...........................................................
 
-The relation attribute of a given outranking digraph :math:`G(X,R)` is an evident example of a bpv-set. And, the conjunctive epistemic fusion operator may for instance be used for computing the bpv-set of *non ambiguous weak Condorcet winners and losers* of such a digraph *G* [28]_. The :py:class:`~digraphs.Digraph` class provides therefore the :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method as shown in :numref:`CondorcetWinners1` Line 5.  
+The relation attribute of a given outranking digraph :math:`G(X,R)` is an evident example of a bpv-set. And the epistemic fusion operators may for instance be used for computing the bpv-set of *non ambiguous weak Condorcet winners and losers* of such a digraph *G* [28]_. The :py:class:`~digraphs.Digraph` class provides therefore the :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method as shown in :numref:`CondorcetWinners1` Line 5.  
 
 .. code-block:: pycon
    :caption: Computing the bpv-set of the weak Condorcet winner(s)
@@ -5074,7 +5074,7 @@ When we reconsider the graphviz drawing of this outranking digraph (see Fig. 52 
 
 it becomes obvious why alternative *a1* is **neither included nor excluded** from the initial prekernel. Same observation is applicable to alternative *a3* which can **neither be included nor excluded** from the terminal prekernel. It may even happen, in case of more indeterminate outranking situations, that no alternative  is positively included or excluded from a weakly independent prekernel; the corresponding bipolar-valued membership characteristic vector being completely indeterminate (see for instance the tutorial on :ref:`Computing a Best Choice Recommendation <Rubis-Tutorial-label>`).
 
-To illustrate finally why sometimes we need to operate an *epistemic disjunctive fusion* of **unequal** stable low and high membership characteristics vectors (see Step 2.c.), let us consider, for instance, the following crisp 7-*cycle* graph.
+To illustrate finally why sometimes we need to operate a *disjunctive epistemic fusion* of **unequal** stable low and high membership characteristics vectors (see Step 2.c.), let us consider, for instance, the following crisp 7-*cycle* graph.
 
 .. code-block:: pycon
 
@@ -5602,7 +5602,7 @@ Yet, when inspecting in :numref:`rel_circular-5-PT` the outranking relation, we 
 
 The *Kemeny* rule delivers indeed five optimal rankings which appear to be the circular versions of the apparent downward ranking ['a5', 'a4', 'a3', 'a2', 'a1'].
 
-The epistemic disjunctive fusion of these five circular rankings gives again an empty relation (see :numref:`rel_circular-5-PT_wk` below).
+The disjunctive epistemic fusion of these five circular rankings gives again an empty relation (see :numref:`rel_circular-5-PT_wk` below).
 
 .. code-block:: pycon
    :linenos:
