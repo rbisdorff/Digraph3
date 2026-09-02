@@ -7025,19 +7025,32 @@ We have mentioned that Alice considers a performance difference of 7 points on t
 
 In :numref:`aliceVetos`, we see that *considerable performance differences* concerning the *Attractiveness of the studies* (*AS* criterion) are indeed observed between the *Specialised Secretary* study programm offered in Köln and the *Graduate Interpreter* study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three *more or less invalid* outranking situations to *certainly invalid* (Lines 8, 13, 18) and corresponding three *more or less valid* converse outranking situations to *certainly valid* ones (Lines 25, 30, 35).
 
-We may furthermore notice in :numref:`aliceRelationMap`, that the four first-ranked study programs, *I-FHK*, *I-USB*, *I-UHB* and *T-FHK*,  are in fact *Condorcet* winners (see :numref:`aliceBestChoice` Line 2), i.e. they are all four *indifferent* one of the other **and** they positively *outrank* all other alternatives, a result confirmed below by our best choice recommendation (Line 8).
+We may furthermore notice in :numref:`aliceRelationMap`, that the four first-ranked study programs, *I-FHK*, *I-USB*, *I-UHB* and *T-FHK*,  are in fact *Condorcet* winners (see :numref:`aliceBestChoice` Lines 4-8), i.e. they are all four *indifferent* one of the other **and** they positively *outrank* all other alternatives, a result confirmed below by our Rubis best choice recommendation (Lines 21 and 27-28).
    
 .. code-block:: pycon
    :name: aliceBestChoice
    :linenos:
    :caption: Alice's best choice recommendation
-   :emphasize-lines: 8,14
+   :emphasize-lines: 5-8,17,21,27-28
 
-   >>> dg.computeCondorcetWinners()
-    ['I-FHK', 'I-UHB', 'I-USB', 'T-FHK'] 
-   >>> dg.showBestChoiceRecommendation()
-    Best choice recommendation(s) (BCR)
-    (in decreasing order of determinateness)   
+   >>> dg.showChoiceRecommendation('CondorcetWinners')
+    First and last choice recommendations
+    -------------------------------------
+     First choice (Condorcet winners)
+      'I-FHK': +0.75 (87.50%)
+      'T-FHK': +0.17 (58.34%)
+      'I-USB': +0.17 (58.34%)
+      'I-UHB': +0.17 (58.34%)
+    -------------------------------------
+     Last choice (Condorcet losers)
+      'C-HKK': +0.17 (58.34%)
+      'S-HKK': +0.17 (58.34%)
+    -------------------------------------
+     Criteria significance majority in brakets
+     Execution time: 0.014 sec.
+    ******************************************
+   >>> dg.showChoiceRecommendation('Rubis)
+    Rubis first choice recommendations  
     Credibility domain: [-1.00,1.00]
     === >> potential first choice(s)
     choice              : ['I-FHK','I-UHB','I-USB','T-FHK']
@@ -7057,9 +7070,9 @@ We may furthermore notice in :numref:`aliceRelationMap`, that the four first-ran
      determinateness (%) : 58.33
      most credible action(s) = {'S-HKK': 0.17,'C-HKK': 0.17}
 
-Notice in Line 14 above that the most credible best choice among the four first-ranked study programs eventually becomes the *Graduate Interpreter* study program at the *Technical High School* in *Köln* supported by a :math:`(0.75 + 1)/2.0 \,=\,87.5\%` (18/24) majority of global criteria significance [24]_.
+Notice in Lines 5 and 27 above that the most credible best choice among the four first-ranked study programs eventually becomes the *Graduate Interpreter* study program at the *Technical High School* in *Köln* supported by a :math:`(0.75 + 1)/2.0 \,=\,87.50\%` (18/24) majority of global criteria significance [24]_.
 
-In the relation map, shown in :numref:`aliceRelationMap` above, we finally see in the left corner that the *asymmetrical* part of the outranking relation, i.e. the corresponding *strict* outranking relation, is actually *transitive* (see Lines 3-6 in :numref:`transitivePart`). We can hence make usage of the :py:meth:`~transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph` method from the :py:class:`transitiveDigraphs.TransitiveDigraph` to illustrate our previous first choice recommendation.
+In the relation map, shown in :numref:`aliceRelationMap` above, we finally see in the left corner that the *asymmetrical* part of the outranking relation, i.e. the corresponding *strict* outranking relation, is actually *transitive* (see Lines 3-6 in :numref:`transitivePart`). We can hence make usage of the :py:meth:`~transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph` method from the :py:class:`transitiveDigraphs.TransitiveDigraph` to illustrate our previous first choice recommendations.
 
 .. code-block:: pycon
    :name: transitivePart
@@ -7166,7 +7179,7 @@ Yet, how *robust* are our findings with respect to potential settings of the dec
 		
 Robustness analysis
 ```````````````````
-Alice considers her four decision objectives as being *more or less* equally important. Here we have, however, allocated *strictly equal* importance weights with *strictly* equi-significant criteria per objective. How robust is our previous best choice recommendation when, now, we would consider the importance of the objectives and, hence, the significance of the respective performance criteria to be *more or less uncertain* ?
+Alice considers her four decision objectives of *more or less* equal importance. Here we have, however, allocated *strictly equal* importance weights with *strictly* equi-significant criteria per objective. How robust is our previous best choice recommendation when, now, we would consider the importance of the objectives and, hence, the significance of the respective performance criteria to be *more or less uncertain* ?
 
 To answer this question, we will consider the respective criteria significance weights *wj* to be **triangular random variables** in the range 0 to *2wj* with *mode* = *wj*. We may compute a corresponding **90%-confident outranking digraph** with the help of the :py:class:`~outrankingDigraphs.ConfidentBipolarOutrankingDigraph` constructor [22]_.
 
@@ -7202,7 +7215,7 @@ Concerning now a 90%-*confident* best choice recommendation, we are lucky (see :
    :name: aliceConfidentBestChoice
    :linenos:
    :caption: The 90% confident best choice recommendation
-   :emphasize-lines: 9-10,16
+   :emphasize-lines: 2, 9-10,16
 
    >>> cdg.computeCondorcetWinners()
     ['I-FHK']
@@ -7267,9 +7280,31 @@ We may hence use the :py:meth:`~transitiveDigraphs.TransitiveDigraph.exportGraph
    :width: 200 px
    :align: center
 
-   Unopposed partial ranking of the potential study programs	   
+   Unopposed partial ranking of the potential study programs
 
-Again, when *equi-signficant* performance criteria are assumed per decision objective, we observe in :numref:`AliceChoice_unopposed` that *I-FHK* remains the stable best choice, *independently* of the actual importance weights that Alice may wish to allocate to her four decision objectives.
+Again, when *equi-signficant* performance criteria are assumed per decision objective, we observe in :numref:`AliceChoice_unopposed` that *I-FHK* remains the stable best choice, *independently* of the actual importance weights that Alice may wish to allocate to her four decision objectives. A result that gets confirmed with an iterated weak Condorcet winners and losers extraction.
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> uop.showChoiceRecommendation('IteratedCondorcetWinners')
+    ******************************************
+    Iterated weak Condorcet winners and losers
+    ------------------------------------------
+     1rst-choice: 'I-FHK' (+0.750)
+        2nd-choice: 'I-USB' (+0.875)
+        2nd-choice: 'T-FHK' (+0.833)
+          3rd-choice: 'T-UD' (+1.000)
+            indeterminate: 'I-UHB' (+0.000)
+          3rd-reject: 'T-USB' (+1.000)
+        2nd-reject: 'T-UHB' (+0.833)
+        2nd-reject: 'C-HKK' (+0.833)
+     1rst-reject: 'T-FHM' (+0.583)
+     1rst-reject: 'S-HKK' (+0.833)
+    -----------------------------------------
+    Criteria significance majority in brakets
+    Execution time: 0.028 sec.
+    *****************************************
 
 In view of her performance tableau in :numref:`aliceHeatmap`, *Graduate Interpreter* studies at the *Technical High School Köln*, thus, represent definitely **Alice's very best choice**.
 
