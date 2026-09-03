@@ -1,7 +1,7 @@
 
 .. meta::
-   :description: Documentation of the Digraph3 collection of python3 modules for fair and accountble algorithmic decision theory
-   :keywords: Algorithmic Decision Theory, Fair and Accountable Algorithms, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Support, Bipolar-valued Epistemic Logic
+   :description: Documentation of the Digraph3 collection of python3 modules for fair and justiable algorithmic decision theory
+   :keywords: Algorithmic Decision Theory, Fair and Justifiable Algorithms, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Support, Bipolar-valued Epistemic Logic
 
 .. raw:: latex
 
@@ -3320,7 +3320,7 @@ A heatmap view on the performance tableau illustrates the actual quality of this
 
    *Bachet* rule ranked heatmap view on the performance records 	   
 
-In :numref:`bachetHeatmapT` we may notice that action *a5*, with all grades above the third 7-tile (> 42.86%), appears convincingly first-ranked. Similarly, with six grades in the two lowest 7-tiled classes (< 28.57%), action *a2* appears last-ranked. Most significant in this ranking appear to be the *Benefit* criteria *b09*, *b04* , *b01*, *c01* and *b08* with a correlation > +0.20, whereas *Costs* criteria *c03* and *b05* appear somehow in contradiction (< -0.20 ) with the proposed *Bachet* ranking. Action *a7*, with only three weak grades, is not first-ranked because of the fact that on all three *Costs* criteria and on the *Benefit* criterion *b08*, i.e on a majority (33/60) of criteria significance, action *a7* is positively outranked by actions *a6* and *a5*. Notice also the highly contrasted performance record of action *a1* with three grades in the highest 7-tile (> 85.71%) and four grades in the lowest 7-tile (<14.29%). A similar contrasted situation is given for action *a3* with 7 grades in the two top 7-tiles (>71.43%) and four grades in the two lowest 7-tiles (<28.57%). The mean marginal correlation over all 13 criteria is slightly positive (+0.10). The standard deviation of the marginal correlations is a bit high (+0.198) so that the ranking may lack a bit of fairness (-0.096).
+In :numref:`bachetHeatmapT` we may notice that action *a5*, with all grades above the third 7-tile (> 42.86%), appears convincingly first-ranked. Similarly, with six grades in the two lowest 7-tiled classes (< 28.57%), action *a2* appears last-ranked. Most significant in this ranking appear to be the *Benefit* criteria *b09*, *b04* , *b01*, *c01* and *b08* with a correlation > +0.20, whereas *Costs* criteria *c03* and *b05* appear somehow in contradiction (< -0.20 ) with the proposed *Bachet* ranking. Action *a7*, with only three weak grades, is not first-ranked because of the fact that on all three *Costs* criteria and on the *Benefit* criterion *b08*, i.e on a majority (33/60) of criteria significance, action *a7* is positively outranked by actions *a6* and *a5*. Notice also the highly contrasted performance record of action *a1* with three grades in the highest 7-tile (> 85.71%) and four grades in the lowest 7-tile (<14.29%). A similar contrasted situation is given for action *a3* with 7 grades in the two top 7-tiles (>71.43%) and four grades in the two lowest 7-tiles (<28.57%). The mean marginal correlation over all 13 criteria is slightly positive (+0.10). The standard deviation of the marginal correlations is a bit high (+0.198) so that the ranking may lack a bit of fairness (-0.096) [71]_.
 
 Let us now consider a similar ranking rule, but working directly on the *bipolar-valued* outranking digraph.
 
@@ -11975,6 +11975,8 @@ Appendices
 
 .. [CON-1785] Condorcet, J.A.N. de Caritat marquis de (1785), *Essai sur l'application de l'analyse à la probabilité des décisions rendues à la pluralité des voix*, Imprimerie royale Paris, https://gallica.bnf.fr/ark:/12148/bpt6k417181/f4.item
 
+.. [TAJ-2026] Tajouri S. and Tsoukias A. (2026) Subjective fairness in algorithmic decision-support, *ETHICS*, forthcoming.
+
 .. |location_link4| raw:: html
 
    <a href="https://orbilu.uni.lu/handle/10993/37933" target="_blank">on Algorithmic Decision Theory</a>
@@ -12122,6 +12124,9 @@ Appendices
 .. [69] See :ref:`Applications of bipolar-valued base 3 encoded Bachet numbers <Bachet-Tutorial-label>`
 
 .. [70] See https://en.wikipedia.org/wiki/Multiple-criteria_decision_analysis
+
+.. [71] The notion of *ranking fairness* only considers here the ranking algorithm's more or less fairly taking into account of the marginal criteria rankings. We do not discuss whether the individual performance measuring criteria do treat the potential decision alternatives without any unfair discrimination (see [TAJ-2026]_ )
+
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
 ..  LocalWords:  hasIntegerValuation showAll tutorialdigraph graphviz
