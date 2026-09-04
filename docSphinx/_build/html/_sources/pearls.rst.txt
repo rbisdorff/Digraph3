@@ -39,8 +39,9 @@ Pearls of bipolar-valued epistemic logic
 .. only:: html
    
    :New:
-
+      
       * :ref:`Introducing computational bipolar-valued set theory <Bipolar-Valued-Sets-Tutorial-label>`
+      * :ref:`Computing bipolar-valued Condorcet winners and losers <Bipolar-Valued-Condorcet-Winners>`
       * :ref:`Applications of bipolar-valued base 3 encoded Bachet numbers <Bachet-Tutorial-label>`	 
       *	:ref:`Condorcet's 1785 critical perspective on the simple plurality voting rule <Condorcet-Tutorial-label>`
       * :ref:`On characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>`     
@@ -4387,8 +4388,9 @@ Computational bipolar-valued epistemic logic
 	:depth: 1
 	:local:
 
-Bipolar-valued epistemic logic
-..............................
+Bipolar-valued propositional calculus
+.....................................
+
 
 In bipolar-valued epistemic logic we balance or **superpose** like in quantum theory, some epistemic evidences for a propositional statement to be true against other evidences for the same statement to be false. First example is given by the statement *P*: '*this candidate should win the election*'. There are some voters who support its truthfulness and some voters who support, on the contrary its falseness. Yet, there may also be some voters who don't give any opinion, they abstain from voting. What logical status should be given to the statement *P* ?
 
@@ -4396,10 +4398,7 @@ Following *Condorcet* [CON-1785p]_ we are going to balance the votes in favour a
 
 First important consequence is that the logical status of any statement is considered to be indeterminate as long as no evidence is yet collected. Reconsidering for instance proposition *P*, its logical status is indeterminate as long as no voting has been organized. More important is furthermore the consequence that negating the truthfulness or falseness of a proposition does no more imply its falseness, repective its truthfulness, but its falseness **or** indeterminate state, respectively its truthfulness **or** indeterminate state. Double negation does no more automatically imply truthfulness.  
 
-Bipolar-valued propositional calculus
-.....................................
-
-| In order to formalize the previous intuitions, we are attaching to any logical  proposition or statement *P* a characteristic function *r(P)* taking value in the decimal interval [-1.0;+1.0] with following semantics:
+In order to formalize the previous intuitions, we are attaching to any logical  proposition or statement *P* a characteristic function *r(P)* taking value in the decimal interval [-1.0;+1.0] with following semantics:
 |    :math:`r(P) = +1.0` means statement *P* is **for sure true**;
 |    :math:`0.0 < r(P) < +1.0` means statement *P* is **more or less true**;
 |    :math:`r(P) = 0.0` means statement *P* is **indeterminate**;
@@ -4647,7 +4646,24 @@ The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a pa
      s5  0.0000  0.0000
     True
 
-Computing the bpv-set of weak Condorcet winners and loosers
+.. note::
+   
+   The *disjunctive* epistemic fusion :math:`$ \textcircled{$\vee$} $` operator was from the beginning of our bipolar-valued computations a very convincing operator, used for instance for computing ranking consensuses. This was however strangely not the case with the simply inverted max <-> min *conjunctive* epistemic fusion operator. The latter results were too often becoming indeterminate for being useful and convincing.
+
+   The fact that 0.0 values are as such *neutral* for a *max* operator on positive terms and *neutral* for a *min* operator on negative terms did in fact hide the condition that **both** epistemic fusion operators, :math:`$ \textcircled{$\wedge$} $` as well as :math:`$ \textcircled{$\vee$} $`, need to verify the **neutrality** of the indeterminate characteristic value. For the epistemic fusion operators the characteristic valuation domain appears indeed split into three disjoint parts: the right open negative interval [-max criteria significance; -0.0..[, the neutral indeterminate 0.0 value, and the left open positive interval ]+0.0..; max criteria significance]. Same hiding is in action when computing bipolar-valued outranking characteristic values. The indeterminate 0.0 value is pers se *neutral* for any adding and subtracting of individual criterion significances.
+
+   This conceptual clarification opens the way to a new algorithm for computing a choice recommendation from a given strict outranking digraph.
+
+.. _Bipolar-Valued-Condorcet-Winners:
+
+A new choice recommender algorithm
+``````````````````````````````````
+
+.. contents:: 
+	:depth: 1
+	:local:
+
+Computing bipolar-valued weak Condorcet winners and loosers
 ...........................................................
 
 The relation attribute of a given outranking digraph :math:`G(X,R)` is an evident example of a bpv-set. And the epistemic fusion operators may for instance be used for computing the bpv-set of *non ambiguous weak Condorcet winners and losers* of such a digraph *G* [28]_. The :py:class:`~digraphs.Digraph` class provides therefore the :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method as shown in :numref:`CondorcetWinners1` Line 5.  
@@ -4694,7 +4710,10 @@ In :numref:`condorcetWinners2` we see confirmed in the outranking relation table
 
 When a given strict outranking digraph shows chordless circuits it may however be the case that no weak Condorcet winners and/or losers can be detected, the resulting bpv-set does not contain any positive and/or negative credibilities. Breaking in such a case all chordless strict outranking circuits at their weakest link transforms the digraph in an acyclic asymmetric digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the digraph.
 
-Now, weak Condorcet winners and losers, like initial and terminal prekernels, give suitable first and last choice recommendations. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts therefore the '*CondorcetWinners*' argument for showing positive weak Condorcet winners as first choice and positive weak Condorcet losers as last choice recommendation as shown in :numref:`CondorcetWinners3` below.
+Suitable first and last choice recommendations
+..............................................
+
+Now, weak Condorcet winners and losers verify the same pragmatic principles as initial and terminal prekernels. Hence they deliver similar first and last choice recommendations. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts therefore the '*CondorcetWinners*' argument for showing positive weak Condorcet winners as first choice and positive weak Condorcet losers as last choice recommendation as shown in :numref:`CondorcetWinners3` below.
 
 .. code-block:: pycon
    :caption: Showing first and last choice recommendations from weak Condorcet winners bpv-set
@@ -4719,7 +4738,7 @@ Now, weak Condorcet winners and losers, like initial and terminal prekernels, gi
      Execution time: 0.017 sec.
     ***********************************************
 
-The criteria significance majorities for each choice are indicated in brakets (see Lines 5-12). A result that gets confirmed with the '*Rubis*' choice recommendation shown in :numref:`CondorcetWinners4` below.
+The criteria significance majorities for each choice are indicated in brakets (see Lines 5-12). Alternative *p2* is the most supported first choice and alternative *p8* is the most supported last choice. A recommendation that gets confirmed with the '*Rubis*' choice recommendation shown in :numref:`CondorcetWinners4` below.
 
 .. code-block:: pycon
    :caption: Showing the choice recommendations from the Rubis method
@@ -4749,7 +4768,7 @@ The criteria significance majorities for each choice are indicated in brakets (s
 	 determinateness (%) : 50.00
 	 - most credible action(s) = { }
 
-With the given outranking digraph, initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and *strictly* outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are non ambiguous *weakly* outranking resp. *weakly* outranked choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location 'A', being incomparable to all other locations, is included in both the initial and the terminal prekernel. Location *A* is hence an ambiguous first and last choice recommendation and therefore neither part of the non ambiguous weak Condorcet winners, nor of the non ambiguous weak Condorcet losers [29]_.
+With the given outranking digraph, initial and terminal prekernels recommendations perfectly correspond to the positive weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and *strictly* outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are non ambiguous *weakly* outranking resp. *weakly* outranked choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location 'A', being incomparable to all other locations, is included in both the initial and the terminal prekernel. Location *A* is hence an ambiguous first and last choice recommendation and therefore neither part of the non ambiguous weak Condorcet winners, nor of the non ambiguous weak Condorcet losers [29]_.
 
 Ranking-by-choosing with bpv-sets of weak Condorcet winners and loosers
 .......................................................................
@@ -4784,7 +4803,7 @@ In a ranking-by-choosing strategy, we may recursively extract bpv-sets of weak C
    >>> cr.condorcetRanking
     ['p2','p6','p5','p4','p9','p3','p1','p7','p8']
 
-This choice recommendation makes apparent a linear ranking which may be computed with the :py:class:`linearOrders.IteratedBpvCondorcetWinnersRanking` class (see Lines 19 and 21).
+This choice recommendation makes apparent a linear ranking which may be computed with the :py:class:`linearOrders.IteratedBpvCondorcetWinnersRanking` class constructor (see Lines 19 and 21).
 
 In the performance heatmap shown in :numref:`condorcetWinnersHeatmap` using the previous *cr.condorcetRanking*, we may verify the quality of this ranking.
 
@@ -4799,14 +4818,9 @@ In the performance heatmap shown in :numref:`condorcetWinnersHeatmap` using the 
 
    Performance heatmap ranked by iterated bipolar-valued Condorcet winners and losers
 
-
 .. note::
-   
-   The *disjunctive* epistemic fusion :math:`$ \textcircled{$\vee$} $` operator was from the beginning of our bipolar-valued computations a very convincing operator, used for instance for computing a ranking consensus. This was however strangely not the case with the simply inverted max <-> min *conjunctive* epistemic fusion operator. The latter results were too often becoming indeterminate for being useful and convincing.
 
-   The fact that 0.0 values are as such *neutral* for a *max* operator on positive terms and *neutral* for a *min* operator on negative terms did in fact hide the condition that **both** epistemic fusion operators, :math:`$ \textcircled{$\wedge$} $` as well as :math:`$ \textcircled{$\vee$} $`, need to verify the **neutrality** of the indeterminate characteristic value. For the epistemic fusion operators the characteristic valuation domain appears indeed split into three disjoint parts: the right open negative interval [-max criteria significance; -0.0..[, the neutral indeterminate 0.0 value, and the left open positive interval ]+0.0..; max criteria significance]. Same hiding is in action when computing bipolar-valued outranking characteristic values. The indeterminate 0.0 value is pers se *neutral* for any adding and subtracting of individual criterion significances.
-
-   This recent conceptual clarification enhances a lot the computational power of our bipolar-valued epistemic logic. With the correct implementation of the epistemic fusion operators we may now compute for instance bipolar-valued non ambiguous first and last choice recommendations of a given strict outranking digraph in an :math:`\mathcal{O}(n^2)` complexity without having to first find its polarised crisp initial and terminal prekernels (a not polynomial problem in general) and without having furthermore to solve the corresponding double fixpoint kernel equation systems [30]_.
+   With the correct implementation of the conjunctive epistemic fusion operator we may now compute bipolar-valued non ambiguous first and last choice recommendations of a given strict outranking digraph in an :math:`\mathcal{O}(n^2)` complexity without having to first find its polarised crisp initial and terminal prekernels (a not polynomial problem in general) and without having furthermore to solve the corresponding double fixpoint kernel equation systems [30]_.
 
    Yet, this is the actual topic of the next section.
 
