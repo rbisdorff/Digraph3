@@ -67,7 +67,7 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{August 25, 2026}
+\date{September 04, 2026}
 \release{3.14.7}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -5031,7 +5031,7 @@ As we observe only 11 intransitive triples in the codual outranking digraph \sph
 \subsubsection{Revealing the transitive part of a bipolar\sphinxhyphen{}valued digraph}
 \label{\detokenize{pearls:revealing-the-transitive-part-of-a-bipolar-valued-digraph}}
 \sphinxAtStartPar
-As we have noticed before, the randomized versions of the \sphinxcode{\sphinxupquote{PolarisedBachetRanking}} and the \sphinxcode{\sphinxupquote{ValuedBachetRanking}} constructors potentially produce multiple ranking results of unequal correlation quality, yet respecting \textendash{}due to the Condorcet consistency property\textendash{} all more or less the transitive part of the given digraph. If we collect now a small subset of the best correlated rankings, we can use the \sphinxcode{\sphinxupquote{transitiveDigraphs.RankingsFusionDigraph}} class for constructing, by epistemic disjunctive fusion of these selected rankings, a partial \sphinxstyleemphasis{Bachet} ranking result \textendash{}a transitive asymmetric digraph with indeterminate reflexive relations\textendash{} showing actually the potential transitive part of a given polarised outranking digraph.
+As we have noticed before, the randomized versions of the \sphinxcode{\sphinxupquote{PolarisedBachetRanking}} and the \sphinxcode{\sphinxupquote{ValuedBachetRanking}} constructors potentially produce multiple ranking results of unequal correlation quality, yet respecting \textendash{}due to the Condorcet consistency property\textendash{} all more or less the transitive part of the given digraph. If we collect now a small subset of the best correlated rankings, we can use the \sphinxcode{\sphinxupquote{transitiveDigraphs.RankingsFusionDigraph}} class for constructing, by disjunctive epistemic fusion of these selected rankings, a partial \sphinxstyleemphasis{Bachet} ranking result \textendash{}a transitive asymmetric digraph with indeterminate reflexive relations\textendash{} showing actually the potential transitive part of a given polarised outranking digraph.
 
 \sphinxAtStartPar
 To explore this remarkable opportunity, a new \sphinxcode{\sphinxupquote{PartialBachetRanking}} class is provided by the \sphinxcode{\sphinxupquote{transitiveDigraphs}} module. To illustrate its usefulness, let us reconsider the example outranking digraph \sphinxstyleemphasis{g} of \hyperref[\detokenize{pearls:optimisingbachet}]{Listing \ref{\detokenize{pearls:optimisingbachet}}}.
@@ -5199,7 +5199,7 @@ Our initial Python implementation of the \sphinxcode{\sphinxupquote{BachetIntege
 \end{footnote}.
 
 \sphinxAtStartPar
-The power of the \sphinxstylestrong{epistemic disjunctive fusion} operator, for instance, is indeed impressive. When two arguments prove the \sphinxstyleemphasis{Truthfulness} of a logical statement, their fusion will be \sphinxstylestrong{True}. When two arguments prove the \sphinxstylestrong{Falseness} of the statement, their fusion will be \sphinxstylestrong{False}, However, when they provide conjointly a proof of \sphinxstyleemphasis{Falseness} \sphinxstylestrong{and} a proof of \sphinxstyleemphasis{Truthfulness}, their fusion will be \sphinxstylestrong{indeterminate} (zero knowledge). It is worthwhile noticing again the essential computational role this indeterminate \sphinxstylestrong{zero} value is taking on in such a \sphinxstyleemphasis{Bachet} computer.
+The power of the \sphinxstylestrong{disjunctive epistemic fusion} operator, for instance, is indeed impressive. When two arguments prove the \sphinxstyleemphasis{Truthfulness} of a logical statement, their fusion will be \sphinxstylestrong{True}. When two arguments prove the \sphinxstylestrong{Falseness} of the statement, their fusion will be \sphinxstylestrong{False}, However, when they provide conjointly a proof of \sphinxstyleemphasis{Falseness} \sphinxstylestrong{and} a proof of \sphinxstyleemphasis{Truthfulness}, their fusion will be \sphinxstylestrong{indeterminate} (zero knowledge). It is worthwhile noticing again the essential computational role this indeterminate \sphinxstylestrong{zero} value is taking on in such a \sphinxstyleemphasis{Bachet} computer.
 
 \sphinxAtStartPar
 Remarkable is even more the unexpected \sphinxstylestrong{Condorcet Consistency} of the \sphinxstyleemphasis{polarised} Bachet ranking scores which allows us to effectively reveal, with the \sphinxcode{\sphinxupquote{PartialBachetRanking}} constructor, the transitive part of any given bipolar\sphinxhyphen{}valued digraph. This consistency property, coupled with a higher discriminatory power than the classic \sphinxstyleemphasis{Copeland} ranking scores, makes the usage of \sphinxstyleemphasis{Bachet} ranking scores very effective for solving inter\sphinxhyphen{} and intragroup pairing problems (see the \sphinxcode{\sphinxupquote{pairings}} module).
@@ -6049,10 +6049,10 @@ This way all tautologies and antologies of a classical propositional calculus li
 Partly determined characteristic values appear now when balancing positive epistemic evidences against negative epistemic evidences. A first example is given by the normalized majority margins obtained from a ranked voting election. For each pair (\sphinxstyleemphasis{x}, \sphinxstyleemphasis{y}) of eligible candidates, we balance the number of times a voter ranks \sphinxstyleemphasis{x} before \sphinxstyleemphasis{y} against the number of times a voter ranks \sphinxstyleemphasis{y} before \sphinxstyleemphasis{x}.  A positive majority margin thus warrants that candidate \sphinxstyleemphasis{x} is more or less preferred to candidate \sphinxstyleemphasis{y}, a negative majority margin warrants that candidate \sphinxstyleemphasis{x} is not more or less prefered to candidate \sphinxstyleemphasis{y}. A second example is given by the characteristic values of a normalized outranking relation when no considerable performance differences are taken into account. Yet another example is given by normalized \sphinxstyleemphasis{Copeland} or \sphinxstyleemphasis{NetFlows} ranking scores of a decision alternative \sphinxstyleemphasis{x}. These scores characterise the statement that an alternative is first ranked by balancing the number of outranked against the number of outranking alternatives. In all these cases, we observe \sphinxstylestrong{compensatory superpositions} of elementary epistemic situations.
 
 \sphinxAtStartPar
-But we may also operate \sphinxstylestrong{non compensatory superpositions} of epistemic situations. This is the case when superposing bipolar\sphinxhyphen{}valued characteristic values for instance with the disjunctive epistemic fusion operator, denoted \(X $ \textcircled{ $\vee$ } $Y\). Let \(r(P)\) et \(r(Q)\) be the characteristic values of two bipolar\sphinxhyphen{}valued propositions \sphinxstyleemphasis{P} et \sphinxstyleemphasis{Q}. We may superpose these characteristics as follows:
+But we may also operate \sphinxstylestrong{non compensatory superpositions} of epistemic situations. This is the case when superposing bipolar\sphinxhyphen{}valued characteristic values for instance with the disjunctive epistemic fusion operator, denoted \(X $ \textcircled{$\vee$} $Y\). Let \(r(P)\) et \(r(Q)\) be the characteristic values of two bipolar\sphinxhyphen{}valued propositions \sphinxstyleemphasis{P} et \sphinxstyleemphasis{Q}. We may superpose these characteristics as follows:
 
 \begin{DUlineblock}{0em}
-\item[] \(r\big(\,P\,$ \textcircled{ $\vee$ }$\,Q\,\big) \;=\)
+\item[] \(r\big(\,P\,$ \textcircled{$\vee$}$\,Q\,\big) \;=\)
 \item[]
 \begin{DUlineblock}{\DUlineblockindent}
 \item[] \(\max\big(r(P),r(Q)\big)\) when \(r(P) \geq 0.0 \; \land \; r(Q) \geq 0.0\);
@@ -6231,7 +6231,7 @@ The disjunctive and conjunctive epistemic fusions of two bpv\sphinxhyphen{}sets 
 \item[] \(r(z \in Y)\) when
 \item[]
 \begin{DUlineblock}{\DUlineblockindent}
-\item[] \(r(z \in X) = 0.0\) and \(r(z \in Y) \neq 0.0\);;
+\item[] \(r(z \in X) = 0.0\) and \(r(z \in Y) \neq 0.0\);
 \end{DUlineblock}
 \item[] \(0.0\) otherwise.
 \end{DUlineblock}
@@ -6350,7 +6350,7 @@ The epistemic fusion operators induce furthermore on \(\mathcal{S}(A)\) a partia
 \subsubsection{Computing the bpv\sphinxhyphen{}set of weak Condorcet winners and loosers}
 \label{\detokenize{pearls:computing-the-bpv-set-of-weak-condorcet-winners-and-loosers}}
 \sphinxAtStartPar
-The relation attribute of a given outranking digraph \(G(X,R)\) is an evident example of a bpv\sphinxhyphen{}set. And, the conjunctive epistemic fusion operator may for instance be used for computing the bpv\sphinxhyphen{}set of \sphinxstyleemphasis{non ambiguous weak Condorcet winners and losers} of such a digraph \sphinxstyleemphasis{G} %
+The relation attribute of a given outranking digraph \(G(X,R)\) is an evident example of a bpv\sphinxhyphen{}set. And the epistemic fusion operators may for instance be used for computing the bpv\sphinxhyphen{}set of \sphinxstyleemphasis{non ambiguous weak Condorcet winners and losers} of such a digraph \sphinxstyleemphasis{G} %
 \begin{footnote}[28]\sphinxAtStartFootnote
 A \sphinxstylestrong{weak} Condorcet winner outranks at least one action and is incomparable to the not outranked actions. A \sphinxstylestrong{weak} Condorcet loser is outranked by at least one action and is incomparable to the remaining actions.
 %
@@ -6400,7 +6400,7 @@ The individual bipolar\sphinxhyphen{}valued credibilities to ‘\sphinxstylestro
 In \hyperref[\detokenize{pearls:condorcetwinners2}]{Fig.\@ \ref{\detokenize{pearls:condorcetwinners2}}} we see confirmed in the outranking relation table of \(G(X,R)\) that alternative \sphinxstyleemphasis{p2} is a Condorcet winner and alternatives \sphinxstyleemphasis{p6} and \sphinxstyleemphasis{p5} are \sphinxstyleemphasis{weak Condorcet winners} whereas alternatives \sphinxstyleemphasis{p1}, \sphinxstyleemphasis{p7} and \sphinxstyleemphasis{p8} are \sphinxstyleemphasis{weak Condorcet losers}.
 
 \sphinxAtStartPar
-When a given digraph shows chordless outranking circuits it may however be the case that no weak Condorcet winners and/or losers can be detected, the resulting bpv\sphinxhyphen{}set does not contain any positive and/or negative credibilities. Breaking in such a case all chordless outranking circuits at their weakest link transforms the outranking digraph in an acyclic asymmetric digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the digraph.
+When a given strict outranking digraph shows chordless circuits it may however be the case that no weak Condorcet winners and/or losers can be detected, the resulting bpv\sphinxhyphen{}set does not contain any positive and/or negative credibilities. Breaking in such a case all chordless strict outranking circuits at their weakest link transforms the digraph in an acyclic asymmetric digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the digraph.
 
 \sphinxAtStartPar
 Now, weak Condorcet winners and losers, like initial and terminal prekernels, give suitable first and last choice recommendations. The \sphinxcode{\sphinxupquote{showChoiceRecommendation()}} method accepts therefore the ‘\sphinxstyleemphasis{CondorcetWinners}’ argument for showing positive weak Condorcet winners as first choice and positive weak Condorcet losers as last choice recommendation as shown in \hyperref[\detokenize{pearls:condorcetwinners3}]{Listing \ref{\detokenize{pearls:condorcetwinners3}}} below.
@@ -6458,7 +6458,7 @@ The criteria significance majorities for each choice are indicated in brakets (s
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-With the given outranking digraph, initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in \hyperref[\detokenize{pearls:condorcetwinners1}]{Listing \ref{\detokenize{pearls:condorcetwinners1}}} and shown in \hyperref[\detokenize{pearls:condorcetwinners2}]{Fig.\@ \ref{\detokenize{pearls:condorcetwinners2}}}. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and \sphinxstyleemphasis{strictly} outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are non ambiguous \sphinxstyleemphasis{weakly} outranking resp. \sphinxstyleemphasis{weakly} outranked choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location ‘A’, being incomparable to all other locations, is included in both the initial and the terminal prekernel. Location \sphinxstyleemphasis{A} is hence an ambiguous first and last choice recommendation and is therefore neither part of the non ambiguous weak Condorcet winners, nor of the non ambiguous weak Condorcet losers %
+With the given outranking digraph, initial and terminal prekernels recommendations perfectly correspond to the weak Condorcet winners and loosers as computed before in \hyperref[\detokenize{pearls:condorcetwinners1}]{Listing \ref{\detokenize{pearls:condorcetwinners1}}} and shown in \hyperref[\detokenize{pearls:condorcetwinners2}]{Fig.\@ \ref{\detokenize{pearls:condorcetwinners2}}}. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and \sphinxstyleemphasis{strictly} outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are non ambiguous \sphinxstyleemphasis{weakly} outranking resp. \sphinxstyleemphasis{weakly} outranked choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location ‘A’, being incomparable to all other locations, is included in both the initial and the terminal prekernel. Location \sphinxstyleemphasis{A} is hence an ambiguous first and last choice recommendation and therefore neither part of the non ambiguous weak Condorcet winners, nor of the non ambiguous weak Condorcet losers %
 \begin{footnote}[29]\sphinxAtStartFootnote
 See \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{Rubis\sphinxhyphen{}Tutorial\sphinxhyphen{}label}}}
 %
@@ -6871,7 +6871,7 @@ When we reconsider the graphviz drawing of this outranking digraph (see Fig. 52 
 it becomes obvious why alternative \sphinxstyleemphasis{a1} is \sphinxstylestrong{neither included nor excluded} from the initial prekernel. Same observation is applicable to alternative \sphinxstyleemphasis{a3} which can \sphinxstylestrong{neither be included nor excluded} from the terminal prekernel. It may even happen, in case of more indeterminate outranking situations, that no alternative  is positively included or excluded from a weakly independent prekernel; the corresponding bipolar\sphinxhyphen{}valued membership characteristic vector being completely indeterminate (see for instance the tutorial on \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{Computing a Best Choice Recommendation}}}).
 
 \sphinxAtStartPar
-To illustrate finally why sometimes we need to operate an \sphinxstyleemphasis{epistemic disjunctive fusion} of \sphinxstylestrong{unequal} stable low and high membership characteristics vectors (see Step 2.c.), let us consider, for instance, the following crisp 7\sphinxhyphen{}\sphinxstyleemphasis{cycle} graph.
+To illustrate finally why sometimes we need to operate a \sphinxstyleemphasis{disjunctive epistemic fusion} of \sphinxstylestrong{unequal} stable low and high membership characteristics vectors (see Step 2.c.), let us consider, for instance, the following crisp 7\sphinxhyphen{}\sphinxstyleemphasis{cycle} graph.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{CirculantDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{circulants}\PYG{o}{=}\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
@@ -7502,7 +7502,7 @@ Yet, when inspecting in \hyperref[\detokenize{pearls:rel-circular-5-pt}]{Fig.\@ 
 The \sphinxstyleemphasis{Kemeny} rule delivers indeed five optimal rankings which appear to be the circular versions of the apparent downward ranking {[}‘a5’, ‘a4’, ‘a3’, ‘a2’, ‘a1’{]}.
 
 \sphinxAtStartPar
-The epistemic disjunctive fusion of these five circular rankings gives again an empty relation (see \hyperref[\detokenize{pearls:rel-circular-5-pt-wk}]{Fig.\@ \ref{\detokenize{pearls:rel-circular-5-pt-wk}}} below).
+The disjunctive epistemic fusion of these five circular rankings gives again an empty relation (see \hyperref[\detokenize{pearls:rel-circular-5-pt-wk}]{Fig.\@ \ref{\detokenize{pearls:rel-circular-5-pt-wk}}} below).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{transitiveDigraphs} \PYG{k+kn}{import} \PYG{n}{RankingsFusionDigraph}

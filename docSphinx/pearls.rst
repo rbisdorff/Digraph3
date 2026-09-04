@@ -17,8 +17,8 @@
          cautionBgColor={named}{LightCyan}}
 
 .. meta::
-   :description: Documentation of the Digraph3 collection of python3 modules for fair and accountable algorithmic decision theory
-   :keywords: Algorithmic Decision Theory, Fair and Accountable Algorithms, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Support, Bipolar-valued Epistemic Logic
+   :description: Documentation of the Digraph3 collection of python3 modules for fair and justifiable algorithmic decision theory
+   :keywords: Algorithmic Decision Theory, Fair and Justifiable Algorithms, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Support, Bipolar-valued Epistemic Logic
 
 .. _Advanced-Topics-label:
 
