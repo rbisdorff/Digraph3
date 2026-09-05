@@ -4726,7 +4726,7 @@ When a given strict outranking digraph shows chordless circuits it may however b
 Suitable first and last choice recommendations
 ..............................................
 
-Now, weak Condorcet winners and losers verify the same pragmatic principles as initial and terminal prekernels. Hence they deliver similar first and last choice recommendations. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts therefore the '*CondorcetWinners*' argument for showing positive weak Condorcet winners as first choice and positive weak Condorcet losers as last choice recommendation as shown in :numref:`CondorcetWinners3` below.
+Now, weak Condorcet winners and losers verify the same pragmatic first choice principles as initial and terminal prekernels [31]_. Hence they may deliver similar first and last choice recommendations. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts therefore the '*CondorcetWinners*' argument for showing positive weak Condorcet winners as first choice and positive weak Condorcet losers as last choice recommendation as shown in :numref:`CondorcetWinners3` below.
 
 .. code-block:: pycon
    :caption: Showing first and last choice recommendations from weak Condorcet winners bpv-set
@@ -5991,6 +5991,8 @@ Appendix
 .. [29] See :ref:`Rubis-Tutorial-label`
 
 .. [30] See :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method.
+
+.. [31] See :ref:`Pragmatic-Principles--label`
 
 .. raw:: latex
 

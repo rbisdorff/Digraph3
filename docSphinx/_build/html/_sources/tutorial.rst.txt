@@ -1522,6 +1522,8 @@ We may hence compute a strict outranking digraph *gcd* with the *codual transfor
 
 We observe in the resulting strict outranking digraph *gcd* 10 valid strict outranking situations (see Line 8) on which we are going to focus our search for a best choice recommendation. 
 
+.. _Pragmatic-Principles--label:
+
 Designing a best choice recommender system
 ``````````````````````````````````````````
 
