@@ -67,7 +67,7 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{September 04, 2026}
+\date{September 05, 2026}
 \release{3.14.7}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -6254,14 +6254,21 @@ The disjunctive and conjunctive epistemic fusions of two bpv\sphinxhyphen{}sets 
 In \hyperref[\detokenize{pearls:bipolarvaluedsets4}]{Listing \ref{\detokenize{pearls:bipolarvaluedsets4}}} below we illustrate the disjunctive and conjunctive fusion operators.
 \sphinxSetupCaptionForVerbatim{Disjunctive and conjunctive fusion of bpv\sphinxhyphen{}sets}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:bipolarvaluedsets4}}}
-\fvset{hllines={, 3, 6,}}%
+\fvset{hllines={, 4, 7, 10, 13,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{.}\PYG{n}{ovee}\PYG{p}{(}\PYG{n}{Y}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{bipolarValuedSets} \PYG{k+kn}{import} \PYG{n}{RandomBpvSet}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{X} \PYG{o}{=} \PYG{n}{RandomBpvSet}\PYG{p}{(}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{X}\PYG{o}{.}\PYG{n}{showMembershipCharaceristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+go}{  x1:\PYGZhy{}0.7313, x2:+0.6949, x3:+0.5275, x4:\PYGZhy{}0.4899, x5:+0.0000}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{Y} \PYG{o}{=} \PYG{n}{RandomBpvSet}\PYG{p}{(}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{2}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{Y}\PYG{o}{.}\PYG{n}{showMembershipCharaceristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+go}{  x1:+0.9121, x2:+0.8957, x3:\PYGZhy{}0.8869, x4:\PYGZhy{}0.8303, x5:+0.6710}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{.}\PYG{n}{ovee}\PYG{p}{(}\PYG{n}{Y}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
 \PYG{g+go}{ \PYGZsh{} disjunctive epistemic fusion \PYGZhy{}}
-\PYG{g+go}{  s2:+0.8957, s2:+0.6710, s1:+0.0000, s3:+0.0000, s4:\PYGZhy{}0.8303}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{.}\PYG{n}{owedge}\PYG{p}{(}\PYG{n}{Y}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{  x1:+0.0000, x2:+0.8957, x3:+0.0000, x4:\PYGZhy{}0.8303, x5:+0.6710}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{.}\PYG{n}{owedge}\PYG{p}{(}\PYG{n}{Y}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
 \PYG{g+go}{ \PYGZsh{} conjunctive epistemic fusion \PYGZhy{}}
-\PYG{g+go}{  s2:+0.6949, s5:+0.6710, s1:+0.0000, s3:+0.0000, s4:\PYGZhy{}0.4899}
+\PYG{g+go}{  x1:+0.0000, x2:+0.6949, x3:+0.0000, x4:\PYGZhy{}0.4899, x5:+0.6710}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
 
@@ -6272,23 +6279,29 @@ Due to the commutativity and idempotency of the numerical binary \sphinxstyleemp
 Let \(\mathcal{S}(A)\) denote the set of all possible bpv\sphinxhyphen{}sets that may be defined on a given finite set \sphinxstyleemphasis{A} of dimension \sphinxstyleemphasis{n}. Let \(\bf{0} \in \mathcal{S}(A)\)  denote the completely indeterminate bpv\sphinxhyphen{}set, i.e \(r(a \in \bf{0}) \;=\; 0.0 , \; \forall \,a \in\, A\). It is worthwhile noticing that bpv\sphinxhyphen{}set \(\bf{0}\) is a \sphinxstylestrong{neutral} element of the \($ \textcircled{$\vee$} $\) and the \($ \textcircled{$\wedge$} $\) operator. For any bpv\sphinxhyphen{}subset of \sphinxstyleemphasis{A}, the corresponding polarised \textendash{}fully determined\textendash{} crisp subset is an \sphinxstylestrong{absorbent} element of the \($ \textcircled{$\vee$} $\) and a \sphinxstylestrong{neutral} element of the \($ \textcircled{$\wedge$} $\) operator. And, the minimal precision valued polarised bpv\sphinxhyphen{}set is a \sphinxstylestrong{neutral} element of the \($ \textcircled{$\vee$} $\) operator and an \sphinxstylestrong{absorbent} element of the \($ \textcircled{$\wedge$} $\) operator.
 \sphinxSetupCaptionForVerbatim{Neutral and absorbent bpv\sphinxhyphen{}sets}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:bipolarvaluedsets5}}}
-\fvset{hllines={, 2, 3, 5, 7, 9, 11, 13, 15,}}%
+\fvset{hllines={, 2, 3, 5, 6, 8, 9, 11, 13, 15, 17, 19, 21,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{O} \PYG{o}{=} \PYG{n}{RandomBpvSet}\PYG{p}{(}\PYG{n}{indeterminateness}\PYG{o}{=}\PYG{l+m+mf}{1.0}\PYG{p}{,}\PYG{n}{elementNamePrefix}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{s}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{O} \PYG{o}{=} \PYG{n}{RandomBpvSet}\PYG{p}{(}\PYG{n}{indeterminateness}\PYG{o}{=}\PYG{l+m+mf}{1.0}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{O}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+go}{ x1:+0.0000, x2:+0.0000, x3:+0.0000, x4:+0.0000, x5:+0.0000}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{Xp} \PYG{o}{=} \PYG{n}{X}\PYG{o}{.}\PYG{n}{polarise}\PYG{p}{(}\PYG{n}{InSite}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{Xp}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+go}{ x1:\PYGZhy{}1.0000, x2:+1.0000, x3:+1.0000, x4:\PYGZhy{}1.0000, x5:+0.0000}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{Xm} \PYG{o}{=} \PYG{n}{X}\PYG{o}{.}\PYG{n}{polarise}\PYG{p}{(}\PYG{n}{MinimalValues}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}\PYG{n}{InSite}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{.}\PYG{n}{ovee}\PYG{p}{(}\PYG{n}{O}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ s2:+0.6949, s3:+0.5275, s5:+0.0000, s4:\PYGZhy{}0.4899, s1:\PYGZhy{}0.7313}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{.}\PYG{n}{ovee}\PYG{p}{(}\PYG{n}{Xp}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ s2:+1.0000, s3:+1.0000, s5:+0.0000, s4:\PYGZhy{}1.0000, s1:\PYGZhy{}1.0000}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{.}\PYG{n}{ovee}\PYG{p}{(}\PYG{n}{Xm}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ s2:+0.6949, s3:+0.5275, s5:+0.0000, s4:\PYGZhy{}0.4899, s1:\PYGZhy{}0.7313}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{.}\PYG{n}{owedge}\PYG{p}{(}\PYG{n}{O}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ s2:+0.6949, s3:+0.5275, s5:+0.0000, s4:\PYGZhy{}0.4899, s1:\PYGZhy{}0.7313}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{.}\PYG{n}{owedge}\PYG{p}{(}\PYG{n}{Xp}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ s2:+0.6949, s3:+0.5275, s5:+0.0000, s4:\PYGZhy{}0.4899, s1:\PYGZhy{}0.7313}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{.}\PYG{n}{owedge}\PYG{p}{(}\PYG{n}{Xm}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ s2:+0.0001, s3:+0.0001, s5:+0.0000, s4:\PYGZhy{}0.0001, s1:\PYGZhy{}0.0001}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{Xm}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+go}{ x1:\PYGZhy{}0.0001, x2:+0.0001, x3:+0.0001, x4:\PYGZhy{}0.0001, x5:+0.0000}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{.}\PYG{n}{ovee}\PYG{p}{(}\PYG{n}{O}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+go}{ x1:\PYGZhy{}0.7313, x2:+0.6949, x3:+0.5275, x4:\PYGZhy{}0.4899, x5:+0.0000}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{.}\PYG{n}{ovee}\PYG{p}{(}\PYG{n}{Xp}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+go}{ x1:\PYGZhy{}1.0000, x2:+1.0000, x3:+1.0000, x4:\PYGZhy{}1.0000, x5:+0.0000}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{.}\PYG{n}{ovee}\PYG{p}{(}\PYG{n}{Xm}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+go}{ x1:\PYGZhy{}0.7313, x2:+0.6949, x3:+0.5275, x4:\PYGZhy{}0.4899, x5:+0.0000}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{.}\PYG{n}{owedge}\PYG{p}{(}\PYG{n}{O}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+go}{ x1:\PYGZhy{}0.7313, x2:+0.6949, x3:+0.5275, x4:\PYGZhy{}0.4899, x5:+0.0000}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{.}\PYG{n}{owedge}\PYG{p}{(}\PYG{n}{Xp}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+go}{ x1:\PYGZhy{}0.7313, x2:+0.6949, x3:+0.5275, x4:\PYGZhy{}0.4899, x5:+0.0000}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{.}\PYG{n}{owedge}\PYG{p}{(}\PYG{n}{Xm}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+go}{ x1:\PYGZhy{}0.0001, x2:+0.0001, x3:+0.0001, x4:\PYGZhy{}0.0001, x5:+0.0000}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
 
@@ -6302,9 +6315,9 @@ To every bpv\sphinxhyphen{}set \(X \in \mathcal{S}(A)\) we may associate its neg
 \fvset{hllines={, 2, 4,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{.}\PYG{n}{ovee}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{X}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ s1:+0.0000, s2:+0.0000, s3:+0.0000, s4:+0.0000, s5:+0.0000}
+\PYG{g+go}{ x1:+0.0000, x2:+0.0000, x3:+0.0000, x4:+0.0000, x5:+0.0000}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{.}\PYG{n}{owedge}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{X}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ s1:+0.0000, s2:+0.0000, s3:+0.0000, s4:+0.0000, s5:+0.0000}
+\PYG{g+go}{ x1:+0.0000, x2:+0.0000, x3:+0.0000, x4:+0.0000, x5:+0.0000}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
 
@@ -6315,18 +6328,18 @@ The epistemic fusion operators induce furthermore on \(\mathcal{S}(A)\) a partia
 \fvset{hllines={, 1, 7, 8, 14,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{.}\PYG{n}{isSharper}\PYG{p}{(}\PYG{n}{O}\PYG{p}{,}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
-\PYG{g+go}{  s1 \PYGZhy{}0.7313  0.0000}
-\PYG{g+go}{  s2  0.6949  0.0000}
-\PYG{g+go}{  s3  0.5275  0.0000}
-\PYG{g+go}{  s4 \PYGZhy{}0.4899  0.0000}
-\PYG{g+go}{  s5  0.0000  0.0000}
+\PYG{g+go}{  x1 \PYGZhy{}0.7313  0.0000}
+\PYG{g+go}{  x2  0.6949  0.0000}
+\PYG{g+go}{  x3  0.5275  0.0000}
+\PYG{g+go}{  x4 \PYGZhy{}0.4899  0.0000}
+\PYG{g+go}{  x5  0.0000  0.0000}
 \PYG{g+go}{ True}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{Xp}\PYG{o}{.}\PYG{n}{isSharper}\PYG{p}{(}\PYG{n}{X}\PYG{p}{,}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
-\PYG{g+go}{  s1 \PYGZhy{}1.0000 \PYGZhy{}0.7313}
-\PYG{g+go}{  s2  1.0000  0.6949}
-\PYG{g+go}{  s3  1.0000  0.5275}
-\PYG{g+go}{  s4 \PYGZhy{}1.0000 \PYGZhy{}0.4899}
-\PYG{g+go}{  s5  0.0000  0.0000}
+\PYG{g+go}{  x1 \PYGZhy{}1.0000 \PYGZhy{}0.7313}
+\PYG{g+go}{  x2  1.0000  0.6949}
+\PYG{g+go}{  x3  1.0000  0.5275}
+\PYG{g+go}{  x4 \PYGZhy{}1.0000 \PYGZhy{}0.4899}
+\PYG{g+go}{  x5  0.0000  0.0000}
 \PYG{g+go}{ True}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
