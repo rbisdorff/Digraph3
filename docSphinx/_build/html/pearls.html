@@ -4401,12 +4401,19 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>In <a class="reference internal" href="#bipolarvaluedsets4"><span class="std std-numref">Listing 3.59</span></a> below we illustrate the disjunctive and conjunctive fusion operators.</p>
 <div class="literal-block-wrapper docutils container" id="bipolarvaluedsets4">
 <div class="code-block-caption"><span class="caption-number">Listing 3.59 </span><span class="caption-text">Disjunctive and conjunctive fusion of bpv-sets</span><a class="headerlink" href="#bipolarvaluedsets4" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">ovee</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="linenos">2</span><span class="go"> # disjunctive epistemic fusion -</span>
-<span class="hll"><span class="linenos">3</span><span class="go">  s2:+0.8957, s2:+0.6710, s1:+0.0000, s3:+0.0000, s4:-0.8303</span>
-</span><span class="linenos">4</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">owedge</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="linenos">5</span><span class="go"> # conjunctive epistemic fusion -</span>
-<span class="hll"><span class="linenos">6</span><span class="go">  s2:+0.6949, s5:+0.6710, s1:+0.0000, s3:+0.0000, s4:-0.4899</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bipolarValuedSets</span> <span class="kn">import</span> <span class="n">RandomBpvSet</span>
+<span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">RandomBpvSet</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">showMembershipCharaceristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="hll"><span class="linenos"> 4</span><span class="go">  x1:-0.7313, x2:+0.6949, x3:+0.5275, x4:-0.4899, x5:+0.0000</span>
+</span><span class="linenos"> 5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="n">RandomBpvSet</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="linenos"> 6</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span><span class="o">.</span><span class="n">showMembershipCharaceristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="hll"><span class="linenos"> 7</span><span class="go">  x1:+0.9121, x2:+0.8957, x3:-0.8869, x4:-0.8303, x5:+0.6710</span>
+</span><span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">ovee</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos"> 9</span><span class="go"> # disjunctive epistemic fusion -</span>
+<span class="hll"><span class="linenos">10</span><span class="go">  x1:+0.0000, x2:+0.8957, x3:+0.0000, x4:-0.8303, x5:+0.6710</span>
+</span><span class="linenos">11</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">owedge</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos">12</span><span class="go"> # conjunctive epistemic fusion -</span>
+<span class="hll"><span class="linenos">13</span><span class="go">  x1:+0.0000, x2:+0.6949, x3:+0.0000, x4:-0.4899, x5:+0.6710</span>
 </span></pre></div>
 </div>
 </div>
@@ -4414,21 +4421,27 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>Let <img class="math" src="_images/math/670c1a35fcd5cab5e00e9981d740edc44b3b0564.png" alt="\mathcal{S}(A)"/> denote the set of all possible bpv-sets that may be defined on a given finite set <em>A</em> of dimension <em>n</em>. Let <img class="math" src="_images/math/d2a7a9134ffce7190d7bdf8f97da83114ae3575d.png" alt="\bf{0} \in \mathcal{S}(A)"/>  denote the completely indeterminate bpv-set, i.e <img class="math" src="_images/math/e2030ac3f8bc140abe7943ebaa04eb469d93f77a.png" alt="r(a \in \bf{0}) \;=\; 0.0 , \; \forall \,a \in\, A"/>. It is worthwhile noticing that bpv-set <img class="math" src="_images/math/9f6c3c1fccc6aedeaba5d79feb369ec59a1114dd.png" alt="\bf{0}"/> is a <strong>neutral</strong> element of the <img class="math" src="_images/math/0a30c304d7411a5cfe3ccef0630cfd9f06e61a47.png" alt="$ \textcircled{$\vee$} $"/> and the <img class="math" src="_images/math/01a8ce82461e4f826bfb8b68afbe7a05fdc8899f.png" alt="$ \textcircled{$\wedge$} $"/> operator. For any bpv-subset of <em>A</em>, the corresponding polarised –fully determined– crisp subset is an <strong>absorbent</strong> element of the <img class="math" src="_images/math/0a30c304d7411a5cfe3ccef0630cfd9f06e61a47.png" alt="$ \textcircled{$\vee$} $"/> and a <strong>neutral</strong> element of the <img class="math" src="_images/math/01a8ce82461e4f826bfb8b68afbe7a05fdc8899f.png" alt="$ \textcircled{$\wedge$} $"/> operator. And, the minimal precision valued polarised bpv-set is a <strong>neutral</strong> element of the <img class="math" src="_images/math/0a30c304d7411a5cfe3ccef0630cfd9f06e61a47.png" alt="$ \textcircled{$\vee$} $"/> operator and an <strong>absorbent</strong> element of the <img class="math" src="_images/math/01a8ce82461e4f826bfb8b68afbe7a05fdc8899f.png" alt="$ \textcircled{$\wedge$} $"/> operator.</p>
 <div class="literal-block-wrapper docutils container" id="bipolarvaluedsets5">
 <div class="code-block-caption"><span class="caption-number">Listing 3.60 </span><span class="caption-text">Neutral and absorbent bpv-sets</span><a class="headerlink" href="#bipolarvaluedsets5" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">O</span> <span class="o">=</span> <span class="n">RandomBpvSet</span><span class="p">(</span><span class="n">indeterminateness</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">elementNamePrefix</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
-<span class="hll"><span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Xp</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">polarise</span><span class="p">(</span><span class="n">InSite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span class="hll"><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Xm</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">polarise</span><span class="p">(</span><span class="n">MinimalValues</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">InSite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span class="linenos"> 4</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">ovee</span><span class="p">(</span><span class="n">O</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="hll"><span class="linenos"> 5</span><span class="go"> s2:+0.6949, s3:+0.5275, s5:+0.0000, s4:-0.4899, s1:-0.7313</span>
-</span><span class="linenos"> 6</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">ovee</span><span class="p">(</span><span class="n">Xp</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="hll"><span class="linenos"> 7</span><span class="go"> s2:+1.0000, s3:+1.0000, s5:+0.0000, s4:-1.0000, s1:-1.0000</span>
-</span><span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">ovee</span><span class="p">(</span><span class="n">Xm</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="hll"><span class="linenos"> 9</span><span class="go"> s2:+0.6949, s3:+0.5275, s5:+0.0000, s4:-0.4899, s1:-0.7313</span>
-</span><span class="linenos">10</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">owedge</span><span class="p">(</span><span class="n">O</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="hll"><span class="linenos">11</span><span class="go"> s2:+0.6949, s3:+0.5275, s5:+0.0000, s4:-0.4899, s1:-0.7313</span>
-</span><span class="linenos">12</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">owedge</span><span class="p">(</span><span class="n">Xp</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="hll"><span class="linenos">13</span><span class="go"> s2:+0.6949, s3:+0.5275, s5:+0.0000, s4:-0.4899, s1:-0.7313</span>
-</span><span class="linenos">14</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">owedge</span><span class="p">(</span><span class="n">Xm</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="hll"><span class="linenos">15</span><span class="go"> s2:+0.0001, s3:+0.0001, s5:+0.0000, s4:-0.0001, s1:-0.0001</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">O</span> <span class="o">=</span> <span class="n">RandomBpvSet</span><span class="p">(</span><span class="n">indeterminateness</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="hll"><span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">O</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos"> 3</span><span class="go"> x1:+0.0000, x2:+0.0000, x3:+0.0000, x4:+0.0000, x5:+0.0000</span>
+</span><span class="linenos"> 4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Xp</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">polarise</span><span class="p">(</span><span class="n">InSite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="hll"><span class="linenos"> 5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Xp</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos"> 6</span><span class="go"> x1:-1.0000, x2:+1.0000, x3:+1.0000, x4:-1.0000, x5:+0.0000</span>
+</span><span class="linenos"> 7</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Xm</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">polarise</span><span class="p">(</span><span class="n">MinimalValues</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">InSite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="hll"><span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Xm</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos"> 9</span><span class="go"> x1:-0.0001, x2:+0.0001, x3:+0.0001, x4:-0.0001, x5:+0.0000</span>
+</span><span class="linenos">10</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">ovee</span><span class="p">(</span><span class="n">O</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="hll"><span class="linenos">11</span><span class="go"> x1:-0.7313, x2:+0.6949, x3:+0.5275, x4:-0.4899, x5:+0.0000</span>
+</span><span class="linenos">12</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">ovee</span><span class="p">(</span><span class="n">Xp</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="hll"><span class="linenos">13</span><span class="go"> x1:-1.0000, x2:+1.0000, x3:+1.0000, x4:-1.0000, x5:+0.0000</span>
+</span><span class="linenos">14</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">ovee</span><span class="p">(</span><span class="n">Xm</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="hll"><span class="linenos">15</span><span class="go"> x1:-0.7313, x2:+0.6949, x3:+0.5275, x4:-0.4899, x5:+0.0000</span>
+</span><span class="linenos">16</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">owedge</span><span class="p">(</span><span class="n">O</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="hll"><span class="linenos">17</span><span class="go"> x1:-0.7313, x2:+0.6949, x3:+0.5275, x4:-0.4899, x5:+0.0000</span>
+</span><span class="linenos">18</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">owedge</span><span class="p">(</span><span class="n">Xp</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="hll"><span class="linenos">19</span><span class="go"> x1:-0.7313, x2:+0.6949, x3:+0.5275, x4:-0.4899, x5:+0.0000</span>
+</span><span class="linenos">20</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">owedge</span><span class="p">(</span><span class="n">Xm</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="hll"><span class="linenos">21</span><span class="go"> x1:-0.0001, x2:+0.0001, x3:+0.0001, x4:-0.0001, x5:+0.0000</span>
 </span></pre></div>
 </div>
 </div>
@@ -4437,9 +4450,9 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <div class="literal-block-wrapper docutils container" id="bipolarvaluedsets6">
 <div class="code-block-caption"><span class="caption-number">Listing 3.61 </span><span class="caption-text">Dual bpv-sets</span><a class="headerlink" href="#bipolarvaluedsets6" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">ovee</span><span class="p">(</span><span class="o">-</span><span class="n">X</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="hll"><span class="linenos">2</span><span class="go"> s1:+0.0000, s2:+0.0000, s3:+0.0000, s4:+0.0000, s5:+0.0000</span>
+<span class="hll"><span class="linenos">2</span><span class="go"> x1:+0.0000, x2:+0.0000, x3:+0.0000, x4:+0.0000, x5:+0.0000</span>
 </span><span class="linenos">3</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">owedge</span><span class="p">(</span><span class="o">-</span><span class="n">X</span><span class="p">))</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="hll"><span class="linenos">4</span><span class="go"> s1:+0.0000, s2:+0.0000, s3:+0.0000, s4:+0.0000, s5:+0.0000</span>
+<span class="hll"><span class="linenos">4</span><span class="go"> x1:+0.0000, x2:+0.0000, x3:+0.0000, x4:+0.0000, x5:+0.0000</span>
 </span></pre></div>
 </div>
 </div>
@@ -4447,18 +4460,18 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <div class="literal-block-wrapper docutils container" id="bipolarvaluedsets7">
 <div class="code-block-caption"><span class="caption-number">Listing 3.62 </span><span class="caption-text">The sharpness ordering of bpv-sets</span><a class="headerlink" href="#bipolarvaluedsets7" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">isSharper</span><span class="p">(</span><span class="n">O</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span class="linenos"> 2</span><span class="go">  s1 -0.7313  0.0000</span>
-<span class="linenos"> 3</span><span class="go">  s2  0.6949  0.0000</span>
-<span class="linenos"> 4</span><span class="go">  s3  0.5275  0.0000</span>
-<span class="linenos"> 5</span><span class="go">  s4 -0.4899  0.0000</span>
-<span class="linenos"> 6</span><span class="go">  s5  0.0000  0.0000</span>
+</span><span class="linenos"> 2</span><span class="go">  x1 -0.7313  0.0000</span>
+<span class="linenos"> 3</span><span class="go">  x2  0.6949  0.0000</span>
+<span class="linenos"> 4</span><span class="go">  x3  0.5275  0.0000</span>
+<span class="linenos"> 5</span><span class="go">  x4 -0.4899  0.0000</span>
+<span class="linenos"> 6</span><span class="go">  x5  0.0000  0.0000</span>
 <span class="hll"><span class="linenos"> 7</span><span class="go"> True</span>
 </span><span class="hll"><span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Xp</span><span class="o">.</span><span class="n">isSharper</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span class="linenos"> 9</span><span class="go">  s1 -1.0000 -0.7313</span>
-<span class="linenos">10</span><span class="go">  s2  1.0000  0.6949</span>
-<span class="linenos">11</span><span class="go">  s3  1.0000  0.5275</span>
-<span class="linenos">12</span><span class="go">  s4 -1.0000 -0.4899</span>
-<span class="linenos">13</span><span class="go">  s5  0.0000  0.0000</span>
+</span><span class="linenos"> 9</span><span class="go">  x1 -1.0000 -0.7313</span>
+<span class="linenos">10</span><span class="go">  x2  1.0000  0.6949</span>
+<span class="linenos">11</span><span class="go">  x3  1.0000  0.5275</span>
+<span class="linenos">12</span><span class="go">  x4 -1.0000 -0.4899</span>
+<span class="linenos">13</span><span class="go">  x5  0.0000  0.0000</span>
 <span class="hll"><span class="linenos">14</span><span class="go"> True</span>
 </span></pre></div>
 </div>
@@ -5754,7 +5767,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Sep 04, 2026.
+      <span class="lastupdated">Last updated on Sep 05, 2026.
       </span></p>
   </div>
 

@@ -150,9 +150,11 @@ class BpvSet(object):
             self.cardinality = self.computeCardinality()
             self.determinateness = self.computeDeterminateness()
 
-    def showMembershipCharacteristics(self,ndigits=None,Normalized=False):
+    def showMembershipCharacteristics(self,ndigits=None,
+                                      Normalized=False,Sorted=True):
         """
-        When *Normalized*, the charactritic values are recoded into the [-1,1] range
+        When *Normalized*, the charactritic values are recoded into the [-1,1] range.
+        When *Sorted=True*, the elements are shown in decreasing order of the characteristic values.
         """
         from digraphsTools import scoredTuplesSort
         if Normalized:
@@ -169,7 +171,8 @@ class BpvSet(object):
             ndigits = self.ndigits
         formatString = '  %%s:  %%+ .%df' % (ndigits)
         characteristics = [(membership[x],x) for x in items]
-        scoredTuplesSort(characteristics,reverse=True)
+        if Sorted:
+            scoredTuplesSort(characteristics,reverse=True)
         #print(characteristics)
         for it in characteristics:
             #print(it)
@@ -510,7 +513,7 @@ class BpvSet(object):
         diff.cardinality = diff.computeCardinality()
         return diff
 
-    def ovee(self,other,/):
+    def ovee(self,other,Debug=False):
         """
         Returns the disjunctive fusion of self and other
         """
@@ -525,13 +528,15 @@ class BpvSet(object):
 
         # union of the supports
         for it in newSelf.support:
-            #print(it)
             if it not in fusion.support:
                 fusion.support[it] = newSelf.support[it]
+                if Debug:
+                    print(it,'added')
         for it in newOther.support:
-            #print(it)
             if it not in fusion.support:
                 fusion.support[it] = newOther.support[it]
+                if Debug:
+                    print(it,'added')
 
         membership = {}
         Min = fusion.valuationDomain['min']

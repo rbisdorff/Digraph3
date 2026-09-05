@@ -4573,14 +4573,21 @@ In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunct
    :caption: Disjunctive and conjunctive fusion of bpv-sets
    :name: bipolarValuedSets4
    :linenos:
-   :emphasize-lines: 3,6
- 
-   >>> (X.ovee(Y)).showMembershipCharacteristics()
+   :emphasize-lines: 4,7,10,13
+
+   >>> from bipolarValuedSets import RandomBpvSet
+   >>> X = RandomBpvSet(seed=1)
+   >>> X.showMembershipCharaceristics(Sorted=False)
+     x1:-0.7313, x2:+0.6949, x3:+0.5275, x4:-0.4899, x5:+0.0000
+   >>> Y = RandomBpvSet(seed=2)
+   >>> Y.showMembershipCharaceristics(Sorted=False)
+     x1:+0.9121, x2:+0.8957, x3:-0.8869, x4:-0.8303, x5:+0.6710
+   >>> (X.ovee(Y)).showMembershipCharacteristics(Sorted=False)
     # disjunctive epistemic fusion -
-     s2:+0.8957, s2:+0.6710, s1:+0.0000, s3:+0.0000, s4:-0.8303
-   >>> (X.owedge(Y)).showMembershipCharacteristics()
+     x1:+0.0000, x2:+0.8957, x3:+0.0000, x4:-0.8303, x5:+0.6710
+   >>> (X.owedge(Y)).showMembershipCharacteristics(Sorted=False)
     # conjunctive epistemic fusion -  
-     s2:+0.6949, s5:+0.6710, s1:+0.0000, s3:+0.0000, s4:-0.4899
+     x1:+0.0000, x2:+0.6949, x3:+0.0000, x4:-0.4899, x5:+0.6710
 
 Due to the commutativity and idempotency of the numerical binary *max* and *min* operators, both :math:`$ \textcircled{$\vee$} $` and :math:`$ \textcircled{$\wedge$} $` operators are **commutative** and **idempotent**. Mind however, that similarly to a mean or average operator, both epistemic fusion operators are not associative. In order to render results univocal, all positive and negative arguments are considered separately and both intermediate results are further processed as two single arguments.  
 
@@ -4590,23 +4597,29 @@ Let :math:`\mathcal{S}(A)` denote the set of all possible bpv-sets that may be d
    :caption: Neutral and absorbent bpv-sets
    :name: bipolarValuedSets5
    :linenos:
-   :emphasize-lines: 2-3,5,7,9,11,13,15
+   :emphasize-lines: 2-3,5-6,8-9,11,13,15,17,19,21
 
-   >>> O = RandomBpvSet(indeterminateness=1.0,elementNamePrefix='s')
+   >>> O = RandomBpvSet(indeterminateness=1.0)
+   >>> O.showMembershipCharacteristics(Sorted=False)
+    x1:+0.0000, x2:+0.0000, x3:+0.0000, x4:+0.0000, x5:+0.0000
    >>> Xp = X.polarise(InSite=False)
+   >>> Xp.showMembershipCharacteristics(Sorted=False)
+    x1:-1.0000, x2:+1.0000, x3:+1.0000, x4:-1.0000, x5:+0.0000
    >>> Xm = X.polarise(MinimalValues=True,InSite=False)
-   >>> (X.ovee(O)).showMembershipCharacteristics()
-    s2:+0.6949, s3:+0.5275, s5:+0.0000, s4:-0.4899, s1:-0.7313
-   >>> (X.ovee(Xp)).showMembershipCharacteristics()
-    s2:+1.0000, s3:+1.0000, s5:+0.0000, s4:-1.0000, s1:-1.0000
-   >>> (X.ovee(Xm)).showMembershipCharacteristics()
-    s2:+0.6949, s3:+0.5275, s5:+0.0000, s4:-0.4899, s1:-0.7313
-   >>> (X.owedge(O)).showMembershipCharacteristics()
-    s2:+0.6949, s3:+0.5275, s5:+0.0000, s4:-0.4899, s1:-0.7313
-   >>> (X.owedge(Xp)).showMembershipCharacteristics()
-    s2:+0.6949, s3:+0.5275, s5:+0.0000, s4:-0.4899, s1:-0.7313
-   >>> (X.owedge(Xm)).showMembershipCharacteristics()
-    s2:+0.0001, s3:+0.0001, s5:+0.0000, s4:-0.0001, s1:-0.0001
+   >>> Xm.showMembershipCharacteristics(Sorted=False)
+    x1:-0.0001, x2:+0.0001, x3:+0.0001, x4:-0.0001, x5:+0.0000
+   >>> (X.ovee(O)).showMembershipCharacteristics(Sorted=False)
+    x1:-0.7313, x2:+0.6949, x3:+0.5275, x4:-0.4899, x5:+0.0000
+   >>> (X.ovee(Xp)).showMembershipCharacteristics(Sorted=False)
+    x1:-1.0000, x2:+1.0000, x3:+1.0000, x4:-1.0000, x5:+0.0000
+   >>> (X.ovee(Xm)).showMembershipCharacteristics(Sorted=False)
+    x1:-0.7313, x2:+0.6949, x3:+0.5275, x4:-0.4899, x5:+0.0000
+   >>> (X.owedge(O)).showMembershipCharacteristics(Sorted=False)
+    x1:-0.7313, x2:+0.6949, x3:+0.5275, x4:-0.4899, x5:+0.0000
+   >>> (X.owedge(Xp)).showMembershipCharacteristics(Sorted=False)
+    x1:-0.7313, x2:+0.6949, x3:+0.5275, x4:-0.4899, x5:+0.0000
+   >>> (X.owedge(Xm)).showMembershipCharacteristics(Sorted=False)
+    x1:-0.0001, x2:+0.0001, x3:+0.0001, x4:-0.0001, x5:+0.0000
 
 Remarkable is the fact that a 0.0 characteristic value does not count as minimal positive and maximal negative value. Its epistemic value is in fact **indeterminate**, i.e. it may be any possible value from -1.0 to +1.0.
 
@@ -4619,9 +4632,9 @@ To every bpv-set :math:`X \in \mathcal{S}(A)` we may associate its negated --dua
    :emphasize-lines: 2,4
 
    >>> (X.ovee(-X)).showMembershipCharacteristics()
-    s1:+0.0000, s2:+0.0000, s3:+0.0000, s4:+0.0000, s5:+0.0000
+    x1:+0.0000, x2:+0.0000, x3:+0.0000, x4:+0.0000, x5:+0.0000
    >>> (X.owedge(-X)).showMembershipCharacteristics()
-    s1:+0.0000, s2:+0.0000, s3:+0.0000, s4:+0.0000, s5:+0.0000
+    x1:+0.0000, x2:+0.0000, x3:+0.0000, x4:+0.0000, x5:+0.0000
 
 The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a partial **sharpness** ordering denoted :math:`\succcurlyeq` and defined as follows. Let *X* and *Y* be two bpv-sets in :math:`\mathcal{S}(A)`. We say that :math:`X \,\succcurlyeq\, Y` when :math:`\forall a \in A` either :math:`r(a \in X) \leqslant r(a \in Y) \leqslant 0.0` or, :math:`0.0 \leqslant r(a \in Y) \leqslant r(a \in X)`. If *X* and *Y* are bpv-sets of a same crisp subset, it follows for instance that :math:`(X  $ \textcircled{$\vee$} $ Y) \,\succcurlyeq\,(X $ \textcircled{$\wedge$} $ Y)`. Minimal sharp is the bpv-set :math:`\bf{0}`. Maximal sharp are all :math:`2^n` completely determined --crisp-- subsets of the support set *A*. 
 
@@ -4632,18 +4645,18 @@ The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a pa
    :emphasize-lines: 1,7,8,14
 
    >>> (X.isSharper(O,Comments=True)
-     s1 -0.7313  0.0000
-     s2  0.6949  0.0000
-     s3  0.5275  0.0000
-     s4 -0.4899  0.0000
-     s5  0.0000  0.0000
+     x1 -0.7313  0.0000
+     x2  0.6949  0.0000
+     x3  0.5275  0.0000
+     x4 -0.4899  0.0000
+     x5  0.0000  0.0000
     True
    >>> Xp.isSharper(X,Comments=True)
-     s1 -1.0000 -0.7313
-     s2  1.0000  0.6949
-     s3  1.0000  0.5275
-     s4 -1.0000 -0.4899
-     s5  0.0000  0.0000
+     x1 -1.0000 -0.7313
+     x2  1.0000  0.6949
+     x3  1.0000  0.5275
+     x4 -1.0000 -0.4899
+     x5  0.0000  0.0000
     True
 
 .. note::
