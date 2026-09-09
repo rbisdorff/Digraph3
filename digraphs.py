@@ -8403,10 +8403,31 @@ class Digraph(object):
         else:
             return med
 
+##    def inner_prod(self, v1, v2):
+##        """
+##        Parameters: two choice characteristic vectors
+##        Renders the inner product with guarded 0.0 characteristic of two characteristic vectors.
+##        """
+##        Min = Decimal(str(self.valuationdomain['min']))
+##        Med = Decimal(str(self.valuationdomain['med']))
+##        res = Min
+##        for i in range(len(v1)):
+##            if v1[i] == Med:
+##                omin = v2[i]
+##            elif v2[i] == Med:
+##                omin = v1[i]
+##            else:
+##                omin = min(v1[i],v2[i])
+##            if res == Med:
+##                res = omin
+##            elif omin != Med:
+##                res = max(res, omin)
+##        return res
+
     def inner_prod(self, v1, v2):
         """
         Parameters: two choice characteristic vectors
-        Renders the inner product of two characteristic vetors.
+        Renders the inner product of two characteristic vectors.
         """
         res = Decimal(str(self.valuationdomain['min']))
         for i in range(len(v1)):
@@ -8946,7 +8967,7 @@ class Digraph(object):
         self.showBestChoiceRecommendation(**kwargs)
 
     def showChoiceRecommendation(self,
-                                method='Bachet',
+                                method='condorcetWinners',
                                 Polarised=True,
                                 randomized=100,
                                 maxNbrOfRankings=5,
@@ -8961,8 +8982,8 @@ class Digraph(object):
                                 randomActionsList=False,
                                  # IteratedCondorcetWinners
                                 ReturnRanking=False,
-                                 Show=True,
-                                 Average=False,
+                                Show=True,
+                                Average=False,
                                  ):
         """
         Generic choice recommender method.

@@ -9025,12 +9025,33 @@
             <span class="k">return</span> <span class="n">med</span></div>
 
 
+<span class="c1">##    def inner_prod(self, v1, v2):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Parameters: two choice characteristic vectors</span>
+<span class="c1">##        Renders the inner product with guarded 0.0 characteristic of two characteristic vectors.</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Min = Decimal(str(self.valuationdomain[&#39;min&#39;]))</span>
+<span class="c1">##        Med = Decimal(str(self.valuationdomain[&#39;med&#39;]))</span>
+<span class="c1">##        res = Min</span>
+<span class="c1">##        for i in range(len(v1)):</span>
+<span class="c1">##            if v1[i] == Med:</span>
+<span class="c1">##                omin = v2[i]</span>
+<span class="c1">##            elif v2[i] == Med:</span>
+<span class="c1">##                omin = v1[i]</span>
+<span class="c1">##            else:</span>
+<span class="c1">##                omin = min(v1[i],v2[i])</span>
+<span class="c1">##            if res == Med:</span>
+<span class="c1">##                res = omin</span>
+<span class="c1">##            elif omin != Med:</span>
+<span class="c1">##                res = max(res, omin)</span>
+<span class="c1">##        return res</span>
+
 <div class="viewcode-block" id="Digraph.inner_prod">
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.inner_prod">[docs]</a>
     <span class="k">def</span> <span class="nf">inner_prod</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameters: two choice characteristic vectors</span>
-<span class="sd">        Renders the inner product of two characteristic vetors.</span>
+<span class="sd">        Renders the inner product of two characteristic vectors.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">res</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]))</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">v1</span><span class="p">)):</span>
@@ -9603,7 +9624,7 @@
 <div class="viewcode-block" id="Digraph.showChoiceRecommendation">
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.showChoiceRecommendation">[docs]</a>
     <span class="k">def</span> <span class="nf">showChoiceRecommendation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                                <span class="n">method</span><span class="o">=</span><span class="s1">&#39;Bachet&#39;</span><span class="p">,</span>
+                                <span class="n">method</span><span class="o">=</span><span class="s1">&#39;condorcetWinners&#39;</span><span class="p">,</span>
                                 <span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                 <span class="n">randomized</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
                                 <span class="n">maxNbrOfRankings</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
@@ -9618,8 +9639,8 @@
                                 <span class="n">randomActionsList</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                  <span class="c1"># IteratedCondorcetWinners</span>
                                 <span class="n">ReturnRanking</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                 <span class="n">Show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                 <span class="n">Average</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                <span class="n">Show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                <span class="n">Average</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                  <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generic choice recommender method.</span>
@@ -16891,7 +16912,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Sep 05, 2026.
+      <span class="lastupdated">Last updated on Sep 09, 2026.
       </span></p>
   </div>
 
