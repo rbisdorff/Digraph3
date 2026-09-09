@@ -8967,7 +8967,7 @@ class Digraph(object):
         self.showBestChoiceRecommendation(**kwargs)
 
     def showChoiceRecommendation(self,
-                                method='condorcetWinners',
+                                method='CondorcetWinners',
                                 Polarised=True,
                                 randomized=100,
                                 maxNbrOfRankings=5,
