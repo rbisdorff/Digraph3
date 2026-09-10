@@ -249,7 +249,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.inDegrees"><code class="docutils literal notranslate"><span class="pre">Digraph.inDegrees()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.inDegreesDistribution"><code class="docutils literal notranslate"><span class="pre">Digraph.inDegreesDistribution()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.independentChoices"><code class="docutils literal notranslate"><span class="pre">Digraph.independentChoices()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.inner_prod"><code class="docutils literal notranslate"><span class="pre">Digraph.inner_prod()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.inner_prod2"><code class="docutils literal notranslate"><span class="pre">Digraph.inner_prod2()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.inner_prod3"><code class="docutils literal notranslate"><span class="pre">Digraph.inner_prod3()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.intstab"><code class="docutils literal notranslate"><span class="pre">Digraph.intstab()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.irreflex"><code class="docutils literal notranslate"><span class="pre">Digraph.irreflex()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.isAsymmetricIndeterminate"><code class="docutils literal notranslate"><span class="pre">Digraph.isAsymmetricIndeterminate()</span></code></a></li>
@@ -266,6 +267,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.iterateRankingByChoosing"><code class="docutils literal notranslate"><span class="pre">Digraph.iterateRankingByChoosing()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.kChoices"><code class="docutils literal notranslate"><span class="pre">Digraph.kChoices()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.matmult2"><code class="docutils literal notranslate"><span class="pre">Digraph.matmult2()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.matmult3"><code class="docutils literal notranslate"><span class="pre">Digraph.matmult3()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.meanDegree"><code class="docutils literal notranslate"><span class="pre">Digraph.meanDegree()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.meanLength"><code class="docutils literal notranslate"><span class="pre">Digraph.meanLength()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.minimalChoices"><code class="docutils literal notranslate"><span class="pre">Digraph.minimalChoices()</span></code></a></li>
@@ -2226,7 +2228,7 @@ of the irreflexive and determined arcs of the digraph</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="digraphs.Digraph.computeBadPirlotChoices">
-<span class="sig-name descname"><span class="pre">computeBadPirlotChoices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeBadPirlotChoices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeBadPirlotChoices" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">computeBadPirlotChoices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">EpistemicFusion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeBadPirlotChoices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeBadPirlotChoices" title="Link to this definition"></a></dt>
 <dd><p>Characteristic values for potentially bad choices
 using the Pirlot’s fixpoint algorithm.</p>
 </dd></dl>
@@ -3243,10 +3245,17 @@ the absorbed neighborhood.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="digraphs.Digraph.inner_prod">
-<span class="sig-name descname"><span class="pre">inner_prod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.inner_prod"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.inner_prod" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="digraphs.Digraph.inner_prod2">
+<span class="sig-name descname"><span class="pre">inner_prod2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.inner_prod2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.inner_prod2" title="Link to this definition"></a></dt>
 <dd><p>Parameters: two choice characteristic vectors
 Renders the inner product of two characteristic vectors.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="digraphs.Digraph.inner_prod3">
+<span class="sig-name descname"><span class="pre">inner_prod3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.inner_prod3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.inner_prod3" title="Link to this definition"></a></dt>
+<dd><p>Parameters: two choice characteristic vectors
+Renders the inner product with guarded 0.0 characteristic of two characteristic vectors.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -3392,6 +3401,13 @@ Limited = proportion (in [0,1]) * (max - med) valuationdomain</p>
 <span class="sig-name descname"><span class="pre">matmult2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.matmult2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.matmult2" title="Link to this definition"></a></dt>
 <dd><p>Parameters: digraph relation and choice characteristic vector
 matrix multiply vector by inner production</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="digraphs.Digraph.matmult3">
+<span class="sig-name descname"><span class="pre">matmult3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.matmult3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.matmult3" title="Link to this definition"></a></dt>
+<dd><p>Parameters: digraph relation and choice characteristic vector
+matrix multiply vector by inner production with epistemic fusion operators</p>
 </dd></dl>
 
 <dl class="py method">
@@ -15399,7 +15415,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Sep 09, 2026.
+      <span class="lastupdated">Last updated on Sep 10, 2026.
       </span></p>
   </div>
 

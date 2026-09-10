@@ -8403,28 +8403,28 @@ class Digraph(object):
         else:
             return med
 
-##    def inner_prod(self, v1, v2):
-##        """
-##        Parameters: two choice characteristic vectors
-##        Renders the inner product with guarded 0.0 characteristic of two characteristic vectors.
-##        """
-##        Min = Decimal(str(self.valuationdomain['min']))
-##        Med = Decimal(str(self.valuationdomain['med']))
-##        res = Min
-##        for i in range(len(v1)):
-##            if v1[i] == Med:
-##                omin = v2[i]
-##            elif v2[i] == Med:
-##                omin = v1[i]
-##            else:
-##                omin = min(v1[i],v2[i])
-##            if res == Med:
-##                res = omin
-##            elif omin != Med:
-##                res = max(res, omin)
-##        return res
+    def inner_prod3(self, v1, v2):
+        """
+        Parameters: two choice characteristic vectors
+        Renders the inner product with guarded 0.0 characteristic of two characteristic vectors.
+        """
+        Min = Decimal(str(self.valuationdomain['min']))
+        Med = Decimal(str(self.valuationdomain['med']))
+        res = Min
+        for i in range(len(v1)):
+            if v1[i] == Med:
+                omin = v2[i]
+            elif v2[i] == Med:
+                omin = v1[i]
+            else:
+                omin = min(v1[i],v2[i])
+            if res == Med:
+                res = omin
+            elif omin != Med:
+                res = max(res, omin)
+        return res
 
-    def inner_prod(self, v1, v2):
+    def inner_prod2(self, v1, v2):
         """
         Parameters: two choice characteristic vectors
         Renders the inner product of two characteristic vectors.
@@ -8439,7 +8439,14 @@ class Digraph(object):
         Parameters: digraph relation and choice characteristic vector
         matrix multiply vector by inner production
         """
-        return [self.inner_prod(r, v) for r in m]
+        return [self.inner_prod2(r, v) for r in m]
+
+    def matmult3(self, m, v):
+        """
+        Parameters: digraph relation and choice characteristic vector
+        matrix multiply vector by inner production with epistemic fusion operators
+        """
+        return [self.inner_prod3(r, v) for r in m]
 
     def readdomvector(self, x,relation):
         """
@@ -10143,7 +10150,7 @@ class Digraph(object):
         self.goodChoices = domChoicesSort
 
 
-    def computeBadPirlotChoices(self,Comments=False):
+    def computeBadPirlotChoices(self,Comments=False,EpistemicFusion=False):
         """
         Characteristic values for potentially bad choices
         using the Pirlot's fixpoint algorithm.
@@ -10183,7 +10190,10 @@ class Digraph(object):
             vecsolfin = vecmed
             it = 0
             while it < 2*n*n:
-                vecsolfin = self.matmult2(mat,vecsol)
+                if EpistemicFusion:
+                    vecsolfin = self.matmult3(mat,vecsol)
+                else:
+                    vecsolfin = self.matmult2(mat,vecsol)                    
                 if Comments:
                     print(it, 'th vesol :',vecsol)
                 veccur = self.contra(vecsolfin)
