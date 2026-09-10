@@ -4679,7 +4679,7 @@ A new choice recommender algorithm
 Computing bipolar-valued weak Condorcet winners and loosers
 ...........................................................
 
-The relation attribute of a given outranking digraph :math:`G(X,R)` is an evident example of a bpv-set. And the epistemic fusion operators may for instance be used for computing the bpv-set of *non ambiguous weak Condorcet winners and losers* of such a digraph *G* [28]_. The :py:class:`~digraphs.Digraph` class provides therefore the :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method as shown in :numref:`CondorcetWinners1` Line 5.  
+The relation attribute of a given outranking digraph :math:`G(X,R)` is an evident example of a bipolar-valued set, a *bpv-set* for short. And the epistemic fusion operators may for instance be used for computing the bpv-set of *non ambiguous weak Condorcet winners and losers* of such a digraph *G* [28]_. The :py:class:`~digraphs.Digraph` class provides therefore the :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method as shown in :numref:`CondorcetWinners1` Line 5.  
 
 .. code-block:: pycon
    :caption: Computing the bpv-set of the weak Condorcet winner(s)
