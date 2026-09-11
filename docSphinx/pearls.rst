@@ -4396,7 +4396,7 @@ In bipolar-valued epistemic logic we balance or **superpose** like in quantum th
 
 Following *Condorcet* [CON-1785p]_ we are going to balance the votes in favour against the votes in disfavour. As a result we obtain a bipolar-valued credibility which qualifies statement *P* as **utterly true** when all voters support its truth, **more or less true** when more voters support its truthfulness than its falseness, **more or less false** when more voters support its falseness than its truthfulness and **utterly false** when all the voters support its falseness. There may however appear a special case when the same number of voters support its truthfulness respectively its falseness, or all voters abstain from voting. In these cases, statement *P* becomes neither *true* nor *false*, but **indeterminate**. It is a *zero knowledge* situation.
 
-First important consequence is that the logical status of any statement is considered to be indeterminate as long as no evidence is yet collected. Reconsidering for instance proposition *P*, its logical status is indeterminate as long as no voting has been organized. More important is furthermore the consequence that negating the truthfulness or falseness of a proposition does no more imply its falseness, repective its truthfulness, but its falseness **or** indeterminate state, respectively its truthfulness **or** indeterminate state. Double negation does no more automatically imply truthfulness.  
+First important consequence is that the logical status of any statement is considered to be indeterminate as long as no evidence is yet collected. Reconsidering for instance proposition *P*, its logical status is indeterminate as long as no voting has been organized.
 
 In order to formalize the previous intuitions, we are attaching to any logical  proposition or statement *P* a characteristic function *r(P)* taking value in the decimal interval [-1.0;+1.0] with following semantics:
 |    :math:`r(P) = +1.0` means statement *P* is **for sure true**;
@@ -4428,7 +4428,7 @@ But we may also operate **non compensatory superpositions** of epistemic situati
 |        :math:`\min\big(r(P),r(Q)\big)` when :math:`r(P) \leq 0.0 \; \land \; r(Q) \leq 0.0`;
 |        :math:`0.0` otherwise.
 
-Mind that the disjunctive, as well as the conjunctive epistemic fusion operator, like a mean or an average operator, are not associative when multiple characteristic values must be fused together. In this case, all positive and negative terms get separately fused and their respective final results get again submitted to the fusion operator. As a consequence, when there exist conjointly positive and negative epistemic evidences for a statement, the truthfulness or falseness of their epistemic fusion always becomes **indeterminate**.
+As a consequence, when there exist conjointly positive and negative epistemic evidences for a statement, the truthfulness or falseness of their epistemic fusion always becomes **indeterminate**.
 
 Lest us now apply this bipolar-valued logical characteristic calculus to elementary set theory. 
 
