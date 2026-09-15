@@ -251,6 +251,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.independentChoices"><code class="docutils literal notranslate"><span class="pre">Digraph.independentChoices()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.inner_prod2"><code class="docutils literal notranslate"><span class="pre">Digraph.inner_prod2()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.inner_prod3"><code class="docutils literal notranslate"><span class="pre">Digraph.inner_prod3()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.inner_prod4"><code class="docutils literal notranslate"><span class="pre">Digraph.inner_prod4()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.intstab"><code class="docutils literal notranslate"><span class="pre">Digraph.intstab()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.irreflex"><code class="docutils literal notranslate"><span class="pre">Digraph.irreflex()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.isAsymmetricIndeterminate"><code class="docutils literal notranslate"><span class="pre">Digraph.isAsymmetricIndeterminate()</span></code></a></li>
@@ -2217,7 +2218,7 @@ of the irreflexive and determined arcs of the digraph</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="digraphs.Digraph.computeBadChoices">
-<span class="sig-name descname"><span class="pre">computeBadChoices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeBadChoices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeBadChoices" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">computeBadChoices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Test</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeBadChoices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeBadChoices" title="Link to this definition"></a></dt>
 <dd><p>Computes characteristic values for potentially bad choices.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -2435,7 +2436,7 @@ to a given sink sink node.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="digraphs.Digraph.computeGoodChoices">
-<span class="sig-name descname"><span class="pre">computeGoodChoices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeGoodChoices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeGoodChoices" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">computeGoodChoices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Test</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeGoodChoices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeGoodChoices" title="Link to this definition"></a></dt>
 <dd><p>Computes characteristic values for potentially good choices.</p>
 <p>..note:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Return</span> <span class="n">a</span> <span class="nb">tuple</span> <span class="k">with</span> <span class="n">following</span> <span class="n">content</span><span class="p">:</span>
@@ -2491,7 +2492,7 @@ Return a tuple: kemenyOrder (from worst to best), kemenyIndex</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="digraphs.Digraph.computeKernelVector">
-<span class="sig-name descname"><span class="pre">computeKernelVector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kernel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Initial</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeKernelVector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeKernelVector" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">computeKernelVector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kernel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Initial</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Test</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeKernelVector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeKernelVector" title="Link to this definition"></a></dt>
 <dd><div class="line-block">
 <div class="line">Computing Characteristic values for dominant pre-kernels</div>
 <div class="line">using the von Neumann dual fixpoint equation</div>
@@ -3254,6 +3255,13 @@ Renders the inner product of two characteristic vectors.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="digraphs.Digraph.inner_prod3">
 <span class="sig-name descname"><span class="pre">inner_prod3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.inner_prod3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.inner_prod3" title="Link to this definition"></a></dt>
+<dd><p>Parameters: two choice characteristic vectors
+Renders the inner product with guarded 0.0 characteristic of two characteristic vectors.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="digraphs.Digraph.inner_prod4">
+<span class="sig-name descname"><span class="pre">inner_prod4</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.inner_prod4"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.inner_prod4" title="Link to this definition"></a></dt>
 <dd><p>Parameters: two choice characteristic vectors
 Renders the inner product with guarded 0.0 characteristic of two characteristic vectors.</p>
 </dd></dl>
@@ -15415,7 +15423,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Sep 10, 2026.
+      <span class="lastupdated">Last updated on Sep 15, 2026.
       </span></p>
   </div>
 

@@ -8403,6 +8403,38 @@ class Digraph(object):
         else:
             return med
 
+    def inner_prod4(self, v1, v2):
+        """
+        Parameters: two choice characteristic vectors
+        Renders the inner product with guarded 0.0 characteristic of two characteristic vectors.
+        """
+        Min = Decimal(str(self.valuationdomain['min']))
+        Med = Decimal(str(self.valuationdomain['med']))
+        resp = []
+        resm = []
+        for i in range(len(v1)):
+            if v1[i] > Med and v2[i] > Med:
+                resp.append(min(v1[i],v2[i]))
+            elif v1[i] < Med and v2[i] < Med:
+                resm.append(max(v1[i],v2[i]))
+            elif v1[i] == Med and v2[i] > Med:
+                resp.append(v2[i])
+            elif v1[i] > Med and v2[i] == Med:
+                resp.append(v1[i])
+            elif v1[i] == Med and v2[i] < Med:
+                resm.append(v2[i])
+            elif v1[i] < Med and v2[i] == Med:
+                resm.append(v1[i])
+        np = len(resp)
+        nm = len(resm)
+        if np > 0 and nm == 0:
+            res = max(resp)
+        elif nm > 0 and np == 0:
+            res = min(resm)
+        else:
+            res = Med
+        return res
+    
     def inner_prod3(self, v1, v2):
         """
         Parameters: two choice characteristic vectors
@@ -8410,18 +8442,15 @@ class Digraph(object):
         """
         Min = Decimal(str(self.valuationdomain['min']))
         Med = Decimal(str(self.valuationdomain['med']))
-        res = Min
+        resTerms = []
         for i in range(len(v1)):
-            if v1[i] == Med:
-                omin = v2[i]
-            elif v2[i] == Med:
-                omin = v1[i]
-            else:
-                omin = min(v1[i],v2[i])
-            if res == Med:
-                res = omin
-            elif omin != Med:
-                res = max(res, omin)
+            if v1[i] != Med and v2[i] != Med:
+                resTerms.append(min(v1[i],v2[i]))
+            elif v1[i] != Med and v2[i] == Med:
+                resTerms.append(v1[i])
+            elif v1[i] != Med and v2[i] == Med:
+                resTerms.append(v1[i])
+        res = max(resTerms)             
         return res
 
     def inner_prod2(self, v1, v2):
@@ -8439,7 +8468,7 @@ class Digraph(object):
         Parameters: digraph relation and choice characteristic vector
         matrix multiply vector by inner production
         """
-        return [self.inner_prod2(r, v) for r in m]
+        return [self.inner_prod3(r, v) for r in m]
 
     def matmult3(self, m, v):
         """
@@ -9925,10 +9954,10 @@ class Digraph(object):
                 print('%s: %+.2f' % (item[1],item[0]) )
         else:
             return goodChoiceVector
-
+   
     
     def computeKernelVector(self,kernel,Initial=True,
-                            Comments=False,Iterations=False):
+                            Comments=False,Iterations=False,Test=False):
         """
         | Computing Characteristic values for dominant pre-kernels
         | using the von Neumann dual fixpoint equation
@@ -9971,8 +10000,12 @@ class Digraph(object):
             print('initial high vector :', vechigha)
         it = 1
         while veclowa != vechigha and it < 2*n*n:
-            veclowb = temp.matmult2(mat,veclowa)
-            vechighb = temp.matmult2(mat,vechigha)
+            if Test:
+                veclowb = temp.matmult3(mat,veclowa)
+                vechighb = temp.matmult3(mat,vechigha)
+            else:  
+                veclowb = temp.matmult3(mat,veclowa)
+                vechighb = temp.matmult3(mat,vechigha)
             veclow = temp.contra(vechighb)
             vechigh = temp.contra(veclowb)
             if veclow == veclowa and vechigh == vechigha : break
@@ -10005,7 +10038,7 @@ class Digraph(object):
             return choiceVector        
 
                                 
-    def computeGoodChoices(self,Comments=False):
+    def computeGoodChoices(self,Comments=False,Test=False):
         """
         Computes characteristic values for potentially good choices.
 
@@ -10055,8 +10088,12 @@ class Digraph(object):
                 print('initial vechigh', vechigha)
             it = 1
             while veclowa != vechigha and it < 2*n*n:
-                veclowb = temp.matmult2(mat,veclowa)
-                vechighb = temp.matmult2(mat,vechigha)
+                if Test:
+                    veclowb = temp.matmult3(mat,veclowa)
+                    vechighb = temp.matmult3(mat,vechigha)
+                else:
+                    veclowb = temp.matmult2(mat,veclowa)
+                    vechighb = temp.matmult2(mat,vechigha)
                 veclow = temp.contra(vechighb)
                 vechigh = temp.contra(veclowb)
                 if veclow == veclowa and vechigh == vechigha : break
@@ -10237,7 +10274,7 @@ class Digraph(object):
             return result*(Max-Med)
 
 
-    def computeBadChoices(self,Comments=False):
+    def computeBadChoices(self,Comments=False,Test=False):
         """
         Computes characteristic values for potentially bad choices.
 
@@ -10285,8 +10322,12 @@ class Digraph(object):
                 print('initial vechigha', vechigha)
             it = 1
             while veclowa != vechigha and it < 2*n*n:
-                veclowb = temp.matmult2(mat,veclowa)
-                vechighb = temp.matmult2(mat,vechigha)
+                if Test:
+                    veclowb = temp.matmult3(mat,veclowa)
+                    vechighb = temp.matmult3(mat,vechigha)
+                else:
+                    veclowb = temp.matmult2(mat,veclowa)
+                    vechighb = temp.matmult2(mat,vechigha)                    
                 veclow = temp.contra(vechighb)
                 vechigh = temp.contra(veclowb)
                 if veclow == veclowa and vechigh == vechigha : break

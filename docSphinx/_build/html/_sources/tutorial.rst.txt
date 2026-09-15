@@ -1587,9 +1587,9 @@ Following the previously stated pragmatic principles, potential first choice rec
       absorbency          : 0.00
       covering (%)        : 41.67
       determinateness (%) : 50.59
-      - characteristic vector = { 'D': 0.02, 'A':  0.00, 'C':  0.00,
-	                          'G': 0.00, 'B': -0.02, 'E': -0.02,
-				  'F': -0.02, }
+      - characteristic vector = { 'A': 0.30, 'C': 0.10, 'D': 0.02,
+	                          'E': -0.02, 'B': -0.02, 'G': -0.10,
+				  'F': -0.10
     === >> potential last choice(s) 
     * choice              : ['A', 'F']
       independence        : 0.00
@@ -1597,11 +1597,11 @@ Following the previously stated pragmatic principles, potential first choice rec
       absorbency          : 1.00
       covered (%)         : 50.00
       determinateness (%) : 50.00
-      - characteristic vector = { 'A': 0.00, 'F': 0.00, 'B': 0.00,
-	                          'C': 0.00, 'D': 0.00, 'E': 0.00,
-				  'G': 0.00, }
+      - characteristic vector = { 'F': 1.00, 'A': 1.00, 'G': -1.00,
+	                          'E': -1.00, 'D': -1.00, 'C': -1.00,
+				  'B': -1.00, }
 				  
-It is interesting to notice in :numref:`strictBestChoice` (Line 6) that the **Rubis first choice recommendation** consists actually in the set of weak Condorcet winners: 'A', 'C' and 'D' and the set of weak Condorcet losers: 'A' and 'F'. In the corresponding characteristic vector (see Lines 12-14), representing the bipolar credibility degree with which each alternative may indeed be considered a first choice candidate (see [BIS-2006a]_, [BIS-2006b]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an *indeterminate* situation. They **may be or not be** potential first choice candidates besides *D*. Notice furthermore that location *G* is not included in the initial prekernel, yet, shows nevertheless an indeterminate situation with respect to *being or not being* a potential first choice candidate. Alternatives *B*, *E* and *F* are *negatively* included, i.e. *positively excluded* from this first choice recommendation. We may furthermore notice in Line 16 that both alternatives *A* and *F* are reported as potential *strict outranked* choices, hence as potential **last choice candidates** . The ambiguous first-ranked and last-ranked position of alternative *A* indicates its global incomparability status as shown in :numref:`bestOfficeChoice`.
+It is interesting to notice in :numref:`strictBestChoice` (Line 6) that the **Rubis first choice recommendation** consists actually in the set of weak Condorcet winners: 'A', 'C' and 'D' and the set of weak Condorcet losers: 'A' and 'F'. In the corresponding characteristic vector (see Lines 12-14) are listed the bipolar credibility degree with which each alternative may indeed be considered a first choice candidate (see [BIS-2006a]_, [BIS-2006b]_). We may furthermore notice in Line 16 that both alternatives *A* and *F* are reported as potential *strict outranked* choices, hence as potential **last choice candidates** . The ambiguous first-ranked and last-ranked position of alternative *A* indicates its global incomparability status as shown in :numref:`bestOfficeChoice`.
 
 .. code-block:: pycon
    :linenos:
@@ -1620,7 +1620,7 @@ It is interesting to notice in :numref:`strictBestChoice` (Line 6) that the **Ru
 
    Best office choice recommendation from strict outranking digraph
 
-To comprehend the indeterminate situation of location *G*, let us now compare the performances of alternatives *D* and *G* in a
+Let us now compare the performances of alternatives *D* and *G* in a
 pairwise perspective (see below). With the given preference discrimination thresholds, we notice that alternative *G* is actually **utterly** *at least as good as* alternative *D*:  :math:`r(G \succsim D) = +145/145 = +1.0` and alternative *D* is also positively, but less credibly, *at least as good as* alternative *G*:  :math:`r(D \succsim G) = +36/145 = +0.25` (see Line 14 below).
 
 .. code-block:: pycon
@@ -1673,7 +1673,7 @@ Considering a potential imprecise knowledge of the different criteria significan
 .. code-block:: pycon
    :linenos:
    :name: confidentOfficeChoice
-   :emphasize-lines: 1,9,12,21,27
+   :emphasize-lines: 1,9,12,21,27-28,36
    :caption: Computing a 90% confident first choice recommendation
 
    >>> cg = ConfidentBipolarOutrankingDigraph(t,confidence=90.0)
@@ -1702,7 +1702,8 @@ Considering a potential imprecise knowledge of the different criteria significan
        absorbency          : 0.00
        covering (%)        : 50.00
        determinateness (%) : 50.00
-     - most credible action(s) = { }
+     - most credible action(s) = { 'G': 0.54, 'C': 0.46, 'A': 0.30,
+                                   'D': 0.25 }
      === >> potential last choice(s) 
      * choice              : ['A', 'B', 'F']
        independence        : 0.00
@@ -1710,14 +1711,14 @@ Considering a potential imprecise knowledge of the different criteria significan
        absorbency          : 1.00
        covered (%)         : 50.00
        determinateness (%) : 50.00
-     - most credible action(s) = { }
+     - most credible action(s) = { 'F': 1.00, 'B': 1.00, 'A': 1.00 }
 
-The :py:class:`~outrankingDigraphs.ConfidentBipolarOutrankingDigraph` class constructor assumes here that the criteria significance weights are in fact *triangular random variates* in the range 0 to 2 times the given significance weights (Line 9). With this working hypothesis, we obtain a 90% confident outranking digraph *cg* where three outranking situations with a credibility in the range [-15/145; +15/145] are put to *indeterminate* (Line 8). The pairwise outranking situations between location *C* and location *G* are for instance not 90% confident and the first choice recommendation now includes consequently this latter location as a further potential best choice candidate (Line 21). Notice by the way that location 'D' is now only a *weak Condorcet winner* as the alternative is not 90% confidently outranking location *C* (Line 27).
+The :py:class:`~outrankingDigraphs.ConfidentBipolarOutrankingDigraph` class constructor assumes here that the criteria significance weights are in fact *triangular random variates* in the range 0 to 2 times the given significance weights (Line 9). With this working hypothesis, we obtain a 90% confident outranking digraph *cg* where three outranking situations with a credibility in the range [-15/145; +15/145] are put to *indeterminate* (Line 8). The pairwise outranking situations between location *C* and location *G* are for instance not 90% confident and the first choice recommendation now includes consequently this latter location as a further potential best choice candidate (Line 21). Notice by the way that location 'D' is now only a *weak Condorcet winner* as the alternative is not 90% confidently outranking location *C* (Line 27). Location 'A' remains eventually an ambiguous 90% confident first and last choice candidate, even if it is a last choice recommendation for sure.
 
-Computing the bipolar-valued set of weak Condorcet winners
-``````````````````````````````````````````````````````````
+Computing the bipolar-valued set of non ambiguous weak Condorcet winners
+````````````````````````````````````````````````````````````````````````
 
-It may be opportune to compute the bipolar-valued set of weak Condorcet winners or losers on the 90% confident outranking digraph. The :py:mod:`digraphs` module provides therefore the :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method (see the advanced topic on :ref:`Bipolar-Valued-Sets-Tutorial-label`).
+It may be opportune now to compute the bipolar-valued set of non ambiguous weak Condorcet winners or losers on the 90% confident outranking digraph. The :py:mod:`digraphs` module provides therefore the :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method (see the advanced topic on :ref:`Bipolar-Valued-Sets-Tutorial-label`).
 
 .. code-block:: pycon
    :linenos:
@@ -1760,7 +1761,7 @@ In :numref:`confidentOfficeChoice1` Lines 3-9, the positive locations give suita
      Execution time: 0.012 sec.
     *****************************************
 
-Remarquable in :numref:`confidentOfficeChoice2` is the fact that, in the 90% confident outranking digraph, location *G* gives now the most credible first choice candidate. Location *F* stays the most credible last choice candidate (see Lines 5 and 11). Locations *A* and *E* are now correctly flagged as being indeterminate choice candidates (see Line 8-9).
+Remarquable in :numref:`confidentOfficeChoice2` is the fact that, in the 90% confident outranking digraph, location *G* remains the most credible first choice candidate. Location *F* stays the most credible last choice candidate (see Lines 5 and 11). Locations *A* is now correctly flagged as being an indeterminate choice candidates (see Line 8).
 
 To get a further interesting insight in the overall outranking situation, we finally make usage of the new :py:class:`~transitiveDigraphs.PartialBachetRanking` class imported from the :py:mod:`transitiveDigraphs` module, for computing a **partial ranking** of all the potential office locations (see the advanced topic on :ref:`partially ranking strategies <Partial-Ranking-Tutorial-label>`).
 
@@ -1991,9 +1992,9 @@ It became thereafter obvious for us all that both the lack of a specific perform
 
 The digraph put forward by *Bouyssou* in the October 2005 discussion is not strongly complete --node *a* is not outranking node *d* and vice versa-- and does hence not represent, in our present sense, a valid outranking digraph instance. Yet, it may be a partial tournament and as such it could be a strict outranking digraph, i.e. the asymmetrical part --the codual-- of a valid outranking digraph. In this case, nodes *a* and *d* --the kernel of the strict outranking digraph-- would actually positively outrank each other and, hence, represent both indifferently the natural best choice candidates. However, in this not strict outranking digraph, node *a* becomes also the unique *Condorcet* winner --positively outranking all other nodes-- and gives hence the evident unique best choice recommendation.
 
-Only after 2013, when the strong completeness and the coduality properties of the outranking digraph were discovered, became it obvious that the initial prekernels of the strict outranking digraph, coupled with the solution of the corresponding kernel equation system, could in fact deliver convincing best choice recommendations (see [BIS-2013]_). Yet, *Bouyssou* and the critical audience of the 2005 seminar would be satisfied to see their doubts somehow confirmed by the solution of the office location choice problem shown previously. Indeed, the initial prekernel {*A*, *C*, *D*} of the corresponding strict outranking digraph does not retain location *G* --as it is actually strictly outranked by location *C* -- and proposes solely location *D* as credible best choice candidate. This latter location appears however certainly outranked by location *G*. Keeping location *G* in an indeterminate situation with being or not being a potential best choice candidate in the solution of the corresponding kernel equation system shows that the resulting bipolar-valued choice vector may be an essential complement of information. Showing solely an initial prekernel appears hence not necessarily sufficient for determining the actual best choice alternative(s). Similarly, questioning the confidence of outranking statements showing, the case given, weak positive credibilities, may result in a more convincing first-choice recommendation.
+Only after 2013, when the strong completeness and the coduality properties of the outranking digraph were discovered, became it obvious that the initial prekernels of the strict outranking digraph, coupled with the solution of the corresponding kernel equation system, could in fact deliver convincing best choice recommendations (see [BIS-2013]_). Yet, *Bouyssou* and the critical audience of the 2005 seminar would be satisfied to see their doubts somehow confirmed by the solution of the office location choice problem shown previously. Indeed, the initial prekernel {*A*, *C*, *D*} of the corresponding strict outranking digraph does not retain location *G* --as it is actually strictly outranked by location *C* -- and proposes solely locations *C* and *D* as credible best choice candidates. This latter location appears however certainly outranked by location *G*. Questioning the confidence of outranking statements showing, the case given, weak positive credibilities, may result in a more convincing first-choice recommendation.
 
-A major computational breakthrough could be recently achieved by reviewing the implementation of the conjunctive epistemic fusion operator. It is now possible to compute bipolar-valued sets of *weak Condorcet winners or losers* in :math:`\mathcal{O}(n^2)` complexity which avoids the strong absorbance property of the zero valued indeterminate characteristic value when computing the Rubis best choice recommendation.
+A major computational breakthrough could be recently achieved by reviewing the implementation of the conjunctive epistemic fusion operator. It is now possible to compute bipolar-valued sets of *weak Condorcet winners or losers* in :math:`\mathcal{O}(n^2)` complexity.
 
 But it is eventually also the new :ref:`Bachet partial ranking rule <Partial-Ranking-Tutorial-label>` that allows nowadays to compute a partial transitive tournament, very close in a bipolar-valued  ordinal correlation sense to the actual transitive part of the given strict outranking digraph, that definitely supports our kernels based recommending approach. The unique initial and terminal kernels of such a transitive asymmetric digraph, easily found via a topological sort algorithm, may indeed deliver more effectively convincing first and/or last choice recommendations.
 
@@ -7051,7 +7052,7 @@ We may furthermore notice in :numref:`aliceRelationMap`, that the four first-ran
      Criteria significance majority in brakets
      Execution time: 0.014 sec.
     ******************************************
-   >>> dg.showChoiceRecommendation('Rubis)
+   >>> dg.showChoiceRecommendation('Rubis')
     Rubis first choice recommendations  
     Credibility domain: [-1.00,1.00]
     === >> potential first choice(s)
@@ -7217,13 +7218,13 @@ Concerning now a 90%-*confident* best choice recommendation, we are lucky (see :
    :name: aliceConfidentBestChoice
    :linenos:
    :caption: The 90% confident best choice recommendation
-   :emphasize-lines: 2, 9-10,16
+   :emphasize-lines: 2, 9-10,16-18
 
    >>> cdg.computeCondorcetWinners()
     ['I-FHK']
-   >>> cdg.showBestChoiceRecommendation()
+   >>> cdg.showChoiceRecommendation('Rubis')
     ***********************
-    Best choice recommendation(s) (BCR)
+    First choice recommendation(s) (BCR)
      (in decreasing order of determinateness)   
      Credibility domain: [-1.00,1.00]
      === >> potential first choice(s)
@@ -7234,9 +7235,11 @@ Concerning now a 90%-*confident* best choice recommendation, we are lucky (see :
       absorbency          : 0.00
       covering (%)        : 20.00
       determinateness (%) : 61.25
-      - most credible action(s) = { 'I-FHK': 0.75, }
+      - most credible action(s) = { 'I-FHK': 0.75, 'I-USB': 0.50,
+	                            'I-UHB': 0.50, 'T-FHM': 0.42,
+				    'T-FHK': 0.33,  }
 
-The *Graduate Interpreter* studies in Köln remain indeed a 90%-confident *Condorcet* winner (Line 2). Hence, the same study program also remains our 90%-confident most credible best choice supported by a continual 18/24 (87.5%) majority of the global criteria significance (see Lines 9-10 and 16).
+The *Graduate Interpreter* studies in Köln remain indeed a 90%-confident *Condorcet* winner (Line 2). Hence, the same study program also remains our 90%-confident most credible best choice supported by a continual 18/24 (87.5%) majority of the global criteria significance (see Lines 9-10 and 16-18).
 
 When previously comparing the two best-ranked study programs (see :numref:`pairwiseComparison`), we have observed that *I-FHK* actually positively outranks *I-USB* on all four decision objectives. When admitting equi-significant criteria significance weights per objective, this outranking situation is hence valid independently of the importance weights Alice may allocate to each of her decision objectives. 
 
