@@ -8435,33 +8435,36 @@ class Digraph(object):
             res = Med
         return res
     
-    def inner_prod3(self, v1, v2):
-        """
-        Parameters: two choice characteristic vectors
-        Renders the inner product with guarded 0.0 characteristic of two characteristic vectors.
-        """
-        Min = Decimal(str(self.valuationdomain['min']))
-        Med = Decimal(str(self.valuationdomain['med']))
-        resTerms = []
-        for i in range(len(v1)):
-            if v1[i] != Med and v2[i] != Med:
-                resTerms.append(min(v1[i],v2[i]))
-            elif v1[i] != Med and v2[i] == Med:
-                resTerms.append(v1[i])
-            elif v1[i] != Med and v2[i] == Med:
-                resTerms.append(v1[i])
-        res = max(resTerms)             
-        return res
+##    def inner_prod2(self, v1, v2):
+##        """
+##        Parameters: two choice characteristic vectors
+##        Renders the inner product with guarded 0.0 characteristic of two characteristic vectors.
+##        """
+##        Min = Decimal(str(self.valuationdomain['min']))
+##        Med = Decimal(str(self.valuationdomain['med']))
+##        resTerms = []
+##        for i in range(len(v1)):
+##            if v1[i] != Med and v2[i] != Med:
+##                resTerms.append(min(v1[i],v2[i]))
+##            elif v1[i] != Med and v2[i] == Med:
+##                resTerms.append(v1[i])
+##            elif v1[i] != Med and v2[i] == Med:
+##                resTerms.append(v1[i])
+##        res = max(resTerms)             
+##        return res
 
-    def inner_prod2(self, v1, v2):
+    def inner_prod3(self, v1, v2):
         """
         Parameters: two choice characteristic vectors
         Renders the inner product of two characteristic vectors.
         """
+        from digraphsTools import bpmin,bpmax
         res = Decimal(str(self.valuationdomain['min']))
+        Med = self.valuationdomain['med']
+        terms = []
         for i in range(len(v1)):
-            res = max(res, min(v1[i],v2[i]))
-        return res
+            terms.append(bpmin(Med,[v1[i],v2[i]]))
+        return bpmax(Med,terms)
 
     def matmult2(self, m, v):
         """

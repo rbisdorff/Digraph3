@@ -322,7 +322,39 @@ def symmetricAverage(Med,L,weights=None,Debug=False):
     else:
         return Med
 
-#epistemic disjunctive operator
+# bpv operators
+def bpmax(Med,L, Debug=False):
+    """
+    Indeterminate values guarded max operator for bipolar outranking characteristics
+    computation: Med is the valuation domain median and L is a list of
+    r-valued statement characteristics.    
+    """
+    terms = list(L)
+    nonIndeterTerms = []
+    for i in range(len(terms)):
+        if terms[i] != Med:
+            nonIndeterTerms.append(terms[i])
+    if Debug:
+        print('terms', terms)
+        print('nonIndeterTerms',termsPlus)
+    return max(nonIndeterTerms,default=Med)
+
+def bpmin(Med,L, Debug=False):
+    """
+    Indeterminate values guarded min operator for bipolar outranking characteristics
+    computation: Med is the valuation domain median and L is a list of
+    r-valued statement characteristics.    
+    """
+    terms = list(L)
+    nonIndeterTerms = []
+    for i in range(len(terms)):
+        if terms[i] != Med:
+            nonIndeterTerms.append(terms[i])
+    if Debug:
+        print('terms', terms)
+        print('nonIndeterTerms',termsPlus)
+    return min(nonIndeterTerms,default=Med)
+    
 def omax(Med,L, Debug=False):
     """
     Epistemic **disjunction** for bipolar outranking characteristics

@@ -1203,8 +1203,8 @@ confidence level <em>alpha</em> %, when</p>
 <p>Indeed, best choice recommendations, computed from an <em>unopposed multiobjective</em> outranking digraph, will in fact deliver <strong>efficient</strong> choice recommendations.</p>
 <div class="literal-block-wrapper docutils container" id="unopposed5">
 <div class="code-block-caption"><span class="caption-number">Listing 3.15 </span><span class="caption-text">Efficient multiobjective choice recommendation</span><a class="headerlink" href="#unopposed5" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">uopg</span><span class="o">.</span><span class="n">showBestChoiceRecommendation</span><span class="p">()</span>
-<span class="linenos"> 2</span><span class="go"> Best choice recommendation(s) (BCR)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">uopg</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;Rubis&#39;</span><span class="p">)</span>
+<span class="linenos"> 2</span><span class="go"> Rubis choice recommendation(s) (BCR)</span>
 <span class="linenos"> 3</span><span class="go">  (in decreasing order of determinateness)</span>
 <span class="linenos"> 4</span><span class="go"> Credibility domain: [-1.00,1.00]</span>
 <span class="linenos"> 5</span><span class="go">  === &gt;&gt; potential first choice(s)</span>
@@ -1816,8 +1816,8 @@ confidence level <em>alpha</em> %, when</p>
 <p>As a consequence, a <strong>multipartisan primary selection</strong>, computed with a <a class="reference internal" href="techDoc.html#digraphs.Digraph.showBestChoiceRecommendation" title="digraphs.Digraph.showBestChoiceRecommendation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">showBestChoiceRecommendation()</span></code></a> method,  will keep the complete initial set of eligible candidates and, hence, becomes <strong>ineffective</strong> (see <a class="reference internal" href="#ineffectiveprimaryselection"><span class="std std-numref">Listing 3.30</span></a> Line 6).</p>
 <div class="literal-block-wrapper docutils container" id="ineffectiveprimaryselection">
 <div class="code-block-caption"><span class="caption-number">Listing 3.30 </span><span class="caption-text">Example of ineffective primary multipartisan selection</span><a class="headerlink" href="#ineffectiveprimaryselection" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">uodg</span><span class="o">.</span><span class="n">showBestChoiceRecommendation</span><span class="p">()</span>
-<span class="linenos"> 2</span><span class="go"> Best choice recommendation(s) (BCR)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">uodg</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;Rubis&#39;</span><span class="p">)</span>
+<span class="linenos"> 2</span><span class="go"> Rubis choice recommendation(s) (BCR)</span>
 <span class="linenos"> 3</span><span class="go">  (in decreasing order of determinateness)</span>
 <span class="linenos"> 4</span><span class="go"> Credibility domain: [-1.00,1.00]</span>
 <span class="linenos"> 5</span><span class="go"> === &gt;&gt; ambiguous choice(s)</span>
@@ -2148,9 +2148,9 @@ confidence level <em>alpha</em> %, when</p>
 </div>
 <p>Despite its apparent poor strict preference discriminating power, we obtain here <em>NetFlows</em> scores that are directly proportional (divided by 100) to the scores obtained with the <em>better approved than</em> majority margins digraph <em>m</em>.</p>
 <p>Encouraged by this positive result, we may furthermore try to compute as well a <em>best choice recommendation</em>.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span><span class="o">.</span><span class="n">showBestChoiceRecommendation</span><span class="p">()</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;Rubis&#39;</span><span class="p">)</span>
 <span class="linenos"> 2</span><span class="go"> ***********************</span>
-<span class="linenos"> 3</span><span class="go"> Best choice recommendation(s) (BCR)</span>
+<span class="linenos"> 3</span><span class="go"> Rubis choice recommendation(s) (BCR)</span>
 <span class="linenos"> 4</span><span class="go">  (in decreasing order of determinateness)</span>
 <span class="linenos"> 5</span><span class="go">  Credibility domain: [-1.00,1.00]</span>
 <span class="hll"><span class="linenos"> 6</span><span class="go"> === &gt;&gt; ambiguous first choice(s)</span>
@@ -2324,8 +2324,8 @@ confidence level <em>alpha</em> %, when</p>
 </span></pre></div>
 </div>
 <p>We see this result furthermore confirmed when computing the corresponding <strong>first</strong>, respectively <strong>last</strong> choice recommendation.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">showBestChoiceRecommendation</span><span class="p">()</span>
-<span class="linenos"> 2</span><span class="go"> Best choice recommendation(s) (BCR)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;Rubis&#39;</span><span class="p">)</span>
+<span class="linenos"> 2</span><span class="go"> Rubis choice recommendation(s) (BCR)</span>
 <span class="linenos"> 3</span><span class="go">  (in decreasing order of determinateness)</span>
 <span class="linenos"> 4</span><span class="go"> Credibility domain: [-100.00,100.00]</span>
 <span class="linenos"> 5</span><span class="go">  === &gt;&gt; potential first choice(s)</span>
@@ -4349,10 +4349,13 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </span><span class="linenos">6</span><span class="go"> s1:+0.7313, s2:-0.6949, s3:-0.8869</span>
 </pre></div>
 </div>
-<p>Finally, a <a class="reference internal" href="techDoc.html#bipolarValuedSets.BpvSet.polarise" title="bipolarValuedSets.BpvSet.polarise"><code class="xref py py-meth docutils literal notranslate"><span class="pre">polarise()</span></code></a> method is provided for setting all positive and negative membership credibilities of a bpv-set to +1.0, respectively to -1.0 .</p>
+<p>Finally, a <a class="reference internal" href="techDoc.html#bipolarValuedSets.BpvSet.polarise" title="bipolarValuedSets.BpvSet.polarise"><code class="xref py py-meth docutils literal notranslate"><span class="pre">polarise()</span></code></a> method is provided for setting all positive and negative membership credibilities of a bpv-set to +1.0, respectively to -1.0, respectively to the minimal positive +0.0001 or negative -0.0001 characteristic value.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">D2</span> <span class="o">=</span> <span class="n">D1</span><span class="o">.</span><span class="n">polarise</span><span class="p">(</span><span class="n">InSite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </span><span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">D2</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
 <span class="linenos">3</span><span class="go"> s1:+1.0000, s2:-1.0000, s3:-1.0000</span>
+<span class="linenos">4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">D3</span> <span class="o">=</span> <span class="n">D1</span><span class="o">.</span><span class="n">polarise</span><span class="p">(</span><span class="n">MinimalValues</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">InSite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos">5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">D3</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="linenos">6</span><span class="go"> s1:+0.0001, s2:-0.0001, s3:-0.0001</span>
 </pre></div>
 </div>
 <p>In the limit case of no indeterminate membership characteristics, we recover this way standard crisp sets and the previous set operations implement in fact a classical Boolean algebra <a class="reference internal" href="#bis-2004-3p" id="id58"><span>[BIS-2004_3p]</span></a>.</p>

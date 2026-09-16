@@ -1040,8 +1040,8 @@ Indeed, best choice recommendations, computed from an *unopposed multiobjective*
    :name: unOpposed5
    :emphasize-lines: 6, 13
 
-   >>> uopg.showBestChoiceRecommendation()
-    Best choice recommendation(s) (BCR)
+   >>> uopg.showChoiceRecommendation('Rubis')
+    Rubis choice recommendation(s) (BCR)
      (in decreasing order of determinateness)   
     Credibility domain: [-1.00,1.00]
      === >> potential first choice(s)
@@ -1741,8 +1741,8 @@ As a consequence, a **multipartisan primary selection**, computed with a :py:met
    :caption: Example of ineffective primary multipartisan selection
    :linenos:
 
-   >>> uodg.showBestChoiceRecommendation()
-    Best choice recommendation(s) (BCR)
+   >>> uodg.showChoiceRecommendation('Rubis')
+    Rubis choice recommendation(s) (BCR)
      (in decreasing order of determinateness)   
     Credibility domain: [-1.00,1.00]
     === >> ambiguous choice(s)
@@ -2129,9 +2129,9 @@ Encouraged by this positive result, we may furthermore try to compute as well a 
    :linenos:
    :emphasize-lines: 6-9,16,31
 
-   >>> odg.showBestChoiceRecommendation()
+   >>> odg.showChoiceRecommendation('Rubis')
     ***********************
-    Best choice recommendation(s) (BCR)
+    Rubis choice recommendation(s) (BCR)
      (in decreasing order of determinateness)   
      Credibility domain: [-1.00,1.00]
     === >> ambiguous first choice(s) 
@@ -2338,8 +2338,8 @@ We see this result furthermore confirmed when computing the corresponding **firs
    :linenos:
    :emphasize-lines: 6,14
    
-   >>> m.showBestChoiceRecommendation()
-    Best choice recommendation(s) (BCR)
+   >>> m.showChoiceRecommendation('Rubis')
+    Rubis choice recommendation(s) (BCR)
      (in decreasing order of determinateness)   
     Credibility domain: [-100.00,100.00]
      === >> potential first choice(s)
@@ -4532,7 +4532,7 @@ The :py:class:`~bipolarValuedSets.BpvSet` class provides furthermore a :py:meth:
    >>> D1.showMembershipCharacteristics(Sorted=False)
     s1:+0.7313, s2:-0.6949, s3:-0.8869
 
-Finally, a :py:meth:`~bipolarValuedSets.BpvSet.polarise` method is provided for setting all positive and negative membership credibilities of a bpv-set to +1.0, respectively to -1.0 .
+Finally, a :py:meth:`~bipolarValuedSets.BpvSet.polarise` method is provided for setting all positive and negative membership credibilities of a bpv-set to +1.0, respectively to -1.0, respectively to the minimal positive +0.0001 or negative -0.0001 characteristic value.
 
 .. code-block:: pycon
    :linenos:
@@ -4541,6 +4541,9 @@ Finally, a :py:meth:`~bipolarValuedSets.BpvSet.polarise` method is provided for 
    >>> D2 = D1.polarise(InSite=False)
    >>> D2.showMembershipCharacteristics()
     s1:+1.0000, s2:-1.0000, s3:-1.0000
+   >>> D3 = D1.polarise(MinimalValues=True,InSite=False)
+   >>> D3.showMembershipCharacteristics()
+    s1:+0.0001, s2:-0.0001, s3:-0.0001
 
 In the limit case of no indeterminate membership characteristics, we recover this way standard crisp sets and the previous set operations implement in fact a classical Boolean algebra [BIS-2004_3p]_. 
 

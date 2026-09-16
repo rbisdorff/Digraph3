@@ -318,6 +318,7 @@ class BpvSet(object):
         from copy import deepcopy
         from bipolarValuedSets import BpvSet
         from decimal import Decimal
+        from digraphsTools import bpmin
         newSelf = deepcopy(self)
         newSelf.recodeValuation()
         newOther = deepcopy(other)
@@ -337,9 +338,10 @@ class BpvSet(object):
         
         membership = {}
         Min = inter.valuationDomain['min']
+        Med = inter.valuationDomain['med']
         for it in inter.support:
             try:
-                membership[it] = min(newSelf.membership[it],newOther.membership[it])
+                membership[it] = bpmin(Med,[newSelf.membership[it],newOther.membership[it]])
             except:
                 membership[it] = Min
         inter.ndigits = max(newSelf.ndigits, newOther.ndigits)
@@ -362,6 +364,7 @@ class BpvSet(object):
 
         from copy import deepcopy
         from bipolarValuedSets import BpvSet
+        from digraphsTools import bpmax
         newSelf = deepcopy(self)
         newSelf.recodeValuation()
         newOther = deepcopy(other)
@@ -381,9 +384,10 @@ class BpvSet(object):
 
         membership = {}
         Max = union.valuationDomain['max']
+        Med = union.valuationDomain['med']
         for it in union.support:
             try:
-                membership[it] = max(newSelf.membership[it],newOther.membership[it])
+                membership[it] = bpmax(Med,[newSelf.membership[it],newOther.membership[it]])
             except:
                 try:
                     membership[it] = newSelf.membership[it]
@@ -838,25 +842,29 @@ if __name__ == "__main__":
                       Debug=False)
     
     #X.showMembershipCharacteristics(Normalized=False)
-    X.showMembershipCharacteristics()
-    Y = RandomBpvSet(numberOfElements=5,elementNamePrefix='s',
+    X.showMembershipCharacteristics(Sorted=False)
+    Y = RandomBpvSet(numberOfElements=3,elementNamePrefix='s',
                       indeterminateness=0.1,
                       valuationRange=(-1,1),
                       seed=2,ndigits=4,
                       Debug=False)
     
     #Y.showMembershipCharacteristics(Normalized=False)
-    Y.showMembershipCharacteristics()
+    Y.showMembershipCharacteristics(Sorted=False)
     D = Y - X
+    D.showMembershipCharacteristics(Sorted=False)
     E = D.strip(InSite=False)
+    E.showMembershipCharacteristics(Sorted=True)
     D.strip()
+    D.showMembershipCharacteristics(Sorted=False)
+    
     Op = X.ovee(Y)
-    Op.showMembershipCharacteristics()
+    Op.showMembershipCharacteristics(Sorted=False)
     Om = X.owedge(Y)
-    Om.showMembershipCharacteristics()
+    Om.showMembershipCharacteristics(Sorted=False)
     M = RandomBpvSet(indeterminateness=1.0,elementNamePrefix='s')
     Oxmp = X.ovee(M)
-    Oxmp.showMembershipCharacteristics()
+    Oxmp.showMembershipCharacteristics(Sorted=False)
     Oxmm = X.owedge(M)
-    Oxmm.showMembershipCharacteristics()
+    Oxmm.showMembershipCharacteristics(Sorted=False)
 

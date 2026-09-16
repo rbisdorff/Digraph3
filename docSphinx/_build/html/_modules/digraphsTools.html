@@ -420,7 +420,45 @@
         <span class="k">return</span> <span class="n">Med</span></div>
 
 
-<span class="c1">#epistemic disjunctive operator</span>
+<span class="c1"># bpv operators</span>
+<div class="viewcode-block" id="bpmax">
+<a class="viewcode-back" href="../techDoc.html#digraphsTools.bpmax">[docs]</a>
+<span class="k">def</span> <span class="nf">bpmax</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span><span class="n">L</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Indeterminate values guarded max operator for bipolar outranking characteristics</span>
+<span class="sd">    computation: Med is the valuation domain median and L is a list of</span>
+<span class="sd">    r-valued statement characteristics.    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">terms</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+    <span class="n">nonIndeterTerms</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">terms</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Med</span><span class="p">:</span>
+            <span class="n">nonIndeterTerms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;terms&#39;</span><span class="p">,</span> <span class="n">terms</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;nonIndeterTerms&#39;</span><span class="p">,</span><span class="n">termsPlus</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">nonIndeterTerms</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="n">Med</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="bpmin">
+<a class="viewcode-back" href="../techDoc.html#digraphsTools.bpmin">[docs]</a>
+<span class="k">def</span> <span class="nf">bpmin</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span><span class="n">L</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Indeterminate values guarded min operator for bipolar outranking characteristics</span>
+<span class="sd">    computation: Med is the valuation domain median and L is a list of</span>
+<span class="sd">    r-valued statement characteristics.    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">terms</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+    <span class="n">nonIndeterTerms</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">terms</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Med</span><span class="p">:</span>
+            <span class="n">nonIndeterTerms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;terms&#39;</span><span class="p">,</span> <span class="n">terms</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;nonIndeterTerms&#39;</span><span class="p">,</span><span class="n">termsPlus</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">nonIndeterTerms</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="n">Med</span><span class="p">)</span></div>
+
+    
 <div class="viewcode-block" id="omax">
 <a class="viewcode-back" href="../techDoc.html#digraphsTools.omax">[docs]</a>
 <span class="k">def</span> <span class="nf">omax</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span><span class="n">L</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
