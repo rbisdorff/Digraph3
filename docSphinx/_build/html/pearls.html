@@ -4268,19 +4268,25 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <div class="line-block">
 <div class="line">For all <img class="math" src="_images/math/2f85bc4c834f81d3d8587c571049602d7d40d148.png" alt="z \in E_{X \cup Y}"/> the membership characteristic <img class="math" src="_images/math/9e441cca04cc8f2d18e79525ab8d4a9a737d80cb.png" alt="r\big(\,z \in (X \cup Y)\,\big)\; ="/></div>
 <div class="line-block">
-<div class="line"><img class="math" src="_images/math/4379581c39bfc2839188591b35ab81a71bd1be50.png" alt="\max\big(\,r(z \in X),r(z \in Y)\, \big)"/> when both <em>z</em> in <em>X</em> and <em>z</em> in <em>Y</em>;</div>
+<div class="line"><img class="math" src="_images/math/4379581c39bfc2839188591b35ab81a71bd1be50.png" alt="\max\big(\,r(z \in X),r(z \in Y)\, \big)"/> when <img class="math" src="_images/math/b534f926d5a99c7f951ac975459e1f906948ff8d.png" alt="r(z \in X) \neq 0.0"/> and <img class="math" src="_images/math/66e85772cfc6ed9163b1abd03271564713329482.png" alt="r(z \in Y)\neq 0.0"/>;</div>
+<div class="line"><img class="math" src="_images/math/5d8b976e2862b5d489aab1cf78235c34e79fe930.png" alt="r(z \in X)"/> when <img class="math" src="_images/math/49105529f10d435fccec7321283b4909fe09a96c.png" alt="r(r(z \in Y) = 0.0"/>;</div>
+<div class="line"><img class="math" src="_images/math/c17438c3d2249ac66c65164a5aa74088b7be8237.png" alt="r(z \in Y)"/> when <img class="math" src="_images/math/447a186fc0fa14ca3fe435c16d38d348b060d6f7.png" alt="r(r(z \in X) = 0.0"/>;</div>
 <div class="line">otherwise:</div>
 <div class="line-block">
-<div class="line"><img class="math" src="_images/math/5d8b976e2862b5d489aab1cf78235c34e79fe930.png" alt="r(z \in X)"/> when <img class="math" src="_images/math/68c861c2626b82613d8050dbbf65726c0c9ac611.png" alt="z \in X"/>, and</div>
-<div class="line"><img class="math" src="_images/math/c17438c3d2249ac66c65164a5aa74088b7be8237.png" alt="r(z \in Y)"/> when <img class="math" src="_images/math/287b5b676378ceac03ca8c1becee5471b6966c68.png" alt="z \in Y"/>.</div>
+<div class="line"><img class="math" src="_images/math/1eb0514994edf71549d3baf4fbfa79d643bca95e.png" alt="0.0"/>.</div>
 </div>
 </div>
 </div>
 <div class="line-block">
 <div class="line">For all <img class="math" src="_images/math/2f85bc4c834f81d3d8587c571049602d7d40d148.png" alt="z \in E_{X \cup Y}"/> the membership characteristic <img class="math" src="_images/math/b2f27984aa652bd8c546623dbf9a3d37fa42167f.png" alt="r\big(\,z \in (X \cap Y)\,\big)\; ="/></div>
 <div class="line-block">
-<div class="line"><img class="math" src="_images/math/bff5a84a92e64a8ffd8940cc127a72f82caa7fa7.png" alt="\min\big(\,r(z \in X),r(z \in Y)\, \big)"/> when both <em>z</em> in <em>X</em> and <em>z</em> in <em>Y</em>;</div>
-<div class="line"><img class="math" src="_images/math/26f3fc3c1a88f417dfecaccadb181c5941ec0f10.png" alt="-1.0"/> otherwise.</div>
+<div class="line"><img class="math" src="_images/math/bff5a84a92e64a8ffd8940cc127a72f82caa7fa7.png" alt="\min\big(\,r(z \in X),r(z \in Y)\, \big)"/> when <img class="math" src="_images/math/b534f926d5a99c7f951ac975459e1f906948ff8d.png" alt="r(z \in X) \neq 0.0"/> and <img class="math" src="_images/math/66e85772cfc6ed9163b1abd03271564713329482.png" alt="r(z \in Y)\neq 0.0"/>;</div>
+<div class="line"><img class="math" src="_images/math/5d8b976e2862b5d489aab1cf78235c34e79fe930.png" alt="r(z \in X)"/> when <img class="math" src="_images/math/49105529f10d435fccec7321283b4909fe09a96c.png" alt="r(r(z \in Y) = 0.0"/>;</div>
+<div class="line"><img class="math" src="_images/math/c17438c3d2249ac66c65164a5aa74088b7be8237.png" alt="r(z \in Y)"/> when <img class="math" src="_images/math/447a186fc0fa14ca3fe435c16d38d348b060d6f7.png" alt="r(r(z \in X) = 0.0"/>;</div>
+<div class="line">otherwise:</div>
+<div class="line-block">
+<div class="line"><img class="math" src="_images/math/1eb0514994edf71549d3baf4fbfa79d643bca95e.png" alt="0.0"/>.</div>
+</div>
 </div>
 </div>
 <div class="line-block">
@@ -4298,39 +4304,39 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bipolarValuedSets</span> <span class="kn">import</span> <span class="n">RandomBpvSet</span>
 <span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">RandomBpvSet</span><span class="p">(</span><span class="n">numberOfElements</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">elementNamePrefix</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span>
 <span class="linenos">3</span><span class="gp">... </span>    <span class="n">indeterminateness</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">valuationRange</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="linenos">4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="hll"><span class="linenos">5</span><span class="go"> s2:+0.6949, s3:+0.5275, s5:+0.0000, s4:-0.4899, s1:-0.7313</span>
+<span class="linenos">4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="hll"><span class="linenos">5</span><span class="go"> s1:-0.7313, s2:+0.6949, s3:+0.5275, s4:-0.4899, s5:+0.0000</span>
 </span><span class="linenos">6</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="n">RandomBpvSet</span><span class="p">(</span><span class="n">numberOfElements</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">elementNamePrefix</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span>
 <span class="linenos">7</span><span class="gp">... </span>   <span class="n">indeterminateness</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">valuationRange</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="linenos">8</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="hll"><span class="linenos">9</span><span class="go"> s1:  +0.9121, s2:+0.8957, s3:-0.8869</span>
+<span class="linenos">8</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="hll"><span class="linenos">9</span><span class="go"> s1:+0.9121, s2:+0.8957, s3:-0.8869</span>
 </span></pre></div>
 </div>
 </div>
 <p>In <a class="reference internal" href="#bipolarvaluedsets2"><span class="std std-numref">Listing 3.57</span></a> below we illustrate the bipolar-valued set <strong>union</strong> and <strong>intersection</strong>.</p>
 <div class="literal-block-wrapper docutils container" id="bipolarvaluedsets2">
 <div class="code-block-caption"><span class="caption-number">Listing 3.57 </span><span class="caption-text">Set union and intersection of bpv-sets</span><a class="headerlink" href="#bipolarvaluedsets2" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">|</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">|</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="linenos">2</span><span class="go"> # Python&#39;s set union symbol is |</span>
-<span class="hll"><span class="linenos">3</span><span class="go"> s1:+0.9121, s2:+0.8957, s3:+0.5275, s5:+0.0000, s4:-0.4899</span>
-</span><span class="linenos">4</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">&amp;</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="hll"><span class="linenos">3</span><span class="go"> s1:+0.9121, s2:+0.8957, s3:+0.5275, s4:-0.4899, s5:+0.0000,</span>
+</span><span class="linenos">4</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">&amp;</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="linenos">5</span><span class="go"> # Python&#39;s set intersection symbol is &amp;</span>
-<span class="hll"><span class="linenos">6</span><span class="go"> s2:+0.6949, s1:-0.7313 s3:-0.8869, s4:-1.0000, s5:-1.0000</span>
+<span class="hll"><span class="linenos">6</span><span class="go"> s1:-0.7313, s2:+0.6949, s3:-0.8869, s4:-1.0000, s5:-1.0000</span>
 </span></pre></div>
 </div>
 </div>
 <p>In <a class="reference internal" href="#bipolarvaluedsets3"><span class="std std-numref">Listing 3.58</span></a> below we illustrate the bipolar-valued set <strong>difference</strong> and <strong>symmetric difference</strong>.</p>
 <div class="literal-block-wrapper docutils container" id="bipolarvaluedsets3">
 <div class="code-block-caption"><span class="caption-number">Listing 3.58 </span><span class="caption-text">Difference and symmetric differences of bpv-sets</span><a class="headerlink" href="#bipolarvaluedsets3" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">-</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">-</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="linenos">2</span><span class="go"> # Python&#39;s set difference is -</span>
-<span class="hll"><span class="linenos">3</span><span class="go"> s3:+0.5275, s5:+0.0000, s4:-0.4899 s2:-0.8957, s1:-0.9121</span>
-</span><span class="linenos">4</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Y</span><span class="o">-</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="hll"><span class="linenos">3</span><span class="go"> s1:-0.9121, s2:-0.8957, s3:+0.5275, s4:-0.4899, s5:+0.0000</span>
+</span><span class="linenos">4</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Y</span><span class="o">-</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="hll"><span class="linenos">5</span><span class="go"> s1:+0.7313, s2:-0.6949, s3:-0.8869, s4:-1.0000, s5:-1.0000</span>
-</span><span class="linenos">6</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Y</span><span class="o">^</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+</span><span class="linenos">6</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Y</span><span class="o">^</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="linenos">7</span><span class="go"> # Python&#39;s symmetrix difference symbol is ^</span>
 <span class="linenos">8</span><span class="go"> # X^Y = (X-Y)|(Y-X) or (X|Y)-(X&amp;Y)</span>
-<span class="hll"><span class="linenos">9</span><span class="go"> s1:+0.7313, s3:+0.5275, s5:+0.0000, s4:-0.4899, s2:-0.6949</span>
+<span class="hll"><span class="linenos">9</span><span class="go"> s1:+0.7313, s2:-0.6949, s3:+0.5275, s4:-0.4899, s5:+0.0000</span>
 </span></pre></div>
 </div>
 </div>
@@ -4339,7 +4345,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="hll"><span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">D</span><span class="o">.</span><span class="n">isSubset</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
 </span><span class="linenos">3</span><span class="go"> Decimal(&#39;0.8869&#39;)</span>
 <span class="linenos">4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">D1</span> <span class="o">=</span> <span class="n">D</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="n">InSite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="hll"><span class="linenos">5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">D1</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="hll"><span class="linenos">5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">D1</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </span><span class="linenos">6</span><span class="go"> s1:+0.7313, s2:-0.6949, s3:-0.8869</span>
 </pre></div>
 </div>
@@ -4403,7 +4409,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <div class="code-block-caption"><span class="caption-number">Listing 3.59 </span><span class="caption-text">Disjunctive and conjunctive fusion of bpv-sets</span><a class="headerlink" href="#bipolarvaluedsets4" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bipolarValuedSets</span> <span class="kn">import</span> <span class="n">RandomBpvSet</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">RandomBpvSet</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">showMembershipCharaceristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="hll"><span class="linenos"> 4</span><span class="go">  x1:-0.7313, x2:+0.6949, x3:+0.5275, x4:-0.4899, x5:+0.0000</span>
 </span><span class="linenos"> 5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="n">RandomBpvSet</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="linenos"> 6</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span><span class="o">.</span><span class="n">showMembershipCharaceristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -5771,7 +5777,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Sep 11, 2026.
+      <span class="lastupdated">Last updated on Sep 16, 2026.
       </span></p>
   </div>
 
