@@ -1734,7 +1734,7 @@ With an oppositeness degree of 100.0% (see :numref:`divisivePolitics` Lines 33-3
     'a7' |  +0.00  +0.00  +0.00  +0.00  +0.00  +0.00    -   
     Valuation domain: [-1.000; 1.000]
       
-As a consequence, a **multipartisan primary selection**, computed with a :py:meth:`~digraphs.Digraph.showBestChoiceRecommendation` method,  will keep the complete initial set of eligible candidates and, hence, becomes **ineffective** (see :numref:`ineffectivePrimarySelection` Line 6).
+As a consequence, a **multipartisan primary selection**, computed with a :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method,  will keep the complete initial set of eligible candidates and, hence, becomes **ineffective** (see :numref:`ineffectivePrimarySelection` Line 6).
 
 .. code-block:: pycon
    :name: ineffectivePrimarySelection

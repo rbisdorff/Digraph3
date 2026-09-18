@@ -8403,38 +8403,38 @@ class Digraph(object):
         else:
             return med
 
-    def inner_prod4(self, v1, v2):
-        """
-        Parameters: two choice characteristic vectors
-        Renders the inner product with guarded 0.0 characteristic of two characteristic vectors.
-        """
-        Min = Decimal(str(self.valuationdomain['min']))
-        Med = Decimal(str(self.valuationdomain['med']))
-        resp = []
-        resm = []
-        for i in range(len(v1)):
-            if v1[i] > Med and v2[i] > Med:
-                resp.append(min(v1[i],v2[i]))
-            elif v1[i] < Med and v2[i] < Med:
-                resm.append(max(v1[i],v2[i]))
-            elif v1[i] == Med and v2[i] > Med:
-                resp.append(v2[i])
-            elif v1[i] > Med and v2[i] == Med:
-                resp.append(v1[i])
-            elif v1[i] == Med and v2[i] < Med:
-                resm.append(v2[i])
-            elif v1[i] < Med and v2[i] == Med:
-                resm.append(v1[i])
-        np = len(resp)
-        nm = len(resm)
-        if np > 0 and nm == 0:
-            res = max(resp)
-        elif nm > 0 and np == 0:
-            res = min(resm)
-        else:
-            res = Med
-        return res
-    
+##    def inner_prod2(self, v1, v2):
+##        """
+##        Parameters: two choice characteristic vectors
+##        Renders the inner product with guarded 0.0 characteristic of two characteristic vectors.
+##        """
+##        Min = Decimal(str(self.valuationdomain['min']))
+##        Med = Decimal(str(self.valuationdomain['med']))
+##        resp = []
+##        resm = []
+##        for i in range(len(v1)):
+##            if v1[i] > Med and v2[i] > Med:
+##                resp.append(min(v1[i],v2[i]))
+##            elif v1[i] < Med and v2[i] < Med:
+##                resm.append(max(v1[i],v2[i]))
+##            elif v1[i] == Med and v2[i] > Med:
+##                resp.append(v2[i])
+##            elif v1[i] > Med and v2[i] == Med:
+##                resp.append(v1[i])
+##            elif v1[i] == Med and v2[i] < Med:
+##                resm.append(v2[i])
+##            elif v1[i] < Med and v2[i] == Med:
+##                resm.append(v1[i])
+##        np = len(resp)
+##        nm = len(resm)
+##        if np > 0 and nm == 0:
+##            res = max(resp)
+##        elif nm > 0 and np == 0:
+##            res = min(resm)
+##        else:
+##            res = Med
+##        return res
+##    
 ##    def inner_prod2(self, v1, v2):
 ##        """
 ##        Parameters: two choice characteristic vectors
@@ -8448,37 +8448,39 @@ class Digraph(object):
 ##                resTerms.append(min(v1[i],v2[i]))
 ##            elif v1[i] != Med and v2[i] == Med:
 ##                resTerms.append(v1[i])
-##            elif v1[i] != Med and v2[i] == Med:
-##                resTerms.append(v1[i])
+##            elif v1[i] == Med and v2[i] != Med:
+##                resTerms.append(v2[i])
 ##        res = max(resTerms)             
 ##        return res
 
-    def inner_prod3(self, v1, v2):
+    def inner_prod2(self, v1, v2):
         """
         Parameters: two choice characteristic vectors
         Renders the inner product of two characteristic vectors.
         """
         from digraphsTools import bpmin,bpmax
-        res = Decimal(str(self.valuationdomain['min']))
+        #res = Decimal(str(self.valuationdomain['min']))
         Med = self.valuationdomain['med']
         terms = []
         for i in range(len(v1)):
-            terms.append(bpmin(Med,[v1[i],v2[i]]))
-        return bpmax(Med,terms)
+##            terms.append(bpmin(Med,[v1[i],v2[i]]))
+##        return bpmax(Med,terms)
+            terms.append(min([v1[i],v2[i]]))
+        return max(terms)
 
     def matmult2(self, m, v):
         """
         Parameters: digraph relation and choice characteristic vector
         matrix multiply vector by inner production
         """
-        return [self.inner_prod3(r, v) for r in m]
+        return [self.inner_prod2(r, v) for r in m]
 
-    def matmult3(self, m, v):
-        """
-        Parameters: digraph relation and choice characteristic vector
-        matrix multiply vector by inner production with epistemic fusion operators
-        """
-        return [self.inner_prod3(r, v) for r in m]
+##    def matmult3(self, m, v):
+##        """
+##        Parameters: digraph relation and choice characteristic vector
+##        matrix multiply vector by inner production with epistemic fusion operators
+##        """
+##        return [self.inner_prod2(r, v) for r in m]
 
     def readdomvector(self, x,relation):
         """
@@ -9960,7 +9962,7 @@ class Digraph(object):
    
     
     def computeKernelVector(self,kernel,Initial=True,
-                            Comments=False,Iterations=False,Test=False):
+                            Comments=False,Iterations=False):
         """
         | Computing Characteristic values for dominant pre-kernels
         | using the von Neumann dual fixpoint equation
@@ -10003,12 +10005,8 @@ class Digraph(object):
             print('initial high vector :', vechigha)
         it = 1
         while veclowa != vechigha and it < 2*n*n:
-            if Test:
-                veclowb = temp.matmult3(mat,veclowa)
-                vechighb = temp.matmult3(mat,vechigha)
-            else:  
-                veclowb = temp.matmult3(mat,veclowa)
-                vechighb = temp.matmult3(mat,vechigha)
+            veclowb = temp.matmult2(mat,veclowa)
+            vechighb = temp.matmult2(mat,vechigha)
             veclow = temp.contra(vechighb)
             vechigh = temp.contra(veclowb)
             if veclow == veclowa and vechigh == vechigha : break
@@ -10041,7 +10039,7 @@ class Digraph(object):
             return choiceVector        
 
                                 
-    def computeGoodChoices(self,Comments=False,Test=False):
+    def computeGoodChoices(self,Comments=False):
         """
         Computes characteristic values for potentially good choices.
 
@@ -10091,12 +10089,8 @@ class Digraph(object):
                 print('initial vechigh', vechigha)
             it = 1
             while veclowa != vechigha and it < 2*n*n:
-                if Test:
-                    veclowb = temp.matmult3(mat,veclowa)
-                    vechighb = temp.matmult3(mat,vechigha)
-                else:
-                    veclowb = temp.matmult2(mat,veclowa)
-                    vechighb = temp.matmult2(mat,vechigha)
+                veclowb = temp.matmult2(mat,veclowa)
+                vechighb = temp.matmult2(mat,vechigha)
                 veclow = temp.contra(vechighb)
                 vechigh = temp.contra(veclowb)
                 if veclow == veclowa and vechigh == vechigha : break
@@ -10190,7 +10184,7 @@ class Digraph(object):
         self.goodChoices = domChoicesSort
 
 
-    def computeBadPirlotChoices(self,Comments=False,EpistemicFusion=False):
+    def computeBadPirlotChoices(self,Comments=False):
         """
         Characteristic values for potentially bad choices
         using the Pirlot's fixpoint algorithm.
@@ -10230,10 +10224,7 @@ class Digraph(object):
             vecsolfin = vecmed
             it = 0
             while it < 2*n*n:
-                if EpistemicFusion:
-                    vecsolfin = self.matmult3(mat,vecsol)
-                else:
-                    vecsolfin = self.matmult2(mat,vecsol)                    
+                vecsolfin = self.matmult2(mat,vecsol)                    
                 if Comments:
                     print(it, 'th vesol :',vecsol)
                 veccur = self.contra(vecsolfin)
@@ -10277,7 +10268,7 @@ class Digraph(object):
             return result*(Max-Med)
 
 
-    def computeBadChoices(self,Comments=False,Test=False):
+    def computeBadChoices(self,Comments=False):
         """
         Computes characteristic values for potentially bad choices.
 
@@ -10325,12 +10316,8 @@ class Digraph(object):
                 print('initial vechigha', vechigha)
             it = 1
             while veclowa != vechigha and it < 2*n*n:
-                if Test:
-                    veclowb = temp.matmult3(mat,veclowa)
-                    vechighb = temp.matmult3(mat,vechigha)
-                else:
-                    veclowb = temp.matmult2(mat,veclowa)
-                    vechighb = temp.matmult2(mat,vechigha)                    
+                veclowb = temp.matmult2(mat,veclowa)
+                vechighb = temp.matmult2(mat,vechigha)                    
                 veclow = temp.contra(vechighb)
                 vechigh = temp.contra(veclowb)
                 if veclow == veclowa and vechigh == vechigha : break
@@ -15968,20 +15955,22 @@ if __name__ == "__main__":
     from outrankingDigraphs import *
     from randomDigraphs import *
     from decimal import Decimal, getcontext
-    t = Random3ObjectivesPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=11,numberOfCriteria=13,
-                                            missingDataProbability=0.05,seed=8)
+    #t = Random3ObjectivesPerformanceTableau(weightDistribution="equiobjectives",
+    #                             numberOfActions=11,numberOfCriteria=13,
+    #                                        missingDataProbability=0.05,seed=8)
                           
     #t = CircularPerformanceTableau()
-    #t = PerformanceTableau('officeChoice')
+    #t = PerformanceTableau('AliceChoice')
+    t = PerformanceTableau('officeChoice')
     #print(getcontext().prec)
     g = BipolarOutrankingDigraph(t,Threading=False,startMethod='spawn')
     print(g)
-    # print('Rubis BCR')
-    # g.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True)
-    # ranking = g.showChoiceRecommendation('IteratedCondorcetWinners',ReturnRanking=True)
-    g.showChoiceRecommendation('Rubis',ChoiceVector=True)
-    g.showChoiceRecommendation('CondorcetWinners')
+    print('Rubis BCR')
+    g.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True)
+    cg = ConfidentBipolarOutrankingDigraph(t,confidence=90.0)    # ranking = g.showChoiceRecommendation('IteratedCondorcetWinners',ReturnRanking=True)
+    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True)
+    #g.showChoiceRecommendation('Rubis',ChoiceVector=True)
+    cg.showChoiceRecommendation('CondorcetWinners')
     print(g.showChoiceRecommendation('IteratedCondorcetWinners',
                                      ReturnRanking=True))
     from linearOrders import IteratedBpvCondorcetWinnersRanking
