@@ -7056,7 +7056,7 @@ In the relation map, shown in :numref:`aliceRelationMap` above, we finally see i
    :linenos:
    :emphasize-lines: 1,6,10-13
 
-   >>> cdg = ~(dg)  # codual == strict outranking digraph
+   >>> cdg = ~(-dg)  # codual == strict outranking digraph
    >>> cdg.computeTransitivityDegree(Comments=True)
     Transitivity degree of digraph <converse-dual-rel_AliceChoice>:
      #triples x>y>z: 14, #closed: 14, #open: 0

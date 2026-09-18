@@ -8461,16 +8461,16 @@ class Digraph(object):
         """
         Parameters: digraph relation and choice characteristic vector
         matrix multiply vector by inner production
-        *fusionType* := 'standard' (default) | 'guardedIndterminateness' | 'epistemicFusion'
+        *fusionType* := 'standard' (default) | 'guardedIndeterminateness' | 'epistemicFusion'
         """
         if fusionType == 'standard':
             return [self.inner_prod2(r, v) for r in m]
-        elif fusionType == 'guardedIndterminateness':
+        elif fusionType == 'guardedIndeterminateness':
             return [self.inner_prodgi(r, v) for r in m]
         elif fusionType == 'epistemicFusion':
             return [self.inner_prodpb(r, v) for r in m]
         else:
-            print("Error: fusionType := 'standard' (default) | 'guardedIndterminateness' | 'epistemicFusion'")
+            print("Error: fusionType := 'standard' (default) | 'guardedIndeterminateness' | 'epistemicFusion'")
 
 
 ##    def matmult2(self, m, v):
@@ -8480,26 +8480,26 @@ class Digraph(object):
 ##        """
 ##        return [self.inner_prod2(r, v) for r in m]
 
-    def matmultpb(self, m, v):
-        """
-        Parameters: digraph relation and choice characteristic vector
-        matrix multiply vector by inner production with epistemic fusion operators
-        """
-        return [self.inner_prodpb(r, v) for r in m]
-
-    def matmultpb(self, m, v):
-        """
-        Parameters: digraph relation and choice characteristic vector
-        matrix multiply vector by inner production with epistemic fusion operators
-        """
-        return [self.inner_prodpb(r, v) for r in m]
-
-    def matmultgi(self, m, v):
-        """
-        Parameters: digraph relation and choice characteristic vector
-        matrix multiply vector by inner production with epistemic fusion operators
-        """
-        return [self.inner_prodgi(r, v) for r in m]
+##    def matmultpb(self, m, v):
+##        """
+##        Parameters: digraph relation and choice characteristic vector
+##        matrix multiply vector by inner production with epistemic fusion operators
+##        """
+##        return [self.inner_prodpb(r, v) for r in m]
+##
+##    def matmultpb(self, m, v):
+##        """
+##        Parameters: digraph relation and choice characteristic vector
+##        matrix multiply vector by inner production with epistemic fusion operators
+##        """
+##        return [self.inner_prodpb(r, v) for r in m]
+##
+##    def matmultgi(self, m, v):
+##        """
+##        Parameters: digraph relation and choice characteristic vector
+##        matrix multiply vector by inner production with epistemic fusion operators
+##        """
+##        return [self.inner_prodgi(r, v) for r in m]
 
     def readdomvector(self, x,relation):
         """
@@ -8586,6 +8586,7 @@ class Digraph(object):
     def computeBestChoiceRecommendation(self,Verbose=False,
                                           Comments=False,
                                           ChoiceVector=False,
+                                            fusionType='epistemicFusion',
                                           CoDual=True,
                                           Debug=False,
                                           _OldCoca=False,
@@ -8604,6 +8605,7 @@ class Digraph(object):
         self.showBestChoiceRecommendation(Verbose=Verbose,
                                           Comments=Comments,
                                           ChoiceVector=ChoiceVector,
+                                          fusionType=fusionType,
                                           CoDual=CoDual,
                                           Debug=Debug,
                                           _OldCoca=_OldCoca,
@@ -8617,7 +8619,7 @@ class Digraph(object):
                                           Debug=False,
                                           _OldCoca=False,
                                           BrokenCocs=True,
-                                          EpistemicFusion=False,
+                                          fusionType='standard',
                                           ):
         """
         Shows a first choice recommendation.
@@ -8712,8 +8714,8 @@ class Digraph(object):
             g.showPreKernels()
         if Debug:
             print(g.dompreKernels,g.abspreKernels)
-        g.computeGoodChoices(EpistemicFusion=EpistemicFusion,Comments=Debug)
-        g.computeBadChoices(EpistemicFusion=EpistemicFusion,Comments=Debug)
+        g.computeGoodChoices(fusionType=fusionType,Comments=Debug)
+        g.computeBadChoices(fusionType=fusionType,Comments=Debug)
         if Debug:
             print('first and last choices: ',g.goodChoices,g.badChoices)
         t1 = time()
@@ -8819,6 +8821,7 @@ class Digraph(object):
     def showBestChoiceRecommendation(self,Verbose=False,
                                           Comments=True,
                                           ChoiceVector=False,
+                                     fusionType='epistemicFusion',
                                           CoDual=True,
                                           Debug=False,
                                           _OldCoca=False,
@@ -8917,8 +8920,8 @@ class Digraph(object):
             g.showPreKernels()
         if Debug:
             print(g.dompreKernels,g.abspreKernels)
-        g.computeGoodChoices(Comments=Debug)
-        g.computeBadChoices(Comments=Debug)
+        g.computeGoodChoices(fusionType=fusionType,Comments=Debug)
+        g.computeBadChoices(fusionType=fusionType,Comments=Debug)
         if Debug:
             print('first and last choices: ',g.goodChoices,g.badChoices)
         t1 = time()
@@ -9035,7 +9038,7 @@ class Digraph(object):
                                 seed=None,
                                  # Rubis
                                 ChoiceVector=False,
-                                EpistemicFusion=False,
+                                fusionType='standard',
                                  # iterated Bachet
                                 CoDual=False,
                                 Reversed=False,
@@ -9099,7 +9102,7 @@ class Digraph(object):
             self.showFirstChoiceRecommendation(Verbose=False,
                                           Comments=True,
                                           ChoiceVector=ChoiceVector,
-                                          EpistemicFusion=EpistemicFusion,
+                                          fusionType=fusionType,
                                           )
         elif method == 'CondorcetWinners':
             from time import time
@@ -9917,7 +9920,7 @@ class Digraph(object):
             res.membership[x] = resvec[x]
         return res
    
-    def computeGoodChoiceVector(self,ker,Comments=False):
+    def computeGoodChoiceVector(self,ker,fusionType='standardd',Comments=False):
         """
         | Computing Characteristic values for dominant pre-kernels
         | using the von Neumann dual fixoint equation
@@ -9954,8 +9957,8 @@ class Digraph(object):
             print('initial high vector :', vechigha)
         it = 1
         while veclowa != vechigha and it < 2*n*n:
-            veclowb = temp.matmult2(mat,veclowa)
-            vechighb = temp.matmult2(mat,vechigha)
+            veclowb = temp.matmult2(mat,veclowa,fusionType=FusionType)
+            vechighb = temp.matmult2(mat,vechigha,fusionType=FusionType)
             veclow = temp.contra(vechighb)
             vechigh = temp.contra(veclowb)
             if veclow == veclowa and vechigh == vechigha : break
@@ -9984,7 +9987,7 @@ class Digraph(object):
    
     
     def computeKernelVector(self,kernel,Initial=True,
-                            Comments=False,Iterations=False):
+                            Comments=False,fusionType='standard',Iterations=False):
         """
         | Computing Characteristic values for dominant pre-kernels
         | using the von Neumann dual fixpoint equation
@@ -10027,8 +10030,8 @@ class Digraph(object):
             print('initial high vector :', vechigha)
         it = 1
         while veclowa != vechigha and it < 2*n*n:
-            veclowb = temp.matmult2(mat,veclowa)
-            vechighb = temp.matmult2(mat,vechigha)
+            veclowb = temp.matmult2(mat,veclowa,fusionType=FusionType)
+            vechighb = temp.matmult2(mat,vechigha,fusionType=FusionType)
             veclow = temp.contra(vechighb)
             vechigh = temp.contra(veclowb)
             if veclow == veclowa and vechigh == vechigha : break
@@ -10061,7 +10064,7 @@ class Digraph(object):
             return choiceVector        
 
                                 
-    def computeGoodChoices(self,EpistemicFusion=False,Comments=False):
+    def computeGoodChoices(self,fusionType='standard',Comments=False):
         """
         Computes characteristic values for potentially good choices.
 
@@ -10111,12 +10114,8 @@ class Digraph(object):
                 print('initial vechigh', vechigha)
             it = 1
             while veclowa != vechigha and it < 2*n*n:
-                if EpistemicFusion:
-                    veclowb = temp.matmultpb(mat,veclowa)
-                    vechighb = temp.matmultpb(mat,vechigha)
-                else:
-                    veclowb = temp.matmult2(mat,veclowa)
-                    vechighb = temp.matmult2(mat,vechigha)
+                veclowb = temp.matmult2(mat,veclowa,fusionType=fusionType)
+                vechighb = temp.matmult2(mat,vechigha,fusionType=fusionType)
                 veclow = temp.contra(vechighb)
                 vechigh = temp.contra(veclowb)
                 if veclow == veclowa and vechigh == vechigha : break
@@ -10154,7 +10153,7 @@ class Digraph(object):
         self.goodChoices = domChoicesSort
         return goodChoicesDic
 
-    def computeGoodPirlotChoices(self,Comments=False):
+    def computeGoodPirlotChoices(self,fusionType='standard',Comments=False):
         """
         Characteristic values for potentially good choices
         using the Pirlot fixpoint algorithm.
@@ -10193,7 +10192,7 @@ class Digraph(object):
             vecsolfin = vecmed
             it = 0
             while it < 2*n*n:
-                vecsolfin = self.matmult2(mat,vecsol)
+                vecsolfin = self.matmult2(mat,vecsol,fusionType=fusionType)
                 if Comments:
                     print(it, 'th vecsol  :',vecsol)
                 veccur = self.contra(vecsolfin)
@@ -10210,7 +10209,7 @@ class Digraph(object):
         self.goodChoices = domChoicesSort
 
 
-    def computeBadPirlotChoices(self,Comments=False):
+    def computeBadPirlotChoices(self,fusionType='standard',Comments=False):
         """
         Characteristic values for potentially bad choices
         using the Pirlot's fixpoint algorithm.
@@ -10250,7 +10249,7 @@ class Digraph(object):
             vecsolfin = vecmed
             it = 0
             while it < 2*n*n:
-                vecsolfin = self.matmult2(mat,vecsol)                    
+                vecsolfin = self.matmult2(mat,vecsol,fusionType=fusionType)                    
                 if Comments:
                     print(it, 'th vesol :',vecsol)
                 veccur = self.contra(vecsolfin)
@@ -10294,7 +10293,7 @@ class Digraph(object):
             return result*(Max-Med)
 
 
-    def computeBadChoices(self,EpistemicFusion=False,Comments=False):
+    def computeBadChoices(self,fusionType='standard',Comments=False):
         """
         Computes characteristic values for potentially bad choices.
 
@@ -10342,12 +10341,8 @@ class Digraph(object):
                 print('initial vechigha', vechigha)
             it = 1
             while veclowa != vechigha and it < 2*n*n:
-                if EpistemicFusion:
-                    veclowb = temp.matmultpb(mat,veclowa)
-                    vechighb = temp.matmultpb(mat,vechigha)
-                else:
-                    veclowb = temp.matmult2(mat,veclowa)
-                    vechighb = temp.matmult2(mat,vechigha)
+                veclowb = temp.matmult2(mat,veclowa,fusionType=fusionType)
+                vechighb = temp.matmult2(mat,vechigha,fusionType=fusionType)
                 veclow = temp.contra(vechighb)
                 vechigh = temp.contra(veclowb)
                 if veclow == veclowa and vechigh == vechigha : break
@@ -10505,7 +10500,7 @@ class Digraph(object):
             print('}')
             print()
 
-    def showGoodChoices(self,Recompute=True):
+    def showGoodChoices(self,fusionType='standard',Recompute=True):
         """
         Characteristic values for potentially good choices.
         """
@@ -10555,8 +10550,8 @@ class Digraph(object):
             vechigha = vec1_a
             it = 1
             while veclowa != vechigha and it < 2*n*n:
-                veclowb = temp.matmult2(mat,veclowa)
-                vechighb = temp.matmult2(mat,vechigha)
+                veclowb = temp.matmult2(mat,veclowa,fusionType=FusionType)
+                vechighb = temp.matmult2(mat,vechigha,fusionType=FusionType)
                 veclow = temp.contra(vechighb)
                 vechigh = temp.contra(veclowb)
                 if veclow == veclowa and vechigh == vechigha : break
@@ -10580,7 +10575,7 @@ class Digraph(object):
             mat[i][i] = Min
         return mat
 
-    def showBadChoices(self,Recompute=True):
+    def showBadChoices(self,fusionType='standard',Recompute=True):
         """
         Characteristic values for potentially bad choices.
         """
@@ -10632,8 +10627,8 @@ class Digraph(object):
             vechigha = vec1_a
             it = 1
             while veclowa != vechigha and it < 2*n*n:
-                veclowb = temp.matmult2(mat,veclowa)
-                vechighb = temp.matmult2(mat,vechigha)
+                veclowb = temp.matmult2(mat,veclowa,fusionType=FusionType)
+                vechighb = temp.matmult2(mat,vechigha,fusionType=FusionType)
                 veclow = temp.contra(vechighb)
                 vechigh = temp.contra(veclowb)
                 if veclow == veclowa and vechigh == vechigha : break
@@ -15990,16 +15985,20 @@ if __name__ == "__main__":
     #                                        missingDataProbability=0.05,seed=8)
                           
     #t = CircularPerformanceTableau()
-    t = PerformanceTableau('AliceChoice')
-    #t = PerformanceTableau('officeChoice')
+    #t = PerformanceTableau('AliceChoice')
+    t = PerformanceTableau('officeChoice')
     #print(getcontext().prec)
     g = BipolarOutrankingDigraph(t,Threading=False,startMethod='spawn')
     print(g)
     print('Rubis BCR')
-    g.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True)
-    g.showFirstChoiceRecommendation(EpistemicFusion=True,Comments=True,ChoiceVector=True)
+    g.showBestChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType='standard')
+    g.showBestChoiceRecommendation(Comments=True,fusionType='guardedIndeterminateness',ChoiceVector=True)
+    g.showBestChoiceRecommendation(Comments=True,fusionType='epistemicFusion',ChoiceVector=True)
     cg = ConfidentBipolarOutrankingDigraph(t,confidence=90.0)    # ranking = g.showChoiceRecommendation('IteratedCondorcetWinners',ReturnRanking=True)
-    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,EpistemicFusion=True)
+    print('Confident ===>')
+    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType='standard')
+    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType='guardedIndeterminateness')
+    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType='epistemicFusion')
     #g.showChoiceRecommendation('Rubis',ChoiceVector=True)
     cg.showChoiceRecommendation('CondorcetWinners')
     print(g.showChoiceRecommendation('IteratedCondorcetWinners',
