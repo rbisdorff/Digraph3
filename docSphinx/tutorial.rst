@@ -1913,37 +1913,35 @@ Using again the same *NetFlows* ranking: *a6* > *a5* > *a1* > *a4* > *a2* > *a3*
 
    Solving the seminal best choice recommendation problem
 
-Finally, in :numref:`roy66V1B`, our *Rubis* best choice recommendation confirms, with the help of the initial and terminal kernels of the corresponding strict outranking digraph (Lines 1,7 and 16), that alternatives *a6* and *a5* are potential first choice candidates and alternatives  *a3* and *a2* are potential last choice candidates. The *graphviz* drawing of the strict outranking digraph, oriented by the initial and terminal kernels, shows its transitive structure (see :numref:`roy66V1Figures`). 
+Finally, in :numref:`roy66V1B`, our *Rubis* best choice recommendation confirms, with the help of the initial and terminal kernels of the corresponding strict outranking digraph (Lines 1,7,13,15,21), that alternatives *a6* and *a5* are potential first choice candidates and alternatives  *a3* and *a2* are potential last choice candidates. The *graphviz* drawing of the strict outranking digraph, oriented by the initial and terminal kernels, shows its transitive structure (see :numref:`roy66V1Figures`). 
 
 .. code-block:: pycon
    :name: roy66V1B
    :caption: The Rubis choice recommendation
    :linenos:
-   :emphasize-lines: 1,7,13-14,16,22-27
+   :emphasize-lines: 1,7,13,15,21-23
 
-   >>> g.showRubisBestChoiceRecommendation(CoDual=True)
+   >>> g.showChoiceRecommendation('Rubis')
     Rubis choice recommendation
     ***********************
-     First choice recommendation(s) (BCR)   
+    Rubis first choice recommendation(s) (BCR) 
      Credibility domain: [-1.00,1.00]
-     === >> potential first choice(s)
+    === >> potential first choice(s)
      * choice              : ['a5', 'a6']
-       independence        : 0.27
-       dominance           : 0.45
-       absorbency          : -1.00
-       covering (%)        : 100.00
-       determinateness (%) : 89.39
-       - first choice credibilities = { 'a6': 1.00, 'a5': 0.27,
-	    'a4': -0.45, 'a3': -1.00, 'a2': -1.00, 'a1': -1.00,  }
-     === >> potential last choice(s) 
+     independence        : 0.27
+     dominance           : 0.45
+     absorbency          : -1.00
+     covering (%)        : 100.00
+     determinateness (%) : 89.39
+     - most credible action(s) = { 'a6': 1.00, 'a5': 0.27, }
+    === >> potential last choice(s) 
      * choice              : ['a2', 'a3']
-       independence        : 0.27
-       dominance           : -1.00
-       absorbency          : 1.00
-       covered (%)         : 100.00
-       determinateness (%) : 71.21
-       - last choice credibilities = { 'a3': 0.45, 'a2': 0.27,
-	     'a6': -0.45, 'a5': -0.45, 'a4': -0.45, 'a1': -0.45, }
+     independence        : 0.27
+     dominance           : -1.00
+     absorbency          : 1.00
+     covered (%)         : 100.00
+     determinateness (%) : 71.21
+     - most credible action(s) = { 'a3': 0.45, 'a2': 0.27, }
    >>> (~(-g)).isTransitive()
     True
    >>> (~(-g)).exportGraphViz('roy66',firstChoice=['a6','a5'],

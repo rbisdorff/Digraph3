@@ -4072,27 +4072,26 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </pre></div>
 </div>
 <p>With such unique disjoint initial and terminal prekernels (see Line 4 and 10), the given digraph instance is hence clearly <em>lateralized</em>. Indeed, these initial and terminal prekernels of the codual outranking digraph reveal first, resp. last, choice recommendations one may formulate on the basis of a given outranking digraph instance.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showFirstChoiceRecommendation</span><span class="p">()</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;Rubis&#39;</span><span class="p">)</span>
 <span class="linenos"> 2</span><span class="go"> ***********************</span>
-<span class="linenos"> 3</span><span class="go"> First choice recommendation(s) (BCR)</span>
-<span class="linenos"> 4</span><span class="go">  (in decreasing order of determinateness)</span>
-<span class="linenos"> 5</span><span class="go"> Credibility domain: [-100.00,100.00]</span>
-<span class="linenos"> 6</span><span class="go">  === &gt;&gt; potential first choice(s)</span>
-<span class="linenos"> 7</span><span class="go"> * choice              : [&#39;a1&#39;, &#39;a2&#39;, &#39;a4&#39;]</span>
-<span class="linenos"> 8</span><span class="go">   independence        : 0.00</span>
-<span class="linenos"> 9</span><span class="go">   dominance           : 6.98</span>
-<span class="linenos">10</span><span class="go">   absorbency          : -48.84</span>
-<span class="linenos">11</span><span class="go">   covering (%)        : 66.67</span>
-<span class="linenos">12</span><span class="go">   determinateness (%) : 57.97</span>
-<span class="linenos">13</span><span class="go">   - most credible action(s) = { &#39;a4&#39;: 20.93, &#39;a2&#39;: 20.93, }</span>
-<span class="linenos">14</span><span class="go">  === &gt;&gt; potential last choice(s)</span>
-<span class="linenos">15</span><span class="go"> * choice              : [&#39;a3&#39;, &#39;a7&#39;]</span>
-<span class="linenos">16</span><span class="go">   independence        : 0.00</span>
-<span class="linenos">17</span><span class="go">   dominance           : -74.42</span>
-<span class="linenos">18</span><span class="go">   absorbency          : 16.28</span>
-<span class="linenos">19</span><span class="go">   covered (%)         : 80.00</span>
-<span class="linenos">20</span><span class="go">   determinateness (%) : 64.62</span>
-<span class="linenos">21</span><span class="go">   - most credible action(s) = { &#39;a7&#39;: 48.84, }</span>
+<span class="linenos"> 3</span><span class="go"> First choice recommendation(s)</span>
+<span class="linenos"> 4</span><span class="go"> Credibility domain: [-100.00,100.00]</span>
+<span class="linenos"> 5</span><span class="go">  === &gt;&gt; potential first choice(s)</span>
+<span class="linenos"> 6</span><span class="go"> * choice              : [&#39;a1&#39;, &#39;a2&#39;, &#39;a4&#39;]</span>
+<span class="linenos"> 7</span><span class="go">   independence        : 0.00</span>
+<span class="linenos"> 8</span><span class="go">   dominance           : 6.98</span>
+<span class="linenos"> 9</span><span class="go">   absorbency          : -48.84</span>
+<span class="linenos">10</span><span class="go">   covering (%)        : 66.67</span>
+<span class="linenos">11</span><span class="go">   determinateness (%) : 57.97</span>
+<span class="linenos">12</span><span class="go">   - most credible action(s) = { &#39;a4&#39;: 20.93, &#39;a2&#39;: 20.93, }</span>
+<span class="linenos">13</span><span class="go">  === &gt;&gt; potential last choice(s)</span>
+<span class="linenos">14</span><span class="go"> * choice              : [&#39;a3&#39;, &#39;a7&#39;]</span>
+<span class="linenos">15</span><span class="go">   independence        : 0.00</span>
+<span class="linenos">16</span><span class="go">   dominance           : -74.42</span>
+<span class="linenos">17</span><span class="go">   absorbency          : 16.28</span>
+<span class="linenos">18</span><span class="go">   covered (%)         : 80.00</span>
+<span class="linenos">19</span><span class="go">   determinateness (%) : 64.62</span>
+<span class="linenos">20</span><span class="go">   - most credible action(s) = { &#39;a7&#39;: 48.84, }</span>
 </pre></div>
 </div>
 <p>Notice that solving bipolar-valued kernel equation systems (see <a class="reference internal" href="#bipolar-valued-kernels-tutorial-label"><span class="std std-ref">Bipolar-Valued Kernels</span></a> below) provides furthermore a positive characterization of the most credible decision actions in each respective choice recommendation (see Lines 14 and 23 above). Actions ‘a2’ and ‘a4’ are equivalent candidates for a unique best choice, and action ‘a7’ is clearly confirmed as the last choice.</p>
@@ -5780,7 +5779,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Sep 16, 2026.
+      <span class="lastupdated">Last updated on Sep 18, 2026.
       </span></p>
   </div>
 

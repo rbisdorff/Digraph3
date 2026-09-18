@@ -2214,39 +2214,37 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 <p><span class="caption-number">Fig. 1.16 </span><span class="caption-text">Solving the seminal best choice recommendation problem</span><a class="headerlink" href="#roy66v1figures" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>Finally, in <a class="reference internal" href="#roy66v1b"><span class="std std-numref">Listing 1.20</span></a>, our <em>Rubis</em> best choice recommendation confirms, with the help of the initial and terminal kernels of the corresponding strict outranking digraph (Lines 1,7 and 16), that alternatives <em>a6</em> and <em>a5</em> are potential first choice candidates and alternatives  <em>a3</em> and <em>a2</em> are potential last choice candidates. The <em>graphviz</em> drawing of the strict outranking digraph, oriented by the initial and terminal kernels, shows its transitive structure (see <a class="reference internal" href="#roy66v1figures"><span class="std std-numref">Fig. 1.16</span></a>).</p>
+<p>Finally, in <a class="reference internal" href="#roy66v1b"><span class="std std-numref">Listing 1.20</span></a>, our <em>Rubis</em> best choice recommendation confirms, with the help of the initial and terminal kernels of the corresponding strict outranking digraph (Lines 1,7,13,15,21), that alternatives <em>a6</em> and <em>a5</em> are potential first choice candidates and alternatives  <em>a3</em> and <em>a2</em> are potential last choice candidates. The <em>graphviz</em> drawing of the strict outranking digraph, oriented by the initial and terminal kernels, shows its transitive structure (see <a class="reference internal" href="#roy66v1figures"><span class="std std-numref">Fig. 1.16</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="roy66v1b">
 <div class="code-block-caption"><span class="caption-number">Listing 1.20 </span><span class="caption-text">The Rubis choice recommendation</span><a class="headerlink" href="#roy66v1b" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showRubisBestChoiceRecommendation</span><span class="p">(</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;Rubis&#39;</span><span class="p">)</span>
 </span><span class="linenos"> 2</span><span class="go"> Rubis choice recommendation</span>
 <span class="linenos"> 3</span><span class="go"> ***********************</span>
-<span class="linenos"> 4</span><span class="go">  First choice recommendation(s) (BCR)</span>
+<span class="linenos"> 4</span><span class="go"> Rubis first choice recommendation(s) (BCR)</span>
 <span class="linenos"> 5</span><span class="go">  Credibility domain: [-1.00,1.00]</span>
-<span class="linenos"> 6</span><span class="go">  === &gt;&gt; potential first choice(s)</span>
+<span class="linenos"> 6</span><span class="go"> === &gt;&gt; potential first choice(s)</span>
 <span class="hll"><span class="linenos"> 7</span><span class="go">  * choice              : [&#39;a5&#39;, &#39;a6&#39;]</span>
-</span><span class="linenos"> 8</span><span class="go">    independence        : 0.27</span>
-<span class="linenos"> 9</span><span class="go">    dominance           : 0.45</span>
-<span class="linenos">10</span><span class="go">    absorbency          : -1.00</span>
-<span class="linenos">11</span><span class="go">    covering (%)        : 100.00</span>
-<span class="linenos">12</span><span class="go">    determinateness (%) : 89.39</span>
-<span class="hll"><span class="linenos">13</span><span class="go">    - first choice credibilities = { &#39;a6&#39;: 1.00, &#39;a5&#39;: 0.27,</span>
-</span><span class="hll"><span class="linenos">14</span><span class="go">         &#39;a4&#39;: -0.45, &#39;a3&#39;: -1.00, &#39;a2&#39;: -1.00, &#39;a1&#39;: -1.00,  }</span>
-</span><span class="linenos">15</span><span class="go">  === &gt;&gt; potential last choice(s)</span>
-<span class="hll"><span class="linenos">16</span><span class="go">  * choice              : [&#39;a2&#39;, &#39;a3&#39;]</span>
-</span><span class="linenos">17</span><span class="go">    independence        : 0.27</span>
-<span class="linenos">18</span><span class="go">    dominance           : -1.00</span>
-<span class="linenos">19</span><span class="go">    absorbency          : 1.00</span>
-<span class="linenos">20</span><span class="go">    covered (%)         : 100.00</span>
-<span class="linenos">21</span><span class="go">    determinateness (%) : 71.21</span>
-<span class="hll"><span class="linenos">22</span><span class="go">    - last choice credibilities = { &#39;a3&#39;: 0.45, &#39;a2&#39;: 0.27,</span>
-</span><span class="hll"><span class="linenos">23</span><span class="go">          &#39;a6&#39;: -0.45, &#39;a5&#39;: -0.45, &#39;a4&#39;: -0.45, &#39;a1&#39;: -0.45, }</span>
-</span><span class="hll"><span class="linenos">24</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">))</span><span class="o">.</span><span class="n">isTransitive</span><span class="p">()</span>
-</span><span class="hll"><span class="linenos">25</span><span class="go"> True</span>
-</span><span class="hll"><span class="linenos">26</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">))</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;roy66&#39;</span><span class="p">,</span><span class="n">firstChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a6&#39;</span><span class="p">,</span><span class="s1">&#39;a5&#39;</span><span class="p">],</span>
-</span><span class="hll"><span class="linenos">27</span><span class="gp">... </span>                       <span class="n">lastChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span><span class="s1">&#39;a3&#39;</span><span class="p">])</span>
-</span><span class="linenos">28</span><span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
-<span class="linenos">29</span><span class="go">  Exporting to roy66V1.dot</span>
-<span class="linenos">30</span><span class="go">  dot -Grankdir=BT -Tpng roy66.dot -o roy66.png</span>
+</span><span class="linenos"> 8</span><span class="go">  independence        : 0.27</span>
+<span class="linenos"> 9</span><span class="go">  dominance           : 0.45</span>
+<span class="linenos">10</span><span class="go">  absorbency          : -1.00</span>
+<span class="linenos">11</span><span class="go">  covering (%)        : 100.00</span>
+<span class="linenos">12</span><span class="go">  determinateness (%) : 89.39</span>
+<span class="hll"><span class="linenos">13</span><span class="go">  - most credible action(s) = { &#39;a6&#39;: 1.00, &#39;a5&#39;: 0.27, }</span>
+</span><span class="linenos">14</span><span class="go"> === &gt;&gt; potential last choice(s)</span>
+<span class="hll"><span class="linenos">15</span><span class="go">  * choice              : [&#39;a2&#39;, &#39;a3&#39;]</span>
+</span><span class="linenos">16</span><span class="go">  independence        : 0.27</span>
+<span class="linenos">17</span><span class="go">  dominance           : -1.00</span>
+<span class="linenos">18</span><span class="go">  absorbency          : 1.00</span>
+<span class="linenos">19</span><span class="go">  covered (%)         : 100.00</span>
+<span class="linenos">20</span><span class="go">  determinateness (%) : 71.21</span>
+<span class="hll"><span class="linenos">21</span><span class="go">  - most credible action(s) = { &#39;a3&#39;: 0.45, &#39;a2&#39;: 0.27, }</span>
+</span><span class="hll"><span class="linenos">22</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">))</span><span class="o">.</span><span class="n">isTransitive</span><span class="p">()</span>
+</span><span class="hll"><span class="linenos">23</span><span class="go"> True</span>
+</span><span class="linenos">24</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">))</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;roy66&#39;</span><span class="p">,</span><span class="n">firstChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a6&#39;</span><span class="p">,</span><span class="s1">&#39;a5&#39;</span><span class="p">],</span>
+<span class="linenos">25</span><span class="gp">... </span>                       <span class="n">lastChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span><span class="s1">&#39;a3&#39;</span><span class="p">])</span>
+<span class="linenos">26</span><span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
+<span class="linenos">27</span><span class="go">  Exporting to roy66V1.dot</span>
+<span class="linenos">28</span><span class="go">  dot -Grankdir=BT -Tpng roy66.dot -o roy66.png</span>
 </pre></div>
 </div>
 </div>

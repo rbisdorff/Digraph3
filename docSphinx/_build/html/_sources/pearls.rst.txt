@@ -4221,10 +4221,9 @@ With such unique disjoint initial and terminal prekernels (see Line 4 and 10), t
 .. code-block:: pycon
    :linenos:
 
-   >>> g.showFirstChoiceRecommendation()
+   >>> g.showChoiceRecommendation('Rubis')
     ***********************
-    First choice recommendation(s) (BCR)
-     (in decreasing order of determinateness)   
+    First choice recommendation(s) 
     Credibility domain: [-100.00,100.00]
      === >> potential first choice(s)
     * choice              : ['a1', 'a2', 'a4']
