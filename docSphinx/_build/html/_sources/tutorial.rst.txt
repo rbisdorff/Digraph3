@@ -1671,7 +1671,7 @@ Considering a potential imprecise knowledge of the different criteria significan
    :linenos:
    :name: confidentOfficeChoice
    :emphasize-lines: 1,9,12
-   :caption: Computing a 90% confident first choice recommendation
+   :caption: Computing a 90% confident outranking digraph
 
    >>> cg = ConfidentBipolarOutrankingDigraph(t,confidence=90.0)
    >>> cg
@@ -1688,7 +1688,40 @@ Considering a potential imprecise knowledge of the different criteria significan
      Determinateness (%)  : 70.67
      Valuation domain     : [-1.00;1.00]
 
-The :py:class:`~outrankingDigraphs.ConfidentBipolarOutrankingDigraph` class constructor assumes here that the criteria significance weights are in fact *triangular random variates* in the range 0 to 2 times the given significance weights (Line 9). With this working hypothesis, we obtain a 90% confident outranking digraph *cg* where three outranking situations with a credibility in the range [-15/145; +15/145] are put to *indeterminate* (Line 9). The pairwise outranking situations between location *C* and location *G* are for instance not 90% confident and the first choice recommendation now includes consequently this latter location as a further potential best choice candidate (Line 21). Notice by the way that location 'D' is now only a *weak Condorcet winner* as the alternative is not 90% confidently outranking location *C* (Line 27). Location 'A' remains eventually an ambiguous 90% confident first and last choice candidate, even if it is a last choice recommendation for sure.
+The :py:class:`~outrankingDigraphs.ConfidentBipolarOutrankingDigraph` class constructor assumes here that the criteria significance weights are in fact *triangular random variates* in the range 0 to 2 times the given significance weights (Line 9). With this working hypothesis, we obtain a 90% confident outranking digraph *cg* where three outranking situations with a credibility in the range [-15/145; +15/145] are put to *indeterminate* (Line 12). The pairwise outranking situations between location *C* and location *G* are for instance not 90% confident and the first choice recommendation now includes consequently this latter location as a further potential best choice candidate as shown in :numref:`confidentOfficeChoice3` Line 7. Notice furthermore that location 'D' is now only a *weak Condorcet winner* as the alternative is not 90% confidently outranking location *C* and that location 'C', the cheapest one, is now a more credible confirdent choice than compromise location 'D' (Lines 13-14).
+
+.. code-block:: pycon
+   :linenos:
+   :name: confidentOfficeChoice3
+   :emphasize-lines: 1,7,13-14,16,22
+   :caption: Computing a 90% confident first choice recommendation
+
+   >>> cg.showChoiceRecommendation('Rubis',fusionType='epistemicFusion')
+    Rubis choice recommendation
+    ***************************
+    First choice recommendation(s) (BCR)   
+     Credibility domain: [-1.00,1.00]
+    === >> potential first choice(s)
+    * choice              : ['A', 'C', 'D', 'G']
+     independence        : 0.00
+     dominance           : 0.42
+     absorbency          : 0.00
+     covering (%)        : 50.00
+     determinateness (%) : 75.52
+     - most credible action(s) = { 'G': 0.54, 'C': 0.46,
+                                   'A': 0.30, 'D': 0.25, }
+    === >> potential last choice(s) 
+    * choice              : ['A', 'B', 'F']
+     independence        : 0.00
+     dominance           : 0.00
+     absorbency          : 1.00
+     covered (%)         : 50.00
+     determinateness (%) : 93.40
+    - most credible action(s) = { 'F': 1.00, 'B': 0.56, 'A': 0.52, }
+   Execution time: 0.008 seconds
+   ***************************** 
+
+Remarquable in :numref:`confidentOfficeChoice1` is the fact that, in the 90% confident outranking digraph, location *G* becomes the most credible first choice candidate (lines 13-14). Location *F* stays the most credible last choice candidate (Lines 16 and 22). Location 'A' remains hence an ambiguous 90% confident first and last choice candidate, even if it is a confident last choice recommendation for sure.
 
 Computing the bipolar-valued set of non ambiguous weak Condorcet winners
 ````````````````````````````````````````````````````````````````````````
@@ -1717,7 +1750,7 @@ In :numref:`confidentOfficeChoice1` Lines 3-9, the positive locations give suita
 .. code-block:: pycon
    :linenos:
    :name: confidentOfficeChoice2
-   :emphasize-lines: 1,5,8-9,11
+   :emphasize-lines: 1,5-11
    :caption: Computing iterated weak Condorcet winners and losers
 
    >>> cg.showChoiceRecommendation('IteratedCondorcetWinners')
@@ -1736,7 +1769,7 @@ In :numref:`confidentOfficeChoice1` Lines 3-9, the positive locations give suita
      Execution time: 0.012 sec.
     *****************************************
 
-Remarquable in :numref:`confidentOfficeChoice2` is the fact that, in the 90% confident outranking digraph, location *G* becomes the most credible first choice candidate. Location *F* stays the most credible last choice candidate (see Lines 5 and 11). Locations *A* is now correctly flagged as being an indeterminate choice candidates (see Line 8).
+Notice in :numref:`confidentOfficeChoice2` that location 'C', the cheapest one, is a more supported confident first choice candidate than compromise location 'D' (Line 6). Locations *A* is now correctly flagged as being an indeterminate choice candidate (see Line 8). Location 'F' remains eventually the evident last choice recommendation (Line 11).
 
 To get a further interesting insight in the overall outranking situation, we finally make usage of the new :py:class:`~transitiveDigraphs.PartialBachetRanking` class imported from the :py:mod:`transitiveDigraphs` module, for computing a **partial ranking** of all the potential office locations (see the advanced topic on :ref:`partially ranking strategies <Partial-Ranking-Tutorial-label>`).
 
