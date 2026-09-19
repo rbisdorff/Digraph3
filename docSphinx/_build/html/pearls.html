@@ -4579,7 +4579,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="linenos"> 9</span><span class="go">      dominance           : 0.06</span>
 <span class="linenos">10</span><span class="go">      absorbency          : -1.00</span>
 <span class="linenos">11</span><span class="go">      covering (%)        : 55.56</span>
-<span class="linenos">12</span><span class="go">      determinateness (%) : 57.72</span>
+<span class="linenos">12</span><span class="go">      determinateness (%) : 88.89</span>
 <span class="hll"><span class="linenos">13</span><span class="go">      - most credible action(s) = { &#39;p2&#39;: 0.22 }</span>
 </span><span class="linenos">14</span><span class="go">  === &gt;&gt; potential last choice(s)</span>
 <span class="hll"><span class="linenos">15</span><span class="go">  * choice              : [&#39;p1&#39;, &#39;p7&#39;, &#39;p8&#39;]</span>
@@ -4587,12 +4587,12 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="linenos">17</span><span class="go">      dominance           : -0.58</span>
 <span class="linenos">18</span><span class="go">      absorbency          : 0.03</span>
 <span class="linenos">19</span><span class="go">      covered (%)         : 50.00</span>
-<span class="linenos">20</span><span class="go">      determinateness (%) : 50.00</span>
-<span class="linenos">21</span><span class="go">      - most credible action(s) = { &#39;p8&#39;: 0.17, &#39;p1&#39;: 0.14, &#39;p7&#39;: 0.14 }</span>
-</pre></div>
+<span class="linenos">20</span><span class="go">      determinateness (%) : 71.76</span>
+<span class="hll"><span class="linenos">21</span><span class="go">      - most credible action(s) = { &#39;p8&#39;: 0.17, &#39;p1&#39;: 0.14, &#39;p7&#39;: 0.14 }</span>
+</span></pre></div>
 </div>
 </div>
-<p>With the given outranking digraph, initial and terminal prekernels recommendations perfectly correspond to the positive weak Condorcet winners and loosers as computed before in <a class="reference internal" href="#condorcetwinners1"><span class="std std-numref">Listing 3.63</span></a> and shown in <a class="reference internal" href="#condorcetwinners2"><span class="std std-numref">Fig. 3.38</span></a>. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and <em>strictly</em> outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are non ambiguous <em>weakly</em> outranking resp. <em>weakly</em> outranked choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location ‘A’, being incomparable to all other locations, is included in both the initial and the terminal prekernel. Location <em>A</em> is hence an ambiguous first and last choice recommendation and therefore neither part of the non ambiguous weak Condorcet winners, nor of the non ambiguous weak Condorcet losers <a class="footnote-reference brackets" href="#id122" id="id62" role="doc-noteref"><span class="fn-bracket">[</span>29<span class="fn-bracket">]</span></a>.</p>
+<p>Notice that the classic <em>max</em> and <em>min</em> inner vector product operators are replaced here with their corresponding disjunctive and conjunctive epistemic fusion operators (see Line 1). With the given random outranking digraph <em>g</em>, initial and terminal prekernels recommendations perfectly correspond now to the positive weak Condorcet winners and loosers as computed before in <a class="reference internal" href="#condorcetwinners1"><span class="std std-numref">Listing 3.63</span></a> and shown in <a class="reference internal" href="#condorcetwinners2"><span class="std std-numref">Fig. 3.38</span></a>. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and <em>strictly</em> outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are non ambiguous <em>weakly</em> outranking or not <em>outranked</em> resp. <em>weakly</em> outranked or not <em>outranking</em> choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location ‘A’, being incomparable to all other locations, is included in both the initial and the terminal prekernel. Location <em>A</em> is hence an ambiguous first and last choice recommendation and therefore neither part of the non ambiguous weak Condorcet winners, nor of the non ambiguous weak Condorcet losers <a class="footnote-reference brackets" href="#id122" id="id62" role="doc-noteref"><span class="fn-bracket">[</span>29<span class="fn-bracket">]</span></a>.</p>
 </section>
 <section id="ranking-by-choosing-with-bpv-sets-of-weak-condorcet-winners-and-loosers">
 <h4><a class="toc-backref" href="#id194" role="doc-backlink"><span class="section-number">3.3.6.3. </span>Ranking-by-choosing with bpv-sets of weak Condorcet winners and loosers</a><a class="headerlink" href="#ranking-by-choosing-with-bpv-sets-of-weak-condorcet-winners-and-loosers" title="Link to this heading"></a></h4>
