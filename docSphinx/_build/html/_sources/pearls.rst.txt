@@ -67,6 +67,7 @@ Pearls of bipolar-valued epistemic logic
        * :ref:`Applications of bipolar-valued base 3 Bachet numbers <Bachet-Tutorial-label>` 	 
        * :ref:`On computing graph and digraph kernels <Kernel-Tutorial-label>`
        * :ref:`On computational bipolar-valued set theory <Bipolar-Valued-Sets-Tutorial-label>`
+       * :ref:`A new choice recommender algorithm <Bipolar-Valued-Condorcet-Winners>`
        * :ref:`Computing bipolar-valued kernel membership characteristic vectors <Bipolar-Valued-Kernels-Tutorial-label>`
        * :ref:`On characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>`
        * :ref:`Consensus quality of the bipolar-valued outranking relation <Outranking-Consensus-Tutorial-label>`
@@ -4765,7 +4766,7 @@ The criteria significance majorities for each choice are indicated in brakets (s
    :linenos:
    :emphasize-lines: 1,7,13,15
 
-   >>> g.showChoiceRecommendation('Rubis')
+   >>> g.showChoiceRecommendation('Rubis', fusionType='epistemicFusion')
     Rubis choice recommendation
     ***********************
      First choice recommendation(s) (BCR) 
@@ -4777,7 +4778,7 @@ The criteria significance majorities for each choice are indicated in brakets (s
          absorbency          : -1.00
          covering (%)        : 55.56
          determinateness (%) : 57.72
-         - most credible action(s) = { 'p2': 0.22, }
+         - most credible action(s) = { 'p2': 0.22 }
      === >> potential last choice(s) 
      * choice              : ['p1', 'p7', 'p8']
 	 independence        : 0.00
@@ -4785,7 +4786,7 @@ The criteria significance majorities for each choice are indicated in brakets (s
 	 absorbency          : 0.03
 	 covered (%)         : 50.00
 	 determinateness (%) : 50.00
-	 - most credible action(s) = { }
+	 - most credible action(s) = { 'p8': 0.17, 'p1': 0.14, 'p7': 0.14 }
 
 With the given outranking digraph, initial and terminal prekernels recommendations perfectly correspond to the positive weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and *strictly* outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are non ambiguous *weakly* outranking resp. *weakly* outranked choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location 'A', being incomparable to all other locations, is included in both the initial and the terminal prekernel. Location *A* is hence an ambiguous first and last choice recommendation and therefore neither part of the non ambiguous weak Condorcet winners, nor of the non ambiguous weak Condorcet losers [29]_.
 

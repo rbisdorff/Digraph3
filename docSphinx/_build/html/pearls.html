@@ -261,6 +261,7 @@
 <li><p><a class="reference internal" href="#bachet-tutorial-label"><span class="std std-ref">Applications of bipolar-valued base 3 Bachet numbers</span></a></p></li>
 <li><p><a class="reference internal" href="#kernel-tutorial-label"><span class="std std-ref">On computing graph and digraph kernels</span></a></p></li>
 <li><p><a class="reference internal" href="#bipolar-valued-sets-tutorial-label"><span class="std std-ref">On computational bipolar-valued set theory</span></a></p></li>
+<li><p><a class="reference internal" href="#bipolar-valued-condorcet-winners"><span class="std std-ref">A new choice recommender algorithm</span></a></p></li>
 <li><p><a class="reference internal" href="#bipolar-valued-kernels-tutorial-label"><span class="std std-ref">Computing bipolar-valued kernel membership characteristic vectors</span></a></p></li>
 <li><p><a class="reference internal" href="#sufficiency-tutorial-label"><span class="std std-ref">On characterizing bipolar-valued outranking digraphs</span></a></p></li>
 <li><p><a class="reference internal" href="#outranking-consensus-tutorial-label"><span class="std std-ref">Consensus quality of the bipolar-valued outranking relation</span></a></p></li>
@@ -1615,7 +1616,7 @@ confidence level <em>alpha</em> %, when</p>
 </pre></div>
 </div>
 </div>
-<p>In this example (see <a class="reference internal" href="tutorial.html#linearvotingprofilewithpolls"><span class="std std-numref">Listing 1.87</span></a> Lines 18-), we obtained 460 Party_1 supporters (46%), 436 Party_2 supporters (43.6%) and 104 other voters (10.4%). Favorite candidates of <em>Party_1</em> supporters, with more than 10%, appeared to be <em>a06</em> (19.91%), <em>a07</em> (14.27%) and <em>a03</em> (10.02%). Whereas for <em>Party_2</em> supporters, favorite candidates appeared to be <em>a11</em> (22.94%), followed by <em>a08</em> (15.65%), <em>a04</em> (15.07%) and <em>a06</em> (13.4%).</p>
+<p>In this example (see <a class="reference internal" href="tutorial.html#linearvotingprofilewithpolls"><span class="std std-numref">Listing 1.88</span></a> Lines 18-), we obtained 460 Party_1 supporters (46%), 436 Party_2 supporters (43.6%) and 104 other voters (10.4%). Favorite candidates of <em>Party_1</em> supporters, with more than 10%, appeared to be <em>a06</em> (19.91%), <em>a07</em> (14.27%) and <em>a03</em> (10.02%). Whereas for <em>Party_2</em> supporters, favorite candidates appeared to be <em>a11</em> (22.94%), followed by <em>a08</em> (15.65%), <em>a04</em> (15.07%) and <em>a06</em> (13.4%).</p>
 <p>We may convert this linear voting profile into a PerformanceTableau object where each party corresponds to a decision objective.</p>
 <div class="literal-block-wrapper docutils container" id="convertvotingprofile2perftab">
 <div class="code-block-caption"><span class="caption-number">Listing 3.24 </span><span class="caption-text">Converting a voting profile into a performance tableau</span><a class="headerlink" href="#convertvotingprofile2perftab" title="Link to this code"></a></div>
@@ -4567,7 +4568,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>The criteria significance majorities for each choice are indicated in brakets (see Lines 5-12). Alternative <em>p2</em> is the most supported first choice and alternative <em>p8</em> is the most supported last choice. A recommendation that gets confirmed with the ‘<em>Rubis</em>’ choice recommendation shown in <a class="reference internal" href="#condorcetwinners4"><span class="std std-numref">Listing 3.65</span></a> below.</p>
 <div class="literal-block-wrapper docutils container" id="condorcetwinners4">
 <div class="code-block-caption"><span class="caption-number">Listing 3.65 </span><span class="caption-text">Showing the choice recommendations from the Rubis method</span><a class="headerlink" href="#condorcetwinners4" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;Rubis&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;Rubis&#39;</span><span class="p">,</span> <span class="n">fusionType</span><span class="o">=</span><span class="s1">&#39;epistemicFusion&#39;</span><span class="p">)</span>
 </span><span class="linenos"> 2</span><span class="go"> Rubis choice recommendation</span>
 <span class="linenos"> 3</span><span class="go"> ***********************</span>
 <span class="linenos"> 4</span><span class="go">  First choice recommendation(s) (BCR)</span>
@@ -4579,7 +4580,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="linenos">10</span><span class="go">      absorbency          : -1.00</span>
 <span class="linenos">11</span><span class="go">      covering (%)        : 55.56</span>
 <span class="linenos">12</span><span class="go">      determinateness (%) : 57.72</span>
-<span class="hll"><span class="linenos">13</span><span class="go">      - most credible action(s) = { &#39;p2&#39;: 0.22, }</span>
+<span class="hll"><span class="linenos">13</span><span class="go">      - most credible action(s) = { &#39;p2&#39;: 0.22 }</span>
 </span><span class="linenos">14</span><span class="go">  === &gt;&gt; potential last choice(s)</span>
 <span class="hll"><span class="linenos">15</span><span class="go">  * choice              : [&#39;p1&#39;, &#39;p7&#39;, &#39;p8&#39;]</span>
 </span><span class="linenos">16</span><span class="go">      independence        : 0.00</span>
@@ -4587,7 +4588,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="linenos">18</span><span class="go">      absorbency          : 0.03</span>
 <span class="linenos">19</span><span class="go">      covered (%)         : 50.00</span>
 <span class="linenos">20</span><span class="go">      determinateness (%) : 50.00</span>
-<span class="linenos">21</span><span class="go">      - most credible action(s) = { }</span>
+<span class="linenos">21</span><span class="go">      - most credible action(s) = { &#39;p8&#39;: 0.17, &#39;p1&#39;: 0.14, &#39;p7&#39;: 0.14 }</span>
 </pre></div>
 </div>
 </div>
@@ -5779,7 +5780,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Sep 18, 2026.
+      <span class="lastupdated">Last updated on Sep 19, 2026.
       </span></p>
   </div>
 
