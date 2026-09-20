@@ -9718,12 +9718,12 @@
 
 <span class="sd">        **Parameters**</span>
 <span class="sd">        </span>
-<span class="sd">        *method*: &#39;Bachet&#39; (default) | &#39;Rubis&#39; | &#39;IteratedBachet&#39; | &#39;CondorcetWinners&#39; | &#39;IteratedCondorcetWinners&#39;;</span>
-<span class="sd">        the Bachet method is based on the conjoint</span>
+<span class="sd">        *method*: &#39;CondorcetWinners&#39; |&#39;Bachet&#39; | &#39;Rubis&#39; | &#39;IteratedBachet&#39; | &#39;IteratedCondorcetWinners&#39;</span>
+<span class="sd">        The Bachet method is based on the conjoint</span>
 <span class="sd">        extracton of initial and terminal prekernels from the partial Bachet ranking,</span>
 <span class="sd">        whereas the Rubis method is based on the extraction of an initial and</span>
 <span class="sd">        terminal prekernels directly from the given outranking digraph.</span>
-<span class="sd">        The Condorcet winners method return the bpv-sets of the weak Condorcet winners by</span>
+<span class="sd">        The Condorcet winners method returns the bpv-sets of the weak Condorcet winners by</span>
 <span class="sd">        default computed on the codual and broken Cocs instance.</span>
 
 <span class="sd">        *Polarised*: *True* (by default) | False; Bachet parameter</span>
@@ -9735,7 +9735,7 @@
 <span class="sd">        *seed*: Bachet parameter for making the randomization reproducible</span>
 
 <span class="sd">        *ChoiceVector*: Rubis parameter for showing complete prekernel</span>
-<span class="sd">        characteristic vectors.</span>
+<span class="sd">        characteristic vectors</span>
 
 <span class="sd">        *ReturnRanking*: IteratedCondorcetWinners parameter for returning a linear ranking</span>
 <span class="sd">        induced by the iterated extraction of Condorcet winners bpv-sets.</span>
@@ -9891,7 +9891,7 @@
                     <span class="n">ranking</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
                 <span class="k">return</span> <span class="n">ranking</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: method = &quot;Bachet&quot;, &quot;IteratedBachet&quot;, &quot;Rubis&quot; or &quot;CondorcetWinners&quot;,  not &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="n">method</span><span class="p">)</span> 
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: method = &quot;CondorcetWinners&quot;, &quot;Rubis&quot;, &quot;IteratedCondorcetWinners&quot;, &quot;Bachet&quot; or &quot;IteratedBachet&quot;,  not &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="n">method</span><span class="p">)</span> 
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************************&#39;</span><span class="p">)</span></div>
 
                  
@@ -16936,13 +16936,14 @@
     <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
     <span class="kn">from</span> <span class="nn">randomDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
     <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">getcontext</span>
-    <span class="c1">#t = Random3ObjectivesPerformanceTableau(weightDistribution=&quot;equiobjectives&quot;,</span>
-    <span class="c1">#                             numberOfActions=11,numberOfCriteria=13,</span>
-    <span class="c1">#                                        missingDataProbability=0.05,seed=8)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">weightDistribution</span><span class="o">=</span><span class="s2">&quot;equiobjectives&quot;</span><span class="p">,</span>
+                                 <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
+                                            <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
                           
     <span class="c1">#t = CircularPerformanceTableau()</span>
     <span class="c1">#t = PerformanceTableau(&#39;AliceChoice&#39;)</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">PerformanceTableau</span><span class="p">(</span><span class="s1">&#39;officeChoice&#39;</span><span class="p">)</span>
+    <span class="c1">#t = PerformanceTableau(&#39;officeChoice&#39;)</span>
+    <span class="c1">#t = PerformanceTableau(&#39;roy66&#39;)</span>
     <span class="c1">#print(getcontext().prec)</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">startMethod</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
@@ -16991,7 +16992,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Sep 18, 2026.
+      <span class="lastupdated">Last updated on Sep 20, 2026.
       </span></p>
   </div>
 

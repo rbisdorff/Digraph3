@@ -9055,12 +9055,12 @@ class Digraph(object):
 
         **Parameters**
         
-        *method*: 'Bachet' (default) | 'Rubis' | 'IteratedBachet' | 'CondorcetWinners' | 'IteratedCondorcetWinners';
-        the Bachet method is based on the conjoint
+        *method*: 'CondorcetWinners' |'Bachet' | 'Rubis' | 'IteratedBachet' | 'IteratedCondorcetWinners'
+        The Bachet method is based on the conjoint
         extracton of initial and terminal prekernels from the partial Bachet ranking,
         whereas the Rubis method is based on the extraction of an initial and
         terminal prekernels directly from the given outranking digraph.
-        The Condorcet winners method return the bpv-sets of the weak Condorcet winners by
+        The Condorcet winners method returns the bpv-sets of the weak Condorcet winners by
         default computed on the codual and broken Cocs instance.
 
         *Polarised*: *True* (by default) | False; Bachet parameter
@@ -9072,7 +9072,7 @@ class Digraph(object):
         *seed*: Bachet parameter for making the randomization reproducible
 
         *ChoiceVector*: Rubis parameter for showing complete prekernel
-        characteristic vectors.
+        characteristic vectors
 
         *ReturnRanking*: IteratedCondorcetWinners parameter for returning a linear ranking
         induced by the iterated extraction of Condorcet winners bpv-sets.
@@ -9228,7 +9228,7 @@ class Digraph(object):
                     ranking.append(ch[1])
                 return ranking
         else:
-            print('Error: method = "Bachet", "IteratedBachet", "Rubis" or "CondorcetWinners",  not "%s"' % method) 
+            print('Error: method = "CondorcetWinners", "Rubis", "IteratedCondorcetWinners", "Bachet" or "IteratedBachet",  not "%s"' % method) 
         print('*************************************************')
                  
     def computeBpvCondorcetWinners(self,CoDual=True,

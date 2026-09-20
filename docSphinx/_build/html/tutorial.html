@@ -1801,7 +1801,7 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 <span class="linenos">6</span><span class="go"> [&#39;A&#39;, &#39;F&#39;]</span>
 </pre></div>
 </div>
-<p>For two locations <em>x</em> and <em>y</em>, the situation “<em>x</em> strictly outranks <em>y</em>”, denoted <img class="math" src="_images/math/3feafe58a9ed71aa3051dc5f55b6b17772c0726b.png" alt="(x \succnsim y)"/>, is given when <em>x</em> outranks <em>y</em> and <em>y</em> does not outrank <em>y</em>. From theory, we know that outranking digraphs are <em>strongly complete</em>, i.e. for all <em>x</em> and <em>y</em> in <em>X</em>, <img class="math" src="_images/math/9f2e2e0443bafdffafb1ec1181de7dc8c151928d.png" alt="r(x \succsim y) + r(y \succsim x) \geq 0.0"/>. And they verify the <em>coduality principle</em>: <img class="math" src="_images/math/be58a8585f9253dd93cd2372c5aa0a913b896044.png" alt="r(x \not\succsim y) = r(y \succnsim x)"/> (see <a class="reference internal" href="pearls.html#sufficiency-tutorial-label"><span class="std std-ref">On characterizing bipolar-valued outranking digraphs</span></a> and <a class="reference internal" href="#bis-2013" id="id44"><span>[BIS-2013]</span></a>).</p>
+<p>For two locations <em>x</em> and <em>y</em>, the situation “<em>x</em> strictly outranks <em>y</em>”, denoted <img class="math" src="_images/math/3feafe58a9ed71aa3051dc5f55b6b17772c0726b.png" alt="(x \succnsim y)"/>, is given when <em>x</em> outranks <em>y</em> and <em>y</em> does not outrank <em>x</em>. From theory, we know that outranking digraphs are <em>strongly complete</em>, i.e. for all <em>x</em> and <em>y</em> in <em>X</em>, <img class="math" src="_images/math/9f2e2e0443bafdffafb1ec1181de7dc8c151928d.png" alt="r(x \succsim y) + r(y \succsim x) \geq 0.0"/>. And they verify the <em>coduality principle</em>: <img class="math" src="_images/math/be58a8585f9253dd93cd2372c5aa0a913b896044.png" alt="r(x \not\succsim y) = r(y \succnsim x)"/> (see <a class="reference internal" href="pearls.html#sufficiency-tutorial-label"><span class="std std-ref">On characterizing bipolar-valued outranking digraphs</span></a> and <a class="reference internal" href="#bis-2013" id="id44"><span>[BIS-2013]</span></a>).</p>
 <p>We may hence compute a strict outranking digraph <em>gcd</em> with the <em>codual transform</em>, i.e. the <em>converse of the negation</em> (see Line 1 below) of digraph <em>g</em> (see tutorial on <a class="reference internal" href="#outrankingdigraphs-tutorial-label"><span class="std std-ref">Working with the outrankingDigraphs module</span></a>).</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span> <span class="c1"># codual transform</span>
 </span><span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span>
@@ -11865,7 +11865,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Sep 19, 2026.
+      <span class="lastupdated">Last updated on Sep 20, 2026.
       </span></p>
   </div>
 

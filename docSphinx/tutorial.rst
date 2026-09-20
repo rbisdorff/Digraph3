@@ -1497,7 +1497,7 @@ In the relation table shown :numref:`officeChoiceOutranking` we may notice rowwi
    >>> g.computeWeakCondorcetLosers()
     ['A', 'F']
 
-For two locations *x* and *y*, the situation "*x* strictly outranks *y*", denoted :math:`(x \succnsim y)`, is given when *x* outranks *y* and *y* does not outrank *y*. From theory, we know that outranking digraphs are *strongly complete*, i.e. for all *x* and *y* in *X*, :math:`r(x \succsim y) + r(y \succsim x) \geq 0.0`. And they verify the *coduality principle*: :math:`r(x \not\succsim y) = r(y \succnsim x)` (see :ref:`On characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>` and [BIS-2013]_).
+For two locations *x* and *y*, the situation "*x* strictly outranks *y*", denoted :math:`(x \succnsim y)`, is given when *x* outranks *y* and *y* does not outrank *x*. From theory, we know that outranking digraphs are *strongly complete*, i.e. for all *x* and *y* in *X*, :math:`r(x \succsim y) + r(y \succsim x) \geq 0.0`. And they verify the *coduality principle*: :math:`r(x \not\succsim y) = r(y \succnsim x)` (see :ref:`On characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>` and [BIS-2013]_).
 
 We may hence compute a strict outranking digraph *gcd* with the *codual transform*, i.e. the *converse of the negation* (see Line 1 below) of digraph *g* (see tutorial on :ref:`Working with the outrankingDigraphs module <OutrankingDigraphs-Tutorial-label>`).
 
