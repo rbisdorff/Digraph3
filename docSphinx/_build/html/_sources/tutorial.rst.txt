@@ -4127,8 +4127,8 @@ With such slightly diverging ranking-by-choosing and ordering-by-choosing result
 
 This partial ranking structure, illustrated in :numref:`iBachetRanking` is highly correlated (+0.976) with the given outranking digraph *g* and supported by a nearly 2/3rd significance majority (see Lines 14 and 16 below).
 
-Extracting the transitive tiples part of the outranking digraph
-```````````````````````````````````````````````````````````````
+Extracting the transitive triples part of the outranking digraph
+````````````````````````````````````````````````````````````````
 The transitive closure of the transitive triples part of the strict outranking digraph delivers also a partial ranking. The :py:mod:`transitiveDigraphs` module provides therefore the :py:class:`~transitiveDigraphs.TransitiveTriplesPartDigraph` class as shown in :numref:`transitiveTriples1` Lines 6 and 7 below.
 
 .. code-block:: pycon
@@ -4162,27 +4162,28 @@ Remarquable is here the fact that this partial ranking does by the way confirm o
    :name: transitiveTriples2
    :emphasize-lines: 1,7,13,15
 
-   >>> og.showChoiceRecommendation('Rubis')
+   >>> og.showChoiceRecommendation('Rubis',fusionType='epistemicFusion')
     Rubis choice recommendation
     ***********************
     First choice recommendation(s) (BCR)  
     Credibility domain: [-1.00,1.00]
     === >> potential first choice(s)
     * choice              : ['a5', 'a8']
-      independence        : 0.03
-      dominance           : 0.03
-      absorbency          : -0.32
-      covering (%)        : 50.00
-      determinateness (%) : 51.66
-      - most credible action(s) = { 'a5': 0.03, 'a8': 0.03  }
+     independence        : 0.03
+     dominance           : 0.03
+     absorbency          : -0.32
+     covering (%)        : 50.00
+     determinateness (%) : 61.76
+     - most credible action(s) = { 'a5': 0.40, 'a8': 0.03, }
     === >> potential last choice(s) 
     * choice              : ['a2', 'a3', 'a4', 'a8']
-      independence        : 0.00
-      dominance           : -0.35
-      absorbency          : 0.10
-      covered (%)         : 50.00
-      determinateness (%) : 50.00
-      - most credible action(s) = { }
+     independence        : 0.00
+     dominance           : -0.35
+     absorbency          : 0.10
+     covered (%)         : 50.00
+     determinateness (%) : 58.52
+     - most credible action(s) = { 'a4': 0.20, 'a2': 0.12,
+                                   'a3': 0.10, 'a8': 0.02, }
 
 As shown above, bipolar ranking-by-choosing rules operated on transtive parts of the outranking digraph may effectively deliver a new method for constructing convincing partial rankings and, by the way, a tool for computing potential first or last choice recommendations, actually the :ref:`initial and terminal prekernels <Bipolar-Valued-Kernels-Tutorial-label>` of such partial transitive digraphs.
 
