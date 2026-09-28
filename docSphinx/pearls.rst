@@ -435,7 +435,12 @@ Despite lower likelihood values (see the *g90* relation table above), we keep th
 
 .. note::
 
-   For concluding, it is worthwhile noticing again that it is in fact the **neutral** value of our *bipolar-valued epistemic logic* that allows us to easily handle alpha% confidence or not of outranking situations when confronted with uncertain criteria significance weights. Remarkable furthermore is the usage, the standard **Gaussian error function** (erf) provides by delivering *signed likelihood values* immediately concerning either a *positive* relational statement, or when negative, its *negated* version. 
+   For concluding, it is worthwhile noticing again that it is in fact the **neutral** value of our *bipolar-valued epistemic logic* that allows us to easily handle alpha% confidence or not of outranking situations when confronted with uncertain criteria significance weights. Remarkable furthermore is the usage, the standard **Gaussian error function** (erf) provides by delivering *signed likelihood values* immediately concerning either a *positive* relational statement, or when negative, its *negated* version.
+
+.. seealso::
+
+   * :ref:`Computing a best choice recommendation <Rubis-Tutorial-label>`
+   
 
 Back to :ref:`Content Table <Pearls-label>`
 
@@ -874,6 +879,10 @@ As the initial prekernel is here validated at stability level +2, recommending a
 
 For concluding, let us mention that it is precisely again our bipolar-valued *logical characteristic framework* that provides us here with a **first order distributional dominance** test for effectively qualifying the stability level 2 *robustness* of an outranking digraph when facing performance tableaux with criteria of only ordinal-valued significance weights. A real world application of our stability analysis with such a kind of performance tableau may be consulted in [BIS-2015p]_.
 
+.. seealso::
+
+   * :ref:`Alice’s best choice: A selection case study <Alice-Tutorial-label>`
+
 Back to :ref:`Content Table <Pearls-label>`
 
 ----------------
@@ -1083,6 +1092,8 @@ We may visualize this kind of **efficient** choice recommendation in :numref:`un
    Standard versus *unopposed* strict outranking digraphs oriented by first and last choice recommendations
 
 In order to make now an eventual best unique choice, a decision maker will necessarily have to weight, in a second stage of the decision aiding process, the relative importance of the individual decision objectives (see tutorial on :ref:`computing a best choice recommendation <Rubis-Tutorial-label>`).
+
+.. seealso:: :ref:`Alice’s best choice: A selection case study <Alice-Tutorial-label>`
 
 Back to :ref:`Content Table <Pearls-label>`
 
