@@ -9055,7 +9055,7 @@ class Digraph(object):
 
         **Parameters**
         
-        *method*: 'CondorcetWinners' |'Bachet' | 'Rubis' | 'IteratedBachet' | 'IteratedCondorcetWinners'
+        *method*: 'CondorcetWinners', 'Bachet', 'Rubis', 'IteratedBachet' or 'IteratedCondorcetWinners'
         The Bachet method is based on the conjoint
         extracton of initial and terminal prekernels from the partial Bachet ranking,
         whereas the Rubis method is based on the extraction of an initial and
@@ -9957,8 +9957,8 @@ class Digraph(object):
             print('initial high vector :', vechigha)
         it = 1
         while veclowa != vechigha and it < 2*n*n:
-            veclowb = temp.matmult2(mat,veclowa,fusionType=FusionType)
-            vechighb = temp.matmult2(mat,vechigha,fusionType=FusionType)
+            veclowb = temp.matmult2(mat,veclowa,fusionType=fusionType)
+            vechighb = temp.matmult2(mat,vechigha,fusionType=fusionType)
             veclow = temp.contra(vechighb)
             vechigh = temp.contra(veclowb)
             if veclow == veclowa and vechigh == vechigha : break
@@ -10030,8 +10030,8 @@ class Digraph(object):
             print('initial high vector :', vechigha)
         it = 1
         while veclowa != vechigha and it < 2*n*n:
-            veclowb = temp.matmult2(mat,veclowa,fusionType=FusionType)
-            vechighb = temp.matmult2(mat,vechigha,fusionType=FusionType)
+            veclowb = temp.matmult2(mat,veclowa,fusionType=fusionType)
+            vechighb = temp.matmult2(mat,vechigha,fusionType=fusionType)
             veclow = temp.contra(vechighb)
             vechigh = temp.contra(veclowb)
             if veclow == veclowa and vechigh == vechigha : break
@@ -10550,8 +10550,8 @@ class Digraph(object):
             vechigha = vec1_a
             it = 1
             while veclowa != vechigha and it < 2*n*n:
-                veclowb = temp.matmult2(mat,veclowa,fusionType=FusionType)
-                vechighb = temp.matmult2(mat,vechigha,fusionType=FusionType)
+                veclowb = temp.matmult2(mat,veclowa,fusionType=fusionType)
+                vechighb = temp.matmult2(mat,vechigha,fusionType=fusionType)
                 veclow = temp.contra(vechighb)
                 vechigh = temp.contra(veclowb)
                 if veclow == veclowa and vechigh == vechigha : break
@@ -10627,8 +10627,8 @@ class Digraph(object):
             vechigha = vec1_a
             it = 1
             while veclowa != vechigha and it < 2*n*n:
-                veclowb = temp.matmult2(mat,veclowa,fusionType=FusionType)
-                vechighb = temp.matmult2(mat,vechigha,fusionType=FusionType)
+                veclowb = temp.matmult2(mat,veclowa,fusionType=fusionType)
+                vechighb = temp.matmult2(mat,vechigha,fusionType=fusionType)
                 veclow = temp.contra(vechighb)
                 vechigh = temp.contra(veclowb)
                 if veclow == veclowa and vechigh == vechigha : break
