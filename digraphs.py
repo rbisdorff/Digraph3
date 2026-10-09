@@ -15985,7 +15985,7 @@ if __name__ == "__main__":
                                             missingDataProbability=0.05,seed=10)
                           
     #t = CircularPerformanceTableau()
-    t = PerformanceTableau('AliceChoice')
+    #t = PerformanceTableau('AliceChoice')
     #t = PerformanceTableau('officeChoice')
     #t = PerformanceTableau('roy66')
     #print(getcontext().prec)

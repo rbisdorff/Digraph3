@@ -177,7 +177,10 @@ class BpvSet(object):
         for it in characteristics:
             #print(it)
             x = it[1]
-            print(formatString% (items[x]['shortName'], membership[x]) )
+            try:
+                print(formatString% (items[x]['shortName'], membership[x]) )
+            except:
+                print(formatString% (x, membership[x]) )              
         print('Valuation domain: [%+.2f;%+.2f]' % (
             valuationDomain['min'],valuationDomain['max'] ))            
 
