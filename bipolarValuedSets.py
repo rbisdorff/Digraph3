@@ -107,7 +107,7 @@ def averageEpistemicFusion(L,Debug=False):
     from decimal import Decimal
     res = BpvSet()
     res.support = deepcopy(L[0].support)
-    n = len(res.support) -1
+    n = len(L)
     res.name = 'averageFusion'
     res.membership = {}
     for x in res.support:

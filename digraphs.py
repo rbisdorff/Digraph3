@@ -9241,7 +9241,7 @@ class Digraph(object):
         Returns by default the bpvSet of the Condorcet winner(s) of a
         codual and acyclic (BrokenCocs=True) digraph.
         """
-        from bipolarValuedSets import BpvSet
+        from bipolarValuedSets import BpvSet,averageEpistemicFusion
         from copy import deepcopy
         g = deepcopy(self)
         if CoDual:
@@ -9258,7 +9258,10 @@ class Digraph(object):
             for x in self.actions:
                 print(x,'i',initialVector.membership[x])
                 print(x,'t',terminalVector.membership[x])
-        resVector = initialVector.ovee(-terminalVector)
+        if Average:
+            resVector = averageEpistemicFusion([initialVector,-terminalVector])
+        else:
+            resVector = initialVector.ovee(-terminalVector)                
         if Comments:
             resVector.showMembershipCharacteristics()
         return resVector

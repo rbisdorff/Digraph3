@@ -56,7 +56,25 @@ def testBpvSet():
     Oxmm = X.owedge(M)
     Oxmm.showMembershipCharacteristics()
 
+def testAverageEpistemicFusion():
+    print('==>> Testing the average epistemic fusion operator')
+    X = RandomBpvSet(numberOfElements=5,elementNamePrefix='s',
+                      indeterminateness=0.2,
+                      valuationRange=(-1,1),
+                      seed=1000,
+                      Debug=False)
     
+    X.showMembershipCharacteristics(ndigits=2,Sorted=False)
+    Y = RandomBpvSet(numberOfElements=5,elementNamePrefix='s',
+                      indeterminateness=0.2,
+                      valuationRange=(-1,1),
+                      seed=2000,
+                      Debug=False)
+    Y.showMembershipCharacteristics(ndigits=2,Sorted=False)
+    mu = averageEpistemicFusion([X,Y])
+    mu.recodeValuation()
+    mu.showMembershipCharacteristics(ndigits=2,Sorted=False)
+
     
 
 
