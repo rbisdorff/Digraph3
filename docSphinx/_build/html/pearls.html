@@ -4557,20 +4557,17 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>The epistemic fusion operators induce furthermore on <img class="math" src="_images/math/670c1a35fcd5cab5e00e9981d740edc44b3b0564.png" alt="\mathcal{S}(A)"/> a partial <strong>sharpness</strong> ordering denoted <img class="math" src="_images/math/1f95145b8303d83bb9146359c3b22883ed793600.png" alt="\succcurlyeq"/> and defined as follows. Let <em>X</em> and <em>Y</em> be two bpv-sets in <img class="math" src="_images/math/670c1a35fcd5cab5e00e9981d740edc44b3b0564.png" alt="\mathcal{S}(A)"/>. We say that <img class="math" src="_images/math/c8ac5824dd1122607d82adbdeb4346bb3ab221d1.png" alt="X \,\succcurlyeq\, Y"/> when <img class="math" src="_images/math/7448ed6f0dee63db6f3a5586cc9e6a6e1118be0c.png" alt="\forall a \in A"/> either <img class="math" src="_images/math/b72fade6bf04630d72fdc5582dd7d1abf458634f.png" alt="r(a \in X) \leqslant r(a \in Y) \leqslant 0.0"/> or, <img class="math" src="_images/math/1e6b64bd6355bbb809aa18d23a7a8546bf2a8856.png" alt="0.0 \leqslant r(a \in Y) \leqslant r(a \in X)"/>. It follows for instance that <img class="math" src="_images/math/544b4d30fdf1ed34f9f9634989dde5c0a7e1dbee.png" alt="(X  $ \textcircled{$\vee$} $ Y) \,\succcurlyeq\, \mu([X,Y]) \,\succcurlyeq\, (X $ \textcircled{$\wedge$} $ Y)"/>. Minimal sharp is the bpv-set <img class="math" src="_images/math/9f6c3c1fccc6aedeaba5d79feb369ec59a1114dd.png" alt="\bf{0}"/>. Maximal sharp are all <img class="math" src="_images/math/d76f16a00dc1dd4eb18ca913e933b14079c81f2b.png" alt="2^n"/> completely determined –crisp– subsets of the support set <em>A</em>.</p>
 <div class="literal-block-wrapper docutils container" id="bipolarvaluedsets7">
 <div class="code-block-caption"><span class="caption-number">Listing 3.63 </span><span class="caption-text">The sharpness ordering of bpv-sets</span><a class="headerlink" href="#bipolarvaluedsets7" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">isSharper</span><span class="p">(</span><span class="n">O</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span class="linenos"> 2</span><span class="go">  x1 -0.7313  0.0000</span>
-<span class="linenos"> 3</span><span class="go">  x2  0.6949  0.0000</span>
-<span class="linenos"> 4</span><span class="go">  x3  0.5275  0.0000</span>
-<span class="linenos"> 5</span><span class="go">  x4 -0.4899  0.0000</span>
-<span class="linenos"> 6</span><span class="go">  x5  0.0000  0.0000</span>
-<span class="hll"><span class="linenos"> 7</span><span class="go"> True</span>
-</span><span class="hll"><span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Xp</span><span class="o">.</span><span class="n">isSharper</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span class="linenos"> 9</span><span class="go">  x1 -1.0000 -0.7313</span>
-<span class="linenos">10</span><span class="go">  x2  1.0000  0.6949</span>
-<span class="linenos">11</span><span class="go">  x3  1.0000  0.5275</span>
-<span class="linenos">12</span><span class="go">  x4 -1.0000 -0.4899</span>
-<span class="linenos">13</span><span class="go">  x5  0.0000  0.0000</span>
-<span class="hll"><span class="linenos">14</span><span class="go"> True</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">isSharper</span><span class="p">(</span><span class="n">O</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="hll"><span class="linenos"> 2</span><span class="go">  x1 -0.7313  0.0000</span>
+</span><span class="hll"><span class="linenos"> 3</span><span class="go">  x2  0.6949  0.0000</span>
+</span><span class="hll"><span class="linenos"> 4</span><span class="go">  x3  0.5275  0.0000</span>
+</span><span class="hll"><span class="linenos"> 5</span><span class="go"> True</span>
+</span><span class="linenos"> 6</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Xp</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">polarise</span><span class="p">(</span><span class="n">InSite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Xp</span><span class="o">.</span><span class="n">isSharper</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="hll"><span class="linenos"> 8</span><span class="go">  x1 -1.0000 -0.7313</span>
+</span><span class="hll"><span class="linenos"> 9</span><span class="go">  x2  1.0000  0.6949</span>
+</span><span class="hll"><span class="linenos">10</span><span class="go">  x3  1.0000  0.5275</span>
+</span><span class="hll"><span class="linenos">11</span><span class="go"> True</span>
 </span></pre></div>
 </div>
 </div>

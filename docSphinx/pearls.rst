@@ -4695,21 +4695,18 @@ The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a pa
    :caption: The sharpness ordering of bpv-sets
    :name: bipolarValuedSets7
    :linenos:
-   :emphasize-lines: 1,7,8,14
+   :emphasize-lines: 2-5,8-11
 
    >>> (X.isSharper(O,Comments=True)
      x1 -0.7313  0.0000
      x2  0.6949  0.0000
      x3  0.5275  0.0000
-     x4 -0.4899  0.0000
-     x5  0.0000  0.0000
     True
+   >>> Xp = X.polarise(InSite=False) 
    >>> Xp.isSharper(X,Comments=True)
      x1 -1.0000 -0.7313
      x2  1.0000  0.6949
      x3  1.0000  0.5275
-     x4 -1.0000 -0.4899
-     x5  0.0000  0.0000
     True
 
 .. note::
