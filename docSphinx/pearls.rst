@@ -4658,7 +4658,7 @@ Let finally *L* be a list of *n* bpv-sets defined on a same support set *E*. The
 
 | For all *z* in *E* the membership characteristic :math:`r\big(\,z \in \mu(L)\,\big)\; =`
 |     :math:`\big( \, \sum_{X \in L} r(z \in X) \, \big)\,/\, n` 
-|          when forall :math:`X \in L`, either :math:`r(z \in X) >= 0.0` or :math:`r(z \in X) <= 0.0` ;
+|          when forall :math:`X \in L`, either :math:`r(z \in X) \geqslant 0.0` or :math:`r(z \in X) \leqslant 0.0` ;
 |     :math:`0.0` otherwise.
 
 In :numref:`averageBpvSets` we illustrate the usage of the :py:meth:`~bipolarValuedSets.averageEpistemicFusion` method on a list *L* of two random bpv-sets *X* and *Y*  of same support set *E = {'s1', 's2', 's3'}*.
@@ -4695,18 +4695,20 @@ The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a pa
    :caption: The sharpness ordering of bpv-sets
    :name: bipolarValuedSets7
    :linenos:
-   :emphasize-lines: 2-5,8-11
+   :emphasize-lines: 2-3,5-6,8-9,12-13
 
+   >>> (X.ovee(Y)).isSharper(mu,Comments=True)
+    s1 0.0000 0.0000, s2 0.8957 0.7953, s3 0.0000 0.0000
+    True
+   >>> mu.isSharper((X.owedge(Y)),Comments=True)
+    s1 0.0000 0.0000, s2 0.7953 0.6949, s3 0.0000 0.0000
+    True
    >>> (X.isSharper(O,Comments=True)
-     x1 -0.7313  0.0000
-     x2  0.6949  0.0000
-     x3  0.5275  0.0000
+    x1 -0.7313 0.0000, x2 0.6949 0.0000, x3 0.5275 0.0000
     True
    >>> Xp = X.polarise(InSite=False) 
    >>> Xp.isSharper(X,Comments=True)
-     x1 -1.0000 -0.7313
-     x2  1.0000  0.6949
-     x3  1.0000  0.5275
+    x1 -1.0000 -0.7313, x2 1.0000 0.6949, x3 1.0000 0.5275
     True
 
 .. note::
