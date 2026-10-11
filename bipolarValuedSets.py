@@ -98,6 +98,48 @@ from decimal import Decimal
 
 #------------------
 
+def averageEpistemicFusion(L,Debug=False):
+    """
+    Average epistemic fudion of a list of bpv-sets defined on a same support set.
+    """
+    from bipolarValuedSets import BpvSet
+    from copy import deepcopy
+    from decimal import Decimal
+    res = BpvSet()
+    res.support = deepcopy(L[0].support)
+    n = len(res.support) -1
+    res.name = 'averageFusion'
+    res.membership = {}
+    for x in res.support:
+        if Debug:
+            print(x)
+        vecx = []
+        for s in L:
+            vecx.append(s.membership[x])
+        if Debug:
+            print(vecx)
+        mPlus = Decimal()
+        mMinus = Decimal()
+        for vx in vecx:
+            if vx > Decimal('0'):
+                mPlus += vx
+            elif vx < Decimal('0'):
+                mMinus += vx
+        if mPlus > Decimal() and mMinus == Decimal():
+            res.membership[x] = mPlus / Decimal(n)
+        elif mPlus == Decimal() and mMinus < Decimal():
+            res.membership[x] = mMinus / Decimal(n)
+        else:
+            res.membership[x] = Decimal()
+    if Debug:
+        print(res.membership)
+    return res
+    
+                
+        
+        
+#-----------------
+
 class BpvSet(object):
     """
     Root class. See the final scratch part
@@ -838,7 +880,7 @@ if __name__ == "__main__":
 
     print('*-------- Testing classes and methods -------')
 
-    X = RandomBpvSet(numberOfElements=5,elementNamePrefix='s',
+    X = RandomBpvSet(numberOfElements=3,elementNamePrefix='s',
                       indeterminateness=0.1,
                       valuationRange=(-1,1),ndigits=4,
                       seed=1,
@@ -854,20 +896,24 @@ if __name__ == "__main__":
     
     #Y.showMembershipCharacteristics(Normalized=False)
     Y.showMembershipCharacteristics(Sorted=False)
-    D = Y - X
-    D.showMembershipCharacteristics(Sorted=False)
-    E = D.strip(InSite=False)
-    E.showMembershipCharacteristics(Sorted=True)
-    D.strip()
-    D.showMembershipCharacteristics(Sorted=False)
+    from bipolarValuedSets import averageEpistemicFusion
+    mu = averageEpistemicFusion([X,Y])
+    mu.showMembershipCharacteristics(Sorted=False)
     
-    Op = X.ovee(Y)
-    Op.showMembershipCharacteristics(Sorted=False)
-    Om = X.owedge(Y)
-    Om.showMembershipCharacteristics(Sorted=False)
-    M = RandomBpvSet(indeterminateness=1.0,elementNamePrefix='s')
-    Oxmp = X.ovee(M)
-    Oxmp.showMembershipCharacteristics(Sorted=False)
-    Oxmm = X.owedge(M)
-    Oxmm.showMembershipCharacteristics(Sorted=False)
+##    D = Y - X
+##    D.showMembershipCharacteristics(Sorted=False)
+##    E = D.strip(InSite=False)
+##    E.showMembershipCharacteristics(Sorted=True)
+##    D.strip()
+##    D.showMembershipCharacteristics(Sorted=False)
+##    
+##    Op = X.ovee(Y)
+##    Op.showMembershipCharacteristics(Sorted=False)
+##    Om = X.owedge(Y)
+##    Om.showMembershipCharacteristics(Sorted=False)
+##    M = RandomBpvSet(indeterminateness=1.0,elementNamePrefix='s')
+##    Oxmp = X.ovee(M)
+##    Oxmp.showMembershipCharacteristics(Sorted=False)
+##    Oxmm = X.owedge(M)
+##    Oxmm.showMembershipCharacteristics(Sorted=False)
 

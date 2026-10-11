@@ -4654,7 +4654,42 @@ To every bpv-set :math:`X \in \mathcal{S}(A)` we may associate its negated --dua
    >>> (X.owedge(-X)).showMembershipCharacteristics()
     x1:+0.0000, x2:+0.0000, x3:+0.0000, x4:+0.0000, x5:+0.0000
 
-The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a partial **sharpness** ordering denoted :math:`\succcurlyeq` and defined as follows. Let *X* and *Y* be two bpv-sets in :math:`\mathcal{S}(A)`. We say that :math:`X \,\succcurlyeq\, Y` when :math:`\forall a \in A` either :math:`r(a \in X) \leqslant r(a \in Y) \leqslant 0.0` or, :math:`0.0 \leqslant r(a \in Y) \leqslant r(a \in X)`. If *X* and *Y* are bpv-sets of a same crisp subset, it follows for instance that :math:`(X  $ \textcircled{$\vee$} $ Y) \,\succcurlyeq\,(X $ \textcircled{$\wedge$} $ Y)`. Minimal sharp is the bpv-set :math:`\bf{0}`. Maximal sharp are all :math:`2^n` completely determined --crisp-- subsets of the support set *A*. 
+Let finally *L* be a list of *n* bpv-sets defined on a same support set *E*. The **average epistemic fusion** of *L*, denoted :math:`\mu(L)` is defined as follows.
+
+| For all *z* in *E* the membership characteristic :math:`r\big(\,z \in \mu(L)\,\big)\; =`
+|     :math:`\big( \, \sum_{X \in L} r(z \in X) \, \big)\,/\, n` 
+|          when forall :math:`X \in L`, either :math:`r(z \in X) >= 0.0` or :math:`r(z \in X) <= 0.0` ;
+|     :math:`0.0` otherwise.
+
+In :numref:`averageBpvSets` we illustrate the usage of the :py:meth:`~bipolarValuedSets.averageEpistemicFusion` method on a list *L* of two random bpv-sets *X* and *Y*  of same support set *E = {'s1', 's2', 's3'}*.
+
+.. code-block:: pycon
+   :caption: Average bpv-set
+   :name: averageBpvSets
+   :linenos:
+   :emphasize-lines: 1,13,15,17,19
+
+   >>> from bipolarValuedSets import RandomBpvSet, averageEpistemicFusion
+   >>> X = RandomBpvSet(numberOfElements=3,elementNamePrefix='s',
+   ...                   indeterminateness=0.1,
+   ...                   valuationRange=(-1,1),ndigits=4,
+   ...                   seed=1,
+   ...                   Debug=False)
+   >>> Y = RandomBpvSet(numberOfElements=3,elementNamePrefix='s',
+   ...                   indeterminateness=0.1,
+   ...                   valuationRange=(-1,1),
+   ...                   seed=2,ndigits=4,
+   ...                   Debug=False)
+   >>> X.showMembershipCharacteristics(Sorted=False)
+    s1:  -0.7313, s2:  +0.6949, s3:  +0.5275
+   >>> Y.showMembershipCharacteristics(Sorted=False)
+    s1:  +0.9121, s2:  +0.8957, s3:  -0.8869
+   >>> L = [X,Y]
+   >>> mu = averageEpistemicFusion(L)
+   >>> mu.showMembershipCharacteristics(Sorted=False)
+    s1:  +0.0000, s2:  +0.7953, s3:  +0.0000
+
+The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a partial **sharpness** ordering denoted :math:`\succcurlyeq` and defined as follows. Let *X* and *Y* be two bpv-sets in :math:`\mathcal{S}(A)`. We say that :math:`X \,\succcurlyeq\, Y` when :math:`\forall a \in A` either :math:`r(a \in X) \leqslant r(a \in Y) \leqslant 0.0` or, :math:`0.0 \leqslant r(a \in Y) \leqslant r(a \in X)`. It follows for instance that :math:`(X  $ \textcircled{$\vee$} $ Y) \,\succcurlyeq\, \mu([X,Y]) \,\succcurlyeq\, (X $ \textcircled{$\wedge$} $ Y)`. Minimal sharp is the bpv-set :math:`\bf{0}`. Maximal sharp are all :math:`2^n` completely determined --crisp-- subsets of the support set *A*. 
 
 .. code-block:: pycon
    :caption: The sharpness ordering of bpv-sets

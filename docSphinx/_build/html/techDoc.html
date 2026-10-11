@@ -131,6 +131,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeAllDensities"><code class="docutils literal notranslate"><span class="pre">Digraph.computeAllDensities()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeArrowRaynaudOrder"><code class="docutils literal notranslate"><span class="pre">Digraph.computeArrowRaynaudOrder()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeArrowRaynaudRanking"><code class="docutils literal notranslate"><span class="pre">Digraph.computeArrowRaynaudRanking()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeAverageEpistemicFusion"><code class="docutils literal notranslate"><span class="pre">Digraph.computeAverageEpistemicFusion()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeAverageValuation"><code class="docutils literal notranslate"><span class="pre">Digraph.computeAverageValuation()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeBadChoices"><code class="docutils literal notranslate"><span class="pre">Digraph.computeBadChoices()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeBadPirlotChoices"><code class="docutils literal notranslate"><span class="pre">Digraph.computeBadPirlotChoices()</span></code></a></li>
@@ -1210,6 +1211,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#bipolarValuedSets.RandomBpvSet"><code class="docutils literal notranslate"><span class="pre">RandomBpvSet</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bipolarValuedSets.averageEpistemicFusion"><code class="docutils literal notranslate"><span class="pre">averageEpistemicFusion()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#cythonized-modules-for-big-digraphs">2.24. Cythonized modules for big digraphs</a><ul>
@@ -2208,6 +2210,14 @@ absence arc density, strict absence arc densitiy.</p>
 <dt class="sig sig-object py" id="digraphs.Digraph.computeArrowRaynaudRanking">
 <span class="sig-name descname"><span class="pre">computeArrowRaynaudRanking</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeArrowRaynaudRanking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeArrowRaynaudRanking" title="Link to this definition"></a></dt>
 <dd><p>renders a linear ranking from best to worst of the actions following Arrow&amp;Raynaud’s rule.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="digraphs.Digraph.computeAverageEpistemicFusion">
+<span class="sig-name descname"><span class="pre">computeAverageEpistemicFusion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Terminal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeAverageEpistemicFusion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeAverageEpistemicFusion" title="Link to this definition"></a></dt>
+<dd><p>Computes the conjunctive epistemic fusion of
+rows (Terminal=True) or columns (Terminal=False)
+of the digraph’s relation attribute.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -3684,7 +3694,7 @@ we brake the circuits on their weakest arc.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="digraphs.Digraph.showChoiceRecommendation">
-<span class="sig-name descname"><span class="pre">showChoiceRecommendation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CondorcetWinners'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Polarised</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxNbrOfRankings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ChoiceVector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fusionType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'standard'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CoDual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Reversed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Valued</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actionsList</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomActionsList</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ReturnRanking</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Average</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showChoiceRecommendation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.showChoiceRecommendation" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">showChoiceRecommendation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CondorcetWinners'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Polarised</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Average</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxNbrOfRankings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ChoiceVector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fusionType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'standard'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CoDual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Reversed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Valued</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actionsList</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomActionsList</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ReturnRanking</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showChoiceRecommendation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.showChoiceRecommendation" title="Link to this definition"></a></dt>
 <dd><p>Generic choice recommender method.</p>
 <p><strong>Parameters</strong></p>
 <p><em>method</em>: ‘CondorcetWinners’, ‘Bachet’, ‘Rubis’, ‘IteratedBachet’ or ‘IteratedCondorcetWinners’
@@ -5965,7 +5975,7 @@ by default the ‘spawn’ start-mathod for threading.
 When not using the ‘fork’ start method in a python script file,
 the main entry code must hence be protected with the __name__==’__main__’ test
 in order to avoid a recursive re-execution of the whole script.
-(see the documentation of the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.14)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> module.</p>
+(see the documentation of the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.15)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> module.</p>
 <p>If Threading is <em>True</em>, <em>WithConcordanceRelation</em> and <em>WithVetoCounts</em> flags
 are automatically set both to False.</p>
 </div>
@@ -7512,7 +7522,7 @@ the main program entry must be started with a *__name__==’__main__’</em> tes
 <p>The multiprocessing <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuantilesSortingDigraph</span></code></a> constructor uses
 the spwan start-mathod for threading. In a python script,
 the main entry code must hence be protected with the __name__==’__main__’ test
-(see the documentation of the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.14)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> module.</p>
+(see the documentation of the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.15)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> module.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="sortingDigraphs.QuantilesSortingDigraph.computeCategoryContents">
@@ -13110,6 +13120,12 @@ If Strict is True, cutLevel is stripped !</p>
 <dd><p><em>indeterminateness</em> parameter (in float % [0.0,1.0], default=0.1)</p>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="bipolarValuedSets.averageEpistemicFusion">
+<span class="sig-prename descclassname"><span class="pre">bipolarValuedSets.</span></span><span class="sig-name descname"><span class="pre">averageEpistemicFusion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bipolarValuedSets.html#averageEpistemicFusion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bipolarValuedSets.averageEpistemicFusion" title="Link to this definition"></a></dt>
+<dd><p>Average epistemic fudion of a list of bpv-sets defined on a same support set.</p>
+</dd></dl>
+
 <p>Back to the <a class="reference internal" href="#contents-table-label"><span class="std std-ref">Table of Contents</span></a></p>
 <hr class="docutils" />
 <hr class="docutils" />
@@ -15473,7 +15489,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Oct 09, 2026.
+      <span class="lastupdated">Last updated on Oct 11, 2026.
       </span></p>
   </div>
 

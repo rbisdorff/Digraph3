@@ -9033,6 +9033,7 @@ class Digraph(object):
     def showChoiceRecommendation(self,
                                 method='CondorcetWinners',
                                 Polarised=True,
+                                Average=False,
                                 randomized=100,
                                 maxNbrOfRankings=5,
                                 seed=None,
@@ -9048,7 +9049,6 @@ class Digraph(object):
                                  # IteratedCondorcetWinners
                                 ReturnRanking=False,
                                 Show=True,
-                                Average=False,
                                  ):
         """
         Generic choice recommender method.
@@ -9831,6 +9831,94 @@ class Digraph(object):
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
+
+    def computeAverageEpistemicFusion(digraph,Terminal=False,
+                                      Debug=False):
+        """
+        Computes the conjunctive epistemic fusion of
+        rows (Terminal=True) or columns (Terminal=False)
+        of the digraph's relation attribute.
+        """
+        from copy import deepcopy
+        from bipolarValuedSets import BpvSet
+        from digraphsTools import scoredTuplesSort
+        from decimal import Decimal
+##        if CoDual:
+##            g = ~(-digraph)
+##        else:
+        g = deepcopy(digraph)
+        Med = g.valuationdomain['med']
+        Max = g.valuationdomain['max']
+        Min = g.valuationdomain['min']
+        if Terminal:
+            g = ConverseDigraph(g)
+        res = {}
+        for x in g.actions:
+            posx = []
+            negx = []
+            nulx = []
+            for y in g.actions:
+                if x != y:
+                    matxy = g.relation[x][y]
+                    if matxy > Med:
+                        posx.append(matxy)
+                    elif matxy < Med:
+                        negx.append(matxy)
+                    else:
+                        nulx.append(matxy)
+            res[x] = {'pos':posx,'neg':negx,'nul':nulx}
+        resvec = {}
+        n = len(g.actions) -1
+##        if Average:
+        for x in res:
+            pl = len(res[x]['pos'])
+            nl = len(res[x]['neg'])
+            if pl > 0 and nl == 0:
+                sumx = Decimal()
+                for val in res[x]['pos']:
+                    sumx += val
+                resvec[x] = sumx/Decimal(n)
+            elif nl > 0 and pl == 0:
+                sumx = Decimal()
+                for val in res[x]['neg']:
+                    sumx += val
+                resvec[x] = sumx/Decimal(n)
+            else:
+                resvec[x] = Med
+##        else:
+##            for x in res:
+##                #print(x, res[x])
+##                pl = len(res[x]['pos'])
+##                nl = len(res[x]['neg'])
+##                if pl > 0 and nl == 0:
+##                    minx = Max
+##                    for v in res[x]['pos']:
+##                        minx = min(minx,v)
+##                    resvec[x] = minx
+##                elif nl > 0 and pl == 0:
+##                    maxx = Min
+##                    for v in res[x]['neg']:
+##                        maxx = max(maxx,v)
+##                    resvec[x] = maxx
+##                else:
+##                    resvec[x] = Med
+        kerVec = []
+        for x in g.actions:
+            kerVec.append((resvec[x],x))
+            if Debug:
+                print(x,res[x])
+        #kerVec.sort(reverse=True)
+        scoredTuplesSort(kerVec,reverse=True)
+        if Debug:
+            nl = len(kerVec)
+            for i in range(nl):
+                print(kerVec[i])
+        res = BpvSet()
+        res.support = deepcopy(digraph.actions)
+        res.membership = {}
+        for x in res.support:
+            res.membership[x] = resvec[x]
+        return res
 
     def computeConjunctiveEpistemicFusion(digraph,Terminal=False,
                                           Average=False,Debug=False):
@@ -15982,7 +16070,7 @@ if __name__ == "__main__":
     from decimal import Decimal, getcontext
     t = Random3ObjectivesPerformanceTableau(weightDistribution="equiobjectives",
                                  numberOfActions=11,numberOfCriteria=13,
-                                            missingDataProbability=0.05,seed=10)
+                                            missingDataProbability=0.05,seed=40)
                           
     #t = CircularPerformanceTableau()
     #t = PerformanceTableau('AliceChoice')
@@ -15992,33 +16080,40 @@ if __name__ == "__main__":
     g = BipolarOutrankingDigraph(t,Threading=False,startMethod='spawn')
     print(g)
     g.showChoiceRecommendation('CondorcetWinners')
-    print('Rubis BCR')
-    print('=== strd')
-    g.showBestChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType='standard')
-    print('=== gi')
-    g.showBestChoiceRecommendation(Comments=True,fusionType='guardedIndeterminateness',ChoiceVector=True)
-    print('=== epf')
-    g.showBestChoiceRecommendation(Comments=True,fusionType='epistemicFusion',ChoiceVector=True)
-    cg = ConfidentBipolarOutrankingDigraph(t,confidence=90.0)
-    print('Confident ===>')
-    print('=== strd')
-    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType='standard')
-    print('=== gi')
-    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType='guardedIndeterminateness')
-    print('=== epf')
-    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType='epistemicFusion')
-    #g.showChoiceRecommendation('Rubis',ChoiceVector=True)
-    cg.showChoiceRecommendation('CondorcetWinners')
-    print(g.showChoiceRecommendation('IteratedCondorcetWinners',
-                                     ReturnRanking=True))
-    from linearOrders import IteratedBpvCondorcetWinnersRanking
-    cwr = IteratedBpvCondorcetWinnersRanking(g)
-    print(cwr.condorcetRanking)
-    print(g.computeCondorcetWinners())
-    print(g.computeCondorcetLosers())
-    print(g.computeWeakCondorcetWinners())
-    print(g.computeWeakCondorcetLosers())
-    # g.showHTMLPerformanceHeatmap(actionsList=ranking,Correlations=True)
+    g.showChoiceRecommendation('CondorcetWinners',Average=True)
+    cw1 = g.computeAverageEpistemicFusion(Terminal=True)
+    cw1.showMembershipCharacteristics()
+    cw2 = g.computeAverageEpistemicFusion(Terminal=False)
+    cw2.showMembershipCharacteristics()
+    cw = cw2.ovee((-cw1))
+    cw.showMembershipCharacteristics()
+##    print('Rubis BCR')
+##    print('=== strd')
+##    g.showBestChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType='standard')
+##    print('=== gi')
+##    g.showBestChoiceRecommendation(Comments=True,fusionType='guardedIndeterminateness',ChoiceVector=True)
+##    print('=== epf')
+##    g.showBestChoiceRecommendation(Comments=True,fusionType='epistemicFusion',ChoiceVector=True)
+##    cg = ConfidentBipolarOutrankingDigraph(t,confidence=90.0)
+##    print('Confident ===>')
+##    print('=== strd')
+##    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType='standard')
+##    print('=== gi')
+##    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType='guardedIndeterminateness')
+##    print('=== epf')
+##    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType='epistemicFusion')
+##    #g.showChoiceRecommendation('Rubis',ChoiceVector=True)
+##    cg.showChoiceRecommendation('CondorcetWinners')
+##    print(g.showChoiceRecommendation('IteratedCondorcetWinners',
+##                                     ReturnRanking=True))
+##    from linearOrders import IteratedBpvCondorcetWinnersRanking
+##    cwr = IteratedBpvCondorcetWinnersRanking(g)
+##    print(cwr.condorcetRanking)
+##    print(g.computeCondorcetWinners())
+##    print(g.computeCondorcetLosers())
+##    print(g.computeWeakCondorcetWinners())
+##    print(g.computeWeakCondorcetLosers())
+##    # g.showHTMLPerformanceHeatmap(actionsList=ranking,Correlations=True)
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
