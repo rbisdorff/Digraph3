@@ -2087,6 +2087,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                    Transposed=False,
                                    criteriaList=None,
                                    colorLevels=7,
+                                   GrayScales=False,
                                    pageTitle=None,
                                    ndigits=2,
                                    SparseModel=False,
@@ -2174,6 +2175,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                              strategy=strategy,
                                              ndigits=ndigits,
                                              colorLevels=colorLevels,
+                                             GrayScales=GrayScales,
                                              pageTitle=pageTitle,
                                              Correlations=Correlations,
                                              Threading=Threading, 
@@ -2199,6 +2201,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                 ndigits=2,
                                 ContentCentered=True,
                                 colorLevels=None,
+                                GrayScales=False,
                                 pageTitle='Performance Heatmap',
                                 Correlations=False,
                                 Threading=False,
@@ -2242,18 +2245,60 @@ The performance evaluations of each decision alternative on each criterion are g
                                (Decimal('0.6666'),'"#FFFFBF"'),
                                (Decimal('1.0'),'"#D9EF8B"'),
                                ]
+        grayScales9Colors =    [(Decimal('0.1111'),'"#777777"'),
+                               (Decimal('0.2222'),'"#888888"'),
+                               (Decimal('0.3333'),'"#999999"'),
+                               (Decimal('0.4444'),'"#AAAAAA"'),
+                               (Decimal('0.5555'),'"#BBBBBB"'),
+                               (Decimal('0.6666'),'"#CCCCCC"'),
+                               (Decimal('0.7777'),'"#DDDDDD"'),
+                               (Decimal('0.8888'),'"#EEEEEE'),
+                               (Decimal('1.0000'),'"#FFFFFF')]
+        grayScales7Colors = [
+                               (Decimal('0.1429'),'"#999999"'),
+                               (Decimal('0.2857'),'"#AAAAAA"'),
+                               (Decimal('0.4286'),'"#BBBBBB"'),
+                               (Decimal('0.5714'),'"#CCCCCC"'),
+                               (Decimal('0.7143'),'"#DDDDDD"'),
+                               (Decimal('0.8571'),'"#EEEEEE"'),
+                               (Decimal('1.0000'),'"#FFFFFF"')
+                               ]
+        grayScales5Colors = [
+                               (Decimal('0.2'),'"#777777"'),
+                               (Decimal('0.4'),'"#999999"'),
+                               (Decimal('0.6'),'"#BBBBBB"'),
+                               (Decimal('0.8'),'"#DDDDDD"'),
+                               (Decimal('1.0'),'"#FFFFFF"')
+                               ]
+        grayScales3Colors = [
+                               (Decimal('0.3333'),'"#AAAAAA"'),
+                               (Decimal('0.6666'),'"#DDDDDD"'),
+                               (Decimal('1.0'),'"#FFFFFF"'),
+                               ]
         if colorLevels is None:
             colorLevels = 7
-        if colorLevels == 7:
-            colorPalette = brewerRdYlGn7Colors
-        elif colorLevels == 9:
-            colorPalette = brewerRdYlGn9Colors
-        elif colorLevels == 5:
-            colorPalette = brewerRdYlGn5Colors
-        elif colorLevels == 3:
-            colorPalette = brewerRdYlGn3Colors
-        else:
-            colorPalette = brewerRdYlGn7Colors
+        if GrayScales:
+            if colorLevels == 7:
+                colorPalette = grayScales7Colors
+##            elif colorLevels == 9:
+##                colorPalette = grayScales9Colors
+            elif colorLevels == 5:
+                colorPalette = grayScales5Colors
+            elif colorLevels == 3:
+                colorPalette = grayScales3Colors
+            else:
+                colorPalette = grayScales7Colors
+        else:    
+            if colorLevels == 7:
+                colorPalette = brewerRdYlGn7Colors
+            elif colorLevels == 9:
+                colorPalette = brewerRdYlGn9Colors
+            elif colorLevels == 5:
+                colorPalette = brewerRdYlGn5Colors
+            elif colorLevels == 3:
+                colorPalette = brewerRdYlGn3Colors
+            else:
+                colorPalette = brewerRdYlGn7Colors
         nc = len(colorPalette)
         backGroundColor   = '"#FFFFFF"'
         naColor           = '"#FFFFFF"'
@@ -5140,7 +5185,7 @@ if __name__ == "__main__":
 ##    t = CircularPerformanceTableau(order=7)
 ##    t.showPerformanceTableau()
     t = RandomCBPerformanceTableau(numberOfCriteria=13,
-                                   numberOfActions=100,
+                                   numberOfActions=30,
                                    weightDistribution='equiobjectives',
                                    IntegerWeights=True,
                                    NegativeWeights=False,
@@ -5148,9 +5193,9 @@ if __name__ == "__main__":
                                    seed=1,
                                    Debug=False)
 
-    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,SparseModel=False,
+    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=9,SparseModel=False,
                                   rankingRule='NetFlows',Transposed=False,
-                                 outrankingModel='standard',
+                                 outrankingModel='standard',GrayScales=True,
                                  Threading=False,nbrOfCPUs=4)
 # ##    t.showHTMLPerformanceHeatmap(outrankingModel='this',
 # ##                                   Correlations=True,colorLevels=5,

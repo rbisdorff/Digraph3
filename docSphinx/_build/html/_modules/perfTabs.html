@@ -2294,6 +2294,7 @@
                                    <span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">criteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">colorLevels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+                                   <span class="n">GrayScales</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">pageTitle</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                                    <span class="n">SparseModel</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -2381,6 +2382,7 @@
                                              <span class="n">strategy</span><span class="o">=</span><span class="n">strategy</span><span class="p">,</span>
                                              <span class="n">ndigits</span><span class="o">=</span><span class="n">ndigits</span><span class="p">,</span>
                                              <span class="n">colorLevels</span><span class="o">=</span><span class="n">colorLevels</span><span class="p">,</span>
+                                             <span class="n">GrayScales</span><span class="o">=</span><span class="n">GrayScales</span><span class="p">,</span>
                                              <span class="n">pageTitle</span><span class="o">=</span><span class="n">pageTitle</span><span class="p">,</span>
                                              <span class="n">Correlations</span><span class="o">=</span><span class="n">Correlations</span><span class="p">,</span>
                                              <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span> 
@@ -2407,6 +2409,7 @@
                                 <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                                 <span class="n">ContentCentered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                 <span class="n">colorLevels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                <span class="n">GrayScales</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                 <span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Performance Heatmap&#39;</span><span class="p">,</span>
                                 <span class="n">Correlations</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                 <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -2450,18 +2453,60 @@
                                <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.6666&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FFFFBF&quot;&#39;</span><span class="p">),</span>
                                <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#D9EF8B&quot;&#39;</span><span class="p">),</span>
                                <span class="p">]</span>
+        <span class="n">grayScales9Colors</span> <span class="o">=</span>    <span class="p">[(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.1111&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#777777&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.2222&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#888888&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.3333&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#999999&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.4444&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#AAAAAA&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.5555&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#BBBBBB&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.6666&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#CCCCCC&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.7777&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#DDDDDD&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.8888&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#EEEEEE&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0000&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FFFFFF&#39;</span><span class="p">)]</span>
+        <span class="n">grayScales7Colors</span> <span class="o">=</span> <span class="p">[</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.1429&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#999999&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.2857&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#AAAAAA&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.4286&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#BBBBBB&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.5714&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#CCCCCC&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.7143&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#DDDDDD&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.8571&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#EEEEEE&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0000&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FFFFFF&quot;&#39;</span><span class="p">)</span>
+                               <span class="p">]</span>
+        <span class="n">grayScales5Colors</span> <span class="o">=</span> <span class="p">[</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.2&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#777777&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.4&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#999999&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.6&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#BBBBBB&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.8&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#DDDDDD&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FFFFFF&quot;&#39;</span><span class="p">)</span>
+                               <span class="p">]</span>
+        <span class="n">grayScales3Colors</span> <span class="o">=</span> <span class="p">[</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.3333&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#AAAAAA&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.6666&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#DDDDDD&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FFFFFF&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">]</span>
         <span class="k">if</span> <span class="n">colorLevels</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">colorLevels</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="k">if</span> <span class="n">colorLevels</span> <span class="o">==</span> <span class="mi">7</span><span class="p">:</span>
-            <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">brewerRdYlGn7Colors</span>
-        <span class="k">elif</span> <span class="n">colorLevels</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
-            <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">brewerRdYlGn9Colors</span>
-        <span class="k">elif</span> <span class="n">colorLevels</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
-            <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">brewerRdYlGn5Colors</span>
-        <span class="k">elif</span> <span class="n">colorLevels</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-            <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">brewerRdYlGn3Colors</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">brewerRdYlGn7Colors</span>
+        <span class="k">if</span> <span class="n">GrayScales</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">colorLevels</span> <span class="o">==</span> <span class="mi">7</span><span class="p">:</span>
+                <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">grayScales7Colors</span>
+<span class="c1">##            elif colorLevels == 9:</span>
+<span class="c1">##                colorPalette = grayScales9Colors</span>
+            <span class="k">elif</span> <span class="n">colorLevels</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">grayScales5Colors</span>
+            <span class="k">elif</span> <span class="n">colorLevels</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">grayScales3Colors</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">grayScales7Colors</span>
+        <span class="k">else</span><span class="p">:</span>    
+            <span class="k">if</span> <span class="n">colorLevels</span> <span class="o">==</span> <span class="mi">7</span><span class="p">:</span>
+                <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">brewerRdYlGn7Colors</span>
+            <span class="k">elif</span> <span class="n">colorLevels</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
+                <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">brewerRdYlGn9Colors</span>
+            <span class="k">elif</span> <span class="n">colorLevels</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">brewerRdYlGn5Colors</span>
+            <span class="k">elif</span> <span class="n">colorLevels</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">brewerRdYlGn3Colors</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">brewerRdYlGn7Colors</span>
         <span class="n">nc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">colorPalette</span><span class="p">)</span>
         <span class="n">backGroundColor</span>   <span class="o">=</span> <span class="s1">&#39;&quot;#FFFFFF&quot;&#39;</span>
         <span class="n">naColor</span>           <span class="o">=</span> <span class="s1">&#39;&quot;#FFFFFF&quot;&#39;</span>
@@ -5409,7 +5454,7 @@
 <span class="c1">##    t = CircularPerformanceTableau(order=7)</span>
 <span class="c1">##    t.showPerformanceTableau()</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
-                                   <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                                   <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
                                    <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span>
                                    <span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                    <span class="n">NegativeWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -5417,9 +5462,9 @@
                                    <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                                    <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">SparseModel</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">SparseModel</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                   <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                 <span class="n">outrankingModel</span><span class="o">=</span><span class="s1">&#39;standard&#39;</span><span class="p">,</span>
+                                 <span class="n">outrankingModel</span><span class="o">=</span><span class="s1">&#39;standard&#39;</span><span class="p">,</span><span class="n">GrayScales</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                  <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 <span class="c1"># ##    t.showHTMLPerformanceHeatmap(outrankingModel=&#39;this&#39;,</span>
 <span class="c1"># ##                                   Correlations=True,colorLevels=5,</span>
@@ -5464,7 +5509,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Oct 11, 2026.
+      <span class="lastupdated">Last updated on Oct 12, 2026.
       </span></p>
   </div>
 
