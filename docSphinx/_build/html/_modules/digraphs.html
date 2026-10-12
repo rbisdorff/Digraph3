@@ -17047,7 +17047,8 @@
     <span class="n">cw1</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
     <span class="n">cw2</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeAverageEpistemicFusion</span><span class="p">(</span><span class="n">Terminal</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">cw2</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-    <span class="n">cw</span> <span class="o">=</span> <span class="n">cw2</span><span class="o">.</span><span class="n">ovee</span><span class="p">((</span><span class="o">-</span><span class="n">cw1</span><span class="p">))</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">bipolarValuedSets</span><span class="w"> </span><span class="kn">import</span> <span class="n">averageEpistemicFusion</span>
+    <span class="n">cw</span> <span class="o">=</span> <span class="n">averageEpistemicFusion</span><span class="p">([</span><span class="n">cw2</span><span class="p">,</span><span class="o">-</span><span class="n">cw1</span><span class="p">])</span>
     <span class="n">cw</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
 <span class="c1">##    print(&#39;Rubis BCR&#39;)</span>
 <span class="c1">##    print(&#39;=== strd&#39;)</span>

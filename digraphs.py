@@ -16088,7 +16088,8 @@ if __name__ == "__main__":
     cw1.showMembershipCharacteristics()
     cw2 = g.computeAverageEpistemicFusion(Terminal=False)
     cw2.showMembershipCharacteristics()
-    cw = cw2.ovee((-cw1))
+    from bipolarValuedSets import averageEpistemicFusion
+    cw = averageEpistemicFusion([cw2,-cw1])
     cw.showMembershipCharacteristics()
 ##    print('Rubis BCR')
 ##    print('=== strd')
