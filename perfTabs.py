@@ -2245,43 +2245,44 @@ The performance evaluations of each decision alternative on each criterion are g
                                (Decimal('0.6666'),'"#FFFFBF"'),
                                (Decimal('1.0'),'"#D9EF8B"'),
                                ]
-        grayScales9Colors =    [(Decimal('0.1111'),'"#777777"'),
-                               (Decimal('0.2222'),'"#888888"'),
-                               (Decimal('0.3333'),'"#999999"'),
-                               (Decimal('0.4444'),'"#AAAAAA"'),
-                               (Decimal('0.5555'),'"#BBBBBB"'),
-                               (Decimal('0.6666'),'"#CCCCCC"'),
-                               (Decimal('0.7777'),'"#DDDDDD"'),
-                               (Decimal('0.8888'),'"#EEEEEE'),
-                               (Decimal('1.0000'),'"#FFFFFF')]
+        # gray scales
+        # grayScales9Colors =    [(Decimal('0.1111'),'"#999999'),
+        #                        (Decimal('0.2222'),'"#888888'),
+        #                        (Decimal('0.3333'),'"#777777'),
+        #                        (Decimal('0.4444'),'"#666666'),
+        #                        (Decimal('0.5555'),'"#555555'),
+        #                        (Decimal('0.6666'),'"#444444'),
+        #                        (Decimal('0.7777'),'"#333333'),
+        #                        (Decimal('0.8888'),'"#222222'),
+        #                        (Decimal('1.0000'),'"#111111')]
         grayScales7Colors = [
-                               (Decimal('0.1429'),'"#999999"'),
+                               (Decimal('0.1429'),'"#CCCCCC"'),
                                (Decimal('0.2857'),'"#AAAAAA"'),
-                               (Decimal('0.4286'),'"#BBBBBB"'),
-                               (Decimal('0.5714'),'"#CCCCCC"'),
-                               (Decimal('0.7143'),'"#DDDDDD"'),
-                               (Decimal('0.8571'),'"#EEEEEE"'),
-                               (Decimal('1.0000'),'"#FFFFFF"')
+                               (Decimal('0.4286'),'"#888888"'),
+                               (Decimal('0.5714'),'"#666666"'),
+                               (Decimal('0.7143'),'"#444444"'),
+                               (Decimal('0.8571'),'"#222222"'),
+                               (Decimal('1.0000'),'"#000000"')
                                ]
         grayScales5Colors = [
-                               (Decimal('0.2'),'"#777777"'),
-                               (Decimal('0.4'),'"#999999"'),
-                               (Decimal('0.6'),'"#BBBBBB"'),
-                               (Decimal('0.8'),'"#DDDDDD"'),
-                               (Decimal('1.0'),'"#FFFFFF"')
+                               (Decimal('0.2'),'"#AAAAAA"'),
+                               (Decimal('0.4'),'"#888888"'),
+                               (Decimal('0.6'),'"#666666"'),
+                               (Decimal('0.8'),'"#444444"'),
+                               (Decimal('1.0'),'"#222222"')
                                ]
         grayScales3Colors = [
                                (Decimal('0.3333'),'"#AAAAAA"'),
-                               (Decimal('0.6666'),'"#DDDDDD"'),
-                               (Decimal('1.0'),'"#FFFFFF"'),
+                               (Decimal('0.6666'),'"#777777"'),
+                               (Decimal('1.0000'),'"#444444"'),
                                ]
         if colorLevels is None:
             colorLevels = 7
         if GrayScales:
             if colorLevels == 7:
                 colorPalette = grayScales7Colors
-##            elif colorLevels == 9:
-##                colorPalette = grayScales9Colors
+            # elif colorLevels == 9:
+            #     colorPalette = grayScales9Colors
             elif colorLevels == 5:
                 colorPalette = grayScales5Colors
             elif colorLevels == 3:
@@ -2572,8 +2573,13 @@ The performance evaluations of each decision alternative on each criterion are g
                     html += '<tr><th bgcolor=%s>%s</th>' % (rowHeaderColor,xName)
                 for g in criteriaList:
                     if self.evaluation[g][x] != NA:
-                        formatString = '<td bgcolor=%s align="right">%% .%df</td>' \
+                        if GrayScales:
+                            formatString = '<td style="color:yellow" bgcolor=%s align="right">%% .%df</td>' \
                                                       % (quantileColor[x][g],ndigits)
+                        else:
+                             formatString = '<td bgcolor=%s align="right">%% .%df</td>' \
+                                                      % (quantileColor[x][g],ndigits)
+                          
                         html += formatString % (self.evaluation[g][x])
                     else:
                         html += '<td bgcolor=%s class="na">NA</td>' % naColor
@@ -2585,8 +2591,15 @@ The performance evaluations of each decision alternative on each criterion are g
         html += '<i>Color legend: </i>\n'
         html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
         html += '<tr bgcolor=%s><th>quantile</th>' % (columnHeaderColor)
+        nc = len(colorPalette)
         for col in range(0,nc):
-            html += '<td bgcolor=%s>&nbsp;%.2f&#037;</td>' \
+            print(col,colorPalette[col])
+            if GrayScales:
+                html += '<td style="color:yellow" bgcolor=%s>&nbsp;%.2f&#037;</td>' \
+                % (colorPalette[col][1],
+                   colorPalette[col][0]*Decimal('100.0'))
+            else:
+                html += '<td bgcolor=%s>&nbsp;%.2f&#037;</td>' \
                 % (colorPalette[col][1],
                    colorPalette[col][0]*Decimal('100.0'))
         html += '</tr>\n'
@@ -5185,7 +5198,7 @@ if __name__ == "__main__":
 ##    t = CircularPerformanceTableau(order=7)
 ##    t.showPerformanceTableau()
     t = RandomCBPerformanceTableau(numberOfCriteria=13,
-                                   numberOfActions=30,
+                                   numberOfActions=10,
                                    weightDistribution='equiobjectives',
                                    IntegerWeights=True,
                                    NegativeWeights=False,
@@ -5193,7 +5206,7 @@ if __name__ == "__main__":
                                    seed=1,
                                    Debug=False)
 
-    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=9,SparseModel=False,
+    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=3,SparseModel=False,
                                   rankingRule='NetFlows',Transposed=False,
                                  outrankingModel='standard',GrayScales=True,
                                  Threading=False,nbrOfCPUs=4)
