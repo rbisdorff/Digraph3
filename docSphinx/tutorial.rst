@@ -2451,10 +2451,10 @@ The incomparability situation between 'a3' and 'a4' results here from a perfect 
 Ranking the template peformance tableau
 ```````````````````````````````````````
 
-We may eventually rank the five decision alternatives with a heatmap browser view following the *Copeland* ranking rule which consistently reproduces the partial outranking order shown in :numref:`templateDrawing`. 
+We may eventually rank the five decision alternatives shown in  :numref:`templateDrawing` with a coloured heatmap browser view following the *Copeland* ranking rule which consistently reproduces the apparent partial outranking order (see [72]_). 
 
    >>> g.showHTMLPerformanceHeatmap(ndigits=1,colorLevels=5,
-   ...    Correlations=True,rankingRule='Copeland',
+   ...    Correlations=True,rankingRule='Copeland',GrayScales=False,
    ...    pageTitle='Heatmap of the template performance tableau')
 
 .. image:: templateHeatmapCop.png
@@ -12138,6 +12138,8 @@ Appendices
 .. [70] See https://en.wikipedia.org/wiki/Multiple-criteria_decision_analysis
 
 .. [71] The notion of *ranking fairness* only considers here the ranking algorithm's more or less fairly taking into account of the marginal criteria rankings. We do not discuss whether the individual performance measuring criteria do treat the potential decision alternatives without any unfair discrimination (see [TAJ-2026]_ )
+
+.. [72] For colour-blind people, the :py:meth:`perfsTab.PerformanceTableau.showHTMLPerformanceHeatmap` method provides with the *GrayScales=True* parameter a gray-scaled heatmap design  
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive

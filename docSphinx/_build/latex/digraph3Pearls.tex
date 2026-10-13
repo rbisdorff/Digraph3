@@ -7,6 +7,7 @@
 \ifdefined\pdfimageresolution
     \pdfimageresolution= \numexpr \dimexpr1in\relax/\sphinxpxdimen\relax
 \fi
+\newdimen\sphinxremdimen\sphinxremdimen = 12pt
 %% let collapsible pdf bookmarks panel have high depth per default
 \PassOptionsToPackage{bookmarksdepth=5}{hyperref}
 
@@ -67,8 +68,8 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{September 11, 2026}
-\release{3.14.7}
+\date{October 13, 2026}
+\release{3.14.8}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
 \renewcommand{\releasename}{Release}
@@ -396,7 +397,7 @@ no considerably better performing situation is observed on a concordant criterio
 Let us consider the following random performance tableau.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomPerfTabs} \PYG{k+kn}{import} \PYG{n}{RandomPerformanceTableau}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{randomPerfTabs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{RandomPerformanceTableau}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{RandomPerformanceTableau}\PYG{p}{(}
 \PYG{g+gp}{... }         \PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{7}\PYG{p}{,}
 \PYG{g+gp}{... }         \PYG{n}{numberOfCriteria}\PYG{o}{=}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{)}
@@ -419,7 +420,7 @@ For the corresponding confident outranking digraph, we require a confidence leve
 
 \fvset{hllines={, 4,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import}\PYGZbs{}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{outrankingDigraphs}\PYG{+w}{ }\PYG{k+kn}{import}\PYGZbs{}
 \PYG{g+gp}{... }                      \PYG{n}{ConfidentBipolarOutrankingDigraph}
 
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g90} \PYG{o}{=} \PYG{n}{ConfidentBipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{confidence}\PYG{o}{=}\PYG{l+m+mi}{90}\PYG{p}{)}
@@ -600,6 +601,19 @@ Despite lower likelihood values (see the \sphinxstyleemphasis{g90} relation tabl
 For concluding, it is worthwhile noticing again that it is in fact the \sphinxstylestrong{neutral} value of our \sphinxstyleemphasis{bipolar\sphinxhyphen{}valued epistemic logic} that allows us to easily handle alpha\% confidence or not of outranking situations when confronted with uncertain criteria significance weights. Remarkable furthermore is the usage, the standard \sphinxstylestrong{Gaussian error function} (erf) provides by delivering \sphinxstyleemphasis{signed likelihood values} immediately concerning either a \sphinxstyleemphasis{positive} relational statement, or when negative, its \sphinxstyleemphasis{negated} version.
 \end{sphinxadmonition}
 
+
+\begin{sphinxseealso}{See also:}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{Computing a best choice recommendation}}}
+
+\end{itemize}
+
+
+\end{sphinxseealso}
+
+
 \sphinxAtStartPar
 Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Content Table}}}}} (\autopageref*{\detokenize{pearls:pearls-label}})
 
@@ -640,7 +654,7 @@ The required cardinal significance weights of the performance criteria represent
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:objexample}}}
 \fvset{hllines={, 24, 29, 33,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomPerfTabs} \PYG{k+kn}{import} \PYGZbs{}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{randomPerfTabs}\PYG{+w}{ }\PYG{k+kn}{import} \PYGZbs{}
 \PYG{g+gp}{... }          \PYG{n}{Random3ObjectivesPerformanceTableau}
 
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{Random3ObjectivesPerformanceTableau}\PYG{p}{(}
@@ -707,7 +721,7 @@ Let us construct the normalized bipolar\sphinxhyphen{}valued outranking digraph 
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:exbg}}}
 \fvset{hllines={, 2,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{outrankingDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{Normalized}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -935,81 +949,129 @@ In the comparison of alternatives \sphinxstyleemphasis{a2} and \sphinxstyleempha
 \centering
 \begin{tabulary}{\linewidth}[t]{TTTTTTTT}
 \sphinxtoprule
-\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 \sphinxstyleemphasis{W{[}i{]}}
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 \sphinxhyphen{}12
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 \sphinxhyphen{}8
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 \sphinxhyphen{}6
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 0
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 6
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 8
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 12
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
 \sphinxmidrule
-\sphinxtableatstartofbodyhook
+\sphinxtableatstartofbodyhook\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 \sphinxstyleemphasis{q{[}i{]}}
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 0
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 0
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 2
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 1
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 1
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 3
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 2
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 \sphinxstyleemphasis{Q{[}i{]}}
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 0
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 0
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 2
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 3
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 4
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 7
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 9
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
 \sphinxbottomrule
 \end{tabulary}
@@ -1025,81 +1087,129 @@ Let use denote \sphinxstyleemphasis{\sphinxhyphen{}q} and \sphinxstyleemphasis{\
 \centering
 \begin{tabulary}{\linewidth}[t]{TTTTTTTT}
 \sphinxtoprule
-\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 \sphinxstyleemphasis{W{[}i{]}}
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 \sphinxhyphen{}12
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 \sphinxhyphen{}8
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 \sphinxhyphen{}6
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 0
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 6
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 8
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 12
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
 \sphinxmidrule
-\sphinxtableatstartofbodyhook
+\sphinxtableatstartofbodyhook\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 \sphinxstyleemphasis{\sphinxhyphen{}q{[}i{]}}
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 2
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 3
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 1
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 1
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 2
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 0
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 0
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 \sphinxstyleemphasis{\sphinxhyphen{}Q{[}i{]}}
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 2
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 5
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 6
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 7
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 9
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 9
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 9
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
 \sphinxbottomrule
 \end{tabulary}
@@ -1118,81 +1228,129 @@ We may verify, for instance, that the outranking situation observed between \sph
 \centering
 \begin{tabulary}{\linewidth}[t]{TTTTTTTT}
 \sphinxtoprule
-\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 \sphinxstyleemphasis{W{[}i{]}}
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 \sphinxhyphen{}12
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 \sphinxhyphen{}8
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 \sphinxhyphen{}6
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 0
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 6
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 8
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 12
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
 \sphinxmidrule
-\sphinxtableatstartofbodyhook
+\sphinxtableatstartofbodyhook\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 \sphinxstyleemphasis{Q{[}i{]}}
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 0
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 0
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 2
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 3
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 4
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 7
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 9
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 \sphinxstyleemphasis{\sphinxhyphen{}Q{[}i{]}}
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 2
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 5
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 6
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 7
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 9
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 9
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 9
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
 \sphinxbottomrule
 \end{tabulary}
@@ -1208,106 +1366,170 @@ Notice that outranking situations qualified at stability levels 4 and 3, evident
 \centering
 \begin{tabulary}{\linewidth}[t]{TTTTTTTT}
 \sphinxtoprule
-\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 \sphinxstyleemphasis{W{[}i{]}}
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 \sphinxhyphen{}12
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 \sphinxhyphen{}8
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 \sphinxhyphen{}6
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 0
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 6
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 8
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 12
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
 \sphinxmidrule
-\sphinxtableatstartofbodyhook
+\sphinxtableatstartofbodyhook\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 \sphinxstyleemphasis{q{[}i{]}}
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 0
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 3
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 1
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 0
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 3
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 0
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 2
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 \sphinxstyleemphasis{Q{[}i{]}}
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 0
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 3
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 4
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 4
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 7
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 7
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 9
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 \sphinxstyleemphasis{\sphinxhyphen{}Q{[}i{]}}
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 2
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 2
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 5
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 5
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 6
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 9
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{8}}
 \sphinxAtStartPar
 9
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
 \sphinxbottomrule
 \end{tabulary}
@@ -1347,7 +1569,7 @@ The corresponding \sphinxstyleemphasis{robust} outranking digraph may be compute
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:robg}}}
 \fvset{hllines={, 22, 24, 26, 28, 32, 34,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{RobustOutrankingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{outrankingDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{RobustOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rg} \PYG{o}{=} \PYG{n}{RobustOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} same t as before}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rg}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Object instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -1449,6 +1671,19 @@ As the initial prekernel is here validated at stability level +2, recommending a
 \sphinxAtStartPar
 For concluding, let us mention that it is precisely again our bipolar\sphinxhyphen{}valued \sphinxstyleemphasis{logical characteristic framework} that provides us here with a \sphinxstylestrong{first order distributional dominance} test for effectively qualifying the stability level 2 \sphinxstyleemphasis{robustness} of an outranking digraph when facing performance tableaux with criteria of only ordinal\sphinxhyphen{}valued significance weights. A real world application of our stability analysis with such a kind of performance tableau may be consulted in \sphinxcite{pearls:bis-2015p}.
 
+
+\begin{sphinxseealso}{See also:}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{Alice’s best choice: A selection case study}}}
+
+\end{itemize}
+
+
+\end{sphinxseealso}
+
+
 \sphinxAtStartPar
 Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Content Table}}}}} (\autopageref*{\detokenize{pearls:pearls-label}})
 
@@ -1502,7 +1737,7 @@ Let us reconsider, for instance, the previous performance tableau with three dec
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:unopposed1}}}
 \fvset{hllines={, 10, 15, 19,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomPerfTabs} \PYG{k+kn}{import}\PYGZbs{}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{randomPerfTabs}\PYG{+w}{ }\PYG{k+kn}{import}\PYGZbs{}
 \PYG{g+gp}{... }          \PYG{n}{Random3ObjectivesPerformanceTableau}
 
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{Random3ObjectivesPerformanceTableau}\PYG{p}{(}
@@ -1538,11 +1773,11 @@ We may obtain such \sphinxstyleemphasis{unopposed multiobjective} outranking sit
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:unopposed2}}}
 \fvset{hllines={, 17,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{outrankingDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{geco} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{objectivesSubset}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Eco}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gsoc} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{objectivesSubset}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Soc}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{genv} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{objectivesSubset}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Env}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{FusionLDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{digraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{FusionLDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{objectiveWeights} \PYG{o}{=} \PYGZbs{}
 \PYG{g+gp}{... }  \PYG{p}{[}\PYG{n}{t}\PYG{o}{.}\PYG{n}{objectives}\PYG{p}{[}\PYG{n}{obj}\PYG{p}{]}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{weight}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{k}{for} \PYG{n}{obj} \PYG{o+ow}{in} \PYG{n}{t}\PYG{o}{.}\PYG{n}{objectives}\PYG{p}{]}
 
@@ -1574,7 +1809,7 @@ For easily computing this kind of \sphinxstyleemphasis{unopposed multiobjective}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:unopposed3}}}
 \fvset{hllines={, 12, 13,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import}\PYGZbs{}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{outrankingDigraphs}\PYG{+w}{ }\PYG{k+kn}{import}\PYGZbs{}
 \PYG{g+gp}{... }       \PYG{n}{UnOpposedBipolarOutrankingDigraph}
 
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{uopg} \PYG{o}{=} \PYG{n}{UnOpposedBipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)}
@@ -1640,8 +1875,8 @@ Indeed, best choice recommendations, computed from an \sphinxstyleemphasis{unopp
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:unopposed5}}}
 \fvset{hllines={, 6, 13,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{uopg}\PYG{o}{.}\PYG{n}{showBestChoiceRecommendation}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ Best choice recommendation(s) (BCR)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{uopg}\PYG{o}{.}\PYG{n}{showChoiceRecommendation}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Rubis}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+go}{ Rubis choice recommendation(s) (BCR)}
 \PYG{g+go}{  (in decreasing order of determinateness)}
 \PYG{g+go}{ Credibility domain: [\PYGZhy{}1.00,1.00]}
 \PYG{g+go}{  === \PYGZgt{}\PYGZgt{} potential first choice(s)}
@@ -1685,6 +1920,16 @@ We may visualize this kind of \sphinxstylestrong{efficient} choice recommendatio
 
 \sphinxAtStartPar
 In order to make now an eventual best unique choice, a decision maker will necessarily have to weight, in a second stage of the decision aiding process, the relative importance of the individual decision objectives (see tutorial on \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{computing a best choice recommendation}}}).
+
+
+\begin{sphinxseealso}{See also:}
+
+\sphinxAtStartPar
+\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{Alice’s best choice: A selection case study}}}
+
+
+\end{sphinxseealso}
+
 
 \sphinxAtStartPar
 Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Content Table}}}}} (\autopageref*{\detokenize{pearls:pearls-label}})
@@ -1766,7 +2011,7 @@ To investigate the question, we model the given preference data in the format of
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
  \PYG{c+c1}{\PYGZsh{} BipolarApprovalVotingProfile:}
  \PYG{c+c1}{\PYGZsh{} Condorcet 1785, p. lviij}
- \PYG{k+kn}{from} \PYG{n+nn}{collections} \PYG{k+kn}{import} \PYG{n}{OrderedDict}
+ \PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{collections}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{OrderedDict}
  \PYG{n}{candidates} \PYG{o}{=} \PYG{n}{OrderedDict}\PYG{p}{(}\PYG{p}{[}
  \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{A}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{A}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}\PYG{p}{,}
  \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{B}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{B}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)} \PYG{p}{]}\PYG{p}{)}
@@ -1788,7 +2033,7 @@ We can inspect this data with the \sphinxcode{\sphinxupquote{BipolarApprovalVoti
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:condorcet2}}}
 \fvset{hllines={, 3, 14, 20, 24, 25,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{votingProfiles} \PYG{k+kn}{import}\PYGZbs{}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{votingProfiles}\PYG{+w}{ }\PYG{k+kn}{import}\PYGZbs{}
 \PYG{g+gp}{... }                  \PYG{n}{BipolarApprovalVotingProfile}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{v1} \PYG{o}{=} \PYG{n}{BipolarApprovalVotingProfile}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{condorcet1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{v1}
@@ -1833,7 +2078,7 @@ We may organize this data in the format of the following \sphinxcode{\sphinxupqu
 \sphinxSetupCaptionForVerbatim{Linear voting profile}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:condorcet3}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
- \PYG{k+kn}{from} \PYG{n+nn}{collections} \PYG{k+kn}{import} \PYG{n}{OrderedDict}
+ \PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{collections}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{OrderedDict}
  \PYG{n}{candidates} \PYG{o}{=} \PYG{n}{OrderedDict}\PYG{p}{(}\PYG{p}{[}
  \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{A}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Candidate A}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}\PYG{p}{,}
  \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{B}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Candidate B}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}\PYG{p}{,}
@@ -1859,7 +2104,7 @@ The linear voting profile shown in \hyperref[\detokenize{pearls:condorcet3}]{Lis
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:condorcet4}}}
 \fvset{hllines={, 3, 12, 13, 14, 15, 24, 31,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{votingProfiles} \PYG{k+kn}{import}\PYGZbs{}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{votingProfiles}\PYG{+w}{ }\PYG{k+kn}{import}\PYGZbs{}
 \PYG{g+gp}{... }                  \PYG{n}{LinearVotingProfile}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{v2} \PYG{o}{=} \PYG{n}{LinearVotingProfile}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{condorcet2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{v2}\PYG{o}{.}\PYG{n}{showLinearBallots}\PYG{p}{(}\PYG{p}{)}
@@ -1903,7 +2148,7 @@ Disposing supposedly here of a complete linear voting profile, \sphinxstyleempha
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:condorcet5}}}
 \fvset{hllines={, 3, 10, 13,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{votingProfiles} \PYG{k+kn}{import}\PYGZbs{}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{votingProfiles}\PYG{+w}{ }\PYG{k+kn}{import}\PYGZbs{}
 \PYG{g+gp}{... }               \PYG{n}{MajorityMarginsDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{mm} \PYG{o}{=} \PYG{n}{MajorityMarginsDigraph}\PYG{p}{(}\PYG{n}{v2}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{mm}\PYG{o}{.}\PYG{n}{showMajorityMargins}\PYG{p}{(}\PYG{p}{)}
@@ -1937,7 +2182,7 @@ This resulting linear voting profile, as shown in \hyperref[\detokenize{pearls:c
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:condorcet6}}}
 \fvset{hllines={, 3, 7, 8, 9, 11, 12, 13, 14, 20, 21, 22,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{votingProfiles} \PYG{k+kn}{import}\PYGZbs{}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{votingProfiles}\PYG{+w}{ }\PYG{k+kn}{import}\PYGZbs{}
 \PYG{g+gp}{... }                  \PYG{n}{LinearVotingProfile}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{v3} \PYG{o}{=} \PYG{n}{LinearVotingProfile}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{condorcet3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{v3}\PYG{o}{.}\PYG{n}{showLinearBallots}\PYG{p}{(}\PYG{p}{)}
@@ -1990,7 +2235,7 @@ We may use the \sphinxcode{\sphinxupquote{RankedPairsRanking}} class from the \s
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:condorcet8}}}
 \fvset{hllines={, 2, 20, 21, 22, 23, 28,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{RankedPairsRanking}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{linearOrders}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{RankedPairsRanking}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rp} \PYG{o}{=} \PYG{n}{RankedPairsRanking}\PYG{p}{(}\PYG{n}{m3}\PYG{p}{,}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+go}{ Starting the ranked pairs rule with the following partial order:}
 \PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -2042,7 +2287,7 @@ To defend his pairwise voting approach, \sphinxstyleemphasis{Condorcet} showed w
 \end{footnote}. He proposed therefore the following example of a linear voting profile, stored in a file named \sphinxstyleemphasis{condorcet4.py} available in the \sphinxstyleemphasis{examples} directory of the \sphinxstyleemphasis{Digraph3} resources.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{votingProfiles} \PYG{k+kn}{import} \PYG{n}{LinearVotingProfile}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{votingProfiles}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{LinearVotingProfile}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lv} \PYG{o}{=} \PYG{n}{LinearVotingProfile}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{condorcet4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lv}\PYG{o}{.}\PYG{n}{showLinearBallots}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{  voters           marginal}
@@ -2079,7 +2324,7 @@ However, if we compute the corresponding majority margins digraph, we get the fo
 
 \fvset{hllines={, 7,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{votingProfiles} \PYG{k+kn}{import} \PYG{n}{MajorityMarginsDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{votingProfiles}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{MajorityMarginsDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{mm} \PYG{o}{=} \PYG{n}{MajorityMarginsDigraph}\PYG{p}{(}\PYG{n}{lv}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{mm}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -2156,7 +2401,7 @@ We shall illustrate this point with a voting profile we discuss in the tutorial 
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:example3partiesvotingprofile}}}
 \fvset{hllines={, 22, 23, 24, 28, 29,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{votingProfiles} \PYG{k+kn}{import} \PYG{n}{RandomLinearVotingProfile}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{votingProfiles}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{RandomLinearVotingProfile}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lvp} \PYG{o}{=} \PYG{n}{RandomLinearVotingProfile}\PYG{p}{(}\PYG{n}{numberOfCandidates}\PYG{o}{=}\PYG{l+m+mi}{15}\PYG{p}{,}
 \PYG{g+gp}{... }                        \PYG{n}{numberOfVoters}\PYG{o}{=}\PYG{l+m+mi}{1000}\PYG{p}{,}
 \PYG{g+gp}{... }                        \PYG{n}{WithPolls}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}
@@ -2211,7 +2456,7 @@ We may convert this linear voting profile into a PerformanceTableau object where
 \fvset{hllines={, 1, 3,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lvp}\PYG{o}{.}\PYG{n}{save2PerfTab}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{votingPerfTab}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{perfTabs} \PYG{k+kn}{import} \PYG{n}{PerformanceTableau}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{perfTabs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{PerformanceTableau}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{vpt} \PYG{o}{=} \PYG{n}{PerformanceTableau}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{votingPerfTab}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{vpt}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} PerformanceTableau instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -2246,7 +2491,7 @@ In order to make now a \sphinxstylestrong{primary multipartisan selection} of po
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:computingunopposedvotingresult}}}
 \fvset{hllines={, 4, 11, 12,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYGZbs{}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{outrankingDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYGZbs{}
 \PYG{g+gp}{... }      \PYG{n}{UnOpposedBipolarOutrankingDigraph}
 
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{uog} \PYG{o}{=} \PYG{n}{UnOpposedBipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{vpt}\PYG{p}{)}
@@ -2317,7 +2562,7 @@ When restricting now, in a secondary election stage, the set of eligible candida
 \sphinxSetupCaptionForVerbatim{Secondary election winner recommendation}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:bestchoicerecommendation}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{outrankingDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g2} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{vpt}\PYG{p}{,}
 \PYG{g+gp}{... }              \PYG{n}{actionsSubset}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a06}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a11}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a13}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a15}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
 
@@ -2350,7 +2595,7 @@ We may eventually check the quality of this best choice by noticing that candida
 \PYG{g+go}{ [\PYGZsq{}a06\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lvp}\PYG{o}{.}\PYG{n}{computeBordaWinners}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ [\PYGZsq{}a06\PYGZsq{}]}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{votingProfiles} \PYG{k+kn}{import} \PYG{n}{MajorityMarginsDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{votingProfiles}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{MajorityMarginsDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cd} \PYG{o}{=} \PYG{n}{MajorityMarginsDigraph}\PYG{p}{(}\PYG{n}{lvp}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cd}\PYG{o}{.}\PYG{n}{computeCondorcetWinners}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ [\PYGZsq{}a06\PYGZsq{}]}
@@ -2375,7 +2620,7 @@ The \sphinxcode{\sphinxupquote{RandomLinearVotingProfile}} constructor provides 
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:divisivepolitics}}}
 \fvset{hllines={, 33, 34,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{votingProfiles} \PYG{k+kn}{import} \PYG{n}{RandomLinearVotingProfile}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{votingProfiles}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{RandomLinearVotingProfile}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lvp} \PYG{o}{=} \PYG{n}{RandomLinearVotingProfile}\PYG{p}{(}
 \PYG{g+gp}{... }       \PYG{n}{numberOfCandidates}\PYG{o}{=}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{numberOfVoters}\PYG{o}{=}\PYG{l+m+mi}{500}\PYG{p}{,}
 \PYG{g+gp}{... }       \PYG{n}{WithPolls}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{partyRepartition}\PYG{o}{=}\PYG{l+m+mf}{0.4}\PYG{p}{,}\PYG{n}{other}\PYG{o}{=}\PYG{l+m+mf}{0.2}\PYG{p}{,}
@@ -2398,7 +2643,7 @@ The \sphinxcode{\sphinxupquote{RandomLinearVotingProfile}} constructor provides 
 \PYG{g+go}{   a1 : 02.37\PYGZpc{}  |  a2 : 02.37\PYGZpc{}  |  a5 : 08.98\PYGZpc{}}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lvp}\PYG{o}{.}\PYG{n}{save2PerfTab}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{divisiveExample}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dvp} \PYG{o}{=} \PYG{n}{PerformanceTableau}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{divisiveExample}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYGZbs{}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{outrankingDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYGZbs{}
 \PYG{g+gp}{... }       \PYG{n}{UnOpposedBipolarOutrankingDigraph}
 
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{uodg} \PYG{o}{=} \PYG{n}{UnOpposedBipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{dvp}\PYG{p}{)}
@@ -2434,12 +2679,12 @@ With an oppositeness degree of 100.0\% (see \hyperref[\detokenize{pearls:divisiv
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
-As a consequence, a \sphinxstylestrong{multipartisan primary selection}, computed with a \sphinxcode{\sphinxupquote{showBestChoiceRecommendation()}} method,  will keep the complete initial set of eligible candidates and, hence, becomes \sphinxstylestrong{ineffective} (see \hyperref[\detokenize{pearls:ineffectiveprimaryselection}]{Listing \ref{\detokenize{pearls:ineffectiveprimaryselection}}} Line 6).
+As a consequence, a \sphinxstylestrong{multipartisan primary selection}, computed with a \sphinxcode{\sphinxupquote{showChoiceRecommendation()}} method,  will keep the complete initial set of eligible candidates and, hence, becomes \sphinxstylestrong{ineffective} (see \hyperref[\detokenize{pearls:ineffectiveprimaryselection}]{Listing \ref{\detokenize{pearls:ineffectiveprimaryselection}}} Line 6).
 \sphinxSetupCaptionForVerbatim{Example of ineffective primary multipartisan selection}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:ineffectiveprimaryselection}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{uodg}\PYG{o}{.}\PYG{n}{showBestChoiceRecommendation}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ Best choice recommendation(s) (BCR)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{uodg}\PYG{o}{.}\PYG{n}{showChoiceRecommendation}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Rubis}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+go}{ Rubis choice recommendation(s) (BCR)}
 \PYG{g+go}{  (in decreasing order of determinateness)}
 \PYG{g+go}{ Credibility domain: [\PYGZhy{}1.00,1.00]}
 \PYG{g+go}{ === \PYGZgt{}\PYGZgt{} ambiguous choice(s)}
@@ -2462,7 +2707,7 @@ With such kind of divisive voting profile, there may not always exist an obvious
 \PYG{g+go}{ [\PYGZsq{}a2\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lvp}\PYG{o}{.}\PYG{n}{computeInstantRunoffWinner}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ [\PYGZsq{}a6\PYGZsq{}]}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{votingProfiles} \PYG{k+kn}{import} \PYG{n}{MajorityMarginsDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{votingProfiles}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{MajorityMarginsDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cg} \PYG{o}{=} \PYG{n}{MajorityMarginsDigraph}\PYG{p}{(}\PYG{n}{lvp}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cg}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{n}{ReflexiveTerms}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
 \PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -2558,7 +2803,7 @@ File \sphinxhref{\_static/bpApVotingProfile.py}{bpApVotingProfile.py} contains s
 
 \fvset{hllines={, 10,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{votingProfiles} \PYG{k+kn}{import} \PYG{n}{BipolarApprovalVotingProfile}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{votingProfiles}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{BipolarApprovalVotingProfile}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bavp} \PYG{o}{=} \PYG{n}{BipolarApprovalVotingProfile}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{bpApVotingProfile}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bavp}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} VotingProfile instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -2720,7 +2965,7 @@ We say that candidate \sphinxstyleemphasis{x} is \sphinxstyleemphasis{better app
 
 \fvset{hllines={, 8, 9,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{votingProfiles} \PYG{k+kn}{import} \PYG{n}{MajorityMarginsDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{votingProfiles}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{MajorityMarginsDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{m} \PYG{o}{=} \PYG{n}{MajorityMarginsDigraph}\PYG{p}{(}\PYG{n}{bavp}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{m}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Digraph instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -2761,7 +3006,7 @@ It gets easily apparent that candidate \sphinxstyleemphasis{a12} constitutes a \
 Let us eventually compute, with the help of the \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{NetFlows ranking rule}}}), a linear ranking of the 15 eligible candidates and compare the result with the net approval scores’ ranking.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{NetFlowsOrder}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{linearOrders}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{NetFlowsOrder}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nf} \PYG{o}{=} \PYG{n}{NetFlowsOrder}\PYG{p}{(}\PYG{n}{m}\PYG{p}{,}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{NetFlows versus Net Approval Ranking}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Candidate}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+s1}{NetFlows score}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+s1}{Net Approval score}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
@@ -2820,7 +3065,7 @@ We say that Candidate \sphinxstyleemphasis{x} \sphinxstylestrong{is not outranke
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bavp}\PYG{o}{.}\PYG{n}{save2PerfTab}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{AVPerfTab}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{n}{valueDigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{} Saving as performance tableau in file: \PYGZlt{}AVPerfTab.py\PYGZgt{} \PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{outrankingDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{odg} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{AVPerfTab}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{odg}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Object instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -2845,7 +3090,7 @@ The size (210 = 15*14) of the resulting outranking digraph \sphinxstyleemphasis{
 Yet, we may nevertheless try to apply again the \sphinxstyleemphasis{NetFlows} ranking rule to this complete outranking digraph \sphinxstyleemphasis{g} and print side by side the corresponding \sphinxstyleemphasis{NetFlows} scores and the previous \sphinxstyleemphasis{Net Approval} scores.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{NetFlowsOrder}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{linearOrders}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{NetFlowsOrder}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nf} \PYG{o}{=} \PYG{n}{NetFlowsOrder}\PYG{p}{(}\PYG{n}{odg}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{NetFlows versus Net Approval Ranking}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Candidate}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+s1}{NetFlows Score}\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+s1}{Net Approval Score}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
@@ -2880,9 +3125,9 @@ Encouraged by this positive result, we may furthermore try to compute as well a 
 
 \fvset{hllines={, 6, 7, 8, 9, 16, 31,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{odg}\PYG{o}{.}\PYG{n}{showBestChoiceRecommendation}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{odg}\PYG{o}{.}\PYG{n}{showChoiceRecommendation}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Rubis}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ ***********************}
-\PYG{g+go}{ Best choice recommendation(s) (BCR)}
+\PYG{g+go}{ Rubis choice recommendation(s) (BCR)}
 \PYG{g+go}{  (in decreasing order of determinateness)}
 \PYG{g+go}{  Credibility domain: [\PYGZhy{}1.00,1.00]}
 \PYG{g+go}{ === \PYGZgt{}\PYGZgt{} ambiguous first choice(s)}
@@ -3104,8 +3349,8 @@ We see this result furthermore confirmed when computing the corresponding \sphin
 
 \fvset{hllines={, 6, 14,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{m}\PYG{o}{.}\PYG{n}{showBestChoiceRecommendation}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ Best choice recommendation(s) (BCR)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{m}\PYG{o}{.}\PYG{n}{showChoiceRecommendation}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Rubis}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+go}{ Rubis choice recommendation(s) (BCR)}
 \PYG{g+go}{  (in decreasing order of determinateness)}
 \PYG{g+go}{ Credibility domain: [\PYGZhy{}100.00,100.00]}
 \PYG{g+go}{  === \PYGZgt{}\PYGZgt{} potential first choice(s)}
@@ -3203,158 +3448,254 @@ From January 27 to 30 2022, 392 738 voters participated eventually in a primary 
 \sphinxaftertopcaption
 \begin{tabulary}{\linewidth}[t]{TTTTTT}
 \sphinxtoprule
-\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 Personality
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 Very Good
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 Good
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 Quite Good
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 Fair
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 Insufficient
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
 \sphinxmidrule
-\sphinxtableatstartofbodyhook
+\sphinxtableatstartofbodyhook\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 A Agueb\sphinxhyphen{}Porterie
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 2.86
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 7.34
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 18.19
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 21.05
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 50.56
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 A Hidalgo
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 6.33
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 13.36
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 20.70
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 23.80
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 35.81
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 Y Jadot
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 21.57
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 23.11
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 20.57
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 15.54
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 19.21
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 P Larrouturou
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 13.37
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 14.53
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 19.42
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 18.11
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 34.58
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 Ch Marchandise
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 3.41
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 8.93
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 19.59
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 21.87
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 46.20
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 J\sphinxhyphen{}L Mélenchon
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 20.49
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 15.33
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 16.73
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 18.29
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 29.16
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 Ch Taubira
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 49.41
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 18.00
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 11.68
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 7.91
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 12.99
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
 \sphinxbottomrule
 \end{tabulary}
@@ -3409,134 +3750,214 @@ The best suited multipartisan presidential candidate should as a consequence pre
 \sphinxaftertopcaption
 \begin{tabulary}{\linewidth}[t]{TTTTT}
 \sphinxtoprule
-\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 Personality
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 Net approval
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 Approval
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 Disapproval
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 Abstention
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
 \sphinxmidrule
-\sphinxtableatstartofbodyhook
+\sphinxtableatstartofbodyhook\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 Ch Taubira
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 +66.11
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 79.10
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 12.99
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 07.91
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 Y Jadot
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 +46.04
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 65.25
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 19.21
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 15.54
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 J\sphinxhyphen{}L Mélenchon
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 +23.39
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 52.55
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 29.16
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 18.29
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 P Larrouturou
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 +12.74
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 47.32
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 34.58
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 18.11
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 A Hidalgo
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 +04.57
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 40.39
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 35.81
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 23.80
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 Ch Marchandise
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 \sphinxhyphen{}14.28
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 31.92
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 46.20
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 21.87
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 A Agueb\sphinxhyphen{}Porterie
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 \sphinxhyphen{}22.16
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 28.39
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 50.56
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{5}}
 \sphinxAtStartPar
 21.05
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
 \sphinxbottomrule
 \end{tabulary}
@@ -3556,7 +3977,7 @@ It is furthermore remarkable that both the approval votes and the the disapprova
 To illustrate this point we provide a corresponding \sphinxcode{\sphinxupquote{perfTabs.PerformanceTableau}} object in file \sphinxstyleemphasis{primPopRes.py} in the examples directory of the \sphinxstyleemphasis{Digraph3} resources.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{perfTabs} \PYG{k+kn}{import} \PYG{n}{PerformanceTableau}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{perfTabs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{PerformanceTableau}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{PerformanceTableau}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{primPopRes}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{} PerformanceTableau instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -3671,7 +4092,7 @@ Let us consider such a performance tableau in file \sphinxhref{\_static/graffiti
 \end{footnote} (see \hyperref[\detokenize{pearls:graffiti07-1}]{Fig.\@ \ref{\detokenize{pearls:graffiti07-1}}}).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{perfTabs} \PYG{k+kn}{import} \PYG{n}{PerformanceTableau}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{perfTabs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{PerformanceTableau}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{PerformanceTableau}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{graffiti07}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceTableau}\PYG{p}{(}\PYG{n}{title}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Graffiti Star wars}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
 \PYG{g+gp}{... }                             \PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
@@ -3716,7 +4137,7 @@ There is no doubt that movie \sphinxstyleemphasis{mv\_QS}, with 6 ‘\sphinxstyl
 Let us explicitly construct the underlying bipolar\sphinxhyphen{}valued outranking digraph and consult in \hyperref[\detokenize{pearls:graffiti07-45}]{Fig.\@ \ref{\detokenize{pearls:graffiti07-45}}} the pairwise characteristic values we observe between the two best\sphinxhyphen{}ranked movies, namely \sphinxstyleemphasis{mv\_QS} and \sphinxstyleemphasis{mv\_RR}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{outrankingDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{recodeValuation}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{19}\PYG{p}{,}\PYG{l+m+mi}{19}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} integer characteristic values}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showHTMLPairwiseOutrankings}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mv\PYGZus{}QS}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mv\PYGZus{}RR}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
@@ -3840,10 +4261,10 @@ Let \sphinxstyleemphasis{R1} and \sphinxstyleemphasis{R2} be two random crisp re
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:relequi1}}}
 \fvset{hllines={, 10, 11, 12, 13, 14, 17,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomDigraphs} \PYG{k+kn}{import} \PYG{n}{RandomDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{randomDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{RandomDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{R1} \PYG{o}{=} \PYG{n}{RandomDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{Bipolar}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{R2} \PYG{o}{=} \PYG{n}{RandomDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{Bipolar}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{EquivalenceDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{digraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{EquivalenceDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{E} \PYG{o}{=} \PYG{n}{EquivalenceDigraph}\PYG{p}{(}\PYG{n}{R1}\PYG{p}{,}\PYG{n}{R2}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{E}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{n}{ReflexiveTerms}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
 \PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -4026,9 +4447,9 @@ We reconsider the bipolar\sphinxhyphen{}valued outranking digraph \sphinxstyleem
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:exmoviesbg}}}
 \fvset{hllines={, 10, 16,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{perfTabs} \PYG{k+kn}{import} \PYG{n}{PerformanceTableau}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{perfTabs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{PerformanceTableau}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{PerformanceTableau}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{graffiti07}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{outrankingDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{Normalized}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Object instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Instance class   : BipolarOutrankingDigraph}
@@ -4054,7 +4475,7 @@ Let us now compute the normalized majority margin \sphinxstyleemphasis{r(\textle
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:margcorr}}}
 \fvset{hllines={, 13,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{NetFlowsOrder}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{linearOrders}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{NetFlowsOrder}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nf} \PYG{o}{=} \PYG{n}{NetFlowsOrder}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nf}\PYG{o}{.}\PYG{n}{netFlowsRanking}
 \PYG{g+go}{ [\PYGZsq{}mv\PYGZus{}QS\PYGZsq{}, \PYGZsq{}mv\PYGZus{}RR\PYGZsq{}, \PYGZsq{}mv\PYGZus{}DG\PYGZsq{}, \PYGZsq{}mv\PYGZus{}NP\PYGZsq{}, \PYGZsq{}mv\PYGZus{}HN\PYGZsq{}, \PYGZsq{}mv\PYGZus{}HS\PYGZsq{}, \PYGZsq{}mv\PYGZus{}SM\PYGZsq{},}
@@ -4155,7 +4576,7 @@ In order to furthermore study the quality of a ranking result, it may be interes
 Let us first have a look at the pairwise asymmetrical part, namely the ‘\sphinxstyleemphasis{better rated than}’ and ‘\sphinxstyleemphasis{less well rated than}’ opinions of the movie critics.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{AsymmetricPartialDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{digraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{AsymmetricPartialDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ag} \PYG{o}{=} \PYG{n}{AsymmetricPartialDigraph}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ag}\PYG{o}{.}\PYG{n}{showHTMLRelationTable}\PYG{p}{(}\PYG{n}{actionsList}\PYG{o}{=}\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeNetFlowsRanking}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,}\PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
 \end{sphinxVerbatim}
@@ -4171,7 +4592,7 @@ Let us first have a look at the pairwise asymmetrical part, namely the ‘\sphin
 We notice here that the \sphinxstyleemphasis{NetFlows} ranking rule inverts in fact just three ‘\sphinxstyleemphasis{less well ranked than}’ opinions and four ‘\sphinxstyleemphasis{better ranked than}’ ones. A similar look at the symmetric part, the pairwise ‘\sphinxstyleemphasis{as well rated as}’ opinions, suggests a preordered preference structure in several \sphinxstyleemphasis{equivalently rated} classes.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{SymmetricPartialDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{digraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{SymmetricPartialDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sg} \PYG{o}{=} \PYG{n}{SymmetricPartialDigraph}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sg}\PYG{o}{.}\PYG{n}{showHTMLRelationTable}\PYG{p}{(}\PYG{n}{actionsList}\PYG{o}{=}\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeNetFlowsRanking}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,}\PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
 \end{sphinxVerbatim}
@@ -4193,7 +4614,7 @@ A \sphinxstyleemphasis{kernel} in a digraph \sphinxstyleemphasis{g} is a \sphinx
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:rankgraf}}}
 \fvset{hllines={, 2,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{transitiveDigraphs} \PYG{k+kn}{import} \PYG{n}{RankingByChoosingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{transitiveDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{RankingByChoosingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rbc} \PYG{o}{=} \PYG{n}{RankingByChoosingDigraph}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{CoDual}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rbc}\PYG{o}{.}\PYG{n}{showRankingByChoosing}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ Ranking by Choosing and Rejecting}
@@ -4294,7 +4715,7 @@ The Digraph3 \sphinxcode{\sphinxupquote{bachetNumbers}} module provides with the
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:bachetnumbers}}}
 \fvset{hllines={, 2, 6, 11, 15, 20, 31, 32, 33, 34, 37,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{bachetNumbers} \PYG{k+kn}{import} \PYG{n}{BachetInteger}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{bachetNumbers}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{BachetInteger}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{n1} \PYG{o}{=} \PYG{n}{BachetInteger}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{n1}
 \PYG{g+go}{  *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Bachet number description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -4343,9 +4764,9 @@ Examples of such \sphinxstyleemphasis{sbits} encoded \sphinxstyleemphasis{Bachet
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:examplesbachet}}}
 \fvset{hllines={, 4, 5, 6, 12, 13, 14, 15, 16, 17, 18, 19, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 30,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{o}{*}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{o}{*}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{bachetNumbers} \PYG{k+kn}{import} \PYG{n}{BachetInteger}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{outrankingDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{o}{*}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{linearOrders}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{o}{*}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{bachetNumbers}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{BachetInteger}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{RandomBipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pg} \PYG{o}{=} \PYG{n}{PolarisedDigraph}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{level}\PYG{o}{=}\PYG{n}{g}\PYG{o}{.}\PYG{n}{valuationdomain}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{med}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,}
 \PYG{g+gp}{... }                     \PYG{n}{StrictCut}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}\PYG{n}{KeepValues}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
@@ -4391,7 +4812,7 @@ In our example here we obtain the \sphinxstyleemphasis{Bachet} ranking ‘a4’ 
 
 \fvset{hllines={, 4, 8,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{KemenyRanking}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{linearOrders}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{KemenyRanking}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ke} \PYG{o}{=} \PYG{n}{KemenyRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ke}\PYG{o}{.}\PYG{n}{kemenyRanking}
 \PYG{g+go}{ [\PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}]}
@@ -4443,7 +4864,7 @@ With the reversed \sphinxstyleemphasis{Bachet} integers we obtain the ranking �
 
 \fvset{hllines={, 11, 15, 23,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{CopelandRanking}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{linearOrders}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{CopelandRanking}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cop} \PYG{o}{=} \PYG{n}{CopelandRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cop}\PYG{o}{.}\PYG{n}{showScores}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ Copeland scores in descending order}
@@ -4460,7 +4881,7 @@ With the reversed \sphinxstyleemphasis{Bachet} integers we obtain the ranking �
 \PYG{g+go}{  Crisp ordinal correlation  : +0.526}
 \PYG{g+go}{  Epistemic determination    :  0.621}
 \PYG{g+go}{  Bipolar\PYGZhy{}valued equivalence : +0.327}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{transitiveDigraphs} \PYG{k+kn}{import} \PYG{n}{WeakCopelandOrder}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{transitiveDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{WeakCopelandOrder}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wcop} \PYG{o}{=} \PYG{n}{WeakCopelandOrder}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corrw} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeordinalCorrelation}\PYG{p}{(}\PYG{n}{wcop}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{corrw}\PYG{p}{)}
@@ -4485,7 +4906,7 @@ The \sphinxcode{\sphinxupquote{linearOrders}} module provides now a \sphinxcode{
 
 \fvset{hllines={, 2, 11, 12, 16,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{PolarisedBachetRanking}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{linearOrders}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{PolarisedBachetRanking}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba} \PYG{o}{=} \PYG{n}{PolarisedBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Digraph instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -4551,7 +4972,7 @@ When we reconsider above digraph \sphinxstyleemphasis{g}’s polarised relation 
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:bachetperms}}}
 \fvset{hllines={, 6, 7, 13, 24, 25,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphsTools} \PYG{k+kn}{import} \PYG{n}{all\PYGZus{}perms}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{digraphsTools}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{all\PYGZus{}perms}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{for} \PYG{n}{perm} \PYG{o+ow}{in} \PYG{n}{all\PYGZus{}perms}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{:}
 \PYG{g+gp}{... }    \PYG{n}{ba} \PYG{o}{=} \PYG{n}{PolarisedBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{actionsList}\PYG{o}{=}\PYG{n}{perm}\PYG{p}{,}\PYG{n}{BestQualified}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
 \PYG{g+gp}{... }    \PYG{n}{corr} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeRankingCorrelation}\PYG{p}{(}\PYG{n}{ba}\PYG{o}{.}\PYG{n}{bachetRanking}\PYG{p}{)}
@@ -4589,9 +5010,9 @@ It appears hence to be opportune to compute a first \sphinxstyleemphasis{Bachet}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:optimisingbachet}}}
 \fvset{hllines={, 5, 19, 21, 35,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{RandomBipolarOutrankingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{outrankingDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{RandomBipolarOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{RandomBipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{PolarisedBachetRanking}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{linearOrders}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{PolarisedBachetRanking}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} solely given ordering of the actions \PYGZhy{}\PYGZhy{}\PYGZhy{}*\PYGZsq{})}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba1} \PYG{o}{=} \PYG{n}{PolarisedBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{BestQualified}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba1}\PYG{o}{.}\PYG{n}{showScores}\PYG{p}{(}\PYG{p}{)}
@@ -4660,7 +5081,7 @@ The correlation +0.7585 above corresponds, in the example given here, again to t
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:optimalkemeny1}}}
 \fvset{hllines={, 4, 6,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{KemenyRanking}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{linearOrders}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{KemenyRanking}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{KemenyRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{orderLimit}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ke}\PYG{o}{.}\PYG{n}{kemenyRanking}
 \PYG{g+go}{ [\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}]}
@@ -4707,104 +5128,162 @@ When comparing now the ranking results obtained from \sphinxstyleemphasis{single
 \begin{varwidth}[t]{\sphinxcolwidth{3}{4}}
 \sphinxstyletheadfamily \sphinxAtStartPar
 Polarised Bachet ranking rule
-\par
-\vskip-\baselineskip\vbox{\hbox{\strut}}\end{varwidth}%
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \sphinxstopmulticolumn
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 Copeland
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 single
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 best qualified
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 randomized = 500
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 ranking rule
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
 \sphinxmidrule
-\sphinxtableatstartofbodyhook
+\sphinxtableatstartofbodyhook\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
 \sphinxAtStartPar
 Min.   : +0.3485
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
 \sphinxAtStartPar
 Min.   : +0.3485
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
 \sphinxAtStartPar
 Min.   : +0.6011
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
 \sphinxAtStartPar
 Min.   : +0.5442
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
 \sphinxAtStartPar
 1st Qu.: +0.6317
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
 \sphinxAtStartPar
 1st Qu.: +0.6877
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
 \sphinxAtStartPar
 1st Qu.: +0.8065
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
 \sphinxAtStartPar
 1st Qu.: +0.7943
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
 \sphinxAtStartPar
 Median : +0.7114
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
 \sphinxAtStartPar
 Median : +0.7393
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
 \sphinxAtStartPar
 Median : +0.8486
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
 \sphinxAtStartPar
 Median : +0.8338
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
 \sphinxAtStartPar
 Mean   : +0.6900
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
 \sphinxAtStartPar
 Mean   : +0.7257
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
 \sphinxAtStartPar
 Mean   : +0.8377
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
 \sphinxAtStartPar
 Mean   : +0.8260
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
 \sphinxAtStartPar
 3rd Qu.: +0.7586
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
 \sphinxAtStartPar
 3rd Qu.: +0.7792
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
 \sphinxAtStartPar
 3rd Qu.: +0.8718
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
 \sphinxAtStartPar
 3rd Qu.: +0.8617
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
 \sphinxAtStartPar
 Max.   : +0.8975
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
 \sphinxAtStartPar
 Max.   : +0.8975
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
 \sphinxAtStartPar
 Max.   : +0.9363
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{4}}
 \sphinxAtStartPar
 Max.   : +0.9354
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
 \sphinxbottomrule
 \end{tabulary}
@@ -4819,7 +5298,7 @@ The statistical figures confirm the expected noticeable performance enhancement 
 Mind however that the \sphinxstyleemphasis{Bachet} ranking rule, even of comparable complexity \(O(n^2)\) as the \sphinxstyleemphasis{Copeland} and \sphinxstyleemphasis{NetFlows} rules, is not scalable to large performance tableaux with hundreds of performance records. The integer value range of \sphinxstyleemphasis{Bachet} numbers gets indeed quickly huge with the order of the given outranking digraph. The \sphinxcode{\sphinxupquote{PolarisedBachetRanking}} constructor provides therefore an \sphinxstyleemphasis{orderLimit} parameter set by default to 50, which allows to represent integer values in the huge range +\sphinxhyphen{} 358948993845926294385124.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{bachetNumbers} \PYG{k+kn}{import} \PYG{n}{BachetInteger}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{bachetNumbers}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{BachetInteger}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{v} \PYG{o}{=} \PYG{p}{[}\PYG{l+m+mi}{1} \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{50}\PYG{p}{)}\PYG{p}{]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{n} \PYG{o}{=} \PYG{n}{BachetInteger}\PYG{p}{(}\PYG{n}{vector}\PYG{o}{=}\PYG{n}{v}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{n}\PYG{p}{)}
@@ -4841,13 +5320,13 @@ When reconsidering the random outranking digraph \sphinxstyleemphasis{g}, seen i
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:smartbachet0}}}
 \fvset{hllines={, 5, 8, 22, 25,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{RandomBipolarOutrankingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{outrankingDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{RandomBipolarOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{RandomBipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeTransitivityDegree}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+go}{ Transitivity degree of digraph \PYGZlt{}rel\PYGZus{}randomperftab\PYGZgt{}:}
 \PYG{g+go}{   \PYGZsh{}triples x\PYGZgt{}y\PYGZgt{}z: 504, \PYGZsh{}closed: 343, \PYGZsh{}open: 161}
 \PYG{g+go}{   (\PYGZsh{}closed/\PYGZsh{}triples) =  0.681}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{BachetRanking}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{linearOrders}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{BachetRanking}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sba} \PYG{o}{=} \PYG{n}{BachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{Polarised}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}\PYG{n}{sampleSize}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sba}\PYG{o}{.}\PYG{n}{showScores}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ Bachet scores in descending order}
@@ -4884,120 +5363,192 @@ Running a MonteCarlo simulation with a sample of 500 random 3 objectives \texten
 \centering
 \begin{tabulary}{\linewidth}[t]{TTTTTT}
 \sphinxtoprule
-\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 Ranking rule
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 Median
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 Minimum
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 Maximum
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 5\% perc.
-&\sphinxstyletheadfamily 
-\sphinxAtStartPar
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
+\sphinxstyletheadfamily \sphinxAtStartPar
 95\% perc.
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
 \sphinxmidrule
-\sphinxtableatstartofbodyhook
+\sphinxtableatstartofbodyhook\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 Polarised Bachet
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 0.90095
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 0.52690
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 0.98390
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 0.73898
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 0.96338
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 Copeland
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 0.85935
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 0.40320
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 0.98520
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 0.66041
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 0.95302
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 Valued Bachet
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 0.90175
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 0.56450
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 0.98390
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 0.76050
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 0.96286
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 NetFlows
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 0.86325
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 0.34140
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 0.98130
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 0.67623
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 0.94908
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
-\sphinxhline
+\sphinxhline\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 Kemeny
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 0.91350
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 0.57230
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 0.99010
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 0.79058
-&
+\sphinxbeforeendvarwidth
+\end{varwidth}%
+&\begin{varwidth}[t]{\sphinxcolwidth{1}{6}}
 \sphinxAtStartPar
 0.96945
+\sphinxbeforeendvarwidth
+\end{varwidth}%
 \\
 \sphinxbottomrule
 \end{tabulary}
@@ -5043,9 +5594,9 @@ To explore this remarkable opportunity, a new \sphinxcode{\sphinxupquote{Partial
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:partialbachet0}}}
 \fvset{hllines={, 3, 4, 7, 8, 9, 10, 13, 15,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{RandomBipolarOutrankingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{outrankingDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{RandomBipolarOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{RandomBipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{transitiveDigraphs} \PYG{k+kn}{import} \PYG{n}{PartialBachetRanking}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{transitiveDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{PartialBachetRanking}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pbr} \PYG{o}{=} \PYG{n}{PartialBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{randomized}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{maxNbrOfRankings}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pbr}\PYG{o}{.}\PYG{n}{showTransitiveDigraph}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ Ranking by Choosing and Rejecting}
@@ -5104,7 +5655,7 @@ To explore this opportunity, a \sphinxcode{\sphinxupquote{showChoiceRecommendati
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:bachetbcr0}}}
 \fvset{hllines={, 3, 4, 7, 10, 12, 14,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{RandomBipolarOutrankingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{outrankingDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{RandomBipolarOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{RandomBipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showChoiceRecommendation}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Bachet}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{n}{randomized}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{,}
 \PYG{g+gp}{... }                            \PYG{n}{maxNbrOfRankings}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{4}\PYG{p}{)}
@@ -5265,7 +5816,7 @@ and symmetric digraphs with the following random 3\sphinxhyphen{}regular graph
 instance (see \hyperref[\detokenize{pearls:random3regulargraph}]{Fig.\@ \ref{\detokenize{pearls:random3regulargraph}}}).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{graphs} \PYG{k+kn}{import} \PYG{n}{RandomRegularGraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{graphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{RandomRegularGraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{RandomRegularGraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{12}\PYG{p}{,}\PYG{n}{degree}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{random3RegularGraph}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -5284,7 +5835,7 @@ instance (see \hyperref[\detokenize{pearls:random3regulargraph}]{Fig.\@ \ref{\de
 A random MIS in this graph may be computed for instance by using the \sphinxcode{\sphinxupquote{MISModel}} class.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{graphs} \PYG{k+kn}{import} \PYG{n}{MISModel}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{graphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{MISModel}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{mg} \PYG{o}{=} \PYG{n}{MISModel}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
 \PYG{g+go}{ Iteration:  1}
 \PYG{g+go}{ Running a Gibbs Sampler for 660 step !}
@@ -5406,7 +5957,7 @@ All graphs and symmetric digraphs admit MISs, hence also kernels.
 It is worthwhile noticing that the \sphinxstylestrong{maximal matchings} of a graph correspond bijectively to its line graph’s \sphinxstylestrong{kernels} (see the \sphinxcode{\sphinxupquote{LineGraph}} class).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{graphs} \PYG{k+kn}{import} \PYG{n}{CycleGraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{graphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{CycleGraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{c8} \PYG{o}{=} \PYG{n}{CycleGraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{8}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{maxMatching} \PYG{o}{=} \PYG{n}{c8}\PYG{o}{.}\PYG{n}{computeMaximumMatching}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{c8}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{maxMatchingcycleGraph}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
@@ -5458,7 +6009,7 @@ In such a  bipolar\sphinxhyphen{}valued context, we call \sphinxstylestrong{prek
 In graphs or symmetric digraphs, where there is essentially no apparent ‘ \sphinxstyleemphasis{laterality} ‘, all prekernels are \sphinxstyleemphasis{initial} \sphinxstylestrong{and} \sphinxstyleemphasis{terminal} at the same time. They correspond to what we call \sphinxstyleemphasis{holes} in the graph. A \sphinxstyleemphasis{universal} example is given by the \sphinxstylestrong{complete} digraph.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{CompleteDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{digraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{CompleteDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{u} \PYG{o}{=} \PYG{n}{CompleteDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{u}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Digraph instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -5519,7 +6070,7 @@ In a complete digraph, each single node is indeed both an initial and a terminal
 In the empty digraph, the whole set of nodes gives indeed at the same time the \sphinxstylestrong{unique} \sphinxstyleemphasis{initial} \sphinxstylestrong{and} \sphinxstyleemphasis{terminal} prekernel. Similarly, for the \sphinxstylestrong{indeterminate} digraph.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{IndeterminateDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{digraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{IndeterminateDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{id} \PYG{o}{=} \PYG{n}{IndeterminateDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{id}\PYG{o}{.}\PYG{n}{showPreKernels}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{} Computing preKernels \PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -5542,7 +6093,7 @@ Both these results make sense, as in a completely empty or indeterminate digraph
 Other common digraph models, although being clearly oriented, may show nevertheless no apparent laterality, like \sphinxstylestrong{odd chordless circuits}, i.e. \sphinxstyleemphasis{holes} surrounded by an \sphinxstyleemphasis{oriented cycle} \sphinxhyphen{}a circuit\sphinxhyphen{} of odd length. They do not admit in fact any initial or terminal prekernel.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{CirculantDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{digraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{CirculantDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{c5} \PYG{o}{=} \PYG{n}{CirculantDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{circulants}\PYG{o}{=}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{c5}\PYG{o}{.}\PYG{n}{showPreKernels}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} statistics \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -5633,7 +6184,7 @@ Humans do live in an apparent physical space of plain transitive \sphinxstylestr
 In genuine random digraphs, however, we may need to check for each of its MISs, whether \sphinxstyleemphasis{one}, \sphinxstyleemphasis{both}, or \sphinxstyleemphasis{none} of the lateralized external stability conditions may be satisfied. Consider, for instance, the following random digraph instance of order 7 and generated with an arc probability of 30\%.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomDigraphs} \PYG{k+kn}{import} \PYG{n}{RandomDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{randomDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{RandomDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rd} \PYG{o}{=} \PYG{n}{RandomDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{arcProbability}\PYG{o}{=}\PYG{l+m+mf}{0.3}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rd}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{randomLaterality}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -5740,7 +6291,7 @@ In algorithmic decision theory, initial and terminal prekernels may provide conv
 To illustrate this idea, let us finally compute first and last choice recommendations in the following random bipolar\sphinxhyphen{}valued \sphinxstylestrong{outranking} digraph.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{RandomBipolarOutrankingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{outrankingDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{RandomBipolarOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{RandomBipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Object instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -5803,10 +6354,9 @@ All decision actions appear strictly better performing than action ‘a7’. We 
 With such unique disjoint initial and terminal prekernels (see Line 4 and 10), the given digraph instance is hence clearly \sphinxstyleemphasis{lateralized}. Indeed, these initial and terminal prekernels of the codual outranking digraph reveal first, resp. last, choice recommendations one may formulate on the basis of a given outranking digraph instance.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showFirstChoiceRecommendation}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showChoiceRecommendation}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Rubis}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ ***********************}
-\PYG{g+go}{ First choice recommendation(s) (BCR)}
-\PYG{g+go}{  (in decreasing order of determinateness)}
+\PYG{g+go}{ First choice recommendation(s)}
 \PYG{g+go}{ Credibility domain: [\PYGZhy{}100.00,100.00]}
 \PYG{g+go}{  === \PYGZgt{}\PYGZgt{} potential first choice(s)}
 \PYG{g+go}{ * choice              : [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}]}
@@ -5873,7 +6423,7 @@ In the resulting linear ranking (see \hyperref[\detokenize{pearls:outrankingresu
 Finally, let us give some hints on the \sphinxstylestrong{tractability} of kernel computations. Detecting all (pre)kernels in a digraph is a famously NP\sphinxhyphen{}hard computational problem. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraph may get hard already for tiny sparse digraphs of order \sphinxstyleemphasis{n} \textgreater{} 20 (see \sphinxcite{pearls:bis-2006-2p}). Indeed, the worst case is given by an empty or indeterminate digraph where the set of all potential independent choices to check is in fact the power set of the vertices.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{EmptyDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{digraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{EmptyDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{e} \PYG{o}{=} \PYG{n}{EmptyDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{20}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{e}\PYG{o}{.}\PYG{n}{showMIS}\PYG{p}{(}\PYG{p}{)}   \PYG{c+c1}{\PYGZsh{} by visiting all 2\PYGZca{}20 independent choices}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}  Maximal independent choices \PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -5911,7 +6461,7 @@ Now, there exist more efficient specialized algorithms for directly enumerating 
 For more or less dense strict outranking digraphs of modest order, as facing usually in algorithmic decision theory applications, enumerating all independent choices remains however in most cases tractable, especially by using a very efficient Python generator (see \sphinxcode{\sphinxupquote{independentChoices()}} below).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
- \PYG{k}{def} \PYG{n+nf}{independentChoices}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,}\PYG{n}{U}\PYG{p}{)}\PYG{p}{:}
+ \PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{independentChoices}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,}\PYG{n}{U}\PYG{p}{)}\PYG{p}{:}
 \PYG{+w}{     }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
 \PYG{l+s+sd}{     Generator for all independent choices with associated}
 \PYG{l+s+sd}{     dominated, absorbed and independent neighborhoods}
@@ -5938,7 +6488,7 @@ For more or less dense strict outranking digraphs of modest order, as facing usu
 And, checking maximality of independent choices via the external stability conditions during their enumeration (see \sphinxcode{\sphinxupquote{computePreKernels()}} below) provides the effective advantage of computing all initial \sphinxstylestrong{and} terminal prekernels in a single loop (see Line 10 and \sphinxcite{pearls:bis-2006-2p}).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
- \PYG{k}{def} \PYG{n+nf}{computePreKernels}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
+ \PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{computePreKernels}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
 \PYG{+w}{     }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
 \PYG{l+s+sd}{     computing dominant and absorbent preKernels:}
 \PYG{l+s+sd}{     Result in self.dompreKernels and self.abspreKernels}
@@ -6077,12 +6627,13 @@ Let \sphinxstyleemphasis{X} and \sphinxstyleemphasis{Y} be two bpv\sphinxhyphen{
 \item[] For all \(z \in E_{X \cup Y}\) the membership characteristic \(r\big(\,z \in (X \cup Y)\,\big)\; =\)
 \item[]
 \begin{DUlineblock}{\DUlineblockindent}
-\item[] \(\max\big(\,r(z \in X),r(z \in Y)\, \big)\) when both \sphinxstyleemphasis{z} in \sphinxstyleemphasis{X} and \sphinxstyleemphasis{z} in \sphinxstyleemphasis{Y};
+\item[] \(\max\big(\,r(z \in X),r(z \in Y)\, \big)\) when \(r(z \in X) \neq 0.0\) and \(r(z \in Y)\neq 0.0\);
+\item[] \(r(z \in X)\) when \(r(r(z \in Y) = 0.0\);
+\item[] \(r(z \in Y)\) when \(r(r(z \in X) = 0.0\);
 \item[] otherwise:
 \item[]
 \begin{DUlineblock}{\DUlineblockindent}
-\item[] \(r(z \in X)\) when \(z \in X\), and
-\item[] \(r(z \in Y)\) when \(z \in Y\).
+\item[] \(0.0\).
 \end{DUlineblock}
 \end{DUlineblock}
 \end{DUlineblock}
@@ -6091,8 +6642,14 @@ Let \sphinxstyleemphasis{X} and \sphinxstyleemphasis{Y} be two bpv\sphinxhyphen{
 \item[] For all \(z \in E_{X \cup Y}\) the membership characteristic \(r\big(\,z \in (X \cap Y)\,\big)\; =\)
 \item[]
 \begin{DUlineblock}{\DUlineblockindent}
-\item[] \(\min\big(\,r(z \in X),r(z \in Y)\, \big)\) when both \sphinxstyleemphasis{z} in \sphinxstyleemphasis{X} and \sphinxstyleemphasis{z} in \sphinxstyleemphasis{Y};
-\item[] \(-1.0\) otherwise.
+\item[] \(\min\big(\,r(z \in X),r(z \in Y)\, \big)\) when \(r(z \in X) \neq 0.0\) and \(r(z \in Y)\neq 0.0\);
+\item[] \(r(z \in X)\) when \(r(r(z \in Y) = 0.0\);
+\item[] \(r(z \in Y)\) when \(r(r(z \in X) = 0.0\);
+\item[] otherwise:
+\item[]
+\begin{DUlineblock}{\DUlineblockindent}
+\item[] \(0.0\).
+\end{DUlineblock}
 \end{DUlineblock}
 \end{DUlineblock}
 
@@ -6115,15 +6672,15 @@ The \sphinxcode{\sphinxupquote{bipolarValuedSets}} Digraph3 module provides, wit
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:bipolarvaluedsets1}}}
 \fvset{hllines={, 5, 9,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{bipolarValuedSets} \PYG{k+kn}{import} \PYG{n}{RandomBpvSet}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{bipolarValuedSets}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{RandomBpvSet}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{X} \PYG{o}{=} \PYG{n}{RandomBpvSet}\PYG{p}{(}\PYG{n}{numberOfElements}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{elementNamePrefix}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{s}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
 \PYG{g+gp}{... }    \PYG{n}{indeterminateness}\PYG{o}{=}\PYG{l+m+mf}{0.1}\PYG{p}{,}\PYG{n}{valuationRange}\PYG{o}{=}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,}\PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{X}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ s2:+0.6949, s3:+0.5275, s5:+0.0000, s4:\PYGZhy{}0.4899, s1:\PYGZhy{}0.7313}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{X}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+go}{ s1:\PYGZhy{}0.7313, s2:+0.6949, s3:+0.5275, s4:\PYGZhy{}0.4899, s5:+0.0000}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{Y} \PYG{o}{=} \PYG{n}{RandomBpvSet}\PYG{p}{(}\PYG{n}{numberOfElements}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{elementNamePrefix}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{s}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
 \PYG{g+gp}{... }   \PYG{n}{indeterminateness}\PYG{o}{=}\PYG{l+m+mf}{0.1}\PYG{p}{,}\PYG{n}{valuationRange}\PYG{o}{=}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,}\PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{2}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{Y}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ s1:  +0.9121, s2:+0.8957, s3:\PYGZhy{}0.8869}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{Y}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+go}{ s1:+0.9121, s2:+0.8957, s3:\PYGZhy{}0.8869}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
 
@@ -6133,12 +6690,12 @@ In \hyperref[\detokenize{pearls:bipolarvaluedsets2}]{Listing \ref{\detokenize{pe
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:bipolarvaluedsets2}}}
 \fvset{hllines={, 3, 6,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{|}\PYG{n}{Y}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{|}\PYG{n}{Y}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
 \PYG{g+go}{ \PYGZsh{} Python\PYGZsq{}s set union symbol is |}
-\PYG{g+go}{ s1:+0.9121, s2:+0.8957, s3:+0.5275, s5:+0.0000, s4:\PYGZhy{}0.4899}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{\PYGZam{}}\PYG{n}{Y}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{ s1:+0.9121, s2:+0.8957, s3:+0.5275, s4:\PYGZhy{}0.4899, s5:+0.0000,}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{\PYGZam{}}\PYG{n}{Y}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
 \PYG{g+go}{ \PYGZsh{} Python\PYGZsq{}s set intersection symbol is \PYGZam{}}
-\PYG{g+go}{ s2:+0.6949, s1:\PYGZhy{}0.7313 s3:\PYGZhy{}0.8869, s4:\PYGZhy{}1.0000, s5:\PYGZhy{}1.0000}
+\PYG{g+go}{ s1:\PYGZhy{}0.7313, s2:+0.6949, s3:\PYGZhy{}0.8869, s4:\PYGZhy{}1.0000, s5:\PYGZhy{}1.0000}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
 
@@ -6148,15 +6705,15 @@ In \hyperref[\detokenize{pearls:bipolarvaluedsets3}]{Listing \ref{\detokenize{pe
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:bipolarvaluedsets3}}}
 \fvset{hllines={, 3, 5, 9,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{\PYGZhy{}}\PYG{n}{Y}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{\PYGZhy{}}\PYG{n}{Y}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
 \PYG{g+go}{ \PYGZsh{} Python\PYGZsq{}s set difference is \PYGZhy{}}
-\PYG{g+go}{ s3:+0.5275, s5:+0.0000, s4:\PYGZhy{}0.4899 s2:\PYGZhy{}0.8957, s1:\PYGZhy{}0.9121}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{Y}\PYG{o}{\PYGZhy{}}\PYG{n}{X}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{ s1:\PYGZhy{}0.9121, s2:\PYGZhy{}0.8957, s3:+0.5275, s4:\PYGZhy{}0.4899, s5:+0.0000}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{Y}\PYG{o}{\PYGZhy{}}\PYG{n}{X}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
 \PYG{g+go}{ s1:+0.7313, s2:\PYGZhy{}0.6949, s3:\PYGZhy{}0.8869, s4:\PYGZhy{}1.0000, s5:\PYGZhy{}1.0000}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{Y}\PYG{o}{\PYGZca{}}\PYG{n}{X}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{Y}\PYG{o}{\PYGZca{}}\PYG{n}{X}\PYG{p}{)}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
 \PYG{g+go}{ \PYGZsh{} Python\PYGZsq{}s symmetrix difference symbol is \PYGZca{}}
 \PYG{g+go}{ \PYGZsh{} X\PYGZca{}Y = (X\PYGZhy{}Y)|(Y\PYGZhy{}X) or (X|Y)\PYGZhy{}(X\PYGZam{}Y)}
-\PYG{g+go}{ s1:+0.7313, s3:+0.5275, s5:+0.0000, s4:\PYGZhy{}0.4899, s2:\PYGZhy{}0.6949}
+\PYG{g+go}{ s1:+0.7313, s2:\PYGZhy{}0.6949, s3:+0.5275, s4:\PYGZhy{}0.4899, s5:+0.0000}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
 
@@ -6169,19 +6726,22 @@ The \sphinxcode{\sphinxupquote{BpvSet}} class provides furthermore a \sphinxcode
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{D}\PYG{o}{.}\PYG{n}{isSubset}\PYG{p}{(}\PYG{n}{Y}\PYG{p}{)}
 \PYG{g+go}{ Decimal(\PYGZsq{}0.8869\PYGZsq{})}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{D1} \PYG{o}{=} \PYG{n}{D}\PYG{o}{.}\PYG{n}{strip}\PYG{p}{(}\PYG{n}{InSite}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{D1}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{D1}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
 \PYG{g+go}{ s1:+0.7313, s2:\PYGZhy{}0.6949, s3:\PYGZhy{}0.8869}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-Finally, a \sphinxcode{\sphinxupquote{polarise()}} method is provided for setting all positive and negative membership credibilities of a bpv\sphinxhyphen{}set to +1.0, respectively to \sphinxhyphen{}1.0 .
+Finally, a \sphinxcode{\sphinxupquote{polarise()}} method is provided for setting all positive and negative membership credibilities of a bpv\sphinxhyphen{}set to +1.0, respectively to \sphinxhyphen{}1.0, respectively to the minimal positive +0.0001 or negative \sphinxhyphen{}0.0001 characteristic value.
 
 \fvset{hllines={, 1,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{D2} \PYG{o}{=} \PYG{n}{D1}\PYG{o}{.}\PYG{n}{polarise}\PYG{p}{(}\PYG{n}{InSite}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{D2}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ s1:+1.0000, s2:\PYGZhy{}1.0000, s3:\PYGZhy{}1.0000}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{D3} \PYG{o}{=} \PYG{n}{D1}\PYG{o}{.}\PYG{n}{polarise}\PYG{p}{(}\PYG{n}{MinimalValues}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}\PYG{n}{InSite}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{D3}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{ s1:+0.0001, s2:\PYGZhy{}0.0001, s3:\PYGZhy{}0.0001}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
 
@@ -6256,9 +6816,9 @@ In \hyperref[\detokenize{pearls:bipolarvaluedsets4}]{Listing \ref{\detokenize{pe
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:bipolarvaluedsets4}}}
 \fvset{hllines={, 4, 7, 10, 13,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{bipolarValuedSets} \PYG{k+kn}{import} \PYG{n}{RandomBpvSet}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{bipolarValuedSets}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{RandomBpvSet}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{X} \PYG{o}{=} \PYG{n}{RandomBpvSet}\PYG{p}{(}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{X}\PYG{o}{.}\PYG{n}{showMembershipCharaceristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{X}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
 \PYG{g+go}{  x1:\PYGZhy{}0.7313, x2:+0.6949, x3:+0.5275, x4:\PYGZhy{}0.4899, x5:+0.0000}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{Y} \PYG{o}{=} \PYG{n}{RandomBpvSet}\PYG{p}{(}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{2}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{Y}\PYG{o}{.}\PYG{n}{showMembershipCharaceristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
@@ -6322,24 +6882,67 @@ To every bpv\sphinxhyphen{}set \(X \in \mathcal{S}(A)\) we may associate its neg
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-The epistemic fusion operators induce furthermore on \(\mathcal{S}(A)\) a partial \sphinxstylestrong{sharpness} ordering denoted \(\succcurlyeq\) and defined as follows. Let \sphinxstyleemphasis{X} and \sphinxstyleemphasis{Y} be two bpv\sphinxhyphen{}sets in \(\mathcal{S}(A)\). We say that \(X \,\succcurlyeq\, Y\) when \(\forall a \in A\) either \(r(a \in X) \leqslant r(a \in Y) \leqslant 0.0\) or, \(0.0 \leqslant r(a \in Y) \leqslant r(a \in X)\). If \sphinxstyleemphasis{X} and \sphinxstyleemphasis{Y} are bpv\sphinxhyphen{}sets of a same crisp subset, it follows for instance that \((X  $ \textcircled{$\vee$} $ Y) \,\succcurlyeq\,(X $ \textcircled{$\wedge$} $ Y)\). Minimal sharp is the bpv\sphinxhyphen{}set \(\bf{0}\). Maximal sharp are all \(2^n\) completely determined \textendash{}crisp\textendash{} subsets of the support set \sphinxstyleemphasis{A}.
+Let finally \sphinxstyleemphasis{L} be a list of \sphinxstyleemphasis{n} bpv\sphinxhyphen{}sets defined on a same support set \sphinxstyleemphasis{E}. The \sphinxstylestrong{average epistemic fusion} of \sphinxstyleemphasis{L}, denoted \(\mu(L)\) is defined as follows.
+
+\begin{DUlineblock}{0em}
+\item[] For all \sphinxstyleemphasis{z} in \sphinxstyleemphasis{E} the membership characteristic \(r\big(\,z \in \mu(L)\,\big)\; =\)
+\item[]
+\begin{DUlineblock}{\DUlineblockindent}
+\item[] \(\big( \, \sum_{X \in L} r(z \in X) \, \big)\,/\, n\)
+\item[]
+\begin{DUlineblock}{\DUlineblockindent}
+\item[] when forall \(X \in L\), either \(r(z \in X) \geqslant 0.0\) or \(r(z \in X) \leqslant 0.0\) ;
+\end{DUlineblock}
+\item[] \(0.0\) otherwise.
+\end{DUlineblock}
+\end{DUlineblock}
+
+\sphinxAtStartPar
+In \hyperref[\detokenize{pearls:averagebpvsets}]{Listing \ref{\detokenize{pearls:averagebpvsets}}} we illustrate the usage of the \sphinxcode{\sphinxupquote{averageEpistemicFusion()}} method on a list \sphinxstyleemphasis{L} of two random bpv\sphinxhyphen{}sets \sphinxstyleemphasis{X} and \sphinxstyleemphasis{Y}  of same support set \sphinxstyleemphasis{E = \{‘s1’, ‘s2’, ‘s3’\}}.
+\sphinxSetupCaptionForVerbatim{Average bpv\sphinxhyphen{}set}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:averagebpvsets}}}
+\fvset{hllines={, 1, 13, 15, 17, 19,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{bipolarValuedSets}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{RandomBpvSet}\PYG{p}{,} \PYG{n}{averageEpistemicFusion}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{X} \PYG{o}{=} \PYG{n}{RandomBpvSet}\PYG{p}{(}\PYG{n}{numberOfElements}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{elementNamePrefix}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{s}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{g+gp}{... }                  \PYG{n}{indeterminateness}\PYG{o}{=}\PYG{l+m+mf}{0.1}\PYG{p}{,}
+\PYG{g+gp}{... }                  \PYG{n}{valuationRange}\PYG{o}{=}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,}\PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{4}\PYG{p}{,}
+\PYG{g+gp}{... }                  \PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{,}
+\PYG{g+gp}{... }                  \PYG{n}{Debug}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{Y} \PYG{o}{=} \PYG{n}{RandomBpvSet}\PYG{p}{(}\PYG{n}{numberOfElements}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{elementNamePrefix}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{s}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{g+gp}{... }                  \PYG{n}{indeterminateness}\PYG{o}{=}\PYG{l+m+mf}{0.1}\PYG{p}{,}
+\PYG{g+gp}{... }                  \PYG{n}{valuationRange}\PYG{o}{=}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{p}{,}
+\PYG{g+gp}{... }                  \PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{4}\PYG{p}{,}
+\PYG{g+gp}{... }                  \PYG{n}{Debug}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{X}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+go}{ s1:  \PYGZhy{}0.7313, s2:  +0.6949, s3:  +0.5275}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{Y}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+go}{ s1:  +0.9121, s2:  +0.8957, s3:  \PYGZhy{}0.8869}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{L} \PYG{o}{=} \PYG{p}{[}\PYG{n}{X}\PYG{p}{,}\PYG{n}{Y}\PYG{p}{]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{mu} \PYG{o}{=} \PYG{n}{averageEpistemicFusion}\PYG{p}{(}\PYG{n}{L}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{mu}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+go}{ s1:  +0.0000, s2:  +0.7953, s3:  +0.0000}
+\end{sphinxVerbatim}
+\sphinxresetverbatimhllines
+
+\sphinxAtStartPar
+The epistemic fusion operators induce furthermore on \(\mathcal{S}(A)\) a partial \sphinxstylestrong{sharpness} ordering denoted \(\succcurlyeq\) and defined as follows. Let \sphinxstyleemphasis{X} and \sphinxstyleemphasis{Y} be two bpv\sphinxhyphen{}sets in \(\mathcal{S}(A)\). We say that \(X \,\succcurlyeq\, Y\) when \(\forall a \in A\) either \(r(a \in X) \leqslant r(a \in Y) \leqslant 0.0\) or, \(0.0 \leqslant r(a \in Y) \leqslant r(a \in X)\). It follows for instance that \((X  $ \textcircled{$\vee$} $ Y) \,\succcurlyeq\, \mu([X,Y]) \,\succcurlyeq\, (X $ \textcircled{$\wedge$} $ Y)\). Minimal sharp is the bpv\sphinxhyphen{}set \(\bf{0}\). Maximal sharp are all \(2^n\) completely determined \textendash{}crisp\textendash{} subsets of the support set \sphinxstyleemphasis{A}.
 \sphinxSetupCaptionForVerbatim{The sharpness ordering of bpv\sphinxhyphen{}sets}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:bipolarvaluedsets7}}}
-\fvset{hllines={, 1, 7, 8, 14,}}%
+\fvset{hllines={, 2, 3, 5, 6, 8, 9, 12, 13,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{.}\PYG{n}{isSharper}\PYG{p}{(}\PYG{n}{O}\PYG{p}{,}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
-\PYG{g+go}{  x1 \PYGZhy{}0.7313  0.0000}
-\PYG{g+go}{  x2  0.6949  0.0000}
-\PYG{g+go}{  x3  0.5275  0.0000}
-\PYG{g+go}{  x4 \PYGZhy{}0.4899  0.0000}
-\PYG{g+go}{  x5  0.0000  0.0000}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{.}\PYG{n}{ovee}\PYG{p}{(}\PYG{n}{Y}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{isSharper}\PYG{p}{(}\PYG{n}{mu}\PYG{p}{,}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+go}{ s1 0.0000 0.0000, s2 0.8957 0.7953, s3 0.0000 0.0000}
 \PYG{g+go}{ True}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{mu}\PYG{o}{.}\PYG{n}{isSharper}\PYG{p}{(}\PYG{p}{(}\PYG{n}{X}\PYG{o}{.}\PYG{n}{owedge}\PYG{p}{(}\PYG{n}{Y}\PYG{p}{)}\PYG{p}{)}\PYG{p}{,}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+go}{ s1 0.0000 0.0000, s2 0.7953 0.6949, s3 0.0000 0.0000}
+\PYG{g+go}{ True}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{n}{X}\PYG{o}{.}\PYG{n}{isSharper}\PYG{p}{(}\PYG{n}{O}\PYG{p}{,}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+go}{ x1 \PYGZhy{}0.7313 0.0000, x2 0.6949 0.0000, x3 0.5275 0.0000}
+\PYG{g+go}{ True}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{Xp} \PYG{o}{=} \PYG{n}{X}\PYG{o}{.}\PYG{n}{polarise}\PYG{p}{(}\PYG{n}{InSite}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{Xp}\PYG{o}{.}\PYG{n}{isSharper}\PYG{p}{(}\PYG{n}{X}\PYG{p}{,}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
-\PYG{g+go}{  x1 \PYGZhy{}1.0000 \PYGZhy{}0.7313}
-\PYG{g+go}{  x2  1.0000  0.6949}
-\PYG{g+go}{  x3  1.0000  0.5275}
-\PYG{g+go}{  x4 \PYGZhy{}1.0000 \PYGZhy{}0.4899}
-\PYG{g+go}{  x5  0.0000  0.0000}
+\PYG{g+go}{ x1 \PYGZhy{}1.0000 \PYGZhy{}0.7313, x2 1.0000 0.6949, x3 1.0000 0.5275}
 \PYG{g+go}{ True}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
@@ -6388,7 +6991,7 @@ A \sphinxstylestrong{weak} Condorcet winner outranks at least one action and is 
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:condorcetwinners1}}}
 \fvset{hllines={, 5, 8, 9, 10, 14, 15, 16,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{o}{*}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{outrankingDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{o}{*}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{Random3ObjectivesPerformanceTableau}\PYG{p}{(}
 \PYG{g+gp}{... }          \PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{numberOfCriteria}\PYG{o}{=}\PYG{l+m+mi}{13}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)}
@@ -6467,9 +7070,9 @@ See \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{Pragmatic\sphinxhyphen{}Principl
 The criteria significance majorities for each choice are indicated in brakets (see Lines 5\sphinxhyphen{}12). Alternative \sphinxstyleemphasis{p2} is the most supported first choice and alternative \sphinxstyleemphasis{p8} is the most supported last choice. A recommendation that gets confirmed with the ‘\sphinxstyleemphasis{Rubis}’ choice recommendation shown in \hyperref[\detokenize{pearls:condorcetwinners4}]{Listing \ref{\detokenize{pearls:condorcetwinners4}}} below.
 \sphinxSetupCaptionForVerbatim{Showing the choice recommendations from the Rubis method}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:condorcetwinners4}}}
-\fvset{hllines={, 1, 7, 13, 15,}}%
+\fvset{hllines={, 1, 7, 13, 15, 21,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showChoiceRecommendation}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Rubis}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showChoiceRecommendation}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Rubis}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{fusionType}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{epistemicFusion}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ Rubis choice recommendation}
 \PYG{g+go}{ ***********************}
 \PYG{g+go}{  First choice recommendation(s) (BCR)}
@@ -6480,21 +7083,21 @@ The criteria significance majorities for each choice are indicated in brakets (s
 \PYG{g+go}{      dominance           : 0.06}
 \PYG{g+go}{      absorbency          : \PYGZhy{}1.00}
 \PYG{g+go}{      covering (\PYGZpc{})        : 55.56}
-\PYG{g+go}{      determinateness (\PYGZpc{}) : 57.72}
-\PYG{g+go}{      \PYGZhy{} most credible action(s) = \PYGZob{} \PYGZsq{}p2\PYGZsq{}: 0.22, \PYGZcb{}}
+\PYG{g+go}{      determinateness (\PYGZpc{}) : 88.89}
+\PYG{g+go}{      \PYGZhy{} most credible action(s) = \PYGZob{} \PYGZsq{}p2\PYGZsq{}: 0.22 \PYGZcb{}}
 \PYG{g+go}{  === \PYGZgt{}\PYGZgt{} potential last choice(s)}
 \PYG{g+go}{  * choice              : [\PYGZsq{}p1\PYGZsq{}, \PYGZsq{}p7\PYGZsq{}, \PYGZsq{}p8\PYGZsq{}]}
 \PYG{g+go}{      independence        : 0.00}
 \PYG{g+go}{      dominance           : \PYGZhy{}0.58}
 \PYG{g+go}{      absorbency          : 0.03}
 \PYG{g+go}{      covered (\PYGZpc{})         : 50.00}
-\PYG{g+go}{      determinateness (\PYGZpc{}) : 50.00}
-\PYG{g+go}{      \PYGZhy{} most credible action(s) = \PYGZob{} \PYGZcb{}}
+\PYG{g+go}{      determinateness (\PYGZpc{}) : 71.76}
+\PYG{g+go}{      \PYGZhy{} most credible action(s) = \PYGZob{} \PYGZsq{}p8\PYGZsq{}: 0.17, \PYGZsq{}p1\PYGZsq{}: 0.14, \PYGZsq{}p7\PYGZsq{}: 0.14 \PYGZcb{}}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-With the given outranking digraph, initial and terminal prekernels recommendations perfectly correspond to the positive weak Condorcet winners and loosers as computed before in \hyperref[\detokenize{pearls:condorcetwinners1}]{Listing \ref{\detokenize{pearls:condorcetwinners1}}} and shown in \hyperref[\detokenize{pearls:condorcetwinners2}]{Fig.\@ \ref{\detokenize{pearls:condorcetwinners2}}}. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and \sphinxstyleemphasis{strictly} outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are non ambiguous \sphinxstyleemphasis{weakly} outranking resp. \sphinxstyleemphasis{weakly} outranked choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location ‘A’, being incomparable to all other locations, is included in both the initial and the terminal prekernel. Location \sphinxstyleemphasis{A} is hence an ambiguous first and last choice recommendation and therefore neither part of the non ambiguous weak Condorcet winners, nor of the non ambiguous weak Condorcet losers %
+Notice that the classic \sphinxstyleemphasis{max} and \sphinxstyleemphasis{min} inner vector product operators are replaced here with their corresponding disjunctive and conjunctive epistemic fusion operators (see Line 1). With the given random outranking digraph \sphinxstyleemphasis{g}, initial and terminal prekernels recommendations perfectly correspond now to the positive weak Condorcet winners and loosers as computed before in \hyperref[\detokenize{pearls:condorcetwinners1}]{Listing \ref{\detokenize{pearls:condorcetwinners1}}} and shown in \hyperref[\detokenize{pearls:condorcetwinners2}]{Fig.\@ \ref{\detokenize{pearls:condorcetwinners2}}}. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and \sphinxstyleemphasis{strictly} outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are non ambiguous \sphinxstyleemphasis{weakly} outranking or not \sphinxstyleemphasis{outranked} resp. \sphinxstyleemphasis{weakly} outranked or not \sphinxstyleemphasis{outranking} choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location ‘A’, being incomparable to all other locations, is included in both the initial and the terminal prekernel. Location \sphinxstyleemphasis{A} is hence an ambiguous first and last choice recommendation and therefore neither part of the non ambiguous weak Condorcet winners, nor of the non ambiguous weak Condorcet losers %
 \begin{footnote}[29]\sphinxAtStartFootnote
 See \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{Rubis\sphinxhyphen{}Tutorial\sphinxhyphen{}label}}}
 %
@@ -6526,7 +7129,7 @@ In a ranking\sphinxhyphen{}by\sphinxhyphen{}choosing strategy, we may recursivel
 \PYG{g+go}{  Criteria significance majority in brakets}
 \PYG{g+go}{  Execution time: 0.022 sec.}
 \PYG{g+go}{ *****************************************}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{IteratedBpvCondorcetWinnersRanking}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{linearOrders}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{IteratedBpvCondorcetWinnersRanking}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cr} \PYG{o}{=} \PYG{n}{IteratedBpvCondorcetWinnersRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cr}\PYG{o}{.}\PYG{n}{condorcetRanking}
 \PYG{g+go}{ [\PYGZsq{}p2\PYGZsq{},\PYGZsq{}p6\PYGZsq{},\PYGZsq{}p5\PYGZsq{},\PYGZsq{}p4\PYGZsq{},\PYGZsq{}p9\PYGZsq{},\PYGZsq{}p3\PYGZsq{},\PYGZsq{}p1\PYGZsq{},\PYGZsq{}p7\PYGZsq{},\PYGZsq{}p8\PYGZsq{}]}
@@ -6627,7 +7230,7 @@ makes \(Y^t\) similarly characterise a \sphinxstylestrong{terminal} \sphinxstyle
 Let us verify this result on a tiny random digraph.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{RandomDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{digraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{RandomDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{RandomDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -6729,7 +7332,7 @@ Time for a practical illustration.
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:exrandbg}}}
 \fvset{hllines={, 2,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{RandomBipolarOutrankingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{outrankingDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{RandomBipolarOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{RandomBipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{Normalized}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Object instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -7056,8 +7659,8 @@ It is indeed possible to define such a performance tableau by, first, using a si
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:bouyssou4origpt}}}
 \fvset{hllines={, 9, 10, 11, 12, 18, 21,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{perfsTab} \PYG{k+kn}{import} \PYG{n}{PerformanceTableau}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{perfsTab}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{PerformanceTableau}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{outrankingDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pt} \PYG{o}{=} \PYG{n}{PerformanceTableau}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{testBouyssou}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pt}\PYG{o}{.}\PYG{n}{showPerformanceTableau}\PYG{p}{(}\PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  performance tableau \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -7095,7 +7698,7 @@ In the \sphinxcode{\sphinxupquote{randomDigraphs}} module we provide the \sphinx
 \sphinxSetupCaptionForVerbatim{A partial tournament of order 5}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:partialtournament}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomDigraphs} \PYG{k+kn}{import} \PYG{n}{RandomPartialTournament}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{randomDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{RandomPartialTournament}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rpt} \PYG{o}{=} \PYG{n}{RandomPartialTournament}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{998}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rpt}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -7211,11 +7814,11 @@ If the conjecture reveals itself to be true, and we are rather confident that th
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:checkoutrankingdigraph}}}
 \fvset{hllines={, 17, 18,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomPerfTabs} \PYG{k+kn}{import} \PYG{n}{RandomPerformanceTableau}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{randomPerfTabs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{RandomPerformanceTableau}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{RandomPerformanceTableau}\PYG{p}{(}\PYG{n}{weightDistribution}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{equiobjectives}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
 \PYG{g+gp}{... }                       \PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{numberOfCriteria}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{,}
 \PYG{g+gp}{... }                       \PYG{n}{missingDataProbability}\PYG{o}{=}\PYG{l+m+mf}{0.05}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{outrankingDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -7238,7 +7841,7 @@ Whereas, when we consider in \hyperref[\detokenize{pearls:failedoutrankingcheck}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:failedoutrankingcheck}}}
 \fvset{hllines={, 7, 10, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomDigraphs} \PYG{k+kn}{import} \PYG{n}{RandomValuationDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{randomDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{RandomValuationDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rdg} \PYG{o}{=} \PYG{n}{RandomValuationDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rdg}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -7332,7 +7935,7 @@ The \sphinxcode{\sphinxupquote{RandomOutrankingValuationDigraph}} class from the
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:generateoutrankingvaluation}}}
 \fvset{hllines={, 3, 4, 5, 6, 12, 13, 14, 15, 16, 18, 19,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomDigraphs} \PYG{k+kn}{import} \PYG{n}{RandomOutrankingValuationDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{randomDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{RandomOutrankingValuationDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rov} \PYG{o}{=} \PYG{n}{RandomOutrankingValuationDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}
 \PYG{g+gp}{... }        \PYG{n}{weightsSum}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{,}
 \PYG{g+gp}{... }        \PYG{n}{distribution}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{uniform}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
@@ -7402,7 +8005,7 @@ In order to study the actual consensus quality of a bipolar\sphinxhyphen{}valued
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:circularperftab}}}
 \fvset{hllines={, 2, 8, 9, 10, 11, 12,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{perfTabs} \PYG{k+kn}{import} \PYG{n}{CircularPerformanceTableau}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{perfTabs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{CircularPerformanceTableau}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cpt5} \PYG{o}{=} \PYG{n}{CircularPerformanceTableau}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{NoPolarisation}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cpt5}\PYG{o}{.}\PYG{n}{showPerformanceTableau}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  performance tableau \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -7442,7 +8045,7 @@ All the five decision alternatives show in fact a same performance profile, yet 
 Let us inspect the corresponding bipolar\sphinxhyphen{}valued outranking digraph.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{outrankingDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bodg} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{cpt5}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bodg}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -7485,7 +8088,7 @@ Due to the regular tournament structure, the \sphinxstyleemphasis{Copeland} scor
 
 \fvset{hllines={, 4, 5, 6, 7, 8,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{CopelandRanking}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{linearOrders}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{CopelandRanking}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cop} \PYG{o}{=} \PYG{n}{CopelandRanking}\PYG{p}{(}\PYG{n}{bodg}\PYG{p}{,}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+go}{ Copeland scores}
 \PYG{g+go}{  a1 : 0}
@@ -7535,7 +8138,7 @@ The \sphinxstyleemphasis{Kemeny} rule delivers indeed five optimal rankings whic
 The disjunctive epistemic fusion of these five circular rankings gives again an empty relation (see \hyperref[\detokenize{pearls:rel-circular-5-pt-wk}]{Fig.\@ \ref{\detokenize{pearls:rel-circular-5-pt-wk}}} below).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{transitiveDigraphs} \PYG{k+kn}{import} \PYG{n}{RankingsFusionDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{transitiveDigraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{RankingsFusionDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wke} \PYG{o}{=} \PYG{n}{RankingsFusionDigraph}\PYG{p}{(}\PYG{n}{bodg}\PYG{p}{,}\PYG{n}{ke}\PYG{o}{.}\PYG{n}{maximalRankings}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wke}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
@@ -7597,7 +8200,7 @@ Let us compute the pairwise ordinal correlation indices between each one the fiv
 
 \fvset{hllines={, 2,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{CriteriaCorrelationDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{digraphs}\PYG{+w}{ }\PYG{k+kn}{import} \PYG{n}{CriteriaCorrelationDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cc} \PYG{o}{=} \PYG{n}{CriteriaCorrelationDigraph}\PYG{p}{(}\PYG{n}{bodg}\PYG{p}{,}\PYG{n}{WithMedian}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cc}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -7636,7 +8239,7 @@ What happens now when we observe imprecise performance evaluations, considerable
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:obj-outrankingconsensus}}}
 \fvset{hllines={, 30, 31, 32, 33, 34,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomPerfTabs} \PYG{k+kn}{import}\PYGZbs{}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{randomPerfTabs}\PYG{+w}{ }\PYG{k+kn}{import}\PYGZbs{}
 \PYG{g+gp}{... }         \PYG{n}{Random3ObjectivesPerformanceTableau}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pt3Obj} \PYG{o}{=} \PYG{n}{Random3ObjectivesPerformanceTableau}\PYG{p}{(}
 \PYG{g+gp}{... }         \PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{numberOfCriteria}\PYG{o}{=}\PYG{l+m+mi}{13}\PYG{p}{,}
@@ -7661,7 +8264,7 @@ What happens now when we observe imprecise performance evaluations, considerable
 \PYG{g+go}{    en04 criterion of objective Env 24}
 \PYG{g+go}{    en08 criterion of objective Env 24}
 \PYG{g+go}{   Total weight: 72.00 (3 criteria)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import}\PYGZbs{}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from}\PYG{+w}{ }\PYG{n+nn}{outrankingDigraphs}\PYG{+w}{ }\PYG{k+kn}{import}\PYGZbs{}
 \PYG{g+gp}{... }        \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{,}
 \PYG{g+gp}{... }         \PYG{n}{CriteriaCorrelationDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g3Obj} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{pt3Obj}\PYG{p}{)}

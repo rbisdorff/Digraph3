@@ -2113,7 +2113,8 @@ The performance evaluations of each decision alternative on each criterion are g
           the decision alternatives, resp. criteria, in a given ordering.
         * *WithActionNames* = True (default False) will show the action names instead of the short names or the identifyers.
         * *ndigits* = 0 may be used to show integer evaluation values.
-        * *colorLevels* may be 3, 5, 7, or 9. 
+        * *colorLevels* may be 3, 5, 7, or 9.
+        * When *GrayScales=True*, gray colorLevels may only be 3, 5, or 7. 
         * When no *actionsList* is provided, the decision actions are ordered from the best to the worst. This
           ranking is obtained by default with the Copeland rule applied on a standard *BipolarOutrankingDigraph*.
         * When the *SparseModel* flag is put to *True*, a sparse *PreRankedOutrankingDigraph* construction is used instead.

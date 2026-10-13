@@ -5,79 +5,79 @@
 \contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued likelihood of ‘’at least as good as “ situations}{4}{subsubsection*.11}%
 \contentsline {subsubsection}{Confidence level of outranking situations}{6}{subsubsection*.13}%
 \contentsline {subsection}{\numberline {1.2}On stable outrankings with ordinal criteria significance weights}{11}{subsection.1.2}%
-\contentsline {subsubsection}{Cardinal or ordinal criteria significance weights}{11}{subsubsection*.18}%
+\contentsline {subsubsection}{Cardinal or ordinal criteria significance weights}{12}{subsubsection*.18}%
 \contentsline {subsubsection}{Qualifying the stability of outranking situations}{13}{subsubsection*.19}%
-\contentsline {subsubsection}{Computing the stability denotation of outranking situations}{17}{subsubsection*.20}%
+\contentsline {subsubsection}{Computing the stability denotation of outranking situations}{18}{subsubsection*.20}%
 \contentsline {subsubsection}{Robust bipolar\sphinxhyphen {}valued outranking digraphs}{19}{subsubsection*.21}%
-\contentsline {subsection}{\numberline {1.3}On unopposed outrankings with multiple decision objectives}{22}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.3}On unopposed outrankings with multiple decision objectives}{23}{subsection.1.3}%
 \contentsline {subsubsection}{Characterising unopposed multiobjective outranking situations}{23}{subsubsection*.24}%
 \contentsline {subsubsection}{Computing unopposed multiobjective choice recommendations}{26}{subsubsection*.25}%
-\contentsline {section}{\numberline {2}Enhancing social choice procedures}{27}{section.2}%
+\contentsline {section}{\numberline {2}Enhancing social choice procedures}{28}{section.2}%
 \contentsline {subsection}{\numberline {2.1}\sphinxstyleemphasis {Condorcet}’s critical perspective on the simple plurality voting rule}{28}{subsection.2.1}%
 \contentsline {subsubsection}{Bipolar approval voting of motions}{28}{subsubsection*.35}%
 \contentsline {subsubsection}{Who wins the election?}{30}{subsubsection*.36}%
 \contentsline {subsubsection}{Resolving circular social preferences}{32}{subsubsection*.37}%
 \contentsline {subsubsection}{The \sphinxstyleemphasis {Borda} rank analysis method}{35}{subsubsection*.39}%
-\contentsline {subsection}{\numberline {2.2}Two\sphinxhyphen {}stage elections with multipartisan primary selection}{36}{subsection.2.2}%
-\contentsline {subsubsection}{Converting voting profiles into performance tableaux}{37}{subsubsection*.46}%
+\contentsline {subsection}{\numberline {2.2}Two\sphinxhyphen {}stage elections with multipartisan primary selection}{37}{subsection.2.2}%
+\contentsline {subsubsection}{Converting voting profiles into performance tableaux}{38}{subsubsection*.46}%
 \contentsline {subsubsection}{Multipartisan primary selection of eligible candidates}{39}{subsubsection*.47}%
 \contentsline {subsubsection}{Secondary election winner determination}{41}{subsubsection*.48}%
-\contentsline {subsubsection}{Multipartisan preferences in divisive politics}{42}{subsubsection*.49}%
-\contentsline {subsection}{\numberline {2.3}Tempering plurality tyranny effects with bipolar approval voting}{45}{subsection.2.3}%
-\contentsline {subsubsection}{Bipolar approval voting systems}{46}{subsubsection*.55}%
-\contentsline {subsubsection}{Pairwise comparison of bipolar approval votes}{49}{subsubsection*.56}%
-\contentsline {subsubsection}{Three\sphinxhyphen {}valued evaluative voting system}{51}{subsubsection*.57}%
-\contentsline {subsubsection}{Favouring multipartisan candidates}{54}{subsubsection*.58}%
-\contentsline {subsection}{\numberline {2.4}Selecting the winner of a primary election: a critical commentary}{59}{subsection.2.4}%
-\contentsline {subsubsection}{The French popular primary presidential election 2022}{60}{subsubsection*.63}%
-\contentsline {subsubsection}{A bipolar approval\sphinxhyphen {}disapproval election}{61}{subsubsection*.65}%
-\contentsline {subsubsection}{Ranking the potential presidential candidates}{62}{subsubsection*.66}%
-\contentsline {section}{\numberline {3}Theoretical and computational advancements}{63}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Coping with missing data and indeterminateness}{63}{subsection.3.1}%
-\contentsline {subsubsection}{A motivating data set}{64}{subsubsection*.77}%
-\contentsline {subsubsection}{Modelling pairwise bipolar\sphinxhyphen {}valued rating opinions}{66}{subsubsection*.79}%
-\contentsline {subsection}{\numberline {3.2}Ordinal correlation equals bipolar\sphinxhyphen {}valued relational equivalence}{69}{subsection.3.2}%
-\contentsline {subsubsection}{Kendall’s \sphinxstyleemphasis {tau} index}{70}{subsubsection*.85}%
-\contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued relational equivalence}{71}{subsubsection*.86}%
-\contentsline {subsubsection}{Fitness of ranking heuristics}{73}{subsubsection*.87}%
-\contentsline {subsubsection}{Illustrating preference divergences}{76}{subsubsection*.88}%
-\contentsline {subsubsection}{Exploring the \sphinxstyleemphasis {better rated} and the \sphinxstyleemphasis {as well as rated} opinions}{77}{subsubsection*.90}%
-\contentsline {subsection}{\numberline {3.3}Applications of bipolar\sphinxhyphen {}valued base 3 encoded Bachet numbers}{79}{subsection.3.3}%
-\contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued base 3 encoded Bachet numbers}{80}{subsubsection*.100}%
-\contentsline {subsubsection}{Examples of Bachet integers}{81}{subsubsection*.104}%
-\contentsline {subsubsection}{The Bachet ranking rule, a new ranking\sphinxhyphen {}by\sphinxhyphen {}scoring method}{84}{subsubsection*.106}%
-\contentsline {subsubsection}{Efficiency of the Bachet ranking rule settings}{89}{subsubsection*.109}%
-\contentsline {subsubsection}{Smart sampling of the permutations of the actions list}{92}{subsubsection*.110}%
-\contentsline {subsubsection}{Revealing the transitive part of a bipolar\sphinxhyphen {}valued digraph}{93}{subsubsection*.111}%
-\contentsline {subsubsection}{The Bachet choice recommender algorithm}{95}{subsubsection*.112}%
-\contentsline {subsubsection}{Notes}{98}{subsubsection*.113}%
-\contentsline {subsection}{\numberline {3.4}On computing digraph kernels}{99}{subsection.3.4}%
-\contentsline {subsubsection}{What is a graph kernel ?}{99}{subsubsection*.120}%
-\contentsline {subsubsection}{Initial and terminal kernels}{104}{subsubsection*.121}%
-\contentsline {subsubsection}{Kernels in lateralized digraphs}{109}{subsubsection*.122}%
-\contentsline {subsubsection}{Computing first and last choice recommendations}{112}{subsubsection*.123}%
-\contentsline {subsubsection}{Tractability}{117}{subsubsection*.124}%
-\contentsline {subsection}{\numberline {3.5}Computational bipolar\sphinxhyphen {}valued epistemic logic}{119}{subsection.3.5}%
-\contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued propositional calculus}{119}{subsubsection*.129}%
-\contentsline {subsubsection}{Superposition of elementary epistemic situations}{120}{subsubsection*.130}%
-\contentsline {subsubsection}{Computational bipolar\sphinxhyphen {}valued set theory}{121}{subsubsection*.131}%
-\contentsline {subsubsection}{The partially ordered commutative epistemic fusion algebra}{124}{subsubsection*.132}%
-\contentsline {subsection}{\numberline {3.6}A new choice recommender algorithm}{127}{subsection.3.6}%
-\contentsline {subsubsection}{Computing bipolar\sphinxhyphen {}valued weak Condorcet winners and loosers}{127}{subsubsection*.136}%
-\contentsline {subsubsection}{Suitable first and last choice recommendations}{129}{subsubsection*.138}%
-\contentsline {subsubsection}{Ranking\sphinxhyphen {}by\sphinxhyphen {}choosing with bpv\sphinxhyphen {}sets of weak Condorcet winners and loosers}{130}{subsubsection*.141}%
-\contentsline {subsection}{\numberline {3.7}Bipolar\sphinxhyphen {}valued kernel membership characteristic vectors}{132}{subsection.3.7}%
-\contentsline {subsubsection}{Kernel equation systems}{132}{subsubsection*.146}%
-\contentsline {subsubsection}{Solving bipolar\sphinxhyphen {}valued kernel equation systems}{133}{subsubsection*.147}%
-\contentsline {subsubsection}{Historical notes}{140}{subsubsection*.148}%
-\contentsline {subsection}{\numberline {3.8}On characterizing bipolar\sphinxhyphen {}valued outranking digraphs}{141}{subsection.3.8}%
-\contentsline {subsubsection}{Necessary properties of the outranking digraph}{141}{subsubsection*.154}%
-\contentsline {subsubsection}{Partial tournaments may be strict outranking digraphs}{143}{subsubsection*.156}%
-\contentsline {subsubsection}{Recognizing bipolar outranking valuations}{145}{subsubsection*.157}%
-\contentsline {subsubsection}{On generating random outranking valuations}{149}{subsubsection*.159}%
-\contentsline {subsection}{\numberline {3.9}Consensus quality of the bipolar\sphinxhyphen {}valued outranking relation}{149}{subsection.3.9}%
-\contentsline {subsubsection}{Circular performance tableaux}{150}{subsubsection*.163}%
-\contentsline {subsubsection}{A difficult decision problem}{152}{subsubsection*.164}%
-\contentsline {subsubsection}{The central CONDORCET point of view}{153}{subsubsection*.165}%
-\contentsline {section}{\numberline {4}Appendix}{159}{section.4}%
-\contentsline {section}{References}{159}{section.4}%
+\contentsline {subsubsection}{Multipartisan preferences in divisive politics}{43}{subsubsection*.49}%
+\contentsline {subsection}{\numberline {2.3}Tempering plurality tyranny effects with bipolar approval voting}{46}{subsection.2.3}%
+\contentsline {subsubsection}{Bipolar approval voting systems}{47}{subsubsection*.55}%
+\contentsline {subsubsection}{Pairwise comparison of bipolar approval votes}{50}{subsubsection*.56}%
+\contentsline {subsubsection}{Three\sphinxhyphen {}valued evaluative voting system}{52}{subsubsection*.57}%
+\contentsline {subsubsection}{Favouring multipartisan candidates}{55}{subsubsection*.58}%
+\contentsline {subsection}{\numberline {2.4}Selecting the winner of a primary election: a critical commentary}{60}{subsection.2.4}%
+\contentsline {subsubsection}{The French popular primary presidential election 2022}{61}{subsubsection*.63}%
+\contentsline {subsubsection}{A bipolar approval\sphinxhyphen {}disapproval election}{62}{subsubsection*.65}%
+\contentsline {subsubsection}{Ranking the potential presidential candidates}{63}{subsubsection*.66}%
+\contentsline {section}{\numberline {3}Theoretical and computational advancements}{64}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Coping with missing data and indeterminateness}{64}{subsection.3.1}%
+\contentsline {subsubsection}{A motivating data set}{65}{subsubsection*.77}%
+\contentsline {subsubsection}{Modelling pairwise bipolar\sphinxhyphen {}valued rating opinions}{67}{subsubsection*.79}%
+\contentsline {subsection}{\numberline {3.2}Ordinal correlation equals bipolar\sphinxhyphen {}valued relational equivalence}{70}{subsection.3.2}%
+\contentsline {subsubsection}{Kendall’s \sphinxstyleemphasis {tau} index}{71}{subsubsection*.85}%
+\contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued relational equivalence}{72}{subsubsection*.86}%
+\contentsline {subsubsection}{Fitness of ranking heuristics}{74}{subsubsection*.87}%
+\contentsline {subsubsection}{Illustrating preference divergences}{77}{subsubsection*.88}%
+\contentsline {subsubsection}{Exploring the \sphinxstyleemphasis {better rated} and the \sphinxstyleemphasis {as well as rated} opinions}{78}{subsubsection*.90}%
+\contentsline {subsection}{\numberline {3.3}Applications of bipolar\sphinxhyphen {}valued base 3 encoded Bachet numbers}{80}{subsection.3.3}%
+\contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued base 3 encoded Bachet numbers}{81}{subsubsection*.100}%
+\contentsline {subsubsection}{Examples of Bachet integers}{82}{subsubsection*.104}%
+\contentsline {subsubsection}{The Bachet ranking rule, a new ranking\sphinxhyphen {}by\sphinxhyphen {}scoring method}{85}{subsubsection*.106}%
+\contentsline {subsubsection}{Efficiency of the Bachet ranking rule settings}{90}{subsubsection*.109}%
+\contentsline {subsubsection}{Smart sampling of the permutations of the actions list}{93}{subsubsection*.110}%
+\contentsline {subsubsection}{Revealing the transitive part of a bipolar\sphinxhyphen {}valued digraph}{94}{subsubsection*.111}%
+\contentsline {subsubsection}{The Bachet choice recommender algorithm}{96}{subsubsection*.112}%
+\contentsline {subsubsection}{Notes}{99}{subsubsection*.113}%
+\contentsline {subsection}{\numberline {3.4}On computing digraph kernels}{100}{subsection.3.4}%
+\contentsline {subsubsection}{What is a graph kernel ?}{100}{subsubsection*.120}%
+\contentsline {subsubsection}{Initial and terminal kernels}{105}{subsubsection*.121}%
+\contentsline {subsubsection}{Kernels in lateralized digraphs}{110}{subsubsection*.122}%
+\contentsline {subsubsection}{Computing first and last choice recommendations}{113}{subsubsection*.123}%
+\contentsline {subsubsection}{Tractability}{118}{subsubsection*.124}%
+\contentsline {subsection}{\numberline {3.5}Computational bipolar\sphinxhyphen {}valued epistemic logic}{120}{subsection.3.5}%
+\contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued propositional calculus}{120}{subsubsection*.129}%
+\contentsline {subsubsection}{Superposition of elementary epistemic situations}{121}{subsubsection*.130}%
+\contentsline {subsubsection}{Computational bipolar\sphinxhyphen {}valued set theory}{122}{subsubsection*.131}%
+\contentsline {subsubsection}{The partially ordered commutative epistemic fusion algebra}{125}{subsubsection*.132}%
+\contentsline {subsection}{\numberline {3.6}A new choice recommender algorithm}{128}{subsection.3.6}%
+\contentsline {subsubsection}{Computing bipolar\sphinxhyphen {}valued weak Condorcet winners and loosers}{129}{subsubsection*.136}%
+\contentsline {subsubsection}{Suitable first and last choice recommendations}{130}{subsubsection*.138}%
+\contentsline {subsubsection}{Ranking\sphinxhyphen {}by\sphinxhyphen {}choosing with bpv\sphinxhyphen {}sets of weak Condorcet winners and loosers}{132}{subsubsection*.141}%
+\contentsline {subsection}{\numberline {3.7}Bipolar\sphinxhyphen {}valued kernel membership characteristic vectors}{134}{subsection.3.7}%
+\contentsline {subsubsection}{Kernel equation systems}{134}{subsubsection*.146}%
+\contentsline {subsubsection}{Solving bipolar\sphinxhyphen {}valued kernel equation systems}{135}{subsubsection*.147}%
+\contentsline {subsubsection}{Historical notes}{142}{subsubsection*.148}%
+\contentsline {subsection}{\numberline {3.8}On characterizing bipolar\sphinxhyphen {}valued outranking digraphs}{143}{subsection.3.8}%
+\contentsline {subsubsection}{Necessary properties of the outranking digraph}{143}{subsubsection*.154}%
+\contentsline {subsubsection}{Partial tournaments may be strict outranking digraphs}{145}{subsubsection*.156}%
+\contentsline {subsubsection}{Recognizing bipolar outranking valuations}{147}{subsubsection*.157}%
+\contentsline {subsubsection}{On generating random outranking valuations}{151}{subsubsection*.159}%
+\contentsline {subsection}{\numberline {3.9}Consensus quality of the bipolar\sphinxhyphen {}valued outranking relation}{151}{subsection.3.9}%
+\contentsline {subsubsection}{Circular performance tableaux}{152}{subsubsection*.163}%
+\contentsline {subsubsection}{A difficult decision problem}{154}{subsubsection*.164}%
+\contentsline {subsubsection}{The central CONDORCET point of view}{155}{subsubsection*.165}%
+\contentsline {section}{\numberline {4}Appendix}{161}{section.4}%
+\contentsline {section}{References}{161}{section.4}%
