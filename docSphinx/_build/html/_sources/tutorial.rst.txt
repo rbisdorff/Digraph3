@@ -2451,7 +2451,7 @@ The incomparability situation between 'a3' and 'a4' results here from a perfect 
 Ranking the template peformance tableau
 ```````````````````````````````````````
 
-We may eventually rank the five decision alternatives shown in  :numref:`templateDrawing` with a coloured heatmap browser view following the *Copeland* ranking rule which consistently reproduces the apparent partial outranking order (see [72]_). 
+We may eventually rank the five decision alternatives shown in  :numref:`templateDrawing` with a coloured heatmap browser view following the *Copeland* ranking rule which consistently reproduces the apparent partial outranking order. 
 
    >>> g.showHTMLPerformanceHeatmap(ndigits=1,colorLevels=5,
    ...    Correlations=True,rankingRule='Copeland',GrayScales=False,
@@ -2461,14 +2461,19 @@ We may eventually rank the five decision alternatives shown in  :numref:`templat
    :width: 600 px
    :align: center
 
-Due to a 11 against 7 **plurality tyranny** effect, the *Copeland* ranking rule, essentially based on crisp majority outranking counts, puts here alternative *action5* (*a5*) last, despite its excellent grades observed on criteria *g2*, *g5* and *g6*. A slightly **fairer** ranking result may be obtained with the *NetFlows* ranking rule.
+Due to a 11 against 7 **plurality tyranny** effect, the *Copeland* ranking rule, essentially based on crisp majority outranking counts, puts here alternative *action5* (*a5*) last, despite its excellent grades observed on criteria *g2*, *g5* and *g6*. A slightly **fairer** ranking result may be obtained with the *NetFlows* ranking rule. Notice below by the way the *GrayScales* parameter which may produce a grayscale version of the heatmap [72]_.
+
+.. code-block:: python
+   :linenos:
+   :emphasize-lines: 3
 
    >>> g.showHTMLPerformanceHeatmap(ndigits=1,colorLevels=5,
    ...    Correlations=True,rankingRule='NetFlows',
-   ...    pageTitle='Heatmap of the template performance tableau')
+   ...    GrayScales=True,
+   ...    pageTitle='Grayscale version of the template heatmap')
 
 .. image:: templateHeatmapNF.png
-   :width: 600 px
+   :width: 450 px
    :align: center
 
 It might be opportune to furthermore study the robustness of the apparent outranking situations when assuming only *ordinal* or *uncertain* criteria significance weights. If interested in mainly objectively *unopposed* (multipartisan) outranking situations, one might also try the :py:class:`~outrankingDigraphs.UnOpposedOutrankingDigraph` constructor. (see the :ref:`advanced topics of the Digraph3 documentation <Advanced-Topics-label>`). 

@@ -2594,7 +2594,7 @@ The performance evaluations of each decision alternative on each criterion are g
         html += '<tr bgcolor=%s><th>quantile</th>' % (columnHeaderColor)
         nc = len(colorPalette)
         for col in range(0,nc):
-            print(col,colorPalette[col])
+            #print(col,colorPalette[col])
             if GrayScales:
                 html += '<td style="color:yellow" bgcolor=%s>&nbsp;%.2f&#037;</td>' \
                 % (colorPalette[col][1],

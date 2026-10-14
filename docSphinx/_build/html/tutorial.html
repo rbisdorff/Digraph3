@@ -2716,7 +2716,7 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </section>
 <section id="ranking-the-template-peformance-tableau">
 <h4><a class="toc-backref" href="#id356" role="doc-backlink"><span class="section-number">1.3.2.7. </span>Ranking the template peformance tableau</a><a class="headerlink" href="#ranking-the-template-peformance-tableau" title="Link to this heading"></a></h4>
-<p>We may eventually rank the five decision alternatives shown in  <a class="reference internal" href="#templatedrawing"><span class="std std-numref">Fig. 1.18</span></a> with a coloured heatmap browser view following the <em>Copeland</em> ranking rule which consistently reproduces the apparent partial outranking order (see <a class="footnote-reference brackets" href="#id281" id="id57" role="doc-noteref"><span class="fn-bracket">[</span>72<span class="fn-bracket">]</span></a>).</p>
+<p>We may eventually rank the five decision alternatives shown in  <a class="reference internal" href="#templatedrawing"><span class="std std-numref">Fig. 1.18</span></a> with a coloured heatmap browser view following the <em>Copeland</em> ranking rule which consistently reproduces the apparent partial outranking order.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
 <span class="gp">... </span>   <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">,</span><span class="n">GrayScales</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="gp">... </span>   <span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of the template performance tableau&#39;</span><span class="p">)</span>
@@ -2724,13 +2724,14 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </div>
 <a class="reference internal image-reference" href="_images/templateHeatmapCop.png"><img alt="_images/templateHeatmapCop.png" class="align-center" src="_images/templateHeatmapCop.png" style="width: 600px;" />
 </a>
-<p>Due to a 11 against 7 <strong>plurality tyranny</strong> effect, the <em>Copeland</em> ranking rule, essentially based on crisp majority outranking counts, puts here alternative <em>action5</em> (<em>a5</em>) last, despite its excellent grades observed on criteria <em>g2</em>, <em>g5</em> and <em>g6</em>. A slightly <strong>fairer</strong> ranking result may be obtained with the <em>NetFlows</em> ranking rule.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-<span class="gp">... </span>   <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span>
-<span class="gp">... </span>   <span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of the template performance tableau&#39;</span><span class="p">)</span>
+<p>Due to a 11 against 7 <strong>plurality tyranny</strong> effect, the <em>Copeland</em> ranking rule, essentially based on crisp majority outranking counts, puts here alternative <em>action5</em> (<em>a5</em>) last, despite its excellent grades observed on criteria <em>g2</em>, <em>g5</em> and <em>g6</em>. A slightly <strong>fairer</strong> ranking result may be obtained with the <em>NetFlows</em> ranking rule. Notice below by the way the <em>GrayScales</em> parameter which may produce a grayscale version of the heatmap <a class="footnote-reference brackets" href="#id281" id="id57" role="doc-noteref"><span class="fn-bracket">[</span>72<span class="fn-bracket">]</span></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="linenos">2</span><span class="gp">... </span>   <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span>
+<span class="hll"><span class="linenos">3</span><span class="gp">... </span>   <span class="n">GrayScales</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span class="linenos">4</span><span class="gp">... </span>   <span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Grayscale version of the template heatmap&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/templateHeatmapNF.png"><img alt="_images/templateHeatmapNF.png" class="align-center" src="_images/templateHeatmapNF.png" style="width: 600px;" />
+<a class="reference internal image-reference" href="_images/templateHeatmapNF.png"><img alt="_images/templateHeatmapNF.png" class="align-center" src="_images/templateHeatmapNF.png" style="width: 450px;" />
 </a>
 <p>It might be opportune to furthermore study the robustness of the apparent outranking situations when assuming only <em>ordinal</em> or <em>uncertain</em> criteria significance weights. If interested in mainly objectively <em>unopposed</em> (multipartisan) outranking situations, one might also try the <code class="xref py py-class docutils literal notranslate"><span class="pre">UnOpposedOutrankingDigraph</span></code> constructor. (see the <a class="reference internal" href="pearls.html#advanced-topics-label"><span class="std std-ref">advanced topics of the Digraph3 documentation</span></a>).</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
@@ -11975,7 +11976,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Oct 13, 2026.
+      <span class="lastupdated">Last updated on Oct 14, 2026.
       </span></p>
   </div>
 
