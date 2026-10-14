@@ -60,19 +60,19 @@ pydocs:
 
 pTests:
 		parallel --gnu cp {}.py ${TESTDIR} ::: arithmetics digraphsTools digraphs outrankingDigraphs perfTabs performanceQuantiles sortingDigraphs votingProfiles linearOrders transitiveDigraphs graphs pairings randomNumbers randomDigraphs randomPerfTabs ratingDigraphs sparseOutrankingDigraphs xmcda
-		(cd ${TESTDIR}; parallel --gnu -k ${PYTEST} -v ::: ../pytests*; rm tmp*)
+		(cd ${TESTDIR}; rm tmp*; parallel --gnu -k ${PYTEST} -v ::: ../pytests*)
 
 tests:
 		for md in ${modules}; do \
 		    cp $$md ${TESTDIR}/; \
 		done
-		(cd test/results; ${PYTEST} ${JOBS} -v ../pytests*; rm tmp*)
+		(cd test/results; rm tmp*; ${PYTEST} ${JOBS} -v ../pytests*)
 
 verboseTests:
 		for md in ${modules}; do \
 		    cp $$md ${TESTDIR}/; \
 		done
-		(cd ${TESTDIR}; ${PYTEST} -vs ../pytests*; rm tmp*)
+		(cd ${TESTDIR}; rm tmp*; ${PYTEST} -vs ../pytests*)
 
 digraphsTests:
 		for md in ${modules}; do \
