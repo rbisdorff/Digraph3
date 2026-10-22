@@ -700,17 +700,16 @@ Indeed, a *complete* digraph on the limit has no inner part --privacy!-- at all 
 Fusion by epistemic disjunction
 ```````````````````````````````
 
-We may recover object *rdg* from both partial objects *asymDg* and *symDg*, or as well from the border *bg* and the inner part *ig*, with a **bipolar fusion** constructor, also called **epistemic disjunction**, available via the :py:class:`~digraphs.FusionDigraph` class (see :numref:`tutRandValDigraph` Lines 12- 21). 
+We may recover object *rdg* from both partial objects *asymDg* and *symDg*, or as well from the border *bg* and the inner part *ig*, with a **bipolar fusion** constructor, also called **disjunction epistemic fusion**, available via the :py:class:`~digraphs.FusionDigraph` class (see :numref:`tutRandValDigraph` Lines 12- 21). 
 
 .. code-block:: pycon
    :name: epistemicFusion
-   :caption: Epistemic fusion of partial diagraphs
+   :caption: Disjunctive epistemic fusion of two partial digraphs
    :linenos:
    :emphasize-lines: 2
 
    >>> from digraphs import FusionDigraph
    >>> fusDg = FusionDigraph(asymDg,symDg,operator='o-max')
-   >>> # fusDg = FusionDigraph(bg,ig,operator='o-max')
    >>> fusDg.showRelationTable()
     * ---- Relation Table -----
     r(xSy) |  '1'    '2'   '3'  '4'   '5'    '6'  '7'	  
@@ -1038,6 +1037,10 @@ Let us construct, for instance, a random bipolar-valued outranking digraph with 
     # Actions          : 7
     # Criteria         : 7
     NaN proportion (%) : 6.1
+    Attributes         : ['randomSeed', 'name', 'BigData', 'sumWeights',
+                          'digits', 'commonScale', 'commonMode', 'NA',
+	                  'missingDataProbability', 'actions', 'criteria',
+			  'evaluation', 'weightPreorder']
    >>> pt.showActions()
        *----- show digraphs actions --------------*
        key:  a1
@@ -1052,7 +1055,7 @@ Let us construct, for instance, a random bipolar-valued outranking digraph with 
        name:       action #7
        comment:    RandomPerformanceTableau() generated.
 
-In this example we consider furthermore a family of seven **equisignificant cardinal criteria functions** *g1*, *g2*, ..., *g7*, measuring the performance of each alternative on a rational scale from 0.0 (worst) to 100.00 (best). In order to capture the grading procedure's potential uncertainty and imprecision, each criterion function *g1* to *g7* admits three performance **discrimination thresholds** of 2.5, 5.0 and 80 pts for warranting respectively any indifference, preference or considerable performance difference situation.
+In this example we consider for instance a family of seven **equisignificant cardinal criteria functions** *g1*, *g2*, ..., *g7*, measuring the performance of each alternative on a rational scale from 0.0 (worst) to 100.00 (best). In order to capture the grading procedure's potential uncertainty and imprecision, each criterion function *g1* to *g7* admits three performance **discrimination thresholds** of 2.50, 5.00 and 80.00 pts for warranting respectively any indifference, preference or considerable performance difference situation.
 
 .. code-block:: pycon
    :linenos:
@@ -1081,7 +1084,7 @@ In this example we consider furthermore a family of seven **equisignificant card
       Threshold pref : 5.00 + 0.00x ; percentile: 4.76
       Threshold veto : 80.00 + 0.00x ; percentile: 100.00
 
-On criteria function *g1* (see Lines 6-8 above) we observe, for instance, about 5% of **indifference**, about 90% of **preference** and about 5% of **considerable** performance difference situations. The individual performance evaluation of all decision alternative on each criterion are gathered in a *performance tableau*.
+On criteria function *g1* (see Lines 6-8 above) we observe for instance 4.76% of **indifference** situations, 100.00 - 9.52 = 90.48% of **preference** situations and 100.00 - 95.24 = 4.76% of **considerable** performance difference situations. The individual performance evaluation of all decision alternative on each criterion are gathered in a **performance tableau**.
 
 .. code-block:: pycon
    :linenos:
@@ -1129,7 +1132,7 @@ Given the previous random performance tableau *pt*, the :py:class:`~outrankingDi
 	'order', 'gamma', 'notGamma', ...
 	]
 
-The resulting digraph contains 20 positive (valid) outranking relations. And, the mean majority criteria significance support of all the pairwise outranking situations is 63.3% (see :numref:`tutOutrankingDigraph` Lines 8-9). We may inspect the complete [-1.0,+1.0]-valued adjacency table as follows.
+The resulting digraph contains 20 positive (valid) outranking relations. And, the mean majority criteria significance support of all the pairwise outranking situations is 63.27% (see :numref:`tutOutrankingDigraph` Lines 8-9). We may inspect the complete [-1.0,+1.0]-valued adjacency table as follows.
  
 .. code-block:: pycon
    :linenos:
@@ -1149,14 +1152,14 @@ The resulting digraph contains 20 positive (valid) outranking relations. And, th
 
 Considering the given performance tableau *pt*, the :py:class:`~outrankingDigraphs.BipolarOutrankingDigraph` class constructor computes the characteristic value :math:`r(x \, \succsim \, y)` of a **pairwise outranking** relation ":math:`x\, \succsim \,y`" (see [BIS-2013]_, [ADT-L7]_) in a default *normalised* **valuation domain** [-1.0,+1.0] with the *median value* 0.0 acting as **indeterminate** characteristic value. The semantics of :math:`r(x\, \succsim \, y)` are the following.
 
-    1. When :math:`r(x \, \succsim \, y) > 0.0`, it is more *True* than *False* that *x* **outranks** *y*, i.e. alternative *x* is at least as well performing than alternative *y* on a weighted majority of criteria **and** there is no considerable negative performance difference observed in disfavour of *x*,
-    2. When :math:`r(x \, \succsim \,y) < 0.0`, it is more *False* than *True* that *x* **outranks** *y*, i.e. alternative *x* is **not** at least as well performing on a weighted majority of criteria than alternative *y* **and** there is no considerable positive performance difference observed in favour of *x*,
+    1. When :math:`r(x \, \succsim \, y) > 0.0`, it is more *True* than *False* that *x* **outranks** *y*, i.e. alternative *x* is *at least as well performing* than alternative *y* on a weighted majority of criteria significance **and** there is *no* considerable *negative performance difference* observed in disfavour of *x*,
+    2. When :math:`r(x \, \succsim \,y) < 0.0`, it is more *False* than *True* that *x* **outranks** *y*, i.e. alternative *x* is **not** *at least as well performing* on a weighted majority of criteria significance than alternative *y* **and** there is *no* considerable *positive performance difference* observed in favour of *x*,
     3. When :math:`r(x \, \succsim \,y) = 0.0`, it is **indeterminate** whether *x* outranks *y* or not.
 
 Pairwise comparisons
 ````````````````````
 
-From above given semantics, we may consider (see Line 5 above) that *a1* outranks *a2* :math:`\big( r( a_{1} \, \succsim \, a_{2}) > 0.0 \big)`, but not *a7* :math:`\big(r(a_{1} \, \succsim \, a_{7}) = 0.0 \big)`. In order to comprehend the characteristic values shown in the relation table above, we may furthermore inspect the details of the pairwise multiple criteria comparison between alternatives *a1* and *a2*.
+From above given semantics, we may consider (see Line 5 above) that *a1* outranks *a2* :math:`\big( r( a_{1} \, \succsim \, a_{2}) > 0.0 \big)`, but not *a7* :math:`\big(r(a_{1} \, \succsim \, a_{7}) = 0.0 \big)`. In order to comprehend the bipolar characteristic values shown in the relation table above, we may furthermore inspect the details of the pairwise multiple criteria comparison between alternatives *a1* and *a2*.
 
 .. code-block:: pycon
    :linenos:
@@ -1176,7 +1179,7 @@ From above given semantics, we may consider (see Line 5 above) that *a1* outrank
      ----------------------------------------
      Valuation in range: -7.00 to +7.00; r(x,y): +5/7 = +0.71
 
-The outranking characteristic value :math:`r(a_1 \succsim a_2)` represents the **majority margin** resulting from the difference between the weights of the criteria in favor and the weights of the criteria in disfavor of the statement that alternative *a1* is at least as well performing as alternative *a2*. No considerable performance difference being observed above, no outranking polarisation is triggered in this pairwise comparison. Such a situation is, however, observed for instance when we pairwise compare the performances of alternatives *a1* and *a7*.
+The outranking characteristic value :math:`r(a_1 \succsim a_2)` represents the **majority margin** resulting from the difference between the weights of the criteria in favor and the weights of the criteria in disfavor of the statement that alternative *a1* is *at least as well performing as* alternative *a2*. No considerable performance difference being observed above, no outranking polarisation is triggered in this pairwise comparison. Such a situation is, however, observed for instance when we pairwise compare the performances of alternatives *a1* and *a7*.
 
 .. code-block:: pycon
    :linenos:
@@ -1209,7 +1212,7 @@ All outranking digraphs, being of root type :py:class:`~digraphs.Digraph`, inher
 
    >>> odg.recodeValuation(-7,+7)
    >>> odg.valuationdomain['hasIntegerValuation'] = True
-   >>> Digraph.showRelationTable(odg,ReflexiveTerms=True)
+   >>> Digraph.showRelationTable(odg)
     * ---- Relation Table -----
      r(x,y)  |  'a1'  'a2'  'a3'  'a4'  'a5'  'a6'  'a7'	  
     ---------|------------------------------------------
@@ -1239,7 +1242,7 @@ They furthermore verify the **coduality** principle: the **converse** (the *inve
 
     :math:`\sim\big(-r(y \succsim x)\big) \;=\; \sim\big(r(y \not \succsim x)\big) \;=\; r(x \succnsim y)`.
 
-From both properties follows straightway that codual, i.e. *strict*, outranking digraphs are **strongly asymmetrical**:
+From both properties follows straightaway that codual, i.e. *strict*, outranking digraphs are **strongly asymmetrical**:
 
     :math:`r(x \succnsim y) + r(y \succnsim x) \leq 0.0` 
 
@@ -1250,7 +1253,7 @@ We may visualize the **codual** outranking digraph *cdodg* with a graphviz drawi
 .. code-block:: pycon
    :linenos:
 
-   >>> cdodg = ~(-odg) # == -(~odg) == codual transform
+   >>> cdodg = ~(-odg) # == -(~odg) codual transform
    >>> cdodg.exportGraphViz('codualOdg')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to codualOdg.dot
@@ -1262,13 +1265,25 @@ We may visualize the **codual** outranking digraph *cdodg* with a graphviz drawi
 
    The strict (codual) outranking digraph
 
-It becomes readily clear now from the picture above that both alternatives *a1*  and *a7* are *not outranked* by any other alternatives. Hence, *a1*  and *a7* appear as :ref:`weak Condorcet winners <LinearVoting-Tutorial-label>` and may be recommended as potential *best decision actions* in a selection decision problem. 
+It becomes readily clear now from the picture above that both alternatives *a1*  and *a7* are *not strictly outranked* by any other alternatives. Hence, *a1*  and *a7* appear as :ref:`weak Condorcet winners <LinearVoting-Tutorial-label>` and may be recommended as potential *first choice alternatives* in a selection decision problem. Similarly, alternatives *a6* and *a2* are not strictly outranking any other alternative and may give suitable last choice recommendations (see below).
 
-Many more tools for exploiting bipolar-valued outranking digraphs are available in the *Digraph3* resources (see the technical documentation of the :ref:`outrankingDigraphs module <outrankingDiGraphs-label>` and the :ref:`perfTabs module <perfTabs-label>`).
+.. code-block:: pycon
+   :linenos:
+
+   >>> cdodg.showChoiceRecommendation('CondorcetWinners')
+    First choice (Condorcet winners)
+     'a1': +0.29 (64.28%)
+     'a7': +0.29 (64.28%)
+    Last choice (Condorcet losers)
+     'a6': +0.29 (64.28%)
+     'a2': +0.14 (57.15%)
+    Criteria significance majority in brakets
+    Execution time: 0.011 sec.
+
+Many more tools for analysing bipolar-valued outranking digraphs are available in the *Digraph3* resources (see the technical documentation of the :ref:`outrankingDigraphs module <outrankingDiGraphs-label>` and the :ref:`perfTabs module <perfTabs-label>`).
 
 Historical Notes
 ````````````````
-
 The seminal work on outranking digraphs goes back to the seventies and eighties when *Bernard Roy* joined the just starting *University Paris-Dauphine* and founded there the *Laboratoire d’Analyse et de Modélisation de Systèmes pour l’Aide à la Décision* (LAMSADE). The LAMSADE became the major site in the development of the outranking approach to multiple-criteria decision aiding ([ROY-1991]_).
 
 The ongoing success of the original *outranking* concept stems indeed from the fact that it is rooted in a sound pragmatism. The multiple-criteria performance tableau object, necessarily associated with a given outranking digraph, is indeed convincingly objective and meaningful ([ROY-1993]_). And, ideas from social choice theory gave initially the insight that a pairwise voting mechanism à la *Condorcet* could provide an order-statistical tool for aggregating a set of preference points of view into what *Marc Barbut* called the *central Condorcet* point of view ([CON-1785]_ and [BAR-1980]_); in fact the median of the multiple preference points of view, at minimal absolute *Kendall*'s ordinal correlation distance from all individual points of view (see :ref:`Ordinal correlation equals bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>`).
@@ -1277,7 +1292,7 @@ Considering thus each performance criterion as a subset of unanimous voters and 
 
 If the concordance argument was always well received, the discordance argument however, very confused in the beginning ([ROY-1966]_, [BIS-2009]_), could only be handled in an epistemically correct and logically sound way by using a bipolar-valued epistemic logic ([BIS-2013]_). The outranking situation had consequently to receive an explicit *negative* definition: An alternative *x* is said to *do not outrank* an alternative *y* when – a *significant majority* of criteria confirm that alternative *x* has to be considered as *not at least as well evaluated as* alternative *y*; and – no discordant criterion opens to significant doubt the validity of the previous confirmation by revealing a considerable *better* performance of alternative *x* compared to *y*.
 
-Furthermore, the initial conjunctive aggregation of the concordance and discordance arguments had to be replaced by a disjunctive epistemic fusion operation, polarising in a logically sound and epistemically correct way the concordance with the discordance argument. This way, bipolar-valued outranking  digraphs gained two very useful properties from a measure theoretical perspective. They are *strongly complete*; incomparability situations are no longer attested by the absence of positive outranking relations, but instead by epistemic indeterminateness. And, they verify the *coduality principle*: the negation of the epistemic '*at least as well evaluated as*' situation corresponds formally to the strict converse epistemic '*less well evaluated than*' situation.
+Furthermore, the initial simple conjunctive aggregation of the concordance and discordance arguments had to be replaced by a disjunctive epistemic fusion operation, aggregating in a logically sound and epistemically correct way the concordance and the discordance argument. This way, bipolar-valued outranking  digraphs gained two very useful properties from a measure theoretical perspective. They are *strongly complete*; incomparability situations are no longer attested by the absence of positive outranking relations, but instead by epistemic indeterminateness. And, they verify the *coduality principle*: the negation of the epistemic '*at least as well evaluated as*' situation corresponds formally to the strict converse epistemic '*less well evaluated than*' situation.
 
 Back to :ref:`Content Table <Tutorial-label>`
 
