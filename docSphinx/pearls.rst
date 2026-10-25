@@ -40,8 +40,8 @@ Pearls of bipolar-valued epistemic logic
    
    :New:
       
+      * :ref:`A new efficient first choice recommender algorithm <Bipolar-Valued-Condorcet-Winners>`
       * :ref:`Introducing computational bipolar-valued set theory <Bipolar-Valued-Sets-Tutorial-label>`
-      * :ref:`Computing bipolar-valued Condorcet winners and losers <Bipolar-Valued-Condorcet-Winners>`
       * :ref:`Applications of bipolar-valued base 3 encoded Bachet numbers <Bachet-Tutorial-label>`	 
       *	:ref:`Condorcet's 1785 critical perspective on the simple plurality voting rule <Condorcet-Tutorial-label>`
       * :ref:`On characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>`     
@@ -4731,7 +4731,7 @@ A new choice recommender algorithm
 Computing bipolar-valued weak Condorcet winners and loosers
 ...........................................................
 
-The relation attribute of a given outranking digraph :math:`G(X,R)` is an evident example of a bipolar-valued set, a *bpv-set* for short. And the epistemic fusion operators may for instance be used for computing the bpv-set of *non ambiguous weak Condorcet winners and losers* of such a digraph *G* [28]_. The :py:class:`~digraphs.Digraph` class provides therefore the :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method as shown in :numref:`CondorcetWinners1` Line 5.  
+The relation attribute of a given outranking digraph :math:`G(X,R)` is an evident example of a bipolar-valued set, a *bpv-set* for short. And the epistemic fusion operators, discussed in the previous section, may be efficiently used for computing the bpv-set of *non ambiguous weak Condorcet winners and losers* of such a digraph *G* [28]_. The :py:class:`~digraphs.Digraph` class provides therefore the :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method as shown in :numref:`CondorcetWinners1` Line 5.  
 
 .. code-block:: pycon
    :caption: Computing the bpv-set of the weak Condorcet winner(s)

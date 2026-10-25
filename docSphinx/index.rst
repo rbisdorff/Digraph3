@@ -46,10 +46,9 @@ Wecome! This is the documentation for the **Digraph3** *Python* programming reso
 Parts of the documentation
 ..........................
 :New:
-
-   * :ref:`Computing bipolar-valued Condorcet winners and losers <Bipolar-Valued-Condorcet-Winners>`
-   * A case study on :ref:`fairly matching students and internships <InternshipsMatching-Tutorial-label>`
-   * A case study about :ref:`fairly matching classmates into partner pairs <RoommatesMatching-Tutorial-label>`
+   * :ref:`A new efficient first choice remonnder algorithm <Bipolar-Valued-Condorcet-Winners>`
+   * :ref:`On computational bipolar-valued set theory <Bipolar-Valued-Sets-Tutorial-label>`
+   * Two case studies on :ref:`fairly matching students and internships <InternshipsMatching-Tutorial-label>` and about :ref:`fairly matching classmates into partner pairs <RoommatesMatching-Tutorial-label>`
    * A tutorial on :ref:`partially ranking from multiple incommensurable performance criteria <Partial-Ranking-Tutorial-label>`
    * :ref:`Applications of bipolar-valued base 3 encoded Bachet numbers <Bachet-Tutorial-label>`
    * :ref:`Working with big outranking digraphs <BigDigraphs-Tutorial-label>` and :ref:`using the Digraph3 HPC resources <HPC-Ranking-Tutorial-label>`
