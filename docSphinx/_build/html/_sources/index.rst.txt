@@ -46,7 +46,7 @@ Wecome! This is the documentation for the **Digraph3** *Python* programming reso
 Parts of the documentation
 ..........................
 :New:
-   * :ref:`A new efficient first choice remonnder algorithm <Bipolar-Valued-Condorcet-Winners>`
+   * :ref:`A new efficient first choice recommender algorithm <Bipolar-Valued-Condorcet-Winners>`
    * :ref:`On computational bipolar-valued set theory <Bipolar-Valued-Sets-Tutorial-label>`
    * Two case studies on :ref:`fairly matching students and internships <InternshipsMatching-Tutorial-label>` and about :ref:`fairly matching classmates into partner pairs <RoommatesMatching-Tutorial-label>`
    * A tutorial on :ref:`partially ranking from multiple incommensurable performance criteria <Partial-Ranking-Tutorial-label>`

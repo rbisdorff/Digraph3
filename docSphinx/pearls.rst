@@ -40,7 +40,7 @@ Pearls of bipolar-valued epistemic logic
    
    :New:
       
-      * :ref:`A new efficient first choice recommender algorithm <Bipolar-Valued-Condorcet-Winners>`
+      * :ref:`A new efficient choice recommender algorithm <Bipolar-Valued-Condorcet-Winners>`
       * :ref:`Introducing computational bipolar-valued set theory <Bipolar-Valued-Sets-Tutorial-label>`
       * :ref:`Applications of bipolar-valued base 3 encoded Bachet numbers <Bachet-Tutorial-label>`	 
       *	:ref:`Condorcet's 1785 critical perspective on the simple plurality voting rule <Condorcet-Tutorial-label>`
