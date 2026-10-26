@@ -10212,16 +10212,10 @@ fecop 75.78% success rate</p>
 <li><p>the graph <strong>vertices</strong> : a dictionary of vertices with ‘name’ and ‘shortName’ attributes,</p></li>
 <li><p>the graph <strong>valuationDomain</strong> , a dictionary with three entries: the minimum (-1, means certainly no link), the median (0, means missing information) and the maximum characteristic value (+1, means certainly a link),</p></li>
 <li><p>the graph <strong>edges</strong> : a dictionary with frozensets of pairs of vertices as entries carrying a characteristic value in the range of the previous valuation domain,</p></li>
-<li><p>and its associated <strong>gamma function</strong> : a dictionary containing the direct neighbors of each vertex, automatically added by the object constructor.</p></li>
+<li><p>and its associated <strong>gamma function</strong> : a dictionary containing the direct neighbors of each vertex, automatically added by the object constructor.</p>
+</li>
 </ol>
-<p>See the technical documentation of the <a class="reference internal" href="techDoc.html#graphs-label"><span class="std std-ref">graphs module</span></a>.</p>
-<p>Example Python3 session</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">graphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">Graph</span>
-<span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">numberOfVertices</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="linenos">3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tutorialGraph&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>The saved <a class="reference internal" href="techDoc.html#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a> instance named ‘tutorialGraph.py’ is encoded in python3 as follows.</p>
+<p>A Python encoded random <a class="reference internal" href="techDoc.html#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a> object is available for downloading here <a class="reference external" href="_static/tutorialGraph.py">tutorialGraph.py</a>. The file’s content is the follwing.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span> <span class="c1"># Graph instance saved in Python format</span>
 <span class="linenos"> 2</span> <span class="n">vertices</span> <span class="o">=</span> <span class="p">{</span>
 <span class="linenos"> 3</span> <span class="s1">&#39;v1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;shortName&#39;</span><span class="p">:</span> <span class="s1">&#39;v1&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;random vertex&#39;</span><span class="p">},</span>
@@ -10258,12 +10252,13 @@ fecop 75.78% success rate</p>
 <span class="linenos">34</span> <span class="p">}</span>
 </pre></div>
 </div>
-<p>The stored graph can be recalled and plotted with the generic <a class="reference internal" href="techDoc.html#graphs.Graph.exportGraphViz" title="graphs.Graph.exportGraphViz"><code class="xref py py-func docutils literal notranslate"><span class="pre">exportGraphViz()</span></code></a> <a class="footnote-reference brackets" href="#id210" id="id179" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> method as follows.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s1">&#39;tutorialGraph&#39;</span><span class="p">)</span>
-<span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
-<span class="linenos">3</span><span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
-<span class="linenos">4</span><span class="go"> Exporting to tutorialGraph.dot</span>
-<span class="linenos">5</span><span class="go"> fdp -Tpng tutorialGraph.dot -o tutorialGraph.png</span>
+<p>The stored graph data can be recalled and plotted with the generic <a class="reference internal" href="techDoc.html#graphs.Graph.exportGraphViz" title="graphs.Graph.exportGraphViz"><code class="xref py py-func docutils literal notranslate"><span class="pre">exportGraphViz()</span></code></a> method as follows (see <a class="footnote-reference brackets" href="#id210" id="id179" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> ).</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">graphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">Graph</span>
+<span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s1">&#39;tutorialGraph&#39;</span><span class="p">)</span>
+<span class="linenos">3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
+<span class="linenos">4</span><span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
+<span class="linenos">5</span><span class="go"> Exporting to tutorialGraph.dot</span>
+<span class="linenos">6</span><span class="go"> fdp -Tpng tutorialGraph.dot -o tutorialGraph.png</span>
 </pre></div>
 </div>
 <figure class="align-center" id="id289">
@@ -10367,7 +10362,7 @@ fecop 75.78% success rate</p>
 <span class="linenos"> 9</span><span class="go"> v4 coral</span>
 <span class="linenos">10</span><span class="go"> v1 coral</span>
 <span class="linenos">11</span><span class="go"> v6 coral</span>
-<span class="linenos">12</span><span class="go"> &gt;&gt;&gt; qc.exportGraphViz(&#39;tutorial-2-coloring&#39;)</span>
+<span class="linenos">12</span><span class="gp">&gt;&gt;&gt; </span><span class="n">qc</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;tutorial-2-coloring&#39;</span><span class="p">)</span>
 <span class="linenos">13</span><span class="go"> Exporting to tutorial-2-coloring.dot</span>
 <span class="linenos">14</span><span class="go"> fdp -Tpng tutorial-2-coloring.dot -o tutorial-2-coloring.png</span>
 </pre></div>

@@ -10433,18 +10433,9 @@ In the :py:mod:`graphs` module, the root :py:class:`~graphs.Graph` class provide
 3. the graph **edges** : a dictionary with frozensets of pairs of vertices as entries carrying a characteristic value in the range of the previous valuation domain,
 4. and its associated **gamma function** : a dictionary containing the direct neighbors of each vertex, automatically added by the object constructor.
 
-See the technical documentation of the :ref:`graphs module <graphs-label>`.
+   .. _tutorialGraph.py: _static/tutorialGraph.py
 
-Example Python3 session
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> from graphs import Graph
-   >>> g = Graph(numberOfVertices=7,edgeProbability=0.5)
-   >>> g.save(fileName='tutorialGraph')
-
-The saved :py:class:`~graphs.Graph` instance named 'tutorialGraph.py' is encoded in python3 as follows.
+A Python encoded random :py:class:`~graphs.Graph` object is available for downloading here `tutorialGraph.py`_. The file's content is the follwing.
 
 .. code-block:: python
    :linenos:
@@ -10484,11 +10475,12 @@ The saved :py:class:`~graphs.Graph` instance named 'tutorialGraph.py' is encoded
     frozenset(['v6','v7']) : -1, 
     }
 
-The stored graph can be recalled and plotted with the generic :py:func:`~graphs.Graph.exportGraphViz()` [1]_ method as follows.
+The stored graph data can be recalled and plotted with the generic :py:func:`~graphs.Graph.exportGraphViz()` method as follows (see [1]_ ).
 
 .. code-block:: pycon
    :linenos:
 
+   >>> from graphs import Graph
    >>> g = Graph('tutorialGraph')
    >>> g.exportGraphViz()
     *---- exporting a dot file for GraphViz tools ---------*
@@ -10607,7 +10599,7 @@ Actually, with the given tutorial graph instance, a 2-coloring is already feasib
     v4 coral
     v1 coral
     v6 coral
-    >>> qc.exportGraphViz('tutorial-2-coloring')
+   >>> qc.exportGraphViz('tutorial-2-coloring')
     Exporting to tutorial-2-coloring.dot
     fdp -Tpng tutorial-2-coloring.dot -o tutorial-2-coloring.png
 
