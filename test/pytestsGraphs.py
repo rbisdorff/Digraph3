@@ -93,7 +93,7 @@ def testIsingModel():
 
 def testMISModel():
     print('==>> Testing MIS Model class instantiation')
-    g = Graph(numberOfVertices=20,edgeProbability=0.075)
+    g = RandomGraph(order=20,edgeProbability=0.075)
     g.showShort()
     g.showMIS()
     im = MISModel(g,nSim=10000,Debug=False)
@@ -107,7 +107,7 @@ def testMISModel():
 
 def testMetropolisChain():
     print('==>> Testing Metropolis chain class instantiation')
-    g = Graph(numberOfVertices=30,edgeProbability=0.2)
+    g = RandomGraph(order=30,edgeProbability=0.2)
     #g.save('test')
     probs = {}
     n = g.order
