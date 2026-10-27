@@ -50,7 +50,7 @@ class Graph(object):
        
     Example python3 session:
        >>> from graphs import Graph
-       >>> g = Graph(numberOfVertices=5,edgeProbability=0.5) # random instance
+       >>> g = RandomGraph(numberOfVertices=5,edgeProbability=0.5) # random instance
        >>> g.showShort()
        *----- show short --------------*
        *---- short description of the graph ----*
@@ -98,7 +98,7 @@ class Graph(object):
         """
         from decimal import Decimal
         
-        if Empty:
+        if Empty or fileName is None:
             self.name = 'emptyInstance'
             self.vertices = dict()
             self.order = len(self.vertices)
@@ -106,16 +106,16 @@ class Graph(object):
             self.valuationDomain = {'min': Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
             self.gamma = dict()
             self.size = 0
-        elif fileName==None:
-            g = RandomGraph(order=numberOfVertices,\
-                               edgeProbability=edgeProbability)
-            self.name = g.name
-            self.vertices = g.vertices
-            self.order = len(self.vertices)
-            self.edges = g.edges
-            self.valuationDomain = g.valuationDomain
-            self.size = self.computeSize()
-            self.gamma = self.gammaSets()
+##        elif fileName==None:
+##            g = RandomGraph(order=numberOfVertices,\
+##                               edgeProbability=edgeProbability)
+##            self.name = g.name
+##            self.vertices = g.vertices
+##            self.order = len(self.vertices)
+##            self.edges = g.edges
+##            self.valuationDomain = g.valuationDomain
+##            self.size = self.computeSize()
+##            self.gamma = self.gammaSets()
         else:
             fileNameExt = fileName+'.py'
             argDict = {}
@@ -1068,7 +1068,7 @@ class Graph(object):
         Exports GraphViz dot file  for graph drawing filtering.
 
         Example:
-           >>> g = Graph(numberOfVertices=5,edgeProbability=0.3)
+           >>> g = RandomGraph(numberOfVertices=5,edgeProbability=0.3)
            >>> g.exportGraphViz('randomGraph')
 
         .. image:: randomGraph.png
@@ -3885,7 +3885,7 @@ class Q_Coloring(Graph):
         'fdp', 'circo' or 'neato' with the layout parameter.
 
         Example:
-            >>> g = Graph(numberOfVertices=10,edgeProbability=0.4)
+            >>> g = RandomGraph(numberOfVertices=10,edgeProbability=0.4)
             >>> g.showShort()
             *---- short description of the graph ----*
             Name : 'randomGraph'
@@ -4174,7 +4174,7 @@ class MetropolisChain(Graph):
 
     Usage example:
         >>> from graphs import *
-        >>> g = Graph(numberOfVertices=5,edgeProbability=0.5)
+        >>> g = RandomGraph(numberOfVertices=5,edgeProbability=0.5)
         >>> g.showShort()
         *---- short description of the graph ----*
         Name             : 'randomGraph'
@@ -4919,7 +4919,7 @@ if __name__ == '__main__':
     print("""
     ****************************************************
     * Digraph3 graphs module                           *
-    * Copyright (C) 2010-2025 Raymond Bisdorff         *
+    * Copyright (C) 2010-2026 Raymond Bisdorff         *
     * The module comes with ABSOLUTELY NO WARRANTY     *
     * to the extent permitted by the applicable law.   *
     * This is free software, and you are welcome to    *
@@ -4934,21 +4934,21 @@ if __name__ == '__main__':
     bpg.showEdgesCharacteristicValues()
     bpg.exportGraphViz()    
 
-##    t = RandomTree(prueferCode=['v11', 'v4', 'v8', 'v7', 'v7', 'v10', 'v9', 'v10', 'v2', 'v7'])
-##    #print(t.computeTreeCenters())
+    t = RandomTree(prueferCode=['v11', 'v4', 'v8', 'v7', 'v7', 'v10', 'v9', 'v10', 'v2', 'v7'])
+    print(t.computeTreeCenters())
 ##    #t.exportGraphViz('test')
-##    print(t)
+    print(t)
 ##    #dg = t.tree2OrientedTree(root=None,Debug=True)
 ##    #print(dg)
-##    t.exportOrientedTreeGraphViz(root=None,fileName='testOr')
-##    t.save('testT')
-##    t = TreeGraph('testT')
-##    print(t)
-##    print(t.computeGraphCentres())
+    t.exportOrientedTreeGraphViz(root=None,fileName='testOr')
+    t.save('testT')
+    t = TreeGraph('testT')
+    print(t)
+    print(t.computeGraphCentres())
 ##    
 ##
 ##    from graphs import MetropolisChain
-##    g = Graph(numberOfVertices=5,edgeProbability=0.5)
+##    g = RandomGraph(numberOfVertices=5,edgeProbability=0.5)
 ##    g.showShort()
 ##    probs = {}  # initialize a potential stationary probability vector
 ##    n = g.order # for instance: probs[v_i] = n-i/Sum(1:n) for i in 1:n

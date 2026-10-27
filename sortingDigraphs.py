@@ -5,7 +5,7 @@ Algorithmic Decision Theory applications.
 
 Module for sorting and rating applications.
 
-Copyright (C) 2016-2025  Raymond Bisdorff.
+Copyright (C) 2016-2026  Raymond Bisdorff.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

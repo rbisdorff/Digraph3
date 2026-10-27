@@ -598,9 +598,7 @@ We may now extract both the *symmetrical* as well as the *asymmetrical* part of 
 .. code-block:: pycon
    :linenos:
 
-   >>> from digraphs import AsymmetricPartialDigraph,
-   ...                      SymmetricPartialDigraph
-   
+   >>> from digraphs import AsymmetricPartialDigraph,SymmetricPartialDigraph 
    >>> asymDg = AsymmetricPartialDigraph(rdg)
    >>> asymDg.exportGraphViz()
    >>> symDg = SymmetricPartialDigraph(rdg)

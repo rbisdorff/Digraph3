@@ -3,7 +3,7 @@
 
 Python3 implementation of digraphs
 Module for working with performance tableaux  
-Copyright (C) 2011-2025  Raymond Bisdorff
+Copyright (C) 2011-2026  Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
 

@@ -2,7 +2,7 @@
 """
 Python3+ implementation of arithmetics tools
 
-Copyright (C) 2016-2025 Raymond Bisdorff
+Copyright (C) 2016-2026 Raymond Bisdorff
 
 Tools gathered for doing arithmetics.
 Mainly inspired from G.A. Jones & J.M. Jones,

@@ -3,7 +3,7 @@
 """
 Python3+ implementation of the digraphs module, root module of the Digraph3 resources.
 
-Copyright (C) 2006-2025  Raymond Bisdorff
+Copyright (C) 2006-2026  Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -110,7 +110,7 @@ class Digraph(object):
         >>> dg.save('testdigraph')
         Saving digraph in file: <testdigraph.py> 
         >>> from digraphs import Digraph
-        >>> dg = Digraph(file='testdigraph') # without the .py extenseion
+        >>> dg = Digraph(file='testdigraph') # without the .py extension
         >>> dg.__dict__
         {'name': 'testdigraph',
         'actions': {'a1': {'name': 'random decision action', 'shortName': 'a1'},

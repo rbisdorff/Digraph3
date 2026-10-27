@@ -13,7 +13,7 @@ Two versions are provided:
 
 :ref:`See applications of bipolar-valued base 3 encoded Bachet numbers <Bachet-Tutorial-label>`
 
-Copyright (C) 2025 Raymond Bisdorff
+Copyright (C) 2025-2026 Raymond Bisdorff
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

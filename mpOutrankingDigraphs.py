@@ -3,7 +3,7 @@
 Digraph3 collection of python3 modules for Algorithmic Decision Theory applications.
 
 New Python3.12+ compatible multiprocessing implementation of bipolar-valued outranking digraphs for Linux and MacOS. The potentially unsafe default *fork* multiprocessing start-method may be either set to 'spawn' (default) or to 'forkserver'. 
-Copyright (C) 2023-2025  Raymond Bisdorff
+Copyright (C) 2023-2026  Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
