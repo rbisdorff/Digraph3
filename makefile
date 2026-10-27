@@ -4,7 +4,7 @@
 ########################
 # use PYTHON parameter for selecting a
 # specific Python environment as follows:
-# ..$ make install PYTHON=python3.9
+# ..$ make install PYTHON=python3.x
 ########################
 PYTHON=python3
 PYTEST=${PYTHON} -m pytest

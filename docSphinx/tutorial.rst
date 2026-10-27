@@ -598,9 +598,7 @@ We may now extract both the *symmetrical* as well as the *asymmetrical* part of 
 .. code-block:: pycon
    :linenos:
 
-   >>> from digraphs import AsymmetricPartialDigraph,
-   ...                      SymmetricPartialDigraph
-   
+   >>> from digraphs import AsymmetricPartialDigraph,SymmetricPartialDigraph 
    >>> asymDg = AsymmetricPartialDigraph(rdg)
    >>> asymDg.exportGraphViz()
    >>> symDg = SymmetricPartialDigraph(rdg)
@@ -12014,7 +12012,7 @@ Appendices
     ........
     
 
-.. [1] The *exportGraphViz* method is depending on drawing tools from `graphviz <https://graphviz.org/>`_. On Linux Ubuntu or Debian you may try 'sudo apt-get install graphviz' to install them. There are ready *dmg* installers for Mac OSX. Mind that from Ubuntu 26.04 LTS version on (2026), due to security concerns, only the main graphviz *dot* layout engine is anymore available.   
+.. [1] The *exportGraphViz* method is depending on drawing tools from `graphviz <https://graphviz.org/>`_. On Linux Ubuntu or Debian you may try 'sudo apt-get install graphviz' to install them. There are ready *dmg* installers for Mac OSX.
 
 .. [2] Dependency: The :py:func:`~digraphs.Digraph.automorphismGenerators` method uses the shell :code:`dreadnaut` command from the nauty software package. See https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml . On Mac OS there exist dmg installers and on Ubuntu Linux or Debian, one may easily install it with :code:`...$ sudo apt-get install nauty`.
 
