@@ -4758,7 +4758,15 @@ The relation attribute of a given outranking digraph :math:`G(X,R)` is an eviden
 
 In the given random 3-objectives outranking digraph :math:`G(X,R)`, concerning the performances of 9 public policies with respect to 13 performance criteria, three alternatives, *p2*, *p6* and *p5* are positive weak Condorcet winners, whereas alternatives *p1*, *p7* and *p8* are negative weak Condorcet winners, that is positive weak Condorcet losers (see Lines 8-10 and 14-16 above).
 
-The individual bipolar-valued credibilities to '**be a non ambiguous weak Condorcet winner**' are computed as follows. For each individual alternative *x in X*, the conjunctive epistemic :math:`$ \textcircled{$\wedge$} $` fusion of the *outranking* credibility :math:`r(x \succsim y)` for all :math:`y \neq x` in *X* measures indeed the more or less **outranking power** of *x* and the same conjunctive epistemic :math:`$ \textcircled{$\wedge$} $` fusion of the *not outranked* credibility :math:`-r(y \succsim x)`  for all :math:`y \neq x` in *X* measures the more or less **not outrankedness** of *x*. A disjunctive epistemic :math:`$ \textcircled{$\vee$} $` fusion of both these measures delivers eventually the corresponding bpv-set. It is worthwhile noticing that the *dual* of this bpv-set gives by the way the bpv-set of the corresponding non ambiguous weak Condorcet losers.
+The individual bipolar-valued credibilities to '**be a non ambiguous weak Condorcet winner**' are computed as follows. For each individual alternative *x in X*, the conjunctive epistemic :math:`$ \textcircled{$\wedge$} $` fusion of the *outranking* credibility :math:`r(x \succsim y)` for all :math:`y \neq x` in *X* measures indeed the more or less **outranking power** of *x* and the same conjunctive epistemic :math:`$ \textcircled{$\wedge$} $` fusion of the *not outranked* credibility :math:`-r(y \succsim x)`  for all :math:`y \neq x` in *X* measures the more or less **not outrankedness** of *x*. A disjunctive epistemic :math:`$ \textcircled{$\vee$} $` fusion of both these measures delivers eventually the corresponding bpv-set.
+
+In matrix notation, given the outranking digraph :math:`G(X,R)`, the bipolar-valued weak Condorcet winners bpv-set *Y* verifies the follwing fix-point equation:
+
+   :math:`(R \diamond Y)\;$ \textcircled{$\vee$} $\; (-R^t \diamond Y) \;=\; Y`,
+
+        where :math:`(R \diamond X)(x)\;=\; $ \textcircled{$\wedge$} $_{y \in X, y\neq x} \big[R(x,y)$ \textcircled{$\vee$} $X(y)\big]`
+
+The fix-point computation is started with an indeterminate bpv-set *Y* and the stable fix-point is attained in a single step (see [32]_). It is furthermore worthwhile noticing that the *dual* of this bpv-set *Y* gives by the way the bpv-set of the corresponding non ambiguous weak Condorcet losers.
 
    >>> g.showHTMLRelationTable(
    ...    actionsList=['p2','p6','p5','p3','p4','p9','p1','p7','p8'])
@@ -4771,7 +4779,7 @@ The individual bipolar-valued credibilities to '**be a non ambiguous weak Condor
 
    A random outranking relation table
 
-In :numref:`condorcetWinners2` we see confirmed in the outranking relation table of :math:`G(X,R)` that alternative *p2* is a Condorcet winner and alternatives *p6* and *p5* are *weak Condorcet winners* whereas alternatives *p1*, *p7* and *p8* are *weak Condorcet losers*.
+In :numref:`condorcetWinners2` we see confirmed in the outranking relation table of :math:`G(X,R)` that alternative *p2* is indeed a Condorcet winner and alternatives *p6* and *p5* are *weak Condorcet winners* whereas alternatives *p1*, *p7* and *p8* are *weak Condorcet losers*.
 
 When a given strict outranking digraph shows chordless circuits it may however be the case that no weak Condorcet winners and/or losers can be detected, the resulting bpv-set does not contain any positive and/or negative credibilities. Breaking in such a case all chordless strict outranking circuits at their weakest link transforms the digraph in an acyclic asymmetric digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the digraph.
 
@@ -6045,6 +6053,8 @@ Appendix
 .. [30] See :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method.
 
 .. [31] See :ref:`Pragmatic-Principles--label`
+
+.. [32] It is remarkable that the double fixpoint kernel equation systems deliver the same result when replacing the classical *max* and *min* operators with the corresponding :math:`$ \textcircled{$\vee$} $` and :math:`$ \textcircled{$\wedge$} $` epistemic fusion operators (see :ref:`Computing bipolar-valued kernel membership characteristic vectors <Bipolar-Valued-Kernels-Tutorial-label>`).
 
 .. raw:: latex
 
