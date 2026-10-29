@@ -4760,11 +4760,7 @@ In the given random 3-objectives outranking digraph :math:`G(X,R)`, concerning t
 
 The individual bipolar-valued credibilities to '**be a non ambiguous weak Condorcet winner**' are computed as follows. For each individual alternative *x in X*, the conjunctive epistemic :math:`$ \textcircled{$\wedge$} $` fusion of the *outranking* credibility :math:`r(x \succsim y)` for all :math:`y \neq x` in *X* measures indeed the more or less **outranking power** of *x* and the same conjunctive epistemic :math:`$ \textcircled{$\wedge$} $` fusion of the *not outranked* credibility :math:`-r(y \succsim x)`  for all :math:`y \neq x` in *X* measures the more or less **not outrankedness** of *x*. A disjunctive epistemic :math:`$ \textcircled{$\vee$} $` fusion of both these measures delivers eventually the corresponding bpv-set.
 
-In matrix notation, given the outranking digraph :math:`G(X,R)`, the bipolar-valued weak Condorcet winners bpv-set *Y* verifies the follwing fix-point equation:
-
-   :math:`(R \diamond Y)\;$ \textcircled{$\vee$} $\; (-R^t \diamond Y) \;=\; Y`,
-
-        where :math:`(R \diamond X)(x)\;=\; $ \textcircled{$\wedge$} $_{y \in X, y\neq x} \big[R(x,y)$ \textcircled{$\vee$} $X(y)\big]`
+In matrix notation, given the outranking digraph :math:`G(X,R)`, the bipolar-valued weak Condorcet winners bpv-set *Y* verifies the follwing fix-point equation: :math:`(R \diamond Y)\;$ \textcircled{$\vee$} $\; (-R^t \diamond Y) \;=\; Y`, where for all :math:`x \in X`, :math:`(R \diamond X)(x)\;=\; $ \textcircled{$\wedge$} $_{y \in X, y\neq x} \big[R(x,y)$ \textcircled{$\vee$} $X(y)\big]`.
 
 The fix-point computation is started with an indeterminate bpv-set *Y* and the stable fix-point is attained in a single step (see [32]_). It is furthermore worthwhile noticing that the *dual* of this bpv-set *Y* gives by the way the bpv-set of the corresponding non ambiguous weak Condorcet losers.
 

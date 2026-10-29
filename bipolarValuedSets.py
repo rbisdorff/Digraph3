@@ -133,10 +133,7 @@ def averageEpistemicFusion(L,Debug=False):
             res.membership[x] = Decimal()
     if Debug:
         print(res.membership)
-    return res
-    
-                
-        
+    return res    
         
 #-----------------
 
@@ -879,6 +876,13 @@ if __name__ == "__main__":
     print('*****************************************************')
 
     print('*-------- Testing classes and methods -------')
+
+##    from outrankingDigraphs import *
+##    g = RandomBipolarOutrankingDigraph(seed=1)
+##    print(g)
+##    g.showRelationTable()
+##    computeBpvCondorcetWinners(g)
+##    
 
     X = RandomBpvSet(numberOfElements=3,elementNamePrefix='s',
                       indeterminateness=0.1,
