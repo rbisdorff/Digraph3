@@ -4811,7 +4811,7 @@ Now, weak Condorcet winners and losers verify the same pragmatic first choice pr
      Execution time: 0.017 sec.
     ***********************************************
 
-The criteria significance majorities for each choice are indicated in brakets (see Lines 5-12). Alternative *p2* is the most supported first choice and alternative *p8* is the most supported last choice. A recommendation that gets confirmed with the '*Rubis*' choice recommendation shown in :numref:`CondorcetWinners4` below. 
+The criteria significance majorities for each choice are indicated in brakets (see Lines 5-12). Alternative *p2* is the most supported first choice and alternative *p8* is the most supported last choice. A recommendation that gets confirmed with the '*Rubis*' choice recommendation shown in :numref:`CondorcetWinners4` below (see [32]_). 
 
 .. code-block:: pycon
    :caption: Showing the choice recommendations from the Rubis method
@@ -4841,7 +4841,7 @@ The criteria significance majorities for each choice are indicated in brakets (s
 	 determinateness (%) : 71.76
 	 - most credible action(s) = { 'p8': 0.17, 'p1': 0.14, 'p7': 0.14 }
 
-Notice that the classic *max* and *min* inner vector product operators are replaced here with their corresponding disjunctive and conjunctive epistemic fusion operators (see Line 1). With the given random outranking digraph *g*, initial and terminal prekernels recommendations perfectly correspond now to the positive weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and *strictly* outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are non ambiguous *weakly* outranking or not *outranked* resp. *weakly* outranked or not *outranking* choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location 'A', being incomparable to all other locations, is included in both the initial and the terminal prekernel. Location *A* is hence an ambiguous first and last choice recommendation and therefore neither part of the non ambiguous weak Condorcet winners, nor of the non ambiguous weak Condorcet losers [29]_.
+Notice that the classic *max* and *min* inner vector product operators are replaced here with their corresponding disjunctive and conjunctive epistemic fusion operators (see Line 1). With the given random outranking digraph *g*, initial and terminal prekernels recommendations correspond now nearly to the positive weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and *strictly* outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are non ambiguous *weakly* outranking or not *outranked* resp. *weakly* outranked or not *outranking* choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location 'A', being incomparable to all other locations, is included in both the initial and the terminal prekernel. Location *A* is hence an ambiguous first and last choice recommendation and therefore neither part of the non ambiguous weak Condorcet winners, nor of the non ambiguous weak Condorcet losers [29]_.
 
 Ranking-by-choosing with bpv-sets of weak Condorcet winners and loosers
 .......................................................................
@@ -6054,7 +6054,7 @@ Appendix
 
 .. [31] See :ref:`Pragmatic-Principles--label`
 
-.. [32] It is remarkable that the double fixpoint kernel equation systems deliver the same result when replacing the classical *max* and *min* operators with the corresponding :math:`$ \textcircled{$\vee$} $` and :math:`$ \textcircled{$\wedge$} $` epistemic fusion operators (see :ref:`Computing bipolar-valued kernel membership characteristic vectors <Bipolar-Valued-Kernels-Tutorial-label>`).
+.. [32] It is remarkable that the double fixpoint kernel equation systems deliver a very similar result when replacing the classical *max* and *min* operators with the corresponding :math:`$ \textcircled{$\vee$} $` and :math:`$ \textcircled{$\wedge$} $` epistemic fusion operators (see :ref:`Computing bipolar-valued kernel membership characteristic vectors <Bipolar-Valued-Kernels-Tutorial-label>`).
 
 .. raw:: latex
 
