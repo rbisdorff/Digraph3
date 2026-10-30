@@ -4762,7 +4762,9 @@ The individual bipolar-valued credibilities to '**be a non ambiguous weak Condor
 
 In matrix notation, given the outranking digraph :math:`G(X,R)`, the bipolar-valued weak Condorcet winners bpv-set *Y* verifies the follwing fix-point equation: :math:`(R \diamond Y)\;$ \textcircled{$\vee$} $\; (-R^t \diamond Y) \;=\; Y`, where for all :math:`x \in X`, :math:`(R \diamond X)(x)\;=\; $ \textcircled{$\wedge$} $_{y \in X, y\neq x} \big[R(x,y)$ \textcircled{$\vee$} $X(y)\big]`.
 
-The fix-point computation is started with an indeterminate bpv-set *Y* and the stable fix-point is attained in a single step (see [32]_). It is furthermore worthwhile noticing that the *dual* of this bpv-set *Y* gives by the way the bpv-set of the corresponding non ambiguous weak Condorcet losers.
+It is worthwhile noticing that weak Condorcet winners' fix-point equation systems are the symmetric copy of the *Berge* and *Von Neumann* kernel fix-point equation systems [29]_. The latter start from completely determined vectors and here we start from an ideterminate vector *Y* and iterate in a single step toward the bipolar-valued version of vector *Y*. Mind that, when indeterminate outranking situations are observed, results may usually not correspond one to the other.
+
+It is furthermore worthwhile noticing that the *dual* of this bpv-set *Y* gives by the way the bpv-set of the corresponding non ambiguous weak Condorcet losers.
 
    >>> g.showHTMLRelationTable(
    ...    actionsList=['p2','p6','p5','p3','p4','p9','p1','p7','p8'])
