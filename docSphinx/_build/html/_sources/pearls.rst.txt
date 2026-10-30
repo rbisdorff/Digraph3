@@ -4762,7 +4762,7 @@ The individual bipolar-valued credibilities to '**be a non ambiguous weak Condor
 
 In matrix notation, given the outranking digraph :math:`G(X,R)`, the bipolar-valued weak Condorcet winners bpv-set *Y* verifies the follwing fix-point equation: :math:`(R \diamond Y)\;$ \textcircled{$\vee$} $\; (-R^t \diamond Y) \;=\; Y`, where for all :math:`x \in X`, :math:`(R \diamond X)(x)\;=\; $ \textcircled{$\wedge$} $_{y \in X, y\neq x} \big[R(x,y)$ \textcircled{$\vee$} $X(y)\big]`.
 
-It is worthwhile noticing that weak Condorcet winners' fix-point equation systems are the symmetric copy of the *Berge* and *Von Neumann* kernel fix-point equation systems [29]_. The latter start from completely determined vectors and here we start from an ideterminate vector *Y* and iterate in a single step toward the bipolar-valued version of vector *Y*. Mind that, when indeterminate outranking situations are observed, results may usually not correspond one to the other.
+It is worthwhile noticing that weak Condorcet winners' fix-point equation systems are the symmetric copy of the prekernel double fix-point equation systems [29]_. The latter start the double fix-point computations from completely determined positive and negative vectors and here we start from a unique indeterminate vector *Y* and iterate in a single step toward a stable bipolar-valued version of vector *Y*.
 
 It is furthermore worthwhile noticing that the *dual* of this bpv-set *Y* gives by the way the bpv-set of the corresponding non ambiguous weak Condorcet losers.
 
@@ -4839,7 +4839,7 @@ The criteria significance majorities for each choice are indicated in brakets (s
 	 determinateness (%) : 71.76
 	 - most credible action(s) = { 'p8': 0.17, 'p1': 0.14, 'p7': 0.14 }
 
-Notice that the classic *max* and *min* inner vector product operators are replaced here with their corresponding disjunctive and conjunctive epistemic fusion operators (see Line 1). With the given random outranking digraph *g*, initial and terminal prekernels recommendations correspond now nearly to the positive weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and *strictly* outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are non ambiguous *weakly* outranking or not *outranked* resp. *weakly* outranked or not *outranking* choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location 'A', being incomparable to all other locations, is included in both the initial and the terminal prekernel. Location *A* is hence an ambiguous first and last choice recommendation and therefore neither part of the non ambiguous weak Condorcet winners, nor of the non ambiguous weak Condorcet losers [29]_.
+Notice that the classic *max* and *min* inner vector product operators are replaced here with their corresponding disjunctive and conjunctive epistemic fusion operators (see Line 1). With the given random outranking digraph *g*, initial and terminal prekernels recommendations correspond now nearly to the positive weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and *strictly* outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are non ambiguous *weakly* outranking or not *outranked* resp. *weakly* outranked or not *outranking* choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location 'A', being incomparable to all other locations, is included in both the initial and the terminal prekernel. Location *A* is hence an ambiguous first and last choice recommendation and therefore neither part of the non ambiguous weak Condorcet winners, nor of the non ambiguous weak Condorcet losers [33]_.
 
 Ranking-by-choosing with bpv-sets of weak Condorcet winners and loosers
 .......................................................................
@@ -6046,13 +6046,15 @@ Appendix
 
 .. [28] A **weak** Condorcet winner outranks at least one action and is incomparable to the not outranked actions. A **weak** Condorcet loser is outranked by at least one action and is incomparable to the remaining actions.
 
-.. [29] See :ref:`Rubis-Tutorial-label`
+.. [29] See :ref:`Computing bipolar-valued kernel membership characteristic vectors <Bipolar-Valued-Kernels-Tutorial-label>`
 
 .. [30] See :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method.
 
 .. [31] See :ref:`Pragmatic-Principles--label`
 
-.. [32] It is remarkable that the double fixpoint kernel equation systems deliver a very similar result when replacing the classical *max* and *min* operators with the corresponding :math:`$ \textcircled{$\vee$} $` and :math:`$ \textcircled{$\wedge$} $` epistemic fusion operators (see :ref:`Computing bipolar-valued kernel membership characteristic vectors <Bipolar-Valued-Kernels-Tutorial-label>`).
+.. [32] It is remarkable that the double fixpoint kernel equation systems deliver a very similar result when replacing the classical *max* and *min* operators with the corresponding :math:`$ \textcircled{$\vee$} $` and :math:`$ \textcircled{$\wedge$} $` epistemic fusion operators.
+
+.. [33] :ref:`Computing a best choice recommendation <Rubis-Tutorial-label>`
 
 .. raw:: latex
 
