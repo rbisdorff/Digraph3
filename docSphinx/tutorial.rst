@@ -1585,7 +1585,7 @@ Following the previously stated pragmatic principles, potential first choice rec
    :linenos:
    :emphasize-lines: 1,6,12-14,16
 
-   >>> g.showChoiceRecommendation('Rubis')
+   >>> g.showChoiceRecommendation('Rubis',ChoiceVector=True)
     * --- First and last choice recommendation(s) ---*
      (in decreasing order of determinateness)   
     Credibility domain: [-1.00,1.00]
@@ -1705,7 +1705,7 @@ The :py:class:`~outrankingDigraphs.ConfidentBipolarOutrankingDigraph` class cons
    :emphasize-lines: 1,7,13-14,16,22
    :caption: Computing a 90% confident first choice recommendation
 
-   >>> cg.showChoiceRecommendation('Rubis',fusionType='epistemicFusion')
+   >>> cg.showChoiceRecommendation('Rubis',RubisFusionType='epistemicFusion')
     Rubis choice recommendation
     ***************************
     First choice recommendation(s) (BCR)   
@@ -7256,9 +7256,16 @@ Concerning now a 90%-*confident* best choice recommendation, we are lucky (see :
       absorbency          : 0.00
       covering (%)        : 20.00
       determinateness (%) : 61.25
-      - most credible action(s) = { 'I-FHK': 0.75, 'I-USB': 0.50,
-	                            'I-UHB': 0.50, 'T-FHM': 0.42,
-				    'T-FHK': 0.33,  }
+      - most credible action(s) = { 'I-FHK': 0.75}
+     === >> potential last choice(s) 
+     choice              : ['C-HKK', 'I-UHB', 'I-USB', 'S-HKK',
+                            'T-FHK', 'T-UD', 'T-UHB', 'T-USB']
+      independence        : 0.00
+      dominance           : -0.83
+      absorbency          : 0.42
+      covered (%)         : 31.25
+      determinateness (%) : 50.00
+      - most credible action(s) = { }
 
 The *Graduate Interpreter* studies in Köln remain indeed a 90%-confident *Condorcet* winner (Line 2). Hence, the same study program also remains our 90%-confident most credible best choice supported by a continual 18/24 (87.5%) majority of the global criteria significance (see Lines 9-10 and 16-18).
 

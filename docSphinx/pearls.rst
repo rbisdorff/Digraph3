@@ -4743,22 +4743,22 @@ The relation attribute of a given outranking digraph :math:`G(X,R)` is an eviden
    >>> t = Random3ObjectivesPerformanceTableau(
    ...           numberOfActions=9,numberOfCriteria=13,seed=1)
    >>> g = BipolarOutrankingDigraph(t)
-   >>> bpvWinners = g.computeBpvCondorcetWinners(Average=True)
+   >>> bpvWinners = g.computeBpvCondorcetWinners()
    >>> bpvWinners.showMembershipCharacteristics(ndigits=2)
     Bipolar-valued weak Condorcet winners set
-     p2:  +0.63
-     p6:  +0.23
-     p5:  +0.18
+     p2:  +0.22
+     p6:  +0.19
+     p5:  +0.03
      p3:  +0.00
      p4:  +0.00
      p9:  +0.00
-     p8:  -0.17
-     p7:  -0.23
-     p1:  -0.26
+     p8:  -0.14
+     p7:  -0.14
+     p1:  -0.17
 
 In the given random 3-objectives outranking digraph :math:`G(X,R)`, concerning the performances of 9 public policies with respect to 13 performance criteria, three alternatives, *p2*, *p6* and *p5* are positive weak Condorcet winners, whereas alternatives *p1*, *p7* and *p8* are negative weak Condorcet winners, that is positive weak Condorcet losers (see Lines 8-10 and 14-16 above).
 
-The individual bipolar-valued credibilities to '**be a non ambiguous weak Condorcet winner**' are computed as follows. For each individual alternative *x in X*, the average epistemic fusion of the *outranking* credibilities :math:`r(x \succsim y)` for all :math:`y \neq x` in *X* measures indeed the more or less **outranking power** of *x* and the same average epistemic fusion of the *not outranked* credibilities :math:`-r(y \succsim x)`  for all :math:`y \neq x` in *X* measures the more or less **not outrankedness** of *x*. A disjunctive epistemic :math:`$ \textcircled{$\vee$} $` fusion of both these measures delivers eventually the corresponding bpv-set.
+The individual bipolar-valued credibilities to '**be a non ambiguous weak Condorcet winner**' are computed as follows. For each individual alternative *x in X*, the epistemic fusion of the *outranking* credibilities :math:`r(x \succsim y)` for all :math:`y \neq x` in *X* measures indeed the more or less **outranking power** of *x* and the same epistemic fusion of the *not outranked* credibilities :math:`-r(y \succsim x)`  for all :math:`y \neq x` in *X* measures the more or less **not outrankedness** of *x*. A disjunctive epistemic :math:`$ \textcircled{$\vee$} $` fusion of both these measures delivers eventually the corresponding bpv-set.
 
 .. In matrix notation, given the outranking digraph :math:`G(X,R)`, the bipolar-valued weak Condorcet winners bpv-set *Y* verifies the follwing equation: :math:`Y \;=\; (R \diamond \bf{0})\;$ \textcircled{$\vee$} $\; (-R^t \diamond \bf{0})`, where for all :math:`x \in X`, :math:`(R \diamond \bf{0})(x)\;=\; $ \textcircled{$\wedge$} $_{y \in X, y\neq x} \big[R(x,y)$ \textcircled{$\vee$} $ 0.0\big]`.
 
@@ -4796,20 +4796,20 @@ Now, weak Condorcet winners and losers verify the same pragmatic first choice pr
     First and last choice recommendations
     -------------------------------------
      First choice (Condorcet winners)
-      'p2': +0.63 (81.42%)
-      'p6': +0.23 (61.46%)
-      'p5': +0.18 (59.20%)
+      'p2': +0.22 (61.11%)
+      'p6': +0.19 (59.72%)
+      'p5': +0.03 (51.39%)
     -------------------------------------
      Last choice (Condorcet losers)
-      'p1': +0.26 (63.11%)
-      'p7': +0.23 (61.55%)
-      'p8': +0.17 (58.42%)
+      'p8': +0.17 (58.34%)
+      'p7': +0.14 (56.95%)
+      'p1': +0.14 (56.95%)
     -------------------------------------
      Criteria significance majority in brakets
-     Execution time: 0.197 sec.
+     Execution time: 0.027 sec.
     ******************************************
 
-The criteria significance majorities for each choice are indicated in brakets (see Lines 5-12). Alternative *p2* is the most supported first choice and alternative *p1* is the most supported last choice. A recommendation that gets confirmed with the '*Rubis*' choice recommendation shown in :numref:`CondorcetWinners4` below (see [32]_). 
+The criteria significance majorities for each choice are indicated in brakets (see Lines 5-12). Alternative *p2* is the most supported first choice and alternative *p8* is the most supported last choice. A recommendation that gets confirmed with the '*Rubis*' choice recommendation shown in :numref:`CondorcetWinners4` below (see [32]_). 
 
 .. code-block:: pycon
    :caption: Showing the choice recommendations from the Rubis method
@@ -4829,9 +4829,9 @@ The criteria significance majorities for each choice are indicated in brakets (s
          absorbency          : -1.00
          covering (%)        : 55.56
          determinateness (%) : 88.89
-         - most credible action(s) = { 'p2': 0.22 }
+         - most credible action(s) = { 'p2': 1.00 }
      === >> potential last choice(s) 
-     * choice              : ['p1', 'p7', 'p8']
+     * choice              : ['p8', 'p1', 'p7']
 	 independence        : 0.00
 	 dominance           : -0.58
 	 absorbency          : 0.03

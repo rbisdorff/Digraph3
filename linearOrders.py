@@ -1301,11 +1301,11 @@ class IteratedBpvCondorcetWinnersRanking(LinearOrder):
     Computes the linear ranking or order obtained from the
     iterated bpv-sets of weak Condorcet winners and losers.
     """
-    def __init__(self,other,Average=False,Debug=False):
+    def __init__(self,other,fusionType='conjunctive',Debug=False):
         from copy import copy, deepcopy
         from collections import OrderedDict
         ranking = other.showChoiceRecommendation('IteratedCondorcetWinners',Show=False,
-                                                 Average=Average,ReturnRanking=True)
+                                                 cwFusionType=fusionType,ReturnRanking=True)
         self.name = other.name + '_ranked'
         self.condorcetRanking = ranking
         self.condorcetOrder = [x for x in reversed(ranking)]
@@ -2819,7 +2819,7 @@ if __name__ == "__main__":
         print(t)
         g = BipolarOutrankingDigraph(t)
         print(g)
-        cr = IteratedBpvCondorcetWinnersRanking(g,Average=True,Debug=False)
+        cr = IteratedBpvCondorcetWinnersRanking(g,fusionType='conjunctive',Debug=False)
         
         print(cr)
         # triples = g.computeIntransitiveTriples()

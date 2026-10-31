@@ -9032,14 +9032,15 @@ class Digraph(object):
 
     def showChoiceRecommendation(self,
                                 method='CondorcetWinners',
+                                cwFusionType='conjunctive',
+                                 # Rubis
+                                ChoiceVector=False,
+                                RubisFusionType='standard',
+                                 # Bachet
                                 Polarised=True,
-                                Average=False,
                                 randomized=100,
                                 maxNbrOfRankings=5,
                                 seed=None,
-                                 # Rubis
-                                ChoiceVector=False,
-                                fusionType='standard',
                                  # iterated Bachet
                                 CoDual=False,
                                 Reversed=False,
@@ -9102,7 +9103,7 @@ class Digraph(object):
             self.showFirstChoiceRecommendation(Verbose=False,
                                           Comments=True,
                                           ChoiceVector=ChoiceVector,
-                                          fusionType=fusionType,
+                                          fusionType=RubisFusionType,
                                           )
         elif method == 'CondorcetWinners':
             from time import time
@@ -9110,7 +9111,7 @@ class Digraph(object):
             print('\nFirst and last choice recommendations')
             print('-------------------------------------')
             t0 = time()
-            resVec = self.computeBpvCondorcetWinners(Average=Average)
+            resVec = self.computeBpvCondorcetWinners(fusionType=cwFusionType)
             res = []
             for x in resVec.support:
                 res.append((resVec.membership[x],x))
@@ -9160,7 +9161,7 @@ class Digraph(object):
                 g.actions = {}
                 for x in remainingActions:
                     g.actions[x] = deepcopy(self.actions[x])
-                resVec = g.computeBpvCondorcetWinners(Average=Average)
+                resVec = g.computeBpvCondorcetWinners(fusionType=cwFusionType)
                 Recursion = False
                 posremoved = []
                 negremoved = []
@@ -9234,12 +9235,17 @@ class Digraph(object):
     def computeBpvCondorcetWinners(self,CoDual=True,
                                    BrokenCocs=True,
                                    Average=False,
+                                   fusionType='conjunctive',
                                    Comments=False,
                                    Debug=False,
+                                   initialVector=None,
                                    ):
         """
         Returns by default the bpvSet of the Condorcet winner(s) of a
         codual and acyclic (BrokenCocs=True) digraph.
+        *fusionType* := 'conjunctive' (default') | 'disjunctive' | 'average'
+        If Average == True, an average fusion of initial and -terminal vector is computed
+        If Average == False (default), an 0vee is done.
         """
         from bipolarValuedSets import BpvSet,averageEpistemicFusion
         from copy import deepcopy
@@ -9250,18 +9256,18 @@ class Digraph(object):
             gb = BrokenCocsDigraph(g)
         else:
             gb = g
-        initialVector = gb.computeConjunctiveEpistemicFusion(Terminal=False,
-                                                             Average=Average,Debug=False)
-        terminalVector = gb.computeConjunctiveEpistemicFusion(Terminal=True,
-                                                              Average=Average,Debug=False)
+        iVector = gb.computeEpistemicFusion(Terminal=False,initialVector=initialVector,
+                                                fusionType=fusionType,Debug=False)
+        tVector = gb.computeEpistemicFusion(Terminal=True,initialVector=initialVector,
+                                                fusionType=fusionType,Debug=False)
         if Debug:
             for x in self.actions:
                 print(x,'i',initialVector.membership[x])
                 print(x,'t',terminalVector.membership[x])
         if Average:
-            resVector = averageEpistemicFusion([initialVector,-terminalVector])
+            resVector = averageEpistemicFusion([iVector,-tVector])
         else:
-            resVector = initialVector.ovee(-terminalVector)                
+            resVector = iVector.ovee(-tVector)                
         if Comments:
             resVector.showMembershipCharacteristics()
         return resVector
@@ -9923,7 +9929,138 @@ class Digraph(object):
             res.membership[x] = resvec[x]
         return res
 
-    def computeConjunctiveEpistemicFusion(digraph,Terminal=False,
+    def computeEpistemicFusion(digraph,Terminal=False,initialVector=None,
+                                          fusionType='conjunctive',Debug=False):
+        """
+        Computes the conjunctive epistemic fusion of
+        rows (Terminal=True) or columns (Terminal=False)
+        of the digraph's relation attribute.
+        Validate the stable fix-point solution vector Y.
+        """
+        from copy import deepcopy
+        from bipolarValuedSets import BpvSet
+        from digraphsTools import scoredTuplesSort,omax
+        from decimal import Decimal
+##        if CoDual:
+##            g = ~(-digraph)
+##        else:
+        g = deepcopy(digraph)
+        Med = g.valuationdomain['med']
+        Max = g.valuationdomain['max']
+        Min = g.valuationdomain['min']
+        if Terminal:
+            g = ConverseDigraph(g)
+        if initialVector is None:
+            inVec = {}
+            for x in g.actions:
+                inVec[x] = Med
+        else:
+            inVec = {}
+            for x in initialVector.support:
+                inVec[x] = initialVector.membership[x]
+##        inVec = {
+##          'p02':  Decimal('0.4167'),
+##          'p09':  Decimal('0.1667'),
+##          'p01':  Decimal('-0.0278'),
+##          'p04':  Decimal('0.0000'),
+##          'p06':  Decimal('0.0000'),
+##          'p07':  Decimal('0.0000'),
+##          'p08':  Decimal('-0.0833'),
+##          'p11':  Decimal('0.0000'),
+##          'p10':  Decimal('-0.0278'),
+##          'p03':  Decimal('-0.0833'),
+##          'p05':  Decimal('-0.0833'),
+##          }
+        #print(inVec)
+        res = {}
+        for x in g.actions:
+            posx = []
+            negx = []
+            nulx = []
+            for y in g.actions:
+                if x != y:
+                    matxy = omax(Med,[g.relation[x][y],inVec[y]])
+                    #print(x,y,matxy)
+                    if matxy > Med:
+                        posx.append(matxy)
+                    elif matxy < Med:
+                        negx.append(matxy)
+                    else:
+                        nulx.append(matxy)
+            res[x] = {'pos':posx,'neg':negx,'nul':nulx}
+        resvec = {}
+        n = len(g.actions) -1
+        if fusionType == 'average':
+            for x in res:
+                pl = len(res[x]['pos'])
+                nl = len(res[x]['neg'])
+                if pl > 0 and nl == 0:
+                    sumx = Decimal()
+                    for val in res[x]['pos']:
+                        sumx += val
+                    resvec[x] = sumx/Decimal(n)
+                elif nl > 0 and pl == 0:
+                    sumx = Decimal()
+                    for val in res[x]['neg']:
+                        sumx += val
+                    resvec[x] = sumx/Decimal(n)
+                else:
+                    resvec[x] = Med
+        elif fusionType == 'conjunctive':
+            for x in res:
+                #print(x, res[x])
+                pl = len(res[x]['pos'])
+                nl = len(res[x]['neg'])
+                if pl > 0 and nl == 0:
+                    minx = Max
+                    for v in res[x]['pos']:
+                        minx = min(minx,v)
+                    resvec[x] = minx
+                elif nl > 0 and pl == 0:
+                    maxx = Min
+                    for v in res[x]['neg']:
+                        maxx = max(maxx,v)
+                    resvec[x] = maxx
+                else:
+                    resvec[x] = Med
+        elif fusionType == 'disjunctive':
+            for x in res:
+                #print(x, res[x])
+                pl = len(res[x]['pos'])
+                nl = len(res[x]['neg'])
+                if pl > 0 and nl == 0:
+                    maxx = Min
+                    for v in res[x]['pos']:
+                        maxx = max(maxx,v)
+                    resvec[x] = maxx
+                elif nl > 0 and pl == 0:
+                    minx = Max
+                    for v in res[x]['neg']:
+                        minx = min(minx,v)
+                    resvec[x] = minx
+                else:
+                    resvec[x] = Med
+        kerVec = []
+        for x in g.actions:
+            kerVec.append((resvec[x],x))
+            if Debug:
+                print(x,res[x])
+        #kerVec.sort(reverse=True)
+        scoredTuplesSort(kerVec,reverse=True)
+        if Debug:
+            nl = len(kerVec)
+            for i in range(nl):
+                print(kerVec[i])
+        res = BpvSet()
+        res.name = 'CondorcetWinners'
+        res.support = deepcopy(digraph.actions)
+        res.valuationDomain = deepcopy(g.valuationdomain)
+        res.membership = {}
+        for x in res.support:
+            res.membership[x] = resvec[x]
+        return res
+
+    def computeConjunctiveEpistemicFusionGood(digraph,Terminal=False,
                                           Average=False,Debug=False):
         """
         Computes the conjunctive epistemic fusion of
@@ -16073,26 +16210,37 @@ if __name__ == "__main__":
     from decimal import Decimal, getcontext
 ##    t = Random3ObjectivesPerformanceTableau(weightDistribution="equiobjectives",
 ##                                 numberOfActions=11,numberOfCriteria=13,
-##                                            missingDataProbability=0.05,seed=40)
+##                                            missingDataProbability=0.05,seed=50)
 ##                          
-##    t = Random3ObjectivesPerformanceTableau(weightDistribution="equiobjectives",
-##                                 numberOfActions=9,numberOfCriteria=13,seed=1)                       
     #t = CircularPerformanceTableau()
-    #t = PerformanceTableau('AliceChoice')
-    t = PerformanceTableau('officeChoice')
+    t = PerformanceTableau('AliceChoice')
+    #t = PerformanceTableau('officeChoice')
     #t = PerformanceTableau('roy66')
     #print(getcontext().prec)
     g = BipolarOutrankingDigraph(t,Threading=False,startMethod='spawn')
     print(g)
-    g.showChoiceRecommendation('CondorcetWinners')
-    g.showChoiceRecommendation('CondorcetWinners',Average=True)
-    cw1 = g.computeAverageEpistemicFusion(Terminal=True)
+    cw0 = g.computeBpvCondorcetWinners(Comments=False,fusionType='conjunctive')
+    cw0.showMembershipCharacteristics()
+    cw1 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw0)
     cw1.showMembershipCharacteristics()
-    cw2 = g.computeAverageEpistemicFusion(Terminal=False)
+    cw2 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw1)
     cw2.showMembershipCharacteristics()
-    from bipolarValuedSets import averageEpistemicFusion
-    cw = averageEpistemicFusion([cw2,-cw1])
-    cw.showMembershipCharacteristics()
+    cw3 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw2)
+    cw3.showMembershipCharacteristics()
+    cw4 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw3)
+    cw4.showMembershipCharacteristics()
+    cw5 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw4)
+    cw5.showMembershipCharacteristics()
+
+    #g.showChoiceRecommendation('CondorcetWinners')
+##    g.showChoiceRecommendation('CondorcetWinners',Average=True)
+##    cw1 = g.computeAverageEpistemicFusion(Terminal=True)
+##    cw1.showMembershipCharacteristics()
+##    cw2 = g.computeAverageEpistemicFusion(Terminal=False)
+##    cw2.showMembershipCharacteristics()
+##    from bipolarValuedSets import averageEpistemicFusion
+##    cw = averageEpistemicFusion([cw2,-cw1])
+##    cw.showMembershipCharacteristics()
 ##    print('Rubis BCR')
 ##    print('=== strd')
 ##    g.showBestChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType='standard')

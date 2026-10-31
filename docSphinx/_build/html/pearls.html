@@ -4599,23 +4599,23 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span>
 <span class="linenos"> 3</span><span class="gp">... </span>          <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="linenos"> 4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-<span class="hll"><span class="linenos"> 5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bpvWinners</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">(</span><span class="n">Average</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="hll"><span class="linenos"> 5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bpvWinners</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">()</span>
 </span><span class="linenos"> 6</span><span class="gp">&gt;&gt;&gt; </span><span class="n">bpvWinners</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">(</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="linenos"> 7</span><span class="go"> Bipolar-valued weak Condorcet winners set</span>
-<span class="hll"><span class="linenos"> 8</span><span class="go">  p2:  +0.63</span>
-</span><span class="hll"><span class="linenos"> 9</span><span class="go">  p6:  +0.23</span>
-</span><span class="hll"><span class="linenos">10</span><span class="go">  p5:  +0.18</span>
+<span class="hll"><span class="linenos"> 8</span><span class="go">  p2:  +0.22</span>
+</span><span class="hll"><span class="linenos"> 9</span><span class="go">  p6:  +0.19</span>
+</span><span class="hll"><span class="linenos">10</span><span class="go">  p5:  +0.03</span>
 </span><span class="linenos">11</span><span class="go">  p3:  +0.00</span>
 <span class="linenos">12</span><span class="go">  p4:  +0.00</span>
 <span class="linenos">13</span><span class="go">  p9:  +0.00</span>
-<span class="hll"><span class="linenos">14</span><span class="go">  p8:  -0.17</span>
-</span><span class="hll"><span class="linenos">15</span><span class="go">  p7:  -0.23</span>
-</span><span class="hll"><span class="linenos">16</span><span class="go">  p1:  -0.26</span>
+<span class="hll"><span class="linenos">14</span><span class="go">  p8:  -0.14</span>
+</span><span class="hll"><span class="linenos">15</span><span class="go">  p7:  -0.14</span>
+</span><span class="hll"><span class="linenos">16</span><span class="go">  p1:  -0.17</span>
 </span></pre></div>
 </div>
 </div>
 <p>In the given random 3-objectives outranking digraph <img class="math" src="_images/math/8fefdd03b16090f18d6f4be27fa80854c6750296.png" alt="G(X,R)"/>, concerning the performances of 9 public policies with respect to 13 performance criteria, three alternatives, <em>p2</em>, <em>p6</em> and <em>p5</em> are positive weak Condorcet winners, whereas alternatives <em>p1</em>, <em>p7</em> and <em>p8</em> are negative weak Condorcet winners, that is positive weak Condorcet losers (see Lines 8-10 and 14-16 above).</p>
-<p>The individual bipolar-valued credibilities to ‘<strong>be a non ambiguous weak Condorcet winner</strong>’ are computed as follows. For each individual alternative <em>x in X</em>, the average epistemic fusion of the <em>outranking</em> credibilities <img class="math" src="_images/math/bdaafcd4d24eb3ad63ff8748325475a2e2e7f1c2.png" alt="r(x \succsim y)"/> for all <img class="math" src="_images/math/c95b2e911e03ebb3fe78e3fa976938ac3a71d13c.png" alt="y \neq x"/> in <em>X</em> measures indeed the more or less <strong>outranking power</strong> of <em>x</em> and the same average epistemic fusion of the <em>not outranked</em> credibilities <img class="math" src="_images/math/697d4cb6ee5ba7aee995297d318cf7eab022b95b.png" alt="-r(y \succsim x)"/>  for all <img class="math" src="_images/math/c95b2e911e03ebb3fe78e3fa976938ac3a71d13c.png" alt="y \neq x"/> in <em>X</em> measures the more or less <strong>not outrankedness</strong> of <em>x</em>. A disjunctive epistemic <img class="math" src="_images/math/0a30c304d7411a5cfe3ccef0630cfd9f06e61a47.png" alt="$ \textcircled{$\vee$} $"/> fusion of both these measures delivers eventually the corresponding bpv-set.</p>
+<p>The individual bipolar-valued credibilities to ‘<strong>be a non ambiguous weak Condorcet winner</strong>’ are computed as follows. For each individual alternative <em>x in X</em>, the epistemic fusion of the <em>outranking</em> credibilities <img class="math" src="_images/math/bdaafcd4d24eb3ad63ff8748325475a2e2e7f1c2.png" alt="r(x \succsim y)"/> for all <img class="math" src="_images/math/c95b2e911e03ebb3fe78e3fa976938ac3a71d13c.png" alt="y \neq x"/> in <em>X</em> measures indeed the more or less <strong>outranking power</strong> of <em>x</em> and the same epistemic fusion of the <em>not outranked</em> credibilities <img class="math" src="_images/math/697d4cb6ee5ba7aee995297d318cf7eab022b95b.png" alt="-r(y \succsim x)"/>  for all <img class="math" src="_images/math/c95b2e911e03ebb3fe78e3fa976938ac3a71d13c.png" alt="y \neq x"/> in <em>X</em> measures the more or less <strong>not outrankedness</strong> of <em>x</em>. A disjunctive epistemic <img class="math" src="_images/math/0a30c304d7411a5cfe3ccef0630cfd9f06e61a47.png" alt="$ \textcircled{$\vee$} $"/> fusion of both these measures delivers eventually the corresponding bpv-set.</p>
 <p>It is worthwhile noticing that the <em>dual</em> of this bpv-set <em>Y</em> gives by the way the bpv-set of the corresponding non ambiguous weak Condorcet losers.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">(</span>
 <span class="gp">... </span>   <span class="n">actionsList</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;p2&#39;</span><span class="p">,</span><span class="s1">&#39;p6&#39;</span><span class="p">,</span><span class="s1">&#39;p5&#39;</span><span class="p">,</span><span class="s1">&#39;p3&#39;</span><span class="p">,</span><span class="s1">&#39;p4&#39;</span><span class="p">,</span><span class="s1">&#39;p9&#39;</span><span class="p">,</span><span class="s1">&#39;p1&#39;</span><span class="p">,</span><span class="s1">&#39;p7&#39;</span><span class="p">,</span><span class="s1">&#39;p8&#39;</span><span class="p">])</span>
@@ -4640,22 +4640,22 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </span><span class="linenos"> 2</span><span class="go"> First and last choice recommendations</span>
 <span class="linenos"> 3</span><span class="go"> -------------------------------------</span>
 <span class="linenos"> 4</span><span class="go">  First choice (Condorcet winners)</span>
-<span class="hll"><span class="linenos"> 5</span><span class="go">   &#39;p2&#39;: +0.63 (81.42%)</span>
-</span><span class="hll"><span class="linenos"> 6</span><span class="go">   &#39;p6&#39;: +0.23 (61.46%)</span>
-</span><span class="hll"><span class="linenos"> 7</span><span class="go">   &#39;p5&#39;: +0.18 (59.20%)</span>
+<span class="hll"><span class="linenos"> 5</span><span class="go">   &#39;p2&#39;: +0.22 (61.11%)</span>
+</span><span class="hll"><span class="linenos"> 6</span><span class="go">   &#39;p6&#39;: +0.19 (59.72%)</span>
+</span><span class="hll"><span class="linenos"> 7</span><span class="go">   &#39;p5&#39;: +0.03 (51.39%)</span>
 </span><span class="linenos"> 8</span><span class="go"> -------------------------------------</span>
 <span class="linenos"> 9</span><span class="go">  Last choice (Condorcet losers)</span>
-<span class="hll"><span class="linenos">10</span><span class="go">   &#39;p1&#39;: +0.26 (63.11%)</span>
-</span><span class="hll"><span class="linenos">11</span><span class="go">   &#39;p7&#39;: +0.23 (61.55%)</span>
-</span><span class="hll"><span class="linenos">12</span><span class="go">   &#39;p8&#39;: +0.17 (58.42%)</span>
+<span class="hll"><span class="linenos">10</span><span class="go">   &#39;p8&#39;: +0.17 (58.34%)</span>
+</span><span class="hll"><span class="linenos">11</span><span class="go">   &#39;p7&#39;: +0.14 (56.95%)</span>
+</span><span class="hll"><span class="linenos">12</span><span class="go">   &#39;p1&#39;: +0.14 (56.95%)</span>
 </span><span class="linenos">13</span><span class="go"> -------------------------------------</span>
 <span class="linenos">14</span><span class="go">  Criteria significance majority in brakets</span>
-<span class="linenos">15</span><span class="go">  Execution time: 0.197 sec.</span>
+<span class="linenos">15</span><span class="go">  Execution time: 0.027 sec.</span>
 <span class="linenos">16</span><span class="go"> ******************************************</span>
 </pre></div>
 </div>
 </div>
-<p>The criteria significance majorities for each choice are indicated in brakets (see Lines 5-12). Alternative <em>p2</em> is the most supported first choice and alternative <em>p1</em> is the most supported last choice. A recommendation that gets confirmed with the ‘<em>Rubis</em>’ choice recommendation shown in <a class="reference internal" href="#condorcetwinners4"><span class="std std-numref">Listing 3.66</span></a> below (see <a class="footnote-reference brackets" href="#id125" id="id62" role="doc-noteref"><span class="fn-bracket">[</span>32<span class="fn-bracket">]</span></a>).</p>
+<p>The criteria significance majorities for each choice are indicated in brakets (see Lines 5-12). Alternative <em>p2</em> is the most supported first choice and alternative <em>p8</em> is the most supported last choice. A recommendation that gets confirmed with the ‘<em>Rubis</em>’ choice recommendation shown in <a class="reference internal" href="#condorcetwinners4"><span class="std std-numref">Listing 3.66</span></a> below (see <a class="footnote-reference brackets" href="#id125" id="id62" role="doc-noteref"><span class="fn-bracket">[</span>32<span class="fn-bracket">]</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="condorcetwinners4">
 <div class="code-block-caption"><span class="caption-number">Listing 3.66 </span><span class="caption-text">Showing the choice recommendations from the Rubis method</span><a class="headerlink" href="#condorcetwinners4" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;Rubis&#39;</span><span class="p">,</span> <span class="n">fusionType</span><span class="o">=</span><span class="s1">&#39;epistemicFusion&#39;</span><span class="p">)</span>
@@ -4670,9 +4670,9 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="linenos">10</span><span class="go">      absorbency          : -1.00</span>
 <span class="linenos">11</span><span class="go">      covering (%)        : 55.56</span>
 <span class="linenos">12</span><span class="go">      determinateness (%) : 88.89</span>
-<span class="hll"><span class="linenos">13</span><span class="go">      - most credible action(s) = { &#39;p2&#39;: 0.22 }</span>
+<span class="hll"><span class="linenos">13</span><span class="go">      - most credible action(s) = { &#39;p2&#39;: 1.00 }</span>
 </span><span class="linenos">14</span><span class="go">  === &gt;&gt; potential last choice(s)</span>
-<span class="hll"><span class="linenos">15</span><span class="go">  * choice              : [&#39;p1&#39;, &#39;p7&#39;, &#39;p8&#39;]</span>
+<span class="hll"><span class="linenos">15</span><span class="go">  * choice              : [&#39;p8&#39;, &#39;p1&#39;, &#39;p7&#39;]</span>
 </span><span class="linenos">16</span><span class="go">      independence        : 0.00</span>
 <span class="linenos">17</span><span class="go">      dominance           : -0.58</span>
 <span class="linenos">18</span><span class="go">      absorbency          : 0.03</span>

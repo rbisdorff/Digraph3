@@ -1881,7 +1881,7 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 <p>Following the previously stated pragmatic principles, potential first choice recommendations may be determined by the <strong>initial</strong> and <strong>terminal prekernels</strong> –<em>weakly independent</em> and <em>strictly outranking</em> resp. <em>strictly outranked</em> choices– of the strict outranking digraph (see the tutorial on <a class="reference internal" href="pearls.html#kernel-tutorial-label"><span class="std std-ref">computing digraph kernels</span></a>). Any detected chordless odd outranking circuits are by default broken up (see <a class="reference internal" href="#bis-2008" id="id45"><span>[BIS-2008]</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="strictbestchoice">
 <div class="code-block-caption"><span class="caption-number">Listing 1.12 </span><span class="caption-text">Computing the Rubis first choice recommendation</span><a class="headerlink" href="#strictbestchoice" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;Rubis&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;Rubis&#39;</span><span class="p">,</span><span class="n">ChoiceVector</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </span><span class="linenos"> 2</span><span class="go"> * --- First and last choice recommendation(s) ---*</span>
 <span class="linenos"> 3</span><span class="go">  (in decreasing order of determinateness)</span>
 <span class="linenos"> 4</span><span class="go"> Credibility domain: [-1.00,1.00]</span>
@@ -1983,7 +1983,7 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 <p>The <a class="reference internal" href="techDoc.html#outrankingDigraphs.ConfidentBipolarOutrankingDigraph" title="outrankingDigraphs.ConfidentBipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfidentBipolarOutrankingDigraph</span></code></a> class constructor assumes here that the criteria significance weights are in fact <em>triangular random variates</em> in the range 0 to 2 times the given significance weights (Line 9). With this working hypothesis, we obtain a 90% confident outranking digraph <em>cg</em> where three outranking situations with a credibility in the range [-15/145; +15/145] are put to <em>indeterminate</em> (Line 12). The pairwise outranking situations between location <em>C</em> and location <em>G</em> are for instance not 90% confident and the first choice recommendation now includes consequently this latter location as a further potential best choice candidate as shown in <a class="reference internal" href="#confidentofficechoice3"><span class="std std-numref">Listing 1.14</span></a> Line 7. Notice furthermore that location ‘D’ is now only a <em>weak Condorcet winner</em> as the alternative is not 90% confidently outranking location <em>C</em>.</p>
 <div class="literal-block-wrapper docutils container" id="confidentofficechoice3">
 <div class="code-block-caption"><span class="caption-number">Listing 1.14 </span><span class="caption-text">Computing a 90% confident first choice recommendation</span><a class="headerlink" href="#confidentofficechoice3" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cg</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;Rubis&#39;</span><span class="p">,</span><span class="n">fusionType</span><span class="o">=</span><span class="s1">&#39;epistemicFusion&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cg</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;Rubis&#39;</span><span class="p">,</span><span class="n">RubisFusionType</span><span class="o">=</span><span class="s1">&#39;epistemicFusion&#39;</span><span class="p">)</span>
 </span><span class="linenos"> 2</span><span class="go"> Rubis choice recommendation</span>
 <span class="linenos"> 3</span><span class="go"> ***************************</span>
 <span class="linenos"> 4</span><span class="go"> First choice recommendation(s) (BCR)</span>
@@ -7124,10 +7124,17 @@ fecop 75.78% success rate</p>
 <span class="linenos">13</span><span class="go">   absorbency          : 0.00</span>
 <span class="linenos">14</span><span class="go">   covering (%)        : 20.00</span>
 <span class="linenos">15</span><span class="go">   determinateness (%) : 61.25</span>
-<span class="hll"><span class="linenos">16</span><span class="go">   - most credible action(s) = { &#39;I-FHK&#39;: 0.75, &#39;I-USB&#39;: 0.50,</span>
-</span><span class="hll"><span class="linenos">17</span><span class="go">                                 &#39;I-UHB&#39;: 0.50, &#39;T-FHM&#39;: 0.42,</span>
-</span><span class="hll"><span class="linenos">18</span><span class="go">                                 &#39;T-FHK&#39;: 0.33,  }</span>
-</span></pre></div>
+<span class="hll"><span class="linenos">16</span><span class="go">   - most credible action(s) = { &#39;I-FHK&#39;: 0.75}</span>
+</span><span class="hll"><span class="linenos">17</span><span class="go">  === &gt;&gt; potential last choice(s)</span>
+</span><span class="hll"><span class="linenos">18</span><span class="go">  choice              : [&#39;C-HKK&#39;, &#39;I-UHB&#39;, &#39;I-USB&#39;, &#39;S-HKK&#39;,</span>
+</span><span class="linenos">19</span><span class="go">                         &#39;T-FHK&#39;, &#39;T-UD&#39;, &#39;T-UHB&#39;, &#39;T-USB&#39;]</span>
+<span class="linenos">20</span><span class="go">   independence        : 0.00</span>
+<span class="linenos">21</span><span class="go">   dominance           : -0.83</span>
+<span class="linenos">22</span><span class="go">   absorbency          : 0.42</span>
+<span class="linenos">23</span><span class="go">   covered (%)         : 31.25</span>
+<span class="linenos">24</span><span class="go">   determinateness (%) : 50.00</span>
+<span class="linenos">25</span><span class="go">   - most credible action(s) = { }</span>
+</pre></div>
 </div>
 </div>
 <p>The <em>Graduate Interpreter</em> studies in Köln remain indeed a 90%-confident <em>Condorcet</em> winner (Line 2). Hence, the same study program also remains our 90%-confident most credible best choice supported by a continual 18/24 (87.5%) majority of the global criteria significance (see Lines 9-10 and 16-18).</p>
@@ -11983,7 +11990,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Oct 27, 2026.
+      <span class="lastupdated">Last updated on Oct 31, 2026.
       </span></p>
   </div>
 
