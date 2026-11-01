@@ -9231,8 +9231,8 @@ class Digraph(object):
             print('Error: method = "CondorcetWinners", "Rubis", "IteratedCondorcetWinners", "Bachet" or "IteratedBachet",  not "%s"' % method) 
         print('*************************************************')
                  
-    def computeBpvCondorcetWinners(self,CoDual=True,
-                                   BrokenCocs=True,
+    def computeBpvCondorcetWinners(self,CoDual=False,
+                                   BrokenCocs=False,
                                    Average=False,
                                    fusionType='conjunctive',
                                    Comments=False,
@@ -9940,9 +9940,6 @@ class Digraph(object):
         from bipolarValuedSets import BpvSet
         from digraphsTools import scoredTuplesSort,omax
         from decimal import Decimal
-##        if CoDual:
-##            g = ~(-digraph)
-##        else:
         g = deepcopy(digraph)
         Med = g.valuationdomain['med']
         Max = g.valuationdomain['max']
@@ -9957,20 +9954,6 @@ class Digraph(object):
             inVec = {}
             for x in initialVector.support:
                 inVec[x] = initialVector.membership[x]
-##        inVec = {
-##          'p02':  Decimal('0.4167'),
-##          'p09':  Decimal('0.1667'),
-##          'p01':  Decimal('-0.0278'),
-##          'p04':  Decimal('0.0000'),
-##          'p06':  Decimal('0.0000'),
-##          'p07':  Decimal('0.0000'),
-##          'p08':  Decimal('-0.0833'),
-##          'p11':  Decimal('0.0000'),
-##          'p10':  Decimal('-0.0278'),
-##          'p03':  Decimal('-0.0833'),
-##          'p05':  Decimal('-0.0833'),
-##          }
-        #print(inVec)
         res = {}
         for x in g.actions:
             posx = []
@@ -9979,7 +9962,8 @@ class Digraph(object):
             for y in g.actions:
                 if x != y:
                     matxy = omax(Med,[g.relation[x][y],inVec[y]])
-                    #print(x,y,matxy)
+                    #matxy = omin(Med,[g.relation[x][y],inVec[y]])
+                    #print(x,y,g.relation[x][y],inVec[y],matxy)
                     if matxy > Med:
                         posx.append(matxy)
                     elif matxy < Med:
@@ -9989,23 +9973,7 @@ class Digraph(object):
             res[x] = {'pos':posx,'neg':negx,'nul':nulx}
         resvec = {}
         n = len(g.actions) -1
-        if fusionType == 'average':
-            for x in res:
-                pl = len(res[x]['pos'])
-                nl = len(res[x]['neg'])
-                if pl > 0 and nl == 0:
-                    sumx = Decimal()
-                    for val in res[x]['pos']:
-                        sumx += val
-                    resvec[x] = sumx/Decimal(n)
-                elif nl > 0 and pl == 0:
-                    sumx = Decimal()
-                    for val in res[x]['neg']:
-                        sumx += val
-                    resvec[x] = sumx/Decimal(n)
-                else:
-                    resvec[x] = Med
-        elif fusionType == 'conjunctive':
+        if fusionType == 'conjunctive':
             for x in res:
                 #print(x, res[x])
                 pl = len(res[x]['pos'])
@@ -10020,6 +9988,22 @@ class Digraph(object):
                     for v in res[x]['neg']:
                         maxx = max(maxx,v)
                     resvec[x] = maxx
+                else:
+                    resvec[x] = Med
+        elif fusionType == 'average':
+            for x in res:
+                pl = len(res[x]['pos'])
+                nl = len(res[x]['neg'])
+                if pl > 0 and nl == 0:
+                    sumx = Decimal()
+                    for val in res[x]['pos']:
+                        sumx += val
+                    resvec[x] = sumx/Decimal(n)
+                elif nl > 0 and pl == 0:
+                    sumx = Decimal()
+                    for val in res[x]['neg']:
+                        sumx += val
+                    resvec[x] = sumx/Decimal(n)
                 else:
                     resvec[x] = Med
         elif fusionType == 'disjunctive':
@@ -16218,7 +16202,8 @@ if __name__ == "__main__":
     #print(getcontext().prec)
     g = BipolarOutrankingDigraph(t,Threading=False,startMethod='spawn')
     print(g)
-    cw0 = g.computeBpvCondorcetWinners(Comments=False,fusionType='conjunctive')
+    cw0 = g.computeBpvCondorcetWinners(Comments=False,
+                                       Debug=True,fusionType='conjunctive')
     cw0.showMembershipCharacteristics()
 ##    cw1 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw0)
 ##    cw1.showMembershipCharacteristics()
@@ -16231,7 +16216,7 @@ if __name__ == "__main__":
 ##    cw5 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw4)
 ##    cw5.showMembershipCharacteristics()
 
-    #g.showChoiceRecommendation('CondorcetWinners')
+    g.showChoiceRecommendation('CondorcetWinners')
 ##    g.showChoiceRecommendation('CondorcetWinners',Average=True)
 ##    cw1 = g.computeAverageEpistemicFusion(Terminal=True)
 ##    cw1.showMembershipCharacteristics()
@@ -16255,6 +16240,7 @@ if __name__ == "__main__":
 ##    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType='guardedIndeterminateness')
 ##    print('=== epf')
 ##    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType='epistemicFusion')
+    g.showChoiceRecommendation('Rubis',RubisFusionType='guardedIndeterminateness',ChoiceVector=True)
     g.showChoiceRecommendation('Rubis',RubisFusionType='epistemicFusion',ChoiceVector=True)
 ##    cg.showChoiceRecommendation('CondorcetWinners')
 ##    print(g.showChoiceRecommendation('IteratedCondorcetWinners',

@@ -4760,10 +4760,6 @@ In the given random 3-objectives outranking digraph :math:`G(X,R)`, concerning t
 
 The individual bipolar-valued credibilities to '**be a non ambiguous weak Condorcet winner**' are computed as follows. For each individual alternative *x in X*, the epistemic fusion of the *outranking* credibilities :math:`r(x \succsim y)` for all :math:`y \neq x` in *X* measures indeed the more or less **outranking power** of *x* and the same epistemic fusion of the *not outranked* credibilities :math:`-r(y \succsim x)`  for all :math:`y \neq x` in *X* measures the more or less **not outrankedness** of *x*. A disjunctive epistemic :math:`$ \textcircled{$\vee$} $` fusion of both these measures delivers eventually the corresponding bpv-set.
 
-.. In matrix notation, given the outranking digraph :math:`G(X,R)`, the bipolar-valued weak Condorcet winners bpv-set *Y* verifies the follwing equation: :math:`Y \;=\; (R \diamond \bf{0})\;$ \textcircled{$\vee$} $\; (-R^t \diamond \bf{0})`, where for all :math:`x \in X`, :math:`(R \diamond \bf{0})(x)\;=\; $ \textcircled{$\wedge$} $_{y \in X, y\neq x} \big[R(x,y)$ \textcircled{$\vee$} $ 0.0\big]`.
-
-.. It is worthwhile noticing that weak Condorcet winners' equation systems are some kind of symmetric copies of the prekernel double fix-point equation systems [29]_. The latter start the double fix-point computations from completely determined positive and negative vectors and here we use a unique indeterminate vector :math:`\bf{0}` and find the result in a single step.
-
 It is worthwhile noticing that the *dual* of this bpv-set *Y* gives by the way the bpv-set of the corresponding non ambiguous weak Condorcet losers.
 
    >>> g.showHTMLRelationTable(
@@ -4779,7 +4775,7 @@ It is worthwhile noticing that the *dual* of this bpv-set *Y* gives by the way t
 
 In :numref:`condorcetWinners2` we see confirmed in the outranking relation table of :math:`G(X,R)` that alternative *p2* is indeed a Condorcet winner and alternatives *p6* and *p5* are *weak Condorcet winners* whereas alternatives *p1*, *p7* and *p8* are *weak Condorcet losers*.
 
-When a given strict outranking digraph shows chordless circuits it may however be the case that no weak Condorcet winners and/or losers can be detected, the resulting bpv-set does not contain any positive and/or negative credibilities. Breaking in such a case all chordless strict outranking circuits at their weakest link transforms the digraph in an acyclic asymmetric digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the digraph.
+.. When a given strict outranking digraph shows chordless circuits it may however be the case that no weak Condorcet winners and/or losers can be detected, the resulting bpv-set does not contain any positive and/or negative credibilities. Breaking in such a case all chordless strict outranking circuits at their weakest link transforms the digraph in an acyclic asymmetric digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the digraph.
 
 Suitable first and last choice recommendations
 ..............................................
