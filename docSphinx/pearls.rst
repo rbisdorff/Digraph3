@@ -4792,7 +4792,7 @@ Now, weak Condorcet winners and losers verify the same pragmatic first choice pr
    :linenos:
    :emphasize-lines: 1,5-7,10-12
 
-   >>> g.showChoiceRecommendation('CondorcetWinners',Average=True)
+   >>> g.showChoiceRecommendation('CondorcetWinners')
     First and last choice recommendations
     -------------------------------------
      First choice (Condorcet winners)
@@ -4817,7 +4817,7 @@ The criteria significance majorities for each choice are indicated in brakets (s
    :linenos:
    :emphasize-lines: 1,7,13,15,21
 
-   >>> g.showChoiceRecommendation('Rubis', fusionType='epistemicFusion')
+   >>> g.showChoiceRecommendation('Rubis', RubisFusionType='epistemicFusion')
     Rubis choice recommendation
     ***********************
      First choice recommendation(s) (BCR) 
@@ -4850,7 +4850,7 @@ In a ranking-by-choosing strategy, we may recursively extract bpv-sets of weak C
    :caption: Showing first and last choice recommendations from recursively extracted weak Condorcet winners and loosers
    :name: CondorcetWinners5
    :linenos:
-   :emphasize-lines: 1,7,13,15,19,21
+   :emphasize-lines: 1,5-13
 
    >>> g.showChoiceRecommendation('IteratedCondorcetWinners')
     ******************************************
@@ -4869,12 +4869,13 @@ In a ranking-by-choosing strategy, we may recursively extract bpv-sets of weak C
      Criteria significance majority in brakets
      Execution time: 0.022 sec.
     *****************************************   
-   >>> from linearOrders import IteratedBpvCondorcetWinnersRanking
-   >>> cr = IteratedBpvCondorcetWinnersRanking(g)
-   >>> cr.condorcetRanking
-    ['p2','p6','p5','p4','p9','p3','p1','p7','p8']
 
-This choice recommendation makes apparent a linear ranking which may be computed with the :py:class:`linearOrders.IteratedBpvCondorcetWinnersRanking` class constructor (see Lines 19 and 21).
+This choice recommendation makes apparent a linear ranking which may be computed with the :py:class:`linearOrders.IteratedBpvCondorcetWinnersRanking` class constructor.
+
+>>> from linearOrders import IteratedBpvCondorcetWinnersRanking
+>>> cr = IteratedBpvCondorcetWinnersRanking(g)
+>>> cr.condorcetRanking
+  ['p2','p6','p5','p4','p9','p3','p1','p7','p8']
 
 In the performance heatmap shown in :numref:`condorcetWinnersHeatmap` using the previous *cr.condorcetRanking*, we may verify the quality of this ranking.
 

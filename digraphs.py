@@ -8642,30 +8642,29 @@ class Digraph(object):
         >>> from outrankingDigraphs import *
         >>> t = Random3ObjectivesPerformanceTableau(seed=5)
         >>> g = BipolarOutrankingDigraph(t)
-        >>> g.showFirstChoiceRecommendation()
+        >>> g.showFirstChoiceRecommendation(fusionType='epistemicFusion')
         ***********************
-        First Choice Recommendation (BCR)
-        (in decreasing order of determinateness)   
-        Credibility domain:  [-100.0, 100.0]
-        === >> potential first choices
-        * choice              : ['a04', 'a14', 'a19', 'a20']
-           independence        : 1.19
-           dominance           : 4.76
-           absorbency          : -59.52
-           covering (%)        : 75.00
-           determinateness (%) : 57.86
-           - most credible action(s) = { 'a14': 23.81, 'a19': 11.90, 'a04': 2.38, 'a20': 1.19, }  
-        === >> potential last choices 
-        * choice              : ['a03', 'a12', 'a17']
-          independence        : 4.76
-          dominance           : -76.19
-          absorbency          : 4.76
-          covering (%)        : 0.00
-          determinateness (%) : 65.39
-          - most credible action(s) = { 'a03': 38.10, 'a12': 13.10, 'a17': 4.76, }
-        Execution time: 0.024 seconds
+        First choice recommendation(s) (BCR)
+         (in decreasing order of determinateness)   
+        Credibility domain: [-1.00,1.00]
+         === >> potential first choice(s)
+        * choice              : ['p11', 'p19', 'p20']
+          independence        : 0.00
+          dominance           : 0.01
+          absorbency          : -0.73
+          covering (%)        : 84.31
+          determinateness (%) : 89.43
+          - most credible action(s) = { 'p20': 1.00, 'p11': 0.21, }
+         === >> potential last choice(s) 
+        * choice              : ['p02', 'p03', 'p12', 'p17']
+          independence        : 0.00
+          dominance           : -0.82
+          absorbency          : 0.05
+          covered (%)         : 78.12
+          determinateness (%) : 87.44
+          - most credible action(s) = { 'p03': 0.42, 'p02': 0.11, 'p12': 0.05, 'p17': 0.01, }
+          Execution time: 0.090 seconds
         *****************************
-
         """
         from copy import deepcopy
         from time import time
@@ -9262,8 +9261,8 @@ class Digraph(object):
                                                 fusionType=fusionType,Debug=False)
         if Debug:
             for x in self.actions:
-                print(x,'i',initialVector.membership[x])
-                print(x,'t',terminalVector.membership[x])
+                print(x,'i',iVector.membership[x])
+                print(x,'t',tVector.membership[x])
         if Average:
             resVector = averageEpistemicFusion([iVector,-tVector])
         else:
@@ -16208,12 +16207,12 @@ if __name__ == "__main__":
     from outrankingDigraphs import *
     from randomDigraphs import *
     from decimal import Decimal, getcontext
-##    t = Random3ObjectivesPerformanceTableau(weightDistribution="equiobjectives",
-##                                 numberOfActions=11,numberOfCriteria=13,
+    t = Random3ObjectivesPerformanceTableau(weightDistribution="equiobjectives",
+                                 numberOfActions=9,numberOfCriteria=13,seed=1)
 ##                                            missingDataProbability=0.05,seed=50)
 ##                          
     #t = CircularPerformanceTableau()
-    t = PerformanceTableau('AliceChoice')
+    #t = PerformanceTableau('AliceChoice')
     #t = PerformanceTableau('officeChoice')
     #t = PerformanceTableau('roy66')
     #print(getcontext().prec)
@@ -16221,16 +16220,16 @@ if __name__ == "__main__":
     print(g)
     cw0 = g.computeBpvCondorcetWinners(Comments=False,fusionType='conjunctive')
     cw0.showMembershipCharacteristics()
-    cw1 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw0)
-    cw1.showMembershipCharacteristics()
-    cw2 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw1)
-    cw2.showMembershipCharacteristics()
-    cw3 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw2)
-    cw3.showMembershipCharacteristics()
-    cw4 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw3)
-    cw4.showMembershipCharacteristics()
-    cw5 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw4)
-    cw5.showMembershipCharacteristics()
+##    cw1 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw0)
+##    cw1.showMembershipCharacteristics()
+##    cw2 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw1)
+##    cw2.showMembershipCharacteristics()
+##    cw3 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw2)
+##    cw3.showMembershipCharacteristics()
+##    cw4 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw3)
+##    cw4.showMembershipCharacteristics()
+##    cw5 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw4)
+##    cw5.showMembershipCharacteristics()
 
     #g.showChoiceRecommendation('CondorcetWinners')
 ##    g.showChoiceRecommendation('CondorcetWinners',Average=True)
@@ -16256,7 +16255,7 @@ if __name__ == "__main__":
 ##    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType='guardedIndeterminateness')
 ##    print('=== epf')
 ##    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType='epistemicFusion')
-##    #g.showChoiceRecommendation('Rubis',ChoiceVector=True)
+    g.showChoiceRecommendation('Rubis',RubisFusionType='epistemicFusion',ChoiceVector=True)
 ##    cg.showChoiceRecommendation('CondorcetWinners')
 ##    print(g.showChoiceRecommendation('IteratedCondorcetWinners',
 ##                                     ReturnRanking=True))

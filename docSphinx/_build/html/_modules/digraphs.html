@@ -9296,30 +9296,29 @@
 <span class="sd">        &gt;&gt;&gt; from outrankingDigraphs import *</span>
 <span class="sd">        &gt;&gt;&gt; t = Random3ObjectivesPerformanceTableau(seed=5)</span>
 <span class="sd">        &gt;&gt;&gt; g = BipolarOutrankingDigraph(t)</span>
-<span class="sd">        &gt;&gt;&gt; g.showFirstChoiceRecommendation()</span>
+<span class="sd">        &gt;&gt;&gt; g.showFirstChoiceRecommendation(fusionType=&#39;epistemicFusion&#39;)</span>
 <span class="sd">        ***********************</span>
-<span class="sd">        First Choice Recommendation (BCR)</span>
-<span class="sd">        (in decreasing order of determinateness)   </span>
-<span class="sd">        Credibility domain:  [-100.0, 100.0]</span>
-<span class="sd">        === &gt;&gt; potential first choices</span>
-<span class="sd">        * choice              : [&#39;a04&#39;, &#39;a14&#39;, &#39;a19&#39;, &#39;a20&#39;]</span>
-<span class="sd">           independence        : 1.19</span>
-<span class="sd">           dominance           : 4.76</span>
-<span class="sd">           absorbency          : -59.52</span>
-<span class="sd">           covering (%)        : 75.00</span>
-<span class="sd">           determinateness (%) : 57.86</span>
-<span class="sd">           - most credible action(s) = { &#39;a14&#39;: 23.81, &#39;a19&#39;: 11.90, &#39;a04&#39;: 2.38, &#39;a20&#39;: 1.19, }  </span>
-<span class="sd">        === &gt;&gt; potential last choices </span>
-<span class="sd">        * choice              : [&#39;a03&#39;, &#39;a12&#39;, &#39;a17&#39;]</span>
-<span class="sd">          independence        : 4.76</span>
-<span class="sd">          dominance           : -76.19</span>
-<span class="sd">          absorbency          : 4.76</span>
-<span class="sd">          covering (%)        : 0.00</span>
-<span class="sd">          determinateness (%) : 65.39</span>
-<span class="sd">          - most credible action(s) = { &#39;a03&#39;: 38.10, &#39;a12&#39;: 13.10, &#39;a17&#39;: 4.76, }</span>
-<span class="sd">        Execution time: 0.024 seconds</span>
+<span class="sd">        First choice recommendation(s) (BCR)</span>
+<span class="sd">         (in decreasing order of determinateness)   </span>
+<span class="sd">        Credibility domain: [-1.00,1.00]</span>
+<span class="sd">         === &gt;&gt; potential first choice(s)</span>
+<span class="sd">        * choice              : [&#39;p11&#39;, &#39;p19&#39;, &#39;p20&#39;]</span>
+<span class="sd">          independence        : 0.00</span>
+<span class="sd">          dominance           : 0.01</span>
+<span class="sd">          absorbency          : -0.73</span>
+<span class="sd">          covering (%)        : 84.31</span>
+<span class="sd">          determinateness (%) : 89.43</span>
+<span class="sd">          - most credible action(s) = { &#39;p20&#39;: 1.00, &#39;p11&#39;: 0.21, }</span>
+<span class="sd">         === &gt;&gt; potential last choice(s) </span>
+<span class="sd">        * choice              : [&#39;p02&#39;, &#39;p03&#39;, &#39;p12&#39;, &#39;p17&#39;]</span>
+<span class="sd">          independence        : 0.00</span>
+<span class="sd">          dominance           : -0.82</span>
+<span class="sd">          absorbency          : 0.05</span>
+<span class="sd">          covered (%)         : 78.12</span>
+<span class="sd">          determinateness (%) : 87.44</span>
+<span class="sd">          - most credible action(s) = { &#39;p03&#39;: 0.42, &#39;p02&#39;: 0.11, &#39;p12&#39;: 0.05, &#39;p17&#39;: 0.01, }</span>
+<span class="sd">          Execution time: 0.090 seconds</span>
 <span class="sd">        *****************************</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
@@ -9928,8 +9927,8 @@
                                                 <span class="n">fusionType</span><span class="o">=</span><span class="n">fusionType</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="s1">&#39;i&#39;</span><span class="p">,</span><span class="n">initialVector</span><span class="o">.</span><span class="n">membership</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="n">terminalVector</span><span class="o">.</span><span class="n">membership</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="s1">&#39;i&#39;</span><span class="p">,</span><span class="n">iVector</span><span class="o">.</span><span class="n">membership</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="n">tVector</span><span class="o">.</span><span class="n">membership</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
         <span class="k">if</span> <span class="n">Average</span><span class="p">:</span>
             <span class="n">resVector</span> <span class="o">=</span> <span class="n">averageEpistemicFusion</span><span class="p">([</span><span class="n">iVector</span><span class="p">,</span><span class="o">-</span><span class="n">tVector</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
@@ -17170,12 +17169,12 @@
     <span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">randomDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">getcontext</span>
-<span class="c1">##    t = Random3ObjectivesPerformanceTableau(weightDistribution=&quot;equiobjectives&quot;,</span>
-<span class="c1">##                                 numberOfActions=11,numberOfCriteria=13,</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">weightDistribution</span><span class="o">=</span><span class="s2">&quot;equiobjectives&quot;</span><span class="p">,</span>
+                                 <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="c1">##                                            missingDataProbability=0.05,seed=50)</span>
 <span class="c1">##                          </span>
     <span class="c1">#t = CircularPerformanceTableau()</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">PerformanceTableau</span><span class="p">(</span><span class="s1">&#39;AliceChoice&#39;</span><span class="p">)</span>
+    <span class="c1">#t = PerformanceTableau(&#39;AliceChoice&#39;)</span>
     <span class="c1">#t = PerformanceTableau(&#39;officeChoice&#39;)</span>
     <span class="c1">#t = PerformanceTableau(&#39;roy66&#39;)</span>
     <span class="c1">#print(getcontext().prec)</span>
@@ -17183,16 +17182,16 @@
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
     <span class="n">cw0</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">fusionType</span><span class="o">=</span><span class="s1">&#39;conjunctive&#39;</span><span class="p">)</span>
     <span class="n">cw0</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-    <span class="n">cw1</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">initialVector</span><span class="o">=</span><span class="n">cw0</span><span class="p">)</span>
-    <span class="n">cw1</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-    <span class="n">cw2</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">initialVector</span><span class="o">=</span><span class="n">cw1</span><span class="p">)</span>
-    <span class="n">cw2</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-    <span class="n">cw3</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">initialVector</span><span class="o">=</span><span class="n">cw2</span><span class="p">)</span>
-    <span class="n">cw3</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-    <span class="n">cw4</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">initialVector</span><span class="o">=</span><span class="n">cw3</span><span class="p">)</span>
-    <span class="n">cw4</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-    <span class="n">cw5</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">initialVector</span><span class="o">=</span><span class="n">cw4</span><span class="p">)</span>
-    <span class="n">cw5</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+<span class="c1">##    cw1 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw0)</span>
+<span class="c1">##    cw1.showMembershipCharacteristics()</span>
+<span class="c1">##    cw2 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw1)</span>
+<span class="c1">##    cw2.showMembershipCharacteristics()</span>
+<span class="c1">##    cw3 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw2)</span>
+<span class="c1">##    cw3.showMembershipCharacteristics()</span>
+<span class="c1">##    cw4 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw3)</span>
+<span class="c1">##    cw4.showMembershipCharacteristics()</span>
+<span class="c1">##    cw5 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw4)</span>
+<span class="c1">##    cw5.showMembershipCharacteristics()</span>
 
     <span class="c1">#g.showChoiceRecommendation(&#39;CondorcetWinners&#39;)</span>
 <span class="c1">##    g.showChoiceRecommendation(&#39;CondorcetWinners&#39;,Average=True)</span>
@@ -17218,7 +17217,7 @@
 <span class="c1">##    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType=&#39;guardedIndeterminateness&#39;)</span>
 <span class="c1">##    print(&#39;=== epf&#39;)</span>
 <span class="c1">##    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType=&#39;epistemicFusion&#39;)</span>
-<span class="c1">##    #g.showChoiceRecommendation(&#39;Rubis&#39;,ChoiceVector=True)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;Rubis&#39;</span><span class="p">,</span><span class="n">RubisFusionType</span><span class="o">=</span><span class="s1">&#39;epistemicFusion&#39;</span><span class="p">,</span><span class="n">ChoiceVector</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="c1">##    cg.showChoiceRecommendation(&#39;CondorcetWinners&#39;)</span>
 <span class="c1">##    print(g.showChoiceRecommendation(&#39;IteratedCondorcetWinners&#39;,</span>
 <span class="c1">##                                     ReturnRanking=True))</span>
@@ -17254,7 +17253,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Oct 31, 2026.
+      <span class="lastupdated">Last updated on Nov 01, 2026.
       </span></p>
   </div>
 

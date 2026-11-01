@@ -4636,7 +4636,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>Now, weak Condorcet winners and losers verify the same pragmatic first choice principles as initial and terminal prekernels <a class="footnote-reference brackets" href="#id124" id="id61" role="doc-noteref"><span class="fn-bracket">[</span>31<span class="fn-bracket">]</span></a>. Hence they may deliver similar first and last choice recommendations. The <a class="reference internal" href="techDoc.html#digraphs.Digraph.showChoiceRecommendation" title="digraphs.Digraph.showChoiceRecommendation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">showChoiceRecommendation()</span></code></a> method accepts therefore the ‘<em>CondorcetWinners</em>’ argument for showing positive weak Condorcet winners as first choice and positive weak Condorcet losers as last choice recommendation as shown in <a class="reference internal" href="#condorcetwinners3"><span class="std std-numref">Listing 3.65</span></a> below.</p>
 <div class="literal-block-wrapper docutils container" id="condorcetwinners3">
 <div class="code-block-caption"><span class="caption-number">Listing 3.65 </span><span class="caption-text">Showing first and last choice recommendations from weak Condorcet winners bpv-set</span><a class="headerlink" href="#condorcetwinners3" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;CondorcetWinners&#39;</span><span class="p">,</span><span class="n">Average</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;CondorcetWinners&#39;</span><span class="p">)</span>
 </span><span class="linenos"> 2</span><span class="go"> First and last choice recommendations</span>
 <span class="linenos"> 3</span><span class="go"> -------------------------------------</span>
 <span class="linenos"> 4</span><span class="go">  First choice (Condorcet winners)</span>
@@ -4658,7 +4658,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>The criteria significance majorities for each choice are indicated in brakets (see Lines 5-12). Alternative <em>p2</em> is the most supported first choice and alternative <em>p8</em> is the most supported last choice. A recommendation that gets confirmed with the ‘<em>Rubis</em>’ choice recommendation shown in <a class="reference internal" href="#condorcetwinners4"><span class="std std-numref">Listing 3.66</span></a> below (see <a class="footnote-reference brackets" href="#id125" id="id62" role="doc-noteref"><span class="fn-bracket">[</span>32<span class="fn-bracket">]</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="condorcetwinners4">
 <div class="code-block-caption"><span class="caption-number">Listing 3.66 </span><span class="caption-text">Showing the choice recommendations from the Rubis method</span><a class="headerlink" href="#condorcetwinners4" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;Rubis&#39;</span><span class="p">,</span> <span class="n">fusionType</span><span class="o">=</span><span class="s1">&#39;epistemicFusion&#39;</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;Rubis&#39;</span><span class="p">,</span> <span class="n">RubisFusionType</span><span class="o">=</span><span class="s1">&#39;epistemicFusion&#39;</span><span class="p">)</span>
 </span><span class="linenos"> 2</span><span class="go"> Rubis choice recommendation</span>
 <span class="linenos"> 3</span><span class="go"> ***********************</span>
 <span class="linenos"> 4</span><span class="go">  First choice recommendation(s) (BCR)</span>
@@ -4693,27 +4693,29 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </span><span class="linenos"> 2</span><span class="go"> ******************************************</span>
 <span class="linenos"> 3</span><span class="go">  Iterated weak Condorcet winners and losers</span>
 <span class="linenos"> 4</span><span class="go">  ------------------------------------------</span>
-<span class="linenos"> 5</span><span class="go">   1rst-choice: &#39;p2&#39; (+0.22)</span>
-<span class="linenos"> 6</span><span class="go">   1rst-choice: &#39;p6&#39; (+0.19)</span>
-<span class="hll"><span class="linenos"> 7</span><span class="go">   1rst-choice: &#39;p5&#39; (+0.03)</span>
-</span><span class="linenos"> 8</span><span class="go">     2nd-choice: &#39;p4&#39; (+1.00)</span>
-<span class="linenos"> 9</span><span class="go">     2nd-choice: &#39;p9&#39; (+0.53)</span>
-<span class="linenos">10</span><span class="go">     2nd-reject: &#39;p3&#39; (+0.53)</span>
-<span class="linenos">11</span><span class="go">   1rst-reject: &#39;p1&#39; (+0.14)</span>
-<span class="linenos">12</span><span class="go">   1rst-reject: &#39;p7&#39; (+0.14)</span>
-<span class="hll"><span class="linenos">13</span><span class="go">   1rst-reject: &#39;p8&#39; (+0.17)</span>
+<span class="hll"><span class="linenos"> 5</span><span class="go">   1rst-choice: &#39;p2&#39; (+0.22)</span>
+</span><span class="hll"><span class="linenos"> 6</span><span class="go">   1rst-choice: &#39;p6&#39; (+0.19)</span>
+</span><span class="hll"><span class="linenos"> 7</span><span class="go">   1rst-choice: &#39;p5&#39; (+0.03)</span>
+</span><span class="hll"><span class="linenos"> 8</span><span class="go">     2nd-choice: &#39;p4&#39; (+1.00)</span>
+</span><span class="hll"><span class="linenos"> 9</span><span class="go">     2nd-choice: &#39;p9&#39; (+0.53)</span>
+</span><span class="hll"><span class="linenos">10</span><span class="go">     2nd-reject: &#39;p3&#39; (+0.53)</span>
+</span><span class="hll"><span class="linenos">11</span><span class="go">   1rst-reject: &#39;p1&#39; (+0.14)</span>
+</span><span class="hll"><span class="linenos">12</span><span class="go">   1rst-reject: &#39;p7&#39; (+0.14)</span>
+</span><span class="hll"><span class="linenos">13</span><span class="go">   1rst-reject: &#39;p8&#39; (+0.17)</span>
 </span><span class="linenos">14</span><span class="go">  -----------------------------------------</span>
-<span class="hll"><span class="linenos">15</span><span class="go">  Criteria significance majority in brakets</span>
-</span><span class="linenos">16</span><span class="go">  Execution time: 0.022 sec.</span>
+<span class="linenos">15</span><span class="go">  Criteria significance majority in brakets</span>
+<span class="linenos">16</span><span class="go">  Execution time: 0.022 sec.</span>
 <span class="linenos">17</span><span class="go"> *****************************************</span>
-<span class="linenos">18</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">IteratedBpvCondorcetWinnersRanking</span>
-<span class="hll"><span class="linenos">19</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cr</span> <span class="o">=</span> <span class="n">IteratedBpvCondorcetWinnersRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-</span><span class="linenos">20</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cr</span><span class="o">.</span><span class="n">condorcetRanking</span>
-<span class="hll"><span class="linenos">21</span><span class="go"> [&#39;p2&#39;,&#39;p6&#39;,&#39;p5&#39;,&#39;p4&#39;,&#39;p9&#39;,&#39;p3&#39;,&#39;p1&#39;,&#39;p7&#39;,&#39;p8&#39;]</span>
-</span></pre></div>
+</pre></div>
 </div>
 </div>
-<p>This choice recommendation makes apparent a linear ranking which may be computed with the <a class="reference internal" href="techDoc.html#linearOrders.IteratedBpvCondorcetWinnersRanking" title="linearOrders.IteratedBpvCondorcetWinnersRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">linearOrders.IteratedBpvCondorcetWinnersRanking</span></code></a> class constructor (see Lines 19 and 21).</p>
+<p>This choice recommendation makes apparent a linear ranking which may be computed with the <a class="reference internal" href="techDoc.html#linearOrders.IteratedBpvCondorcetWinnersRanking" title="linearOrders.IteratedBpvCondorcetWinnersRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">linearOrders.IteratedBpvCondorcetWinnersRanking</span></code></a> class constructor.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">IteratedBpvCondorcetWinnersRanking</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cr</span> <span class="o">=</span> <span class="n">IteratedBpvCondorcetWinnersRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cr</span><span class="o">.</span><span class="n">condorcetRanking</span>
+<span class="go">  [&#39;p2&#39;,&#39;p6&#39;,&#39;p5&#39;,&#39;p4&#39;,&#39;p9&#39;,&#39;p3&#39;,&#39;p1&#39;,&#39;p7&#39;,&#39;p8&#39;]</span>
+</pre></div>
+</div>
 <p>In the performance heatmap shown in <a class="reference internal" href="#condorcetwinnersheatmap"><span class="std std-numref">Fig. 3.39</span></a> using the previous <em>cr.condorcetRanking</em>, we may verify the quality of this ranking.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">cr</span><span class="o">.</span><span class="n">condorcetRanking</span><span class="p">,</span>
 <span class="gp">... </span>                             <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
@@ -5889,7 +5891,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Oct 31, 2026.
+      <span class="lastupdated">Last updated on Nov 01, 2026.
       </span></p>
   </div>
 

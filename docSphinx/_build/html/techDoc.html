@@ -3770,28 +3770,28 @@ we brake the circuits on their weakest arc.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showFirstChoiceRecommendation</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showFirstChoiceRecommendation</span><span class="p">(</span><span class="n">fusionType</span><span class="o">=</span><span class="s1">&#39;epistemicFusion&#39;</span><span class="p">)</span>
 <span class="go">***********************</span>
-<span class="go">First Choice Recommendation (BCR)</span>
-<span class="go">(in decreasing order of determinateness)   </span>
-<span class="go">Credibility domain:  [-100.0, 100.0]</span>
-<span class="go">=== &gt;&gt; potential first choices</span>
-<span class="go">* choice              : [&#39;a04&#39;, &#39;a14&#39;, &#39;a19&#39;, &#39;a20&#39;]</span>
-<span class="go">   independence        : 1.19</span>
-<span class="go">   dominance           : 4.76</span>
-<span class="go">   absorbency          : -59.52</span>
-<span class="go">   covering (%)        : 75.00</span>
-<span class="go">   determinateness (%) : 57.86</span>
-<span class="go">   - most credible action(s) = { &#39;a14&#39;: 23.81, &#39;a19&#39;: 11.90, &#39;a04&#39;: 2.38, &#39;a20&#39;: 1.19, }  </span>
-<span class="go">=== &gt;&gt; potential last choices </span>
-<span class="go">* choice              : [&#39;a03&#39;, &#39;a12&#39;, &#39;a17&#39;]</span>
-<span class="go">  independence        : 4.76</span>
-<span class="go">  dominance           : -76.19</span>
-<span class="go">  absorbency          : 4.76</span>
-<span class="go">  covering (%)        : 0.00</span>
-<span class="go">  determinateness (%) : 65.39</span>
-<span class="go">  - most credible action(s) = { &#39;a03&#39;: 38.10, &#39;a12&#39;: 13.10, &#39;a17&#39;: 4.76, }</span>
-<span class="go">Execution time: 0.024 seconds</span>
+<span class="go">First choice recommendation(s) (BCR)</span>
+<span class="go"> (in decreasing order of determinateness)   </span>
+<span class="go">Credibility domain: [-1.00,1.00]</span>
+<span class="go"> === &gt;&gt; potential first choice(s)</span>
+<span class="go">* choice              : [&#39;p11&#39;, &#39;p19&#39;, &#39;p20&#39;]</span>
+<span class="go">  independence        : 0.00</span>
+<span class="go">  dominance           : 0.01</span>
+<span class="go">  absorbency          : -0.73</span>
+<span class="go">  covering (%)        : 84.31</span>
+<span class="go">  determinateness (%) : 89.43</span>
+<span class="go">  - most credible action(s) = { &#39;p20&#39;: 1.00, &#39;p11&#39;: 0.21, }</span>
+<span class="go"> === &gt;&gt; potential last choice(s) </span>
+<span class="go">* choice              : [&#39;p02&#39;, &#39;p03&#39;, &#39;p12&#39;, &#39;p17&#39;]</span>
+<span class="go">  independence        : 0.00</span>
+<span class="go">  dominance           : -0.82</span>
+<span class="go">  absorbency          : 0.05</span>
+<span class="go">  covered (%)         : 78.12</span>
+<span class="go">  determinateness (%) : 87.44</span>
+<span class="go">  - most credible action(s) = { &#39;p03&#39;: 0.42, &#39;p02&#39;: 0.11, &#39;p12&#39;: 0.05, &#39;p17&#39;: 0.01, }</span>
+<span class="go">  Execution time: 0.090 seconds</span>
 <span class="go">*****************************</span>
 </pre></div>
 </div>
@@ -15505,7 +15505,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Oct 31, 2026.
+      <span class="lastupdated">Last updated on Nov 01, 2026.
       </span></p>
   </div>
 
