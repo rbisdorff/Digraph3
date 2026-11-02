@@ -1259,18 +1259,19 @@ We may visualize the **codual** outranking digraph *cdodg* with a graphviz drawi
 
    The strict (codual) outranking digraph
 
-It becomes readily clear now from the picture above that both alternatives *a1*  and *a7* are *not strictly outranked* by any other alternatives. Hence, *a1*  and *a7* appear as :ref:`weak Condorcet winners <LinearVoting-Tutorial-label>` and may be recommended as potential *first choice alternatives* in a selection decision problem. Similarly, alternatives *a6* and *a2* are not strictly outranking any other alternative and may give suitable last choice recommendations (see below).
+It becomes readily clear now from the picture above that both alternatives *a1*  and *a7* are *not strictly outranked* by any other alternatives. Hence, *a7*  and *a1* appear as :ref:`weak Condorcet winners <LinearVoting-Tutorial-label>` and may be recommended as potential *first choice alternatives* in a selection decision problem. Similarly, alternatives *a2* and *a6* are not strictly outranking any other alternative and may give suitable last choice recommendations (see below).
 
 .. code-block:: pycon
    :linenos:
 
-   >>> cdodg.showChoiceRecommendation('CondorcetWinners')
+   >>> cdodg.showChoiceRecommendation('CondorcetWinners',
+   ...                                cwFusionTpye='average')
     First choice (Condorcet winners)
-     'a1': +0.29 (64.28%)
-     'a7': +0.29 (64.28%)
+     'a7': +0.33 (66.66%)
+     'a1': +0.31 (65.47%)
     Last choice (Condorcet losers)
-     'a6': +0.29 (64.28%)
-     'a2': +0.14 (57.15%)
+     'a2': +0.31 (65.47%)
+     'a6': +0.24 (61.91%)
     Criteria significance majority in brakets
     Execution time: 0.011 sec.
 
@@ -1730,55 +1731,37 @@ The :py:class:`~outrankingDigraphs.ConfidentBipolarOutrankingDigraph` class cons
    Execution time: 0.008 seconds
    ***************************** 
 
-Remarquable in :numref:`confidentOfficeChoice3` is the fact that, in the 90% confident outranking digraph, location *G* becomes the most credible first choice candidate and that location 'C', the cheapest one, is now a more credible confident choice than compromise location 'D' (Lines 13-14). Location *F* stays the most credible last choice candidate (Lines 16 and 22). Location 'A' remains hence an ambiguous 90% confident first and last choice candidate, even if it is a confident last choice recommendation for sure.
+Remarquable in :numref:`confidentOfficeChoice3` is the fact that, in the 90% confident outranking digraph, when replacing in the 'Rubis' method, the classical *max* and *min* operators by the corresponding disjunctive and conjunctive epistemic fusion operators, location *G* becomes the most credible first choice candidate and that location 'C', the cheapest one, is now a more credible confident choice than compromise location 'D' (Lines 13-14). Location *F* stays the most credible last choice candidate (Lines 16 and 22). Location 'A' remains hence an ambiguous 90% confident first and last choice candidate, even if it is a confident last choice recommendation for sure.
 
 Computing the bipolar-valued set of non ambiguous weak Condorcet winners
 ````````````````````````````````````````````````````````````````````````
 
-It may be opportune now to compute the bipolar-valued set of non ambiguous weak Condorcet winners and losers on the 90% confident outranking digraph. The :py:mod:`digraphs` module provides therefore the :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method (see the advanced topic on :ref:`Bipolar-Valued-Sets-Tutorial-label`).
-
-.. code-block:: pycon
-   :linenos:
-   :name: confidentOfficeChoice1
-   :emphasize-lines: 1,3-9
-   :caption: Computing the bpv-set of weak Condorcet winners and losers
-
-   >>> wcw = cg.computeBpvCondorcetWinners()
-   >>> wcw.showMembershipCharacteristics(ndigits=2)
-    G (Gar):  +0.54
-    C (Ces):  +0.46
-    D (Dom):  +0.25
-    A (Ave):  +0.00
-    E (Bel):  +0.00
-    B (Bon):  -0.56
-    F (Fen):  -1.00
-   Valuation domain: [-1.00;+1.00]
-
-In :numref:`confidentOfficeChoice1` Lines 3-9, the positive locations give suitable *first choice* candidates and the negative locations give similarly *last* *choice* candidates. To show the corresponding first and last choices recommendation, the :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method provides the '*IteratedCondorcetWinners*' argument.
+It may be opportune now to confirm this result by iterating, with the same epistemic fusion operators, the extraction of bipolar-valued sets of non ambiguous weak Condorcet winners and losers on the 90% confident outranking digraph (see :ref:`a new efficient first choice recommender algorithm <Bipolar-Valued-Condorcet-Winners>`). The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method provides therefore the '*IteratedCondorcetWinners*' argument and the *cwFusionType* parameter as shown in :numref:`confidentOfficeChoice2` Lines 1-2.
 
 .. code-block:: pycon
    :linenos:
    :name: confidentOfficeChoice2
-   :emphasize-lines: 1,5-11
+   :emphasize-lines: 1,6,8,12
    :caption: Computing iterated weak Condorcet winners and losers
 
-   >>> cg.showChoiceRecommendation('IteratedCondorcetWinners')
+   >>> cg.showChoiceRecommendation('IteratedCondorcetWinners',
+   ...                             cwFusionType='conjunctive')
     ******************************************
     Iterated weak Condorcet winners or losers
     -----------------------------------------
-      1rst-choice: 'G' (+0.545)
-      1rst-choice: 'C' (+0.462)
-      1rst-choice: 'D' (+0.248)
-        indeterminate: 'A' (+0.000)
-        indeterminate: 'E' (+0.000)
-      1rst-reject: 'B' (+0.559)
-      1rst-reject: 'F' (+1.000)
+      1rst-choice: 'G' (+0.54)
+      1rst-choice: 'C' (+0.46)
+      1rst-choice: 'D' (+0.25)
+        indeterminate: 'A' (+0.00)
+        indeterminate: 'E' (+0.00)
+      1rst-reject: 'B' (+0.56)
+      1rst-reject: 'F' (+1.00)
     -----------------------------------------
      Criteria significance majority in brakets
      Execution time: 0.012 sec.
     *****************************************
 
-Notice in :numref:`confidentOfficeChoice2` that location *A* is now correctly flagged as being an indeterminate choice candidate (see Line 8). Location 'F' remains eventually the evident last choice recommendation (Line 11).
+Notice that we obtain exactly the same result as with the 'Rubis' method [73]_, except that location *A* is now correctly flagged as being an indeterminate choice candidate (see Line 9). Location 'F' remains eventually the evident last choice recommendation (see Line 9).
 
 To get a further interesting insight in the overall outranking situation, we finally make usage of the new :py:class:`~transitiveDigraphs.PartialBachetRanking` class imported from the :py:mod:`transitiveDigraphs` module, for computing a **partial ranking** of all the potential office locations (see the advanced topic on :ref:`partially ranking strategies <Partial-Ranking-Tutorial-label>`).
 
@@ -7049,15 +7032,16 @@ We have mentioned that Alice considers a performance difference of 7 points on t
 
 In :numref:`aliceVetos`, we see that *considerable performance differences* concerning the *Attractiveness of the studies* (*AS* criterion) are indeed observed between the *Specialised Secretary* study programm offered in Köln and the *Graduate Interpreter* study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three *more or less invalid* outranking situations to *certainly invalid* (Lines 8, 13, 18) and corresponding three *more or less valid* converse outranking situations to *certainly valid* ones (Lines 25, 30, 35).
 
-We may furthermore notice in :numref:`aliceRelationMap`, that the four first-ranked study programs, *I-FHK*, *I-USB*, *I-UHB* and *T-FHK*,  are in fact *Condorcet* winners (see :numref:`aliceBestChoice` Lines 4-8), i.e. they are all four *indifferent* one of the other **and** they positively *outrank* all other alternatives, a result confirmed below by our Rubis best choice recommendation (Lines 21 and 27-28).
+We may furthermore notice in :numref:`aliceRelationMap`, that the four first-ranked study programs, *I-FHK*, *I-USB*, *I-UHB* and *T-FHK*,  are in fact *Condorcet* winners (see :numref:`aliceBestChoice` Lines 5-9), i.e. they are all four *indifferent* one of the other **and** they positively *outrank* all other alternatives, a result confirmed below by our Rubis best choice recommendation (Lines 22 and 28-29).
    
 .. code-block:: pycon
    :name: aliceBestChoice
    :linenos:
    :caption: Alice's best choice recommendation
-   :emphasize-lines: 5-8,17,21,27-28
+   :emphasize-lines: 6-9,18,22,28-29
 
-   >>> dg.showChoiceRecommendation('CondorcetWinners')
+   >>> dg.showChoiceRecommendation('CondorcetWinners',
+   ...                             cwFusionType='conjunctive')
     First and last choice recommendations
     -------------------------------------
      First choice (Condorcet winners)
@@ -7320,26 +7304,27 @@ Again, when *equi-signficant* performance criteria are assumed per decision obje
 .. code-block:: pycon
    :linenos:
 
-   >>> uop.showChoiceRecommendation('IteratedCondorcetWinners')
+   >>> uop.showChoiceRecommendation('IteratedCondorcetWinners',
+   ...                              cwFusionType='average')
     ******************************************
     Iterated weak Condorcet winners and losers
     ------------------------------------------
-     1rst-choice: 'I-FHK' (+0.750)
-        2nd-choice: 'I-USB' (+0.875)
-        2nd-choice: 'T-FHK' (+0.833)
-          3rd-choice: 'T-UD' (+1.000)
-            indeterminate: 'I-UHB' (+0.000)
-          3rd-reject: 'T-USB' (+1.000)
-        2nd-reject: 'T-UHB' (+0.833)
-        2nd-reject: 'C-HKK' (+0.833)
-     1rst-reject: 'T-FHM' (+0.583)
-     1rst-reject: 'S-HKK' (+0.833)
+     1rst-choice: 'I-FHK' (+0.84)
+       2nd-choice: 'T-FHK' (+0.56)
+       2nd-choice: 'I-USB' (+0.48)
+         3rd-choice: 'T-UD' (+0.50)
+           indeterminate: 'I-UHB' (+0.00)
+         3rd-reject: 'T-USB' (+0.50)
+       2nd-reject: 'C-HKK' (+0.14)
+       2nd-reject: 'T-UHB' (+0.81)
+     1rst-reject: 'S-HKK' (+0.30)
+     1rst-reject: 'T-FHM' (+0.49)
     -----------------------------------------
     Criteria significance majority in brakets
     Execution time: 0.028 sec.
     *****************************************
 
-In view of her performance tableau in :numref:`aliceHeatmap`, *Graduate Interpreter* studies at the *Technical High School Köln*, thus, represent definitely **Alice's very best choice**.
+In view of her performance tableau in :numref:`aliceHeatmap`, *Graduate Interpreter* studies at the *Technical High School Köln*, thus, represent definitely **Alice's very best choice** and *Qualified Translator* at the *Technical High School München* the very last choice. 
 
 For further reading about the Best Choice methodology, one may consult in [BIS-2015]_ the study of a *real decision aid case* about choosing a best poster in a scientific conference.
 
@@ -12152,7 +12137,9 @@ Appendices
 
 .. [71] The notion of *ranking fairness* only considers here the ranking algorithm's more or less fairly taking into account of the marginal criteria rankings. We do not discuss whether the individual performance measuring criteria do treat the potential decision alternatives without any unfair discrimination (see [TAJ-2026]_ )
 
-.. [72] For colour-blind people, the :py:meth:`perfsTab.PerformanceTableau.showHTMLPerformanceHeatmap` method provides with the *GrayScales=True* parameter a gray-scaled heatmap design  
+.. [72] For colour-blind people, the :py:meth:`perfsTab.PerformanceTableau.showHTMLPerformanceHeatmap` method provides with the *GrayScales=True* parameter a gray-scaled heatmap design
+
+.. [73] Most remarquable is the fact that the double fix-point equation system operating on a partial prekernel-reduced outranking digraph, when using the disjunctive and conjunctive fusion operators instead of the classical *max* and *min* operators, delivers exactly the same result as the simple conjunctive epistemic fusion of rows and columns of the outranking relation.
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive

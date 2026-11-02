@@ -4784,7 +4784,7 @@ Now, weak Condorcet winners and losers verify the same pragmatic first choice pr
    :linenos:
    :emphasize-lines: 1,5-7,10-12
 
-   >>> g.showChoiceRecommendation(method='CondorcetWinners',
+   >>> g.showChoiceRecommendation('CondorcetWinners',
    ...                            cwFusionType='average')
     First and last choice recommendations
     -------------------------------------
@@ -4810,7 +4810,7 @@ The average criteria significance majorities for each choice are indicated in br
    :linenos:
    :emphasize-lines: 1,7,13,15,21
 
-   >>> g.showChoiceRecommendation(method='Rubis')
+   >>> g.showChoiceRecommendation('Rubis')
     Rubis choice recommendation
     ***********************
      First choice recommendation(s) (BCR) 
@@ -4845,7 +4845,7 @@ In a ranking-by-choosing strategy, we may recursively extract bpv-sets of weak C
    :linenos:
    :emphasize-lines: 1,5-13
 
-   >>> g.showChoiceRecommendation(method='IteratedCondorcetWinners'
+   >>> g.showChoiceRecommendation('IteratedCondorcetWinners'
    ...                            cwFusionType='average')
     ******************************************
      Iterated weak Condorcet winners and losers
