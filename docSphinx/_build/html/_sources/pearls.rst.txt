@@ -4743,27 +4743,27 @@ The relation attribute of a given outranking digraph :math:`G(X,R)` is an eviden
    >>> t = Random3ObjectivesPerformanceTableau(
    ...           numberOfActions=9,numberOfCriteria=13,seed=1)
    >>> g = BipolarOutrankingDigraph(t)
-   >>> bpvWinners = g.computeBpvCondorcetWinners()
+   >>> bpvWinners = g.computeBpvCondorcetWinners(fusionType='average')
    >>> bpvWinners.showMembershipCharacteristics(ndigits=2)
     Bipolar-valued weak Condorcet winners set
-     p2:  +0.22
-     p6:  +0.19
-     p5:  +0.03
+     p2:  +0.82
+     p6:  +0.46
+     p5:  +0.37
      p3:  +0.00
      p4:  +0.00
      p9:  +0.00
-     p8:  -0.14
-     p7:  -0.14
-     p1:  -0.17
+     p8:  -0.34
+     p7:  -0.46
+     p1:  -0.52
 
-In the given random 3-objectives outranking digraph :math:`G(X,R)`, concerning the performances of 9 public policies with respect to 13 performance criteria, three alternatives, *p2*, *p6* and *p5* are positive weak Condorcet winners, whereas alternatives *p1*, *p7* and *p8* are negative weak Condorcet winners, that is positive weak Condorcet losers (see Lines 8-10 and 14-16 above).
+In the given random 3-objectives outranking digraph :math:`G(X,R)`, concerning the performances of 9 public policies with respect to 13 performance criteria, three alternatives, *p2*, *p6* and *p5* are positive weak Condorcet winners, whereas alternatives *p8*, *p7* and *p1* are negative weak Condorcet winners, that is positive weak Condorcet losers (see Lines 8-10 and 14-16 above).
 
-The individual bipolar-valued credibilities to '**be a non ambiguous weak Condorcet winner**' are computed as follows. For each individual alternative *x in X*, the epistemic fusion of the *outranking* credibilities :math:`r(x \succsim y)` for all :math:`y \neq x` in *X* measures indeed the more or less **outranking power** of *x* and the same epistemic fusion of the *not outranked* credibilities :math:`-r(y \succsim x)`  for all :math:`y \neq x` in *X* measures the more or less **not outrankedness** of *x*. A disjunctive epistemic :math:`$ \textcircled{$\vee$} $` fusion of both these measures delivers eventually the corresponding bpv-set.
+The individual bipolar-valued credibilities to '**be a non ambiguous weak Condorcet winner**' are computed as follows. For each individual alternative *x in X*, the average epistemic fusion of the *outranking* credibilities :math:`r(x \succsim y)` for all :math:`y \neq x` in *X* measures indeed the more or less **outranking power** of *x* and the same average epistemic fusion of the *not outranked* credibilities :math:`-r(y \succsim x)`  for all :math:`y \neq x` in *X* measures the more or less **not outrankedness** of *x*. A disjunctive epistemic :math:`$ \textcircled{$\vee$} $` fusion of both these measures delivers eventually the corresponding bpv-set.
 
-It is worthwhile noticing that the *dual* of this bpv-set *Y* gives by the way the bpv-set of the corresponding non ambiguous weak Condorcet losers.
+In :numref:`condorcetWinners2` we see confirmed in the outranking relation table of :math:`G(X,R)` that alternative *p2* is indeed a Condorcet winner and alternatives *p6* and *p5* are *weak Condorcet winners* whereas alternatives *p8*, *p7* and *p1* are *weak Condorcet losers*. It is worthwhile noticing that the *dual* of this bpv-set *Y* gives by the way the bpv-set of the corresponding non ambiguous weak Condorcet losers.
 
    >>> g.showHTMLRelationTable(
-   ...    actionsList=['p2','p6','p5','p3','p4','p9','p1','p7','p8'])
+   ...    actionsList=['p2','p6','p5','p3','p4','p9','p8','p7','p1'])
 
 .. figure:: condorcetWinners.png
    :name: condorcetWinners2
@@ -4772,10 +4772,6 @@ It is worthwhile noticing that the *dual* of this bpv-set *Y* gives by the way t
    :alt: A random outranking relation table
 
    A random outranking relation table
-
-In :numref:`condorcetWinners2` we see confirmed in the outranking relation table of :math:`G(X,R)` that alternative *p2* is indeed a Condorcet winner and alternatives *p6* and *p5* are *weak Condorcet winners* whereas alternatives *p1*, *p7* and *p8* are *weak Condorcet losers*.
-
-.. When a given strict outranking digraph shows chordless circuits it may however be the case that no weak Condorcet winners and/or losers can be detected, the resulting bpv-set does not contain any positive and/or negative credibilities. Breaking in such a case all chordless strict outranking circuits at their weakest link transforms the digraph in an acyclic asymmetric digraph such that weak Condorcet winners and losers are always given by the first and last stage of the topological sort of the digraph.
 
 Suitable first and last choice recommendations
 ..............................................
@@ -4788,24 +4784,25 @@ Now, weak Condorcet winners and losers verify the same pragmatic first choice pr
    :linenos:
    :emphasize-lines: 1,5-7,10-12
 
-   >>> g.showChoiceRecommendation('CondorcetWinners')
+   >>> g.showChoiceRecommendation(method='CondorcetWinners',
+   ...                            cwFusionType='average')
     First and last choice recommendations
     -------------------------------------
      First choice (Condorcet winners)
-      'p2': +0.22 (61.11%)
-      'p6': +0.19 (59.72%)
-      'p5': +0.03 (51.39%)
+      'p2': +0.82 (91.14%)
+      'p6': +0.46 (72.91%)
+      'p5': +0.37 (68.41%)
     -------------------------------------
      Last choice (Condorcet losers)
-      'p8': +0.17 (58.34%)
-      'p7': +0.14 (56.95%)
-      'p1': +0.14 (56.95%)
+      'p1': +0.52 (76.22%)
+      'p7': +0.46 (73.09%)
+      'p8': +0.34 (66.84%)
     -------------------------------------
      Criteria significance majority in brakets
      Execution time: 0.027 sec.
     ******************************************
 
-The criteria significance majorities for each choice are indicated in brakets (see Lines 5-12). Alternative *p2* is the most supported first choice and alternative *p8* is the most supported last choice. A recommendation that gets confirmed with the '*Rubis*' choice recommendation shown in :numref:`CondorcetWinners4` below (see [32]_). 
+The average criteria significance majorities for each choice are indicated in brakets (see Lines 5-12). Alternative *p2* is the most supported first choice and alternative *p1* is the most supported last choice. A recommendation that gets confirmed with the '*Rubis*' choice recommendation shown in :numref:`CondorcetWinners4` below (see [32]_). 
 
 .. code-block:: pycon
    :caption: Showing the choice recommendations from the Rubis method
@@ -4813,7 +4810,7 @@ The criteria significance majorities for each choice are indicated in brakets (s
    :linenos:
    :emphasize-lines: 1,7,13,15,21
 
-   >>> g.showChoiceRecommendation('Rubis', RubisFusionType='epistemicFusion')
+   >>> g.showChoiceRecommendation(method='Rubis')
     Rubis choice recommendation
     ***********************
      First choice recommendation(s) (BCR) 
@@ -4824,18 +4821,18 @@ The criteria significance majorities for each choice are indicated in brakets (s
          dominance           : 0.06
          absorbency          : -1.00
          covering (%)        : 55.56
-         determinateness (%) : 88.89
-         - most credible action(s) = { 'p2': 1.00 }
+         determinateness (%) : 57.72
+         - most credible action(s) = { 'p2': 0.22 }
      === >> potential last choice(s) 
-     * choice              : ['p8', 'p1', 'p7']
+     * choice              : ['p1', 'p7', 'p8']
 	 independence        : 0.00
 	 dominance           : -0.58
 	 absorbency          : 0.03
 	 covered (%)         : 50.00
-	 determinateness (%) : 71.76
-	 - most credible action(s) = { 'p8': 0.17, 'p1': 0.14, 'p7': 0.14 }
+	 determinateness (%) : 50.00
+	 - most credible action(s) = {}
 
-Notice that the classic *max* and *min* inner vector product operators are replaced here with their corresponding disjunctive and conjunctive epistemic fusion operators (see Line 1). With the given random outranking digraph *g*, initial and terminal prekernels recommendations correspond now nearly to the positive weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and *strictly* outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are non ambiguous *weakly* outranking or not *outranked* resp. *weakly* outranked or not *outranking* choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location 'A', being incomparable to all other locations, is included in both the initial and the terminal prekernel. Location *A* is hence an ambiguous first and last choice recommendation and therefore neither part of the non ambiguous weak Condorcet winners, nor of the non ambiguous weak Condorcet losers [33]_.
+With the given random outranking digraph *g*, initial and terminal prekernels recommendations correspond now nearly to the positive weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and *strictly* outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are non ambiguous *weakly* outranking or not *outranked* resp. *weakly* outranked or not *outranking* choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location 'A', being incomparable to all other locations, is included in both the initial and the terminal prekernel. Location *A* is hence an ambiguous first and last choice recommendation and therefore neither part of the non ambiguous weak Condorcet winners, nor of the non ambiguous weak Condorcet losers [33]_.
 
 Ranking-by-choosing with bpv-sets of weak Condorcet winners and loosers
 .......................................................................
@@ -4848,35 +4845,37 @@ In a ranking-by-choosing strategy, we may recursively extract bpv-sets of weak C
    :linenos:
    :emphasize-lines: 1,5-13
 
-   >>> g.showChoiceRecommendation('IteratedCondorcetWinners')
+   >>> g.showChoiceRecommendation(method='IteratedCondorcetWinners'
+   ...                            cwFusionType='average')
     ******************************************
      Iterated weak Condorcet winners and losers
      ------------------------------------------
-      1rst-choice: 'p2' (+0.22)
-      1rst-choice: 'p6' (+0.19)
-      1rst-choice: 'p5' (+0.03)
-        2nd-choice: 'p4' (+1.00)
-        2nd-choice: 'p9' (+0.53)
-        2nd-reject: 'p3' (+0.53)
-      1rst-reject: 'p1' (+0.14)
-      1rst-reject: 'p7' (+0.14)
-      1rst-reject: 'p8' (+0.17)
+      1rst-choice: 'p2' (+0.823)
+      1rst-choice: 'p6' (+0.458)
+      1rst-choice: 'p5' (+0.368)
+        2nd-choice: 'p4' (+0.500)
+	2nd-choice: 'p9' (+0.264)
+        2nd-reject: 'p3' (+0.764)
+      1rst-reject: 'p8' (+0.337)
+      1rst-reject: 'p7' (+0.462)
+      1rst-reject: 'p1' (+0.524)
      -----------------------------------------
      Criteria significance majority in brakets
-     Execution time: 0.022 sec.
+     Execution time: 0.039 sec.
     *****************************************   
 
 This choice recommendation makes apparent a linear ranking which may be computed with the :py:class:`linearOrders.IteratedBpvCondorcetWinnersRanking` class constructor.
 
 >>> from linearOrders import IteratedBpvCondorcetWinnersRanking
->>> cr = IteratedBpvCondorcetWinnersRanking(g)
+>>> cr = IteratedBpvCondorcetWinnersRanking(g,fusionType=average')
 >>> cr.condorcetRanking
-  ['p2','p6','p5','p4','p9','p3','p1','p7','p8']
+  ['p2','p6','p5','p4','p9','p3','p8','p7','p1']
 
-In the performance heatmap shown in :numref:`condorcetWinnersHeatmap` using the previous *cr.condorcetRanking*, we may verify the quality of this ranking.
+In the performance heatmap shown in :numref:`condorcetWinnersHeatmap` using the previous *cr.condorcetRanking*, we may verify the quality of this ranking. Notice by the way the *GrayScales* parameter which allows to produce heatmaps suitable for colourblind persons.
 
 >>> g.showHTMLPerformanceHeatmap(cr.condorcetRanking,
-...                              Correlations=True,colorLevels=5)
+...                              Correlations=True,colorLevels=5
+...                              GrayScales=True)
 
 .. figure:: condorcetWinnersHeatmap.png
    :name: condorcetWinnersHeatmap
