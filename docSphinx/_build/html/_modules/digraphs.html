@@ -9694,10 +9694,10 @@
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.showChoiceRecommendation">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">showChoiceRecommendation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                 <span class="n">method</span><span class="o">=</span><span class="s1">&#39;CondorcetWinners&#39;</span><span class="p">,</span>
-                                <span class="n">cwFusionType</span><span class="o">=</span><span class="s1">&#39;conjunctive&#39;</span><span class="p">,</span>
+                                <span class="n">cwFusionType</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span> <span class="c1"># or &#39;conjunctive&#39;</span>
                                  <span class="c1"># Rubis</span>
                                 <span class="n">ChoiceVector</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                <span class="n">RubisFusionType</span><span class="o">=</span><span class="s1">&#39;standard&#39;</span><span class="p">,</span>
+                                <span class="n">RubisFusionType</span><span class="o">=</span><span class="s1">&#39;standard&#39;</span><span class="p">,</span> <span class="c1"># or &#39;epistemicFusion&#39;</span>
                                  <span class="c1"># Bachet</span>
                                 <span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                 <span class="n">randomized</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
@@ -9718,13 +9718,13 @@
 
 <span class="sd">        **Parameters**</span>
 <span class="sd">        </span>
-<span class="sd">        *method*: &#39;CondorcetWinners&#39;, &#39;Bachet&#39;, &#39;Rubis&#39;, &#39;IteratedBachet&#39; or &#39;IteratedCondorcetWinners&#39;</span>
+<span class="sd">        *method*: &#39;CondorcetWinners&#39; (default), &#39;Bachet&#39;, &#39;Rubis&#39;, &#39;IteratedBachet&#39; or &#39;IteratedCondorcetWinners&#39;</span>
 <span class="sd">        The Bachet method is based on the conjoint</span>
 <span class="sd">        extracton of initial and terminal prekernels from the partial Bachet ranking,</span>
 <span class="sd">        whereas the Rubis method is based on the extraction of an initial and</span>
 <span class="sd">        terminal prekernels directly from the given outranking digraph.</span>
-<span class="sd">        The Condorcet winners method returns the bpv-sets of the weak Condorcet winners by</span>
-<span class="sd">        default computed on the codual and broken Cocs instance.</span>
+<span class="sd">        The Condorcet winners method returns the bpv-sets of the weak Condorcet winners computed by</span>
+<span class="sd">        average epistemic fusion.</span>
 
 <span class="sd">        *Polarised*: *True* (by default) | False; Bachet parameter</span>
 
@@ -9900,7 +9900,7 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">computeBpvCondorcetWinners</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">BrokenCocs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">Average</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                   <span class="n">fusionType</span><span class="o">=</span><span class="s1">&#39;conjunctive&#39;</span><span class="p">,</span>
+                                   <span class="n">fusionType</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span> <span class="c1"># or &#39;conjunctive&#39;</span>
                                    <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">initialVector</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -10613,9 +10613,10 @@
 <div class="viewcode-block" id="Digraph.computeEpistemicFusion">
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeEpistemicFusion">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">computeEpistemicFusion</span><span class="p">(</span><span class="n">digraph</span><span class="p">,</span><span class="n">Terminal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">initialVector</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                                          <span class="n">fusionType</span><span class="o">=</span><span class="s1">&#39;conjunctive&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                               <span class="n">fusionType</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span> <span class="c1"># or &#39;conjunctive&#39; or &#39;disjunctive&#39;</span>
+                               <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Computes the conjunctive epistemic fusion of</span>
+<span class="sd">        Computes the average (default) or conjunctive epistemic fusion of</span>
 <span class="sd">        rows (Terminal=True) or columns (Terminal=False)</span>
 <span class="sd">        of the digraph&#39;s relation attribute.</span>
 <span class="sd">        Validate the stable fix-point solution vector Y.</span>
@@ -10657,7 +10658,23 @@
             <span class="n">res</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;pos&#39;</span><span class="p">:</span><span class="n">posx</span><span class="p">,</span><span class="s1">&#39;neg&#39;</span><span class="p">:</span><span class="n">negx</span><span class="p">,</span><span class="s1">&#39;nul&#39;</span><span class="p">:</span><span class="n">nulx</span><span class="p">}</span>
         <span class="n">resvec</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span> <span class="o">-</span><span class="mi">1</span>
-        <span class="k">if</span> <span class="n">fusionType</span> <span class="o">==</span> <span class="s1">&#39;conjunctive&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">fusionType</span> <span class="o">==</span> <span class="s1">&#39;average&#39;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
+                <span class="n">pl</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;pos&#39;</span><span class="p">])</span>
+                <span class="n">nl</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;neg&#39;</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">pl</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">nl</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">sumx</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">()</span>
+                    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">res</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;pos&#39;</span><span class="p">]:</span>
+                        <span class="n">sumx</span> <span class="o">+=</span> <span class="n">val</span>
+                    <span class="n">resvec</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">sumx</span><span class="o">/</span><span class="n">Decimal</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">nl</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">pl</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">sumx</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">()</span>
+                    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">res</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;neg&#39;</span><span class="p">]:</span>
+                        <span class="n">sumx</span> <span class="o">+=</span> <span class="n">val</span>
+                    <span class="n">resvec</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">sumx</span><span class="o">/</span><span class="n">Decimal</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">resvec</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
+        <span class="k">elif</span> <span class="n">fusionType</span> <span class="o">==</span> <span class="s1">&#39;conjunctive&#39;</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
                 <span class="c1">#print(x, res[x])</span>
                 <span class="n">pl</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;pos&#39;</span><span class="p">])</span>
@@ -10672,22 +10689,6 @@
                     <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">res</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;neg&#39;</span><span class="p">]:</span>
                         <span class="n">maxx</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">maxx</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
                     <span class="n">resvec</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">maxx</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">resvec</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
-        <span class="k">elif</span> <span class="n">fusionType</span> <span class="o">==</span> <span class="s1">&#39;average&#39;</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
-                <span class="n">pl</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;pos&#39;</span><span class="p">])</span>
-                <span class="n">nl</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;neg&#39;</span><span class="p">])</span>
-                <span class="k">if</span> <span class="n">pl</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">nl</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="n">sumx</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">()</span>
-                    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">res</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;pos&#39;</span><span class="p">]:</span>
-                        <span class="n">sumx</span> <span class="o">+=</span> <span class="n">val</span>
-                    <span class="n">resvec</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">sumx</span><span class="o">/</span><span class="n">Decimal</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-                <span class="k">elif</span> <span class="n">nl</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">pl</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="n">sumx</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">()</span>
-                    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">res</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;neg&#39;</span><span class="p">]:</span>
-                        <span class="n">sumx</span> <span class="o">+=</span> <span class="n">val</span>
-                    <span class="n">resvec</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">sumx</span><span class="o">/</span><span class="n">Decimal</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">resvec</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
         <span class="k">elif</span> <span class="n">fusionType</span> <span class="o">==</span> <span class="s1">&#39;disjunctive&#39;</span><span class="p">:</span>
@@ -17165,10 +17166,14 @@
     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">startMethod</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
     <span class="n">cw0</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                       <span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">fusionType</span><span class="o">=</span><span class="s1">&#39;conjunctive&#39;</span><span class="p">)</span>
+                                       <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">fusionType</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
     <span class="n">cw0</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
-<span class="c1">##    cw1 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw0)</span>
+<span class="c1">##    cw1 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw0,</span>
+<span class="c1">##                                       fusionType=&#39;average&#39;)</span>
 <span class="c1">##    cw1.showMembershipCharacteristics()</span>
+<span class="c1">##    cw2 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw1,</span>
+<span class="c1">##                                       fusionType=&#39;average&#39;)</span>
+<span class="c1">##    cw2.showMembershipCharacteristics()</span>
 <span class="c1">##    cw2 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw1)</span>
 <span class="c1">##    cw2.showMembershipCharacteristics()</span>
 <span class="c1">##    cw3 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw2)</span>
@@ -17202,7 +17207,7 @@
 <span class="c1">##    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType=&#39;guardedIndeterminateness&#39;)</span>
 <span class="c1">##    print(&#39;=== epf&#39;)</span>
 <span class="c1">##    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType=&#39;epistemicFusion&#39;)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;Rubis&#39;</span><span class="p">,</span><span class="n">RubisFusionType</span><span class="o">=</span><span class="s1">&#39;guardedIndeterminateness&#39;</span><span class="p">,</span><span class="n">ChoiceVector</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1">##    g.showChoiceRecommendation(&#39;Rubis&#39;,RubisFusionType=&#39;guardedIndeterminateness&#39;,ChoiceVector=True)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;Rubis&#39;</span><span class="p">,</span><span class="n">RubisFusionType</span><span class="o">=</span><span class="s1">&#39;epistemicFusion&#39;</span><span class="p">,</span><span class="n">ChoiceVector</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="c1">##    cg.showChoiceRecommendation(&#39;CondorcetWinners&#39;)</span>
 <span class="c1">##    print(g.showChoiceRecommendation(&#39;IteratedCondorcetWinners&#39;,</span>
@@ -17239,7 +17244,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Nov 01, 2026.
+      <span class="lastupdated">Last updated on Nov 02, 2026.
       </span></p>
   </div>
 

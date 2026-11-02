@@ -9031,10 +9031,10 @@ class Digraph(object):
 
     def showChoiceRecommendation(self,
                                 method='CondorcetWinners',
-                                cwFusionType='conjunctive',
+                                cwFusionType='average', # or 'conjunctive'
                                  # Rubis
                                 ChoiceVector=False,
-                                RubisFusionType='standard',
+                                RubisFusionType='standard', # or 'epistemicFusion'
                                  # Bachet
                                 Polarised=True,
                                 randomized=100,
@@ -9055,13 +9055,13 @@ class Digraph(object):
 
         **Parameters**
         
-        *method*: 'CondorcetWinners', 'Bachet', 'Rubis', 'IteratedBachet' or 'IteratedCondorcetWinners'
+        *method*: 'CondorcetWinners' (default), 'Bachet', 'Rubis', 'IteratedBachet' or 'IteratedCondorcetWinners'
         The Bachet method is based on the conjoint
         extracton of initial and terminal prekernels from the partial Bachet ranking,
         whereas the Rubis method is based on the extraction of an initial and
         terminal prekernels directly from the given outranking digraph.
-        The Condorcet winners method returns the bpv-sets of the weak Condorcet winners by
-        default computed on the codual and broken Cocs instance.
+        The Condorcet winners method returns the bpv-sets of the weak Condorcet winners computed by
+        average epistemic fusion.
 
         *Polarised*: *True* (by default) | False; Bachet parameter
 
@@ -9234,7 +9234,7 @@ class Digraph(object):
     def computeBpvCondorcetWinners(self,CoDual=False,
                                    BrokenCocs=False,
                                    Average=False,
-                                   fusionType='conjunctive',
+                                   fusionType='average', # or 'conjunctive'
                                    Comments=False,
                                    Debug=False,
                                    initialVector=None,
@@ -9929,9 +9929,10 @@ class Digraph(object):
         return res
 
     def computeEpistemicFusion(digraph,Terminal=False,initialVector=None,
-                                          fusionType='conjunctive',Debug=False):
+                               fusionType='average', # or 'conjunctive' or 'disjunctive'
+                               Debug=False):
         """
-        Computes the conjunctive epistemic fusion of
+        Computes the average (default) or conjunctive epistemic fusion of
         rows (Terminal=True) or columns (Terminal=False)
         of the digraph's relation attribute.
         Validate the stable fix-point solution vector Y.
@@ -9973,7 +9974,23 @@ class Digraph(object):
             res[x] = {'pos':posx,'neg':negx,'nul':nulx}
         resvec = {}
         n = len(g.actions) -1
-        if fusionType == 'conjunctive':
+        if fusionType == 'average':
+            for x in res:
+                pl = len(res[x]['pos'])
+                nl = len(res[x]['neg'])
+                if pl > 0 and nl == 0:
+                    sumx = Decimal()
+                    for val in res[x]['pos']:
+                        sumx += val
+                    resvec[x] = sumx/Decimal(n)
+                elif nl > 0 and pl == 0:
+                    sumx = Decimal()
+                    for val in res[x]['neg']:
+                        sumx += val
+                    resvec[x] = sumx/Decimal(n)
+                else:
+                    resvec[x] = Med
+        elif fusionType == 'conjunctive':
             for x in res:
                 #print(x, res[x])
                 pl = len(res[x]['pos'])
@@ -9988,22 +10005,6 @@ class Digraph(object):
                     for v in res[x]['neg']:
                         maxx = max(maxx,v)
                     resvec[x] = maxx
-                else:
-                    resvec[x] = Med
-        elif fusionType == 'average':
-            for x in res:
-                pl = len(res[x]['pos'])
-                nl = len(res[x]['neg'])
-                if pl > 0 and nl == 0:
-                    sumx = Decimal()
-                    for val in res[x]['pos']:
-                        sumx += val
-                    resvec[x] = sumx/Decimal(n)
-                elif nl > 0 and pl == 0:
-                    sumx = Decimal()
-                    for val in res[x]['neg']:
-                        sumx += val
-                    resvec[x] = sumx/Decimal(n)
                 else:
                     resvec[x] = Med
         elif fusionType == 'disjunctive':
@@ -16203,10 +16204,14 @@ if __name__ == "__main__":
     g = BipolarOutrankingDigraph(t,Threading=False,startMethod='spawn')
     print(g)
     cw0 = g.computeBpvCondorcetWinners(Comments=False,
-                                       Debug=True,fusionType='conjunctive')
+                                       Debug=False,fusionType='average')
     cw0.showMembershipCharacteristics()
-##    cw1 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw0)
+##    cw1 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw0,
+##                                       fusionType='average')
 ##    cw1.showMembershipCharacteristics()
+##    cw2 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw1,
+##                                       fusionType='average')
+##    cw2.showMembershipCharacteristics()
 ##    cw2 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw1)
 ##    cw2.showMembershipCharacteristics()
 ##    cw3 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw2)
@@ -16240,7 +16245,7 @@ if __name__ == "__main__":
 ##    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType='guardedIndeterminateness')
 ##    print('=== epf')
 ##    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType='epistemicFusion')
-    g.showChoiceRecommendation('Rubis',RubisFusionType='guardedIndeterminateness',ChoiceVector=True)
+##    g.showChoiceRecommendation('Rubis',RubisFusionType='guardedIndeterminateness',ChoiceVector=True)
     g.showChoiceRecommendation('Rubis',RubisFusionType='epistemicFusion',ChoiceVector=True)
 ##    cg.showChoiceRecommendation('CondorcetWinners')
 ##    print(g.showChoiceRecommendation('IteratedCondorcetWinners',
