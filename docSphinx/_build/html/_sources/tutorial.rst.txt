@@ -6807,13 +6807,13 @@ Alice's best choice: A *selection* case study [19]_
          :width: 150 px
          :align: center
 
-   Alice D. , 19 years old German student finishing her secondary studies in Köln (Germany), desires to undertake foreign languages studies. She will probably receive her 'Abitur' with satisfactory and/or good marks and  wants to start her further studies thereafter.
+   Alice D. , 19 years old German student finishing her secondary studies in Köln (Germany), desires to undertake foreign languages studies [DUS-2001]_. She will probably receive her 'Abitur' with satisfactory and/or good marks and  wants to start her further studies thereafter.
 
    She would not mind staying in Köln, yet is ready to move elsewhere if necessary. The length of the higher studies do concern her, as she wants to earn her life as soon as possible.  Her parents however agree to financially support her study fees as well as her living costs during her studies.
 
 .. only:: latex
 
-   |linkAlice| Alice D. , 19 years old German student finishing her secondary studies in Köln (Germany), desires to undertake foreign languages studies. She will probably receive her 'Abitur' with satisfactory and/or good marks and  wants to start her further studies thereafter.
+   |linkAlice| Alice D. , 19 years old German student finishing her secondary studies in Köln (Germany), desires to undertake foreign languages studies [DUS-2001]_. She will probably receive her 'Abitur' with satisfactory and/or good marks and  wants to start her further studies thereafter.
 
    She would not mind staying in Köln, yet is ready to move elsewhere if necessary. The length of the higher studies do concern her, as she wants to earn her life as soon as possible.  Her parents however agree to financially support her study fees, as well as, her living costs during her studies.
 
@@ -11964,6 +11964,8 @@ Appendices
 
 .. [FMCAA] Häggström O. (2002) *Finite Markov Chains and Algorithmic Applications*. Cambridge University Press.
 
+.. [DUS-2001] Düsch E. (2001), Entscheidung für eine Fremdsprachenausbildung. In: Eisenführ F., Langer T. and Weber M (eds), *Fallstudien zu rationalem Entscheiden*, Fallstudie A, Springer New York, pp 1-18
+
 .. [BIS-2000] Bisdorff R. (2000), "Logical foundation of fuzzy preferential systems with application to the ELECTRE decision aid methods", *Computers and Operations Research*, 27:673-687 (downloadable version `PDF file 159.1Kb <http://hdl.handle.net/10993/23724>`_).
 
 .. [BIS-1999] Bisdorff R. (1999), "Bipolar ranking from pairwise fuzzy outrankings", JORBEL *Belgian Journal of Operations Research, Statistics and Computer Science*, Vol. 37 (4) 97 379-387. (PDF file (351.7 Kb) `for downloading <http://hdl.handle.net/10993/38738>`_)
@@ -12032,7 +12034,7 @@ Appendices
 
 .. [18] A Digraph3 *graphs.Graph* encoded file is available in the :code:`examples` directory of the Digraph3 software collection.
 
-.. [19] This case study is inspired by a *Multiple Criteria Decision Analysis* case study published in Eisenführ Fr., Langer Th., and Weber M., *Fallstudien zu rationalem Entscheiden*, Springer 2001, pp. 1-17.
+.. [19] This case study is inspired by a *Multiple Criteria Decision Analysis* case study published by Düsch E. in Eisenführ Fr., Langer Th., and Weber M., *Fallstudien zu rationalem Entscheiden*, Springer 2001, pp. 1-17.
 
 .. [20] Ganzeboom H.B.G, Treiman D.J. "Internationally Comparable Measures of Occupational Status for the 1988 International Standard Classification of Occupations", *Social Science Research* 25, 201–239 (1996).
 
