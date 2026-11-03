@@ -16201,11 +16201,11 @@ if __name__ == "__main__":
     #t = PerformanceTableau('officeChoice')
     #t = PerformanceTableau('roy66')
     #print(getcontext().prec)
-    g = BipolarOutrankingDigraph(t,Threading=False,startMethod='spawn')
+    g = BipolarOutrankingDigraph(t,Threading=True,startMethod='spawn')
     print(g)
     cw0 = g.computeBpvCondorcetWinners(Comments=False,
                                        Debug=False,fusionType='average')
-    cw0.showMembershipCharacteristics()
+    #cw0.showMembershipCharacteristics()
 ##    cw1 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw0,
 ##                                       fusionType='average')
 ##    cw1.showMembershipCharacteristics()

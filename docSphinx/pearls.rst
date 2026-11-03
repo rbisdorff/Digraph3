@@ -4885,6 +4885,12 @@ In the performance heatmap shown in :numref:`condorcetWinnersHeatmap` using the 
 
    Performance heatmap ranked by iterated bipolar-valued Condorcet winners and losers
 
+.. seealso::    
+
+   * :ref:`Computing a best choice recommendation <Rubis-Tutorial-label>`
+     
+   * :ref:`Alice’s best choice: A selection case study <Alice-Tutorial-label>`
+
 .. note::
 
    With the correct implementation of the conjunctive epistemic fusion operator we may now compute bipolar-valued non ambiguous first and last choice recommendations of a given strict outranking digraph in an :math:`\mathcal{O}(n^2)` complexity without having to first find its polarised crisp initial and terminal prekernels (a not polynomial problem in general) and without having furthermore to solve the corresponding double fixpoint kernel equation systems [30]_.
