@@ -65,19 +65,19 @@
 \contentsline {subsection}{\numberline {3.6}A new choice recommender algorithm}{128}{subsection.3.6}%
 \contentsline {subsubsection}{Computing bipolar\sphinxhyphen {}valued weak Condorcet winners and loosers}{129}{subsubsection*.136}%
 \contentsline {subsubsection}{Suitable first and last choice recommendations}{130}{subsubsection*.138}%
-\contentsline {subsubsection}{Ranking\sphinxhyphen {}by\sphinxhyphen {}choosing with bpv\sphinxhyphen {}sets of weak Condorcet winners and loosers}{132}{subsubsection*.141}%
+\contentsline {subsubsection}{Ranking\sphinxhyphen {}by\sphinxhyphen {}choosing with bpv\sphinxhyphen {}sets of weak Condorcet winners and loosers}{132}{subsubsection*.142}%
 \contentsline {subsection}{\numberline {3.7}Bipolar\sphinxhyphen {}valued kernel membership characteristic vectors}{134}{subsection.3.7}%
-\contentsline {subsubsection}{Kernel equation systems}{134}{subsubsection*.146}%
-\contentsline {subsubsection}{Solving bipolar\sphinxhyphen {}valued kernel equation systems}{135}{subsubsection*.147}%
-\contentsline {subsubsection}{Historical notes}{142}{subsubsection*.148}%
+\contentsline {subsubsection}{Kernel equation systems}{134}{subsubsection*.147}%
+\contentsline {subsubsection}{Solving bipolar\sphinxhyphen {}valued kernel equation systems}{135}{subsubsection*.148}%
+\contentsline {subsubsection}{Historical notes}{142}{subsubsection*.149}%
 \contentsline {subsection}{\numberline {3.8}On characterizing bipolar\sphinxhyphen {}valued outranking digraphs}{143}{subsection.3.8}%
-\contentsline {subsubsection}{Necessary properties of the outranking digraph}{143}{subsubsection*.154}%
-\contentsline {subsubsection}{Partial tournaments may be strict outranking digraphs}{145}{subsubsection*.156}%
-\contentsline {subsubsection}{Recognizing bipolar outranking valuations}{147}{subsubsection*.157}%
-\contentsline {subsubsection}{On generating random outranking valuations}{151}{subsubsection*.159}%
+\contentsline {subsubsection}{Necessary properties of the outranking digraph}{143}{subsubsection*.155}%
+\contentsline {subsubsection}{Partial tournaments may be strict outranking digraphs}{145}{subsubsection*.157}%
+\contentsline {subsubsection}{Recognizing bipolar outranking valuations}{147}{subsubsection*.158}%
+\contentsline {subsubsection}{On generating random outranking valuations}{151}{subsubsection*.160}%
 \contentsline {subsection}{\numberline {3.9}Consensus quality of the bipolar\sphinxhyphen {}valued outranking relation}{151}{subsection.3.9}%
-\contentsline {subsubsection}{Circular performance tableaux}{152}{subsubsection*.163}%
-\contentsline {subsubsection}{A difficult decision problem}{154}{subsubsection*.164}%
-\contentsline {subsubsection}{The central CONDORCET point of view}{155}{subsubsection*.165}%
+\contentsline {subsubsection}{Circular performance tableaux}{152}{subsubsection*.164}%
+\contentsline {subsubsection}{A difficult decision problem}{154}{subsubsection*.165}%
+\contentsline {subsubsection}{The central CONDORCET point of view}{155}{subsubsection*.166}%
 \contentsline {section}{\numberline {4}Appendix}{161}{section.4}%
 \contentsline {section}{References}{161}{section.4}%

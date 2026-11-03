@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.10.4)  13 OCT 2026 13:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.10.4)  3 NOV 2026 15:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1250,131 +1250,128 @@ Overfull \vbox (3.88771pt too high) detected at line 6508
  []
 
 [119] [120] [121] [122] [123] [124] [125] [126] [127] [128] [129]
-<condorcetWinners.png, id=1687, 335.00156pt x 279.29344pt>
+<condorcetWinners.png, id=1689, 347.79938pt x 318.43968pt>
 File: condorcetWinners.png Graphic file (type png)
 <use condorcetWinners.png>
-Package pdftex.def Info: condorcetWinners.png  used on input line 7028.
-(pdftex.def)             Requested size: 225.84229pt x 188.2848pt.
- [130 <./condorcetWinners.png>]
-Underfull \vbox (badness 10000) detected at line 7096
- []
-
-[131] [132]
-<condorcetWinnersHeatmap.png, id=1727, 625.58719pt x 493.0922pt>
+Package pdftex.def Info: condorcetWinners.png  used on input line 7031.
+(pdftex.def)             Requested size: 225.84229pt x 206.7744pt.
+ [130 <./condorcetWinners.png>] [131] [132]
+<condorcetWinnersHeatmap.png, id=1731, 498.36188pt x 408.77719pt>
 File: condorcetWinnersHeatmap.png Graphic file (type png)
 <use condorcetWinnersHeatmap.png>
-Package pdftex.def Info: condorcetWinnersHeatmap.png  used on input line 7154.
-(pdftex.def)             Requested size: 376.40381pt x 296.69275pt.
- [133 <./condorcetWinnersHeatmap.png>] [134] [135] [136]
-Underfull \hbox (badness 7814) in paragraph at lines 7389--7391
+Package pdftex.def Info: condorcetWinnersHeatmap.png  used on input line 7161.
+(pdftex.def)             Requested size: 376.40381pt x 308.74652pt.
+ [133 <./condorcetWinnersHeatmap.png>] [134]
+[135] [136]
+Underfull \hbox (badness 7814) in paragraph at lines 7413--7415
 []\T1/cmr/m/n/12 Let us com-pute the \T1/cmr/m/it/12 ini-tial \T1/cmr/m/n/12 pr
 ek-er-nel re-stricted ad-ja-cency ta-ble with the
  []
 
-<k1restricted.png, id=1776, 483.30562pt x 281.55188pt>
+<k1restricted.png, id=1779, 483.30562pt x 281.55188pt>
 File: k1restricted.png Graphic file (type png)
 <use k1restricted.png>
-Package pdftex.def Info: k1restricted.png  used on input line 7404.
+Package pdftex.def Info: k1restricted.png  used on input line 7428.
 (pdftex.def)             Requested size: 301.12305pt x 175.42816pt.
 [137] [138 <./k1restricted.png>]
-<k2restricted.png, id=1789, 486.31688pt x 279.29344pt>
+<k2restricted.png, id=1793, 486.31688pt x 279.29344pt>
 File: k2restricted.png Graphic file (type png)
 <use k2restricted.png>
-Package pdftex.def Info: k2restricted.png  used on input line 7459.
+Package pdftex.def Info: k2restricted.png  used on input line 7483.
 (pdftex.def)             Requested size: 301.12305pt x 172.93427pt.
  [139 <./k2restricted.png>]
 File: bestWorstOrientation.png Graphic file (type png)
 <use bestWorstOrientation.png>
-Package pdftex.def Info: bestWorstOrientation.png  used on input line 7500.
+Package pdftex.def Info: bestWorstOrientation.png  used on input line 7524.
 (pdftex.def)             Requested size: 225.84229pt x 237.053pt.
  [140] [141]
 [142]
-<Bouyssou4Orig.png, id=1839, 225.84375pt x 295.85532pt>
+<Bouyssou4Orig.png, id=1844, 225.84375pt x 295.85532pt>
 File: Bouyssou4Orig.png Graphic file (type png)
 <use Bouyssou4Orig.png>
-Package pdftex.def Info: Bouyssou4Orig.png  used on input line 7650.
+Package pdftex.def Info: Bouyssou4Orig.png  used on input line 7674.
 (pdftex.def)             Requested size: 150.56152pt x 197.24692pt.
  [143] [144 <./Bouyssou4Orig.png>]
-<randomPartialTournament.png, id=1869, 225.84375pt x 377.15906pt>
+<randomPartialTournament.png, id=1873, 225.84375pt x 377.15906pt>
 File: randomPartialTournament.png Graphic file (type png)
 <use randomPartialTournament.png>
-Package pdftex.def Info: randomPartialTournament.png  used on input line 7724.
+Package pdftex.def Info: randomPartialTournament.png  used on input line 7748.
 (pdftex.def)             Requested size: 150.56152pt x 251.45218pt.
  [145] [146 <./randomPartialTournament.png>] [147] [148] [149] [150] [151] [152
 ]
-<rel_circular-5-PT.png, id=1955, 225.84375pt x 377.15906pt>
+<rel_circular-5-PT.png, id=1959, 225.84375pt x 377.15906pt>
 File: rel_circular-5-PT.png Graphic file (type png)
 <use rel_circular-5-PT.png>
-Package pdftex.def Info: rel_circular-5-PT.png  used on input line 8061.
+Package pdftex.def Info: rel_circular-5-PT.png  used on input line 8085.
 (pdftex.def)             Requested size: 150.56152pt x 251.45218pt.
  [153 <./rel_circular-5-PT.png>]
-<rel_circular-5-PT_wk.png, id=1968, 261.22594pt x 86.57344pt>
+<rel_circular-5-PT_wk.png, id=1972, 261.22594pt x 86.57344pt>
 File: rel_circular-5-PT_wk.png Graphic file (type png)
 <use rel_circular-5-PT_wk.png>
-Package pdftex.def Info: rel_circular-5-PT_wk.png  used on input line 8150.
+Package pdftex.def Info: rel_circular-5-PT_wk.png  used on input line 8174.
 (pdftex.def)             Requested size: 225.84229pt x 74.84799pt.
 
 [154]
-<circularHeatmap.png, id=1976, 461.47406pt x 226.59656pt>
+<circularHeatmap.png, id=1980, 461.47406pt x 226.59656pt>
 File: circularHeatmap.png Graphic file (type png)
 <use circularHeatmap.png>
-Package pdftex.def Info: circularHeatmap.png  used on input line 8166.
+Package pdftex.def Info: circularHeatmap.png  used on input line 8190.
 (pdftex.def)             Requested size: 301.12305pt x 147.85997pt.
  [155 <./rel_circular-5-PT_wk.png> <./circularHeatmap.png>]
-<correlation3Dplot.png, id=1992, 361.35pt x 361.35pt>
+<correlation3Dplot.png, id=1996, 361.35pt x 361.35pt>
 File: correlation3Dplot.png Graphic file (type png)
 <use correlation3Dplot.png>
-Package pdftex.def Info: correlation3Dplot.png  used on input line 8230.
+Package pdftex.def Info: correlation3Dplot.png  used on input line 8254.
 (pdftex.def)             Requested size: 301.12305pt x 301.12242pt.
  [156] [157 <./correlation3Dplot.png (PNG copy)>]
-<correlation3Dplot-3Obj.png, id=2006, 671.50874pt x 468.24937pt>
+<correlation3Dplot-3Obj.png, id=2010, 671.50874pt x 468.24937pt>
 File: correlation3Dplot-3Obj.png Graphic file (type png)
 <use correlation3Dplot-3Obj.png>
-Package pdftex.def Info: correlation3Dplot-3Obj.png  used on input line 8283.
+Package pdftex.def Info: correlation3Dplot-3Obj.png  used on input line 8307.
 (pdftex.def)             Requested size: 414.04419pt x 288.71829pt.
  [158 <./correlation3Dplot-3Obj.png>]
-<criteriaCorrelationTable.png, id=2015, 612.78937pt x 340.27126pt>
+<criteriaCorrelationTable.png, id=2019, 612.78937pt x 340.27126pt>
 File: criteriaCorrelationTable.png Graphic file (type png)
 <use criteriaCorrelationTable.png>
-Package pdftex.def Info: criteriaCorrelationTable.png  used on input line 8301.
+Package pdftex.def Info: criteriaCorrelationTable.png  used on input line 8325.
 
 (pdftex.def)             Requested size: 376.40381pt x 209.00856pt.
-<dendogram.png, id=2020, 555.57562pt x 441.14813pt>
+<dendogram.png, id=2024, 555.57562pt x 441.14813pt>
 File: dendogram.png Graphic file (type png)
 <use dendogram.png>
-Package pdftex.def Info: dendogram.png  used on input line 8320.
+Package pdftex.def Info: dendogram.png  used on input line 8344.
 (pdftex.def)             Requested size: 376.40381pt x 298.87955pt.
 
 [159 <./criteriaCorrelationTable.png>]
-Overfull \vbox (1.0535pt too high) detected at line 8355
+Overfull \vbox (1.0535pt too high) detected at line 8379
  []
 
 [160 <./dendogram.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 8377--8379
+Underfull \hbox (badness 10000) in paragraph at lines 8401--8403
 \T1/cmr/m/n/12 Per-for-mance Dif-fer-ences^^Q \T1/cmr/m/it/12 Jour-nal of Multi
 -Criteria De-ci-sion Anal-
  []
 
 
-Underfull \hbox (badness 8113) in paragraph at lines 8377--8379
+Underfull \hbox (badness 8113) in paragraph at lines 8401--8403
 \T1/cmr/m/it/12 y-sis \T1/cmr/m/n/12 (Wi-ley) \T1/cmr/bx/n/12 20\T1/cmr/m/n/12 
 :3-12 (down-load-able preprint [][]PDF file 403.5 Kb[][]
  []
 
 [161]
-Underfull \hbox (badness 5417) in paragraph at lines 8395--8397
+Underfull \hbox (badness 5417) in paragraph at lines 8419--8421
 []\T1/cmr/m/n/12 Bis-dorff R., Pir-lot M. and Roubens M. (2006). ^^PChoices and
 
  []
 
 
-Underfull \hbox (badness 5460) in paragraph at lines 8395--8397
+Underfull \hbox (badness 5460) in paragraph at lines 8419--8421
 \T1/cmr/m/n/12 ker-nels from bipo-lar val-ued di-graphs^^Q. \T1/cmr/m/it/12 Eu-
 ro-pean Jour-nal of Op-er-
  []
 
 
-Underfull \hbox (badness 6559) in paragraph at lines 8395--8397
+Underfull \hbox (badness 6559) in paragraph at lines 8419--8421
 \T1/cmr/m/it/12 a-tional Re-search\T1/cmr/m/n/12 , 175 (2006) 155-170. (On-line
 ) Elec-tronic ver-sion:
  []
@@ -1389,62 +1386,63 @@ L3 programming layer <2026-01-19>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `digraph3Pearls.out' has not changed.
-(rerunfilecheck)             Checksum: 9B488DF99C7E264F2481BA4A3D42B003;23909.
+(rerunfilecheck)             Checksum: F1C6A922FE273652AF66E22ADAAF82A0;23909.
  ) 
 Here is how much of TeX's memory you used:
- 18749 strings out of 469514
- 324848 string characters out of 5470072
- 912126 words of memory out of 5000000
- 46418 multiletter control sequences out of 15000+600000
- 656882 words of font info for 103 fonts, out of 8000000 for 9000
+ 18754 strings out of 469514
+ 324909 string characters out of 5470072
+ 912202 words of memory out of 5000000
+ 46420 multiletter control sequences out of 15000+600000
+ 657217 words of font info for 104 fonts, out of 8000000 for 9000
  15 hyphenation exceptions out of 8191
- 72i,24n,98p,1618b,1810s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.
-600pk> </home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1
+ 72i,24n,98p,1618b,1811s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.
+600pk> </home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1
 000.600pk> </home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/e
-cso1200.600pk> </home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/
-ec/ecso1440.600pk> </home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/jknap
-pen/ec/ecit1200.600pk> </home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/j
-knappen/ec/ecss1200.600pk> </home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfo
-ur/jknappen/ec/ecsi1200.600pk> </home/bisdorff/.texlive2025/texmf-var/fonts/pk/
-ljfour/jknappen/ec/tctt1200.600pk> </home/bisdorff/.texlive2025/texmf-var/fonts
-/pk/ljfour/jknappen/ec/ectt1200.600pk> </home/bisdorff/.texlive2025/texmf-var/f
-onts/pk/ljfour/jknappen/ec/ecrm0600.600pk> </home/bisdorff/.texlive2025/texmf-v
-ar/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </home/bisdorff/.texlive2025/tex
-mf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/bisdorff/.texlive2025
-/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0700.600pk> </home/bisdorff/.texlive
-2025/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1440.600pk> </home/bisdorff/.tex
-live2025/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </home/bisdorff/
-.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </home/bisdo
-rff/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1200.600pk> </home/b
-isdorff/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1728.600pk> </ho
-me/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> 
-</home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600
-pk> </home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095
-.600pk> </home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm
+ctt1000.600pk> </home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/
+ec/ecso1200.600pk> </home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/jknap
+pen/ec/ecso1440.600pk> </home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/j
+knappen/ec/ecit1200.600pk> </home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfo
+ur/jknappen/ec/ecss1200.600pk> </home/bisdorff/.texlive2025/texmf-var/fonts/pk/
+ljfour/jknappen/ec/ecsi1200.600pk> </home/bisdorff/.texlive2025/texmf-var/fonts
+/pk/ljfour/jknappen/ec/tctt1200.600pk> </home/bisdorff/.texlive2025/texmf-var/f
+onts/pk/ljfour/jknappen/ec/ectt1200.600pk> </home/bisdorff/.texlive2025/texmf-v
+ar/fonts/pk/ljfour/jknappen/ec/ecrm0600.600pk> </home/bisdorff/.texlive2025/tex
+mf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </home/bisdorff/.texlive2025
+/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/bisdorff/.texlive
+2025/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0700.600pk> </home/bisdorff/.tex
+live2025/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1440.600pk> </home/bisdorff/
+.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </home/bisdo
+rff/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </home/b
+isdorff/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1200.600pk> </ho
+me/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1728.600pk> 
+</home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600
+pk> </home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200
+.600pk> </home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti
 1095.600pk> </home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/
-ecbx1200.600pk> </home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen
-/ec/ecbx2488.600pk> </home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/jkna
-ppen/ec/ecxc1728.600pk> </home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/
-jknappen/ec/ecbx1728.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-mi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/sym
-bols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symb
-ols/msbm10.pfb>
-Output written on digraph3Pearls.pdf (165 pages, 3864103 bytes).
+ecrm1095.600pk> </home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen
+/ec/ecbx1200.600pk> </home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/jkna
+ppen/ec/ecbx2488.600pk> </home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljfour/
+jknappen/ec/ecxc1728.600pk> </home/bisdorff/.texlive2025/texmf-var/fonts/pk/ljf
+our/jknappen/ec/ecbx1728.600pk></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
+6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+symbols/msbm10.pfb>
+Output written on digraph3Pearls.pdf (165 pages, 3813617 bytes).
 PDF statistics:
- 3270 PDF objects out of 3580 (max. 8388607)
- 2034 compressed objects within 21 object streams
- 569 named destinations out of 1000 (max. 500000)
+ 3279 PDF objects out of 3580 (max. 8388607)
+ 2042 compressed objects within 21 object streams
+ 571 named destinations out of 1000 (max. 500000)
  932 words of extra memory for PDF output out of 10000 (max. 10000000)
 
