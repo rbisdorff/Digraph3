@@ -4845,7 +4845,7 @@ In a ranking-by-choosing strategy, we may recursively extract bpv-sets of weak C
    :linenos:
    :emphasize-lines: 1,5-13
 
-   >>> g.showChoiceRecommendation('IteratedCondorcetWinners'
+   >>> g.showChoiceRecommendation('IteratedCondorcetWinners',
    ...                            cwFusionType='average')
     ******************************************
      Iterated weak Condorcet winners and losers
@@ -4867,14 +4867,14 @@ In a ranking-by-choosing strategy, we may recursively extract bpv-sets of weak C
 This choice recommendation makes apparent a linear ranking which may be computed with the :py:class:`linearOrders.IteratedBpvCondorcetWinnersRanking` class constructor.
 
 >>> from linearOrders import IteratedBpvCondorcetWinnersRanking
->>> cr = IteratedBpvCondorcetWinnersRanking(g,fusionType=average')
+>>> cr = IteratedBpvCondorcetWinnersRanking(g,fusionType='average')
 >>> cr.condorcetRanking
   ['p2','p6','p5','p4','p9','p3','p8','p7','p1']
 
 In the performance heatmap shown in :numref:`condorcetWinnersHeatmap` using the previous *cr.condorcetRanking*, we may verify the quality of this ranking. Notice by the way the *GrayScales* parameter which allows to produce heatmaps suitable for colourblind persons.
 
 >>> g.showHTMLPerformanceHeatmap(cr.condorcetRanking,
-...                              Correlations=True,colorLevels=5
+...                              Correlations=True,colorLevels=5,
 ...                              GrayScales=True)
 
 .. figure:: condorcetWinnersHeatmap.png
@@ -4902,8 +4902,8 @@ In :numref:`CondorcetWinners6` we show for instance the extraction of weak Condo
    bisdorff@bisdorff-pc:~/Desktop$ python3
    Python 3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0] on linux
    Type "help", "copyright", "credits" or "license" for more information.
-   >>> from randomDigraphs import Random3ObjectivesPerformanceTableau as 3ObjPT
-   >>> t = 3ObjPT(numberOfActions=1000,numberOfCriteria=13,seed=1)
+   >>> from randomDigraphs import Random3ObjectivesPerformanceTableau as ObjPT
+   >>> t = ObjPT(numberOfActions=1000,numberOfCriteria=13,seed=1)
    >>> from outrankingDigraphs import BipolarOutrankingDigraph
    >>> g = BipolarOutrankingDigraph(t,Threading=True,startMethod='spawn')
    >>> print(g)
@@ -6117,10 +6117,8 @@ Appendix
 .. [26] *Balanced ternary optical* HPC designs have recently gained in China a lot of attention [JIN-2003]_. Compared to classical HPC or 'dreamed' quantum computers, balanced ternary based optical computer systems provide indeed many technical and computational advantages. Much less electrical energy required, no water cooling, millions of optical trits may be easily assembled, faithful ultra high speed read and write access, etc.
 
 .. [27] https://en.wikipedia.org/wiki/Grover%27s_algorithm
-
+ 
 .. [28] A **weak** Condorcet winner outranks at least one action and is incomparable to the not outranked actions. A **weak** Condorcet loser is outranked by at least one action and is incomparable to the remaining actions.
-
-.. .. [29] See :ref:`Computing bipolar-valued kernel membership characteristic vectors <Bipolar-Valued-Kernels-Tutorial-label>`
 
 .. [30] The *fusionType* parameter accepts besides the default 'average' option also the 'conjunctive' and 'disjunctive' options.
 
