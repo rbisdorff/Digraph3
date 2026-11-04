@@ -4758,7 +4758,7 @@ The relation attribute of a given outranking digraph :math:`G(X,R)` is an eviden
 
 In the given random 3-objectives outranking digraph :math:`G(X,R)`, concerning the performances of 9 public policies with respect to 13 performance criteria, three alternatives, *p2*, *p6* and *p5* are positive weak Condorcet winners, whereas alternatives *p8*, *p7* and *p1* are negative weak Condorcet winners, that is positive weak Condorcet losers (see Lines 8-10 and 14-16 above).
 
-The individual bipolar-valued credibilities to '**be a non ambiguous weak Condorcet winner**' are computed as follows. For each individual alternative *x in X*, the average epistemic fusion of the *outranking* credibilities :math:`r(x \succsim y)` for all :math:`y \neq x` in *X* measures indeed the more or less **outranking power** of *x* and the same average epistemic fusion of the *not outranked* credibilities :math:`-r(y \succsim x)`  for all :math:`y \neq x` in *X* measures the more or less **not outrankedness** of *x*. A disjunctive epistemic :math:`$ \textcircled{$\vee$} $` fusion of both these measures delivers eventually the corresponding bpv-set.
+The individual bipolar-valued credibilities to '**be a non ambiguous weak Condorcet winner**' are computed as follows. For each individual alternative *x in X*, the **average** [30]_ **epistemic fusion** of the *outranking* credibilities :math:`r(x \succsim y)` for all :math:`y \neq x` in *X* measures indeed the more or less **outranking power** of *x* and the same average epistemic fusion of the *not outranked* credibilities :math:`-r(y \succsim x)`  for all :math:`y \neq x` in *X* measures the more or less **not outrankedness** of *x*. A disjunctive epistemic :math:`$ \textcircled{$\vee$} $` fusion of both these measures delivers eventually the corresponding bpv-set.
 
 In :numref:`condorcetWinners2` we see confirmed in the outranking relation table of :math:`G(X,R)` that alternative *p2* is indeed a Condorcet winner and alternatives *p6* and *p5* are *weak Condorcet winners* whereas alternatives *p8*, *p7* and *p1* are *weak Condorcet losers*. It is worthwhile noticing that the *dual* of this bpv-set *Y* gives by the way the bpv-set of the corresponding non ambiguous weak Condorcet losers.
 
@@ -4948,7 +4948,7 @@ In :numref:`CondorcetWinners6` we show for instance the extraction of weak Condo
    Execution time: 3.858 sec.
    *************************************************
 
-Extracting the Condorcet winners and loosers take on this big outranking digraph about 4 seconds (Line 47). We may show in :numref:`condorcetWinnersHeatmapMP` the quality of this extraction with a performance heatmap of these 10 public policies.
+Extracting the Condorcet winners and loosers takes on this big outranking digraph only about 4 seconds (Line 47). We may show in :numref:`condorcetWinnersHeatmapMP` the quality of this extraction with a performance heatmap of these 10 public policies.
 
    >>> al = ['p0583','p0446','p0877','p0073','p0156',
    ...       'p0652','p0615','p0400','p0994','p0390']
@@ -4965,7 +4965,7 @@ Extracting the Condorcet winners and loosers take on this big outranking digraph
    
 .. note::
 
-   With the correct implementation of the conjunctive epistemic fusion operator we may now compute bipolar-valued non ambiguous first and last choice recommendations of a given strict outranking digraph in a polynomial complexity without having to first find its polarised crisp initial and terminal prekernels (a not polynomial problem) and without having furthermore to solve the corresponding double fixpoint kernel equation systems.
+   With the correct implementation of the epistemic fusion operators we may now compute bipolar-valued non ambiguous first and last choice recommendations of a given strict outranking digraph in a polynomial complexity without having to first find its polarised crisp initial and terminal prekernels (a not polynomial problem) and without having furthermore to solve the corresponding double fixpoint kernel equation systems.
 
    Yet, this is the actual topic of the next section.
 
@@ -6121,6 +6121,8 @@ Appendix
 .. [28] A **weak** Condorcet winner outranks at least one action and is incomparable to the not outranked actions. A **weak** Condorcet loser is outranked by at least one action and is incomparable to the remaining actions.
 
 .. .. [29] See :ref:`Computing bipolar-valued kernel membership characteristic vectors <Bipolar-Valued-Kernels-Tutorial-label>`
+
+.. [30] The *fusionType* parameter accepts besides the default 'average' option also the 'conjunctive' and 'disjunctive' options.
 
 .. [31] See :ref:`Pragmatic-Principles--label`
 
