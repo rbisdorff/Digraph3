@@ -4885,18 +4885,13 @@ In the performance heatmap shown in :numref:`condorcetWinnersHeatmap` using the 
 
    Performance heatmap ranked by iterated bipolar-valued Condorcet winners and losers
 
-.. seealso::    
 
-   * :ref:`Computing a best choice recommendation <Rubis-Tutorial-label>`
-     
-   * :ref:`Alice’s best choice: A selection case study <Alice-Tutorial-label>`
+Efficiency of computing weak Condorcet winners and loosers
+..........................................................
 
-Efficiency of the bvp-sets of Condorcet winners and loosers
-...........................................................
+The complexity of the computation of non ambiguous weak Condorcet winners and loosers bpv-sets is in :math:`\mathcal{O}(n^2)` which actually allows to tackle choice recommender problems on much larger outranking digraphs than the *Rubis* or the *Bachet* methods.
 
-The complexity of the computation of Condorcet winners and loosers bpv-sets is in :math:`\mathcal{O}(n^2)` which allows to tackle choice recommender problems on much larger outranking digraphs than the *Rubis* or the *Bachet* methods.
-
-In :numref:`CondorcetWinners6` we show the extraction of Condorcet winners and loosers on a random 3 Objectives outranking digraph of order 1000 using a 11th Gen Intel® Core™ i5-11400 × 12 desktop computer with 64 GB CPU running under Ubuntu 26.04.1 LTS in an Python 3.14.4 interpreter.
+In :numref:`CondorcetWinners6` we show for instance the extraction of weak Condorcet winners and loosers on a random 3 Objectives outranking digraph of order 1000 using a 11th Gen Intel® Core™ i5-11400 × 12 desktop computer with 64 GiB CPU memory running under Ubuntu 26.04.1 LTS in an Python 3.14.4 interpreter.
 
 .. code-block:: pycon
    :caption: Computing Condorcet winners and loosers on big outranking digraphs 
