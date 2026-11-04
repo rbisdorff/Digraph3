@@ -16193,7 +16193,7 @@ if __name__ == "__main__":
     from randomDigraphs import *
     from decimal import Decimal, getcontext
     t = Random3ObjectivesPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=9,numberOfCriteria=13,seed=1)
+                                 numberOfActions=1000,numberOfCriteria=13,seed=1)
 ##                                            missingDataProbability=0.05,seed=50)
 ##                          
     #t = CircularPerformanceTableau()
@@ -16203,8 +16203,8 @@ if __name__ == "__main__":
     #print(getcontext().prec)
     g = BipolarOutrankingDigraph(t,Threading=True,startMethod='spawn')
     print(g)
-    cw0 = g.computeBpvCondorcetWinners(Comments=False,
-                                       Debug=False,fusionType='average')
+##    cw0 = g.computeBpvCondorcetWinners(Comments=False,
+##                                       Debug=False,fusionType='average')
     #cw0.showMembershipCharacteristics()
 ##    cw1 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw0,
 ##                                       fusionType='average')
@@ -16246,7 +16246,7 @@ if __name__ == "__main__":
 ##    print('=== epf')
 ##    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType='epistemicFusion')
 ##    g.showChoiceRecommendation('Rubis',RubisFusionType='guardedIndeterminateness',ChoiceVector=True)
-    g.showChoiceRecommendation('Rubis',RubisFusionType='epistemicFusion',ChoiceVector=True)
+##    g.showChoiceRecommendation('Rubis',RubisFusionType='epistemicFusion',ChoiceVector=True)
 ##    cg.showChoiceRecommendation('CondorcetWinners')
 ##    print(g.showChoiceRecommendation('IteratedCondorcetWinners',
 ##                                     ReturnRanking=True))

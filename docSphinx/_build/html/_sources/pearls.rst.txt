@@ -4891,9 +4891,86 @@ In the performance heatmap shown in :numref:`condorcetWinnersHeatmap` using the 
      
    * :ref:`Alice’s best choice: A selection case study <Alice-Tutorial-label>`
 
+Efficiency of the bvp-sets of Condorcet winners and loosers
+...........................................................
+
+The complexity of the computation of Condorcet winners and loosers bpv-sets is in :math:`\mathcal{O}(n^2)` which allows to tackle choice recommender problems on much larger outranking digraphs than the *Rubis* or the *Bachet* methods.
+
+In :numref:`CondorcetWinners6` we show the extraction of Condorcet winners and loosers on a random 3 Objectives outranking digraph of order 1000 using a 11th Gen Intel® Core™ i5-11400 × 12 desktop computer with 64 GB CPU running under Ubuntu 26.04.1 LTS in an Python 3.14.4 interpreter.
+
+.. code-block:: pycon
+   :caption: Computing Condorcet winners and loosers on big outranking digraphs 
+   :name: CondorcetWinners6
+   :linenos:
+   :emphasize-lines: 5,23-24,29,47
+
+   bisdorff@bisdorff-pc:~/Desktop$ python3
+   Python 3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0] on linux
+   Type "help", "copyright", "credits" or "license" for more information.
+   >>> from randomDigraphs import Random3ObjectivesPerformanceTableau as 3ObjPT
+   >>> t = 3ObjPT(numberOfActions=1000,numberOfCriteria=13,seed=1)
+   >>> from outrankingDigraphs import BipolarOutrankingDigraph
+   >>> g = BipolarOutrankingDigraph(t,Threading=True,startMethod='spawn')
+   >>> print(g)
+   *------- Object instance description ------*
+   Instance class        : BipolarOutrankingDigraph
+   Instance name         : rel_random3ObjectivesPerfTab
+   Actions               : 1000
+   Criteria              : 13
+   Size                  : 577378
+   Determinateness (%)   : 70.78
+   Valuation domain      : [-1.00;1.00]
+   Attributes            : ['name', 'actions', 'ndigits', 'valuationdomain',
+                            'objectives', 'criteria', 'methodData',
+			    'evaluation', 'NA', 'order', 'runTimes',
+			    'startMethod', 'nbrThreads', 'relation',
+			    'gamma', 'notGamma']
+   ----  Constructor run times (in sec.) ----
+   Threads          : 12
+   Start method     : spawn
+   Total time       : 11.95566
+   Data input       : 0.02075
+   Compute relation : 11.43047
+   Gamma sets       : 0.50436
+   >>> g.showChoiceRecommendation('CondorcetWinners')
+   First and last choice recommendations
+   -------------------------------------
+   First choice (Condorcet winners)
+   'p0583': +0.85 (92.47%)
+   'p0446': +0.84 (92.06%)
+   'p0877': +0.84 (91.92%)
+   'p0073': +0.72 (85.87%)
+   'p0156': +0.70 (84.86%)
+   -------------------------------------
+   Last choice (Condorcet losers)
+   'p0390': +0.90 (95.19%)
+   'p0994': +0.85 (92.73%)
+   'p0400': +0.84 (92.00%)
+   'p0615': +0.76 (88.11%)
+   'p0652': +0.72 (86.01%)
+   -------------------------------------
+   Criteria significance majority in brakets
+   Execution time: 3.858 sec.
+   *************************************************
+
+Extracting the Condorcet winners and loosers take on this big outranking digraph about 4 seconds (Line 47). We may show in :numref:`condorcetWinnersHeatmapMP` the quality of this extraction with a performance heatmap of these 10 public policies.
+
+   >>> al = ['p0583','p0446','p0877','p0073','p0156',
+   ...       'p0652','p0615','p0400','p0994','p0390']
+   >>> g.showHTMLPerformanceHeatmap(actionsList=al,colorLevels=9,
+   ...                 pageTitle='Condorcet Winners and Loosers')
+
+.. figure:: condorcetWinnersHeatmapMP.png
+   :name: condorcetWinnersHeatmapMP
+   :width: 400 px
+   :align: center
+   :alt: Verifying the quality of the Condorcet winners and losers recommendation
+
+   Performance heatmap of Condorcet winners and losers
+   
 .. note::
 
-   With the correct implementation of the conjunctive epistemic fusion operator we may now compute bipolar-valued non ambiguous first and last choice recommendations of a given strict outranking digraph in an :math:`\mathcal{O}(n^2)` complexity without having to first find its polarised crisp initial and terminal prekernels (a not polynomial problem in general) and without having furthermore to solve the corresponding double fixpoint kernel equation systems [30]_.
+   With the correct implementation of the conjunctive epistemic fusion operator we may now compute bipolar-valued non ambiguous first and last choice recommendations of a given strict outranking digraph in a polynomial complexity without having to first find its polarised crisp initial and terminal prekernels (a not polynomial problem) and without having furthermore to solve the corresponding double fixpoint kernel equation systems.
 
    Yet, this is the actual topic of the next section.
 
@@ -6049,8 +6126,6 @@ Appendix
 .. [28] A **weak** Condorcet winner outranks at least one action and is incomparable to the not outranked actions. A **weak** Condorcet loser is outranked by at least one action and is incomparable to the remaining actions.
 
 .. .. [29] See :ref:`Computing bipolar-valued kernel membership characteristic vectors <Bipolar-Valued-Kernels-Tutorial-label>`
-
-.. [30] See :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method.
 
 .. [31] See :ref:`Pragmatic-Principles--label`
 
