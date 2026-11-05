@@ -4728,8 +4728,8 @@ A new choice recommender algorithm
 	:depth: 1
 	:local:
 
-Computing bipolar-valued weak Condorcet winners and loosers
-...........................................................
+Computing bipolar-valued weak Condorcet winners and losers
+..........................................................
 
 The relation attribute of a given outranking digraph :math:`G(X,R)` is an evident example of a bipolar-valued set, a *bpv-set* for short. And the epistemic fusion operators, discussed in the previous section, may be efficiently used for computing the bpv-set of *non ambiguous weak Condorcet winners and losers* of such a digraph *G* [28]_. The :py:class:`~digraphs.Digraph` class provides therefore the :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method as shown in :numref:`CondorcetWinners1` Line 5.  
 
@@ -4832,15 +4832,15 @@ The average criteria significance majorities for each choice are indicated in br
 	 determinateness (%) : 50.00
 	 - most credible action(s) = {}
 
-With the given random outranking digraph *g*, initial and terminal prekernels recommendations correspond now nearly to the positive weak Condorcet winners and loosers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and *strictly* outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are non ambiguous *weakly* outranking or not *outranked* resp. *weakly* outranked or not *outranking* choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location 'A', being incomparable to all other locations, is included in both the initial and the terminal prekernel. Location *A* is hence an ambiguous first and last choice recommendation and therefore neither part of the non ambiguous weak Condorcet winners, nor of the non ambiguous weak Condorcet losers [33]_.
+With the given random outranking digraph *g*, initial and terminal prekernels recommendations correspond now nearly to the positive weak Condorcet winners and losers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and *strictly* outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are non ambiguous *weakly* outranking or not *outranked* resp. *weakly* outranked or not *outranking* choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location 'A', being incomparable to all other locations, is included in both the initial and the terminal prekernel. Location *A* is hence an ambiguous first and last choice recommendation and therefore neither part of the non ambiguous weak Condorcet winners, nor of the non ambiguous weak Condorcet losers [33]_.
 
-Ranking-by-choosing with bpv-sets of weak Condorcet winners and loosers
-.......................................................................
+Ranking-by-choosing with bpv-sets of weak Condorcet winners and losers
+......................................................................
 
-In a ranking-by-choosing strategy, we may recursively extract bpv-sets of weak Condorcet winners and loosers as shown in :numref:`CondorcetWinners5` below. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts therefore the '*IteratedCondorcetWinners*' argument
+In a ranking-by-choosing strategy, we may recursively extract bpv-sets of weak Condorcet winners and losers as shown in :numref:`CondorcetWinners5` below. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts therefore the '*IteratedCondorcetWinners*' argument
 
 .. code-block:: pycon
-   :caption: Showing first and last choice recommendations from recursively extracted weak Condorcet winners and loosers
+   :caption: Showing first and last choice recommendations from recursively extracted weak Condorcet winners and losers
    :name: CondorcetWinners5
    :linenos:
    :emphasize-lines: 1,5-13
@@ -4886,47 +4886,49 @@ In the performance heatmap shown in :numref:`condorcetWinnersHeatmap` using the 
    Performance heatmap ranked by iterated bipolar-valued Condorcet winners and losers
 
 
-Efficiency of computing weak Condorcet winners and loosers
-..........................................................
+Efficiency of computing weak Condorcet winners and losers
+.........................................................
 
-The complexity of the computation of non ambiguous weak Condorcet winners and loosers bpv-sets is in :math:`\mathcal{O}(n^2)` which actually allows to tackle choice recommender problems on much larger outranking digraphs than the *Rubis* or the *Bachet* methods.
+The complexity of the computation of non ambiguous weak Condorcet winners and losers bpv-sets is in :math:`\mathcal{O}(n^2)` which actually allows to tackle choice recommender problems on much larger outranking digraphs than the *Rubis* or the *Bachet* methods.
 
-In :numref:`CondorcetWinners6` we show for instance the extraction of weak Condorcet winners and loosers on a random 3 Objectives outranking digraph of order 1000 using a 11th Gen Intel® Core™ i5-11400 × 12 desktop computer with 64 GiB CPU memory running under Ubuntu 26.04.1 LTS in an Python 3.14.4 interpreter.
+In :numref:`CondorcetWinners6` we show for instance the extraction of weak Condorcet winners and losers on a random 3 Objectives outranking digraph of order 1000 using a 11th Gen Intel® Core™ i5-11400 × 12 desktop computer with 64 GiB CPU memory running under Ubuntu 26.04.1 LTS in an Python 3.14.4 interpreter.
 
 .. code-block:: pycon
-   :caption: Computing Condorcet winners and loosers on big outranking digraphs 
+   :caption: Computing Condorcet winners and losers on big outranking digraphs 
    :name: CondorcetWinners6
    :linenos:
-   :emphasize-lines: 5,23-24,29,47
+   :emphasize-lines: 7,25-27,31,49
 
    bisdorff@bisdorff-pc:~/Desktop$ python3
    Python 3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0] on linux
    Type "help", "copyright", "credits" or "license" for more information.
    >>> from randomDigraphs import Random3ObjectivesPerformanceTableau as ObjPT
    >>> t = ObjPT(numberOfActions=1000,numberOfCriteria=13,seed=1)
-   >>> from outrankingDigraphs import BipolarOutrankingDigraph
-   >>> g = BipolarOutrankingDigraph(t,Threading=True,startMethod='spawn')
+   >>> from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
+   >>> g = MPBipolarOutrankingDigraph(t,MultipleInterpreters=True)
    >>> print(g)
    *------- Object instance description ------*
-   Instance class        : BipolarOutrankingDigraph
+   Instance class        : MPBipolarOutrankingDigraph
    Instance name         : rel_random3ObjectivesPerfTab
    Actions               : 1000
    Criteria              : 13
    Size                  : 577378
    Determinateness (%)   : 70.78
    Valuation domain      : [-1.00;1.00]
-   Attributes            : ['name', 'actions', 'ndigits', 'valuationdomain',
-                            'objectives', 'criteria', 'methodData',
-			    'evaluation', 'NA', 'order', 'runTimes',
-			    'startMethod', 'nbrThreads', 'relation',
-			    'gamma', 'notGamma']
+   Attributes           : ['name', 'actions', 'order', 'criteria',
+                           'objectives', 'NA', 'evaluation',
+			   'startMethod', 'nbrThreads', 'relation',
+			   'largePerformanceDifferencesCount',
+			   'valuationdomain', 'gamma', 'notGamma', 'runTimes']
    ----  Constructor run times (in sec.) ----
-   Threads          : 12
-   Start method     : spawn
-   Total time       : 11.95566
-   Data input       : 0.02075
-   Compute relation : 11.43047
-   Gamma sets       : 0.50436
+   Threads            : 12
+   Start method       : 'spawn'
+   multiInterpreters  : 'True'
+   Total time         : 7.28415
+   Data input         : 0.00001
+   Compute relation   : 5.74009
+   Normalize relation : 1.04829
+   Gamma sets         : 0.49552
    >>> g.showChoiceRecommendation('CondorcetWinners')
    First and last choice recommendations
    -------------------------------------
@@ -4948,12 +4950,12 @@ In :numref:`CondorcetWinners6` we show for instance the extraction of weak Condo
    Execution time: 3.858 sec.
    *************************************************
 
-Extracting the Condorcet winners and loosers takes on this big outranking digraph only about 4 seconds (Line 47). We may show in :numref:`condorcetWinnersHeatmapMP` the quality of this extraction with a performance heatmap of these 10 public policies.
+Extracting the Condorcet winners and losers takes on this big outranking digraph only about 4 seconds (Line 47). For this purpose we use the :py:class:`mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor for running twelve python3.14.4 interpreters in parallel [29]_ (see Lines 7 and 23-25). To illustrate the quality of this extraction, we may show in :numref:`condorcetWinnersHeatmapMP` a performance heatmap of these 10 public policies.
 
    >>> al = ['p0583','p0446','p0877','p0073','p0156',
    ...       'p0652','p0615','p0400','p0994','p0390']
    >>> g.showHTMLPerformanceHeatmap(actionsList=al,colorLevels=9,
-   ...                 pageTitle='Condorcet Winners and Loosers')
+   ...                 pageTitle='Condorcet Winners and Losers')
 
 .. figure:: condorcetWinnersHeatmapMP.png
    :name: condorcetWinnersHeatmapMP
@@ -6119,6 +6121,8 @@ Appendix
 .. [27] https://en.wikipedia.org/wiki/Grover%27s_algorithm
  
 .. [28] A **weak** Condorcet winner outranks at least one action and is incomparable to the not outranked actions. A **weak** Condorcet loser is outranked by at least one action and is incomparable to the remaining actions.
+
+.. [29] See :ref:`Using the Digraph3 multiprocessing resources <Multiprocessing-Tutorial-label>`
 
 .. [30] The *fusionType* parameter accepts besides the default 'average' option also the 'conjunctive' and 'disjunctive' options.
 
