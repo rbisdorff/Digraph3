@@ -131,7 +131,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeAllDensities"><code class="docutils literal notranslate"><span class="pre">Digraph.computeAllDensities()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeArrowRaynaudOrder"><code class="docutils literal notranslate"><span class="pre">Digraph.computeArrowRaynaudOrder()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeArrowRaynaudRanking"><code class="docutils literal notranslate"><span class="pre">Digraph.computeArrowRaynaudRanking()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeAverageEpistemicFusion"><code class="docutils literal notranslate"><span class="pre">Digraph.computeAverageEpistemicFusion()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeAverageValuation"><code class="docutils literal notranslate"><span class="pre">Digraph.computeAverageValuation()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeBadChoices"><code class="docutils literal notranslate"><span class="pre">Digraph.computeBadChoices()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeBadPirlotChoices"><code class="docutils literal notranslate"><span class="pre">Digraph.computeBadPirlotChoices()</span></code></a></li>
@@ -145,7 +144,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeConcentrationIndexTrapez"><code class="docutils literal notranslate"><span class="pre">Digraph.computeConcentrationIndexTrapez()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeCondorcetLosers"><code class="docutils literal notranslate"><span class="pre">Digraph.computeCondorcetLosers()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeCondorcetWinners"><code class="docutils literal notranslate"><span class="pre">Digraph.computeCondorcetWinners()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeConjunctiveEpistemicFusionGood"><code class="docutils literal notranslate"><span class="pre">Digraph.computeConjunctiveEpistemicFusionGood()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeCopelandOrder"><code class="docutils literal notranslate"><span class="pre">Digraph.computeCopelandOrder()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeCopelandRanking"><code class="docutils literal notranslate"><span class="pre">Digraph.computeCopelandRanking()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeCutLevelDensities"><code class="docutils literal notranslate"><span class="pre">Digraph.computeCutLevelDensities()</span></code></a></li>
@@ -2214,14 +2212,6 @@ absence arc density, strict absence arc densitiy.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="digraphs.Digraph.computeAverageEpistemicFusion">
-<span class="sig-name descname"><span class="pre">computeAverageEpistemicFusion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Terminal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeAverageEpistemicFusion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeAverageEpistemicFusion" title="Link to this definition"></a></dt>
-<dd><p>Computes the conjunctive epistemic fusion of
-rows (Terminal=True) or columns (Terminal=False)
-of the digraph’s relation attribute.</p>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="digraphs.Digraph.computeAverageValuation">
 <span class="sig-name descname"><span class="pre">computeAverageValuation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeAverageValuation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeAverageValuation" title="Link to this definition"></a></dt>
 <dd><p>Computes the bipolar average correlation between
@@ -2332,14 +2322,6 @@ Based on the triangles summation formula.</p>
 <dt class="sig sig-object py" id="digraphs.Digraph.computeCondorcetWinners">
 <span class="sig-name descname"><span class="pre">computeCondorcetWinners</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeCondorcetWinners"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeCondorcetWinners" title="Link to this definition"></a></dt>
 <dd><p>Wrapper for condorcetWinners().</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="digraphs.Digraph.computeConjunctiveEpistemicFusionGood">
-<span class="sig-name descname"><span class="pre">computeConjunctiveEpistemicFusionGood</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Terminal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Average</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeConjunctiveEpistemicFusionGood"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeConjunctiveEpistemicFusionGood" title="Link to this definition"></a></dt>
-<dd><p>Computes the conjunctive epistemic fusion of
-rows (Terminal=True) or columns (Terminal=False)
-of the digraph’s relation attribute.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -15505,7 +15487,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Nov 02, 2026.
+      <span class="lastupdated">Last updated on Nov 06, 2026.
       </span></p>
   </div>
 
