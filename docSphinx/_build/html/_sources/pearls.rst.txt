@@ -4689,7 +4689,7 @@ In :numref:`averageBpvSets` we illustrate the usage of the :py:meth:`~bipolarVal
    >>> mu.showMembershipCharacteristics(Sorted=False)
     s1:  +0.0000, s2:  +0.7953, s3:  +0.0000
 
-The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a partial **sharpness** ordering denoted :math:`\succcurlyeq` and defined as follows. Let *X* and *Y* be two bpv-sets in :math:`\mathcal{S}(A)`. We say that :math:`X \,\succcurlyeq\, Y` when :math:`\forall a \in A` either :math:`r(a \in X) \leqslant r(a \in Y) \leqslant 0.0` or, :math:`0.0 \leqslant r(a \in Y) \leqslant r(a \in X)`. It follows for instance that :math:`(X  $ \textcircled{$\vee$} $ Y) \,\succcurlyeq\, \mu([X,Y]) \,\succcurlyeq\, (X $ \textcircled{$\wedge$} $ Y)`. Minimal sharp is the bpv-set :math:`\bf{0}`. Maximal sharp are all :math:`2^n` completely determined --crisp-- subsets of the support set *A*. 
+The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a partial **sharpness** ordering denoted :math:`\succcurlyeq` and defined as follows. Let *X* and *Y* be two bpv-sets in :math:`\mathcal{S}(A)`. We say that :math:`X \,\succcurlyeq\, Y` when :math:`\forall a \in A` either :math:`r(a \in X) \leqslant r(a \in Y) \leqslant 0.0` or, :math:`0.0 \leqslant r(a \in Y) \leqslant r(a \in X)`. It follows for instance that :math:`(X  $ \textcircled{$\vee$} $ Y) \,\succcurlyeq\, \mu([X,Y]) \,\succcurlyeq\, (X $ \textcircled{$\wedge$} $ Y)` when no indeterminate characteristic value is observed. Minimal sharp is the bpv-set :math:`\bf{0}`. Maximal sharp are all :math:`2^n` completely determined --crisp-- subsets of the support set *A*. 
 
 .. code-block:: pycon
    :caption: The sharpness ordering of bpv-sets
@@ -4897,7 +4897,7 @@ In :numref:`CondorcetWinners6` we show for instance the extraction of weak Condo
    :caption: Computing Condorcet winners and losers on big outranking digraphs 
    :name: CondorcetWinners6
    :linenos:
-   :emphasize-lines: 7,25-27,31,49
+   :emphasize-lines: 7,23-25,31,49
 
    bisdorff@bisdorff-pc:~/Desktop$ python3
    Python 3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0] on linux
