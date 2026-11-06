@@ -9844,8 +9844,8 @@ class Digraph(object):
                                fusionType='average', # or 'conjunctive' or 'disjunctive'
                                Debug=False):
         """
-        Computes the average (default) or conjunctive epistemic fusion of
-        rows (Terminal=True) or columns (Terminal=False)
+        Computes the average (default), conjunctive or disjunctive
+        epistemic fusion of rows (Terminal=False) or columns (Terminal=True)
         of the digraph's relation attribute.
         Validate the stable fix-point solution vector Y.
         """

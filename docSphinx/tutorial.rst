@@ -48,8 +48,8 @@
       - The *Bachet* ranking rules are illustrated in the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`
           
 	
-   Contents
-   --------
+   **Contents**
+
 
    * :ref:`Working with digraphs and outranking digraphs <Working-With-Digraphs-label>`
    
