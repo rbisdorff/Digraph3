@@ -4950,7 +4950,9 @@ In :numref:`CondorcetWinners6` we show for instance the extraction of weak Condo
    Execution time: 3.858 sec.
    *************************************************
 
-Extracting the Condorcet winners and losers takes on this big outranking digraph only about 4 seconds (Line 47). For this purpose we use the :py:class:`mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor for running twelve python3.14.4 interpreters in parallel [29]_ (see Lines 7 and 23-25). To illustrate the quality of this extraction, we may show in :numref:`condorcetWinnersHeatmapMP` a performance heatmap of these 10 public policies.
+For this purpose we use the :py:class:`mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor for running twelve python3.14.4 interpreters in parallel [29]_ (see Lines 7 and 23-25). Extracting the Condorcet winners and losers takes than on this big outranking digraph only about 4 seconds (Line 47).
+
+To illustrate the quality of this extraction, we may show in :numref:`condorcetWinnersHeatmapMP` a performance heatmap of these 10 public policies.
 
    >>> al = ['p0583','p0446','p0877','p0073','p0156',
    ...       'p0652','p0615','p0400','p0994','p0390']

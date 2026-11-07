@@ -4791,7 +4791,8 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </pre></div>
 </div>
 </div>
-<p>Extracting the Condorcet winners and losers takes on this big outranking digraph only about 4 seconds (Line 47). For this purpose we use the <a class="reference internal" href="techDoc.html#mpOutrankingDigraphs.MPBipolarOutrankingDigraph" title="mpOutrankingDigraphs.MPBipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">mpOutrankingDigraphs.MPBipolarOutrankingDigraph</span></code></a> constructor for running twelve python3.14.4 interpreters in parallel <a class="footnote-reference brackets" href="#id124" id="id65" role="doc-noteref"><span class="fn-bracket">[</span>29<span class="fn-bracket">]</span></a> (see Lines 7 and 23-25). To illustrate the quality of this extraction, we may show in <a class="reference internal" href="#condorcetwinnersheatmapmp"><span class="std std-numref">Fig. 3.40</span></a> a performance heatmap of these 10 public policies.</p>
+<p>For this purpose we use the <a class="reference internal" href="techDoc.html#mpOutrankingDigraphs.MPBipolarOutrankingDigraph" title="mpOutrankingDigraphs.MPBipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">mpOutrankingDigraphs.MPBipolarOutrankingDigraph</span></code></a> constructor for running twelve python3.14.4 interpreters in parallel <a class="footnote-reference brackets" href="#id124" id="id65" role="doc-noteref"><span class="fn-bracket">[</span>29<span class="fn-bracket">]</span></a> (see Lines 7 and 23-25). Extracting the Condorcet winners and losers takes than on this big outranking digraph only about 4 seconds (Line 47).</p>
+<p>To illustrate the quality of this extraction, we may show in <a class="reference internal" href="#condorcetwinnersheatmapmp"><span class="std std-numref">Fig. 3.40</span></a> a performance heatmap of these 10 public policies.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">al</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;p0583&#39;</span><span class="p">,</span><span class="s1">&#39;p0446&#39;</span><span class="p">,</span><span class="s1">&#39;p0877&#39;</span><span class="p">,</span><span class="s1">&#39;p0073&#39;</span><span class="p">,</span><span class="s1">&#39;p0156&#39;</span><span class="p">,</span>
 <span class="gp">... </span>      <span class="s1">&#39;p0652&#39;</span><span class="p">,</span><span class="s1">&#39;p0615&#39;</span><span class="p">,</span><span class="s1">&#39;p0400&#39;</span><span class="p">,</span><span class="s1">&#39;p0994&#39;</span><span class="p">,</span><span class="s1">&#39;p0390&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">actionsList</span><span class="o">=</span><span class="n">al</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
@@ -5970,7 +5971,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Nov 06, 2026.
+      <span class="lastupdated">Last updated on Nov 07, 2026.
       </span></p>
   </div>
 

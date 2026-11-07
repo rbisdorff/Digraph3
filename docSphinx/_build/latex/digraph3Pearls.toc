@@ -70,15 +70,15 @@
 \contentsline {subsection}{\numberline {3.7}Bipolar\sphinxhyphen {}valued kernel membership characteristic vectors}{136}{subsection.3.7}%
 \contentsline {subsubsection}{Kernel equation systems}{136}{subsubsection*.150}%
 \contentsline {subsubsection}{Solving bipolar\sphinxhyphen {}valued kernel equation systems}{137}{subsubsection*.151}%
-\contentsline {subsubsection}{Historical notes}{143}{subsubsection*.152}%
+\contentsline {subsubsection}{Historical notes}{144}{subsubsection*.152}%
 \contentsline {subsection}{\numberline {3.8}On characterizing bipolar\sphinxhyphen {}valued outranking digraphs}{145}{subsection.3.8}%
 \contentsline {subsubsection}{Necessary properties of the outranking digraph}{145}{subsubsection*.158}%
 \contentsline {subsubsection}{Partial tournaments may be strict outranking digraphs}{147}{subsubsection*.160}%
-\contentsline {subsubsection}{Recognizing bipolar outranking valuations}{148}{subsubsection*.161}%
-\contentsline {subsubsection}{On generating random outranking valuations}{152}{subsubsection*.163}%
-\contentsline {subsection}{\numberline {3.9}Consensus quality of the bipolar\sphinxhyphen {}valued outranking relation}{152}{subsection.3.9}%
-\contentsline {subsubsection}{Circular performance tableaux}{153}{subsubsection*.167}%
-\contentsline {subsubsection}{A difficult decision problem}{155}{subsubsection*.168}%
-\contentsline {subsubsection}{The central CONDORCET point of view}{156}{subsubsection*.169}%
-\contentsline {section}{\numberline {4}Appendix}{162}{section.4}%
-\contentsline {section}{References}{162}{section.4}%
+\contentsline {subsubsection}{Recognizing bipolar outranking valuations}{149}{subsubsection*.161}%
+\contentsline {subsubsection}{On generating random outranking valuations}{153}{subsubsection*.163}%
+\contentsline {subsection}{\numberline {3.9}Consensus quality of the bipolar\sphinxhyphen {}valued outranking relation}{153}{subsection.3.9}%
+\contentsline {subsubsection}{Circular performance tableaux}{154}{subsubsection*.167}%
+\contentsline {subsubsection}{A difficult decision problem}{156}{subsubsection*.168}%
+\contentsline {subsubsection}{The central CONDORCET point of view}{157}{subsubsection*.169}%
+\contentsline {section}{\numberline {4}Appendix}{163}{section.4}%
+\contentsline {section}{References}{163}{section.4}%

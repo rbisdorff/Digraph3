@@ -68,7 +68,7 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{November 06, 2026}
+\date{November 07, 2026}
 \release{3.15.2}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -7235,11 +7235,14 @@ In \hyperref[\detokenize{pearls:condorcetwinners6}]{Listing \ref{\detokenize{pea
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-Extracting the Condorcet winners and losers takes on this big outranking digraph only about 4 seconds (Line 47). For this purpose we use the \sphinxcode{\sphinxupquote{mpOutrankingDigraphs.MPBipolarOutrankingDigraph}} constructor for running twelve python3.14.4 interpreters in parallel %
+For this purpose we use the \sphinxcode{\sphinxupquote{mpOutrankingDigraphs.MPBipolarOutrankingDigraph}} constructor for running twelve python3.14.4 interpreters in parallel %
 \begin{footnote}[29]\sphinxAtStartFootnote
 See \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{Using the Digraph3 multiprocessing resources}}}
 %
-\end{footnote} (see Lines 7 and 23\sphinxhyphen{}25). To illustrate the quality of this extraction, we may show in \hyperref[\detokenize{pearls:condorcetwinnersheatmapmp}]{Fig.\@ \ref{\detokenize{pearls:condorcetwinnersheatmapmp}}} a performance heatmap of these 10 public policies.
+\end{footnote} (see Lines 7 and 23\sphinxhyphen{}25). Extracting the Condorcet winners and losers takes than on this big outranking digraph only about 4 seconds (Line 47).
+
+\sphinxAtStartPar
+To illustrate the quality of this extraction, we may show in \hyperref[\detokenize{pearls:condorcetwinnersheatmapmp}]{Fig.\@ \ref{\detokenize{pearls:condorcetwinnersheatmapmp}}} a performance heatmap of these 10 public policies.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{al} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{p0583}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{p0446}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{p0877}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{p0073}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{p0156}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
