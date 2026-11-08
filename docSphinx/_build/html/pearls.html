@@ -4786,12 +4786,12 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="linenos">46</span><span class="go">&#39;p0652&#39;: +0.72 (86.01%)</span>
 <span class="linenos">47</span><span class="go">-------------------------------------</span>
 <span class="linenos">48</span><span class="go">Criteria significance majority in brakets</span>
-<span class="hll"><span class="linenos">49</span><span class="go">Execution time: 3.858 sec.</span>
+<span class="hll"><span class="linenos">49</span><span class="go">Execution time: 7.587 sec.</span>
 </span><span class="linenos">50</span><span class="go">*************************************************</span>
 </pre></div>
 </div>
 </div>
-<p>For this purpose we use the <a class="reference internal" href="techDoc.html#mpOutrankingDigraphs.MPBipolarOutrankingDigraph" title="mpOutrankingDigraphs.MPBipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">mpOutrankingDigraphs.MPBipolarOutrankingDigraph</span></code></a> constructor for running twelve python3.14.4 interpreters in parallel <a class="footnote-reference brackets" href="#id124" id="id65" role="doc-noteref"><span class="fn-bracket">[</span>29<span class="fn-bracket">]</span></a> (see Lines 7 and 23-25). Extracting the non ambiguous weak Condorcet winners and losers takes than on this big outranking digraph only about 4 seconds (Line 49).</p>
+<p>For this purpose we use the <a class="reference internal" href="techDoc.html#mpOutrankingDigraphs.MPBipolarOutrankingDigraph" title="mpOutrankingDigraphs.MPBipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">mpOutrankingDigraphs.MPBipolarOutrankingDigraph</span></code></a> constructor for running twelve python3.14.4 interpreters in parallel <a class="footnote-reference brackets" href="#id124" id="id65" role="doc-noteref"><span class="fn-bracket">[</span>29<span class="fn-bracket">]</span></a> (see Lines 7 and 23-25). Extracting the non ambiguous weak Condorcet winners and losers takes than on this big outranking digraph only about 7.6 seconds (Line 49).</p>
 <p>To illustrate the quality of this extraction, we may show in <a class="reference internal" href="#condorcetwinnersheatmapmp"><span class="std std-numref">Fig. 3.40</span></a> a performance heatmap of these 10 public policies.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">al</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;p0583&#39;</span><span class="p">,</span><span class="s1">&#39;p0446&#39;</span><span class="p">,</span><span class="s1">&#39;p0877&#39;</span><span class="p">,</span><span class="s1">&#39;p0073&#39;</span><span class="p">,</span><span class="s1">&#39;p0156&#39;</span><span class="p">,</span>
 <span class="gp">... </span>      <span class="s1">&#39;p0652&#39;</span><span class="p">,</span><span class="s1">&#39;p0615&#39;</span><span class="p">,</span><span class="s1">&#39;p0400&#39;</span><span class="p">,</span><span class="s1">&#39;p0994&#39;</span><span class="p">,</span><span class="s1">&#39;p0390&#39;</span><span class="p">]</span>
@@ -5971,7 +5971,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Nov 07, 2026.
+      <span class="lastupdated">Last updated on Nov 08, 2026.
       </span></p>
   </div>
 

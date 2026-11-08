@@ -4947,10 +4947,10 @@ In :numref:`CondorcetWinners6` we show for instance the extraction of weak Condo
    'p0652': +0.72 (86.01%)
    -------------------------------------
    Criteria significance majority in brakets
-   Execution time: 3.858 sec.
+   Execution time: 7.587 sec.
    *************************************************
 
-For this purpose we use the :py:class:`mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor for running twelve python3.14.4 interpreters in parallel [29]_ (see Lines 7 and 23-25). Extracting the non ambiguous weak Condorcet winners and losers takes than on this big outranking digraph only about 4 seconds (Line 49).
+For this purpose we use the :py:class:`mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor for running twelve python3.14.4 interpreters in parallel [29]_ (see Lines 7 and 23-25). Extracting the non ambiguous weak Condorcet winners and losers takes than on this big outranking digraph only about 7.6 seconds (Line 49).
 
 To illustrate the quality of this extraction, we may show in :numref:`condorcetWinnersHeatmapMP` a performance heatmap of these 10 public policies.
 
