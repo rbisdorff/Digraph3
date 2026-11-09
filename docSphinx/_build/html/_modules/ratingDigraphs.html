@@ -407,7 +407,7 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">LowerClosed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteriaCategoryLimits</span><span class="p">[</span><span class="s1">&#39;LowerClosed&#39;</span><span class="p">]</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="n">LowerClosed</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">LowerClosed</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="n">LowerClosed</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x  in  K_k</span><span class="se">\t</span><span class="s1"> r(x &gt;= m_k)</span><span class="se">\t</span><span class="s1"> r(x &lt; M_k)</span><span class="se">\t</span><span class="s1"> r(x in K_k)&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -422,6 +422,52 @@
                        <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;notHighLimit&#39;</span><span class="p">],</span> <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;categoryMembership&#39;</span><span class="p">]))</span>
             <span class="nb">print</span><span class="p">()</span></div>
 
+
+<div class="viewcode-block" id="RatingDigraph.showPositiveRatingCharacteristics">
+<a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showPositiveRatingCharacteristics">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showPositiveRatingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders a bipolar-valued bi-dictionary relation</span>
+<span class="sd">        representing the degree of credibility of the</span>
+<span class="sd">        assertion that &quot;action x in A belongs to category c in C&quot;,</span>
+<span class="sd">        ie x outranks low category limit and does not outrank</span>
+<span class="sd">        the high category limit.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">actionsList</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getActionsKeys</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">actions</span> <span class="o">=</span> <span class="n">actionsList</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">sorting</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sorting</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">sorting</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+                <span class="n">sorting</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_computeSortingCharacteristics</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="n">x</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sorting</span> <span class="o">=</span> <span class="n">sorting</span>
+            
+        <span class="n">categories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_orderedCategoryKeys</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">LowerClosed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteriaCategoryLimits</span><span class="p">[</span><span class="s1">&#39;LowerClosed&#39;</span><span class="p">]</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">LowerClosed</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">LowerClosed</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x  in  K_k</span><span class="se">\t</span><span class="s1"> r(x &gt;= m_k)</span><span class="se">\t</span><span class="s1"> r(x &lt; M_k)</span><span class="se">\t</span><span class="s1"> r(x in K_k)&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x  in  K_k</span><span class="se">\t</span><span class="s1"> r(m_k &lt; x)</span><span class="se">\t</span><span class="s1"> r(M_k &gt;= x)</span><span class="se">\t</span><span class="s1"> r(x in K_k)&#39;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">categories</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;categoryMembership&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">Med</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1"> in </span><span class="si">%s</span><span class="s1"> - </span><span class="si">%s</span><span class="se">\t</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">],</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;highLimit&#39;</span><span class="p">],),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%.2f</span><span class="se">\t\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="se">\t\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span>\
+                          <span class="p">(</span><span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">],</span>
+                           <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;notHighLimit&#39;</span><span class="p">],</span> <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;categoryMembership&#39;</span><span class="p">]))</span></div>
+
+            <span class="c1">#print()</span>
 
 
 <div class="viewcode-block" id="RatingDigraph.showHTMLRatingByQuantileSorting">
@@ -2501,7 +2547,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Nov 07, 2026.
+      <span class="lastupdated">Last updated on Nov 09, 2026.
       </span></p>
   </div>
 

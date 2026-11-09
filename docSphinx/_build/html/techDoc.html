@@ -610,6 +610,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#ratingDigraphs.RatingDigraph.showHTMLRatingByQuantileSorting"><code class="docutils literal notranslate"><span class="pre">RatingDigraph.showHTMLRatingByQuantileSorting()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ratingDigraphs.RatingDigraph.showHTMLRatingHeatmap"><code class="docutils literal notranslate"><span class="pre">RatingDigraph.showHTMLRatingHeatmap()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ratingDigraphs.RatingDigraph.showHTMLSorting"><code class="docutils literal notranslate"><span class="pre">RatingDigraph.showHTMLSorting()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ratingDigraphs.RatingDigraph.showPositiveRatingCharacteristics"><code class="docutils literal notranslate"><span class="pre">RatingDigraph.showPositiveRatingCharacteristics()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ratingDigraphs.RatingDigraph.showRatingByQuantilesRanking"><code class="docutils literal notranslate"><span class="pre">RatingDigraph.showRatingByQuantilesRanking()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ratingDigraphs.RatingDigraph.showRatingByQuantilesSorting"><code class="docutils literal notranslate"><span class="pre">RatingDigraph.showRatingByQuantilesSorting()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ratingDigraphs.RatingDigraph.showSorting"><code class="docutils literal notranslate"><span class="pre">RatingDigraph.showSorting()</span></code></a></li>
@@ -7141,6 +7142,16 @@ see <code class="xref py py-meth docutils literal notranslate"><span class="pre"
 <dt class="sig sig-object py" id="ratingDigraphs.RatingDigraph.showHTMLSorting">
 <span class="sig-name descname"><span class="pre">showHTMLSorting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Reverse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">htmlFileName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ratingDigraphs.html#RatingDigraph.showHTMLSorting"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratingDigraphs.RatingDigraph.showHTMLSorting" title="Link to this definition"></a></dt>
 <dd><p>shows the html version of the sorting result in a browser window.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ratingDigraphs.RatingDigraph.showPositiveRatingCharacteristics">
+<span class="sig-name descname"><span class="pre">showPositiveRatingCharacteristics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">actionsList</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ratingDigraphs.html#RatingDigraph.showPositiveRatingCharacteristics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratingDigraphs.RatingDigraph.showPositiveRatingCharacteristics" title="Link to this definition"></a></dt>
+<dd><p>Renders a bipolar-valued bi-dictionary relation
+representing the degree of credibility of the
+assertion that “action x in A belongs to category c in C”,
+ie x outranks low category limit and does not outrank
+the high category limit.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -15487,7 +15498,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Nov 07, 2026.
+      <span class="lastupdated">Last updated on Nov 09, 2026.
       </span></p>
   </div>
 

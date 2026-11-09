@@ -317,7 +317,7 @@ class RatingDigraph(BipolarOutrankingDigraph):
         try:
             LowerClosed = self.criteriaCategoryLimits['LowerClosed']
         except:
-            LowerClosed = True
+            LowerClosed = False
         if LowerClosed:
             print('x  in  K_k\t r(x >= m_k)\t r(x < M_k)\t r(x in K_k)')
         else:
@@ -331,6 +331,49 @@ class RatingDigraph(BipolarOutrankingDigraph):
                       (sorting[x][c]['lowLimit'],
                        sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
             print()
+
+    def showPositiveRatingCharacteristics(self, actionsList=None):
+        """
+        Renders a bipolar-valued bi-dictionary relation
+        representing the degree of credibility of the
+        assertion that "action x in A belongs to category c in C",
+        ie x outranks low category limit and does not outrank
+        the high category limit.
+        """
+        Med = self.valuationdomain['med']
+
+        if actionsList is None:
+            actions = self._getActionsKeys(action)
+        else:
+            actions = actionsList
+        try:
+            sorting = self.sorting
+        except:
+            sorting = {}
+            for x in actions:
+                sorting.update(self._computeSortingCharacteristics(action=x))
+            self.sorting = sorting
+            
+        categories = self._orderedCategoryKeys()
+
+        try:
+            LowerClosed = self.criteriaCategoryLimits['LowerClosed']
+        except:
+            LowerClosed = False
+        if LowerClosed:
+            print('x  in  K_k\t r(x >= m_k)\t r(x < M_k)\t r(x in K_k)')
+        else:
+            print('x  in  K_k\t r(m_k < x)\t r(M_k >= x)\t r(x in K_k)')
+
+        for x in actions:
+            for c in categories:
+                if sorting[x][c]['categoryMembership'] >= Med:
+                    print('\'%s\' in %s - %s\t' % (x, self.categories[c]['lowLimit'],
+                            self.categories[c]['highLimit'],), end=' ')
+                    print('%.2f\t\t %.2f\t\t %.2f' %\
+                          (sorting[x][c]['lowLimit'],
+                           sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+            #print()
 
 
     def showHTMLRatingByQuantileSorting(self,title='Quantiles Preordering',

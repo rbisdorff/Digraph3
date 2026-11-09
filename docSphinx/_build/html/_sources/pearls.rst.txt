@@ -4966,7 +4966,37 @@ To illustrate the quality of this extraction, we may show in :numref:`condorcetW
    :alt: Verifying the quality of the Condorcet winners and losers recommendation
 
    Performance heatmap of Condorcet winners and losers
+
+We may furthermore compute in :numref:`CondorcetWinners7` the relative 9th quantile performance ratings of the weak Condorcet winners and losers.
+
+.. code-block:: pycon
+   :caption: Computing performance ratings of the Condorcet winners and losers 
+   :name: CondorcetWinners7
+   :linenos:
+   :emphasize-lines: 1-2,4-5,8-12,15-19
+
+   >>> winners = ['p0583','p0446','p0877','p0073','p0156']
+   >>> losers = ['p0652','p0615','p0400','p0994','p0390']   
+   >>> from ratingDigraphs import *
+   >>> qr =  RatingByRelativeQuantilesDigraph(t,quantiles=9,
+   ...                       Threading=True,LowerClosed=True)
+   >>> qr.showPositiveRatingCharacteristics(winners)
+       x    in      K_k	     r(x >= m_k)  r(x < M_k)  r(x in K_k)
+    'p0583' in [0.78 - 0.89[	0.08	     0.36        0.08
+    'p0446' in [0.78 - 0.89[	0.25	     0.39	 0.25
+    'p0877' in [0.89 -    <[	0.11	     1.00	 0.11
+    'p0073' in [0.78 - 0.89[	0.03	     1.00	 0.03
+    'p0156' in [0.78 - 0.89[	0.03	     0.58	 0.03
+   >>> qr.showPositiveRatingCharacteristics(losers)
+       x    in      K_k	     r(x >= m_k)  r(x < M_k)  r(x in K_k)
+    'p0652' in [0.00 - 0.11[	1.00	     0.14	 0.14
+    'p0615' in [0.11 - 0.22[	0.47	     0.11	 0.11
+    'p0400' in [0.11 - 0.22[	0.14	     0.28	 0.14
+    'p0994' in [0.11 - 0.22[	0.14	     0.31	 0.14
+    'p0390' in [0.00 - 0.11[	1.00	     0.03	 0.03
    
+All five weak Condorcet winners are rated either into the second-highest [0.78 - 0.89[ or in the highest [0.89 - <[ performance class. Among the Condorcet losers, two are rated into the lowest [0.00 - 0.11[ and three in the second lowest [0.11 - 0.22[ performance class.
+
 .. note::
 
    With the correct implementation of the epistemic fusion operators we may now compute bipolar-valued non ambiguous first and last choice recommendations of a given strict outranking digraph in a polynomial complexity without having to first find its polarised crisp initial and terminal prekernels (a not polynomial problem) and without having furthermore to solve the corresponding double fixpoint kernel equation systems.
