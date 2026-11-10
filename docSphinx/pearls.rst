@@ -4891,7 +4891,7 @@ Efficiency of computing weak Condorcet winners and losers
 
 The complexity of the computation of non ambiguous weak Condorcet winners and losers bpv-sets is in :math:`\mathcal{O}(n^2)` which actually allows to tackle choice recommender problems on much larger outranking digraphs than the *Rubis* or the *Bachet* methods.
 
-In :numref:`CondorcetWinners6` we show for instance the extraction of weak Condorcet winners and losers on a random 3 Objectives outranking digraph of order 1000 using a 11th Gen Intel® Core™ i5-11400 × 12 desktop computer with 64 GiB CPU memory running under Ubuntu 26.04.1 LTS in an Python 3.14.4 interpreter.
+In :numref:`CondorcetWinners6` we show for instance in a Python 3.14.4 console the extraction of weak Condorcet winners and losers from a random 3 Objectives outranking digraph of order 1000 using a 11th Gen Intel® Core™ i5-11400 × 12HT desktop computer with 64 GiB CPU memory running under Ubuntu 26.04.1 LTS.
 
 .. code-block:: pycon
    :caption: Computing Condorcet winners and losers on big outranking digraphs 
@@ -4950,14 +4950,15 @@ In :numref:`CondorcetWinners6` we show for instance the extraction of weak Condo
    Execution time: 7.587 sec.
    *************************************************
 
-For this purpose we use the :py:class:`mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor for running twelve python3.14.4 interpreters in parallel [29]_ (see Lines 7 and 23-25). Extracting the non ambiguous weak Condorcet winners and losers takes than on this big outranking digraph only about 7.6 seconds (Line 49).
+For constructing an outranking digraph of order 1000, on this desktop computer with 12 hyperthreaded cores, we may judiciously use the :py:class:`mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor allowing to run twelve python3.14.4 interpreters in parallel (see Lines 7 and 23-25) [29]_ . Extracting now the non ambiguous weak Condorcet winners and losers takes on this big outranking digraph instance only about 7.6 seconds (Line 49).
 
 To illustrate the quality of this extraction, we may show in :numref:`condorcetWinnersHeatmapMP` a performance heatmap of these 10 public policies.
 
    >>> al = ['p0583','p0446','p0877','p0073','p0156',
    ...       'p0652','p0615','p0400','p0994','p0390']
    >>> g.showHTMLPerformanceHeatmap(actionsList=al,colorLevels=9,
-   ...                 pageTitle='Condorcet Winners and Losers')
+   ...                 pageTitle='Condorcet Winners and Losers',
+   ...                 outrankingModel='this')
 
 .. figure:: condorcetWinnersHeatmapMP.png
    :name: condorcetWinnersHeatmapMP
@@ -4967,7 +4968,7 @@ To illustrate the quality of this extraction, we may show in :numref:`condorcetW
 
    Performance heatmap of Condorcet winners and losers
 
-We may furthermore compute in :numref:`CondorcetWinners7` the relative 9th quantile performance ratings of the weak Condorcet winners and losers.
+We may furthermore compute in :numref:`CondorcetWinners7` the relative performance ratings of our set of weak Condorcet winners and losers.
 
 .. code-block:: pycon
    :caption: Computing performance ratings of the Condorcet winners and losers 
@@ -4977,7 +4978,7 @@ We may furthermore compute in :numref:`CondorcetWinners7` the relative 9th quant
 
    >>> winners = ['p0583','p0446','p0877','p0073','p0156']
    >>> losers = ['p0652','p0615','p0400','p0994','p0390']   
-   >>> from ratingDigraphs import *
+   >>> from ratingDigraphs import RatingByRelativeQuantilesDigraph
    >>> qr =  RatingByRelativeQuantilesDigraph(t,quantiles=9,
    ...                       Threading=True,LowerClosed=True)
    >>> qr.showPositiveRatingCharacteristics(winners)
@@ -4995,7 +4996,7 @@ We may furthermore compute in :numref:`CondorcetWinners7` the relative 9th quant
     'p0994' in [0.11 - 0.22[	0.14	     0.31	 0.14
     'p0390' in [0.00 - 0.11[	1.00	     0.03	 0.03
    
-All five weak Condorcet winners are rated either into the second-highest [0.78 - 0.89[ or in the highest [0.89 - <[ performance class. Among the Condorcet losers, two are rated into the lowest [0.00 - 0.11[ and three in the second lowest [0.11 - 0.22[ performance class.
+Alternative 'p0877' is positively rated into the highest [0.89 - <[ performance class . All the other four weak Condorcet winners are rated into the second-highest [0.78 - 0.89[ performance class. Among the Condorcet losers, two are rated into the lowest [0.00 - 0.11[ and three in the second lowest [0.11 - 0.22[ performance class.
 
 .. note::
 
@@ -6154,7 +6155,7 @@ Appendix
  
 .. [28] A **weak** Condorcet winner outranks at least one action and is incomparable to the not outranked actions. A **weak** Condorcet loser is outranked by at least one action and is incomparable to the remaining actions.
 
-.. [29] See :ref:`Using the Digraph3 multiprocessing resources <Multiprocessing-Tutorial-label>`
+.. [29] See :ref:`Using the Digraph3 multiprocessing resources <Multiprocessing-Tutorial-label>`. Using multiple subinterpreters in parallel is available since Python 3.14, https://docs.python.org/3/whatsnew/3.14.html.
 
 .. [30] The *fusionType* parameter accepts besides the default 'average' option also the 'conjunctive' and 'disjunctive' options.
 

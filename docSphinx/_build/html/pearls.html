@@ -4735,7 +4735,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <section id="efficiency-of-computing-weak-condorcet-winners-and-losers">
 <h4><a class="toc-backref" href="#id199" role="doc-backlink"><span class="section-number">3.3.6.4. </span>Efficiency of computing weak Condorcet winners and losers</a><a class="headerlink" href="#efficiency-of-computing-weak-condorcet-winners-and-losers" title="Link to this heading"></a></h4>
 <p>The complexity of the computation of non ambiguous weak Condorcet winners and losers bpv-sets is in <img class="math" src="_images/math/0d46836ff354f180306676ded9ebb233e0b01f5b.png" alt="\mathcal{O}(n^2)"/> which actually allows to tackle choice recommender problems on much larger outranking digraphs than the <em>Rubis</em> or the <em>Bachet</em> methods.</p>
-<p>In <a class="reference internal" href="#condorcetwinners6"><span class="std std-numref">Listing 3.68</span></a> we show for instance the extraction of weak Condorcet winners and losers on a random 3 Objectives outranking digraph of order 1000 using a 11th Gen Intel® Core™ i5-11400 × 12 desktop computer with 64 GiB CPU memory running under Ubuntu 26.04.1 LTS in an Python 3.14.4 interpreter.</p>
+<p>In <a class="reference internal" href="#condorcetwinners6"><span class="std std-numref">Listing 3.68</span></a> we show for instance in a Python 3.14.4 console the extraction of weak Condorcet winners and losers from a random 3 Objectives outranking digraph of order 1000 using a 11th Gen Intel® Core™ i5-11400 × 12HT desktop computer with 64 GiB CPU memory running under Ubuntu 26.04.1 LTS.</p>
 <div class="literal-block-wrapper docutils container" id="condorcetwinners6">
 <div class="code-block-caption"><span class="caption-number">Listing 3.68 </span><span class="caption-text">Computing Condorcet winners and losers on big outranking digraphs</span><a class="headerlink" href="#condorcetwinners6" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="go">bisdorff@bisdorff-pc:~/Desktop$ python3</span>
@@ -4791,12 +4791,13 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </pre></div>
 </div>
 </div>
-<p>For this purpose we use the <a class="reference internal" href="techDoc.html#mpOutrankingDigraphs.MPBipolarOutrankingDigraph" title="mpOutrankingDigraphs.MPBipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">mpOutrankingDigraphs.MPBipolarOutrankingDigraph</span></code></a> constructor for running twelve python3.14.4 interpreters in parallel <a class="footnote-reference brackets" href="#id124" id="id65" role="doc-noteref"><span class="fn-bracket">[</span>29<span class="fn-bracket">]</span></a> (see Lines 7 and 23-25). Extracting the non ambiguous weak Condorcet winners and losers takes than on this big outranking digraph only about 7.6 seconds (Line 49).</p>
+<p>For constructing an outranking digraph of order 1000, on this desktop computer with 12 hyperthreaded cores, we may judiciously use the <a class="reference internal" href="techDoc.html#mpOutrankingDigraphs.MPBipolarOutrankingDigraph" title="mpOutrankingDigraphs.MPBipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">mpOutrankingDigraphs.MPBipolarOutrankingDigraph</span></code></a> constructor allowing to run twelve python3.14.4 interpreters in parallel (see Lines 7 and 23-25) <a class="footnote-reference brackets" href="#id124" id="id65" role="doc-noteref"><span class="fn-bracket">[</span>29<span class="fn-bracket">]</span></a> . Extracting now the non ambiguous weak Condorcet winners and losers takes on this big outranking digraph instance only about 7.6 seconds (Line 49).</p>
 <p>To illustrate the quality of this extraction, we may show in <a class="reference internal" href="#condorcetwinnersheatmapmp"><span class="std std-numref">Fig. 3.40</span></a> a performance heatmap of these 10 public policies.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">al</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;p0583&#39;</span><span class="p">,</span><span class="s1">&#39;p0446&#39;</span><span class="p">,</span><span class="s1">&#39;p0877&#39;</span><span class="p">,</span><span class="s1">&#39;p0073&#39;</span><span class="p">,</span><span class="s1">&#39;p0156&#39;</span><span class="p">,</span>
 <span class="gp">... </span>      <span class="s1">&#39;p0652&#39;</span><span class="p">,</span><span class="s1">&#39;p0615&#39;</span><span class="p">,</span><span class="s1">&#39;p0400&#39;</span><span class="p">,</span><span class="s1">&#39;p0994&#39;</span><span class="p">,</span><span class="s1">&#39;p0390&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">actionsList</span><span class="o">=</span><span class="n">al</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
-<span class="gp">... </span>                <span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Condorcet Winners and Losers&#39;</span><span class="p">)</span>
+<span class="gp">... </span>                <span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Condorcet Winners and Losers&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="n">outrankingModel</span><span class="o">=</span><span class="s1">&#39;this&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <figure class="align-center" id="condorcetwinnersheatmapmp">
@@ -4806,12 +4807,12 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p><span class="caption-number">Fig. 3.40 </span><span class="caption-text">Performance heatmap of Condorcet winners and losers</span><a class="headerlink" href="#condorcetwinnersheatmapmp" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>We may furthermore compute in <a class="reference internal" href="#condorcetwinners7"><span class="std std-numref">Listing 3.69</span></a> the relative 9th quantile performance ratings of the weak Condorcet winners and losers.</p>
+<p>We may furthermore compute in <a class="reference internal" href="#condorcetwinners7"><span class="std std-numref">Listing 3.69</span></a> the relative performance ratings of our set of weak Condorcet winners and losers.</p>
 <div class="literal-block-wrapper docutils container" id="condorcetwinners7">
 <div class="code-block-caption"><span class="caption-number">Listing 3.69 </span><span class="caption-text">Computing performance ratings of the Condorcet winners and losers</span><a class="headerlink" href="#condorcetwinners7" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">winners</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;p0583&#39;</span><span class="p">,</span><span class="s1">&#39;p0446&#39;</span><span class="p">,</span><span class="s1">&#39;p0877&#39;</span><span class="p">,</span><span class="s1">&#39;p0073&#39;</span><span class="p">,</span><span class="s1">&#39;p0156&#39;</span><span class="p">]</span>
 </span><span class="hll"><span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">losers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;p0652&#39;</span><span class="p">,</span><span class="s1">&#39;p0615&#39;</span><span class="p">,</span><span class="s1">&#39;p0400&#39;</span><span class="p">,</span><span class="s1">&#39;p0994&#39;</span><span class="p">,</span><span class="s1">&#39;p0390&#39;</span><span class="p">]</span>
-</span><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">ratingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+</span><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">ratingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">RatingByRelativeQuantilesDigraph</span>
 <span class="hll"><span class="linenos"> 4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">qr</span> <span class="o">=</span>  <span class="n">RatingByRelativeQuantilesDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
 </span><span class="hll"><span class="linenos"> 5</span><span class="gp">... </span>                      <span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </span><span class="linenos"> 6</span><span class="gp">&gt;&gt;&gt; </span><span class="n">qr</span><span class="o">.</span><span class="n">showPositiveRatingCharacteristics</span><span class="p">(</span><span class="n">winners</span><span class="p">)</span>
@@ -4831,7 +4832,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </span></pre></div>
 </div>
 </div>
-<p>All five weak Condorcet winners are rated either into the second-highest [0.78 - 0.89[ or in the highest [0.89 - &lt;[ performance class. Among the Condorcet losers, two are rated into the lowest [0.00 - 0.11[ and three in the second lowest [0.11 - 0.22[ performance class.</p>
+<p>Alternative ‘p0877’ is positively rated into the highest [0.89 - &lt;[ performance class . All the other four weak Condorcet winners are rated into the second-highest [0.78 - 0.89[ performance class. Among the Condorcet losers, two are rated into the lowest [0.00 - 0.11[ and three in the second lowest [0.11 - 0.22[ performance class.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>With the correct implementation of the epistemic fusion operators we may now compute bipolar-valued non ambiguous first and last choice recommendations of a given strict outranking digraph in a polynomial complexity without having to first find its polarised crisp initial and terminal prekernels (a not polynomial problem) and without having furthermore to solve the corresponding double fixpoint kernel equation systems.</p>
@@ -5963,7 +5964,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 </aside>
 <aside class="footnote brackets" id="id124" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id65">29</a><span class="fn-bracket">]</span></span>
-<p>See <a class="reference internal" href="tutorial.html#multiprocessing-tutorial-label"><span class="std std-ref">Using the Digraph3 multiprocessing resources</span></a></p>
+<p>See <a class="reference internal" href="tutorial.html#multiprocessing-tutorial-label"><span class="std std-ref">Using the Digraph3 multiprocessing resources</span></a>. Using multiple subinterpreters in parallel is available since Python 3.14, <a class="reference external" href="https://docs.python.org/3/whatsnew/3.14.html">https://docs.python.org/3/whatsnew/3.14.html</a>.</p>
 </aside>
 <aside class="footnote brackets" id="id125" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id61">30</a><span class="fn-bracket">]</span></span>
@@ -5997,7 +5998,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Nov 09, 2026.
+      <span class="lastupdated">Last updated on Nov 10, 2026.
       </span></p>
   </div>
 
