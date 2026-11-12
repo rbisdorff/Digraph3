@@ -332,7 +332,7 @@ class RatingDigraph(BipolarOutrankingDigraph):
                        sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
             print()
 
-    def showPositiveRatingCharacteristics(self, actionsList=None):
+    def showPositiveRatingCharacteristics(self, actionsList=None,fusionType='conjunctive'):
         """
         Renders a bipolar-valued bi-dictionary relation
         representing the degree of credibility of the
@@ -367,13 +367,67 @@ class RatingDigraph(BipolarOutrankingDigraph):
 
         for x in actions:
             for c in categories:
-                if sorting[x][c]['categoryMembership'] >= Med:
-                    print('\'%s\' in %s - %s\t' % (x, self.categories[c]['lowLimit'],
-                            self.categories[c]['highLimit'],), end=' ')
-                    print('%.2f\t\t %.2f\t\t %.2f' %\
-                          (sorting[x][c]['lowLimit'],
-                           sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+                if fusionType == 'average':
+                    from digraphsTools import symmetricAverage
+                    val = symmetricAverage(Med,[sorting[x][c]['lowLimit'],
+                                                sorting[x][c]['notHighLimit']])
+                    if  sorting[x][c]['lowLimit']>= Med and sorting[x][c]['notHighLimit'] >= Med:
+                        print('\'%s\' in %s - %s\t' % (x, self.categories[c]['lowLimit'],
+                                self.categories[c]['highLimit'],), end=' ')
+                        print('%.2f\t\t %.2f\t\t %.2f' %\
+                              (sorting[x][c]['lowLimit'],
+                               sorting[x][c]['notHighLimit'], val))
+                                                    
+                else:
+                    from digraphsTools import bpmin
+                    #val = sorting[x][c]['categoryMembership']
+                    val = bpmin(Med,[sorting[x][c]['lowLimit'],
+                               sorting[x][c]['notHighLimit']])
+                #print(x,val)
+                    if  val >= Med:
+                        print('\'%s\' in %s - %s\t' % (x, self.categories[c]['lowLimit'],
+                                self.categories[c]['highLimit'],), end=' ')
+                        print('%.2f\t\t %.2f\t\t %.2f' %\
+                              (sorting[x][c]['lowLimit'],
+                               sorting[x][c]['notHighLimit'], val))
             #print()
+
+##    def showRatingPercentiles(self, percentile=None):
+##        """
+##        Renders the set of actions that positively outrank the given persentile
+##        """
+##        Med = self.valuationdomain['med']
+##        actions = self.actions
+##        if persentile is None:
+##            percentile = Med
+##        try:
+##            sorting = self.sorting
+##        except:
+##            sorting = {}
+##            for x in actions:
+##                sorting.update(self._computeSortingCharacteristics(action=x))
+##            self.sorting = sorting
+##            
+##        categories = self._orderedCategoryKeys()
+##
+##        try:
+##            LowerClosed = self.criteriaCategoryLimits['LowerClosed']
+##        except:
+##            LowerClosed = False
+##        if LowerClosed:
+##            print('x  in  K_k\t r(x >= m_k)\t r(x < M_k)\t r(x in K_k)')
+##        else:
+##            print('x  in  K_k\t r(m_k < x)\t r(M_k >= x)\t r(x in K_k)')
+##
+##        for x in actions:
+##            for c in categories:
+##                if sorting[x][c]['categoryMembership'] >= Med:
+##                    print('\'%s\' in %s - %s\t' % (x, self.categories[c]['lowLimit'],
+##                            self.categories[c]['highLimit'],), end=' ')
+##                    print('%.2f\t\t %.2f\t\t %.2f' %\
+##                          (sorting[x][c]['lowLimit'],
+##                           sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+##            #print()
 
 
     def showHTMLRatingByQuantileSorting(self,title='Quantiles Preordering',
