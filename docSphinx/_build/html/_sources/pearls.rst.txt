@@ -4996,7 +4996,7 @@ We may furthermore compute in :numref:`CondorcetWinners7` the relative performan
     'p0994' in [0.11 - 0.22[	0.14	     0.31	 0.14
     'p0390' in [0.00 - 0.11[	1.00	     0.03	 0.03
    
-Alternative 'p0877' is positively rated into the highest [0.89 - <[ performance class . All the other four weak Condorcet winners are rated into the second-highest [0.78 - 0.89[ performance class. Among the Condorcet losers, two are rated into the lowest [0.00 - 0.11[ and three in the second lowest [0.11 - 0.22[ performance class.
+Alternative 'p0877' is positively rated into the highest [0.89 - <[ performance class . All the other four weak Condorcet winners are rated into the second-highest [0.78 - 0.89[ performance class. Among the Condorcet losers, two are rated into the lowest [0.00 - 0.11[ and three in the second lowest [0.11 - 0.22[ performance class (see the tutorial on :ref:`Rating into relative performance quantiles <QuantilesRating-Tutorial-label>`). 
 
 .. note::
 
