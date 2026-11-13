@@ -560,8 +560,10 @@ if __name__ == "__main__":
 ##    print('CoDualDigraph time',time()-t0)
     cd1 = CudaDigraph(ig1)
     print(cd1)
+    print(cd1.runTimes)
     cd2 = CudaDigraph(ig2)
     print(cd2)
+    print(cd2.runTimes)
 
     # fd = omaxFusionDigraph(cd1,cd2,Cuda=False)
     # print(fd)

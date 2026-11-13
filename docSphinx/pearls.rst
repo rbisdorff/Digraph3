@@ -4450,32 +4450,25 @@ A bipolar-valued set *X*, a **bpv-set** for short, consists of a **support set**
 
 |    Element *x* is more or less included in the set *X* when :math:`r(x \in X) \,>\, 0.0`;     
 |    Element *x* is more or less excluded from the set *X* when :math:`r(x \in X) \,<\, 0.0`;
-|    When  :math:`r(x \in X)\,=\, 0.0`, element *x* is neither included nor excluded from set *X*.
+|    When  :math:`r(x \in X)\,=\, 0.0`, element *x* is neither included nor excluded from set *X*. We say that the statement is **indeterminate**.
 
-We may distinguish three special bpv-sets: the **crisp** bpv-set *X* where all members of the support :math:`E_X` are certainly members of *X*, the **relatively empty** bpv-set *X* where all members of its support :math:`E_X` are certainly non-members of *X* and the special **indeterminate** case where all members of its support :math:`E_X` are indeterminate members of *X*, i.e :math:`r(z \in X) \;=\; 0.0 , \; \forall \,z \in\, E_X`.
+We may distinguish four special bpv-sets: the **dual** or *negated* bpv-set *-X*, the **crisp** bpv-set *X* where all members of the support :math:`E_X` are certainly members of *X*, the **relatively empty** bpv-set *X* where all members of its support :math:`E_X` are certainly non-members of *X* and the special **indeterminate** case where all members of its support :math:`E_X` are indeterminate members of *X*, i.e :math:`r(z \in X) \;=\; 0.0 , \; \forall \,z \in\, E_X`.
 
 Mind that for any potential element *z* not included in the support set :math:`E_X`, we consider its potential *X* membership characteristic :math:`r(z \in X)` to be -1.0. The **absolute empty** bpv-set :math:`\emptyset` consists hence of an empty support set :math:`E_{\emptyset} \,=\, \emptyset`. And, for any element *x* it follows that :math:`r(x \in \emptyset) \,=\, -1.0`.
 
+| On such bipolar-valued characteristic values, we define two binary operations denoted **bpmin** and **bpmax** as follows. For two characteristic values *r* and *r'* in [-1;+1],
+| *pbmax* (*r*, *r*'), resp. *bpmin* (*r*, *r*') =
+|    **max** (*r*, *r*'), resp. **min** (*r*, *r*'), when both *r* **and** *r*' are **not indeterminate**,
+|    *r* when *r*' is *indeterminate* or
+|    *r*' when *r* is *indeterminate*. [34]_
+
 Let *X* and *Y* be two bpv-sets. The support for logical bpv-set operations is the union of the support of the arguments. We define the classical **set union** :math:`\cup` and **intersection** :math:`\cap` as follows.
 
-| For all :math:`z \in E_{X \cup Y}` the membership characteristic :math:`r\big(\,z \in (X \cup Y)\,\big)\; =`
-|    :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when :math:`r(z \in X) \neq 0.0` and :math:`r(z \in Y)\neq 0.0`;
-|    :math:`r(z \in X)` when :math:`r(r(z \in Y) = 0.0`;
-|    :math:`r(z \in Y)` when :math:`r(r(z \in X) = 0.0`;
-|    otherwise:
-|       :math:`0.0`.
+| For all :math:`z \in E_{X \cup Y}` the membership characteristic :math:`r\big(\,z \in (X \cup Y)\,\big)\; = bpmax \big(\,r(z \in X),r(z \in Y)\, \big)`
 
-| For all :math:`z \in E_{X \cup Y}` the membership characteristic :math:`r\big(\,z \in (X \cap Y)\,\big)\; =` 
-|    :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when :math:`r(z \in X) \neq 0.0` and :math:`r(z \in Y)\neq 0.0`;
-|    :math:`r(z \in X)` when :math:`r(r(z \in Y) = 0.0`;
-|    :math:`r(z \in Y)` when :math:`r(r(z \in X) = 0.0`;
-|    otherwise:
-|       :math:`0.0`.
+| For all :math:`z \in E_{X \cup Y}` the membership characteristic :math:`r\big(\,z \in (X \cap Y)\,\big)\; = bpmin \big(\,r(z \in X),r(z \in Y)\, \big)` 
 
-| The **set difference** between two bpv-sets *X* and *Y*, denoted *X-Y*, is the bpv-set of all members of *X* that are not members of *Y*. For all :math:`z \in E_{X \cup Y}`, the membership characteristic :math:`r\big(\,z \in (X - Y)\, \big)\; =` 
-|    :math:`\min\big(\,r(z \in X),-r(z \in Y)\,\big)` when both :math:`z \in E_X \land z \in E_Y`;
-|    :math:`r(z \in X)` when :math:`z \in E_X`;
-|    :math:`-1.0` otherwise.
+| The **set difference** between two bpv-sets *X* and *Y*, denoted *X-Y*, is the bpv-set of all members of *X* that are not members of *Y*. For all :math:`z \in E_{X \cup Y}`, the membership characteristic :math:`r\big(\,z \in (X - Y)\, \big)\; = \; (X \,\cap\, -Y) \; = \; bpmin\big(\,r(z \in X),-r(z \in Y)\,\big)`. 
 
 The **symmetric difference** of bpv-sets *X* and *Y*, denoted *X^Y*, is the set difference of their union and intersection, :math:`(X \cup Y) \,-\, (X \cap Y)` or the union of their reciprocal set differences :math:`(X - Y) \,\cup\, (Y - X)`.
 
@@ -4561,31 +4554,21 @@ In the limit case of no indeterminate membership characteristics, we recover thi
 The partially ordered commutative epistemic fusion algebra
 ..........................................................
 
-The disjunctive and conjunctive epistemic fusions of two bpv-sets *X* and *Y*, defined on a same finite support set *E* and denoted :math:`X $ \textcircled{$\vee$} $ Y`, respectively :math:`X $ \textcircled{$\wedge$} $ Y`, give the bpv-sets defined as follows.
+The **disjunctive** and **conjunctive** *epistemic fusions* of two bpv-sets *X* and *Y*, defined on a same finite support set *E* and denoted :math:`X $ \textcircled{$\vee$} $ Y`, respectively :math:`X $ \textcircled{$\wedge$} $ Y`, give the bpv-sets defined as follows.
 
 | For all *z* in *E* the membership characteristic :math:`r\big(\,z \in (X  $ \textcircled{$\vee$} $ Y)\,\big)\; =`
-|    :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when
+|    :math:`bpmax \big(\,r(z \in X),r(z \in Y)\, \big)` when
 |          :math:`r(z \in X) > 0.0` and :math:`r(z \in Y) > 0.0`; or
-|    :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when 
+|    :math:`bpmin \big(\,r(z \in X),r(z \in Y)\, \big)` when 
 |          :math:`r(z \in X) < 0.0` and :math:`r(z \in Y) < 0.0`
-|    :math:`r(z \in X)` when
-|          :math:`r(z \in X) \neq 0.0` and :math:`r(z \in Y) = 0.0`; or
-|    :math:`r(z \in Y)` when
-|          :math:`r(z \in X) = 0.0` and :math:`r(z \in Y) \neq 0.0`;
-|    :math:`0.0` otherwise.
 
 | For all *z* in *E* the membership characteristic :math:`r\big(\,z \in (X $ \textcircled{$\wedge$} $ Y)\,\big)\; =`
-|    :math:`\min\big(\,r(z \in X),r(z \in Y)\, \big)` when
+|    :math:`bpmin \big(\,r(z \in X),r(z \in Y)\, \big)` when
 |          :math:`r(z \in X) > 0.0` and :math:`r(z \in Y) > 0.0`; or
-|    :math:`\max\big(\,r(z \in X),r(z \in Y)\, \big)` when 
+|    :math:`bpmax \big(\,r(z \in X),r(z \in Y)\, \big)` when 
 |          :math:`r(z \in X) < 0.0` and :math:`r(z \in Y) < 0.0`; or
-|    :math:`r(z \in X)` when
-|          :math:`r(z \in X) \neq 0.0` and :math:`r(z \in Y) = 0.0`; or
-|    :math:`r(z \in Y)` when
-|          :math:`r(z \in X) = 0.0` and :math:`r(z \in Y) \neq 0.0`;
-|    :math:`0.0` otherwise.
 
-In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunctive fusion operators.
+In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunctive fusion operators. [34]_
 
 .. code-block:: pycon
    :caption: Disjunctive and conjunctive fusion of bpv-sets
@@ -4782,7 +4765,7 @@ Now, weak Condorcet winners and losers verify the same pragmatic first choice pr
    :caption: Showing first and last choice recommendations from weak Condorcet winners bpv-set
    :name: CondorcetWinners3
    :linenos:
-   :emphasize-lines: 1,5-7,10-12
+   :emphasize-lines: 1-2,6-8,11-13
 
    >>> g.showChoiceRecommendation('CondorcetWinners',
    ...                            cwFusionType='average')
@@ -4802,7 +4785,7 @@ Now, weak Condorcet winners and losers verify the same pragmatic first choice pr
      Execution time: 0.027 sec.
     ******************************************
 
-The average criteria significance majorities for each choice are indicated in brakets (see Lines 5-12). Alternative *p2* is the most supported first choice and alternative *p1* is the most supported last choice. A recommendation that gets confirmed with the '*Rubis*' choice recommendation shown in :numref:`CondorcetWinners4` below (see [32]_). 
+The average criteria significance majorities for each choice are indicated in brakets (see Lines 6-8 and 11-13). Alternative *p2* is the most supported first choice and alternative *p1* is the most supported last choice. A recommendation that gets confirmed with the '*Rubis*' choice recommendation shown in :numref:`CondorcetWinners4` below (see [32]_). 
 
 .. code-block:: pycon
    :caption: Showing the choice recommendations from the Rubis method
@@ -6164,6 +6147,8 @@ Appendix
 .. [32] It is remarkable that the double fixpoint kernel equation systems deliver a very similar result when replacing the classical *max* and *min* operators with the corresponding :math:`$ \textcircled{$\vee$} $` and :math:`$ \textcircled{$\wedge$} $` epistemic fusion operators.
 
 .. [33] :ref:`Computing a best choice recommendation <Rubis-Tutorial-label>`
+
+.. [34] Remarkable is the fact that the indeterminate 0.0 characteristic value does not count as minimal positive and maximal negative value. Its epistemic value is in fact **indeterminate**, i.e. it may be any possible value from -1.0 to +1.0.
 
 .. raw:: latex
 
