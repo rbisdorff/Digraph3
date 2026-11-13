@@ -4418,7 +4418,7 @@ In order to formalize the previous intuitions, we are attaching to any logical  
   
 Negating a statement is operated by changing the sign of its characteristic function: :math:`-r(P) = r(\neg P)`. A negative *affirmation* becomes hence a positive *refutation* and vice versa [BIS-2004_3p]_. An important consequence appears. This **negation** :math:`\neg` operation does not correspond to taking the logical complement value. Indeed, the complement of *not true* is here *false or indeterminate* and the complement of *not false* is *true or indeterminate*. In fact, we are working in a balanced ternary logic with **negative** (false), **positive** (true) and **null** (indeterminate) characteristic values.  
 
-| Let now *P* and *Q* be two bipolar-valued propositions, logical **conjunction** :math:`\land`, **disjunction** :math:`\lor` and **implication** :math:`\Rightarrow` may be computed as follows:
+| Let now *P* and *Q* be two **not indeterminate** bipolar-valued propositions, logical **conjunction** :math:`\land`, **disjunction** :math:`\lor` and **implication** :math:`\Rightarrow` may be computed as follows:
 |    :math:`r(P \land Q) \,=\, \min\big(r(P),r(Q)\big)`;
 |    :math:`r(P \lor Q) \,=\, \max\big(r(P),r(Q)\big)`;
 |    :math:`r(P \Rightarrow Q)  \,=\, r\big(\neg(P \land \neg Q)\big) \,=\, -r \big(\,\min(r(P),-r(Q)\,)\big)`.
@@ -4459,8 +4459,9 @@ Mind that for any potential element *z* not included in the support set :math:`E
 | On such bipolar-valued characteristic values, we define two binary operations denoted **bpmin** and **bpmax** as follows. For two characteristic values *r* and *r'* in [-1;+1],
 | *pbmax* (*r*, *r*'), resp. *bpmin* (*r*, *r*') =
 |    **max** (*r*, *r*'), resp. **min** (*r*, *r*'), when both *r* **and** *r*' are **not indeterminate**,
-|    *r* when *r*' is *indeterminate* or
-|    *r*' when *r* is *indeterminate*. [34]_
+|    *r*  when *r*' is *indeterminate* or
+|    *r*' when *r* is *indeterminate*,
+|    **indeterminate** otherwise. [34]_
 
 Let *X* and *Y* be two bpv-sets. The support for logical bpv-set operations is the union of the support of the arguments. We define the classical **set union** :math:`\cup` and **intersection** :math:`\cap` as follows.
 
@@ -4743,8 +4744,6 @@ In the given random 3-objectives outranking digraph :math:`G(X,R)`, concerning t
 
 The individual bipolar-valued credibilities to '**be a non ambiguous weak Condorcet winner**' are computed as follows. For each individual alternative *x in X*, the **average** [30]_ **epistemic fusion** of the *outranking* credibilities :math:`r(x \succsim y)` for all :math:`y \neq x` in *X* measures indeed the more or less **outranking power** of *x* and the same average epistemic fusion of the *not outranked* credibilities :math:`-r(y \succsim x)`  for all :math:`y \neq x` in *X* measures the more or less **not outrankedness** of *x*. A disjunctive epistemic :math:`$ \textcircled{$\vee$} $` fusion of both these measures delivers eventually the corresponding bpv-set.
 
-In :numref:`condorcetWinners2` we see confirmed in the outranking relation table of :math:`G(X,R)` that alternative *p2* is indeed a Condorcet winner and alternatives *p6* and *p5* are *weak Condorcet winners* whereas alternatives *p8*, *p7* and *p1* are *weak Condorcet losers*. It is worthwhile noticing that the *dual* of this bpv-set *Y* gives by the way the bpv-set of the corresponding non ambiguous weak Condorcet losers.
-
    >>> g.showHTMLRelationTable(
    ...    actionsList=['p2','p6','p5','p3','p4','p9','p8','p7','p1'])
 
@@ -4755,6 +4754,8 @@ In :numref:`condorcetWinners2` we see confirmed in the outranking relation table
    :alt: A random outranking relation table
 
    A random outranking relation table
+
+In :numref:`condorcetWinners2` we see confirmed in the outranking relation table of :math:`G(X,R)` that alternative *p2* is indeed a *Condorcet winner* and alternatives *p6* and *p5* are *weak Condorcet winners* whereas alternatives *p8*, *p7* and *p1* are *weak Condorcet losers*. It is worthwhile noticing that the *dual* of this bpv-set *Y* gives by the way the bpv-set of the corresponding non ambiguous weak Condorcet losers.
 
 Suitable first and last choice recommendations
 ..............................................
