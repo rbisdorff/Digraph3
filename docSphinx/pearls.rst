@@ -4409,7 +4409,7 @@ Following *Condorcet* [CON-1785p]_ we are going to balance the votes in favour a
 
 First important consequence is that the logical status of any statement is considered to be indeterminate as long as no evidence is yet collected. Reconsidering for instance proposition *P*, its logical status is indeterminate as long as no voting has been organized.
 
-In order to formalize the previous intuitions, we are attaching to any logical  proposition or statement *P* a characteristic function *r(P)* taking value in the decimal interval [-1.0;+1.0] with following semantics:
+| In order to formalize the previous intuitions, we are attaching to any logical  proposition or statement *P* a characteristic function *r(P)* taking value in the decimal interval [-1.0;+1.0] with following semantics:
 |    :math:`r(P) = +1.0` means statement *P* is **for sure true**;
 |    :math:`0.0 < r(P) < +1.0` means statement *P* is **more or less true**;
 |    :math:`r(P) = 0.0` means statement *P* is **indeterminate**;
@@ -4446,11 +4446,10 @@ Lest us now apply this bipolar-valued logical characteristic calculus to element
 Computational bipolar-valued set theory
 .......................................
 
-A bipolar-valued set *X*, a **bpv-set** for short, consists of a **support set** :math:`E_X` of potential elements and a **membership dictionary** providing for every element :math:`x \in E_X` a bipolar-valued membership characteristic function :math:`r(x \in X)` taking values in the decimal interval [-1.0;+1.0]:
-
-|    Element *x* is more or less included in the set *X* when :math:`r(x \in X) \,>\, 0.0`;     
-|    Element *x* is more or less excluded from the set *X* when :math:`r(x \in X) \,<\, 0.0`;
-|    When  :math:`r(x \in X)\,=\, 0.0`, element *x* is neither included nor excluded from set *X*. We say that the statement is **indeterminate**.
+| A bipolar-valued set *X*, a **bpv-set** for short, consists of a **support set** :math:`E_X` of potential elements and a **membership dictionary** providing for every element :math:`x \in E_X` a bipolar-valued membership characteristic function :math:`r(x \in X)` taking values in the decimal interval [-1.0;+1.0]:
+|    - Element *x* is *more or less* **included** in the set *X* when :math:`r(x \in X) \,>\, 0.0`;     
+|    - Element *x* is *more or less* **excluded** from the set *X* when :math:`r(x \in X) \,<\, 0.0`;
+|    - When  :math:`r(x \in X)\,=\, 0.0`, element *x* is neither included nor excluded from set *X*. We say that the statement is **indeterminate**.
 
 We may distinguish four special bpv-sets: the **dual** or *negated* bpv-set *-X*, the **crisp** bpv-set *X* where all members of the support :math:`E_X` are certainly members of *X*, the **relatively empty** bpv-set *X* where all members of its support :math:`E_X` are certainly non-members of *X* and the special **indeterminate** case where all members of its support :math:`E_X` are indeterminate members of *X*, i.e :math:`r(z \in X) \;=\; 0.0 , \; \forall \,z \in\, E_X`.
 
@@ -4559,15 +4558,17 @@ The **disjunctive** and **conjunctive** *epistemic fusions* of two bpv-sets *X* 
 
 | For all *z* in *E* the membership characteristic :math:`r\big(\,z \in (X  $ \textcircled{$\vee$} $ Y)\,\big)\; =`
 |    :math:`bpmax \big(\,r(z \in X),r(z \in Y)\, \big)` when
-|          :math:`r(z \in X) > 0.0` and :math:`r(z \in Y) > 0.0`; or
+|          :math:`r(z \in X) > 0.0` and :math:`r(z \in Y) > 0.0` or
 |    :math:`bpmin \big(\,r(z \in X),r(z \in Y)\, \big)` when 
-|          :math:`r(z \in X) < 0.0` and :math:`r(z \in Y) < 0.0`
+|          :math:`r(z \in X) < 0.0` and :math:`r(z \in Y) < 0.0` or
+|    *indeterminate* otherwise.
 
 | For all *z* in *E* the membership characteristic :math:`r\big(\,z \in (X $ \textcircled{$\wedge$} $ Y)\,\big)\; =`
 |    :math:`bpmin \big(\,r(z \in X),r(z \in Y)\, \big)` when
 |          :math:`r(z \in X) > 0.0` and :math:`r(z \in Y) > 0.0`; or
 |    :math:`bpmax \big(\,r(z \in X),r(z \in Y)\, \big)` when 
 |          :math:`r(z \in X) < 0.0` and :math:`r(z \in Y) < 0.0`; or
+|    *indeterminate* otherwise.
 
 In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunctive fusion operators. [34]_
 
@@ -4643,7 +4644,7 @@ Let finally *L* be a list of *n* bpv-sets defined on a same support set *E*. The
 | For all *z* in *E* the membership characteristic :math:`r\big(\,z \in \mu(L)\,\big)\; =`
 |     :math:`\big( \, \sum_{X \in L} r(z \in X) \, \big)\,/\, n` 
 |          when forall :math:`X \in L`, either :math:`r(z \in X) \geqslant 0.0` or :math:`r(z \in X) \leqslant 0.0` ;
-|     :math:`0.0` otherwise.
+|     *indeterminate* otherwise.
 
 In :numref:`averageBpvSets` we illustrate the usage of the :py:meth:`~bipolarValuedSets.averageEpistemicFusion` method on a list *L* of two random bpv-sets *X* and *Y*  of same support set *E = {'s1', 's2', 's3'}*.
 

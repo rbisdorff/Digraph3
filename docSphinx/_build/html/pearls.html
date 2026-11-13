@@ -4275,12 +4275,16 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>In bipolar-valued epistemic logic we balance or <strong>superpose</strong> like in quantum theory, some epistemic evidences for a propositional statement to be true against other evidences for the same statement to be false. First example is given by the statement <em>P</em>: ‘<em>this candidate should win the election</em>’. There are some voters who support its truthfulness and some voters who support, on the contrary its falseness. Yet, there may also be some voters who don’t give any opinion, they abstain from voting. What logical status should be given to the statement <em>P</em> ?</p>
 <p>Following <em>Condorcet</em> <a class="reference internal" href="#con-1785p" id="id56"><span>[CON-1785p]</span></a> we are going to balance the votes in favour against the votes in disfavour. As a result we obtain a bipolar-valued credibility which qualifies statement <em>P</em> as <strong>utterly true</strong> when all voters support its truth, <strong>more or less true</strong> when more voters support its truthfulness than its falseness, <strong>more or less false</strong> when more voters support its falseness than its truthfulness and <strong>utterly false</strong> when all the voters support its falseness. There may however appear a special case when the same number of voters support its truthfulness respectively its falseness, or all voters abstain from voting. In these cases, statement <em>P</em> becomes neither <em>true</em> nor <em>false</em>, but <strong>indeterminate</strong>. It is a <em>zero knowledge</em> situation.</p>
 <p>First important consequence is that the logical status of any statement is considered to be indeterminate as long as no evidence is yet collected. Reconsidering for instance proposition <em>P</em>, its logical status is indeterminate as long as no voting has been organized.</p>
-<p>In order to formalize the previous intuitions, we are attaching to any logical  proposition or statement <em>P</em> a characteristic function <em>r(P)</em> taking value in the decimal interval [-1.0;+1.0] with following semantics:
-|    <img class="math" src="_images/math/32721715ede1aa1c060f82cb8bec20ad9e80b08c.png" alt="r(P) = +1.0"/> means statement <em>P</em> is <strong>for sure true</strong>;
-|    <img class="math" src="_images/math/5a09c2c881764e5c17b64c7d21e3479ccafe62a9.png" alt="0.0 &lt; r(P) &lt; +1.0"/> means statement <em>P</em> is <strong>more or less true</strong>;
-|    <img class="math" src="_images/math/4b9ffb1630863f647d6607f6e0c53ab2f24f2feb.png" alt="r(P) = 0.0"/> means statement <em>P</em> is <strong>indeterminate</strong>;
-|    <img class="math" src="_images/math/acc59803e9c968d6ce96b07d49882e6aae8458e3.png" alt="-1.0 &lt; r(P) &lt; 0.0"/> means statement <em>P</em> is <strong>more or less false</strong>;
-|    <img class="math" src="_images/math/15c986a5769260f0d7bb9ae481fc1a78153c5ec2.png" alt="r(P) = -1.0"/> means statement <em>P</em> is <strong>for sure false</strong>.</p>
+<div class="line-block">
+<div class="line">In order to formalize the previous intuitions, we are attaching to any logical  proposition or statement <em>P</em> a characteristic function <em>r(P)</em> taking value in the decimal interval [-1.0;+1.0] with following semantics:</div>
+<div class="line-block">
+<div class="line"><img class="math" src="_images/math/32721715ede1aa1c060f82cb8bec20ad9e80b08c.png" alt="r(P) = +1.0"/> means statement <em>P</em> is <strong>for sure true</strong>;</div>
+<div class="line"><img class="math" src="_images/math/5a09c2c881764e5c17b64c7d21e3479ccafe62a9.png" alt="0.0 &lt; r(P) &lt; +1.0"/> means statement <em>P</em> is <strong>more or less true</strong>;</div>
+<div class="line"><img class="math" src="_images/math/4b9ffb1630863f647d6607f6e0c53ab2f24f2feb.png" alt="r(P) = 0.0"/> means statement <em>P</em> is <strong>indeterminate</strong>;</div>
+<div class="line"><img class="math" src="_images/math/acc59803e9c968d6ce96b07d49882e6aae8458e3.png" alt="-1.0 &lt; r(P) &lt; 0.0"/> means statement <em>P</em> is <strong>more or less false</strong>;</div>
+<div class="line"><img class="math" src="_images/math/15c986a5769260f0d7bb9ae481fc1a78153c5ec2.png" alt="r(P) = -1.0"/> means statement <em>P</em> is <strong>for sure false</strong>.</div>
+</div>
+</div>
 <p>Negating a statement is operated by changing the sign of its characteristic function: <img class="math" src="_images/math/5421c795d2b37f967ef1c8c38fb89b83c70cf054.png" alt="-r(P) = r(\neg P)"/>. A negative <em>affirmation</em> becomes hence a positive <em>refutation</em> and vice versa <a class="reference internal" href="#bis-2004-3p" id="id57"><span>[BIS-2004_3p]</span></a>. An important consequence appears. This <strong>negation</strong> <img class="math" src="_images/math/c9223c455a541292838065c77ca76042c2c38315.png" alt="\neg"/> operation does not correspond to taking the logical complement value. Indeed, the complement of <em>not true</em> is here <em>false or indeterminate</em> and the complement of <em>not false</em> is <em>true or indeterminate</em>. In fact, we are working in a balanced ternary logic with <strong>negative</strong> (false), <strong>positive</strong> (true) and <strong>null</strong> (indeterminate) characteristic values.</p>
 <div class="line-block">
 <div class="line">Let now <em>P</em> and <em>Q</em> be two <strong>not indeterminate</strong> bipolar-valued propositions, logical <strong>conjunction</strong> <img class="math" src="_images/math/e24aec858112a75c8ebaf9d12ea9b94ac472851a.png" alt="\land"/>, <strong>disjunction</strong> <img class="math" src="_images/math/d032498313a62c6a0f3bbc4dd919b7bd46c18ccd.png" alt="\lor"/> and <strong>implication</strong> <img class="math" src="_images/math/d1a55bc0d5f4b30060db724826d79f376a4cd4d4.png" alt="\Rightarrow"/> may be computed as follows:</div>
@@ -4310,11 +4314,13 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </section>
 <section id="computational-bipolar-valued-set-theory">
 <h4><a class="toc-backref" href="#id197" role="doc-backlink"><span class="section-number">3.3.5.3. </span>Computational bipolar-valued set theory</a><a class="headerlink" href="#computational-bipolar-valued-set-theory" title="Link to this heading"></a></h4>
-<p>A bipolar-valued set <em>X</em>, a <strong>bpv-set</strong> for short, consists of a <strong>support set</strong> <img class="math" src="_images/math/b599784fb63a576cdfeadface312ad10c53c3bdb.png" alt="E_X"/> of potential elements and a <strong>membership dictionary</strong> providing for every element <img class="math" src="_images/math/7b41380b088e85f2971b6207d303fabd97d6c002.png" alt="x \in E_X"/> a bipolar-valued membership characteristic function <img class="math" src="_images/math/79534d4d4f3e67f032dec9c58c7bc0779d25f954.png" alt="r(x \in X)"/> taking values in the decimal interval [-1.0;+1.0]:</p>
 <div class="line-block">
-<div class="line">Element <em>x</em> is more or less included in the set <em>X</em> when <img class="math" src="_images/math/19479d5208df708cef15709134d9cb710cdd10e0.png" alt="r(x \in X) \,&gt;\, 0.0"/>;</div>
-<div class="line">Element <em>x</em> is more or less excluded from the set <em>X</em> when <img class="math" src="_images/math/3631a05f044a2efdd68e4ce6e3b25afbbc3a3ae6.png" alt="r(x \in X) \,&lt;\, 0.0"/>;</div>
-<div class="line">When  <img class="math" src="_images/math/58210510ce16e8ffd5c5cb52d23de28d6843b5a1.png" alt="r(x \in X)\,=\, 0.0"/>, element <em>x</em> is neither included nor excluded from set <em>X</em>. We say that the statement is <strong>indeterminate</strong>.</div>
+<div class="line">A bipolar-valued set <em>X</em>, a <strong>bpv-set</strong> for short, consists of a <strong>support set</strong> <img class="math" src="_images/math/b599784fb63a576cdfeadface312ad10c53c3bdb.png" alt="E_X"/> of potential elements and a <strong>membership dictionary</strong> providing for every element <img class="math" src="_images/math/7b41380b088e85f2971b6207d303fabd97d6c002.png" alt="x \in E_X"/> a bipolar-valued membership characteristic function <img class="math" src="_images/math/79534d4d4f3e67f032dec9c58c7bc0779d25f954.png" alt="r(x \in X)"/> taking values in the decimal interval [-1.0;+1.0]:</div>
+<div class="line-block">
+<div class="line">- Element <em>x</em> is <em>more or less</em> <strong>included</strong> in the set <em>X</em> when <img class="math" src="_images/math/19479d5208df708cef15709134d9cb710cdd10e0.png" alt="r(x \in X) \,&gt;\, 0.0"/>;</div>
+<div class="line">- Element <em>x</em> is <em>more or less</em> <strong>excluded</strong> from the set <em>X</em> when <img class="math" src="_images/math/3631a05f044a2efdd68e4ce6e3b25afbbc3a3ae6.png" alt="r(x \in X) \,&lt;\, 0.0"/>;</div>
+<div class="line">- When  <img class="math" src="_images/math/58210510ce16e8ffd5c5cb52d23de28d6843b5a1.png" alt="r(x \in X)\,=\, 0.0"/>, element <em>x</em> is neither included nor excluded from set <em>X</em>. We say that the statement is <strong>indeterminate</strong>.</div>
+</div>
 </div>
 <p>We may distinguish four special bpv-sets: the <strong>dual</strong> or <em>negated</em> bpv-set <em>-X</em>, the <strong>crisp</strong> bpv-set <em>X</em> where all members of the support <img class="math" src="_images/math/b599784fb63a576cdfeadface312ad10c53c3bdb.png" alt="E_X"/> are certainly members of <em>X</em>, the <strong>relatively empty</strong> bpv-set <em>X</em> where all members of its support <img class="math" src="_images/math/b599784fb63a576cdfeadface312ad10c53c3bdb.png" alt="E_X"/> are certainly non-members of <em>X</em> and the special <strong>indeterminate</strong> case where all members of its support <img class="math" src="_images/math/b599784fb63a576cdfeadface312ad10c53c3bdb.png" alt="E_X"/> are indeterminate members of <em>X</em>, i.e <img class="math" src="_images/math/b77b61e229e68be53bb31eac9a35de98561b3ba9.png" alt="r(z \in X) \;=\; 0.0 , \; \forall \,z \in\, E_X"/>.</p>
 <p>Mind that for any potential element <em>z</em> not included in the support set <img class="math" src="_images/math/b599784fb63a576cdfeadface312ad10c53c3bdb.png" alt="E_X"/>, we consider its potential <em>X</em> membership characteristic <img class="math" src="_images/math/5d8b976e2862b5d489aab1cf78235c34e79fe930.png" alt="r(z \in X)"/> to be -1.0. The <strong>absolute empty</strong> bpv-set <img class="math" src="_images/math/11771dabc5996d6b3f6e4ba352697d89712ce77f.png" alt="\emptyset"/> consists hence of an empty support set <img class="math" src="_images/math/11c2aa794251fd283b48945863950c3fab90d155.png" alt="E_{\emptyset} \,=\, \emptyset"/>. And, for any element <em>x</em> it follows that <img class="math" src="_images/math/f7fb2319563cd618784032add2345c255aa94088.png" alt="r(x \in \emptyset) \,=\, -1.0"/>.</p>
@@ -4409,12 +4415,13 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <div class="line-block">
 <div class="line"><img class="math" src="_images/math/6d88b06688a6ddd9ab48981fc1706b9dc0871bf0.png" alt="bpmax \big(\,r(z \in X),r(z \in Y)\, \big)"/> when</div>
 <div class="line-block">
-<div class="line"><img class="math" src="_images/math/e618bc28614775e18ace23450f7d805d21013832.png" alt="r(z \in X) &gt; 0.0"/> and <img class="math" src="_images/math/2121ce0a925f519fec675dfca7b7fa7326e7b02f.png" alt="r(z \in Y) &gt; 0.0"/>; or</div>
+<div class="line"><img class="math" src="_images/math/e618bc28614775e18ace23450f7d805d21013832.png" alt="r(z \in X) &gt; 0.0"/> and <img class="math" src="_images/math/2121ce0a925f519fec675dfca7b7fa7326e7b02f.png" alt="r(z \in Y) &gt; 0.0"/> or</div>
 </div>
 <div class="line"><img class="math" src="_images/math/007a4a9c004a0479afac884f42391478e6091bdd.png" alt="bpmin \big(\,r(z \in X),r(z \in Y)\, \big)"/> when</div>
 <div class="line-block">
-<div class="line"><img class="math" src="_images/math/576c03bd0e6129837c9b81b3219819232f387bd3.png" alt="r(z \in X) &lt; 0.0"/> and <img class="math" src="_images/math/93c95a338fd774430a842c7cc2af0a9f72169a91.png" alt="r(z \in Y) &lt; 0.0"/></div>
+<div class="line"><img class="math" src="_images/math/576c03bd0e6129837c9b81b3219819232f387bd3.png" alt="r(z \in X) &lt; 0.0"/> and <img class="math" src="_images/math/93c95a338fd774430a842c7cc2af0a9f72169a91.png" alt="r(z \in Y) &lt; 0.0"/> or</div>
 </div>
+<div class="line"><em>indeterminate</em> otherwise.</div>
 </div>
 </div>
 <div class="line-block">
@@ -4428,6 +4435,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <div class="line-block">
 <div class="line"><img class="math" src="_images/math/576c03bd0e6129837c9b81b3219819232f387bd3.png" alt="r(z \in X) &lt; 0.0"/> and <img class="math" src="_images/math/93c95a338fd774430a842c7cc2af0a9f72169a91.png" alt="r(z \in Y) &lt; 0.0"/>; or</div>
 </div>
+<div class="line"><em>indeterminate</em> otherwise.</div>
 </div>
 </div>
 <p>In <a class="reference internal" href="#bipolarvaluedsets4"><span class="std std-numref">Listing 3.59</span></a> below we illustrate the disjunctive and conjunctive fusion operators. <a class="footnote-reference brackets" href="#id131" id="id60" role="doc-noteref"><span class="fn-bracket">[</span>34<span class="fn-bracket">]</span></a></p>
@@ -4496,7 +4504,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <div class="line-block">
 <div class="line">when forall <img class="math" src="_images/math/79cdaabcb699025272ee222bcb7b2a72bce82487.png" alt="X \in L"/>, either <img class="math" src="_images/math/cf41a2c61a5ad7d188ae0fa9b9927fd717ea56b3.png" alt="r(z \in X) \geqslant 0.0"/> or <img class="math" src="_images/math/3b5ab2c15d6dd56906de9160729b45d9ee40f4c8.png" alt="r(z \in X) \leqslant 0.0"/> ;</div>
 </div>
-<div class="line"><img class="math" src="_images/math/1eb0514994edf71549d3baf4fbfa79d643bca95e.png" alt="0.0"/> otherwise.</div>
+<div class="line"><em>indeterminate</em> otherwise.</div>
 </div>
 </div>
 <p>In <a class="reference internal" href="#averagebpvsets"><span class="std std-numref">Listing 3.62</span></a> we illustrate the usage of the <a class="reference internal" href="techDoc.html#bipolarValuedSets.averageEpistemicFusion" title="bipolarValuedSets.averageEpistemicFusion"><code class="xref py py-meth docutils literal notranslate"><span class="pre">averageEpistemicFusion()</span></code></a> method on a list <em>L</em> of two random bpv-sets <em>X</em> and <em>Y</em>  of same support set <em>E = {‘s1’, ‘s2’, ‘s3’}</em>.</p>
