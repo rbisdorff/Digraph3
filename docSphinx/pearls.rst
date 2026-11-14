@@ -4583,7 +4583,7 @@ In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunct
    >>> X.showMembershipCharacteristics(Sorted=False)
      x1:-0.7313, x2:+0.6949, x3:+0.5275, x4:-0.4899, x5:+0.0000
    >>> Y = RandomBpvSet(seed=2)
-   >>> Y.showMembershipCharaceristics(Sorted=False)
+   >>> Y.showMembershipCharacteristics(Sorted=False)
      x1:+0.9121, x2:+0.8957, x3:-0.8869, x4:-0.8303, x5:+0.6710
    >>> (X.ovee(Y)).showMembershipCharacteristics(Sorted=False)
     # disjunctive epistemic fusion -
@@ -4688,7 +4688,7 @@ The epistemic fusion operators induce furthermore on :math:`\mathcal{S}(A)` a pa
    >>> mu.isSharper((X.owedge(Y)),Comments=True)
     s1 0.0000 0.0000, s2 0.7953 0.6949, s3 0.0000 0.0000
     True
-   >>> (X.isSharper(O,Comments=True)
+   >>> X.isSharper(O,Comments=True)
     x1 -0.7313 0.0000, x2 0.6949 0.0000, x3 0.5275 0.0000
     True
    >>> Xp = X.polarise(InSite=False) 

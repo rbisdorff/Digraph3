@@ -498,14 +498,14 @@ class BpvSet(object):
         Max = newSelf.valuationDomain['max']
         res = Max
         for it in newSelf.support:
-            print(it)
+            #print(it)
             try:
                 resit = -( min(newSelf.membership[it],-(newOther.membership[it])) )
-                print(res,newSelf.membership[it],newOther.membership[it],resit)
+                #print(res,newSelf.membership[it],newOther.membership[it],resit)
             except:
                 newOther.membership[it] = Min
                 resit = -( min(newSelf.membership[it],-(newOther.membership[it])) )
-                print(res,newSelf.membership[it],newOther.membership[it],resit)
+                #print(res,newSelf.membership[it],newOther.membership[it],resit)
             if resit < res:
                 res = resit
         return res
