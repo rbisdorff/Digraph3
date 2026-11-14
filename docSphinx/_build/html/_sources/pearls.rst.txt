@@ -4570,16 +4570,16 @@ The **disjunctive** and **conjunctive** *epistemic fusions* of two bpv-sets *X* 
 
 | For all *z* in *E* the membership characteristic :math:`r\big(\,z \in (X  $ \textcircled{$\vee$} $ Y)\,\big)\; =`
 |    :math:`bpmax \big(\,r(z \in X),r(z \in Y)\, \big)` when
-|          :math:`r(z \in X) > 0.0` and :math:`r(z \in Y) > 0.0` or
+|          :math:`r(z \in X) \geqslant 0.0` and :math:`r(z \in Y) \geqslant 0.0` or
 |    :math:`bpmin \big(\,r(z \in X),r(z \in Y)\, \big)` when 
-|          :math:`r(z \in X) < 0.0` and :math:`r(z \in Y) < 0.0` or
+|          :math:`r(z \in X) \leqslant 0.0` and :math:`r(z \in Y) \leqslant 0.0` or
 |    *indeterminate* otherwise.
 
 | For all *z* in *E* the membership characteristic :math:`r\big(\,z \in (X $ \textcircled{$\wedge$} $ Y)\,\big)\; =`
 |    :math:`bpmin \big(\,r(z \in X),r(z \in Y)\, \big)` when
-|          :math:`r(z \in X) > 0.0` and :math:`r(z \in Y) > 0.0`; or
+|          :math:`r(z \in X) \geqslant 0.0` and :math:`r(z \in Y) \geqslant 0.0`; or
 |    :math:`bpmax \big(\,r(z \in X),r(z \in Y)\, \big)` when 
-|          :math:`r(z \in X) < 0.0` and :math:`r(z \in Y) < 0.0`; or
+|          :math:`r(z \in X) \leqslant 0.0` and :math:`r(z \in Y) \leqslant 0.0`; or
 |    *indeterminate* otherwise.
 
 In :numref:`bipolarValuedSets4` below we illustrate the disjunctive and conjunctive fusion operators. [34]_
