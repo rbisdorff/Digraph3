@@ -4492,7 +4492,7 @@ The :py:mod:`bipolarValuedSets` Digraph3 module provides, with the :py:class:`~b
    >>> Y.showMembershipCharacteristics(Sorted=False)
     s1:+0.9121, s2:+0.8957, s3:-0.8869
    >>> I = RandomBpvSet(numberOfElements=5,elementNamePrefix='s',
-   ...                  ndigits=4,indterminateness=1.0)
+   ...                  ndigits=4,indeterminateness=1.0)
    >>> I.showMembershipCharacteristics(Sorted=False)
     s1:+0.0000, s2:+0.0000, s3:+0.0000, s4:+0.0000, s5:+0.0000
 
