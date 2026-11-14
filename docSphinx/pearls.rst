@@ -4470,6 +4470,8 @@ Let *X* and *Y* be two bpv-sets. The support for logical bpv-set operations is t
 
 | The **set difference** between two bpv-sets *X* and *Y*, denoted *X-Y*, is the bpv-set of all members of *X* that are not members of *Y*. For all :math:`z \in E_{X \cup Y}`, the membership characteristic :math:`r\big(\,z \in (X - Y)\, \big)\; = \; (X \,\cap\, -Y) \; = \; bpmin\big(\,r(z \in X),-r(z \in Y)\,\big)`. 
 
+It is worthwhile noticing that replacing above the classical *max* and *min* operators with their corresponding *bpmax* and *bpmin* versions makes the indeterminate bpv-set a **neutral** element for the bpv-set **union** and **intersection**.
+
 The **symmetric difference** of bpv-sets *X* and *Y*, denoted *X^Y*, is the set difference of their union and intersection, :math:`(X \cup Y) \,-\, (X \cap Y)` or the union of their reciprocal set differences :math:`(X - Y) \,\cup\, (Y - X)`.
 
 The :py:mod:`bipolarValuedSets` Digraph3 module provides, with the :py:class:`~bipolarValuedSets.BpvSet` class, a Python implementation of such bpv-sets. In :numref:`bipolarValuedSets1` we use the :py:class:`~bipolarValuedSets.RandomBpvSet` class for generating two random bpv-sets *X* and *Y* with a common support of three elements *s1*, *s2* and *s3*. 
@@ -4478,7 +4480,7 @@ The :py:mod:`bipolarValuedSets` Digraph3 module provides, with the :py:class:`~b
    :caption: Generating random bpv-sets
    :name: bipolarValuedSets1
    :linenos:
-   :emphasize-lines: 5,9
+   :emphasize-lines: 5,9,11,13
 
    >>> from bipolarValuedSets import RandomBpvSet
    >>> X = RandomBpvSet(numberOfElements=5,elementNamePrefix='s',
@@ -4489,14 +4491,18 @@ The :py:mod:`bipolarValuedSets` Digraph3 module provides, with the :py:class:`~b
    ...    indeterminateness=0.1,valuationRange=(-1, 1),ndigits=4,seed=2)
    >>> Y.showMembershipCharacteristics(Sorted=False)
     s1:+0.9121, s2:+0.8957, s3:-0.8869
+   >>> I = RandomBpvSet(numberOfElements=5,elementNamePrefix='s',
+   ...                  ndigits=4,indterminateness=1.0)
+   >>> I.showMembershipCharacteristics(Sorted=False)
+    s1:+0.0000, s2:+0.0000, s3:+0.0000, s4:+0.0000, s5:+0.0000
 
-In :numref:`bipolarValuedSets2` below we illustrate the bipolar-valued set **union** and **intersection**.
+In :numref:`bipolarValuedSets2` below we illustrate the bpv-set **union** and **intersection**.
 
 .. code-block:: pycon
    :caption: Set union and intersection of bpv-sets
    :name: bipolarValuedSets2
    :linenos:
-   :emphasize-lines: 3,6
+   :emphasize-lines: 3,6,8,10
 
    >>> (X|Y).showMembershipCharacteristics(Sorted=False)
     # Python's set union symbol is |
@@ -4504,8 +4510,14 @@ In :numref:`bipolarValuedSets2` below we illustrate the bipolar-valued set **uni
    >>> (X&Y).showMembershipCharacteristics(Sorted=False)
     # Python's set intersection symbol is &
     s1:-0.7313, s2:+0.6949, s3:-0.8869, s4:-1.0000, s5:-1.0000
+   >>> (X|I).showMembershipCharacteristics(Sorted=False)
+    # neutrality of I for the bpv-set union 
+    s1:-0.7313, s2:+0.6949, s3:+0.5275, s4:-0.4899, s5:+0.0000
+   >>> (X&I).showMembershipCharacteristics(Sorted=False)
+    # neutrality of I for the bpv-set intersection
+    s1:-0.7313, s2:+0.6949, s3:+0.5275, s4:-0.4899, s5:+0.0000
 
-In :numref:`bipolarValuedSets3` below we illustrate the bipolar-valued set **difference** and **symmetric difference**. 
+In :numref:`bipolarValuedSets3` below we illustrate the bpv-set **difference** and **symmetric difference**. 
 
 .. code-block:: pycon
    :caption: Difference and symmetric differences of bpv-sets
