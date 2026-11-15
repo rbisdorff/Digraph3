@@ -4757,6 +4757,8 @@ In the given random 3-objectives outranking digraph :math:`G(X,R)`, concerning t
 
 The individual bipolar-valued credibilities to '**be a non ambiguous weak Condorcet winner**' are computed as follows. For each individual alternative *x in X*, the **average** [30]_ **epistemic fusion** of the *outranking* credibilities :math:`r(x \succsim y)` for all :math:`y \neq x` in *X* measures indeed the more or less **outranking power** of *x* and the same average epistemic fusion of the *not outranked* credibilities :math:`-r(y \succsim x)`  for all :math:`y \neq x` in *X* measures the more or less **not outrankedness** of *x*. A disjunctive epistemic :math:`$ \textcircled{$\vee$} $` fusion of both these measures delivers eventually the corresponding bpv-set.
 
+In matrix style notation, the computation of weak Condorcet winners and losers may be expressed like follows. Let :math:`I` denote an indeterminate column bpv-vector with support set :math:`X`, let :math:`R`, resp. :math:`R^{cd}`, denote the bpv-adjacency matrix of the outranking digraph, resp. of the codual of the outranking digraph :math:`G(X,R)`. Let :math:`Y` be the column bpv-vector of the weak Condorcet winners and losers. Than :math:`Y \; = \; \big(R\,\diamond\,I\big) \; $ \textcircled{$\vee$} $ \; \big(R^{cd}\,\diamond\,I\big)` where :math:`\big(R\,\diamond\,I\big)(x) \;= \; $ \textcircled{$\vee$} $_{y \neq x \in X} \big(R(x,y) $ \textcircled{$\wedge$} $ I(y)\big)` and :math:`\big(R^{cd}\,\diamond\,I\big)(x) \;= \; $ \textcircled{$\vee$} $_{y \neq x \in X} \big(-R(y,x) $ \textcircled{$\wedge$} $ I(y)\big)`.
+
    >>> g.showHTMLRelationTable(
    ...    actionsList=['p2','p6','p5','p3','p4','p9','p8','p7','p1'])
 
