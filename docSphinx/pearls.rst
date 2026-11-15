@@ -6169,7 +6169,7 @@ Appendix
 
 .. [34] Remarkable is the fact that the indeterminate 0.0 characteristic value does not count as minimal positive and maximal negative value. Its epistemic value is in fact **indeterminate**, i.e. it may be any possible value from -1.0 to +1.0.
 
-.. [35] It is tempting to see this matrix formulation as a kind of *von Neumann* or *Pirlot* fix-point equation where the initial :math:`Y` vector is set to indeterminate. But no fix-point convergence could be observed. This idea needs further research (avis aux amateurs) (see :ref:`Bipolar-Valued-Kernels-Tutorial-label`).
+.. [35] It is tempting to see this matrix formulation as a kind of *von Neumann* or *Pirlot* fix-point equation where the initial :math:`Y` vector is set to indeterminate. But no fix-point convergence could be observed. This idea, as well as the formal connection to computing prekernel bpv-vectors, needs further research (avis aux amateurs) (see :ref:`Bipolar-Valued-Kernels-Tutorial-label`).
 
 
 .. raw:: latex
