@@ -4728,7 +4728,7 @@ A new choice recommender algorithm
 Computing bipolar-valued weak Condorcet winners and losers
 ..........................................................
 
-The relation attribute of a given outranking digraph :math:`G(X,R)` is an evident example of a bipolar-valued set, a *bpv-set* for short. And the epistemic fusion operators, discussed in the previous section, may be efficiently used for computing the bpv-set of *non ambiguous weak Condorcet winners and losers* of such a digraph *G* [28]_. The :py:class:`~digraphs.Digraph` class provides therefore the :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method as shown in :numref:`CondorcetWinners1` Line 5.  
+The relation attribute of a given outranking digraph :math:`G(X,R)` is an evident example of a bipolar-valued set, a *bpv-set* for short. And the epistemic fusion operators, discussed in the previous section, may be efficiently used for computing the bpv-set of *non ambiguous weak Condorcet winners and losers* of such a digraph *G* [28]_. The :py:class:`~digraphs.Digraph` class provides therefore the :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method as shown in :numref:`CondorcetWinners1` Line 5 [30]_.  
 
 .. code-block:: pycon
    :caption: Computing the bpv-set of the weak Condorcet winner(s)
@@ -4755,9 +4755,12 @@ The relation attribute of a given outranking digraph :math:`G(X,R)` is an eviden
 
 In the given random 3-objectives outranking digraph :math:`G(X,R)`, concerning the performances of 9 public policies with respect to 13 performance criteria, three alternatives, *p2*, *p6* and *p5* are positive weak Condorcet winners, whereas alternatives *p8*, *p7* and *p1* are negative weak Condorcet winners, that is positive weak Condorcet losers (see Lines 8-10 and 14-16 above).
 
-The individual bipolar-valued credibilities to '**be a non ambiguous weak Condorcet winner**' are computed as follows. For each individual alternative *x in X*, the **average** [30]_ **epistemic fusion** of the *outranking* credibilities :math:`r(x \succsim y)` for all :math:`y \neq x` in *X* measures indeed the more or less **outranking power** of *x* and the same average epistemic fusion of the *not outranked* credibilities :math:`-r(y \succsim x)`  for all :math:`y \neq x` in *X* measures the more or less **not outrankedness** of *x*. A disjunctive epistemic :math:`$ \textcircled{$\vee$} $` fusion of both these measures delivers eventually the corresponding bpv-set.
+The individual bipolar-valued credibilities to '**be a non ambiguous weak Condorcet winner**' are computed as follows. For each individual alternative *x in X*, an **epistemic fusion** of the *outranking* credibilities :math:`r(x \succsim y)` for all :math:`y \neq x` in *X* measures indeed the more or less **outranking power** of *x* and the same epistemic fusion of the *not outranked* credibilities :math:`-r(y \succsim x)`  for all :math:`y \neq x` in *X* measures the more or less **not outrankedness** of *x*. A disjunctive epistemic :math:`$ \textcircled{$\vee$} $` fusion of both these measures delivers eventually the corresponding bpv-set [30]_. 
 
-In matrix style notation, the computation of weak Condorcet winners and losers may be expressed like follows. Let :math:`I` denote an indeterminate column bpv-vector with support set :math:`X`, let :math:`R`, resp. :math:`R^{cd}`, denote the bpv-adjacency matrix of the outranking digraph, resp. of the codual of the outranking digraph :math:`G(X,R)`. Let :math:`Y` be the column bpv-vector of the weak Condorcet winners and losers. Than :math:`Y \; = \; \big(R\,\diamond\,I\big) \; $ \textcircled{$\vee$} $ \; \big(R^{cd}\,\diamond\,I\big)` where :math:`\big(R\,\diamond\,I\big)(x) \;= \; $ \textcircled{$\vee$} $_{y \neq x \in X} \big(R(x,y) $ \textcircled{$\wedge$} $ I(y)\big)` and :math:`\big(R^{cd}\,\diamond\,I\big)(x) \;= \; $ \textcircled{$\vee$} $_{y \neq x \in X} \big(-R(y,x) $ \textcircled{$\wedge$} $ I(y)\big)`.
+| In matrix style notation, the conjunctive epistemic fusion computation of weak Condorcet winners and losers may be expressed like follows. Let :math:`I` denote an indeterminate column bpv-vector with support set :math:`X`, let :math:`R`, resp. :math:`R^{cd}`, denote the bpv-adjacency matrix of the outranking digraph, resp. of the codual of the outranking digraph :math:`G(X,R)`. Let :math:`Y` be the column bpv-vector of the weak Condorcet winners and losers. Than
+|    :math:`Y \; = \; \big(R\,\diamond\,I\big) \; $ \textcircled{$\vee$} $ \; \big(R^{cd}\,\diamond\,I\big)` where :math:`\forall x \in X`,
+|        :math:`\big(R\,\diamond\,I\big)(x) \;= \; $ \textcircled{$\wedge$} $_{y \neq x \in X} \big(R(x,y) $ \textcircled{$\vee$} $ I(y)\big)` and
+|        :math:`\big(R^{cd}\,\diamond\,I\big)(x) \;= \; $ \textcircled{$\wedge$} $_{y \neq x \in X} \big(-R(y,x) $ \textcircled{$\vee$} $ I(y)\big)` [35]_.
 
    >>> g.showHTMLRelationTable(
    ...    actionsList=['p2','p6','p5','p3','p4','p9','p8','p7','p1'])
@@ -6156,7 +6159,7 @@ Appendix
 
 .. [29] See :ref:`Using the Digraph3 multiprocessing resources <Multiprocessing-Tutorial-label>`. Using multiple subinterpreters in parallel is available since Python 3.14, https://docs.python.org/3/whatsnew/3.14.html.
 
-.. [30] The *fusionType* parameter accepts besides the default 'average' option also the 'conjunctive' and 'disjunctive' options.
+.. [30] The *average* epistemic fusion is the default setting. The *fusionType* parameter accepts besides the 'average' option also the 'conjunctive' and 'disjunctive' options.
 
 .. [31] See :ref:`Pragmatic-Principles--label`
 
@@ -6165,6 +6168,9 @@ Appendix
 .. [33] :ref:`Computing a best choice recommendation <Rubis-Tutorial-label>`
 
 .. [34] Remarkable is the fact that the indeterminate 0.0 characteristic value does not count as minimal positive and maximal negative value. Its epistemic value is in fact **indeterminate**, i.e. it may be any possible value from -1.0 to +1.0.
+
+.. [35] It is tempting to see this matrix formulation as a kind of *von Neumann* or *Pirlot* fix-point equation where the initial :math:`Y` vector is set to indeterminate. But no fix-point convergence could be observed. This idea needs further research (avis aux amateurs) (see :ref:`Bipolar-Valued-Kernels-Tutorial-label`).
+
 
 .. raw:: latex
 
