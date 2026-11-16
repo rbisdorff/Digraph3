@@ -4755,15 +4755,6 @@ The relation attribute of a given outranking digraph :math:`G(X,R)` is an eviden
 
 In the given random 3-objectives outranking digraph :math:`G(X,R)`, concerning the performances of 9 public policies with respect to 13 performance criteria, three alternatives, *p2*, *p6* and *p5* are positive weak Condorcet winners, whereas alternatives *p8*, *p7* and *p1* are negative weak Condorcet winners, that is positive weak Condorcet losers (see Lines 8-10 and 14-16 above).
 
-The individual bipolar-valued credibilities to '**be a non ambiguous weak Condorcet winner**' are computed as follows. For each individual alternative *x in X*, an **epistemic fusion** of the *outranking* credibilities :math:`r(x \succsim y)` for all :math:`y \neq x` in *X* measures indeed the more or less **outranking power** of *x* and the same epistemic fusion of the *not outranked* credibilities :math:`-r(y \succsim x)`  for all :math:`y \neq x` in *X* measures the more or less **not outrankedness** of *x*. A same epistemic fusion of both these measures delivers eventually the corresponding bpv-set [30]_. 
-
-| In matrix style notation, the conjunctive epistemic fusion computation of weak Condorcet winners and losers may for instance be expressed like follows. Let :math:`I` denote an indeterminate column bpv-vector with support set :math:`X`, let :math:`R`, resp. :math:`R^{cd}`, denote the bpv-adjacency matrix of the outranking digraph, resp. of the codual of the outranking digraph :math:`G(X,R)`. Let :math:`Y` be the column bpv-vector of the weak Condorcet winners and losers. Than
-|    :math:`Y \; = \; \big(R\,\diamond\,I\big) \; $ \textcircled{$\wedge$} $ \; \big(R^{cd}\,\diamond\,I\big)` where :math:`\forall x \in X`,
-|        :math:`\big(R\,\diamond\,I\big)(x) \;= \; $ \textcircled{$\wedge$} $_{y \neq x \in X} \big(R(x,y) $ \textcircled{$\vee$} $ I(y)\big)` and
-|        :math:`\big(R^{cd}\,\diamond\,I\big)(x) \;= \; $ \textcircled{$\wedge$} $_{y \neq x \in X} \big(-R(y,x) $ \textcircled{$\vee$} $ I(y)\big)`.
-
-It is tempting to see this matrix formulation as a kind of *von Neumann* or *Pirlot* fix-point equation where the initial :math:`Y` vector is set to indeterminate [BIS-2006-1p]_ and such coherent fix-point convergences could effectively be observed. This idea, as well as the formal connection to computing prekernel bpv-vectors, needs further mathematical research (avis aux amateurs) (see :ref:`Bipolar-Valued-Kernels-Tutorial-label`).
-
    >>> g.showHTMLRelationTable(
    ...    actionsList=['p2','p6','p5','p3','p4','p9','p8','p7','p1'])
 
@@ -4776,6 +4767,16 @@ It is tempting to see this matrix formulation as a kind of *von Neumann* or *Pir
    A random outranking relation table
 
 In :numref:`condorcetWinners2` we see confirmed in the outranking relation table of :math:`G(X,R)` that alternative *p2* is indeed a *Condorcet winner* and alternatives *p6* and *p5* are *weak Condorcet winners* whereas alternatives *p8*, *p7* and *p1* are *weak Condorcet losers*. It is worthwhile noticing that the *dual* of this bpv-set *Y* gives by the way the bpv-set of the corresponding non ambiguous weak Condorcet losers.
+
+The individual bipolar-valued credibilities to '**be a non ambiguous weak Condorcet winner**' are computed as follows: For each individual alternative *x in X*, an **epistemic fusion** of the *outranking* credibilities :math:`r(x \succsim y)` for all :math:`y \neq x` in *X* measures indeed the more or less **outranking power** of *x* and the same epistemic fusion of the *not outranked* credibilities :math:`-r(y \succsim x)`  for all :math:`y \neq x` in *X* measures the more or less **not outrankedness** of *x*. A same epistemic fusion of both these measures delivers eventually the corresponding bpv-set [30]_. 
+
+| In matrix style notation, the conjunctive epistemic fusion computation of weak Condorcet winners and losers may for instance be expressed like follows. Let :math:`R`, resp. :math:`R^{cd}`, denote the bpv-adjacency matrix of the outranking digraph, resp. of the codual of the outranking digraph :math:`G(X,R)`. Let :math:`Y` be the column bpv-vector of the weak Condorcet winners and losers and let :math:`Y_0` be an indeterminate column bpv-vector with support set *X*. Than
+|
+|   :math:`Y \; = \; \big(R\,\diamond\,Y_0\big) \; $ \textcircled{$\wedge$} $ \; \big(R^{cd}\,\diamond\,Y_0\big)` where :math:`\forall x \in X`,
+|        :math:`\big(R\,\diamond\,Y_0\big)(x) \;= \; $ \textcircled{$\wedge$} $_{y \neq x \in X} \big(R(x,y) $ \textcircled{$\vee$} $ Y_0(y)\big)` and
+|        :math:`\big(R^{cd}\,\diamond\,Y_0\big)(x) \;= \; $ \textcircled{$\wedge$} $_{y \neq x \in X} \big(-R(y,x) $ \textcircled{$\vee$} $ Y_0(y)\big)`.
+
+It is tempting to see this matrix formulation as a kind of *von Neumann* or *Pirlot* fix-point equation where the initial :math:`Y` vector is set to indeterminate [BIS-2006-1p]_. Such fix-point convergences could indeed be empirically observed. This idea, as well as the apparent connection to computing prekernels characteristic vectors, needs further formal research (avis aux amateurs) (see :ref:`Bipolar-Valued-Kernels-Tutorial-label`).
 
 Suitable first and last choice recommendations
 ..............................................
