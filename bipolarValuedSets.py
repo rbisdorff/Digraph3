@@ -485,6 +485,23 @@ class BpvSet(object):
                 
         return IsSharper
 
+    def __eq__(self,other,/):
+        """
+        returns True or False
+        """
+        if self.cardinality != other.cardinality:
+            return False
+        prec = self.valuationDomain['precision']
+        for x in self.support:
+            try:
+                diff = (self.membership[x] - other.membership[x])
+                #print(diff, prec)
+                if abs(diff) > prec:
+                    return False
+            except:
+                return False
+        return True  
+
     def isSubset(self,other,/):
         """
         Return the bipolar-valued credibility that self is a bpv-subset of other

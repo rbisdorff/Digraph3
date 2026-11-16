@@ -16974,35 +16974,59 @@
     <span class="kn">from</span><span class="w"> </span><span class="nn">randomDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">getcontext</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">weightDistribution</span><span class="o">=</span><span class="s2">&quot;equiobjectives&quot;</span><span class="p">,</span>
-                                 <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                                 <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
 <span class="c1">##                                            missingDataProbability=0.05,seed=50)</span>
 <span class="c1">##                          </span>
     <span class="c1">#t = CircularPerformanceTableau()</span>
     <span class="c1">#t = PerformanceTableau(&#39;AliceChoice&#39;)</span>
     <span class="c1">#t = PerformanceTableau(&#39;officeChoice&#39;)</span>
     <span class="c1">#t = PerformanceTableau(&#39;roy66&#39;)</span>
+    <span class="c1">#t = PerformanceTableau(&#39;studentGrades&#39;)</span>
     <span class="c1">#print(getcontext().prec)</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">startMethod</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-<span class="c1">##    cw0 = g.computeBpvCondorcetWinners(Comments=False,</span>
-<span class="c1">##                                       Debug=False,fusionType=&#39;average&#39;)</span>
-    <span class="c1">#cw0.showMembershipCharacteristics()</span>
-<span class="c1">##    cw1 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw0,</span>
-<span class="c1">##                                       fusionType=&#39;average&#39;)</span>
-<span class="c1">##    cw1.showMembershipCharacteristics()</span>
+    <span class="n">fusionType</span><span class="o">=</span><span class="s1">&#39;average&#39;</span>
+    <span class="n">iterations</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">g</span><span class="o">.</span><span class="n">order</span>
+    <span class="n">cw0</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                       <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">fusionType</span><span class="o">=</span><span class="n">fusionType</span><span class="p">)</span>
+    <span class="n">cw0</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+
+    <span class="n">NotEqual</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">NotEqual</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">iterations</span><span class="p">:</span>
+        <span class="n">cw</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">initialVector</span><span class="o">=</span><span class="n">cw0</span><span class="p">,</span>
+                                       <span class="n">fusionType</span><span class="o">=</span><span class="n">fusionType</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;iter:&#39;</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">cw</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">cw</span> <span class="o">==</span> <span class="n">cw0</span><span class="p">:</span>
+            <span class="n">NotEqual</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cw0</span> <span class="o">=</span> <span class="n">cw</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            
 <span class="c1">##    cw2 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw1,</span>
 <span class="c1">##                                       fusionType=&#39;average&#39;)</span>
 <span class="c1">##    cw2.showMembershipCharacteristics()</span>
-<span class="c1">##    cw2 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw1)</span>
+<span class="c1">##    cw2 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw1,</span>
+<span class="c1">##                                       fusionType=fusionType)</span>
 <span class="c1">##    cw2.showMembershipCharacteristics()</span>
-<span class="c1">##    cw3 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw2)</span>
+<span class="c1">##    cw3 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw2,</span>
+<span class="c1">##                                       fusionType=fusionType)</span>
 <span class="c1">##    cw3.showMembershipCharacteristics()</span>
-<span class="c1">##    cw4 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw3)</span>
+<span class="c1">##    cw4 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw3,</span>
+<span class="c1">##                                       fusionType=fusionType)</span>
 <span class="c1">##    cw4.showMembershipCharacteristics()</span>
-<span class="c1">##    cw5 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw4)</span>
+<span class="c1">##    cw5 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw4,</span>
+<span class="c1">##                                       fusionType=fusionType)</span>
 <span class="c1">##    cw5.showMembershipCharacteristics()</span>
+<span class="c1">##    cw6 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw5,</span>
+<span class="c1">##                                       fusionType = fusionType)</span>
+<span class="c1">##    cw6.showMembershipCharacteristics()</span>
+<span class="c1">##    cw7 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw6,</span>
+<span class="c1">##                                       fusionType = fusionType)</span>
+<span class="c1">##    cw7.showMembershipCharacteristics()</span>
 
-    <span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;CondorcetWinners&#39;</span><span class="p">)</span>
+<span class="c1">##    g.showChoiceRecommendation(&#39;CondorcetWinners&#39;,cwFusionType=&#39;conjunctive&#39;)</span>
 <span class="c1">##    g.showChoiceRecommendation(&#39;CondorcetWinners&#39;,Average=True)</span>
 <span class="c1">##    cw1 = g.computeAverageEpistemicFusion(Terminal=True)</span>
 <span class="c1">##    cw1.showMembershipCharacteristics()</span>
@@ -17063,7 +17087,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Nov 14, 2026.
+      <span class="lastupdated">Last updated on Nov 16, 2026.
       </span></p>
   </div>
 

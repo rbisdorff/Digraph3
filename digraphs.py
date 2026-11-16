@@ -16018,35 +16018,59 @@ if __name__ == "__main__":
     from randomDigraphs import *
     from decimal import Decimal, getcontext
     t = Random3ObjectivesPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=1000,numberOfCriteria=13,seed=1)
+                                 numberOfActions=20,numberOfCriteria=13,seed=6)
 ##                                            missingDataProbability=0.05,seed=50)
 ##                          
     #t = CircularPerformanceTableau()
     #t = PerformanceTableau('AliceChoice')
     #t = PerformanceTableau('officeChoice')
     #t = PerformanceTableau('roy66')
+    #t = PerformanceTableau('studentGrades')
     #print(getcontext().prec)
     g = BipolarOutrankingDigraph(t,Threading=True,startMethod='spawn')
     print(g)
-##    cw0 = g.computeBpvCondorcetWinners(Comments=False,
-##                                       Debug=False,fusionType='average')
-    #cw0.showMembershipCharacteristics()
-##    cw1 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw0,
-##                                       fusionType='average')
-##    cw1.showMembershipCharacteristics()
+    fusionType='average'
+    iterations = 2*g.order
+    cw0 = g.computeBpvCondorcetWinners(Comments=False,
+                                       Debug=False,fusionType=fusionType)
+    cw0.showMembershipCharacteristics()
+
+    NotEqual = True
+    i = 1
+    while NotEqual and i < iterations:
+        cw = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw0,
+                                       fusionType=fusionType)
+        print('iter:',i)
+        cw.showMembershipCharacteristics()
+        if cw == cw0:
+            NotEqual = False
+        else:
+            cw0 = cw
+            i += 1
+            
 ##    cw2 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw1,
 ##                                       fusionType='average')
 ##    cw2.showMembershipCharacteristics()
-##    cw2 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw1)
+##    cw2 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw1,
+##                                       fusionType=fusionType)
 ##    cw2.showMembershipCharacteristics()
-##    cw3 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw2)
+##    cw3 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw2,
+##                                       fusionType=fusionType)
 ##    cw3.showMembershipCharacteristics()
-##    cw4 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw3)
+##    cw4 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw3,
+##                                       fusionType=fusionType)
 ##    cw4.showMembershipCharacteristics()
-##    cw5 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw4)
+##    cw5 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw4,
+##                                       fusionType=fusionType)
 ##    cw5.showMembershipCharacteristics()
+##    cw6 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw5,
+##                                       fusionType = fusionType)
+##    cw6.showMembershipCharacteristics()
+##    cw7 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw6,
+##                                       fusionType = fusionType)
+##    cw7.showMembershipCharacteristics()
 
-    g.showChoiceRecommendation('CondorcetWinners')
+##    g.showChoiceRecommendation('CondorcetWinners',cwFusionType='conjunctive')
 ##    g.showChoiceRecommendation('CondorcetWinners',Average=True)
 ##    cw1 = g.computeAverageEpistemicFusion(Terminal=True)
 ##    cw1.showMembershipCharacteristics()
