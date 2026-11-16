@@ -4837,12 +4837,12 @@ The average criteria significance majorities for each choice are indicated in br
 	 determinateness (%) : 50.00
 	 - most credible action(s) = {}
 
-With the given random outranking digraph *g*, initial and terminal prekernels recommendations correspond now nearly to the positive weak Condorcet winners and losers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and *strictly* outranking, resp. outranked,  choices, whereas weak Condorcet winners or losers are non ambiguous *weakly* outranking or not *outranked* resp. *weakly* outranked or not *outranking* choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location 'A', being incomparable to all other locations, is included in both the initial and the terminal prekernel. Location *A* is hence an ambiguous first and last choice recommendation and therefore neither part of the non ambiguous weak Condorcet winners, nor of the non ambiguous weak Condorcet losers [33]_.
+With the given random outranking digraph *g*, initial and terminal prekernels recommendations correspond now nearly to the positive weak Condorcet winners and losers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and *strictly* outranking, resp. outranked,  choices, whereas weak Condorcet winners and losers are non ambiguous *weakly* outranking and not *outranked* resp. *weakly* outranked and not *outranking* choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location 'A', being incomparable to all other locations, is included in both the initial and the terminal prekernel. Location *A* is hence an ambiguous first and last choice recommendation and therefore neither part of the non ambiguous weak Condorcet winners, nor of the non ambiguous weak Condorcet losers [33]_.
 
 Ranking-by-choosing with bpv-sets of weak Condorcet winners and losers
 ......................................................................
 
-In a ranking-by-choosing strategy, we may recursively extract bpv-sets of weak Condorcet winners and losers as shown in :numref:`CondorcetWinners5` below. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts therefore the '*IteratedCondorcetWinners*' argument
+In a bipolar ranking-by-choosing strategy, we may recursively extract bpv-sets of weak Condorcet winners and losers as shown in :numref:`CondorcetWinners5` below. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts therefore the '*IteratedCondorcetWinners*' argument
 
 .. code-block:: pycon
    :caption: Showing first and last choice recommendations from recursively extracted weak Condorcet winners and losers
@@ -4910,7 +4910,7 @@ In :numref:`CondorcetWinners6` we show for instance in a Python 3.14.4 console t
    >>> from randomDigraphs import Random3ObjectivesPerformanceTableau as ObjPT
    >>> t = ObjPT(numberOfActions=1000,numberOfCriteria=13,seed=1)
    >>> from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
-   >>> g = MPBipolarOutrankingDigraph(t,MultipleInterpreters=True)
+   >>> g = MPBipolarOutrankingDigraph(t,nbrCores=12,MultipleInterpreters=True)
    >>> print(g)
    *------- Object instance description ------*
    Instance class        : MPBipolarOutrankingDigraph
@@ -4955,7 +4955,7 @@ In :numref:`CondorcetWinners6` we show for instance in a Python 3.14.4 console t
    Execution time: 7.587 sec.
    *************************************************
 
-For constructing an outranking digraph of order 1000, on this desktop computer with 12 hyperthreaded cores, we may judiciously use the :py:class:`mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor allowing to run twelve python3.14.4 interpreters in parallel (see Lines 7 and 23-25) [29]_ . Extracting now the non ambiguous weak Condorcet winners and losers takes on this big outranking digraph instance only about 7.6 seconds (Line 49).
+For constructing an outranking digraph of order 1000, on this desktop computer with 12 hyperthreaded cores, we may judiciously use the :py:class:`mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor allowing to run twelve python3.14.4 interpreters in parallel (see Lines 7 and 23-25) [29]_. Extracting now the non ambiguous weak Condorcet winners and losers takes on this big outranking digraph instance only about 7.6 seconds (Line 49).
 
 To illustrate the quality of this extraction, we may show in :numref:`condorcetWinnersHeatmapMP` a performance heatmap of these 10 public policies.
 
