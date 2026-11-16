@@ -9773,12 +9773,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">First and last choice recommendations&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-------------------------------------&#39;</span><span class="p">)</span>
             <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">cwFusionType</span> <span class="o">==</span> <span class="s1">&#39;average&#39;</span><span class="p">:</span>
-                <span class="n">Average</span><span class="o">=</span><span class="kc">True</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">Average</span> <span class="o">=</span> <span class="kc">False</span>
-            <span class="n">resVec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">(</span><span class="n">fusionType</span><span class="o">=</span><span class="n">cwFusionType</span><span class="p">,</span>
-                                                     <span class="n">Average</span><span class="o">=</span><span class="n">Average</span><span class="p">)</span>
+            <span class="n">resVec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">(</span><span class="n">fusionType</span><span class="o">=</span><span class="n">cwFusionType</span><span class="p">)</span>
             <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">resVec</span><span class="o">.</span><span class="n">support</span><span class="p">:</span>
                 <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">resVec</span><span class="o">.</span><span class="n">membership</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">x</span><span class="p">))</span>
@@ -9904,7 +9899,7 @@
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeBpvCondorcetWinners">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">computeBpvCondorcetWinners</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">BrokenCocs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                   <span class="n">Average</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                   <span class="c1">#Average=True,</span>
                                    <span class="n">fusionType</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span> <span class="c1"># or &#39;conjunctive&#39;</span>
                                    <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -9934,12 +9929,14 @@
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="s1">&#39;i&#39;</span><span class="p">,</span><span class="n">iVector</span><span class="o">.</span><span class="n">membership</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="s1">&#39;t&#39;</span><span class="p">,</span><span class="n">tVector</span><span class="o">.</span><span class="n">membership</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
-        <span class="k">if</span> <span class="n">fusionType</span> <span class="o">!=</span> <span class="s1">&#39;average&#39;</span><span class="p">:</span>
-            <span class="n">Average</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">if</span> <span class="n">Average</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">fusionType</span> <span class="o">==</span> <span class="s1">&#39;average&#39;</span><span class="p">:</span>
             <span class="n">resVector</span> <span class="o">=</span> <span class="n">averageEpistemicFusion</span><span class="p">([</span><span class="n">iVector</span><span class="p">,</span><span class="o">-</span><span class="n">tVector</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">fusionType</span> <span class="o">==</span> <span class="s1">&#39;conjunctive&#39;</span><span class="p">:</span>
+            <span class="n">resVector</span> <span class="o">=</span> <span class="n">iVector</span><span class="o">.</span><span class="n">owedge</span><span class="p">(</span><span class="o">-</span><span class="n">tVector</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">fusionType</span> <span class="o">==</span> <span class="s1">&#39;disjunctive&#39;</span><span class="p">:</span>
+            <span class="n">resVector</span> <span class="o">=</span> <span class="n">iVector</span><span class="o">.</span><span class="n">ovee</span><span class="p">(</span><span class="o">-</span><span class="n">tVector</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">resVector</span> <span class="o">=</span> <span class="n">iVector</span><span class="o">.</span><span class="n">ovee</span><span class="p">(</span><span class="o">-</span><span class="n">tVector</span><span class="p">)</span>                
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: fusionType </span><span class="si">%s</span><span class="s1"> incorrect !&#39;</span> <span class="o">%</span> <span class="n">fusionType</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="n">resVector</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">resVector</span></div>
@@ -16988,13 +16985,13 @@
     <span class="c1">#t = PerformanceTableau(&#39;AliceChoice&#39;)</span>
     <span class="c1">#t = PerformanceTableau(&#39;officeChoice&#39;)</span>
     <span class="c1">#t = PerformanceTableau(&#39;roy66&#39;)</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">PerformanceTableau</span><span class="p">(</span><span class="s1">&#39;studentGrades&#39;</span><span class="p">)</span>
-    <span class="c1">#print(getcontext().prec)</span>
+    <span class="c1">#t = PerformanceTableau(&#39;studentGrades&#39;)</span>
+    <span class="c1"># testing the fixpoint convergence of the weak Condorcet winners and losers computation</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">startMethod</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
     <span class="n">fusionType</span><span class="o">=</span><span class="s1">&#39;average&#39;</span>
-    <span class="n">iterations</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">g</span><span class="o">.</span><span class="n">order</span>
-    <span class="n">cw0</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Average</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">iterations</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">order</span>
+    <span class="n">cw0</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                        <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">fusionType</span><span class="o">=</span><span class="n">fusionType</span><span class="p">)</span>
     <span class="n">cw0</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
 
@@ -17003,7 +17000,7 @@
     <span class="n">history</span> <span class="o">=</span> <span class="p">[</span><span class="n">cw0</span><span class="p">]</span>
     <span class="k">while</span> <span class="n">NotEqual</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">iterations</span><span class="p">:</span>
         <span class="n">cw</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">initialVector</span><span class="o">=</span><span class="n">cw0</span><span class="p">,</span>
-                                       <span class="n">fusionType</span><span class="o">=</span><span class="n">fusionType</span><span class="p">,</span><span class="n">Average</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                                       <span class="n">fusionType</span><span class="o">=</span><span class="n">fusionType</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;iter:&#39;</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
         <span class="n">cw</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">history</span><span class="p">:</span>
@@ -17014,65 +17011,6 @@
             <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
     
             
-<span class="c1">##    cw2 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw1,</span>
-<span class="c1">##                                       fusionType=&#39;average&#39;)</span>
-<span class="c1">##    cw2.showMembershipCharacteristics()</span>
-<span class="c1">##    cw2 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw1,</span>
-<span class="c1">##                                       fusionType=fusionType)</span>
-<span class="c1">##    cw2.showMembershipCharacteristics()</span>
-<span class="c1">##    cw3 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw2,</span>
-<span class="c1">##                                       fusionType=fusionType)</span>
-<span class="c1">##    cw3.showMembershipCharacteristics()</span>
-<span class="c1">##    cw4 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw3,</span>
-<span class="c1">##                                       fusionType=fusionType)</span>
-<span class="c1">##    cw4.showMembershipCharacteristics()</span>
-<span class="c1">##    cw5 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw4,</span>
-<span class="c1">##                                       fusionType=fusionType)</span>
-<span class="c1">##    cw5.showMembershipCharacteristics()</span>
-<span class="c1">##    cw6 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw5,</span>
-<span class="c1">##                                       fusionType = fusionType)</span>
-<span class="c1">##    cw6.showMembershipCharacteristics()</span>
-<span class="c1">##    cw7 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw6,</span>
-<span class="c1">##                                       fusionType = fusionType)</span>
-<span class="c1">##    cw7.showMembershipCharacteristics()</span>
-
-<span class="c1">##    g.showChoiceRecommendation(&#39;CondorcetWinners&#39;,cwFusionType=&#39;conjunctive&#39;)</span>
-<span class="c1">##    g.showChoiceRecommendation(&#39;CondorcetWinners&#39;,Average=True)</span>
-<span class="c1">##    cw1 = g.computeAverageEpistemicFusion(Terminal=True)</span>
-<span class="c1">##    cw1.showMembershipCharacteristics()</span>
-<span class="c1">##    cw2 = g.computeAverageEpistemicFusion(Terminal=False)</span>
-<span class="c1">##    cw2.showMembershipCharacteristics()</span>
-<span class="c1">##    from bipolarValuedSets import averageEpistemicFusion</span>
-<span class="c1">##    cw = averageEpistemicFusion([cw2,-cw1])</span>
-<span class="c1">##    cw.showMembershipCharacteristics()</span>
-<span class="c1">##    print(&#39;Rubis BCR&#39;)</span>
-<span class="c1">##    print(&#39;=== strd&#39;)</span>
-<span class="c1">##    g.showBestChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType=&#39;standard&#39;)</span>
-<span class="c1">##    print(&#39;=== gi&#39;)</span>
-<span class="c1">##    g.showBestChoiceRecommendation(Comments=True,fusionType=&#39;guardedIndeterminateness&#39;,ChoiceVector=True)</span>
-<span class="c1">##    print(&#39;=== epf&#39;)</span>
-<span class="c1">##    g.showBestChoiceRecommendation(Comments=True,fusionType=&#39;epistemicFusion&#39;,ChoiceVector=True)</span>
-<span class="c1">##    cg = ConfidentBipolarOutrankingDigraph(t,confidence=90.0)</span>
-<span class="c1">##    print(&#39;Confident ===&gt;&#39;)</span>
-<span class="c1">##    print(&#39;=== strd&#39;)</span>
-<span class="c1">##    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType=&#39;standard&#39;)</span>
-<span class="c1">##    print(&#39;=== gi&#39;)</span>
-<span class="c1">##    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType=&#39;guardedIndeterminateness&#39;)</span>
-<span class="c1">##    print(&#39;=== epf&#39;)</span>
-<span class="c1">##    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType=&#39;epistemicFusion&#39;)</span>
-<span class="c1">##    g.showChoiceRecommendation(&#39;Rubis&#39;,RubisFusionType=&#39;guardedIndeterminateness&#39;,ChoiceVector=True)</span>
-<span class="c1">##    g.showChoiceRecommendation(&#39;Rubis&#39;,RubisFusionType=&#39;epistemicFusion&#39;,ChoiceVector=True)</span>
-<span class="c1">##    cg.showChoiceRecommendation(&#39;CondorcetWinners&#39;)</span>
-<span class="c1">##    print(g.showChoiceRecommendation(&#39;IteratedCondorcetWinners&#39;,</span>
-<span class="c1">##                                     ReturnRanking=True))</span>
-<span class="c1">##    from linearOrders import IteratedBpvCondorcetWinnersRanking</span>
-<span class="c1">##    cwr = IteratedBpvCondorcetWinnersRanking(g)</span>
-<span class="c1">##    print(cwr.condorcetRanking)</span>
-<span class="c1">##    print(g.computeCondorcetWinners())</span>
-<span class="c1">##    print(g.computeCondorcetLosers())</span>
-<span class="c1">##    print(g.computeWeakCondorcetWinners())</span>
-<span class="c1">##    print(g.computeWeakCondorcetLosers())</span>
-<span class="c1">##    # g.showHTMLPerformanceHeatmap(actionsList=ranking,Correlations=True)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enjoy !&#39;</span><span class="p">)</span>

@@ -9110,12 +9110,7 @@ class Digraph(object):
             print('\nFirst and last choice recommendations')
             print('-------------------------------------')
             t0 = time()
-            if cwFusionType == 'average':
-                Average=True
-            else:
-                Average = False
-            resVec = self.computeBpvCondorcetWinners(fusionType=cwFusionType,
-                                                     Average=Average)
+            resVec = self.computeBpvCondorcetWinners(fusionType=cwFusionType)
             res = []
             for x in resVec.support:
                 res.append((resVec.membership[x],x))
@@ -9238,7 +9233,7 @@ class Digraph(object):
                  
     def computeBpvCondorcetWinners(self,CoDual=False,
                                    BrokenCocs=False,
-                                   Average=True,
+                                   #Average=True,
                                    fusionType='average', # or 'conjunctive'
                                    Comments=False,
                                    Debug=False,
@@ -9268,12 +9263,14 @@ class Digraph(object):
             for x in self.actions:
                 print(x,'i',iVector.membership[x])
                 print(x,'t',tVector.membership[x])
-        if fusionType != 'average':
-            Average = False
-        if Average:
+        if fusionType == 'average':
             resVector = averageEpistemicFusion([iVector,-tVector])
+        elif fusionType == 'conjunctive':
+            resVector = iVector.owedge(-tVector)
+        elif fusionType == 'disjunctive':
+            resVector = iVector.ovee(-tVector)
         else:
-            resVector = iVector.ovee(-tVector)                
+            print('Error: fusionType %s incorrect !' % fusionType)
         if Comments:
             resVector.showMembershipCharacteristics()
         return resVector
@@ -16032,13 +16029,13 @@ if __name__ == "__main__":
     #t = PerformanceTableau('AliceChoice')
     #t = PerformanceTableau('officeChoice')
     #t = PerformanceTableau('roy66')
-    t = PerformanceTableau('studentGrades')
-    #print(getcontext().prec)
+    #t = PerformanceTableau('studentGrades')
+    # testing the fixpoint convergence of the weak Condorcet winners and losers computation
     g = BipolarOutrankingDigraph(t,Threading=True,startMethod='spawn')
     print(g)
     fusionType='average'
-    iterations = 3*g.order
-    cw0 = g.computeBpvCondorcetWinners(Comments=False,Average=True,
+    iterations = g.order
+    cw0 = g.computeBpvCondorcetWinners(Comments=False,
                                        Debug=False,fusionType=fusionType)
     cw0.showMembershipCharacteristics()
 
@@ -16047,7 +16044,7 @@ if __name__ == "__main__":
     history = [cw0]
     while NotEqual and i < iterations:
         cw = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw0,
-                                       fusionType=fusionType,Average=True)
+                                       fusionType=fusionType)
         print('iter:',i)
         cw.showMembershipCharacteristics()
         for w in history:
@@ -16058,65 +16055,6 @@ if __name__ == "__main__":
             i += 1
     
             
-##    cw2 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw1,
-##                                       fusionType='average')
-##    cw2.showMembershipCharacteristics()
-##    cw2 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw1,
-##                                       fusionType=fusionType)
-##    cw2.showMembershipCharacteristics()
-##    cw3 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw2,
-##                                       fusionType=fusionType)
-##    cw3.showMembershipCharacteristics()
-##    cw4 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw3,
-##                                       fusionType=fusionType)
-##    cw4.showMembershipCharacteristics()
-##    cw5 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw4,
-##                                       fusionType=fusionType)
-##    cw5.showMembershipCharacteristics()
-##    cw6 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw5,
-##                                       fusionType = fusionType)
-##    cw6.showMembershipCharacteristics()
-##    cw7 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw6,
-##                                       fusionType = fusionType)
-##    cw7.showMembershipCharacteristics()
-
-##    g.showChoiceRecommendation('CondorcetWinners',cwFusionType='conjunctive')
-##    g.showChoiceRecommendation('CondorcetWinners',Average=True)
-##    cw1 = g.computeAverageEpistemicFusion(Terminal=True)
-##    cw1.showMembershipCharacteristics()
-##    cw2 = g.computeAverageEpistemicFusion(Terminal=False)
-##    cw2.showMembershipCharacteristics()
-##    from bipolarValuedSets import averageEpistemicFusion
-##    cw = averageEpistemicFusion([cw2,-cw1])
-##    cw.showMembershipCharacteristics()
-##    print('Rubis BCR')
-##    print('=== strd')
-##    g.showBestChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType='standard')
-##    print('=== gi')
-##    g.showBestChoiceRecommendation(Comments=True,fusionType='guardedIndeterminateness',ChoiceVector=True)
-##    print('=== epf')
-##    g.showBestChoiceRecommendation(Comments=True,fusionType='epistemicFusion',ChoiceVector=True)
-##    cg = ConfidentBipolarOutrankingDigraph(t,confidence=90.0)
-##    print('Confident ===>')
-##    print('=== strd')
-##    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType='standard')
-##    print('=== gi')
-##    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType='guardedIndeterminateness')
-##    print('=== epf')
-##    cg.showFirstChoiceRecommendation(Comments=True,ChoiceVector=True,fusionType='epistemicFusion')
-##    g.showChoiceRecommendation('Rubis',RubisFusionType='guardedIndeterminateness',ChoiceVector=True)
-##    g.showChoiceRecommendation('Rubis',RubisFusionType='epistemicFusion',ChoiceVector=True)
-##    cg.showChoiceRecommendation('CondorcetWinners')
-##    print(g.showChoiceRecommendation('IteratedCondorcetWinners',
-##                                     ReturnRanking=True))
-##    from linearOrders import IteratedBpvCondorcetWinnersRanking
-##    cwr = IteratedBpvCondorcetWinnersRanking(g)
-##    print(cwr.condorcetRanking)
-##    print(g.computeCondorcetWinners())
-##    print(g.computeCondorcetLosers())
-##    print(g.computeWeakCondorcetWinners())
-##    print(g.computeWeakCondorcetLosers())
-##    # g.showHTMLPerformanceHeatmap(actionsList=ranking,Correlations=True)
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
