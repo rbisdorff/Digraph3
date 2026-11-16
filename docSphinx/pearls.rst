@@ -4743,24 +4743,26 @@ The relation attribute of a given outranking digraph :math:`G(X,R)` is an eviden
    >>> bpvWinners = g.computeBpvCondorcetWinners(fusionType='average')
    >>> bpvWinners.showMembershipCharacteristics(ndigits=2)
     Bipolar-valued weak Condorcet winners set
-     p2:  +0.82
-     p6:  +0.46
-     p5:  +0.37
+     p2:  +0.63
+     p6:  +0.23
+     p5:  +0.18
      p3:  +0.00
      p4:  +0.00
      p9:  +0.00
-     p8:  -0.34
-     p7:  -0.46
-     p1:  -0.52
+     p8:  -0.17
+     p7:  -0.23
+     p1:  -0.26
 
 In the given random 3-objectives outranking digraph :math:`G(X,R)`, concerning the performances of 9 public policies with respect to 13 performance criteria, three alternatives, *p2*, *p6* and *p5* are positive weak Condorcet winners, whereas alternatives *p8*, *p7* and *p1* are negative weak Condorcet winners, that is positive weak Condorcet losers (see Lines 8-10 and 14-16 above).
 
-The individual bipolar-valued credibilities to '**be a non ambiguous weak Condorcet winner**' are computed as follows. For each individual alternative *x in X*, an **epistemic fusion** of the *outranking* credibilities :math:`r(x \succsim y)` for all :math:`y \neq x` in *X* measures indeed the more or less **outranking power** of *x* and the same epistemic fusion of the *not outranked* credibilities :math:`-r(y \succsim x)`  for all :math:`y \neq x` in *X* measures the more or less **not outrankedness** of *x*. A disjunctive epistemic :math:`$ \textcircled{$\vee$} $` fusion of both these measures delivers eventually the corresponding bpv-set [30]_. 
+The individual bipolar-valued credibilities to '**be a non ambiguous weak Condorcet winner**' are computed as follows. For each individual alternative *x in X*, an **epistemic fusion** of the *outranking* credibilities :math:`r(x \succsim y)` for all :math:`y \neq x` in *X* measures indeed the more or less **outranking power** of *x* and the same epistemic fusion of the *not outranked* credibilities :math:`-r(y \succsim x)`  for all :math:`y \neq x` in *X* measures the more or less **not outrankedness** of *x*. A same epistemic fusion of both these measures delivers eventually the corresponding bpv-set [30]_. 
 
-| In matrix style notation, the conjunctive epistemic fusion computation of weak Condorcet winners and losers may be expressed like follows. Let :math:`I` denote an indeterminate column bpv-vector with support set :math:`X`, let :math:`R`, resp. :math:`R^{cd}`, denote the bpv-adjacency matrix of the outranking digraph, resp. of the codual of the outranking digraph :math:`G(X,R)`. Let :math:`Y` be the column bpv-vector of the weak Condorcet winners and losers. Than
+| In matrix style notation, the conjunctive epistemic fusion computation of weak Condorcet winners and losers may for instance be expressed like follows. Let :math:`I` denote an indeterminate column bpv-vector with support set :math:`X`, let :math:`R`, resp. :math:`R^{cd}`, denote the bpv-adjacency matrix of the outranking digraph, resp. of the codual of the outranking digraph :math:`G(X,R)`. Let :math:`Y` be the column bpv-vector of the weak Condorcet winners and losers. Than
 |    :math:`Y \; = \; \big(R\,\diamond\,I\big) \; $ \textcircled{$\vee$} $ \; \big(R^{cd}\,\diamond\,I\big)` where :math:`\forall x \in X`,
 |        :math:`\big(R\,\diamond\,I\big)(x) \;= \; $ \textcircled{$\wedge$} $_{y \neq x \in X} \big(R(x,y) $ \textcircled{$\vee$} $ I(y)\big)` and
-|        :math:`\big(R^{cd}\,\diamond\,I\big)(x) \;= \; $ \textcircled{$\wedge$} $_{y \neq x \in X} \big(-R(y,x) $ \textcircled{$\vee$} $ I(y)\big)` [35]_.
+|        :math:`\big(R^{cd}\,\diamond\,I\big)(x) \;= \; $ \textcircled{$\wedge$} $_{y \neq x \in X} \big(-R(y,x) $ \textcircled{$\vee$} $ I(y)\big)`.
+
+It is tempting to see this matrix formulation as a kind of *von Neumann* or *Pirlot* fix-point equation where the initial :math:`Y` vector is set to indeterminate [BIS-2006-1p]_ and such coherent fix-point convergences could effectively be observed. This idea, as well as the formal connection to computing prekernel bpv-vectors, needs further mathematical research (avis aux amateurs) (see :ref:`Bipolar-Valued-Kernels-Tutorial-label`).
 
    >>> g.showHTMLRelationTable(
    ...    actionsList=['p2','p6','p5','p3','p4','p9','p8','p7','p1'])
@@ -4791,14 +4793,14 @@ Now, weak Condorcet winners and losers verify the same pragmatic first choice pr
     First and last choice recommendations
     -------------------------------------
      First choice (Condorcet winners)
-      'p2': +0.82 (91.14%)
-      'p6': +0.46 (72.91%)
-      'p5': +0.37 (68.41%)
+      'p2': +0.63 (81.42%)
+      'p6': +0.23 (61.46%)
+      'p5': +0.18 (59.20%)
     -------------------------------------
      Last choice (Condorcet losers)
-      'p1': +0.52 (76.22%)
-      'p7': +0.46 (73.09%)
-      'p8': +0.34 (66.84%)
+      'p1': +0.26 (63.11%)
+      'p7': +0.23 (61.55%)
+      'p8': +0.17 (58.42%)
     -------------------------------------
      Criteria significance majority in brakets
      Execution time: 0.027 sec.
@@ -4852,15 +4854,15 @@ In a ranking-by-choosing strategy, we may recursively extract bpv-sets of weak C
     ******************************************
      Iterated weak Condorcet winners and losers
      ------------------------------------------
-      1rst-choice: 'p2' (+0.823)
-      1rst-choice: 'p6' (+0.458)
-      1rst-choice: 'p5' (+0.368)
+      1rst-choice: 'p2' (+0.628)
+      1rst-choice: 'p6' (+0.229)
+      1rst-choice: 'p5' (+0.184)
         2nd-choice: 'p4' (+0.500)
-	2nd-choice: 'p9' (+0.264)
-        2nd-reject: 'p3' (+0.764)
-      1rst-reject: 'p8' (+0.337)
-      1rst-reject: 'p7' (+0.462)
-      1rst-reject: 'p1' (+0.524)
+        2nd-choice: 'p9' (+0.194)
+        2nd-reject: 'p3' (+0.694)
+      1rst-reject: 'p8' (+0.168)
+      1rst-reject: 'p7' (+0.231)
+      1rst-reject: 'p1' (+0.262)
      -----------------------------------------
      Criteria significance majority in brakets
      Execution time: 0.039 sec.
@@ -4935,18 +4937,18 @@ In :numref:`CondorcetWinners6` we show for instance in a Python 3.14.4 console t
    First and last choice recommendations
    -------------------------------------
    First choice (Condorcet winners)
-   'p0583': +0.85 (92.47%)
-   'p0446': +0.84 (92.06%)
-   'p0877': +0.84 (91.92%)
-   'p0073': +0.72 (85.87%)
-   'p0156': +0.70 (84.86%)
+    'p0583': +0.42 (71.24%)
+    'p0446': +0.42 (71.03%)
+    'p0877': +0.42 (70.96%)
+    'p0073': +0.36 (67.93%)
+    'p0156': +0.35 (67.43%)
    -------------------------------------
    Last choice (Condorcet losers)
-   'p0390': +0.90 (95.19%)
-   'p0994': +0.85 (92.73%)
-   'p0400': +0.84 (92.00%)
-   'p0615': +0.76 (88.11%)
-   'p0652': +0.72 (86.01%)
+    'p0390': +0.45 (72.59%)
+    'p0994': +0.43 (71.37%)
+    'p0400': +0.42 (71.00%)
+    'p0615': +0.38 (69.05%)
+    'p0652': +0.36 (68.00%)
    -------------------------------------
    Criteria significance majority in brakets
    Execution time: 7.587 sec.
@@ -6169,11 +6171,7 @@ Appendix
 
 .. [34] Remarkable is the fact that the indeterminate 0.0 characteristic value does not count as minimal positive and maximal negative value. Its epistemic value is in fact **indeterminate**, i.e. it may be any possible value from -1.0 to +1.0.
 
-.. [35] It is tempting to see this matrix formulation as a kind of *von Neumann* or *Pirlot* fix-point equation where the initial :math:`Y` vector is set to indeterminate [BIS-2006-1p]_. But no fix-point convergence could yet be observed. This idea, as well as the formal connection to computing prekernel bpv-vectors, needs further research (avis aux amateurs) (see :ref:`Bipolar-Valued-Kernels-Tutorial-label`).
-
-
 .. raw:: latex
 
    \endgroup
-
 

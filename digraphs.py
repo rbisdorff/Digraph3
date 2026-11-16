@@ -9110,7 +9110,12 @@ class Digraph(object):
             print('\nFirst and last choice recommendations')
             print('-------------------------------------')
             t0 = time()
-            resVec = self.computeBpvCondorcetWinners(fusionType=cwFusionType)
+            if cwFusionType == 'average':
+                Average=True
+            else:
+                Average = False
+            resVec = self.computeBpvCondorcetWinners(fusionType=cwFusionType,
+                                                     Average=Average)
             res = []
             for x in resVec.support:
                 res.append((resVec.membership[x],x))
@@ -9233,7 +9238,7 @@ class Digraph(object):
                  
     def computeBpvCondorcetWinners(self,CoDual=False,
                                    BrokenCocs=False,
-                                   Average=False,
+                                   Average=True,
                                    fusionType='average', # or 'conjunctive'
                                    Comments=False,
                                    Debug=False,
@@ -9263,6 +9268,8 @@ class Digraph(object):
             for x in self.actions:
                 print(x,'i',iVector.membership[x])
                 print(x,'t',tVector.membership[x])
+        if fusionType != 'average':
+            Average = False
         if Average:
             resVector = averageEpistemicFusion([iVector,-tVector])
         else:
@@ -16018,35 +16025,38 @@ if __name__ == "__main__":
     from randomDigraphs import *
     from decimal import Decimal, getcontext
     t = Random3ObjectivesPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=20,numberOfCriteria=13,seed=6)
+                                 numberOfActions=30,numberOfCriteria=13,seed=6)
 ##                                            missingDataProbability=0.05,seed=50)
 ##                          
     #t = CircularPerformanceTableau()
     #t = PerformanceTableau('AliceChoice')
     #t = PerformanceTableau('officeChoice')
     #t = PerformanceTableau('roy66')
-    #t = PerformanceTableau('studentGrades')
+    t = PerformanceTableau('studentGrades')
     #print(getcontext().prec)
     g = BipolarOutrankingDigraph(t,Threading=True,startMethod='spawn')
     print(g)
     fusionType='average'
-    iterations = 2*g.order
-    cw0 = g.computeBpvCondorcetWinners(Comments=False,
+    iterations = 3*g.order
+    cw0 = g.computeBpvCondorcetWinners(Comments=False,Average=True,
                                        Debug=False,fusionType=fusionType)
     cw0.showMembershipCharacteristics()
 
     NotEqual = True
     i = 1
+    history = [cw0]
     while NotEqual and i < iterations:
         cw = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw0,
-                                       fusionType=fusionType)
+                                       fusionType=fusionType,Average=True)
         print('iter:',i)
         cw.showMembershipCharacteristics()
-        if cw == cw0:
-            NotEqual = False
-        else:
-            cw0 = cw
+        for w in history:
+            if cw == w:
+                NotEqual = False
+        if NotEqual:
+            history.append(cw)
             i += 1
+    
             
 ##    cw2 = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw1,
 ##                                       fusionType='average')
