@@ -9749,7 +9749,36 @@
 
 <span class="sd">        *cwFusionType*: &#39;average&#39; (default), &#39;conjunctive&#39; or &#39;djunctive&#39;.</span>
 <span class="sd">        CondorcetWinners, IteratedCondorcetWinners and CondorcetFixPoint parameter.</span>
+
+<span class="sd">        **Usage example**</span>
 <span class="sd">        </span>
+<span class="sd">        &gt;&gt;&gt; from time import time</span>
+<span class="sd">        &gt;&gt;&gt; from outrankingDigraphs import *</span>
+<span class="sd">        &gt;&gt;&gt; t = Random3ObjectivesPerformanceTableau(</span>
+<span class="sd">        ...             weightDistribution=&quot;equiobjectives&quot;,</span>
+<span class="sd">        ...             numberOfActions=15,numberOfCriteria=13,</span>
+<span class="sd">        ...             missingDataProbability=0.05,seed=50)</span>
+<span class="sd">        &gt;&gt;&gt; g = BipolarOutrankingDigraph(t,Threading=False,nbrCores=1,</span>
+<span class="sd">        ...                              startMethod=&#39;spawn&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; g.showChoiceRecommendation(&#39;CondorcetWinners&#39;,</span>
+<span class="sd">                               cwFusionType=&#39;average&#39;)</span>
+<span class="sd">        First and last choice recommendations</span>
+<span class="sd">        -------------------------------------</span>
+<span class="sd">        First choice (Condorcet winners)</span>
+<span class="sd">        &#39;p13&#39;: +0.30 (65.23%)</span>
+<span class="sd">        &#39;p07&#39;: +0.23 (61.41%)</span>
+<span class="sd">        &#39;p03&#39;: +0.19 (59.28%)</span>
+<span class="sd">        &#39;p14&#39;: +0.15 (57.64%)</span>
+<span class="sd">        -------------------------------------</span>
+<span class="sd">        Last choice (Condorcet losers)</span>
+<span class="sd">        &#39;p12&#39;: +0.33 (66.57%)</span>
+<span class="sd">        &#39;p11&#39;: +0.29 (64.34%)</span>
+<span class="sd">        &#39;p02&#39;: +0.27 (63.39%)</span>
+<span class="sd">        -------------------------------------</span>
+<span class="sd">        Criteria significance majority in brakets</span>
+<span class="sd">        Execution time: 0.171 sec.</span>
+<span class="sd">        *************************************************</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;Bachet&#39;</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bachet choice recommendation&#39;</span><span class="p">)</span>
@@ -17056,7 +17085,7 @@
     <span class="kn">from</span><span class="w"> </span><span class="nn">randomDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">getcontext</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">weightDistribution</span><span class="o">=</span><span class="s2">&quot;equiobjectives&quot;</span><span class="p">,</span>
-                                 <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
+                                 <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
                                  <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 <span class="c1">##                          </span>
     <span class="c1">#t = CircularPerformanceTableau()</span>

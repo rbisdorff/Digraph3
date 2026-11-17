@@ -9086,7 +9086,36 @@ class Digraph(object):
 
         *cwFusionType*: 'average' (default), 'conjunctive' or 'djunctive'.
         CondorcetWinners, IteratedCondorcetWinners and CondorcetFixPoint parameter.
+
+        **Usage example**
         
+        >>> from time import time
+        >>> from outrankingDigraphs import *
+        >>> t = Random3ObjectivesPerformanceTableau(
+        ...             weightDistribution="equiobjectives",
+        ...             numberOfActions=15,numberOfCriteria=13,
+        ...             missingDataProbability=0.05,seed=50)
+        >>> g = BipolarOutrankingDigraph(t,Threading=False,nbrCores=1,
+        ...                              startMethod='spawn')
+        >>> g.showChoiceRecommendation('CondorcetWinners',
+                               cwFusionType='average')
+        First and last choice recommendations
+        -------------------------------------
+        First choice (Condorcet winners)
+        'p13': +0.30 (65.23%)
+        'p07': +0.23 (61.41%)
+        'p03': +0.19 (59.28%)
+        'p14': +0.15 (57.64%)
+        -------------------------------------
+        Last choice (Condorcet losers)
+        'p12': +0.33 (66.57%)
+        'p11': +0.29 (64.34%)
+        'p02': +0.27 (63.39%)
+        -------------------------------------
+        Criteria significance majority in brakets
+        Execution time: 0.171 sec.
+        *************************************************
+
         """
         if method == 'Bachet':
             print('Bachet choice recommendation')
@@ -16100,7 +16129,7 @@ if __name__ == "__main__":
     from randomDigraphs import *
     from decimal import Decimal, getcontext
     t = Random3ObjectivesPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=30,numberOfCriteria=13,
+                                 numberOfActions=150,numberOfCriteria=13,
                                  missingDataProbability=0.05,seed=50)
 ##                          
     #t = CircularPerformanceTableau()

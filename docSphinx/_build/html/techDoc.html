@@ -3712,6 +3712,35 @@ characteristic vectors</p>
 induced by the iterated extraction of Condorcet winners bpv-sets.</p>
 <p><em>cwFusionType</em>: ‘average’ (default), ‘conjunctive’ or ‘djunctive’.
 CondorcetWinners, IteratedCondorcetWinners and CondorcetFixPoint parameter.</p>
+<p><strong>Usage example</strong></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="n">weightDistribution</span><span class="o">=</span><span class="s2">&quot;equiobjectives&quot;</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="gp">... </span>                             <span class="n">startMethod</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;CondorcetWinners&#39;</span><span class="p">,</span>
+<span class="go">                       cwFusionType=&#39;average&#39;)</span>
+<span class="go">First and last choice recommendations</span>
+<span class="go">-------------------------------------</span>
+<span class="go">First choice (Condorcet winners)</span>
+<span class="go">&#39;p13&#39;: +0.30 (65.23%)</span>
+<span class="go">&#39;p07&#39;: +0.23 (61.41%)</span>
+<span class="go">&#39;p03&#39;: +0.19 (59.28%)</span>
+<span class="go">&#39;p14&#39;: +0.15 (57.64%)</span>
+<span class="go">-------------------------------------</span>
+<span class="go">Last choice (Condorcet losers)</span>
+<span class="go">&#39;p12&#39;: +0.33 (66.57%)</span>
+<span class="go">&#39;p11&#39;: +0.29 (64.34%)</span>
+<span class="go">&#39;p02&#39;: +0.27 (63.39%)</span>
+<span class="go">-------------------------------------</span>
+<span class="go">Criteria significance majority in brakets</span>
+<span class="go">Execution time: 0.171 sec.</span>
+<span class="go">*************************************************</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">

@@ -768,6 +768,7 @@ def testBachetChoiceRecommendation():
 def testChoiceRecommendation():
     print('*-------- choice recommendations ----*')
     from outrankingDigraphs import RandomBipolarOutrankingDigraph
+    from digraphs import Digraph
     g = RandomBipolarOutrankingDigraph(seed=1)
     print('Polarised version')
     g.showChoiceRecommendation(method='Bachet')
@@ -780,4 +781,6 @@ def testChoiceRecommendation():
     print('Iterated Weak Condorcet winners')
     ranking = g.showChoiceRecommendation('IteratedCondorcetWinners',ReturnRanking=True)
     g.showHTMLPerformanceHeatmap(actionsList=ranking,Correlations=True)
+    print('Condorcet fixpoint')
+    g.showChoiceRecommendation('CondorcetFixPoint')
     
