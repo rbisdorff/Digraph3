@@ -9032,6 +9032,7 @@ class Digraph(object):
     def showChoiceRecommendation(self,
                                 method='CondorcetWinners',
                                 cwFusionType='average', # or 'conjunctive'
+                                Comments=False,
                                  # Rubis
                                 ChoiceVector=False,
                                 RubisFusionType='standard', # or 'epistemicFusion'
@@ -9055,13 +9056,17 @@ class Digraph(object):
 
         **Parameters**
         
-        *method*: 'CondorcetWinners' (default), 'CondorcetFixPoint', 'Bachet', 'Rubis', 'IteratedBachet' or 'IteratedCondorcetWinners'
-        The Bachet method is based on the conjoint
+        *method*: 'CondorcetWinners' (default), 'CondorcetFixPoint', 'Rubis', 'Bachet', 'IteratedBachet' or 'IteratedCondorcetWinners'
+
+        The 'Bachet' method is based on the conjoint
         extracton of initial and terminal prekernels from the partial Bachet ranking,
-        whereas the Rubis method is based on the extraction of an initial and
+        whereas the 'Rubis' method is based on the extraction of an initial and
         terminal prekernels directly from the given outranking digraph.
-        The Condorcet winners method returns the bpv-sets of the weak Condorcet winners computed by
+
+        The 'CondorcetWinners' method returns the bpv-sets of the weak Condorcet winners computed by
         average epistemic fusion.
+
+        The 'CondorcetFixPoint' method returns the fixpoint of the matrix formulation of the Condorcet winners method.
 
         *Polarised*: *True* (by default) | False; Bachet parameter
 
@@ -9074,8 +9079,13 @@ class Digraph(object):
         *ChoiceVector*: Rubis parameter for showing complete prekernel
         characteristic vectors
 
+        *RubisFusionType*: 'standard' (default) or 'epistemicFusion'. Rubis parameter for setting either the standard max min operators or the epistemic fusion operators.
+
         *ReturnRanking*: IteratedCondorcetWinners parameter for returning a linear ranking
         induced by the iterated extraction of Condorcet winners bpv-sets.
+
+        *cwFusionType*: 'average' (default), 'conjunctive' or 'djunctive'.
+        CondorcetWinners, IteratedCondorcetWinners and CondorcetFixPoint parameter.
         
         """
         if method == 'Bachet':
@@ -9243,26 +9253,54 @@ class Digraph(object):
             iterations = g.order
             cw0 = g.computeBpvCondorcetWinners(Comments=False,
                                                Debug=False,fusionType=fusionType)
-            #cw0.showMembershipCharacteristics()
+            if Comments:
+                cw0.showMembershipCharacteristics()
             NotEqual = True
             i = 1
             history = [cw0]
             while NotEqual and i < iterations:
                 cw = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw0,
                                                fusionType=fusionType)
-                #print('iter:',i)
-                #cw.showMembershipCharacteristics()
-                #if cw.isSharper(cw0):
-                #    print('is sharper !')
-                #else:
-                #    print('is not sharper')
+                if Comments:
+                    print('iter:',i)
+                    cw.showMembershipCharacteristics()
+                    if cw.isSharper(cw0):
+                        print('is sharper !')
+                    else:
+                        print('is not sharper')
                 for w in history:
                     if cw == w:
                         NotEqual = False
                 if NotEqual:
                     history.append(cw)
                     i += 1
-            cw.showMembershipCharacteristics()
+            if not Comments:
+                cw.showMembershipCharacteristics()
+            res = []
+            for x in cw.support:
+                res.append((cw.membership[x],x))
+            #res.sort(reverse=True)
+            scoredTuplesSort(res,reverse=True)
+            nr = len(res)
+            Med = self.valuationdomain['med']
+            ##print(resVec)
+            print('First choice (Condorcet winners)')
+            for i in range(nr):
+                if res[i][0] > Med:
+                    print("\'%s\': %+.2f (%.2f%%)"% (res[i][1], res[i][0],
+                                                ( (float(res[i][0])+1.0)/2.0 * 100.0) ) )
+                else:
+                    break
+            print('-------------------------------------')
+            print('Last choice (Condorcet losers)')
+            for i in range(nr-1,0,-1):
+                if res[i][0] < Med:
+                    val = float(res[i][0])*(-1.0)
+                    print("\'%s\': %+.2f (%.2f%%)"% ( res[i][1], val,
+                                                ( (val+1.0)/2.0 * 100.0) ) )
+                else:
+                    break
+            print('---------------------------------------')
             print('Iterations:', i)
             print('Execution time: %.3f sec.' % (time() - t0) )
             print('*****************************************')
@@ -16062,41 +16100,19 @@ if __name__ == "__main__":
     from randomDigraphs import *
     from decimal import Decimal, getcontext
     t = Random3ObjectivesPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=30,numberOfCriteria=13,seed=6)
-##                                            missingDataProbability=0.05,seed=50)
+                                 numberOfActions=30,numberOfCriteria=13,
+                                 missingDataProbability=0.05,seed=50)
 ##                          
     #t = CircularPerformanceTableau()
     #t = PerformanceTableau('AliceChoice')
-    t = PerformanceTableau('officeChoice')
+    #t = PerformanceTableau('officeChoice')
     #t = PerformanceTableau('roy66')
     #t = PerformanceTableau('studentGrades')
     # testing the fixpoint convergence of the weak Condorcet winners and losers computation
-    g = BipolarOutrankingDigraph(t,Threading=True,startMethod='spawn')
+    g = BipolarOutrankingDigraph(t,Threading=False,nbrCores=1,startMethod='spawn')
     print(g)
-    fusionType='conjunctive'
-    iterations = g.order
-    cw0 = g.computeBpvCondorcetWinners(Comments=False,
-                                       Debug=False,fusionType=fusionType)
-    cw0.showMembershipCharacteristics()
-
-    NotEqual = True
-    i = 1
-    history = [cw0]
-    while NotEqual and i < iterations:
-        cw = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw0,
-                                       fusionType=fusionType)
-        print('iter:',i)
-        cw.showMembershipCharacteristics()
-        if cw.isSharper(cw0):
-            print('is sharper !')
-        else:
-            print('is not sharper')
-        for w in history:
-            if cw == w:
-                NotEqual = False
-        if NotEqual:
-            history.append(cw)
-            i += 1
+    g.showChoiceRecommendation('CondorcetFixPoint',
+                               cwFusionType='average',Comments=False)
     
             
     print('*------------------*')

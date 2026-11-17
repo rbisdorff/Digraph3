@@ -4022,14 +4022,14 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         val4 = self.runTimes['gammaSets']
         reprString += '----  Constructor run times (in sec.) ----\n'
         try:
-            if self.nbrThreads > 0:
+            if self.nbrThreads >= 0:
                 reprString += 'Threads          : %d\n' % self.nbrThreads
         except:
             reprString += 'Threads          : %d\n' % 0
         try:
             reprString += 'Start method     : %s\n' % self.startMethod
         except:
-            reprString += 'Start method     : %s\n' % None
+            pass
         reprString += 'Total time       : %.5f\n' % val1
         reprString += 'Data input       : %.5f\n' % val2
         reprString += 'Compute relation : %.5f\n' % val3

@@ -4776,7 +4776,7 @@ The individual bipolar-valued credibilities to '**be a non ambiguous weak Condor
 |        :math:`\big(R\,\diamond\,Y_0\big)(x) \;= \; $ \textcircled{$\wedge$} $_{y \neq x \in X} \big(R(x,y) $ \textcircled{$\vee$} $ Y_0(y)\big)` and
 |        :math:`\big(R^{cd}\,\diamond\,Y_0\big)(x) \;= \; $ \textcircled{$\wedge$} $_{y \neq x \in X} \big(-R(y,x) $ \textcircled{$\vee$} $ Y_0(y)\big)`.
 
-It is tempting to see this matrix formulation as a kind of *von Neumann* or *Pirlot* fix-point equation where the initial :math:`Y` vector is set to indeterminate [BIS-2006-1p]_. Such fix-point convergences could indeed be empirically observed. This idea, as well as the apparent connection to computing prekernels characteristic vectors, needs further formal research (avis aux amateurs) (see :ref:`Bipolar-Valued-Kernels-Tutorial-label`).
+It is tempting to see this matrix formulation as a kind of *von Neumann* or *Pirlot* fix-point equation where the initial :math:`Y` vector is set to indeterminate [BIS-2006-1p]_. Such fix-point convergences could indeed be empirically verified with all three variants of epistemic fusion [35]_. The most convincing fusion type appears to be the 'average' operator. This idea, as well as the apparent connection to computing prekernels characteristic vectors, needs further formal research (avis aux amateurs) (see :ref:`Bipolar-Valued-Kernels-Tutorial-label`).
 
 Suitable first and last choice recommendations
 ..............................................
@@ -6173,6 +6173,8 @@ Appendix
 
 .. [34] Remarkable is the fact that the indeterminate 0.0 characteristic value does not count as minimal positive and maximal negative value. Its epistemic value is in fact **indeterminate**, i.e. it may be any possible value from -1.0 to +1.0.
 
+.. [35] The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method provides the *CondorcetFixPoint*  method for experimental usage. Setting the *cwFusionType* parameter to the 'average' value seams to deliver the most accurate and convincing choice recommendation. The formal properties of these fixpoints or recurrent identical cycles of solutions have yet to be uncovered.
+	
 .. raw:: latex
 
    \endgroup
