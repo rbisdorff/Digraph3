@@ -4744,54 +4744,55 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="linenos"> 4</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">randomDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span> <span class="k">as</span> <span class="n">ObjPT</span>
 <span class="linenos"> 5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">ObjPT</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="linenos"> 6</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mpOutrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">MPBipolarOutrankingDigraph</span>
-<span class="hll"><span class="linenos"> 7</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">MPBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span><span class="n">MultipleInterpreters</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-<span class="linenos"> 9</span><span class="go">*------- Object instance description ------*</span>
-<span class="linenos">10</span><span class="go">Instance class        : MPBipolarOutrankingDigraph</span>
-<span class="linenos">11</span><span class="go">Instance name         : rel_random3ObjectivesPerfTab</span>
-<span class="linenos">12</span><span class="go">Actions               : 1000</span>
-<span class="linenos">13</span><span class="go">Criteria              : 13</span>
-<span class="linenos">14</span><span class="go">Size                  : 577378</span>
-<span class="linenos">15</span><span class="go">Determinateness (%)   : 70.78</span>
-<span class="linenos">16</span><span class="go">Valuation domain      : [-1.00;1.00]</span>
-<span class="linenos">17</span><span class="go">Attributes           : [&#39;name&#39;, &#39;actions&#39;, &#39;order&#39;, &#39;criteria&#39;,</span>
-<span class="linenos">18</span><span class="go">                        &#39;objectives&#39;, &#39;NA&#39;, &#39;evaluation&#39;,</span>
-<span class="linenos">19</span><span class="go">                        &#39;startMethod&#39;, &#39;nbrThreads&#39;, &#39;relation&#39;,</span>
-<span class="linenos">20</span><span class="go">                        &#39;largePerformanceDifferencesCount&#39;,</span>
-<span class="linenos">21</span><span class="go">                        &#39;valuationdomain&#39;, &#39;gamma&#39;, &#39;notGamma&#39;, &#39;runTimes&#39;]</span>
-<span class="linenos">22</span><span class="go">----  Constructor run times (in sec.) ----</span>
-<span class="hll"><span class="linenos">23</span><span class="go">Threads            : 12</span>
-</span><span class="hll"><span class="linenos">24</span><span class="go">Start method       : &#39;spawn&#39;</span>
-</span><span class="hll"><span class="linenos">25</span><span class="go">multiInterpreters  : &#39;True&#39;</span>
-</span><span class="linenos">26</span><span class="go">Total time         : 7.28415</span>
-<span class="linenos">27</span><span class="go">Data input         : 0.00001</span>
-<span class="linenos">28</span><span class="go">Compute relation   : 5.74009</span>
-<span class="linenos">29</span><span class="go">Normalize relation : 1.04829</span>
-<span class="linenos">30</span><span class="go">Gamma sets         : 0.49552</span>
-<span class="hll"><span class="linenos">31</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;CondorcetWinners&#39;</span><span class="p">)</span>
-</span><span class="linenos">32</span><span class="go">First and last choice recommendations</span>
-<span class="linenos">33</span><span class="go">-------------------------------------</span>
-<span class="linenos">34</span><span class="go">First choice (Condorcet winners)</span>
-<span class="linenos">35</span><span class="go"> &#39;p0583&#39;: +0.42 (71.24%)</span>
-<span class="linenos">36</span><span class="go"> &#39;p0446&#39;: +0.42 (71.03%)</span>
-<span class="linenos">37</span><span class="go"> &#39;p0877&#39;: +0.42 (70.96%)</span>
-<span class="linenos">38</span><span class="go"> &#39;p0073&#39;: +0.36 (67.93%)</span>
-<span class="linenos">39</span><span class="go"> &#39;p0156&#39;: +0.35 (67.43%)</span>
-<span class="linenos">40</span><span class="go">-------------------------------------</span>
-<span class="linenos">41</span><span class="go">Last choice (Condorcet losers)</span>
-<span class="linenos">42</span><span class="go"> &#39;p0390&#39;: +0.45 (72.59%)</span>
-<span class="linenos">43</span><span class="go"> &#39;p0994&#39;: +0.43 (71.37%)</span>
-<span class="linenos">44</span><span class="go"> &#39;p0400&#39;: +0.42 (71.00%)</span>
-<span class="linenos">45</span><span class="go"> &#39;p0615&#39;: +0.38 (69.05%)</span>
-<span class="linenos">46</span><span class="go"> &#39;p0652&#39;: +0.36 (68.00%)</span>
-<span class="linenos">47</span><span class="go">-------------------------------------</span>
-<span class="linenos">48</span><span class="go">Criteria significance majority in brakets</span>
-<span class="hll"><span class="linenos">49</span><span class="go">Execution time: 7.587 sec.</span>
-</span><span class="linenos">50</span><span class="go">*************************************************</span>
+<span class="hll"><span class="linenos"> 7</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">MPBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+</span><span class="hll"><span class="linenos"> 8</span><span class="gp">... </span>                               <span class="n">MultipleInterpreters</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span class="linenos"> 9</span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="linenos">10</span><span class="go">*------- Object instance description ------*</span>
+<span class="linenos">11</span><span class="go">Instance class        : MPBipolarOutrankingDigraph</span>
+<span class="linenos">12</span><span class="go">Instance name         : rel_random3ObjectivesPerfTab</span>
+<span class="linenos">13</span><span class="go">Actions               : 1000</span>
+<span class="linenos">14</span><span class="go">Criteria              : 13</span>
+<span class="linenos">15</span><span class="go">Size                  : 577378</span>
+<span class="linenos">16</span><span class="go">Determinateness (%)   : 70.78</span>
+<span class="linenos">17</span><span class="go">Valuation domain      : [-1.00;1.00]</span>
+<span class="linenos">18</span><span class="go">Attributes           : [&#39;name&#39;, &#39;actions&#39;, &#39;order&#39;, &#39;criteria&#39;,</span>
+<span class="linenos">19</span><span class="go">                        &#39;objectives&#39;, &#39;NA&#39;, &#39;evaluation&#39;,</span>
+<span class="linenos">20</span><span class="go">                        &#39;startMethod&#39;, &#39;nbrThreads&#39;, &#39;relation&#39;,</span>
+<span class="linenos">21</span><span class="go">                        &#39;largePerformanceDifferencesCount&#39;,</span>
+<span class="linenos">22</span><span class="go">                        &#39;valuationdomain&#39;, &#39;gamma&#39;, &#39;notGamma&#39;, &#39;runTimes&#39;]</span>
+<span class="linenos">23</span><span class="go">----  Constructor run times (in sec.) ----</span>
+<span class="hll"><span class="linenos">24</span><span class="go">Threads            : 12</span>
+</span><span class="hll"><span class="linenos">25</span><span class="go">Start method       : &#39;spawn&#39;</span>
+</span><span class="hll"><span class="linenos">26</span><span class="go">multiInterpreters  : &#39;True&#39;</span>
+</span><span class="linenos">27</span><span class="go">Total time         : 7.28415</span>
+<span class="linenos">28</span><span class="go">Data input         : 0.00001</span>
+<span class="linenos">29</span><span class="go">Compute relation   : 5.74009</span>
+<span class="linenos">30</span><span class="go">Normalize relation : 1.04829</span>
+<span class="linenos">31</span><span class="go">Gamma sets         : 0.49552</span>
+<span class="hll"><span class="linenos">32</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;CondorcetWinners&#39;</span><span class="p">)</span>
+</span><span class="linenos">33</span><span class="go">First and last choice recommendations</span>
+<span class="linenos">34</span><span class="go">-------------------------------------</span>
+<span class="linenos">35</span><span class="go">First choice (Condorcet winners)</span>
+<span class="linenos">36</span><span class="go"> &#39;p0583&#39;: +0.42 (71.24%)</span>
+<span class="linenos">37</span><span class="go"> &#39;p0446&#39;: +0.42 (71.03%)</span>
+<span class="linenos">38</span><span class="go"> &#39;p0877&#39;: +0.42 (70.96%)</span>
+<span class="linenos">39</span><span class="go"> &#39;p0073&#39;: +0.36 (67.93%)</span>
+<span class="linenos">40</span><span class="go"> &#39;p0156&#39;: +0.35 (67.43%)</span>
+<span class="linenos">41</span><span class="go">-------------------------------------</span>
+<span class="linenos">42</span><span class="go">Last choice (Condorcet losers)</span>
+<span class="linenos">43</span><span class="go"> &#39;p0390&#39;: +0.45 (72.59%)</span>
+<span class="linenos">44</span><span class="go"> &#39;p0994&#39;: +0.43 (71.37%)</span>
+<span class="linenos">45</span><span class="go"> &#39;p0400&#39;: +0.42 (71.00%)</span>
+<span class="linenos">46</span><span class="go"> &#39;p0615&#39;: +0.38 (69.05%)</span>
+<span class="linenos">47</span><span class="go"> &#39;p0652&#39;: +0.36 (68.00%)</span>
+<span class="linenos">48</span><span class="go">-------------------------------------</span>
+<span class="linenos">49</span><span class="go">Criteria significance majority in brakets</span>
+<span class="hll"><span class="linenos">50</span><span class="go">Execution time: 7.587 sec.</span>
+</span><span class="linenos">51</span><span class="go">*************************************************</span>
 </pre></div>
 </div>
 </div>
-<p>For constructing an outranking digraph of order 1000, on this desktop computer with 12 hyperthreaded cores, we may judiciously use the <a class="reference internal" href="techDoc.html#mpOutrankingDigraphs.MPBipolarOutrankingDigraph" title="mpOutrankingDigraphs.MPBipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">mpOutrankingDigraphs.MPBipolarOutrankingDigraph</span></code></a> constructor allowing to run twelve python3.14.4 interpreters in parallel (see Lines 7 and 23-25) <a class="footnote-reference brackets" href="#id128" id="id69" role="doc-noteref"><span class="fn-bracket">[</span>29<span class="fn-bracket">]</span></a>. Extracting now the non ambiguous weak Condorcet winners and losers takes on this big outranking digraph instance only about 7.6 seconds (Line 49).</p>
+<p>For constructing an outranking digraph of order 1000, on this desktop computer with 12 hyperthreaded cores, we may judiciously use the <a class="reference internal" href="techDoc.html#mpOutrankingDigraphs.MPBipolarOutrankingDigraph" title="mpOutrankingDigraphs.MPBipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">mpOutrankingDigraphs.MPBipolarOutrankingDigraph</span></code></a> constructor allowing to run twelve python3.14.4 interpreters in parallel (see Lines 7-8 and 24-26) <a class="footnote-reference brackets" href="#id128" id="id69" role="doc-noteref"><span class="fn-bracket">[</span>29<span class="fn-bracket">]</span></a>. Extracting now the non ambiguous weak Condorcet winners and losers takes on this big outranking digraph instance only about 7.6 seconds (Line 50).</p>
 <p>To illustrate the quality of this extraction, we may show in <a class="reference internal" href="#condorcetwinnersheatmapmp"><span class="std std-numref">Fig. 3.40</span></a> a performance heatmap of these 10 public policies.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">al</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;p0583&#39;</span><span class="p">,</span><span class="s1">&#39;p0446&#39;</span><span class="p">,</span><span class="s1">&#39;p0877&#39;</span><span class="p">,</span><span class="s1">&#39;p0073&#39;</span><span class="p">,</span><span class="s1">&#39;p0156&#39;</span><span class="p">,</span>
 <span class="gp">... </span>      <span class="s1">&#39;p0652&#39;</span><span class="p">,</span><span class="s1">&#39;p0615&#39;</span><span class="p">,</span><span class="s1">&#39;p0400&#39;</span><span class="p">,</span><span class="s1">&#39;p0994&#39;</span><span class="p">,</span><span class="s1">&#39;p0390&#39;</span><span class="p">]</span>
@@ -6005,7 +6006,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Nov 16, 2026.
+      <span class="lastupdated">Last updated on Nov 17, 2026.
       </span></p>
   </div>
 

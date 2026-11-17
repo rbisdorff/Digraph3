@@ -4902,7 +4902,7 @@ In :numref:`CondorcetWinners6` we show for instance in a Python 3.14.4 console t
    :caption: Computing Condorcet winners and losers on big outranking digraphs 
    :name: CondorcetWinners6
    :linenos:
-   :emphasize-lines: 7,23-25,31,49
+   :emphasize-lines: 7-8,24-26,32,50
 
    bisdorff@bisdorff-pc:~/Desktop$ python3
    Python 3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0] on linux
@@ -4910,7 +4910,8 @@ In :numref:`CondorcetWinners6` we show for instance in a Python 3.14.4 console t
    >>> from randomDigraphs import Random3ObjectivesPerformanceTableau as ObjPT
    >>> t = ObjPT(numberOfActions=1000,numberOfCriteria=13,seed=1)
    >>> from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
-   >>> g = MPBipolarOutrankingDigraph(t,nbrCores=12,MultipleInterpreters=True)
+   >>> g = MPBipolarOutrankingDigraph(t,nbrCores=12,
+   ...                                MultipleInterpreters=True)
    >>> print(g)
    *------- Object instance description ------*
    Instance class        : MPBipolarOutrankingDigraph
@@ -4955,7 +4956,7 @@ In :numref:`CondorcetWinners6` we show for instance in a Python 3.14.4 console t
    Execution time: 7.587 sec.
    *************************************************
 
-For constructing an outranking digraph of order 1000, on this desktop computer with 12 hyperthreaded cores, we may judiciously use the :py:class:`mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor allowing to run twelve python3.14.4 interpreters in parallel (see Lines 7 and 23-25) [29]_. Extracting now the non ambiguous weak Condorcet winners and losers takes on this big outranking digraph instance only about 7.6 seconds (Line 49).
+For constructing an outranking digraph of order 1000, on this desktop computer with 12 hyperthreaded cores, we may judiciously use the :py:class:`mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor allowing to run twelve python3.14.4 interpreters in parallel (see Lines 7-8 and 24-26) [29]_. Extracting now the non ambiguous weak Condorcet winners and losers takes on this big outranking digraph instance only about 7.6 seconds (Line 50).
 
 To illustrate the quality of this extraction, we may show in :numref:`condorcetWinnersHeatmapMP` a performance heatmap of these 10 public policies.
 

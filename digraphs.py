@@ -9055,7 +9055,7 @@ class Digraph(object):
 
         **Parameters**
         
-        *method*: 'CondorcetWinners' (default), 'Bachet', 'Rubis', 'IteratedBachet' or 'IteratedCondorcetWinners'
+        *method*: 'CondorcetWinners' (default), 'CondorcetFixPoint', 'Bachet', 'Rubis', 'IteratedBachet' or 'IteratedCondorcetWinners'
         The Bachet method is based on the conjoint
         extracton of initial and terminal prekernels from the partial Bachet ranking,
         whereas the Rubis method is based on the extraction of an initial and
@@ -9227,6 +9227,46 @@ class Digraph(object):
                 for ch in negRanking:
                     ranking.append(ch[1])
                 return ranking
+        elif method == 'CondorcetFixPoint':
+            if Show:
+                print('\n*************************************************')
+                print('Condorcet %s winners and losers fix point' % cwFusionType)
+                print('-------------------------------------------------')
+            from time import time
+            from copy import deepcopy
+            from digraphsTools import scoredTuplesSort
+            g = deepcopy(self)
+            t0 = time()
+            #g = BipolarOutrankingDigraph(t,Threading=True,startMethod='spawn')
+            #print(g)
+            fusionType=cwFusionType
+            iterations = g.order
+            cw0 = g.computeBpvCondorcetWinners(Comments=False,
+                                               Debug=False,fusionType=fusionType)
+            #cw0.showMembershipCharacteristics()
+            NotEqual = True
+            i = 1
+            history = [cw0]
+            while NotEqual and i < iterations:
+                cw = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw0,
+                                               fusionType=fusionType)
+                #print('iter:',i)
+                #cw.showMembershipCharacteristics()
+                #if cw.isSharper(cw0):
+                #    print('is sharper !')
+                #else:
+                #    print('is not sharper')
+                for w in history:
+                    if cw == w:
+                        NotEqual = False
+                if NotEqual:
+                    history.append(cw)
+                    i += 1
+            cw.showMembershipCharacteristics()
+            print('Iterations:', i)
+            print('Execution time: %.3f sec.' % (time() - t0) )
+            print('*****************************************')
+                    
         else:
             print('Error: method = "CondorcetWinners", "Rubis", "IteratedCondorcetWinners", "Bachet" or "IteratedBachet",  not "%s"' % method) 
         print('*************************************************')
@@ -16027,13 +16067,13 @@ if __name__ == "__main__":
 ##                          
     #t = CircularPerformanceTableau()
     #t = PerformanceTableau('AliceChoice')
-    #t = PerformanceTableau('officeChoice')
+    t = PerformanceTableau('officeChoice')
     #t = PerformanceTableau('roy66')
     #t = PerformanceTableau('studentGrades')
     # testing the fixpoint convergence of the weak Condorcet winners and losers computation
     g = BipolarOutrankingDigraph(t,Threading=True,startMethod='spawn')
     print(g)
-    fusionType='average'
+    fusionType='conjunctive'
     iterations = g.order
     cw0 = g.computeBpvCondorcetWinners(Comments=False,
                                        Debug=False,fusionType=fusionType)
@@ -16047,6 +16087,10 @@ if __name__ == "__main__":
                                        fusionType=fusionType)
         print('iter:',i)
         cw.showMembershipCharacteristics()
+        if cw.isSharper(cw0):
+            print('is sharper !')
+        else:
+            print('is not sharper')
         for w in history:
             if cw == w:
                 NotEqual = False
