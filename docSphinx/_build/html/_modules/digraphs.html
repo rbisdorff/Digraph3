@@ -9693,7 +9693,7 @@
 <div class="viewcode-block" id="Digraph.showChoiceRecommendation">
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.showChoiceRecommendation">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">showChoiceRecommendation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                                <span class="n">method</span><span class="o">=</span><span class="s1">&#39;WeakCondorcetWinners&#39;</span><span class="p">,</span>
+                                <span class="n">method</span><span class="o">=</span><span class="s1">&#39;CondorcetWinners&#39;</span><span class="p">,</span>
                                 <span class="n">cwFusionType</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span> <span class="c1"># or &#39;conjunctive&#39;</span>
                                 <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                  <span class="c1"># Rubis</span>
@@ -9821,7 +9821,7 @@
             <span class="n">nr</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
             <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
             <span class="c1">##print(resVec)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First choice (Condorcet winners)&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First choice (weak Condorcet winners)&#39;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s2">: </span><span class="si">%+.2f</span><span class="s2"> (</span><span class="si">%.2f%%</span><span class="s2">)&quot;</span><span class="o">%</span> <span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
@@ -9829,7 +9829,7 @@
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">break</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-------------------------------------&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Last choice (Condorcet losers)&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Last choice (weak Condorcet losers)&#39;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Med</span><span class="p">:</span>
                     <span class="n">val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span>
@@ -9929,10 +9929,10 @@
                 <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">negRanking</span><span class="p">:</span>
                     <span class="n">ranking</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
                 <span class="k">return</span> <span class="n">ranking</span>
-        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;WeakCondorcetWinners&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;CondorcetQuasiWinners&#39;</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">Show</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">*************************************************&#39;</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Weak </span><span class="si">%s</span><span class="s1"> Condorcet winners and losers&#39;</span> <span class="o">%</span> <span class="n">cwFusionType</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> Condorcet quasi-winners and -losers&#39;</span> <span class="o">%</span> <span class="n">cwFusionType</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-------------------------------------------------&#39;</span><span class="p">)</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
@@ -9948,7 +9948,7 @@
             <span class="n">nr</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
             <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
             <span class="c1">##print(resVec)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First choice (weak Condorcet winners)&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First choice (Condorcet quasi-winners)&#39;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s2">: </span><span class="si">%+.2f</span><span class="s2"> (</span><span class="si">%.2f%%</span><span class="s2">)&quot;</span><span class="o">%</span> <span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
@@ -9956,7 +9956,7 @@
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">break</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-------------------------------------&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Last choice (weak Condorcet losers)&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Last choice (Condorcet quasi-losers)&#39;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Med</span><span class="p">:</span>
                     <span class="n">val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span>
@@ -17117,9 +17117,9 @@
 <span class="c1">##                          </span>
     <span class="c1">#t = CircularPerformanceTableau()</span>
     <span class="c1">#t = PerformanceTableau(&#39;AliceChoice&#39;)</span>
-    <span class="c1">#t = PerformanceTableau(&#39;officeChoice&#39;)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">PerformanceTableau</span><span class="p">(</span><span class="s1">&#39;officeChoice&#39;</span><span class="p">)</span>
     <span class="c1">#t = PerformanceTableau(&#39;roy66&#39;)</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">PerformanceTableau</span><span class="p">(</span><span class="s1">&#39;studentGrades&#39;</span><span class="p">)</span>
+    <span class="c1">#t = PerformanceTableau(&#39;studentGrades&#39;)</span>
     <span class="c1"># testing the fixpoint convergence of the weak Condorcet winners and losers computation</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">startMethod</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
