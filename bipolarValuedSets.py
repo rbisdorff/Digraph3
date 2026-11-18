@@ -133,6 +133,57 @@ def averageEpistemicFusion(L,Debug=False):
             res.membership[x] = Decimal()
     if Debug:
         print(res.membership)
+    return res
+
+def computeEpistemicFusion(L,fusionType='average',Debug=False):
+    """
+    renders the  epistemic fudion of a list of bpv-sets defined on a same support set.
+    """
+    from bipolarValuedSets import BpvSet
+    from digraphsTools import omin,omax
+    from copy import deepcopy
+    from decimal import Decimal
+    res = BpvSet()
+    res.support = deepcopy(L[0].support)
+    res.valuationDomain = deepcopy(L[0].valuationDomain)
+    n = len(L)
+    if fusionType == 'average':
+        res.name = 'averageFusion'
+    elif fusionType == 'conjunctive':
+        res.name = 'conjunctiveFusion'
+    elif fusionType == 'disjunctive':
+        res.name = 'disjunctiveFusion'
+        
+    res.membership = {}
+    Med = res.valuationDomain['med']
+    for x in res.support:
+        if Debug:
+            print(x)
+        vecx = []
+        for s in L:
+            vecx.append(s.membership[x])
+        if Debug:
+            print(vecx)
+        if fusionType == 'average':
+            mPlus = Decimal()
+            mMinus = Decimal()
+            for vx in vecx:
+                if vx > Decimal('0'):
+                    mPlus += vx
+                elif vx < Decimal('0'):
+                    mMinus += vx
+            if mPlus > Decimal() and mMinus == Decimal():
+                res.membership[x] = mPlus / Decimal(n)
+            elif mPlus == Decimal() and mMinus < Decimal():
+                res.membership[x] = mMinus / Decimal(n)
+            else:
+                res.membership[x] = Decimal()
+        elif fusionType == 'conjunctive':
+            res.membership[x] = omin(Med,vecx)
+        elif fusionType == 'disjunctive':
+            res.membership[x] = omax(Med,vecx)
+    if Debug:
+        print(res.membership)
     return res    
         
 #-----------------

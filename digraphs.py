@@ -9030,7 +9030,7 @@ class Digraph(object):
         self.showBestChoiceRecommendation(**kwargs)
 
     def showChoiceRecommendation(self,
-                                method='CondorcetWinners',
+                                method='WeakCondorcetWinners',
                                 cwFusionType='average', # or 'conjunctive'
                                 Comments=False,
                                  # Rubis
@@ -9056,7 +9056,7 @@ class Digraph(object):
 
         **Parameters**
         
-        *method*: 'CondorcetWinners' (default), 'CondorcetFixPoint', 'Rubis', 'Bachet', 'IteratedBachet' or 'IteratedCondorcetWinners'
+        *method*: 'WeakCondorcetWeakWinners' (default), 'CondorcetWinners', 'Rubis', 'Bachet', 'IteratedBachet' or 'IteratedCondorcetWinners'
 
         The 'Bachet' method is based on the conjoint
         extracton of initial and terminal prekernels from the partial Bachet ranking,
@@ -9266,45 +9266,17 @@ class Digraph(object):
                 for ch in negRanking:
                     ranking.append(ch[1])
                 return ranking
-        elif method == 'CondorcetFixPoint':
+        elif method == 'WeakCondorcetWinners':
             if Show:
                 print('\n*************************************************')
-                print('Condorcet %s winners and losers fix point' % cwFusionType)
+                print('Weak %s Condorcet winners and losers' % cwFusionType)
                 print('-------------------------------------------------')
             from time import time
             from copy import deepcopy
             from digraphsTools import scoredTuplesSort
             g = deepcopy(self)
             t0 = time()
-            #g = BipolarOutrankingDigraph(t,Threading=True,startMethod='spawn')
-            #print(g)
-            fusionType=cwFusionType
-            iterations = g.order
-            cw0 = g.computeBpvCondorcetWinners(Comments=False,
-                                               Debug=False,fusionType=fusionType)
-            if Comments:
-                cw0.showMembershipCharacteristics()
-            NotEqual = True
-            i = 1
-            history = [cw0]
-            while NotEqual and i < iterations:
-                cw = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw0,
-                                               fusionType=fusionType)
-                if Comments:
-                    print('iter:',i)
-                    cw.showMembershipCharacteristics()
-                    if cw.isSharper(cw0):
-                        print('is sharper !')
-                    else:
-                        print('is not sharper')
-                for w in history:
-                    if cw == w:
-                        NotEqual = False
-                if NotEqual:
-                    history.append(cw)
-                    i += 1
-            if not Comments:
-                cw.showMembershipCharacteristics()
+            cw = g.solveCondorcetWinnersFixPointEquation(fusionType=cwFusionType,Comments=Comments)
             res = []
             for x in cw.support:
                 res.append((cw.membership[x],x))
@@ -9313,7 +9285,7 @@ class Digraph(object):
             nr = len(res)
             Med = self.valuationdomain['med']
             ##print(resVec)
-            print('First choice (Condorcet winners)')
+            print('First choice (weak Condorcet winners)')
             for i in range(nr):
                 if res[i][0] > Med:
                     print("\'%s\': %+.2f (%.2f%%)"% (res[i][1], res[i][0],
@@ -9321,7 +9293,7 @@ class Digraph(object):
                 else:
                     break
             print('-------------------------------------')
-            print('Last choice (Condorcet losers)')
+            print('Last choice (weak Condorcet losers)')
             for i in range(nr-1,0,-1):
                 if res[i][0] < Med:
                     val = float(res[i][0])*(-1.0)
@@ -9330,14 +9302,66 @@ class Digraph(object):
                 else:
                     break
             print('---------------------------------------')
-            print('Iterations:', i)
+            #print('Iterations:', it)
             print('Execution time: %.3f sec.' % (time() - t0) )
             print('*****************************************')
+            #return history
                     
         else:
             print('Error: method = "CondorcetWinners", "Rubis", "IteratedCondorcetWinners", "Bachet" or "IteratedBachet",  not "%s"' % method) 
         print('*************************************************')
-                 
+
+    def solveCondorcetWinnersFixPointEquation(self,fusionType='average',
+                                              CoDual=False,
+                                              BrokenCocs=False,
+                                              Comments=False):
+        """
+        Reteurn the epistemic fusion of the successive solutions of the
+        Condorcet winners fixpoint equation
+        """
+        from bipolarValuedSets import BpvSet,averageEpistemicFusion
+        from copy import deepcopy
+        g = deepcopy(self)
+        if CoDual:
+            g = ~(-g)
+        if BrokenCocs:
+            gb = BrokenCocsDigraph(g)
+        else:
+            gb = g
+        iterations = g.order
+        cw0 = g.computeBpvCondorcetWinners(Comments=False,
+                                           Debug=False,fusionType=fusionType)
+        NotEqual = True
+        it = 1
+        history = [cw0]
+        while NotEqual and it < iterations:
+            it += 1
+            cw = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw0,
+                                           fusionType=fusionType)
+            if Comments:
+                print('iter:',it)
+                cw.showMembershipCharacteristics()
+                if cw.isSharper(cw0):
+                    print('is sharper !')
+                else:
+                    print('is not sharper')
+            for w in history:
+                if cw == w:
+                    NotEqual = False
+                else:
+                    history.append(cw)
+                    #print(i,history)
+        nh = len(history)
+        if nh > 1:
+            #print('history')
+            from bipolarValuedSets import computeEpistemicFusion
+            cw = computeEpistemicFusion(history,fusionType=fusionType)
+        cw.history = history
+        if Comments:
+            cw.showMembershipCharacteristics()
+        return cw    
+        
+        
     def computeBpvCondorcetWinners(self,CoDual=False,
                                    BrokenCocs=False,
                                    #Average=True,
@@ -16136,11 +16160,11 @@ if __name__ == "__main__":
     #t = PerformanceTableau('AliceChoice')
     #t = PerformanceTableau('officeChoice')
     #t = PerformanceTableau('roy66')
-    #t = PerformanceTableau('studentGrades')
+    t = PerformanceTableau('studentGrades')
     # testing the fixpoint convergence of the weak Condorcet winners and losers computation
     g = BipolarOutrankingDigraph(t,Threading=False,nbrCores=1,startMethod='spawn')
     print(g)
-    g.showChoiceRecommendation('CondorcetFixPoint',
+    history = g.showChoiceRecommendation('CondorcetWinners',
                                cwFusionType='average',Comments=False)
     
             
