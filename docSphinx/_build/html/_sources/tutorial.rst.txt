@@ -1890,6 +1890,10 @@ What will become the best choice recommendation under this working hypothesis?
 
 The next tutorial shows how to create or edit a performance tableau.
 
+.. seealso::
+   - :ref:`Alice’s best choice: A selection case study <Alice-Tutorial-label>`
+   - :ref:`A new efficient choice recommender algorithm <Bipolar-Valued-Condorcet-Winners>`
+
 Historical Notes
 ````````````````
 The seminal article by *Bernard Roy* et al. about the outranking based best choice selection procedure called *ELECTRE* dates from 1966 and was actively promoted thereafter by the LAMSADE [61]_, *Roy*'s research laboratory at the newly founded University Paris 9 Dauphine ([ROY-1966]_). Our critical perspective on this seminal text may be consulted in [BIS-2009]_. Revolutionary for that time was the idea to solve this classical decision problem not by looking for **the best** decision alternative, but **recommending**, with the help of the **kernel** of the outranking digraph, a *subset* of potential best choice candidates.
@@ -7326,7 +7330,11 @@ Again, when *equi-signficant* performance criteria are assumed per decision obje
 
 In view of her performance tableau in :numref:`aliceHeatmap`, *Graduate Interpreter* studies at the *Technical High School Köln*, thus, represent definitely **Alice's very best choice** and *Qualified Translator* at the *Technical High School München* the very last choice. 
 
-For further reading about the Best Choice methodology, one may consult in [BIS-2015]_ the study of a *real decision aid case* about choosing a best poster in a scientific conference.
+.. seealso::
+
+   - The study of a *real decision aid case* about choosing a best poster in a scientific conference [BIS-2015]_.
+   - The tutorial on :ref:`Computing a best choice recommendation <Rubis-Tutorial-label>`.
+   - :ref:`A new efficient choice recommender algorithm <Bipolar-Valued-Condorcet-Winners>`
 
 Back to :ref:`Content Table <Tutorial-label>`
 
