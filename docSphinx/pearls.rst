@@ -2460,7 +2460,7 @@ The best suited multipartisan presidential candidate should as a consequence pre
 
 Without surprise, it is again *Christiane Taubira* who shows the highest net approval score (+66.11%), followed by *Yannick Jadot* (+46.04%). Notice that both *Ch Marchandise* (-14.28%) and *A Agueb-Porterie* (-22.16%) are positively disapproved as potential multipartisan presidential candidates.
 
-It is furthermore remarkable that both the approval votes and the the disapproval votes model the same linear ranking of the seven candidates. 
+It is furthermore remarkable that both the approval votes and the disapproval votes model the same linear ranking of the seven candidates. 
 
 Ranking the potential presidential candidates
 .............................................
@@ -4780,7 +4780,7 @@ The individual bipolar-valued credibilities to '**be a non ambiguous weak Condor
 
 This matrix formulation **(+)** is a kind of *von Neumann* or *Pirlot* fix-point equation system where the initial :math:`Y` vector is set to indeterminate (see :ref:`Bipolar-Valued-Kernels-Tutorial-label` and [BIS-2006-1p]_). The equation system **(+)** attains indeed a fix point with all three variants -- average, conjunctive and disjunctive-- of the epistemic fusion operators in just two steps .
 
-When operating now the corresponding epistemic fusion of both solutions of the fix-point equation **(+)** we obtain an even **weaker** concept of weak Condorcet winners and losers. We call a decision alternative :math:`x \in X` **quasi Condorcet winner**  when *x* is positively outranking at least one not Condorcet winner and incomparable to all the other not not outranked Condorcet winners. Symetrically, we call a decision alternative :math:`x \in X` **quasi Condorcet loser**  when *x* is positively outranked by at least one not Condorcet loser and incomparable to all the other not Condorcet losers that do not outrank *x*. All weak Condorcet winners or losers are quasi Condorcet winners or losers but not vice-versa. 
+When operating now the corresponding epistemic fusion of both solutions of the fix-point equation **(+)** we obtain an even **weaker** concept of weak Condorcet winners and losers. We call a decision alternative :math:`x \in X` **quasi Condorcet winner**  when *x* is positively outranking at least one not Condorcet winner and incomparable to all the other not outranked Condorcet winners. Symetrically, we call a decision alternative :math:`x \in X` **quasi Condorcet loser**  when *x* is positively outranked by at least one not Condorcet loser and incomparable to all the other not Condorcet losers that do not outrank *x*. All weak Condorcet winners or losers are quasi Condorcet winners or losers but not vice-versa. 
 
 Suitable first and last choice recommendations
 ..............................................
@@ -4930,7 +4930,7 @@ In the performance heatmap shown in :numref:`condorcetWinnersHeatmap` using the 
 Efficiency of computing weak Condorcet winners and losers
 .........................................................
 
-The complexity of the computation of non ambiguous Condorcet winners and losers bpv-sets is in :math:`\mathcal{O}(n^2)` which actually allows to tackle choice recommender problems on much larger outranking digraphs than the one that can be handled by the the *Rubis* or the *Bachet* methods.
+The complexity of the computation of non ambiguous Condorcet winners and losers bpv-sets is in :math:`\mathcal{O}(n^2)` which actually allows to tackle choice recommender problems on much larger outranking digraphs than the one that can be handled by the *Rubis* or *Bachet* methods.
 
 In :numref:`CondorcetWinners6` we show for instance in a Python 3.14.4 console the extraction of quasi Condorcet winners and losers from a random 3 Objectives outranking digraph of order 1000 using a 11th Gen Intel® Core™ i5-11400 × 12HT desktop computer with 64 GiB CPU memory running under Ubuntu 26.04.1 LTS.
 
@@ -4995,7 +4995,7 @@ In :numref:`CondorcetWinners6` we show for instance in a Python 3.14.4 console t
    Execution time: 16.24 sec.
    *************************************************
 
-For constructing on this desktop computer with 12 hyperthreaded cores an outranking digraph of order 1000, we may judiciously use the :py:class:`mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor allowing to run up to twelve python3.14.4 interpreters in parallel (see Lines 7-8 and 24-26) [29]_. Extracting now the non ambiguous average quasi Condorcet winners losers takes on this big outranking digraph instance only about 16.24 seconds (Line 50). Computing the corresponding *weak* version divides the time by two. Only *p0576*, *p0814* and *p0165* are in fact quasi-winners.
+For constructing on this desktop computer with 12 hyperthreaded cores an outranking digraph of order 1000, we may judiciously use the :py:class:`mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor allowing to run up to twelve python3.14.4 interpreters in parallel (see Lines 7-8 and 24-26) [29]_. Extracting now the non ambiguous average quasi Condorcet winners and losers takes on this big outranking digraph instance only about 16.24 seconds (Line 50). Computing the corresponding *weak* version divides the time by two. Only *p0576*, *p0814* and *p0165* are in fact quasi-winners.
 
 To illustrate the quality of this quasi Condorcet winners and losers extraction, we may show in :numref:`condorcetWinnersHeatmapMP` a performance heatmap of these 13 public policies.
 
