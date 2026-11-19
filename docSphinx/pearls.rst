@@ -4811,7 +4811,7 @@ Now, non ambiguous weak Condorcet winners and losers verify the same pragmatic f
      Execution time: 0.027 sec.
     ******************************************
 
-The average criteria significance majorities for each choice are indicated in brakets (see Lines 6-8 and 11-13). Alternative *p2* is the most supported first choice and alternative *p7* is the most supported last choice.
+The average criteria significance majorities for each choice are indicated in brakets (see Lines 6-8 and 11-13). Alternative *p2* is the most supported first choice and alternative *p1* is the most supported last choice.
 
 The weak Condorcet winners and losers recommendation gets confirmed with the '*Rubis*' choice recommendation shown in :numref:`CondorcetWinners4` below (see [32]_). 
 
@@ -4871,9 +4871,9 @@ The corresponding non ambiguous **quasi Condorcet winners** and **quasi Condorce
      Execution time: 0.046 sec.
     ******************************************
 
-Alternatives *p9* and *p3* are the additional quasi Condorcet winner resp. loser.
+Alternatives *p9* and *p3* are the additional quasi Condorcet winner resp. loser. Notice that alternatives *p7* is now the most supported quasi Condorcet loser.
 
-With the given random outranking digraph *g*, initial and terminal prekernels recommendations correspond exactly to the positive weak Condorcet winners and losers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and *strictly* outranking, resp. outranked,  choices, whereas weak Condorcet winners and losers are non ambiguous *weakly* outranking and not *outranked* resp. *weakly* outranked and not *outranking* choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location 'A', being incomparable to all other locations, is included in both the initial and the terminal prekernel. Location *A* is hence an ambiguous first and last choice recommendation and therefore neither part of the non ambiguous weak Condorcet winners, nor of the non ambiguous weak Condorcet losers [33]_.
+With the given random outranking digraph *g*, initial and terminal prekernels recommendations correspond exactly to the sets of positive weak Condorcet winners and losers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and *strictly* outranking, resp. outranked,  choices, whereas weak Condorcet winners and losers are non ambiguous *weakly* outranking and not *outranked* resp. *weakly* outranked and not *outranking* choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location 'A', being incomparable to all other locations, is included in both the initial and the terminal prekernel. Location *A* is hence an ambiguous first and last choice recommendation and therefore neither part of the non ambiguous weak Condorcet winners, nor of the non ambiguous weak Condorcet losers [33]_.
 
 Ranking-by-choosing with bpv-sets of weak Condorcet winners and losers
 ......................................................................
