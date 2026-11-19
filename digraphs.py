@@ -9147,6 +9147,7 @@ class Digraph(object):
         elif method == 'CondorcetWinners':
             from time import time
             from digraphsTools import scoredTuplesSort
+            print('*************************************')
             print('First and last choice recommendations')
             print('-------------------------------------')
             t0 = time()
@@ -9178,6 +9179,8 @@ class Digraph(object):
             print('-------------------------------------')
             print('Criteria significance majority in brakets' )
             print('Execution time: %.3f sec.' % (time() - t0) )
+            print('*********************************************')
+
 
         elif method == 'IteratedCondorcetWinners':
             if Show:
@@ -9269,9 +9272,9 @@ class Digraph(object):
                 return ranking
         elif method == 'QuasiCondorcetWinners':
             if Show:
-                print('*************************************************')
+                print('*************************************')
                 print('First and last choice recommendations')
-                print('-------------------------------------------------')
+                print('-------------------------------------')
             from time import time
             from copy import deepcopy
             from digraphsTools import scoredTuplesSort
@@ -9311,7 +9314,7 @@ class Digraph(object):
         else:
             print('Error: method = "CondorcetWinners", "QuasiCondorcetWinners", "Rubis",\
                   "IteratedCondorcetWinners", "Bachet" or "IteratedBachet",  not "%s"' % method) 
-        print('*************************************************')
+        #print('*************************************************')
 
     def solveCondorcetWinnersFixPointEquation(self,fusionType='average',
                                               CoDual=False,

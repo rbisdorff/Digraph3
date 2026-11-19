@@ -9810,7 +9810,8 @@
         <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;CondorcetWinners&#39;</span><span class="p">:</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">digraphsTools</span><span class="w"> </span><span class="kn">import</span> <span class="n">scoredTuplesSort</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">First and last choice recommendations&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First and last choice recommendations&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-------------------------------------&#39;</span><span class="p">)</span>
             <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
             <span class="n">resVec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">(</span><span class="n">fusionType</span><span class="o">=</span><span class="n">cwFusionType</span><span class="p">)</span>
@@ -9841,11 +9842,13 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-------------------------------------&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Criteria significance majority in brakets&#39;</span> <span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Execution time: </span><span class="si">%.3f</span><span class="s1"> sec.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span> <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*********************************************&#39;</span><span class="p">)</span>
+
 
         <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;IteratedCondorcetWinners&#39;</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">Show</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">******************************************&#39;</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iterated weak Condorcet winners and losers&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;******************************************&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iterated </span><span class="si">%s</span><span class="s1"> weak Condorcet winners and losers&#39;</span> <span class="o">%</span> <span class="n">cwFusionType</span> <span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------------------------------------------&#39;</span><span class="p">)</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
@@ -9932,9 +9935,9 @@
                 <span class="k">return</span> <span class="n">ranking</span>
         <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;QuasiCondorcetWinners&#39;</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">Show</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">*************************************************&#39;</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> Condorcet quasi-winners and -losers&#39;</span> <span class="o">%</span> <span class="n">cwFusionType</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-------------------------------------------------&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First and last choice recommendations&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-------------------------------------&#39;</span><span class="p">)</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">digraphsTools</span><span class="w"> </span><span class="kn">import</span> <span class="n">scoredTuplesSort</span>
@@ -9973,9 +9976,9 @@
                     
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: method = &quot;CondorcetWinners&quot;, &quot;QuasiCondorcetWinners&quot;, &quot;Rubis&quot;,</span><span class="se">\</span>
-<span class="s1">                  &quot;IteratedCondorcetWinners&quot;, &quot;Bachet&quot; or &quot;IteratedBachet&quot;,  not &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="n">method</span><span class="p">)</span> 
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************************&#39;</span><span class="p">)</span></div>
+<span class="s1">                  &quot;IteratedCondorcetWinners&quot;, &quot;Bachet&quot; or &quot;IteratedBachet&quot;,  not &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="n">method</span><span class="p">)</span> </div>
 
+        <span class="c1">#print(&#39;*************************************************&#39;)</span>
 
 <div class="viewcode-block" id="Digraph.solveCondorcetWinnersFixPointEquation">
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.solveCondorcetWinnersFixPointEquation">[docs]</a>
