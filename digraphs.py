@@ -9056,7 +9056,8 @@ class Digraph(object):
 
         **Parameters**
         
-        *method*: 'WeakCondorcetWeakWinners' (default), 'CondorcetWinners', 'Rubis', 'Bachet', 'IteratedBachet' or 'IteratedCondorcetWinners'
+        *method*: 'WeakCondorcetWeakWinners' (default), 'CondorcetWinners', 'QuasiCondorcetWinners', 'Rubis',
+                  'Bachet', 'IteratedBachet' or 'IteratedCondorcetWinners'
 
         The 'Bachet' method is based on the conjoint
         extracton of initial and terminal prekernels from the partial Bachet ranking,
@@ -9085,7 +9086,7 @@ class Digraph(object):
         induced by the iterated extraction of Condorcet winners bpv-sets.
 
         *cwFusionType*: 'average' (default), 'conjunctive' or 'djunctive'.
-        CondorcetWinners, IteratedCondorcetWinners and CondorcetFixPoint parameter.
+        CondorcetWinners, IteratedCondorcetWinners and QuasiCondorcetWinners parameter.
 
         **Usage example**
         
@@ -9146,7 +9147,7 @@ class Digraph(object):
         elif method == 'CondorcetWinners':
             from time import time
             from digraphsTools import scoredTuplesSort
-            print('\nFirst and last choice recommendations')
+            print('First and last choice recommendations')
             print('-------------------------------------')
             t0 = time()
             resVec = self.computeBpvCondorcetWinners(fusionType=cwFusionType)
@@ -9158,7 +9159,7 @@ class Digraph(object):
             nr = len(res)
             Med = self.valuationdomain['med']
             ##print(resVec)
-            print('First choice (weak Condorcet winners)')
+            print('First choice (%s weak Condorcet winners)' % cwFusionType )
             for i in range(nr):
                 if res[i][0] > Med:
                     print("\'%s\': %+.2f (%.2f%%)"% (res[i][1], res[i][0],
@@ -9166,7 +9167,7 @@ class Digraph(object):
                 else:
                     break
             print('-------------------------------------')
-            print('Last choice (weak Condorcet losers)')
+            print('Last choice (%s weak Condorcet losers)' % cwFusionType )
             for i in range(nr-1,0,-1):
                 if res[i][0] < Med:
                     val = float(res[i][0])*(-1.0)
@@ -9180,8 +9181,8 @@ class Digraph(object):
 
         elif method == 'IteratedCondorcetWinners':
             if Show:
-                print('\n******************************************')
-                print('Iterated weak Condorcet winners and losers')
+                print('******************************************')
+                print('Iterated %s weak Condorcet winners and losers' % cwFusionType )
                 print('------------------------------------------')
             from time import time
             from copy import deepcopy
@@ -9266,10 +9267,10 @@ class Digraph(object):
                 for ch in negRanking:
                     ranking.append(ch[1])
                 return ranking
-        elif method == 'CondorcetQuasiWinners':
+        elif method == 'QuasiCondorcetWinners':
             if Show:
-                print('\n*************************************************')
-                print('%s Condorcet quasi-winners and -losers' % cwFusionType)
+                print('*************************************************')
+                print('First and last choice recommendations')
                 print('-------------------------------------------------')
             from time import time
             from copy import deepcopy
@@ -9285,7 +9286,7 @@ class Digraph(object):
             nr = len(res)
             Med = self.valuationdomain['med']
             ##print(resVec)
-            print('First choice (Condorcet quasi-winners)')
+            print('First choice (%s quasi Condorcet winners)' % cwFusionType )
             for i in range(nr):
                 if res[i][0] > Med:
                     print("\'%s\': %+.2f (%.2f%%)"% (res[i][1], res[i][0],
@@ -9293,7 +9294,7 @@ class Digraph(object):
                 else:
                     break
             print('-------------------------------------')
-            print('Last choice (Condorcet quasi-losers)')
+            print('Last choice (%s quasi Condorcet losers)' % cwFusionType )
             for i in range(nr-1,0,-1):
                 if res[i][0] < Med:
                     val = float(res[i][0])*(-1.0)
@@ -9308,7 +9309,8 @@ class Digraph(object):
             #return history
                     
         else:
-            print('Error: method = "CondorcetWinners", "Rubis", "IteratedCondorcetWinners", "Bachet" or "IteratedBachet",  not "%s"' % method) 
+            print('Error: method = "CondorcetWinners", "QuasiCondorcetWinners", "Rubis",\
+                  "IteratedCondorcetWinners", "Bachet" or "IteratedBachet",  not "%s"' % method) 
         print('*************************************************')
 
     def solveCondorcetWinnersFixPointEquation(self,fusionType='average',
@@ -16164,8 +16166,8 @@ if __name__ == "__main__":
     # testing the fixpoint convergence of the weak Condorcet winners and losers computation
     g = BipolarOutrankingDigraph(t,Threading=False,nbrCores=1,startMethod='spawn')
     print(g)
-    history = g.showChoiceRecommendation('CondorcetWinners',
-                               cwFusionType='average',Comments=False)
+    g.showChoiceRecommendation('CondorcetWinners',
+                               cwFusionType='disjunctive',Comments=False)
     
             
     print('*------------------*')

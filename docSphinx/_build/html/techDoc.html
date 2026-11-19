@@ -3695,7 +3695,10 @@ we brake the circuits on their weakest arc.</p>
 <span class="sig-name descname"><span class="pre">showChoiceRecommendation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CondorcetWinners'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cwFusionType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'average'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ChoiceVector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RubisFusionType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'standard'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Polarised</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxNbrOfRankings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CoDual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Reversed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Valued</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actionsList</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomActionsList</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ReturnRanking</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showChoiceRecommendation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.showChoiceRecommendation" title="Link to this definition"></a></dt>
 <dd><p>Generic choice recommender method.</p>
 <p><strong>Parameters</strong></p>
-<p><em>method</em>: ‘WeakCondorcetWeakWinners’ (default), ‘CondorcetWinners’, ‘Rubis’, ‘Bachet’, ‘IteratedBachet’ or ‘IteratedCondorcetWinners’</p>
+<dl class="simple">
+<dt><em>method</em>: ‘WeakCondorcetWeakWinners’ (default), ‘CondorcetWinners’, ‘QuasiCondorcetWinners’, ‘Rubis’,</dt><dd><p>‘Bachet’, ‘IteratedBachet’ or ‘IteratedCondorcetWinners’</p>
+</dd>
+</dl>
 <p>The ‘Bachet’ method is based on the conjoint
 extracton of initial and terminal prekernels from the partial Bachet ranking,
 whereas the ‘Rubis’ method is based on the extraction of an initial and
@@ -3713,7 +3716,7 @@ characteristic vectors</p>
 <p><em>ReturnRanking</em>: IteratedCondorcetWinners parameter for returning a linear ranking
 induced by the iterated extraction of Condorcet winners bpv-sets.</p>
 <p><em>cwFusionType</em>: ‘average’ (default), ‘conjunctive’ or ‘djunctive’.
-CondorcetWinners, IteratedCondorcetWinners and CondorcetFixPoint parameter.</p>
+CondorcetWinners, IteratedCondorcetWinners and QuasiCondorcetWinners parameter.</p>
 <p><strong>Usage example</strong></p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
@@ -15546,7 +15549,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Nov 18, 2026.
+      <span class="lastupdated">Last updated on Nov 19, 2026.
       </span></p>
   </div>
 

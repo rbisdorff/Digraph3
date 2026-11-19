@@ -4774,13 +4774,13 @@ The individual bipolar-valued credibilities to '**be a non ambiguous weak Condor
 
 | In matrix style notation, the *conjunctive* epistemic fusion computation of non ambiguous weak Condorcet winners and losers may for instance be expressed like follows. Let :math:`R`, resp. :math:`R^{cd}`, denote the bpv-adjacency matrix of the outranking digraph, resp. of the codual of the outranking digraph :math:`G(X,R)`. Let :math:`Y` be the column bpv-vector of the weak Condorcet winners and losers and let :math:`Y_0` be an indeterminate column bpv-vector with support set *X*. Than
 |
-|   (*) :math:`Y \; = \; \big(R\,\diamond\,Y_0\big) \; $ \textcircled{$\wedge$} $ \; \big(R^{cd}\,\diamond\,Y_0\big)` where :math:`\forall x \in X`,
+|   **(+)** :math:`Y \; = \; \big(R\,\diamond\,Y_0\big) \; $ \textcircled{$\wedge$} $ \; \big(R^{cd}\,\diamond\,Y_0\big)` where :math:`\forall x \in X`,
 |          :math:`\big(R\,\diamond\,Y_0\big)(x) \;= \; $ \textcircled{$\wedge$} $_{y \neq x \in X} \big(R(x,y) $ \textcircled{$\vee$} $ Y_0(y)\big)` and
 |          :math:`\big(R^{cd}\,\diamond\,Y_0\big)(x) \;= \; $ \textcircled{$\wedge$} $_{y \neq x \in X} \big(-R(y,x) $ \textcircled{$\vee$} $ Y_0(y)\big)`.
 
-This matrix formulation (*) is a kind of *von Neumann* or *Pirlot* fix-point equation where the initial :math:`Y` vector is set to indeterminate (see :ref:`Bipolar-Valued-Kernels-Tutorial-label` and [BIS-2006-1p]_). The equation (*) attains indeed a fix point in two steps with all three variants -- average, conjunctive and disjunctive-- of the epistemic fusion operators.
+This matrix formulation **(+)** is a kind of *von Neumann* or *Pirlot* fix-point equation system where the initial :math:`Y` vector is set to indeterminate (see :ref:`Bipolar-Valued-Kernels-Tutorial-label` and [BIS-2006-1p]_). The equation system **(+)** attains indeed a fix point with all three variants -- average, conjunctive and disjunctive-- of the epistemic fusion operators in just two steps .
 
-When operating now the corresponding epistemic fusions of both unequal solutions of fix-point equation (*) we obtain an even **weaker** concept of weak Condorcet winners and losers. We call **Condorcet quasi-winner** a decision alternative :math:`x \in X` when *x* is positively outranking at least one not Condorcet winner and incomparable to all the other not Condorcet winners that are not outranked by *x*. Symetrically, we call **Condorcet quasi-loser** a decision alternative :math:`x \in X` when *x* is positively outranked by at least one not Condorcet loser and incomparable to all the other not Condorcet losers that do not outrank *x*. All weak Condorcet winners or losers are Condorcet quasi-winners or -losers but not vice-versa. 
+When operating now the corresponding epistemic fusion of both solutions of the fix-point equation **(+)** we obtain an even **weaker** concept of weak Condorcet winners and losers. We call a decision alternative :math:`x \in X` **quasi Condorcet winner**  when *x* is positively outranking at least one not Condorcet winner and incomparable to all the other not not outranked Condorcet winners. Symetrically, we call a decision alternative :math:`x \in X` **quasi Condorcet loser**  when *x* is positively outranked by at least one not Condorcet loser and incomparable to all the other not Condorcet losers that do not outrank *x*. All weak Condorcet winners or losers are quasi Condorcet winners or losers but not vice-versa. 
 
 Suitable first and last choice recommendations
 ..............................................
@@ -4797,12 +4797,12 @@ Now, non ambiguous weak Condorcet winners and losers verify the same pragmatic f
    ...                            cwFusionType='average')
     First and last choice recommendations
     -------------------------------------
-     First choice (weak Condorcet winners)
+     First choice (average weak Condorcet winners)
       'p2': +0.63 (81.42%)
       'p6': +0.23 (61.46%)
       'p5': +0.18 (59.20%)
     -------------------------------------
-     Last choice (weak Condorcet losers)
+     Last choice (average weak Condorcet losers)
       'p1': +0.26 (63.11%)
       'p7': +0.23 (61.55%)
       'p8': +0.17 (58.42%)
@@ -4812,36 +4812,6 @@ Now, non ambiguous weak Condorcet winners and losers verify the same pragmatic f
     ******************************************
 
 The average criteria significance majorities for each choice are indicated in brakets (see Lines 6-8 and 11-13). Alternative *p2* is the most supported first choice and alternative *p7* is the most supported last choice.
-
-The corresponding non ambiguous Condorcet **Quasi-winners** and **quasi-losers** may be computed with the '*CondorcetQuasiWinners*' argument as shown in :numref:`CondorcetWinners3b`.
-
-.. code-block:: pycon
-   :caption: Showing first and last choice recommendations
-   :name: CondorcetWinners3b
-   :linenos:
-   :emphasize-lines: 1,9,14
-
-   >>> g.showChoiceRecommendation('CondorcetQuasiWinners',
-   ...                            cwFusionType='average')
-    First and last choice recommendations
-    -------------------------------------
-     First choice (weak Condorcet winners)
-      'p2': +0.44 (72.09%)
-      'p6': +0.11 (55.73%)
-      'p5': +0.09 (54.60%)
-      'p9': +0.03 (51.53%)
-    -------------------------------------
-     Last choice (weak Condorcet losers)
-      'p7': +0.19 (59.62%)
-      'p1': +0.13 (56.55%)
-      'p8': +0.08 (54.21%)
-      'p3': +0.04 (52.22%)
-    -------------------------------------
-     Criteria significance majority in brakets
-     Execution time: 0.046 sec.
-    ******************************************
-
-Alternatives *p9* and *p3* are the additional Condorcet quasi-winner resp. quasi-loser.
 
 The weak Condorcet winners and losers recommendation gets confirmed with the '*Rubis*' choice recommendation shown in :numref:`CondorcetWinners4` below (see [32]_). 
 
@@ -4873,7 +4843,37 @@ The weak Condorcet winners and losers recommendation gets confirmed with the '*R
 	 determinateness (%) : 50.00
 	 - most credible action(s) = {}
 
-With the given random outranking digraph *g*, initial and terminal prekernels recommendations correspond now exactly to the positive weak Condorcet winners and losers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and *strictly* outranking, resp. outranked,  choices, whereas weak Condorcet winners and losers are non ambiguous *weakly* outranking and not *outranked* resp. *weakly* outranked and not *outranking* choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location 'A', being incomparable to all other locations, is included in both the initial and the terminal prekernel. Location *A* is hence an ambiguous first and last choice recommendation and therefore neither part of the non ambiguous weak Condorcet winners, nor of the non ambiguous weak Condorcet losers [33]_.
+The corresponding non ambiguous **quasi Condorcet winners** and **quasi Condorcet losers** may be computed with the '*QuasiCondorcetWinners*' argument as shown in :numref:`CondorcetWinners3b`.
+
+.. code-block:: pycon
+   :caption: Showing first and last choice recommendations
+   :name: CondorcetWinners3b
+   :linenos:
+   :emphasize-lines: 1,9,15
+
+   >>> g.showChoiceRecommendation('QuasiCondorcetWinners',
+   ...                            cwFusionType='average')
+    First and last choice recommendations
+    -------------------------------------
+     First choice (average quasi Condorcet winners)
+      'p2': +0.44 (72.09%)
+      'p6': +0.11 (55.73%)
+      'p5': +0.09 (54.60%)
+      'p9': +0.03 (51.53%)
+    -------------------------------------
+     Last choice (average quasi Condorcet losers)
+      'p7': +0.19 (59.62%)
+      'p1': +0.13 (56.55%)
+      'p8': +0.08 (54.21%)
+      'p3': +0.04 (52.22%)
+    -------------------------------------
+     Criteria significance majority in brakets
+     Execution time: 0.046 sec.
+    ******************************************
+
+Alternatives *p9* and *p3* are the additional quasi Condorcet winner resp. loser.
+
+With the given random outranking digraph *g*, initial and terminal prekernels recommendations correspond exactly to the positive weak Condorcet winners and losers as computed before in :numref:`CondorcetWinners1` and shown in :numref:`condorcetWinners2`. But this is only an anecdotic correspondence. Initial and terminal prekernels are weakly independent and *strictly* outranking, resp. outranked,  choices, whereas weak Condorcet winners and losers are non ambiguous *weakly* outranking and not *outranked* resp. *weakly* outranked and not *outranking* choices. In, for instance, the office location best choice problem discussed in the tutorials methodological part, location 'A', being incomparable to all other locations, is included in both the initial and the terminal prekernel. Location *A* is hence an ambiguous first and last choice recommendation and therefore neither part of the non ambiguous weak Condorcet winners, nor of the non ambiguous weak Condorcet losers [33]_.
 
 Ranking-by-choosing with bpv-sets of weak Condorcet winners and losers
 ......................................................................
@@ -4884,12 +4884,12 @@ In a bipolar ranking-by-choosing strategy, we may recursively extract bpv-sets o
    :caption: Showing first and last choice recommendations from recursively extracted weak Condorcet winners and losers
    :name: CondorcetWinners5
    :linenos:
-   :emphasize-lines: 1,5-13
+   :emphasize-lines: 1,6-14
 
    >>> g.showChoiceRecommendation('IteratedCondorcetWinners',
    ...                            cwFusionType='average')
     ******************************************
-     Iterated weak Condorcet winners and losers
+     Iterated average weak Condorcet winners and losers
      ------------------------------------------
       1rst-choice: 'p2' (+0.628)
       1rst-choice: 'p6' (+0.229)
@@ -4930,9 +4930,9 @@ In the performance heatmap shown in :numref:`condorcetWinnersHeatmap` using the 
 Efficiency of computing weak Condorcet winners and losers
 .........................................................
 
-The complexity of the computation of non ambiguous Condorcet winners and losers bpv-sets is in :math:`\mathcal{O}(n^2)` which actually allows to tackle choice recommender problems on much larger outranking digraphs than can be handled by the the *Rubis* or the *Bachet* methods.
+The complexity of the computation of non ambiguous Condorcet winners and losers bpv-sets is in :math:`\mathcal{O}(n^2)` which actually allows to tackle choice recommender problems on much larger outranking digraphs than the one that can be handled by the the *Rubis* or the *Bachet* methods.
 
-In :numref:`CondorcetWinners6` we show for instance in a Python 3.14.4 console the extraction of weak Condorcet winners and losers from a random 3 Objectives outranking digraph of order 1000 using a 11th Gen Intel® Core™ i5-11400 × 12HT desktop computer with 64 GiB CPU memory running under Ubuntu 26.04.1 LTS.
+In :numref:`CondorcetWinners6` we show for instance in a Python 3.14.4 console the extraction of quasi Condorcet winners and losers from a random 3 Objectives outranking digraph of order 1000 using a 11th Gen Intel® Core™ i5-11400 × 12HT desktop computer with 64 GiB CPU memory running under Ubuntu 26.04.1 LTS.
 
 .. code-block:: pycon
    :caption: Computing Condorcet quasi-winners and -losers on big outranking digraphs 
@@ -4971,10 +4971,10 @@ In :numref:`CondorcetWinners6` we show for instance in a Python 3.14.4 console t
    Compute relation   : 5.74009
    Normalize relation : 1.04829
    Gamma sets         : 0.49552
-   >>> g.showChoiceRecommendation('CondorcetQuasiWinners')
+   >>> g.showChoiceRecommendation('QuasiCondorcetWinners')
    First and last choice recommendations
    -------------------------------------
-   First choice (average Condorcet quasi winners)
+   First choice (average quasi Condorcet winners)
     'p0583': +0.42 (71.24%)
     'p0446': +0.42 (71.03%)
     'p0877': +0.42 (70.96%)
@@ -4984,7 +4984,7 @@ In :numref:`CondorcetWinners6` we show for instance in a Python 3.14.4 console t
     'p0814': +0.20 (59.92%)
     'p0165': +0.20 (59.86%)
    -------------------------------------
-   Last choice (average Condorcet quasi-losers)
+   Last choice (average quasi Condorcet losers)
     'p0390': +0.45 (72.59%)
     'p0994': +0.43 (71.37%)
     'p0400': +0.42 (71.00%)
@@ -4995,12 +4995,12 @@ In :numref:`CondorcetWinners6` we show for instance in a Python 3.14.4 console t
    Execution time: 16.24 sec.
    *************************************************
 
-For constructing an outranking digraph of order 1000, on this desktop computer with 12 hyperthreaded cores, we may judiciously use the :py:class:`mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor allowing to run twelve python3.14.4 interpreters in parallel (see Lines 7-8 and 24-26) [29]_. Extracting now the non ambiguous average Condorcet quasi-winners and -losers takes on this big outranking digraph instance only about 16.24 seconds (Line 50). Computing the corresponding *weak* version divides the time by two. Only *p0576*, *p0814* and *p0165* are in fact quasi-winners.
+For constructing on this desktop computer with 12 hyperthreaded cores an outranking digraph of order 1000, we may judiciously use the :py:class:`mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor allowing to run up to twelve python3.14.4 interpreters in parallel (see Lines 7-8 and 24-26) [29]_. Extracting now the non ambiguous average quasi Condorcet winners losers takes on this big outranking digraph instance only about 16.24 seconds (Line 50). Computing the corresponding *weak* version divides the time by two. Only *p0576*, *p0814* and *p0165* are in fact quasi-winners.
 
-To illustrate the quality of this extraction, we may show in :numref:`condorcetWinnersHeatmapMP` a performance heatmap of these 13 public policies.
+To illustrate the quality of this quasi Condorcet winners and losers extraction, we may show in :numref:`condorcetWinnersHeatmapMP` a performance heatmap of these 13 public policies.
 
-   >>> al = ['p0583','p0446','p0877','p0073','p0156','p0576',
-   ...       'p0814','p0165','p0652','p0615','p0400','p0994','p0390']
+   >>> al = ['p0583','p0446','p0877','p0073','p0156','p0576','p0814','p0165',
+   ...       'p0652','p0615','p0400','p0994','p0390']
    >>> g.showHTMLPerformanceHeatmap(actionsList=al,colorLevels=9,
    ...                 pageTitle='Condorcet Winners and Losers',
    ...                 outrankingModel='this')
@@ -5009,14 +5009,14 @@ To illustrate the quality of this extraction, we may show in :numref:`condorcetW
    :name: condorcetWinnersHeatmapMP
    :width: 400 px
    :align: center
-   :alt: Verifying the quality of Condorcet quasi-winners and -losers recommendation
+   :alt: Verifying the quality of quasi Condorcet winners and losers recommendations
 
-   Performance heatmap of Condorcet quasi-winners and -losers
+   Performance heatmap of quasi Condorcet winners and losers
 
 We may furthermore compute in :numref:`CondorcetWinners7` the relative performance ratings of our corresponding sets of weak Condorcet winners and losers.
 
 .. code-block:: pycon
-   :caption: Computing performance ratings of the Condorcet winners and losers 
+   :caption: Computing performance ratings of the weak Condorcet winners and losers 
    :name: CondorcetWinners7
    :linenos:
    :emphasize-lines: 1-2,4-5,8-12,15-19
