@@ -12149,7 +12149,7 @@ Appendices
 
 .. [72] For colour-blind people, the :py:meth:`perfsTab.PerformanceTableau.showHTMLPerformanceHeatmap` method provides with the *GrayScales=True* parameter a gray-scaled heatmap design
 
-.. [73] Most remarquable is the fact that the double fix-point equation system operating on a partial prekernel-reduced outranking digraph, when using the disjunctive and conjunctive fusion operators instead of the classical *max* and *min* operators, delivers exactly the same result as the simple conjunctive epistemic fusion of rows and columns of the outranking relation.
+.. [73] Most remarquable is the fact that the double fix-point kernel equation system operating on a partial prekernel-reduced outranking digraph, when using the disjunctive and conjunctive fusion operators instead of the classical *max* and *min* operators, delivers exactly the same result as the simple conjunctive epistemic fusion of rows and columns of the outranking relation.
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
