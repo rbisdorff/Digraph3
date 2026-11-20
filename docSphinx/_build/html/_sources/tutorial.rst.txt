@@ -1264,12 +1264,12 @@ It becomes readily clear now from the picture above that both alternatives *a1* 
 .. code-block:: pycon
    :linenos:
 
-   >>> cdodg.showChoiceRecommendation('CondorcetWinners',
+   >>> cdodg.showChoiceRecommendation('CondorcetWinners',version='weak',
    ...                                cwFusionTpye='average')
-    First choice (Condorcet winners)
+    First choice (average weak Condorcet winners)
      'a7': +0.33 (66.66%)
      'a1': +0.31 (65.47%)
-    Last choice (Condorcet losers)
+    Last choice (average weak Condorcet losers)
      'a2': +0.31 (65.47%)
      'a6': +0.24 (61.91%)
     Criteria significance majority in brakets
@@ -1744,10 +1744,10 @@ It may be opportune now to confirm this result by iterating, with the same epist
    :emphasize-lines: 1,6,8,12
    :caption: Computing iterated weak Condorcet winners and losers
 
-   >>> cg.showChoiceRecommendation('IteratedCondorcetWinners',
+   >>> cg.showChoiceRecommendation('IteratedCondorcetWinners',version='weak',
    ...                             cwFusionType='conjunctive')
     ******************************************
-    Iterated weak Condorcet winners or losers
+    Iterated weak conjunctive Condorcet winners or losers
     -----------------------------------------
       1rst-choice: 'G' (+0.54)
       1rst-choice: 'C' (+0.46)
@@ -7044,17 +7044,17 @@ We may furthermore notice in :numref:`aliceRelationMap`, that the four first-ran
    :caption: Alice's best choice recommendation
    :emphasize-lines: 6-9,18,22,28-29
 
-   >>> dg.showChoiceRecommendation('CondorcetWinners',
+   >>> dg.showChoiceRecommendation('CondorcetWinners',version='weak',
    ...                             cwFusionType='conjunctive')
     First and last choice recommendations
     -------------------------------------
-     First choice (Condorcet winners)
+     First choice (weak conjunctive Condorcet winners)
       'I-FHK': +0.75 (87.50%)
       'T-FHK': +0.17 (58.34%)
       'I-USB': +0.17 (58.34%)
       'I-UHB': +0.17 (58.34%)
     -------------------------------------
-     Last choice (Condorcet losers)
+     Last choice (weak conjunctive Condorcet losers)
       'C-HKK': +0.17 (58.34%)
       'S-HKK': +0.17 (58.34%)
     -------------------------------------
@@ -7309,9 +7309,9 @@ Again, when *equi-signficant* performance criteria are assumed per decision obje
    :linenos:
 
    >>> uop.showChoiceRecommendation('IteratedCondorcetWinners',
-   ...                              cwFusionType='average')
+   ...                              version='weak',cwFusionType='average')
     ******************************************
-    Iterated weak Condorcet winners and losers
+    Iterated average weak Condorcet winners and losers
     ------------------------------------------
      1rst-choice: 'I-FHK' (+0.84)
        2nd-choice: 'T-FHK' (+0.56)

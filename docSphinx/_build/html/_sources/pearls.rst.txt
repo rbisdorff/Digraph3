@@ -4793,7 +4793,7 @@ Now, non ambiguous weak Condorcet winners and losers verify the same pragmatic f
    :linenos:
    :emphasize-lines: 1-2,6-8,11-13
 
-   >>> g.showChoiceRecommendation('CondorcetWinners',
+   >>> g.showChoiceRecommendation('CondorcetWinners',version='weak',
    ...                            cwFusionType='average')
     First and last choice recommendations
     -------------------------------------
@@ -4851,7 +4851,7 @@ The corresponding non ambiguous **quasi Condorcet winners** and **quasi Condorce
    :linenos:
    :emphasize-lines: 1,9,15
 
-   >>> g.showChoiceRecommendation('QuasiCondorcetWinners',
+   >>> g.showChoiceRecommendation('CondorcetWinners',version='quasi',
    ...                            cwFusionType='average')
     First and last choice recommendations
     -------------------------------------
@@ -4886,7 +4886,7 @@ In a bipolar ranking-by-choosing strategy, we may recursively extract bpv-sets o
    :linenos:
    :emphasize-lines: 1,6-14
 
-   >>> g.showChoiceRecommendation('IteratedCondorcetWinners',
+   >>> g.showChoiceRecommendation('IteratedCondorcetWinners',version='weak',
    ...                            cwFusionType='average')
     ******************************************
      Iterated average weak Condorcet winners and losers
@@ -4908,7 +4908,7 @@ In a bipolar ranking-by-choosing strategy, we may recursively extract bpv-sets o
 This choice recommendation makes apparent a linear ranking which may be computed with the :py:class:`linearOrders.IteratedBpvCondorcetWinnersRanking` class constructor.
 
 >>> from linearOrders import IteratedBpvCondorcetWinnersRanking
->>> cr = IteratedBpvCondorcetWinnersRanking(g,fusionType='average')
+>>> cr = IteratedBpvCondorcetWinnersRanking(g,version='weak',fusionType='average')
 >>> cr.condorcetRanking
   ['p2','p6','p5','p4','p9','p3','p8','p7','p1']
 
@@ -4971,7 +4971,7 @@ In :numref:`CondorcetWinners6` we show for instance in a Python 3.14.4 console t
    Compute relation   : 5.74009
    Normalize relation : 1.04829
    Gamma sets         : 0.49552
-   >>> g.showChoiceRecommendation('QuasiCondorcetWinners')
+   >>> g.showChoiceRecommendation('CondorcetWinners',version='quasi')
    First and last choice recommendations
    -------------------------------------
    First choice (average quasi Condorcet winners)

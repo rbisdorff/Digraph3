@@ -777,10 +777,10 @@ def testChoiceRecommendation():
     print('Rubis first choice')
     g.showChoiceRecommendation('Rubis')
     print('Weak Condorcet winners')
-    g.showChoiceRecommendation('CondorcetWinners')
+    g.showChoiceRecommendation('CondorcetWinners',version='weak',cwFusionType='average')
     print('Iterated Weak Condorcet winners')
-    ranking = g.showChoiceRecommendation('IteratedCondorcetWinners',ReturnRanking=True)
+    ranking = g.showChoiceRecommendation('IteratedCondorcetWinners',version='quasi',ReturnRanking=True)
     g.showHTMLPerformanceHeatmap(actionsList=ranking,Correlations=True)
     print('Condorcet fixpoint')
-    g.showChoiceRecommendation('CondorcetFixPoint')
+    g.showChoiceRecommendation('CondorcetWinners',version='quasi')
     

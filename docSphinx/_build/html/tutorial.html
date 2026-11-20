@@ -1432,12 +1432,12 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </figcaption>
 </figure>
 <p>It becomes readily clear now from the picture above that both alternatives <em>a1</em>  and <em>a7</em> are <em>not strictly outranked</em> by any other alternatives. Hence, <em>a7</em>  and <em>a1</em> appear as <a class="reference internal" href="#linearvoting-tutorial-label"><span class="std std-ref">weak Condorcet winners</span></a> and may be recommended as potential <em>first choice alternatives</em> in a selection decision problem. Similarly, alternatives <em>a2</em> and <em>a6</em> are not strictly outranking any other alternative and may give suitable last choice recommendations (see below).</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cdodg</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;CondorcetWinners&#39;</span><span class="p">,</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cdodg</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;CondorcetWinners&#39;</span><span class="p">,</span><span class="n">version</span><span class="o">=</span><span class="s1">&#39;weak&#39;</span><span class="p">,</span>
 <span class="linenos"> 2</span><span class="gp">... </span>                               <span class="n">cwFusionTpye</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
-<span class="linenos"> 3</span><span class="go"> First choice (Condorcet winners)</span>
+<span class="linenos"> 3</span><span class="go"> First choice (average weak Condorcet winners)</span>
 <span class="linenos"> 4</span><span class="go">  &#39;a7&#39;: +0.33 (66.66%)</span>
 <span class="linenos"> 5</span><span class="go">  &#39;a1&#39;: +0.31 (65.47%)</span>
-<span class="linenos"> 6</span><span class="go"> Last choice (Condorcet losers)</span>
+<span class="linenos"> 6</span><span class="go"> Last choice (average weak Condorcet losers)</span>
 <span class="linenos"> 7</span><span class="go">  &#39;a2&#39;: +0.31 (65.47%)</span>
 <span class="linenos"> 8</span><span class="go">  &#39;a6&#39;: +0.24 (61.91%)</span>
 <span class="linenos"> 9</span><span class="go"> Criteria significance majority in brakets</span>
@@ -2016,10 +2016,10 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 <p>It may be opportune now to confirm this result by iterating, with the same epistemic fusion operators, the extraction of bipolar-valued sets of non ambiguous weak Condorcet winners and losers on the 90% confident outranking digraph (see <a class="reference internal" href="pearls.html#bipolar-valued-condorcet-winners"><span class="std std-ref">a new efficient first choice recommender algorithm</span></a>). The <a class="reference internal" href="techDoc.html#digraphs.Digraph.showChoiceRecommendation" title="digraphs.Digraph.showChoiceRecommendation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">showChoiceRecommendation()</span></code></a> method provides therefore the ‘<em>IteratedCondorcetWinners</em>’ argument and the <em>cwFusionType</em> parameter as shown in <a class="reference internal" href="#confidentofficechoice2"><span class="std std-numref">Listing 1.15</span></a> Lines 1-2.</p>
 <div class="literal-block-wrapper docutils container" id="confidentofficechoice2">
 <div class="code-block-caption"><span class="caption-number">Listing 1.15 </span><span class="caption-text">Computing iterated weak Condorcet winners and losers</span><a class="headerlink" href="#confidentofficechoice2" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cg</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;IteratedCondorcetWinners&#39;</span><span class="p">,</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cg</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;IteratedCondorcetWinners&#39;</span><span class="p">,</span><span class="n">version</span><span class="o">=</span><span class="s1">&#39;weak&#39;</span><span class="p">,</span>
 </span><span class="linenos"> 2</span><span class="gp">... </span>                            <span class="n">cwFusionType</span><span class="o">=</span><span class="s1">&#39;conjunctive&#39;</span><span class="p">)</span>
 <span class="linenos"> 3</span><span class="go"> ******************************************</span>
-<span class="linenos"> 4</span><span class="go"> Iterated weak Condorcet winners or losers</span>
+<span class="linenos"> 4</span><span class="go"> Iterated weak conjunctive Condorcet winners or losers</span>
 <span class="linenos"> 5</span><span class="go"> -----------------------------------------</span>
 <span class="hll"><span class="linenos"> 6</span><span class="go">   1rst-choice: &#39;G&#39; (+0.54)</span>
 </span><span class="linenos"> 7</span><span class="go">   1rst-choice: &#39;C&#39; (+0.46)</span>
@@ -6937,17 +6937,17 @@ fecop 75.78% success rate</p>
 <p>We may furthermore notice in <a class="reference internal" href="#alicerelationmap"><span class="std std-numref">Fig. 1.55</span></a>, that the four first-ranked study programs, <em>I-FHK</em>, <em>I-USB</em>, <em>I-UHB</em> and <em>T-FHK</em>,  are in fact <em>Condorcet</em> winners (see <a class="reference internal" href="#alicebestchoice"><span class="std std-numref">Listing 1.94</span></a> Lines 5-9), i.e. they are all four <em>indifferent</em> one of the other <strong>and</strong> they positively <em>outrank</em> all other alternatives, a result confirmed below by our Rubis best choice recommendation (Lines 22 and 28-29).</p>
 <div class="literal-block-wrapper docutils container" id="alicebestchoice">
 <div class="code-block-caption"><span class="caption-number">Listing 1.94 </span><span class="caption-text">Alice’s best choice recommendation</span><a class="headerlink" href="#alicebestchoice" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;CondorcetWinners&#39;</span><span class="p">,</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;CondorcetWinners&#39;</span><span class="p">,</span><span class="n">version</span><span class="o">=</span><span class="s1">&#39;weak&#39;</span><span class="p">,</span>
 <span class="linenos"> 2</span><span class="gp">... </span>                            <span class="n">cwFusionType</span><span class="o">=</span><span class="s1">&#39;conjunctive&#39;</span><span class="p">)</span>
 <span class="linenos"> 3</span><span class="go"> First and last choice recommendations</span>
 <span class="linenos"> 4</span><span class="go"> -------------------------------------</span>
-<span class="linenos"> 5</span><span class="go">  First choice (Condorcet winners)</span>
+<span class="linenos"> 5</span><span class="go">  First choice (weak conjunctive Condorcet winners)</span>
 <span class="hll"><span class="linenos"> 6</span><span class="go">   &#39;I-FHK&#39;: +0.75 (87.50%)</span>
 </span><span class="hll"><span class="linenos"> 7</span><span class="go">   &#39;T-FHK&#39;: +0.17 (58.34%)</span>
 </span><span class="hll"><span class="linenos"> 8</span><span class="go">   &#39;I-USB&#39;: +0.17 (58.34%)</span>
 </span><span class="hll"><span class="linenos"> 9</span><span class="go">   &#39;I-UHB&#39;: +0.17 (58.34%)</span>
 </span><span class="linenos">10</span><span class="go"> -------------------------------------</span>
-<span class="linenos">11</span><span class="go">  Last choice (Condorcet losers)</span>
+<span class="linenos">11</span><span class="go">  Last choice (weak conjunctive Condorcet losers)</span>
 <span class="linenos">12</span><span class="go">   &#39;C-HKK&#39;: +0.17 (58.34%)</span>
 <span class="linenos">13</span><span class="go">   &#39;S-HKK&#39;: +0.17 (58.34%)</span>
 <span class="linenos">14</span><span class="go"> -------------------------------------</span>
@@ -7170,9 +7170,9 @@ fecop 75.78% success rate</p>
 </figure>
 <p>Again, when <em>equi-signficant</em> performance criteria are assumed per decision objective, we observe in <a class="reference internal" href="#alicechoice-unopposed"><span class="std std-numref">Fig. 1.59</span></a> that <em>I-FHK</em> remains the stable best choice, <em>independently</em> of the actual importance weights that Alice may wish to allocate to her four decision objectives. A result that gets confirmed with an iterated weak Condorcet winners and losers extraction.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">uop</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;IteratedCondorcetWinners&#39;</span><span class="p">,</span>
-<span class="linenos"> 2</span><span class="gp">... </span>                             <span class="n">cwFusionType</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
+<span class="linenos"> 2</span><span class="gp">... </span>                             <span class="n">version</span><span class="o">=</span><span class="s1">&#39;weak&#39;</span><span class="p">,</span><span class="n">cwFusionType</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
 <span class="linenos"> 3</span><span class="go"> ******************************************</span>
-<span class="linenos"> 4</span><span class="go"> Iterated weak Condorcet winners and losers</span>
+<span class="linenos"> 4</span><span class="go"> Iterated average weak Condorcet winners and losers</span>
 <span class="linenos"> 5</span><span class="go"> ------------------------------------------</span>
 <span class="linenos"> 6</span><span class="go">  1rst-choice: &#39;I-FHK&#39; (+0.84)</span>
 <span class="linenos"> 7</span><span class="go">    2nd-choice: &#39;T-FHK&#39; (+0.56)</span>

@@ -9694,7 +9694,8 @@
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.showChoiceRecommendation">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">showChoiceRecommendation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                 <span class="n">method</span><span class="o">=</span><span class="s1">&#39;CondorcetWinners&#39;</span><span class="p">,</span>
-                                <span class="n">cwFusionType</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span> <span class="c1"># or &#39;conjunctive&#39;</span>
+                                <span class="n">cwFusionType</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span> <span class="c1"># or &#39;conjunctive&#39;, &#39;disjonctive&#39;</span>
+                                <span class="n">version</span><span class="o">=</span><span class="s1">&#39;weak&#39;</span><span class="p">,</span> <span class="c1"># or &#39;quasi&#39;</span>
                                 <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                  <span class="c1"># Rubis</span>
                                 <span class="n">ChoiceVector</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -9719,7 +9720,7 @@
 
 <span class="sd">        **Parameters**</span>
 <span class="sd">        </span>
-<span class="sd">        *method*: &#39;WeakCondorcetWeakWinners&#39; (default), &#39;CondorcetWinners&#39;, &#39;QuasiCondorcetWinners&#39;, &#39;Rubis&#39;,</span>
+<span class="sd">        *method*: &#39;CondorcetWinners&#39; (default), &#39;Rubis&#39;,</span>
 <span class="sd">                  &#39;Bachet&#39;, &#39;IteratedBachet&#39; or &#39;IteratedCondorcetWinners&#39;</span>
 
 <span class="sd">        The &#39;Bachet&#39; method is based on the conjoint</span>
@@ -9728,9 +9729,9 @@
 <span class="sd">        terminal prekernels directly from the given outranking digraph.</span>
 
 <span class="sd">        The &#39;CondorcetWinners&#39; method returns the bpv-sets of the weak Condorcet winners computed by</span>
-<span class="sd">        average epistemic fusion.</span>
+<span class="sd">        average, conjunctive or disjunctive epistemic fusion.</span>
 
-<span class="sd">        The &#39;CondorcetFixPoint&#39; method returns the fixpoint of the matrix formulation of the Condorcet winners method.</span>
+<span class="sd">        *version* : &#39;weak&#39; or &#39;quasi&#39; Condorcet winners and losers</span>
 
 <span class="sd">        *Polarised*: *True* (by default) | False; Bachet parameter</span>
 
@@ -9761,17 +9762,17 @@
 <span class="sd">        ...             missingDataProbability=0.05,seed=50)</span>
 <span class="sd">        &gt;&gt;&gt; g = BipolarOutrankingDigraph(t,Threading=False,nbrCores=1,</span>
 <span class="sd">        ...                              startMethod=&#39;spawn&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; g.showChoiceRecommendation(&#39;CondorcetWinners&#39;,</span>
+<span class="sd">        &gt;&gt;&gt; g.showChoiceRecommendation(&#39;CondorcetWinners&#39;,version=&#39;weak&#39;,</span>
 <span class="sd">                               cwFusionType=&#39;average&#39;)</span>
 <span class="sd">        First and last choice recommendations</span>
 <span class="sd">        -------------------------------------</span>
-<span class="sd">        First choice (Condorcet winners)</span>
+<span class="sd">        First choice (average weak Condorcet winners)</span>
 <span class="sd">        &#39;p13&#39;: +0.30 (65.23%)</span>
 <span class="sd">        &#39;p07&#39;: +0.23 (61.41%)</span>
 <span class="sd">        &#39;p03&#39;: +0.19 (59.28%)</span>
 <span class="sd">        &#39;p14&#39;: +0.15 (57.64%)</span>
 <span class="sd">        -------------------------------------</span>
-<span class="sd">        Last choice (Condorcet losers)</span>
+<span class="sd">        Last choice (average weak Condorcet losers)</span>
 <span class="sd">        &#39;p12&#39;: +0.33 (66.57%)</span>
 <span class="sd">        &#39;p11&#39;: +0.29 (64.34%)</span>
 <span class="sd">        &#39;p02&#39;: +0.27 (63.39%)</span>
@@ -9814,7 +9815,13 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First and last choice recommendations&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-------------------------------------&#39;</span><span class="p">)</span>
             <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-            <span class="n">resVec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">(</span><span class="n">fusionType</span><span class="o">=</span><span class="n">cwFusionType</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">version</span> <span class="o">==</span> <span class="s1">&#39;weak&#39;</span><span class="p">:</span>
+                <span class="n">resVec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">(</span><span class="n">fusionType</span><span class="o">=</span><span class="n">cwFusionType</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">version</span> <span class="o">==</span> <span class="s1">&#39;quasi&#39;</span><span class="p">:</span>
+                <span class="n">resVec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solveCondorcetWinnersFixPointEquation</span><span class="p">(</span><span class="n">fusionType</span><span class="o">=</span><span class="n">cwFusionType</span><span class="p">,</span>
+                                                             <span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: version must be &quot;weak* or &quot;quasi&quot; not </span><span class="si">%s</span><span class="s1"> !&#39;</span> <span class="o">%</span> <span class="n">version</span><span class="p">)</span>
             <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">resVec</span><span class="o">.</span><span class="n">support</span><span class="p">:</span>
                 <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">resVec</span><span class="o">.</span><span class="n">membership</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">x</span><span class="p">))</span>
@@ -9823,7 +9830,7 @@
             <span class="n">nr</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
             <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
             <span class="c1">##print(resVec)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First choice (</span><span class="si">%s</span><span class="s1"> weak Condorcet winners)&#39;</span> <span class="o">%</span> <span class="n">cwFusionType</span> <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First choice (</span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> Condorcet winners)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cwFusionType</span><span class="p">,</span><span class="n">version</span><span class="p">)</span> <span class="p">)</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s2">: </span><span class="si">%+.2f</span><span class="s2"> (</span><span class="si">%.2f%%</span><span class="s2">)&quot;</span><span class="o">%</span> <span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
@@ -9831,7 +9838,7 @@
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">break</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-------------------------------------&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Last choice (</span><span class="si">%s</span><span class="s1"> weak Condorcet losers)&#39;</span> <span class="o">%</span> <span class="n">cwFusionType</span> <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Last choice (</span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> Condorcet losers)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cwFusionType</span><span class="p">,</span><span class="n">version</span><span class="p">)</span> <span class="p">)</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Med</span><span class="p">:</span>
                     <span class="n">val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span>
@@ -9848,7 +9855,7 @@
         <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;IteratedCondorcetWinners&#39;</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">Show</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;******************************************&#39;</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iterated </span><span class="si">%s</span><span class="s1"> weak Condorcet winners and losers&#39;</span> <span class="o">%</span> <span class="n">cwFusionType</span> <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iterated </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> Condorcet winners and losers&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cwFusionType</span><span class="p">,</span><span class="n">version</span><span class="p">)</span> <span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------------------------------------------&#39;</span><span class="p">)</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
@@ -9866,7 +9873,13 @@
                 <span class="n">g</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="p">{}</span>
                 <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">remainingActions</span><span class="p">:</span>
                     <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
-                <span class="n">resVec</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">(</span><span class="n">fusionType</span><span class="o">=</span><span class="n">cwFusionType</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">version</span> <span class="o">==</span> <span class="s1">&#39;weak&#39;</span><span class="p">:</span>
+                    <span class="n">resVec</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">(</span><span class="n">fusionType</span><span class="o">=</span><span class="n">cwFusionType</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">version</span> <span class="o">==</span> <span class="s1">&#39;quasi&#39;</span><span class="p">:</span>
+                    <span class="n">resVec</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">solveCondorcetWinnersFixPointEquation</span><span class="p">(</span><span class="n">fusionType</span><span class="o">=</span><span class="n">cwFusionType</span><span class="p">,</span>
+                                                                     <span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: version must be &quot;weak* or &quot;quasi&quot; not </span><span class="si">%s</span><span class="s1"> !&#39;</span> <span class="o">%</span> <span class="n">version</span><span class="p">)</span>
                 <span class="n">Recursion</span> <span class="o">=</span> <span class="kc">False</span>
                 <span class="n">posremoved</span> <span class="o">=</span> <span class="p">[]</span>
                 <span class="n">negremoved</span> <span class="o">=</span> <span class="p">[]</span>
@@ -9933,49 +9946,49 @@
                 <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">negRanking</span><span class="p">:</span>
                     <span class="n">ranking</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
                 <span class="k">return</span> <span class="n">ranking</span>
-        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;QuasiCondorcetWinners&#39;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">Show</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First and last choice recommendations&#39;</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-------------------------------------&#39;</span><span class="p">)</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">digraphsTools</span><span class="w"> </span><span class="kn">import</span> <span class="n">scoredTuplesSort</span>
-            <span class="n">g</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-            <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-            <span class="n">cw</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">solveCondorcetWinnersFixPointEquation</span><span class="p">(</span><span class="n">fusionType</span><span class="o">=</span><span class="n">cwFusionType</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">cw</span><span class="o">.</span><span class="n">support</span><span class="p">:</span>
-                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">cw</span><span class="o">.</span><span class="n">membership</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">x</span><span class="p">))</span>
-            <span class="c1">#res.sort(reverse=True)</span>
-            <span class="n">scoredTuplesSort</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="n">nr</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
-            <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
-            <span class="c1">##print(resVec)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First choice (</span><span class="si">%s</span><span class="s1"> quasi Condorcet winners)&#39;</span> <span class="o">%</span> <span class="n">cwFusionType</span> <span class="p">)</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s2">: </span><span class="si">%+.2f</span><span class="s2"> (</span><span class="si">%.2f%%</span><span class="s2">)&quot;</span><span class="o">%</span> <span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
-                                                <span class="p">(</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="mf">1.0</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span> <span class="o">*</span> <span class="mf">100.0</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">break</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-------------------------------------&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Last choice (</span><span class="si">%s</span><span class="s1"> quasi Condorcet losers)&#39;</span> <span class="o">%</span> <span class="n">cwFusionType</span> <span class="p">)</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nr</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Med</span><span class="p">:</span>
-                    <span class="n">val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s2">: </span><span class="si">%+.2f</span><span class="s2"> (</span><span class="si">%.2f%%</span><span class="s2">)&quot;</span><span class="o">%</span> <span class="p">(</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">val</span><span class="p">,</span>
-                                                <span class="p">(</span> <span class="p">(</span><span class="n">val</span><span class="o">+</span><span class="mf">1.0</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span> <span class="o">*</span> <span class="mf">100.0</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">break</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;---------------------------------------&#39;</span><span class="p">)</span>
-            <span class="c1">#print(&#39;Iterations:&#39;, it)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Execution time: </span><span class="si">%.3f</span><span class="s1"> sec.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span> <span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*****************************************&#39;</span><span class="p">)</span>
-            <span class="c1">#return history</span>
+<span class="c1">##        elif method == &#39;QuasiCondorcetWinners&#39;:</span>
+<span class="c1">##            if Show:</span>
+<span class="c1">##                print(&#39;*************************************&#39;)</span>
+<span class="c1">##                print(&#39;First and last choice recommendations&#39;)</span>
+<span class="c1">##                print(&#39;-------------------------------------&#39;)</span>
+<span class="c1">##            from time import time</span>
+<span class="c1">##            from copy import deepcopy</span>
+<span class="c1">##            from digraphsTools import scoredTuplesSort</span>
+<span class="c1">##            g = deepcopy(self)</span>
+<span class="c1">##            t0 = time()</span>
+<span class="c1">##            cw = g.solveCondorcetWinnersFixPointEquation(fusionType=cwFusionType,Comments=Comments)</span>
+<span class="c1">##            res = []</span>
+<span class="c1">##            for x in cw.support:</span>
+<span class="c1">##                res.append((cw.membership[x],x))</span>
+<span class="c1">##            #res.sort(reverse=True)</span>
+<span class="c1">##            scoredTuplesSort(res,reverse=True)</span>
+<span class="c1">##            nr = len(res)</span>
+<span class="c1">##            Med = self.valuationdomain[&#39;med&#39;]</span>
+<span class="c1">##            ##print(resVec)</span>
+<span class="c1">##            print(&#39;First choice (%s quasi Condorcet winners)&#39; % cwFusionType )</span>
+<span class="c1">##            for i in range(nr):</span>
+<span class="c1">##                if res[i][0] &gt; Med:</span>
+<span class="c1">##                    print(&quot;\&#39;%s\&#39;: %+.2f (%.2f%%)&quot;% (res[i][1], res[i][0],</span>
+<span class="c1">##                                                ( (float(res[i][0])+1.0)/2.0 * 100.0) ) )</span>
+<span class="c1">##                else:</span>
+<span class="c1">##                    break</span>
+<span class="c1">##            print(&#39;-------------------------------------&#39;)</span>
+<span class="c1">##            print(&#39;Last choice (%s quasi Condorcet losers)&#39; % cwFusionType )</span>
+<span class="c1">##            for i in range(nr-1,0,-1):</span>
+<span class="c1">##                if res[i][0] &lt; Med:</span>
+<span class="c1">##                    val = float(res[i][0])*(-1.0)</span>
+<span class="c1">##                    print(&quot;\&#39;%s\&#39;: %+.2f (%.2f%%)&quot;% ( res[i][1], val,</span>
+<span class="c1">##                                                ( (val+1.0)/2.0 * 100.0) ) )</span>
+<span class="c1">##                else:</span>
+<span class="c1">##                    break</span>
+<span class="c1">##            print(&#39;---------------------------------------&#39;)</span>
+<span class="c1">##            #print(&#39;Iterations:&#39;, it)</span>
+<span class="c1">##            print(&#39;Execution time: %.3f sec.&#39; % (time() - t0) )</span>
+<span class="c1">##            print(&#39;*****************************************&#39;)</span>
+<span class="c1">##            #return history</span>
                     
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: method = &quot;CondorcetWinners&quot;, &quot;QuasiCondorcetWinners&quot;, &quot;Rubis&quot;,</span><span class="se">\</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: method = &quot;CondorcetWinners&quot;, &quot;Rubis&quot;,</span><span class="se">\</span>
 <span class="s1">                  &quot;IteratedCondorcetWinners&quot;, &quot;Bachet&quot; or &quot;IteratedBachet&quot;,  not &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="n">method</span><span class="p">)</span> </div>
 
         <span class="c1">#print(&#39;*************************************************&#39;)</span>
@@ -17128,8 +17141,10 @@
     <span class="c1"># testing the fixpoint convergence of the weak Condorcet winners and losers computation</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">startMethod</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;CondorcetWinners&#39;</span><span class="p">,</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;CondorcetWinners&#39;</span><span class="p">,</span><span class="n">version</span><span class="o">=</span><span class="s1">&#39;quasi&#39;</span><span class="p">,</span>
                                <span class="n">cwFusionType</span><span class="o">=</span><span class="s1">&#39;disjunctive&#39;</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;IteratedCondorcetWinners&#39;</span><span class="p">,</span><span class="n">version</span><span class="o">=</span><span class="s1">&#39;quasi&#39;</span><span class="p">,</span>
+                               <span class="n">cwFusionType</span><span class="o">=</span><span class="s1">&#39;conjunctive&#39;</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     
             
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
@@ -17156,7 +17171,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Nov 19, 2026.
+      <span class="lastupdated">Last updated on Nov 20, 2026.
       </span></p>
   </div>
 

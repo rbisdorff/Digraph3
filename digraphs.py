@@ -9031,7 +9031,8 @@ class Digraph(object):
 
     def showChoiceRecommendation(self,
                                 method='CondorcetWinners',
-                                cwFusionType='average', # or 'conjunctive'
+                                cwFusionType='average', # or 'conjunctive', 'disjonctive'
+                                version='weak', # or 'quasi'
                                 Comments=False,
                                  # Rubis
                                 ChoiceVector=False,
@@ -9056,7 +9057,7 @@ class Digraph(object):
 
         **Parameters**
         
-        *method*: 'WeakCondorcetWeakWinners' (default), 'CondorcetWinners', 'QuasiCondorcetWinners', 'Rubis',
+        *method*: 'CondorcetWinners' (default), 'Rubis',
                   'Bachet', 'IteratedBachet' or 'IteratedCondorcetWinners'
 
         The 'Bachet' method is based on the conjoint
@@ -9065,9 +9066,9 @@ class Digraph(object):
         terminal prekernels directly from the given outranking digraph.
 
         The 'CondorcetWinners' method returns the bpv-sets of the weak Condorcet winners computed by
-        average epistemic fusion.
+        average, conjunctive or disjunctive epistemic fusion.
 
-        The 'CondorcetFixPoint' method returns the fixpoint of the matrix formulation of the Condorcet winners method.
+        *version* : 'weak' or 'quasi' Condorcet winners and losers
 
         *Polarised*: *True* (by default) | False; Bachet parameter
 
@@ -9098,17 +9099,17 @@ class Digraph(object):
         ...             missingDataProbability=0.05,seed=50)
         >>> g = BipolarOutrankingDigraph(t,Threading=False,nbrCores=1,
         ...                              startMethod='spawn')
-        >>> g.showChoiceRecommendation('CondorcetWinners',
+        >>> g.showChoiceRecommendation('CondorcetWinners',version='weak',
                                cwFusionType='average')
         First and last choice recommendations
         -------------------------------------
-        First choice (Condorcet winners)
+        First choice (average weak Condorcet winners)
         'p13': +0.30 (65.23%)
         'p07': +0.23 (61.41%)
         'p03': +0.19 (59.28%)
         'p14': +0.15 (57.64%)
         -------------------------------------
-        Last choice (Condorcet losers)
+        Last choice (average weak Condorcet losers)
         'p12': +0.33 (66.57%)
         'p11': +0.29 (64.34%)
         'p02': +0.27 (63.39%)
@@ -9151,7 +9152,13 @@ class Digraph(object):
             print('First and last choice recommendations')
             print('-------------------------------------')
             t0 = time()
-            resVec = self.computeBpvCondorcetWinners(fusionType=cwFusionType)
+            if version == 'weak':
+                resVec = self.computeBpvCondorcetWinners(fusionType=cwFusionType)
+            elif version == 'quasi':
+                resVec = self.solveCondorcetWinnersFixPointEquation(fusionType=cwFusionType,
+                                                             Comments=Comments)
+            else:
+                print('Error: version must be "weak* or "quasi" not %s !' % version)
             res = []
             for x in resVec.support:
                 res.append((resVec.membership[x],x))
@@ -9160,7 +9167,7 @@ class Digraph(object):
             nr = len(res)
             Med = self.valuationdomain['med']
             ##print(resVec)
-            print('First choice (%s weak Condorcet winners)' % cwFusionType )
+            print('First choice (%s %s Condorcet winners)' % (cwFusionType,version) )
             for i in range(nr):
                 if res[i][0] > Med:
                     print("\'%s\': %+.2f (%.2f%%)"% (res[i][1], res[i][0],
@@ -9168,7 +9175,7 @@ class Digraph(object):
                 else:
                     break
             print('-------------------------------------')
-            print('Last choice (%s weak Condorcet losers)' % cwFusionType )
+            print('Last choice (%s %s Condorcet losers)' % (cwFusionType,version) )
             for i in range(nr-1,0,-1):
                 if res[i][0] < Med:
                     val = float(res[i][0])*(-1.0)
@@ -9185,7 +9192,7 @@ class Digraph(object):
         elif method == 'IteratedCondorcetWinners':
             if Show:
                 print('******************************************')
-                print('Iterated %s weak Condorcet winners and losers' % cwFusionType )
+                print('Iterated %s %s Condorcet winners and losers' % (cwFusionType,version) )
                 print('------------------------------------------')
             from time import time
             from copy import deepcopy
@@ -9203,7 +9210,13 @@ class Digraph(object):
                 g.actions = {}
                 for x in remainingActions:
                     g.actions[x] = deepcopy(self.actions[x])
-                resVec = g.computeBpvCondorcetWinners(fusionType=cwFusionType)
+                if version == 'weak':
+                    resVec = g.computeBpvCondorcetWinners(fusionType=cwFusionType)
+                elif version == 'quasi':
+                    resVec = g.solveCondorcetWinnersFixPointEquation(fusionType=cwFusionType,
+                                                                     Comments=Comments)
+                else:
+                    print('Error: version must be "weak* or "quasi" not %s !' % version)
                 Recursion = False
                 posremoved = []
                 negremoved = []
@@ -9270,49 +9283,49 @@ class Digraph(object):
                 for ch in negRanking:
                     ranking.append(ch[1])
                 return ranking
-        elif method == 'QuasiCondorcetWinners':
-            if Show:
-                print('*************************************')
-                print('First and last choice recommendations')
-                print('-------------------------------------')
-            from time import time
-            from copy import deepcopy
-            from digraphsTools import scoredTuplesSort
-            g = deepcopy(self)
-            t0 = time()
-            cw = g.solveCondorcetWinnersFixPointEquation(fusionType=cwFusionType,Comments=Comments)
-            res = []
-            for x in cw.support:
-                res.append((cw.membership[x],x))
-            #res.sort(reverse=True)
-            scoredTuplesSort(res,reverse=True)
-            nr = len(res)
-            Med = self.valuationdomain['med']
-            ##print(resVec)
-            print('First choice (%s quasi Condorcet winners)' % cwFusionType )
-            for i in range(nr):
-                if res[i][0] > Med:
-                    print("\'%s\': %+.2f (%.2f%%)"% (res[i][1], res[i][0],
-                                                ( (float(res[i][0])+1.0)/2.0 * 100.0) ) )
-                else:
-                    break
-            print('-------------------------------------')
-            print('Last choice (%s quasi Condorcet losers)' % cwFusionType )
-            for i in range(nr-1,0,-1):
-                if res[i][0] < Med:
-                    val = float(res[i][0])*(-1.0)
-                    print("\'%s\': %+.2f (%.2f%%)"% ( res[i][1], val,
-                                                ( (val+1.0)/2.0 * 100.0) ) )
-                else:
-                    break
-            print('---------------------------------------')
-            #print('Iterations:', it)
-            print('Execution time: %.3f sec.' % (time() - t0) )
-            print('*****************************************')
-            #return history
+##        elif method == 'QuasiCondorcetWinners':
+##            if Show:
+##                print('*************************************')
+##                print('First and last choice recommendations')
+##                print('-------------------------------------')
+##            from time import time
+##            from copy import deepcopy
+##            from digraphsTools import scoredTuplesSort
+##            g = deepcopy(self)
+##            t0 = time()
+##            cw = g.solveCondorcetWinnersFixPointEquation(fusionType=cwFusionType,Comments=Comments)
+##            res = []
+##            for x in cw.support:
+##                res.append((cw.membership[x],x))
+##            #res.sort(reverse=True)
+##            scoredTuplesSort(res,reverse=True)
+##            nr = len(res)
+##            Med = self.valuationdomain['med']
+##            ##print(resVec)
+##            print('First choice (%s quasi Condorcet winners)' % cwFusionType )
+##            for i in range(nr):
+##                if res[i][0] > Med:
+##                    print("\'%s\': %+.2f (%.2f%%)"% (res[i][1], res[i][0],
+##                                                ( (float(res[i][0])+1.0)/2.0 * 100.0) ) )
+##                else:
+##                    break
+##            print('-------------------------------------')
+##            print('Last choice (%s quasi Condorcet losers)' % cwFusionType )
+##            for i in range(nr-1,0,-1):
+##                if res[i][0] < Med:
+##                    val = float(res[i][0])*(-1.0)
+##                    print("\'%s\': %+.2f (%.2f%%)"% ( res[i][1], val,
+##                                                ( (val+1.0)/2.0 * 100.0) ) )
+##                else:
+##                    break
+##            print('---------------------------------------')
+##            #print('Iterations:', it)
+##            print('Execution time: %.3f sec.' % (time() - t0) )
+##            print('*****************************************')
+##            #return history
                     
         else:
-            print('Error: method = "CondorcetWinners", "QuasiCondorcetWinners", "Rubis",\
+            print('Error: method = "CondorcetWinners", "Rubis",\
                   "IteratedCondorcetWinners", "Bachet" or "IteratedBachet",  not "%s"' % method) 
         #print('*************************************************')
 
@@ -16169,8 +16182,10 @@ if __name__ == "__main__":
     # testing the fixpoint convergence of the weak Condorcet winners and losers computation
     g = BipolarOutrankingDigraph(t,Threading=False,nbrCores=1,startMethod='spawn')
     print(g)
-    g.showChoiceRecommendation('CondorcetWinners',
+    g.showChoiceRecommendation('CondorcetWinners',version='quasi',
                                cwFusionType='disjunctive',Comments=False)
+    g.showChoiceRecommendation('IteratedCondorcetWinners',version='quasi',
+                               cwFusionType='conjunctive',Comments=False)
     
             
     print('*------------------*')
