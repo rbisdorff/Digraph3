@@ -1609,7 +1609,28 @@ Following the previously stated pragmatic principles, potential first choice rec
       determinateness (%) : 50.00
       - most credible action(s) = { }
 				  
-It is interesting to notice in :numref:`strictBestChoice` (Line 6) that the **Rubis first choice recommendation** consists actually in the set of weak Condorcet winners: 'A', 'C' and 'D' and the set of weak Condorcet losers: 'A' and 'F'. In the corresponding characteristic vector (see Lines 12-14) are listed the bipolar credibility degrees with which each alternative may indeed be considered a first choice candidate (see [BIS-2006a]_, [BIS-2006b]_). Location 'D', the Condorcet winner, is the most credible first choice. It is worthwhile noticing that location 'G', even if not among the weak Condorcet winners is nevertheless neither included nor excluded from the potential first choice candidates. We may furthermore notice in Line 16 that both alternatives *A* and *F* are reported as potential *strict outranked* choices, hence as potential **last choice candidates** . The ambiguous first-ranked and last-ranked position of alternative *A* indicates its global incomparability status as shown in :numref:`bestOfficeChoice`.
+It is interesting to notice in :numref:`strictBestChoice` (Line 6) that the **Rubis first and last choice recommendation** consists actually in the set of weak Condorcet winners: 'A', 'C' and 'D' and the set of weak Condorcet losers: 'A' and 'F'. In the corresponding characteristic vector (see Lines 6 and 12-14) are listed the bipolar credibility degrees with which each alternative may indeed be considered a first choice candidate (see [BIS-2006a]_, [BIS-2006b]_). Location 'D' is the most credible first choice. It is worthwhile noticing that location 'G', even if not among the weak Condorcet winners is nevertheless neither included nor excluded from the potential first choice candidates.
+
+Location *Gar* (G) is actually a most determined **quasi Condorcet Winner**, i.e. positively outranking all not weak Condorcet winners, namely locations *Bon* (B), *Bel* (E) and 'Fen'(F) (see :numref:`quasiBestChoice` Line 3 and :ref:`a new efficient first choice recommender algorithm <Bipolar-Valued-Condorcet-Winners>`). 
+
+.. code-block:: pycon
+   :name: quasiBestChoice
+   :caption: Computing the non ambiguous quasi Condorcet winners and losers
+   :linenos:
+   :emphasize-lines: 1,3,7
+
+   >>> qcw = g.solveCondorcetWinnersFixPointEquation(fusionType='conjunctive')
+   >>> qcw.showMembershipCharacteristics()
+    Gar:  +0.5448
+    Ces:  +0.1034
+    Dom:  +0.0207
+    Ave:  +0.0000
+    Bon:  +0.0000
+    Bel:  +0.0000
+    Fen:  -1.0000
+    Valuation domain: [-1.00;+1.00]
+
+Locations *Ces* (C) and *Dom* (D) are as well positive quasi Condorcet Winners. Location *Fen* (F) is the only quasi Condorcet loser. Being an ambiguous first as well as last choice recommendation, location *A* does not appear in the list of non ambiguous quasi Condorcet winners. The first-ranked and last-ranked positions of alternative *A* in :numref:`strictBestChoice` Lines 6 and  16 indicate in fact its global incomparability status as shown in :numref:`bestOfficeChoice`.
 
 .. code-block:: pycon
    :linenos:
@@ -1670,7 +1691,7 @@ Yet, we must as well notice that the cheapest alternative *C* is in fact **stric
     =========================================================================
     Valuation in range: -145.00 to +145.00; global concordance: +15.00/-15.00
 
-Following pragmatic principle **P3** --the required internal stability stating that a BCR should not contain a sub-recommendation-- alternative *G* is hence dropped from our first-ranked list of alternatives. Yet, the credibility level of this outranking situation is not very high: 15/145 = 0.104 (55.2% significance majority).
+Following pragmatic principle **P3** --the required internal stability stating that a BCR should not contain a sub-recommendation-- alternative *G* is hence dropped from our first-ranked list of alternatives despite its quasi Condorcet winner's status. Yet, the credibility level of this outranking situation is actually not very high: 15/145 = 0.104 (55.2% significance majority).
 
 Robustness of the outranking digraph
 ````````````````````````````````````
@@ -1807,7 +1828,7 @@ In :numref:`BachetRanking0` Line 2, we operate the :ref:`epistemic disjunctive f
    :name: PartialBachetRanking1
    :caption: Consensus quality of the partial Bachet ranking
    :linenos:
-   :emphasize-lines: 1,5,7,8,10-11,13
+   :emphasize-lines: 1,5-7,10-11,13
 	
    >>> pbr.computePartialOutrankingConsensusQuality(Comments=True)
     Consensus quality of partial ranking:
@@ -1825,7 +1846,7 @@ In :numref:`BachetRanking0` Line 2, we operate the :ref:`epistemic disjunctive f
      Standard deviation (b)                 : +0.476
      Partial ranking fairness (a)-(b)       : +0.002
 
-The partial *Bachet* ranking is 100% consistent with the *Proximity* criterion, 85% consistent with *Visibility* and 75% consistent with the *Costs* criterion. These three criteria are the most significant ones (see Lines 5 aand 7). The least considered criteria are the *Standing* and even more the *Comfort* criterion. The partial *Bachet* ranking is indeed  only 35% consistent with the *Standing* and only 15% consistent with the latter one (see Lines 10-11). The mean weighted marginal ordinal correlation index (+0.478, Line 13) over all the criteria shows eventually a partial ranking consensus supported by a nearly 75% significance majority.   
+The partial *Bachet* ranking is 100% consistent with the *Proximity*, 95% consistent with the *Parking*  and 85% consistent with the *Visibility* criterion. These three criteria are the most significant ones (see Lines 5 and 7). The least considered criteria are the *Standing* and even more the *Comfort* criterion. The partial *Bachet* ranking is indeed  only 35% consistent with the *Standing* and only 15% consistent with the latter one (see Lines 10-11). The mean weighted marginal ordinal correlation index (+0.478, Line 13) over all the criteria shows eventually a partial ranking consensus supported by a nearly 75% criteria significance majority.   
 
 We may finally use the best, with the outranking digraph *g* correlated (+0.816), *Bachet* ranking ['G', 'D', 'A', 'C', 'B', 'E', 'F']  for showing in :numref:`rankedOfficeChoiceHeatmap` a from best to worst ranked performance heatmap of all the potential office locations.
 
@@ -1877,7 +1898,7 @@ The :py:class:`digraphs.Digraph` class now readily provides the :py:meth:`~digra
 			    'seed', 'maxNbrOfRankings', 'Polarised',
 			    'partialBachetCorrelation', 'rankingByChoosing']
 
-Due to the **Condorcet consistency** of the polarised *Bachet* ranking rule, the partial ranking digraph *g.pbr* represents here faithfully an actual transitive and asymmetrical part of the given outranking digraph *g* (see Line 13 and :ref:`Bachet-Tutorial-label`).  
+Due to the **Condorcet consistency** of the polarised *Bachet* ranking rule, the partial ranking digraph *g.pbr* represents here faithfully an actual transitive and asymmetrical part of the given outranking digraph *g* (see Lines 9, 13 and :ref:`Bachet-Tutorial-label`).  
 
 Our first choice recommendations eventually appear essentially depending on the very importance the CEO is attaching to each one of his three decision objectives. In the setting here, where he considers that *maximizing the future turnover* is the most important objective (81/145 = 0.56) followed by *minimizing the Costs* (45/145 = 0.31) and, less important, *maximizing the working conditions* (19/145 = 0.13), compromise locations *G* as well as *D* become the potential first choices candidates. However, if minimizing the *Costs* does not play much a role, it would perhaps be better to recommend the most advantageous location *A*; or if, on the contrary, the *Costs* objective does matter a lot, recommending the cheapest alternative *C* could definitely become the more convincing first choice recommendation. 
 
