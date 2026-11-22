@@ -4785,7 +4785,7 @@ When operating now a disjunctive epistemic fusion of both solutions of the fix-p
 Suitable first and last choice recommendations
 ..............................................
 
-Now, non ambiguous weak Condorcet winners and losers verify similar pragmatic first choice principles as initial and terminal prekernels like **weak external stability**, **minimal size**, **no ambiguity** and **most determination** [31]_. Hence they may deliver similar first and last choice recommendations. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts therefore the '*CondorcetWinners*'  argument for showing positive weak Condorcet winners as first choice and positive weak Condorcet losers as last choice recommendation as shown in :numref:`CondorcetWinners3` below.
+Now, non ambiguous weak Condorcet winners and losers verify similar pragmatic first choice principles as initial and terminal prekernels like **weak internal and external stability**, **minimal size**, **no ambiguity** and **most determination** [31]_. Hence they may deliver similar first and last choice recommendations. The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method accepts therefore the '*CondorcetWinners*'  argument for showing positive weak Condorcet winners as first choice and positive weak Condorcet losers as last choice recommendation as shown in :numref:`CondorcetWinners3` below.
 
 .. code-block:: pycon
    :caption: Showing first and last choice recommendations from weak Condorcet winners bpv-set
@@ -5041,7 +5041,7 @@ We may furthermore compute in :numref:`CondorcetWinners7` the relative performan
     'p0994' in [0.11 - 0.22[	0.14	     0.31	 0.14
     'p0390' in [0.00 - 0.11[	1.00	     0.03	 0.03
    
-Alternative 'p0877' is positively rated into the highest [0.89 - <[ performance class . All the other four weak Condorcet winners are rated into the second-highest [0.78 - 0.89[ performance class. Among the weak Condorcet losers, two are rated into the lowest [0.00 - 0.11[ and three in the second lowest [0.11 - 0.22[ performance class (see the tutorial on :ref:`Rating into relative performance quantiles <QuantilesRating-Tutorial-label>`). 
+Alternative 'p0877' is positively rated into the highest [0.89 - <[ performance nine-tiles class . All the other four weak Condorcet winners are rated into the second-highest [0.78 - 0.89[ performance nine-tiles class. Among the weak Condorcet losers, two are rated into the lowest [0.00 - 0.11[ and three in the second lowest [0.11 - 0.22[ performance nine-tiles class (see the tutorial on :ref:`Rating into relative performance quantiles <QuantilesRating-Tutorial-label>`). 
 
 .. note::
 
