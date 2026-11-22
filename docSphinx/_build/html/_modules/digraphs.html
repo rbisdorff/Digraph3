@@ -10039,7 +10039,7 @@
         <span class="k">if</span> <span class="n">nh</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="c1">#print(&#39;history&#39;)</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">bipolarValuedSets</span><span class="w"> </span><span class="kn">import</span> <span class="n">computeEpistemicFusion</span>
-            <span class="n">cw</span> <span class="o">=</span> <span class="n">computeEpistemicFusion</span><span class="p">(</span><span class="n">history</span><span class="p">,</span><span class="n">fusionType</span><span class="o">=</span><span class="n">fusionType</span><span class="p">)</span>
+            <span class="n">cw</span> <span class="o">=</span> <span class="n">computeEpistemicFusion</span><span class="p">(</span><span class="n">history</span><span class="p">,</span><span class="n">fusionType</span><span class="o">=</span><span class="s1">&#39;disjunctive&#39;</span><span class="p">)</span>
         <span class="n">cw</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="n">history</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="n">cw</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">()</span>
@@ -10710,16 +10710,16 @@
             <span class="n">negx</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">nulx</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">y</span><span class="p">:</span>
-                    <span class="n">matxy</span> <span class="o">=</span> <span class="n">omax</span><span class="p">(</span><span class="n">Med</span><span class="p">,[</span><span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">],</span><span class="n">inVec</span><span class="p">[</span><span class="n">y</span><span class="p">]])</span>
-                    <span class="c1">#matxy = omin(Med,[g.relation[x][y],inVec[y]])</span>
-                    <span class="c1">#print(x,y,g.relation[x][y],inVec[y],matxy)</span>
-                    <span class="k">if</span> <span class="n">matxy</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
-                        <span class="n">posx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">matxy</span><span class="p">)</span>
-                    <span class="k">elif</span> <span class="n">matxy</span> <span class="o">&lt;</span> <span class="n">Med</span><span class="p">:</span>
-                        <span class="n">negx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">matxy</span><span class="p">)</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">nulx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">matxy</span><span class="p">)</span>
+<span class="c1">##                if x != y:</span>
+                <span class="n">matxy</span> <span class="o">=</span> <span class="n">omax</span><span class="p">(</span><span class="n">Med</span><span class="p">,[</span><span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">],</span><span class="n">inVec</span><span class="p">[</span><span class="n">y</span><span class="p">]])</span>
+                <span class="c1">#matxy = omin(Med,[g.relation[x][y],inVec[y]])</span>
+                <span class="c1">#print(x,y,g.relation[x][y],inVec[y],matxy)</span>
+                <span class="k">if</span> <span class="n">matxy</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
+                    <span class="n">posx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">matxy</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">matxy</span> <span class="o">&lt;</span> <span class="n">Med</span><span class="p">:</span>
+                    <span class="n">negx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">matxy</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">nulx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">matxy</span><span class="p">)</span>
             <span class="n">res</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;pos&#39;</span><span class="p">:</span><span class="n">posx</span><span class="p">,</span><span class="s1">&#39;neg&#39;</span><span class="p">:</span><span class="n">negx</span><span class="p">,</span><span class="s1">&#39;nul&#39;</span><span class="p">:</span><span class="n">nulx</span><span class="p">}</span>
         <span class="n">resvec</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span> <span class="o">-</span><span class="mi">1</span>
@@ -17134,17 +17134,19 @@
                                  <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 <span class="c1">##                          </span>
     <span class="c1">#t = CircularPerformanceTableau()</span>
-    <span class="c1">#t = PerformanceTableau(&#39;AliceChoice&#39;)</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">PerformanceTableau</span><span class="p">(</span><span class="s1">&#39;officeChoice&#39;</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">PerformanceTableau</span><span class="p">(</span><span class="s1">&#39;AliceChoice&#39;</span><span class="p">)</span>
+    <span class="c1">#t = PerformanceTableau(&#39;officeChoice&#39;)</span>
     <span class="c1">#t = PerformanceTableau(&#39;roy66&#39;)</span>
     <span class="c1">#t = PerformanceTableau(&#39;studentGrades&#39;)</span>
     <span class="c1"># testing the fixpoint convergence of the weak Condorcet winners and losers computation</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">startMethod</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;CondorcetWinners&#39;</span><span class="p">,</span><span class="n">version</span><span class="o">=</span><span class="s1">&#39;weak&#39;</span><span class="p">,</span>
+                               <span class="n">cwFusionType</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;CondorcetWinners&#39;</span><span class="p">,</span><span class="n">version</span><span class="o">=</span><span class="s1">&#39;quasi&#39;</span><span class="p">,</span>
-                               <span class="n">cwFusionType</span><span class="o">=</span><span class="s1">&#39;disjunctive&#39;</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                               <span class="n">cwFusionType</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">showChoiceRecommendation</span><span class="p">(</span><span class="s1">&#39;IteratedCondorcetWinners&#39;</span><span class="p">,</span><span class="n">version</span><span class="o">=</span><span class="s1">&#39;quasi&#39;</span><span class="p">,</span>
-                               <span class="n">cwFusionType</span><span class="o">=</span><span class="s1">&#39;conjunctive&#39;</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                               <span class="n">cwFusionType</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     
             
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
@@ -17171,7 +17173,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Nov 20, 2026.
+      <span class="lastupdated">Last updated on Nov 22, 2026.
       </span></p>
   </div>
 

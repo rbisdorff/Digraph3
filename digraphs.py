@@ -9373,7 +9373,7 @@ class Digraph(object):
         if nh > 1:
             #print('history')
             from bipolarValuedSets import computeEpistemicFusion
-            cw = computeEpistemicFusion(history,fusionType=fusionType)
+            cw = computeEpistemicFusion(history,fusionType='disjunctive')
         cw.history = history
         if Comments:
             cw.showMembershipCharacteristics()
@@ -10026,16 +10026,16 @@ class Digraph(object):
             negx = []
             nulx = []
             for y in g.actions:
-                if x != y:
-                    matxy = omax(Med,[g.relation[x][y],inVec[y]])
-                    #matxy = omin(Med,[g.relation[x][y],inVec[y]])
-                    #print(x,y,g.relation[x][y],inVec[y],matxy)
-                    if matxy > Med:
-                        posx.append(matxy)
-                    elif matxy < Med:
-                        negx.append(matxy)
-                    else:
-                        nulx.append(matxy)
+##                if x != y:
+                matxy = omax(Med,[g.relation[x][y],inVec[y]])
+                #matxy = omin(Med,[g.relation[x][y],inVec[y]])
+                #print(x,y,g.relation[x][y],inVec[y],matxy)
+                if matxy > Med:
+                    posx.append(matxy)
+                elif matxy < Med:
+                    negx.append(matxy)
+                else:
+                    nulx.append(matxy)
             res[x] = {'pos':posx,'neg':negx,'nul':nulx}
         resvec = {}
         n = len(g.actions) -1
@@ -16175,17 +16175,19 @@ if __name__ == "__main__":
                                  missingDataProbability=0.05,seed=50)
 ##                          
     #t = CircularPerformanceTableau()
-    #t = PerformanceTableau('AliceChoice')
-    t = PerformanceTableau('officeChoice')
+    t = PerformanceTableau('AliceChoice')
+    #t = PerformanceTableau('officeChoice')
     #t = PerformanceTableau('roy66')
     #t = PerformanceTableau('studentGrades')
     # testing the fixpoint convergence of the weak Condorcet winners and losers computation
     g = BipolarOutrankingDigraph(t,Threading=False,nbrCores=1,startMethod='spawn')
     print(g)
+    g.showChoiceRecommendation('CondorcetWinners',version='weak',
+                               cwFusionType='average',Comments=True)
     g.showChoiceRecommendation('CondorcetWinners',version='quasi',
-                               cwFusionType='disjunctive',Comments=False)
+                               cwFusionType='average',Comments=True)
     g.showChoiceRecommendation('IteratedCondorcetWinners',version='quasi',
-                               cwFusionType='conjunctive',Comments=False)
+                               cwFusionType='average',Comments=False)
     
             
     print('*------------------*')
