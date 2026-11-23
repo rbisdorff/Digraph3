@@ -1537,7 +1537,7 @@ We observe in the resulting strict outranking digraph *gcd* 10 valid strict outr
 Designing a best choice recommender system
 ``````````````````````````````````````````
 
-Solving a best-choice problem consists traditionally in finding *the* unique best decision alternative. We adopt here instead a modern **recommender system** approach which shows a non empty subset of decision alternatives which contains by construction the potential best alternative(s).
+Solving a best-choice problem consists traditionally in finding *the* unique best or optimal decision alternative. We adopt here instead a modern **recommender system** approach which shows a non empty subset of decision alternatives which contains by construction the potential best alternative(s).
 
 The five *pragmatic principles* for computing such a *best choice recommendation* (BCR) are the following
 
@@ -1611,7 +1611,7 @@ Following the previously stated pragmatic principles, potential first choice rec
 				  
 It is interesting to notice in :numref:`strictBestChoice` (Line 6) that the **Rubis first and last choice recommendation** consists actually in the set of weak Condorcet winners: 'A', 'C' and 'D' and the set of weak Condorcet losers: 'A' and 'F'. In the corresponding characteristic vector (see Lines 6 and 12-14) are listed the bipolar credibility degrees with which each alternative may indeed be considered a first choice candidate (see [BIS-2006a]_, [BIS-2006b]_). Location 'D' is the most credible first choice. It is worthwhile noticing that location 'G', even if not among the weak Condorcet winners is nevertheless neither included nor excluded from the potential first choice candidates.
 
-Location *Gar* (G) is actually a most determined **quasi Condorcet Winner**, i.e. positively outranking all not weak Condorcet winners, namely locations *Bon* (B), *Bel* (E) and 'Fen'(F) (see :numref:`quasiBestChoice` Line 3 and :ref:`a new efficient first choice recommender algorithm <Bipolar-Valued-Condorcet-Winners>`). 
+Location *Gar* (G) is actually a most determined **quasi Condorcet Winner**, i.e. positively outranking all not weak Condorcet winners, namely locations *B* (*Bon*), *E* (*Bel*) and *F* (*Fen*) (see :numref:`quasiBestChoice` Line 3 and :ref:`a new efficient first choice recommender algorithm <Bipolar-Valued-Condorcet-Winners>`). 
 
 .. code-block:: pycon
    :name: quasiBestChoice
@@ -1630,7 +1630,7 @@ Location *Gar* (G) is actually a most determined **quasi Condorcet Winner**, i.e
     Fen:  -1.0000
     Valuation domain: [-1.00;+1.00]
 
-Locations *Ces* (C) and *Dom* (D) are as well positive quasi Condorcet Winners. Location *Fen* (F) is the only quasi Condorcet loser. Being an ambiguous first as well as last choice recommendation, location *A* does not appear in the list of non ambiguous quasi Condorcet winners. The first-ranked and last-ranked positions of alternative *A* in :numref:`strictBestChoice` Lines 6 and  16 indicate in fact its global incomparability status as shown in :numref:`bestOfficeChoice`.
+Locations *Ces* (*C*) and *Dom* (*D*) are as well positive quasi Condorcet Winners. Location *Fen* (*F*) is the only quasi Condorcet loser. Being an ambiguous first as well as last choice recommendation, location *Ave* (*A*) does not appear in the list of non ambiguous quasi Condorcet winners. The first-ranked and last-ranked positions of alternative *A* in :numref:`strictBestChoice` Lines 6 and  16 indicate in fact its global incomparability status as shown in :numref:`bestOfficeChoice`.
 
 .. code-block:: pycon
    :linenos:
@@ -1670,7 +1670,7 @@ Let us now compare in a pairwise perspective the performances of the apparently 
     =========================================================================
     Valuation in range: [-145.00;+145.00]; global concordance: +145.00/+36.00
 
-Yet, we must as well notice that the cheapest alternative *C* is in fact **strictly outranking** alternative *G*:  :math:`r(C \succsim G) = +15/145 > 0.0`, and :math:`r(G \succsim C) = -15/145 < 0.0` (see Line 14 below). 
+Yet, we must as well notice that the cheapest alternative *Ces* (*C*) is in fact **strictly outranking** alternative *G*:  :math:`r(C \succsim G) = +15/145 > 0.0`, and :math:`r(G \succsim C) = -15/145 < 0.0` (see Line 14 below). 
 
 .. code-block:: pycon
    :linenos:
@@ -1862,7 +1862,7 @@ We may finally use the best, with the outranking digraph *g* correlated (+0.816)
 
 In view of :numref:`rankedOfficeChoiceHeatmap`, office locations *G* or *D* make up convincing best choice recommendations with an apparent slight advantage for location *G*. Notice that both alternatives *A* and *C*, with their highly contrasted performance profiles, appear ranked in the midfield. Indeed, as they don't compare well, they may neither be first nor last ranked. Notice finally in the *tau* row above similar marginal ordinal correlation indexes as observed before in :numref:`PartialBachetRanking1` Lines 5-11.  
 
-The :py:class:`digraphs.Digraph` class now readily provides the :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method for directly showing the first and last choices obtained from the previous  partial *Bachet* ranking result accessible in the *g.pbr* attribute (see :numref:`PartialBachetRanking10` Line 1).
+The the :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method now readily accepts the **'Bachet'** option for showing the first and last choices obtained from the previous  partial *Bachet* ranking result accessible in the *g.pbr* attribute (see :numref:`PartialBachetRanking10` Line 1).
 
 .. code-block:: pycon
    :name: PartialBachetRanking10
@@ -1900,7 +1900,7 @@ The :py:class:`digraphs.Digraph` class now readily provides the :py:meth:`~digra
 
 Due to the **Condorcet consistency** of the polarised *Bachet* ranking rule, the partial ranking digraph *g.pbr* represents here faithfully an actual transitive and asymmetrical part of the given outranking digraph *g* (see Lines 9, 13 and :ref:`Bachet-Tutorial-label`).  
 
-Our first choice recommendations eventually appear essentially depending on the very importance the CEO is attaching to each one of his three decision objectives. In the setting here, where he considers that *maximizing the future turnover* is the most important objective (81/145 = 0.56) followed by *minimizing the Costs* (45/145 = 0.31) and, less important, *maximizing the working conditions* (19/145 = 0.13), compromise locations *G* as well as *D* become the potential first choices candidates. However, if minimizing the *Costs* does not play much a role, it would perhaps be better to recommend the most advantageous location *A*; or if, on the contrary, the *Costs* objective does matter a lot, recommending the cheapest alternative *C* could definitely become the more convincing first choice recommendation. 
+Our first choice recommendations eventually appear essentially depending on the very importance the CEO is attaching to each one of his three decision objectives. In the setting here, where he considers that *maximizing the future turnover* is the most important objective (81/145 = 0.56) followed by *minimizing the Costs* (45/145 = 0.31) and, less important, *maximizing the working conditions* (19/145 = 0.13), compromise locations *G* as well as *D* become the potential first choices candidates. However, if minimizing the *Costs* does not play much a role, it would perhaps be better to recommend the most advantageous location *A*; or if, on the contrary, the *Costs* objective does matter a lot, recommending the cheapest alternative *C* could perhaps become the more convincing first choice recommendation. 
 
 It might be worth, as an **exercise**, to modify the criteria significance weights in the 'officeChoice.py' data file [64]_ in such a way that
 
