@@ -4935,7 +4935,7 @@ The complexity of the computation of non ambiguous Condorcet winners and losers 
 In :numref:`CondorcetWinners6` we show for instance in a Python 3.14.4 console the extraction of quasi Condorcet winners and losers from a random 3 Objectives outranking digraph of order 1000 using a 11th Gen Intel® Core™ i5-11400 × 12HT desktop computer with 64 GiB CPU memory running under Ubuntu 26.04.1 LTS.
 
 .. code-block:: pycon
-   :caption: Computing Condorcet quasi-winners and -losers on big outranking digraphs 
+   :caption: Computing Condorcet quasi Condorcet winners and losers on big outranking digraphs 
    :name: CondorcetWinners6
    :linenos:
    :emphasize-lines: 7-8,24-26,32,53
@@ -4995,7 +4995,7 @@ In :numref:`CondorcetWinners6` we show for instance in a Python 3.14.4 console t
    Execution time: 16.24 sec.
    *************************************************
 
-For constructing on this desktop computer with 12 hyperthreaded cores an outranking digraph of order 1000, we may judiciously use the :py:class:`mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor allowing to run up to twelve python3.14.4 interpreters in parallel (see Lines 7-8 and 24-26) [29]_. Extracting now the non ambiguous average quasi Condorcet winners and losers takes on this big outranking digraph instance only about 16.24 seconds (Line 50). Computing the corresponding *weak* version divides the time by two. Only *p0576*, *p0814* and *p0165* are in fact quasi-winners.
+For constructing on this desktop computer with 12 hyperthreaded cores an outranking digraph of order 1000, we may judiciously use the :py:class:`mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor allowing to run up to twelve python3.14.4 interpreters in parallel (see Lines 7-8 and 24-26) [29]_. Extracting now the non ambiguous average quasi Condorcet winners and losers takes on this big outranking digraph instance only about 16.24 seconds (Line 50). Computing the corresponding *weak* version divides the time by two. Only *p0576*, *p0814* and *p0165* are in fact quasi Condorcet winners.
 
 To illustrate the quality of this quasi Condorcet winners and losers extraction, we may show in :numref:`condorcetWinnersHeatmapMP` a performance heatmap of these 13 public policies.
 
@@ -5021,19 +5021,19 @@ We may furthermore compute in :numref:`CondorcetWinners7` the relative performan
    :linenos:
    :emphasize-lines: 1-2,4-5,8-12,15-19
 
-   >>> winners = ['p0583','p0446','p0877','p0073','p0156']
-   >>> losers = ['p0652','p0615','p0400','p0994','p0390']   
+   >>> weakWinners = ['p0583','p0446','p0877','p0073','p0156']
+   >>> weakLosers = ['p0652','p0615','p0400','p0994','p0390']   
    >>> from ratingDigraphs import RatingByRelativeQuantilesDigraph
    >>> qr =  RatingByRelativeQuantilesDigraph(t,quantiles=9,
    ...                       Threading=True,LowerClosed=True)
-   >>> qr.showPositiveRatingCharacteristics(winners)
+   >>> qr.showPositiveRatingCharacteristics(weakWinners)
        x    in      K_k	     r(x >= m_k)  r(x < M_k)  r(x in K_k)
     'p0583' in [0.78 - 0.89[	0.08	     0.36        0.08
     'p0446' in [0.78 - 0.89[	0.25	     0.39	 0.25
     'p0877' in [0.89 -    <[	0.11	     1.00	 0.11
     'p0073' in [0.78 - 0.89[	0.03	     1.00	 0.03
     'p0156' in [0.78 - 0.89[	0.03	     0.58	 0.03
-   >>> qr.showPositiveRatingCharacteristics(losers)
+   >>> qr.showPositiveRatingCharacteristics(weakLosers)
        x    in      K_k	     r(x >= m_k)  r(x < M_k)  r(x in K_k)
     'p0652' in [0.00 - 0.11[	1.00	     0.14	 0.14
     'p0615' in [0.11 - 0.22[	0.47	     0.11	 0.11
@@ -5041,7 +5041,7 @@ We may furthermore compute in :numref:`CondorcetWinners7` the relative performan
     'p0994' in [0.11 - 0.22[	0.14	     0.31	 0.14
     'p0390' in [0.00 - 0.11[	1.00	     0.03	 0.03
    
-Alternative 'p0877' is positively rated into the highest [0.89 - <[ performance nine-tiles class . All the other four weak Condorcet winners are rated into the second-highest [0.78 - 0.89[ performance nine-tiles class. Among the weak Condorcet losers, two are rated into the lowest [0.00 - 0.11[ and three in the second lowest [0.11 - 0.22[ performance nine-tiles class (see the tutorial on :ref:`Rating into relative performance quantiles <QuantilesRating-Tutorial-label>`). 
+Alternative 'p0877' is positively rated into the highest [0.89 - <[ performance nine-tile. All the other four weak Condorcet winners are rated into the second-highest [0.78 - 0.89[ performance nine-tile. Among the weak Condorcet losers, two are rated into the lowest [0.00 - 0.11[ and three in the second lowest [0.11 - 0.22[ performance nine-tiles (see the tutorial on :ref:`Rating into relative performance quantiles <QuantilesRating-Tutorial-label>`). 
 
 .. note::
 
