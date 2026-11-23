@@ -2025,7 +2025,6 @@ But it is eventually also the new :ref:`Bachet partial ranking rule <Partial-Ran
 
    - :ref:`On computing bipolar-valued sets <Bipolar-Valued-Sets-Tutorial-label>`
    - :ref:`Bachet partial ranking rule <Partial-Ranking-Tutorial-label>`
-   - :ref:`Alice’s best choice: A selection case study <Alice-Tutorial-label>`
 
 Back to :ref:`Content Table <Tutorial-label>`
 
