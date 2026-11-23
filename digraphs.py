@@ -9153,9 +9153,9 @@ class Digraph(object):
             print('-------------------------------------')
             t0 = time()
             if version == 'weak':
-                resVec = self.computeBpvCondorcetWinners(fusionType=cwFusionType)
+                resVec = self.computeBpvWeakCondorcetWinners(fusionType=cwFusionType)
             elif version == 'quasi':
-                resVec = self.solveCondorcetWinnersFixPointEquation(fusionType=cwFusionType,
+                resVec = self.computeBpvQuasiCondorcetWinners(fusionType=cwFusionType,
                                                              Comments=Comments)
             else:
                 print('Error: version must be "weak* or "quasi" not %s !' % version)
@@ -9211,9 +9211,9 @@ class Digraph(object):
                 for x in remainingActions:
                     g.actions[x] = deepcopy(self.actions[x])
                 if version == 'weak':
-                    resVec = g.computeBpvCondorcetWinners(fusionType=cwFusionType)
+                    resVec = g.computeBpvWeakCondorcetWinners(fusionType=cwFusionType)
                 elif version == 'quasi':
-                    resVec = g.solveCondorcetWinnersFixPointEquation(fusionType=cwFusionType,
+                    resVec = g.computeBpvQuasiCondorcetWinners(fusionType=cwFusionType,
                                                                      Comments=Comments)
                 else:
                     print('Error: version must be "weak* or "quasi" not %s !' % version)
@@ -9283,55 +9283,15 @@ class Digraph(object):
                 for ch in negRanking:
                     ranking.append(ch[1])
                 return ranking
-##        elif method == 'QuasiCondorcetWinners':
-##            if Show:
-##                print('*************************************')
-##                print('First and last choice recommendations')
-##                print('-------------------------------------')
-##            from time import time
-##            from copy import deepcopy
-##            from digraphsTools import scoredTuplesSort
-##            g = deepcopy(self)
-##            t0 = time()
-##            cw = g.solveCondorcetWinnersFixPointEquation(fusionType=cwFusionType,Comments=Comments)
-##            res = []
-##            for x in cw.support:
-##                res.append((cw.membership[x],x))
-##            #res.sort(reverse=True)
-##            scoredTuplesSort(res,reverse=True)
-##            nr = len(res)
-##            Med = self.valuationdomain['med']
-##            ##print(resVec)
-##            print('First choice (%s quasi Condorcet winners)' % cwFusionType )
-##            for i in range(nr):
-##                if res[i][0] > Med:
-##                    print("\'%s\': %+.2f (%.2f%%)"% (res[i][1], res[i][0],
-##                                                ( (float(res[i][0])+1.0)/2.0 * 100.0) ) )
-##                else:
-##                    break
-##            print('-------------------------------------')
-##            print('Last choice (%s quasi Condorcet losers)' % cwFusionType )
-##            for i in range(nr-1,0,-1):
-##                if res[i][0] < Med:
-##                    val = float(res[i][0])*(-1.0)
-##                    print("\'%s\': %+.2f (%.2f%%)"% ( res[i][1], val,
-##                                                ( (val+1.0)/2.0 * 100.0) ) )
-##                else:
-##                    break
-##            print('---------------------------------------')
-##            #print('Iterations:', it)
-##            print('Execution time: %.3f sec.' % (time() - t0) )
-##            print('*****************************************')
-##            #return history
-                    
+                   
         else:
             print('Error: method = "CondorcetWinners", "Rubis",\
                   "IteratedCondorcetWinners", "Bachet" or "IteratedBachet",  not "%s"' % method) 
         #print('*************************************************')
 
-    def solveCondorcetWinnersFixPointEquation(self,fusionType='average',
-                                              CoDual=False,
-                                              BrokenCocs=False,
+    def computeBpvQuasiCondorcetWinners(self,fusionType='average',
+                                              #CoDual=False,
+                                              #BrokenCocs=False,
                                               Comments=False):
         """
         Reteurn the epistemic fusion of the successive solutions of the
@@ -9339,22 +9299,22 @@ class Digraph(object):
         """
         from bipolarValuedSets import BpvSet,averageEpistemicFusion
         from copy import deepcopy
-        g = deepcopy(self)
-        if CoDual:
-            g = ~(-g)
-        if BrokenCocs:
-            gb = BrokenCocsDigraph(g)
-        else:
-            gb = g
-        iterations = g.order
-        cw0 = g.computeBpvCondorcetWinners(Comments=False,
+        gb = deepcopy(self)
+##        if CoDual:
+##            g = ~(-g)
+##        if BrokenCocs:
+##            gb = BrokenCocsDigraph(g)
+##        else:
+##            gb = g
+        iterations = gb.order
+        cw0 = gb.computeBpvWeakCondorcetWinners(Comments=False,
                                            Debug=False,fusionType=fusionType)
         NotEqual = True
         it = 1
         history = [cw0]
         while NotEqual and it < iterations:
             it += 1
-            cw = g.computeBpvCondorcetWinners(Comments=False,initialVector=cw0,
+            cw = gb.computeBpvWeakCondorcetWinners(Comments=False,initialVector=cw0,
                                            fusionType=fusionType)
             if Comments:
                 print('iter:',it)
@@ -9380,8 +9340,8 @@ class Digraph(object):
         return cw    
         
         
-    def computeBpvCondorcetWinners(self,CoDual=False,
-                                   BrokenCocs=False,
+    def computeBpvWeakCondorcetWinners(self,#CoDual=False,
+                                   ##BrokenCocs=False,
                                    #Average=True,
                                    fusionType='average', # or 'conjunctive'
                                    Comments=False,
@@ -9389,21 +9349,20 @@ class Digraph(object):
                                    initialVector=None,
                                    ):
         """
-        Returns by default the bpvSet of the Condorcet winner(s) of a
-        codual and acyclic (BrokenCocs=True) digraph.
+        Returns by default the bpvSet of the Condorcet winner(s) of an outranking digraph.
         *fusionType* := 'conjunctive' (default') | 'disjunctive' | 'average'
         If Average == True, an average fusion of initial and -terminal vector is computed
         If Average == False (default), an 0vee is done.
         """
         from bipolarValuedSets import BpvSet,averageEpistemicFusion
         from copy import deepcopy
-        g = deepcopy(self)
-        if CoDual:
-            g = ~(-g)
-        if BrokenCocs:
-            gb = BrokenCocsDigraph(g)
-        else:
-            gb = g
+        gb = deepcopy(self)
+##        if CoDual:
+##            g = ~(-g)
+##        if BrokenCocs:
+##            gb = BrokenCocsDigraph(g)
+##        else:
+##            gb = g
         iVector = gb.computeEpistemicFusion(Terminal=False,initialVector=initialVector,
                                                 fusionType=fusionType,Debug=False)
         tVector = gb.computeEpistemicFusion(Terminal=True,initialVector=initialVector,

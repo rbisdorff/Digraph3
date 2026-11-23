@@ -1619,7 +1619,7 @@ Location *Gar* (G) is actually a most determined **quasi Condorcet Winner**, i.e
    :linenos:
    :emphasize-lines: 1,3,7
 
-   >>> qcw = g.solveCondorcetWinnersFixPointEquation(fusionType='conjunctive')
+   >>> qcw = g.computeBpvQuasiCondorcetWinners(fusionType='conjunctive')
    >>> qcw.showMembershipCharacteristics()
     Gar:  +0.5448
     Ces:  +0.1034

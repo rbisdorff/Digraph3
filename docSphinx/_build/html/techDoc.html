@@ -136,7 +136,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeBadPirlotChoices"><code class="docutils literal notranslate"><span class="pre">Digraph.computeBadPirlotChoices()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeBestChoiceRecommendation"><code class="docutils literal notranslate"><span class="pre">Digraph.computeBestChoiceRecommendation()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeBipolarCorrelation"><code class="docutils literal notranslate"><span class="pre">Digraph.computeBipolarCorrelation()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeBpvCondorcetWinners"><code class="docutils literal notranslate"><span class="pre">Digraph.computeBpvCondorcetWinners()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeBpvQuasiCondorcetWinners"><code class="docutils literal notranslate"><span class="pre">Digraph.computeBpvQuasiCondorcetWinners()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeBpvWeakCondorcetWinners"><code class="docutils literal notranslate"><span class="pre">Digraph.computeBpvWeakCondorcetWinners()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeChordlessCircuits"><code class="docutils literal notranslate"><span class="pre">Digraph.computeChordlessCircuits()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeChordlessCircuitsMP"><code class="docutils literal notranslate"><span class="pre">Digraph.computeChordlessCircuitsMP()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.computeCoSize"><code class="docutils literal notranslate"><span class="pre">Digraph.computeCoSize()</span></code></a></li>
@@ -337,7 +338,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.showdre"><code class="docutils literal notranslate"><span class="pre">Digraph.showdre()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.singletons"><code class="docutils literal notranslate"><span class="pre">Digraph.singletons()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.sizeSubGraph"><code class="docutils literal notranslate"><span class="pre">Digraph.sizeSubGraph()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.solveCondorcetWinnersFixPointEquation"><code class="docutils literal notranslate"><span class="pre">Digraph.solveCondorcetWinnersFixPointEquation()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.strongComponents"><code class="docutils literal notranslate"><span class="pre">Digraph.strongComponents()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.symDegreesDistribution"><code class="docutils literal notranslate"><span class="pre">Digraph.symDegreesDistribution()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.topologicalSort"><code class="docutils literal notranslate"><span class="pre">Digraph.topologicalSort()</span></code></a></li>
@@ -2258,10 +2258,16 @@ self.worstChoice = self.worstChoiceData[5]</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="digraphs.Digraph.computeBpvCondorcetWinners">
-<span class="sig-name descname"><span class="pre">computeBpvCondorcetWinners</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">CoDual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BrokenCocs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fusionType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'average'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialVector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeBpvCondorcetWinners"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeBpvCondorcetWinners" title="Link to this definition"></a></dt>
-<dd><p>Returns by default the bpvSet of the Condorcet winner(s) of a
-codual and acyclic (BrokenCocs=True) digraph.
+<dt class="sig sig-object py" id="digraphs.Digraph.computeBpvQuasiCondorcetWinners">
+<span class="sig-name descname"><span class="pre">computeBpvQuasiCondorcetWinners</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fusionType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'average'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeBpvQuasiCondorcetWinners"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeBpvQuasiCondorcetWinners" title="Link to this definition"></a></dt>
+<dd><p>Reteurn the epistemic fusion of the successive solutions of the
+Condorcet winners fixpoint equation</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="digraphs.Digraph.computeBpvWeakCondorcetWinners">
+<span class="sig-name descname"><span class="pre">computeBpvWeakCondorcetWinners</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fusionType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'average'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initialVector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeBpvWeakCondorcetWinners"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeBpvWeakCondorcetWinners" title="Link to this definition"></a></dt>
+<dd><p>Returns by default the bpvSet of the Condorcet winner(s) of an outranking digraph.
 <em>fusionType</em> := ‘conjunctive’ (default’) | ‘disjunctive’ | ‘average’
 If Average == True, an average fusion of initial and -terminal vector is computed
 If Average == False (default), an 0vee is done.</p>
@@ -4189,13 +4195,6 @@ minus outrankedness credibilities of all singleton choices.</p>
 <span class="sig-name descname"><span class="pre">sizeSubGraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">choice</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.sizeSubGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.sizeSubGraph" title="Link to this definition"></a></dt>
 <dd><p>Output: (size, undeterm,arcDensity).
 Renders the arc density of the induced subgraph.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="digraphs.Digraph.solveCondorcetWinnersFixPointEquation">
-<span class="sig-name descname"><span class="pre">solveCondorcetWinnersFixPointEquation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fusionType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'average'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CoDual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BrokenCocs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.solveCondorcetWinnersFixPointEquation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.solveCondorcetWinnersFixPointEquation" title="Link to this definition"></a></dt>
-<dd><p>Reteurn the epistemic fusion of the successive solutions of the
-Condorcet winners fixpoint equation</p>
 </dd></dl>
 
 <dl class="py method">
@@ -15549,7 +15548,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Nov 22, 2026.
+      <span class="lastupdated">Last updated on Nov 23, 2026.
       </span></p>
   </div>
 

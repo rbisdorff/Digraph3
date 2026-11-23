@@ -9816,9 +9816,9 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-------------------------------------&#39;</span><span class="p">)</span>
             <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">version</span> <span class="o">==</span> <span class="s1">&#39;weak&#39;</span><span class="p">:</span>
-                <span class="n">resVec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">(</span><span class="n">fusionType</span><span class="o">=</span><span class="n">cwFusionType</span><span class="p">)</span>
+                <span class="n">resVec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeBpvWeakCondorcetWinners</span><span class="p">(</span><span class="n">fusionType</span><span class="o">=</span><span class="n">cwFusionType</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">version</span> <span class="o">==</span> <span class="s1">&#39;quasi&#39;</span><span class="p">:</span>
-                <span class="n">resVec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solveCondorcetWinnersFixPointEquation</span><span class="p">(</span><span class="n">fusionType</span><span class="o">=</span><span class="n">cwFusionType</span><span class="p">,</span>
+                <span class="n">resVec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeBpvQuasiCondorcetWinners</span><span class="p">(</span><span class="n">fusionType</span><span class="o">=</span><span class="n">cwFusionType</span><span class="p">,</span>
                                                              <span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: version must be &quot;weak* or &quot;quasi&quot; not </span><span class="si">%s</span><span class="s1"> !&#39;</span> <span class="o">%</span> <span class="n">version</span><span class="p">)</span>
@@ -9874,9 +9874,9 @@
                 <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">remainingActions</span><span class="p">:</span>
                     <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
                 <span class="k">if</span> <span class="n">version</span> <span class="o">==</span> <span class="s1">&#39;weak&#39;</span><span class="p">:</span>
-                    <span class="n">resVec</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">(</span><span class="n">fusionType</span><span class="o">=</span><span class="n">cwFusionType</span><span class="p">)</span>
+                    <span class="n">resVec</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvWeakCondorcetWinners</span><span class="p">(</span><span class="n">fusionType</span><span class="o">=</span><span class="n">cwFusionType</span><span class="p">)</span>
                 <span class="k">elif</span> <span class="n">version</span> <span class="o">==</span> <span class="s1">&#39;quasi&#39;</span><span class="p">:</span>
-                    <span class="n">resVec</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">solveCondorcetWinnersFixPointEquation</span><span class="p">(</span><span class="n">fusionType</span><span class="o">=</span><span class="n">cwFusionType</span><span class="p">,</span>
+                    <span class="n">resVec</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvQuasiCondorcetWinners</span><span class="p">(</span><span class="n">fusionType</span><span class="o">=</span><span class="n">cwFusionType</span><span class="p">,</span>
                                                                      <span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: version must be &quot;weak* or &quot;quasi&quot; not </span><span class="si">%s</span><span class="s1"> !&#39;</span> <span class="o">%</span> <span class="n">version</span><span class="p">)</span>
@@ -9946,58 +9946,18 @@
                 <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">negRanking</span><span class="p">:</span>
                     <span class="n">ranking</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
                 <span class="k">return</span> <span class="n">ranking</span>
-<span class="c1">##        elif method == &#39;QuasiCondorcetWinners&#39;:</span>
-<span class="c1">##            if Show:</span>
-<span class="c1">##                print(&#39;*************************************&#39;)</span>
-<span class="c1">##                print(&#39;First and last choice recommendations&#39;)</span>
-<span class="c1">##                print(&#39;-------------------------------------&#39;)</span>
-<span class="c1">##            from time import time</span>
-<span class="c1">##            from copy import deepcopy</span>
-<span class="c1">##            from digraphsTools import scoredTuplesSort</span>
-<span class="c1">##            g = deepcopy(self)</span>
-<span class="c1">##            t0 = time()</span>
-<span class="c1">##            cw = g.solveCondorcetWinnersFixPointEquation(fusionType=cwFusionType,Comments=Comments)</span>
-<span class="c1">##            res = []</span>
-<span class="c1">##            for x in cw.support:</span>
-<span class="c1">##                res.append((cw.membership[x],x))</span>
-<span class="c1">##            #res.sort(reverse=True)</span>
-<span class="c1">##            scoredTuplesSort(res,reverse=True)</span>
-<span class="c1">##            nr = len(res)</span>
-<span class="c1">##            Med = self.valuationdomain[&#39;med&#39;]</span>
-<span class="c1">##            ##print(resVec)</span>
-<span class="c1">##            print(&#39;First choice (%s quasi Condorcet winners)&#39; % cwFusionType )</span>
-<span class="c1">##            for i in range(nr):</span>
-<span class="c1">##                if res[i][0] &gt; Med:</span>
-<span class="c1">##                    print(&quot;\&#39;%s\&#39;: %+.2f (%.2f%%)&quot;% (res[i][1], res[i][0],</span>
-<span class="c1">##                                                ( (float(res[i][0])+1.0)/2.0 * 100.0) ) )</span>
-<span class="c1">##                else:</span>
-<span class="c1">##                    break</span>
-<span class="c1">##            print(&#39;-------------------------------------&#39;)</span>
-<span class="c1">##            print(&#39;Last choice (%s quasi Condorcet losers)&#39; % cwFusionType )</span>
-<span class="c1">##            for i in range(nr-1,0,-1):</span>
-<span class="c1">##                if res[i][0] &lt; Med:</span>
-<span class="c1">##                    val = float(res[i][0])*(-1.0)</span>
-<span class="c1">##                    print(&quot;\&#39;%s\&#39;: %+.2f (%.2f%%)&quot;% ( res[i][1], val,</span>
-<span class="c1">##                                                ( (val+1.0)/2.0 * 100.0) ) )</span>
-<span class="c1">##                else:</span>
-<span class="c1">##                    break</span>
-<span class="c1">##            print(&#39;---------------------------------------&#39;)</span>
-<span class="c1">##            #print(&#39;Iterations:&#39;, it)</span>
-<span class="c1">##            print(&#39;Execution time: %.3f sec.&#39; % (time() - t0) )</span>
-<span class="c1">##            print(&#39;*****************************************&#39;)</span>
-<span class="c1">##            #return history</span>
-                    
+                   
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: method = &quot;CondorcetWinners&quot;, &quot;Rubis&quot;,</span><span class="se">\</span>
 <span class="s1">                  &quot;IteratedCondorcetWinners&quot;, &quot;Bachet&quot; or &quot;IteratedBachet&quot;,  not &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="n">method</span><span class="p">)</span> </div>
 
         <span class="c1">#print(&#39;*************************************************&#39;)</span>
 
-<div class="viewcode-block" id="Digraph.solveCondorcetWinnersFixPointEquation">
-<a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.solveCondorcetWinnersFixPointEquation">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">solveCondorcetWinnersFixPointEquation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fusionType</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
-                                              <span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                              <span class="n">BrokenCocs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<div class="viewcode-block" id="Digraph.computeBpvQuasiCondorcetWinners">
+<a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeBpvQuasiCondorcetWinners">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeBpvQuasiCondorcetWinners</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fusionType</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
+                                              <span class="c1">#CoDual=False,</span>
+                                              <span class="c1">#BrokenCocs=False,</span>
                                               <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reteurn the epistemic fusion of the successive solutions of the</span>
@@ -10005,22 +9965,22 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">bipolarValuedSets</span><span class="w"> </span><span class="kn">import</span> <span class="n">BpvSet</span><span class="p">,</span><span class="n">averageEpistemicFusion</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="n">g</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">CoDual</span><span class="p">:</span>
-            <span class="n">g</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">BrokenCocs</span><span class="p">:</span>
-            <span class="n">gb</span> <span class="o">=</span> <span class="n">BrokenCocsDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">gb</span> <span class="o">=</span> <span class="n">g</span>
-        <span class="n">iterations</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">order</span>
-        <span class="n">cw0</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">gb</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="c1">##        if CoDual:</span>
+<span class="c1">##            g = ~(-g)</span>
+<span class="c1">##        if BrokenCocs:</span>
+<span class="c1">##            gb = BrokenCocsDigraph(g)</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            gb = g</span>
+        <span class="n">iterations</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">order</span>
+        <span class="n">cw0</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">computeBpvWeakCondorcetWinners</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                            <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">fusionType</span><span class="o">=</span><span class="n">fusionType</span><span class="p">)</span>
         <span class="n">NotEqual</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="n">it</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="n">history</span> <span class="o">=</span> <span class="p">[</span><span class="n">cw0</span><span class="p">]</span>
         <span class="k">while</span> <span class="n">NotEqual</span> <span class="ow">and</span> <span class="n">it</span> <span class="o">&lt;</span> <span class="n">iterations</span><span class="p">:</span>
             <span class="n">it</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">cw</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeBpvCondorcetWinners</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">initialVector</span><span class="o">=</span><span class="n">cw0</span><span class="p">,</span>
+            <span class="n">cw</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">computeBpvWeakCondorcetWinners</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">initialVector</span><span class="o">=</span><span class="n">cw0</span><span class="p">,</span>
                                            <span class="n">fusionType</span><span class="o">=</span><span class="n">fusionType</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;iter:&#39;</span><span class="p">,</span><span class="n">it</span><span class="p">)</span>
@@ -10047,10 +10007,10 @@
 
         
         
-<div class="viewcode-block" id="Digraph.computeBpvCondorcetWinners">
-<a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeBpvCondorcetWinners">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">computeBpvCondorcetWinners</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                   <span class="n">BrokenCocs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<div class="viewcode-block" id="Digraph.computeBpvWeakCondorcetWinners">
+<a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeBpvWeakCondorcetWinners">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeBpvWeakCondorcetWinners</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="c1">#CoDual=False,</span>
+                                   <span class="c1">##BrokenCocs=False,</span>
                                    <span class="c1">#Average=True,</span>
                                    <span class="n">fusionType</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span> <span class="c1"># or &#39;conjunctive&#39;</span>
                                    <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -10058,21 +10018,20 @@
                                    <span class="n">initialVector</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns by default the bpvSet of the Condorcet winner(s) of a</span>
-<span class="sd">        codual and acyclic (BrokenCocs=True) digraph.</span>
+<span class="sd">        Returns by default the bpvSet of the Condorcet winner(s) of an outranking digraph.</span>
 <span class="sd">        *fusionType* := &#39;conjunctive&#39; (default&#39;) | &#39;disjunctive&#39; | &#39;average&#39;</span>
 <span class="sd">        If Average == True, an average fusion of initial and -terminal vector is computed</span>
 <span class="sd">        If Average == False (default), an 0vee is done.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">bipolarValuedSets</span><span class="w"> </span><span class="kn">import</span> <span class="n">BpvSet</span><span class="p">,</span><span class="n">averageEpistemicFusion</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="n">g</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">CoDual</span><span class="p">:</span>
-            <span class="n">g</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">BrokenCocs</span><span class="p">:</span>
-            <span class="n">gb</span> <span class="o">=</span> <span class="n">BrokenCocsDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">gb</span> <span class="o">=</span> <span class="n">g</span>
+        <span class="n">gb</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="c1">##        if CoDual:</span>
+<span class="c1">##            g = ~(-g)</span>
+<span class="c1">##        if BrokenCocs:</span>
+<span class="c1">##            gb = BrokenCocsDigraph(g)</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            gb = g</span>
         <span class="n">iVector</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">computeEpistemicFusion</span><span class="p">(</span><span class="n">Terminal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">initialVector</span><span class="o">=</span><span class="n">initialVector</span><span class="p">,</span>
                                                 <span class="n">fusionType</span><span class="o">=</span><span class="n">fusionType</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">tVector</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">computeEpistemicFusion</span><span class="p">(</span><span class="n">Terminal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">initialVector</span><span class="o">=</span><span class="n">initialVector</span><span class="p">,</span>
@@ -17173,7 +17132,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Nov 22, 2026.
+      <span class="lastupdated">Last updated on Nov 23, 2026.
       </span></p>
   </div>
 

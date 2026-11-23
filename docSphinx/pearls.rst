@@ -4730,7 +4730,7 @@ Computing bipolar-valued weak Condorcet winners and losers
 
 Given a bipolar-valued outranking digraph :math:`G(X,R)`, we call a decision alternative :math:`x \in X` a **weak Condorcet winner**  when *x* is positively outranking at least one other decision alternative and is incomparable to all the alternatives that *x* is not outranking. Symetrically, we call a decision alternative :math:`x \in X` **weak Condorcet loser**  when *x* is positively outranked by at least one decision alternative and incomparable to all the alternatives that do not outrank *x*.
 
-Now, the relation attribute of a given outranking digraph :math:`G(X,R)` is an evident example of a bipolar-valued set, a *bpv-set* for short. And the epistemic fusion operators, discussed in the previous section, may be efficiently used for computing the bpv-set of **non ambiguous** weak Condorcet winners and losers of such a digraph *G*. The :py:class:`~digraphs.Digraph` class provides therefore the :py:meth:`~digraphs.Digraph.computeBpvCondorcetWinners` method as shown in :numref:`CondorcetWinners1` Line 5 [30]_.  
+Now, the relation attribute of a given outranking digraph :math:`G(X,R)` is an evident example of a bipolar-valued set, a *bpv-set* for short. And the epistemic fusion operators, discussed in the previous section, may be efficiently used for computing the bpv-set of **non ambiguous** weak Condorcet winners and losers of such a digraph *G*. The :py:class:`~digraphs.Digraph` class provides therefore the :py:meth:`~digraphs.Digraph.computeBpvWeakCondorcetWinners` method as shown in :numref:`CondorcetWinners1` Line 5 [30]_.  
 
 .. code-block:: pycon
    :caption: Computing the bpv-set of the non ambiguous weak Condorcet winners and losers
@@ -4742,7 +4742,7 @@ Now, the relation attribute of a given outranking digraph :math:`G(X,R)` is an e
    >>> t = Random3ObjectivesPerformanceTableau(
    ...           numberOfActions=9,numberOfCriteria=13,seed=1)
    >>> g = BipolarOutrankingDigraph(t)
-   >>> bpvWinners = g.computeBpvCondorcetWinners(fusionType='average')
+   >>> bpvWinners = g.computeBpvWeakCondorcetWinners(fusionType='average')
    >>> bpvWinners.showMembershipCharacteristics(ndigits=2)
     Bipolar-valued weak Condorcet winners set
      p2:  +0.63
