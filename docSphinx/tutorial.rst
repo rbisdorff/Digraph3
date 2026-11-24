@@ -2023,7 +2023,7 @@ But it is eventually also the new :ref:`Bachet partial ranking rule <Partial-Ran
 
 .. seealso::
 
-   - :ref:`On computing bipolar-valued sets <Bipolar-Valued-Sets-Tutorial-label>`
+   - :ref:`A new efficient choice recommender algorithm <Bipolar-Valued-Condorcet-Winners>`
    - :ref:`Bachet partial ranking rule <Partial-Ranking-Tutorial-label>`
 
 Back to :ref:`Content Table <Tutorial-label>`
@@ -6411,6 +6411,10 @@ In order to study the potential difference in quality and fairness of the pairin
    Comparing pairing results from different fairnesss enhancing start points
 
 If the average ordinal correlations obtained with the three starting matchings are quite similar --means within +0.690 and +0.693-- the differences between the average correlations of group *A* and group *B* show a potential advantage for the left&right initial matchings (mean unfairness: 0.065) versus the best *Copeland* (mean unfairness: 0.078) and, even more versus the fairest *Gale-Shapley* matching (mean unfairness: 0.203, see :numref:`compFemCopGS`). The essential unfairness of stable *Gale-Shapley* matchings may in fact not being corrected with our fairness enhancing procedure.
+
+.. seealso::
+   The case study :ref:`on fairly matching students and internships <InternshipsMatching-Tutorial-label>`
+
 
 ..                 Mean     Median       S.D.        Min        Max
 .. corr3          0.6895     0.6860    0.02845     0.6080     0.7610
