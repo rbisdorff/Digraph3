@@ -2820,7 +2820,8 @@ if __name__ == "__main__":
         print(t)
         g = BipolarOutrankingDigraph(t)
         print(g)
-        cr = IteratedBpvCondorcetWinnersRanking(g,fusionType='conjunctive',Debug=False)
+        cr = IteratedBpvCondorcetWinnersRanking(g,version='weak',
+                                                fusionType='conjunctive',Debug=False)
         
         print(cr.condorcetRanking)
         cr = IteratedBpvCondorcetWinnersRanking(g,version='quasi',

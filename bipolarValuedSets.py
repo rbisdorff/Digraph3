@@ -540,16 +540,28 @@ class BpvSet(object):
         """
         returns True or False
         """
+##        ns = len(self.support)
+##        no = len(other.support)
+##        if ns != no:
+##            return False
         if self.cardinality != other.cardinality:
             return False
         prec = self.valuationDomain['precision']
-        for x in self.support:
+        selfx = set([x for x in self.support])
+        otherx = set([x for x in other.support])
+        union = selfx | otherx
+        for x in union:
             try:
-                diff = (self.membership[x] - other.membership[x])
-                #print(diff, prec)
-                if abs(diff) > prec:
-                    return False
+                selfValx = self.membership[x]
             except:
+                return False
+            try:
+                otherValx = other.membership[x]
+            except:
+                return False
+            
+            diffx = (selfValx - otherValx)
+            if abs(diffx) > prec:
                 return False
         return True  
 
@@ -938,13 +950,6 @@ if __name__ == "__main__":
     print('*****************************************************')
 
     print('*-------- Testing classes and methods -------')
-
-##    from outrankingDigraphs import *
-##    g = RandomBipolarOutrankingDigraph(seed=1)
-##    print(g)
-##    g.showRelationTable()
-##    computeBpvCondorcetWinners(g)
-##    
 
     X = RandomBpvSet(numberOfElements=3,elementNamePrefix='s',
                       indeterminateness=0.1,

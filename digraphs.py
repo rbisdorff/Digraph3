@@ -16130,13 +16130,15 @@ if __name__ == "__main__":
     from randomDigraphs import *
     from decimal import Decimal, getcontext
     t = Random3ObjectivesPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=150,numberOfCriteria=13,
-                                 missingDataProbability=0.05,seed=50)
+                                 numberOfActions=20,numberOfCriteria=13,
+                                 missingDataProbability=0.05,seed=51)
 ##                          
     #t = CircularPerformanceTableau()
     t = PerformanceTableau('AliceChoice')
     #t = PerformanceTableau('officeChoice')
     #t = PerformanceTableau('roy66')
+    #t = PerformanceTableau('TvSetData')
+    #t = PerformanceTableau('graffiti07')
     #t = PerformanceTableau('studentGrades')
     # testing the fixpoint convergence of the weak Condorcet winners and losers computation
     g = BipolarOutrankingDigraph(t,Threading=False,nbrCores=1,startMethod='spawn')
@@ -16145,7 +16147,7 @@ if __name__ == "__main__":
                                cwFusionType='average',Comments=True)
     g.showChoiceRecommendation('CondorcetWinners',version='quasi',
                                cwFusionType='average',Comments=True)
-    g.showChoiceRecommendation('IteratedCondorcetWinners',version='quasi',
+    g.showChoiceRecommendation('IteratedCondorcetWinners',version='weak',
                                cwFusionType='average',Comments=False)
     
             

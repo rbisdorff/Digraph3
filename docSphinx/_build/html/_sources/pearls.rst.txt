@@ -4995,7 +4995,7 @@ In :numref:`CondorcetWinners6` we show for instance in a Python 3.14.4 console t
    Execution time: 16.24 sec.
    *************************************************
 
-For constructing on this desktop computer with 12 hyperthreaded cores an outranking digraph of order 1000, we may judiciously use the :py:class:`mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor allowing to run up to twelve python3.14.4 interpreters in parallel (see Lines 7-8 and 24-26) [29]_. Extracting now the non ambiguous average quasi Condorcet winners and losers takes on this big outranking digraph instance only about 16.24 seconds (Line 50). Computing the corresponding *weak* version divides the time by two. Only *p0576*, *p0814* and *p0165* are in fact quasi Condorcet winners.
+For constructing on this desktop computer with 12 hyperthreaded cores an outranking digraph of order 1000, we may judiciously use the :py:class:`mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor allowing to run up to twelve python3.14.4 interpreters in parallel (see Lines 7-8 and 24-26) [29]_. Extracting now the non ambiguous average quasi Condorcet winners and losers takes on this big outranking digraph instance only about 16.24 seconds (Line 53). Computing the corresponding *weak* version divides the time by two. Only *p0576*, *p0814* and *p0165* are in fact quasi Condorcet winners.
 
 To illustrate the quality of this quasi Condorcet winners and losers extraction, we may show in :numref:`condorcetWinnersHeatmapMP` a performance heatmap of these 13 public policies.
 

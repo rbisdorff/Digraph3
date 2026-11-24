@@ -1762,7 +1762,7 @@ It may be opportune now to confirm this result by iterating, with the same epist
 .. code-block:: pycon
    :linenos:
    :name: confidentOfficeChoice2
-   :emphasize-lines: 1,6,8,12
+   :emphasize-lines: 1,6,9,12
    :caption: Computing iterated weak Condorcet winners and losers
 
    >>> cg.showChoiceRecommendation('IteratedCondorcetWinners',version='weak',
