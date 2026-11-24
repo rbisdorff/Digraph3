@@ -18,7 +18,7 @@ Python resources for fair and justifiable Algorithmic Decision Theory
 =====================================================================
 
 .. epigraph::
-   *A decision action is fair and justifiable if free from bias, dishonesty, or injustice and done with good reason easily explained and defended*.  -- Cambridge Dictionary
+  "*A decision action is fair and justifiable if free from self-interest, discrimination, or favouritism and done with good reason easily explained and defended*"
 
 Wecome! This is the documentation for the **Digraph3** *Python* programming resources.
 

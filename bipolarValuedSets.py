@@ -602,6 +602,7 @@ class BpvSet(object):
         """
         from copy import deepcopy
         from bipolarValuedSets import BpvSet
+        from digraphsTools import bpmin
         newSelf = deepcopy(self)
         newSelf.recodeValuation()
         newOther = deepcopy(other)
@@ -625,7 +626,7 @@ class BpvSet(object):
         Max = diff.valuationDomain['max']
         for it in diff.support:
             try:
-                membership[it] = min(newSelf.membership[it],-newOther.membership[it])
+                membership[it] = bpmin(newSelf.membership[it],-newOther.membership[it])
             except:
                 try:
                     membership[it] = newSelf.membership[it]
@@ -987,4 +988,16 @@ if __name__ == "__main__":
 ##    Oxmp.showMembershipCharacteristics(Sorted=False)
 ##    Oxmm = X.owedge(M)
 ##    Oxmm.showMembershipCharacteristics(Sorted=False)
-
+    from bipolarValuedSets import RandomBpvSet
+    X = RandomBpvSet(numberOfElements=5,elementNamePrefix='s',
+        indeterminateness=0.1,valuationRange=(-1, 1),ndigits=4,seed=1)
+    X.showMembershipCharacteristics(Sorted=False)
+    Y = RandomBpvSet(numberOfElements=3,elementNamePrefix='s',
+       indeterminateness=0.1,valuationRange=(-1, 1),ndigits=4,seed=2)
+    Y.showMembershipCharacteristics(Sorted=False)
+    I = RandomBpvSet(numberOfElements=5,elementNamePrefix='s',
+                     ndigits=4,indeterminateness=1.0)
+    I.showMembershipCharacteristics(Sorted=False)
+    (X-Y).showMembershipCharacteristics(Sorted=False)
+    (Y-X).showMembershipCharacteristics(Sorted=False)
+    (Y^X).showMembershipCharacteristics(Sorted=False)
