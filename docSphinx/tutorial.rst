@@ -1495,7 +1495,7 @@ For computing such a bipolar-valued outranking digraph from the given performanc
 
    The office choice outranking digraph  
 
-In the relation table shown :numref:`officeChoiceOutranking` we may notice rowwise that alternative *D* is **positively outranking** all other potential office locations. *D* is hence a *Condorcet winner*. Yet, alternatives *A* (the most expensive) and *C* (the cheapest) are also outranking or incomparable with all other locations; they are in fact **weak** *Condorcet winners*. Similarly, columnwise, we may notice that alternatives *A* and *F* are also positively outranked or incomparable to all the other locations. They are hence **weak** *Condorcet losers*. It is worthwhile noticing furthermore that alternative *A* is in fact conjointly a *weak Condorcet winner* **and** a *weak Condorcet loser*. 
+In the relation table shown in :numref:`officeChoiceOutranking` we may notice rowwise that alternative *D* is **positively outranking** all other potential office locations. *D* is hence a *Condorcet winner*. Yet, alternatives *A* (the most expensive) and *C* (the cheapest) are also outranking or incomparable with all other locations; they are in fact **weak** *Condorcet winners*. Similarly, columnwise, we may notice that alternatives *A* and *F* are also positively outranked or incomparable to all the other locations. They are hence **weak** *Condorcet losers*. It is worthwhile noticing furthermore that alternative *A* is in fact conjointly a *weak Condorcet winner* **and** a *weak Condorcet loser*. 
 
 .. code-block:: pycon
    :linenos:
@@ -1691,7 +1691,7 @@ Yet, we must as well notice that the cheapest alternative *Ces* (*C*) is in fact
     =========================================================================
     Valuation in range: -145.00 to +145.00; global concordance: +15.00/-15.00
 
-Following pragmatic principle **P3** --the required internal stability stating that a BCR should not contain a sub-recommendation-- alternative *G* is hence dropped from our first-ranked list of alternatives despite its quasi Condorcet winner's status. Yet, the credibility level of this outranking situation is actually not very high: 15/145 = 0.104 (55.2% significance majority).
+Following pragmatic principle **P3** --the required internal stability stating that a BCR should not contain a sub-recommendation-- alternative *G* is hence dropped from our first-ranked list of alternatives despite its quasi Condorcet winner's status. Yet, the credibility level of this :math:`r(C \succsim G)` outranking situation is actually not very high: +15/145 = +0.104 (55.2% significance majority).
 
 Robustness of the outranking digraph
 ````````````````````````````````````
@@ -1862,7 +1862,7 @@ We may finally use the best, with the outranking digraph *g* correlated (+0.816)
 
 In view of :numref:`rankedOfficeChoiceHeatmap`, office locations *G* or *D* make up convincing best choice recommendations with an apparent slight advantage for location *G*. Notice that both alternatives *A* and *C*, with their highly contrasted performance profiles, appear ranked in the midfield. Indeed, as they don't compare well, they may neither be first nor last ranked. Notice finally in the *tau* row above similar marginal ordinal correlation indexes as observed before in :numref:`PartialBachetRanking1` Lines 5-11.  
 
-The the :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method now readily accepts the **'Bachet'** option for showing the first and last choices obtained from the previous  partial *Bachet* ranking result accessible in the *g.pbr* attribute (see :numref:`PartialBachetRanking10` Line 1).
+The :py:meth:`~digraphs.Digraph.showChoiceRecommendation` method now readily accepts the **'Bachet'** option for showing the first and last choices obtained from the previous  partial *Bachet* ranking result accessible in the *g.pbr* attribute (see :numref:`PartialBachetRanking10` Line 1).
 
 .. code-block:: pycon
    :name: PartialBachetRanking10
