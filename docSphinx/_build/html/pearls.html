@@ -4325,7 +4325,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>We may distinguish four special bpv-sets: the <strong>dual</strong> or <em>negated</em> bpv-set <em>-X</em>, the <strong>crisp</strong> bpv-set <em>X</em> where all members of the support <img class="math" src="_images/math/b599784fb63a576cdfeadface312ad10c53c3bdb.png" alt="E_X"/> are certainly members of <em>X</em>, the <strong>relatively empty</strong> bpv-set <em>X</em> where all members of its support <img class="math" src="_images/math/b599784fb63a576cdfeadface312ad10c53c3bdb.png" alt="E_X"/> are certainly non-members of <em>X</em> and the special <strong>indeterminate</strong> case where all members of its support <img class="math" src="_images/math/b599784fb63a576cdfeadface312ad10c53c3bdb.png" alt="E_X"/> are indeterminate members of <em>X</em>, i.e <img class="math" src="_images/math/b77b61e229e68be53bb31eac9a35de98561b3ba9.png" alt="r(z \in X) \;=\; 0.0 , \; \forall \,z \in\, E_X"/>.</p>
 <p>Mind that for any potential element <em>z</em> not included in the support set <img class="math" src="_images/math/b599784fb63a576cdfeadface312ad10c53c3bdb.png" alt="E_X"/>, we consider its potential <em>X</em> membership characteristic <img class="math" src="_images/math/5d8b976e2862b5d489aab1cf78235c34e79fe930.png" alt="r(z \in X)"/> to be -1.0. The <strong>absolute empty</strong> bpv-set <img class="math" src="_images/math/11771dabc5996d6b3f6e4ba352697d89712ce77f.png" alt="\emptyset"/> consists hence of an empty support set <img class="math" src="_images/math/11c2aa794251fd283b48945863950c3fab90d155.png" alt="E_{\emptyset} \,=\, \emptyset"/>. And, for any element <em>x</em> it follows that <img class="math" src="_images/math/f7fb2319563cd618784032add2345c255aa94088.png" alt="r(x \in \emptyset) \,=\, -1.0"/>.</p>
 <div class="line-block">
-<div class="line">On such bipolar-valued characteristic values, we define two binary operations denoted <strong>bpmin</strong> and <strong>bpmax</strong> as follows. For two characteristic values <em>r</em> and <em>r’</em> in [-1;+1],</div>
+<div class="line">On such bipolar-valued characteristic values, we define two binary operations denoted <strong>bpmin</strong> and <strong>bpmax</strong> as follows. For two characteristic values <em>r</em> and <em>r’</em> in [-1.0;+1.0],</div>
 <div class="line"><em>pbmax</em> (<em>r</em>, <em>r</em>’), resp. <em>bpmin</em> (<em>r</em>, <em>r</em>’) =</div>
 <div class="line-block">
 <div class="line"><strong>max</strong> (<em>r</em>, <em>r</em>’), resp. <strong>min</strong> (<em>r</em>, <em>r</em>’), when both <em>r</em> <strong>and</strong> <em>r</em>’ are <strong>not indeterminate</strong>,</div>
@@ -4388,13 +4388,13 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <div class="code-block-caption"><span class="caption-number">Listing 3.58 </span><span class="caption-text">Difference and symmetric differences of bpv-sets</span><a class="headerlink" href="#bipolarvaluedsets3" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">X</span><span class="o">-</span><span class="n">Y</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="linenos">2</span><span class="go"> # Python&#39;s set difference is -</span>
-<span class="hll"><span class="linenos">3</span><span class="go"> s1:-0.9121, s2:-0.8957, s3:+0.5275, s4:-0.4899, s5:+0.0000</span>
+<span class="hll"><span class="linenos">3</span><span class="go"> s1:-0.7313, s2:+0.6949, s3:+0.5275, s4:-0.4899, s5:+0.0000</span>
 </span><span class="linenos">4</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Y</span><span class="o">-</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="hll"><span class="linenos">5</span><span class="go"> s1:+0.7313, s2:-0.6949, s3:-0.8869, s4:-1.0000, s5:-1.0000</span>
+<span class="hll"><span class="linenos">5</span><span class="go"> s1:+0.9121, s2:+0.8957, s3:-0.8869, s4:-1.0000, s5:-1.0000</span>
 </span><span class="linenos">6</span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">Y</span><span class="o">^</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">showMembershipCharacteristics</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="linenos">7</span><span class="go"> # Python&#39;s symmetrix difference symbol is ^</span>
 <span class="linenos">8</span><span class="go"> # X^Y = (X-Y)|(Y-X) or (X|Y)-(X&amp;Y)</span>
-<span class="hll"><span class="linenos">9</span><span class="go"> s1:+0.7313, s2:-0.6949, s3:+0.5275, s4:-0.4899, s5:+0.0000</span>
+<span class="hll"><span class="linenos">9</span><span class="go"> s1:+0.9121, s2:+0.8957, s3:+0.5275, s4:-0.4899, s5:+-1.0000</span>
 </span></pre></div>
 </div>
 </div>
@@ -6034,7 +6034,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2026, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Nov 23, 2026.
+      <span class="lastupdated">Last updated on Nov 27, 2026.
       </span></p>
   </div>
 

@@ -4455,7 +4455,7 @@ We may distinguish four special bpv-sets: the **dual** or *negated* bpv-set *-X*
 
 Mind that for any potential element *z* not included in the support set :math:`E_X`, we consider its potential *X* membership characteristic :math:`r(z \in X)` to be -1.0. The **absolute empty** bpv-set :math:`\emptyset` consists hence of an empty support set :math:`E_{\emptyset} \,=\, \emptyset`. And, for any element *x* it follows that :math:`r(x \in \emptyset) \,=\, -1.0`.
 
-| On such bipolar-valued characteristic values, we define two binary operations denoted **bpmin** and **bpmax** as follows. For two characteristic values *r* and *r'* in [-1;+1],
+| On such bipolar-valued characteristic values, we define two binary operations denoted **bpmin** and **bpmax** as follows. For two characteristic values *r* and *r'* in [-1.0;+1.0],
 | *pbmax* (*r*, *r*'), resp. *bpmin* (*r*, *r*') =
 |    **max** (*r*, *r*'), resp. **min** (*r*, *r*'), when both *r* **and** *r*' are **not indeterminate**,
 |    *r*  when *r*' is *indeterminate* or
@@ -4527,13 +4527,13 @@ In :numref:`bipolarValuedSets3` below we illustrate the bpv-set **difference** a
  
    >>> (X-Y).showMembershipCharacteristics(Sorted=False)
     # Python's set difference is -
-    s1:-0.9121, s2:-0.8957, s3:+0.5275, s4:-0.4899, s5:+0.0000   
+    s1:-0.7313, s2:+0.6949, s3:+0.5275, s4:-0.4899, s5:+0.0000   
    >>> (Y-X).showMembershipCharacteristics(Sorted=False)
-    s1:+0.7313, s2:-0.6949, s3:-0.8869, s4:-1.0000, s5:-1.0000
+    s1:+0.9121, s2:+0.8957, s3:-0.8869, s4:-1.0000, s5:-1.0000
    >>> (Y^X).showMembershipCharacteristics(Sorted=False) 
     # Python's symmetrix difference symbol is ^
     # X^Y = (X-Y)|(Y-X) or (X|Y)-(X&Y)
-    s1:+0.7313, s2:-0.6949, s3:+0.5275, s4:-0.4899, s5:+0.0000
+    s1:+0.9121, s2:+0.8957, s3:+0.5275, s4:-0.4899, s5:+-1.0000
 
 The :py:class:`~bipolarValuedSets.BpvSet` class provides furthermore a :py:meth:`~bipolarValuedSets.BpvSet.isSubset` method for computing the bipolar-valued subset statement and a :py:meth:`~bipolarValuedSets.BpvSet.strip` method which removes potential non-elements from the support of a bpv-set.
 

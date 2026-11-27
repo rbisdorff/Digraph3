@@ -1691,7 +1691,7 @@ Yet, we must as well notice that the cheapest alternative *Ces* (*C*) is in fact
     =========================================================================
     Valuation in range: -145.00 to +145.00; global concordance: +15.00/-15.00
 
-Following pragmatic principle **P3** --the required internal stability stating that a BCR should not contain a sub-recommendation-- alternative *G* is hence dropped from our first-ranked list of alternatives despite its quasi Condorcet winner's status. Yet, the credibility level of this :math:`r(C \succsim G)` outranking situation is actually not very high: +15/145 = +0.104 (55.2% significance majority).
+Following pragmatic principle **P3** --the required internal stability stating that a BCR should not contain a sub-recommendation-- alternative *G* is hence dropped from our first-ranked list of alternatives despite its quasi Condorcet winner's status. Yet, the credibility level :math:`r(C \succsim G)` of this  outranking situation is actually not very high: +15/145 = +0.104 (55.2% significance majority).
 
 Robustness of the outranking digraph
 ````````````````````````````````````
