@@ -4975,14 +4975,14 @@ In :numref:`CondorcetWinners6` we show for instance in a Python 3.14.4 console t
    First and last choice recommendations
    -------------------------------------
    First choice (average quasi Condorcet winners)
-    'p0583': +0.42 (71.24%)
-    'p0446': +0.42 (71.03%)
-    'p0877': +0.42 (70.96%)
-    'p0073': +0.36 (67.93%)
-    'p0156': +0.35 (67.43%)
-    'p0576': +0.20 (60.17%)
-    'p0814': +0.20 (59.92%)
-    'p0165': +0.20 (59.86%)
+    'p0583': +0.43 (71.26%)
+    'p0446': +0.42 (71.06%)
+    'p0877': +0.42 (70.98%)
+    'p0576': +0.41 (70.37%)
+    'p0814': +0.40 (69.86%)
+    'p0165': +0.40 (69.75%)
+    'p0073': +0.36 (67.96%)
+    'p0156': +0.35 (67.45%)
    -------------------------------------
    Last choice (average quasi Condorcet losers)
     'p0390': +0.45 (72.59%)
@@ -4999,7 +4999,7 @@ For constructing on this desktop computer with 12 hyperthreaded cores an outrank
 
 To illustrate the quality of this quasi Condorcet winners and losers extraction, we may show in :numref:`condorcetWinnersHeatmapMP` a performance heatmap of these 13 public policies.
 
-   >>> al = ['p0583','p0446','p0877','p0073','p0156','p0576','p0814','p0165',
+   >>> al = ['p0583','p0446','p0877','p0576','p0814','p0165','p0073','p0156',
    ...       'p0652','p0615','p0400','p0994','p0390']
    >>> g.showHTMLPerformanceHeatmap(actionsList=al,colorLevels=9,
    ...                 pageTitle='Condorcet Winners and Losers',

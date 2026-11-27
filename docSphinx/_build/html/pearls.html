@@ -4802,14 +4802,14 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </span><span class="linenos">33</span><span class="go">First and last choice recommendations</span>
 <span class="linenos">34</span><span class="go">-------------------------------------</span>
 <span class="linenos">35</span><span class="go">First choice (average quasi Condorcet winners)</span>
-<span class="linenos">36</span><span class="go"> &#39;p0583&#39;: +0.42 (71.24%)</span>
-<span class="linenos">37</span><span class="go"> &#39;p0446&#39;: +0.42 (71.03%)</span>
-<span class="linenos">38</span><span class="go"> &#39;p0877&#39;: +0.42 (70.96%)</span>
-<span class="linenos">39</span><span class="go"> &#39;p0073&#39;: +0.36 (67.93%)</span>
-<span class="linenos">40</span><span class="go"> &#39;p0156&#39;: +0.35 (67.43%)</span>
-<span class="linenos">41</span><span class="go"> &#39;p0576&#39;: +0.20 (60.17%)</span>
-<span class="linenos">42</span><span class="go"> &#39;p0814&#39;: +0.20 (59.92%)</span>
-<span class="linenos">43</span><span class="go"> &#39;p0165&#39;: +0.20 (59.86%)</span>
+<span class="linenos">36</span><span class="go"> &#39;p0583&#39;: +0.43 (71.26%)</span>
+<span class="linenos">37</span><span class="go"> &#39;p0446&#39;: +0.42 (71.06%)</span>
+<span class="linenos">38</span><span class="go"> &#39;p0877&#39;: +0.42 (70.98%)</span>
+<span class="linenos">39</span><span class="go"> &#39;p0576&#39;: +0.41 (70.37%)</span>
+<span class="linenos">40</span><span class="go"> &#39;p0814&#39;: +0.40 (69.86%)</span>
+<span class="linenos">41</span><span class="go"> &#39;p0165&#39;: +0.40 (69.75%)</span>
+<span class="linenos">42</span><span class="go"> &#39;p0073&#39;: +0.36 (67.96%)</span>
+<span class="linenos">43</span><span class="go"> &#39;p0156&#39;: +0.35 (67.45%)</span>
 <span class="linenos">44</span><span class="go">-------------------------------------</span>
 <span class="linenos">45</span><span class="go">Last choice (average quasi Condorcet losers)</span>
 <span class="linenos">46</span><span class="go"> &#39;p0390&#39;: +0.45 (72.59%)</span>
@@ -4826,7 +4826,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </div>
 <p>For constructing on this desktop computer with 12 hyperthreaded cores an outranking digraph of order 1000, we may judiciously use the <a class="reference internal" href="techDoc.html#mpOutrankingDigraphs.MPBipolarOutrankingDigraph" title="mpOutrankingDigraphs.MPBipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">mpOutrankingDigraphs.MPBipolarOutrankingDigraph</span></code></a> constructor allowing to run up to twelve python3.14.4 interpreters in parallel (see Lines 7-8 and 24-26) <a class="footnote-reference brackets" href="#id126" id="id68" role="doc-noteref"><span class="fn-bracket">[</span>29<span class="fn-bracket">]</span></a>. Extracting now the non ambiguous average quasi Condorcet winners and losers takes on this big outranking digraph instance only about 16.24 seconds (Line 53). Computing the corresponding <em>weak</em> version divides the time by two. Only <em>p0576</em>, <em>p0814</em> and <em>p0165</em> are in fact quasi Condorcet winners.</p>
 <p>To illustrate the quality of this quasi Condorcet winners and losers extraction, we may show in <a class="reference internal" href="#condorcetwinnersheatmapmp"><span class="std std-numref">Fig. 3.40</span></a> a performance heatmap of these 13 public policies.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">al</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;p0583&#39;</span><span class="p">,</span><span class="s1">&#39;p0446&#39;</span><span class="p">,</span><span class="s1">&#39;p0877&#39;</span><span class="p">,</span><span class="s1">&#39;p0073&#39;</span><span class="p">,</span><span class="s1">&#39;p0156&#39;</span><span class="p">,</span><span class="s1">&#39;p0576&#39;</span><span class="p">,</span><span class="s1">&#39;p0814&#39;</span><span class="p">,</span><span class="s1">&#39;p0165&#39;</span><span class="p">,</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">al</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;p0583&#39;</span><span class="p">,</span><span class="s1">&#39;p0446&#39;</span><span class="p">,</span><span class="s1">&#39;p0877&#39;</span><span class="p">,</span><span class="s1">&#39;p0576&#39;</span><span class="p">,</span><span class="s1">&#39;p0814&#39;</span><span class="p">,</span><span class="s1">&#39;p0165&#39;</span><span class="p">,</span><span class="s1">&#39;p0073&#39;</span><span class="p">,</span><span class="s1">&#39;p0156&#39;</span><span class="p">,</span>
 <span class="gp">... </span>      <span class="s1">&#39;p0652&#39;</span><span class="p">,</span><span class="s1">&#39;p0615&#39;</span><span class="p">,</span><span class="s1">&#39;p0400&#39;</span><span class="p">,</span><span class="s1">&#39;p0994&#39;</span><span class="p">,</span><span class="s1">&#39;p0390&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">actionsList</span><span class="o">=</span><span class="n">al</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
 <span class="gp">... </span>                <span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Condorcet Winners and Losers&#39;</span><span class="p">,</span>

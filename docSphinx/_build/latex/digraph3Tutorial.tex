@@ -68,7 +68,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{November 16, 2026}
+\date{November 27, 2026}
 \release{3.15.2}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -1538,12 +1538,12 @@ We may visualize the \sphinxstylestrong{codual} outranking digraph \sphinxstylee
 It becomes readily clear now from the picture above that both alternatives \sphinxstyleemphasis{a1}  and \sphinxstyleemphasis{a7} are \sphinxstyleemphasis{not strictly outranked} by any other alternatives. Hence, \sphinxstyleemphasis{a7}  and \sphinxstyleemphasis{a1} appear as {\hyperref[\detokenize{tutorial:linearvoting-tutorial-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{weak Condorcet winners}}}}} (\autopageref*{\detokenize{tutorial:linearvoting-tutorial-label}}) and may be recommended as potential \sphinxstyleemphasis{first choice alternatives} in a selection decision problem. Similarly, alternatives \sphinxstyleemphasis{a2} and \sphinxstyleemphasis{a6} are not strictly outranking any other alternative and may give suitable last choice recommendations (see below).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cdodg}\PYG{o}{.}\PYG{n}{showChoiceRecommendation}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{CondorcetWinners}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cdodg}\PYG{o}{.}\PYG{n}{showChoiceRecommendation}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{CondorcetWinners}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{n}{version}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{weak}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
 \PYG{g+gp}{... }                               \PYG{n}{cwFusionTpye}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{average}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{g+go}{ First choice (Condorcet winners)}
+\PYG{g+go}{ First choice (average weak Condorcet winners)}
 \PYG{g+go}{  \PYGZsq{}a7\PYGZsq{}: +0.33 (66.66\PYGZpc{})}
 \PYG{g+go}{  \PYGZsq{}a1\PYGZsq{}: +0.31 (65.47\PYGZpc{})}
-\PYG{g+go}{ Last choice (Condorcet losers)}
+\PYG{g+go}{ Last choice (average weak Condorcet losers)}
 \PYG{g+go}{  \PYGZsq{}a2\PYGZsq{}: +0.31 (65.47\PYGZpc{})}
 \PYG{g+go}{  \PYGZsq{}a6\PYGZsq{}: +0.24 (61.91\PYGZpc{})}
 \PYG{g+go}{ Criteria significance majority in brakets}
@@ -2747,7 +2747,7 @@ For computing such a bipolar\sphinxhyphen{}valued outranking digraph from the gi
 \caption{The office choice outranking digraph}\label{\detokenize{tutorial:officechoiceoutranking}}\end{figure}
 
 \sphinxAtStartPar
-In the relation table shown \hyperref[\detokenize{tutorial:officechoiceoutranking}]{Fig.\@ \ref{\detokenize{tutorial:officechoiceoutranking}}} we may notice rowwise that alternative \sphinxstyleemphasis{D} is \sphinxstylestrong{positively outranking} all other potential office locations. \sphinxstyleemphasis{D} is hence a \sphinxstyleemphasis{Condorcet winner}. Yet, alternatives \sphinxstyleemphasis{A} (the most expensive) and \sphinxstyleemphasis{C} (the cheapest) are also outranking or incomparable with all other locations; they are in fact \sphinxstylestrong{weak} \sphinxstyleemphasis{Condorcet winners}. Similarly, columnwise, we may notice that alternatives \sphinxstyleemphasis{A} and \sphinxstyleemphasis{F} are also positively outranked or incomparable to all the other locations. They are hence \sphinxstylestrong{weak} \sphinxstyleemphasis{Condorcet losers}. It is worthwhile noticing furthermore that alternative \sphinxstyleemphasis{A} is in fact conjointly a \sphinxstyleemphasis{weak Condorcet winner} \sphinxstylestrong{and} a \sphinxstyleemphasis{weak Condorcet loser}.
+In the relation table shown in \hyperref[\detokenize{tutorial:officechoiceoutranking}]{Fig.\@ \ref{\detokenize{tutorial:officechoiceoutranking}}} we may notice rowwise that alternative \sphinxstyleemphasis{D} is \sphinxstylestrong{positively outranking} all other potential office locations. \sphinxstyleemphasis{D} is hence a \sphinxstyleemphasis{Condorcet winner}. Yet, alternatives \sphinxstyleemphasis{A} (the most expensive) and \sphinxstyleemphasis{C} (the cheapest) are also outranking or incomparable with all other locations; they are in fact \sphinxstylestrong{weak} \sphinxstyleemphasis{Condorcet winners}. Similarly, columnwise, we may notice that alternatives \sphinxstyleemphasis{A} and \sphinxstyleemphasis{F} are also positively outranked or incomparable to all the other locations. They are hence \sphinxstylestrong{weak} \sphinxstyleemphasis{Condorcet losers}. It is worthwhile noticing furthermore that alternative \sphinxstyleemphasis{A} is in fact conjointly a \sphinxstyleemphasis{weak Condorcet winner} \sphinxstylestrong{and} a \sphinxstyleemphasis{weak Condorcet loser}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeCondorcetWinners}\PYG{p}{(}\PYG{p}{)}
@@ -2790,7 +2790,7 @@ We observe in the resulting strict outranking digraph \sphinxstyleemphasis{gcd} 
 \subsubsection{Designing a best choice recommender system}
 \label{\detokenize{tutorial:designing-a-best-choice-recommender-system}}\label{\detokenize{tutorial:pragmatic-principles-label}}
 \sphinxAtStartPar
-Solving a best\sphinxhyphen{}choice problem consists traditionally in finding \sphinxstyleemphasis{the} unique best decision alternative. We adopt here instead a modern \sphinxstylestrong{recommender system} approach which shows a non empty subset of decision alternatives which contains by construction the potential best alternative(s).
+Solving a best\sphinxhyphen{}choice problem consists traditionally in finding \sphinxstyleemphasis{the} unique best or optimal decision alternative. We adopt here instead a modern \sphinxstylestrong{recommender system} approach which shows a non empty subset of decision alternatives which contains by construction the potential best alternative(s).
 
 \sphinxAtStartPar
 The five \sphinxstyleemphasis{pragmatic principles} for computing such a \sphinxstyleemphasis{best choice recommendation} (BCR) are the following
@@ -2891,7 +2891,29 @@ Following the previously stated pragmatic principles, potential first choice rec
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-It is interesting to notice in \hyperref[\detokenize{tutorial:strictbestchoice}]{Listing \ref{\detokenize{tutorial:strictbestchoice}}} (Line 6) that the \sphinxstylestrong{Rubis first choice recommendation} consists actually in the set of weak Condorcet winners: ‘A’, ‘C’ and ‘D’ and the set of weak Condorcet losers: ‘A’ and ‘F’. In the corresponding characteristic vector (see Lines 12\sphinxhyphen{}14) are listed the bipolar credibility degrees with which each alternative may indeed be considered a first choice candidate (see \sphinxcite{tutorial:bis-2006a}, \sphinxcite{tutorial:bis-2006b}). Location ‘D’, the Condorcet winner, is the most credible first choice. It is worthwhile noticing that location ‘G’, even if not among the weak Condorcet winners is nevertheless neither included nor excluded from the potential first choice candidates. We may furthermore notice in Line 16 that both alternatives \sphinxstyleemphasis{A} and \sphinxstyleemphasis{F} are reported as potential \sphinxstyleemphasis{strict outranked} choices, hence as potential \sphinxstylestrong{last choice candidates} . The ambiguous first\sphinxhyphen{}ranked and last\sphinxhyphen{}ranked position of alternative \sphinxstyleemphasis{A} indicates its global incomparability status as shown in \hyperref[\detokenize{tutorial:bestofficechoice}]{Fig.\@ \ref{\detokenize{tutorial:bestofficechoice}}}.
+It is interesting to notice in \hyperref[\detokenize{tutorial:strictbestchoice}]{Listing \ref{\detokenize{tutorial:strictbestchoice}}} (Line 6) that the \sphinxstylestrong{Rubis first and last choice recommendation} consists actually in the set of weak Condorcet winners: ‘A’, ‘C’ and ‘D’ and the set of weak Condorcet losers: ‘A’ and ‘F’. In the corresponding characteristic vector (see Lines 6 and 12\sphinxhyphen{}14) are listed the bipolar credibility degrees with which each alternative may indeed be considered a first choice candidate (see \sphinxcite{tutorial:bis-2006a}, \sphinxcite{tutorial:bis-2006b}). Location ‘D’ is the most credible first choice. It is worthwhile noticing that location ‘G’, even if not among the weak Condorcet winners is nevertheless neither included nor excluded from the potential first choice candidates.
+
+\sphinxAtStartPar
+Location \sphinxstyleemphasis{Gar} (G) is actually a most determined \sphinxstylestrong{quasi Condorcet Winner}, i.e. positively outranking all not weak Condorcet winners, namely locations \sphinxstyleemphasis{B} (\sphinxstyleemphasis{Bon}), \sphinxstyleemphasis{E} (\sphinxstyleemphasis{Bel}) and \sphinxstyleemphasis{F} (\sphinxstyleemphasis{Fen}) (see \hyperref[\detokenize{tutorial:quasibestchoice}]{Listing \ref{\detokenize{tutorial:quasibestchoice}}} Line 3 and \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{a new efficient first choice recommender algorithm}}}).
+\sphinxSetupCaptionForVerbatim{Computing the non ambiguous quasi Condorcet winners and losers}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:quasibestchoice}}}
+\fvset{hllines={, 1, 3, 7,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{qcw} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeBpvQuasiCondorcetWinners}\PYG{p}{(}\PYG{n}{fusionType}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{conjunctive}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{qcw}\PYG{o}{.}\PYG{n}{showMembershipCharacteristics}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{ Gar:  +0.5448}
+\PYG{g+go}{ Ces:  +0.1034}
+\PYG{g+go}{ Dom:  +0.0207}
+\PYG{g+go}{ Ave:  +0.0000}
+\PYG{g+go}{ Bon:  +0.0000}
+\PYG{g+go}{ Bel:  +0.0000}
+\PYG{g+go}{ Fen:  \PYGZhy{}1.0000}
+\PYG{g+go}{ Valuation domain: [\PYGZhy{}1.00;+1.00]}
+\end{sphinxVerbatim}
+\sphinxresetverbatimhllines
+
+\sphinxAtStartPar
+Locations \sphinxstyleemphasis{Ces} (\sphinxstyleemphasis{C}) and \sphinxstyleemphasis{Dom} (\sphinxstyleemphasis{D}) are as well positive quasi Condorcet Winners. Location \sphinxstyleemphasis{Fen} (\sphinxstyleemphasis{F}) is the only quasi Condorcet loser. Being an ambiguous first as well as last choice recommendation, location \sphinxstyleemphasis{Ave} (\sphinxstyleemphasis{A}) does not appear in the list of non ambiguous quasi Condorcet winners. The first\sphinxhyphen{}ranked and last\sphinxhyphen{}ranked positions of alternative \sphinxstyleemphasis{A} in \hyperref[\detokenize{tutorial:strictbestchoice}]{Listing \ref{\detokenize{tutorial:strictbestchoice}}} Lines 6 and  16 indicate in fact its global incomparability status as shown in \hyperref[\detokenize{tutorial:bestofficechoice}]{Fig.\@ \ref{\detokenize{tutorial:bestofficechoice}}}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{bestChoiceChoice}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
@@ -2932,7 +2954,7 @@ Let us now compare in a pairwise perspective the performances of the apparently 
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-Yet, we must as well notice that the cheapest alternative \sphinxstyleemphasis{C} is in fact \sphinxstylestrong{strictly outranking} alternative \sphinxstyleemphasis{G}:  \(r(C \succsim G) = +15/145 > 0.0\), and \(r(G \succsim C) = -15/145 < 0.0\) (see Line 14 below).
+Yet, we must as well notice that the cheapest alternative \sphinxstyleemphasis{Ces} (\sphinxstyleemphasis{C}) is in fact \sphinxstylestrong{strictly outranking} alternative \sphinxstyleemphasis{G}:  \(r(C \succsim G) = +15/145 > 0.0\), and \(r(G \succsim C) = -15/145 < 0.0\) (see Line 14 below).
 
 \fvset{hllines={, 14,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -2954,7 +2976,7 @@ Yet, we must as well notice that the cheapest alternative \sphinxstyleemphasis{C
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-Following pragmatic principle \sphinxstylestrong{P3} \textendash{}the required internal stability stating that a BCR should not contain a sub\sphinxhyphen{}recommendation\textendash{} alternative \sphinxstyleemphasis{G} is hence dropped from our first\sphinxhyphen{}ranked list of alternatives. Yet, the credibility level of this outranking situation is not very high: 15/145 = 0.104 (55.2\% significance majority).
+Following pragmatic principle \sphinxstylestrong{P3} \textendash{}the required internal stability stating that a BCR should not contain a sub\sphinxhyphen{}recommendation\textendash{} alternative \sphinxstyleemphasis{G} is hence dropped from our first\sphinxhyphen{}ranked list of alternatives despite its quasi Condorcet winner’s status. Yet, the credibility level \(r(C \succsim G)\) of this  outranking situation is actually not very high: +15/145 = +0.104 (55.2\% significance majority).
 
 
 \subsubsection{Robustness of the outranking digraph}
@@ -3025,12 +3047,12 @@ Remarquable in \hyperref[\detokenize{tutorial:confidentofficechoice3}]{Listing \
 It may be opportune now to confirm this result by iterating, with the same epistemic fusion operators, the extraction of bipolar\sphinxhyphen{}valued sets of non ambiguous weak Condorcet winners and losers on the 90\% confident outranking digraph (see \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{a new efficient first choice recommender algorithm}}}). The \sphinxcode{\sphinxupquote{showChoiceRecommendation()}} method provides therefore the ‘\sphinxstyleemphasis{IteratedCondorcetWinners}’ argument and the \sphinxstyleemphasis{cwFusionType} parameter as shown in \hyperref[\detokenize{tutorial:confidentofficechoice2}]{Listing \ref{\detokenize{tutorial:confidentofficechoice2}}} Lines 1\sphinxhyphen{}2.
 \sphinxSetupCaptionForVerbatim{Computing iterated weak Condorcet winners and losers}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:confidentofficechoice2}}}
-\fvset{hllines={, 1, 6, 8, 12,}}%
+\fvset{hllines={, 1, 6, 9, 12,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cg}\PYG{o}{.}\PYG{n}{showChoiceRecommendation}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{IteratedCondorcetWinners}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cg}\PYG{o}{.}\PYG{n}{showChoiceRecommendation}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{IteratedCondorcetWinners}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{n}{version}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{weak}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
 \PYG{g+gp}{... }                            \PYG{n}{cwFusionType}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{conjunctive}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ ******************************************}
-\PYG{g+go}{ Iterated weak Condorcet winners or losers}
+\PYG{g+go}{ Iterated weak conjunctive Condorcet winners or losers}
 \PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{g+go}{   1rst\PYGZhy{}choice: \PYGZsq{}G\PYGZsq{} (+0.54)}
 \PYG{g+go}{   1rst\PYGZhy{}choice: \PYGZsq{}C\PYGZsq{} (+0.46)}
@@ -3049,7 +3071,7 @@ It may be opportune now to confirm this result by iterating, with the same epist
 \sphinxAtStartPar
 Notice that we obtain exactly the same result as with the ‘Rubis’ method %
 \begin{footnote}[73]\sphinxAtStartFootnote
-Most remarquable is the fact that the double fix\sphinxhyphen{}point equation system operating on a partial prekernel\sphinxhyphen{}reduced outranking digraph, when using the disjunctive and conjunctive fusion operators instead of the classical \sphinxstyleemphasis{max} and \sphinxstyleemphasis{min} operators, delivers exactly the same result as the simple conjunctive epistemic fusion of rows and columns of the outranking relation.
+Most remarquable is the fact that the double fix\sphinxhyphen{}point kernel equation system operating on a partial prekernel\sphinxhyphen{}reduced outranking digraph, when using the disjunctive and conjunctive fusion operators instead of the classical \sphinxstyleemphasis{max} and \sphinxstyleemphasis{min} operators, delivers exactly the same result as the simple conjunctive epistemic fusion of rows and columns of the outranking relation.
 %
 \end{footnote}, except that location \sphinxstyleemphasis{A} is now correctly flagged as being an indeterminate choice candidate (see Line 9). Location ‘F’ remains eventually the evident last choice recommendation (see Line 9).
 
@@ -3097,7 +3119,7 @@ In \hyperref[\detokenize{tutorial:bachetranking0}]{Listing \ref{\detokenize{tuto
 \hyperref[\detokenize{tutorial:officechoiceranking}]{Fig.\@ \ref{\detokenize{tutorial:officechoiceranking}}} makes hence again clearly apparent the important fact that the most expensive location \sphinxstyleemphasis{A} and the cheapest location \sphinxstyleemphasis{C}, both,  appear incomparable with all the other alternatives except the last\sphinxhyphen{}ranked location \sphinxstyleemphasis{F}. With the \sphinxcode{\sphinxupquote{computePartialOutrankingConsensusQuality()}} method, we may check in \hyperref[\detokenize{tutorial:partialbachetranking1}]{Listing \ref{\detokenize{tutorial:partialbachetranking1}}} the consensus quality of this partial ranking with respect to the marginal criterion rankings.
 \sphinxSetupCaptionForVerbatim{Consensus quality of the partial Bachet ranking}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:partialbachetranking1}}}
-\fvset{hllines={, 1, 5, 7, 8, 10, 11, 13,}}%
+\fvset{hllines={, 1, 5, 6, 7, 10, 11, 13,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pbr}\PYG{o}{.}\PYG{n}{computePartialOutrankingConsensusQuality}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+go}{ Consensus quality of partial ranking:}
@@ -3118,7 +3140,7 @@ In \hyperref[\detokenize{tutorial:bachetranking0}]{Listing \ref{\detokenize{tuto
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-The partial \sphinxstyleemphasis{Bachet} ranking is 100\% consistent with the \sphinxstyleemphasis{Proximity} criterion, 85\% consistent with \sphinxstyleemphasis{Visibility} and 75\% consistent with the \sphinxstyleemphasis{Costs} criterion. These three criteria are the most significant ones (see Lines 5 aand 7). The least considered criteria are the \sphinxstyleemphasis{Standing} and even more the \sphinxstyleemphasis{Comfort} criterion. The partial \sphinxstyleemphasis{Bachet} ranking is indeed  only 35\% consistent with the \sphinxstyleemphasis{Standing} and only 15\% consistent with the latter one (see Lines 10\sphinxhyphen{}11). The mean weighted marginal ordinal correlation index (+0.478, Line 13) over all the criteria shows eventually a partial ranking consensus supported by a nearly 75\% significance majority.
+The partial \sphinxstyleemphasis{Bachet} ranking is 100\% consistent with the \sphinxstyleemphasis{Proximity}, 95\% consistent with the \sphinxstyleemphasis{Parking}  and 85\% consistent with the \sphinxstyleemphasis{Visibility} criterion. These three criteria are the most significant ones (see Lines 5 and 7). The least considered criteria are the \sphinxstyleemphasis{Standing} and even more the \sphinxstyleemphasis{Comfort} criterion. The partial \sphinxstyleemphasis{Bachet} ranking is indeed  only 35\% consistent with the \sphinxstyleemphasis{Standing} and only 15\% consistent with the latter one (see Lines 10\sphinxhyphen{}11). The mean weighted marginal ordinal correlation index (+0.478, Line 13) over all the criteria shows eventually a partial ranking consensus supported by a nearly 75\% criteria significance majority.
 
 \sphinxAtStartPar
 We may finally use the best, with the outranking digraph \sphinxstyleemphasis{g} correlated (+0.816), \sphinxstyleemphasis{Bachet} ranking {[}‘G’, ‘D’, ‘A’, ‘C’, ‘B’, ‘E’, ‘F’{]}  for showing in \hyperref[\detokenize{tutorial:rankedofficechoiceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:rankedofficechoiceheatmap}}} a from best to worst ranked performance heatmap of all the potential office locations.
@@ -3139,7 +3161,7 @@ We may finally use the best, with the outranking digraph \sphinxstyleemphasis{g}
 In view of \hyperref[\detokenize{tutorial:rankedofficechoiceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:rankedofficechoiceheatmap}}}, office locations \sphinxstyleemphasis{G} or \sphinxstyleemphasis{D} make up convincing best choice recommendations with an apparent slight advantage for location \sphinxstyleemphasis{G}. Notice that both alternatives \sphinxstyleemphasis{A} and \sphinxstyleemphasis{C}, with their highly contrasted performance profiles, appear ranked in the midfield. Indeed, as they don’t compare well, they may neither be first nor last ranked. Notice finally in the \sphinxstyleemphasis{tau} row above similar marginal ordinal correlation indexes as observed before in \hyperref[\detokenize{tutorial:partialbachetranking1}]{Listing \ref{\detokenize{tutorial:partialbachetranking1}}} Lines 5\sphinxhyphen{}11.
 
 \sphinxAtStartPar
-The \sphinxcode{\sphinxupquote{digraphs.Digraph}} class now readily provides the \sphinxcode{\sphinxupquote{showChoiceRecommendation()}} method for directly showing the first and last choices obtained from the previous  partial \sphinxstyleemphasis{Bachet} ranking result accessible in the \sphinxstyleemphasis{g.pbr} attribute (see \hyperref[\detokenize{tutorial:partialbachetranking10}]{Listing \ref{\detokenize{tutorial:partialbachetranking10}}} Line 1).
+The \sphinxcode{\sphinxupquote{showChoiceRecommendation()}} method now readily accepts the \sphinxstylestrong{‘Bachet’} option for showing the first and last choices obtained from the previous  partial \sphinxstyleemphasis{Bachet} ranking result accessible in the \sphinxstyleemphasis{g.pbr} attribute (see \hyperref[\detokenize{tutorial:partialbachetranking10}]{Listing \ref{\detokenize{tutorial:partialbachetranking10}}} Line 1).
 \sphinxSetupCaptionForVerbatim{Bachet choice recommendation}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:partialbachetranking10}}}
 \fvset{hllines={, 1, 9, 13,}}%
@@ -3175,10 +3197,10 @@ The \sphinxcode{\sphinxupquote{digraphs.Digraph}} class now readily provides the
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-Due to the \sphinxstylestrong{Condorcet consistency} of the polarised \sphinxstyleemphasis{Bachet} ranking rule, the partial ranking digraph \sphinxstyleemphasis{g.pbr} represents here faithfully an actual transitive and asymmetrical part of the given outranking digraph \sphinxstyleemphasis{g} (see Line 13 and \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{Bachet\sphinxhyphen{}Tutorial\sphinxhyphen{}label}}}).
+Due to the \sphinxstylestrong{Condorcet consistency} of the polarised \sphinxstyleemphasis{Bachet} ranking rule, the partial ranking digraph \sphinxstyleemphasis{g.pbr} represents here faithfully an actual transitive and asymmetrical part of the given outranking digraph \sphinxstyleemphasis{g} (see Lines 9, 13 and \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{Bachet\sphinxhyphen{}Tutorial\sphinxhyphen{}label}}}).
 
 \sphinxAtStartPar
-Our first choice recommendations eventually appear essentially depending on the very importance the CEO is attaching to each one of his three decision objectives. In the setting here, where he considers that \sphinxstyleemphasis{maximizing the future turnover} is the most important objective (81/145 = 0.56) followed by \sphinxstyleemphasis{minimizing the Costs} (45/145 = 0.31) and, less important, \sphinxstyleemphasis{maximizing the working conditions} (19/145 = 0.13), compromise locations \sphinxstyleemphasis{G} as well as \sphinxstyleemphasis{D} become the potential first choices candidates. However, if minimizing the \sphinxstyleemphasis{Costs} does not play much a role, it would perhaps be better to recommend the most advantageous location \sphinxstyleemphasis{A}; or if, on the contrary, the \sphinxstyleemphasis{Costs} objective does matter a lot, recommending the cheapest alternative \sphinxstyleemphasis{C} could definitely become the more convincing first choice recommendation.
+Our first choice recommendations eventually appear essentially depending on the very importance the CEO is attaching to each one of his three decision objectives. In the setting here, where he considers that \sphinxstyleemphasis{maximizing the future turnover} is the most important objective (81/145 = 0.56) followed by \sphinxstyleemphasis{minimizing the Costs} (45/145 = 0.31) and, less important, \sphinxstyleemphasis{maximizing the working conditions} (19/145 = 0.13), compromise locations \sphinxstyleemphasis{G} as well as \sphinxstyleemphasis{D} become the potential first choices candidates. However, if minimizing the \sphinxstyleemphasis{Costs} does not play much a role, it would perhaps be better to recommend the most advantageous location \sphinxstyleemphasis{A}; or if, on the contrary, the \sphinxstyleemphasis{Costs} objective does matter a lot, recommending the cheapest alternative \sphinxstyleemphasis{C} could perhaps become the more convincing first choice recommendation.
 
 \sphinxAtStartPar
 It might be worth, as an \sphinxstylestrong{exercise}, to modify the criteria significance weights in the ‘officeChoice.py’ data file %
@@ -3202,6 +3224,23 @@ What will become the best choice recommendation under this working hypothesis?
 
 \sphinxAtStartPar
 The next tutorial shows how to create or edit a performance tableau.
+
+
+\begin{sphinxseealso}{See also:}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+{\hyperref[\detokenize{tutorial:alice-tutorial-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Alice’s best choice: A selection case study}}}}} (\autopageref*{\detokenize{tutorial:alice-tutorial-label}})
+
+\item {} 
+\sphinxAtStartPar
+\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{A new efficient choice recommender algorithm}}}
+
+\end{itemize}
+
+
+\end{sphinxseealso}
+
 
 
 \subsubsection{Historical Notes}
@@ -3662,15 +3701,11 @@ But it is eventually also the new {\hyperref[\detokenize{tutorial:partial-rankin
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{On computing bipolar\sphinxhyphen{}valued sets}}}
+\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{A new efficient choice recommender algorithm}}}
 
 \item {} 
 \sphinxAtStartPar
 {\hyperref[\detokenize{tutorial:partial-ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Bachet partial ranking rule}}}}} (\autopageref*{\detokenize{tutorial:partial-ranking-tutorial-label}})
-
-\item {} 
-\sphinxAtStartPar
-{\hyperref[\detokenize{tutorial:alice-tutorial-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Alice’s best choice: A selection case study}}}}} (\autopageref*{\detokenize{tutorial:alice-tutorial-label}})
 
 \end{itemize}
 
@@ -9315,6 +9350,16 @@ In order to study the potential difference in quality and fairness of the pairin
 \sphinxAtStartPar
 If the average ordinal correlations obtained with the three starting matchings are quite similar \textendash{}means within +0.690 and +0.693\textendash{} the differences between the average correlations of group \sphinxstyleemphasis{A} and group \sphinxstyleemphasis{B} show a potential advantage for the left\&right initial matchings (mean unfairness: 0.065) versus the best \sphinxstyleemphasis{Copeland} (mean unfairness: 0.078) and, even more versus the fairest \sphinxstyleemphasis{Gale\sphinxhyphen{}Shapley} matching (mean unfairness: 0.203, see \hyperref[\detokenize{tutorial:compfemcopgs}]{Fig.\@ \ref{\detokenize{tutorial:compfemcopgs}}}). The essential unfairness of stable \sphinxstyleemphasis{Gale\sphinxhyphen{}Shapley} matchings may in fact not being corrected with our fairness enhancing procedure.
 
+
+\begin{sphinxseealso}{See also:}
+
+\sphinxAtStartPar
+The case study {\hyperref[\detokenize{tutorial:internshipsmatching-tutorial-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{on fairly matching students and internships}}}}} (\autopageref*{\detokenize{tutorial:internshipsmatching-tutorial-label}})
+
+
+\end{sphinxseealso}
+
+
 \sphinxAtStartPar
 Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Content Table}}}}} (\autopageref*{\detokenize{tutorial:tutorial-label}})
 
@@ -10825,17 +10870,17 @@ We may furthermore notice in \hyperref[\detokenize{tutorial:alicerelationmap}]{F
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:alicebestchoice}}}
 \fvset{hllines={, 6, 7, 8, 9, 18, 22, 28, 29,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg}\PYG{o}{.}\PYG{n}{showChoiceRecommendation}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{CondorcetWinners}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg}\PYG{o}{.}\PYG{n}{showChoiceRecommendation}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{CondorcetWinners}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{n}{version}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{weak}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
 \PYG{g+gp}{... }                            \PYG{n}{cwFusionType}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{conjunctive}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ First and last choice recommendations}
 \PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{  First choice (Condorcet winners)}
+\PYG{g+go}{  First choice (weak conjunctive Condorcet winners)}
 \PYG{g+go}{   \PYGZsq{}I\PYGZhy{}FHK\PYGZsq{}: +0.75 (87.50\PYGZpc{})}
 \PYG{g+go}{   \PYGZsq{}T\PYGZhy{}FHK\PYGZsq{}: +0.17 (58.34\PYGZpc{})}
 \PYG{g+go}{   \PYGZsq{}I\PYGZhy{}USB\PYGZsq{}: +0.17 (58.34\PYGZpc{})}
 \PYG{g+go}{   \PYGZsq{}I\PYGZhy{}UHB\PYGZsq{}: +0.17 (58.34\PYGZpc{})}
 \PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{  Last choice (Condorcet losers)}
+\PYG{g+go}{  Last choice (weak conjunctive Condorcet losers)}
 \PYG{g+go}{   \PYGZsq{}C\PYGZhy{}HKK\PYGZsq{}: +0.17 (58.34\PYGZpc{})}
 \PYG{g+go}{   \PYGZsq{}S\PYGZhy{}HKK\PYGZsq{}: +0.17 (58.34\PYGZpc{})}
 \PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -11117,9 +11162,9 @@ Again, when \sphinxstyleemphasis{equi\sphinxhyphen{}signficant} performance crit
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{uop}\PYG{o}{.}\PYG{n}{showChoiceRecommendation}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{IteratedCondorcetWinners}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
-\PYG{g+gp}{... }                             \PYG{n}{cwFusionType}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{average}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{... }                             \PYG{n}{version}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{weak}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{n}{cwFusionType}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{average}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ ******************************************}
-\PYG{g+go}{ Iterated weak Condorcet winners and losers}
+\PYG{g+go}{ Iterated average weak Condorcet winners and losers}
 \PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{g+go}{  1rst\PYGZhy{}choice: \PYGZsq{}I\PYGZhy{}FHK\PYGZsq{} (+0.84)}
 \PYG{g+go}{    2nd\PYGZhy{}choice: \PYGZsq{}T\PYGZhy{}FHK\PYGZsq{} (+0.56)}
@@ -11140,8 +11185,26 @@ Again, when \sphinxstyleemphasis{equi\sphinxhyphen{}signficant} performance crit
 \sphinxAtStartPar
 In view of her performance tableau in \hyperref[\detokenize{tutorial:aliceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:aliceheatmap}}}, \sphinxstyleemphasis{Graduate Interpreter} studies at the \sphinxstyleemphasis{Technical High School Köln}, thus, represent definitely \sphinxstylestrong{Alice’s very best choice} and \sphinxstyleemphasis{Qualified Translator} at the \sphinxstyleemphasis{Technical High School München} the very last choice.
 
+
+\begin{sphinxseealso}{See also:}
+\begin{itemize}
+\item {} 
 \sphinxAtStartPar
-For further reading about the Best Choice methodology, one may consult in \sphinxcite{tutorial:bis-2015} the study of a \sphinxstyleemphasis{real decision aid case} about choosing a best poster in a scientific conference.
+The study of a \sphinxstyleemphasis{real decision aid case} about choosing a best poster in a scientific conference \sphinxcite{tutorial:bis-2015}.
+
+\item {} 
+\sphinxAtStartPar
+The tutorial on {\hyperref[\detokenize{tutorial:rubis-tutorial-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Computing a best choice recommendation}}}}} (\autopageref*{\detokenize{tutorial:rubis-tutorial-label}}).
+
+\item {} 
+\sphinxAtStartPar
+\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{A new efficient choice recommender algorithm}}}
+
+\end{itemize}
+
+
+\end{sphinxseealso}
+
 
 \sphinxAtStartPar
 Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Content Table}}}}} (\autopageref*{\detokenize{tutorial:tutorial-label}})

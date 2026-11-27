@@ -64,21 +64,21 @@
 \contentsline {subsubsection}{The partially ordered commutative epistemic fusion algebra}{125}{subsubsection*.133}%
 \contentsline {subsection}{\numberline {3.6}A new choice recommender algorithm}{129}{subsection.3.6}%
 \contentsline {subsubsection}{Computing bipolar\sphinxhyphen {}valued weak Condorcet winners and losers}{129}{subsubsection*.138}%
-\contentsline {subsubsection}{Suitable first and last choice recommendations}{131}{subsubsection*.141}%
-\contentsline {subsubsection}{Ranking\sphinxhyphen {}by\sphinxhyphen {}choosing with bpv\sphinxhyphen {}sets of weak Condorcet winners and losers}{133}{subsubsection*.145}%
-\contentsline {subsubsection}{Efficiency of computing weak Condorcet winners and losers}{134}{subsubsection*.146}%
-\contentsline {subsection}{\numberline {3.7}Bipolar\sphinxhyphen {}valued kernel membership characteristic vectors}{137}{subsection.3.7}%
-\contentsline {subsubsection}{Kernel equation systems}{137}{subsubsection*.151}%
-\contentsline {subsubsection}{Solving bipolar\sphinxhyphen {}valued kernel equation systems}{139}{subsubsection*.152}%
-\contentsline {subsubsection}{Historical notes}{145}{subsubsection*.153}%
-\contentsline {subsection}{\numberline {3.8}On characterizing bipolar\sphinxhyphen {}valued outranking digraphs}{146}{subsection.3.8}%
-\contentsline {subsubsection}{Necessary properties of the outranking digraph}{146}{subsubsection*.159}%
-\contentsline {subsubsection}{Partial tournaments may be strict outranking digraphs}{148}{subsubsection*.161}%
-\contentsline {subsubsection}{Recognizing bipolar outranking valuations}{150}{subsubsection*.162}%
-\contentsline {subsubsection}{On generating random outranking valuations}{153}{subsubsection*.164}%
-\contentsline {subsection}{\numberline {3.9}Consensus quality of the bipolar\sphinxhyphen {}valued outranking relation}{154}{subsection.3.9}%
-\contentsline {subsubsection}{Circular performance tableaux}{154}{subsubsection*.168}%
-\contentsline {subsubsection}{A difficult decision problem}{156}{subsubsection*.169}%
-\contentsline {subsubsection}{The central CONDORCET point of view}{158}{subsubsection*.170}%
-\contentsline {section}{\numberline {4}Appendix}{164}{section.4}%
-\contentsline {section}{References}{164}{section.4}%
+\contentsline {subsubsection}{Suitable first and last choice recommendations}{131}{subsubsection*.140}%
+\contentsline {subsubsection}{Ranking\sphinxhyphen {}by\sphinxhyphen {}choosing with bpv\sphinxhyphen {}sets of weak Condorcet winners and losers}{134}{subsubsection*.144}%
+\contentsline {subsubsection}{Efficiency of computing weak Condorcet winners and losers}{135}{subsubsection*.145}%
+\contentsline {subsection}{\numberline {3.7}Bipolar\sphinxhyphen {}valued kernel membership characteristic vectors}{139}{subsection.3.7}%
+\contentsline {subsubsection}{Kernel equation systems}{139}{subsubsection*.150}%
+\contentsline {subsubsection}{Solving bipolar\sphinxhyphen {}valued kernel equation systems}{140}{subsubsection*.151}%
+\contentsline {subsubsection}{Historical notes}{147}{subsubsection*.152}%
+\contentsline {subsection}{\numberline {3.8}On characterizing bipolar\sphinxhyphen {}valued outranking digraphs}{148}{subsection.3.8}%
+\contentsline {subsubsection}{Necessary properties of the outranking digraph}{148}{subsubsection*.158}%
+\contentsline {subsubsection}{Partial tournaments may be strict outranking digraphs}{150}{subsubsection*.160}%
+\contentsline {subsubsection}{Recognizing bipolar outranking valuations}{152}{subsubsection*.161}%
+\contentsline {subsubsection}{On generating random outranking valuations}{156}{subsubsection*.163}%
+\contentsline {subsection}{\numberline {3.9}Consensus quality of the bipolar\sphinxhyphen {}valued outranking relation}{156}{subsection.3.9}%
+\contentsline {subsubsection}{Circular performance tableaux}{157}{subsubsection*.167}%
+\contentsline {subsubsection}{A difficult decision problem}{159}{subsubsection*.168}%
+\contentsline {subsubsection}{The central CONDORCET point of view}{160}{subsubsection*.169}%
+\contentsline {section}{\numberline {4}Appendix}{166}{section.4}%
+\contentsline {section}{References}{166}{section.4}%
