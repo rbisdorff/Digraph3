@@ -50,18 +50,21 @@ Pearls of bipolar-valued epistemic logic
 	    
    **Contents**
 
-   :ref:`Enhancing the outranking based MCDA approach <Enhancing-outranking-label>`
+   * :ref:`Enhancing the outranking based MCDA approach <Enhancing-outranking-label>`
+	
        * :ref:`On confident outrankings with uncertain criteria significance weights <Bipolar-Valued-Likelihood-Tutorial-label>`
        * :ref:`On stable outrankings with ordinal criteria significance weights <Stable-Outranking-Tutorial-label>`
        * :ref:`On unopposed outrankings with multiple decision objectives <UnOpposed-Outranking-Tutorial-label>`
 
-   :ref:`Enhancing social choice procedures <Enhancing-Social-Choice-label>`
+   * :ref:`Enhancing social choice procedures <Enhancing-Social-Choice-label>`
+	
        * :ref:`Condorcet's 1785 critical perspective on the simple plurality voting rule <Condorcet-Tutorial-label>`
        * :ref:`Two-stage elections with multipartisan primary selection <Two-stage elections-label>`
        * :ref:`Tempering plurality tyranny effects with bipolar approval voting <Tempering-Plurality-label>`
        * :ref:`Selecting the winner of a primary election: a critical commentary <PopularPrimary-Tutorial-label>`
 
-   :ref:`Theoretical and computational advancements <Theoretical-Enhancements-label>`
+   * :ref:`Theoretical and computational advancements <Theoretical-Enhancements-label>`
+
        * :ref:`Coping with missing evaluation and indeterminateness <CopingMissing-Data-label>`
        * :ref:`Ordinal correlation equals bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>`
        * :ref:`Applications of bipolar-valued base 3 Bachet numbers <Bachet-Tutorial-label>` 	 
@@ -72,10 +75,9 @@ Pearls of bipolar-valued epistemic logic
        * :ref:`On characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>`
        * :ref:`Consensus quality of the bipolar-valued outranking relation <Outranking-Consensus-Tutorial-label>`
 
-    **Indices and search results**
-
-	* `General Index <genindex.html>`_ : all classes, functions and terms
-        * `Module Index <py-modindex.html>`_ : quick access to all the Digraph3 modules
+   * Indices   
+       * `General Index <genindex.html>`_ , all classes, functions and terms
+       * `Module Index <py-modindex.html>`_ , quick access to all the Digraph3 modules
 
 --------------------------------------------------------
 
