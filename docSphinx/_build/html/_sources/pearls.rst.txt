@@ -72,6 +72,11 @@ Pearls of bipolar-valued epistemic logic
        * :ref:`On characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>`
        * :ref:`Consensus quality of the bipolar-valued outranking relation <Outranking-Consensus-Tutorial-label>`
 
+    **Indices and search results**
+
+	* `General Index <genindex.html>`_ : all classes, functions and terms
+        * `Module Index <py-modindex.html>`_ : quick access to all the Digraph3 modules
+
 --------------------------------------------------------
 
 .. highlight:: python

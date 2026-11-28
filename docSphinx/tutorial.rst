@@ -104,6 +104,8 @@
    **Appendices**
        * :ref:`Bibliography <Appendices-label>`
        * :ref:`Endnotes <Endnotes-label>`
+       * `General Index <genindex.html>`_ : all classes, functions and terms
+       * `Module Index <py-modindex.html>`_ : quick access to all the Digraph3 modules
 
 -------------------------------------
 
