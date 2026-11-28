@@ -126,6 +126,10 @@ The *pytest* module is by default ignoring Python run time warnings. It is possi
 Organisation of the Digraph3 modules
 ------------------------------------
 
+.. contents:: 
+	:depth: 1
+	:local:
+
 The Digraph3 source code is split into several interdependent modules of which the *digraphs.py* module is the master module.
 
 Basic modules
@@ -314,15 +318,21 @@ Miscellaneous tools
      Methods and tools for handling XMCDA encoded performance tableaux and digraphs.
      
 
-.. toctree::
-   :maxdepth: 2
+-------------------------------------------
 
--------------
+
+.. _modules-label:
+
+Source code of the Digraph3 modules
+-----------------------------------
+
+.. toctree::
+   :maxdepth: 1
 
 .. _digraphs-label:
 
 digraphs module
----------------
+...............
 
 A tutorial with coding examples is available here: :ref:`Digraphs-Tutorial-label`
 
@@ -343,7 +353,7 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 .. _randomDigraphs-label:
 
 randomDigraphs module
----------------------
+.....................
 
 **Inheritance Diagram**
 
@@ -362,7 +372,7 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 .. _perfTabs-label:
 
 perfTabs module
----------------
+...............
 
 **Inheritance Diagram**
 
@@ -381,7 +391,7 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 .. _randomPerfTabs-label:
       
 randomPerfTabs module
----------------------
+.....................
 
 A tutorial with coding examples is available here: :ref:`RandomPerformanceTableau-Tutorial-label`
 
@@ -402,7 +412,7 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 .. _outrankingDigraphs-label:
 
 outrankingDigraphs module
--------------------------
+.........................
 
 A tutorial with coding examples is available here: :ref:`OutrankingDigraphs-Tutorial-label`
 
@@ -424,7 +434,7 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 .. _mpOutrankingDigraphs-label:
 
 mpOutrankingDigraphs module
----------------------------
+...........................
 
 **Inheritance Diagram**
 
@@ -442,7 +452,7 @@ mpOutrankingDigraphs module
 .. _ratingDigraphs-label:
 
 ratingDigraphs module
-----------------------
+.....................
 
 **Inheritance Diagram**
 
@@ -462,7 +472,7 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 .. _sortingDigraphs-label:
 
 sortingDigraphs module
-----------------------
+......................
 
 A tutorial with coding examples for solving multi-criteria rating problems is available here: :ref:`QuantilesRating-Tutorial-label`
 
@@ -484,7 +494,7 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 .. _sparseOutrankingDigraphs-label:
 
 sparseOutrankingDigraphs module
--------------------------------
+...............................
 
 **Inheritance Diagram**
 
@@ -504,7 +514,7 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 .. _performanceQuantiles-label:
 
 performanceQuantiles module
----------------------------
+...........................
 
 **Inheritance Diagram**
 
@@ -523,7 +533,7 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 .. _votingProfiles-label:
 
 votingProfiles module
----------------------
+.....................
 
 **Inheritance Diagram**
 
@@ -545,7 +555,7 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 .. _linearOrders-label:
 
 linearOrders module
--------------------
+...................
 
 A tutorial with coding examples is available here: :ref:`Ranking-Tutorial-label`
 
@@ -567,7 +577,7 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 .. _dynamicProgramming-label:
 
 dynamicProgramming module
--------------------------
+.........................
 
 **Inheritance Diagram**
 
@@ -587,7 +597,7 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 .. _transitiveDigraphs-label:
 
 transitiveDigraphs module
--------------------------
+.........................
 
 **Inheritance Diagram**
 
@@ -607,7 +617,7 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 .. _graphs-label:
 
 graphs module
--------------
+.............
 
 A tutorial with coding examples is available here: :ref:`Graphs-Tutorial-label`
 
@@ -628,7 +638,7 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 .. _pairings-label:
 
 pairings module
----------------
+...............
 
 **Inheritance Diagram**
 
@@ -649,7 +659,7 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 .. _randomNumbers-label:
 
 randomNumbers module
---------------------
+....................
 
 **Inheritance Diagram**
 
@@ -668,7 +678,7 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 .. _bachetNumbers-label:
 
 bachetNumbers module
---------------------
+....................
 
 .. inheritance-diagram:: bachetNumbers
    :top-classes: bachetNumbers.BachetNumber
@@ -684,7 +694,7 @@ bachetNumbers module
 .. _digraphsTools-label:
 
 digraphsTools module
---------------------
+....................
 
 .. automodule:: digraphsTools
    :member-order: alphabetical
@@ -696,7 +706,7 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 .. _arithmetics-label:
 
 arithmetics module
-------------------
+..................
 
 .. automodule:: arithmetics
    :member-order: alphabetical
@@ -710,7 +720,7 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 .. _bipolarValuedSets-label:
 
 bipolarValuedSets module
-------------------------
+........................
 
 .. inheritance-diagram:: bipolarValuedSets
    :parts: 1
@@ -775,6 +785,7 @@ A tutorial with coding examples is available here: :ref:`HPC-Tutorial-label`.
 
 cnpBipolarDigraphs module
 .........................
+
 
 **Inheritance Diagram**
 
